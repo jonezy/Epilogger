@@ -1,0 +1,14 @@
+.sln
+.suo
+.csproj
+.cs\
+.pdb
+obj\
+errors\
+App_Data\
+Public\js\ckeditor\
+Public\js\ckfinder\
+Uploads\
+.Debug.config
+.Release.config
+packages.config
