@@ -1,7 +1,0 @@
-C:\dev\Epilogger\New\Epilogger.Web\bin\Epilogger.Web.dll
-C:\dev\Epilogger\New\Epilogger.Web\bin\Epilogger.Web.pdb
-C:\dev\Epilogger\New\Epilogger.Web\bin\SubSonic.Core.dll
-C:\dev\Epilogger\New\Epilogger.Web\obj\Debug\ResolveAssemblyReference.cache
-C:\dev\Epilogger\New\Epilogger.Web\obj\Debug\Epilogger.Web.dll
-C:\dev\Epilogger\New\Epilogger.Web\obj\Debug\Epilogger.Web.pdb
-C:\dev\Epilogger\New\Epilogger.Web\bin\AutoMapper.dll
