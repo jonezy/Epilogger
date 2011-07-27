@@ -1,0 +1,40 @@
+﻿@model Epilogger.Web.Models.EventDisplayViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+<fieldset>
+    <div class="display-label">UserID</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserID)
+    </div>
+
+    <div class="display-label">Name</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">SubTitle</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SubTitle)
+    </div>
+
+    <div class="display-label">Description</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">CategoryID</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CategoryID)
+    </div>
+
+    <div class="display-label">WebsiteURL</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.WebsiteURL)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
