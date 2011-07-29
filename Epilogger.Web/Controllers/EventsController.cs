@@ -18,7 +18,11 @@ namespace Epilogger.Web.Controllers {
         }
 
         public ActionResult Index() {
-            return View(Mapper.Map<List<Event>,List<EventDisplayViewModel>>(db.Events.OrderByDescending(e => e.StartDateTime).ToList()));
+            List<Event> events = db.Events.ToList() ;
+            List<EventDisplayViewModel> model = Mapper.Map<List<Event>, List<EventDisplayViewModel>>(events);
+
+
+            return View(model);
         }
 
         public ActionResult Details(int id) {

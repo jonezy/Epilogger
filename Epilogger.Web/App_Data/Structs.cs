@@ -73,462 +73,6 @@ namespace Epilogger.Data {
         }
         
         /// <summary>
-        /// Table: aspnet_WebEvent_Events
-        /// Primary Key: EventId
-        /// </summary>
-
-        public class aspnet_WebEvent_EventsTable: DatabaseTable {
-            
-            public aspnet_WebEvent_EventsTable(IDataProvider provider):base("aspnet_WebEvent_Events",provider){
-                ClassName = "aspnet_WebEvent_Event";
-                SchemaName = "dbo";
-                
-
-                Columns.Add(new DatabaseColumn("EventId", this)
-                {
-	                IsPrimaryKey = true,
-	                DataType = DbType.AnsiStringFixedLength,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 32
-                });
-
-                Columns.Add(new DatabaseColumn("EventTimeUtc", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.DateTime,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("EventTime", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.DateTime,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("EventType", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 256
-                });
-
-                Columns.Add(new DatabaseColumn("EventSequence", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Decimal,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("EventOccurrence", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Decimal,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("EventCode", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("EventDetailCode", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("Message", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 1024
-                });
-
-                Columns.Add(new DatabaseColumn("ApplicationPath", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 256
-                });
-
-                Columns.Add(new DatabaseColumn("ApplicationVirtualPath", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 256
-                });
-
-                Columns.Add(new DatabaseColumn("MachineName", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 256
-                });
-
-                Columns.Add(new DatabaseColumn("RequestUrl", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 1024
-                });
-
-                Columns.Add(new DatabaseColumn("ExceptionType", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 256
-                });
-
-                Columns.Add(new DatabaseColumn("Details", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 1073741823
-                });
-                    
-                
-                
-            }
-            
-            public IColumn EventId{
-                get{
-                    return this.GetColumn("EventId");
-                }
-            }
-            				
-   			public static string EventIdColumn{
-			      get{
-        			return "EventId";
-      			}
-		    }
-           
-            public IColumn EventTimeUtc{
-                get{
-                    return this.GetColumn("EventTimeUtc");
-                }
-            }
-            				
-   			public static string EventTimeUtcColumn{
-			      get{
-        			return "EventTimeUtc";
-      			}
-		    }
-           
-            public IColumn EventTime{
-                get{
-                    return this.GetColumn("EventTime");
-                }
-            }
-            				
-   			public static string EventTimeColumn{
-			      get{
-        			return "EventTime";
-      			}
-		    }
-           
-            public IColumn EventType{
-                get{
-                    return this.GetColumn("EventType");
-                }
-            }
-            				
-   			public static string EventTypeColumn{
-			      get{
-        			return "EventType";
-      			}
-		    }
-           
-            public IColumn EventSequence{
-                get{
-                    return this.GetColumn("EventSequence");
-                }
-            }
-            				
-   			public static string EventSequenceColumn{
-			      get{
-        			return "EventSequence";
-      			}
-		    }
-           
-            public IColumn EventOccurrence{
-                get{
-                    return this.GetColumn("EventOccurrence");
-                }
-            }
-            				
-   			public static string EventOccurrenceColumn{
-			      get{
-        			return "EventOccurrence";
-      			}
-		    }
-           
-            public IColumn EventCode{
-                get{
-                    return this.GetColumn("EventCode");
-                }
-            }
-            				
-   			public static string EventCodeColumn{
-			      get{
-        			return "EventCode";
-      			}
-		    }
-           
-            public IColumn EventDetailCode{
-                get{
-                    return this.GetColumn("EventDetailCode");
-                }
-            }
-            				
-   			public static string EventDetailCodeColumn{
-			      get{
-        			return "EventDetailCode";
-      			}
-		    }
-           
-            public IColumn Message{
-                get{
-                    return this.GetColumn("Message");
-                }
-            }
-            				
-   			public static string MessageColumn{
-			      get{
-        			return "Message";
-      			}
-		    }
-           
-            public IColumn ApplicationPath{
-                get{
-                    return this.GetColumn("ApplicationPath");
-                }
-            }
-            				
-   			public static string ApplicationPathColumn{
-			      get{
-        			return "ApplicationPath";
-      			}
-		    }
-           
-            public IColumn ApplicationVirtualPath{
-                get{
-                    return this.GetColumn("ApplicationVirtualPath");
-                }
-            }
-            				
-   			public static string ApplicationVirtualPathColumn{
-			      get{
-        			return "ApplicationVirtualPath";
-      			}
-		    }
-           
-            public IColumn MachineName{
-                get{
-                    return this.GetColumn("MachineName");
-                }
-            }
-            				
-   			public static string MachineNameColumn{
-			      get{
-        			return "MachineName";
-      			}
-		    }
-           
-            public IColumn RequestUrl{
-                get{
-                    return this.GetColumn("RequestUrl");
-                }
-            }
-            				
-   			public static string RequestUrlColumn{
-			      get{
-        			return "RequestUrl";
-      			}
-		    }
-           
-            public IColumn ExceptionType{
-                get{
-                    return this.GetColumn("ExceptionType");
-                }
-            }
-            				
-   			public static string ExceptionTypeColumn{
-			      get{
-        			return "ExceptionType";
-      			}
-		    }
-           
-            public IColumn Details{
-                get{
-                    return this.GetColumn("Details");
-                }
-            }
-            				
-   			public static string DetailsColumn{
-			      get{
-        			return "Details";
-      			}
-		    }
-           
-                    
-        }
-        
-        /// <summary>
-        /// Table: aspnet_Applications
-        /// Primary Key: ApplicationId
-        /// </summary>
-
-        public class aspnet_ApplicationsTable: DatabaseTable {
-            
-            public aspnet_ApplicationsTable(IDataProvider provider):base("aspnet_Applications",provider){
-                ClassName = "aspnet_Application";
-                SchemaName = "dbo";
-                
-
-                Columns.Add(new DatabaseColumn("ApplicationName", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 256
-                });
-
-                Columns.Add(new DatabaseColumn("LoweredApplicationName", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 256
-                });
-
-                Columns.Add(new DatabaseColumn("ApplicationId", this)
-                {
-	                IsPrimaryKey = true,
-	                DataType = DbType.Guid,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = true,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("Description", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 256
-                });
-                    
-                
-                
-            }
-            
-            public IColumn ApplicationName{
-                get{
-                    return this.GetColumn("ApplicationName");
-                }
-            }
-            				
-   			public static string ApplicationNameColumn{
-			      get{
-        			return "ApplicationName";
-      			}
-		    }
-           
-            public IColumn LoweredApplicationName{
-                get{
-                    return this.GetColumn("LoweredApplicationName");
-                }
-            }
-            				
-   			public static string LoweredApplicationNameColumn{
-			      get{
-        			return "LoweredApplicationName";
-      			}
-		    }
-           
-            public IColumn ApplicationId{
-                get{
-                    return this.GetColumn("ApplicationId");
-                }
-            }
-            				
-   			public static string ApplicationIdColumn{
-			      get{
-        			return "ApplicationId";
-      			}
-		    }
-           
-            public IColumn Description{
-                get{
-                    return this.GetColumn("Description");
-                }
-            }
-            				
-   			public static string DescriptionColumn{
-			      get{
-        			return "Description";
-      			}
-		    }
-           
-                    
-        }
-        
-        /// <summary>
         /// Table: BlogPosts
         /// Primary Key: ID
         /// </summary>
@@ -669,16 +213,6 @@ namespace Epilogger.Data {
                 SchemaName = "dbo";
                 
 
-                Columns.Add(new DatabaseColumn("ApplicationId", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Guid,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = true,
-	                MaxLength = 0
-                });
-
                 Columns.Add(new DatabaseColumn("UserId", this)
                 {
 	                IsPrimaryKey = true,
@@ -743,18 +277,6 @@ namespace Epilogger.Data {
                 
             }
             
-            public IColumn ApplicationId{
-                get{
-                    return this.GetColumn("ApplicationId");
-                }
-            }
-            				
-   			public static string ApplicationIdColumn{
-			      get{
-        			return "ApplicationId";
-      			}
-		    }
-           
             public IColumn UserId{
                 get{
                     return this.GetColumn("UserId");
@@ -1202,91 +724,6 @@ namespace Epilogger.Data {
         }
         
         /// <summary>
-        /// Table: aspnet_SchemaVersions
-        /// Primary Key: CompatibleSchemaVersion
-        /// </summary>
-
-        public class aspnet_SchemaVersionsTable: DatabaseTable {
-            
-            public aspnet_SchemaVersionsTable(IDataProvider provider):base("aspnet_SchemaVersions",provider){
-                ClassName = "aspnet_SchemaVersion";
-                SchemaName = "dbo";
-                
-
-                Columns.Add(new DatabaseColumn("Feature", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 128
-                });
-
-                Columns.Add(new DatabaseColumn("CompatibleSchemaVersion", this)
-                {
-	                IsPrimaryKey = true,
-	                DataType = DbType.String,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 128
-                });
-
-                Columns.Add(new DatabaseColumn("IsCurrentVersion", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Boolean,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-                    
-                
-                
-            }
-            
-            public IColumn Feature{
-                get{
-                    return this.GetColumn("Feature");
-                }
-            }
-            				
-   			public static string FeatureColumn{
-			      get{
-        			return "Feature";
-      			}
-		    }
-           
-            public IColumn CompatibleSchemaVersion{
-                get{
-                    return this.GetColumn("CompatibleSchemaVersion");
-                }
-            }
-            				
-   			public static string CompatibleSchemaVersionColumn{
-			      get{
-        			return "CompatibleSchemaVersion";
-      			}
-		    }
-           
-            public IColumn IsCurrentVersion{
-                get{
-                    return this.GetColumn("IsCurrentVersion");
-                }
-            }
-            				
-   			public static string IsCurrentVersionColumn{
-			      get{
-        			return "IsCurrentVersion";
-      			}
-		    }
-           
-                    
-        }
-        
-        /// <summary>
         /// Table: Pictures
         /// Primary Key: ID
         /// </summary>
@@ -1523,28 +960,18 @@ namespace Epilogger.Data {
         }
         
         /// <summary>
-        /// Table: aspnet_Membership
-        /// Primary Key: UserId
+        /// Table: User
+        /// Primary Key: ID
         /// </summary>
 
-        public class aspnet_MembershipTable: DatabaseTable {
+        public class UserTable: DatabaseTable {
             
-            public aspnet_MembershipTable(IDataProvider provider):base("aspnet_Membership",provider){
-                ClassName = "aspnet_Membership";
+            public UserTable(IDataProvider provider):base("User",provider){
+                ClassName = "User";
                 SchemaName = "dbo";
                 
 
-                Columns.Add(new DatabaseColumn("ApplicationId", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Guid,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = true,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("UserId", this)
+                Columns.Add(new DatabaseColumn("ID", this)
                 {
 	                IsPrimaryKey = true,
 	                DataType = DbType.Guid,
@@ -1554,6 +981,16 @@ namespace Epilogger.Data {
 	                MaxLength = 0
                 });
 
+                Columns.Add(new DatabaseColumn("Username", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 500
+                });
+
                 Columns.Add(new DatabaseColumn("Password", this)
                 {
 	                IsPrimaryKey = false,
@@ -1561,80 +998,50 @@ namespace Epilogger.Data {
 	                IsNullable = false,
 	                AutoIncrement = false,
 	                IsForeignKey = false,
-	                MaxLength = 128
+	                MaxLength = 500
                 });
 
-                Columns.Add(new DatabaseColumn("PasswordFormat", this)
+                Columns.Add(new DatabaseColumn("FirstName", this)
                 {
 	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
+	                DataType = DbType.String,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 250
+                });
+
+                Columns.Add(new DatabaseColumn("LastName", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 250
+                });
+
+                Columns.Add(new DatabaseColumn("EmailAddress", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 500
+                });
+
+                Columns.Add(new DatabaseColumn("CreatedDate", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.DateTime,
 	                IsNullable = false,
 	                AutoIncrement = false,
 	                IsForeignKey = false,
 	                MaxLength = 0
                 });
 
-                Columns.Add(new DatabaseColumn("PasswordSalt", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 128
-                });
-
-                Columns.Add(new DatabaseColumn("MobilePIN", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 16
-                });
-
-                Columns.Add(new DatabaseColumn("Email", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 256
-                });
-
-                Columns.Add(new DatabaseColumn("LoweredEmail", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 256
-                });
-
-                Columns.Add(new DatabaseColumn("PasswordQuestion", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 256
-                });
-
-                Columns.Add(new DatabaseColumn("PasswordAnswer", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 128
-                });
-
-                Columns.Add(new DatabaseColumn("IsApproved", this)
+                Columns.Add(new DatabaseColumn("IsActive", this)
                 {
 	                IsPrimaryKey = false,
 	                DataType = DbType.Boolean,
@@ -1642,133 +1049,33 @@ namespace Epilogger.Data {
 	                AutoIncrement = false,
 	                IsForeignKey = false,
 	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("IsLockedOut", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Boolean,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("CreateDate", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.DateTime,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("LastLoginDate", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.DateTime,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("LastPasswordChangedDate", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.DateTime,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("LastLockoutDate", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.DateTime,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("FailedPasswordAttemptCount", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("FailedPasswordAttemptWindowStart", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.DateTime,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("FailedPasswordAnswerAttemptCount", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("FailedPasswordAnswerAttemptWindowStart", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.DateTime,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("Comment", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 1073741823
                 });
                     
                 
                 
             }
             
-            public IColumn ApplicationId{
+            public IColumn ID{
                 get{
-                    return this.GetColumn("ApplicationId");
+                    return this.GetColumn("ID");
                 }
             }
             				
-   			public static string ApplicationIdColumn{
+   			public static string IDColumn{
 			      get{
-        			return "ApplicationId";
+        			return "ID";
       			}
 		    }
            
-            public IColumn UserId{
+            public IColumn Username{
                 get{
-                    return this.GetColumn("UserId");
+                    return this.GetColumn("Username");
                 }
             }
             				
-   			public static string UserIdColumn{
+   			public static string UsernameColumn{
 			      get{
-        			return "UserId";
+        			return "Username";
       			}
 		    }
            
@@ -1784,219 +1091,63 @@ namespace Epilogger.Data {
       			}
 		    }
            
-            public IColumn PasswordFormat{
+            public IColumn FirstName{
                 get{
-                    return this.GetColumn("PasswordFormat");
+                    return this.GetColumn("FirstName");
                 }
             }
             				
-   			public static string PasswordFormatColumn{
+   			public static string FirstNameColumn{
 			      get{
-        			return "PasswordFormat";
+        			return "FirstName";
       			}
 		    }
            
-            public IColumn PasswordSalt{
+            public IColumn LastName{
                 get{
-                    return this.GetColumn("PasswordSalt");
+                    return this.GetColumn("LastName");
                 }
             }
             				
-   			public static string PasswordSaltColumn{
+   			public static string LastNameColumn{
 			      get{
-        			return "PasswordSalt";
+        			return "LastName";
       			}
 		    }
            
-            public IColumn MobilePIN{
+            public IColumn EmailAddress{
                 get{
-                    return this.GetColumn("MobilePIN");
+                    return this.GetColumn("EmailAddress");
                 }
             }
             				
-   			public static string MobilePINColumn{
+   			public static string EmailAddressColumn{
 			      get{
-        			return "MobilePIN";
+        			return "EmailAddress";
       			}
 		    }
            
-            public IColumn Email{
+            public IColumn CreatedDate{
                 get{
-                    return this.GetColumn("Email");
+                    return this.GetColumn("CreatedDate");
                 }
             }
             				
-   			public static string EmailColumn{
+   			public static string CreatedDateColumn{
 			      get{
-        			return "Email";
+        			return "CreatedDate";
       			}
 		    }
            
-            public IColumn LoweredEmail{
+            public IColumn IsActive{
                 get{
-                    return this.GetColumn("LoweredEmail");
+                    return this.GetColumn("IsActive");
                 }
             }
             				
-   			public static string LoweredEmailColumn{
+   			public static string IsActiveColumn{
 			      get{
-        			return "LoweredEmail";
-      			}
-		    }
-           
-            public IColumn PasswordQuestion{
-                get{
-                    return this.GetColumn("PasswordQuestion");
-                }
-            }
-            				
-   			public static string PasswordQuestionColumn{
-			      get{
-        			return "PasswordQuestion";
-      			}
-		    }
-           
-            public IColumn PasswordAnswer{
-                get{
-                    return this.GetColumn("PasswordAnswer");
-                }
-            }
-            				
-   			public static string PasswordAnswerColumn{
-			      get{
-        			return "PasswordAnswer";
-      			}
-		    }
-           
-            public IColumn IsApproved{
-                get{
-                    return this.GetColumn("IsApproved");
-                }
-            }
-            				
-   			public static string IsApprovedColumn{
-			      get{
-        			return "IsApproved";
-      			}
-		    }
-           
-            public IColumn IsLockedOut{
-                get{
-                    return this.GetColumn("IsLockedOut");
-                }
-            }
-            				
-   			public static string IsLockedOutColumn{
-			      get{
-        			return "IsLockedOut";
-      			}
-		    }
-           
-            public IColumn CreateDate{
-                get{
-                    return this.GetColumn("CreateDate");
-                }
-            }
-            				
-   			public static string CreateDateColumn{
-			      get{
-        			return "CreateDate";
-      			}
-		    }
-           
-            public IColumn LastLoginDate{
-                get{
-                    return this.GetColumn("LastLoginDate");
-                }
-            }
-            				
-   			public static string LastLoginDateColumn{
-			      get{
-        			return "LastLoginDate";
-      			}
-		    }
-           
-            public IColumn LastPasswordChangedDate{
-                get{
-                    return this.GetColumn("LastPasswordChangedDate");
-                }
-            }
-            				
-   			public static string LastPasswordChangedDateColumn{
-			      get{
-        			return "LastPasswordChangedDate";
-      			}
-		    }
-           
-            public IColumn LastLockoutDate{
-                get{
-                    return this.GetColumn("LastLockoutDate");
-                }
-            }
-            				
-   			public static string LastLockoutDateColumn{
-			      get{
-        			return "LastLockoutDate";
-      			}
-		    }
-           
-            public IColumn FailedPasswordAttemptCount{
-                get{
-                    return this.GetColumn("FailedPasswordAttemptCount");
-                }
-            }
-            				
-   			public static string FailedPasswordAttemptCountColumn{
-			      get{
-        			return "FailedPasswordAttemptCount";
-      			}
-		    }
-           
-            public IColumn FailedPasswordAttemptWindowStart{
-                get{
-                    return this.GetColumn("FailedPasswordAttemptWindowStart");
-                }
-            }
-            				
-   			public static string FailedPasswordAttemptWindowStartColumn{
-			      get{
-        			return "FailedPasswordAttemptWindowStart";
-      			}
-		    }
-           
-            public IColumn FailedPasswordAnswerAttemptCount{
-                get{
-                    return this.GetColumn("FailedPasswordAnswerAttemptCount");
-                }
-            }
-            				
-   			public static string FailedPasswordAnswerAttemptCountColumn{
-			      get{
-        			return "FailedPasswordAnswerAttemptCount";
-      			}
-		    }
-           
-            public IColumn FailedPasswordAnswerAttemptWindowStart{
-                get{
-                    return this.GetColumn("FailedPasswordAnswerAttemptWindowStart");
-                }
-            }
-            				
-   			public static string FailedPasswordAnswerAttemptWindowStartColumn{
-			      get{
-        			return "FailedPasswordAnswerAttemptWindowStart";
-      			}
-		    }
-           
-            public IColumn Comment{
-                get{
-                    return this.GetColumn("Comment");
-                }
-            }
-            				
-   			public static string CommentColumn{
-			      get{
-        			return "Comment";
+        			return "IsActive";
       			}
 		    }
            
@@ -2419,6 +1570,135 @@ namespace Epilogger.Data {
         }
         
         /// <summary>
+        /// Table: UserAuthenticationProfile
+        /// Primary Key: ID
+        /// </summary>
+
+        public class UserAuthenticationProfileTable: DatabaseTable {
+            
+            public UserAuthenticationProfileTable(IDataProvider provider):base("UserAuthenticationProfile",provider){
+                ClassName = "UserAuthenticationProfile";
+                SchemaName = "dbo";
+                
+
+                Columns.Add(new DatabaseColumn("ID", this)
+                {
+	                IsPrimaryKey = true,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = true,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("UserID", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Guid,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = true,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("Service", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("ServiceUsername", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 250
+                });
+
+                Columns.Add(new DatabaseColumn("AuthToken", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 500
+                });
+                    
+                
+                
+            }
+            
+            public IColumn ID{
+                get{
+                    return this.GetColumn("ID");
+                }
+            }
+            				
+   			public static string IDColumn{
+			      get{
+        			return "ID";
+      			}
+		    }
+           
+            public IColumn UserID{
+                get{
+                    return this.GetColumn("UserID");
+                }
+            }
+            				
+   			public static string UserIDColumn{
+			      get{
+        			return "UserID";
+      			}
+		    }
+           
+            public IColumn Service{
+                get{
+                    return this.GetColumn("Service");
+                }
+            }
+            				
+   			public static string ServiceColumn{
+			      get{
+        			return "Service";
+      			}
+		    }
+           
+            public IColumn ServiceUsername{
+                get{
+                    return this.GetColumn("ServiceUsername");
+                }
+            }
+            				
+   			public static string ServiceUsernameColumn{
+			      get{
+        			return "ServiceUsername";
+      			}
+		    }
+           
+            public IColumn AuthToken{
+                get{
+                    return this.GetColumn("AuthToken");
+                }
+            }
+            				
+   			public static string AuthTokenColumn{
+			      get{
+        			return "AuthToken";
+      			}
+		    }
+           
+                    
+        }
+        
+        /// <summary>
         /// Table: URLs
         /// Primary Key: ID
         /// </summary>
@@ -2607,327 +1887,6 @@ namespace Epilogger.Data {
    			public static string DeletedColumn{
 			      get{
         			return "Deleted";
-      			}
-		    }
-           
-                    
-        }
-        
-        /// <summary>
-        /// Table: aspnet_Profile
-        /// Primary Key: UserId
-        /// </summary>
-
-        public class aspnet_ProfileTable: DatabaseTable {
-            
-            public aspnet_ProfileTable(IDataProvider provider):base("aspnet_Profile",provider){
-                ClassName = "aspnet_Profile";
-                SchemaName = "dbo";
-                
-
-                Columns.Add(new DatabaseColumn("UserId", this)
-                {
-	                IsPrimaryKey = true,
-	                DataType = DbType.Guid,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = true,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("PropertyNames", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 1073741823
-                });
-
-                Columns.Add(new DatabaseColumn("PropertyValuesString", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 1073741823
-                });
-
-                Columns.Add(new DatabaseColumn("PropertyValuesBinary", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Binary,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 2147483647
-                });
-
-                Columns.Add(new DatabaseColumn("LastUpdatedDate", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.DateTime,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-                    
-                
-                
-            }
-            
-            public IColumn UserId{
-                get{
-                    return this.GetColumn("UserId");
-                }
-            }
-            				
-   			public static string UserIdColumn{
-			      get{
-        			return "UserId";
-      			}
-		    }
-           
-            public IColumn PropertyNames{
-                get{
-                    return this.GetColumn("PropertyNames");
-                }
-            }
-            				
-   			public static string PropertyNamesColumn{
-			      get{
-        			return "PropertyNames";
-      			}
-		    }
-           
-            public IColumn PropertyValuesString{
-                get{
-                    return this.GetColumn("PropertyValuesString");
-                }
-            }
-            				
-   			public static string PropertyValuesStringColumn{
-			      get{
-        			return "PropertyValuesString";
-      			}
-		    }
-           
-            public IColumn PropertyValuesBinary{
-                get{
-                    return this.GetColumn("PropertyValuesBinary");
-                }
-            }
-            				
-   			public static string PropertyValuesBinaryColumn{
-			      get{
-        			return "PropertyValuesBinary";
-      			}
-		    }
-           
-            public IColumn LastUpdatedDate{
-                get{
-                    return this.GetColumn("LastUpdatedDate");
-                }
-            }
-            				
-   			public static string LastUpdatedDateColumn{
-			      get{
-        			return "LastUpdatedDate";
-      			}
-		    }
-           
-                    
-        }
-        
-        /// <summary>
-        /// Table: aspnet_Roles
-        /// Primary Key: RoleId
-        /// </summary>
-
-        public class aspnet_RolesTable: DatabaseTable {
-            
-            public aspnet_RolesTable(IDataProvider provider):base("aspnet_Roles",provider){
-                ClassName = "aspnet_Role";
-                SchemaName = "dbo";
-                
-
-                Columns.Add(new DatabaseColumn("ApplicationId", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Guid,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = true,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("RoleId", this)
-                {
-	                IsPrimaryKey = true,
-	                DataType = DbType.Guid,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = true,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("RoleName", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 256
-                });
-
-                Columns.Add(new DatabaseColumn("LoweredRoleName", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 256
-                });
-
-                Columns.Add(new DatabaseColumn("Description", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 256
-                });
-                    
-                
-                
-            }
-            
-            public IColumn ApplicationId{
-                get{
-                    return this.GetColumn("ApplicationId");
-                }
-            }
-            				
-   			public static string ApplicationIdColumn{
-			      get{
-        			return "ApplicationId";
-      			}
-		    }
-           
-            public IColumn RoleId{
-                get{
-                    return this.GetColumn("RoleId");
-                }
-            }
-            				
-   			public static string RoleIdColumn{
-			      get{
-        			return "RoleId";
-      			}
-		    }
-           
-            public IColumn RoleName{
-                get{
-                    return this.GetColumn("RoleName");
-                }
-            }
-            				
-   			public static string RoleNameColumn{
-			      get{
-        			return "RoleName";
-      			}
-		    }
-           
-            public IColumn LoweredRoleName{
-                get{
-                    return this.GetColumn("LoweredRoleName");
-                }
-            }
-            				
-   			public static string LoweredRoleNameColumn{
-			      get{
-        			return "LoweredRoleName";
-      			}
-		    }
-           
-            public IColumn Description{
-                get{
-                    return this.GetColumn("Description");
-                }
-            }
-            				
-   			public static string DescriptionColumn{
-			      get{
-        			return "Description";
-      			}
-		    }
-           
-                    
-        }
-        
-        /// <summary>
-        /// Table: aspnet_UsersInRoles
-        /// Primary Key: RoleId
-        /// </summary>
-
-        public class aspnet_UsersInRolesTable: DatabaseTable {
-            
-            public aspnet_UsersInRolesTable(IDataProvider provider):base("aspnet_UsersInRoles",provider){
-                ClassName = "aspnet_UsersInRole";
-                SchemaName = "dbo";
-                
-
-                Columns.Add(new DatabaseColumn("UserId", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Guid,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = true,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("RoleId", this)
-                {
-	                IsPrimaryKey = true,
-	                DataType = DbType.Guid,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = true,
-	                MaxLength = 0
-                });
-                    
-                
-                
-            }
-            
-            public IColumn UserId{
-                get{
-                    return this.GetColumn("UserId");
-                }
-            }
-            				
-   			public static string UserIdColumn{
-			      get{
-        			return "UserId";
-      			}
-		    }
-           
-            public IColumn RoleId{
-                get{
-                    return this.GetColumn("RoleId");
-                }
-            }
-            				
-   			public static string RoleIdColumn{
-			      get{
-        			return "RoleId";
       			}
 		    }
            
@@ -3318,327 +2277,6 @@ namespace Epilogger.Data {
    			public static string DeletedColumn{
 			      get{
         			return "Deleted";
-      			}
-		    }
-           
-                    
-        }
-        
-        /// <summary>
-        /// Table: aspnet_Paths
-        /// Primary Key: PathId
-        /// </summary>
-
-        public class aspnet_PathsTable: DatabaseTable {
-            
-            public aspnet_PathsTable(IDataProvider provider):base("aspnet_Paths",provider){
-                ClassName = "aspnet_Path";
-                SchemaName = "dbo";
-                
-
-                Columns.Add(new DatabaseColumn("ApplicationId", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Guid,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = true,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("PathId", this)
-                {
-	                IsPrimaryKey = true,
-	                DataType = DbType.Guid,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = true,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("Path", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 256
-                });
-
-                Columns.Add(new DatabaseColumn("LoweredPath", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 256
-                });
-                    
-                
-                
-            }
-            
-            public IColumn ApplicationId{
-                get{
-                    return this.GetColumn("ApplicationId");
-                }
-            }
-            				
-   			public static string ApplicationIdColumn{
-			      get{
-        			return "ApplicationId";
-      			}
-		    }
-           
-            public IColumn PathId{
-                get{
-                    return this.GetColumn("PathId");
-                }
-            }
-            				
-   			public static string PathIdColumn{
-			      get{
-        			return "PathId";
-      			}
-		    }
-           
-            public IColumn Path{
-                get{
-                    return this.GetColumn("Path");
-                }
-            }
-            				
-   			public static string PathColumn{
-			      get{
-        			return "Path";
-      			}
-		    }
-           
-            public IColumn LoweredPath{
-                get{
-                    return this.GetColumn("LoweredPath");
-                }
-            }
-            				
-   			public static string LoweredPathColumn{
-			      get{
-        			return "LoweredPath";
-      			}
-		    }
-           
-                    
-        }
-        
-        /// <summary>
-        /// Table: aspnet_PersonalizationAllUsers
-        /// Primary Key: PathId
-        /// </summary>
-
-        public class aspnet_PersonalizationAllUsersTable: DatabaseTable {
-            
-            public aspnet_PersonalizationAllUsersTable(IDataProvider provider):base("aspnet_PersonalizationAllUsers",provider){
-                ClassName = "aspnet_PersonalizationAllUser";
-                SchemaName = "dbo";
-                
-
-                Columns.Add(new DatabaseColumn("PathId", this)
-                {
-	                IsPrimaryKey = true,
-	                DataType = DbType.Guid,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = true,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("PageSettings", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Binary,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 2147483647
-                });
-
-                Columns.Add(new DatabaseColumn("LastUpdatedDate", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.DateTime,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-                    
-                
-                
-            }
-            
-            public IColumn PathId{
-                get{
-                    return this.GetColumn("PathId");
-                }
-            }
-            				
-   			public static string PathIdColumn{
-			      get{
-        			return "PathId";
-      			}
-		    }
-           
-            public IColumn PageSettings{
-                get{
-                    return this.GetColumn("PageSettings");
-                }
-            }
-            				
-   			public static string PageSettingsColumn{
-			      get{
-        			return "PageSettings";
-      			}
-		    }
-           
-            public IColumn LastUpdatedDate{
-                get{
-                    return this.GetColumn("LastUpdatedDate");
-                }
-            }
-            				
-   			public static string LastUpdatedDateColumn{
-			      get{
-        			return "LastUpdatedDate";
-      			}
-		    }
-           
-                    
-        }
-        
-        /// <summary>
-        /// Table: aspnet_PersonalizationPerUser
-        /// Primary Key: Id
-        /// </summary>
-
-        public class aspnet_PersonalizationPerUserTable: DatabaseTable {
-            
-            public aspnet_PersonalizationPerUserTable(IDataProvider provider):base("aspnet_PersonalizationPerUser",provider){
-                ClassName = "aspnet_PersonalizationPerUser";
-                SchemaName = "dbo";
-                
-
-                Columns.Add(new DatabaseColumn("Id", this)
-                {
-	                IsPrimaryKey = true,
-	                DataType = DbType.Guid,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("PathId", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Guid,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = true,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("UserId", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Guid,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = true,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("PageSettings", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Binary,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 2147483647
-                });
-
-                Columns.Add(new DatabaseColumn("LastUpdatedDate", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.DateTime,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-                    
-                
-                
-            }
-            
-            public IColumn Id{
-                get{
-                    return this.GetColumn("Id");
-                }
-            }
-            				
-   			public static string IdColumn{
-			      get{
-        			return "Id";
-      			}
-		    }
-           
-            public IColumn PathId{
-                get{
-                    return this.GetColumn("PathId");
-                }
-            }
-            				
-   			public static string PathIdColumn{
-			      get{
-        			return "PathId";
-      			}
-		    }
-           
-            public IColumn UserId{
-                get{
-                    return this.GetColumn("UserId");
-                }
-            }
-            				
-   			public static string UserIdColumn{
-			      get{
-        			return "UserId";
-      			}
-		    }
-           
-            public IColumn PageSettings{
-                get{
-                    return this.GetColumn("PageSettings");
-                }
-            }
-            				
-   			public static string PageSettingsColumn{
-			      get{
-        			return "PageSettings";
-      			}
-		    }
-           
-            public IColumn LastUpdatedDate{
-                get{
-                    return this.GetColumn("LastUpdatedDate");
-                }
-            }
-            				
-   			public static string LastUpdatedDateColumn{
-			      get{
-        			return "LastUpdatedDate";
       			}
 		    }
            

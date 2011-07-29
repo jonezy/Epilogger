@@ -31,7 +31,8 @@ namespace Epilogger.Web {
         }
 
         private void RegisterAutomapperMappings() {
-            Mapper.CreateMap<Event, EventDisplayViewModel>();
+            Mapper.CreateMap<Event, EventDisplayViewModel>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Description));
         }
     }
 }
