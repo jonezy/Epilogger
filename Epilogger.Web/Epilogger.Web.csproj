@@ -37,6 +37,12 @@
       <HintPath>..\packages\AutoMapper.1.1.0.118\lib\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RichmondDay.Helpers">
+      <HintPath>..\packages\RichmondDay.Helpers.dll.1.0\lib\RichmondDay.Helpers.dll</HintPath>
+    </Reference>
     <Reference Include="SubSonic.Core">
       <HintPath>..\packages\SubSonic.3.0.0.4\lib\SubSonic.Core.dll</HintPath>
     </Reference>
@@ -85,12 +91,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Structs.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Core\Services\EventService.cs" />
+    <Compile Include="Core\Services\ServiceBase.cs" />
+    <Compile Include="Core\Services\UserService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\UrlHelpers.cs" />
     <Compile Include="Models\EventDisplayViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

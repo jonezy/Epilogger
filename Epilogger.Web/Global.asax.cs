@@ -5,9 +5,26 @@ using AutoMapper;
 
 using Epilogger.Data;
 using Epilogger.Web.Models;
+using System.Configuration;
 
 namespace Epilogger.Web {
-    public class MvcApplication : System.Web.HttpApplication {
+    public class App : System.Web.HttpApplication {
+        /// <summary>
+        /// Boolean flag to indicate whether or not caching should be enabled.
+        /// </summary>
+        public static bool CachingEnabled {
+            get {
+                if (ConfigurationManager.AppSettings["CachingEnabled"] != null) {
+                    bool enabled;
+                    bool.TryParse(ConfigurationManager.AppSettings["CachingEnabled"].ToString(), out enabled);
+
+                    return enabled;
+                }
+
+                return false;
+            }
+        }
+        
         public static void RegisterGlobalFilters(GlobalFilterCollection filters) {
             filters.Add(new HandleErrorAttribute());
         }
@@ -31,8 +48,7 @@ namespace Epilogger.Web {
         }
 
         private void RegisterAutomapperMappings() {
-            Mapper.CreateMap<Event, EventDisplayViewModel>()
-                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Description));
+            Mapper.CreateMap<Event, EventDisplayViewModel>();
         }
     }
 }

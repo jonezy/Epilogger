@@ -11,22 +11,18 @@ using System.Dynamic;
 namespace Epilogger.Web.Controllers {
     public class EventsController : Controller {
         EpiloggerDB db;
+        EventService service = new EventService();
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext) {
             if (db == null) db = new EpiloggerDB();
+            if (service == null) service = new EventService();
 
             base.Initialize(requestContext);
         }
 
         public ActionResult Index() {
-            List<Event> events = db.Events.ToList() ;
+            List<Event> events = service.AllEvents();
             List<EventDisplayViewModel> model = Mapper.Map<List<Event>, List<EventDisplayViewModel>>(events);
-
-
-
-            dynamic stuff = new ExpandoObject();
-            stuff.This = "that";
-            stuff.That = "this";
 
             return View(model);
         }
