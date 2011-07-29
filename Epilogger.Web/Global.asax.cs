@@ -1,11 +1,11 @@
-﻿using System.Web.Mvc;
+﻿using System.Configuration;
+using System.Web.Mvc;
 using System.Web.Routing;
 
 using AutoMapper;
 
 using Epilogger.Data;
 using Epilogger.Web.Models;
-using System.Configuration;
 
 namespace Epilogger.Web {
     public class App : System.Web.HttpApplication {
