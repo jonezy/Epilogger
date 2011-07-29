@@ -7,6 +7,7 @@ using AutoMapper;
 using Epilogger.Data;
 using Epilogger.Web.Models;
 using System.Dynamic;
+using System;
 
 namespace Epilogger.Web.Controllers {
     public class EventsController : Controller {
@@ -25,6 +26,11 @@ namespace Epilogger.Web.Controllers {
             List<EventDisplayViewModel> model = Mapper.Map<List<Event>, List<EventDisplayViewModel>>(events);
 
             return View(model);
+        }
+
+        [LogErrors(FriendlyErrorMessage="There was a problem saving your event")]
+        public ActionResult Error() {
+            throw new Exception("This is a test exception");
         }
 
         public ActionResult Details(int id) {

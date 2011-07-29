@@ -6,6 +6,7 @@ using RichmondDay.Helpers;
 using SubSonic.Query;
 using SubSonic.Repository;
 using System.Collections.Generic;
+using System;
 
 namespace Epilogger.Web {
     public abstract class ServiceBase<T> where T :class, new() {
@@ -34,12 +35,12 @@ namespace Epilogger.Web {
         }
 
         protected virtual List<T> GetData() {
-            List<T> data = CacheHelper != null ? CacheHelper.Get(CacheKey) as List<T> : null;
+            List<T> data = CacheHelper != null && CacheExpiry > 0 ? CacheHelper.Get(CacheKey) as List<T> : null;
 
             if (data == null) {
                 data = GetRepository<T>(db).GetAll().ToList();
                 if (CacheHelper != null)
-                    CacheHelper.Add(CacheKey, data);
+                    CacheHelper.Add(CacheKey, data, DateTime.Now.AddSeconds(CacheExpiry));
             }
 
             return data;
