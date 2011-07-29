@@ -6,6 +6,7 @@ using AutoMapper;
 
 using Epilogger.Data;
 using Epilogger.Web.Models;
+using System.Dynamic;
 
 namespace Epilogger.Web.Controllers {
     public class EventsController : Controller {
@@ -21,6 +22,11 @@ namespace Epilogger.Web.Controllers {
             List<Event> events = db.Events.ToList() ;
             List<EventDisplayViewModel> model = Mapper.Map<List<Event>, List<EventDisplayViewModel>>(events);
 
+
+
+            dynamic stuff = new ExpandoObject();
+            stuff.This = "that";
+            stuff.That = "this";
 
             return View(model);
         }
