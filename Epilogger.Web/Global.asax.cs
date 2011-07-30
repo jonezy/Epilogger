@@ -6,6 +6,7 @@ using AutoMapper;
 
 using Epilogger.Data;
 using Epilogger.Web.Models;
+using System;
 
 namespace Epilogger.Web {
     public class App : System.Web.HttpApplication {
@@ -49,6 +50,9 @@ namespace Epilogger.Web {
 
         private void RegisterAutomapperMappings() {
             Mapper.CreateMap<Event, EventDisplayViewModel>();
+
+            Mapper.CreateMap<CreateAccountModel, User>()
+                .ForMember(dest => dest.CreatedDate, opt => opt.UseValue(DateTime.Now));
         }
     }
 }

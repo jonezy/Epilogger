@@ -1,0 +1,15 @@
+﻿@model Epilogger.Web.Models.LoginModel
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<div class="ten columsn alpha">
+<h2>Login</h2>
+
+<fieldset>
+    <p>@Html.LabelFor(model => model.Username) @Html.TextBoxFor(model => model.Username)</p>
+    <p>@Html.LabelFor(model => model.Password) @Html.PasswordFor(model => model.Password)</p>
+    <p><input type="submit" class="submit" value="register" /></p>
+</fieldset>
+</div>
