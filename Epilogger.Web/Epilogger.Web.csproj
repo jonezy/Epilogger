@@ -46,8 +46,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="RichmondDay.Helpers">
-      <HintPath>..\packages\RichmondDay.Helpers.dll.1.0\lib\RichmondDay.Helpers.dll</HintPath>
+    <Reference Include="RichmondDay.Helpers, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RichmondDay.Helpers.1.4.1\lib\net35\RichmondDay.Helpers.dll</HintPath>
     </Reference>
     <Reference Include="smokesignals">
       <HintPath>..\packages\smokesignals.1.4\lib\smokesignals.dll</HintPath>
@@ -106,7 +107,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Core\Filters\LogErrors.cs" />
     <Compile Include="Core\Filters\RequiresAuthentication.cs" />
-    <Compile Include="Core\Helpers\CookieHelpers.cs" />
     <Compile Include="Core\Services\EventService.cs" />
     <Compile Include="Core\Services\ServiceBase.cs" />
     <Compile Include="Core\Services\UserService.cs" />
@@ -145,6 +145,7 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Core\Helpers\" />
     <Folder Include="Public\images\" />
   </ItemGroup>
   <ItemGroup>
