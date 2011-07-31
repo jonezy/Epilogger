@@ -145,7 +145,6 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Core\Helpers\" />
     <Folder Include="Public\images\" />
   </ItemGroup>
   <ItemGroup>
