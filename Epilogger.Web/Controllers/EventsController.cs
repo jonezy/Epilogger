@@ -10,7 +10,7 @@ using System.Dynamic;
 using System;
 
 namespace Epilogger.Web.Controllers {
-    public class EventsController : Controller {
+    public class EventsController : BaseController {
         EpiloggerDB db;
         EventService service = new EventService();
 
@@ -21,6 +21,7 @@ namespace Epilogger.Web.Controllers {
             base.Initialize(requestContext);
         }
 
+        [RequiresAuthentication(AccessDeniedMessage="You must be logged in to view the list of events")]
         public ActionResult Index() {
             List<Event> events = service.AllEvents();
             List<EventDisplayViewModel> model = Mapper.Map<List<Event>, List<EventDisplayViewModel>>(events);
@@ -33,6 +34,7 @@ namespace Epilogger.Web.Controllers {
             throw new Exception("This is a test exception");
         }
 
+        [RequiresAuthentication(AccessDeniedMessage="You must be logged in to view the details of that event")]
         public ActionResult Details(int id) {
             return View(Mapper.Map<Event, EventDisplayViewModel>(db.Events.Where(e=>e.ID == id).FirstOrDefault()));
         }
