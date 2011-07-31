@@ -5,6 +5,7 @@ using AutoMapper;
 using DevOne.Security.Cryptography.BCrypt;
 using Epilogger.Data;
 using Epilogger.Web.Models;
+using RichmondDay.Helpers;
 
 namespace Epilogger.Web.Controllers {
     public class AccountController : BaseController {
