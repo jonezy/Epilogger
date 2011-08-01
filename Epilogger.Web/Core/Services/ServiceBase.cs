@@ -1,12 +1,14 @@
-﻿using System.Web;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Web;
+
 using Epilogger.Data;
+
 using RichmondDay.Helpers;
 
 using SubSonic.Query;
 using SubSonic.Repository;
-using System.Collections.Generic;
-using System;
 
 namespace Epilogger.Web {
     public abstract class ServiceBase<T> where T :class, new() {

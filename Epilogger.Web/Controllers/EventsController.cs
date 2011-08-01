@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -6,8 +7,6 @@ using AutoMapper;
 
 using Epilogger.Data;
 using Epilogger.Web.Models;
-using System.Dynamic;
-using System;
 
 namespace Epilogger.Web.Controllers {
     public class EventsController : BaseController {

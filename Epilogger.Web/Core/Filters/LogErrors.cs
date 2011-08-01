@@ -1,5 +1,5 @@
-﻿using System.Web.Mvc;
-using System;
+﻿using System;
+using System.Web.Mvc;
 
 namespace Epilogger.Web {
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple=true)]

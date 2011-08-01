@@ -5,3 +5,6 @@
 }
 
 <h2>Your Account</h2>
+@using (Html.BeginForm("BuildAuthenticationRequest", "Twitter", new { area = "Authentication" }, FormMethod.Post, null)) {
+    <input type="submit" value="link your account with twitter" name="twitter" />
+}

@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -6,7 +7,6 @@ using AutoMapper;
 
 using Epilogger.Data;
 using Epilogger.Web.Models;
-using System;
 
 namespace Epilogger.Web {
     public class App : System.Web.HttpApplication {
@@ -53,6 +53,8 @@ namespace Epilogger.Web {
 
             Mapper.CreateMap<CreateAccountModel, User>()
                 .ForMember(dest => dest.CreatedDate, opt => opt.UseValue(DateTime.Now));
+
+            //Mapper.AssertConfigurationIsValid();
         }
     }
 }

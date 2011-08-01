@@ -1,6 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+
 using Epilogger.Data;
-using System;
 
 namespace Epilogger.Web {
     public class UserService : ServiceBase<User>{

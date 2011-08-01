@@ -517,433 +517,6 @@ namespace Epilogger.Data
             }
         }
 
-        public IQueryable<Event> Events
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Events
-                       where items.UserID == _UserId
-                       select items;
-            }
-        }
-
-        #endregion
-
-
-        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-        public event PropertyChangingEventHandler PropertyChanging;
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void SendPropertyChanging()
-        {
-            var handler = PropertyChanging;
-            if (handler != null)
-               handler(this, emptyChangingEventArgs);
-        }
-
-        protected virtual void SendPropertyChanged(String propertyName)
-        {
-            var handler = PropertyChanged;
-            if (handler != null)
-                handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-	}
-	
-    
-    
-    /// <summary>
-    /// A class which represents the Events table in the Epilogger Database.
-    /// This class is queryable through EpiloggerDB.Event 
-    /// </summary>
-
-	public partial class Event: INotifyPropertyChanging, INotifyPropertyChanged
-	{
-        partial void OnLoaded();
-        partial void OnValidate(System.Data.Linq.ChangeAction action);
-        partial void OnCreated();
-	    
-	    public Event(){
-	        OnCreated();
-	    }
-	    
-	    #region Properties
-	    
-        partial void OnIDChanging(int value);
-        partial void OnIDChanged();
-		
-		private int _ID;
-		public int ID { 
-		    get{
-		        return _ID;
-		    } 
-		    set{
-		        this.OnIDChanging(value);
-                this.SendPropertyChanging();
-                this._ID = value;
-                this.SendPropertyChanged("ID");
-                this.OnIDChanged();
-		    }
-		}
-		
-        partial void OnUserIDChanging(Guid? value);
-        partial void OnUserIDChanged();
-		
-		private Guid? _UserID;
-		public Guid? UserID { 
-		    get{
-		        return _UserID;
-		    } 
-		    set{
-		        this.OnUserIDChanging(value);
-                this.SendPropertyChanging();
-                this._UserID = value;
-                this.SendPropertyChanged("UserID");
-                this.OnUserIDChanged();
-		    }
-		}
-		
-        partial void OnNameChanging(string value);
-        partial void OnNameChanged();
-		
-		private string _Name;
-		public string Name { 
-		    get{
-		        return _Name;
-		    } 
-		    set{
-		        this.OnNameChanging(value);
-                this.SendPropertyChanging();
-                this._Name = value;
-                this.SendPropertyChanged("Name");
-                this.OnNameChanged();
-		    }
-		}
-		
-        partial void OnSubTitleChanging(string value);
-        partial void OnSubTitleChanged();
-		
-		private string _SubTitle;
-		public string SubTitle { 
-		    get{
-		        return _SubTitle;
-		    } 
-		    set{
-		        this.OnSubTitleChanging(value);
-                this.SendPropertyChanging();
-                this._SubTitle = value;
-                this.SendPropertyChanged("SubTitle");
-                this.OnSubTitleChanged();
-		    }
-		}
-		
-        partial void OnDescriptionChanging(string value);
-        partial void OnDescriptionChanged();
-		
-		private string _Description;
-		public string Description { 
-		    get{
-		        return _Description;
-		    } 
-		    set{
-		        this.OnDescriptionChanging(value);
-                this.SendPropertyChanging();
-                this._Description = value;
-                this.SendPropertyChanged("Description");
-                this.OnDescriptionChanged();
-		    }
-		}
-		
-        partial void OnCategoryIDChanging(int value);
-        partial void OnCategoryIDChanged();
-		
-		private int _CategoryID;
-		public int CategoryID { 
-		    get{
-		        return _CategoryID;
-		    } 
-		    set{
-		        this.OnCategoryIDChanging(value);
-                this.SendPropertyChanging();
-                this._CategoryID = value;
-                this.SendPropertyChanged("CategoryID");
-                this.OnCategoryIDChanged();
-		    }
-		}
-		
-        partial void OnWebsiteURLChanging(string value);
-        partial void OnWebsiteURLChanged();
-		
-		private string _WebsiteURL;
-		public string WebsiteURL { 
-		    get{
-		        return _WebsiteURL;
-		    } 
-		    set{
-		        this.OnWebsiteURLChanging(value);
-                this.SendPropertyChanging();
-                this._WebsiteURL = value;
-                this.SendPropertyChanged("WebsiteURL");
-                this.OnWebsiteURLChanged();
-		    }
-		}
-		
-        partial void OnCostChanging(string value);
-        partial void OnCostChanged();
-		
-		private string _Cost;
-		public string Cost { 
-		    get{
-		        return _Cost;
-		    } 
-		    set{
-		        this.OnCostChanging(value);
-                this.SendPropertyChanging();
-                this._Cost = value;
-                this.SendPropertyChanged("Cost");
-                this.OnCostChanged();
-		    }
-		}
-		
-        partial void OnStartDateTimeChanging(DateTime? value);
-        partial void OnStartDateTimeChanged();
-		
-		private DateTime? _StartDateTime;
-		public DateTime? StartDateTime { 
-		    get{
-		        return _StartDateTime;
-		    } 
-		    set{
-		        this.OnStartDateTimeChanging(value);
-                this.SendPropertyChanging();
-                this._StartDateTime = value;
-                this.SendPropertyChanged("StartDateTime");
-                this.OnStartDateTimeChanged();
-		    }
-		}
-		
-        partial void OnEndDateTimeChanging(DateTime? value);
-        partial void OnEndDateTimeChanged();
-		
-		private DateTime? _EndDateTime;
-		public DateTime? EndDateTime { 
-		    get{
-		        return _EndDateTime;
-		    } 
-		    set{
-		        this.OnEndDateTimeChanging(value);
-                this.SendPropertyChanging();
-                this._EndDateTime = value;
-                this.SendPropertyChanged("EndDateTime");
-                this.OnEndDateTimeChanged();
-		    }
-		}
-		
-        partial void OnTimeZoneOffsetChanging(int? value);
-        partial void OnTimeZoneOffsetChanged();
-		
-		private int? _TimeZoneOffset;
-		public int? TimeZoneOffset { 
-		    get{
-		        return _TimeZoneOffset;
-		    } 
-		    set{
-		        this.OnTimeZoneOffsetChanging(value);
-                this.SendPropertyChanging();
-                this._TimeZoneOffset = value;
-                this.SendPropertyChanged("TimeZoneOffset");
-                this.OnTimeZoneOffsetChanged();
-		    }
-		}
-		
-        partial void OnVenueIDChanging(long? value);
-        partial void OnVenueIDChanged();
-		
-		private long? _VenueID;
-		public long? VenueID { 
-		    get{
-		        return _VenueID;
-		    } 
-		    set{
-		        this.OnVenueIDChanging(value);
-                this.SendPropertyChanging();
-                this._VenueID = value;
-                this.SendPropertyChanged("VenueID");
-                this.OnVenueIDChanged();
-		    }
-		}
-		
-        partial void OnSearchTermsChanging(string value);
-        partial void OnSearchTermsChanged();
-		
-		private string _SearchTerms;
-		public string SearchTerms { 
-		    get{
-		        return _SearchTerms;
-		    } 
-		    set{
-		        this.OnSearchTermsChanging(value);
-                this.SendPropertyChanging();
-                this._SearchTerms = value;
-                this.SendPropertyChanged("SearchTerms");
-                this.OnSearchTermsChanged();
-		    }
-		}
-		
-        partial void OnNumberOfTweetsChanging(long value);
-        partial void OnNumberOfTweetsChanged();
-		
-		private long _NumberOfTweets;
-		public long NumberOfTweets { 
-		    get{
-		        return _NumberOfTweets;
-		    } 
-		    set{
-		        this.OnNumberOfTweetsChanging(value);
-                this.SendPropertyChanging();
-                this._NumberOfTweets = value;
-                this.SendPropertyChanged("NumberOfTweets");
-                this.OnNumberOfTweetsChanged();
-		    }
-		}
-		
-        partial void OnCollectionModeChanging(int value);
-        partial void OnCollectionModeChanged();
-		
-		private int _CollectionMode;
-		public int CollectionMode { 
-		    get{
-		        return _CollectionMode;
-		    } 
-		    set{
-		        this.OnCollectionModeChanging(value);
-                this.SendPropertyChanging();
-                this._CollectionMode = value;
-                this.SendPropertyChanged("CollectionMode");
-                this.OnCollectionModeChanged();
-		    }
-		}
-		
-        partial void OnIsActiveChanging(bool value);
-        partial void OnIsActiveChanged();
-		
-		private bool _IsActive;
-		public bool IsActive { 
-		    get{
-		        return _IsActive;
-		    } 
-		    set{
-		        this.OnIsActiveChanging(value);
-                this.SendPropertyChanging();
-                this._IsActive = value;
-                this.SendPropertyChanged("IsActive");
-                this.OnIsActiveChanged();
-		    }
-		}
-		
-
-        #endregion
-
-        #region Foreign Keys
-        public IQueryable<aspnet_User> aspnet_Users
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.aspnet_Users
-                       where items.UserId == _UserID
-                       select items;
-            }
-        }
-
-        public IQueryable<EventCategory> EventCategories
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.EventCategories
-                       where items.ID == _CategoryID
-                       select items;
-            }
-        }
-
-        public IQueryable<BlogPost> BlogPosts
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.BlogPosts
-                       where items.EventID == _ID
-                       select items;
-            }
-        }
-
-        public IQueryable<ImageMetaDatum> ImageMetaData
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.ImageMetaData
-                       where items.EventID == _ID
-                       select items;
-            }
-        }
-
-        public IQueryable<Image> Images
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Images
-                       where items.EventID == _ID
-                       select items;
-            }
-        }
-
-        public IQueryable<Picture> Pictures
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Pictures
-                       where items.EventID == _ID
-                       select items;
-            }
-        }
-
-        public IQueryable<Tweet> Tweets
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Tweets
-                       where items.EventID == _ID
-                       select items;
-            }
-        }
-
-        public IQueryable<URL> URLS
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.URLS
-                       where items.EventID == _ID
-                       select items;
-            }
-        }
-
-        public IQueryable<Venue> Venues
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Venues
-                       where items.VenueID == _VenueID
-                       select items;
-            }
-        }
-
         #endregion
 
 
@@ -1074,17 +647,6 @@ namespace Epilogger.Data
         #endregion
 
         #region Foreign Keys
-        public IQueryable<Event> Events
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Events
-                       where items.ID == _EventID
-                       select items;
-            }
-        }
-
         public IQueryable<Tweet> Tweets
         {
             get
@@ -1092,6 +654,17 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.Tweets
                        where items.ID == _TweetID
+                       select items;
+            }
+        }
+
+        public IQueryable<Event> Events
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Events
+                       where items.ID == _EventID
                        select items;
             }
         }
@@ -1396,6 +969,28 @@ namespace Epilogger.Data
             {
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.UserAuthenticationProfiles
+                       where items.UserID == _ID
+                       select items;
+            }
+        }
+
+        public IQueryable<UserRole> UserRoles
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.UserRoles
+                       where items.UserID == _ID
+                       select items;
+            }
+        }
+
+        public IQueryable<Event> Events
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Events
                        where items.UserID == _ID
                        select items;
             }
@@ -1752,17 +1347,6 @@ namespace Epilogger.Data
         #endregion
 
         #region Foreign Keys
-        public IQueryable<Event> Events
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Events
-                       where items.ID == _EventID
-                       select items;
-            }
-        }
-
         public IQueryable<Picture> Pictures
         {
             get
@@ -1781,6 +1365,17 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.URLS
                        where items.TweetID == _ID
+                       select items;
+            }
+        }
+
+        public IQueryable<Event> Events
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Events
+                       where items.ID == _EventID
                        select items;
             }
         }
@@ -1894,20 +1489,37 @@ namespace Epilogger.Data
 		    }
 		}
 		
-        partial void OnAuthTokenChanging(string value);
-        partial void OnAuthTokenChanged();
+        partial void OnTokenChanging(string value);
+        partial void OnTokenChanged();
 		
-		private string _AuthToken;
-		public string AuthToken { 
+		private string _Token;
+		public string Token { 
 		    get{
-		        return _AuthToken;
+		        return _Token;
 		    } 
 		    set{
-		        this.OnAuthTokenChanging(value);
+		        this.OnTokenChanging(value);
                 this.SendPropertyChanging();
-                this._AuthToken = value;
-                this.SendPropertyChanged("AuthToken");
-                this.OnAuthTokenChanged();
+                this._Token = value;
+                this.SendPropertyChanged("Token");
+                this.OnTokenChanged();
+		    }
+		}
+		
+        partial void OnTokenSecretChanging(string value);
+        partial void OnTokenSecretChanged();
+		
+		private string _TokenSecret;
+		public string TokenSecret { 
+		    get{
+		        return _TokenSecret;
+		    } 
+		    set{
+		        this.OnTokenSecretChanging(value);
+                this.SendPropertyChanging();
+                this._TokenSecret = value;
+                this.SendPropertyChanged("TokenSecret");
+                this.OnTokenSecretChanged();
 		    }
 		}
 		
@@ -1922,6 +1534,96 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.Users
                        where items.ID == _UserID
+                       select items;
+            }
+        }
+
+        #endregion
+
+
+        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+        public event PropertyChangingEventHandler PropertyChanging;
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void SendPropertyChanging()
+        {
+            var handler = PropertyChanging;
+            if (handler != null)
+               handler(this, emptyChangingEventArgs);
+        }
+
+        protected virtual void SendPropertyChanged(String propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+	}
+	
+    
+    
+    /// <summary>
+    /// A class which represents the Roles table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.Role 
+    /// </summary>
+
+	public partial class Role: INotifyPropertyChanging, INotifyPropertyChanged
+	{
+        partial void OnLoaded();
+        partial void OnValidate(System.Data.Linq.ChangeAction action);
+        partial void OnCreated();
+	    
+	    public Role(){
+	        OnCreated();
+	    }
+	    
+	    #region Properties
+	    
+        partial void OnIDChanging(int value);
+        partial void OnIDChanged();
+		
+		private int _ID;
+		public int ID { 
+		    get{
+		        return _ID;
+		    } 
+		    set{
+		        this.OnIDChanging(value);
+                this.SendPropertyChanging();
+                this._ID = value;
+                this.SendPropertyChanged("ID");
+                this.OnIDChanged();
+		    }
+		}
+		
+        partial void OnRoleXChanging(string value);
+        partial void OnRoleXChanged();
+		
+		private string _RoleX;
+		public string RoleX { 
+		    get{
+		        return _RoleX;
+		    } 
+		    set{
+		        this.OnRoleXChanging(value);
+                this.SendPropertyChanging();
+                this._RoleX = value;
+                this.SendPropertyChanged("RoleX");
+                this.OnRoleXChanged();
+		    }
+		}
+		
+
+        #endregion
+
+        #region Foreign Keys
+        public IQueryable<UserRole> UserRoles
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.UserRoles
+                       where items.RoleID == _ID
                        select items;
             }
         }
@@ -2107,6 +1809,17 @@ namespace Epilogger.Data
         #endregion
 
         #region Foreign Keys
+        public IQueryable<Tweet> Tweets
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Tweets
+                       where items.ID == _TweetID
+                       select items;
+            }
+        }
+
         public IQueryable<Event> Events
         {
             get
@@ -2118,13 +1831,536 @@ namespace Epilogger.Data
             }
         }
 
+        #endregion
+
+
+        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+        public event PropertyChangingEventHandler PropertyChanging;
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void SendPropertyChanging()
+        {
+            var handler = PropertyChanging;
+            if (handler != null)
+               handler(this, emptyChangingEventArgs);
+        }
+
+        protected virtual void SendPropertyChanged(String propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+	}
+	
+    
+    
+    /// <summary>
+    /// A class which represents the UserRoles table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.UserRole 
+    /// </summary>
+
+	public partial class UserRole: INotifyPropertyChanging, INotifyPropertyChanged
+	{
+        partial void OnLoaded();
+        partial void OnValidate(System.Data.Linq.ChangeAction action);
+        partial void OnCreated();
+	    
+	    public UserRole(){
+	        OnCreated();
+	    }
+	    
+	    #region Properties
+	    
+        partial void OnIDChanging(int value);
+        partial void OnIDChanged();
+		
+		private int _ID;
+		public int ID { 
+		    get{
+		        return _ID;
+		    } 
+		    set{
+		        this.OnIDChanging(value);
+                this.SendPropertyChanging();
+                this._ID = value;
+                this.SendPropertyChanged("ID");
+                this.OnIDChanged();
+		    }
+		}
+		
+        partial void OnUserIDChanging(Guid value);
+        partial void OnUserIDChanged();
+		
+		private Guid _UserID;
+		public Guid UserID { 
+		    get{
+		        return _UserID;
+		    } 
+		    set{
+		        this.OnUserIDChanging(value);
+                this.SendPropertyChanging();
+                this._UserID = value;
+                this.SendPropertyChanged("UserID");
+                this.OnUserIDChanged();
+		    }
+		}
+		
+        partial void OnRoleIDChanging(int value);
+        partial void OnRoleIDChanged();
+		
+		private int _RoleID;
+		public int RoleID { 
+		    get{
+		        return _RoleID;
+		    } 
+		    set{
+		        this.OnRoleIDChanging(value);
+                this.SendPropertyChanging();
+                this._RoleID = value;
+                this.SendPropertyChanged("RoleID");
+                this.OnRoleIDChanged();
+		    }
+		}
+		
+
+        #endregion
+
+        #region Foreign Keys
+        public IQueryable<User> Users
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Users
+                       where items.ID == _UserID
+                       select items;
+            }
+        }
+
+        public IQueryable<Role> Roles
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Roles
+                       where items.ID == _RoleID
+                       select items;
+            }
+        }
+
+        #endregion
+
+
+        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+        public event PropertyChangingEventHandler PropertyChanging;
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void SendPropertyChanging()
+        {
+            var handler = PropertyChanging;
+            if (handler != null)
+               handler(this, emptyChangingEventArgs);
+        }
+
+        protected virtual void SendPropertyChanged(String propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+	}
+	
+    
+    
+    /// <summary>
+    /// A class which represents the Events table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.Event 
+    /// </summary>
+
+	public partial class Event: INotifyPropertyChanging, INotifyPropertyChanged
+	{
+        partial void OnLoaded();
+        partial void OnValidate(System.Data.Linq.ChangeAction action);
+        partial void OnCreated();
+	    
+	    public Event(){
+	        OnCreated();
+	    }
+	    
+	    #region Properties
+	    
+        partial void OnIDChanging(int value);
+        partial void OnIDChanged();
+		
+		private int _ID;
+		public int ID { 
+		    get{
+		        return _ID;
+		    } 
+		    set{
+		        this.OnIDChanging(value);
+                this.SendPropertyChanging();
+                this._ID = value;
+                this.SendPropertyChanged("ID");
+                this.OnIDChanged();
+		    }
+		}
+		
+        partial void OnUserIDChanging(Guid? value);
+        partial void OnUserIDChanged();
+		
+		private Guid? _UserID;
+		public Guid? UserID { 
+		    get{
+		        return _UserID;
+		    } 
+		    set{
+		        this.OnUserIDChanging(value);
+                this.SendPropertyChanging();
+                this._UserID = value;
+                this.SendPropertyChanged("UserID");
+                this.OnUserIDChanged();
+		    }
+		}
+		
+        partial void OnNameChanging(string value);
+        partial void OnNameChanged();
+		
+		private string _Name;
+		public string Name { 
+		    get{
+		        return _Name;
+		    } 
+		    set{
+		        this.OnNameChanging(value);
+                this.SendPropertyChanging();
+                this._Name = value;
+                this.SendPropertyChanged("Name");
+                this.OnNameChanged();
+		    }
+		}
+		
+        partial void OnSubTitleChanging(string value);
+        partial void OnSubTitleChanged();
+		
+		private string _SubTitle;
+		public string SubTitle { 
+		    get{
+		        return _SubTitle;
+		    } 
+		    set{
+		        this.OnSubTitleChanging(value);
+                this.SendPropertyChanging();
+                this._SubTitle = value;
+                this.SendPropertyChanged("SubTitle");
+                this.OnSubTitleChanged();
+		    }
+		}
+		
+        partial void OnDescriptionChanging(string value);
+        partial void OnDescriptionChanged();
+		
+		private string _Description;
+		public string Description { 
+		    get{
+		        return _Description;
+		    } 
+		    set{
+		        this.OnDescriptionChanging(value);
+                this.SendPropertyChanging();
+                this._Description = value;
+                this.SendPropertyChanged("Description");
+                this.OnDescriptionChanged();
+		    }
+		}
+		
+        partial void OnCategoryIDChanging(int value);
+        partial void OnCategoryIDChanged();
+		
+		private int _CategoryID;
+		public int CategoryID { 
+		    get{
+		        return _CategoryID;
+		    } 
+		    set{
+		        this.OnCategoryIDChanging(value);
+                this.SendPropertyChanging();
+                this._CategoryID = value;
+                this.SendPropertyChanged("CategoryID");
+                this.OnCategoryIDChanged();
+		    }
+		}
+		
+        partial void OnWebsiteURLChanging(string value);
+        partial void OnWebsiteURLChanged();
+		
+		private string _WebsiteURL;
+		public string WebsiteURL { 
+		    get{
+		        return _WebsiteURL;
+		    } 
+		    set{
+		        this.OnWebsiteURLChanging(value);
+                this.SendPropertyChanging();
+                this._WebsiteURL = value;
+                this.SendPropertyChanged("WebsiteURL");
+                this.OnWebsiteURLChanged();
+		    }
+		}
+		
+        partial void OnCostChanging(string value);
+        partial void OnCostChanged();
+		
+		private string _Cost;
+		public string Cost { 
+		    get{
+		        return _Cost;
+		    } 
+		    set{
+		        this.OnCostChanging(value);
+                this.SendPropertyChanging();
+                this._Cost = value;
+                this.SendPropertyChanged("Cost");
+                this.OnCostChanged();
+		    }
+		}
+		
+        partial void OnStartDateTimeChanging(DateTime? value);
+        partial void OnStartDateTimeChanged();
+		
+		private DateTime? _StartDateTime;
+		public DateTime? StartDateTime { 
+		    get{
+		        return _StartDateTime;
+		    } 
+		    set{
+		        this.OnStartDateTimeChanging(value);
+                this.SendPropertyChanging();
+                this._StartDateTime = value;
+                this.SendPropertyChanged("StartDateTime");
+                this.OnStartDateTimeChanged();
+		    }
+		}
+		
+        partial void OnEndDateTimeChanging(DateTime? value);
+        partial void OnEndDateTimeChanged();
+		
+		private DateTime? _EndDateTime;
+		public DateTime? EndDateTime { 
+		    get{
+		        return _EndDateTime;
+		    } 
+		    set{
+		        this.OnEndDateTimeChanging(value);
+                this.SendPropertyChanging();
+                this._EndDateTime = value;
+                this.SendPropertyChanged("EndDateTime");
+                this.OnEndDateTimeChanged();
+		    }
+		}
+		
+        partial void OnTimeZoneOffsetChanging(int? value);
+        partial void OnTimeZoneOffsetChanged();
+		
+		private int? _TimeZoneOffset;
+		public int? TimeZoneOffset { 
+		    get{
+		        return _TimeZoneOffset;
+		    } 
+		    set{
+		        this.OnTimeZoneOffsetChanging(value);
+                this.SendPropertyChanging();
+                this._TimeZoneOffset = value;
+                this.SendPropertyChanged("TimeZoneOffset");
+                this.OnTimeZoneOffsetChanged();
+		    }
+		}
+		
+        partial void OnVenueIDChanging(long? value);
+        partial void OnVenueIDChanged();
+		
+		private long? _VenueID;
+		public long? VenueID { 
+		    get{
+		        return _VenueID;
+		    } 
+		    set{
+		        this.OnVenueIDChanging(value);
+                this.SendPropertyChanging();
+                this._VenueID = value;
+                this.SendPropertyChanged("VenueID");
+                this.OnVenueIDChanged();
+		    }
+		}
+		
+        partial void OnSearchTermsChanging(string value);
+        partial void OnSearchTermsChanged();
+		
+		private string _SearchTerms;
+		public string SearchTerms { 
+		    get{
+		        return _SearchTerms;
+		    } 
+		    set{
+		        this.OnSearchTermsChanging(value);
+                this.SendPropertyChanging();
+                this._SearchTerms = value;
+                this.SendPropertyChanged("SearchTerms");
+                this.OnSearchTermsChanged();
+		    }
+		}
+		
+        partial void OnNumberOfTweetsChanging(long value);
+        partial void OnNumberOfTweetsChanged();
+		
+		private long _NumberOfTweets;
+		public long NumberOfTweets { 
+		    get{
+		        return _NumberOfTweets;
+		    } 
+		    set{
+		        this.OnNumberOfTweetsChanging(value);
+                this.SendPropertyChanging();
+                this._NumberOfTweets = value;
+                this.SendPropertyChanged("NumberOfTweets");
+                this.OnNumberOfTweetsChanged();
+		    }
+		}
+		
+        partial void OnCollectionModeChanging(int value);
+        partial void OnCollectionModeChanged();
+		
+		private int _CollectionMode;
+		public int CollectionMode { 
+		    get{
+		        return _CollectionMode;
+		    } 
+		    set{
+		        this.OnCollectionModeChanging(value);
+                this.SendPropertyChanging();
+                this._CollectionMode = value;
+                this.SendPropertyChanged("CollectionMode");
+                this.OnCollectionModeChanged();
+		    }
+		}
+		
+        partial void OnIsActiveChanging(bool value);
+        partial void OnIsActiveChanged();
+		
+		private bool _IsActive;
+		public bool IsActive { 
+		    get{
+		        return _IsActive;
+		    } 
+		    set{
+		        this.OnIsActiveChanging(value);
+                this.SendPropertyChanging();
+                this._IsActive = value;
+                this.SendPropertyChanged("IsActive");
+                this.OnIsActiveChanged();
+		    }
+		}
+		
+
+        #endregion
+
+        #region Foreign Keys
+        public IQueryable<EventCategory> EventCategories
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.EventCategories
+                       where items.ID == _CategoryID
+                       select items;
+            }
+        }
+
+        public IQueryable<User> Users
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Users
+                       where items.ID == _UserID
+                       select items;
+            }
+        }
+
+        public IQueryable<Image> Images
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Images
+                       where items.EventID == _ID
+                       select items;
+            }
+        }
+
+        public IQueryable<ImageMetaDatum> ImageMetaData
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.ImageMetaData
+                       where items.EventID == _ID
+                       select items;
+            }
+        }
+
         public IQueryable<Tweet> Tweets
         {
             get
             {
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.Tweets
-                       where items.ID == _TweetID
+                       where items.EventID == _ID
+                       select items;
+            }
+        }
+
+        public IQueryable<Picture> Pictures
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Pictures
+                       where items.EventID == _ID
+                       select items;
+            }
+        }
+
+        public IQueryable<URL> URLS
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.URLS
+                       where items.EventID == _ID
+                       select items;
+            }
+        }
+
+        public IQueryable<BlogPost> BlogPosts
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.BlogPosts
+                       where items.EventID == _ID
+                       select items;
+            }
+        }
+
+        public IQueryable<Venue> Venues
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Venues
+                       where items.VenueID == _VenueID
                        select items;
             }
         }
