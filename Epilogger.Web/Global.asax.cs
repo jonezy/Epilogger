@@ -52,9 +52,11 @@ namespace Epilogger.Web {
             Mapper.CreateMap<Event, EventDisplayViewModel>();
 
             Mapper.CreateMap<CreateAccountModel, User>()
+                .ForMember(dest => dest.ID, opt => opt.Ignore())
+                .ForMember(dest => dest.IsActive, opt => opt.UseValue(true))
                 .ForMember(dest => dest.CreatedDate, opt => opt.UseValue(DateTime.Now));
 
-            //Mapper.AssertConfigurationIsValid();
+            Mapper.AssertConfigurationIsValid();
         }
     }
 }
