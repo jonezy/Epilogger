@@ -51,6 +51,25 @@ namespace Epilogger.Web.Controllers {
             }
         }
 
+        [HttpPost]
+        [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to edit your account")]
+        public ActionResult Update(AccountModel model) {
+            try {
+                User user = CurrentUser;
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.EmailAddress = model.EmailAddress;
+
+                service.Save(user);
+
+                this.StoreSuccess("Your account was updated successfully");
+            } catch (Exception ex) {
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                this.StoreError("There was a problem updating your account");
+            }
+
+            return RedirectToAction("Index");
+        }
         [HttpGet]
         public ActionResult Login() {
             return View(new LoginModel());

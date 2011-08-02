@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Web.Mvc;
 
-using Facebook;
 using Epilogger.Data;
 using Epilogger.Web.Controllers;
+
+using Facebook;
 
 namespace Epilogger.Web.Areas.Authentication.Controllers {
     public class FacebookController : BaseController {
@@ -68,5 +69,11 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
             return RedirectToAction("Index", "Account", new { area = "" });
         }
 
+        public ActionResult Disconnect() {
+            UserAuthenticationProfileService service = new UserAuthenticationProfileService();
+            service.DisconnectService(AuthenticationServices.FACEBOOK, CurrentUserID);
+
+            return RedirectToAction("Index", "Account", new { area = "" });
+        }
     }
 }

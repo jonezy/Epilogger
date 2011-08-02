@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 using Epilogger.Data;
 
@@ -13,6 +14,11 @@ namespace Epilogger.Web {
                 return GetRepository<UserAuthenticationProfile>(db).Update(entity);
 
             return GetRepository<UserAuthenticationProfile>(db).Add(entity);
+        }
+
+        public void DisconnectService(AuthenticationServices serviceType, Guid userId) {
+            UserAuthenticationProfile profile = GetData().Where(p => p.UserID == userId && p.Service == serviceType.ToString()).FirstOrDefault();
+            GetRepository<UserAuthenticationProfile>(db).Delete(profile);
         }
 
         public UserAuthenticationProfile UserAuthorizationByService(AuthenticationServices serviceType) {

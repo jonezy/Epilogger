@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 
 using Epilogger.Data;
@@ -23,15 +24,16 @@ namespace Epilogger.Web.Controllers {
             }
         }
 
-        //protected UserAuthorization CurrentUserTwitterAuthorization {
-        //    get {
-        //        return CurrentUser.UserAuthorizations.Where(ua => ua.Service == AuthenticationServices.TWITTER.ToString()).FirstOrDefault();
-        //    }
-        //}
-        //protected UserAuthorization CurrentUserFacebookAuthorization {
-        //    get {
-        //        return CurrentUser.UserAuthorizations.Where(ua => ua.Service == AuthenticationServices.FACEBOOK.ToString()).FirstOrDefault();
-        //    }
-        //}
+        protected UserAuthenticationProfile CurrentUserTwitterAuthorization {
+            get {
+                return CurrentUser.UserAuthenticationProfiles.Where(ua => ua.Service == AuthenticationServices.TWITTER.ToString()).FirstOrDefault();
+            }
+        }
+
+        protected UserAuthenticationProfile CurrentUserFacebookAuthorization {
+            get {
+                return CurrentUser.UserAuthenticationProfiles.Where(ua => ua.Service == AuthenticationServices.FACEBOOK.ToString()).FirstOrDefault();
+            }
+        }
     }
 }

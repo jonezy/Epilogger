@@ -11,7 +11,7 @@ a:link { color: #034af3; }
 a:visited { color: #505abc; }
 a:hover { color: #1d60ff;}
 a:active { color: #12eb87;}
-p { margin-bottom: 20px; line-height: 1.6em; }
+p { margin-bottom: 10px;}
 
 header,
 footer,
@@ -30,7 +30,9 @@ h5, h6 { font-size: 1em; }
 
 /* PRIMARY LAYOUT ELEMENTS   
 ----------------------------------------------------------*/
+.container {background:#fff;}
 header{
+    background:#343434;
     position: relative;
     margin-bottom: -20px;
     color: #000;
@@ -38,12 +40,7 @@ header{
 }
 
 header #logo {float:left;}
-
-#main {
-    padding: 30px 30px 15px 30px;
-    background-color: #fff;
-}
-
+section[role="main"], #main {background:#fff;margin-top:10px;}
 footer {
     background-color: #fff;
     color: #999;

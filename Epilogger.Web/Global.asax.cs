@@ -56,6 +56,12 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.ID, opt => opt.Ignore())
                 .ForMember(dest => dest.IsActive, opt => opt.UseValue(true))
                 .ForMember(dest => dest.CreatedDate, opt => opt.UseValue(DateTime.Now));
+            
+            Mapper.CreateMap<AccountModel, User>()
+                .ForMember(dest => dest.ID, opt => opt.Ignore())
+                .ForMember(dest => dest.Password, opt => opt.Ignore())
+                .ForMember(dest => dest.IsActive, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedDate, opt => opt.Ignore());
 
             Mapper.CreateMap<User, AccountModel>()
                 .ForMember(dest => dest.TwitterUsername, opt => opt.MapFrom(src => src.UserAuthenticationProfiles.Where(ua => ua.Service == AuthenticationServices.TWITTER.ToString()).FirstOrDefault().ServiceUsername))

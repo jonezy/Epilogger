@@ -47,5 +47,12 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
 
             return RedirectToAction("Index", "Account", new { area = "" });
         }
+
+        public ActionResult Disconnect() {
+            UserAuthenticationProfileService service = new UserAuthenticationProfileService();
+            service.DisconnectService(AuthenticationServices.TWITTER, CurrentUserID);
+
+            return RedirectToAction("Index", "Account", new { area = "" });
+        }
     }
 }
