@@ -135,6 +135,7 @@
     <Content Include="Public\css\layout.css" />
     <Content Include="Public\css\messages.css" />
     <Content Include="Public\css\skeleton.css" />
+    <Content Include="Public\images\logo.png" />
     <Content Include="Public\js\head.load.min.js" />
     <Content Include="Public\js\jquery-1.6.2.min.js" />
     <Content Include="Web.config" />
@@ -155,7 +156,6 @@
   <ItemGroup>
     <Folder Include="Areas\Authentication\Models\" />
     <Folder Include="Areas\Authentication\Views\Shared\" />
-    <Folder Include="Public\images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
