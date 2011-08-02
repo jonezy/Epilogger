@@ -41,20 +41,27 @@
 <div id="flash"></div>
 	<div class="container">	
         <header>
-            <div id="title">
-                <h1>Epilogger</h1>
-            </div>
-            
-            <nav>
-                <ul id="menu">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+            @Html.Raw(Html.Image("logo.png", "id='logo'"))
+
+            <nav role="global">
+                <ul>
                     <li>@Html.ActionLink("Login", "Login", "Account")</li>
                     <li>@Html.ActionLink("Register", "Create", "Account")</li>
-                    <li>@Html.ActionLink("Events", "Index", "Events")</li>
-                </ul>
+                </ul>    
             </nav>
             <br style="clear:both;" />
         </header>
+        <nav role="main" class="clearfix">
+            <ul>
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("Browse Events", "Index", "Events")</li>
+                <li>@Html.ActionLink("My Events", "Index", "Events")</li>
+                <li>@Html.ActionLink("Dashboard", "Index", "Events")</li>
+                <li>@Html.ActionLink("What Is Epilogger?", "Index", "Home")</li>
+                <li><a href="http://blog.epilogger.com">Blog</a></li>
+                <li>@Html.ActionLink("Help", "Index", "Home")</li>
+            </ul>
+        </nav>
         <section id="main">
             @RenderBody()
         </section>
@@ -64,3 +71,4 @@
 
 </body>
 </html>
+
