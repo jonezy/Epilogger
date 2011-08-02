@@ -36,8 +36,9 @@ namespace Epilogger.Web.Controllers {
             try {
                 User user = Mapper.Map<CreateAccountModel, User>(model);
                 service.Save(user);
+                
                 user.ID = Guid.NewGuid();
-                service.Save(user);
+                service.Save(user); 
                 //TODO: send a confirmation email.
 
                 this.StoreSuccess("Your account was created successfully");
