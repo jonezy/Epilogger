@@ -22,7 +22,8 @@ namespace Epilogger.Web.Controllers {
 
         [RequiresAuthentication(AccessDeniedMessage="You must be logged in to edit your account")]
         public ActionResult Index () {
-            return View(new AccountModel());
+            AccountModel model = Mapper.Map<User, AccountModel>(CurrentUser);
+            return View(model);
         }
 
         [HttpGet]

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Configuration;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -55,6 +56,10 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.ID, opt => opt.Ignore())
                 .ForMember(dest => dest.IsActive, opt => opt.UseValue(true))
                 .ForMember(dest => dest.CreatedDate, opt => opt.UseValue(DateTime.Now));
+
+            Mapper.CreateMap<User, AccountModel>()
+                .ForMember(dest => dest.TwitterUsername, opt => opt.MapFrom(src => src.UserAuthenticationProfiles.Where(ua => ua.Service == AuthenticationServices.TWITTER.ToString()).FirstOrDefault().ServiceUsername))
+                .ForMember(dest => dest.FacebookUsername, opt => opt.MapFrom(src => src.UserAuthenticationProfiles.Where(ua => ua.Service == AuthenticationServices.FACEBOOK.ToString()).FirstOrDefault().ServiceUsername));
 
             Mapper.AssertConfigurationIsValid();
         }
