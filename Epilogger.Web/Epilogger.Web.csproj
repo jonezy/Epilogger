@@ -120,6 +120,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Core\AuthenticationServices.cs" />
     <Compile Include="Core\Filters\LogErrors.cs" />
     <Compile Include="Core\Filters\RequiresAuthentication.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\CreateAccountModel.cs" />
     <Compile Include="Models\EventDisplayViewModel.cs" />
+    <Compile Include="Models\GlobalNavigationModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\UpdatePasswordModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -197,6 +199,7 @@
     <Content Include="Views\Account\UpdatePassword.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Areas\Authentication\Views\Web.config" />
+    <Content Include="Views\Shared\GlobalNavigation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

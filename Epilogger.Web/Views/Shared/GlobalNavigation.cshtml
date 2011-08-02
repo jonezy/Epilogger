@@ -1,0 +1,15 @@
+﻿@model Epilogger.Web.Models.GlobalNavigationModel
+
+<nav role="global">
+    <ul>
+        @if (Model.UserLoggedIn) {
+            <li>@Html.ActionLink("Account", "Index", "Account")</li>
+            <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+        } else {
+            <li>@Html.ActionLink("Login", "Login", "Account")</li>
+            <li>@Html.ActionLink("Register", "Create", "Account")</li>
+        }
+        
+    </ul>    
+</nav>
+

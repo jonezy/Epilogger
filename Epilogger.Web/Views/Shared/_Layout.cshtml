@@ -42,13 +42,8 @@
 	<div class="container">	
         <header>
             @Html.Raw(Html.Image("logo.png", "id='logo'"))
+            @Html.Action("GlobalNavigation", "Navigation")
 
-            <nav role="global">
-                <ul>
-                    <li>@Html.ActionLink("Login", "Login", "Account")</li>
-                    <li>@Html.ActionLink("Register", "Create", "Account")</li>
-                </ul>    
-            </nav>
             <br style="clear:both;" />
         </header>
         <nav role="main" class="clearfix">
