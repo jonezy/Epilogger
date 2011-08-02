@@ -54,6 +54,7 @@ namespace Epilogger.Web {
 
             Mapper.CreateMap<CreateAccountModel, User>()
                 .ForMember(dest => dest.ID, opt => opt.Ignore())
+                .ForMember(dest => dest.Password, opt => opt.MapFrom(src => PasswordHelpers.EncryptPassword(src.Password)))
                 .ForMember(dest => dest.IsActive, opt => opt.UseValue(true))
                 .ForMember(dest => dest.CreatedDate, opt => opt.UseValue(DateTime.Now));
             

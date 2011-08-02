@@ -35,11 +35,10 @@ namespace Epilogger.Web.Controllers {
         public ActionResult Create(CreateAccountModel model) {
             try {
                 User user = Mapper.Map<CreateAccountModel, User>(model);
-                string salt = BCryptHelper.GenerateSalt();
-                string password = BCryptHelper.HashPassword(model.Password, salt);
-                user.Password = password;
-
                 service.Save(user);
+                user.ID = Guid.NewGuid();
+                service.Save(user);
+                //TODO: send a confirmation email.
 
                 this.StoreSuccess("Your account was created successfully");
                 
@@ -98,7 +97,7 @@ namespace Epilogger.Web.Controllers {
                     return View(model);
                 }
 
-                // write the login cookie, redirect.
+                // write the login cookie, redirect. 
                 CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString());
 
                 return RedirectToAction("Index");

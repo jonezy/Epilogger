@@ -124,6 +124,7 @@
     <Compile Include="Core\AuthenticationServices.cs" />
     <Compile Include="Core\Filters\LogErrors.cs" />
     <Compile Include="Core\Filters\RequiresAuthentication.cs" />
+    <Compile Include="Core\Helpers\PasswordHelpers.cs" />
     <Compile Include="Core\Helpers\TwitterHelper.cs" />
     <Compile Include="Core\Services\EventService.cs" />
     <Compile Include="Core\Services\ServiceBase.cs" />
