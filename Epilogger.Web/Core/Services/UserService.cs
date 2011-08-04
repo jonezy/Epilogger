@@ -21,7 +21,8 @@ namespace Epilogger.Web {
             return GetData().Where(u => u.ID == id).FirstOrDefault();
         }
         public User GetUserByUsername(string username) {
-            return GetData().Where(u => u.Username == username).FirstOrDefault();
+            //This was case-sensative for usernames - CB
+            return GetData().Where(u => string.Equals(u.Username, username, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
         }
 
         public User GetUserByEmail(string emailAddress) {

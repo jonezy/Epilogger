@@ -67,7 +67,7 @@ namespace Epilogger.Web {
             Mapper.CreateMap<User, AccountModel>()
                 .ForMember(dest => dest.TwitterUsername, opt => opt.MapFrom(src => src.UserAuthenticationProfiles.Where(ua => ua.Service == AuthenticationServices.TWITTER.ToString()).FirstOrDefault().ServiceUsername))
                 .ForMember(dest => dest.FacebookUsername, opt => opt.MapFrom(src => src.UserAuthenticationProfiles.Where(ua => ua.Service == AuthenticationServices.FACEBOOK.ToString()).FirstOrDefault().ServiceUsername));
-
+            
             Mapper.AssertConfigurationIsValid();
         }
     }

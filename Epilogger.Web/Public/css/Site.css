@@ -18,6 +18,37 @@ footer,
 nav,
 section { display: block; }
 
+
+/* ---------------------------------------- FONTS ---- */
+
+@font-face {
+    font-family: 'InterstatePlusBoldCond';
+    src: url('../fonts/InterstatePlusBoldCond.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;}
+
+
+@font-face {
+    font-family: 'ChunkFiveRegular';
+    src: url('fonts/Chunkfive-webfont.eot');
+    src: url('fonts/Chunkfive-webfont.eot?#iefix') format('eot'),
+         url('fonts/Chunkfive-webfont.woff') format('woff'),
+         url('fonts/Chunkfive-webfont.ttf') format('truetype'),
+         url('fonts/Chunkfive-webfont.svg#webfontbMWZ83oH') format('svg');
+    font-weight: normal;
+    font-style: normal;}
+    
+@font-face {
+    font-family: 'MuseoSlab500';
+    src: url('fonts/Museo_Slab_500-webfont.eot');
+    src: url('fonts/Museo_Slab_500-webfont.eot?iefix') format('eot'),
+         url('fonts/Museo_Slab_500-webfont.woff') format('woff'),
+         url('fonts/Museo_Slab_500-webfont.ttf') format('truetype'),
+         url('fonts/Museo_Slab_500-webfont.svg#webfont8VbsAwew') format('svg');
+    font-weight: normal;
+    font-style: normal;}
+
+
 /* HEADINGS   
 ----------------------------------------------------------*/
 h1, h2, h3, h4, h5, h6 { font-size: 1.5em; color: #000; }
@@ -55,8 +86,10 @@ nav ul li {float:left;margin-bottom:0px;line-height:normal;}
 
 nav[role="global"] {position:absolute;top:0;right:0;}
 nav[role="global"] ul li {background:#000;color:#fc5daf;margin-right:5px;}
-nav[role="global"] ul li a {color:#fc5daf;padding:5px 15px 5px 15px;display:block;}
+nav[role="global"] ul li a {color:#fc5daf;padding:5px 15px 5px 15px;display:block; font-family: 'InterstatePlusBoldCond', 'MuseoSlab500', Chunk Five, Rockwell, serif;}
+nav[role="global"] ul li a:hover { padding:8px 15px 5px 15px;}
 
 nav[role="main"] {background:#d1d1d1;}
-nav[role="main"] ul li a {color:#000;display:block;font-size:16px;padding:5px 10px;}
+nav[role="main"] ul li a {color:#000;display:block;font-size:16px;padding:5px 10px; font-family: 'InterstatePlusBoldCond', 'MuseoSlab500', Chunk Five, Rockwell, serif; }
 nav[role="main"] ul li a:hover {background:#fc5daf;color:#fff;} 
+
