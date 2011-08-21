@@ -3,34 +3,55 @@ using Epilogger.Web.Core.Email;
 using NUnit.Framework;
 
 namespace Epilogger.Tests {
+
     [TestFixture]
     public class EmailTests {
+
+        string messageTemplate = "Hi, [FIRST_NAME].  This is a message template";
+
+        TemplateParser parser;
+        Dictionary<string, string> validReplacements;
+        Dictionary<string, string> invalidReplacements;
+
+        [TestFixtureSetUp]
+        public void Setup() {
+            parser = new TemplateParser();
+
+            validReplacements = new Dictionary<string, string>();
+            validReplacements.Add("[FIRST_NAME]", "Chris");
+
+            invalidReplacements = new Dictionary<string, string>();
+            invalidReplacements.Add("[LAST_NAME]", "Jones");
+        }
+
         [Test]
         public void string_with_valid_replacements_should_return_replaced_string() {
-            string messageTemplate = "Hi, [FIRST_NAME].  This is a message template";
             string expected = "Hi, Chris.  This is a message template";
-            
-            Dictionary<string, string> replacements = new Dictionary<string,string>();
-            replacements.Add("[FIRST_NAME]", "Chris");
-                
-            TemplateParser parser = new TemplateParser();
-            string actual = parser.Parse(messageTemplate, replacements);
+            string actual = parser.Parse(messageTemplate, validReplacements);
 
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
         public void string_with_invalid_replacements_should_return_original_string() {
-            string messageTemplate = "Hi, [FIRST_NAME].  This is a message template";
             string expected = "Hi, [FIRST_NAME].  This is a message template";
-
-            Dictionary<string, string> replacements = new Dictionary<string, string>();
-            replacements.Add("[LAST_NAME]", "Jones");
-
-            TemplateParser parser = new TemplateParser();
-            string actual = parser.Parse(messageTemplate, replacements);
+            string actual = parser.Parse(messageTemplate, invalidReplacements);
 
             Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void string_with_invlaid_replacesments_should_log_unmatched_replacement() {
+            string output = parser.Parse(messageTemplate, invalidReplacements);
+
+            Assert.GreaterOrEqual(parser.UnMatchedReplacements.Count, 1);
+        }
+
+        [Test]
+        public void string_with_invlaid_replacements_should_log_correct_unmatched_replacement() {
+            string output = parser.Parse(messageTemplate, invalidReplacements);
+
+            Assert.IsTrue(parser.UnMatchedReplacements.ContainsKey("[LAST_NAME]"));
         }
     }
 }
