@@ -132,8 +132,8 @@ namespace Epilogger.Data
         public Query<Role> Roles { get; set; }
         public Query<URL> URLS { get; set; }
         public Query<UserRole> UserRoles { get; set; }
-        public Query<Event> Events { get; set; }
         public Query<ImageMetaDatum> ImageMetaData { get; set; }
+        public Query<Event> Events { get; set; }
         public Query<Image> Images { get; set; }
         public Query<Venue> Venues { get; set; }
 
@@ -250,8 +250,8 @@ namespace Epilogger.Data
             Roles = new Query<Role>(provider);
             URLS = new Query<URL>(provider);
             UserRoles = new Query<UserRole>(provider);
-            Events = new Query<Event>(provider);
             ImageMetaData = new Query<ImageMetaDatum>(provider);
+            Events = new Query<Event>(provider);
             Images = new Query<Image>(provider);
             Venues = new Query<Venue>(provider);
             #endregion
@@ -271,8 +271,8 @@ namespace Epilogger.Data
             	DataProvider.Schema.Tables.Add(new RolesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new URLsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserRolesTable(DataProvider));
-            	DataProvider.Schema.Tables.Add(new EventsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ImageMetaDataTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new EventsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ImagesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new VenuesTable(DataProvider));
             }

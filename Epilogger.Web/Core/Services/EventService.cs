@@ -11,5 +11,14 @@ namespace Epilogger.Web {
         public List<Event> AllEvents() {
             return base.GetData();
         }
+
+        public object Save(Event entity)
+        {
+            if (entity.ID > 0)
+                return base.GetRepository<Event>(db).Update(entity);
+
+            return base.GetRepository<Event>(db).Add(entity);
+        }
+
     }
 }
