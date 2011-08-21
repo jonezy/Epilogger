@@ -9,6 +9,7 @@ namespace Epilogger.Web.Models
 {
     public class CreateEventViewModel
     {
+        public Guid UserID { get; set; }
         [DisplayName("Event Name")]
         public String Name { get; set; }
         [Required]

@@ -69,21 +69,20 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.TwitterUsername, opt => opt.MapFrom(src => src.UserAuthenticationProfiles.Where(ua => ua.Service == AuthenticationServices.TWITTER.ToString()).FirstOrDefault().ServiceUsername))
                 .ForMember(dest => dest.FacebookUsername, opt => opt.MapFrom(src => src.UserAuthenticationProfiles.Where(ua => ua.Service == AuthenticationServices.FACEBOOK.ToString()).FirstOrDefault().ServiceUsername));
 
-            //Mapper.CreateMap<CreateEventViewModel, Event>()
-            //    .ForMember(dest => dest.UserID, opt => opt.UseValue(Helpers.GetUserGuid()))
-            //    .ForMember(dest => dest.ID, opt => opt.Ignore())
-            //    .ForMember(dest => dest.SubTitle, opt => opt.Ignore())
-            //    .ForMember(dest => dest.Description, opt => opt.Ignore())
-            //    .ForMember(dest => dest.WebsiteURL, opt => opt.Ignore())
-            //    .ForMember(dest => dest.Cost, opt => opt.Ignore())
-            //    .ForMember(dest => dest.CategoryID, opt => opt.UseValue(19))
-            //    .ForMember(dest => dest.VenueID, opt => opt.Ignore())
-            //    .ForMember(dest => dest.SearchTerms, opt => opt.Ignore())
-            //    .ForMember(dest => dest.EventStatus, opt => opt.UseValue(0))
-            //    .ForMember(dest => dest.NumberOfTweets, opt => opt.UseValue(0))
-            //    .ForMember(dest => dest.IsPrivate, opt => opt.UseValue(false))
-            //    .ForMember(dest => dest.IsAdult, opt => opt.UseValue(0))
-            //    .ForMember(dest => dest.IsActive, opt => opt.UseValue(0));
+            Mapper.CreateMap<CreateEventViewModel, Event>()
+                .ForMember(dest => dest.ID, opt => opt.Ignore())
+                .ForMember(dest => dest.SubTitle, opt => opt.Ignore())
+                .ForMember(dest => dest.Description, opt => opt.Ignore())
+                .ForMember(dest => dest.WebsiteURL, opt => opt.Ignore())
+                .ForMember(dest => dest.Cost, opt => opt.Ignore())
+                .ForMember(dest => dest.CategoryID, opt => opt.UseValue(19))
+                .ForMember(dest => dest.VenueID, opt => opt.Ignore())
+                .ForMember(dest => dest.SearchTerms, opt => opt.Ignore())
+                .ForMember(dest => dest.EventStatus, opt => opt.UseValue(0))
+                .ForMember(dest => dest.NumberOfTweets, opt => opt.UseValue(0))
+                .ForMember(dest => dest.IsPrivate, opt => opt.UseValue(false))
+                .ForMember(dest => dest.IsAdult, opt => opt.UseValue(0))
+                .ForMember(dest => dest.IsActive, opt => opt.UseValue(0));
             
             Mapper.AssertConfigurationIsValid();
         }
