@@ -126,6 +126,7 @@
     <Compile Include="Core\Email\TemplateParser.cs" />
     <Compile Include="Core\Filters\LogErrors.cs" />
     <Compile Include="Core\Filters\RequiresAuthentication.cs" />
+    <Compile Include="Core\Helpers\Helpers.cs" />
     <Compile Include="Core\Helpers\PasswordHelpers.cs" />
     <Compile Include="Core\Helpers\TwitterHelper.cs" />
     <Compile Include="Core\Services\EventService.cs" />
