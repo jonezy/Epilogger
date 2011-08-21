@@ -7,6 +7,7 @@ using AutoMapper;
 
 using Epilogger.Data;
 using Epilogger.Web.Models;
+using RichmondDay.Helpers;
 
 namespace Epilogger.Web.Controllers {
     public class EventsController : BaseController {
@@ -20,7 +21,7 @@ namespace Epilogger.Web.Controllers {
             base.Initialize(requestContext);
         }
 
-        [RequiresAuthentication(AccessDeniedMessage="You must be logged in to view the list of events")]
+        [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the list of events")]
         public ActionResult Index() {
             List<Event> events = service.AllEvents();
             List<EventDisplayViewModel> model = Mapper.Map<List<Event>, List<EventDisplayViewModel>>(events);
@@ -28,35 +29,32 @@ namespace Epilogger.Web.Controllers {
             return View(model);
         }
 
-        [LogErrors(FriendlyErrorMessage="There was a problem saving your event")]
+        [LogErrors(FriendlyErrorMessage = "There was a problem saving your event")]
         public ActionResult Error() {
             throw new Exception("This is a test exception");
         }
 
-        [RequiresAuthentication(AccessDeniedMessage="You must be logged in to view the details of that event")]
+        [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the details of that event")]
         public ActionResult Details(int id) {
-            return View(Mapper.Map<Event, EventDisplayViewModel>(db.Events.Where(e=>e.ID == id).FirstOrDefault()));
+            return View(Mapper.Map<Event, EventDisplayViewModel>(db.Events.Where(e => e.ID == id).FirstOrDefault()));
         }
 
         [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the details of that event")]
-        public ActionResult CreateEvent()
-        {
+        public ActionResult CreateEvent() {
             return View();
         }
 
         [HttpPost]
-        public ActionResult CreateEvent(CreateEventViewModel model)
-        {
-            
+        public ActionResult CreateEvent(CreateEventViewModel model) {
+
             EventService service = new EventService();
-            try
-            {
+            try {
+                model.UserID = Guid.Parse(CookieHelpers.GetCookieValue("lc", "uid").ToString());
+
                 Event EPLevent = Mapper.Map<CreateEventViewModel, Event>(model);
                 service.Save(EPLevent);
                 this.StoreSuccess("Your Event was created");
-            }
-            catch(Exception ex)
-            {
+            } catch (Exception ex) {
                 this.StoreError(string.Format("There was an error: {0}", ex.Message));
             }
 
@@ -66,7 +64,7 @@ namespace Epilogger.Web.Controllers {
         public ActionResult EventBySlug(string eventSlug) {
             Event foundEvent = null;
             foreach (var e in db.Events) {
-                if(e.Name.CreateUrlSlug() == eventSlug) {
+                if (e.Name.CreateUrlSlug() == eventSlug) {
                     foundEvent = e;
                     break;
                 }
