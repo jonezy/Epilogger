@@ -8,6 +8,7 @@ namespace Epilogger.Tests {
     public class EmailTests {
 
         string messageTemplate = "Hi, [FIRST_NAME].  This is a message template";
+        string multipleMessageTemplate = "Hi, [FIRST_NAME] [LAST_NAME].  This is a message template";
 
         TemplateParser parser;
         Dictionary<string, string> validReplacements;
@@ -27,7 +28,7 @@ namespace Epilogger.Tests {
         [Test]
         public void string_with_valid_replacements_should_return_replaced_string() {
             string expected = "Hi, Chris.  This is a message template";
-            string actual = parser.Parse(messageTemplate, validReplacements);
+            string actual = parser.Replace(messageTemplate, validReplacements);
 
             Assert.AreEqual(expected, actual);
         }
@@ -35,23 +36,37 @@ namespace Epilogger.Tests {
         [Test]
         public void string_with_invalid_replacements_should_return_original_string() {
             string expected = "Hi, [FIRST_NAME].  This is a message template";
-            string actual = parser.Parse(messageTemplate, invalidReplacements);
+            string actual = parser.Replace(messageTemplate, invalidReplacements);
 
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
         public void string_with_invlaid_replacesments_should_log_unmatched_replacement() {
-            string output = parser.Parse(messageTemplate, invalidReplacements);
+            string output = parser.Replace(messageTemplate, invalidReplacements);
 
             Assert.GreaterOrEqual(parser.UnMatchedReplacements.Count, 1);
         }
 
         [Test]
         public void string_with_invlaid_replacements_should_log_correct_unmatched_replacement() {
-            string output = parser.Parse(messageTemplate, invalidReplacements);
+            string output = parser.Replace(messageTemplate, invalidReplacements);
 
             Assert.IsTrue(parser.UnMatchedReplacements.ContainsKey("[LAST_NAME]"));
+        }
+
+        [Test]
+        public void string_with_tokens_should_generate_replacement_dictionary_with_single() {
+            Dictionary<string, string> replacements = parser.ParseTokens(messageTemplate);
+
+            Assert.AreEqual(replacements.Count, 1);
+        }
+
+        [Test]
+        public void string_with_multiple_tokens_should_generate_replacement_dictionary_with_multiple() {
+            Dictionary<string, string> replacements = parser.ParseTokens(multipleMessageTemplate);
+
+            Assert.AreEqual(replacements.Count, 2);
         }
     }
 }
