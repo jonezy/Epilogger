@@ -70,7 +70,7 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.FacebookUsername, opt => opt.MapFrom(src => src.UserAuthenticationProfiles.Where(ua => ua.Service == AuthenticationServices.FACEBOOK.ToString()).FirstOrDefault().ServiceUsername));
 
             Mapper.CreateMap<CreateEventViewModel, Event>()
-                .ForMember(dest => dest.UserID, opt => opt.UseValue(Guid.Parse(CookieHelpers.GetCookieValue("lc", "uid").ToString())))
+                .ForMember(dest => dest.UserID, opt => opt.UseValue(Helpers.GetUserGuid()))
                 .ForMember(dest => dest.ID, opt => opt.Ignore())
                 .ForMember(dest => dest.SubTitle, opt => opt.Ignore())
                 .ForMember(dest => dest.Description, opt => opt.Ignore())
@@ -84,7 +84,7 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.IsPrivate, opt => opt.UseValue(false))
                 .ForMember(dest => dest.IsAdult, opt => opt.UseValue(0))
                 .ForMember(dest => dest.IsActive, opt => opt.UseValue(0));
-
+            
             Mapper.AssertConfigurationIsValid();
         }
     }
