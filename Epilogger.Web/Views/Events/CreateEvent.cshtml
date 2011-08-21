@@ -1,0 +1,19 @@
+﻿@model Epilogger.Web.Models.CreateEventViewModel
+
+@{
+    ViewBag.Title = "CreateEvent";
+}
+
+<h2>CreateEvent</h2>
+
+@Html.ValidationSummary("Please correct the following issues")
+@using (Html.BeginForm("CreateEvent", "Events", FormMethod.Post)) {
+    <p>Create Event fun time</p>
+    <fieldset>
+        <p>@Html.LabelFor(model => model.Name) @Html.TextBoxFor(model => model.Name)</p>
+        <p>@Html.LabelFor(model => model.StartDateTime) @Html.EditorFor(model => model.StartDateTime)</p>
+        <p>@Html.LabelFor(model => model.EndDateTime) @Html.EditorFor(model => model.EndDateTime)</p>
+        <p>@Html.LabelFor(model => model.TimeZoneOffset) @Html.TextBoxFor(model => model.TimeZoneOffset)</p>
+        <p><input type="submit" class="submit" value="Create Event" /></p>
+    </fieldset>
+}

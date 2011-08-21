@@ -38,6 +38,31 @@ namespace Epilogger.Web.Controllers {
             return View(Mapper.Map<Event, EventDisplayViewModel>(db.Events.Where(e=>e.ID == id).FirstOrDefault()));
         }
 
+        [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the details of that event")]
+        public ActionResult CreateEvent()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateEvent(CreateEventViewModel model)
+        {
+            
+            EventService service = new EventService();
+            try
+            {
+                Event EPLevent = Mapper.Map<CreateEventViewModel, Event>(model);
+                service.Save(EPLevent);
+                this.StoreSuccess("Your Event was created");
+            }
+            catch(Exception ex)
+            {
+                this.StoreError(string.Format("There was an error: {0}", ex.Message));
+            }
+
+            return View();
+        }
+
         public ActionResult EventBySlug(string eventSlug) {
             Event foundEvent = null;
             foreach (var e in db.Events) {

@@ -138,6 +138,7 @@
     </Compile>
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\CreateAccountModel.cs" />
+    <Compile Include="Models\CreateEventViewModel.cs" />
     <Compile Include="Models\EventDisplayViewModel.cs" />
     <Compile Include="Models\GlobalNavigationModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
@@ -212,6 +213,7 @@
     <Content Include="Areas\Authentication\Views\Web.config" />
     <Content Include="Views\Shared\GlobalNavigation.cshtml" />
     <None Include="Public\fonts\InterstatePlusBoldCond.ttf" />
+    <Content Include="Views\Events\CreateEvent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
