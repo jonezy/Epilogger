@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Text.RegularExpressions;
 
 namespace Epilogger.Web.Core.Email {
     
@@ -18,7 +19,7 @@ namespace Epilogger.Web.Core.Email {
         /// <param name="messageTemplate">string containing tokens to be replaced ([EX_TOKEN]).</param>
         /// <param name="replacements">Dictionary of replacements</param>
         /// <returns>messageTemplate with it's tokens replaced</returns>
-        public string Parse(string messageTemplate, Dictionary<string, string> replacements) {
+        public string Replace(string messageTemplate, Dictionary<string, string> replacements) {
             string returnValue = string.Empty;
             
             foreach (KeyValuePair<string, string> replacement in replacements) {
@@ -31,5 +32,15 @@ namespace Epilogger.Web.Core.Email {
             return returnValue;
         }
 
+        public Dictionary<string, string> ParseTokens(string messageTemplate) {
+            MatchCollection matches = Regex.Matches(messageTemplate, @"[[][\w]*]");
+            Dictionary<string, string> replacements = new Dictionary<string,string>();
+            
+            foreach (Match match in matches) {
+                replacements.Add(match.Value, "");
+	        }
+
+            return replacements;
+        }
     }
 }
