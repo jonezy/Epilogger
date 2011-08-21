@@ -1693,6 +1693,179 @@ namespace Epilogger.Data {
         }
         
         /// <summary>
+        /// Table: ImageMetaData
+        /// Primary Key: ID
+        /// </summary>
+
+        public class ImageMetaDataTable: DatabaseTable {
+            
+            public ImageMetaDataTable(IDataProvider provider):base("ImageMetaData",provider){
+                ClassName = "ImageMetaDatum";
+                SchemaName = "dbo";
+                
+
+                Columns.Add(new DatabaseColumn("ID", this)
+                {
+	                IsPrimaryKey = true,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = true,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("ImageID", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("EventID", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = true,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("UserID", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Guid,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("ImageSource", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("TwitterID", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int64,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("TwitterName", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+                    
+                
+                
+            }
+            
+            public IColumn ID{
+                get{
+                    return this.GetColumn("ID");
+                }
+            }
+            				
+   			public static string IDColumn{
+			      get{
+        			return "ID";
+      			}
+		    }
+           
+            public IColumn ImageID{
+                get{
+                    return this.GetColumn("ImageID");
+                }
+            }
+            				
+   			public static string ImageIDColumn{
+			      get{
+        			return "ImageID";
+      			}
+		    }
+           
+            public IColumn EventID{
+                get{
+                    return this.GetColumn("EventID");
+                }
+            }
+            				
+   			public static string EventIDColumn{
+			      get{
+        			return "EventID";
+      			}
+		    }
+           
+            public IColumn UserID{
+                get{
+                    return this.GetColumn("UserID");
+                }
+            }
+            				
+   			public static string UserIDColumn{
+			      get{
+        			return "UserID";
+      			}
+		    }
+           
+            public IColumn ImageSource{
+                get{
+                    return this.GetColumn("ImageSource");
+                }
+            }
+            				
+   			public static string ImageSourceColumn{
+			      get{
+        			return "ImageSource";
+      			}
+		    }
+           
+            public IColumn TwitterID{
+                get{
+                    return this.GetColumn("TwitterID");
+                }
+            }
+            				
+   			public static string TwitterIDColumn{
+			      get{
+        			return "TwitterID";
+      			}
+		    }
+           
+            public IColumn TwitterName{
+                get{
+                    return this.GetColumn("TwitterName");
+                }
+            }
+            				
+   			public static string TwitterNameColumn{
+			      get{
+        			return "TwitterName";
+      			}
+		    }
+           
+                    
+        }
+        
+        /// <summary>
         /// Table: Events
         /// Primary Key: ID
         /// </summary>
@@ -1771,7 +1944,7 @@ namespace Epilogger.Data {
 	                IsNullable = true,
 	                AutoIncrement = false,
 	                IsForeignKey = false,
-	                MaxLength = 255
+	                MaxLength = 500
                 });
 
                 Columns.Add(new DatabaseColumn("Cost", this)
@@ -1844,10 +2017,30 @@ namespace Epilogger.Data {
 	                MaxLength = 0
                 });
 
-                Columns.Add(new DatabaseColumn("CollectionMode", this)
+                Columns.Add(new DatabaseColumn("EventStatus", this)
                 {
 	                IsPrimaryKey = false,
 	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("IsPrivate", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Boolean,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("IsAdult", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Boolean,
 	                IsNullable = false,
 	                AutoIncrement = false,
 	                IsForeignKey = false,
@@ -2036,15 +2229,39 @@ namespace Epilogger.Data {
       			}
 		    }
            
-            public IColumn CollectionMode{
+            public IColumn EventStatus{
                 get{
-                    return this.GetColumn("CollectionMode");
+                    return this.GetColumn("EventStatus");
                 }
             }
             				
-   			public static string CollectionModeColumn{
+   			public static string EventStatusColumn{
 			      get{
-        			return "CollectionMode";
+        			return "EventStatus";
+      			}
+		    }
+           
+            public IColumn IsPrivate{
+                get{
+                    return this.GetColumn("IsPrivate");
+                }
+            }
+            				
+   			public static string IsPrivateColumn{
+			      get{
+        			return "IsPrivate";
+      			}
+		    }
+           
+            public IColumn IsAdult{
+                get{
+                    return this.GetColumn("IsAdult");
+                }
+            }
+            				
+   			public static string IsAdultColumn{
+			      get{
+        			return "IsAdult";
       			}
 		    }
            
@@ -2057,179 +2274,6 @@ namespace Epilogger.Data {
    			public static string IsActiveColumn{
 			      get{
         			return "IsActive";
-      			}
-		    }
-           
-                    
-        }
-        
-        /// <summary>
-        /// Table: ImageMetaData
-        /// Primary Key: ID
-        /// </summary>
-
-        public class ImageMetaDataTable: DatabaseTable {
-            
-            public ImageMetaDataTable(IDataProvider provider):base("ImageMetaData",provider){
-                ClassName = "ImageMetaDatum";
-                SchemaName = "dbo";
-                
-
-                Columns.Add(new DatabaseColumn("ID", this)
-                {
-	                IsPrimaryKey = true,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = true,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("ImageID", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("EventID", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = true,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("UserID", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Guid,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("ImageSource", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 100
-                });
-
-                Columns.Add(new DatabaseColumn("TwitterID", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int64,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("TwitterName", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 100
-                });
-                    
-                
-                
-            }
-            
-            public IColumn ID{
-                get{
-                    return this.GetColumn("ID");
-                }
-            }
-            				
-   			public static string IDColumn{
-			      get{
-        			return "ID";
-      			}
-		    }
-           
-            public IColumn ImageID{
-                get{
-                    return this.GetColumn("ImageID");
-                }
-            }
-            				
-   			public static string ImageIDColumn{
-			      get{
-        			return "ImageID";
-      			}
-		    }
-           
-            public IColumn EventID{
-                get{
-                    return this.GetColumn("EventID");
-                }
-            }
-            				
-   			public static string EventIDColumn{
-			      get{
-        			return "EventID";
-      			}
-		    }
-           
-            public IColumn UserID{
-                get{
-                    return this.GetColumn("UserID");
-                }
-            }
-            				
-   			public static string UserIDColumn{
-			      get{
-        			return "UserID";
-      			}
-		    }
-           
-            public IColumn ImageSource{
-                get{
-                    return this.GetColumn("ImageSource");
-                }
-            }
-            				
-   			public static string ImageSourceColumn{
-			      get{
-        			return "ImageSource";
-      			}
-		    }
-           
-            public IColumn TwitterID{
-                get{
-                    return this.GetColumn("TwitterID");
-                }
-            }
-            				
-   			public static string TwitterIDColumn{
-			      get{
-        			return "TwitterID";
-      			}
-		    }
-           
-            public IColumn TwitterName{
-                get{
-                    return this.GetColumn("TwitterName");
-                }
-            }
-            				
-   			public static string TwitterNameColumn{
-			      get{
-        			return "TwitterName";
       			}
 		    }
            
