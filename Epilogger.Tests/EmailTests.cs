@@ -8,6 +8,7 @@ namespace Epilogger.Tests {
     public class EmailTests {
 
         string messageTemplate = "Hi, [FIRST_NAME].  This is a message template";
+        string multipleMessageTemplate = "Hi, [FIRST_NAME] [LAST_NAME].  This is a message template";
 
         TemplateParser parser;
         Dictionary<string, string> validReplacements;
@@ -52,6 +53,20 @@ namespace Epilogger.Tests {
             string output = parser.Parse(messageTemplate, invalidReplacements);
 
             Assert.IsTrue(parser.UnMatchedReplacements.ContainsKey("[LAST_NAME]"));
+        }
+
+        [Test]
+        public void string_with_tokens_should_generate_replacement_dictionary_with_single() {
+            Dictionary<string, string> replacements = parser.ParseTokens(messageTemplate);
+
+            Assert.AreEqual(replacements.Count, 1);
+        }
+
+        [Test]
+        public void string_with_multiple_tokens_should_generate_replacement_dictionary_with_multiple() {
+            Dictionary<string, string> replacements = parser.ParseTokens(multipleMessageTemplate);
+
+            Assert.AreEqual(replacements.Count, 2);
         }
     }
 }
