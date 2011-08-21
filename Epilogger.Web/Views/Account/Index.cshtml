@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Account";
 }
-<div class="six columns">
+<div class="four columns">
     <h3>Social networks</h3>
     @if (string.IsNullOrEmpty(Model.TwitterUsername)) {
         using (Html.BeginForm("BuildAuthenticationRequest", "Twitter", new { area = "Authentication" }, FormMethod.Post, new { @class = "remove-bottom" })) {
