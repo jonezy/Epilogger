@@ -162,7 +162,17 @@
     <Content Include="Public\images\bg\sample5.jpg" />
     <Content Include="Public\images\bg\sample6.jpg" />
     <Content Include="Public\images\bg\sample7.jpg" />
+    <Content Include="Public\images\btn-checkinmore.png" />
+    <Content Include="Public\images\btn-submit.png" />
+    <Content Include="Public\images\icons\bubble.png" />
+    <Content Include="Public\images\icons\tweet-black.png" />
     <Content Include="Public\images\logo.png" />
+    <Content Include="Public\images\samples\ad.png" />
+    <Content Include="Public\images\samples\avatar.png" />
+    <Content Include="Public\images\samples\checkin.png" />
+    <Content Include="Public\images\samples\photo.png" />
+    <Content Include="Public\images\samples\twitter.png" />
+    <Content Include="Public\images\shoutbox.png" />
     <Content Include="Public\js\epilogger.js" />
     <Content Include="Public\js\head.load.min.js" />
     <Content Include="Public\js\jquery-1.6.2.min.js" />
