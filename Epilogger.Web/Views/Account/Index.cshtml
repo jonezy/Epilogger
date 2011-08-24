@@ -3,8 +3,8 @@
 @{
     ViewBag.Title = "Account";
 }
-<div class="four columns">
-    <h3>Social networks</h3>
+<div class="grid_3 alpha">
+    <h2>Social networks</h2>
     @if (string.IsNullOrEmpty(Model.TwitterUsername)) {
         using (Html.BeginForm("BuildAuthenticationRequest", "Twitter", new { area = "Authentication" }, FormMethod.Post, new { @class = "remove-bottom" })) {
             <input type="submit" value="link your account with twitter" name="twitter" />
@@ -21,8 +21,8 @@
         @:<p class="remove-bottom">You are connected to facebook as: <strong>@Model.FacebookUsername</strong> (@Html.ActionLink("x", "Disconnect", "Facebook", new { area = "Authentication" }, null))</p>
     }
 </div>
-<div class="eight columns">
-    <h3>Your Info</h3>
+<div class="grid_8 omega">
+    <h2>Your Info</h2>
     @using (Html.BeginForm("Update", "Account", FormMethod.Post)) {
         <fieldset>
             <p>@Html.LabelFor(model => model.FirstName) @Html.TextBoxFor(model => model.FirstName)</p>
