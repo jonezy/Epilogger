@@ -148,9 +148,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Public\css\960_12_col.css" />
     <Content Include="Public\css\base.css" />
     <Content Include="Public\css\layout.css" />
     <Content Include="Public\css\messages.css" />
+    <Content Include="Public\css\reset.css" />
+    <Content Include="Public\css\sadiehawkins.css" />
     <Content Include="Public\css\skeleton.css" />
     <Content Include="Public\images\bg\sample1.jpg" />
     <Content Include="Public\images\bg\sample2.jpg" />
@@ -213,8 +216,24 @@
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Areas\Authentication\Views\Web.config" />
     <Content Include="Views\Shared\GlobalNavigation.cshtml" />
-    <None Include="Public\fonts\InterstatePlusBoldCond.ttf" />
     <Content Include="Views\Events\CreateEvent.cshtml" />
+    <None Include="Public\fonts\BEBAS___-webfont.eot" />
+    <None Include="Public\fonts\BEBAS___-webfont.svg" />
+    <None Include="Public\fonts\BEBAS___-webfont.ttf" />
+    <None Include="Public\fonts\BEBAS___-webfont.woff" />
+    <None Include="Public\fonts\InterstatePlusBoldCond.ttf" />
+    <None Include="Public\fonts\interstateplus_regular-webfont.eot" />
+    <None Include="Public\fonts\interstateplus_regular-webfont.svg" />
+    <None Include="Public\fonts\interstateplus_regular-webfont.ttf" />
+    <None Include="Public\fonts\interstateplus_regular-webfont.woff" />
+    <None Include="Public\fonts\interstateplus_regular_cond-webfont.eot" />
+    <None Include="Public\fonts\interstateplus_regular_cond-webfont.svg" />
+    <None Include="Public\fonts\interstateplus_regular_cond-webfont.ttf" />
+    <None Include="Public\fonts\interstateplus_regular_cond-webfont.woff" />
+    <None Include="Public\fonts\OSP-DIN-webfont.eot" />
+    <None Include="Public\fonts\OSP-DIN-webfont.svg" />
+    <None Include="Public\fonts\OSP-DIN-webfont.ttf" />
+    <None Include="Public\fonts\OSP-DIN-webfont.woff" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
