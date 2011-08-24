@@ -123,6 +123,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Core\AuthenticationServices.cs" />
+    <Compile Include="Core\Email\EmalSender.cs" />
+    <Compile Include="Core\Email\IEmailSender.cs" />
     <Compile Include="Core\Email\TemplateParser.cs" />
     <Compile Include="Core\Filters\LogErrors.cs" />
     <Compile Include="Core\Filters\RequiresAuthentication.cs" />
