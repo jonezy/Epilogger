@@ -82,7 +82,8 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.NumberOfTweets, opt => opt.UseValue(0))
                 .ForMember(dest => dest.IsPrivate, opt => opt.UseValue(false))
                 .ForMember(dest => dest.IsAdult, opt => opt.UseValue(0))
-                .ForMember(dest => dest.IsActive, opt => opt.UseValue(0));
+                .ForMember(dest => dest.IsActive, opt => opt.UseValue(0))
+                .ForMember(dest => dest.CollectionMode, opt => opt.UseValue(0));
             
             Mapper.AssertConfigurationIsValid();
         }

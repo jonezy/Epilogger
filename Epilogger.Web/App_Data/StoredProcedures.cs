@@ -239,6 +239,10 @@ namespace Epilogger.Data{
             StoredProcedure sp=new StoredProcedure("DeleteEvent",this.Provider);
             return sp;
         }
+        public StoredProcedure DeleteEventData(){
+            StoredProcedure sp=new StoredProcedure("DeleteEventData",this.Provider);
+            return sp;
+        }
 	
 	}
 	
