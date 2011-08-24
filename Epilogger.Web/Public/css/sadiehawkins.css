@@ -1,0 +1,218 @@
+* {}
+
+body {
+	color:#707070;
+	background:#252525;
+	font:normal 11pt times, 'times new roman', serif}
+
+a {
+	color:#2d8ac5;
+	text-decoration:none}
+
+p a {
+	text-decoration:underline}
+
+
+/* ------------------------------ CONTAINERS */
+
+#outer-container {}
+
+#content-container {
+	background:#fff;
+	padding-top:15px}
+	
+	
+/* ------------------------------ MENUS */
+
+/* --- main menu */	
+ul#navigation {
+	background:#d1d1d1}
+	
+ul#navigation li {
+	display:inline-block;
+	padding:9px 0 5px 0}
+
+ul#navigation li a {
+	color:#000;
+	padding:10px 10px 6px 10px;
+	text-transform:uppercase;
+	margin:0 5px;
+	font:normal 13pt 'InterstatePlusRegular', impact, sans-serif;}
+
+ul#navigation li a:hover {
+	background:#fff;
+	color:#60143b}
+
+ul#navigation li a.selected {
+	background:#fc5daf;
+	color:#fff}
+
+
+/* --- top tabs */
+ul.tabs li {
+	float:right;
+	display:inline-block;}
+	
+ul.tabs a {
+	color:#fc5daf;
+	font:normal 12pt 'InterstatePlusRegular', impact, sans-serif;;
+	text-transform:uppercase;
+	margin:0 0 0 8px;
+	padding:20px 10px 10px 10px;
+	line-height:40px;
+	background:#000}
+
+ul.tabs a:hover {
+	color:#ee4490;
+	line-height:45px;
+	background:#111}
+	
+	
+	
+/* ------------------------------ CONTENT */
+
+h1, h2, h4 {
+	color:#000;
+	text-transform:uppercase;
+	font:normal 26pt 'InterstatePlusRegular', impact, sans-serif;}
+	
+h2 {
+	color:#ee4490;
+	font-size:15pt;
+	margin-bottom:10px}
+
+h4 {
+	color:#333;
+	font-size:10pt;
+	position:relative;
+	top:-5px}
+
+.small-label, small {
+	text-transform:uppercase;
+	color:#404040;
+	font-size:8pt}
+
+small.tinylabel {
+	color:#c0c0c0;
+	margin-bottom:10px;
+	display:block}
+
+p {
+	margin-bottom:15px}
+
+div#logo img {
+	margin:30px 0}
+
+ul.plain-list li {
+	list-style:none;
+	margin-bottom:15px}
+
+span.number {
+	font-size:25pt;
+	position:relative;
+	top:4px}
+	
+
+/* --- single event page */
+div#event-details {
+	border-top:1px dotted #ccc;
+	padding:15px 0;
+	margin:0 15px;
+	border-bottom:1px dotted #ccc;}
+	
+span.event-details-label, span.event-details-detail {
+	display:inline-block;
+	vertical-align:top;}
+
+span.event-details-label {
+	font-size:8pt;
+	color:#444;
+	text-transform:uppercase;
+	text-align:right;
+	width:50px;
+	padding:0 3px 0 0;
+	margin:3px 0 0 0}
+	
+span.event-details-detail {
+	width:170px;}
+	
+ul.plain-list .fleft {
+	margin-bottom:10px;
+	padding-right:10px}
+
+.image-grid img {
+	padding:2px 0}
+	
+
+image-grid#photosvideos {
+	text-align:center}
+
+.image-grid#photosvideos img {
+	padding:8px}
+
+.image-grid .withcomment {
+	text-align:right;
+	height:154px;
+	width:180px;
+	overflow:hidden;
+	float:left;}
+
+.image-grid .commentbubble {
+	background:url('../images/icons/bubble.png') no-repeat;
+	opacity:0.7;
+	padding:3px 5px 5px 5px;
+	font-family:InterstatePlusRegular;
+	color:#3399ff;
+	position:relative;
+	top:-155px;
+	right:6px;
+	z-index:10}
+
+.image-grid .commentbubble:hover {
+	opacity:1;}
+	
+/* ------------------------------ FORMS */
+
+div#search-container {
+	background:#333;
+	margin-top:20px;
+	float:right;
+	width:214px}
+
+div#search-container input[type=text] {
+	background:transparent;
+	color:#888;
+	font:normal 9pt tahoma;
+	border:0;
+	width:170px !important;
+	padding:5px 0 0 5px;
+	margin:0;max-width:170px !important;float:left;}
+
+div#search-container input[type=image] {
+	vertical-align:middle;
+	float:right;}
+
+	
+	
+/* ------------------------------ MISC */
+
+.spacer 	{ height:25px; display:block}
+.sm-spacer  { height:5px; display:block}
+.big-spacer { height:50px; display:block}
+.valign		{ vertical-align:middle}
+.fleft		{ float:left}
+.fright		{ float:right}
+
+
+
+/* ------------------------------ FONTS */	
+
+@font-face {
+    font-family: 'InterstatePlusRegular';
+    src: url('../fonts/interstateplus_regular_cond-webfont.eot');
+    src: url('../fonts/interstateplus_regular_cond-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/interstateplus_regular_cond-webfont.woff') format('woff'),
+         url('../fonts/interstateplus_regular_cond-webfont.ttf') format('truetype'),
+         url('../fonts/interstateplus_regular_cond-webfont.svg#InterstatePlusRegular') format('svg');
+    font-weight: normal;
+    font-style: normal}

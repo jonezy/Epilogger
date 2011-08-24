@@ -19,10 +19,10 @@
   ================================================== -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
 	
-    <link href="@Url.Content("~/Public/css/base.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Public/css/skeleton.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Public/css/reset.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Public/css/960_12_col.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Public/css/messages.css")" rel="stylesheet" type="text/css" />
-	<link href="@Url.Content("~/Public/css/Site.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Public/css/sadiehawkins.css")" rel="stylesheet" type="text/css" />
     
     <script src="@Url.Content("~/Public/js/head.load.min.js")"></script>
     <script>
@@ -41,30 +41,40 @@
     
 @Html.Raw(Html.Notify())
 <div id="flash"></div>
-	<div class="container">	
-        <header>
-            @Html.Raw(Html.Image("logo.png", "id='logo'"))
-            @Html.Action("GlobalNavigation", "Navigation")
-
-            <br style="clear:both;" />
-        </header>
-        <nav role="main" class="clearfix">
-            <ul>
-                <li>@Html.ActionLink("HOME", "Index", "Home")</li>
-                <li>@Html.ActionLink("BROWSE EVENTS", "Index", "Events")</li>
-                <li>@Html.ActionLink("MY EVENTS", "Index", "Events")</li>
-                <li>@Html.ActionLink("DASHBOARD", "Index", "Events")</li>
-                <li>@Html.ActionLink("WHAT IS EPILOGGER?", "Index", "Home")</li>
-                <li><a href="http://www.epilogger.com/blog/">BLOG</a></li>
-                <li>@Html.ActionLink("HELP", "Index", "Home")</li>
-            </ul>
-        </nav>
-        <section role="main" id="main" class="sixteen columns clearfix">
-            @RenderBody()
-        </section>
-        <footer>
-        </footer>
+<div class="container_12" id="outer-container">
+	<div class="grid_8" id="logo">
+		 @Html.Raw(Html.Image("logo.png", "id='logo'"))
 	</div>
+	<div class="grid_4">
+        @Html.Action("GlobalNavigation", "Navigation")
+		
+		<div class="clear"></div>
+		
+		<div id="search-container">
+			<input type="text" value="Find an event..."/>
+			<input type="image" src="@Url.Content("~/Public/images/btn-submit.png")"/>
+		</div>		
+	</div>           
+
+
+	<div class="clear"></div>
+
+        
+    <ul id="navigation">
+        <li>@Html.ActionLink("HOME", "Index", "Home")</li>
+        <li>@Html.ActionLink("BROWSE EVENTS", "Index", "Events")</li>
+        <li>@Html.ActionLink("MY EVENTS", "Index", "Events")</li>
+        <li>@Html.ActionLink("DASHBOARD", "Index", "Events")</li>
+        <li>@Html.ActionLink("WHAT IS EPILOGGER?", "Index", "Home")</li>
+        <li><a href="http://www.epilogger.com/blog/">BLOG</a></li>
+        <li>@Html.ActionLink("HELP", "Index", "Home")</li>
+    </ul>
+    <div id="content-container">	
+        @RenderBody()
+    		<div class="clear"></div>
+		<div class="spacer"></div>
+    </div>
+</div>
 
 </body>
 </html>

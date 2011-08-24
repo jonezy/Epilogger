@@ -1,18 +1,15 @@
 ﻿@model Epilogger.Web.Models.GlobalNavigationModel
-
-<nav role="global">
-    <ul>
-        @if (Model.UserLoggedIn) {
-            <li>@Html.ActionLink("Account", "Index", "Account")</li>
-            <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
-            <li><a href="#" onclick="window.open('http://tracker.epilogger.com/projects/epiloggerfeedback/issues/new','','width=920,height=550');return false;">FEEDBACK</a></li>
-        }
-        else
-        {
-            <li>@Html.ActionLink("LOGIN & REGISTER", "Login", "Account")</li>
-            <li><a href="#" onclick="window.open('http://tracker.epilogger.com/projects/epiloggerfeedback/issues/new','','width=920,height=550');return false;">FEEDBACK</a></li>
-        }
+<ul class="tabs">
+    @if (Model.UserLoggedIn) {
+        <li>@Html.ActionLink("Account", "Index", "Account")</li>
+        <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+        <li><a href="#" onclick="window.open('http://tracker.epilogger.com/projects/epiloggerfeedback/issues/new','','width=920,height=550');return false;">FEEDBACK</a></li>
+    }
+    else
+    {
+        <li>@Html.ActionLink("LOGIN & REGISTER", "Login", "Account")</li>
+        <li><a href="#" onclick="window.open('http://tracker.epilogger.com/projects/epiloggerfeedback/issues/new','','width=920,height=550');return false;">FEEDBACK</a></li>
+    }
         
-    </ul>    
-</nav>
+</ul>    
 
