@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using Epilogger.Web.Core.Email;
 using NUnit.Framework;
+using System;
+using RichmondDay.Helpers;
 
 namespace Epilogger.Tests {
 
     [TestFixture]
-    public class EmailTests {
+    public class TemplateParserTests {
 
         string messageTemplate = "Hi, [FIRST_NAME].  This is a message template";
         string multipleMessageTemplate = "Hi, [FIRST_NAME] [LAST_NAME].  This is a message template";
@@ -67,6 +69,22 @@ namespace Epilogger.Tests {
             Dictionary<string, string> replacements = parser.ParseTokens(multipleMessageTemplate);
 
             Assert.AreEqual(replacements.Count, 2);
+        }
+
+    }
+
+    [TestFixture]
+    public class EmailTests {
+
+        [Test]
+        public void sending_email_with_empty_config_should_throw_error() {
+            IEmailSender sender = new EmailSender();
+
+            try {
+                sender.Send(null, "", "", "", "");
+            } catch (ArgumentException ex) {
+                Assert.AreEqual(typeof(System.ArgumentException), ex);
+            }
         }
     }
 }
