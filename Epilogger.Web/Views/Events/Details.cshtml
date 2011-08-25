@@ -1,8 +1,263 @@
-﻿@model Epilogger.Web.Models.EventDisplayViewModel
+﻿
+@model Epilogger.Web.Models.EventDisplayViewModel
+
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Epilogger - " + Model.Name;
+    
 }
+
+<div class="grid_8">
+	<h1>@Model.Name</h1>
+	<h2>@Model.SubTitle</h2>
+			
+	<p>@Html.Raw(Model.Description.Replace("\r", "<br />"))
+        @if (Model.Description.Length > 266)
+        { 
+            @: ... (<a href="#">read more</a>)
+        } </p>
+</div>
+	
+<div class="grid_4">
+	<small class="tinylabel">Sponsors & Supporters</small>
+	<img src="img/samples/ad.png"/>
+	<img src="img/samples/ad.png"/>
+</div>
+		
+<div class="clear"></div>		
+<span class="spacer"></span>
+		
+<div id="event-details">
+	<span class="event-details-label">When:</span>
+	<span class="event-details-detail">
+		
+        @if (Model.StartDateTime.Subtract(Model.EndDateTime).Days == 0)
+        {
+            @String.Format("{0:MMMM dd, yyyy}", Model.StartDateTime)
+            @: <br />
+            @String.Format("{0:h:mm tt}", Model.StartDateTime)
+            @: to
+            @String.Format("{0:h:mm tt}", Model.EndDateTime)
+        }
+        else
+        {
+            @String.Format("{0:MMMM dd, yyyy h:mm tt}", Model.StartDateTime)
+            @: to 
+            @String.Format("{0:MMMM dd, yyyy h:mm tt}", Model.EndDateTime)
+        }
+
+	</span>
+			
+	<span class="event-details-label">Where:</span>
+	<span class="event-details-detail">
+		Tattoo Rock Parlour<br/>
+		567 Queen Street West<br/>
+		Toronto (<a href="#">map</a>)
+	</span>			
+			
+	<span class="event-details-label">
+		URL:<br/>
+		<span style="position:relative; top:5px">Hashtag:</span>
+	</span>
+	<span class="event-details-detail">
+        @Model.WebsiteURL<br />
+		@{
+            try {
+                string[] SearchT = Model.SearchTerms.Split(new string[] {" OR "}, StringSplitOptions.None);
+                string SearchTerms = "";
+                foreach (string s in SearchT) {
+                    SearchTerms += s + ", ";
+                }
+                @Html.Raw("<strong>" + SearchTerms.Substring(0, (SearchTerms.Length - 2)) + "</strong>")
+            }
+            catch
+            {
+                <strong>@Model.SearchTerms</strong>
+            }
+        }
+	</span>
+			
+	<span class="event-details-label">
+		Cost:<br/>
+		<span style="position:relative; top:5px">tw:</span><br/>
+		<span style="position:relative; top:10px">fb:</span>
+	</span>
+	<span class="event-details-detail">
+		free<br/>
+		<a href="#">@@socialmedia</a><br/>
+		<a href="#">fanpage</a>
+	</span>
+</div>
+		
+<div class="clear"></div>
+<div class="spacer"></div>
+		
+		
+<!-- PHOTOS & VIDEOS -->
+<div class="grid_8">
+	<h2><span class="number">34905</span> Photos & Videos</h2>
+	<h4>filter:</h4>
+			
+	<span class="sm-spacer"></span>
+			
+	<div class="image-grid" id="photosvideos">
+		<div class="withcomment">
+			<img src="img/samples/photo.png"/>
+			<a href="#" class="commentbubble">23</a>
+		</div>
+		<div class="withcomment">
+			<img src="img/samples/photo.png"/>
+			<a href="#" class="commentbubble">23</a>
+		</div>
+		<div class="withcomment">
+			<img src="img/samples/photo.png"/>
+			<a href="#" class="commentbubble">23</a>
+		</div>
+		<div class="withcomment">
+			<img src="img/samples/photo.png"/>
+			<a href="#" class="commentbubble">23</a>
+		</div>
+		<div class="withcomment">
+			<img src="img/samples/photo.png"/>
+			<a href="#" class="commentbubble">23</a>
+		</div>
+		<div class="withcomment">
+			<img src="img/samples/photo.png"/>
+			<a href="#" class="commentbubble">23</a>
+		</div>
+		<div class="withcomment">
+			<img src="img/samples/photo.png"/>
+			<a href="#" class="commentbubble">23</a>
+		</div>
+	</div>
+			
+	<div class="clear"></div>
+	<div class="spacer"></div>
+			
+	<p>(<a href="#">See all photos and videos</a>)</p>
+</div>
+		
+		
+<!-- TWEETS -->
+<div class="grid_4">
+	<h2><span class="number">34905</span> Tweets & Shoutouts</h2>
+	<h4>filter:</h4>
+			
+	<span class="sm-spacer"></span>
+			
+	<ul class="plain-list">
+		<li>
+			<img src="img/samples/twitter.png" class="fleft">
+			<small><a href="#">@@Gangles</a></small>
+			<p>"Your work is going to fill a large part of your life, and the only way to be truly satisfied is to..." </a>
+		</li>
+		<li>
+			<img src="img/samples/twitter.png" class="fleft">
+			<small><a href="#">@@Gangles</a></small>
+			<p>Discovered that <a href="#">@@mittense</a> feels obligated to exclusively pick the "good" path in Catherine because his girlfriend watches him play.</p>
+		</li>
+		<li>
+			<img src="img/samples/twitter.png" class="fleft">
+			<small><a href="#">@@Gangles</a></small>
+			<p>#Crashaversary is coming up! If your RSVP has changed and you can't make it, could you update it for us? cc : @@e11eventoronto Thanks!!</p>
+		</li>
+	</ul>
+			
+	<span class="sm-spacer"></span>
+			
+	<form>
+</div>
+		
+<div class="clear"></div>
+<div class="big-spacer"></div>
+		
+		
+<!-- BLOG POSTINGS -->
+<div class="grid_4">
+	<h2>Blog postings</h2>
+	<ul class="plain-list">
+		<li>
+			<img src="img/samples/avatar.png" class="fleft"/>
+			<a href="#">I won an xbox at IHAVEANIDEA</a><br/>
+			<small><a href="#">BY MICHAEL NUS</a></small><br/>
+			<p>After a very busy day of meetings and wheeling...</p>
+		</li>
+		<li>
+			<img src="img/samples/avatar.png" class="fleft"/>
+			<a href="#">I won an xbox at IHAVEANIDEA</a><br/>
+			<small><a href="#">BY MICHAEL NUS</a></small><br/>
+			<p>After a very busy day of meetings and wheeling...</p>
+		</li>
+		<li>
+			<img src="img/samples/avatar.png" class="fleft"/>
+			<a href="#">I won an xbox at IHAVEANIDEA</a><br/>
+			<small><a href="#">BY MICHAEL NUS</a></small><br/>
+			<p>After a very busy day of meetings and wheeling...</p>
+		</li>
+	</ul>
+			
+	<div class="clear"></div>
+	<p>(<a href="#">See all blog posts</a>)</p>
+</div>
+		
+		
+<!-- EXTERNAL LINKS -->
+<div class="grid_4">
+	<h2>External Links</h2>
+	<ul class="plain-list">
+		<li> 
+			<a href="#">http://www.torontobeerblog.com/contests/toronto-festival-of-beer-photo-scavenger-hunt</a><br/>
+			<small><img src="img/icons/tweet-black.png" class="valign" />VIA @@MICHAELNUS</small>
+      	</li>
+		<li> 
+			<a href="#">http://www.torontobeerblog.com/contests/toronto-festival-of-beer-photo-scavenger-hunt</a><br/>
+			<small><img src="img/icons/tweet-black.png" class="valign" />VIA @@MICHAELNUS</small>
+      	</li>
+		<li> 
+			<a href="#">http://www.torontobeerblog.com/contests/toronto-festival-of-beer-photo-scavenger-hunt</a><br/>
+			<small><img src="img/icons/tweet-black.png" class="valign" />VIA @@MICHAELNUS</small>
+      	</li>
+    </ul>
+			
+	<div class="clear"></div>
+	<p>(<a href="#">See all links</a>)</p>
+</div>
+		
+		
+<!-- CHECKINS -->
+<div class="grid_4">
+	<h2><span class="number">23</span> Check-ins</h2>
+	<p>All these lovely people attended Social Media Day Global at the Tattoo Rock Parlour!</p>
+	<span class="image-grid">
+		<img src="img/samples/checkin.png"/> 
+		<img src="img/samples/checkin.png"/> 
+		<img src="img/samples/checkin.png"/> 
+		<img src="img/samples/checkin.png"/> 
+		<img src="img/samples/checkin.png"/> 
+		<img src="img/samples/checkin.png"/> 
+		<img src="img/samples/checkin.png"/> 
+		<img src="img/samples/checkin.png"/> 
+		<img src="img/samples/checkin.png"/> 
+		<img src="img/samples/checkin.png"/> 
+		<img src="img/samples/checkin.png"/> 
+		<img src="img/samples/checkin.png"/> 
+		<img src="img/samples/checkin.png"/> 
+		<img src="img/samples/checkin.png"/> 
+		<img src="img/samples/checkin.png"/> 
+		<img src="img/samples/checkin.png"/> 
+		<img src="img/samples/checkin.png"/> 
+		<img src="img/samples/checkin.png"/> 
+		<img src="img/samples/checkin.png"/> 
+		<img src="img/samples/checkin.png"/>
+		<a href="#"><img src="img/btn-checkinmore.png"/></a>
+	</span>
+</div>
+		
+<div class="clear"></div>
+<div class="spacer"></div>
+
+
+
 <fieldset>
     <div class="display-label">UserID</div>
     <div class="display-field">
@@ -35,6 +290,6 @@
     </div>
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
