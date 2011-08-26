@@ -299,7 +299,7 @@ svg {
 		font: 13px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
 		color: #777;
 		margin: 0;
-		width: 210px;
+		width: 100%;
 		max-width: 100%;
 		display: block;
 		margin-bottom: 20px;
@@ -338,6 +338,7 @@ svg {
 	.remove-bottom { margin-bottom: 0 !important; }
 	.half-bottom { margin-bottom: 10px !important; }
 	.add-bottom { margin-bottom: 20px !important; }
-
+    .left {float:left;}
+    .right {float:right;}
 		
 			

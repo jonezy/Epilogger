@@ -3,14 +3,16 @@
 @{
     ViewBag.Title = "Login";
 }
-<div class="grid_10 alpha">
 <h2>Login</h2>
 @Html.ValidationSummary("Please correct the following issues")
+
+<div class="grid_3 alpha">
+
 @using (Html.BeginForm("Login", "Account", FormMethod.Post)) {
     <fieldset>
         <p>@Html.LabelFor(model => model.Username) @Html.TextBoxFor(model => model.Username)</p>
         <p>@Html.LabelFor(model => model.Password) @Html.PasswordFor(model => model.Password)</p>
-        <p><input type="submit" class="submit" value="login" /></p>
+        <p><input type="submit" class="submit" value="login" /> or @Html.ActionLink("Register", "Create", "Account")</p>
     </fieldset>
 }
 </div>
