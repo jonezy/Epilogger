@@ -5,14 +5,17 @@
 }
 <h2>Login</h2>
 @Html.ValidationSummary("Please correct the following issues")
-
+<p>If you already have an Epilogger account sign in to view events and create your own.</p>
+<p>If you don't have an account, why not @Html.ActionLink("sign up?", "create", "account").</p>
 <div class="grid_3 alpha">
 
 @using (Html.BeginForm("Login", "Account", FormMethod.Post)) {
     <fieldset>
         <p>@Html.LabelFor(model => model.Username) @Html.TextBoxFor(model => model.Username)</p>
         <p>@Html.LabelFor(model => model.Password) @Html.PasswordFor(model => model.Password)</p>
-        <p><input type="submit" class="submit" value="login" /> or @Html.ActionLink("Register", "Create", "Account")</p>
+        <p class="clearfix"><label class="left">Remember me?</label> @Html.CheckBoxFor(model => model.RememberMe, new { @class = "left" })</p>
+
+        <p><input type="submit" class="submit" value="login" /> or @Html.ActionLink("Register", "create", "Account")</p>
     </fieldset>
 }
 </div>
