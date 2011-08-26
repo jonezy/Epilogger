@@ -83,7 +83,7 @@ namespace Epilogger.Tests {
             try {
                 sender.Send(null, "", "", "", "");
             } catch (ArgumentException ex) {
-                Assert.AreEqual(typeof(System.ArgumentException), ex);
+                Assert.AreEqual(typeof(System.ArgumentException), ex.GetType());
             }
         }
     }
