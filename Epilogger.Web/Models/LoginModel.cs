@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace Epilogger.Web.Models {
     public class LoginModel {
@@ -7,5 +8,8 @@ namespace Epilogger.Web.Models {
         
         [Required]
         public string Password { get; set; }
+
+        [DisplayName("Remember me?")]
+        public bool RememberMe { get; set; }
     }
 }

@@ -101,6 +101,9 @@ namespace Epilogger.Web.Controllers {
                 }
 
                 // write the login cookie, redirect. 
+                if(model.RememberMe)
+                    CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString(), DateTime.Now.AddDays(30));
+                 
                 CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString());
 
                 return RedirectToAction("Index");
