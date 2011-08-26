@@ -21,7 +21,7 @@
         @:<p class="remove-bottom">You are connected to facebook as: <strong>@Model.FacebookUsername</strong> (@Html.ActionLink("x", "Disconnect", "Facebook", new { area = "Authentication" }, null))</p>
     }
 </div>
-<div class="grid_8 omega">
+<div class="grid_4">
     <h2>Your Info</h2>
     @using (Html.BeginForm("Update", "Account", FormMethod.Post)) {
         <fieldset>
@@ -32,5 +32,8 @@
         </fieldset>
     }
 </div>
+<div class="grid_4 omega">
+    <h2>Your Followed Events</h2>
 
+</div>
 <br style="clear:both;" />
