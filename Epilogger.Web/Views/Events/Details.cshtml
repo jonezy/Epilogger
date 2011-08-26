@@ -20,8 +20,8 @@
 	
 <div class="grid_4">
 	<small class="tinylabel">Sponsors & Supporters</small>
-	<img src="img/samples/ad.png"/>
-	<img src="img/samples/ad.png"/>
+	<img src="/Public/images/samples/ad.png"/>
+	<img src="/Public/images/samples/ad.png"/>
 </div>
 		
 <div class="clear"></div>		
@@ -97,40 +97,19 @@
 		
 <!-- PHOTOS & VIDEOS -->
 <div class="grid_8">
-	<h2><span class="number">34905</span> Photos & Videos</h2>
+	<h2><span class="number">@Model.ImageCount</span> Photos & Videos</h2>
 	<h4>filter:</h4>
 			
 	<span class="sm-spacer"></span>
 			
 	<div class="image-grid" id="photosvideos">
-		<div class="withcomment">
-			<img src="img/samples/photo.png"/>
-			<a href="#" class="commentbubble">23</a>
-		</div>
-		<div class="withcomment">
-			<img src="img/samples/photo.png"/>
-			<a href="#" class="commentbubble">23</a>
-		</div>
-		<div class="withcomment">
-			<img src="img/samples/photo.png"/>
-			<a href="#" class="commentbubble">23</a>
-		</div>
-		<div class="withcomment">
-			<img src="img/samples/photo.png"/>
-			<a href="#" class="commentbubble">23</a>
-		</div>
-		<div class="withcomment">
-			<img src="img/samples/photo.png"/>
-			<a href="#" class="commentbubble">23</a>
-		</div>
-		<div class="withcomment">
-			<img src="img/samples/photo.png"/>
-			<a href="#" class="commentbubble">23</a>
-		</div>
-		<div class="withcomment">
-			<img src="img/samples/photo.png"/>
-			<a href="#" class="commentbubble">23</a>
-		</div>
+       @* @foreach (Epilogger.Data.Image EPLImage in Model.Images.OrderByDescending(i => i.DateTime).Take(9))
+        {
+            <div class="withcomment">
+			    <img alt="" height="154" width="180" src="@EPLImage.Thumb"/>
+			    <a href="#" class="commentbubble">0</a>
+		    </div>
+        }*@
 	</div>
 			
 	<div class="clear"></div>
@@ -142,32 +121,24 @@
 		
 <!-- TWEETS -->
 <div class="grid_4">
-	<h2><span class="number">34905</span> Tweets & Shoutouts</h2>
+	<h2><span class="number">@Model.TweetCount</span> Tweets & Shoutouts</h2>
 	<h4>filter:</h4>
 			
 	<span class="sm-spacer"></span>
 			
 	<ul class="plain-list">
-		<li>
-			<img src="img/samples/twitter.png" class="fleft">
-			<small><a href="#">@@Gangles</a></small>
-			<p>"Your work is going to fill a large part of your life, and the only way to be truly satisfied is to..." </a>
-		</li>
-		<li>
-			<img src="img/samples/twitter.png" class="fleft">
-			<small><a href="#">@@Gangles</a></small>
-			<p>Discovered that <a href="#">@@mittense</a> feels obligated to exclusively pick the "good" path in Catherine because his girlfriend watches him play.</p>
-		</li>
-		<li>
-			<img src="img/samples/twitter.png" class="fleft">
-			<small><a href="#">@@Gangles</a></small>
-			<p>#Crashaversary is coming up! If your RSVP has changed and you can't make it, could you update it for us? cc : @@e11eventoronto Thanks!!</p>
-		</li>
+        @*@foreach (Epilogger.Data.Tweet EPLTweet in Model.Tweets.OrderByDescending(t => t.CreatedDate).Take(4))
+        {
+            <li>
+			    <img src="@EPLTweet.ProfileImageURL" class="fleft" alt="" />
+			    <small><a href="http://www.twitter.com/@EPLTweet.FromUserScreenName">@EPLTweet.FromUserScreenName</a></small>
+			    <p>@Html.Raw(EPLTweet.TextAsHTML)</p>
+		    </li>
+        }*@
 	</ul>
 			
 	<span class="sm-spacer"></span>
 			
-	<form>
 </div>
 		
 <div class="clear"></div>
@@ -179,19 +150,19 @@
 	<h2>Blog postings</h2>
 	<ul class="plain-list">
 		<li>
-			<img src="img/samples/avatar.png" class="fleft"/>
+			<img src="/Public/images/samples/avatar.png" class="fleft"/>
 			<a href="#">I won an xbox at IHAVEANIDEA</a><br/>
 			<small><a href="#">BY MICHAEL NUS</a></small><br/>
 			<p>After a very busy day of meetings and wheeling...</p>
 		</li>
 		<li>
-			<img src="img/samples/avatar.png" class="fleft"/>
+			<img src="/Public/images/samples/avatar.png" class="fleft"/>
 			<a href="#">I won an xbox at IHAVEANIDEA</a><br/>
 			<small><a href="#">BY MICHAEL NUS</a></small><br/>
 			<p>After a very busy day of meetings and wheeling...</p>
 		</li>
 		<li>
-			<img src="img/samples/avatar.png" class="fleft"/>
+			<img src="/Public/images/samples/avatar.png" class="fleft"/>
 			<a href="#">I won an xbox at IHAVEANIDEA</a><br/>
 			<small><a href="#">BY MICHAEL NUS</a></small><br/>
 			<p>After a very busy day of meetings and wheeling...</p>
@@ -254,44 +225,3 @@
 		<a href="#"><img src="img/btn-checkinmore.png"/></a>
 	</span>
 </div>
-		
-<div class="clear"></div>
-<div class="spacer"></div>
-
-
-
-<fieldset>
-    <div class="display-label">UserID</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.UserID)
-    </div>
-
-    <div class="display-label">Name</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
-    </div>
-
-    <div class="display-label">SubTitle</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.SubTitle)
-    </div>
-
-    <div class="display-label">Description</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Description)
-    </div>
-
-    <div class="display-label">CategoryID</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.CategoryID)
-    </div>
-
-    <div class="display-label">WebsiteURL</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.WebsiteURL)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

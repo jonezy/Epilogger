@@ -51,7 +51,10 @@ namespace Epilogger.Web {
         }
 
         private void RegisterAutomapperMappings() {
-            Mapper.CreateMap<Event, EventDisplayViewModel>();
+            Mapper.CreateMap<Event, EventDisplayViewModel>()
+                .ForMember(dest => dest.Images, opt => opt.Ignore())
+                .ForMember(dest => dest.ImageCount, opt => opt.Ignore())
+                .ForMember(dest => dest.TweetCount, opt => opt.MapFrom(src => src.NumberOfTweets));
                 
 
             Mapper.CreateMap<CreateAccountModel, User>()
