@@ -52,6 +52,7 @@ namespace Epilogger.Web {
 
         private void RegisterAutomapperMappings() {
             Mapper.CreateMap<Event, EventDisplayViewModel>();
+                
 
             Mapper.CreateMap<CreateAccountModel, User>()
                 .ForMember(dest => dest.ID, opt => opt.Ignore())
