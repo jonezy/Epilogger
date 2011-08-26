@@ -50,9 +50,9 @@
 			
 	<span class="event-details-label">Where:</span>
 	<span class="event-details-detail">
-		Tattoo Rock Parlour<br/>
+		@*Tattoo Rock Parlour<br/>
 		567 Queen Street West<br/>
-		Toronto (<a href="#">map</a>)
+		Toronto (<a href="#">map</a>)*@
 	</span>			
 			
 	<span class="event-details-label">
@@ -78,14 +78,16 @@
 	</span>
 			
 	<span class="event-details-label">
-		Cost:<br/>
+		Cost <br />        
 		<span style="position:relative; top:5px">tw:</span><br/>
 		<span style="position:relative; top:10px">fb:</span>
 	</span>
 	<span class="event-details-detail">
-		free<br/>
-		<a href="#">@@socialmedia</a><br/>
-		<a href="#">fanpage</a>
+		@if (Model.Cost != null) {
+            @Model.Cost
+        }<br/>
+		<a href="#">twitter - Add to DB</a><br/>
+		<a href="#">fb fan page  - Add to DB</a>
 	</span>
 </div>
 		

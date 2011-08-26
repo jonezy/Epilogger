@@ -134,7 +134,9 @@ span.event-details-label {
 	margin:3px 0 0 0}
 	
 span.event-details-detail {
-	width:170px;}
+	/*width:170px; CB - Aug 25, 2011 - Changed this to prevent the Cost and TW and FB values from wrapping to the next line*/
+	width:165px;
+	}
 	
 ul.plain-list .fleft {
 	margin-bottom:10px;
