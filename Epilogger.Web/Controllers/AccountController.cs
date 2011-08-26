@@ -70,6 +70,7 @@ namespace Epilogger.Web.Controllers {
 
             return RedirectToAction("Index");
         }
+
         [HttpGet]
         public ActionResult Login() {
             return View(new LoginModel());
@@ -91,6 +92,7 @@ namespace Epilogger.Web.Controllers {
                 user = service.GetUserByUsername(model.Username);
                 if (!BCryptHelper.CheckPassword(model.Password, user.Password)) {
                     this.StoreError("The password you entered does not match the password for your account");
+                    return View(model);
                 }
 
                 if (user == null) {
