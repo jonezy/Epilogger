@@ -53,6 +53,14 @@
       <HintPath>..\packages\FacebookWebMvc.5.0.50.0\lib\net40\Facebook.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Microsoft.WindowsAzure.ServiceRuntime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Microsoft.WindowsAzure.StorageClient.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -136,6 +144,7 @@
     <Compile Include="Core\Helpers\TwitterHelper.cs" />
     <Compile Include="Core\Services\EventService.cs" />
     <Compile Include="Core\Services\ServiceBase.cs" />
+    <Compile Include="Core\Services\TweetService.cs" />
     <Compile Include="Core\Services\UserAuthenticationProfileService.cs" />
     <Compile Include="Core\Services\UserService.cs" />
     <Compile Include="Core\UserRole.cs" />
@@ -143,6 +152,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\AzureTweetModel.cs" />
     <Compile Include="Models\CreateAccountModel.cs" />
     <Compile Include="Models\CreateEventViewModel.cs" />
     <Compile Include="Models\EventDisplayViewModel.cs" />
