@@ -30,6 +30,7 @@ namespace Epilogger.Web.Models {
         public string Cost { get; set; }
         public int ImageCount { get; set; }
         public int TweetCount { get; set; }
+        public List<Epilogger.Data.Tweet> Tweets { get; set; }
         public List<Epilogger.Data.Image> Images { get; set;}
         
     }
