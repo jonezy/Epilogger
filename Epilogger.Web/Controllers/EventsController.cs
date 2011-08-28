@@ -12,18 +12,21 @@ using RichmondDay.Helpers;
 namespace Epilogger.Web.Controllers {
     public class EventsController : BaseController {
         EpiloggerDB db;
-        EventService service = new EventService();
+        EventService ES = new EventService();
+        TweetService TS = new TweetService();
+        
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext) {
             if (db == null) db = new EpiloggerDB();
-            if (service == null) service = new EventService();
+            if (ES == null) ES = new EventService();
+            if (TS == null) TS = new TweetService();
 
             base.Initialize(requestContext);
         }
 
         [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the list of events")]
         public ActionResult Index() {
-            List<Event> events = service.AllEvents();
+            List<Event> events = ES.AllEvents();
             List<EventDisplayViewModel> model = Mapper.Map<List<Event>, List<EventDisplayViewModel>>(events);
 
             return View(model);
@@ -36,7 +39,14 @@ namespace Epilogger.Web.Controllers {
 
         [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the details of that event")]
         public ActionResult Details(int id) {
-            return View(Mapper.Map<Event, EventDisplayViewModel>(db.Events.Where(e => e.ID == id).FirstOrDefault()));
+
+
+            //EventViewModel model = Mapper.Map<Event, EventDisplayViewMode>(eventEntity);
+            //model.Tweets = GetTheTweetsFromSomewhereButOnlyWhenWeNeedThem();
+            EventDisplayViewModel Model = Mapper.Map<Event, EventDisplayViewModel>(ES.FindByID(id));
+            Model.Tweets = TS.FindByEventID(id);
+            
+            return View(Model);
         }
 
         [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the details of that event")]
@@ -47,12 +57,11 @@ namespace Epilogger.Web.Controllers {
         [HttpPost]
         public ActionResult CreateEvent(CreateEventViewModel model) {
 
-            EventService service = new EventService();
             try {
                 model.UserID = Guid.Parse(CookieHelpers.GetCookieValue("lc", "uid").ToString());
 
                 Event EPLevent = Mapper.Map<CreateEventViewModel, Event>(model);
-                service.Save(EPLevent);
+                ES.Save(EPLevent);
                 this.StoreSuccess("Your Event was created");
             } catch (Exception ex) {
                 this.StoreError(string.Format("There was an error: {0}", ex.Message));

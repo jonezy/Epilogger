@@ -124,18 +124,21 @@ namespace Epilogger.Data
         public Query<EventCategory> EventCategories { get; set; }
         public Query<BlogPost> BlogPosts { get; set; }
         public Query<aspnet_User> aspnet_Users { get; set; }
-        public Query<Picture> Pictures { get; set; }
         public Query<BetaSignup> BetaSignups { get; set; }
-        public Query<User> Users { get; set; }
         public Query<Tweet> Tweets { get; set; }
         public Query<UserAuthenticationProfile> UserAuthenticationProfiles { get; set; }
+        public Query<CheckIn> CheckIns { get; set; }
         public Query<Role> Roles { get; set; }
         public Query<URL> URLS { get; set; }
         public Query<UserRole> UserRoles { get; set; }
         public Query<ImageMetaDatum> ImageMetaData { get; set; }
-        public Query<Event> Events { get; set; }
         public Query<Image> Images { get; set; }
+        public Query<Event> Events { get; set; }
+        public Query<ActiveVisitorsQueue> ActiveVisitorsQueues { get; set; }
+        public Query<AggregateVisitHistory> AggregateVisitHistories { get; set; }
+        public Query<VisitHistory> VisitHistories { get; set; }
         public Query<Venue> Venues { get; set; }
+        public Query<User> Users { get; set; }
 
 			
 
@@ -242,18 +245,21 @@ namespace Epilogger.Data
             EventCategories = new Query<EventCategory>(provider);
             BlogPosts = new Query<BlogPost>(provider);
             aspnet_Users = new Query<aspnet_User>(provider);
-            Pictures = new Query<Picture>(provider);
             BetaSignups = new Query<BetaSignup>(provider);
-            Users = new Query<User>(provider);
             Tweets = new Query<Tweet>(provider);
             UserAuthenticationProfiles = new Query<UserAuthenticationProfile>(provider);
+            CheckIns = new Query<CheckIn>(provider);
             Roles = new Query<Role>(provider);
             URLS = new Query<URL>(provider);
             UserRoles = new Query<UserRole>(provider);
             ImageMetaData = new Query<ImageMetaDatum>(provider);
-            Events = new Query<Event>(provider);
             Images = new Query<Image>(provider);
+            Events = new Query<Event>(provider);
+            ActiveVisitorsQueues = new Query<ActiveVisitorsQueue>(provider);
+            AggregateVisitHistories = new Query<AggregateVisitHistory>(provider);
+            VisitHistories = new Query<VisitHistory>(provider);
             Venues = new Query<Venue>(provider);
+            Users = new Query<User>(provider);
             #endregion
 
 
@@ -263,18 +269,21 @@ namespace Epilogger.Data
             	DataProvider.Schema.Tables.Add(new EventCategoriesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new BlogPostsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new aspnet_UsersTable(DataProvider));
-            	DataProvider.Schema.Tables.Add(new PicturesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new BetaSignupsTable(DataProvider));
-            	DataProvider.Schema.Tables.Add(new UserTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new TweetsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserAuthenticationProfileTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new CheckInsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new RolesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new URLsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserRolesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ImageMetaDataTable(DataProvider));
-            	DataProvider.Schema.Tables.Add(new EventsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ImagesTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new EventsTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new ActiveVisitorsQueueTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new AggregateVisitHistoryTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new VisitHistoryTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new VenuesTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new UserTable(DataProvider));
             }
             #endregion
         }
