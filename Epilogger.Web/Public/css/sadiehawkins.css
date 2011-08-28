@@ -19,7 +19,7 @@ p a {
 
 #content-container {
 	background:#fff;
-	padding:15px}
+	padding-top:15px}
 	
 	
 /* ------------------------------ MENUS */
@@ -134,9 +134,7 @@ span.event-details-label {
 	margin:3px 0 0 0}
 	
 span.event-details-detail {
-	/*width:170px; CB - Aug 25, 2011 - Changed this to prevent the Cost and TW and FB values from wrapping to the next line*/
-	width:165px;
-	}
+	width:170px;}
 	
 ul.plain-list .fleft {
 	margin-bottom:10px;
@@ -160,7 +158,7 @@ image-grid#photosvideos {
 	float:left;}
 
 .image-grid .commentbubble {
-	background:url('../images/icons/bubble.png') no-repeat;
+	background:url('../img/icons/bubble.png') no-repeat;
 	opacity:0.7;
 	padding:3px 5px 5px 5px;
 	font-family:InterstatePlusRegular;
@@ -186,9 +184,8 @@ div#search-container input[type=text] {
 	color:#888;
 	font:normal 9pt tahoma;
 	border:0;
-	width:170px !important;
-	padding:5px 0 0 5px;
-	margin:0;max-width:170px !important;float:left;}
+	width:170px;
+	padding:5px 0 0 5px}
 
 div#search-container input[type=image] {
 	vertical-align:middle;

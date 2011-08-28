@@ -36,7 +36,14 @@ namespace Epilogger.Web.Controllers {
 
         [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the details of that event")]
         public ActionResult Details(int id) {
-            return View(Mapper.Map<Event, EventDisplayViewModel>(db.Events.Where(e => e.ID == id).FirstOrDefault()));
+
+
+            //EventViewModel model = Mapper.Map<Event, EventDisplayViewMode>(eventEntity);
+            //model.Tweets = GetTheTweetsFromSomewhereButOnlyWhenWeNeedThem();
+
+            EventDisplayViewModel Model = Mapper.Map<Event, EventDisplayViewModel>(db.Events.Where(e => e.ID == id).FirstOrDefault());
+            
+            return View(Model);
         }
 
         [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the details of that event")]
