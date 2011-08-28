@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Epilogger.Web.Models {
     public class EventDisplayViewModel {
@@ -26,6 +27,11 @@ namespace Epilogger.Web.Models {
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
         public string SearchTerms { get; set; }
-
+        public string Cost { get; set; }
+        public int ImageCount { get; set; }
+        public int TweetCount { get; set; }
+        public List<Epilogger.Data.Tweet> Tweets { get; set; }
+        public List<Epilogger.Data.Image> Images { get; set;}
+        
     }
 }

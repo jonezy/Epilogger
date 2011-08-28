@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
 
+using System;
+using System.Linq;
+
 using Epilogger.Data;
 
 namespace Epilogger.Web {
@@ -11,6 +14,12 @@ namespace Epilogger.Web {
         public List<Event> AllEvents() {
             return base.GetData();
         }
+
+        public Event FindByID(int EventID)
+        {
+            return GetData().Where(e => e.ID == EventID).FirstOrDefault();
+        }
+
 
         public object Save(Event entity)
         {

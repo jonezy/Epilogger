@@ -12,6 +12,9 @@ namespace Epilogger.Web.Models {
         
         public string Username { get; set; }
         public string Password { get; set; }
-        
+
+        [DisplayName("Time Zone Offset")]
+        public int TimeZoneOffset { get; set; }
+                
     }
 }
