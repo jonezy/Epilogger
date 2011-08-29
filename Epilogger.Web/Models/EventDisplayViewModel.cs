@@ -33,9 +33,10 @@ namespace Epilogger.Web.Models {
         public string FacebookPageURL { get; set; }
         public string TwitterAccount { get; set; }
         
-        public List<Epilogger.Data.Tweet> Last100Tweets { get; set; }
-        public IEnumerable<Epilogger.Data.Tweet> Tweets { get; set; }
-        public List<Epilogger.Data.Image> Images { get; set;}
+        //public List<Epilogger.Data.Tweet> Last100Tweets { get; set; }
+        //public IEnumerable<Epilogger.Data.Tweet> Tweets { get; set; }
+        public IEnumerable<Epilogger.Data.Image> Images { get; set;}
+        public IEnumerable<Epilogger.Data.CheckIn> CheckIns { get; set; }
         
     }
 }

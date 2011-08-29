@@ -44,7 +44,7 @@ namespace Epilogger.Web.Controllers {
             //EventViewModel model = Mapper.Map<Event, EventDisplayViewMode>(eventEntity);
             //model.Tweets = GetTheTweetsFromSomewhereButOnlyWhenWeNeedThem();
             EventDisplayViewModel Model = Mapper.Map<Event, EventDisplayViewModel>(ES.FindByID(id));
-            Model.Last100Tweets = TS.FindByEventIDToList(id);
+            //Model.Last100Tweets = TS.FindByEventIDToList(id);
             //Model.Tweets = TS.FindByEventID(id);
             
             return View(Model);

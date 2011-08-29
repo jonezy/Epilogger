@@ -106,19 +106,22 @@
 		
 <!-- PHOTOS & VIDEOS -->
 <div class="grid_8">
-	<h2><span class="number">@Model.ImageCount</span> Photos & Videos</h2>
+	<h2><span class="number">@Model.Images.Count()</span> Photos & Videos</h2>
 	<h4>filter:</h4>
 
 	<span class="sm-spacer"></span>
 
 	<div class="image-grid" id="photosvideos">
-       @* @foreach (Epilogger.Data.Image EPLImage in Model.Images.OrderByDescending(i => i.DateTime).Take(9))
+        @foreach (Epilogger.Data.Image EPLImage in Model.Images.OrderByDescending(i => i.DateTime).Take(9))
         {
             <div class="withcomment">
 			    <img alt="" height="154" width="180" src="@EPLImage.Thumb"/>
-			    <a href="#" class="commentbubble">0</a>
+			    <a href="#" class="commentbubble">
+                    @*Number of Comments*@
+                    @EPLImage.ImageMetaData.Count()
+                </a>
 		    </div>
-        }*@
+        }
 	</div>
 			
 	<div class="clear"></div>
@@ -136,15 +139,16 @@
 	<span class="sm-spacer"></span>
 			
 	<ul class="plain-list">
-        @foreach (Epilogger.Data.Tweet EPLTweet in Model.Last100Tweets.Take(8))
+        @*@foreach (Epilogger.Data.Tweet EPLTweet in Model.Last100Tweets.Take(8))
         {
             <li>
-			    @*<img src="@EPLTweet.ProfileImageURL" class="fleft" alt="" />
+			    <img src="@EPLTweet.ProfileImageURL" class="fleft" alt="" />
 			    <small><a href="http://www.twitter.com/@EPLTweet.FromUserScreenName">@EPLTweet.FromUserScreenName</a></small>
-			    <p>@Html.Raw(EPLTweet.TextAsHTML)</p>*@
+			    <p>@Html.Raw(EPLTweet.TextAsHTML)</p>
+
                 @EPLTweet.TwitterID - @EPLTweet.CreatedDate
 		    </li>
-        }
+        }*@
 	</ul>
 			
 	<span class="sm-spacer"></span>
@@ -209,29 +213,16 @@
 		
 <!-- CHECKINS -->
 <div class="grid_4">
-	<h2><span class="number">23</span> Check-ins</h2>
+	<h2><span class="number">@Model.CheckIns.Count()</span> Check-ins</h2>
 	<p>All these lovely people attended Social Media Day Global at the Tattoo Rock Parlour!</p>
 	<span class="image-grid">
-		<img src="@Url.Content("~/Public/images/samples/checkin.png")" /> 
-		<img src="@Url.Content("~/Public/images/samples/checkin.png")"/> 
-		<img src="@Url.Content("~/Public/images/samples/checkin.png")"/>
-        <img src="@Url.Content("~/Public/images/samples/checkin.png")"/> 
-        <img src="@Url.Content("~/Public/images/samples/checkin.png")"/> 
-        <img src="@Url.Content("~/Public/images/samples/checkin.png")"/> 
-        <img src="@Url.Content("~/Public/images/samples/checkin.png")"/> 
-        <img src="@Url.Content("~/Public/images/samples/checkin.png")"/> 
-        <img src="@Url.Content("~/Public/images/samples/checkin.png")"/> 
-        <img src="@Url.Content("~/Public/images/samples/checkin.png")"/> 
-        <img src="@Url.Content("~/Public/images/samples/checkin.png")"/> 
-        <img src="@Url.Content("~/Public/images/samples/checkin.png")"/> 
-        <img src="@Url.Content("~/Public/images/samples/checkin.png")"/> 
-        <img src="@Url.Content("~/Public/images/samples/checkin.png")"/> 
-        <img src="@Url.Content("~/Public/images/samples/checkin.png")"/> 
-        <img src="@Url.Content("~/Public/images/samples/checkin.png")"/> 
-        <img src="@Url.Content("~/Public/images/samples/checkin.png")"/> 
-        <img src="@Url.Content("~/Public/images/samples/checkin.png")"/> 
-        <img src="@Url.Content("~/Public/images/samples/checkin.png")"/> 
-        <img src="@Url.Content("~/Public/images/samples/checkin.png")"/> 
-		<a href="#"><img src="@Url.Content("~/Public/images/samples/checkin.png")"/></a>
+        @foreach (Epilogger.Data.CheckIn checkin in @Model.CheckIns)
+        {
+            
+            //@tw = checkin.Tweets.Where(t => t.ID == checkin.TweetID).FirstOrDefault();
+            <a href="@checkin.FourSquareCheckInURL">@checkin.FourSquareCheckInURL</a>
+            <a href="#"><img src="@Url.Content("~/Public/images/samples/checkin.png")"/></a>
+        }
+
 	</span>
 </div>
