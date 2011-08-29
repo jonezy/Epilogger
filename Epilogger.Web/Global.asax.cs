@@ -54,7 +54,9 @@ namespace Epilogger.Web {
             Mapper.CreateMap<Event, EventDisplayViewModel>()
                 .ForMember(dest => dest.Images, opt => opt.Ignore())
                 .ForMember(dest => dest.ImageCount, opt => opt.Ignore())
-                .ForMember(dest => dest.TweetCount, opt => opt.MapFrom(src => src.NumberOfTweets));
+                .ForMember(dest => dest.TweetCount, opt => opt.MapFrom(src => src.NumberOfTweets))
+                .ForMember(dest => dest.Last100Tweets, opt => opt.Ignore())
+                .ForMember(dest => dest.Tweets, opt => opt.Ignore());
                 
 
             Mapper.CreateMap<CreateAccountModel, User>()
@@ -92,7 +94,9 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.CollectionStartDateTime, opt => opt.Ignore())
                 .ForMember(dest => dest.CollectionEndDateTime, opt => opt.Ignore())
                 .ForMember(dest => dest.CollectionMode, opt => opt.Ignore())
-                .ForMember(dest => dest.LastTweetID, opt => opt.UseValue(0));
+                .ForMember(dest => dest.LastTweetID, opt => opt.UseValue(0))
+                .ForMember(dest => dest.TwitterAccount, opt => opt.Ignore())
+                .ForMember(dest => dest.FacebookPageURL, opt => opt.Ignore());
             
             Mapper.AssertConfigurationIsValid();
         }

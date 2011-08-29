@@ -19,9 +19,10 @@
 </div>
 	
 <div class="grid_4">
+    @*TODO Write this funcitonality into the application*@
 	<small class="tinylabel">Sponsors & Supporters</small>
-	<img src="@Url.Content("~/Public/images/samples/ad.png")"/>
-	<img src="@Url.Content("~/Public/images/samples/ad.png")"/>
+	<img src="@Url.Content("~/Public/images/samples/ad.png")" alt="" />
+	<img src="@Url.Content("~/Public/images/samples/ad.png")" alt="" />
 </div>
 		
 <div class="clear"></div>		
@@ -78,7 +79,7 @@
 	</span>
 			
 	<span class="event-details-label">
-		Cost <br />        
+		Cost: <br />        
 		<span style="position:relative; top:5px">tw:</span><br/>
 		<span style="position:relative; top:10px">fb:</span>
 	</span>
@@ -86,8 +87,16 @@
 		@if (Model.Cost != null) {
             @Model.Cost
         }<br/>
-		<a href="#">twitter - Add to DB</a><br/>
-		<a href="#">fb fan page  - Add to DB</a>
+        
+        @if (Model.TwitterAccount != null)
+        {
+            <a href="http://www.twitter.com/@Model.TwitterAccount">@Model.TwitterAccount</a>
+        }
+        @if (Model.FacebookPageURL != null) 
+        {
+            <a href="@Model.FacebookPageURL" target="_blank">@Model.FacebookPageURL</a><br/>
+        }
+        
 	</span>
 </div>
 		
@@ -99,9 +108,9 @@
 <div class="grid_8">
 	<h2><span class="number">@Model.ImageCount</span> Photos & Videos</h2>
 	<h4>filter:</h4>
-			
+
 	<span class="sm-spacer"></span>
-			
+
 	<div class="image-grid" id="photosvideos">
        @* @foreach (Epilogger.Data.Image EPLImage in Model.Images.OrderByDescending(i => i.DateTime).Take(9))
         {
@@ -127,14 +136,15 @@
 	<span class="sm-spacer"></span>
 			
 	<ul class="plain-list">
-        @*@foreach (Epilogger.Data.Tweet EPLTweet in Model.Tweets.OrderByDescending(t => t.CreatedDate).Take(4))
+        @foreach (Epilogger.Data.Tweet EPLTweet in Model.Last100Tweets.Take(8))
         {
             <li>
-			    <img src="@EPLTweet.ProfileImageURL" class="fleft" alt="" />
+			    @*<img src="@EPLTweet.ProfileImageURL" class="fleft" alt="" />
 			    <small><a href="http://www.twitter.com/@EPLTweet.FromUserScreenName">@EPLTweet.FromUserScreenName</a></small>
-			    <p>@Html.Raw(EPLTweet.TextAsHTML)</p>
+			    <p>@Html.Raw(EPLTweet.TextAsHTML)</p>*@
+                @EPLTweet.TwitterID - @EPLTweet.CreatedDate
 		    </li>
-        }*@
+        }
 	</ul>
 			
 	<span class="sm-spacer"></span>
