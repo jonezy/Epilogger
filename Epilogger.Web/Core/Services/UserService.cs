@@ -11,9 +11,12 @@ namespace Epilogger.Web {
         }
 
         public object Save(User entity) {
+            //If GUID, then update.
             if (entity.ID != Guid.Empty)
                 return base.GetRepository<User>(db).Update(entity);
 
+            //No Guid, create a new one and insert
+            entity.ID = Guid.NewGuid();
             return base.GetRepository<User>(db).Add(entity);
         }
 

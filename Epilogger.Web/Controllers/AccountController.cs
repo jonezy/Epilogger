@@ -34,11 +34,9 @@ namespace Epilogger.Web.Controllers {
         [HttpPost]
         public ActionResult Create(CreateAccountModel model) {
             try {
-                User user = Mapper.Map<CreateAccountModel, User>(model);
-                service.Save(user);
-                
-                user.ID = Guid.NewGuid();
+                User user = Mapper.Map<CreateAccountModel, User>(model);                
                 service.Save(user); 
+                
                 //TODO: send a confirmation email.
 
                 this.StoreSuccess("Your account was created successfully");
@@ -46,7 +44,6 @@ namespace Epilogger.Web.Controllers {
                 return RedirectToAction("Index", "Home");
             } catch (Exception ex) {
                 this.StoreError("There was a problem creating your account");
-
                 return View(model);
             }
         }

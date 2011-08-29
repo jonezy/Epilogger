@@ -54,20 +54,24 @@ namespace Epilogger.Web {
             Mapper.CreateMap<Event, EventDisplayViewModel>()
                 .ForMember(dest => dest.Images, opt => opt.Ignore())
                 .ForMember(dest => dest.ImageCount, opt => opt.Ignore())
-                .ForMember(dest => dest.TweetCount, opt => opt.MapFrom(src => src.NumberOfTweets));
+                .ForMember(dest => dest.TweetCount, opt => opt.MapFrom(src => src.NumberOfTweets))
+                .ForMember(dest => dest.Last100Tweets, opt => opt.Ignore())
+                .ForMember(dest => dest.Tweets, opt => opt.Ignore());
                 
 
             Mapper.CreateMap<CreateAccountModel, User>()
                 .ForMember(dest => dest.ID, opt => opt.Ignore())
                 .ForMember(dest => dest.Password, opt => opt.MapFrom(src => PasswordHelpers.EncryptPassword(src.Password)))
                 .ForMember(dest => dest.IsActive, opt => opt.UseValue(true))
-                .ForMember(dest => dest.CreatedDate, opt => opt.UseValue(DateTime.Now));
+                .ForMember(dest => dest.CreatedDate, opt => opt.UseValue(DateTime.UtcNow))
+                .ForMember(dest => dest.TimeZoneOffSet, opt => opt.UseValue(-5));
             
             Mapper.CreateMap<AccountModel, User>()
                 .ForMember(dest => dest.ID, opt => opt.Ignore())
                 .ForMember(dest => dest.Password, opt => opt.Ignore())
                 .ForMember(dest => dest.IsActive, opt => opt.Ignore())
-                .ForMember(dest => dest.CreatedDate, opt => opt.Ignore());
+                .ForMember(dest => dest.CreatedDate, opt => opt.Ignore())
+                .ForMember(dest => dest.TimeZoneOffSet, opt => opt.UseValue(-5));
 
             Mapper.CreateMap<User, AccountModel>()
                 .ForMember(dest => dest.TwitterUsername, opt => opt.MapFrom(src => src.UserAuthenticationProfiles.Where(ua => ua.Service == AuthenticationServices.TWITTER.ToString()).FirstOrDefault().ServiceUsername))
@@ -86,7 +90,13 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.NumberOfTweets, opt => opt.UseValue(0))
                 .ForMember(dest => dest.IsPrivate, opt => opt.UseValue(false))
                 .ForMember(dest => dest.IsAdult, opt => opt.UseValue(0))
-                .ForMember(dest => dest.IsActive, opt => opt.UseValue(0));
+                .ForMember(dest => dest.IsActive, opt => opt.UseValue(0))
+                .ForMember(dest => dest.CollectionStartDateTime, opt => opt.Ignore())
+                .ForMember(dest => dest.CollectionEndDateTime, opt => opt.Ignore())
+                .ForMember(dest => dest.CollectionMode, opt => opt.Ignore())
+                .ForMember(dest => dest.LastTweetID, opt => opt.UseValue(0))
+                .ForMember(dest => dest.TwitterAccount, opt => opt.Ignore())
+                .ForMember(dest => dest.FacebookPageURL, opt => opt.Ignore());
             
             Mapper.AssertConfigurationIsValid();
         }
