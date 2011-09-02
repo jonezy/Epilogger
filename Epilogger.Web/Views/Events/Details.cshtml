@@ -133,22 +133,20 @@
 		
 <!-- TWEETS -->
 <div class="grid_4">
-	<h2><span class="number">@Model.TweetCount</span> Tweets & Shoutouts</h2>
+	<h2><span class="number">@Model.Tweets.Count()</span> Tweets & Shoutouts</h2>
 	<h4>filter:</h4>
 			
 	<span class="sm-spacer"></span>
 			
 	<ul class="plain-list">
-        @*@foreach (Epilogger.Data.Tweet EPLTweet in Model.Last100Tweets.Take(8))
+        @foreach (Epilogger.Data.Tweet EPLTweet in Model.Tweets.OrderByDescending(t => t.CreatedDate).Take(4))
         {
             <li>
 			    <img src="@EPLTweet.ProfileImageURL" class="fleft" alt="" />
 			    <small><a href="http://www.twitter.com/@EPLTweet.FromUserScreenName">@EPLTweet.FromUserScreenName</a></small>
 			    <p>@Html.Raw(EPLTweet.TextAsHTML)</p>
-
-                @EPLTweet.TwitterID - @EPLTweet.CreatedDate
 		    </li>
-        }*@
+        }
 	</ul>
 			
 	<span class="sm-spacer"></span>
