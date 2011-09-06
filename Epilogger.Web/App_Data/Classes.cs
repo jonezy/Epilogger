@@ -1540,20 +1540,20 @@ namespace Epilogger.Data
 		    }
 		}
 		
-        partial void OnURLXChanging(string value);
-        partial void OnURLXChanged();
+        partial void OnFullURLChanging(string value);
+        partial void OnFullURLChanged();
 		
-		private string _URLX;
-		public string URLX { 
+		private string _FullURL;
+		public string FullURL { 
 		    get{
-		        return _URLX;
+		        return _FullURL;
 		    } 
 		    set{
-		        this.OnURLXChanging(value);
+		        this.OnFullURLChanging(value);
                 this.SendPropertyChanging();
-                this._URLX = value;
-                this.SendPropertyChanged("URLX");
-                this.OnURLXChanged();
+                this._FullURL = value;
+                this.SendPropertyChanged("FullURL");
+                this.OnFullURLChanged();
 		    }
 		}
 		

@@ -145,6 +145,10 @@
     <Compile Include="Core\Helpers\Helpers.cs" />
     <Compile Include="Core\Helpers\PasswordHelpers.cs" />
     <Compile Include="Core\Helpers\TwitterHelper.cs" />
+    <Compile Include="Core\Services\CheckInService.cs" />
+    <Compile Include="Core\Services\BlogService.cs" />
+    <Compile Include="Core\Services\ExternalLinksService.cs" />
+    <Compile Include="Core\Services\ImageService.cs" />
     <Compile Include="Core\Services\EventService.cs" />
     <Compile Include="Core\Services\ServiceBase.cs" />
     <Compile Include="Core\Services\TweetService.cs" />

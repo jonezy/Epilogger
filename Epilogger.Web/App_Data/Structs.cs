@@ -1291,7 +1291,7 @@ namespace Epilogger.Data {
 	                MaxLength = 1000
                 });
 
-                Columns.Add(new DatabaseColumn("URL", this)
+                Columns.Add(new DatabaseColumn("FullURL", this)
                 {
 	                IsPrimaryKey = false,
 	                DataType = DbType.String,
@@ -1383,15 +1383,15 @@ namespace Epilogger.Data {
       			}
 		    }
            
-            public IColumn URL{
+            public IColumn FullURL{
                 get{
-                    return this.GetColumn("URL");
+                    return this.GetColumn("FullURL");
                 }
             }
             				
-   			public static string URLColumn{
+   			public static string FullURLColumn{
 			      get{
-        			return "URL";
+        			return "FullURL";
       			}
 		    }
            

@@ -28,14 +28,14 @@ namespace Epilogger.Web.Models {
         public DateTime EndDateTime { get; set; }
         public string SearchTerms { get; set; }
         public string Cost { get; set; }
-        //public int ImageCount { get; set; }
-        //public int TweetCount { get; set; }
         public string FacebookPageURL { get; set; }
         public string TwitterAccount { get; set; }
 
         public IEnumerable<Epilogger.Data.Tweet> Tweets { get; set; }
         public IEnumerable<Epilogger.Data.Image> Images { get; set;}
         public IEnumerable<Epilogger.Data.CheckIn> CheckIns { get; set; }
+        public IEnumerable<Epilogger.Data.URL> ExternalLinks { get; set; }
+        public IEnumerable<Epilogger.Data.BlogPost> BlogPosts { get; set; }
         
     }
 }
