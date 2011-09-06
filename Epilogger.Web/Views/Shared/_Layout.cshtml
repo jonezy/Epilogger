@@ -60,12 +60,12 @@
         
     <ul id="navigation">
         <li>@Html.ActionLink("HOME", "Index", "Home")</li>
-        <li>@Html.ActionLink("BROWSE EVENTS", "Index", "Events")</li>
-        <li>@Html.ActionLink("MY EVENTS", "Index", "Events")</li>
-        <li>@Html.ActionLink("DASHBOARD", "Index", "Events")</li>
-        <li>@Html.ActionLink("WHAT IS EPILOGGER?", "Index", "Home")</li>
+        <li>@Html.ActionLink("BROWSE EVENTS", "index", "events")</li>
+        <li>@Html.ActionLink("MY EVENTS", "index", "events")</li>
+        <li>@Html.ActionLink("DASHBOARD", "index", "dashboard")</li>
+        <li>@Html.ActionLink("WHAT IS EPILOGGER?", "index", "home")</li>
         <li><a href="http://www.epilogger.com/blog/">BLOG</a></li>
-        <li>@Html.ActionLink("HELP", "Index", "Home")</li>
+        <li>@Html.ActionLink("HELP", "index", "home")</li>
     </ul>
     <div id="content-container">	
         @RenderBody()

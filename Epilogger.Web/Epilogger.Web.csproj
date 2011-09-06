@@ -131,6 +131,7 @@
     <Compile Include="Areas\Authentication\Controllers\TwitterController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="Models\AzureTweetModel.cs" />
     <Compile Include="Models\CreateAccountModel.cs" />
     <Compile Include="Models\CreateEventViewModel.cs" />
+    <Compile Include="Models\DashboardIndexViewModel.cs" />
     <Compile Include="Models\EventDisplayViewModel.cs" />
     <Compile Include="Models\GlobalNavigationModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
@@ -268,7 +270,7 @@
     <Content Include="Public\fonts\OSP-DIN-webfont.svg" />
     <Content Include="Public\fonts\OSP-DIN-webfont.ttf" />
     <Content Include="Public\fonts\OSP-DIN-webfont.woff" />
-    <Content Include="Views\Shared\_Account.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
