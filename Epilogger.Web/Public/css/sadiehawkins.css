@@ -15,11 +15,11 @@ p a {
 
 /* ------------------------------ CONTAINERS */
 
-#outer-container {}
+#outer-container {position:relative;}
 
 #content-container {
 	background:#fff;
-	padding-top:15px}
+	padding:15px}
 	
 	
 /* ------------------------------ MENUS */
@@ -177,9 +177,10 @@ div#search-container {
 	background:#333;
 	margin-top:20px;
 	float:right;
-	width:214px}
+	width:214px;position:absolute;top:40px;right:10px;}
 
 div#search-container input[type=text] {
+    float:left;
 	background:transparent;
 	color:#888;
 	font:normal 9pt tahoma;
@@ -188,7 +189,7 @@ div#search-container input[type=text] {
 	padding:5px 0 0 5px}
 
 div#search-container input[type=image] {
-	vertical-align:middle;
+	vertical-align:top;
 	float:right;}
 
 	
