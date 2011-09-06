@@ -14,12 +14,20 @@ namespace Epilogger.Web.Controllers {
         EpiloggerDB db;
         EventService ES = new EventService();
         TweetService TS = new TweetService();
+        ImageService IS = new ImageService();
+        CheckInService CS = new CheckInService();
+        ExternalLinkService LS = new ExternalLinkService();
+        BlogService BS = new BlogService();
         
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext) {
             if (db == null) db = new EpiloggerDB();
             if (ES == null) ES = new EventService();
             if (TS == null) TS = new TweetService();
+            if (IS == null) IS = new ImageService();
+            if (CS == null) CS = new CheckInService();
+            if (LS == null) LS = new ExternalLinkService();
+            if (BS == null) BS = new BlogService();
 
             base.Initialize(requestContext);
         }
@@ -40,11 +48,13 @@ namespace Epilogger.Web.Controllers {
         [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the details of that event")]
         public ActionResult Details(int id) {
 
-
-            //EventViewModel model = Mapper.Map<Event, EventDisplayViewMode>(eventEntity);
-            //model.Tweets = GetTheTweetsFromSomewhereButOnlyWhenWeNeedThem();
             EventDisplayViewModel Model = Mapper.Map<Event, EventDisplayViewModel>(ES.FindByID(id));
+            
             Model.Tweets = TS.FindByEventID(id);
+            Model.Images = IS.FindByEventID(id);
+            Model.CheckIns = CS.FindByEventID(id);
+            Model.ExternalLinks = LS.FindByEventID(id);
+            Model.BlogPosts = BS.FindByEventID(id);
             
             return View(Model);
         }

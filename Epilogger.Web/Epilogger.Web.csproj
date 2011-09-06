@@ -76,6 +76,7 @@
     </Reference>
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Data.Services.Client" />
     <Reference Include="System.Data.SQLite">
       <HintPath>..\packages\System.Data.SQLite.1.0.66.1\lib\System.Data.SQLite.DLL</HintPath>
     </Reference>
@@ -136,12 +137,18 @@
     <Compile Include="Core\AuthenticationServices.cs" />
     <Compile Include="Core\Email\EmalSender.cs" />
     <Compile Include="Core\Email\IEmailSender.cs" />
+    <Compile Include="Core\Email\SmtpConfiguration.cs" />
     <Compile Include="Core\Email\TemplateParser.cs" />
     <Compile Include="Core\Filters\LogErrors.cs" />
     <Compile Include="Core\Filters\RequiresAuthentication.cs" />
+    <Compile Include="Core\Helpers\AzureTableHelper.cs" />
     <Compile Include="Core\Helpers\Helpers.cs" />
     <Compile Include="Core\Helpers\PasswordHelpers.cs" />
     <Compile Include="Core\Helpers\TwitterHelper.cs" />
+    <Compile Include="Core\Services\CheckInService.cs" />
+    <Compile Include="Core\Services\BlogService.cs" />
+    <Compile Include="Core\Services\ExternalLinksService.cs" />
+    <Compile Include="Core\Services\ImageService.cs" />
     <Compile Include="Core\Services\EventService.cs" />
     <Compile Include="Core\Services\ServiceBase.cs" />
     <Compile Include="Core\Services\TweetService.cs" />

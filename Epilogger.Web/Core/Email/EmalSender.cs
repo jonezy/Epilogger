@@ -1,5 +1,5 @@
 ﻿using System;
-using RichmondDay.Helpers;
+using System.Net.Mail;
 
 namespace Epilogger.Web.Core.Email {
     public class EmailSender : IEmailSender {
@@ -9,7 +9,28 @@ namespace Epilogger.Web.Core.Email {
             if (smtpConfig == null || string.IsNullOrEmpty(smtpConfig.Server) || string.IsNullOrEmpty(smtpConfig.Port.ToString())) {
                 throw new ArgumentException("smtpConfig");
             }
+
+            // if there is no from address specified, use the default one.
+            if (string.IsNullOrEmpty(fromAddress))
+                fromAddress = smtpConfig.DefaultFromAddress;
+
+            if (string.IsNullOrEmpty(toAddress))
+                toAddress = smtpConfig.DefaultToAddress;
+
+            // setup the message
+            MailMessage email = new MailMessage();
+            email.Subject = subject;
+            email.Body = message;
+            email.From = new MailAddress(fromAddress);
+            email.To.Add(new MailAddress(toAddress));
+            email.IsBodyHtml = true;
+
+            // setup the smtpclient 
+            // only need to add credentials if they are present (production)
+            SmtpClient client = new SmtpClient(smtpConfig.Server, smtpConfig.Port);
             
+            // send the message
+            client.Send(email);
         }
     }
 }
