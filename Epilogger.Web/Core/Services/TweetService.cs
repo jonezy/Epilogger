@@ -56,6 +56,12 @@ namespace Epilogger.Web
             return db.Tweets.Where(t => t.EventID == EventID & t.CreatedDate >= StartDateTimeFilter & t.CreatedDate <= EndDateTimeFilter).AsEnumerable();
         }
 
+        public IEnumerable<Tweet> FindByUserScreenName(string fromUserScreenName) {
+            DateTime startDate = DateTime.Parse("2000-01-01 00:00:00");
+            DateTime endDate = DateTime.Parse("2200-12-31 00:00:00");
+
+            return GetData(t => t.FromUserScreenName == fromUserScreenName && t.CreatedDate >= startDate && t.CreatedDate <= endDate);
+        }
         
         ////Reading on the performance diff of List vs iEnumerable.
         ////http://stackoverflow.com/questions/3628425/linq-ienumerable-vs-list-what-to-use-how-do-they-work

@@ -3,4 +3,4 @@ obj
 *.suo
 *.xml
 .tests.VisualState.xml
-.s3db
+App_Data/errors.s3db
