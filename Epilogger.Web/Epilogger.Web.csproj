@@ -163,6 +163,7 @@
     <Compile Include="Models\AzureTweetModel.cs" />
     <Compile Include="Models\CreateAccountModel.cs" />
     <Compile Include="Models\CreateEventViewModel.cs" />
+    <Compile Include="Models\DashboardActivityModel.cs" />
     <Compile Include="Models\DashboardEventViewModel.cs" />
     <Compile Include="Models\DashboardIndexViewModel.cs" />
     <Compile Include="Models\DashboardProfileViewModel.cs" />

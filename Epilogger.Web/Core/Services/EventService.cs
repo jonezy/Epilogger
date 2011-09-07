@@ -20,6 +20,10 @@ namespace Epilogger.Web {
             return GetData().Where(e => e.ID == EventID).FirstOrDefault();
         }
 
+        public List<Event> FindByUserID(Guid userID) {
+            return GetData().Where(e => e.UserID == userID).ToList();
+        }
+
 
         public object Save(Event entity)
         {
