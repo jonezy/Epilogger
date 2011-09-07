@@ -178,6 +178,7 @@ image-grid#photosvideos {
 #dashboard-nav ul li a:hover,
 #dashboard-nav ul li a.current {background:#f6f6f6;border-bottom:solid 1px #bdbdbd;}
 
+.dashboard-activity-entry {float:left;height:90px;overflow:hidden;margin-bottom:10px;}
 /* ------------------------------ FORMS */
 
 div#search-container {

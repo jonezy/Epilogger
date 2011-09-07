@@ -9,6 +9,12 @@
 </div>
 
 <div class="grid_8 omega">
-
+@foreach (var item in Model.Activity) {
+    
+    <div class="grid_2 dashboard-activity-entry">
+    <strong>@item.Event.Name</strong><br />
+    <p>@item.ActivityContent ?? </p>
+    </div>
+}
 </div>
 
