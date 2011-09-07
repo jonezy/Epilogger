@@ -138,6 +138,7 @@ namespace Epilogger.Data
         public Query<User> Users { get; set; }
         public Query<AggregateVisitHistory> AggregateVisitHistories { get; set; }
         public Query<VisitHistory> VisitHistories { get; set; }
+        public Query<UserFollowsEvent> UserFollowsEvents { get; set; }
         public Query<Venue> Venues { get; set; }
 
 			
@@ -259,6 +260,7 @@ namespace Epilogger.Data
             Users = new Query<User>(provider);
             AggregateVisitHistories = new Query<AggregateVisitHistory>(provider);
             VisitHistories = new Query<VisitHistory>(provider);
+            UserFollowsEvents = new Query<UserFollowsEvent>(provider);
             Venues = new Query<Venue>(provider);
             #endregion
 
@@ -283,6 +285,7 @@ namespace Epilogger.Data
             	DataProvider.Schema.Tables.Add(new UserTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new AggregateVisitHistoryTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new VisitHistoryTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new UserFollowsEventTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new VenuesTable(DataProvider));
             }
             #endregion
