@@ -2,6 +2,8 @@
 using System.Collections;
 using Epilogger.Data;
 using System.Collections.Generic;
+using Epilogger.Web.Models;
+using AutoMapper;
 
 namespace Epilogger.Web.Controllers {
     [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view your dashboard")]
@@ -18,6 +20,12 @@ namespace Epilogger.Web.Controllers {
             IEnumerable<Tweet> tweets = tweetService.FindByUserScreenName(CurrentUserTwitterAuthorization.ServiceUsername);
 
             return View();
+        }
+
+        public ActionResult Profile() {
+            DashboardProfileViewModel model = Mapper.Map<User, DashboardProfileViewModel>(CurrentUser);
+
+            return View(model);
         }
 
     }

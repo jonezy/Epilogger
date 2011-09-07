@@ -74,7 +74,7 @@ ul.tabs a:hover {
 h1, h2, h4 {
 	color:#000;
 	text-transform:uppercase;
-	font:normal 26pt 'InterstatePlusRegular', impact, sans-serif;}
+	font:normal 26pt 'InterstatePlusRegular', arial, sans-serif;}
 	
 h2 {
 	color:#ee4490;
@@ -174,8 +174,9 @@ image-grid#photosvideos {
 /* ------------------------------ DASHBOARD */
 #dashboard-nav {}
 #dashboard-nav ul li {list-style:none;}
-#dashboard-nav ul li a {font:normal 18px 'InterstatePlusRegular', impact, sans-serif;text-transform:uppercase;font-weight:bold;padding:10px;display:block;border-bottom:solid 1p #fff;}
-#dashboard-nav ul li a:hover {background:#f6f6f6;border-bottom:solid 1px #bdbdbd;}
+#dashboard-nav ul li a {font:normal 16px 'InterstatePlusRegular', arial, sans-serif;text-transform:uppercase;font-weight:bold;padding:10px;display:block;border-bottom:solid 1p #fff;}
+#dashboard-nav ul li a:hover,
+#dashboard-nav ul li a.current {background:#f6f6f6;border-bottom:solid 1px #bdbdbd;}
 
 /* ------------------------------ FORMS */
 

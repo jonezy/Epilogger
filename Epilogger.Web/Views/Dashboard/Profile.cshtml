@@ -1,0 +1,28 @@
+﻿@model Epilogger.Web.Models.DashboardProfileViewModel
+
+@{
+    ViewBag.Title = "Profile";
+}
+
+<div id="dashboard-nav" class="grid_3 alpha">
+    @Html.Partial("Menu")
+</div>
+
+<div class="grid_8 omega">
+
+    <div class="profile-card">
+        <h4>Account Information</h4>
+        <div class="profile-data">
+            <h2>Hello my name is</h2>
+            <h1>@Model.FullName</h1>
+
+            @Model.EmailAddress
+
+        </div>
+    </div>
+    <div class="spacer"></div>
+    <h2>My Events & Subscriptions</h2>
+    @foreach (var item in Model.Events) {
+        <p>@item.Name - @item.StartDateTime.ToString("MMM dd yy hh:mmt").ToLower()</p>
+    }
+</div>
