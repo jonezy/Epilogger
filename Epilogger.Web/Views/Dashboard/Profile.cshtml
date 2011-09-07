@@ -20,4 +20,9 @@
 
         </div>
     </div>
+    <div class="spacer"></div>
+    <h2>My Events & Subscriptions</h2>
+    @foreach (var item in Model.Events) {
+        <p>@item.Name - @item.StartDateTime.ToString("MMM dd yy hh:mmt").ToLower()</p>
+    }
 </div>
