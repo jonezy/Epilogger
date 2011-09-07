@@ -170,7 +170,13 @@ image-grid#photosvideos {
 
 .image-grid .commentbubble:hover {
 	opacity:1;}
-	
+
+/* ------------------------------ DASHBOARD */
+#dashboard-nav {}
+#dashboard-nav ul li {list-style:none;}
+#dashboard-nav ul li a {font:normal 18px 'InterstatePlusRegular', impact, sans-serif;text-transform:uppercase;font-weight:bold;padding:10px;display:block;border-bottom:solid 1p #fff;}
+#dashboard-nav ul li a:hover {background:#f6f6f6;border-bottom:solid 1px #bdbdbd;}
+
 /* ------------------------------ FORMS */
 
 div#search-container {

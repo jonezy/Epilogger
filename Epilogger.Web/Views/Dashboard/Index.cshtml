@@ -4,4 +4,19 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div id="dashboard-nav" class="grid_4 alpha">
+    <h1>DASHBOARD</h1>
+
+    <ul>
+        <li>@Html.ActionLink("Account Activity", "index")</li>
+        <li>@Html.ActionLink("Profile Information", "index")</li>
+        <li>@Html.ActionLink("My Events & Subscriptions", "index")</li>
+        <li>@Html.ActionLink("Friends Feed", "index")</li>
+        <li>@Html.ActionLink("Account", "index")</li>
+    </ul>
+</div>
+
+<div class="grid_8 omega">
+
+</div>
+
