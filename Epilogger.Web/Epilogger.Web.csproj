@@ -177,6 +177,20 @@
     <Content Include="Global.asax" />
     <Content Include="Public\css\960_12_col.css" />
     <Content Include="Public\css\base.css" />
+    <Content Include="Public\css\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Public\css\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Public\css\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Public\css\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Public\css\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Public\css\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Public\css\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Public\css\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Public\css\images\ui-icons_222222_256x240.png" />
+    <Content Include="Public\css\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Public\css\images\ui-icons_454545_256x240.png" />
+    <Content Include="Public\css\images\ui-icons_888888_256x240.png" />
+    <Content Include="Public\css\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Public\css\jquery-ui-1.8.16.custom.css" />
     <Content Include="Public\css\layout.css" />
     <Content Include="Public\css\messages.css" />
     <Content Include="Public\css\reset.css" />
@@ -203,6 +217,7 @@
     <Content Include="Public\js\epilogger.js" />
     <Content Include="Public\js\head.load.min.js" />
     <Content Include="Public\js\jquery-1.6.2.min.js" />
+    <Content Include="Public\js\jquery-ui-1.8.16.custom.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

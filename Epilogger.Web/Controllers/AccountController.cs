@@ -56,6 +56,7 @@ namespace Epilogger.Web.Controllers {
                 user.FirstName = model.FirstName;
                 user.LastName = model.LastName;
                 user.EmailAddress = model.EmailAddress;
+                user.DateOfBirth = model.DateOfBirth;
 
                 service.Save(user);
 
