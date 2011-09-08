@@ -172,14 +172,19 @@ image-grid#photosvideos {
 	opacity:1;}
 
 /* ------------------------------ DASHBOARD */
-#dashboard-nav {width}
+#dashboard-nav {float:left;width:268px;margin-right:17px;}
 #dashboard-nav ul li {list-style:none;}
-#dashboard-nav ul li a {font:normal 16px 'InterstatePlusRegular', arial, sans-serif;text-transform:uppercase;font-weight:bold;padding:10px;display:block;border-bottom:solid 1p #fff;}
+#dashboard-nav ul li a {font:normal 18px 'InterstatePlusRegular', arial, sans-serif;text-transform:uppercase;font-weight:bold;padding:10px;display:block;border-bottom:solid 1p #fff;}
 #dashboard-nav ul li a:hover,
 #dashboard-nav ul li a.current {background:#f6f6f6;border-bottom:solid 1px #bdbdbd;}
 
-#dashboard-activity {width:}
-.dashboard-activity-entry {float:left;height:90px;overflow:hidden;margin-bottom:10px;}
+#dashboard-content {float:left;width:641px;}
+.dashboard-activity-entry {float:left;height:90px;overflow:hidden;margin:0px 20px 20px 0px;width:185px;}
+.dashboard-activity-entry strong.title {color:#5086b9;margin-bottom:10px;}
+
+.profile-card {}
+.profile-card h4 {background:#ee4490;color:#fff;float:left;padding:5px 10px 5px 10px;}
+.profile-data {background:#dcdcdc;padding:10px;border-top:solid 5px #ee4490;margin-top:-5px;}
 /* ------------------------------ FORMS */
 
 div#search-container {

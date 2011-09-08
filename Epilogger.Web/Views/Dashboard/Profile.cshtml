@@ -4,14 +4,15 @@
     ViewBag.Title = "Profile";
 }
 
-<div id="dashboard-nav" class="grid_3 alpha">
+<div id="dashboard-nav">
     @Html.Partial("Menu")
 </div>
 
-<div class="grid_8 omega">
+<div id="dashboard-content">
 
     <div class="profile-card">
         <h4>Account Information</h4>
+        <div class="clear"></div>
         <div class="profile-data">
             <h2>Hello my name is</h2>
             <h1>@Model.FullName</h1>
@@ -20,6 +21,8 @@
 
         </div>
     </div>
+    @Html.ActionLink("edit your profile", "index", "account")
+
     <div class="spacer"></div>
     <h2>My Events & Subscriptions</h2>
     @foreach (var item in Model.Events) {
