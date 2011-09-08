@@ -10,11 +10,14 @@
 
 <div class="grid_8 omega">
 @foreach (var item in Model.Activity) {
-    
     <div class="grid_2 dashboard-activity-entry">
-    <strong>@item.Event.Name</strong><br />
-    <p>@item.ActivityContent ?? </p>
+        <strong>@item.Event.Name</strong><br />
+        <p>@MvcHtmlString.Create(item.ActivityContent) ?? </p>
     </div>
 }
+<div class="clear"></div>
+<div class="spacer"></div>
+@MvcHtmlString.Create(Html.Pager(Model.PageSize, Model.CurrentPageIndex, Model.TotalRecords, new { controller = "dashboard", action = "index"}))
 </div>
+
 

@@ -172,12 +172,13 @@ image-grid#photosvideos {
 	opacity:1;}
 
 /* ------------------------------ DASHBOARD */
-#dashboard-nav {}
+#dashboard-nav {width}
 #dashboard-nav ul li {list-style:none;}
 #dashboard-nav ul li a {font:normal 16px 'InterstatePlusRegular', arial, sans-serif;text-transform:uppercase;font-weight:bold;padding:10px;display:block;border-bottom:solid 1p #fff;}
 #dashboard-nav ul li a:hover,
 #dashboard-nav ul li a.current {background:#f6f6f6;border-bottom:solid 1px #bdbdbd;}
 
+#dashboard-activity {width:}
 .dashboard-activity-entry {float:left;height:90px;overflow:hidden;margin-bottom:10px;}
 /* ------------------------------ FORMS */
 
@@ -201,7 +202,9 @@ div#search-container input[type=image] {
 	float:right;}
 
 	
-	
+	.Pager {}
+	.Pager a, .Pager span {background:#fc5daf;color:#fff;padding:5px;margin:0px 5px 0px 0px;}
+	.Pager span.current {background:#fff;color:#fc5daf;}
 /* ------------------------------ MISC */
 
 .spacer 	{ height:25px; display:block}
