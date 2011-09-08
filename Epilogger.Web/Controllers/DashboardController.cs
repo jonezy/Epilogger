@@ -18,7 +18,9 @@ namespace Epilogger.Web.Controllers {
             base.Initialize(requestContext);
         }
 
-        public ActionResult Index() {
+        public ActionResult Index(int? page) {
+            int currentPage = page.HasValue ? page.Value - 1 : 0;
+
             IEnumerable<Tweet> tweets = tweetService.FindByUserScreenName(CurrentUserTwitterAuthorization.ServiceUsername);
             IEnumerable<Event> events = eventService.FindByUserID(CurrentUserID);
 
@@ -28,7 +30,7 @@ namespace Epilogger.Web.Controllers {
                 activity.Add(new DashboardActivityModel() {
                     ActivityType = ActivityType.TWEET,
                     Date = item.CreatedDate.Value,
-                    ActivityContent = item.Text,
+                    ActivityContent = item.TextAsHTML,
                     Event = Mapper.Map<Event, DashboardEventViewModel>(item.Events.FirstOrDefault())
                 });
 	        }
@@ -42,7 +44,7 @@ namespace Epilogger.Web.Controllers {
                 });
             }
 
-            DashboardIndexViewModel model = new DashboardIndexViewModel() { Activity = activity.OrderByDescending(a => a.Date).ToList() };
+            DashboardIndexViewModel model = new DashboardIndexViewModel(activity.OrderByDescending(a => a.Date).ToList(),currentPage);
 
             return View(model);
         }

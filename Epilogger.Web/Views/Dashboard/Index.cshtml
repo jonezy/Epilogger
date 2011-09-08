@@ -4,17 +4,19 @@
     ViewBag.Title = "Index";
 }
 
-<div id="dashboard-nav" class="grid_3 alpha">
+<div id="dashboard-nav">
     @Html.Partial("Menu")
 </div>
 
-<div class="grid_8 omega">
+<div id="dashboard-content">
 @foreach (var item in Model.Activity) {
-    
-    <div class="grid_2 dashboard-activity-entry">
-    <strong>@item.Event.Name</strong><br />
-    <p>@item.ActivityContent ?? </p>
+    <div class="dashboard-activity-entry">
+        <strong class="title">@item.Event.Name</strong><br />
+        <p>@MvcHtmlString.Create(item.ActivityContent) ?? </p>
     </div>
 }
+<div class="clear"></div>
+@MvcHtmlString.Create(Html.Pager(Model.PageSize, Model.CurrentPageIndex, Model.TotalRecords, new { controller = "dashboard", action = "index"}))
 </div>
+
 
