@@ -15,7 +15,7 @@ p a {
 
 /* ------------------------------ CONTAINERS */
 
-#outer-container {position:relative;}
+#outer-container {position:relative;z-index:0;}
 
 #content-container {
 	background:#fff;
