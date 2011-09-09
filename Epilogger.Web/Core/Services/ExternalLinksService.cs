@@ -21,9 +21,7 @@ namespace Epilogger.Web
         public IEnumerable<URL> FindByEventID(int EventID, DateTime StartDateTimeFilter, DateTime EndDateTimeFilter)
         {
             EpiloggerDB db = new EpiloggerDB();
-            //return db.URLS.Where(t => t.EventID == EventID & t. >= StartDateTimeFilter & t.CheckInDateTime <= EndDateTimeFilter).AsEnumerable();
-            return db.URLS.Where(t => t.EventID == EventID).AsEnumerable();
-            //TODO - Add dates to the Links in the DB.
+            return db.URLS.Where(t => t.EventID == EventID & t.DateTime >= StartDateTimeFilter & t.DateTime <= EndDateTimeFilter).AsEnumerable();
         }
 
     }

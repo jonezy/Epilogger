@@ -12,5 +12,19 @@ namespace Epilogger.Web {
 
             return uid;
         }
+
+        public static int GetUserTimeZoneOffset()
+        {
+            int TimeZoneOffSet;
+            TimeZoneOffSet =  int.Parse(CookieHelpers.GetCookieValue("lc", "tz").ToString());
+            return TimeZoneOffSet;
+        }
+
+
+        public static DateTime ToUserTimeZone(this DateTime dt)
+        {
+            return dt.Add(new TimeSpan(GetUserTimeZoneOffset(), 0, 0));
+        }
+
     }
 }

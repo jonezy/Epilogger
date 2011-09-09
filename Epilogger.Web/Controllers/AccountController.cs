@@ -98,10 +98,16 @@ namespace Epilogger.Web.Controllers {
                 }
 
                 // write the login cookie, redirect. 
-                if(model.RememberMe)
+                if (model.RememberMe) 
+                {
                     CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString(), DateTime.Now.AddDays(30));
-                 
-                CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString());
+                    CookieHelpers.WriteCookie("lc", "tz", user.TimeZoneOffSet.ToString(), DateTime.Now.AddDays(30));
+                }
+                else
+                {
+                    CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString());
+                    CookieHelpers.WriteCookie("lc", "tz", user.TimeZoneOffSet.ToString());    
+                }
 
                 return RedirectToAction("Index");
             }
