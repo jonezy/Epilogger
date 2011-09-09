@@ -17,3 +17,14 @@ head.ready(function () {
     });
     $(".dob").formatDate('yyyy-mm-dd');
 });
+
+//This fills in the Comments on the Image popups (tweets)
+function changeDescription() {
+    var photoID = $(".pp_description").html();
+    $(".pp_description").html("");
+
+    $.get('/Events/GetImageComments/' + photoID,
+                function (data) {
+                    $('.pp_Comments').html(data);
+                }, "html");
+}

@@ -23,5 +23,11 @@ namespace Epilogger.Web
             return GetData(t => t.EventID == EventID & t.DateTime >= StartDateTimeFilter & t.DateTime <= EndDateTimeFilter);
         }
 
+        public Image FindByID(int ID)
+        {
+            return GetData(t => t.ID == ID).FirstOrDefault();
+        }
+        
+
     }
 }

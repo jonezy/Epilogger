@@ -148,6 +148,7 @@
     <Compile Include="Core\Helpers\TwitterHelper.cs" />
     <Compile Include="Core\Services\CheckInService.cs" />
     <Compile Include="Core\Services\BlogService.cs" />
+    <Compile Include="Core\Services\ImageMetaDataService.cs" />
     <Compile Include="Core\Services\ExternalLinksService.cs" />
     <Compile Include="Core\Services\ImageService.cs" />
     <Compile Include="Core\Services\EventService.cs" />
@@ -347,6 +348,7 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Dashboard\Profile.cshtml" />
     <Content Include="Views\Dashboard\Menu.cshtml" />
+    <Content Include="Views\Shared\_ImageComments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -366,12 +368,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>16007</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://eplv1</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

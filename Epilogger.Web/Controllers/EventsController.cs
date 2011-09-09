@@ -91,5 +91,14 @@ namespace Epilogger.Web.Controllers {
 
             return View("Details", Mapper.Map<Event, EventDisplayViewModel>(foundEvent));
         }
+
+        [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the details of that event")]
+        public ActionResult GetImageComments()
+        {
+            
+            //EventModel.GetTweetsByImageID(id)
+
+            return PartialView("_ImageComments", null);
+        }
     }
 }
