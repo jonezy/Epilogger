@@ -20,13 +20,17 @@ namespace Epilogger.Web {
             return GetData().Where(e => e.ID == EventID).FirstOrDefault();
         }
 
+        public List<Event> FindByUserID(Guid userID) {
+            return GetData().Where(e => e.UserID == userID).ToList();
+        }
+
 
         public object Save(Event entity)
         {
             if (entity.ID > 0)
-                return base.GetRepository<Event>(db).Update(entity);
+                return base.GetRepository<Event>().Update(entity);
 
-            return base.GetRepository<Event>(db).Add(entity);
+            return base.GetRepository<Event>().Add(entity);
         }
 
     }

@@ -23,10 +23,15 @@
     <link href="@Url.Content("~/Public/css/960_12_col.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Public/css/messages.css")" rel="stylesheet" type="text/css" />
 	<link href="@Url.Content("~/Public/css/sadiehawkins.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Public/css/jquery-ui-1.8.16.custom.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Public/js/prettyPhoto/css/prettyPhoto.css")" rel="stylesheet" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
     
-    <script type="text/javascript" src="@Url.Content("~/Public/js/head.load.min.js")" />
-    <script type="text/javascript">
+    <script src="@Url.Content("~/Public/js/head.load.min.js")" type="text/javascript" language="javascript"></script>
+
+    <script type="text/javascript" language="javascript">
         head.js('@Url.Content("~/Public/js/jquery-1.6.2.min.js")');
+        head.js('@Url.Content("~/Public/js/jquery-ui-1.8.16.custom.min.js")');
+        head.js('@Url.Content("~/Public/js/prettyPhoto/js/jquery.prettyPhoto.js")');
         head.js('@Url.Content("~/Public/js/epilogger.js")');
     </script>
 	<!-- Favicons
@@ -51,7 +56,7 @@
 		<div class="clear"></div>
 		
 		<div id="search-container">
-			<input type="text" value="Find an event..."/>
+			<input type="text" value="Find an event..." class="remove-bottom"/>
 			<input type="image" src="@Url.Content("~/Public/images/btn-submit.png")"/>
 		</div>		
 	</div>           
@@ -60,12 +65,12 @@
         
     <ul id="navigation">
         <li>@Html.ActionLink("HOME", "Index", "Home")</li>
-        <li>@Html.ActionLink("BROWSE EVENTS", "Index", "Events")</li>
-        <li>@Html.ActionLink("MY EVENTS", "Index", "Events")</li>
-        <li>@Html.ActionLink("DASHBOARD", "Index", "Events")</li>
-        <li>@Html.ActionLink("WHAT IS EPILOGGER?", "Index", "Home")</li>
+        <li>@Html.ActionLink("BROWSE EVENTS", "index", "events")</li>
+        <li>@Html.ActionLink("MY EVENTS", "index", "events")</li>
+        <li>@Html.ActionLink("DASHBOARD", "index", "dashboard")</li>
+        <li>@Html.ActionLink("WHAT IS EPILOGGER?", "index", "home")</li>
         <li><a href="http://www.epilogger.com/blog/">BLOG</a></li>
-        <li>@Html.ActionLink("HELP", "Index", "Home")</li>
+        <li>@Html.ActionLink("HELP", "index", "home")</li>
     </ul>
     <div id="content-container">	
         @RenderBody()
@@ -73,6 +78,17 @@
 		<div class="spacer"></div>
     </div>
 </div>
+
+<script type="text/javascript" charset="utf-8">
+    head.ready(function () {
+        $("a[rel^='prettyPhoto']").prettyPhoto({
+            theme: 'light_square',
+            animation_speed: 'fast',
+            overlay_gallery: false,
+            changepicturecallback: function () { changeDescription(); }
+        });
+    });
+</script>
 
 </body>
 </html>

@@ -8,3 +8,12 @@ $(document).ready(function () {
     $("body").css({ background: "url(/Public/images/bg/sample" + rndNum + ".jpg) #222 no-repeat center center fixed" });
 });
 */
+
+head.ready(function () {
+    $(".dob").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        yearRange: "-90:+0"
+    });
+    $(".dob").formatDate('yyyy-mm-dd');
+});

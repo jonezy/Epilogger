@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Account";
 }
+
 <div class="grid_3 alpha">
     <h2>Social networks</h2>
     @if (string.IsNullOrEmpty(Model.TwitterUsername)) {
@@ -21,6 +22,7 @@
         @:<p class="remove-bottom">You are connected to facebook as: <strong>@Model.FacebookUsername</strong> (@Html.ActionLink("x", "Disconnect", "Facebook", new { area = "Authentication" }, null))</p>
     }
 </div>
+
 <div class="grid_4">
     <h2>Your Info</h2>
     @using (Html.BeginForm("Update", "Account", FormMethod.Post)) {
@@ -28,6 +30,7 @@
             <p>@Html.LabelFor(model => model.FirstName) @Html.TextBoxFor(model => model.FirstName)</p>
             <p>@Html.LabelFor(model => model.LastName) @Html.TextBoxFor(model => model.LastName)</p>
             <p>@Html.LabelFor(model => model.EmailAddress) @Html.TextBoxFor(model => model.EmailAddress)</p>
+            <p>@Html.LabelFor(model => model.DateOfBirth) @Html.TextBoxFor(model => model.DateOfBirth, new { @class = "dob" })</p>
             <p><input type="submit" class="submit" value="update" /></p>
         </fieldset>
     }

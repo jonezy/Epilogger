@@ -17,7 +17,7 @@ div.Message_Error, div.Message_Success, div.Message_Warning, div.Message_Info,
   border: solid 1px; background-repeat:no-repeat; background-position: 8px 12px;
   /*-moz-border-radius:5px; -webkit-border-radius:5px; -khtml-border-radius:5px;border-radius:5px;*/
   border-right:none;border-left:none;
-  position:relative;
+  position:relative;z-index:1000;
 }
 
 /* close button */

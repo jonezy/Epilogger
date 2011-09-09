@@ -15,11 +15,11 @@ p a {
 
 /* ------------------------------ CONTAINERS */
 
-#outer-container {}
+#outer-container {position:relative;z-index:0;}
 
 #content-container {
 	background:#fff;
-	padding-top:15px}
+	padding:15px}
 	
 	
 /* ------------------------------ MENUS */
@@ -74,7 +74,7 @@ ul.tabs a:hover {
 h1, h2, h4 {
 	color:#000;
 	text-transform:uppercase;
-	font:normal 26pt 'InterstatePlusRegular', impact, sans-serif;}
+	font:normal 26pt 'InterstatePlusRegular', arial, sans-serif;}
 	
 h2 {
 	color:#ee4490;
@@ -170,16 +170,31 @@ image-grid#photosvideos {
 
 .image-grid .commentbubble:hover {
 	opacity:1;}
-	
+
+/* ------------------------------ DASHBOARD */
+#dashboard-nav {float:left;width:268px;margin-right:17px;}
+#dashboard-nav ul li {list-style:none;}
+#dashboard-nav ul li a {font:normal 18px 'InterstatePlusRegular', arial, sans-serif;text-transform:uppercase;font-weight:bold;padding:10px;display:block;border-bottom:solid 1p #fff;}
+#dashboard-nav ul li a:hover,
+#dashboard-nav ul li a.current {background:#f6f6f6;border-bottom:solid 1px #bdbdbd;}
+
+#dashboard-content {float:left;width:641px;}
+.dashboard-activity-entry {float:left;height:90px;overflow:hidden;margin:0px 20px 20px 0px;width:185px;}
+.dashboard-activity-entry strong.title {color:#5086b9;margin-bottom:10px;}
+
+.profile-card {}
+.profile-card h4 {background:#ee4490;color:#fff;float:left;padding:5px 10px 5px 10px;}
+.profile-data {background:#dcdcdc;padding:10px;border-top:solid 5px #ee4490;margin-top:-5px;}
 /* ------------------------------ FORMS */
 
 div#search-container {
 	background:#333;
 	margin-top:20px;
 	float:right;
-	width:214px}
+	width:214px;position:absolute;top:40px;right:10px;}
 
 div#search-container input[type=text] {
+    float:left;
 	background:transparent;
 	color:#888;
 	font:normal 9pt tahoma;
@@ -188,11 +203,13 @@ div#search-container input[type=text] {
 	padding:5px 0 0 5px}
 
 div#search-container input[type=image] {
-	vertical-align:middle;
+	vertical-align:top;
 	float:right;}
 
 	
-	
+	.Pager {}
+	.Pager a, .Pager span {background:#fc5daf;color:#fff;padding:5px;margin:0px 5px 0px 0px;}
+	.Pager span.current {background:#fff;color:#fc5daf;}
 /* ------------------------------ MISC */
 
 .spacer 	{ height:25px; display:block}

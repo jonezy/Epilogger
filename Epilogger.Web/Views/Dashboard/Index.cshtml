@@ -1,0 +1,22 @@
+﻿@model Epilogger.Web.Models.DashboardIndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div id="dashboard-nav">
+    @Html.Partial("Menu")
+</div>
+
+<div id="dashboard-content">
+@foreach (var item in Model.Activity) {
+    <div class="dashboard-activity-entry">
+        <strong class="title">@item.Event.Name</strong><br />
+        <p>@MvcHtmlString.Create(item.ActivityContent) ?? </p>
+    </div>
+}
+<div class="clear"></div>
+@MvcHtmlString.Create(Html.Pager(Model.PageSize, Model.CurrentPageIndex, Model.TotalRecords, new { controller = "dashboard", action = "index"}))
+</div>
+
+

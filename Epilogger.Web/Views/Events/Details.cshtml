@@ -8,7 +8,15 @@
     
 }
 
-<div class="grid_8">
+<script language="javascript" type="text/javascript">
+    var EventID = @Model.ID;
+
+    var EventName = "@Model.Name";
+    var EventURL = "http://test.epilogger.com/Events/Details/@Model.ID";
+</script>
+
+
+<div class="grid_7 alpha">
 	<h1>@Model.Name</h1>
 	<h2>@Model.SubTitle</h2>
 			
@@ -19,7 +27,7 @@
         } </p>
 </div>
 	
-<div class="grid_4">
+<div class="grid_4 omega">
     @*TODO Write this funcitonality into the application*@
 	<small class="tinylabel">Sponsors & Supporters</small>
 	<img src="@Url.Content("~/Public/images/samples/ad.png")" alt="" />
@@ -106,7 +114,7 @@
 		
 		
 <!-- PHOTOS & VIDEOS -->
-<div class="grid_8">
+<div class="grid_7 alpha">
 	<h2><span class="number">@Model.Images.Count()</span> Photos & Videos</h2>
 	<h4>filter:</h4>
 
@@ -116,7 +124,8 @@
         @foreach (Epilogger.Data.Image EPLImage in Model.Images.OrderByDescending(i => i.DateTime).Take(9))
         {
             <div class="withcomment">
-			    <img alt="" height="154" width="180" src="@EPLImage.Thumb"/>
+			    @*<img alt="" height="154" width="180" src="@EPLImage.Thumb" rel="prettyPhoto[gallery1]" />*@
+                <a href="@EPLImage.Fullsize" rel="prettyPhoto[gallery1]" title="@EPLImage.ID" id="@EPLImage.ID"><img src="@EPLImage.Thumb" height="154" width="180" border="0" alt="" /></a>
 			    <a href="#" class="commentbubble">
                     @*Number of Comments*@
                     @EPLImage.ImageMetaData.Count()
@@ -133,7 +142,7 @@
 		
 		
 <!-- TWEETS -->
-<div class="grid_4">
+<div class="grid_4 omega">
 	<h2><span class="number">@Model.Tweets.Count()</span> Tweets & Shoutouts</h2>
 	<h4>filter:</h4>
 			
@@ -159,7 +168,7 @@
 		
 		
 <!-- BLOG POSTINGS -->
-<div class="grid_4">
+<div class="grid_4 alpha">
 	<h2>Blog postings</h2>
 	<ul class="plain-list">
         @foreach (Epilogger.Data.BlogPost TheBlogPost in Model.BlogPosts.Take(3))
@@ -180,7 +189,7 @@
 		
 		
 <!-- EXTERNAL LINKS -->
-<div class="grid_4">
+<div class="grid_3">
 	<h2>External Links</h2>
 	<ul class="plain-list">
 		@foreach (Epilogger.Data.URL TheURL in Model.ExternalLinks.Take(3))
@@ -198,7 +207,7 @@
 		
 		
 <!-- CHECKINS -->
-<div class="grid_4">
+<div class="grid_4 omega">
 	<h2><span class="number">@Model.CheckIns.Count()</span> Check-ins</h2>
 	<p>All these lovely people attended Social Media Day Global at the Tattoo Rock Parlour!</p>
 	

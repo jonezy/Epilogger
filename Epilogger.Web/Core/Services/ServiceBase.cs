@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 
 using Epilogger.Data;
 
 using RichmondDay.Helpers;
 
-using SubSonic.Query;
 using SubSonic.Repository;
 
 namespace Epilogger.Web {
@@ -32,7 +32,7 @@ namespace Epilogger.Web {
             }
         }
 
-        protected SubSonicRepository<T> GetRepository<T>(IQuerySurface db) where T : class, new() {
+        protected SubSonicRepository<T> GetRepository<T>() where T : class, new() {
             return new SubSonicRepository<T>(db);
         }
 
@@ -43,14 +43,31 @@ namespace Epilogger.Web {
             List<T> data = CacheHelper != null && CacheExpiry > 0 ? CacheHelper.Get(CacheKey) as List<T> : null;
 
             if (data == null) {
-                data = GetRepository<T>(db).GetAll().ToList();
+                data = GetRepository<T>().GetAll().ToList();
                 if (CacheHelper != null)
                     CacheHelper.Add(CacheKey, data, DateTime.Now.AddSeconds(CacheExpiry));
             }
 
             return data;
         }
-     
+
+        // CJ Sept 6, 2011
+        // Got that whore some medicine.  Just pass in your query expression to this overloaded method and your query will be run
+        // against the data repository when refetching instead of getting everything. 
+        // The neat thing about this is that it caches each result and uses the query as part of the lookup key, so any time that
+        // same query is performed the results will be retrieved from cache
+        protected virtual List<T> GetData(Expression<Func<T, bool>> expression) {
+            string localCacheKey = string.Format("{0}-{1}", expression.ToString().Replace(" ", ""), CacheKey);
+            List<T> data = CacheHelper != null && CacheExpiry > 0 ? CacheHelper.Get(localCacheKey) as List<T> : null;
+            
+            if (data == null) {
+                data = GetRepository<T>().Find(expression).ToList();
+                if (CacheHelper != null)
+                    CacheHelper.Add(localCacheKey, data, DateTime.Now.AddSeconds(CacheExpiry));
+            }
+
+            return data;
+        }
 
 
     }
