@@ -21,9 +21,21 @@ namespace Epilogger.Web {
         }
 
 
-        public static DateTime ToUserTimeZone(this DateTime dt)
+        public static DateTime ToUserTimeZone(this DateTime dt, int EventTimeZoneOffSet)
         {
-            return dt.Add(new TimeSpan(GetUserTimeZoneOffset(), 0, 0));
+            TimeSpan offset;
+            if (GetUserGuid() == Guid.Parse("{00000000-0000-0000-0000-000000000000}"))
+            {
+                //Use Event Offset
+                offset = new TimeSpan(EventTimeZoneOffSet, 0, 0);
+            }
+            else
+            {
+                //user User offset
+                offset = new TimeSpan(GetUserTimeZoneOffset(), 0, 0);
+            }
+
+            return dt.Add(offset);
         }
 
     }

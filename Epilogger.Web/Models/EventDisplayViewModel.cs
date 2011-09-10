@@ -27,6 +27,7 @@ namespace Epilogger.Web.Models {
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
         public string SearchTerms { get; set; }
+        public int TimeZoneOffSet { get; set; }
         public string Cost { get; set; }
         public string FacebookPageURL { get; set; }
         public string TwitterAccount { get; set; }
