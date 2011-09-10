@@ -1,1 +1,29 @@
-﻿
+﻿@model IEnumerable<Epilogger.Data.Tweet>
+
+@if (Model != null)
+{
+    bool ShowFirst = true;
+    foreach (Epilogger.Data.Tweet t in Model)
+    {
+        if (ShowFirst)
+        {
+            <div class="lightbox" style="position:relative; top:-20px;">   
+                <small style="position:relative; top:-13px"><a href="http://www.twitter.com/@t.FromUserScreenName" target="_blank">@@@t.FromUserScreenName</a> originally tweets:</small>
+                <div style="background:#f0f0f0; padding:8px;">
+                     <span class="sm-spacer"></span>
+                     <h2 class="nomargin">@Html.Raw(t.TextAsHTML)</h2>
+                </div>
+            </div>
+            ShowFirst = false;
+        }
+        else
+        {
+            <div class="lightbox" style="position:relative; top:5px">
+                <p class="item nomargin">
+                    <strong><a href="http://www.twitter.com/@t.FromUserScreenName" target="_blank">@t.FromUserScreenName</a></strong>: @Html.Raw(t.TextAsHTML)
+                    <span class="hr"></span>
+                </p>
+            </div>
+        }
+    }       
+}

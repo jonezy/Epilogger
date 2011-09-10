@@ -32,7 +32,7 @@ namespace Epilogger.Web.Controllers {
             base.Initialize(requestContext);
         }
 
-        [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the list of events")]
+        //[RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the list of events")]
         public ActionResult Index() {
             List<Event> events = ES.AllEvents();
             List<EventDisplayViewModel> model = Mapper.Map<List<Event>, List<EventDisplayViewModel>>(events);
@@ -45,7 +45,7 @@ namespace Epilogger.Web.Controllers {
             throw new Exception("This is a test exception");
         }
 
-        [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the details of that event")]
+        //[RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the details of that event")]
         public ActionResult Details(int id) {
 
             EventDisplayViewModel Model = Mapper.Map<Event, EventDisplayViewModel>(ES.FindByID(id));
@@ -92,13 +92,9 @@ namespace Epilogger.Web.Controllers {
             return View("Details", Mapper.Map<Event, EventDisplayViewModel>(foundEvent));
         }
 
-        [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the details of that event")]
-        public ActionResult GetImageComments()
+        public ActionResult GetImageComments(int id)
         {
-            
-            //EventModel.GetTweetsByImageID(id)
-
-            return PartialView("_ImageComments", null);
+            return PartialView("_ImageComments", TS.FindByImageID(id));
         }
     }
 }

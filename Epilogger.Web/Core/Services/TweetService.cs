@@ -26,14 +26,14 @@ namespace Epilogger.Web
             return base.GetData();
         }
 
-        public List<Tweet> FindByEventID(int EventID)
+        public IEnumerable<Tweet> FindByEventID(int EventID)
         {
             return FindByEventID(EventID, DateTime.Parse("2000-01-01 00:00:00"), DateTime.Parse("2200-12-31 00:00:00"));
         }
 
-        public List<Tweet> FindByEventID(int EventID, DateTime StartDateTimeFilter, DateTime EndDateTimeFilter)
+        public IEnumerable<Tweet> FindByEventID(int EventID, DateTime StartDateTimeFilter, DateTime EndDateTimeFilter)
         {
-            return GetData(t => t.EventID == EventID & t.CreatedDate >= StartDateTimeFilter & t.CreatedDate <= EndDateTimeFilter);
+            return db.Tweets.Where(t => t.EventID == EventID & t.CreatedDate >= StartDateTimeFilter & t.CreatedDate <= EndDateTimeFilter);
         }
 
         public List<Tweet> FindByUserScreenName(string fromUserScreenName) {
@@ -43,45 +43,21 @@ namespace Epilogger.Web
             return GetData(t => t.FromUserScreenName == fromUserScreenName && t.CreatedDate >= startDate && t.CreatedDate <= endDate);
         }
 
-        //public List<Tweet> FindByImageID(int ImageID)
-        //{
-            
-        //}
-        public List<Tweet> FindByImageID(int ImageID, DateTime StartDateTimeFilter, DateTime EndDateTimeFilter)
+
+        public IEnumerable<Tweet> FindByImageID(int ImageID)
+        {
+            return FindByImageID(ImageID, DateTime.Parse("2000-01-01 00:00:00"), DateTime.Parse("2200-12-31 00:00:00"));
+        }
+
+        public IEnumerable<Tweet> FindByImageID(int ImageID, DateTime StartDateTimeFilter, DateTime EndDateTimeFilter)
         {
             ImageMetaDateService IMDS = new ImageMetaDateService();
-            List<ImageMetaDatum> IM = IMDS.FindByImageID(ImageID);
+            IEnumerable<ImageMetaDatum> IM = IMDS.FindByImageID(ImageID);
 
-            return from TW in GetDataEnumerable()
-                   join img in IM on TW.TwitterID equals img.TwitterID
+            return from TW in db.Tweets
+                   join I in IM on TW.TwitterID equals I.TwitterID
+                   orderby TW.CreatedDate
                    select TW;
-
-            
-            
-            
-            //return GetData(IM.Join());
-            
-            //return GetData(t => t.TwitterID == IM);
-
-
-
-
-
-                //return GetData(t => t.TwitterID = IM.FirstOrDefault().)
-
-            //Dim i = From IM In DB.EpiloggerImageMetaDatas
-            //    Where IM.ImageID = ImageID
-            //    Select IM
-
-
-            //    Dim tweets = From TW In DB.Tweets, IM In i
-            //             Where TW.TwitterID = IM.TwitterID
-            //             Order By TW.CreatedDate
-            //             Select TW
-
-            //Return tweets
-
-            //return GetData(t => t.EventID == EventID & t.CreatedDate >= StartDateTimeFilter & t.CreatedDate <= EndDateTimeFilter);
         }
 
 
