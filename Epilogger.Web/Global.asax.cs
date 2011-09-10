@@ -18,7 +18,21 @@ namespace Epilogger.Web {
         /// </summary>
         public static string BaseUrl {
             get {
-                return HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + VirtualPathUtility.ToAbsolute("~/");
+                string url = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + VirtualPathUtility.ToAbsolute("~/");
+                var httpContext = HttpContext.Current;
+
+                var uriBuilder = new UriBuilder {
+                    Host = httpContext.Request.Url.Host,
+                    Path = "/",
+                    Port = 80,
+                    Scheme = "http",
+                };
+
+                if (httpContext.Request.IsLocal) {
+                    uriBuilder.Port = httpContext.Request.Url.Port;
+                }
+
+                return new Uri(uriBuilder.Uri, VirtualPathUtility.ToAbsolute("~/")).AbsoluteUri;
             }
         }
 
@@ -130,6 +144,23 @@ namespace Epilogger.Web {
             Mapper.CreateMap<Event, DashboardEventViewModel>();
 
             Mapper.AssertConfigurationIsValid();
+        }
+
+        public static string ToPublicUrl(Uri relativeUri) {
+            var httpContext = HttpContext.Current;
+
+            var uriBuilder = new UriBuilder {
+                Host = httpContext.Request.Url.Host,
+                Path = "/",
+                Port = 80,
+                Scheme = "http",
+            };
+
+            if (httpContext.Request.IsLocal) {
+                uriBuilder.Port = httpContext.Request.Url.Port;
+            }
+
+            return new Uri(uriBuilder.Uri, relativeUri).AbsoluteUri;
         }
     }
 }

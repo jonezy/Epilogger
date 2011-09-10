@@ -291,7 +291,7 @@ svg {
 	textarea, 
 	select {
 		border: 1px solid #ccc;
-		padding: 6px 4px;
+		padding: 6px 4px !important;
 		outline: none;
 		-moz-border-radius: 2px;
 		-webkit-border-radius: 2px;

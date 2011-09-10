@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 using AutoMapper;
@@ -6,12 +7,11 @@ using AutoMapper;
 using DevOne.Security.Cryptography.BCrypt;
 
 using Epilogger.Data;
+using Epilogger.Web.Core.Email;
 using Epilogger.Web.Models;
+using Epilogger.Web.Views.Emails;
 
 using RichmondDay.Helpers;
-using Epilogger.Web.Core.Email;
-using System.Collections.Generic;
-using Epilogger.Web.Views.Emails;
 
 namespace Epilogger.Web.Controllers {
     public class AccountController : BaseController {
@@ -36,19 +36,32 @@ namespace Epilogger.Web.Controllers {
 
         [HttpPost]
         public ActionResult Create(CreateAccountModel model) {
-            try {
-                User user = Mapper.Map<CreateAccountModel, User>(model);                
-                service.Save(user); 
-                
-                //TODO: send a confirmation email.
+            if (ModelState.IsValid) {
+                try {
+                    User user = Mapper.Map<CreateAccountModel, User>(model);
+                    service.Save(user);
 
-                this.StoreSuccess("Your account was created successfully");
-                
-                return RedirectToAction("Index", "Home");
-            } catch (Exception ex) {
-                this.StoreError("There was a problem creating your account");
+                    string loginUrl = string.Format("{0}account/login", App.BaseUrl);
+
+                    TemplateParser parser = new TemplateParser();
+                    Dictionary<string, string> replacements = new Dictionary<string, string>();
+                    replacements.Add("[FULLNAME]", string.Format("{0} {1}", user.FirstName, user.LastName));
+                    replacements.Add("[LINKTOLOGIN]", loginUrl);
+
+                    string message = parser.Replace(AccountEmails.WelcomeMessage, replacements);
+
+                    EmailSender sender = new EmailSender();
+                    sender.Send(App.MailConfiguration, model.EmailAddress, "", "Thank you for registering on epilogger.com", message);
+
+                    this.StoreSuccess("Your account was created successfully<br /><br/>Please check your inbox for our welcome message.");
+
+                    return RedirectToAction("login", "account");
+                } catch (Exception ex) {
+                    this.StoreError("There was a problem creating your account");
+                    return View(model);
+                }
+            } else
                 return View(model);
-            }
         }
 
         [HttpPost]
@@ -87,6 +100,7 @@ namespace Epilogger.Web.Controllers {
 
                 // the user is a valid user but they need to update there password.
                 if (user != null && user.Password == string.Empty) {
+                    CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString());
                     return RedirectToAction("UpdatePassword");
                 }
                 
@@ -210,13 +224,12 @@ namespace Epilogger.Web.Controllers {
                 // update password.
                 string salt = BCryptHelper.GenerateSalt();
                 string password = BCryptHelper.HashPassword(model.NewPassword, salt);
-                User user = service.GetUserByEmail(model.EmailAddress);
-
+                User user = service.GetUserByID(CurrentUserID);
                 user.Password = password;
 
                 service.Save(user);
 
-                this.StoreSuccess("Your password has been updated, please login");
+                this.StoreSuccess("Your password has been updated, please login using the password you just created.");
 
                 return RedirectToAction("Login");
                 

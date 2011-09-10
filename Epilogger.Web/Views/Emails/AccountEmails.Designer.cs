@@ -70,5 +70,18 @@ namespace Epilogger.Web.Views.Emails {
                 return ResourceManager.GetString("ForgotPassword", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hi [FULLNAME]&lt;br /&gt;&lt;br /&gt;
+        ///
+        ///Thank you for registering and taking part in epilogger.com, the new hot way to remember your life.
+        ///
+        ///&lt;a href=&quot;[LINKTOLOGIN]&quot;&gt;Login and start epilogging!&lt;/a&gt;.
+        /// </summary>
+        internal static string WelcomeMessage {
+            get {
+                return ResourceManager.GetString("WelcomeMessage", resourceCulture);
+            }
+        }
     }
 }
