@@ -122,4 +122,11 @@
 
 &lt;a href="[LINKTORESETPASSWORD]"&gt;click here to reset your password&lt;/a&gt;</value>
   </data>
+  <data name="WelcomeMessage" xml:space="preserve">
+    <value>Hi [FULLNAME]&lt;br /&gt;&lt;br /&gt;
+
+Thank you for registering and taking part in epilogger.com, the new hot way to remember your life.
+
+&lt;a href="[LINKTOLOGIN]"&gt;Login and start epilogging!&lt;/a&gt;</value>
+  </data>
 </root>
