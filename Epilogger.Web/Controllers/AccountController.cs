@@ -134,29 +134,34 @@ namespace Epilogger.Web.Controllers {
 
         [HttpPost, ValidateInput(false)]
         public ActionResult ForgotPassword(ForgotPasswordViewModel model) {
-            Guid passwordResetHash = Guid.NewGuid();
-            User user = service.GetUserByEmail(model.EmailAddress);
-            if (user == null) {
-                this.StoreWarning("There is no account on epilogger.com that uses that email address");
-                return View();
+            try {
+                Guid passwordResetHash = Guid.NewGuid();
+                User user = service.GetUserByEmail(model.EmailAddress);
+                if (user == null) {
+                    this.StoreWarning("There is no account on epilogger.com that uses that email address");
+                    return View();
+                }
+
+                user.ForgotPasswordHash = passwordResetHash;
+                service.Save(user);
+
+                string resetPasswordUrl = string.Format("{0}account/resetpassword?hash={1}", App.BaseUrl, passwordResetHash);
+
+                TemplateParser parser = new TemplateParser();
+                Dictionary<string, string> replacements = new Dictionary<string, string>();
+                replacements.Add("[USERNAME]", user.Username);
+                replacements.Add("[LINKTORESETPASSWORD]", resetPasswordUrl);
+
+                string message = parser.Replace(AccountEmails.ForgotPassword, replacements);
+
+                EmailSender sender = new EmailSender();
+                sender.Send(App.MailConfiguration, model.EmailAddress, "", "Reset your password on epilogger.com", message);
+
+                this.StoreSuccess("We\\'ve emailed you instructions on how to reset your password.");
+            } catch (Exception ex) {
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                this.StoreError("There was a problem sending you instructions to reset your password");
             }
-
-            user.ForgotPasswordHash = passwordResetHash;
-            service.Save(user);
-
-            string resetPasswordUrl = string.Format("{0}account/resetpassword?hash={1}",App.BaseUrl, passwordResetHash);
-
-            TemplateParser parser = new TemplateParser();
-            Dictionary<string, string> replacements = new Dictionary<string, string>();
-            replacements.Add("[USERNAME]", user.Username);
-            replacements.Add("[LINKTORESETPASSWORD]", resetPasswordUrl);
-
-            string message = parser.Replace(AccountEmails.ForgotPassword, replacements);
-            
-            EmailSender sender = new EmailSender();
-            sender.Send(App.MailConfiguration, model.EmailAddress, "", "Reset your password on epilogger.com", message);
-
-            this.StoreSuccess("We\\'ve emailed you instructions on how to reset your password.");
 
             return View();
         }
