@@ -13,7 +13,34 @@
 
     var EventName = "@Model.Name";
     var EventURL = "http://test.epilogger.com/Events/Details/@Model.ID";
+
+
+    var updateTimeout = 5000;
+    var updateRate = 5000;
+    var prologuePostsUpdates = 1;
+    var isFirstFrontPage = 1;
+    var pageLoadTime = new Date().toUTCString();
+    var postsOnPage = new Array;
+    var postsOnPageQS = '';
+    var maxItemsOnPage = 6;
+
+    $getPosts();
+
 </script>
+
+<style type="text/css">
+    
+    .tweet { display: block;
+            clear: both;
+            position: relative;
+            z-index: 1000; }
+                
+    .newupdates { display: none;
+                    background: #F6F3D1; }
+    
+</style>
+
+
 
 
 <div class="grid_7 alpha">
@@ -143,20 +170,23 @@
 		
 <!-- TWEETS -->
 <div class="grid_4 omega">
-	<h2><span class="number">@Model.Tweets.Count()</span> Tweets & Shoutouts</h2>
+	<h2><span class="number">@Model.TweetCount</span> Tweets & Shoutouts</h2>
 	<h4>filter:</h4>
 			
 	<span class="sm-spacer"></span>
 			
-	<ul class="plain-list">
-        @foreach (Epilogger.Data.Tweet EPLTweet in Model.Tweets.OrderByDescending(t => t.CreatedDate).Take(6))
+	<ul class="plain-list" id="tweetlist">
+        @foreach (Epilogger.Data.Tweet EPLTweet in Model.Tweets)
         {
-            <li>
+            <li id="Tweet-@EPLTweet.TwitterID" class="tweet">
 			    <img src="@EPLTweet.ProfileImageURL" class="fleft" alt="" />
 			    <small><a href="http://www.twitter.com/@EPLTweet.FromUserScreenName">@EPLTweet.FromUserScreenName</a></small>
 			    <p>@Html.Raw(EPLTweet.TextAsHTML)</p>
 		    </li>
         }
+        
+        @*<li class="tweet">
+		</li>*@
 	</ul>
 			
 	<span class="sm-spacer"></span>

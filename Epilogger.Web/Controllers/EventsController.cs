@@ -8,6 +8,7 @@ using AutoMapper;
 using Epilogger.Data;
 using Epilogger.Web.Models;
 using RichmondDay.Helpers;
+using System.Text;
 
 namespace Epilogger.Web.Controllers {
     public class EventsController : BaseController {
@@ -49,8 +50,11 @@ namespace Epilogger.Web.Controllers {
         public ActionResult Details(int id) {
 
             EventDisplayViewModel Model = Mapper.Map<Event, EventDisplayViewModel>(ES.FindByID(id));
-            
-            Model.Tweets = TS.FindByEventID(id);
+
+            Model.TweetCount = TS.FindTweetCountByEventID(id);
+            Model.Tweets = TS.FindByEventIDOrderDescTake6(id);
+                        
+            //Not optimized
             Model.Images = IS.FindByEventID(id);
             Model.CheckIns = CS.FindByEventID(id);
             Model.ExternalLinks = LS.FindByEventID(id);
@@ -96,5 +100,66 @@ namespace Epilogger.Web.Controllers {
         {
             return PartialView("_ImageComments", TS.FindByImageID(id));
         }
+
+
+
+        [HttpPost]
+        public ActionResult GetLastTweetsJSON(int Count, string pageLoadTime, int EventID)
+        {
+            Dictionary<String, Object> dict = new Dictionary<String, Object>();
+
+            if (pageLoadTime.Length > 0)
+            {
+                if (pageLoadTime != "undefined")
+                {
+
+                    pageLoadTime = string.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.Parse(pageLoadTime));
+
+                    EpiloggerDB db = TS.Thedb();
+                    IEnumerable<Tweet> TheTweets = TS.Thedb().Tweets.Where(t => t.EventID == EventID & t.CreatedDate > DateTime.Parse(pageLoadTime)).OrderByDescending(t => t.CreatedDate).Take(6);
+
+
+                    StringBuilder HTML = new StringBuilder();
+                    string lasttweettime = string.Empty;
+                    bool TheFirst = true;
+                    int RecordCount = 0;
+
+                    foreach (Tweet TheT in TheTweets)
+                    {
+                        if (TheFirst)
+                        {
+                            lasttweettime = string.Format("{0:yyyy-MM-dd HH:mm:ss}", TheT.CreatedDate);
+                            TheFirst = false;
+                        }
+
+                        //TODO - This will need to be replaced with something better
+
+                        //<li>
+                        //    <img src="@EPLTweet.ProfileImageURL" class="fleft" alt="" />
+                        //    <small><a href="http://www.twitter.com/@EPLTweet.FromUserScreenName">@EPLTweet.FromUserScreenName</a></small>
+                        //    <p>@Html.Raw(EPLTweet.TextAsHTML)</p>
+                        //</li>
+
+
+                        string ProfilePicture = "<img src='" + TheT.ProfileImageURL + "' class='fleft' alt='' />";
+                        string FromLine = "<small><a href='http://www.twitter.com/" + TheT.FromUserScreenName + "'>" + TheT.FromUserScreenName + "</a></small>";
+                        HTML.Append("<li id='Tweet-" + TheT.TwitterID + "' class='tweet newupdates'>" + ProfilePicture + FromLine + "<p>" + TheT.TextAsHTML + "</p></li>");
+
+                        RecordCount++;
+                    }
+
+
+                    //Return the Dictionary as it's IEnumerable and it creates the correct JSON doc.
+                    dict = new Dictionary<String, Object>();
+
+                    dict.Add("numberofnewtweets", RecordCount);
+                    dict.Add("lasttweettime", lasttweettime);
+                    dict.Add("html", HTML.ToString());
+                }
+            }
+
+            return Json(dict);
+        }
+        
     }
 }

@@ -3,13 +3,6 @@ using System;
 using System.Linq;
 using Epilogger.Data;
 using Epilogger.Web.Model;
-using Microsoft.WindowsAzure.StorageClient;
-
-enum SortType
-    {
-        Ascending = 1,
-   	    Descending = 2         
-    }
 
 
 namespace Epilogger.Web
@@ -26,9 +19,28 @@ namespace Epilogger.Web
             return base.GetData();
         }
 
+
+        public EpiloggerDB Thedb()
+        {
+            return db;
+        }
+
+        public int FindTweetCountByEventID(int EventID)
+        {
+            return db.Tweets.Where(t => t.EventID == EventID).Count();
+        }
+
+        public IEnumerable<Tweet> FindByEventIDOrderDescTake6(int EventID)
+        {
+            return db.Tweets.Where(t => t.EventID == EventID).OrderByDescending(t=> t.CreatedDate).Take(6);
+        }
+
+
+
         public IEnumerable<Tweet> FindByEventID(int EventID)
         {
-            return FindByEventID(EventID, DateTime.Parse("2000-01-01 00:00:00"), DateTime.Parse("2200-12-31 00:00:00"));
+            //return FindByEventID(EventID, DateTime.Parse("2000-01-01 00:00:00"), DateTime.Parse("2200-12-31 00:00:00"));
+            return db.Tweets.Where(t => t.EventID == EventID);
         }
 
         public IEnumerable<Tweet> FindByEventID(int EventID, DateTime StartDateTimeFilter, DateTime EndDateTimeFilter)
