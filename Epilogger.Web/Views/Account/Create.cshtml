@@ -4,8 +4,11 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Create an Epilogger Account</h2>
+<p>1 minute, that's about all it takes to fill out the fields below to create your very own epilogger.com account.</p>
+<p>You shouldn't still be reading, should you?</p>
 <div class="grid_7 alpha">
+@Html.ValidationSummary("Please correct the following issues")
 <fieldset>
 @using(Html.BeginForm("Create", "Account", FormMethod.Post)) {
     <div class="grid_3 alpha">
@@ -29,7 +32,7 @@
     </div>
     
     <div class="grid_7 alpha">
-        <p>@Html.LabelFor(model => model.TimeZoneOffset) @Html.TextBoxFor(model => model.TimeZoneOffset)</p>
+        <p>@Html.LabelFor(model => model.TimeZoneOffset) @Html.DropDownListFor(model => model.TimeZoneOffset, Model.TimeZones, "Select your timezone")</p>
     </div>
     
     <br style="clear:both;" />
