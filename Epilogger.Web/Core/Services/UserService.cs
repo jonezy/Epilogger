@@ -32,6 +32,10 @@ namespace Epilogger.Web {
             return GetData().Where(u => u.EmailAddress == emailAddress).FirstOrDefault();
         }
 
+        public User GetUserByResetHash(Guid passwordResetHash) {
+            return GetData().Where(u => u.ForgotPasswordHash == passwordResetHash).FirstOrDefault();
+        }
+
         public User ValidateLogin(string username, string password) {
             return GetData().Where(u => u.Username == username && u.Password == password).FirstOrDefault();
         }

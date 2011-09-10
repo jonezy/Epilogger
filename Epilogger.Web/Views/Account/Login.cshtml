@@ -15,7 +15,7 @@
         <p>@Html.LabelFor(model => model.Password) @Html.PasswordFor(model => model.Password)</p>
         <p class="clearfix"><label class="left">Remember me?</label> @Html.CheckBoxFor(model => model.RememberMe, new { @class = "left" })</p>
 
-        <p><input type="submit" class="submit" value="login" /> or @Html.ActionLink("Register", "create", "Account")</p>
+        <p><input type="submit" class="submit" value="login" /> - @Html.ActionLink("I forgot my password", "forgotpassword", "account")</p>
     </fieldset>
 }
 </div>
