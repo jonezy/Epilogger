@@ -136,7 +136,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Core\AuthenticationServices.cs" />
-    <Compile Include="Core\Email\EmalSender.cs" />
+    <Compile Include="Core\Email\EmailSender.cs" />
     <Compile Include="Core\Email\IEmailSender.cs" />
     <Compile Include="Core\Email\SmtpConfiguration.cs" />
     <Compile Include="Core\Email\TemplateParser.cs" />
@@ -148,7 +148,6 @@
     <Compile Include="Core\Helpers\TwitterHelper.cs" />
     <Compile Include="Core\Services\CheckInService.cs" />
     <Compile Include="Core\Services\BlogService.cs" />
-    <Compile Include="Core\Services\ImageMetaDataService.cs" />
     <Compile Include="Core\Services\ExternalLinksService.cs" />
     <Compile Include="Core\Services\ImageService.cs" />
     <Compile Include="Core\Services\EventService.cs" />
@@ -169,10 +168,17 @@
     <Compile Include="Models\DashboardIndexViewModel.cs" />
     <Compile Include="Models\DashboardProfileViewModel.cs" />
     <Compile Include="Models\EventDisplayViewModel.cs" />
+    <Compile Include="Models\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\GlobalNavigationModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\ResetPasswordViewModel.cs" />
     <Compile Include="Models\UpdatePasswordModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Emails\AccountEmails.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountEmails.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -219,62 +225,6 @@
     <Content Include="Public\js\head.load.min.js" />
     <Content Include="Public\js\jquery-1.6.2.min.js" />
     <Content Include="Public\js\jquery-ui-1.8.16.custom.min.js" />
-    <Content Include="Public\js\prettyPhoto\css\prettyPhoto.css" />
-    <Content Include="Public\js\prettyPhoto\images\fullscreen\1.jpg" />
-    <Content Include="Public\js\prettyPhoto\images\fullscreen\2.jpg" />
-    <Content Include="Public\js\prettyPhoto\images\fullscreen\3.jpg" />
-    <Content Include="Public\js\prettyPhoto\images\fullscreen\4.jpg" />
-    <Content Include="Public\js\prettyPhoto\images\fullscreen\5.jpg" />
-    <Content Include="Public\js\prettyPhoto\images\fullscreen\6.jpg" />
-    <Content Include="Public\js\prettyPhoto\images\fullscreen\high.gif" />
-    <Content Include="Public\js\prettyPhoto\images\fullscreen\huge.gif" />
-    <Content Include="Public\js\prettyPhoto\images\fullscreen\wide.gif" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\dark_rounded\btnNext.png" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\dark_rounded\btnPrevious.png" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\dark_rounded\contentPattern.png" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\dark_rounded\default_thumbnail.gif" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\dark_rounded\loader.gif" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\dark_rounded\sprite.png" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\dark_square\btnNext.png" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\dark_square\btnPrevious.png" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\dark_square\contentPattern.png" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\dark_square\default_thumbnail.gif" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\dark_square\loader.gif" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\dark_square\sprite.png" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\default\default_thumb.png" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\default\loader.gif" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\default\sprite.png" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\default\sprite_next.png" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\default\sprite_prev.png" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\default\sprite_x.png" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\default\sprite_y.png" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\facebook\btnNext.png" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\facebook\btnPrevious.png" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\facebook\contentPatternBottom.png" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\facebook\contentPatternLeft.png" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\facebook\contentPatternRight.png" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\facebook\contentPatternTop.png" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\facebook\default_thumbnail.gif" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\facebook\loader.gif" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\facebook\sprite.png" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\light_rounded\btnNext.png" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\light_rounded\btnPrevious.png" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\light_rounded\default_thumbnail.gif" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\light_rounded\loader.gif" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\light_rounded\sprite.png" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\light_square\btnNext.png" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\light_square\btnPrevious.png" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\light_square\default_thumbnail.gif" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\light_square\loader.gif" />
-    <Content Include="Public\js\prettyPhoto\images\prettyPhoto\light_square\sprite.png" />
-    <Content Include="Public\js\prettyPhoto\images\thumbnails\flash-logo.png" />
-    <Content Include="Public\js\prettyPhoto\images\thumbnails\quicktime-logo.gif" />
-    <Content Include="Public\js\prettyPhoto\images\thumbnails\t_1.jpg" />
-    <Content Include="Public\js\prettyPhoto\images\thumbnails\t_2.jpg" />
-    <Content Include="Public\js\prettyPhoto\images\thumbnails\t_3.jpg" />
-    <Content Include="Public\js\prettyPhoto\images\thumbnails\t_4.jpg" />
-    <Content Include="Public\js\prettyPhoto\images\thumbnails\t_5.jpg" />
-    <Content Include="Public\js\prettyPhoto\js\jquery.prettyPhoto.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -348,10 +298,17 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Dashboard\Profile.cshtml" />
     <Content Include="Views\Dashboard\Menu.cshtml" />
-    <Content Include="Views\Shared\_ImageComments.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Emails\AccountEmails.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccountEmails.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
@@ -368,11 +325,12 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>false</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>16007</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://eplv1</IISUrl>
+          <IISUrl>
+          </IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

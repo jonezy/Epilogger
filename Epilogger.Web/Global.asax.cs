@@ -1,17 +1,38 @@
 ﻿using System;
-using System.Linq;
 using System.Configuration;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
 using AutoMapper;
 
 using Epilogger.Data;
+using Epilogger.Web.Core.Email;
 using Epilogger.Web.Models;
-using RichmondDay.Helpers;
 
 namespace Epilogger.Web {
     public class App : System.Web.HttpApplication {
+        /// <summary>
+        /// The application's base url (eg: http://www.example.com, http://localhost:21215/)
+        /// </summary>
+        public static string BaseUrl {
+            get {
+                return HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + VirtualPathUtility.ToAbsolute("~/");
+            }
+        }
+
+        public static SmtpConfiguration MailConfiguration {
+            get {
+                return new SmtpConfiguration() {
+                    Server = ConfigurationManager.AppSettings["SiteSettings.Mail.Server"] as string ?? "",
+                    Port = int.Parse(ConfigurationManager.AppSettings["SiteSettings.Mail.ServerPort"] as string),
+                    Username = ConfigurationManager.AppSettings["SiteSettings.Mail.Username"] as string ?? "",
+                    Password = ConfigurationManager.AppSettings["SiteSettings.Mail.Password"] as string ?? "",
+                    DefaultFromAddress = ConfigurationManager.AppSettings["SiteSettings.Mail.DefaultFromAddress"] as string ?? ""
+                };
+            }
+        }
         /// <summary>
         /// Boolean flag to indicate whether or not caching should be enabled.
         /// </summary>
@@ -60,6 +81,7 @@ namespace Epilogger.Web {
                 
 
             Mapper.CreateMap<CreateAccountModel, User>()
+                .ForMember(dest => dest.ForgotPasswordHash, opt => opt.Ignore())
                 .ForMember(dest => dest.ID, opt => opt.Ignore())
                 .ForMember(dest => dest.Password, opt => opt.MapFrom(src => PasswordHelpers.EncryptPassword(src.Password)))
                 .ForMember(dest => dest.IsActive, opt => opt.UseValue(true))
@@ -68,6 +90,7 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.TimeZoneOffSet, opt => opt.UseValue(-5));
             
             Mapper.CreateMap<AccountModel, User>()
+                .ForMember(dest => dest.ForgotPasswordHash, opt => opt.Ignore())
                 .ForMember(dest => dest.ID, opt => opt.Ignore())
                 .ForMember(dest => dest.Password, opt => opt.Ignore())
                 .ForMember(dest => dest.DateOfBirth, opt => opt.Ignore())
