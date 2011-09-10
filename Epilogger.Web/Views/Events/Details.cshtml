@@ -1,4 +1,5 @@
-﻿
+﻿@using Epilogger.Web;
+
 @model Epilogger.Web.Models.EventDisplayViewModel
 
 
@@ -6,6 +7,40 @@
     ViewBag.Title = "Epilogger - " + Model.Name;
     
 }
+
+
+<script language="javascript" type="text/javascript">
+    var EventID = @Model.ID;
+
+    var EventName = '@Model.Name';
+    var EventURL = 'http://test.epilogger.com/Events/Details/@Model.ID';
+    var updateTimeout = 5000;
+    var updateRate = 5000;
+    var prologuePostsUpdates = 1;
+    var isFirstFrontPage = 1;
+    var pageLoadTime = '@string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.Tweets.FirstOrDefault().CreatedDate)';
+    var postsOnPage = new Array;
+    var postsOnPageQS = '';
+    var maxItemsOnPage = 6;
+
+    $getPosts();
+
+</script>
+
+<style type="text/css">
+    
+    .tweet { display: block;
+            clear: both;
+            position: relative;
+            z-index: 1000; }
+                
+    .newupdates { display: none;
+                    background: #F6F3D1; }
+    
+</style>
+
+
+
 
 <div class="grid_7 alpha">
 	<h1>@Model.Name</h1>
@@ -34,17 +69,17 @@
 		
         @if (Model.StartDateTime.Subtract(Model.EndDateTime).Days == 0)
         {
-            @String.Format("{0:MMMM dd, yyyy}", Model.StartDateTime)
+            @String.Format("{0:MMMM dd, yyyy}", Model.StartDateTime.ToUserTimeZone(Model.TimeZoneOffSet))
             @: <br />
-            @String.Format("{0:h:mm tt}", Model.StartDateTime)
+            @String.Format("{0:h:mm tt}", Model.StartDateTime.ToUserTimeZone(Model.TimeZoneOffSet))
             @: to
-            @String.Format("{0:h:mm tt}", Model.EndDateTime)
+            @String.Format("{0:h:mm tt}", Model.EndDateTime.ToUserTimeZone(Model.TimeZoneOffSet))
         }
         else
         {
-            @String.Format("{0:MMMM dd, yyyy h:mm tt}", Model.StartDateTime)
+            @String.Format("{0:MMMM dd, yyyy h:mm tt}", Model.StartDateTime.ToUserTimeZone(Model.TimeZoneOffSet))
             @: to 
-            @String.Format("{0:MMMM dd, yyyy h:mm tt}", Model.EndDateTime)
+            @String.Format("{0:MMMM dd, yyyy h:mm tt}", Model.EndDateTime.ToUserTimeZone(Model.TimeZoneOffSet))
         }
 
 	</span>
@@ -115,7 +150,8 @@
         @foreach (Epilogger.Data.Image EPLImage in Model.Images.OrderByDescending(i => i.DateTime).Take(9))
         {
             <div class="withcomment">
-			    <img alt="" height="154" width="180" src="@EPLImage.Thumb"/>
+			    @*<img alt="" height="154" width="180" src="@EPLImage.Thumb" rel="prettyPhoto[gallery1]" />*@
+                <a href="@EPLImage.Fullsize" rel="prettyPhoto[latestphotos]" title="@EPLImage.ID" id="@EPLImage.ID"><img src="@EPLImage.Thumb" height="154" width="180" border="0" alt="" /></a>
 			    <a href="#" class="commentbubble">
                     @*Number of Comments*@
                     @EPLImage.ImageMetaData.Count()
@@ -133,20 +169,23 @@
 		
 <!-- TWEETS -->
 <div class="grid_4 omega">
-	<h2><span class="number">@Model.Tweets.Count()</span> Tweets & Shoutouts</h2>
+	<h2><span class="number">@Model.TweetCount</span> Tweets & Shoutouts</h2>
 	<h4>filter:</h4>
 			
 	<span class="sm-spacer"></span>
 			
-	<ul class="plain-list">
-        @foreach (Epilogger.Data.Tweet EPLTweet in Model.Tweets.OrderByDescending(t => t.CreatedDate).Take(4))
+	<ul class="plain-list" id="tweetlist">
+        @foreach (Epilogger.Data.Tweet EPLTweet in Model.Tweets)
         {
-            <li>
+            <li id="Tweet-@EPLTweet.TwitterID" class="tweet">
 			    <img src="@EPLTweet.ProfileImageURL" class="fleft" alt="" />
 			    <small><a href="http://www.twitter.com/@EPLTweet.FromUserScreenName">@EPLTweet.FromUserScreenName</a></small>
 			    <p>@Html.Raw(EPLTweet.TextAsHTML)</p>
 		    </li>
         }
+        
+        @*<li class="tweet">
+		</li>*@
 	</ul>
 			
 	<span class="sm-spacer"></span>
@@ -165,7 +204,7 @@
         {
 		<li>
 			<img src="@Url.Content("~/Public/images/samples/avatar.png")" class="fleft"/>
-			<a href="@TheBlogPost.BlogURL">@TheBlogPost.BlogTitle</a><br/>
+			<a href="@TheBlogPost.BlogURL">@TheBlogPost.Title</a><br/>
 			<small><a href="#">BY MICHAEL NUS</a></small><br/>
 			<p>After a very busy day of meetings and wheeling...</p>
             @*TODO - Add move fiels to the Blog table to store more Info!*@
@@ -183,12 +222,12 @@
 	<h2>External Links</h2>
 	<ul class="plain-list">
 		@foreach (Epilogger.Data.URL TheURL in Model.ExternalLinks.Take(3))
-        {
+  {
             <li>
 			    <a href="@TheURL.ShortURL">@TheURL.FullURL</a><br/>
-			    <small><img src="@Url.Content("~/Public/images/icons/tweet-black.png")" class="valign" />VIA @TheURL.Tweets.Where(t => t.ID==TheURL.TweetID).FirstOrDefault().FromUserScreenName</small>
+			    <small><img src="@Url.Content("~/Public/images/icons/tweet-black.png")" class="valign" />VIA @TheURL.Tweets.Where(t => t.ID == TheURL.TweetID).FirstOrDefault().FromUserScreenName</small>
       	    </li>
-        }
+  }
     </ul>
 			
 	<div class="clear"></div>
@@ -199,7 +238,7 @@
 <!-- CHECKINS -->
 <div class="grid_4 omega">
 	<h2><span class="number">@Model.CheckIns.Count()</span> Check-ins</h2>
-	<p>All these lovely people attended Social Media Day Global at the Tattoo Rock Parlour!</p>
+	<p>All these lovely people attended @Model.Name!</p>
 	
     
     <ul class="plain-list">
@@ -207,7 +246,7 @@
         {
             <li>
                 @{
-                Epilogger.Data.Tweet ThisTweet = checkin.Tweets.Where(t => t.ID == checkin.TweetID).FirstOrDefault();
+            Epilogger.Data.Tweet ThisTweet = checkin.Tweets.Where(t => t.ID == checkin.TweetID).FirstOrDefault();
 			    }
 
                 <img src="@Url.Content(ThisTweet.ProfileImageURL)" class="fleft" alt="" />

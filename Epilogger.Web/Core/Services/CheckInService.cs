@@ -6,7 +6,7 @@ using Epilogger.Web.Model;
 
 namespace Epilogger.Web
 {
-    public class CheckInService : ServiceBase<Tweet>
+    public class CheckInService : ServiceBase<CheckIn>
     {
         protected override string CacheKey
         {
@@ -20,8 +20,7 @@ namespace Epilogger.Web
 
         public IEnumerable<CheckIn> FindByEventID(int EventID, DateTime StartDateTimeFilter, DateTime EndDateTimeFilter)
         {
-            EpiloggerDB db = new EpiloggerDB();
-            return db.CheckIns.Where(t => t.EventID == EventID & t.CheckInDateTime >= StartDateTimeFilter & t.CheckInDateTime <= EndDateTimeFilter).AsEnumerable();
+            return db.CheckIns.Where(t => t.EventID == EventID & t.CheckInDateTime >= StartDateTimeFilter & t.CheckInDateTime <= EndDateTimeFilter);
         }
 
     }

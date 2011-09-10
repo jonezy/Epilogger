@@ -51,6 +51,20 @@ namespace Epilogger.Web {
             return data;
         }
 
+        protected virtual IEnumerable<T> GetDataEnumerable()
+        {
+            IEnumerable<T> data = CacheHelper != null && CacheExpiry > 0 ? CacheHelper.Get(CacheKey) as IEnumerable<T> : null;
+
+            if (data == null)
+            {
+                data = GetRepository<T>().GetAll();
+                if (CacheHelper != null)
+                    CacheHelper.Add(CacheKey, data, DateTime.Now.AddSeconds(CacheExpiry));
+            }
+
+            return data;
+        }
+
         // CJ Sept 6, 2011
         // Got that whore some medicine.  Just pass in your query expression to this overloaded method and your query will be run
         // against the data repository when refetching instead of getting everything. 
@@ -68,6 +82,7 @@ namespace Epilogger.Web {
 
             return data;
         }
+
 
     }
 }
