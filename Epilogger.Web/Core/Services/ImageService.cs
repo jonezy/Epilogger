@@ -6,17 +6,12 @@ using Epilogger.Web.Model;
 
 namespace Epilogger.Web
 {
-    public class ImageService : ServiceBase<Tweet>
+    public class ImageService : ServiceBase<Image>
     {
         protected override string CacheKey
         {
             get { return "Epilogger.Web.Images"; }
         }
-
-        //public List<Tweet> AllImages()
-        //{
-        //    return base.GetData();
-        //}
 
         public IEnumerable<Image> FindByEventID(int EventID)
         {
@@ -25,9 +20,14 @@ namespace Epilogger.Web
 
         public IEnumerable<Image> FindByEventID(int EventID, DateTime StartDateTimeFilter, DateTime EndDateTimeFilter)
         {
-            EpiloggerDB db = new EpiloggerDB();
-            return db.Images.Where(t => t.EventID == EventID & t.DateTime >= StartDateTimeFilter & t.DateTime <= EndDateTimeFilter).AsEnumerable();
+            return db.Images.Where(t => t.EventID == EventID & t.DateTime >= StartDateTimeFilter & t.DateTime <= EndDateTimeFilter);
         }
+
+        public Image FindByID(int ID)
+        {
+            return GetData(t => t.ID == ID).FirstOrDefault();
+        }
+        
 
     }
 }

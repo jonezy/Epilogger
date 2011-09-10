@@ -91,7 +91,8 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.CheckIns, opt => opt.Ignore())
                 .ForMember(dest => dest.Tweets, opt => opt.Ignore())
                 .ForMember(dest => dest.ExternalLinks, opt => opt.Ignore())
-                .ForMember(dest => dest.BlogPosts, opt => opt.Ignore());
+                .ForMember(dest => dest.BlogPosts, opt => opt.Ignore())
+                .ForMember(dest => dest.TweetCount, opt => opt.Ignore());
                 
 
             Mapper.CreateMap<CreateAccountModel, User>()

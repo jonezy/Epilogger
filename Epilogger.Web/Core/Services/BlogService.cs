@@ -6,7 +6,7 @@ using Epilogger.Web.Model;
 
 namespace Epilogger.Web
 {
-    public class BlogService : ServiceBase<Tweet>
+    public class BlogService : ServiceBase<BlogPost>
     {
         protected override string CacheKey
         {
@@ -20,11 +20,7 @@ namespace Epilogger.Web
 
         public IEnumerable<BlogPost> FindByEventID(int EventID, DateTime StartDateTimeFilter, DateTime EndDateTimeFilter)
         {
-            EpiloggerDB db = new EpiloggerDB();
-            //return db.BlogPosts.Where(t => t.EventID == EventID & t.CheckInDateTime >= StartDateTimeFilter & t.CheckInDateTime <= EndDateTimeFilter).AsEnumerable();
-            return db.BlogPosts.Where(t => t.EventID == EventID).AsEnumerable();
-            
-            //TODO - Add Dates and Time to the Blog Post Submittion
+            return db.BlogPosts.Where(t => t.EventID == EventID & t.DateTime >= StartDateTimeFilter & t.DateTime <= EndDateTimeFilter);
         }
 
     }

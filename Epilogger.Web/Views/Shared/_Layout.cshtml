@@ -24,11 +24,14 @@
     <link href="@Url.Content("~/Public/css/messages.css")" rel="stylesheet" type="text/css" />
 	<link href="@Url.Content("~/Public/css/sadiehawkins.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Public/css/jquery-ui-1.8.16.custom.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Public/js/prettyPhoto/css/prettyPhoto.css")" rel="stylesheet" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
     
-    <script src="@Url.Content("~/Public/js/head.load.min.js")"></script>
-    <script>
+    <script src="@Url.Content("~/Public/js/head.load.min.js")" type="text/javascript" language="javascript"></script>
+
+    <script type="text/javascript" language="javascript">
         head.js('@Url.Content("~/Public/js/jquery-1.6.2.min.js")');
         head.js('@Url.Content("~/Public/js/jquery-ui-1.8.16.custom.min.js")');
+        head.js('@Url.Content("~/Public/js/prettyPhoto/js/jquery.prettyPhoto.js")');
         head.js('@Url.Content("~/Public/js/epilogger.js")');
     </script>
 	<!-- Favicons
@@ -75,6 +78,17 @@
 		<div class="spacer"></div>
     </div>
 </div>
+
+<script type="text/javascript" charset="utf-8">
+    head.ready(function () {
+        $("a[rel^='prettyPhoto']").prettyPhoto({
+            theme: 'light_square',
+            animation_speed: 'fast',
+            overlay_gallery: false,
+            changepicturecallback: function () { changeDescription(); }
+        });
+    });
+</script>
 
 </body>
 </html>

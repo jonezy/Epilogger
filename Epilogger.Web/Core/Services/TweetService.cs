@@ -3,13 +3,6 @@ using System;
 using System.Linq;
 using Epilogger.Data;
 using Epilogger.Web.Model;
-using Microsoft.WindowsAzure.StorageClient;
-
-enum SortType
-    {
-        Ascending = 1,
-   	    Descending = 2         
-    }
 
 
 namespace Epilogger.Web
@@ -27,42 +20,67 @@ namespace Epilogger.Web
         }
 
 
+        public EpiloggerDB Thedb()
+        {
+            return db;
+        }
 
-        //public List<Tweet> FindByEventID(int EventID)
-        //{
-        //    return FindByEventID(EventID, DateTime.Parse("1900-01-01 00:00:00"), DateTime.Parse("9999-12-31 00:00:00"), 1000);
-        //}
+        public int FindTweetCountByEventID(int EventID)
+        {
+            return db.Tweets.Where(t => t.EventID == EventID).Count();
+        }
 
-        //public List<Tweet> FindByEventID(int EventID, int NumberToReturn)
-        //{
-        //    return FindByEventID(EventID, DateTime.Parse("1900-01-01 00:00:00"), DateTime.Parse("9999-12-31 00:00:00"), NumberToReturn);
-        //}
+        public IEnumerable<Tweet> FindByEventIDOrderDescTake6(int EventID)
+        {
+            return db.Tweets.Where(t => t.EventID == EventID).OrderByDescending(t=> t.CreatedDate).Take(6);
+        }
 
-        //public List<Tweet> FindByEventID(int EventID, DateTime StartDateTimeFilter, DateTime EndDateTimeFilter, int NumberToReturn)
-        //{
-        //    EpiloggerDB db = new EpiloggerDB();
-        //    return db.Tweets.Where(t => t.EventID == EventID & t.CreatedDate >= StartDateTimeFilter & t.CreatedDate <= EndDateTimeFilter).Take(NumberToReturn).ToList();
-        //}
 
 
         public IEnumerable<Tweet> FindByEventID(int EventID)
         {
-            return FindByEventID(EventID, DateTime.Parse("2000-01-01 00:00:00"), DateTime.Parse("2200-12-31 00:00:00"));
+            //return FindByEventID(EventID, DateTime.Parse("2000-01-01 00:00:00"), DateTime.Parse("2200-12-31 00:00:00"));
+            return db.Tweets.Where(t => t.EventID == EventID);
         }
 
         public IEnumerable<Tweet> FindByEventID(int EventID, DateTime StartDateTimeFilter, DateTime EndDateTimeFilter)
         {
-            EpiloggerDB db = new EpiloggerDB();
-            return db.Tweets.Where(t => t.EventID == EventID & t.CreatedDate >= StartDateTimeFilter & t.CreatedDate <= EndDateTimeFilter).AsEnumerable();
+            return db.Tweets.Where(t => t.EventID == EventID & t.CreatedDate >= StartDateTimeFilter & t.CreatedDate <= EndDateTimeFilter);
         }
 
-        public IEnumerable<Tweet> FindByUserScreenName(string fromUserScreenName) {
+        public List<Tweet> FindByUserScreenName(string fromUserScreenName) {
             DateTime startDate = DateTime.Parse("2000-01-01 00:00:00");
             DateTime endDate = DateTime.Parse("2200-12-31 00:00:00");
 
             return GetData(t => t.FromUserScreenName == fromUserScreenName && t.CreatedDate >= startDate && t.CreatedDate <= endDate);
         }
-        
+
+
+        public IEnumerable<Tweet> FindByImageID(int ImageID)
+        {
+            return FindByImageID(ImageID, DateTime.Parse("2000-01-01 00:00:00"), DateTime.Parse("2200-12-31 00:00:00"));
+        }
+
+        public IEnumerable<Tweet> FindByImageID(int ImageID, DateTime StartDateTimeFilter, DateTime EndDateTimeFilter)
+        {
+            ImageMetaDateService IMDS = new ImageMetaDateService();
+            IEnumerable<ImageMetaDatum> IM = IMDS.FindByImageID(ImageID);
+
+            return from TW in db.Tweets
+                   join I in IM on TW.TwitterID equals I.TwitterID
+                   orderby TW.CreatedDate
+                   select TW;
+        }
+
+
+
+
+
+
+
+
+
+
         ////Reading on the performance diff of List vs iEnumerable.
         ////http://stackoverflow.com/questions/3628425/linq-ienumerable-vs-list-what-to-use-how-do-they-work
         //public List<Tweet> FindByEventIDList(int EventID)
@@ -89,6 +107,24 @@ namespace Epilogger.Web
         ////    var atweet = this.CreateQuery<AzureTweetModel>().Where(t => t.PartitionKey == EventID).AsEnumrable;
         ////    return atweet;
         ////}
+
+
+        //public List<Tweet> FindByEventID(int EventID)
+        //{
+        //    return FindByEventID(EventID, DateTime.Parse("1900-01-01 00:00:00"), DateTime.Parse("9999-12-31 00:00:00"), 1000);
+        //}
+
+        //public List<Tweet> FindByEventID(int EventID, int NumberToReturn)
+        //{
+        //    return FindByEventID(EventID, DateTime.Parse("1900-01-01 00:00:00"), DateTime.Parse("9999-12-31 00:00:00"), NumberToReturn);
+        //}
+
+        //public List<Tweet> FindByEventID(int EventID, DateTime StartDateTimeFilter, DateTime EndDateTimeFilter, int NumberToReturn)
+        //{
+        //    EpiloggerDB db = new EpiloggerDB();
+        //    return db.Tweets.Where(t => t.EventID == EventID & t.CreatedDate >= StartDateTimeFilter & t.CreatedDate <= EndDateTimeFilter).Take(NumberToReturn).ToList();
+        //}
+
 
     }
 }
