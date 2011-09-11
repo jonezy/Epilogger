@@ -183,7 +183,7 @@ jQuery(function ($) {
     //Tweets
     $.ajaxSetup({ timeout: updateTimeout, cache: false, error: function () { toggleUpdates('unewposts', 'on'); } }); if (prologuePostsUpdates) { toggleUpdates('unewposts', 'on'); }
     $("#tweetlist li.tweet").each(function () { var thisId = $(this).attr("id"); vpostId = thisId.substring(thisId.indexOf('-') + 1); postsOnPage.push(thisId); postsOnPageQS += "&vp[]=" + vpostId; }); function removeYellow() {
-        if (isFirstFrontPage) { $('#tweetlist li.newupdates').each(function () { if (isElementVisible(this)) { $(this).animate({ backgroundColor: '#F1F8FA' }, { duration: 2500 }); $(this).removeClass('newupdates'); } }); }
+        if (isFirstFrontPage) { $('#tweetlist li.newupdates').each(function () { if (isElementVisible(this)) { $(this).animate({ backgroundColor: '#FFF' }, { duration: 2500 }); $(this).removeClass('newupdates'); } }); }
         //titleCount();
     }
     $(window).scroll(function () { removeYellow(); });
