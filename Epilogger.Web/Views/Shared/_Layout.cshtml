@@ -72,7 +72,9 @@
         <li><a href="http://www.epilogger.com/blog/">BLOG</a></li>
         <li>@Html.ActionLink("HELP", "index", "home")</li>
     </ul>
-    <div id="content-container">	
+    <div id="content-container">
+        @Html.Action("RenderBreadCrumb", "Navigation")
+        <br style="clear:both;" />
         @RenderBody()
         <div class="clear"></div>
 		<div class="spacer"></div>

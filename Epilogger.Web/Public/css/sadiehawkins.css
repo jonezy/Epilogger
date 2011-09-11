@@ -3,7 +3,7 @@
 body {
 	color:#707070;
 	background:#252525;
-	font:normal 11pt times, 'times new roman', serif}
+	font:normal 11pt times, 'Georgia', 'Times New Roman', serif}
 
 a {
 	color:#2d8ac5;
@@ -206,6 +206,7 @@ div#search-container input[type=image] {
 	vertical-align:top;
 	float:right;}
 
+#breadcrumb {text-transform:uppercase;font-size:12px;}
 	
 	.Pager {}
 	.Pager a, .Pager span {background:#fc5daf;color:#fff;padding:5px;margin:0px 5px 0px 0px;}
