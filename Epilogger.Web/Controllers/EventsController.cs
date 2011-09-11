@@ -116,7 +116,8 @@ namespace Epilogger.Web.Controllers {
                     pageLoadTime = string.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.Parse(pageLoadTime));
 
                     EpiloggerDB db = TS.Thedb();
-                    IEnumerable<Tweet> TheTweets = TS.Thedb().Tweets.Where(t => t.EventID == EventID & t.CreatedDate > DateTime.Parse(pageLoadTime)).OrderByDescending(t => t.CreatedDate).Take(6);
+                    IEnumerable<Tweet> TheTweets = TS.Thedb().Tweets.Where(t => t.EventID == EventID & t.CreatedDate > DateTime.Parse(pageLoadTime)).OrderByDescending(t => t.CreatedDate).Take(Count);
+                    //IEnumerable<Tweet> TheTweets = TS.Thedb().Tweets.Where(t => t.EventID == EventID).OrderByDescending(t => t.CreatedDate).Take(1);
 
 
                     StringBuilder HTML = new StringBuilder();
@@ -154,12 +155,74 @@ namespace Epilogger.Web.Controllers {
 
                     dict.Add("numberofnewtweets", RecordCount);
                     dict.Add("lasttweettime", lasttweettime);
+                    dict.Add("tweetcount", string.Format("{0:#,###}", db.Tweets.Where(t => t.EventID == EventID).Count()));
                     dict.Add("html", HTML.ToString());
                 }
             }
 
             return Json(dict);
         }
-        
+
+        [HttpPost]
+        public ActionResult GetLastPhotosJSON(int Count, string pageLoadTime, int EventID)
+        {
+            Dictionary<String, Object> dict = new Dictionary<String, Object>();
+
+            if (pageLoadTime.Length > 0)
+            {
+                if (pageLoadTime != "undefined")
+                {
+
+                    pageLoadTime = string.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.Parse(pageLoadTime));
+
+                    EpiloggerDB db = TS.Thedb();
+                    IEnumerable<Image> TheImages = db.Images.Where(t => t.EventID == EventID & t.DateTime > DateTime.Parse(pageLoadTime)).OrderByDescending(t => t.DateTime).Take(Count);
+                    //IEnumerable<Image> TheImages = db.Images.Where(t => t.EventID == EventID).OrderByDescending(t => t.DateTime).Take(1);
+
+
+                    StringBuilder HTML = new StringBuilder();
+                    string lastphototime = string.Empty;
+                    bool TheFirst = true;
+                    int RecordCount = 0;
+
+                    foreach (Image TheI in TheImages)
+                    {
+                        if (TheFirst)
+                        {
+                            lastphototime = string.Format("{0:yyyy-MM-dd HH:mm:ss}", TheI.DateTime);
+                            TheFirst = false;
+                        }
+
+                        //TODO - This will need to be replaced with something better
+
+                        //<div class="withcomment" id="photo-@EPLImage.ID">
+                        //    <a href="@EPLImage.Fullsize" rel="prettyPhoto[latestphotos]" title="@EPLImage.ID" id="@EPLImage.ID"><img src="@EPLImage.Thumb" height="154" width="180" border="0" alt="" /></a>
+                        //    <a href="#" class="commentbubble">
+                        //        @EPLImage.ImageMetaData.Count()
+                        //    </a>
+                        //</div>
+
+                        string TheImage = "<a href='" + TheI.Fullsize + "' rel='prettyPhoto[latestphotos]' title='" + TheI.ID + "' id='" + TheI.ID + "'><img src='" + TheI.Thumb + "' height='154' width='180' border='0' alt='' /></a>";
+                        string CommentCount = "<a href='#' class='commentbubble'>" + TheI.ImageMetaData.Count() + "</a>";
+
+                        HTML.Append("<div class='withcomment newPhotoupdates' style='display:none;' id='photo-'" + TheI.ID + "'>" + TheImage + CommentCount + "</div>");
+
+
+                        RecordCount++;
+                    }
+
+
+                    //Return the Dictionary as it's IEnumerable and it creates the correct JSON doc.
+                    dict = new Dictionary<String, Object>();
+
+                    dict.Add("numberofnewphotos", RecordCount);
+                    dict.Add("lastphototime", lastphototime);
+                    dict.Add("photocount", string.Format("{0:#,###}", db.Images.Where(t => t.EventID == EventID).Count()));
+                    dict.Add("html", HTML.ToString());
+                }
+            }
+
+            return Json(dict);
+        }
     }
 }

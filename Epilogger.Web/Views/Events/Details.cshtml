@@ -13,7 +13,9 @@
     var EventID = @Model.ID;
 
     var EventName = '@Model.Name';
-    var EventURL = 'http://test.epilogger.com/Events/Details/@Model.ID';
+    var EventURL = 'http://www.epilogger.com/Events/Details/@Model.ID';
+    
+    //Parameters to control the Tweet list
     var updateTimeout = 5000;
     var updateRate = 5000;
     var prologuePostsUpdates = 1;
@@ -23,8 +25,21 @@
     var postsOnPageQS = '';
     var maxItemsOnPage = 6;
 
-    $getPosts();
+    //head.ready($getPosts());
 
+    //Parameters to control the Image List
+    var photoUpdateTimeout = 5000;
+    var photoUpdateRate = 5000;
+    var photoProloguePostsUpdates = 1;
+    var photoIsFirstFrontPage = 1;
+    var photoPageLoadTime = '@string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.Tweets.FirstOrDefault().CreatedDate)';
+    
+    var photoPostsOnPage = new Array;
+    var photoPostsOnPageQS = '';
+    var photoMaxItemsOnPage = 9;
+
+    //$getPhotos();
+    
 </script>
 
 <style type="text/css">
@@ -35,7 +50,7 @@
             z-index: 1000; }
                 
     .newupdates { display: none;
-                    background: #F6F3D1; }
+                    background: #eebad1; }
     
 </style>
 
@@ -141,7 +156,7 @@
 		
 <!-- PHOTOS & VIDEOS -->
 <div class="grid_7 alpha">
-	<h2><span class="number">@Model.Images.Count()</span> Photos & Videos</h2>
+	<h2><span class="number" id="photoCount">@string.Format("{0:#,###}", Model.Images.Count())</span> Photos & Videos</h2>
 	<h4>filter:</h4>
 
 	<span class="sm-spacer"></span>
@@ -149,7 +164,7 @@
 	<div class="image-grid" id="photosvideos">
         @foreach (Epilogger.Data.Image EPLImage in Model.Images.OrderByDescending(i => i.DateTime).Take(9))
         {
-            <div class="withcomment">
+            <div class="withcomment newPhotoupdates" id="photo-@EPLImage.ID">
 			    @*<img alt="" height="154" width="180" src="@EPLImage.Thumb" rel="prettyPhoto[gallery1]" />*@
                 <a href="@EPLImage.Fullsize" rel="prettyPhoto[latestphotos]" title="@EPLImage.ID" id="@EPLImage.ID"><img src="@EPLImage.Thumb" height="154" width="180" border="0" alt="" /></a>
 			    <a href="#" class="commentbubble">
@@ -169,7 +184,7 @@
 		
 <!-- TWEETS -->
 <div class="grid_4 omega">
-	<h2><span class="number">@Model.TweetCount</span> Tweets & Shoutouts</h2>
+	<h2><span class="number" id="tweetCount">@string.Format("{0:#,###}", Model.TweetCount)</span> Tweets & Shoutouts</h2>
 	<h4>filter:</h4>
 			
 	<span class="sm-spacer"></span>
