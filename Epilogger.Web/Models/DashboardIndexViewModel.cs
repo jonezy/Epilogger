@@ -11,13 +11,13 @@ namespace Epilogger.Web.Models {
 
         public string TotalRecordsLabel { get; set; }
 
-        public IPagedList<DashboardActivityModel> Activity { get; set; }
+        public List<DashboardActivityModel> Activity { get; set; }
 
-        public DashboardIndexViewModel(IList<DashboardActivityModel> activities, int currentPageIndex) {
+        public DashboardIndexViewModel(List<DashboardActivityModel> activities, int currentPageIndex, int totalRecords) {
             CurrentPageIndex = currentPageIndex;
-            TotalRecords = activities.Count;
+            TotalRecords = totalRecords;
 
-            Activity = activities.ToPagedList(CurrentPageIndex, PageSize, TotalRecords);
+            Activity = activities;
         }
     }
 }

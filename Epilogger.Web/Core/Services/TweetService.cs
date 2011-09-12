@@ -55,6 +55,16 @@ namespace Epilogger.Web
             return db.Tweets.Where(t => t.EventID == EventID & t.CreatedDate >= StartDateTimeFilter & t.CreatedDate <= EndDateTimeFilter);
         }
 
+        public List<Tweet> FindByUserScreenName(string fromUserScreenName, int page, int recordsPerPage) {
+            DateTime startDate = DateTime.Parse("2000-01-01 00:00:00");
+            DateTime endDate = DateTime.Parse("2200-12-31 00:00:00");
+
+            return GetData(t => t.FromUserScreenName == fromUserScreenName && t.CreatedDate >= startDate && t.CreatedDate <= endDate)
+                    .Skip(page * recordsPerPage)
+                    .Take(recordsPerPage)
+                    .ToList();
+        }
+
         public List<Tweet> FindByUserScreenName(string fromUserScreenName) {
             DateTime startDate = DateTime.Parse("2000-01-01 00:00:00");
             DateTime endDate = DateTime.Parse("2200-12-31 00:00:00");
