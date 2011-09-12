@@ -171,6 +171,13 @@ image-grid#photosvideos {
 .image-grid .commentbubble:hover {
 	opacity:1;}
 
+/*------------------------------- ALL PHOTOS */
+div#photos-filterbar {
+	padding:15px 0;
+	/*margin:0 15px;*/
+	border-bottom:1px dotted #000;}
+
+
 /* ------------------------------ DASHBOARD */
 #dashboard-nav {float:left;width:268px;margin-right:17px;}
 #dashboard-nav ul li {list-style:none;}
