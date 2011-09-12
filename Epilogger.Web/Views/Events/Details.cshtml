@@ -17,7 +17,7 @@
     
     //Parameters to control the Tweet list
     var updateTimeout = 5000;
-    var updateRate = 5000;
+    var updateRate = 10000;
     var prologuePostsUpdates = 1;
     var isFirstFrontPage = 1;
     var pageLoadTime = '@string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.Tweets.FirstOrDefault().CreatedDate)';
@@ -25,11 +25,9 @@
     var postsOnPageQS = '';
     var maxItemsOnPage = 6;
 
-    //head.ready($getPosts());
-
     //Parameters to control the Image List
     var photoUpdateTimeout = 5000;
-    var photoUpdateRate = 5000;
+    var photoUpdateRate = 15000;
     var photoProloguePostsUpdates = 1;
     var photoIsFirstFrontPage = 1;
     var photoPageLoadTime = '@string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.Tweets.FirstOrDefault().CreatedDate)';
@@ -37,8 +35,6 @@
     var photoPostsOnPage = new Array;
     var photoPostsOnPageQS = '';
     var photoMaxItemsOnPage = 9;
-
-    //$getPhotos();
     
 </script>
 
@@ -76,7 +72,7 @@
 </div>
 		
 <div class="clear"></div>		
-<span class="spacer"></span>
+@*<span class="spacer"></span>*@
 		
 <div id="event-details">
 	<span class="event-details-label">When:</span>
@@ -92,9 +88,9 @@
         }
         else
         {
-            @String.Format("{0:MMMM dd, yyyy h:mm tt}", Model.StartDateTime.ToUserTimeZone(Model.TimeZoneOffSet))
-            @: to 
-            @String.Format("{0:MMMM dd, yyyy h:mm tt}", Model.EndDateTime.ToUserTimeZone(Model.TimeZoneOffSet))
+            @String.Format("{0:MMM d, yyyy h:mm}{1}", Model.StartDateTime.ToUserTimeZone(Model.TimeZoneOffSet), Model.StartDateTime.ToUserTimeZone(Model.TimeZoneOffSet).ToString("tt").ToLower())
+            @: to <br />
+            @String.Format("{0:MMM d, yyyy h:mm}{1}", Model.EndDateTime.ToUserTimeZone(Model.TimeZoneOffSet), Model.EndDateTime.ToUserTimeZone(Model.TimeZoneOffSet).ToString("tt").ToLower())
         }
 
 	</span>
@@ -111,7 +107,7 @@
 		<span style="position:relative; top:5px">Hashtag:</span>
 	</span>
 	<span class="event-details-detail">
-        @Model.WebsiteURL<br />
+        <a href="@Model.WebsiteURL" target="_blank">@Model.WebsiteURL</a><br />
 		@{
             try {
                 string[] SearchT = Model.SearchTerms.Split(new string[] {" OR "}, StringSplitOptions.None);
@@ -194,7 +190,7 @@
         {
             <li id="Tweet-@EPLTweet.TwitterID" class="tweet">
 			    <img src="@EPLTweet.ProfileImageURL" class="fleft" alt="" />
-			    <small><a href="http://www.twitter.com/@EPLTweet.FromUserScreenName">@EPLTweet.FromUserScreenName</a></small>
+			    <small><a href="http://www.twitter.com/@EPLTweet.FromUserScreenName" target="_blank">@EPLTweet.FromUserScreenName</a></small>
 			    <p>@Html.Raw(EPLTweet.TextAsHTML)</p>
 		    </li>
         }
@@ -208,7 +204,8 @@
 </div>
 		
 <div class="clear"></div>
-<div class="big-spacer"></div>
+<div class="spacer"></div>
+@*<div class="big-spacer"></div>*@
 		
 		
 <!-- BLOG POSTINGS -->
@@ -233,13 +230,13 @@
 		
 		
 <!-- EXTERNAL LINKS -->
-<div class="grid_3">
+<div class="grid_3 overflowhide">
 	<h2>External Links</h2>
 	<ul class="plain-list">
 		@foreach (Epilogger.Data.URL TheURL in Model.ExternalLinks.Take(3))
   {
             <li>
-			    <a href="@TheURL.ShortURL">@TheURL.FullURL</a><br/>
+			    <a href="@TheURL.ShortURL" title="@TheURL.Tweets.Where(t => t.ID == TheURL.TweetID).FirstOrDefault().Text">@TheURL.FullURL</a><br/>
 			    <small><img src="@Url.Content("~/Public/images/icons/tweet-black.png")" class="valign" />VIA @TheURL.Tweets.Where(t => t.ID == TheURL.TweetID).FirstOrDefault().FromUserScreenName</small>
       	    </li>
   }
