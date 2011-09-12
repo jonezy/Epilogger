@@ -31,7 +31,7 @@
     <script type="text/javascript" language="javascript">
         head.js('@Url.Content("~/Public/js/jquery-1.6.2.min.js")');
         head.js('@Url.Content("~/Public/js/jquery-ui-1.8.16.custom.min.js")');
-        head.js('@Url.Content("~/Public/js/prettyPhoto/js/jquery.prettyPhoto.js")');
+        //head.js('@Url.Content("~/Public/js/prettyPhoto/js/jquery.prettyPhoto.js")');
         head.js('@Url.Content("~/Public/js/epilogger.js")');
     </script>
 	<!-- Favicons
@@ -72,7 +72,9 @@
         <li><a href="http://www.epilogger.com/blog/">BLOG</a></li>
         <li>@Html.ActionLink("HELP", "index", "home")</li>
     </ul>
-    <div id="content-container">	
+    <div id="content-container">
+        @Html.Action("RenderBreadCrumb", "Navigation")
+        <br style="clear:both;" />
         @RenderBody()
         <div class="clear"></div>
 		<div class="spacer"></div>
