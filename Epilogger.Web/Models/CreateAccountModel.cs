@@ -61,5 +61,8 @@ namespace Epilogger.Web.Models {
                 return timeZones.Select(t => new SelectListItem() { Text = t.Value, Value = t.Key });
             }
         }
+
+        [DisplayName("Date of birth")]
+        public string DateOfBirth { get; set; }
     }
 }
