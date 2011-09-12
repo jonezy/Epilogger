@@ -11,12 +11,26 @@
 <div id="dashboard-content">
 @foreach (var item in Model.Activity) {
     <div class="dashboard-activity-entry">
-        <strong class="title">@item.Event.Name</strong><br />
-        <p>@MvcHtmlString.Create(item.ActivityContent) ?? </p>
+        <strong class="title @item.ActivityType">
+        @if(item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION) {
+            @:NEW EVENT ADDED:
+        } else {
+            @item.Event.Name
+        }</strong>
+        
+        @if(item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION) {
+            <h2>@MvcHtmlString.Create(item.Event.Name)</h2>
+        } else if(item.ActivityType == Epilogger.Web.Models.ActivityType.PHOTOS_VIDEOS) {
+            <img src="@item.ActivityContent" width="170" height="140" />
+        } else {
+           <p> @MvcHtmlString.Create(item.ActivityContent)</p>
+        }
+        
+        
     </div>
 }
 <div class="clear"></div>
-@MvcHtmlString.Create(Html.Pager(Model.PageSize, Model.CurrentPageIndex, Model.TotalRecords, new { controller = "dashboard", action = "index"}))
+@MvcHtmlString.Create(Html.Pager(Model.PageSize, Model.CurrentPageIndex, Model.TotalRecords, new { controller = "dashboard", action = "index" }))
 </div>
 
 

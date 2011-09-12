@@ -15,6 +15,7 @@ namespace Epilogger.Web.Models {
         [DisplayName("Email address")]
         public string EmailAddress { get; set; }
 
-        public DateTime DateOfBirth { get; set; }
+        [DisplayName("Date of birth")]
+        public string DateOfBirth { get; set; }
     }
 }

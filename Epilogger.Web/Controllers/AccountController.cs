@@ -41,6 +41,7 @@ namespace Epilogger.Web.Controllers {
                     User user = Mapper.Map<CreateAccountModel, User>(model);
                     service.Save(user);
 
+                    // build a message to send to the user.
                     string loginUrl = string.Format("{0}account/login", App.BaseUrl);
 
                     TemplateParser parser = new TemplateParser();
@@ -55,7 +56,9 @@ namespace Epilogger.Web.Controllers {
 
                     this.StoreSuccess("Your account was created successfully<br /><br/>Please check your inbox for our welcome message.");
 
-                    return RedirectToAction("login", "account");
+                    CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString());
+
+                    return RedirectToAction("index", "account");
                 } catch (Exception ex) {
                     this.StoreError("There was a problem creating your account");
                     return View(model);
@@ -72,7 +75,7 @@ namespace Epilogger.Web.Controllers {
                 user.FirstName = model.FirstName;
                 user.LastName = model.LastName;
                 user.EmailAddress = model.EmailAddress;
-                user.DateOfBirth = model.DateOfBirth;
+                user.DateOfBirth = DateTime.Parse(model.DateOfBirth);
 
                 service.Save(user);
 

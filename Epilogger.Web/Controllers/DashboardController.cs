@@ -1,10 +1,13 @@
-﻿using System.Web.Mvc;
-using System.Collections;
-using Epilogger.Data;
+﻿using System.Collections;
 using System.Collections.Generic;
-using Epilogger.Web.Models;
-using AutoMapper;
 using System.Linq;
+using System.Web.Mvc;
+
+using AutoMapper;
+
+using Epilogger.Data;
+using Epilogger.Web.Models;
+
 namespace Epilogger.Web.Controllers {
     [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view your dashboard")]
     public class DashboardController : BaseController {
@@ -20,28 +23,45 @@ namespace Epilogger.Web.Controllers {
 
         public ActionResult Index(int? page) {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
-
-            IEnumerable<Tweet> tweets = tweetService.FindByUserScreenName(CurrentUserTwitterAuthorization.ServiceUsername);
-            IEnumerable<Event> events = eventService.FindByUserID(CurrentUserID);
-
             List<DashboardActivityModel> activity = new List<DashboardActivityModel>();
 
-            foreach (var item in tweets) {
-                activity.Add(new DashboardActivityModel() {
-                    ActivityType = ActivityType.TWEET,
-                    Date = item.CreatedDate.Value,
-                    ActivityContent = item.TextAsHTML,
-                    Event = Mapper.Map<Event, DashboardEventViewModel>(item.Events.FirstOrDefault())
-                });
-	        }
+            if (CurrentUserTwitterAuthorization != null) {
+                IEnumerable<Tweet> tweets = tweetService.FindByUserScreenName(CurrentUserTwitterAuthorization.ServiceUsername);
+                IEnumerable<Event> events = eventService.FindByUserID(CurrentUserID);
+                List<Image> images = new List<Image>();
+                foreach (var item in events) {
+                    IEnumerable<ImageMetaDatum> usersEventImages = item.ImageMetaData.Where(imd => imd.TwitterName == CurrentUserTwitterAuthorization.ServiceUsername).Distinct();
+                    foreach (var image in usersEventImages) {
+                        images.Add(image.Images.First());
+                    }
+                }
 
-            foreach (var item in events) {
-                activity.Add(new DashboardActivityModel() {
-                    ActivityType = ActivityType.EVENT_CREATION,
-                    Date = item.StartDateTime.Value,
-                    ActivityContent = item.Description,
-                    Event = Mapper.Map<Event, DashboardEventViewModel>(item)
-                });
+                foreach (var item in tweets) {
+                    activity.Add(new DashboardActivityModel() {
+                        ActivityType = ActivityType.TWEET,
+                        Date = item.CreatedDate.Value,
+                        ActivityContent = item.TextAsHTML,
+                        Event = Mapper.Map<Event, DashboardEventViewModel>(item.Events.FirstOrDefault())
+                    });
+                }
+
+                foreach (var item in events) {
+                    activity.Add(new DashboardActivityModel() {
+                        ActivityType = ActivityType.EVENT_CREATION,
+                        Date = item.StartDateTime.Value,
+                        ActivityContent = item.Description,
+                        Event = Mapper.Map<Event, DashboardEventViewModel>(item)
+                    });
+                }
+
+                foreach (var item in images) {
+                    activity.Add(new DashboardActivityModel() {
+                        ActivityType = ActivityType.PHOTOS_VIDEOS,
+                        Date = item.DateTime,
+                        ActivityContent = item.Thumb,
+                        Event = Mapper.Map<Event, DashboardEventViewModel>(item.Events.FirstOrDefault())
+                    });
+                }
             }
 
             DashboardIndexViewModel model = new DashboardIndexViewModel(activity.OrderByDescending(a => a.Date).ToList(),currentPage);

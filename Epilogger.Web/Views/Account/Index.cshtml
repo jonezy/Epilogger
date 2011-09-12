@@ -11,7 +11,7 @@
             <input type="submit" value="link your account with twitter" name="twitter" />
         }
     } else {
-        @:<p class="remove-bottom">You are connected to twitter as: <strong>@Model.TwitterUsername</strong> (@Html.ActionLink("x", "Disconnect", "Twitter", new { area = "Authentication" }, null))</p>
+        @:<p class="half-bottom">You are connected to twitter as: <strong>@Model.TwitterUsername</strong> (@Html.ActionLink("x", "Disconnect", "Twitter", new { area = "Authentication" }, null))</p>
     }
 
     @if (string.IsNullOrEmpty(Model.FacebookUsername)) {
@@ -35,8 +35,6 @@
         </fieldset>
     }
 </div>
-<div class="grid_4 omega">
-    <h2>Your Followed Events</h2>
 
-</div>
+
 <br style="clear:both;" />
