@@ -1,0 +1,40 @@
+﻿@using Epilogger.Web;
+
+@model Epilogger.Web.Models.AllPhotosDisplayViewModel
+
+
+@{
+    ViewBag.Title = "Epilogger - " + Model.Name;   
+}
+
+
+<div class="grid_11 alpha">
+	<h1>ALL PHOTOS</h1>
+	<h2>FROM @Model.Name - @Model.PhotoCount.ToString("#,###")</h2>
+
+</div>
+
+<div class="grid_11 alpha" style="background-color: #333; height: 200px">Temp space</div>
+
+<div class="clear"></div>	
+<div class="spacer"></div>
+
+<div id="photos-filterbar">
+    FILTER:
+</div>
+
+<div class="clear"></div>	
+<div class="spacer"></div>
+
+<div class="image-grid" id="photosvideos">
+    @foreach (Epilogger.Data.Image EPLImage in Model.Images)
+    {
+        <div class="withcomment newPhotoupdates" id="photo-@EPLImage.ID">
+            <a href="@EPLImage.Fullsize" rel="prettyPhoto[latestphotos]" title="@EPLImage.ID" id="@EPLImage.ID"><img src="@EPLImage.Thumb" height="154" width="180" border="0" alt="" /></a>
+		    <a href="#" class="commentbubble">
+                @*Number of Comments*@
+                @EPLImage.ImageMetaData.Count()
+            </a>
+	    </div>
+    }
+</div>

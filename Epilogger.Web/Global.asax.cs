@@ -144,6 +144,13 @@ namespace Epilogger.Web {
 
             Mapper.CreateMap<Event, DashboardEventViewModel>();
 
+            Mapper.CreateMap<Event, AllPhotosDisplayViewModel>()
+                .ForMember(dest => dest.PhotoCount, opt => opt.Ignore())
+                .ForMember(dest => dest.Page, opt => opt.Ignore())
+                .ForMember(dest => dest.Images, opt => opt.Ignore());
+
+
+
             Mapper.AssertConfigurationIsValid();
         }
 

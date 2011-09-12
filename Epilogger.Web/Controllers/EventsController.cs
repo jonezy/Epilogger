@@ -63,6 +63,21 @@ namespace Epilogger.Web.Controllers {
             return View(Model);
         }
 
+
+        public ActionResult AllPhotos(int id)
+        {
+
+            AllPhotosDisplayViewModel Model = Mapper.Map<Event, AllPhotosDisplayViewModel>(ES.FindByID(id));
+
+            Model.PhotoCount = IS.FindImageCountByEventID(id);
+
+            Model.Images = IS.GetPagedPhotos(id, 1, 10);
+
+            return View(Model);
+        }
+
+
+
         [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the details of that event")]
         public ActionResult CreateEvent() {
             return View();
