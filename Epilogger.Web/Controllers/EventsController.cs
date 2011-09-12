@@ -143,7 +143,7 @@ namespace Epilogger.Web.Controllers {
 
 
                         string ProfilePicture = "<img src='" + TheT.ProfileImageURL + "' class='fleft' alt='' />";
-                        string FromLine = "<small><a href='http://www.twitter.com/" + TheT.FromUserScreenName + "'>" + TheT.FromUserScreenName + "</a></small>";
+                        string FromLine = "<small><a href='http://www.twitter.com/" + TheT.FromUserScreenName + "' target='_blank'>" + TheT.FromUserScreenName + "</a></small>";
                         HTML.Append("<li id='Tweet-" + TheT.TwitterID + "' class='tweet newupdates'>" + ProfilePicture + FromLine + "<p>" + TheT.TextAsHTML + "</p></li>");
 
                         RecordCount++;
