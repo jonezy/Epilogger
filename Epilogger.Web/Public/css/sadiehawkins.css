@@ -117,7 +117,7 @@ span.number {
 div#event-details {
 	border-top:1px dotted #ccc;
 	padding:15px 0;
-	margin:0 15px;
+	/*margin:0 15px;*/
 	border-bottom:1px dotted #ccc;}
 	
 span.event-details-label, span.event-details-detail {
@@ -218,7 +218,7 @@ div#search-container input[type=image] {
 .valign		{ vertical-align:middle}
 .fleft		{ float:left}
 .fright		{ float:right}
-
+.overflowhide { overflow: hidden; }
 
 
 /* ------------------------------ FONTS */	

@@ -461,6 +461,10 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 				
 				delete settings;
 			});
+
+            //CB - Sept 11, 2011 - Remove the hash
+            removeHashtag();
+
 		};
 	
 		/**
@@ -861,6 +865,13 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 		if(typeof theRel == 'undefined') return; // theRel is set on normal calls, it's impossible to deeplink using the API
 		location.hash = '!' + theRel + '/'+rel_index+'/';
 	};
+
+
+    //CB this is my function to remove the stupid hash when you close the photo.
+    function removeHashtag(){
+        location.hash = '';
+	};
+
 	
 	function getParam(name,url){
 	  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
