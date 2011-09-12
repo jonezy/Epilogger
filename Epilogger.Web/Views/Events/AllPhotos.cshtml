@@ -4,26 +4,50 @@
 
 
 @{
-    ViewBag.Title = "Epilogger - " + Model.Name;   
+    ViewBag.Title = "Epilogger - " + Model.Name;
 }
 
+
+<script language="javascript" type="text/javascript">
+    var EventID = @Model.ID;
+
+    var EventName = '@Model.Name';
+    var EventURL = 'http://www.epilogger.com/Events/Details/@Model.ID';
+</script>
+
+<ul id="subnavigation">
+    <li>@Html.ActionLink("OVERVIEW", "Details/" + Model.ID, "Events")</li>
+    <li>@Html.ActionLink("PHOTOS", "AllPhotos/" + Model.ID, "Events")</li>
+    <li>@Html.ActionLink("TWEETS", "index", "events")</li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+<span class="spacer"></span>
 
 <div class="grid_11 alpha">
 	<h1>ALL PHOTOS</h1>
 	<h2>FROM @Model.Name - @Model.PhotoCount.ToString("#,###")</h2>
-
 </div>
 
-<div class="grid_11 alpha" style="background-color: #333; height: 200px">Temp space</div>
+<div class="clear"></div>
 
-<div class="clear"></div>	
-<div class="spacer"></div>
+@if (Model.ShowTopPhotos)
+{
+    <div class="grid_11 alpha" style="background-color: #333; height: 200px">Temp space</div>
+    <div class="clear"></div>
+    <div class="spacer"></div>
+}
+
+	
+
 
 <div id="photos-filterbar">
     FILTER:
 </div>
 
-<div class="clear"></div>	
+<div class="clear"></div>
 <div class="spacer"></div>
 
 <div class="image-grid" id="photosvideos">
@@ -38,3 +62,19 @@
 	    </div>
     }
 </div>
+
+<div class="clear"></div>
+<div class="spacer"></div>
+@MvcHtmlString.Create(Html.Pager(30, Model.CurrentPageIndex, Model.PhotoCount, new { controller = "Events", action = "AllPhotos/" + Model.ID }))
+
+
+<script type="text/javascript" charset="utf-8">
+    head.ready(function () {
+        $("a[rel^='prettyPhoto']").prettyPhoto({
+            theme: 'light_square',
+            animation_speed: 'fast',
+            overlay_gallery: false,
+            changepicturecallback: function () { changeDescription(); }
+        });
+    });
+</script>

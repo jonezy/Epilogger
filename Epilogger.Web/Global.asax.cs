@@ -92,7 +92,8 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.Tweets, opt => opt.Ignore())
                 .ForMember(dest => dest.ExternalLinks, opt => opt.Ignore())
                 .ForMember(dest => dest.BlogPosts, opt => opt.Ignore())
-                .ForMember(dest => dest.TweetCount, opt => opt.Ignore());
+                .ForMember(dest => dest.TweetCount, opt => opt.Ignore())
+                .ForMember(dest => dest.ImageCount, opt => opt.Ignore());
                 
 
             Mapper.CreateMap<CreateAccountModel, User>()
@@ -147,6 +148,8 @@ namespace Epilogger.Web {
             Mapper.CreateMap<Event, AllPhotosDisplayViewModel>()
                 .ForMember(dest => dest.PhotoCount, opt => opt.Ignore())
                 .ForMember(dest => dest.Page, opt => opt.Ignore())
+                .ForMember(dest => dest.CurrentPageIndex, opt => opt.Ignore())
+                .ForMember(dest => dest.ShowTopPhotos, opt => opt.Ignore())
                 .ForMember(dest => dest.Images, opt => opt.Ignore());
 
 

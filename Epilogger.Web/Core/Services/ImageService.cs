@@ -18,6 +18,19 @@ namespace Epilogger.Web
             return db.Images.Where(t => t.EventID == EventID).Count();
         }
 
+        public IEnumerable<Image> FindByEventIDOrderDescTake9(int EventID)
+        {
+            return db.Images.Where(t => t.EventID == EventID).OrderByDescending(t => t.DateTime).Take(9);
+        }
+
+
+
+
+
+
+
+
+
         public IEnumerable<Image> FindByEventID(int EventID)
         {
             return FindByEventID(EventID, DateTime.Parse("1900-01-01 00:00:00"), DateTime.Parse("9999-12-31 00:00:00"));
