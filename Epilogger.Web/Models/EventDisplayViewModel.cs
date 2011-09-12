@@ -33,6 +33,7 @@ namespace Epilogger.Web.Models {
         public string TwitterAccount { get; set; }
 
         public int TweetCount { get; set; }
+        public int ImageCount { get; set; }
 
         public IEnumerable<Epilogger.Data.Tweet> Tweets { get; set; }
         public IEnumerable<Epilogger.Data.Image> Images { get; set;}

@@ -25,10 +25,14 @@ namespace Epilogger.Web
             return db;
         }
 
+
+
+        //Less greedy data functions
         public int FindTweetCountByEventID(int EventID)
         {
             return db.Tweets.Where(t => t.EventID == EventID).Count();
         }
+
 
         public IEnumerable<Tweet> FindByEventIDOrderDescTake6(int EventID)
         {
@@ -37,6 +41,9 @@ namespace Epilogger.Web
 
 
 
+
+
+        //Slower funcitons
         public IEnumerable<Tweet> FindByEventID(int EventID)
         {
             //return FindByEventID(EventID, DateTime.Parse("2000-01-01 00:00:00"), DateTime.Parse("2200-12-31 00:00:00"));
