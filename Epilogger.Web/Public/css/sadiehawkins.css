@@ -46,6 +46,32 @@ ul#navigation li a:hover {
 ul#navigation li a.selected {
 	background:#fc5daf;
 	color:#fff}
+	
+	
+/* -- Sub Nav */
+	
+ul#subnavigation {
+	background:#d1d1d1}
+	
+ul#subnavigation li {
+	display:inline-block;
+	padding:9px 0 5px 0}
+
+ul#subnavigation li a {
+	color:#000;
+	padding:10px 10px 6px 10px;
+	text-transform:uppercase;
+	margin:0 5px;
+	font:normal 13pt 'InterstatePlusRegular', impact, sans-serif;}
+
+ul#subnavigation li a:hover {
+	background:#fff;
+	color:#60143b}
+
+ul#subnavigation li a.selected {
+	background:#fc5daf;
+	color:#fff}	
+	
 
 
 /* --- top tabs */

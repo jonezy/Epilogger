@@ -51,7 +51,16 @@
 </style>
 
 
-
+<ul id="subnavigation">
+    <li>@Html.ActionLink("OVERVIEW", "Details/" + Model.ID, "Events")</li>
+    <li>@Html.ActionLink("PHOTOS", "AllPhotos/" + Model.ID, "Events")</li>
+    <li>@Html.ActionLink("TWEETS", "index", "events")</li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+<span class="spacer"></span>
 
 <div class="grid_7 alpha">
 	<h1>@Model.Name</h1>
@@ -73,7 +82,108 @@
 		
 <div class="clear"></div>		
 @*<span class="spacer"></span>*@
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		
+		
+<!-- PHOTOS & VIDEOS -->
+<div class="grid_7 alpha">
+	<h2><span class="number" id="photoCount">@string.Format("{0:#,###}", Model.Images.Count())</span> Photos & Videos</h2>
+	<h4>filter:</h4>
+
+	<span class="sm-spacer"></span>
+
+	<div class="image-grid" id="photosvideos">
+        @foreach (Epilogger.Data.Image EPLImage in Model.Images)
+        {
+            <div class="withcomment newPhotoupdates" id="photo-@EPLImage.ID">
+                <a href="@EPLImage.Fullsize" rel="prettyPhoto[latestphotos]" title="@EPLImage.ID" id="@EPLImage.ID"><img src="@EPLImage.Thumb" height="154" width="180" border="0" alt="" /></a>
+			    <a href="#" class="commentbubble">
+                    @EPLImage.ImageMetaData.Count()
+                </a>
+		    </div>
+        }
+	</div>
+			
+	<div class="clear"></div>
+	<div class="spacer"></div>
+			
+	<p>(@Html.ActionLink("See all photos and videos", "AllPhotos/" + Model.ID, "Events"))</p>
+</div>
+		
+		
+<!-- TWEETS -->
+<div class="grid_4 omega">
+	<h2><span class="number" id="tweetCount">@string.Format("{0:#,###}", Model.TweetCount)</span> Tweets & Shoutouts</h2>
+	<h4>filter:</h4>
+			
+	<span class="sm-spacer"></span>
+			
+	<ul class="plain-list" id="tweetlist">
+        @foreach (Epilogger.Data.Tweet EPLTweet in Model.Tweets)
+        {
+            <li id="Tweet-@EPLTweet.TwitterID" class="tweet">
+			    <img src="@EPLTweet.ProfileImageURL" class="fleft" alt="" />
+			    <small><a href="http://www.twitter.com/@EPLTweet.FromUserScreenName" target="_blank">@EPLTweet.FromUserScreenName</a></small>
+			    <p>@Html.Raw(EPLTweet.TextAsHTML)</p>
+		    </li>
+        }
+        
+        @*<li class="tweet">
+		</li>*@
+	</ul>
+			
+	<span class="sm-spacer"></span>
+			
+</div>
+		
+<div class="clear"></div>
+<div class="spacer"></div>
+@*<div class="big-spacer"></div>*@
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
 <div id="event-details">
 	<span class="event-details-label">When:</span>
 	<span class="event-details-detail">
@@ -125,7 +235,7 @@
 	</span>
 			
 	<span class="event-details-label">
-		Cost: <br />        
+		Cost: <br />
 		<span style="position:relative; top:5px">tw:</span><br/>
 		<span style="position:relative; top:10px">fb:</span>
 	</span>
@@ -148,66 +258,38 @@
 		
 <div class="clear"></div>
 <div class="spacer"></div>
-		
-		
-<!-- PHOTOS & VIDEOS -->
-<div class="grid_7 alpha">
-	<h2><span class="number" id="photoCount">@string.Format("{0:#,###}", Model.Images.Count())</span> Photos & Videos</h2>
-	<h4>filter:</h4>
 
-	<span class="sm-spacer"></span>
 
-	<div class="image-grid" id="photosvideos">
-        @foreach (Epilogger.Data.Image EPLImage in Model.Images.OrderByDescending(i => i.DateTime).Take(9))
-        {
-            <div class="withcomment newPhotoupdates" id="photo-@EPLImage.ID">
-			    @*<img alt="" height="154" width="180" src="@EPLImage.Thumb" rel="prettyPhoto[gallery1]" />*@
-                <a href="@EPLImage.Fullsize" rel="prettyPhoto[latestphotos]" title="@EPLImage.ID" id="@EPLImage.ID"><img src="@EPLImage.Thumb" height="154" width="180" border="0" alt="" /></a>
-			    <a href="#" class="commentbubble">
-                    @*Number of Comments*@
-                    @EPLImage.ImageMetaData.Count()
-                </a>
-		    </div>
-        }
-	</div>
-			
-	<div class="clear"></div>
-	<div class="spacer"></div>
-			
-	<p>(<a href="#">See all photos and videos</a>)</p>
-</div>
-		
-		
-<!-- TWEETS -->
-<div class="grid_4 omega">
-	<h2><span class="number" id="tweetCount">@string.Format("{0:#,###}", Model.TweetCount)</span> Tweets & Shoutouts</h2>
-	<h4>filter:</h4>
-			
-	<span class="sm-spacer"></span>
-			
-	<ul class="plain-list" id="tweetlist">
-        @foreach (Epilogger.Data.Tweet EPLTweet in Model.Tweets)
-        {
-            <li id="Tweet-@EPLTweet.TwitterID" class="tweet">
-			    <img src="@EPLTweet.ProfileImageURL" class="fleft" alt="" />
-			    <small><a href="http://www.twitter.com/@EPLTweet.FromUserScreenName" target="_blank">@EPLTweet.FromUserScreenName</a></small>
-			    <p>@Html.Raw(EPLTweet.TextAsHTML)</p>
-		    </li>
-        }
-        
-        @*<li class="tweet">
-		</li>*@
-	</ul>
-			
-	<span class="sm-spacer"></span>
-			
-</div>
-		
-<div class="clear"></div>
-<div class="spacer"></div>
-@*<div class="big-spacer"></div>*@
-		
-		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- BLOG POSTINGS -->
 <div class="grid_4 alpha">
 	<h2>Blog postings</h2>
