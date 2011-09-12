@@ -64,7 +64,12 @@ namespace Epilogger.Web.Controllers {
                 }
             }
 
-            DashboardIndexViewModel model = new DashboardIndexViewModel(activity.OrderByDescending(a => a.Date).ToList(),currentPage);
+
+            DashboardIndexViewModel model = new DashboardIndexViewModel(
+                activity.OrderByDescending(a => a.Date).Skip(currentPage * 12).Take(12).ToList(), 
+                currentPage, 
+                activity.Count
+            );
 
             return View(model);
         }
