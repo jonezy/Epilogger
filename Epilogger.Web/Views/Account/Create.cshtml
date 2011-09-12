@@ -31,10 +31,12 @@
         <p>@Html.LabelFor(model => model.Password) @Html.PasswordFor(model => model.Password)</p>
     </div>
     
-    <div class="grid_7 alpha">
-        <p>@Html.LabelFor(model => model.TimeZoneOffset) @Html.DropDownListFor(model => model.TimeZoneOffset, Model.TimeZones, "Select your timezone")</p>
+    <div class="grid_3 alpha">
+        <p>@Html.LabelFor(model => model.DateOfBirth) @Html.TextBoxFor(model => model.DateOfBirth, new { @class = "dob" })</p>
     </div>
-    
+    <div class="grid_4">
+        <p>@Html.LabelFor(model => model.TimeZoneOffset) @Html.DropDownListFor(model => model.TimeZoneOffset, Model.TimeZones, "Select your timezone")</p>
+    </div>    
     <br style="clear:both;" />
     
     <p><input type="submit" class="submit" value="register" /></p>

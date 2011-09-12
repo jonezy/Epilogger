@@ -1,0 +1,11 @@
+﻿<h1>DASHBOARD</h1>
+@{
+    var action = ViewContext.RouteData.Values["action"] as string ?? "";
+}
+<ul>
+    <li>@Html.ActionLink("Account Activity", "index", null,  action.ToLower() == "index" ? new { @class="current"} : null)</li>
+    <li>@Html.ActionLink("Profile Information", "profile", null, action.ToLower() == "profile" ? new { @class = "current" } : null)</li>
+    <li>@Html.ActionLink("My Events & Subscriptions", "index", null, action.ToLower() == "events" ? new { @class = "current" } : null)</li>
+    <li>@Html.ActionLink("Friends Feed", "index", null, action.ToLower() == "friends" ? new { @class = "current" } : null)</li>
+    <li>@Html.ActionLink("Account", "index", null, action.ToLower() == "account" ? new { @class = "current" } : null)</li>
+</ul>

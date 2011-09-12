@@ -17,7 +17,7 @@ namespace Epilogger.Web.Controllers {
             trail.Add("home", App.BaseUrl);
             foreach (var item in Request.RequestContext.RouteData.Values) {
                 if (item.Value.ToString().ToLower() != "index") {
-                    string url = string.Format("{0}{1}", App.BaseUrl, Url.Action(Request.RequestContext.RouteData.Values["action"].ToString(), Request.RequestContext.RouteData.Values["controller"].ToString()));
+                    string url = string.Format("{0}{1}", App.BaseUrl, Url.Action(Request.RequestContext.RouteData.Values["action"].ToString(), Request.RequestContext.RouteData.Values["controller"].ToString()).TrimStart('/'));
                     trail.Add(item.Value.ToString(), url);
                 }
             }

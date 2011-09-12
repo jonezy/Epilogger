@@ -179,8 +179,11 @@ image-grid#photosvideos {
 #dashboard-nav ul li a.current {background:#f6f6f6;border-bottom:solid 1px #bdbdbd;}
 
 #dashboard-content {float:left;width:641px;}
-.dashboard-activity-entry {float:left;height:90px;overflow:hidden;margin:0px 20px 20px 0px;width:185px;}
-.dashboard-activity-entry strong.title {color:#5086b9;margin-bottom:10px;}
+.dashboard-activity-entry {float:left;height:140px;overflow:hidden;margin:0px 20px 20px 0px;width:185px;color:#828282;}
+.dashboard-activity-entry strong.title {color:#5086b9;margin-bottom:10px;padding-left:24px;background-image:url(../images/event_activity_title_icons.png);background-repeat: no-repeat;font-size:12px;text-transform:uppercase;margin-bottom:5px;display:block;}
+.dashboard-activity-entry strong.title.TWEET {background-position:0 0;}
+.dashboard-activity-entry strong.title.PHOTOS_VIDEOS {background-position:0 -24px;padding-left:28px;}
+.dashboard-activity-entry strong.title.EVENT_CREATION {background-position:0 -56px;padding-left:28px;}
 
 .profile-card {}
 .profile-card h4 {background:#ee4490;color:#fff;float:left;padding:5px 10px 5px 10px;}

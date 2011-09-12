@@ -1,10 +1,10 @@
-﻿using System.Web.Mvc;
-using System.Collections;
-using Epilogger.Data;
+﻿using System.Collections;
 using System.Collections.Generic;
-using Epilogger.Web.Models;
-using AutoMapper;
 using System.Linq;
+using System.Web.Mvc;
+using AutoMapper;
+using Epilogger.Data;
+using Epilogger.Web.Models;
 namespace Epilogger.Web.Controllers {
     [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view your dashboard")]
     public class DashboardController : BaseController {
@@ -23,6 +23,12 @@ namespace Epilogger.Web.Controllers {
 
             IEnumerable<Tweet> tweets = tweetService.FindByUserScreenName(CurrentUserTwitterAuthorization.ServiceUsername);
             IEnumerable<Event> events = eventService.FindByUserID(CurrentUserID);
+            List<Image> images = new List<Image>();
+            foreach (var item in events) {
+                foreach (var image in item.ImageMetaData.Where(imd => imd.TwitterName == CurrentUserTwitterAuthorization.ServiceUsername)) {
+                    images.Add(image.Images.FirstOrDefault());
+                }
+            }
 
             List<DashboardActivityModel> activity = new List<DashboardActivityModel>();
 
@@ -42,6 +48,15 @@ namespace Epilogger.Web.Controllers {
                     ActivityContent = item.Description,
                     Event = Mapper.Map<Event, DashboardEventViewModel>(item)
                 });
+            }
+
+            foreach (var item in images) {
+                activity.Add(new DashboardActivityModel() {
+                    ActivityType = ActivityType.PHOTOS_VIDEOS,
+                    Date = item.DateTime,
+                    ActivityContent = item.Thumb,
+                    Event = Mapper.Map<Event, DashboardEventViewModel>(item.Events.FirstOrDefault())
+                });                
             }
 
             DashboardIndexViewModel model = new DashboardIndexViewModel(activity.OrderByDescending(a => a.Date).ToList(),currentPage);

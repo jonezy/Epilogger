@@ -9,13 +9,11 @@ $(document).ready(function () {
 });
 */
 
-head.ready(function () {
-    $(".dob").datepicker({
-        changeMonth: true,
-        changeYear: true,
-        yearRange: "-90:+0"
-    });
-    $(".dob").formatDate('yyyy-mm-dd');
+//attaches  a calendar to date of birth fields.
+$(".dob").datepicker({
+    changeMonth: true,
+    changeYear: true,
+    yearRange: "-90:+0"
 });
 
 //This fills in the Comments on the Image popups (tweets)
