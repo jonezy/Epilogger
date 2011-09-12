@@ -213,6 +213,7 @@
     <Content Include="Public\images\bg\sample7.jpg" />
     <Content Include="Public\images\btn-checkinmore.png" />
     <Content Include="Public\images\btn-submit.png" />
+    <Content Include="Public\images\event_activity_title_icons.png" />
     <Content Include="Public\images\icons\bubble.png" />
     <Content Include="Public\images\icons\tweet-black.png" />
     <Content Include="Public\images\logo.png" />
