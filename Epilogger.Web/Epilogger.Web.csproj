@@ -163,6 +163,7 @@
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\AllPhotosDisplayViewModel.cs" />
     <Compile Include="Models\AzureTweetModel.cs" />
+    <Compile Include="Models\AllTweetsDisplayViewModel.cs" />
     <Compile Include="Models\CreateAccountModel.cs" />
     <Compile Include="Models\CreateEventViewModel.cs" />
     <Compile Include="Models\DashboardActivityModel.cs" />
@@ -365,6 +366,7 @@
     <Content Include="Views\Events\AllPhotos.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Events\AllTweets.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

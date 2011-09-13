@@ -53,14 +53,14 @@ namespace Epilogger.Web.Controllers {
 
             Model.TweetCount = TS.FindTweetCountByEventID(id);
             Model.Tweets = TS.FindByEventIDOrderDescTake6(id);
-
             Model.ImageCount = IS.FindImageCountByEventID(id);
             Model.Images = IS.FindByEventIDOrderDescTake9(id);
-
+            Model.CheckInCount = CS.FindCheckInCountByEventID(id);
+            Model.CheckIns = CS.FindByEventIDOrderDescTake5(id);
+            Model.ExternalLinks = LS.FindByEventIDOrderDescTake3(id);
 
             //Not optimized
-            Model.CheckIns = CS.FindByEventID(id);
-            Model.ExternalLinks = LS.FindByEventID(id);
+            
             Model.BlogPosts = BS.FindByEventID(id);
             
             return View(Model);
@@ -88,6 +88,31 @@ namespace Epilogger.Web.Controllers {
                 Model.Images = IS.GetPagedPhotos(id, currentPage + 1, 30);
             }
             
+
+            return View(Model);
+        }
+
+        public ActionResult AllTweets(int id, int? page)
+        {
+            int currentPage = page.HasValue ? page.Value - 1 : 0;
+
+            AllTweetsDisplayViewModel Model = Mapper.Map<Event, AllTweetsDisplayViewModel>(ES.FindByID(id));
+
+            Model.TweetCount = TS.FindTweetCountByEventID(id);
+            Model.CurrentPageIndex = currentPage;
+
+
+            if (currentPage + 1 == 1)
+            {
+                Model.ShowTopTweets = true;
+                Model.Tweets = TS.GetPagedTweets(id, currentPage + 1, 10);
+            }
+            else
+            {
+                Model.ShowTopTweets = false;
+                Model.Tweets = TS.GetPagedTweets(id, currentPage + 1, 100);
+            }
+
 
             return View(Model);
         }
