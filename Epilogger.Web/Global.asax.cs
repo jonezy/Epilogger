@@ -129,7 +129,7 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.CollectionMode, opt => opt.Ignore())
                 .ForMember(dest => dest.TwitterAccount, opt => opt.Ignore())
                 .ForMember(dest => dest.FacebookPageURL, opt => opt.Ignore());
-
+            
             Mapper.CreateMap<User, DashboardProfileViewModel>()
                 .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => string.Format("{0} {1}", src.FirstName, src.LastName)))
                 .ForMember(dest => dest.Events, opt => opt.MapFrom(src => src.Events.OrderByDescending(e => e.StartDateTime).ToList()));
