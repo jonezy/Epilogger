@@ -95,7 +95,6 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.TweetCount, opt => opt.Ignore())
                 .ForMember(dest => dest.ImageCount, opt => opt.Ignore())
                 .ForMember(dest => dest.CheckInCount, opt => opt.Ignore());
-                
 
             Mapper.CreateMap<CreateAccountModel, User>()
                 .ForMember(dest => dest.ForgotPasswordHash, opt => opt.Ignore())
@@ -103,19 +102,10 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.Password, opt => opt.MapFrom(src => PasswordHelpers.EncryptPassword(src.Password)))
                 .ForMember(dest => dest.IsActive, opt => opt.UseValue(true))
                 .ForMember(dest => dest.CreatedDate, opt => opt.UseValue(DateTime.UtcNow))
-                .ForMember(dest => dest.DateOfBirth, opt => opt.MapFrom(src => DateTime.Parse(src.DateOfBirth)))
-                .ForMember(dest => dest.TimeZoneOffSet, opt => opt.UseValue(-5));
+                .ForMember(dest => dest.DateOfBirth, opt => opt.MapFrom(src => DateTime.Parse(src.DateOfBirth)));
             
-            Mapper.CreateMap<AccountModel, User>()
-                .ForMember(dest => dest.ForgotPasswordHash, opt => opt.Ignore())
-                .ForMember(dest => dest.ID, opt => opt.Ignore())
-                .ForMember(dest => dest.Password, opt => opt.Ignore())
-                .ForMember(dest => dest.DateOfBirth, opt => opt.Ignore())
-                .ForMember(dest => dest.IsActive, opt => opt.Ignore())
-                .ForMember(dest => dest.CreatedDate, opt => opt.Ignore())
-                .ForMember(dest => dest.TimeZoneOffSet, opt => opt.UseValue(-5));
-
             Mapper.CreateMap<User, AccountModel>()
+                .ForMember(dest => dest.TimeZone, opt => opt.MapFrom(src => src.TimeZoneOffSet))
                 .ForMember(dest => dest.DateOfBirth, opt => opt.MapFrom(src => src.DateOfBirth.HasValue ? src.DateOfBirth.Value.ToShortDateString() : ""))
                 .ForMember(dest => dest.TwitterUsername, opt => opt.MapFrom(src => src.UserAuthenticationProfiles.Where(ua => ua.Service == AuthenticationServices.TWITTER.ToString()).FirstOrDefault().ServiceUsername))
                 .ForMember(dest => dest.FacebookUsername, opt => opt.MapFrom(src => src.UserAuthenticationProfiles.Where(ua => ua.Service == AuthenticationServices.FACEBOOK.ToString()).FirstOrDefault().ServiceUsername));
@@ -139,7 +129,7 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.CollectionMode, opt => opt.Ignore())
                 .ForMember(dest => dest.TwitterAccount, opt => opt.Ignore())
                 .ForMember(dest => dest.FacebookPageURL, opt => opt.Ignore());
-
+            
             Mapper.CreateMap<User, DashboardProfileViewModel>()
                 .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => string.Format("{0} {1}", src.FirstName, src.LastName)))
                 .ForMember(dest => dest.Events, opt => opt.MapFrom(src => src.Events.OrderByDescending(e => e.StartDateTime).ToList()));

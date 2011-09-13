@@ -17,7 +17,8 @@
             <h2>Hello my name is</h2>
             <h1>@Model.FullName</h1>
 
-            @Model.EmailAddress
+            @Model.EmailAddress<br />
+            @Model.DateOfBirth.ToShortDateString()
 
         </div>
     </div>
@@ -25,7 +26,27 @@
 
     <div class="spacer"></div>
     <h2>My Events & Subscriptions</h2>
+    @{
+        int count = 0;
+        int columns = 2;
+    }
     @foreach (var item in Model.Events) {
-        <p>@item.Name - @item.StartDateTime.ToString("MMM dd yy hh:mmt").ToLower()</p>
+        <div class="profile-event-item">
+            <div class="month-day">
+                @item.StartDateTime.ToString("MMM")
+                <h2>@item.StartDateTime.Day</h2>
+            </div>
+            <div class="event-content">
+                @Html.ActionLink(item.Name, "details", "events", new { @id = item.ID }, null)<br />
+                @item.StartDateTime.ToString("hh:mmtt").ToLower() &nbsp;&nbsp;&nbsp;&nbsp; @item.SearchTerms
+            </div>
+        </div>
+        
+        if(count <= columns) {
+             count++;
+         } else {
+            @:<br style="clear:both;" />
+            count = 0;
+         } 
     }
 </div>
