@@ -34,6 +34,7 @@ namespace Epilogger.Web.Models {
 
         public int TweetCount { get; set; }
         public int ImageCount { get; set; }
+        public int CheckInCount { get; set; }
 
         public IEnumerable<Epilogger.Data.Tweet> Tweets { get; set; }
         public IEnumerable<Epilogger.Data.Image> Images { get; set;}

@@ -13,6 +13,27 @@ namespace Epilogger.Web
             get { return "Epilogger.Web.CheckIn"; }
         }
 
+
+        public int FindCheckInCountByEventID(int EventID)
+        {
+            return db.CheckIns.Where(t => t.EventID == EventID).Count();
+        }
+
+        public IEnumerable<CheckIn> FindByEventIDOrderDescTake5(int EventID)
+        {
+            return db.CheckIns.Where(t => t.EventID == EventID).OrderByDescending(t => t.CheckInDateTime).Take(5);
+        }
+
+
+
+
+
+
+
+
+
+
+
         public IEnumerable<CheckIn> FindByEventID(int EventID)
         {
             return FindByEventID(EventID, DateTime.Parse("1900-01-01 00:00:00"), DateTime.Parse("9999-12-31 00:00:00"));
