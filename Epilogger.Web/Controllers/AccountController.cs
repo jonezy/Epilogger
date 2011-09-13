@@ -69,13 +69,14 @@ namespace Epilogger.Web.Controllers {
 
         [HttpPost]
         [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to edit your account")]
-        public ActionResult Update(AccountModel model) {
+        public ActionResult Update(AccountModel model, FormCollection c) {
             try {
                 User user = CurrentUser;
                 user.FirstName = model.FirstName;
                 user.LastName = model.LastName;
                 user.EmailAddress = model.EmailAddress;
                 user.DateOfBirth = DateTime.Parse(model.DateOfBirth);
+                user.TimeZoneOffSet = Int32.Parse(c["TimeZoneOffset"].ToString());
 
                 service.Save(user);
 

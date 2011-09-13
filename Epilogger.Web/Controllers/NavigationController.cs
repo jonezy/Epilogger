@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 using Epilogger.Web.Models;
-using System.Collections.Generic;
 
 namespace Epilogger.Web.Controllers {
     public class NavigationController : BaseController {
