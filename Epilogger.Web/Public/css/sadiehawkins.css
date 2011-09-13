@@ -221,6 +221,12 @@ div#photos-filterbar {
 .profile-card {}
 .profile-card h4 {background:#ee4490;color:#fff;float:left;padding:5px 10px 5px 10px;}
 .profile-data {background:#dcdcdc;padding:10px;border-top:solid 5px #ee4490;margin-top:-5px;}
+.profile-data h1 {border-bottom:2px solid #fff;padding-bottom:10px;margin-bottom:10px;}
+
+.profile-event-item {float:left;width:250px;margin:0px 10px 10px 0px;}
+.profile-event-item .month-day {font-size:12px;float:left;background:#e9e9e9;padding:2px 0px 2px 0px;width:39px;height:42px;text-align:center;}
+.profile-event-item .month-day h2 {margin:0;color:#555 !important;font-weight:bold;}
+.profile-event-item .event-content {margin-left:5px;float:left;width:200px;}
 /* ------------------------------ FORMS */
 
 div#search-container {
