@@ -58,7 +58,7 @@ namespace Epilogger.Web.Controllers {
                     activity.Add(new DashboardActivityModel() {
                         ActivityType = ActivityType.PHOTOS_VIDEOS,
                         Date = item.DateTime,
-                        ActivityContent = item.Thumb,
+                        ActivityContent = item.Fullsize,
                         Event = Mapper.Map<Event, DashboardEventViewModel>(item.Events.FirstOrDefault())
                     });
                 }

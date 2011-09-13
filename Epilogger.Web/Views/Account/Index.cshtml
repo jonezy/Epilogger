@@ -27,10 +27,26 @@
     <h2>Your Info</h2>
     @using (Html.BeginForm("Update", "Account", FormMethod.Post)) {
         <fieldset>
-            <p>@Html.LabelFor(model => model.FirstName) @Html.TextBoxFor(model => model.FirstName)</p>
-            <p>@Html.LabelFor(model => model.LastName) @Html.TextBoxFor(model => model.LastName)</p>
-            <p>@Html.LabelFor(model => model.EmailAddress) @Html.TextBoxFor(model => model.EmailAddress)</p>
-            <p>@Html.LabelFor(model => model.DateOfBirth) @Html.TextBoxFor(model => model.DateOfBirth, new { @class = "dob" })</p>
+ <div class="grid_3 alpha">
+        <p>@Html.LabelFor(model => model.FirstName) @Html.TextBoxFor(model => model.FirstName)</p>
+    </div>
+    <div class="grid_4">
+        <p>@Html.LabelFor(model => model.LastName) @Html.TextBoxFor(model => model.LastName)</p>
+    </div>
+    <br style="clear:both;" />
+    
+    <div class="grid_7 alpha">
+        <p>@Html.LabelFor(model => model.EmailAddress) @Html.TextBoxFor(model => model.EmailAddress)</p>
+    </div>
+    <br style="clear:both;" />
+    
+    <div class="grid_3 alpha">
+        <p>@Html.LabelFor(model => model.DateOfBirth) @Html.TextBoxFor(model => model.DateOfBirth, new { @class = "dob" })</p>
+    </div>
+@*    <div class="grid_4">
+        <p>@Html.LabelFor(model => model.TimeZone) @Html.DropDownList("timez", Model.TimeZones, "Select your timezone")</p>
+    </div>    *@
+    <br style="clear:both;" />
             <p><input type="submit" class="submit" value="update" /></p>
         </fieldset>
     }
