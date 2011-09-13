@@ -8,6 +8,25 @@
     
 }
 
+<script type="text/javascript" language="javascript">
+    head.js('@Url.Content("~/Public/js/EventDetails.js")');
+</script>
+
+
+
+@if (Model.Tweets.FirstOrDefault() != null)
+{
+    <script language="javascript" type="text/javascript">
+        var pageLoadTime = '@string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.Tweets.FirstOrDefault().CreatedDate)';
+    </script>
+}
+
+else
+{
+    <script language="javascript" type="text/javascript">
+        var pageLoadTime = '@string.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.UtcNow)';
+    </script>
+}
 
 <script language="javascript" type="text/javascript">
     var EventID = @Model.ID;
@@ -19,8 +38,7 @@
     var updateTimeout = 5000;
     var updateRate = 10000;
     var prologuePostsUpdates = 1;
-    var isFirstFrontPage = 1;
-    var pageLoadTime = '@string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.Tweets.FirstOrDefault().CreatedDate)';
+    var isFirstFrontPage = 1;   
     var postsOnPage = new Array;
     var postsOnPageQS = '';
     var maxItemsOnPage = 6;
@@ -30,7 +48,7 @@
     var photoUpdateRate = 15000;
     var photoProloguePostsUpdates = 1;
     var photoIsFirstFrontPage = 1;
-    var photoPageLoadTime = '@string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.Tweets.FirstOrDefault().CreatedDate)';
+    var photoPageLoadTime = pageLoadTime;
     
     var photoPostsOnPage = new Array;
     var photoPostsOnPageQS = '';
@@ -65,6 +83,27 @@
 <div class="grid_7 alpha">
 	<h1>@Model.Name</h1>
 	<h2>@Model.SubTitle</h2>
+
+
+    @*@if (!Model.HasSubscribed)
+    {
+        @using (Html.BeginForm())
+        {
+            @Html.HiddenFor(m => m.HasSubscribed)
+            <div id="subscribeSection">
+                <input type="submit" value="Subscribe to Event" name="SubscribeToEvent" id="SubscribeToEvent" />
+            </div>
+        }
+    }
+    else
+    {
+        @:<p class="half-bottom">You are connected to twitter as: <strong>@Model.TwitterUsername</strong> (@Html.ActionLink("x", "Disconnect", "Twitter", new { area = "Authentication" }, null))</p>
+    }*@
+
+
+
+
+
 			
 	<p>@Html.Raw(Model.Description.Replace("\r", "<br />"))
         @if (Model.Description.Length > 266)
@@ -119,10 +158,12 @@
 	<span class="event-details-detail">
         <a href="@Model.WebsiteURL" target="_blank">@Model.WebsiteURL</a><br />
 		@{
-            try {
-                string[] SearchT = Model.SearchTerms.Split(new string[] {" OR "}, StringSplitOptions.None);
+            try
+            {
+                string[] SearchT = Model.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None);
                 string SearchTerms = "";
-                foreach (string s in SearchT) {
+                foreach (string s in SearchT)
+                {
                     SearchTerms += s + ", ";
                 }
                 @Html.Raw("<strong>" + SearchTerms.Substring(0, (SearchTerms.Length - 2)) + "</strong>")
@@ -140,15 +181,16 @@
 		<span style="position:relative; top:10px">fb:</span>
 	</span>
 	<span class="event-details-detail">
-		@if (Model.Cost != null) {
+		@if (Model.Cost != null)
+  {
             @Model.Cost
-        }<br/>
+  }<br/>
         
         @if (Model.TwitterAccount != null)
         {
             <a href="http://www.twitter.com/@Model.TwitterAccount">@Model.TwitterAccount</a>
         }
-        @if (Model.FacebookPageURL != null) 
+        @if (Model.FacebookPageURL != null)
         {
             <a href="@Model.FacebookPageURL" target="_blank">@Model.FacebookPageURL</a><br/>
         }
@@ -164,7 +206,7 @@
 		
 <!-- PHOTOS & VIDEOS -->
 <div class="grid_7 alpha">
-	<h2><span class="number" id="photoCount">@string.Format("{0:#,###}", Model.Images.Count())</span> Photos & Videos</h2>
+	<h2><span class="number" id="photoCount">@string.Format("{0:#,###}", Model.ImageCount)</span> Photos & Videos</h2>
 	<h4>filter:</h4>
 
 	<span class="sm-spacer"></span>
@@ -199,7 +241,7 @@
         @foreach (Epilogger.Data.Tweet EPLTweet in Model.Tweets)
         {
             <li id="Tweet-@EPLTweet.TwitterID" class="tweet">
-			    <img src="@EPLTweet.ProfileImageURL" class="fleft" alt="" />
+			    <img src="@EPLTweet.ProfileImageURL" class="fleft" height="48" width="48" alt="" />
 			    <small><a href="http://www.twitter.com/@EPLTweet.FromUserScreenName" target="_blank">@EPLTweet.FromUserScreenName</a></small>
 			    <p>@Html.Raw(EPLTweet.TextAsHTML)</p>
 		    </li>
@@ -246,7 +288,7 @@
 <div class="grid_3 overflowhide">
 	<h2>External Links</h2>
 	<ul class="plain-list">
-		@foreach (Epilogger.Data.URL TheURL in Model.ExternalLinks.Take(3))
+		@foreach (Epilogger.Data.URL TheURL in Model.ExternalLinks)
   {
             <li>
 			    <a href="@TheURL.ShortURL" title="@TheURL.Tweets.Where(t => t.ID == TheURL.TweetID).FirstOrDefault().Text">@TheURL.FullURL</a><br/>
@@ -262,19 +304,19 @@
 		
 <!-- CHECKINS -->
 <div class="grid_4 omega">
-	<h2><span class="number">@Model.CheckIns.Count()</span> Check-ins</h2>
+	<h2><span class="number">@Model.CheckInCount</span> Check-ins</h2>
 	<p>All these lovely people attended @Model.Name!</p>
 	
     
     <ul class="plain-list">
-        @foreach (Epilogger.Data.CheckIn checkin in @Model.CheckIns.OrderByDescending(c => c.CheckInDateTime).Take(5))
+        @foreach (Epilogger.Data.CheckIn checkin in @Model.CheckIns)
         {
             <li>
                 @{
             Epilogger.Data.Tweet ThisTweet = checkin.Tweets.Where(t => t.ID == checkin.TweetID).FirstOrDefault();
 			    }
 
-                <img src="@Url.Content(ThisTweet.ProfileImageURL)" class="fleft" alt="" />
+                <img src="@Url.Content(ThisTweet.ProfileImageURL)" class="fleft" height="48" width="48" alt="" />
 			    <small><a href="http://www.twitter.com/@ThisTweet.FromUserScreenName">@ThisTweet.FromUserScreenName</a></small>
 			    <p>@Html.Raw(ThisTweet.TextAsHTML)</p>
 		    </li>
