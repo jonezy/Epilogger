@@ -15,10 +15,21 @@ namespace Epilogger.Web.Controllers {
         public ActionResult RenderBreadCrumb() {
             Dictionary<string, string> trail = new Dictionary<string, string>();
             trail.Add("home", App.BaseUrl);
-            foreach (var item in Request.RequestContext.RouteData.Values) {
-                if (item.Value.ToString().ToLower() != "index") {
-                    string url = string.Format("{0}{1}", App.BaseUrl, Url.Action(Request.RequestContext.RouteData.Values["action"].ToString(), Request.RequestContext.RouteData.Values["controller"].ToString()).TrimStart('/'));
-                    trail.Add(item.Value.ToString(), url);
+            if (Request.Url.AbsoluteUri != App.BaseUrl) {
+                int count = 1;
+                foreach (var item in Request.RequestContext.RouteData.Values) {
+                    if (item.Value.ToString().ToLower() != "index" && item.Key.ToString().ToLower() != "id") {
+                        string url = string.Empty;
+                        if (count == 1) {
+                            url = string.Format("{0}{1}", App.BaseUrl, Url.Action("index", Request.RequestContext.RouteData.Values["controller"].ToString()).TrimStart('/'));
+                        } else if (count == 2) {
+                            url = string.Format("{0}{1}", App.BaseUrl, Url.Action(Request.RequestContext.RouteData.Values["action"].ToString(), Request.RequestContext.RouteData.Values["controller"].ToString(), Request.RequestContext.RouteData.Values).TrimStart('/'));
+                        }
+                        
+                        trail.Add(item.Value.ToString(), url);
+
+                        count++;
+                    }
                 }
             }
 
