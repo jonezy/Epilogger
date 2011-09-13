@@ -60,8 +60,9 @@ namespace Epilogger.Web.Controllers {
             Model.ExternalLinks = LS.FindByEventIDOrderDescTake3(id);
 
             //Not optimized
-            
             Model.BlogPosts = BS.FindByEventID(id);
+
+            Model.HasSubscribed = false;
             
             return View(Model);
         }
@@ -198,7 +199,7 @@ namespace Epilogger.Web.Controllers {
                         //</li>
 
 
-                        string ProfilePicture = "<img src='" + TheT.ProfileImageURL + "' class='fleft' alt='' />";
+                        string ProfilePicture = "<img src='" + TheT.ProfileImageURL + "' class='fleft' alt='' height='48' width='48'  />";
                         string FromLine = "<small><a href='http://www.twitter.com/" + TheT.FromUserScreenName + "' target='_blank'>" + TheT.FromUserScreenName + "</a></small>";
                         HTML.Append("<li id='Tweet-" + TheT.TwitterID + "' class='tweet newupdates'>" + ProfilePicture + FromLine + "<p>" + TheT.TextAsHTML + "</p></li>");
 
@@ -280,5 +281,24 @@ namespace Epilogger.Web.Controllers {
 
             return Json(dict);
         }
+
+
+        [HttpPost]
+        public string UpdateSubscription(bool HasSubscribed)
+        {
+            //Save the Selectiob
+            if (HasSubscribed)
+            {
+                HasSubscribed = false;
+                return "<input type='submit' value='Subscribe to Event' name='SubscribeToEvent' id='SubscribeToEvent' />";
+            }
+            else
+            {
+                HasSubscribed = true;
+                return "<input type='submit' value='Unsubscribe to Event' name='UnsubscribeToEvent' id='UnsubscribeToEvent' />";
+            }
+
+        }
+
     }
 }
