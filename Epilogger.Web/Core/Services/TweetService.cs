@@ -89,7 +89,20 @@ namespace Epilogger.Web
                    select TW;
         }
 
+        public IEnumerable<Tweet> GetPagedTweets(int EventID, System.Nullable<int> page, int TweetsPerPage)
+        {
 
+            int skipAmount = page.HasValue ? page.Value - 1 : 0;
+
+            var tweets = (from t in db.Tweets
+                          where t.EventID == EventID
+                          orderby t.CreatedDate descending
+                          select t).Skip(skipAmount * TweetsPerPage).Take(TweetsPerPage);
+
+
+            return tweets;
+
+        }
 
 
 

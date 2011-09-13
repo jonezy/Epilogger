@@ -1,0 +1,51 @@
+﻿@model Epilogger.Web.Models.AllTweetsDisplayViewModel
+
+@{
+    ViewBag.Title = "Epilogger - " + Model.Name + "- Tweets";
+}
+
+<ul id="subnavigation">
+    <li>@Html.ActionLink("OVERVIEW", "Details/" + Model.ID, "Events")</li>
+    <li>@Html.ActionLink("PHOTOS", "AllPhotos/" + Model.ID, "Events")</li>
+    <li>@Html.ActionLink("TWEETS", "AllTweets/" + Model.ID, "Events")</li>
+</ul>
+<span class="spacer"></span>
+
+<div class="grid_11 alpha">
+	<h1>ALL PHOTOS</h1>
+	<h2>FROM @Model.Name - @Model.TweetCount.ToString("#,###")</h2>
+</div>
+
+<div class="clear"></div>
+
+@if (Model.ShowTopTweets)
+{
+    <div class="grid_11 alpha" style="background-color: #333; height: 200px">Temp space</div>
+    <div class="clear"></div>
+    <div class="spacer"></div>
+}
+
+	
+
+
+<div id="photos-filterbar">
+    FILTER:
+</div>
+
+<div class="clear"></div>
+<div class="spacer"></div>
+
+<ul class="plain-list" id="tweetlist">
+    @foreach (Epilogger.Data.Tweet EPLTweet in Model.Tweets)
+    {
+        <li id="Tweet-@EPLTweet.TwitterID" class="tweet grid_3">
+			<img src="@EPLTweet.ProfileImageURL" class="fleft" height="48" width="48" alt="" />
+			<small><a href="http://www.twitter.com/@EPLTweet.FromUserScreenName" target="_blank">@EPLTweet.FromUserScreenName</a></small>
+			<p>@Html.Raw(EPLTweet.TextAsHTML)</p>
+		</li>  
+    }
+</ul>
+
+<div class="clear"></div>
+<div class="spacer"></div>
+@MvcHtmlString.Create(Html.Pager(100, Model.CurrentPageIndex, Model.TweetCount, new { controller = "Events", action = "AllTweets/" + Model.ID }))

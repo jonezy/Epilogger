@@ -93,7 +93,8 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.ExternalLinks, opt => opt.Ignore())
                 .ForMember(dest => dest.BlogPosts, opt => opt.Ignore())
                 .ForMember(dest => dest.TweetCount, opt => opt.Ignore())
-                .ForMember(dest => dest.ImageCount, opt => opt.Ignore());
+                .ForMember(dest => dest.ImageCount, opt => opt.Ignore())
+                .ForMember(dest => dest.CheckInCount, opt => opt.Ignore());
                 
 
             Mapper.CreateMap<CreateAccountModel, User>()
@@ -152,7 +153,12 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.ShowTopPhotos, opt => opt.Ignore())
                 .ForMember(dest => dest.Images, opt => opt.Ignore());
 
-
+            Mapper.CreateMap<Event, AllTweetsDisplayViewModel>()
+                .ForMember(dest => dest.TweetCount, opt => opt.Ignore())
+                .ForMember(dest => dest.Page, opt => opt.Ignore())
+                .ForMember(dest => dest.CurrentPageIndex, opt => opt.Ignore())
+                .ForMember(dest => dest.ShowTopTweets, opt => opt.Ignore())
+                .ForMember(dest => dest.Tweets, opt => opt.Ignore());
 
             Mapper.AssertConfigurationIsValid();
         }
