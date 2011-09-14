@@ -13,9 +13,26 @@ namespace Epilogger.Web.Models
         [DisplayName("Event Name")]
         public String Name { get; set; }
         [Required]
+
+
+        [DisplayName("Data Collection Start Time")]
+        public DateTime CollectionStartDateTime { get; set; }
+        
+        [DisplayName("Event Start Date and Time")]
         public DateTime StartDateTime { get; set; }
         [Required]
+        [DisplayName("EventEnd Date and Time")]
         public DateTime EndDateTime { get; set; }
+
+        [DisplayName("Data Collection End Time")]
+        public DateTime CollectionEndDateTime { get; set; }
+
+
+        [DisplayName("Search Terms")]
+        public string SearchTerms { get; set; }
+
+
+        [DisplayName("Time Zone Offset")]
         public int TimeZoneOffset { get; set; }
     }
 }

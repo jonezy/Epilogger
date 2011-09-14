@@ -7,6 +7,7 @@ using AutoMapper;
 
 using Epilogger.Data;
 using Epilogger.Web.Models;
+using Epilogger.Web;
 using RichmondDay.Helpers;
 using System.Text;
 
@@ -122,7 +123,29 @@ namespace Epilogger.Web.Controllers {
 
         [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the details of that event")]
         public ActionResult CreateEvent() {
-            return View();
+            CreateEventViewModel Model = new CreateEventViewModel();
+
+            Model.TimeZoneOffset = Helpers.GetUserTimeZoneOffset();
+
+            DateTime roundTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, 0, 0);
+            if (DateTime.Now.Minute > 30)
+            {
+                roundTime.AddHours(1);
+            }
+
+            Model.StartDateTime = roundTime;
+            Model.EndDateTime = roundTime.AddHours(3);
+
+
+            Model.CollectionStartDateTime = roundTime.AddDays(-2);
+            Model.CollectionEndDateTime = roundTime.AddDays(3);
+
+            //Model.IsActive = true;
+            //Model.WebsiteURL = "http://";
+            //this.Mode = "Create";
+            
+
+            return View(Model);
         }
 
         [HttpPost]
@@ -283,21 +306,21 @@ namespace Epilogger.Web.Controllers {
         }
 
 
-        [HttpPost]
-        public string UpdateSubscription(bool HasSubscribed)
+        
+        public bool UpdateSubscription(int EventID, bool HasSubscribed)
         {
             //Save the Selectiob
             if (HasSubscribed)
             {
                 HasSubscribed = false;
-                return "<input type='submit' value='Subscribe to Event' name='SubscribeToEvent' id='SubscribeToEvent' />";
             }
             else
             {
                 HasSubscribed = true;
-                return "<input type='submit' value='Unsubscribe to Event' name='UnsubscribeToEvent' id='UnsubscribeToEvent' />";
             }
 
+
+            return HasSubscribed;
         }
 
     }

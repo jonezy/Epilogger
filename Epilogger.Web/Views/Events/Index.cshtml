@@ -4,8 +4,33 @@
     ViewBag.Title = "Index";
 }
 
-@foreach (var item in Model) {
-    if (!string.IsNullOrEmpty(item.Name)) {
-    <li>@Html.ActionLink(@item.Name, "Details", "Events", new { id = @item.ID }, null)</li>
+<h2>@Html.ActionLink("Create Event", "CreateEvent", "Events")</h2>
+<div class="clear"></div>
+<div class="spacer"></div>
+
+<h2>Long running Events</h2>
+<ul class="plain-list" id="">
+@foreach (var item in Model.OrderByDescending(t => t.EndDateTime)) {
+    if ((item.EndDateTime - DateTime.UtcNow) > new TimeSpan(30, 0, 0, 0))
+    {
+        if (!string.IsNullOrEmpty(item.Name)) {
+            <li class="grid_4">@Html.ActionLink(@item.Name, "Details", "Events", new { id = @item.ID }, null)</li>
+        }    
     }
 }
+</ul>
+
+<div class="clear"></div>
+<div class="spacer"></div>
+
+<h2>Normal Events</h2>
+<ul class="plain-list" id="">
+@foreach (var item in Model.OrderByDescending(t => t.EndDateTime)) {
+    if ((item.EndDateTime - DateTime.UtcNow) < new TimeSpan(30, 0, 0, 0))
+    {
+        if (!string.IsNullOrEmpty(item.Name)) {
+            <li class="grid_4">@Html.ActionLink(@item.Name, "Details", "Events", new { id = @item.ID }, null)</li>
+        }    
+    }
+}
+</ul>
