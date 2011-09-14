@@ -21,10 +21,13 @@
             @Model.DateOfBirth.ToShortDateString()
 
         </div>
+        @Html.ActionLink("edit your profile", "index", "account", new { @class = "edit_icon" })
     </div>
-    @Html.ActionLink("edit your profile", "index", "account")
 
-    <div class="spacer"></div>
+
+
+    <div class="spacer dotted"></div>
+
     <h2>My Events & Subscriptions</h2>
     @{
         int count = 0;
@@ -38,7 +41,9 @@
             </div>
             <div class="event-content">
                 @Html.ActionLink(item.Name, "details", "events", new { @id = item.ID }, null)<br />
-                @item.StartDateTime.ToString("hh:mmtt").ToLower() &nbsp;&nbsp;&nbsp;&nbsp; @item.SearchTerms
+                
+                <div class="event-content-time">@item.StartDateTime.ToString("hh:mmtt").ToLower()</div>
+                <div class="event-content-searchterms">@item.SearchTerms</div>
             </div>
         </div>
         
@@ -49,4 +54,7 @@
             count = 0;
          } 
     }
+    <br style="clear:both;" />
+    <div class="spacer"></div>
+    @Html.ActionLink("(more events)", "events", "dashboard")
 </div>

@@ -135,7 +135,9 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => string.Format("{0} {1}", src.FirstName, src.LastName)))
                 .ForMember(dest => dest.Events, opt => opt.MapFrom(src => src.Events.OrderByDescending(e => e.StartDateTime).ToList()));
 
-            Mapper.CreateMap<Event, DashboardEventViewModel>();
+            Mapper.CreateMap<Event, DashboardEventViewModel>()
+                .ForMember(dest => dest.TotalTweets, opt => opt.MapFrom(src => src.Tweets.Count()))
+                .ForMember(dest => dest.TotalMedia, opt => opt.MapFrom(src => src.Images.Count()));
 
             Mapper.CreateMap<Event, AllPhotosDisplayViewModel>()
                 .ForMember(dest => dest.PhotoCount, opt => opt.Ignore())
