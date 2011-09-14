@@ -12,7 +12,7 @@ a {
 p a {
 	text-decoration:underline}
 
-
+a.edit_icon {background:url(../images/icons/pencil.png) no-repeat 0px 2px;padding-left:15px;}
 /* ------------------------------ CONTAINERS */
 
 #outer-container {position:relative;z-index:0;}
@@ -218,15 +218,38 @@ div#photos-filterbar {
 .dashboard-activity-entry strong.title.PHOTOS_VIDEOS {background-position:0 -24px;padding-left:28px;}
 .dashboard-activity-entry strong.title.EVENT_CREATION {background-position:0 -56px;padding-left:28px;}
 
-.profile-card {}
+.profile-card {margin-bottom:10px;}
 .profile-card h4 {background:#ee4490;color:#fff;float:left;padding:5px 10px 5px 10px;}
-.profile-data {background:#dcdcdc;padding:10px;border-top:solid 5px #ee4490;margin-top:-5px;}
+.profile-data {background:#dcdcdc;padding:10px;border-top:solid 5px #ee4490;margin:-5px 0px 10px 0px;}
 .profile-data h1 {border-bottom:2px solid #fff;padding-bottom:10px;margin-bottom:10px;}
 
-.profile-event-item {float:left;width:250px;margin:0px 10px 10px 0px;}
+.profile-event-item {float:left;width:300px;margin:0px 10px 10px 0px;}
 .profile-event-item .month-day {font-size:12px;float:left;background:#e9e9e9;padding:2px 0px 2px 0px;width:39px;height:42px;text-align:center;}
 .profile-event-item .month-day h2 {margin:0;color:#555 !important;font-weight:bold;}
-.profile-event-item .event-content {margin-left:5px;float:left;width:200px;}
+.profile-event-item .event-content {margin-left:5px;float:left;width:250px;}
+
+.event-content-time,
+.event-content-searchterms {background-image:url(../images/icons/profile-eventlist.png);background-repeat:no-repeat;}
+.event-content-time {width:63px;float:left;background-position: 0 2px;padding-left:14px;}
+.event-content-searchterms {width:150px;float:left;background-position: 0px -22px;padding-left:14px;}
+
+.dashboard-event-item {border-bottom:solid 1px #e1e1e1;padding:12px 0px 12px 0px;}
+
+.dashboard-event-item .month-day {font-size:12px;float:left;background:#e9e9e9;padding:2px 0px 2px 0px;width:52px;height:55px;text-align:center;position:relative;}
+.dashboard-event-item .month-day .month {background:#ee5b8f;color:#fff;text-transform:uppercase;font:normal 14px 'InterstatePlusRegular'}
+.dashboard-event-item .month-day .icon {position:absolute;bottom:0;right:0;background:url(../images/event-list-icons/test.png) no-repeat;width:21px;height:21px;}
+.dashboard-event-item .month-day h2 {margin:0;color:#555 !important;font-weight:bold;font:normal 38px 'InterstatePlusRegular'}
+
+.dashboard-event-item .event-content {margin-left:15px;float:left;width:60%;}
+.dashboard-event-item .event-content h6 {margin-bottom:3px;}
+.dashboard-event-item .event-content-searchterms {width:70%;}
+
+.dashboard-event-item .event-totals {float:right;margin-top:15px;}
+.dashboard-event-item .event-totals .total-tweets,
+.dashboard-event-item .event-totals .total-media {background-image:url(../images/icons/dashboard-event-totals.png); background-repeat:no-repeat;height:25px;font-weight:bold;color:#2c70cc;font-size:11px;}
+.dashboard-event-item .event-totals .total-tweets {float:left;padding:4px 30px 0px 0px;background-position:24px 0px;width:40px;}
+.dashboard-event-item .event-totals .total-media {float:left;padding:4px 30px 0px 0px;background-position:24px -50px;width:40px;}
+
 /* ------------------------------ FORMS */
 
 div#search-container {
@@ -250,11 +273,13 @@ div#search-container input[type=image] {
 
 #breadcrumb {text-transform:uppercase;font-size:12px;}
 	
-	.Pager {}
-	.Pager a, .Pager span {background:#fc5daf;color:#fff;padding:5px;margin:0px 5px 0px 0px;}
-	.Pager span.current {background:#fff;color:#fc5daf;}
+	.Pager {font-family:InterstatePlusRegular;font-size:12px;}
+	.Pager a, .Pager span {color:#000;padding:5px;margin:0px 10px 0px 10px;display:block;float:left;margin:0 2px 0px 2px;}
+	.Pager span.current,
+	.Pager a:hover {background:#fc5daf;color:#fff;-webkit-border-radius: 2px;-moz-border-radius: 2px;border-radius: 2px;}
 /* ------------------------------ MISC */
 
+.spacer.dotted {border-top:dotted 1px #b5b5b5;} 
 .spacer 	{ height:25px; display:block}
 .sm-spacer  { height:5px; display:block}
 .big-spacer { height:50px; display:block}

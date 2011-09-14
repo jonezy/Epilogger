@@ -80,5 +80,17 @@ namespace Epilogger.Web.Controllers {
             return View(model);
         }
 
+        public ActionResult Events(int? page) {
+            int currentPage = page.HasValue ? page.Value - 1 : 0;
+            IEnumerable<Event> events = eventService.FindByUserID(CurrentUserID);
+            DashboardEventsViewModel model = new DashboardEventsViewModel() {
+                CurrentPageIndex = currentPage,
+                TotalRecords = events.Count(),
+                Events = Mapper.Map<List<Event>, List<DashboardEventViewModel>>(events.Skip(currentPage * 12).Take(12).ToList())
+            };
+            
+            return View(model);
+        }
+
     }
 }
