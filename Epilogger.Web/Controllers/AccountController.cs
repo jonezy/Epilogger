@@ -81,6 +81,18 @@ namespace Epilogger.Web.Controllers {
                 user.DateOfBirth = DateTime.Parse(model.DateOfBirth);
                 //user.TimeZoneOffSet = Int32.Parse(c["TimeZoneOffset"].ToString());
 
+                string imagePath = string.Empty;
+                if (c["ProfilePictures"] != null) {
+                    string pictureProvider = c["ProfilePictures"] as string ?? "";
+
+                    if (pictureProvider.ToLower().Contains("twitter")) {
+                        imagePath = TwitterHelper.GetUser(CurrentUserTwitterAuthorization.Token, CurrentUserTwitterAuthorization.TokenSecret, CurrentUserTwitterAuthorization.ServiceUsername).ResponseObject.ProfileImageLocation;
+                    } else if (pictureProvider.ToLower().Contains("facebook")) {
+                        imagePath = FacebookHelper.GetProfilePicture(CurrentUserFacebookAuthorization.Token);
+                    }
+                }
+                user.ProfilePicture = imagePath;
+
                 service.Save(user);
 
                 this.StoreSuccess("Your account was updated successfully");
