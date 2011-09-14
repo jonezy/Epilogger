@@ -92,5 +92,13 @@ namespace Epilogger.Web.Controllers {
             return View(model);
         }
 
+        public ActionResult Account() {
+            DashboardAccountViewModel model = new DashboardAccountViewModel() {
+                EmailAddress = CurrentUser.EmailAddress,
+                CreatedDate = CurrentUser.CreatedDate
+            };
+
+            return View(model);
+        }
     }
 }
