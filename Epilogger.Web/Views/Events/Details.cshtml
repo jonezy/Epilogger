@@ -33,6 +33,7 @@ else
 
     var EventName = '@Model.Name';
     var EventURL = 'http://www.epilogger.com/Events/Details/@Model.ID';
+    var HasSubscribed = @Model.HasSubscribed.ToString().ToLower();
     
     //Parameters to control the Tweet list
     var updateTimeout = 5000;
@@ -81,30 +82,38 @@ else
 <span class="spacer"></span>
 
 <div class="grid_7 alpha">
+ 
 	<h1>@Model.Name</h1>
 	<h2>@Model.SubTitle</h2>
-
-
-    @*@if (!Model.HasSubscribed)
+ 
+    
+    @*@using (Html.BeginForm())
     {
-        @using (Html.BeginForm())
+        Html.HiddenFor(m => m.HasSubscribed);
+        
+        if (Model.HasSubscribed)
         {
-            @Html.HiddenFor(m => m.HasSubscribed)
-            <div id="subscribeSection">
-                <input type="submit" value="Subscribe to Event" name="SubscribeToEvent" id="SubscribeToEvent" />
-            </div>
+            <input type="submit" value="Unsubscribe" name="SubscribeToEvent" id="SubscribeToEvent" />
         }
+        else
+        {
+            <input type="submit" value="Subscribe to Event" name="SubscribeToEvent" id="SubscribeToEvent" />
+        }
+    }*@
+
+    
+    @if (Model.HasSubscribed)
+    {
+        <input type="submit" value="Unsubscribe" name="SubscribeToEvent" id="SubscribeToEvent" />
     }
     else
     {
-        @:<p class="half-bottom">You are connected to twitter as: <strong>@Model.TwitterUsername</strong> (@Html.ActionLink("x", "Disconnect", "Twitter", new { area = "Authentication" }, null))</p>
-    }*@
-
-
-
-
-
-			
+        <input type="submit" value="Subscribe to Event" name="SubscribeToEvent" id="SubscribeToEvent" />
+    }
+    
+ 
+ 
+           		
 	<p>@Html.Raw(Model.Description.Replace("\r", "<br />"))
         @if (Model.Description.Length > 266)
         { 

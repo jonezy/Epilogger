@@ -233,6 +233,8 @@
     <Content Include="Public\images\samples\photo.png" />
     <Content Include="Public\images\samples\twitter.png" />
     <Content Include="Public\images\shoutbox.png" />
+    <Content Include="Public\js\AnyTime\anytimec.css" />
+    <Content Include="Public\js\AnyTime\anytimec.js" />
     <Content Include="Public\js\epilogger.js" />
     <Content Include="Public\js\EventDetails.js" />
     <Content Include="Public\js\head.load.min.js" />

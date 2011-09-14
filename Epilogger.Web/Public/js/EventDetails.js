@@ -10,3 +10,18 @@
 //    });
 
 //});
+
+
+
+//$('#SubscribeToEvent').click(function () {
+//    $.post('/Events/UpdateSubscription/?EventID=' + EventID + '&HasSubscribed=' + HasSubscribed, function (data) {
+//            $('#SubscribeToEvent').text = 'FUCK YA'
+//        }
+//    );
+//});
+
+
+
+
+
+
