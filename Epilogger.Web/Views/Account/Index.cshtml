@@ -6,21 +6,10 @@
 
 <div class="grid_3 alpha">
     <h2>Social networks</h2>
-    @if (string.IsNullOrEmpty(Model.TwitterUsername)) {
-        using (Html.BeginForm("BuildAuthenticationRequest", "Twitter", new { area = "Authentication" }, FormMethod.Post, new { @class = "remove-bottom" })) {
-            <input type="submit" value="link your account with twitter" name="twitter" />
-        }
-    } else {
-        @:<p class="half-bottom">You are connected to twitter as: <strong>@Model.TwitterUsername</strong> (@Html.ActionLink("x", "Disconnect", "Twitter", new { area = "Authentication" }, null))</p>
-    }
-
-    @if (string.IsNullOrEmpty(Model.FacebookUsername)) {
-        using (Html.BeginForm("BuildAuthenticationRequest", "Facebook", new { area = "Authentication" }, FormMethod.Post, new { @class = "remove-bottom" })) {
-            <input type="submit" value="link your account with facebook" name="facebook" />
-        }
-    } else {
-        @:<p class="remove-bottom">You are connected to facebook as: <strong>@Model.FacebookUsername</strong> (@Html.ActionLink("x", "Disconnect", "Facebook", new { area = "Authentication" }, null))</p>
-    }
+    <ul id="connected-networks">
+        <li class="remove-bottom">@Html.RenderConnectSocialNetworkUI("Twitter", Model.ConnectedNetworks)</li>
+        <li>@Html.RenderConnectSocialNetworkUI("Facebook", Model.ConnectedNetworks)</li>
+    </ul>
 </div>
 
 <div class="grid_4">

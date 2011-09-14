@@ -203,7 +203,7 @@ div#photos-filterbar {
 	/*margin:0 15px;*/
 	border-bottom:1px dotted #000;}
 
-
+ul#connected-networks {list-style:none;}
 /* ------------------------------ DASHBOARD */
 #dashboard-nav {float:left;width:268px;margin-right:17px;}
 #dashboard-nav ul li {list-style:none;}

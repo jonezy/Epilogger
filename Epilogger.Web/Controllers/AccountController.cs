@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
@@ -26,6 +27,8 @@ namespace Epilogger.Web.Controllers {
         [RequiresAuthentication(AccessDeniedMessage="You must be logged in to edit your account")]
         public ActionResult Index () {
             AccountModel model = Mapper.Map<User, AccountModel>(CurrentUser);
+            model.ConnectedNetworks = Mapper.Map<List<UserAuthenticationProfile>, List<ConnectedNetworksViewModel>>(CurrentUser.UserAuthenticationProfiles.ToList());
+            
             return View(model);
         }
 
