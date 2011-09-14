@@ -169,6 +169,7 @@
     <Compile Include="Models\ConnectedNetworksViewModel.cs" />
     <Compile Include="Models\CreateAccountModel.cs" />
     <Compile Include="Models\CreateEventViewModel.cs" />
+    <Compile Include="Models\DashboardAccountViewModel.cs" />
     <Compile Include="Models\DashboardActivityModel.cs" />
     <Compile Include="Models\DashboardEventsViewModel.cs" />
     <Compile Include="Models\DashboardEventViewModel.cs" />
@@ -380,6 +381,7 @@
     </Content>
     <Content Include="Views\Events\AllTweets.cshtml" />
     <Content Include="Views\Dashboard\Events.cshtml" />
+    <Content Include="Views\Dashboard\Account.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -92,5 +92,8 @@ namespace Epilogger.Web.Controllers {
             return View(model);
         }
 
+        public ActionResult Account() {
+            return View(new DashboardAccountViewModel());
+        }
     }
 }
