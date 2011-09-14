@@ -36,6 +36,20 @@
         <p>@Html.LabelFor(model => model.TimeZone) @Html.DropDownList("timez", Model.TimeZones, "Select your timezone")</p>
     </div>    *@
     <br style="clear:both;" />
+    @Html.LabelFor(model => model.ProfilePicture)
+    @if (Model.ConnectedNetworks.Where(cn => cn.Service == "TWITTER").FirstOrDefault() != null) {
+        <div class="grid_1 alpha">
+            <label><img src="@Model.TwitterProfilePicture" class="profile_pic" /></label>
+            @Html.RadioButton("ProfilePictures", "TwitterProfilePicture", !string.IsNullOrEmpty(Model.ProfilePicture) && Model.ProfilePicture.ToLower().Contains("twimg"))
+        </div>
+    }
+    @if (Model.ConnectedNetworks.Where(cn => cn.Service == "FACEBOOK").FirstOrDefault() != null) {
+        <div class="grid_1">
+            <label><img src="@Model.FacebookProfilePicture" class="profile_pic" /></label>
+            @Html.RadioButton("ProfilePictures", "FacebookProfilePicture", !string.IsNullOrEmpty(Model.ProfilePicture) && Model.ProfilePicture.ToLower().Contains("facebook"))
+        </div>
+    }
+    <br style="clear:both;" />
             <p><input type="submit" class="submit" value="update" /></p>
         </fieldset>
     }
