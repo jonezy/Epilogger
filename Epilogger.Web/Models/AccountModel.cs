@@ -62,5 +62,7 @@ namespace Epilogger.Web.Models {
 
         [DisplayName("Date of birth")]
         public string DateOfBirth { get; set; }
+
+        public List<ConnectedNetworksViewModel> ConnectedNetworks { get; set; }
     }
 }
