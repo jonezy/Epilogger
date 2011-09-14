@@ -216,8 +216,12 @@
     <Content Include="Public\images\bg\sample7.jpg" />
     <Content Include="Public\images\btn-checkinmore.png" />
     <Content Include="Public\images\btn-submit.png" />
+    <Content Include="Public\images\event-list-icons\test.png" />
     <Content Include="Public\images\event_activity_title_icons.png" />
     <Content Include="Public\images\icons\bubble.png" />
+    <Content Include="Public\images\icons\dashboard-event-totals.png" />
+    <Content Include="Public\images\icons\pencil.png" />
+    <Content Include="Public\images\icons\profile-eventlist.png" />
     <Content Include="Public\images\icons\tweet-black.png" />
     <Content Include="Public\images\logo.png" />
     <Content Include="Public\images\samples\ad.png" />
