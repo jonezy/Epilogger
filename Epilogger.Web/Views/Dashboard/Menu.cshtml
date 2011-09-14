@@ -10,3 +10,6 @@
     @*<li>@Html.ActionLink("Friends Feed", "index", null, action.ToLower() == "friends" ? new { @class = "current" } : null)</li>*@
     <li>@Html.ActionLink("Account", "account", null, action.ToLower() == "account" ? new { @class = "current" } : null)</li>
 </ul>
+
+
+@Html.ActionLink("+ Create New Event", "createevent", "events", null, new { @class = "blue-action-button" })

@@ -13,6 +13,14 @@ p a {
 	text-decoration:underline}
 
 a.edit_icon {background:url(../images/icons/pencil.png) no-repeat 0px 2px;padding-left:15px;}
+
+a.blue-action-button {-webkit-border-radius: 2px;-moz-border-radius: 2px;border-radius: 2px;
+border:solid 1px #3789bc;
+padding:5px;
+background:#408ebf;
+color:#fff;
+font-family:'InterstatePlusRegular';text-transform:uppercase;}
+
 /* ------------------------------ CONTAINERS */
 
 #outer-container {position:relative;z-index:0;}
@@ -206,6 +214,7 @@ div#photos-filterbar {
 ul#connected-networks {list-style:none;}
 /* ------------------------------ DASHBOARD */
 #dashboard-nav {float:left;width:268px;margin-right:17px;}
+#dashboard-nav ul {margin-bottom:30px;}
 #dashboard-nav ul li {list-style:none;}
 #dashboard-nav ul li a {font:normal 18px 'InterstatePlusRegular', arial, sans-serif;text-transform:uppercase;font-weight:bold;padding:10px;display:block;border-bottom:solid 1p #fff;}
 #dashboard-nav ul li a:hover,
@@ -249,6 +258,10 @@ ul#connected-networks {list-style:none;}
 .dashboard-event-item .event-totals .total-media {background-image:url(../images/icons/dashboard-event-totals.png); background-repeat:no-repeat;height:25px;font-weight:bold;color:#2c70cc;font-size:11px;}
 .dashboard-event-item .event-totals .total-tweets {float:left;padding:4px 30px 0px 0px;background-position:24px 0px;width:40px;}
 .dashboard-event-item .event-totals .total-media {float:left;padding:4px 30px 0px 0px;background-position:24px -50px;width:40px;}
+
+.account-overview {border-top:dotted 1px #b5b5b5;border-bottom:dotted 1px #b5b5b5;padding:10px;margin-bottom:20px;}
+.account-overview table {float:left;margin-right:20px;font-size:11px;}
+.account-overview table td.label {font-weight:bold;width:100px;}
 
 /* ------------------------------ FORMS */
 
