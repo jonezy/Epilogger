@@ -128,6 +128,7 @@
     </Compile>
     <Compile Include="Areas\Authentication\AuthenticationAreaRegistration.cs" />
     <Compile Include="Areas\Authentication\Controllers\FacebookController.cs" />
+    <Compile Include="Areas\Authentication\Controllers\IAuthenticationController.cs" />
     <Compile Include="Areas\Authentication\Controllers\TwitterController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Core\Filters\RequiresAuthentication.cs" />
     <Compile Include="Core\Helpers\AzureTableHelper.cs" />
     <Compile Include="Core\Helpers\Helpers.cs" />
+    <Compile Include="Core\Helpers\HtmlHelpers.cs" />
     <Compile Include="Core\Helpers\PasswordHelpers.cs" />
     <Compile Include="Core\Helpers\TwitterHelper.cs" />
     <Compile Include="Core\Services\CheckInService.cs" />
@@ -164,6 +166,7 @@
     <Compile Include="Models\AllPhotosDisplayViewModel.cs" />
     <Compile Include="Models\AzureTweetModel.cs" />
     <Compile Include="Models\AllTweetsDisplayViewModel.cs" />
+    <Compile Include="Models\ConnectedNetworksViewModel.cs" />
     <Compile Include="Models\CreateAccountModel.cs" />
     <Compile Include="Models\CreateEventViewModel.cs" />
     <Compile Include="Models\DashboardActivityModel.cs" />
