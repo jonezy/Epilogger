@@ -46,7 +46,7 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
 
                 authorizationService.Save(userAuth);
                     
-                this.StoreSuccess("Your facebook account has been linked to your collectbrucelee.com account");
+                this.StoreSuccess("Your facebook account has been linked to your epilogger.com account");
                     
                 // prevent open redirection attack by checking if the url is local.
                 if (Url.IsLocalUrl(state)) {
@@ -63,7 +63,7 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
             UserAuthenticationProfileService service = new UserAuthenticationProfileService();
             service.DisconnectService(AuthenticationServices.FACEBOOK, CurrentUserID);
 
-            this.StoreInfo("Your facebook account has been disconnected from your collectbrucelee.com account");
+            this.StoreInfo("Your facebook account has been disconnected from your epiloggerepilogger.com account");
 
             return Redirect(Request.UrlReferrer.ToString());
         }

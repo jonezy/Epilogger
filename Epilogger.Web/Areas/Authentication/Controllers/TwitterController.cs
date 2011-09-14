@@ -42,7 +42,7 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
                 }
             }
 
-            this.StoreSuccess("Your twitter account has been linked to your collectbrucelee.com account");
+            this.StoreSuccess("Your twitter account has been linked to your epilogger.com account");
 
             return RedirectToAction("Index", "Account", new { area = "" });
         }
@@ -51,7 +51,7 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
             UserAuthenticationProfileService service = new UserAuthenticationProfileService();
             service.DisconnectService(AuthenticationServices.TWITTER, CurrentUserID);
 
-            this.StoreInfo("Your twitter account has been disconnected from your collectbrucelee.com account");
+            this.StoreInfo("Your twitter account has been disconnected from your epilogger.com account");
 
             return Redirect(Request.UrlReferrer.ToString());
         }
