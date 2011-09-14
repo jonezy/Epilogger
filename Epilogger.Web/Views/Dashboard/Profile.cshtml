@@ -13,12 +13,18 @@
     <div class="profile-card">
         <h4>Account Information</h4>
         <div class="clear"></div>
-        <div class="profile-data">
-            <h2>Hello my name is</h2>
-            <h1>@Model.FullName</h1>
+        <div class="profile-data clearfix">
+            @if(!string.IsNullOrEmpty(Model.ProfilePicture)) {
+                <img src="@Url.Content(Model.ProfilePicture.Replace("_normal", ""))" class="profile-picture fleft" />
+            } 
+            
+            <div class="profile-content fleft">
+                <h2>Hello my name is</h2>
+                <h1>@Model.FullName</h1>
 
-            @Model.EmailAddress<br />
-            @Model.DateOfBirth.ToShortDateString()
+                @Model.EmailAddress<br />
+                @Model.DateOfBirth.ToShortDateString()
+            </div>
 
         </div>
         @Html.ActionLink("edit your profile", "index", "account", new { @class = "edit_icon" })

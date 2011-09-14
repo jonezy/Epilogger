@@ -144,10 +144,13 @@
     <Compile Include="Core\Filters\LogErrors.cs" />
     <Compile Include="Core\Filters\RequiresAuthentication.cs" />
     <Compile Include="Core\Helpers\AzureTableHelper.cs" />
+    <Compile Include="Core\Helpers\FacebookHelper.cs" />
     <Compile Include="Core\Helpers\Helpers.cs" />
     <Compile Include="Core\Helpers\HtmlHelpers.cs" />
     <Compile Include="Core\Helpers\PasswordHelpers.cs" />
     <Compile Include="Core\Helpers\TwitterHelper.cs" />
+    <Compile Include="Core\Resolvers\FacebookProfilePictureResolver.cs" />
+    <Compile Include="Core\Resolvers\TwitterProfilePictureResolver.cs" />
     <Compile Include="Core\Services\CheckInService.cs" />
     <Compile Include="Core\Services\BlogService.cs" />
     <Compile Include="Core\Services\ExternalLinksService.cs" />

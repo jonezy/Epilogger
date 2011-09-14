@@ -6,8 +6,10 @@ using System.Web.Mvc;
 namespace Epilogger.Web.Models {
     public class AccountModel {
         public string Username { get; set; }
-        public string TwitterUsername { get; set; }
-        public string FacebookUsername { get; set; }
+
+        public string ProfilePicture { get; set; }
+        public string TwitterProfilePicture { get; set; }
+        public string FacebookProfilePicture { get; set; }
 
         [DisplayName("First name")]
         public string FirstName { get; set; }

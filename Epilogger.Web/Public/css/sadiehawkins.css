@@ -230,6 +230,8 @@ ul#connected-networks {list-style:none;}
 .profile-card {margin-bottom:10px;}
 .profile-card h4 {background:#ee4490;color:#fff;float:left;padding:5px 10px 5px 10px;}
 .profile-data {background:#dcdcdc;padding:10px;border-top:solid 5px #ee4490;margin:-5px 0px 10px 0px;}
+.profile-data .profile-picture {margin-right:20px;}
+.profile-data .profile-content {width:400px;}
 .profile-data h1 {border-bottom:2px solid #fff;padding-bottom:10px;margin-bottom:10px;}
 
 .profile-event-item {float:left;width:300px;margin:0px 10px 10px 0px;}
