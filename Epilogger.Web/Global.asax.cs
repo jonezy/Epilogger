@@ -122,15 +122,12 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.Cost, opt => opt.Ignore())
                 .ForMember(dest => dest.CategoryID, opt => opt.UseValue(19))
                 .ForMember(dest => dest.VenueID, opt => opt.Ignore())
-                .ForMember(dest => dest.SearchTerms, opt => opt.Ignore())
                 .ForMember(dest => dest.EventStatus, opt => opt.UseValue(1))
                 .ForMember(dest => dest.NumberOfTweets, opt => opt.UseValue(0))
                 .ForMember(dest => dest.IsPrivate, opt => opt.UseValue(false))
                 .ForMember(dest => dest.IsAdult, opt => opt.UseValue(false))
-                .ForMember(dest => dest.IsActive, opt => opt.UseValue(false))
-                .ForMember(dest => dest.CollectionStartDateTime, opt => opt.Ignore())
-                .ForMember(dest => dest.CollectionEndDateTime, opt => opt.Ignore())
-                .ForMember(dest => dest.CollectionMode, opt => opt.Ignore())
+                .ForMember(dest => dest.IsActive, opt => opt.UseValue(true))
+                .ForMember(dest => dest.CollectionMode, opt => opt.UseValue(2))
                 .ForMember(dest => dest.TwitterAccount, opt => opt.Ignore())
                 .ForMember(dest => dest.FacebookPageURL, opt => opt.Ignore());
             
