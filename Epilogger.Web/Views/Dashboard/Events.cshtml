@@ -1,0 +1,32 @@
+﻿@model Epilogger.Web.Models.DashboardEventsViewModel
+
+@{
+    ViewBag.Title = "Events";
+}
+
+<div id="dashboard-nav">
+    @Html.Partial("Menu")
+</div>
+
+<div id="dashboard-content">
+
+@foreach (var item in Model.Events) {
+        <div class="dashboard-event-item clearfix">
+            <div class="month-day">
+                <div class="month">@item.StartDateTime.ToString("MMM")</div>    
+                <h2>@item.StartDateTime.Day</h2>
+                <div class="icon"></div>
+            </div>
+            <div class="event-content">
+                <h6>@Html.ActionLink(item.Name, "details", "events", new { @id = item.ID }, null)</h6>
+                
+                <div class="event-content-time">@item.StartDateTime.ToString("hh:mmtt").ToLower()</div>
+                <div class="event-content-searchterms">@item.SearchTerms</div>
+            </div>
+            <div class="event-totals">
+                <div class="total-tweets">@item.TotalTweets</div>
+                <div class="total-media">@item.TotalMedia</div>
+            </div>
+        </div>
+}
+</div>

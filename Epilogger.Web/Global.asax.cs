@@ -104,8 +104,11 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.IsActive, opt => opt.UseValue(true))
                 .ForMember(dest => dest.CreatedDate, opt => opt.UseValue(DateTime.UtcNow))
                 .ForMember(dest => dest.DateOfBirth, opt => opt.MapFrom(src => DateTime.Parse(src.DateOfBirth)));
-            
+
+            Mapper.CreateMap<UserAuthenticationProfile, ConnectedNetworksViewModel>();
+
             Mapper.CreateMap<User, AccountModel>()
+                .ForMember(dest => dest.ConnectedNetworks, opt => opt.Ignore())
                 .ForMember(dest => dest.TimeZone, opt => opt.MapFrom(src => src.TimeZoneOffSet))
                 .ForMember(dest => dest.DateOfBirth, opt => opt.MapFrom(src => src.DateOfBirth.HasValue ? src.DateOfBirth.Value.ToShortDateString() : ""))
                 .ForMember(dest => dest.TwitterUsername, opt => opt.MapFrom(src => src.UserAuthenticationProfiles.Where(ua => ua.Service == AuthenticationServices.TWITTER.ToString()).FirstOrDefault().ServiceUsername))
@@ -135,7 +138,9 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => string.Format("{0} {1}", src.FirstName, src.LastName)))
                 .ForMember(dest => dest.Events, opt => opt.MapFrom(src => src.Events.OrderByDescending(e => e.StartDateTime).ToList()));
 
-            Mapper.CreateMap<Event, DashboardEventViewModel>();
+            Mapper.CreateMap<Event, DashboardEventViewModel>()
+                .ForMember(dest => dest.TotalTweets, opt => opt.MapFrom(src => src.Tweets.Count()))
+                .ForMember(dest => dest.TotalMedia, opt => opt.MapFrom(src => src.Images.Count()));
 
             Mapper.CreateMap<Event, AllPhotosDisplayViewModel>()
                 .ForMember(dest => dest.PhotoCount, opt => opt.Ignore())

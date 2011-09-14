@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
-
-using Epilogger.Data;
 using Epilogger.Web.Controllers;
-
+using Epilogger.Data;
+using RichmondDay.Helpers;
 using Twitterizer;
 
 namespace Epilogger.Web.Areas.Authentication.Controllers {
-    public class TwitterController : BaseController {
-        [HttpPost]
-        public ActionResult BuildAuthenticationRequest() {
+    public class TwitterController : BaseController, IAuthenticationController {
+        public ActionResult ConnectRequest() {
             string requestToken = OAuthUtility.GetRequestToken(TwitterHelper.TwitterConsumerKey, TwitterHelper.TwitterConsumerSecret, TwitterHelper.TwitterCallbackURL).Token;
-            Uri authorizationUrl = OAuthUtility.BuildAuthorizationUri(requestToken);
-
+            Uri authorizationUrl = OAuthUtility.BuildAuthorizationUri(requestToken,false);
+            
             return Redirect(authorizationUrl.ToString());
         }
 
-        public ActionResult ProcessResponse() {
+        public ActionResult ConnectAccount() {
             if (Request.QueryString["oauth_token"] != null) {
                 OAuthTokenResponse accessTokenResponse = OAuthUtility.GetAccessTokenDuringCallback(TwitterHelper.TwitterConsumerKey, TwitterHelper.TwitterConsumerSecret);
                 // check to see if we already have the screen name in the userauth table.
@@ -42,8 +40,9 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
 
                     userAuthService.Save(userAuth);
                 }
-
             }
+
+            this.StoreSuccess("Your twitter account has been linked to your epilogger.com account");
 
             return RedirectToAction("Index", "Account", new { area = "" });
         }
@@ -52,7 +51,9 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
             UserAuthenticationProfileService service = new UserAuthenticationProfileService();
             service.DisconnectService(AuthenticationServices.TWITTER, CurrentUserID);
 
-            return RedirectToAction("Index", "Account", new { area = "" });
+            this.StoreInfo("Your twitter account has been disconnected from your epilogger.com account");
+
+            return Redirect(Request.UrlReferrer.ToString());
         }
     }
 }

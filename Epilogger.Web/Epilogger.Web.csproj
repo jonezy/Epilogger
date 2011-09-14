@@ -128,6 +128,7 @@
     </Compile>
     <Compile Include="Areas\Authentication\AuthenticationAreaRegistration.cs" />
     <Compile Include="Areas\Authentication\Controllers\FacebookController.cs" />
+    <Compile Include="Areas\Authentication\Controllers\IAuthenticationController.cs" />
     <Compile Include="Areas\Authentication\Controllers\TwitterController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Core\Filters\RequiresAuthentication.cs" />
     <Compile Include="Core\Helpers\AzureTableHelper.cs" />
     <Compile Include="Core\Helpers\Helpers.cs" />
+    <Compile Include="Core\Helpers\HtmlHelpers.cs" />
     <Compile Include="Core\Helpers\PasswordHelpers.cs" />
     <Compile Include="Core\Helpers\TwitterHelper.cs" />
     <Compile Include="Core\Services\CheckInService.cs" />
@@ -164,9 +166,11 @@
     <Compile Include="Models\AllPhotosDisplayViewModel.cs" />
     <Compile Include="Models\AzureTweetModel.cs" />
     <Compile Include="Models\AllTweetsDisplayViewModel.cs" />
+    <Compile Include="Models\ConnectedNetworksViewModel.cs" />
     <Compile Include="Models\CreateAccountModel.cs" />
     <Compile Include="Models\CreateEventViewModel.cs" />
     <Compile Include="Models\DashboardActivityModel.cs" />
+    <Compile Include="Models\DashboardEventsViewModel.cs" />
     <Compile Include="Models\DashboardEventViewModel.cs" />
     <Compile Include="Models\DashboardIndexViewModel.cs" />
     <Compile Include="Models\DashboardProfileViewModel.cs" />
@@ -215,8 +219,12 @@
     <Content Include="Public\images\bg\sample7.jpg" />
     <Content Include="Public\images\btn-checkinmore.png" />
     <Content Include="Public\images\btn-submit.png" />
+    <Content Include="Public\images\event-list-icons\test.png" />
     <Content Include="Public\images\event_activity_title_icons.png" />
     <Content Include="Public\images\icons\bubble.png" />
+    <Content Include="Public\images\icons\dashboard-event-totals.png" />
+    <Content Include="Public\images\icons\pencil.png" />
+    <Content Include="Public\images\icons\profile-eventlist.png" />
     <Content Include="Public\images\icons\tweet-black.png" />
     <Content Include="Public\images\logo.png" />
     <Content Include="Public\images\samples\ad.png" />
@@ -371,6 +379,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Events\AllTweets.cshtml" />
+    <Content Include="Views\Dashboard\Events.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -6,5 +6,7 @@ namespace Epilogger.Web.Models {
         public string Name { get; set; }
         public DateTime StartDateTime { get; set; }
         public string SearchTerms { get; set; }
+        public int TotalTweets { get; set; }
+        public int TotalMedia { get; set; }
     }
 }
