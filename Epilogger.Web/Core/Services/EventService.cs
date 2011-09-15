@@ -21,7 +21,7 @@ namespace Epilogger.Web {
         }
 
         public List<Event> FindByUserID(Guid userID) {
-            return GetData().Where(e => e.UserID == userID).ToList();
+            return GetData().Where(e => e.UserID == userID).OrderByDescending(e=>e.StartDateTime).ToList();
         }
 
 

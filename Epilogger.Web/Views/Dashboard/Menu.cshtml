@@ -1,4 +1,5 @@
 ﻿<h1>DASHBOARD</h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tincidunt tellus vel tellus placerat faucibus. Maecenas adipiscing venenatis aliquam.</p>
 @{
     var action = ViewContext.RouteData.Values["action"] as string ?? "";
 }
@@ -6,6 +7,9 @@
     <li>@Html.ActionLink("Account Activity", "index", null,  action.ToLower() == "index" ? new { @class="current"} : null)</li>
     <li>@Html.ActionLink("Profile Information", "profile", null, action.ToLower() == "profile" ? new { @class = "current" } : null)</li>
     <li>@Html.ActionLink("My Events & Subscriptions", "events", null, action.ToLower() == "events" ? new { @class = "current" } : null)</li>
-    <li>@Html.ActionLink("Friends Feed", "index", null, action.ToLower() == "friends" ? new { @class = "current" } : null)</li>
-    <li>@Html.ActionLink("Account", "index", null, action.ToLower() == "account" ? new { @class = "current" } : null)</li>
+    @*<li>@Html.ActionLink("Friends Feed", "index", null, action.ToLower() == "friends" ? new { @class = "current" } : null)</li>*@
+    <li>@Html.ActionLink("Account", "account", null, action.ToLower() == "account" ? new { @class = "current" } : null)</li>
 </ul>
+
+
+@Html.ActionLink("+ Create New Event", "createevent", "events", null, new { @class = "blue-action-button" })
