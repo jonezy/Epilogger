@@ -354,7 +354,7 @@
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Areas\Authentication\Views\Web.config" />
     <Content Include="Views\Shared\GlobalNavigation.cshtml" />
-    <Content Include="Views\Events\CreateEvent.cshtml" />
+    <Content Include="Views\Events\Create.cshtml" />
     <Content Include="Public\fonts\BEBAS___-webfont.eot" />
     <Content Include="Public\fonts\BEBAS___-webfont.svg" />
     <Content Include="Public\fonts\BEBAS___-webfont.ttf" />

@@ -76,7 +76,8 @@ namespace Epilogger.Web.Controllers {
 
             if (currentPage + 1 == 1) {
                 Model.ShowTopPhotos = true;
-                Model.Images = IS.GetPagedPhotos(id, currentPage + 1, 10);
+                //This was 10, but there is an issue with that when there are more than 10 photos but less than 30.
+                Model.Images = IS.GetPagedPhotos(id, currentPage + 1, 30);
             } else {
                 Model.ShowTopPhotos = false;
                 Model.Images = IS.GetPagedPhotos(id, currentPage + 1, 30);
@@ -108,7 +109,7 @@ namespace Epilogger.Web.Controllers {
         }
 
         [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the details of that event")]
-        public ActionResult CreateEvent() {
+        public ActionResult Create() {
             CreateEventViewModel Model = new CreateEventViewModel();
 
             Model.TimeZoneOffset = Helpers.GetUserTimeZoneOffset();
@@ -134,7 +135,7 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpPost]
-        public ActionResult CreateEvent(CreateEventViewModel model) {
+        public ActionResult Create(CreateEventViewModel model) {
             try {
                 model.UserID = Guid.Parse(CookieHelpers.GetCookieValue("lc", "uid").ToString());
 
