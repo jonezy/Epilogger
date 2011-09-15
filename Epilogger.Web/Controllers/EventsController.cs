@@ -62,8 +62,6 @@ namespace Epilogger.Web.Controllers {
             //Not optimized
             Model.BlogPosts = BS.FindByEventID(id);
 
-            Model.HasSubscribed = false;
-
             return View(Model);
         }
 
