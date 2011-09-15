@@ -20,9 +20,14 @@ namespace Epilogger.Web {
             return base.GetRepository<User>().Add(entity);
         }
 
+        public object SaveUserFollowsEvent(UserFollowsEvent entity) {
+            return base.GetRepository<UserFollowsEvent>().Add(entity);
+        }
+
         public User GetUserByID(Guid id) {
             return GetData().Where(u => u.ID == id).FirstOrDefault();
         }
+
         public User GetUserByUsername(string username) {
             //This was case-sensative for usernames - CB
             return GetData().Where(u => string.Equals(u.Username, username, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
@@ -38,6 +43,12 @@ namespace Epilogger.Web {
 
         public User ValidateLogin(string username, string password) {
             return GetData().Where(u => u.Username == username && u.Password == password).FirstOrDefault();
+        }
+
+        public void DeleteEventSubscription(Guid userId, int eventId) {
+            UserFollowsEvent followsEvent = base.db.UserFollowsEvents.Where(ufe => ufe.EventID == eventId && ufe.UserID == userId).FirstOrDefault();
+            
+            base.GetRepository<UserFollowsEvent>().Delete(followsEvent);
         }
     }
 }
