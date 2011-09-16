@@ -24,6 +24,11 @@ namespace Epilogger.Web {
             return base.GetRepository<UserFollowsEvent>().Add(entity);
         }
 
+        public object SaveUserRatesEvent(UserRatesEvent entity)
+        {
+            return base.GetRepository<UserRatesEvent>().Add(entity);
+        }
+
         public User GetUserByID(Guid id) {
             return GetData().Where(u => u.ID == id).FirstOrDefault();
         }
@@ -47,7 +52,6 @@ namespace Epilogger.Web {
 
         public void DeleteEventSubscription(Guid userId, int eventId) {
             UserFollowsEvent followsEvent = base.db.UserFollowsEvents.Where(ufe => ufe.EventID == eventId && ufe.UserID == userId).FirstOrDefault();
-            
             base.GetRepository<UserFollowsEvent>().Delete(followsEvent);
         }
     }

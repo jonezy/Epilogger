@@ -1476,6 +1476,17 @@ namespace Epilogger.Data
             }
         }
 
+        public IQueryable<UserRatesEvent> UserRatesEvents
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.UserRatesEvents
+                       where items.UserID == _ID
+                       select items;
+            }
+        }
+
         public IQueryable<UserRole> UserRoles
         {
             get
@@ -1483,6 +1494,158 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.UserRoles
                        where items.UserID == _ID
+                       select items;
+            }
+        }
+
+        #endregion
+
+
+        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+        public event PropertyChangingEventHandler PropertyChanging;
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void SendPropertyChanging()
+        {
+            var handler = PropertyChanging;
+            if (handler != null)
+               handler(this, emptyChangingEventArgs);
+        }
+
+        protected virtual void SendPropertyChanged(String propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+	}
+	
+    
+    
+    /// <summary>
+    /// A class which represents the UserRatesEvent table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.UserRatesEvent 
+    /// </summary>
+
+	public partial class UserRatesEvent: INotifyPropertyChanging, INotifyPropertyChanged
+	{
+        partial void OnLoaded();
+        partial void OnValidate(System.Data.Linq.ChangeAction action);
+        partial void OnCreated();
+	    
+	    public UserRatesEvent(){
+	        OnCreated();
+	    }
+	    
+	    #region Properties
+	    
+        partial void OnIDChanging(int value);
+        partial void OnIDChanged();
+		
+		private int _ID;
+		public int ID { 
+		    get{
+		        return _ID;
+		    } 
+		    set{
+		        this.OnIDChanging(value);
+                this.SendPropertyChanging();
+                this._ID = value;
+                this.SendPropertyChanged("ID");
+                this.OnIDChanged();
+		    }
+		}
+		
+        partial void OnUserIDChanging(Guid value);
+        partial void OnUserIDChanged();
+		
+		private Guid _UserID;
+		public Guid UserID { 
+		    get{
+		        return _UserID;
+		    } 
+		    set{
+		        this.OnUserIDChanging(value);
+                this.SendPropertyChanging();
+                this._UserID = value;
+                this.SendPropertyChanged("UserID");
+                this.OnUserIDChanged();
+		    }
+		}
+		
+        partial void OnEventIDChanging(int value);
+        partial void OnEventIDChanged();
+		
+		private int _EventID;
+		public int EventID { 
+		    get{
+		        return _EventID;
+		    } 
+		    set{
+		        this.OnEventIDChanging(value);
+                this.SendPropertyChanging();
+                this._EventID = value;
+                this.SendPropertyChanged("EventID");
+                this.OnEventIDChanged();
+		    }
+		}
+		
+        partial void OnUserRatingChanging(string value);
+        partial void OnUserRatingChanged();
+		
+		private string _UserRating;
+		public string UserRating { 
+		    get{
+		        return _UserRating;
+		    } 
+		    set{
+		        this.OnUserRatingChanging(value);
+                this.SendPropertyChanging();
+                this._UserRating = value;
+                this.SendPropertyChanged("UserRating");
+                this.OnUserRatingChanged();
+		    }
+		}
+		
+        partial void OnRatingDateTimeChanging(DateTime value);
+        partial void OnRatingDateTimeChanged();
+		
+		private DateTime _RatingDateTime;
+		public DateTime RatingDateTime { 
+		    get{
+		        return _RatingDateTime;
+		    } 
+		    set{
+		        this.OnRatingDateTimeChanging(value);
+                this.SendPropertyChanging();
+                this._RatingDateTime = value;
+                this.SendPropertyChanged("RatingDateTime");
+                this.OnRatingDateTimeChanged();
+		    }
+		}
+		
+
+        #endregion
+
+        #region Foreign Keys
+        public IQueryable<Event> Events
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Events
+                       where items.ID == _EventID
+                       select items;
+            }
+        }
+
+        public IQueryable<User> Users
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Users
+                       where items.ID == _UserID
                        select items;
             }
         }
@@ -2676,6 +2839,17 @@ namespace Epilogger.Data
             {
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.UserFollowsEvents
+                       where items.EventID == _ID
+                       select items;
+            }
+        }
+
+        public IQueryable<UserRatesEvent> UserRatesEvents
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.UserRatesEvents
                        where items.EventID == _ID
                        select items;
             }

@@ -72,18 +72,43 @@
     <h2>@Model.SubTitle</h2>
     @if (Model.HasSubscribed) {
         using (Html.BeginForm("unsubscribe", "events", FormMethod.Post)) {
-            <input type="submit" value="Unsubscribe" name="SubscribeToEvent" id="SubscribeToEvent" />
+            <input type="submit" value="Unsubscribe" name="SubscribeToEvent" id="" />
             @Html.HiddenFor(model => model.ID)
         }
     } else {
         using (Html.BeginForm("subscribe", "events", FormMethod.Post)) {
-            <input type="submit" value="Subscribe to Event" name="SubscribeToEvent" id="SubscribeToEvent" />
+            <input type="submit" value="Subscribe to Event" name="SubscribeToEvent" id="" />
             @Html.HiddenFor(model => model.ID)
         }
     }
 
+
+    @if (!Model.HasUserRated)
+    {
+        using (Html.BeginForm("eventRating", "events", FormMethod.Post))
+        {   
+            <input type="button" value="+" name="ThumbsUpButton" id="" onclick="$('#ThumbsUp').val('1'); $(form).submit();" /> @: &nbsp;/&nbsp;
+            <input type="button" value="-" name="ThumbsDownButton" id="" onclick="$('#ThumbsUp').val('0'); $(form).submit();" />
+            @Html.HiddenFor(model => model.ID)
+            @Html.Hidden("ThumbsUp")
+        }
+    }
+    else
+    {
+        @Model.EventRatings.Where(i => i.UserRating == "+").Count().ToString() @: Thumbs Up <br />
+        @Model.EventRatings.Where(i => i.UserRating == "-").Count().ToString() @: Thumbs Down <br />
+        @: You voted on: 
+        @String.Format("{0:MMM d, yyyy h:mm}{1}", Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime.ToUserTimeZone(Model.TimeZoneOffSet), Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime.ToUserTimeZone(Model.TimeZoneOffSet).ToString("tt").ToLower())
+        
+    }
+    
+    
+
+
+
     <p>@Html.Raw(Model.Description.Replace("\r", "<br />"))
-        @if (Model.Description.Length > 266) { 
+        @if (Model.Description.Length > 266)
+        { 
             @: ... (<a href="#">read more</a>)
                 }
     </p>
@@ -101,13 +126,16 @@
 @*<span class="spacer"></span>*@
 <div id="event-details">
     <span class="event-details-label">When:</span> <span class="event-details-detail">
-        @if (Model.StartDateTime.Subtract(Model.EndDateTime).Days == 0) {
+        @if (Model.StartDateTime.Subtract(Model.EndDateTime).Days == 0)
+        {
             @String.Format("{0:MMMM dd, yyyy}", Model.StartDateTime.ToUserTimeZone(Model.TimeZoneOffSet))
             @: <br />
             @String.Format("{0:h:mm tt}", Model.StartDateTime.ToUserTimeZone(Model.TimeZoneOffSet))
             @: to
             @String.Format("{0:h:mm tt}", Model.EndDateTime.ToUserTimeZone(Model.TimeZoneOffSet))
-        } else {
+        }
+        else
+        {
             @String.Format("{0:MMM d, yyyy h:mm}{1}", Model.StartDateTime.ToUserTimeZone(Model.TimeZoneOffSet), Model.StartDateTime.ToUserTimeZone(Model.TimeZoneOffSet).ToString("tt").ToLower())
             @: to <br />
             @String.Format("{0:MMM d, yyyy h:mm}{1}", Model.EndDateTime.ToUserTimeZone(Model.TimeZoneOffSet), Model.EndDateTime.ToUserTimeZone(Model.TimeZoneOffSet).ToString("tt").ToLower())
@@ -119,14 +147,18 @@
             <span style="position: relative; top: 5px">Hashtag:</span> </span><span class="event-details-detail">
                 <a href="@Model.WebsiteURL" target="_blank">@Model.WebsiteURL</a><br />
                 @{
-                    try {
+                    try
+                    {
                         string[] SearchT = Model.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None);
                         string SearchTerms = "";
-                        foreach (string s in SearchT) {
+                        foreach (string s in SearchT)
+                        {
                             SearchTerms += s + ", ";
                         }
                     @Html.Raw("<strong>" + SearchTerms.Substring(0, (SearchTerms.Length - 2)) + "</strong>")
-                    } catch {
+                    }
+                    catch
+                    {
                     <strong>@Model.SearchTerms</strong>
                     }
                 }
@@ -134,13 +166,16 @@
                 <br />
                 <span style="position: relative; top: 5px">tw:</span><br />
                 <span style="position: relative; top: 10px">fb:</span> </span><span class="event-details-detail">
-                    @if (Model.Cost != null) {
+                    @if (Model.Cost != null)
+                    {
                         @Model.Cost
                     }<br />
-                    @if (Model.TwitterAccount != null) {
+                    @if (Model.TwitterAccount != null)
+                    {
                         <a href="http://www.twitter.com/@Model.TwitterAccount">@Model.TwitterAccount</a>
                     }
-                    @if (Model.FacebookPageURL != null) {
+                    @if (Model.FacebookPageURL != null)
+                    {
                         <a href="@Model.FacebookPageURL" target="_blank">@Model.FacebookPageURL</a><br />
                     }
                 </span>
@@ -158,7 +193,8 @@
         filter:</h4>
     <span class="sm-spacer"></span>
     <div class="image-grid" id="photosvideos">
-        @foreach (Epilogger.Data.Image EPLImage in Model.Images) {
+        @foreach (Epilogger.Data.Image EPLImage in Model.Images)
+        {
             <div class="withcomment newPhotoupdates" id="photo-@EPLImage.ID">
                 <a href="@EPLImage.Fullsize" rel="prettyPhoto[latestphotos]" title="@EPLImage.ID" id="@EPLImage.ID">
                     <img src="@EPLImage.Thumb" height="154" width="180" border="0" alt="" /></a>
@@ -184,7 +220,8 @@
         filter:</h4>
     <span class="sm-spacer"></span>
     <ul class="plain-list" id="tweetlist">
-        @foreach (Epilogger.Data.Tweet EPLTweet in Model.Tweets) {
+        @foreach (Epilogger.Data.Tweet EPLTweet in Model.Tweets)
+        {
             <li id="Tweet-@EPLTweet.TwitterID" class="tweet">
                 <img src="@EPLTweet.ProfileImageURL" class="fleft" height="48" width="48" alt="" />
                 <small><a href="http://www.twitter.com/@EPLTweet.FromUserScreenName" target="_blank">@EPLTweet.FromUserScreenName</a></small>
@@ -206,7 +243,8 @@
     <h2>
         Blog postings</h2>
     <ul class="plain-list">
-        @foreach (Epilogger.Data.BlogPost TheBlogPost in Model.BlogPosts.Take(3)) {
+        @foreach (Epilogger.Data.BlogPost TheBlogPost in Model.BlogPosts.Take(3))
+        {
             <li>
                 <img src="@Url.Content("~/Public/images/samples/avatar.png")" class="fleft"/>
                 <a href="@TheBlogPost.BlogURL">@TheBlogPost.Title</a><br />
@@ -226,7 +264,8 @@
     <h2>
         External Links</h2>
     <ul class="plain-list">
-        @foreach (Epilogger.Data.URL TheURL in Model.ExternalLinks) {
+        @foreach (Epilogger.Data.URL TheURL in Model.ExternalLinks)
+        {
             <li><a href="@TheURL.ShortURL" title="@TheURL.Tweets.Where(t => t.ID == TheURL.TweetID).FirstOrDefault().Text">@TheURL.FullURL</a><br />
                 <small>
                     <img src="@Url.Content("~/Public/images/icons/tweet-black.png")" class="valign" />VIA
@@ -246,7 +285,8 @@
     <p>
         All these lovely people attended @Model.Name!</p>
     <ul class="plain-list">
-        @foreach (Epilogger.Data.CheckIn checkin in @Model.CheckIns) {
+        @foreach (Epilogger.Data.CheckIn checkin in @Model.CheckIns)
+        {
             <li>
                 @{
             Epilogger.Data.Tweet ThisTweet = checkin.Tweets.Where(t => t.ID == checkin.TweetID).FirstOrDefault();
