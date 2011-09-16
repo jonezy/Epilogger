@@ -2,6 +2,7 @@
 using System.Linq;
 
 using Epilogger.Data;
+using System.Collections.Generic;
 
 namespace Epilogger.Web {
     public class UserService : ServiceBase<User>{
@@ -28,6 +29,12 @@ namespace Epilogger.Web {
         {
             return base.GetRepository<UserRatesEvent>().Add(entity);
         }
+
+        public List<UserRatesEvent> GetUserEventRatings(Guid id)
+        {
+            return db.UserRatesEvents.Where(u => u.UserID == id).ToList();            
+        }
+
 
         public User GetUserByID(Guid id) {
             return GetData().Where(u => u.ID == id).FirstOrDefault();
