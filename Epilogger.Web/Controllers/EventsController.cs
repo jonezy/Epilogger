@@ -41,11 +41,6 @@ namespace Epilogger.Web.Controllers {
             return View(model);
         }
 
-        [LogErrors(FriendlyErrorMessage = "There was a problem saving your event")]
-        public ActionResult Error() {
-            throw new Exception("This is a test exception");
-        }
-
         //[RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the details of that event")]
         public ActionResult Details(int id) {
 
@@ -320,6 +315,7 @@ namespace Epilogger.Web.Controllers {
                 UserFollowsEvent followsEvent = new UserFollowsEvent();
                 followsEvent.EventID = id;
                 followsEvent.UserID = CurrentUserID;
+                followsEvent.Timestamp = DateTime.Now;
 
                 service.SaveUserFollowsEvent(followsEvent);
 

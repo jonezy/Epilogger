@@ -129,6 +129,7 @@ namespace Epilogger.Data
         public Query<User> Users { get; set; }
         public Query<UserRatesEvent> UserRatesEvents { get; set; }
         public Query<BetaSignup> BetaSignups { get; set; }
+        public Query<UserFollowsEvent> UserFollowsEvents { get; set; }
         public Query<UserAuthenticationProfile> UserAuthenticationProfiles { get; set; }
         public Query<CheckIn> CheckIns { get; set; }
         public Query<Role> Roles { get; set; }
@@ -139,7 +140,6 @@ namespace Epilogger.Data
         public Query<ActiveVisitorsQueue> ActiveVisitorsQueues { get; set; }
         public Query<AggregateVisitHistory> AggregateVisitHistories { get; set; }
         public Query<VisitHistory> VisitHistories { get; set; }
-        public Query<UserFollowsEvent> UserFollowsEvents { get; set; }
         public Query<Venue> Venues { get; set; }
         public Query<UserFollowsUser> UserFollowsUsers { get; set; }
 
@@ -253,6 +253,7 @@ namespace Epilogger.Data
             Users = new Query<User>(provider);
             UserRatesEvents = new Query<UserRatesEvent>(provider);
             BetaSignups = new Query<BetaSignup>(provider);
+            UserFollowsEvents = new Query<UserFollowsEvent>(provider);
             UserAuthenticationProfiles = new Query<UserAuthenticationProfile>(provider);
             CheckIns = new Query<CheckIn>(provider);
             Roles = new Query<Role>(provider);
@@ -263,7 +264,6 @@ namespace Epilogger.Data
             ActiveVisitorsQueues = new Query<ActiveVisitorsQueue>(provider);
             AggregateVisitHistories = new Query<AggregateVisitHistory>(provider);
             VisitHistories = new Query<VisitHistory>(provider);
-            UserFollowsEvents = new Query<UserFollowsEvent>(provider);
             Venues = new Query<Venue>(provider);
             UserFollowsUsers = new Query<UserFollowsUser>(provider);
             #endregion
@@ -280,6 +280,7 @@ namespace Epilogger.Data
             	DataProvider.Schema.Tables.Add(new UserTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserRatesEventTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new BetaSignupsTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new UserFollowsEventTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserAuthenticationProfileTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new CheckInsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new RolesTable(DataProvider));
@@ -290,7 +291,6 @@ namespace Epilogger.Data
             	DataProvider.Schema.Tables.Add(new ActiveVisitorsQueueTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new AggregateVisitHistoryTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new VisitHistoryTable(DataProvider));
-            	DataProvider.Schema.Tables.Add(new UserFollowsEventTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new VenuesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserFollowsUserTable(DataProvider));
             }
