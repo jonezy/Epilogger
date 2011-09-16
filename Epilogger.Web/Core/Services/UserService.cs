@@ -2,6 +2,7 @@
 using System.Linq;
 
 using Epilogger.Data;
+using System.Collections.Generic;
 
 namespace Epilogger.Web {
     public class UserService : ServiceBase<User>{
@@ -23,6 +24,17 @@ namespace Epilogger.Web {
         public object SaveUserFollowsEvent(UserFollowsEvent entity) {
             return base.GetRepository<UserFollowsEvent>().Add(entity);
         }
+
+        public object SaveUserRatesEvent(UserRatesEvent entity)
+        {
+            return base.GetRepository<UserRatesEvent>().Add(entity);
+        }
+
+        public List<UserRatesEvent> GetUserEventRatings(Guid id)
+        {
+            return db.UserRatesEvents.Where(u => u.UserID == id).ToList();            
+        }
+
 
         public User GetUserByID(Guid id) {
             return GetData().Where(u => u.ID == id).FirstOrDefault();
@@ -47,7 +59,6 @@ namespace Epilogger.Web {
 
         public void DeleteEventSubscription(Guid userId, int eventId) {
             UserFollowsEvent followsEvent = base.db.UserFollowsEvents.Where(ufe => ufe.EventID == eventId && ufe.UserID == userId).FirstOrDefault();
-            
             base.GetRepository<UserFollowsEvent>().Delete(followsEvent);
         }
     }

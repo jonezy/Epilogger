@@ -95,7 +95,10 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.TweetCount, opt => opt.Ignore())
                 .ForMember(dest => dest.ImageCount, opt => opt.Ignore())
                 .ForMember(dest => dest.CheckInCount, opt => opt.Ignore())
-                .ForMember(dest => dest.HasSubscribed, opt => opt.Ignore());
+                .ForMember(dest => dest.HasSubscribed, opt => opt.Ignore())
+                .ForMember(dest => dest.HasUserRated, opt => opt.Ignore())
+                .ForMember(dest => dest.EventRatings, opt => opt.Ignore())
+                .ForMember(dest => dest.CurrentUserID, opt => opt.Ignore());
 
             Mapper.CreateMap<CreateAccountModel, User>()
                 .ForMember(dest => dest.ForgotPasswordHash, opt => opt.Ignore())

@@ -127,6 +127,7 @@ namespace Epilogger.Data
         public Query<BlogPost> BlogPosts { get; set; }
         public Query<aspnet_User> aspnet_Users { get; set; }
         public Query<User> Users { get; set; }
+        public Query<UserRatesEvent> UserRatesEvents { get; set; }
         public Query<BetaSignup> BetaSignups { get; set; }
         public Query<UserAuthenticationProfile> UserAuthenticationProfiles { get; set; }
         public Query<CheckIn> CheckIns { get; set; }
@@ -250,6 +251,7 @@ namespace Epilogger.Data
             BlogPosts = new Query<BlogPost>(provider);
             aspnet_Users = new Query<aspnet_User>(provider);
             Users = new Query<User>(provider);
+            UserRatesEvents = new Query<UserRatesEvent>(provider);
             BetaSignups = new Query<BetaSignup>(provider);
             UserAuthenticationProfiles = new Query<UserAuthenticationProfile>(provider);
             CheckIns = new Query<CheckIn>(provider);
@@ -276,6 +278,7 @@ namespace Epilogger.Data
             	DataProvider.Schema.Tables.Add(new BlogPostsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new aspnet_UsersTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new UserRatesEventTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new BetaSignupsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserAuthenticationProfileTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new CheckInsTable(DataProvider));
