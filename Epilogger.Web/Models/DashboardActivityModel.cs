@@ -13,6 +13,7 @@ namespace Epilogger.Web.Models {
         PHOTOS_VIDEOS,
         TWEET,
         EVENT_CREATION,
-        EVENT_RATING
+        EVENT_RATING,
+        FOLLOW_EVENT
     }
 }
