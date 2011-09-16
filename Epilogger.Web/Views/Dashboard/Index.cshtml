@@ -14,13 +14,20 @@
         <strong class="title @item.ActivityType">
         @if(item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION) {
             @:NEW EVENT ADDED:
+        } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.FOLLOW_EVENT) {
+            @:SUBSCRIBED TO EVENT
+        } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_RATING) {
+            @:RATED AN EVENT
         } else {
             @item.Event.Name
         }</strong>
         
-        @if(item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION) {
+        @if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION || 
+            item.ActivityType == Epilogger.Web.Models.ActivityType.FOLLOW_EVENT) {
             <h2>@MvcHtmlString.Create(item.Event.Name)</h2>
-        } else if(item.ActivityType == Epilogger.Web.Models.ActivityType.PHOTOS_VIDEOS) {
+        } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_RATING) {
+           <h2>@MvcHtmlString.Create(item.ActivityContent)</h2>
+        } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.PHOTOS_VIDEOS) {
             <img src="@item.ActivityContent" width="170" height="140" />
         } else {
            <p> @MvcHtmlString.Create(item.ActivityContent)</p>

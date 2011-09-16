@@ -141,7 +141,7 @@
     <Compile Include="Core\Email\IEmailSender.cs" />
     <Compile Include="Core\Email\SmtpConfiguration.cs" />
     <Compile Include="Core\Email\TemplateParser.cs" />
-    <Compile Include="Core\Filters\LogErrors.cs" />
+    <Compile Include="Core\Filters\ElmahLoggerFilter.cs" />
     <Compile Include="Core\Filters\RequiresAuthentication.cs" />
     <Compile Include="Core\Helpers\AzureTableHelper.cs" />
     <Compile Include="Core\Helpers\FacebookHelper.cs" />

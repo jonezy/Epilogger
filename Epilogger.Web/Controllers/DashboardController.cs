@@ -32,7 +32,7 @@ namespace Epilogger.Web.Controllers {
                 IEnumerable<Event> events = eventService.FindByUserID(CurrentUserID);
                 List<Image> images = new List<Image>();
                 List<UserRatesEvent> eventrating = userService.GetUserEventRatings(CurrentUserID);
-                
+
                 foreach (var item in events) {
                     IEnumerable<ImageMetaDatum> usersEventImages = item.ImageMetaData.Where(imd => imd.TwitterName == CurrentUserTwitterAuthorization.ServiceUsername).Distinct();
                     foreach (var image in usersEventImages) {
@@ -40,6 +40,16 @@ namespace Epilogger.Web.Controllers {
                     }
                 }
 
+                foreach (var item in CurrentUser.UserFollowsEvents) {
+                    activity.Add(new DashboardActivityModel() {
+                        ActivityType = ActivityType.FOLLOW_EVENT,
+                        Date = item.Timestamp,
+                        ActivityContent = item.Events.FirstOrDefault().Name,
+                        Event = Mapper.Map<Event, DashboardEventViewModel>(item.Events.FirstOrDefault())
+                    });
+                }
+
+                //tweets
                 foreach (var item in tweets) {
                     activity.Add(new DashboardActivityModel() {
                         ActivityType = ActivityType.TWEET,
@@ -49,6 +59,7 @@ namespace Epilogger.Web.Controllers {
                     });
                 }
 
+                // events
                 foreach (var item in events) {
                     activity.Add(new DashboardActivityModel() {
                         ActivityType = ActivityType.EVENT_CREATION,
@@ -58,6 +69,7 @@ namespace Epilogger.Web.Controllers {
                     });
                 }
 
+                // photo's & video's
                 foreach (var item in images) {
                     activity.Add(new DashboardActivityModel() {
                         ActivityType = ActivityType.PHOTOS_VIDEOS,
@@ -67,13 +79,12 @@ namespace Epilogger.Web.Controllers {
                     });
                 }
 
-                foreach (var item in eventrating)
-                {
-                    activity.Add(new DashboardActivityModel()
-                    {
+                // event ratings
+                foreach (var item in eventrating) {
+                    activity.Add(new DashboardActivityModel() {
                         ActivityType = ActivityType.EVENT_RATING,
                         Date = item.RatingDateTime,
-                        ActivityContent = string.Format("{0}'d the Event", item.UserRating),
+                        ActivityContent = string.Format("{0}'d {1}", item.UserRating, item.Events.FirstOrDefault().Name),
                         Event = Mapper.Map<Event, DashboardEventViewModel>(item.Events.FirstOrDefault())
                     });
                 }
@@ -81,8 +92,8 @@ namespace Epilogger.Web.Controllers {
 
 
             DashboardIndexViewModel model = new DashboardIndexViewModel(
-                activity.OrderByDescending(a => a.Date).Skip(currentPage * 12).Take(12).ToList(), 
-                currentPage, 
+                activity.OrderByDescending(a => a.Date).Skip(currentPage * 12).Take(12).ToList(),
+                currentPage,
                 activity.Count
             );
 
@@ -106,7 +117,7 @@ namespace Epilogger.Web.Controllers {
                 TotalRecords = events.Count(),
                 Events = Mapper.Map<List<Event>, List<DashboardEventViewModel>>(events.Skip(currentPage * 12).Take(12).ToList())
             };
-            
+
             return View(model);
         }
 
