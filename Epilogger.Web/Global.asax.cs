@@ -103,6 +103,7 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.Password, opt => opt.MapFrom(src => PasswordHelpers.EncryptPassword(src.Password)))
                 .ForMember(dest => dest.IsActive, opt => opt.UseValue(true))
                 .ForMember(dest => dest.CreatedDate, opt => opt.UseValue(DateTime.UtcNow))
+                .ForMember(dest => dest.ProfilePicture, opt => opt.Ignore())
                 .ForMember(dest => dest.DateOfBirth, opt => opt.MapFrom(src => DateTime.Parse(src.DateOfBirth)));
 
             Mapper.CreateMap<UserAuthenticationProfile, ConnectedNetworksViewModel>();
@@ -110,9 +111,9 @@ namespace Epilogger.Web {
             Mapper.CreateMap<User, AccountModel>()
                 .ForMember(dest => dest.ConnectedNetworks, opt => opt.Ignore())
                 .ForMember(dest => dest.TimeZone, opt => opt.MapFrom(src => src.TimeZoneOffSet))
-                .ForMember(dest => dest.DateOfBirth, opt => opt.MapFrom(src => src.DateOfBirth.HasValue ? src.DateOfBirth.Value.ToShortDateString() : ""))
-                .ForMember(dest => dest.TwitterUsername, opt => opt.MapFrom(src => src.UserAuthenticationProfiles.Where(ua => ua.Service == AuthenticationServices.TWITTER.ToString()).FirstOrDefault().ServiceUsername))
-                .ForMember(dest => dest.FacebookUsername, opt => opt.MapFrom(src => src.UserAuthenticationProfiles.Where(ua => ua.Service == AuthenticationServices.FACEBOOK.ToString()).FirstOrDefault().ServiceUsername));
+                .ForMember(dest => dest.TwitterProfilePicture, opt => opt.ResolveUsing<TwitterProfilePictureResolver>())
+                .ForMember(dest => dest.FacebookProfilePicture, opt => opt.ResolveUsing<FacebookProfilePictureResolver>())
+                .ForMember(dest => dest.DateOfBirth, opt => opt.MapFrom(src => src.DateOfBirth.HasValue ? src.DateOfBirth.Value.ToShortDateString() : ""));
 
             Mapper.CreateMap<CreateEventViewModel, Event>()
                 .ForMember(dest => dest.ID, opt => opt.Ignore())

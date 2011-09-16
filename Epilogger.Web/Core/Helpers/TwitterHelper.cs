@@ -1,6 +1,7 @@
-﻿using System.Configuration;
-
+﻿using System;
+using System.Configuration;
 using Twitterizer;
+
 
 public static class TwitterHelper {
     public static string TwitterConsumerKey {
@@ -30,5 +31,15 @@ public static class TwitterHelper {
         };
 
         return tokens;
+    }
+
+    public static TwitterResponse<TwitterUser> GetUser(string token, string tokenSecret, string username) {
+        if (string.IsNullOrEmpty(username))
+            throw new ArgumentNullException("user");
+
+        OAuthTokens tokens = TwitterHelper.GetTokens(token, tokenSecret);
+        TwitterResponse<TwitterUser> twitterUser = TwitterUser.Show(tokens, username);
+
+        return twitterUser;
     }
 }
