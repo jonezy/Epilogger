@@ -75,14 +75,17 @@ namespace Epilogger.Web.Controllers {
         }
 
         public ActionResult Profile() {
+            List<Event> events = BuildEventsAndSubscriptions();
             DashboardProfileViewModel model = Mapper.Map<User, DashboardProfileViewModel>(CurrentUser);
+            model.Events = Mapper.Map<List<Event>, List<DashboardEventViewModel>>(events.Take(12).ToList());
 
             return View(model);
         }
 
         public ActionResult Events(int? page) {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
-            IEnumerable<Event> events = eventService.FindByUserID(CurrentUserID);
+            List<Event> events = BuildEventsAndSubscriptions();
+
             DashboardEventsViewModel model = new DashboardEventsViewModel() {
                 CurrentPageIndex = currentPage,
                 TotalRecords = events.Count(),
@@ -90,6 +93,16 @@ namespace Epilogger.Web.Controllers {
             };
             
             return View(model);
+        }
+
+        private List<Event> BuildEventsAndSubscriptions() {
+            List<Event> events = eventService.FindByUserID(CurrentUserID);
+            List<UserFollowsEvent> subscribedEvents = CurrentUser.UserFollowsEvents.ToList();
+            foreach (var item in subscribedEvents) {
+                events.Add(item.Events.FirstOrDefault());
+            }
+
+            return events.OrderByDescending(e => e.StartDateTime).ToList();
         }
 
         public ActionResult Account() {
