@@ -25,6 +25,12 @@ namespace Epilogger.Web {
         }
 
 
+        public List<UserRatesEvent> FindEventRatingsByID(int id)
+        {
+            return db.UserRatesEvents.Where(r => r.EventID == id).ToList();
+        }
+
+
         public object Save(Event entity)
         {
             if (entity.ID > 0)

@@ -13,10 +13,12 @@ namespace Epilogger.Web.Controllers {
     public class DashboardController : BaseController {
         TweetService tweetService;
         EventService eventService;
+        UserService userService;
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext) {
             if (tweetService == null) tweetService = new TweetService();
             if (eventService == null) eventService = new EventService();
+            if (userService == null) userService = new UserService();
 
             base.Initialize(requestContext);
         }
@@ -29,6 +31,8 @@ namespace Epilogger.Web.Controllers {
                 IEnumerable<Tweet> tweets = tweetService.FindByUserScreenName(CurrentUserTwitterAuthorization.ServiceUsername);
                 IEnumerable<Event> events = eventService.FindByUserID(CurrentUserID);
                 List<Image> images = new List<Image>();
+                List<UserRatesEvent> eventrating = userService.GetUserEventRatings(CurrentUserID);
+                
                 foreach (var item in events) {
                     IEnumerable<ImageMetaDatum> usersEventImages = item.ImageMetaData.Where(imd => imd.TwitterName == CurrentUserTwitterAuthorization.ServiceUsername).Distinct();
                     foreach (var image in usersEventImages) {
@@ -59,6 +63,17 @@ namespace Epilogger.Web.Controllers {
                         ActivityType = ActivityType.PHOTOS_VIDEOS,
                         Date = item.DateTime,
                         ActivityContent = item.Fullsize,
+                        Event = Mapper.Map<Event, DashboardEventViewModel>(item.Events.FirstOrDefault())
+                    });
+                }
+
+                foreach (var item in eventrating)
+                {
+                    activity.Add(new DashboardActivityModel()
+                    {
+                        ActivityType = ActivityType.EVENT_RATING,
+                        Date = item.RatingDateTime,
+                        ActivityContent = string.Format("{0}'d the Event", item.UserRating),
                         Event = Mapper.Map<Event, DashboardEventViewModel>(item.Events.FirstOrDefault())
                     });
                 }

@@ -50,7 +50,7 @@ namespace Epilogger.Web.Controllers {
         public ActionResult Details(int id) {
 
             EventDisplayViewModel Model = Mapper.Map<Event, EventDisplayViewModel>(ES.FindByID(id));
-            Model.HasSubscribed = CurrentUser.UserFollowsEvents.Where(ufe => ufe.EventID == id).FirstOrDefault()  != null ? true : false;
+            
             Model.TweetCount = TS.FindTweetCountByEventID(id);
             Model.Tweets = TS.FindByEventIDOrderDescTake6(id);
             Model.ImageCount = IS.FindImageCountByEventID(id);
@@ -58,6 +58,24 @@ namespace Epilogger.Web.Controllers {
             Model.CheckInCount = CS.FindCheckInCountByEventID(id);
             Model.CheckIns = CS.FindByEventIDOrderDescTake5(id);
             Model.ExternalLinks = LS.FindByEventIDOrderDescTake3(id);
+            Model.EventRatings = ES.FindEventRatingsByID(id);
+            Model.HasUserRated = false;
+            Model.CurrentUserID = CurrentUserID;
+
+            //If there is a user logged in
+            if (CurrentUserID != Guid.Empty)
+            {
+                Model.HasSubscribed = CurrentUser.UserFollowsEvents.Where(ufe => ufe.EventID == id).FirstOrDefault() != null ? true : false;
+                if (Model.EventRatings.Where(i => i.UserID == CurrentUserID).Count() > 0)
+                {
+                    Model.HasUserRated = true;
+                }
+                else
+                {
+                    Model.HasUserRated = false;
+                }
+            }
+            
 
             //Not optimized
             Model.BlogPosts = BS.FindByEventID(id);
@@ -334,5 +352,55 @@ namespace Epilogger.Web.Controllers {
 
             return RedirectToAction("details", new { id = id });
         }
+
+
+
+        [HttpPost]
+        public ActionResult eventRating(FormCollection fc) 
+        {
+            int id;
+            string ThumbsUp;
+            int.TryParse(fc["ID"].ToString(), out id);
+            ThumbsUp = fc["ThumbsUp"].ToString();
+
+            if (id > 0)
+            {
+                if (CurrentUserID == Guid.Empty)
+                {
+                    this.StoreWarning("You must be logged in to your epilogger account to subscribe to an event");
+                    return RedirectToAction("details", new { id = id });
+                }
+
+                UserService service = new UserService();
+                UserRatesEvent ratesEvent = new UserRatesEvent();
+
+                ratesEvent.EventID = id;
+                ratesEvent.UserID = CurrentUserID;
+                ratesEvent.RatingDateTime = DateTime.UtcNow;
+
+                if (ThumbsUp=="1")
+                {
+                    ratesEvent.UserRating = "+";
+                }
+                else
+                {
+                    ratesEvent.UserRating = "-";
+                }
+
+                service.SaveUserRatesEvent(ratesEvent);
+                this.StoreSuccess("Rating saved!");
+
+            }
+
+            return RedirectToAction("details", new { id = id });
+        }
+
+
+        
+
+
+
+
+
     }
 }
