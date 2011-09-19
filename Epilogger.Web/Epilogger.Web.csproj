@@ -154,6 +154,7 @@
     <Compile Include="Core\Resolvers\TwitterProfilePictureResolver.cs" />
     <Compile Include="Core\Services\CheckInService.cs" />
     <Compile Include="Core\Services\BlogService.cs" />
+    <Compile Include="Core\Services\UserLogService.cs" />
     <Compile Include="Core\Services\ExternalLinksService.cs" />
     <Compile Include="Core\Services\ImageMetaDataService.cs" />
     <Compile Include="Core\Services\ImageService.cs" />

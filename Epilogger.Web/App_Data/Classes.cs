@@ -558,17 +558,6 @@ namespace Epilogger.Data
         #endregion
 
         #region Foreign Keys
-        public IQueryable<CheckIn> CheckIns
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.CheckIns
-                       where items.TweetID == _ID
-                       select items;
-            }
-        }
-
         public IQueryable<Event> Events
         {
             get
@@ -576,6 +565,17 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.Events
                        where items.ID == _EventID
+                       select items;
+            }
+        }
+
+        public IQueryable<CheckIn> CheckIns
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.CheckIns
+                       where items.TweetID == _ID
                        select items;
             }
         }
@@ -2081,6 +2081,187 @@ namespace Epilogger.Data
     
     
     /// <summary>
+    /// A class which represents the UserClickActions table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.UserClickAction 
+    /// </summary>
+
+	public partial class UserClickAction: INotifyPropertyChanging, INotifyPropertyChanged
+	{
+        partial void OnLoaded();
+        partial void OnValidate(System.Data.Linq.ChangeAction action);
+        partial void OnCreated();
+	    
+	    public UserClickAction(){
+	        OnCreated();
+	    }
+	    
+	    #region Properties
+	    
+        partial void OnIDChanging(int value);
+        partial void OnIDChanged();
+		
+		private int _ID;
+		public int ID { 
+		    get{
+		        return _ID;
+		    } 
+		    set{
+		        this.OnIDChanging(value);
+                this.SendPropertyChanging();
+                this._ID = value;
+                this.SendPropertyChanged("ID");
+                this.OnIDChanged();
+		    }
+		}
+		
+        partial void OnUserIDChanging(Guid? value);
+        partial void OnUserIDChanged();
+		
+		private Guid? _UserID;
+		public Guid? UserID { 
+		    get{
+		        return _UserID;
+		    } 
+		    set{
+		        this.OnUserIDChanging(value);
+                this.SendPropertyChanging();
+                this._UserID = value;
+                this.SendPropertyChanged("UserID");
+                this.OnUserIDChanged();
+		    }
+		}
+		
+        partial void OnEventIDChanging(int? value);
+        partial void OnEventIDChanged();
+		
+		private int? _EventID;
+		public int? EventID { 
+		    get{
+		        return _EventID;
+		    } 
+		    set{
+		        this.OnEventIDChanging(value);
+                this.SendPropertyChanging();
+                this._EventID = value;
+                this.SendPropertyChanged("EventID");
+                this.OnEventIDChanged();
+		    }
+		}
+		
+        partial void OnActionDateTimeChanging(DateTime? value);
+        partial void OnActionDateTimeChanged();
+		
+		private DateTime? _ActionDateTime;
+		public DateTime? ActionDateTime { 
+		    get{
+		        return _ActionDateTime;
+		    } 
+		    set{
+		        this.OnActionDateTimeChanging(value);
+                this.SendPropertyChanging();
+                this._ActionDateTime = value;
+                this.SendPropertyChanged("ActionDateTime");
+                this.OnActionDateTimeChanged();
+		    }
+		}
+		
+        partial void OnhrefChanging(string value);
+        partial void OnhrefChanged();
+		
+		private string _href;
+		public string href { 
+		    get{
+		        return _href;
+		    } 
+		    set{
+		        this.OnhrefChanging(value);
+                this.SendPropertyChanging();
+                this._href = value;
+                this.SendPropertyChanged("href");
+                this.OnhrefChanged();
+		    }
+		}
+		
+        partial void OnHostChanging(string value);
+        partial void OnHostChanged();
+		
+		private string _Host;
+		public string Host { 
+		    get{
+		        return _Host;
+		    } 
+		    set{
+		        this.OnHostChanging(value);
+                this.SendPropertyChanging();
+                this._Host = value;
+                this.SendPropertyChanged("Host");
+                this.OnHostChanged();
+		    }
+		}
+		
+        partial void OnPathNameChanging(string value);
+        partial void OnPathNameChanged();
+		
+		private string _PathName;
+		public string PathName { 
+		    get{
+		        return _PathName;
+		    } 
+		    set{
+		        this.OnPathNameChanging(value);
+                this.SendPropertyChanging();
+                this._PathName = value;
+                this.SendPropertyChanged("PathName");
+                this.OnPathNameChanged();
+		    }
+		}
+		
+        partial void OnUserAgentChanging(string value);
+        partial void OnUserAgentChanged();
+		
+		private string _UserAgent;
+		public string UserAgent { 
+		    get{
+		        return _UserAgent;
+		    } 
+		    set{
+		        this.OnUserAgentChanging(value);
+                this.SendPropertyChanging();
+                this._UserAgent = value;
+                this.SendPropertyChanged("UserAgent");
+                this.OnUserAgentChanged();
+		    }
+		}
+		
+
+        #endregion
+
+        #region Foreign Keys
+        #endregion
+
+
+        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+        public event PropertyChangingEventHandler PropertyChanging;
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void SendPropertyChanging()
+        {
+            var handler = PropertyChanging;
+            if (handler != null)
+               handler(this, emptyChangingEventArgs);
+        }
+
+        protected virtual void SendPropertyChanged(String propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+	}
+	
+    
+    
+    /// <summary>
     /// A class which represents the CheckIns table in the Epilogger Database.
     /// This class is queryable through EpiloggerDB.CheckIn 
     /// </summary>
@@ -2411,17 +2592,6 @@ namespace Epilogger.Data
         #endregion
 
         #region Foreign Keys
-        public IQueryable<Role> Roles
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Roles
-                       where items.ID == _RoleID
-                       select items;
-            }
-        }
-
         public IQueryable<User> Users
         {
             get
@@ -2429,6 +2599,17 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.Users
                        where items.ID == _UserID
+                       select items;
+            }
+        }
+
+        public IQueryable<Role> Roles
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Roles
+                       where items.ID == _RoleID
                        select items;
             }
         }
@@ -2869,6 +3050,17 @@ namespace Epilogger.Data
         #endregion
 
         #region Foreign Keys
+        public IQueryable<EventCategory> EventCategories
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.EventCategories
+                       where items.ID == _CategoryID
+                       select items;
+            }
+        }
+
         public IQueryable<BlogPost> BlogPosts
         {
             get
@@ -2887,39 +3079,6 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.CheckIns
                        where items.EventID == _ID
-                       select items;
-            }
-        }
-
-        public IQueryable<EventCategory> EventCategories
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.EventCategories
-                       where items.ID == _CategoryID
-                       select items;
-            }
-        }
-
-        public IQueryable<User> Users
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Users
-                       where items.ID == _UserID
-                       select items;
-            }
-        }
-
-        public IQueryable<Venue> Venues
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Venues
-                       where items.VenueID == _VenueID
                        select items;
             }
         }
@@ -2986,6 +3145,28 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.UserRatesEvents
                        where items.EventID == _ID
+                       select items;
+            }
+        }
+
+        public IQueryable<User> Users
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Users
+                       where items.ID == _UserID
+                       select items;
+            }
+        }
+
+        public IQueryable<Venue> Venues
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Venues
+                       where items.VenueID == _VenueID
                        select items;
             }
         }
@@ -3391,17 +3572,6 @@ namespace Epilogger.Data
         #endregion
 
         #region Foreign Keys
-        public IQueryable<ImageMetaDatum> ImageMetaData
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.ImageMetaData
-                       where items.ImageID == _ID
-                       select items;
-            }
-        }
-
         public IQueryable<Event> Events
         {
             get
@@ -3409,6 +3579,17 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.Events
                        where items.ID == _EventID
+                       select items;
+            }
+        }
+
+        public IQueryable<ImageMetaDatum> ImageMetaData
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.ImageMetaData
+                       where items.ImageID == _ID
                        select items;
             }
         }
@@ -3438,17 +3619,17 @@ namespace Epilogger.Data
     
     
     /// <summary>
-    /// A class which represents the ActiveVisitorsQueue table in the Epilogger Database.
-    /// This class is queryable through EpiloggerDB.ActiveVisitorsQueue 
+    /// A class which represents the ActiveVisitorsQueueOLD table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.ActiveVisitorsQueueOLD 
     /// </summary>
 
-	public partial class ActiveVisitorsQueue: INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class ActiveVisitorsQueueOLD: INotifyPropertyChanging, INotifyPropertyChanged
 	{
         partial void OnLoaded();
         partial void OnValidate(System.Data.Linq.ChangeAction action);
         partial void OnCreated();
 	    
-	    public ActiveVisitorsQueue(){
+	    public ActiveVisitorsQueueOLD(){
 	        OnCreated();
 	    }
 	    
@@ -3704,17 +3885,17 @@ namespace Epilogger.Data
     
     
     /// <summary>
-    /// A class which represents the AggregateVisitHistory table in the Epilogger Database.
-    /// This class is queryable through EpiloggerDB.AggregateVisitHistory 
+    /// A class which represents the AggregateVisitHistoryOLD table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.AggregateVisitHistoryOLD 
     /// </summary>
 
-	public partial class AggregateVisitHistory: INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class AggregateVisitHistoryOLD: INotifyPropertyChanging, INotifyPropertyChanged
 	{
         partial void OnLoaded();
         partial void OnValidate(System.Data.Linq.ChangeAction action);
         partial void OnCreated();
 	    
-	    public AggregateVisitHistory(){
+	    public AggregateVisitHistoryOLD(){
 	        OnCreated();
 	    }
 	    
@@ -3919,17 +4100,17 @@ namespace Epilogger.Data
     
     
     /// <summary>
-    /// A class which represents the VisitHistory table in the Epilogger Database.
-    /// This class is queryable through EpiloggerDB.VisitHistory 
+    /// A class which represents the VisitHistoryOLD table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.VisitHistoryOLD 
     /// </summary>
 
-	public partial class VisitHistory: INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class VisitHistoryOLD: INotifyPropertyChanging, INotifyPropertyChanged
 	{
         partial void OnLoaded();
         partial void OnValidate(System.Data.Linq.ChangeAction action);
         partial void OnCreated();
 	    
-	    public VisitHistory(){
+	    public VisitHistoryOLD(){
 	        OnCreated();
 	    }
 	    
