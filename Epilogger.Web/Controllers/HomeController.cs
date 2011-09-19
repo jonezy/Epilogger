@@ -28,8 +28,20 @@ namespace Epilogger.Web.Controllers {
             
             return Json(new { success = true });
         }
-        
 
+
+
+
+        [HttpPost]
+        public ActionResult ClickMap(Epilogger.Data.UserClickAction clickactions)
+        {
+
+          
+
+
+
+            return Json(new { success = true });
+        }
 
 
     }

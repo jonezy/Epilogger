@@ -36,6 +36,9 @@
         head.js('@Url.Content("~/Public/js/prettyPhoto/js/jquery.prettyPhoto.js")');
         head.js('@Url.Content("~/Public/js/epilogger.js")');
         head.js('@Url.Content("~/Public/js/AnyTime/anytimec.js")');
+
+
+        head.js('@Url.Content("~/Public/js/clickmap.js")');
     </script>
 	<!-- Favicons
 	================================================== 
@@ -100,7 +103,25 @@
 //                }
 //            });
 //        });
-//    });
+    //    });
+
+
+    head.ready(function () {
+        $(document).saveClicks(); 
+
+        $('.displayClicks').click(function() {
+            $.displayClicks();
+            $('#clickmap-overlay').click(function() {
+                 $.removeClicks();
+                 $(document).saveClicks();
+            });
+            $(document).stopSaveClicks();
+            return false;
+        });
+    });
+
+
+
 
 
     head.ready(function () {
