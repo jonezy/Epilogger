@@ -19,12 +19,12 @@
         } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_RATING) {
             @:RATED AN EVENT
         } else {
-            @item.Event.Name
+            @item.EventName
         }</strong>
         
         @if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION || 
             item.ActivityType == Epilogger.Web.Models.ActivityType.FOLLOW_EVENT) {
-            <h2>@MvcHtmlString.Create(item.Event.Name)</h2>
+            <h2>@MvcHtmlString.Create(item.EventName)</h2>
         } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_RATING) {
            <h2>@MvcHtmlString.Create(item.ActivityContent)</h2>
         } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.PHOTOS_VIDEOS) {
