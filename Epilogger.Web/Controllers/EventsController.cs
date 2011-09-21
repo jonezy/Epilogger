@@ -78,6 +78,40 @@ namespace Epilogger.Web.Controllers {
             return View(Model);
         }
 
+
+
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult Details(int id, FormCollection collection)
+        {
+
+            DateTime FromDateTime;
+            DateTime ToDateTime;
+
+            FromDateTime = DateTime.Parse(collection["InputFromDate"]);
+            ToDateTime = DateTime.Parse(collection["InputToDate"]);
+
+            return Redirect("/Events/Details/" + id + "?f=" + String.Format("{0:yyyy-MM-dd HH:mm:ss}", FromDateTime) + "&t=" + String.Format("{0:yyyy-MM-dd HH:mm:ss}", ToDateTime));
+
+        }
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
         public ActionResult AllPhotos(int id, int? page) {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
 

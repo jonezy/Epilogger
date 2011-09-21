@@ -70,6 +70,46 @@
 <div class="grid_7 alpha">
     <h1>@Model.Name</h1>
     <h2>@Model.SubTitle</h2>
+    
+    @using (Html.BeginForm()) {
+        <span class="clear spacer"></span>
+        <div id="filterByDay">
+            Show data for: 
+            @{
+                string ReturnFromDateTime = string.Empty;
+                string ReturnToDateTime = string.Empty;
+                
+                if (Request.QueryString["f"] != null) 
+                {
+                    ReturnFromDateTime = string.Format("{0:MMMMM dd, yyyy h:mmtt}", DateTime.Parse(Request.QueryString["f"]));
+                }
+                if (Request.QueryString["t"] != null) 
+                {
+                    ReturnToDateTime = string.Format("{0:MMMMM dd, yyyy h:mmtt}", DateTime.Parse(Request.QueryString["t"]));
+                }
+            }
+
+            @Html.TextBox("InputFromDate", ReturnFromDateTime)
+            &nbsp;&nbsp;To&nbsp;&nbsp;
+            @Html.TextBox("InputToDate", ReturnToDateTime)
+            &nbsp;&nbsp;<input type="submit" value="Apply" />
+            <script type="text/javascript">
+                head.ready(function () {               
+                    $("#InputFromDate").AnyTime_picker(
+                            { format: "%M %d, %Y %l:%i %p" });
+                    $("#InputToDate").AnyTime_picker(
+                            { format: "%M %d, %Y %l:%i %p" });
+
+                    function setDate(fd, td) {
+                        fd = $("#InputFromDate")
+                        td = $("#InputToDate")
+                    }
+                });
+            </script>
+        </div>    
+    }
+
+
     @if (Model.HasSubscribed) {
         using (Html.BeginForm("unsubscribe", "events", FormMethod.Post)) {
             <input type="submit" value="Unsubscribe" name="SubscribeToEvent" id="" />
