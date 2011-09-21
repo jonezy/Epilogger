@@ -36,6 +36,9 @@
         head.js('@Url.Content("~/Public/js/prettyPhoto/js/jquery.prettyPhoto.js")');
         head.js('@Url.Content("~/Public/js/epilogger.js")');
         head.js('@Url.Content("~/Public/js/AnyTime/anytimec.js")');
+
+
+        head.js('@Url.Content("~/Public/js/clickmap.js")');
     </script>
 	<!-- Favicons
 	================================================== 
@@ -83,6 +86,70 @@
 		<div class="spacer"></div>
     </div>
 </div>
+
+<script language="javascript" type="text/javascript">
+    /* Capture ALL clicks in EPL - Going to use this for user Click tracking to create a click map */
+//    head.ready(function() {
+//        $(document).bind('click', function (e) {
+//            //console.log(e)
+
+//            //Post information back to EPL
+//            $.ajax({
+//                url: '/Home/LogClick',
+//                type: 'POST',
+//                data: { href: e.srcElement.href, PathName: e.srcElement.pathname, UserAgent: jQuery.browser },
+//                success: function (result) {
+//                    // TODO: nothing
+//                }
+//            });
+//        });
+    //    });
+
+
+    //Store all clicks, for interface tweaking.
+    head.ready(function () {
+        $(document).saveClicks(); 
+
+        $('.displayClicks').click(function() {
+            $.displayClicks();
+            $('#clickmap-overlay').click(function() {
+                 $.removeClicks();
+                 $(document).saveClicks();
+            });
+            $(document).stopSaveClicks();
+            return false;
+        });
+    });
+
+
+
+    //Saves all information when a user clicks on a link.
+    head.ready(function () {
+        $("a").bind('click', function (e) {
+            //console.log(e)
+
+            //For the images, we need to access the parent to get the image properties.
+            if (e.srcElement.host == null) {
+                e.srcElement = e.srcElement.parentElement;
+            }
+            if (typeof EventID == "undefined") {
+                EventID = 0;
+            }
+
+            //Post information back to EPL
+            $.ajax({
+                url: '/Home/LogClick',
+                type: 'POST',
+                data: { href: e.srcElement.href, PathName: e.srcElement.pathname, UserAgent: navigator.userAgent, Host: e.srcElement.host, EventID: EventID },
+                success: function (result) {
+                    // TODO: nothing
+                }
+            });
+        });
+    });
+
+</script>
+
 
 </body>
 </html>

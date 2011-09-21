@@ -9,6 +9,9 @@ $(document).ready(function () {
 });
 */
 
+
+
+
 //attaches  a calendar to date of birth fields.
 $(".dob").datepicker({
     changeMonth: true,
