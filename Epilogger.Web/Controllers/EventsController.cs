@@ -150,6 +150,7 @@ namespace Epilogger.Web.Controllers {
         public ActionResult CreateEvent(CreateEventViewModel model) {
             try {
                 model.UserID = Guid.Parse(CookieHelpers.GetCookieValue("lc", "uid").ToString());
+                model.CreatedDateTime = DateTime.UtcNow;
 
                 Event EPLevent = Mapper.Map<CreateEventViewModel, Event>(model);
                 ES.Save(EPLevent);
