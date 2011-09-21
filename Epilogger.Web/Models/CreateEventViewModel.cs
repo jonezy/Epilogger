@@ -10,6 +10,8 @@ namespace Epilogger.Web.Models
     public class CreateEventViewModel
     {
         public Guid UserID { get; set; }
+        public DateTime CreatedDateTime { get; set; }
+
         [DisplayName("Event Name")]
         public String Name { get; set; }
         [Required]
@@ -30,8 +32,6 @@ namespace Epilogger.Web.Models
 
         [DisplayName("Search Terms")]
         public string SearchTerms { get; set; }
-
-
         [DisplayName("Time Zone Offset")]
         public int TimeZoneOffset { get; set; }
     }

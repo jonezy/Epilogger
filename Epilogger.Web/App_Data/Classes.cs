@@ -558,17 +558,6 @@ namespace Epilogger.Data
         #endregion
 
         #region Foreign Keys
-        public IQueryable<Event> Events
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Events
-                       where items.ID == _EventID
-                       select items;
-            }
-        }
-
         public IQueryable<CheckIn> CheckIns
         {
             get
@@ -576,6 +565,17 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.CheckIns
                        where items.TweetID == _ID
+                       select items;
+            }
+        }
+
+        public IQueryable<Event> Events
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Events
+                       where items.ID == _EventID
                        select items;
             }
         }
@@ -2668,124 +2668,6 @@ namespace Epilogger.Data
     
     
     /// <summary>
-    /// A class which represents the UserRoles table in the Epilogger Database.
-    /// This class is queryable through EpiloggerDB.UserRole 
-    /// </summary>
-
-	public partial class UserRole: INotifyPropertyChanging, INotifyPropertyChanged
-	{
-        partial void OnLoaded();
-        partial void OnValidate(System.Data.Linq.ChangeAction action);
-        partial void OnCreated();
-	    
-	    public UserRole(){
-	        OnCreated();
-	    }
-	    
-	    #region Properties
-	    
-        partial void OnIDChanging(int value);
-        partial void OnIDChanged();
-		
-		private int _ID;
-		public int ID { 
-		    get{
-		        return _ID;
-		    } 
-		    set{
-		        this.OnIDChanging(value);
-                this.SendPropertyChanging();
-                this._ID = value;
-                this.SendPropertyChanged("ID");
-                this.OnIDChanged();
-		    }
-		}
-		
-        partial void OnUserIDChanging(Guid value);
-        partial void OnUserIDChanged();
-		
-		private Guid _UserID;
-		public Guid UserID { 
-		    get{
-		        return _UserID;
-		    } 
-		    set{
-		        this.OnUserIDChanging(value);
-                this.SendPropertyChanging();
-                this._UserID = value;
-                this.SendPropertyChanged("UserID");
-                this.OnUserIDChanged();
-		    }
-		}
-		
-        partial void OnRoleIDChanging(int value);
-        partial void OnRoleIDChanged();
-		
-		private int _RoleID;
-		public int RoleID { 
-		    get{
-		        return _RoleID;
-		    } 
-		    set{
-		        this.OnRoleIDChanging(value);
-                this.SendPropertyChanging();
-                this._RoleID = value;
-                this.SendPropertyChanged("RoleID");
-                this.OnRoleIDChanged();
-		    }
-		}
-		
-
-        #endregion
-
-        #region Foreign Keys
-        public IQueryable<User> Users
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Users
-                       where items.ID == _UserID
-                       select items;
-            }
-        }
-
-        public IQueryable<Role> Roles
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Roles
-                       where items.ID == _RoleID
-                       select items;
-            }
-        }
-
-        #endregion
-
-
-        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-        public event PropertyChangingEventHandler PropertyChanging;
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void SendPropertyChanging()
-        {
-            var handler = PropertyChanging;
-            if (handler != null)
-               handler(this, emptyChangingEventArgs);
-        }
-
-        protected virtual void SendPropertyChanged(String propertyName)
-        {
-            var handler = PropertyChanged;
-            if (handler != null)
-                handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-	}
-	
-    
-    
-    /// <summary>
     /// A class which represents the Events table in the Epilogger Database.
     /// This class is queryable through EpiloggerDB.Event 
     /// </summary>
@@ -2833,6 +2715,23 @@ namespace Epilogger.Data
                 this._UserID = value;
                 this.SendPropertyChanged("UserID");
                 this.OnUserIDChanged();
+		    }
+		}
+		
+        partial void OnCreatedDateTimeChanging(DateTime? value);
+        partial void OnCreatedDateTimeChanged();
+		
+		private DateTime? _CreatedDateTime;
+		public DateTime? CreatedDateTime { 
+		    get{
+		        return _CreatedDateTime;
+		    } 
+		    set{
+		        this.OnCreatedDateTimeChanging(value);
+                this.SendPropertyChanging();
+                this._CreatedDateTime = value;
+                this.SendPropertyChanged("CreatedDateTime");
+                this.OnCreatedDateTimeChanged();
 		    }
 		}
 		
@@ -3197,17 +3096,6 @@ namespace Epilogger.Data
         #endregion
 
         #region Foreign Keys
-        public IQueryable<EventCategory> EventCategories
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.EventCategories
-                       where items.ID == _CategoryID
-                       select items;
-            }
-        }
-
         public IQueryable<BlogPost> BlogPosts
         {
             get
@@ -3226,6 +3114,39 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.CheckIns
                        where items.EventID == _ID
+                       select items;
+            }
+        }
+
+        public IQueryable<EventCategory> EventCategories
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.EventCategories
+                       where items.ID == _CategoryID
+                       select items;
+            }
+        }
+
+        public IQueryable<User> Users
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Users
+                       where items.ID == _UserID
+                       select items;
+            }
+        }
+
+        public IQueryable<Venue> Venues
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Venues
+                       where items.VenueID == _VenueID
                        select items;
             }
         }
@@ -3296,6 +3217,113 @@ namespace Epilogger.Data
             }
         }
 
+        #endregion
+
+
+        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+        public event PropertyChangingEventHandler PropertyChanging;
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void SendPropertyChanging()
+        {
+            var handler = PropertyChanging;
+            if (handler != null)
+               handler(this, emptyChangingEventArgs);
+        }
+
+        protected virtual void SendPropertyChanged(String propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+	}
+	
+    
+    
+    /// <summary>
+    /// A class which represents the UserRoles table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.UserRole 
+    /// </summary>
+
+	public partial class UserRole: INotifyPropertyChanging, INotifyPropertyChanged
+	{
+        partial void OnLoaded();
+        partial void OnValidate(System.Data.Linq.ChangeAction action);
+        partial void OnCreated();
+	    
+	    public UserRole(){
+	        OnCreated();
+	    }
+	    
+	    #region Properties
+	    
+        partial void OnIDChanging(int value);
+        partial void OnIDChanged();
+		
+		private int _ID;
+		public int ID { 
+		    get{
+		        return _ID;
+		    } 
+		    set{
+		        this.OnIDChanging(value);
+                this.SendPropertyChanging();
+                this._ID = value;
+                this.SendPropertyChanged("ID");
+                this.OnIDChanged();
+		    }
+		}
+		
+        partial void OnUserIDChanging(Guid value);
+        partial void OnUserIDChanged();
+		
+		private Guid _UserID;
+		public Guid UserID { 
+		    get{
+		        return _UserID;
+		    } 
+		    set{
+		        this.OnUserIDChanging(value);
+                this.SendPropertyChanging();
+                this._UserID = value;
+                this.SendPropertyChanged("UserID");
+                this.OnUserIDChanged();
+		    }
+		}
+		
+        partial void OnRoleIDChanging(int value);
+        partial void OnRoleIDChanged();
+		
+		private int _RoleID;
+		public int RoleID { 
+		    get{
+		        return _RoleID;
+		    } 
+		    set{
+		        this.OnRoleIDChanging(value);
+                this.SendPropertyChanging();
+                this._RoleID = value;
+                this.SendPropertyChanged("RoleID");
+                this.OnRoleIDChanged();
+		    }
+		}
+		
+
+        #endregion
+
+        #region Foreign Keys
+        public IQueryable<Role> Roles
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Roles
+                       where items.ID == _RoleID
+                       select items;
+            }
+        }
+
         public IQueryable<User> Users
         {
             get
@@ -3303,17 +3331,6 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.Users
                        where items.ID == _UserID
-                       select items;
-            }
-        }
-
-        public IQueryable<Venue> Venues
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Venues
-                       where items.VenueID == _VenueID
                        select items;
             }
         }
@@ -3719,17 +3736,6 @@ namespace Epilogger.Data
         #endregion
 
         #region Foreign Keys
-        public IQueryable<Event> Events
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Events
-                       where items.ID == _EventID
-                       select items;
-            }
-        }
-
         public IQueryable<ImageMetaDatum> ImageMetaData
         {
             get
@@ -3737,6 +3743,17 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.ImageMetaData
                        where items.ImageID == _ID
+                       select items;
+            }
+        }
+
+        public IQueryable<Event> Events
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Events
+                       where items.ID == _EventID
                        select items;
             }
         }
