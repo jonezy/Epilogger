@@ -4,10 +4,10 @@
 
     $.fn.saveClicks = function () {
         $(this).bind('mousedown.clickmap', function (evt) {
-            $.post('/examples/ClickMap/clickmap.php', {
+            $.post('/Home/ClickMap', {
                 x: evt.pageX,
                 y: evt.pageY,
-                l: escape(document.location.pathname)
+                location: escape(document.location.pathname)
             });
         });
     };
@@ -22,7 +22,7 @@
 $.displayClicks = function (settings) {
     $('<div id="clickmap-overlay"></div>').appendTo('body');
     $('<div id="clickmap-loading"></div>').appendTo('body');
-    $.get('/Home/ClickMap', { l: escape(document.location.pathname) },
+    $.get('/Home/_GetClickMap', { location: escape(document.location.pathname) },
         function (htmlContentFromServer) {
             $(htmlContentFromServer).appendTo('body');
             $('#clickmap-loading').remove();

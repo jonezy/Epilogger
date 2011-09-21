@@ -2237,6 +2237,157 @@ namespace Epilogger.Data {
         }
         
         /// <summary>
+        /// Table: userClickTracking
+        /// Primary Key: ID
+        /// </summary>
+
+        public class userClickTrackingTable: DatabaseTable {
+            
+            public userClickTrackingTable(IDataProvider provider):base("userClickTracking",provider){
+                ClassName = "userClickTracking";
+                SchemaName = "dbo";
+                
+
+                Columns.Add(new DatabaseColumn("ID", this)
+                {
+	                IsPrimaryKey = true,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = true,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("UserID", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Guid,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("ClickDateTime", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.DateTime,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("x", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int16,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("y", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int16,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("location", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 255
+                });
+                    
+                
+                
+            }
+            
+            public IColumn ID{
+                get{
+                    return this.GetColumn("ID");
+                }
+            }
+            				
+   			public static string IDColumn{
+			      get{
+        			return "ID";
+      			}
+		    }
+           
+            public IColumn UserID{
+                get{
+                    return this.GetColumn("UserID");
+                }
+            }
+            				
+   			public static string UserIDColumn{
+			      get{
+        			return "UserID";
+      			}
+		    }
+           
+            public IColumn ClickDateTime{
+                get{
+                    return this.GetColumn("ClickDateTime");
+                }
+            }
+            				
+   			public static string ClickDateTimeColumn{
+			      get{
+        			return "ClickDateTime";
+      			}
+		    }
+           
+            public IColumn x{
+                get{
+                    return this.GetColumn("x");
+                }
+            }
+            				
+   			public static string xColumn{
+			      get{
+        			return "x";
+      			}
+		    }
+           
+            public IColumn y{
+                get{
+                    return this.GetColumn("y");
+                }
+            }
+            				
+   			public static string yColumn{
+			      get{
+        			return "y";
+      			}
+		    }
+           
+            public IColumn location{
+                get{
+                    return this.GetColumn("location");
+                }
+            }
+            				
+   			public static string locationColumn{
+			      get{
+        			return "location";
+      			}
+		    }
+           
+                    
+        }
+        
+        /// <summary>
         /// Table: UserRoles
         /// Primary Key: ID
         /// </summary>

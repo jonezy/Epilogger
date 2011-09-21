@@ -2521,6 +2521,153 @@ namespace Epilogger.Data
     
     
     /// <summary>
+    /// A class which represents the userClickTracking table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.userClickTracking 
+    /// </summary>
+
+	public partial class userClickTracking: INotifyPropertyChanging, INotifyPropertyChanged
+	{
+        partial void OnLoaded();
+        partial void OnValidate(System.Data.Linq.ChangeAction action);
+        partial void OnCreated();
+	    
+	    public userClickTracking(){
+	        OnCreated();
+	    }
+	    
+	    #region Properties
+	    
+        partial void OnIDChanging(int value);
+        partial void OnIDChanged();
+		
+		private int _ID;
+		public int ID { 
+		    get{
+		        return _ID;
+		    } 
+		    set{
+		        this.OnIDChanging(value);
+                this.SendPropertyChanging();
+                this._ID = value;
+                this.SendPropertyChanged("ID");
+                this.OnIDChanged();
+		    }
+		}
+		
+        partial void OnUserIDChanging(Guid? value);
+        partial void OnUserIDChanged();
+		
+		private Guid? _UserID;
+		public Guid? UserID { 
+		    get{
+		        return _UserID;
+		    } 
+		    set{
+		        this.OnUserIDChanging(value);
+                this.SendPropertyChanging();
+                this._UserID = value;
+                this.SendPropertyChanged("UserID");
+                this.OnUserIDChanged();
+		    }
+		}
+		
+        partial void OnClickDateTimeChanging(DateTime? value);
+        partial void OnClickDateTimeChanged();
+		
+		private DateTime? _ClickDateTime;
+		public DateTime? ClickDateTime { 
+		    get{
+		        return _ClickDateTime;
+		    } 
+		    set{
+		        this.OnClickDateTimeChanging(value);
+                this.SendPropertyChanging();
+                this._ClickDateTime = value;
+                this.SendPropertyChanged("ClickDateTime");
+                this.OnClickDateTimeChanged();
+		    }
+		}
+		
+        partial void OnxChanging(short? value);
+        partial void OnxChanged();
+		
+		private short? _x;
+		public short? x { 
+		    get{
+		        return _x;
+		    } 
+		    set{
+		        this.OnxChanging(value);
+                this.SendPropertyChanging();
+                this._x = value;
+                this.SendPropertyChanged("x");
+                this.OnxChanged();
+		    }
+		}
+		
+        partial void OnyChanging(short? value);
+        partial void OnyChanged();
+		
+		private short? _y;
+		public short? y { 
+		    get{
+		        return _y;
+		    } 
+		    set{
+		        this.OnyChanging(value);
+                this.SendPropertyChanging();
+                this._y = value;
+                this.SendPropertyChanged("y");
+                this.OnyChanged();
+		    }
+		}
+		
+        partial void OnlocationChanging(string value);
+        partial void OnlocationChanged();
+		
+		private string _location;
+		public string location { 
+		    get{
+		        return _location;
+		    } 
+		    set{
+		        this.OnlocationChanging(value);
+                this.SendPropertyChanging();
+                this._location = value;
+                this.SendPropertyChanged("location");
+                this.OnlocationChanged();
+		    }
+		}
+		
+
+        #endregion
+
+        #region Foreign Keys
+        #endregion
+
+
+        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+        public event PropertyChangingEventHandler PropertyChanging;
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void SendPropertyChanging()
+        {
+            var handler = PropertyChanging;
+            if (handler != null)
+               handler(this, emptyChangingEventArgs);
+        }
+
+        protected virtual void SendPropertyChanged(String propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+	}
+	
+    
+    
+    /// <summary>
     /// A class which represents the UserRoles table in the Epilogger Database.
     /// This class is queryable through EpiloggerDB.UserRole 
     /// </summary>

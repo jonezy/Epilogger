@@ -106,6 +106,7 @@
     //    });
 
 
+    //Store all clicks, for interface tweaking.
     head.ready(function () {
         $(document).saveClicks(); 
 
@@ -122,13 +123,12 @@
 
 
 
-
-
+    //Saves all information when a user clicks on a link.
     head.ready(function () {
         $("a").bind('click', function (e) {
             //console.log(e)
 
-            //For the images, we need to access the parent to get the image props.
+            //For the images, we need to access the parent to get the image properties.
             if (e.srcElement.host == null) {
                 e.srcElement = e.srcElement.parentElement;
             }
