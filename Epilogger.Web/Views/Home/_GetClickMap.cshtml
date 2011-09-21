@@ -1,0 +1,8 @@
+﻿@model IEnumerable<Epilogger.Data.userClickTracking>
+
+<div id="clickmap-container">
+    @foreach (Epilogger.Data.userClickTracking item in Model)
+    {
+        @Html.Raw(string.Format("<div style='left:{0}px;top:{1}px'></div>", item.x -10, item.y -10));
+    }
+</div>

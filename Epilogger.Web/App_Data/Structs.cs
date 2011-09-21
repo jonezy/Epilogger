@@ -1828,6 +1828,201 @@ namespace Epilogger.Data {
         }
         
         /// <summary>
+        /// Table: UserClickActions
+        /// Primary Key: ID
+        /// </summary>
+
+        public class UserClickActionsTable: DatabaseTable {
+            
+            public UserClickActionsTable(IDataProvider provider):base("UserClickActions",provider){
+                ClassName = "UserClickAction";
+                SchemaName = "dbo";
+                
+
+                Columns.Add(new DatabaseColumn("ID", this)
+                {
+	                IsPrimaryKey = true,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = true,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("UserID", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Guid,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("EventID", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("ActionDateTime", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.DateTime,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("href", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = -1
+                });
+
+                Columns.Add(new DatabaseColumn("Host", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 255
+                });
+
+                Columns.Add(new DatabaseColumn("PathName", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = -1
+                });
+
+                Columns.Add(new DatabaseColumn("UserAgent", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 255
+                });
+                    
+                
+                
+            }
+            
+            public IColumn ID{
+                get{
+                    return this.GetColumn("ID");
+                }
+            }
+            				
+   			public static string IDColumn{
+			      get{
+        			return "ID";
+      			}
+		    }
+           
+            public IColumn UserID{
+                get{
+                    return this.GetColumn("UserID");
+                }
+            }
+            				
+   			public static string UserIDColumn{
+			      get{
+        			return "UserID";
+      			}
+		    }
+           
+            public IColumn EventID{
+                get{
+                    return this.GetColumn("EventID");
+                }
+            }
+            				
+   			public static string EventIDColumn{
+			      get{
+        			return "EventID";
+      			}
+		    }
+           
+            public IColumn ActionDateTime{
+                get{
+                    return this.GetColumn("ActionDateTime");
+                }
+            }
+            				
+   			public static string ActionDateTimeColumn{
+			      get{
+        			return "ActionDateTime";
+      			}
+		    }
+           
+            public IColumn href{
+                get{
+                    return this.GetColumn("href");
+                }
+            }
+            				
+   			public static string hrefColumn{
+			      get{
+        			return "href";
+      			}
+		    }
+           
+            public IColumn Host{
+                get{
+                    return this.GetColumn("Host");
+                }
+            }
+            				
+   			public static string HostColumn{
+			      get{
+        			return "Host";
+      			}
+		    }
+           
+            public IColumn PathName{
+                get{
+                    return this.GetColumn("PathName");
+                }
+            }
+            				
+   			public static string PathNameColumn{
+			      get{
+        			return "PathName";
+      			}
+		    }
+           
+            public IColumn UserAgent{
+                get{
+                    return this.GetColumn("UserAgent");
+                }
+            }
+            				
+   			public static string UserAgentColumn{
+			      get{
+        			return "UserAgent";
+      			}
+		    }
+           
+                    
+        }
+        
+        /// <summary>
         /// Table: CheckIns
         /// Primary Key: ID
         /// </summary>
@@ -2035,6 +2230,157 @@ namespace Epilogger.Data {
    			public static string RoleColumn{
 			      get{
         			return "Role";
+      			}
+		    }
+           
+                    
+        }
+        
+        /// <summary>
+        /// Table: userClickTracking
+        /// Primary Key: ID
+        /// </summary>
+
+        public class userClickTrackingTable: DatabaseTable {
+            
+            public userClickTrackingTable(IDataProvider provider):base("userClickTracking",provider){
+                ClassName = "userClickTracking";
+                SchemaName = "dbo";
+                
+
+                Columns.Add(new DatabaseColumn("ID", this)
+                {
+	                IsPrimaryKey = true,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = true,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("UserID", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Guid,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("ClickDateTime", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.DateTime,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("x", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int16,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("y", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int16,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("location", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 255
+                });
+                    
+                
+                
+            }
+            
+            public IColumn ID{
+                get{
+                    return this.GetColumn("ID");
+                }
+            }
+            				
+   			public static string IDColumn{
+			      get{
+        			return "ID";
+      			}
+		    }
+           
+            public IColumn UserID{
+                get{
+                    return this.GetColumn("UserID");
+                }
+            }
+            				
+   			public static string UserIDColumn{
+			      get{
+        			return "UserID";
+      			}
+		    }
+           
+            public IColumn ClickDateTime{
+                get{
+                    return this.GetColumn("ClickDateTime");
+                }
+            }
+            				
+   			public static string ClickDateTimeColumn{
+			      get{
+        			return "ClickDateTime";
+      			}
+		    }
+           
+            public IColumn x{
+                get{
+                    return this.GetColumn("x");
+                }
+            }
+            				
+   			public static string xColumn{
+			      get{
+        			return "x";
+      			}
+		    }
+           
+            public IColumn y{
+                get{
+                    return this.GetColumn("y");
+                }
+            }
+            				
+   			public static string yColumn{
+			      get{
+        			return "y";
+      			}
+		    }
+           
+            public IColumn location{
+                get{
+                    return this.GetColumn("location");
+                }
+            }
+            				
+   			public static string locationColumn{
+			      get{
+        			return "location";
       			}
 		    }
            
@@ -3064,14 +3410,14 @@ namespace Epilogger.Data {
         }
         
         /// <summary>
-        /// Table: ActiveVisitorsQueue
+        /// Table: ActiveVisitorsQueueOLD
         /// Primary Key: ID
         /// </summary>
 
-        public class ActiveVisitorsQueueTable: DatabaseTable {
+        public class ActiveVisitorsQueueOLDTable: DatabaseTable {
             
-            public ActiveVisitorsQueueTable(IDataProvider provider):base("ActiveVisitorsQueue",provider){
-                ClassName = "ActiveVisitorsQueue";
+            public ActiveVisitorsQueueOLDTable(IDataProvider provider):base("ActiveVisitorsQueueOLD",provider){
+                ClassName = "ActiveVisitorsQueueOLD";
                 SchemaName = "dbo";
                 
 
@@ -3369,14 +3715,14 @@ namespace Epilogger.Data {
         }
         
         /// <summary>
-        /// Table: AggregateVisitHistory
+        /// Table: AggregateVisitHistoryOLD
         /// Primary Key: ID
         /// </summary>
 
-        public class AggregateVisitHistoryTable: DatabaseTable {
+        public class AggregateVisitHistoryOLDTable: DatabaseTable {
             
-            public AggregateVisitHistoryTable(IDataProvider provider):base("AggregateVisitHistory",provider){
-                ClassName = "AggregateVisitHistory";
+            public AggregateVisitHistoryOLDTable(IDataProvider provider):base("AggregateVisitHistoryOLD",provider){
+                ClassName = "AggregateVisitHistoryOLD";
                 SchemaName = "dbo";
                 
 
@@ -3608,14 +3954,14 @@ namespace Epilogger.Data {
         }
         
         /// <summary>
-        /// Table: VisitHistory
+        /// Table: VisitHistoryOLD
         /// Primary Key: ID
         /// </summary>
 
-        public class VisitHistoryTable: DatabaseTable {
+        public class VisitHistoryOLDTable: DatabaseTable {
             
-            public VisitHistoryTable(IDataProvider provider):base("VisitHistory",provider){
-                ClassName = "VisitHistory";
+            public VisitHistoryOLDTable(IDataProvider provider):base("VisitHistoryOLD",provider){
+                ClassName = "VisitHistoryOLD";
                 SchemaName = "dbo";
                 
 

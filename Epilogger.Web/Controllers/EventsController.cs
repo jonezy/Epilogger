@@ -89,7 +89,7 @@ namespace Epilogger.Web.Controllers {
 
             if (currentPage + 1 == 1) {
                 Model.ShowTopPhotos = true;
-                Model.Images = IS.GetPagedPhotos(id, currentPage + 1, 10);
+                Model.Images = IS.GetPagedPhotos(id, currentPage + 1, 30);
             } else {
                 Model.ShowTopPhotos = false;
                 Model.Images = IS.GetPagedPhotos(id, currentPage + 1, 30);
