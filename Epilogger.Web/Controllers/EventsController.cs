@@ -202,7 +202,7 @@ namespace Epilogger.Web.Controllers {
         }
 
         [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the details of that event")]
-        public ActionResult CreateEvent() {
+        public ActionResult Create() {
             CreateEventViewModel Model = new CreateEventViewModel();
 
             Model.TimeZoneOffset = Helpers.GetUserTimeZoneOffset();
@@ -228,10 +228,15 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpPost]
-        public ActionResult CreateEvent(CreateEventViewModel model) {
+        public ActionResult Create(CreateEventViewModel model) {
             try {
                 model.UserID = Guid.Parse(CookieHelpers.GetCookieValue("lc", "uid").ToString());
                 model.CreatedDateTime = DateTime.UtcNow;
+
+                model.CollectionStartDateTime = model.CollectionStartDateTime.FromUserTimeZoneToUtc();
+                model.CollectionEndDateTime = model.CollectionEndDateTime.FromUserTimeZoneToUtc();
+                model.StartDateTime = model.StartDateTime.FromUserTimeZoneToUtc();
+                model.EndDateTime = model.EndDateTime.FromUserTimeZoneToUtc();
 
                 Event EPLevent = Mapper.Map<CreateEventViewModel, Event>(model);
                 ES.Save(EPLevent);
