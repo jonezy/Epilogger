@@ -12,11 +12,18 @@ namespace Epilogger.Web.Models
         public Guid UserID { get; set; }
         public DateTime CreatedDateTime { get; set; }
 
-        [DisplayName("Event Name")]
-        public String Name { get; set; }
+        
         [Required]
-
-
+        [DisplayName("Name")]
+        public String Name { get; set; }
+        [DisplayName("Subtitle")]
+        public String Subtitle { get; set; }
+        [DisplayName("Cost")]
+        public String Cost { get; set; }
+        [DisplayName("Description")]
+        public String Description { get; set; }
+        
+        [Required]
         [DisplayName("Data Collection Start Time")]
         public DateTime CollectionStartDateTime { get; set; }
         
