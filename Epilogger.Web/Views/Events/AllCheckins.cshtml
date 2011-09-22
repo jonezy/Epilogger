@@ -1,0 +1,16 @@
+﻿@using Epilogger.Web;
+@using Epilogger.Web.Models;
+@model Epilogger.Web.Models.AllCheckinsViewModel
+@{
+    ViewBag.Title = "Epilogger - " + Model.Name + "- Tweets";
+}
+
+<div id="events-nav">
+    <h1>ALL CHECKINS</h1>
+    <h2>FROM @Model.Name</h2>
+    @Html.Partial("Menu")
+
+</div>
+<div id="events-content">
+
+</div>

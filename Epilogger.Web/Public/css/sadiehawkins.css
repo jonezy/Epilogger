@@ -228,11 +228,12 @@ ul#connected-networks {list-style:none;}
 
 /* ------------------------------ DASHBOARD */
 #dashboard-nav {float:left;width:268px;margin-right:17px;}
-#dashboard-nav ul {margin-bottom:30px;}
-#dashboard-nav ul li {list-style:none;}
-#dashboard-nav ul li a {font:normal 18px 'InterstatePlusRegular', arial, sans-serif;text-transform:uppercase;font-weight:bold;padding:10px;display:block;border-bottom:solid 1p #fff;}
-#dashboard-nav ul li a:hover,
-#dashboard-nav ul li a.current {background:#f6f6f6;border-bottom:solid 1px #bdbdbd;}
+
+ul#left-nav {margin-bottom:30px;}
+ul#left-nav li {list-style:none;}
+ul#left-nav li a {font:normal 18px 'InterstatePlusRegular', arial, sans-serif;text-transform:uppercase;font-weight:bold;padding:10px;display:block;border-bottom:solid 1p #fff;}
+ul#left-nav li a:hover,
+ul#left-nav li a.current {background:#f6f6f6;border-bottom:solid 1px #bdbdbd;}
 
 #dashboard-content {float:left;width:641px;}
 .dashboard-activity-entry {float:left;height:140px;overflow:hidden;margin:0px 20px 20px 0px;width:185px;color:#828282;}
@@ -296,6 +297,8 @@ ul#connected-networks {list-style:none;}
 
 .alltweets-entry {margin-bottom:20px;}
 .alltweets-entry .tweet-content {float:left;margin-left:10px;width:560px;font-size:13px;}
+.tweet-content strong {background:url(../images/linebg.png) repeat-x 0 50%;display:block;}
+.tweet-content strong a {padding-right:10px;background:#fff;}
 .tweet-content .tweet-content-username {font-weight:bold;text-transform:uppercase;padding-bottom:4px;}
 .alltweets-entry .tweet-content p {margin-bottom:2px;}
 .alltweets-entry .tweet-content span.tweet-date {font-size:11px;color:#c2c2c2;}

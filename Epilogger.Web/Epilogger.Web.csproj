@@ -169,10 +169,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\AllContentViewModel.cs" />
     <Compile Include="Models\AllPhotosDisplayViewModel.cs" />
     <Compile Include="Models\AzureTweetModel.cs" />
     <Compile Include="Models\AllTweetsDisplayViewModel.cs" />
     <Compile Include="Models\ConnectedNetworksViewModel.cs" />
+    <Compile Include="Models\AllLinksViewModel.cs" />
+    <Compile Include="Models\AllCheckinsViewModel.cs" />
+    <Compile Include="Models\AllBlogPostsViewModel.cs" />
     <Compile Include="Models\CreateAccountModel.cs" />
     <Compile Include="Models\CreateEventViewModel.cs" />
     <Compile Include="Models\DashboardAccountViewModel.cs" />
@@ -396,6 +400,11 @@
     <Content Include="Views\Home\_GetClickMap.cshtml" />
     <Content Include="Views\Events\_TweetTemplate.cshtml" />
     <Content Include="Views\Events\_EventMenu.cshtml" />
+    <Content Include="Views\Events\AllContent.cshtml" />
+    <Content Include="Views\Events\Menu.cshtml" />
+    <Content Include="Views\Events\AllLinks.cshtml" />
+    <Content Include="Views\Events\AllBlogPosts.cshtml" />
+    <Content Include="Views\Events\AllCheckins.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

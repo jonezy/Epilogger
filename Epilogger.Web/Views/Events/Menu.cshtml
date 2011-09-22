@@ -1,0 +1,13 @@
+﻿<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tincidunt tellus vel tellus placerat faucibus. Maecenas adipiscing venenatis aliquam.</p>
+@{
+    var action = ViewContext.RouteData.Values["action"] as string ?? "";
+    var id = ViewContext.RouteData.Values["id"] as string ?? "";
+}
+<ul id="left-nav">
+    <li>@Html.ActionLink("All", "allcontent", null, new { id = @id},  action.ToLower() == "allcontent" ? new { @class="current"} : null)</li>
+    <li>@Html.ActionLink("Tweets", "alltweets", null, new { id = @id }, action.ToLower() == "alltweets" ? new { @class = "current" } : null)</li>
+    <li>@Html.ActionLink("Photo Albums", "allphotos", null, new { id = @id }, action.ToLower() == "allphotos" ? new { @class = "current" } : null)</li>
+    <li>@Html.ActionLink("Blog Posts", "allblogposts", null, new { id = @id }, action.ToLower() == "allblogposts" ? new { @class = "current" } : null)</li>
+    <li>@Html.ActionLink("Checkins", "allcheckins", null, new { id = @id }, action.ToLower() == "allcheckins" ? new { @class = "current" } : null)</li>
+    <li>@Html.ActionLink("Links", "alllinks", null, new { id = @id }, action.ToLower() == "alllinks" ? new { @class = "current" } : null)</li>
+</ul>

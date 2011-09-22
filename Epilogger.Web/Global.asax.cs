@@ -104,6 +104,11 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.FromDateTime, opt => opt.Ignore())
                 .ForMember(dest => dest.ToDateTime, opt => opt.Ignore());
 
+            Mapper.CreateMap<Event, AllContentViewModel>();
+            Mapper.CreateMap<Event, AllBlogPostsViewModel>();
+            Mapper.CreateMap<Event, AllCheckinsViewModel>();
+            Mapper.CreateMap<Event, AllLinksViewModel>();
+
             Mapper.CreateMap<CreateAccountModel, User>()
                 .ForMember(dest => dest.ForgotPasswordHash, opt => opt.Ignore())
                 .ForMember(dest => dest.ID, opt => opt.Ignore())
