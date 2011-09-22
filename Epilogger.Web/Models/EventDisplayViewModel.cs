@@ -8,6 +8,7 @@ namespace Epilogger.Web.Models {
         
         public int ID { get; set; }
         public Guid UserID { get; set; }
+        public Guid CurrentUserID { get; set; }
         public string Name { get; set; }
         public string SubTitle { get; set; }
         public string Description {
@@ -38,6 +39,11 @@ namespace Epilogger.Web.Models {
 
         public bool HasSubscribed { get; set; }
 
+        public bool HasUserRated { get; set; }
+        public DateTime ? FromDateTime { get; set; }
+        public DateTime ? ToDateTime { get; set; }
+
+        public List<Epilogger.Data.UserRatesEvent> EventRatings { get; set; }
         public IEnumerable<Epilogger.Data.Tweet> Tweets { get; set; }
         public IEnumerable<Epilogger.Data.Image> Images { get; set;}
         public IEnumerable<Epilogger.Data.CheckIn> CheckIns { get; set; }

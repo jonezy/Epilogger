@@ -64,7 +64,7 @@ namespace Epilogger.Web {
         }
         
         public static void RegisterGlobalFilters(GlobalFilterCollection filters) {
-            filters.Add(new HandleErrorAttribute());
+            filters.Add(new ErrorLogging());
         }
 
         public static void RegisterRoutes(RouteCollection routes) {
@@ -95,7 +95,12 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.TweetCount, opt => opt.Ignore())
                 .ForMember(dest => dest.ImageCount, opt => opt.Ignore())
                 .ForMember(dest => dest.CheckInCount, opt => opt.Ignore())
-                .ForMember(dest => dest.HasSubscribed, opt => opt.Ignore());
+                .ForMember(dest => dest.HasSubscribed, opt => opt.Ignore())
+                .ForMember(dest => dest.HasUserRated, opt => opt.Ignore())
+                .ForMember(dest => dest.EventRatings, opt => opt.Ignore())
+                .ForMember(dest => dest.CurrentUserID, opt => opt.Ignore())
+                .ForMember(dest => dest.FromDateTime, opt => opt.Ignore())
+                .ForMember(dest => dest.ToDateTime, opt => opt.Ignore());
 
             Mapper.CreateMap<CreateAccountModel, User>()
                 .ForMember(dest => dest.ForgotPasswordHash, opt => opt.Ignore())
@@ -131,10 +136,11 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.CollectionMode, opt => opt.UseValue(2))
                 .ForMember(dest => dest.TwitterAccount, opt => opt.Ignore())
                 .ForMember(dest => dest.FacebookPageURL, opt => opt.Ignore());
-            
+
             Mapper.CreateMap<User, DashboardProfileViewModel>()
                 .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => string.Format("{0} {1}", src.FirstName, src.LastName)))
-                .ForMember(dest => dest.Events, opt => opt.MapFrom(src => src.Events.OrderByDescending(e => e.StartDateTime).ToList()));
+                //.ForMember(dest => dest.Events, opt => opt.MapFrom(src => src.Events.OrderByDescending(e => e.StartDateTime).ToList()));
+                .ForMember(dest => dest.Events, opt => opt.Ignore());
 
             Mapper.CreateMap<Event, DashboardEventViewModel>()
                 .ForMember(dest => dest.TotalTweets, opt => opt.MapFrom(src => src.Tweets.Count()))

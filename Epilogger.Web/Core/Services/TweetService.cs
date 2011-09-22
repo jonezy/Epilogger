@@ -28,15 +28,15 @@ namespace Epilogger.Web
 
 
         //Less greedy data functions
-        public int FindTweetCountByEventID(int EventID)
+        public int FindTweetCountByEventID(int EventID, DateTime F, DateTime T)
         {
-            return db.Tweets.Where(t => t.EventID == EventID).Count();
+            return db.Tweets.Where(t => t.EventID == EventID && t.CreatedDate >= F && t.CreatedDate <= T).Count();
         }
 
 
-        public IEnumerable<Tweet> FindByEventIDOrderDescTake6(int EventID)
+        public IEnumerable<Tweet> FindByEventIDOrderDescTake6(int EventID, DateTime F, DateTime T)
         {
-            return db.Tweets.Where(t => t.EventID == EventID).OrderByDescending(t=> t.CreatedDate).Take(6);
+            return db.Tweets.Where(t => t.EventID == EventID && t.CreatedDate >= F && t.CreatedDate <= T).OrderByDescending(t => t.CreatedDate).Take(6);
         }
 
 
@@ -65,11 +65,12 @@ namespace Epilogger.Web
                     .ToList();
         }
 
-        public List<Tweet> FindByUserScreenName(string fromUserScreenName) {
+        public IEnumerable<Tweet> FindByUserScreenName(string fromUserScreenName) {
             DateTime startDate = DateTime.Parse("2000-01-01 00:00:00");
             DateTime endDate = DateTime.Parse("2200-12-31 00:00:00");
 
-            return GetData(t => t.FromUserScreenName == fromUserScreenName && t.CreatedDate >= startDate && t.CreatedDate <= endDate);
+            //return GetData(t => t.FromUserScreenName == fromUserScreenName && t.CreatedDate >= startDate && t.CreatedDate <= endDate);
+            return db.Tweets.Where(t => t.FromUserScreenName == fromUserScreenName && t.CreatedDate >= startDate && t.CreatedDate <= endDate);
         }
 
 
@@ -89,13 +90,13 @@ namespace Epilogger.Web
                    select TW;
         }
 
-        public IEnumerable<Tweet> GetPagedTweets(int EventID, System.Nullable<int> page, int TweetsPerPage)
+        public IEnumerable<Tweet> GetPagedTweets(int EventID, System.Nullable<int> page, int TweetsPerPage, DateTime F, DateTime T)
         {
 
             int skipAmount = page.HasValue ? page.Value - 1 : 0;
 
             var tweets = (from t in db.Tweets
-                          where t.EventID == EventID
+                          where t.EventID == EventID && t.CreatedDate >= F && t.CreatedDate <= T
                           orderby t.CreatedDate descending
                           select t).Skip(skipAmount * TweetsPerPage).Take(TweetsPerPage);
 

@@ -10,27 +10,13 @@ namespace Epilogger.Web.Models
     public class CreateEventViewModel
     {
         public Guid UserID { get; set; }
-        [Required]
-        [DisplayName("TITLE")]
+        public DateTime CreatedDateTime { get; set; }
+
+        [DisplayName("Event Name")]
         public String Name { get; set; }
-
-
-
-        [DisplayName("SUBTITLE")]
-        public String Subtitle { get; set; }
-
-
-        [DisplayName("CATEGORY")]
-        public int Category { get; set; }
-
-        [DisplayName("COST")]
-        public int Cost { get; set; }
-
-        [DisplayName("SHORT DESCRIPTION")]
-        public int Description { get; set; }
-
-
         [Required]
+
+
         [DisplayName("Data Collection Start Time")]
         public DateTime CollectionStartDateTime { get; set; }
         
@@ -46,8 +32,6 @@ namespace Epilogger.Web.Models
 
         [DisplayName("Search Terms")]
         public string SearchTerms { get; set; }
-
-
         [DisplayName("Time Zone Offset")]
         public int TimeZoneOffset { get; set; }
     }

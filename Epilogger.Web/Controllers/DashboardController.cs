@@ -13,10 +13,12 @@ namespace Epilogger.Web.Controllers {
     public class DashboardController : BaseController {
         TweetService tweetService;
         EventService eventService;
+        UserService userService;
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext) {
             if (tweetService == null) tweetService = new TweetService();
             if (eventService == null) eventService = new EventService();
+            if (userService == null) userService = new UserService();
 
             base.Initialize(requestContext);
         }
@@ -29,6 +31,8 @@ namespace Epilogger.Web.Controllers {
                 IEnumerable<Tweet> tweets = tweetService.FindByUserScreenName(CurrentUserTwitterAuthorization.ServiceUsername);
                 IEnumerable<Event> events = eventService.FindByUserID(CurrentUserID);
                 List<Image> images = new List<Image>();
+                List<UserRatesEvent> eventrating = userService.GetUserEventRatings(CurrentUserID);
+
                 foreach (var item in events) {
                     IEnumerable<ImageMetaDatum> usersEventImages = item.ImageMetaData.Where(imd => imd.TwitterName == CurrentUserTwitterAuthorization.ServiceUsername).Distinct();
                     foreach (var image in usersEventImages) {
@@ -36,6 +40,16 @@ namespace Epilogger.Web.Controllers {
                     }
                 }
 
+                foreach (var item in CurrentUser.UserFollowsEvents) {
+                    activity.Add(new DashboardActivityModel() {
+                        ActivityType = ActivityType.FOLLOW_EVENT,
+                        Date = item.Timestamp,
+                        ActivityContent = item.Events.FirstOrDefault().Name,
+                        Event = Mapper.Map<Event, DashboardEventViewModel>(item.Events.FirstOrDefault())
+                    });
+                }
+
+                //tweets
                 foreach (var item in tweets) {
                     activity.Add(new DashboardActivityModel() {
                         ActivityType = ActivityType.TWEET,
@@ -45,6 +59,7 @@ namespace Epilogger.Web.Controllers {
                     });
                 }
 
+                // events
                 foreach (var item in events) {
                     activity.Add(new DashboardActivityModel() {
                         ActivityType = ActivityType.EVENT_CREATION,
@@ -54,6 +69,7 @@ namespace Epilogger.Web.Controllers {
                     });
                 }
 
+                // photo's & video's
                 foreach (var item in images) {
                     activity.Add(new DashboardActivityModel() {
                         ActivityType = ActivityType.PHOTOS_VIDEOS,
@@ -62,12 +78,22 @@ namespace Epilogger.Web.Controllers {
                         Event = Mapper.Map<Event, DashboardEventViewModel>(item.Events.FirstOrDefault())
                     });
                 }
+
+                // event ratings
+                foreach (var item in eventrating) {
+                    activity.Add(new DashboardActivityModel() {
+                        ActivityType = ActivityType.EVENT_RATING,
+                        Date = item.RatingDateTime,
+                        ActivityContent = string.Format("{0}'d {1}", item.UserRating, item.Events.FirstOrDefault().Name),
+                        Event = Mapper.Map<Event, DashboardEventViewModel>(item.Events.FirstOrDefault())
+                    });
+                }
             }
 
 
             DashboardIndexViewModel model = new DashboardIndexViewModel(
-                activity.OrderByDescending(a => a.Date).Skip(currentPage * 12).Take(12).ToList(), 
-                currentPage, 
+                activity.OrderByDescending(a => a.Date).Skip(currentPage * 12).Take(12).ToList(),
+                currentPage,
                 activity.Count
             );
 
@@ -75,21 +101,34 @@ namespace Epilogger.Web.Controllers {
         }
 
         public ActionResult Profile() {
+            List<Event> events = BuildEventsAndSubscriptions();
             DashboardProfileViewModel model = Mapper.Map<User, DashboardProfileViewModel>(CurrentUser);
+            model.Events = Mapper.Map<List<Event>, List<DashboardEventViewModel>>(events.Take(12).ToList());
 
             return View(model);
         }
 
         public ActionResult Events(int? page) {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
-            IEnumerable<Event> events = eventService.FindByUserID(CurrentUserID);
+            List<Event> events = BuildEventsAndSubscriptions();
+
             DashboardEventsViewModel model = new DashboardEventsViewModel() {
                 CurrentPageIndex = currentPage,
                 TotalRecords = events.Count(),
                 Events = Mapper.Map<List<Event>, List<DashboardEventViewModel>>(events.Skip(currentPage * 12).Take(12).ToList())
             };
-            
+
             return View(model);
+        }
+
+        private List<Event> BuildEventsAndSubscriptions() {
+            List<Event> events = eventService.FindByUserID(CurrentUserID);
+            List<UserFollowsEvent> subscribedEvents = CurrentUser.UserFollowsEvents.ToList();
+            foreach (var item in subscribedEvents) {
+                events.Add(item.Events.FirstOrDefault());
+            }
+
+            return events.OrderByDescending(e => e.StartDateTime).ToList();
         }
 
         public ActionResult Account() {

@@ -1476,6 +1476,17 @@ namespace Epilogger.Data
             }
         }
 
+        public IQueryable<UserRatesEvent> UserRatesEvents
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.UserRatesEvents
+                       where items.UserID == _ID
+                       select items;
+            }
+        }
+
         public IQueryable<UserRole> UserRoles
         {
             get
@@ -1483,6 +1494,158 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.UserRoles
                        where items.UserID == _ID
+                       select items;
+            }
+        }
+
+        #endregion
+
+
+        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+        public event PropertyChangingEventHandler PropertyChanging;
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void SendPropertyChanging()
+        {
+            var handler = PropertyChanging;
+            if (handler != null)
+               handler(this, emptyChangingEventArgs);
+        }
+
+        protected virtual void SendPropertyChanged(String propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+	}
+	
+    
+    
+    /// <summary>
+    /// A class which represents the UserRatesEvent table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.UserRatesEvent 
+    /// </summary>
+
+	public partial class UserRatesEvent: INotifyPropertyChanging, INotifyPropertyChanged
+	{
+        partial void OnLoaded();
+        partial void OnValidate(System.Data.Linq.ChangeAction action);
+        partial void OnCreated();
+	    
+	    public UserRatesEvent(){
+	        OnCreated();
+	    }
+	    
+	    #region Properties
+	    
+        partial void OnIDChanging(int value);
+        partial void OnIDChanged();
+		
+		private int _ID;
+		public int ID { 
+		    get{
+		        return _ID;
+		    } 
+		    set{
+		        this.OnIDChanging(value);
+                this.SendPropertyChanging();
+                this._ID = value;
+                this.SendPropertyChanged("ID");
+                this.OnIDChanged();
+		    }
+		}
+		
+        partial void OnUserIDChanging(Guid value);
+        partial void OnUserIDChanged();
+		
+		private Guid _UserID;
+		public Guid UserID { 
+		    get{
+		        return _UserID;
+		    } 
+		    set{
+		        this.OnUserIDChanging(value);
+                this.SendPropertyChanging();
+                this._UserID = value;
+                this.SendPropertyChanged("UserID");
+                this.OnUserIDChanged();
+		    }
+		}
+		
+        partial void OnEventIDChanging(int value);
+        partial void OnEventIDChanged();
+		
+		private int _EventID;
+		public int EventID { 
+		    get{
+		        return _EventID;
+		    } 
+		    set{
+		        this.OnEventIDChanging(value);
+                this.SendPropertyChanging();
+                this._EventID = value;
+                this.SendPropertyChanged("EventID");
+                this.OnEventIDChanged();
+		    }
+		}
+		
+        partial void OnUserRatingChanging(string value);
+        partial void OnUserRatingChanged();
+		
+		private string _UserRating;
+		public string UserRating { 
+		    get{
+		        return _UserRating;
+		    } 
+		    set{
+		        this.OnUserRatingChanging(value);
+                this.SendPropertyChanging();
+                this._UserRating = value;
+                this.SendPropertyChanged("UserRating");
+                this.OnUserRatingChanged();
+		    }
+		}
+		
+        partial void OnRatingDateTimeChanging(DateTime value);
+        partial void OnRatingDateTimeChanged();
+		
+		private DateTime _RatingDateTime;
+		public DateTime RatingDateTime { 
+		    get{
+		        return _RatingDateTime;
+		    } 
+		    set{
+		        this.OnRatingDateTimeChanging(value);
+                this.SendPropertyChanging();
+                this._RatingDateTime = value;
+                this.SendPropertyChanged("RatingDateTime");
+                this.OnRatingDateTimeChanged();
+		    }
+		}
+		
+
+        #endregion
+
+        #region Foreign Keys
+        public IQueryable<Event> Events
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Events
+                       where items.ID == _EventID
+                       select items;
+            }
+        }
+
+        public IQueryable<User> Users
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Users
+                       where items.ID == _UserID
                        select items;
             }
         }
@@ -1600,6 +1763,141 @@ namespace Epilogger.Data
         #endregion
 
         #region Foreign Keys
+        #endregion
+
+
+        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+        public event PropertyChangingEventHandler PropertyChanging;
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void SendPropertyChanging()
+        {
+            var handler = PropertyChanging;
+            if (handler != null)
+               handler(this, emptyChangingEventArgs);
+        }
+
+        protected virtual void SendPropertyChanged(String propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+	}
+	
+    
+    
+    /// <summary>
+    /// A class which represents the UserFollowsEvent table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.UserFollowsEvent 
+    /// </summary>
+
+	public partial class UserFollowsEvent: INotifyPropertyChanging, INotifyPropertyChanged
+	{
+        partial void OnLoaded();
+        partial void OnValidate(System.Data.Linq.ChangeAction action);
+        partial void OnCreated();
+	    
+	    public UserFollowsEvent(){
+	        OnCreated();
+	    }
+	    
+	    #region Properties
+	    
+        partial void OnIDChanging(int value);
+        partial void OnIDChanged();
+		
+		private int _ID;
+		public int ID { 
+		    get{
+		        return _ID;
+		    } 
+		    set{
+		        this.OnIDChanging(value);
+                this.SendPropertyChanging();
+                this._ID = value;
+                this.SendPropertyChanged("ID");
+                this.OnIDChanged();
+		    }
+		}
+		
+        partial void OnUserIDChanging(Guid value);
+        partial void OnUserIDChanged();
+		
+		private Guid _UserID;
+		public Guid UserID { 
+		    get{
+		        return _UserID;
+		    } 
+		    set{
+		        this.OnUserIDChanging(value);
+                this.SendPropertyChanging();
+                this._UserID = value;
+                this.SendPropertyChanged("UserID");
+                this.OnUserIDChanged();
+		    }
+		}
+		
+        partial void OnEventIDChanging(int value);
+        partial void OnEventIDChanged();
+		
+		private int _EventID;
+		public int EventID { 
+		    get{
+		        return _EventID;
+		    } 
+		    set{
+		        this.OnEventIDChanging(value);
+                this.SendPropertyChanging();
+                this._EventID = value;
+                this.SendPropertyChanged("EventID");
+                this.OnEventIDChanged();
+		    }
+		}
+		
+        partial void OnTimestampChanging(DateTime value);
+        partial void OnTimestampChanged();
+		
+		private DateTime _Timestamp;
+		public DateTime Timestamp { 
+		    get{
+		        return _Timestamp;
+		    } 
+		    set{
+		        this.OnTimestampChanging(value);
+                this.SendPropertyChanging();
+                this._Timestamp = value;
+                this.SendPropertyChanged("Timestamp");
+                this.OnTimestampChanged();
+		    }
+		}
+		
+
+        #endregion
+
+        #region Foreign Keys
+        public IQueryable<Event> Events
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Events
+                       where items.ID == _EventID
+                       select items;
+            }
+        }
+
+        public IQueryable<User> Users
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Users
+                       where items.ID == _UserID
+                       select items;
+            }
+        }
+
         #endregion
 
 
@@ -1758,6 +2056,187 @@ namespace Epilogger.Data
             }
         }
 
+        #endregion
+
+
+        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+        public event PropertyChangingEventHandler PropertyChanging;
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void SendPropertyChanging()
+        {
+            var handler = PropertyChanging;
+            if (handler != null)
+               handler(this, emptyChangingEventArgs);
+        }
+
+        protected virtual void SendPropertyChanged(String propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+	}
+	
+    
+    
+    /// <summary>
+    /// A class which represents the UserClickActions table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.UserClickAction 
+    /// </summary>
+
+	public partial class UserClickAction: INotifyPropertyChanging, INotifyPropertyChanged
+	{
+        partial void OnLoaded();
+        partial void OnValidate(System.Data.Linq.ChangeAction action);
+        partial void OnCreated();
+	    
+	    public UserClickAction(){
+	        OnCreated();
+	    }
+	    
+	    #region Properties
+	    
+        partial void OnIDChanging(int value);
+        partial void OnIDChanged();
+		
+		private int _ID;
+		public int ID { 
+		    get{
+		        return _ID;
+		    } 
+		    set{
+		        this.OnIDChanging(value);
+                this.SendPropertyChanging();
+                this._ID = value;
+                this.SendPropertyChanged("ID");
+                this.OnIDChanged();
+		    }
+		}
+		
+        partial void OnUserIDChanging(Guid? value);
+        partial void OnUserIDChanged();
+		
+		private Guid? _UserID;
+		public Guid? UserID { 
+		    get{
+		        return _UserID;
+		    } 
+		    set{
+		        this.OnUserIDChanging(value);
+                this.SendPropertyChanging();
+                this._UserID = value;
+                this.SendPropertyChanged("UserID");
+                this.OnUserIDChanged();
+		    }
+		}
+		
+        partial void OnEventIDChanging(int? value);
+        partial void OnEventIDChanged();
+		
+		private int? _EventID;
+		public int? EventID { 
+		    get{
+		        return _EventID;
+		    } 
+		    set{
+		        this.OnEventIDChanging(value);
+                this.SendPropertyChanging();
+                this._EventID = value;
+                this.SendPropertyChanged("EventID");
+                this.OnEventIDChanged();
+		    }
+		}
+		
+        partial void OnActionDateTimeChanging(DateTime? value);
+        partial void OnActionDateTimeChanged();
+		
+		private DateTime? _ActionDateTime;
+		public DateTime? ActionDateTime { 
+		    get{
+		        return _ActionDateTime;
+		    } 
+		    set{
+		        this.OnActionDateTimeChanging(value);
+                this.SendPropertyChanging();
+                this._ActionDateTime = value;
+                this.SendPropertyChanged("ActionDateTime");
+                this.OnActionDateTimeChanged();
+		    }
+		}
+		
+        partial void OnhrefChanging(string value);
+        partial void OnhrefChanged();
+		
+		private string _href;
+		public string href { 
+		    get{
+		        return _href;
+		    } 
+		    set{
+		        this.OnhrefChanging(value);
+                this.SendPropertyChanging();
+                this._href = value;
+                this.SendPropertyChanged("href");
+                this.OnhrefChanged();
+		    }
+		}
+		
+        partial void OnHostChanging(string value);
+        partial void OnHostChanged();
+		
+		private string _Host;
+		public string Host { 
+		    get{
+		        return _Host;
+		    } 
+		    set{
+		        this.OnHostChanging(value);
+                this.SendPropertyChanging();
+                this._Host = value;
+                this.SendPropertyChanged("Host");
+                this.OnHostChanged();
+		    }
+		}
+		
+        partial void OnPathNameChanging(string value);
+        partial void OnPathNameChanged();
+		
+		private string _PathName;
+		public string PathName { 
+		    get{
+		        return _PathName;
+		    } 
+		    set{
+		        this.OnPathNameChanging(value);
+                this.SendPropertyChanging();
+                this._PathName = value;
+                this.SendPropertyChanged("PathName");
+                this.OnPathNameChanged();
+		    }
+		}
+		
+        partial void OnUserAgentChanging(string value);
+        partial void OnUserAgentChanged();
+		
+		private string _UserAgent;
+		public string UserAgent { 
+		    get{
+		        return _UserAgent;
+		    } 
+		    set{
+		        this.OnUserAgentChanging(value);
+                this.SendPropertyChanging();
+                this._UserAgent = value;
+                this.SendPropertyChanged("UserAgent");
+                this.OnUserAgentChanged();
+		    }
+		}
+		
+
+        #endregion
+
+        #region Foreign Keys
         #endregion
 
 
@@ -2042,17 +2521,17 @@ namespace Epilogger.Data
     
     
     /// <summary>
-    /// A class which represents the UserRoles table in the Epilogger Database.
-    /// This class is queryable through EpiloggerDB.UserRole 
+    /// A class which represents the userClickTracking table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.userClickTracking 
     /// </summary>
 
-	public partial class UserRole: INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class userClickTracking: INotifyPropertyChanging, INotifyPropertyChanged
 	{
         partial void OnLoaded();
         partial void OnValidate(System.Data.Linq.ChangeAction action);
         partial void OnCreated();
 	    
-	    public UserRole(){
+	    public userClickTracking(){
 	        OnCreated();
 	    }
 	    
@@ -2075,11 +2554,11 @@ namespace Epilogger.Data
 		    }
 		}
 		
-        partial void OnUserIDChanging(Guid value);
+        partial void OnUserIDChanging(Guid? value);
         partial void OnUserIDChanged();
 		
-		private Guid _UserID;
-		public Guid UserID { 
+		private Guid? _UserID;
+		public Guid? UserID { 
 		    get{
 		        return _UserID;
 		    } 
@@ -2092,20 +2571,71 @@ namespace Epilogger.Data
 		    }
 		}
 		
-        partial void OnRoleIDChanging(int value);
-        partial void OnRoleIDChanged();
+        partial void OnClickDateTimeChanging(DateTime? value);
+        partial void OnClickDateTimeChanged();
 		
-		private int _RoleID;
-		public int RoleID { 
+		private DateTime? _ClickDateTime;
+		public DateTime? ClickDateTime { 
 		    get{
-		        return _RoleID;
+		        return _ClickDateTime;
 		    } 
 		    set{
-		        this.OnRoleIDChanging(value);
+		        this.OnClickDateTimeChanging(value);
                 this.SendPropertyChanging();
-                this._RoleID = value;
-                this.SendPropertyChanged("RoleID");
-                this.OnRoleIDChanged();
+                this._ClickDateTime = value;
+                this.SendPropertyChanged("ClickDateTime");
+                this.OnClickDateTimeChanged();
+		    }
+		}
+		
+        partial void OnxChanging(short? value);
+        partial void OnxChanged();
+		
+		private short? _x;
+		public short? x { 
+		    get{
+		        return _x;
+		    } 
+		    set{
+		        this.OnxChanging(value);
+                this.SendPropertyChanging();
+                this._x = value;
+                this.SendPropertyChanged("x");
+                this.OnxChanged();
+		    }
+		}
+		
+        partial void OnyChanging(short? value);
+        partial void OnyChanged();
+		
+		private short? _y;
+		public short? y { 
+		    get{
+		        return _y;
+		    } 
+		    set{
+		        this.OnyChanging(value);
+                this.SendPropertyChanging();
+                this._y = value;
+                this.SendPropertyChanged("y");
+                this.OnyChanged();
+		    }
+		}
+		
+        partial void OnlocationChanging(string value);
+        partial void OnlocationChanged();
+		
+		private string _location;
+		public string location { 
+		    get{
+		        return _location;
+		    } 
+		    set{
+		        this.OnlocationChanging(value);
+                this.SendPropertyChanging();
+                this._location = value;
+                this.SendPropertyChanged("location");
+                this.OnlocationChanged();
 		    }
 		}
 		
@@ -2113,28 +2643,6 @@ namespace Epilogger.Data
         #endregion
 
         #region Foreign Keys
-        public IQueryable<Role> Roles
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Roles
-                       where items.ID == _RoleID
-                       select items;
-            }
-        }
-
-        public IQueryable<User> Users
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Users
-                       where items.ID == _UserID
-                       select items;
-            }
-        }
-
         #endregion
 
 
@@ -2207,6 +2715,23 @@ namespace Epilogger.Data
                 this._UserID = value;
                 this.SendPropertyChanged("UserID");
                 this.OnUserIDChanged();
+		    }
+		}
+		
+        partial void OnCreatedDateTimeChanging(DateTime? value);
+        partial void OnCreatedDateTimeChanged();
+		
+		private DateTime? _CreatedDateTime;
+		public DateTime? CreatedDateTime { 
+		    get{
+		        return _CreatedDateTime;
+		    } 
+		    set{
+		        this.OnCreatedDateTimeChanging(value);
+                this.SendPropertyChanging();
+                this._CreatedDateTime = value;
+                this.SendPropertyChanged("CreatedDateTime");
+                this.OnCreatedDateTimeChanged();
 		    }
 		}
 		
@@ -2681,6 +3206,135 @@ namespace Epilogger.Data
             }
         }
 
+        public IQueryable<UserRatesEvent> UserRatesEvents
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.UserRatesEvents
+                       where items.EventID == _ID
+                       select items;
+            }
+        }
+
+        #endregion
+
+
+        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+        public event PropertyChangingEventHandler PropertyChanging;
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void SendPropertyChanging()
+        {
+            var handler = PropertyChanging;
+            if (handler != null)
+               handler(this, emptyChangingEventArgs);
+        }
+
+        protected virtual void SendPropertyChanged(String propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+	}
+	
+    
+    
+    /// <summary>
+    /// A class which represents the UserRoles table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.UserRole 
+    /// </summary>
+
+	public partial class UserRole: INotifyPropertyChanging, INotifyPropertyChanged
+	{
+        partial void OnLoaded();
+        partial void OnValidate(System.Data.Linq.ChangeAction action);
+        partial void OnCreated();
+	    
+	    public UserRole(){
+	        OnCreated();
+	    }
+	    
+	    #region Properties
+	    
+        partial void OnIDChanging(int value);
+        partial void OnIDChanged();
+		
+		private int _ID;
+		public int ID { 
+		    get{
+		        return _ID;
+		    } 
+		    set{
+		        this.OnIDChanging(value);
+                this.SendPropertyChanging();
+                this._ID = value;
+                this.SendPropertyChanged("ID");
+                this.OnIDChanged();
+		    }
+		}
+		
+        partial void OnUserIDChanging(Guid value);
+        partial void OnUserIDChanged();
+		
+		private Guid _UserID;
+		public Guid UserID { 
+		    get{
+		        return _UserID;
+		    } 
+		    set{
+		        this.OnUserIDChanging(value);
+                this.SendPropertyChanging();
+                this._UserID = value;
+                this.SendPropertyChanged("UserID");
+                this.OnUserIDChanged();
+		    }
+		}
+		
+        partial void OnRoleIDChanging(int value);
+        partial void OnRoleIDChanged();
+		
+		private int _RoleID;
+		public int RoleID { 
+		    get{
+		        return _RoleID;
+		    } 
+		    set{
+		        this.OnRoleIDChanging(value);
+                this.SendPropertyChanging();
+                this._RoleID = value;
+                this.SendPropertyChanged("RoleID");
+                this.OnRoleIDChanged();
+		    }
+		}
+		
+
+        #endregion
+
+        #region Foreign Keys
+        public IQueryable<Role> Roles
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Roles
+                       where items.ID == _RoleID
+                       select items;
+            }
+        }
+
+        public IQueryable<User> Users
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Users
+                       where items.ID == _UserID
+                       select items;
+            }
+        }
+
         #endregion
 
 
@@ -3129,17 +3783,17 @@ namespace Epilogger.Data
     
     
     /// <summary>
-    /// A class which represents the ActiveVisitorsQueue table in the Epilogger Database.
-    /// This class is queryable through EpiloggerDB.ActiveVisitorsQueue 
+    /// A class which represents the ActiveVisitorsQueueOLD table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.ActiveVisitorsQueueOLD 
     /// </summary>
 
-	public partial class ActiveVisitorsQueue: INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class ActiveVisitorsQueueOLD: INotifyPropertyChanging, INotifyPropertyChanged
 	{
         partial void OnLoaded();
         partial void OnValidate(System.Data.Linq.ChangeAction action);
         partial void OnCreated();
 	    
-	    public ActiveVisitorsQueue(){
+	    public ActiveVisitorsQueueOLD(){
 	        OnCreated();
 	    }
 	    
@@ -3395,17 +4049,17 @@ namespace Epilogger.Data
     
     
     /// <summary>
-    /// A class which represents the AggregateVisitHistory table in the Epilogger Database.
-    /// This class is queryable through EpiloggerDB.AggregateVisitHistory 
+    /// A class which represents the AggregateVisitHistoryOLD table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.AggregateVisitHistoryOLD 
     /// </summary>
 
-	public partial class AggregateVisitHistory: INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class AggregateVisitHistoryOLD: INotifyPropertyChanging, INotifyPropertyChanged
 	{
         partial void OnLoaded();
         partial void OnValidate(System.Data.Linq.ChangeAction action);
         partial void OnCreated();
 	    
-	    public AggregateVisitHistory(){
+	    public AggregateVisitHistoryOLD(){
 	        OnCreated();
 	    }
 	    
@@ -3610,17 +4264,17 @@ namespace Epilogger.Data
     
     
     /// <summary>
-    /// A class which represents the VisitHistory table in the Epilogger Database.
-    /// This class is queryable through EpiloggerDB.VisitHistory 
+    /// A class which represents the VisitHistoryOLD table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.VisitHistoryOLD 
     /// </summary>
 
-	public partial class VisitHistory: INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class VisitHistoryOLD: INotifyPropertyChanging, INotifyPropertyChanged
 	{
         partial void OnLoaded();
         partial void OnValidate(System.Data.Linq.ChangeAction action);
         partial void OnCreated();
 	    
-	    public VisitHistory(){
+	    public VisitHistoryOLD(){
 	        OnCreated();
 	    }
 	    
@@ -3851,124 +4505,6 @@ namespace Epilogger.Data
         #endregion
 
         #region Foreign Keys
-        #endregion
-
-
-        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-        public event PropertyChangingEventHandler PropertyChanging;
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void SendPropertyChanging()
-        {
-            var handler = PropertyChanging;
-            if (handler != null)
-               handler(this, emptyChangingEventArgs);
-        }
-
-        protected virtual void SendPropertyChanged(String propertyName)
-        {
-            var handler = PropertyChanged;
-            if (handler != null)
-                handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-	}
-	
-    
-    
-    /// <summary>
-    /// A class which represents the UserFollowsEvent table in the Epilogger Database.
-    /// This class is queryable through EpiloggerDB.UserFollowsEvent 
-    /// </summary>
-
-	public partial class UserFollowsEvent: INotifyPropertyChanging, INotifyPropertyChanged
-	{
-        partial void OnLoaded();
-        partial void OnValidate(System.Data.Linq.ChangeAction action);
-        partial void OnCreated();
-	    
-	    public UserFollowsEvent(){
-	        OnCreated();
-	    }
-	    
-	    #region Properties
-	    
-        partial void OnIDChanging(int value);
-        partial void OnIDChanged();
-		
-		private int _ID;
-		public int ID { 
-		    get{
-		        return _ID;
-		    } 
-		    set{
-		        this.OnIDChanging(value);
-                this.SendPropertyChanging();
-                this._ID = value;
-                this.SendPropertyChanged("ID");
-                this.OnIDChanged();
-		    }
-		}
-		
-        partial void OnUserIDChanging(Guid value);
-        partial void OnUserIDChanged();
-		
-		private Guid _UserID;
-		public Guid UserID { 
-		    get{
-		        return _UserID;
-		    } 
-		    set{
-		        this.OnUserIDChanging(value);
-                this.SendPropertyChanging();
-                this._UserID = value;
-                this.SendPropertyChanged("UserID");
-                this.OnUserIDChanged();
-		    }
-		}
-		
-        partial void OnEventIDChanging(int value);
-        partial void OnEventIDChanged();
-		
-		private int _EventID;
-		public int EventID { 
-		    get{
-		        return _EventID;
-		    } 
-		    set{
-		        this.OnEventIDChanging(value);
-                this.SendPropertyChanging();
-                this._EventID = value;
-                this.SendPropertyChanged("EventID");
-                this.OnEventIDChanged();
-		    }
-		}
-		
-
-        #endregion
-
-        #region Foreign Keys
-        public IQueryable<Event> Events
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Events
-                       where items.ID == _EventID
-                       select items;
-            }
-        }
-
-        public IQueryable<User> Users
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Users
-                       where items.ID == _UserID
-                       select items;
-            }
-        }
-
         #endregion
 
 

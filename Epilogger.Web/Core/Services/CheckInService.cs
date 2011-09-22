@@ -14,14 +14,14 @@ namespace Epilogger.Web
         }
 
 
-        public int FindCheckInCountByEventID(int EventID)
+        public int FindCheckInCountByEventID(int EventID, DateTime F, DateTime T)
         {
-            return db.CheckIns.Where(t => t.EventID == EventID).Count();
+            return db.CheckIns.Where(t => t.EventID == EventID && t.CheckInDateTime >= F && t.CheckInDateTime <= T).Count();
         }
 
-        public IEnumerable<CheckIn> FindByEventIDOrderDescTake5(int EventID)
+        public IEnumerable<CheckIn> FindByEventIDOrderDescTake5(int EventID, DateTime F, DateTime T)
         {
-            return db.CheckIns.Where(t => t.EventID == EventID).OrderByDescending(t => t.CheckInDateTime).Take(5);
+            return db.CheckIns.Where(t => t.EventID == EventID && t.CheckInDateTime >= F && t.CheckInDateTime <= T).OrderByDescending(t => t.CheckInDateTime).Take(5);
         }
 
 

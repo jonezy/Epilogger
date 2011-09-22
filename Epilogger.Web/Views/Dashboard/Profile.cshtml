@@ -27,7 +27,7 @@
             </div>
 
         </div>
-        @Html.ActionLink("edit your profile", "index", "account", new { @class = "edit_icon" })
+        @Html.ActionLink("edit your profile", "index", "account", null, new { @class = "edit_icon" })
     </div>
 
 
@@ -37,7 +37,7 @@
     <h2>My Events & Subscriptions</h2>
     @{
         int count = 0;
-        int columns = 2;
+        int columns = 1;
     }
     @foreach (var item in Model.Events) {
         <div class="profile-event-item">
@@ -53,12 +53,12 @@
             </div>
         </div>
         
-        if(count <= columns) {
-             count++;
-         } else {
-            @:<br style="clear:both;" />
+        if(count == columns) {
+        <br style="clear:both;" />
             count = 0;
-         } 
+        } else {
+            count++;
+        }
     }
     <br style="clear:both;" />
     <div class="spacer"></div>

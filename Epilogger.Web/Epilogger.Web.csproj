@@ -141,7 +141,7 @@
     <Compile Include="Core\Email\IEmailSender.cs" />
     <Compile Include="Core\Email\SmtpConfiguration.cs" />
     <Compile Include="Core\Email\TemplateParser.cs" />
-    <Compile Include="Core\Filters\LogErrors.cs" />
+    <Compile Include="Core\Filters\ElmahLoggerFilter.cs" />
     <Compile Include="Core\Filters\RequiresAuthentication.cs" />
     <Compile Include="Core\Helpers\AzureTableHelper.cs" />
     <Compile Include="Core\Helpers\FacebookHelper.cs" />
@@ -154,6 +154,8 @@
     <Compile Include="Core\Resolvers\TwitterProfilePictureResolver.cs" />
     <Compile Include="Core\Services\CheckInService.cs" />
     <Compile Include="Core\Services\BlogService.cs" />
+    <Compile Include="Core\Services\clickLogService.cs" />
+    <Compile Include="Core\Services\UserLogService.cs" />
     <Compile Include="Core\Services\ExternalLinksService.cs" />
     <Compile Include="Core\Services\ImageMetaDataService.cs" />
     <Compile Include="Core\Services\ImageService.cs" />
@@ -224,6 +226,7 @@
     <Content Include="Public\images\bg\sample7.jpg" />
     <Content Include="Public\images\btn-checkinmore.png" />
     <Content Include="Public\images\btn-submit.png" />
+    <Content Include="Public\images\click.png" />
     <Content Include="Public\images\event-list-icons\test.png" />
     <Content Include="Public\images\event_activity_title_icons.png" />
     <Content Include="Public\images\icons\bubble.png" />
@@ -231,6 +234,7 @@
     <Content Include="Public\images\icons\pencil.png" />
     <Content Include="Public\images\icons\profile-eventlist.png" />
     <Content Include="Public\images\icons\tweet-black.png" />
+    <Content Include="Public\images\loading.gif" />
     <Content Include="Public\images\logo.png" />
     <Content Include="Public\images\samples\ad.png" />
     <Content Include="Public\images\samples\avatar.png" />
@@ -240,6 +244,7 @@
     <Content Include="Public\images\shoutbox.png" />
     <Content Include="Public\js\AnyTime\anytimec.css" />
     <Content Include="Public\js\AnyTime\anytimec.js" />
+    <Content Include="Public\js\clickmap.js" />
     <Content Include="Public\js\epilogger.js" />
     <Content Include="Public\js\EventDetails.js" />
     <Content Include="Public\js\head.load.min.js" />
@@ -386,6 +391,7 @@
     <Content Include="Views\Events\AllTweets.cshtml" />
     <Content Include="Views\Dashboard\Events.cshtml" />
     <Content Include="Views\Dashboard\Account.cshtml" />
+    <Content Include="Views\Home\_GetClickMap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

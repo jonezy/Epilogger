@@ -16,6 +16,8 @@ namespace Epilogger.Web.Models
         public int TweetCount { get; set; }
         public int Page { get; set; }
         public int CurrentPageIndex { get; set; }
+
+        public int TimeZoneOffSet { get; set; }
         
         public IEnumerable<Epilogger.Data.Tweet> Tweets { get; set;}
         

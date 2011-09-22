@@ -11,22 +11,6 @@ using System.Data;
 namespace Epilogger.Data{
 	public partial class EpiloggerDB{
 
-        public StoredProcedure aspnet_AnyDataInTables(){
-            StoredProcedure sp=new StoredProcedure("aspnet_AnyDataInTables",this.Provider);
-            return sp;
-        }
-        public StoredProcedure aspnet_Applications_CreateApplication(){
-            StoredProcedure sp=new StoredProcedure("aspnet_Applications_CreateApplication",this.Provider);
-            return sp;
-        }
-        public StoredProcedure aspnet_CheckSchemaVersion(){
-            StoredProcedure sp=new StoredProcedure("aspnet_CheckSchemaVersion",this.Provider);
-            return sp;
-        }
-        public StoredProcedure aspnet_Membership_ChangePasswordQuestionAndAnswer(){
-            StoredProcedure sp=new StoredProcedure("aspnet_Membership_ChangePasswordQuestionAndAnswer",this.Provider);
-            return sp;
-        }
         public StoredProcedure aspnet_Membership_CreateUser(){
             StoredProcedure sp=new StoredProcedure("aspnet_Membership_CreateUser",this.Provider);
             return sp;
