@@ -14,7 +14,6 @@ namespace Epilogger.Web.Models {
         public int CurrentPageIndex { get; set; }
 
         public int TimeZoneOffSet { get; set; }
-        
 
         public IEnumerable<TweetDisplayViewModel> Tweets { get; set; }
 

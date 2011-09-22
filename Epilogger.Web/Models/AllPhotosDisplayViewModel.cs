@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 
+namespace Epilogger.Web.Models
+{
+    public class AllPhotosDisplayViewModel
+    {
+        public int ID { get; set; }
 
-namespace Epilogger.Web.Models {
-    public class AllPhotosDisplayViewModel {
-        public string ID { get; set; }
 
         public string Name { get; set; }
 
@@ -16,6 +18,7 @@ namespace Epilogger.Web.Models {
         public int TimeZoneOffSet { get; set; }
         
         public IEnumerable<Epilogger.Data.Image> Images { get; set;}
+
 
     }
 }
