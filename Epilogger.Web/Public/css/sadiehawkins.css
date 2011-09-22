@@ -280,18 +280,19 @@ ul#connected-networks {list-style:none;}
 .account-overview table td.label {font-weight:bold;width:100px;}
 
 /* ------------------------------ EVENTS */
-#events-nav {float:left;width:268px;margin-right:17px;}
+#events-nav {float:left;width:268px;margin-right:17px;position:relative;}
 #events-content {float:left;width:641px;}
 
-.unique-tweets {background:#f3f3f3;padding:1px;float:left;}
+.alltweets-nub {background:url(../images/alltweets-nub.png) no-repeat; width:17px;height:19px;margin-left:10px;}
+.unique-tweets,
+.total-tweets {background:#f3f3f3;padding:10px 20px 10px 20px;float:left;}
+.unique-tweets {width:20%;margin-right:1px;}
+.total-tweets {width:50%;}
 .unique-tweets h1,
 .total-tweets h1 {color:#8c8c8c;}
 
 .unique-tweets h2,
-.unique-tweets h2 {color:#747474;}
-
-.total-tweets {background:#f3f3f3;padding:1px;float:left;}
-
+.total-tweets h2 {color:#747474;margin-bottom:0px;}
 
 .alltweets-entry {margin-bottom:20px;}
 .alltweets-entry .tweet-content {float:left;margin-left:10px;width:560px;font-size:13px;}
