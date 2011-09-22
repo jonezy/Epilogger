@@ -223,6 +223,7 @@
     <Content Include="Public\css\reset.css" />
     <Content Include="Public\css\sadiehawkins.css" />
     <Content Include="Public\css\skeleton.css" />
+    <Content Include="Public\images\alltweets-nub.png" />
     <Content Include="Public\images\bg\sample1.jpg" />
     <Content Include="Public\images\bg\sample2.jpg" />
     <Content Include="Public\images\bg\sample3.jpg" />
@@ -240,6 +241,7 @@
     <Content Include="Public\images\icons\pencil.png" />
     <Content Include="Public\images\icons\profile-eventlist.png" />
     <Content Include="Public\images\icons\tweet-black.png" />
+    <Content Include="Public\images\linebg.png" />
     <Content Include="Public\images\loading.gif" />
     <Content Include="Public\images\logo.png" />
     <Content Include="Public\images\samples\ad.png" />
