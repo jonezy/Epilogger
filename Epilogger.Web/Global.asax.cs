@@ -122,10 +122,7 @@ namespace Epilogger.Web {
 
             Mapper.CreateMap<CreateEventViewModel, Event>()
                 .ForMember(dest => dest.ID, opt => opt.Ignore())
-                .ForMember(dest => dest.SubTitle, opt => opt.Ignore())
-                .ForMember(dest => dest.Description, opt => opt.Ignore())
                 .ForMember(dest => dest.WebsiteURL, opt => opt.Ignore())
-                .ForMember(dest => dest.Cost, opt => opt.Ignore())
                 .ForMember(dest => dest.CategoryID, opt => opt.UseValue(19))
                 .ForMember(dest => dest.VenueID, opt => opt.Ignore())
                 .ForMember(dest => dest.EventStatus, opt => opt.UseValue(1))

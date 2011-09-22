@@ -4,12 +4,16 @@
     ViewBag.Title = "Epilogger - Create Event";
 }
 
-<h2>Create Event</h2>
 
-Lorem ipsum
+    <h2>Create Event</h2>
 
-<div class="spacer"></div>
-<div class="spacer dotted"></div>
+    Lorem ipsum
+
+    <div class="spacer"></div>
+    <div class="spacer dotted"></div>
+
+@Html.ValidationSummary("Please correct the following issues")
+@using (Html.BeginForm("Create", "Events", FormMethod.Post)) {
 
     <div class="item-card">
         <h4>EVENT INFORMATION</h4>
@@ -26,13 +30,8 @@ Lorem ipsum
             </div>
 
         </div>
-        TEst 3
     </div>
 
-
-
-@Html.ValidationSummary("Please correct the following issues")
-@using (Html.BeginForm("CreateEvent", "Events", FormMethod.Post)) {
     <p>Create Event fun time</p>
     <fieldset>
         
