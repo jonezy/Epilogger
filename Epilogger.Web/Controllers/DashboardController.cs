@@ -30,9 +30,7 @@ namespace Epilogger.Web.Controllers {
             List<DashboardActivityModel> activity = new List<DashboardActivityModel>();
 
             if (CurrentUserTwitterAuthorization != null) {
-
                 List<Tweet> tweets = tweetService.FindByUserScreenName(CurrentUserTwitterAuthorization.ServiceUsername).ToList();
-
                 List<Event> events = eventService.FindByUserID(CurrentUserID);
                 List<Image> images = new List<Image>();
                 List<UserRatesEvent> eventrating = userService.GetUserEventRatings(CurrentUserID);
