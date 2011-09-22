@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
-
-namespace Epilogger.Web.Models
-{
-    public class AllPhotosDisplayViewModel
-    {
+namespace Epilogger.Web.Models {
+    public class AllPhotosDisplayViewModel {
         public string ID { get; set; }
         public string Name { get; set; }
 
@@ -16,8 +10,7 @@ namespace Epilogger.Web.Models
         public int PhotoCount { get; set; }
         public int Page { get; set; }
         public int CurrentPageIndex { get; set; }
-        
-        public IEnumerable<Epilogger.Data.Image> Images { get; set;}
-        
+
+        public IEnumerable<Epilogger.Data.Image> Images { get; set; }
     }
 }

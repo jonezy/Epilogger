@@ -103,19 +103,16 @@ namespace Epilogger.Web.Controllers {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
 
             AllTweetsDisplayViewModel Model = Mapper.Map<Event, AllTweetsDisplayViewModel>(ES.FindByID(id));
-
             Model.TweetCount = TS.FindTweetCountByEventID(id);
             Model.CurrentPageIndex = currentPage;
 
-
             if (currentPage + 1 == 1) {
                 Model.ShowTopTweets = true;
-                Model.Tweets = TS.GetPagedTweets(id, currentPage + 1, 10);
+                Model.Tweets = Mapper.Map<IEnumerable<Tweet>, IEnumerable<TweetDisplayViewModel>>(TS.GetPagedTweets(id, currentPage + 1, 10));
             } else {
                 Model.ShowTopTweets = false;
-                Model.Tweets = TS.GetPagedTweets(id, currentPage + 1, 100);
+                Model.Tweets = Mapper.Map<IEnumerable<Tweet>, IEnumerable<TweetDisplayViewModel>>(TS.GetPagedTweets(id, currentPage + 1, 100));
             }
-
 
             return View(Model);
         }
