@@ -478,9 +478,26 @@ namespace Epilogger.Web.Controllers {
         }
 
 
+
+        public ActionResult AllContent(int id) {
+            AllContentViewModel model = Mapper.Map<Event, AllContentViewModel>(ES.FindByID(id));
+            return View(model);
+        }
+
+        public ActionResult AllBlogPosts(int id) {
+            AllBlogPostsViewModel model = Mapper.Map<Event, AllBlogPostsViewModel>(ES.FindByID(id));
+            return View(model);
+        }        
         
+        public ActionResult AllCheckins(int id) {
+            AllCheckinsViewModel model = Mapper.Map<Event, AllCheckinsViewModel>(ES.FindByID(id));
+            return View(model);
+        }
 
-
+        public ActionResult AllLinks(int id) {
+            AllLinksViewModel model = Mapper.Map<Event, AllLinksViewModel>(ES.FindByID(id));
+            return View(model);
+        }
 
 
 
