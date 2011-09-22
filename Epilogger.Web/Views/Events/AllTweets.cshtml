@@ -1,47 +1,35 @@
-﻿@model Epilogger.Web.Models.AllTweetsDisplayViewModel
-
+﻿@using Epilogger.Web;
+@using Epilogger.Web.Models;
+@model Epilogger.Web.Models.AllTweetsDisplayViewModel
 @{
     ViewBag.Title = "Epilogger - " + Model.Name + "- Tweets";
 }
 
-@Html.Partial("_EventMenu", new Epilogger.Web.Models._EventMenuViewModel { EventID = Model.ID })
-<span class="spacer"></span>
+<div id="events-nav">
+    <h1>ALL TWEETS</h1>
+    <h2>FROM @Model.Name</h2>
+    <div class="unique-tweets">
+        <h2>UNIQUE:</h2>
+        <h1>@Model.TweetCount.ToString("#,###")</h1>
+    </div>
 
-<div class="grid_11 alpha">
-	<h1>ALL PHOTOS</h1>
-	<h2>FROM @Model.Name - @Model.TweetCount.ToString("#,###")</h2>
+    <div class="total-tweets">
+        <h2>TOTAL:</h2>
+        <h1>@Model.TweetCount.ToString("#,###")</h1>
+    </div>
 </div>
+<div id="events-content">
 
-<div class="clear"></div>
-
-@if (Model.ShowTopTweets)
-{
-    <div class="grid_11 alpha" style="background-color: #333; height: 200px">Temp space</div>
-    <div class="clear"></div>
-    <div class="spacer"></div>
-}
-
-	
-
-
-<div id="photos-filterbar">
-    FILTER:
-</div>
-
-<div class="clear"></div>
-<div class="spacer"></div>
-
-<ul class="plain-list" id="tweetlist">
-    @foreach (Epilogger.Data.Tweet EPLTweet in Model.Tweets)
-    {
-        <li id="Tweet-@EPLTweet.TwitterID" class="tweet grid_3">
-			<img src="@EPLTweet.ProfileImageURL" class="fleft" height="48" width="48" alt="" />
-			<small><a href="http://www.twitter.com/@EPLTweet.FromUserScreenName" target="_blank">@EPLTweet.FromUserScreenName</a></small>
-			<p>@Html.Raw(EPLTweet.TextAsHTML)</p>
-		</li>  
+    @foreach (TweetDisplayViewModel item in Model.Tweets) {
+        <div class="alltweets-entry clearfix">
+            <img src="@item.ProfileImageUrl" class="fleft" height="48" width="48" alt="" />
+            <div class="tweet-content">
+                <strong><a href="http://www.twitter.com/@item.FromUserScreenName" class="tweet-content-username" target="_blank">@item.FromUserScreenName</a></strong>
+                <p>@Html.Raw(item.TextAsHTML)</p>
+                <span class="tweet-date">(@item.CreatedDate.Value.ToUserTimeZone(-5).ToString("MMMM dd, yyyy"))</span>
+            </div>
+        </div>
     }
-</ul>
 
-<div class="clear"></div>
-<div class="spacer"></div>
-@MvcHtmlString.Create(Html.Pager(100, Model.CurrentPageIndex, Model.TweetCount, new { controller = "Events", action = "AllTweets/" + Model.ID }))
+    @MvcHtmlString.Create(Html.Pager(100, Model.CurrentPageIndex, Model.TweetCount, new { controller = "Events", action = "AllTweets/" + Model.ID }))
+</div>

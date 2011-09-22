@@ -5,7 +5,7 @@ namespace Epilogger.Web.Models {
         public ActivityType ActivityType { get; set; }
         public DateTime Date { get; set; }
         public string ActivityContent { get; set; }
-        public DashboardEventViewModel Event { get; set; }
+        public string EventName { get; set; }
     }
 
     public enum ActivityType {

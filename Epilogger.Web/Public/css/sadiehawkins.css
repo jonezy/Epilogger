@@ -279,6 +279,26 @@ ul#connected-networks {list-style:none;}
 .account-overview table {float:left;margin-right:20px;font-size:11px;}
 .account-overview table td.label {font-weight:bold;width:100px;}
 
+/* ------------------------------ EVENTS */
+#events-nav {float:left;width:268px;margin-right:17px;}
+#events-content {float:left;width:641px;}
+
+.unique-tweets {background:#f3f3f3;padding:1px;float:left;}
+.unique-tweets h1,
+.total-tweets h1 {color:#8c8c8c;}
+
+.unique-tweets h2,
+.unique-tweets h2 {color:#747474;}
+
+.total-tweets {background:#f3f3f3;padding:1px;float:left;}
+
+
+.alltweets-entry {margin-bottom:20px;}
+.alltweets-entry .tweet-content {float:left;margin-left:10px;width:560px;font-size:13px;}
+.tweet-content .tweet-content-username {font-weight:bold;text-transform:uppercase;padding-bottom:4px;}
+.alltweets-entry .tweet-content p {margin-bottom:2px;}
+.alltweets-entry .tweet-content span.tweet-date {font-size:11px;color:#c2c2c2;}
+
 /* ------------------------------ FORMS */
 
 div#search-container {
