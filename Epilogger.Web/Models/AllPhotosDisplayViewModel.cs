@@ -13,10 +13,10 @@ namespace Epilogger.Web.Models
         public int Page { get; set; }
         public int CurrentPageIndex { get; set; }
 
+        public IEnumerable<Epilogger.Data.Image> Images { get; set; }
 
         public int TimeZoneOffSet { get; set; }
-        
-        public IEnumerable<Epilogger.Data.Image> Images { get; set;}
+
 
     }
 }
