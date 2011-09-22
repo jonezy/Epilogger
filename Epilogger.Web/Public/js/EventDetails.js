@@ -147,7 +147,15 @@ jQuery(function ($) {
     }
 
     //Tweets
-    $.ajaxSetup({ timeout: updateTimeout, cache: false, error: function () { toggleUpdates('unewposts', 'on'); } }); if (prologuePostsUpdates) { toggleUpdates('unewposts', 'on'); }
+    $.ajaxSetup({ timeout: updateTimeout, cache: false, error: function () { toggleUpdates('unewposts', 'on'); } });
+    if (prologuePostsUpdates) { toggleUpdates('unewposts', 'on'); }
+    if (disableAutoupdate) {
+        toggleUpdates('unewposts', 'off');
+    }
+    else {
+        toggleUpdates('unewposts', 'on');
+    }
+
     $("#tweetlist li.tweet").each(function () { var thisId = $(this).attr("id"); vpostId = thisId.substring(thisId.indexOf('-') + 1); postsOnPage.push(thisId); postsOnPageQS += "&vp[]=" + vpostId; }); function removeYellow() {
         if (isFirstFrontPage) { $('#tweetlist li.newupdates').each(function () { if (isElementVisible(this)) { $(this).animate({ backgroundColor: '#FFF' }, { duration: 2500 }); $(this).removeClass('newupdates'); } }); }
         //titleCount();
@@ -172,6 +180,13 @@ jQuery(function ($) {
     });
 
     if (photoProloguePostsUpdates) { toggleUpdates('unewphotos', 'on'); }
+    if (disableAutoupdate) {
+        toggleUpdates('unewphotos', 'off');
+    }
+    else {
+        toggleUpdates('unewphotos', 'on');
+    }
+
     $("#photosvideos div.withcomment").each(function () {
         var pthisId = $(this).attr("id");
         pvpostId = pthisId.substring(pthisId.indexOf('-') + 1);

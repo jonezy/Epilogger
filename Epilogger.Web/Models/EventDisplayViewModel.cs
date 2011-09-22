@@ -40,6 +40,8 @@ namespace Epilogger.Web.Models {
         public bool HasSubscribed { get; set; }
 
         public bool HasUserRated { get; set; }
+        public DateTime ? FromDateTime { get; set; }
+        public DateTime ? ToDateTime { get; set; }
 
         public List<Epilogger.Data.UserRatesEvent> EventRatings { get; set; }
         public IEnumerable<Epilogger.Data.Tweet> Tweets { get; set; }
