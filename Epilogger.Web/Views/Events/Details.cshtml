@@ -4,14 +4,34 @@
     ViewBag.Title = "Epilogger - " + Model.Name;
     
 }
+
+@{
+    bool IncludeDateRange = false;
+    int YesCount = 0;
+
+    if (Request.QueryString["f"] != null)
+    {
+        YesCount++;
+    }
+    if (Request.QueryString["t"] != null)
+    {
+        YesCount++;
+    }
+    if (YesCount == 2) { IncludeDateRange = true; }
+}
+
+
 <script type="text/javascript" language="javascript">
     head.js('@Url.Content("~/Public/js/EventDetails.js")');
 </script>
-@if (Model.Tweets.FirstOrDefault() != null) {
+@if (Model.Tweets.FirstOrDefault() != null)
+{
     <script language="javascript" type="text/javascript">
         var pageLoadTime = '@string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.Tweets.FirstOrDefault().CreatedDate)';
     </script>
-} else {
+}
+else
+{
     <script language="javascript" type="text/javascript">
         var pageLoadTime = '@string.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.UtcNow)';
     </script>
@@ -23,6 +43,8 @@
     var EventURL = 'http://www.epilogger.com/Events/Details/@Model.ID';
     var HasSubscribed = @Model.HasSubscribed.ToString().ToLower();
     
+    var disableAutoupdate = false;
+
     //Parameters to control the Tweet list
     var updateTimeout = 5000;
     var updateRate = 10000;
@@ -58,25 +80,80 @@
     }
 </style>
 <ul id="subnavigation">
-    <li>@Html.ActionLink("OVERVIEW", "Details/" + Model.ID, "Events")</li>
-    <li>@Html.ActionLink("PHOTOS", "AllPhotos/" + Model.ID, "Events")</li>
-    <li>@Html.ActionLink("TWEETS", "AllTweets/" + Model.ID, "Events")</li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
+    @if (!IncludeDateRange)
+    {
+        <li>@Html.ActionLink("OVERVIEW", "Details/" + Model.ID, "Events")</li>
+        <li>@Html.ActionLink("PHOTOS", "AllPhotos/" + Model.ID, "Events")</li>
+        <li>@Html.ActionLink("TWEETS", "AllTweets/" + Model.ID, "Events")</li>
+        <li>@Html.ActionLink("TWEETS", "AllTweets/" + Model.ID, "Events")</li>
+    }
+    else
+    {
+        <li>@Html.ActionLink("OVERVIEW", "Details/" + Model.ID, "Events", new { f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { })</li>
+        <li>@Html.ActionLink("PHOTOS", "AllPhotos/" + Model.ID, "Events", new { f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { })</li>
+        <li>@Html.ActionLink("TWEETS", "AllTweets/" + Model.ID, "Events", new { f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { })</li>
+    }
+    
 </ul>
 <span class="spacer"></span>
 <div class="grid_7 alpha">
     <h1>@Model.Name</h1>
     <h2>@Model.SubTitle</h2>
-    @if (Model.HasSubscribed) {
-        using (Html.BeginForm("unsubscribe", "events", FormMethod.Post)) {
+    
+    @using (Html.BeginForm())
+    {
+        <span class="clear spacer"></span>
+        <div id="filterByDay">
+            Show data for: 
+            
+            @Html.TextBoxFor(m => m.FromDateTime)
+            &nbsp;&nbsp;To&nbsp;&nbsp;
+            @Html.TextBoxFor(m => m.ToDateTime)
+
+            &nbsp;&nbsp;<input type="submit" value="Apply" />
+            <script type="text/javascript">
+                head.ready(function () {
+                    $("#FromDateTime").AnyTime_picker(
+                            { format: "%M %d, %Y %l:%i %p" });
+                    $("#ToDateTime").AnyTime_picker(
+                            { format: "%M %d, %Y %l:%i %p" });
+
+                    //If there are dates set, disable the auto refresh events
+                    if ($("#FromDateTime").val() != '') {
+                        if ($("#ToDateTime").val() != '') {
+                            disableAutoupdate = true;
+                        }
+                        else {
+                            disableAutoupdate = false;
+                        }
+                    }
+                    else {
+                        disableAutoupdate = false;
+                    }
+
+
+                    function setDate(fd, td) {
+                        fd = $("#FromDateTime")
+                        td = $("#ToDateTime")
+                    }
+                });
+            </script>
+        </div>    
+    }
+
+
+    @if (Model.HasSubscribed)
+    {
+        using (Html.BeginForm("unsubscribe", "events", FormMethod.Post))
+        {
             <input type="submit" value="Unsubscribe" name="SubscribeToEvent" id="" />
             @Html.HiddenFor(model => model.ID)
         }
-    } else {
-        using (Html.BeginForm("subscribe", "events", FormMethod.Post)) {
+    }
+    else
+    {
+        using (Html.BeginForm("subscribe", "events", FormMethod.Post))
+        {
             <input type="submit" value="Subscribe to Event" name="SubscribeToEvent" id="" />
             @Html.HiddenFor(model => model.ID)
         }
@@ -209,7 +286,12 @@
     <div class="spacer">
     </div>
     <p>
-        (@Html.ActionLink("See all photos and videos", "AllPhotos/" + Model.ID, "Events"))</p>
+        @if (!IncludeDateRange) { @: (@Html.ActionLink("See all photos and videos", "AllPhotos/" + Model.ID, "Events")) 
+            }
+        else
+        { @: (@Html.ActionLink("See all photos and videos", "AllPhotos/" + Model.ID, "Events", new { f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { })) 
+        }       
+    </p>
 </div>
 <!-- TWEETS -->
 <div class="grid_4 omega">
