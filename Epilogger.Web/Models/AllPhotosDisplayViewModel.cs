@@ -8,7 +8,7 @@ namespace Epilogger.Web.Models
 {
     public class AllPhotosDisplayViewModel
     {
-        public string ID { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
 
         public bool ShowTopPhotos { get; set; }

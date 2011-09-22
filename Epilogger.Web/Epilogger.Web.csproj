@@ -187,6 +187,7 @@
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ResetPasswordViewModel.cs" />
     <Compile Include="Models\UpdatePasswordModel.cs" />
+    <Compile Include="Models\_EventMenuViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\Emails\AccountEmails.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -392,6 +393,8 @@
     <Content Include="Views\Dashboard\Events.cshtml" />
     <Content Include="Views\Dashboard\Account.cshtml" />
     <Content Include="Views\Home\_GetClickMap.cshtml" />
+    <Content Include="Views\Events\_TweetTemplate.cshtml" />
+    <Content Include="Views\Events\_EventMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
