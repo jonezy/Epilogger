@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 
-
 namespace Epilogger.Web.Models {
     public class AllTweetsDisplayViewModel {
         public string ID { get; set; }
