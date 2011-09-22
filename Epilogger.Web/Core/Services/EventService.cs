@@ -25,9 +25,9 @@ namespace Epilogger.Web {
         }
 
 
-        public List<UserRatesEvent> FindEventRatingsByID(int id)
+        public List<UserRatesEvent> FindEventRatingsByID(int id, DateTime F, DateTime T)
         {
-            return db.UserRatesEvents.Where(r => r.EventID == id).ToList();
+            return db.UserRatesEvents.Where(r => r.EventID == id && r.RatingDateTime >= F && r.RatingDateTime <= T).ToList();
         }
 
 

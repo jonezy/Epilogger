@@ -14,9 +14,9 @@ namespace Epilogger.Web
         }
 
 
-        public IEnumerable<URL> FindByEventIDOrderDescTake3(int EventID)
+        public IEnumerable<URL> FindByEventIDOrderDescTake3(int EventID, DateTime F, DateTime T)
         {
-            return db.URLS.Where(t => t.EventID == EventID).OrderByDescending(t => t.DateTime).Take(3);
+            return db.URLS.Where(t => t.EventID == EventID && t.DateTime >= F && t.DateTime <= T).OrderByDescending(t => t.DateTime).Take(3);
         }
 
 

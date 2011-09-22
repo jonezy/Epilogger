@@ -13,14 +13,14 @@ namespace Epilogger.Web
             get { return "Epilogger.Web.Images"; }
         }
 
-        public int FindImageCountByEventID(int EventID)
+        public int FindImageCountByEventID(int EventID, DateTime F, DateTime T)
         {
-            return db.Images.Where(t => t.EventID == EventID).Count();
+            return db.Images.Where(t => t.EventID == EventID && t.DateTime >= F && t.DateTime <= T).Count();
         }
 
-        public IEnumerable<Image> FindByEventIDOrderDescTake9(int EventID)
+        public IEnumerable<Image> FindByEventIDOrderDescTake9(int EventID, DateTime F, DateTime T)
         {
-            return db.Images.Where(t => t.EventID == EventID).OrderByDescending(t => t.DateTime).Take(9);
+            return db.Images.Where(t => t.EventID == EventID && t.DateTime >= F && t.DateTime <= T).OrderByDescending(t => t.DateTime).Take(9);
         }
 
 
@@ -47,16 +47,15 @@ namespace Epilogger.Web
         }
 
 
-        public IEnumerable<Image> GetPagedPhotos(int EventID, System.Nullable<int> page, int PhotosPerPage)
+        public IEnumerable<Image> GetPagedPhotos(int EventID, System.Nullable<int> page, int PhotosPerPage, DateTime F, DateTime T)
         {
 
             int skipAmount = page.HasValue ? page.Value - 1 : 0;
 
             var photos = (from t in db.Images
-                         where t.EventID == EventID
-                         orderby t.DateTime descending
-                         select t).Skip(skipAmount * PhotosPerPage).Take(PhotosPerPage);
-
+                          where t.EventID == EventID && t.DateTime >= F && t.DateTime <= T
+                          orderby t.DateTime descending
+                          select t).Skip(skipAmount * PhotosPerPage).Take(PhotosPerPage);
 
             return photos;
 
