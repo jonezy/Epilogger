@@ -1,0 +1,34 @@
+﻿@using Epilogger.Web;
+@model Epilogger.Web.Models._EventMenuViewModel
+
+@{
+    bool IncludeDateRange = false;
+    int YesCount = 0;
+
+    if (Request.QueryString["f"] != null)
+    {
+        YesCount++;
+    }
+    if (Request.QueryString["t"] != null)
+    {
+        YesCount++;
+    }
+    if (YesCount == 2) { IncludeDateRange = true; }
+}
+
+
+<ul id="subnavigation">
+    @if (!IncludeDateRange)
+    {
+        <li>@Html.ActionLink("OVERVIEW", "Details/" + Model.EventID, "Events")</li>
+        <li>@Html.ActionLink("PHOTOS", "AllPhotos/" + Model.EventID, "Events")</li>
+        <li>@Html.ActionLink("TWEETS", "AllTweets/" + Model.EventID, "Events")</li>
+    }
+    else
+    {
+        <li>@Html.ActionLink("OVERVIEW", "Details/" + Model.EventID, "Events", new { f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { })</li>
+        <li>@Html.ActionLink("PHOTOS", "AllPhotos/" + Model.EventID, "Events", new { f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { })</li>
+        <li>@Html.ActionLink("TWEETS", "AllTweets/" + Model.EventID, "Events", new { f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { })</li>
+    }
+    
+</ul>

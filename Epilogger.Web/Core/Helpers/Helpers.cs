@@ -15,12 +15,27 @@ namespace Epilogger.Web {
 
         public static int GetUserTimeZoneOffset()
         {
-            int TimeZoneOffSet;
-            TimeZoneOffSet =  int.Parse(CookieHelpers.GetCookieValue("lc", "tz").ToString());
-            return TimeZoneOffSet;
+            //This takes into account the Daylight savings time and all that BS.
+            TimeZone localZone = TimeZone.CurrentTimeZone;
+            TimeSpan currentOffset = localZone.GetUtcOffset(DateTime.Now);
+            return currentOffset.Hours;
+
+            //int TimeZoneOffSet;
+            //TimeZoneOffSet =  int.Parse(CookieHelpers.GetCookieValue("lc", "tz").ToString());
+            //return TimeZoneOffSet;
+
         }
 
 
+
+        public static DateTime ToUserTimeZone(this DateTime dt)
+        {
+            TimeSpan offset;
+            //user User offset
+            offset = new TimeSpan(GetUserTimeZoneOffset(), 0, 0);
+
+            return dt.Add(offset);
+        }
         public static DateTime ToUserTimeZone(this DateTime dt, int EventTimeZoneOffSet)
         {
             TimeSpan offset;
@@ -34,10 +49,19 @@ namespace Epilogger.Web {
                 //user User offset
                 offset = new TimeSpan(GetUserTimeZoneOffset(), 0, 0);
             }
-
+            
             return dt.Add(offset);
         }
 
+
+        public static DateTime FromUserTimeZoneToUtc(this DateTime dt)
+        {
+            TimeSpan offset;
+            //user User offset
+            offset = new TimeSpan(-GetUserTimeZoneOffset(), 0, 0);
+
+            return dt.Add(offset);
+        }
         public static DateTime FromUserTimeZoneToUtc(this DateTime dt, int EventTimeZoneOffSet)
         {
             TimeSpan offset;
