@@ -22,13 +22,13 @@ namespace Epilogger.Web.Controllers {
         BlogService BS = new BlogService();
 
         DateTime _FromDateTime = DateTime.Parse("2000-01-01 00:00:00");
-        private DateTime FromDateTime(int TimeZoneOffset)
+        private DateTime FromDateTime()
         {
             try
             {
                 if (Request.QueryString["f"] != null)
                 {
-                    _FromDateTime = DateTime.Parse(Epilogger.Web.Helpers.base64Decode(Request.QueryString["f"])).FromUserTimeZoneToUtc(TimeZoneOffset);
+                    _FromDateTime = DateTime.Parse(Epilogger.Web.Helpers.base64Decode(Request.QueryString["f"])).FromUserTimeZoneToUtc();
                 }
                 return _FromDateTime;                    
             }
@@ -40,13 +40,13 @@ namespace Epilogger.Web.Controllers {
         
 
         DateTime _ToDateTime = DateTime.Parse("2200-12-31 00:00:00");
-        private DateTime ToDateTime(int TimeZoneOffset)
+        private DateTime ToDateTime()
         {
             try
             {
                 if (Request.QueryString["t"] != null)
                 {
-                    _ToDateTime = DateTime.Parse(Epilogger.Web.Helpers.base64Decode(Request.QueryString["t"])).FromUserTimeZoneToUtc(TimeZoneOffset);
+                    _ToDateTime = DateTime.Parse(Epilogger.Web.Helpers.base64Decode(Request.QueryString["t"])).FromUserTimeZoneToUtc();
                 }
                 return _ToDateTime;
             }
@@ -85,20 +85,20 @@ namespace Epilogger.Web.Controllers {
 
             EventDisplayViewModel Model = Mapper.Map<Event, EventDisplayViewModel>(ES.FindByID(id));
 
-            Model.TweetCount = TS.FindTweetCountByEventID(id, this.FromDateTime(Model.TimeZoneOffSet), this.ToDateTime(Model.TimeZoneOffSet));
-            Model.Tweets = TS.FindByEventIDOrderDescTake6(id, this.FromDateTime(Model.TimeZoneOffSet), this.ToDateTime(Model.TimeZoneOffSet));
-            Model.ImageCount = IS.FindImageCountByEventID(id, this.FromDateTime(Model.TimeZoneOffSet), this.ToDateTime(Model.TimeZoneOffSet));
-            Model.Images = IS.FindByEventIDOrderDescTake9(id, this.FromDateTime(Model.TimeZoneOffSet), this.ToDateTime(Model.TimeZoneOffSet));
-            Model.CheckInCount = CS.FindCheckInCountByEventID(id, this.FromDateTime(Model.TimeZoneOffSet), this.ToDateTime(Model.TimeZoneOffSet));
-            Model.CheckIns = CS.FindByEventIDOrderDescTake5(id, this.FromDateTime(Model.TimeZoneOffSet), this.ToDateTime(Model.TimeZoneOffSet));
-            Model.ExternalLinks = LS.FindByEventIDOrderDescTake3(id, this.FromDateTime(Model.TimeZoneOffSet), this.ToDateTime(Model.TimeZoneOffSet));
-            Model.EventRatings = ES.FindEventRatingsByID(id, this.FromDateTime(Model.TimeZoneOffSet), this.ToDateTime(Model.TimeZoneOffSet));
+            Model.TweetCount = TS.FindTweetCountByEventID(id, this.FromDateTime(), this.ToDateTime());
+            Model.Tweets = TS.FindByEventIDOrderDescTake6(id, this.FromDateTime(), this.ToDateTime());
+            Model.ImageCount = IS.FindImageCountByEventID(id, this.FromDateTime(), this.ToDateTime());
+            Model.Images = IS.FindByEventIDOrderDescTake9(id, this.FromDateTime(), this.ToDateTime());
+            Model.CheckInCount = CS.FindCheckInCountByEventID(id, this.FromDateTime(), this.ToDateTime());
+            Model.CheckIns = CS.FindByEventIDOrderDescTake5(id, this.FromDateTime(), this.ToDateTime());
+            Model.ExternalLinks = LS.FindByEventIDOrderDescTake3(id, this.FromDateTime(), this.ToDateTime());
+            Model.EventRatings = ES.FindEventRatingsByID(id, this.FromDateTime(), this.ToDateTime());
             Model.HasUserRated = false;
             Model.CurrentUserID = CurrentUserID;
 
             if (Request.QueryString["f"] != null)
             {
-                Model.FromDateTime = this.FromDateTime(Model.TimeZoneOffSet).ToUserTimeZone(Model.TimeZoneOffSet);
+                Model.FromDateTime = this.FromDateTime().ToUserTimeZone();
             }
             else
             {
@@ -106,7 +106,7 @@ namespace Epilogger.Web.Controllers {
             }
             if (Request.QueryString["t"] != null)
             {
-                Model.ToDateTime = this.ToDateTime(Model.TimeZoneOffSet).ToUserTimeZone(Model.TimeZoneOffSet);
+                Model.ToDateTime = this.ToDateTime().ToUserTimeZone();
             }
             else
             {
@@ -139,7 +139,6 @@ namespace Epilogger.Web.Controllers {
 
 
         [HttpPost]
-        [Authorize]
         public ActionResult Details(int id, FormCollection collection)
         {
 
@@ -165,16 +164,16 @@ namespace Epilogger.Web.Controllers {
 
             AllPhotosDisplayViewModel Model = Mapper.Map<Event, AllPhotosDisplayViewModel>(ES.FindByID(id));
 
-            Model.PhotoCount = IS.FindImageCountByEventID(id, this.FromDateTime(Model.TimeZoneOffSet), this.ToDateTime(Model.TimeZoneOffSet));
+            Model.PhotoCount = IS.FindImageCountByEventID(id, this.FromDateTime(), this.ToDateTime());
             Model.CurrentPageIndex = currentPage;
 
 
             if (currentPage + 1 == 1) {
                 Model.ShowTopPhotos = true;
-                Model.Images = IS.GetPagedPhotos(id, currentPage + 1, 30, this.FromDateTime(Model.TimeZoneOffSet), this.ToDateTime(Model.TimeZoneOffSet));
+                Model.Images = IS.GetPagedPhotos(id, currentPage + 1, 30, this.FromDateTime(), this.ToDateTime());
             } else {
                 Model.ShowTopPhotos = false;
-                Model.Images = IS.GetPagedPhotos(id, currentPage + 1, 30, this.FromDateTime(Model.TimeZoneOffSet), this.ToDateTime(Model.TimeZoneOffSet));
+                Model.Images = IS.GetPagedPhotos(id, currentPage + 1, 30, this.FromDateTime(), this.ToDateTime());
             }
 
 
@@ -186,16 +185,16 @@ namespace Epilogger.Web.Controllers {
 
             AllTweetsDisplayViewModel Model = Mapper.Map<Event, AllTweetsDisplayViewModel>(ES.FindByID(id));
 
-            Model.TweetCount = TS.FindTweetCountByEventID(id, this.FromDateTime(Model.TimeZoneOffSet), this.ToDateTime(Model.TimeZoneOffSet));
+            Model.TweetCount = TS.FindTweetCountByEventID(id, this.FromDateTime(), this.ToDateTime());
             Model.CurrentPageIndex = currentPage;
 
 
             if (currentPage + 1 == 1) {
                 Model.ShowTopTweets = true;
-                Model.Tweets = TS.GetPagedTweets(id, currentPage + 1, 10, this.FromDateTime(Model.TimeZoneOffSet), this.ToDateTime(Model.TimeZoneOffSet));
+                Model.Tweets = TS.GetPagedTweets(id, currentPage + 1, 10, this.FromDateTime(), this.ToDateTime());
             } else {
                 Model.ShowTopTweets = false;
-                Model.Tweets = TS.GetPagedTweets(id, currentPage + 1, 100, this.FromDateTime(Model.TimeZoneOffSet), this.ToDateTime(Model.TimeZoneOffSet));
+                Model.Tweets = TS.GetPagedTweets(id, currentPage + 1, 100, this.FromDateTime(), this.ToDateTime());
             }
 
 
@@ -274,7 +273,7 @@ namespace Epilogger.Web.Controllers {
                     //IEnumerable<Tweet> TheTweets = TS.Thedb().Tweets.Where(t => t.EventID == EventID).OrderByDescending(t => t.CreatedDate).Take(1);
 
 
-                    StringBuilder HTML = new StringBuilder();
+                    StringBuilder HTMLString = new StringBuilder();
                     string lasttweettime = string.Empty;
                     bool TheFirst = true;
                     int RecordCount = 0;
@@ -293,10 +292,12 @@ namespace Epilogger.Web.Controllers {
                         //    <p>@Html.Raw(EPLTweet.TextAsHTML)</p>
                         //</li>
 
+                        //HTMLString.Append(PartialView("_TweetTemplate", TheT).ToString());
+
 
                         string ProfilePicture = "<img src='" + TheT.ProfileImageURL + "' class='fleft' alt='' height='48' width='48'  />";
                         string FromLine = "<small><a href='http://www.twitter.com/" + TheT.FromUserScreenName + "' target='_blank'>" + TheT.FromUserScreenName + "</a></small>";
-                        HTML.Append("<li id='Tweet-" + TheT.TwitterID + "' class='tweet newupdates'>" + ProfilePicture + FromLine + "<p>" + TheT.TextAsHTML + "</p></li>");
+                        HTMLString.Append("<li id='Tweet-" + TheT.TwitterID + "' class='tweet newupdates'>" + ProfilePicture + FromLine + "<p>" + TheT.TextAsHTML + "</p></li>");
 
                         RecordCount++;
                     }
@@ -308,7 +309,7 @@ namespace Epilogger.Web.Controllers {
                     dict.Add("numberofnewtweets", RecordCount);
                     dict.Add("lasttweettime", lasttweettime);
                     dict.Add("tweetcount", string.Format("{0:#,###}", db.Tweets.Where(t => t.EventID == EventID).Count()));
-                    dict.Add("html", HTML.ToString());
+                    dict.Add("html", HTMLString.ToString());
                 }
             }
 

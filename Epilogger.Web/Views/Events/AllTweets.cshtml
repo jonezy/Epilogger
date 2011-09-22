@@ -4,11 +4,7 @@
     ViewBag.Title = "Epilogger - " + Model.Name + "- Tweets";
 }
 
-<ul id="subnavigation">
-    <li>@Html.ActionLink("OVERVIEW", "Details/" + Model.ID, "Events")</li>
-    <li>@Html.ActionLink("PHOTOS", "AllPhotos/" + Model.ID, "Events")</li>
-    <li>@Html.ActionLink("TWEETS", "AllTweets/" + Model.ID, "Events")</li>
-</ul>
+@Html.Partial("_EventMenu", new Epilogger.Web.Models._EventMenuViewModel { EventID = Model.ID })
 <span class="spacer"></span>
 
 <div class="grid_11 alpha">

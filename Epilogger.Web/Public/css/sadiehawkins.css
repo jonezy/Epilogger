@@ -204,6 +204,8 @@ image-grid#photosvideos {
 
 .image-grid .commentbubble:hover {
 	opacity:1;}
+	
+
 
 /*------------------------------- ALL PHOTOS */
 div#photos-filterbar {
@@ -212,6 +214,18 @@ div#photos-filterbar {
 	border-bottom:1px dotted #000;}
 
 ul#connected-networks {list-style:none;}
+
+
+/* ------------------------------ CREATE EVENT */
+
+
+.item-card {margin-bottom:10px;}
+.item-card h4 {background:#ee4490;color:#fff;float:left;padding:5px 10px 5px 10px;}
+.item-data {background:#dcdcdc;padding:10px;border-top:solid 5px #ee4490;margin:-5px 0px 10px 0px;}
+.item-data .item-content { width:400px; }
+.item-data h1 {border-bottom:2px solid #fff;padding-bottom:10px;margin-bottom:10px;}
+
+
 /* ------------------------------ DASHBOARD */
 #dashboard-nav {float:left;width:268px;margin-right:17px;}
 #dashboard-nav ul {margin-bottom:30px;}
@@ -302,6 +316,7 @@ div#search-container input[type=image] {
 .fleft		{ float:left}
 .fright		{ float:right}
 .overflowhide { overflow: hidden; }
+.required { color:#ee4490; }
 
 
 /* ------------------------------ FONTS */	
