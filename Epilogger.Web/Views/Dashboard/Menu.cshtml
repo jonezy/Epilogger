@@ -3,7 +3,7 @@
 @{
     var action = ViewContext.RouteData.Values["action"] as string ?? "";
 }
-<ul>
+<ul id="left-nav">
     <li>@Html.ActionLink("Account Activity", "index", null,  action.ToLower() == "index" ? new { @class="current"} : null)</li>
     <li>@Html.ActionLink("Profile Information", "profile", null, action.ToLower() == "profile" ? new { @class = "current" } : null)</li>
     <li>@Html.ActionLink("My Events & Subscriptions", "events", null, action.ToLower() == "events" ? new { @class = "current" } : null)</li>
