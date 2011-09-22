@@ -86,6 +86,8 @@ namespace Epilogger.Web {
         }
 
         private void RegisterAutomapperMappings() {
+            Mapper.CreateMap<Tweet, TweetDisplayViewModel>();
+                
             Mapper.CreateMap<Event, EventDisplayViewModel>()
                 .ForMember(dest => dest.Images, opt => opt.Ignore())
                 .ForMember(dest => dest.CheckIns, opt => opt.Ignore())
