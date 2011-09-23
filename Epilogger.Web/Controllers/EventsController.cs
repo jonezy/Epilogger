@@ -185,6 +185,7 @@ namespace Epilogger.Web.Controllers {
 
             AllTweetsDisplayViewModel Model = Mapper.Map<Event, AllTweetsDisplayViewModel>(ES.FindByID(id));
             Model.TweetCount = TS.FindTweetCountByEventID(id, this.FromDateTime(), this.ToDateTime());
+            Model.UniqueTweeterCount = TS.FindUniqueTweetCountByEventID(id, this.FromDateTime(), this.ToDateTime());
             Model.CurrentPageIndex = currentPage;
 
             if (currentPage + 1 == 1) {
