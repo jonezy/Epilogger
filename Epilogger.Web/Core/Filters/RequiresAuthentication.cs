@@ -48,8 +48,8 @@ namespace Epilogger.Web {
 
         private RouteValueDictionary BuildLoginRouteDictionary(string returnUrl) {
             RouteValueDictionary loginpageRouteDictionary = new RouteValueDictionary();
-            loginpageRouteDictionary.Add("action", "Login");
-            loginpageRouteDictionary.Add("controller", "Account");
+            loginpageRouteDictionary.Add("action", "login");
+            loginpageRouteDictionary.Add("controller", "account");
             
             if(!string.IsNullOrEmpty(returnUrl))
                 loginpageRouteDictionary.Add("returnUrl", returnUrl);

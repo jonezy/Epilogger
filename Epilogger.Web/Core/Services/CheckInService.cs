@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using Epilogger.Data;
 using Epilogger.Web.Model;
+using SubSonic.Repository;
 
 namespace Epilogger.Web
 {
@@ -24,15 +25,11 @@ namespace Epilogger.Web
             return db.CheckIns.Where(t => t.EventID == EventID && t.CheckInDateTime >= F && t.CheckInDateTime <= T).OrderByDescending(t => t.CheckInDateTime).Take(5);
         }
 
+        public IEnumerable<CheckIn> FindByEventIDPaged(int EventID, int currentPage, int recordsPerPage) {
 
-
-
-
-
-
-
-
-
+            var checkins = db.CheckIns.Where(e => e.EventID == EventID);
+            return checkins.Skip(currentPage * recordsPerPage).Take(recordsPerPage).OrderBy(c => c.CheckInDateTime);
+        }
 
         public IEnumerable<CheckIn> FindByEventID(int EventID)
         {

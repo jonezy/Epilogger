@@ -106,6 +106,10 @@ namespace Epilogger.Web.Controllers {
 
         [HttpGet]
         public ActionResult Login() {
+            // store this here so that we can redirect the user back later.
+            if (Request.QueryString["returnUrl"] != null)
+                TempData["returnUrl"] = Request.QueryString["returnUrl"];
+
             return View(new LoginModel());
         }
 
@@ -145,6 +149,10 @@ namespace Epilogger.Web.Controllers {
                     CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString());
                     CookieHelpers.WriteCookie("lc", "tz", user.TimeZoneOffSet.ToString());    
                 }
+
+
+                if (TempData["returnUrl"] != null)
+                    return Redirect(TempData["returnUrl"].ToString());
 
                 return RedirectToAction("Index");
             }
