@@ -22,6 +22,6 @@
             </div>
         </div>
     }
-@*
-    @MvcHtmlString.Create(Html.Pager(100, Model.CurrentPageIndex, Model.TweetCount, new { controller = "Events", action = "AllTweets/" + Model.ID }))*@
+
+    @MvcHtmlString.Create(Html.Pager(10, Model.CurrentPageIndex, Model.TotalRecords, new { controller = "events", action = "allcheckins", id = Model.ID }))
 </div>
