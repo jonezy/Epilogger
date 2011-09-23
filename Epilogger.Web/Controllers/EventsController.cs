@@ -491,10 +491,15 @@ namespace Epilogger.Web.Controllers {
 
         public ActionResult AllCheckins(int id, int? page) {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
+            
             Event currentEvent = ES.FindByID(id);
             List<CheckinDisplayViewModel> checkins = Mapper.Map<List<CheckIn>, List<CheckinDisplayViewModel>>(CS.FindByEventIDPaged(id, currentPage, 10).ToList());
+            
             AllCheckinsViewModel model = new AllCheckinsViewModel(checkins, currentPage, 10);
+            model.ID = currentEvent.ID.ToString();
+            model.Name = currentEvent.Name;
             model.TotalRecords = currentEvent.CheckIns.Count();
+            
             return View(model);
         }
 
