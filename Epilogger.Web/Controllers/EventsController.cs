@@ -491,6 +491,7 @@ namespace Epilogger.Web.Controllers {
         
         public ActionResult AllCheckins(int id) {
             AllCheckinsViewModel model = Mapper.Map<Event, AllCheckinsViewModel>(ES.FindByID(id));
+            
             return View(model);
         }
 

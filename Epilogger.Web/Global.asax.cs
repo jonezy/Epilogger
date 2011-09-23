@@ -109,6 +109,9 @@ namespace Epilogger.Web {
             Mapper.CreateMap<Event, AllCheckinsViewModel>();
             Mapper.CreateMap<Event, AllLinksViewModel>();
 
+            Mapper.CreateMap<CheckIn, CheckinDisplayViewModel>()
+                .ForMember(dest =>dest.Tweet, opt => opt.MapFrom(src => src.Tweets.FirstOrDefault()));
+
             Mapper.CreateMap<CreateAccountModel, User>()
                 .ForMember(dest => dest.ForgotPasswordHash, opt => opt.Ignore())
                 .ForMember(dest => dest.ID, opt => opt.Ignore())
