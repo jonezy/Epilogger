@@ -106,7 +106,6 @@ namespace Epilogger.Web {
 
             Mapper.CreateMap<Event, AllContentViewModel>();
             Mapper.CreateMap<Event, AllBlogPostsViewModel>();
-            Mapper.CreateMap<Event, AllCheckinsViewModel>();
             Mapper.CreateMap<Event, AllLinksViewModel>();
 
             Mapper.CreateMap<CheckIn, CheckinDisplayViewModel>()

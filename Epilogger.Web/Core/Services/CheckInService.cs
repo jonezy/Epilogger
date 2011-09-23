@@ -27,12 +27,9 @@ namespace Epilogger.Web
 
 
 
-
-
-
-
-
-
+        public IEnumerable<CheckIn> FindByEventIDPaged(int EventID, int page, int recordsPerPage) {
+            return GetRepository<CheckIn>().GetPaged(page, recordsPerPage);
+        }
 
         public IEnumerable<CheckIn> FindByEventID(int EventID)
         {

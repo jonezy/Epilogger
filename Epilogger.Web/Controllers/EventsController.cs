@@ -487,11 +487,13 @@ namespace Epilogger.Web.Controllers {
         public ActionResult AllBlogPosts(int id) {
             AllBlogPostsViewModel model = Mapper.Map<Event, AllBlogPostsViewModel>(ES.FindByID(id));
             return View(model);
-        }        
-        
-        public ActionResult AllCheckins(int id) {
-            AllCheckinsViewModel model = Mapper.Map<Event, AllCheckinsViewModel>(ES.FindByID(id));
-            
+        }
+
+        public ActionResult AllCheckins(int id, int? page) {
+            int currentPage = page.HasValue ? page.Value - 1 : 0;
+            Event currentEvent = ES.FindByID(id);
+            List<CheckinDisplayViewModel> checkins = Mapper.Map<List<CheckIn>, List<CheckinDisplayViewModel>>(currentEvent.CheckIns.ToList());
+            AllCheckinsViewModel model = new AllCheckinsViewModel(checkins, currentPage, 10);
             return View(model);
         }
 
