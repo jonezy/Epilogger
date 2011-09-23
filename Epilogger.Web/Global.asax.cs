@@ -164,7 +164,8 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.Page, opt => opt.Ignore())
                 .ForMember(dest => dest.CurrentPageIndex, opt => opt.Ignore())
                 .ForMember(dest => dest.ShowTopTweets, opt => opt.Ignore())
-                .ForMember(dest => dest.Tweets, opt => opt.Ignore());
+                .ForMember(dest => dest.Tweets, opt => opt.Ignore())
+                .ForMember(dest => dest.UniqueTweeterCount, opt => opt.Ignore());
 
             Mapper.AssertConfigurationIsValid();
         }

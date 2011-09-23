@@ -33,6 +33,11 @@ namespace Epilogger.Web
             return db.Tweets.Where(t => t.EventID == EventID && t.CreatedDate >= F && t.CreatedDate <= T).Count();
         }
 
+        public int FindUniqueTweetCountByEventID(int EventID, DateTime F, DateTime T)
+        {
+            return db.Tweets.Where(t => t.EventID == EventID && t.CreatedDate >= F && t.CreatedDate <= T).Select(t => t.FromUserScreenName).Distinct().Count();
+        }
+
 
         public IEnumerable<Tweet> FindByEventIDOrderDescTake6(int EventID, DateTime F, DateTime T)
         {

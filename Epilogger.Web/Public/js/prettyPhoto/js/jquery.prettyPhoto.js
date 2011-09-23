@@ -22,8 +22,8 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 			opacity: 0.80, /* Value between 0 and 1 */
 			show_title: true, /* true/false */
 			allow_resize: true, /* Resize the photos bigger than viewport. true/false */
-			default_width: 500,
-			default_height: 344,
+			default_width: 875,
+			default_height: 495,
 			counter_separator_label: '/', /* The separator for the gallery counter 1 "of" 2 */
 			theme: 'pp_default', /* light_rounded / dark_rounded / light_square / dark_square / facebook */
 			horizontal_padding: 20, /* The padding on each side of the picture */
@@ -47,7 +47,8 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 						<div class="pp_content_container"> \
 							<div class="pp_left"> \
 							<div class="pp_right"> \
-								<div class="pp_content"> \
+								<div class="pp_Comments">Loading...</div> \
+                                <div class="pp_content"> \
 									<div class="pp_loaderIcon"></div> \
 									<div class="pp_fade"> \
 										<a href="#" class="pp_expand" title="Expand the image">Expand</a> \
@@ -58,14 +59,13 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 										<div id="pp_full_res"></div> \
 										<div class="pp_details"> \
 											<p class="pp_description"></p> \
-											<span class="fright">{pp_social}</span> \
+											<span id="pp_ImageLinkEPL" class="">{pp_social}</span> \
 										</div> \
 									</div> \
-								</div> \
+                                </div> \
 							</div> \
 							</div> \
 						</div> \
-                        <div class="pp_Comments">Loading...</div> \
 						<div class="pp_bottom"> \
 							<div class="pp_left"></div> \
 							<div class="pp_middle"></div> \
@@ -88,7 +88,9 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 			iframe_markup: '<iframe src ="{path}" width="{width}" height="{height}" frameborder="no"></iframe>',
 			inline_markup: '<div class="pp_inline">{content}</div>',
 			custom_markup: '',
-            social_tools: '<span class="fright fblue"><small>Share: </small> <a href="http://twitter.com/intent/tweet?text=I+was+at+' + EventName + '+and+Epilogger+remembered+it+for+me!+Reminisce+with+me!+'+ EventURL +'+%23Epilogger" target="_blank"><img src="/Content/images/icons/twitter.png" class="valign"></a> <a target="_blank" href="http://www.facebook.com/sharer.php?u='+EventURL+'" onclick="return fbs_click()" text="I was at '+ EventName + ' and Epilogger remembered it for me! Reminisce with me and help write the story!'+EventURL+'" #Epilogger><img src="/Content/images/icons/facebook.png" class="valign"/></a></span>',}, pp_settings);
+            social_tools: '<a href="#">Link goes here somehow</a>',}, pp_settings);
+
+            //<span class="fright fblue"><small>Share: </small> <a href="http://twitter.com/intent/tweet?text=I+was+at+' + EventName + '+and+Epilogger+remembered+it+for+me!+Reminisce+with+me!+'+ EventURL +'+%23Epilogger" target="_blank"><img src="/Content/images/icons/twitter.png" class="valign"></a> <a target="_blank" href="http://www.facebook.com/sharer.php?u='+EventURL+'" onclick="return fbs_click()" text="I was at '+ EventName + ' and Epilogger remembered it for me! Reminisce with me and help write the story!'+EventURL+'" #Epilogger><img src="/Content/images/icons/facebook.png" class="valign"/></a></span>
             
 		//EventURL
         //newLocURL
@@ -493,6 +495,8 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 				.animate({
 					height:pp_dimensions['contentHeight'],
 					width:pp_dimensions['contentWidth']
+//                    height: 495,
+//                    width: 875
 				},settings.animation_speed);
 			
 			// Resize picture the holder
@@ -590,7 +594,7 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 				width:Math.floor(imageWidth),
 				height:Math.floor(imageHeight),
 				containerHeight:Math.floor(pp_containerHeight),
-				containerWidth:Math.floor(pp_containerWidth) + (settings.horizontal_padding * 2),
+				containerWidth:Math.floor(pp_containerWidth + 355) + (settings.horizontal_padding * 2),
 				contentHeight:Math.floor(pp_contentHeight),
 				contentWidth:Math.floor(pp_contentWidth),
 				resized:resized
