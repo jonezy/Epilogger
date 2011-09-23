@@ -7,7 +7,6 @@ namespace Epilogger.Web.Models {
         public int PageSize { get { return 12; } }
         public int CurrentPageIndex { get; set; }
         public int TotalRecords { get; set; }
-
         public List<CheckinDisplayViewModel> Checkins { get; set; }
 
         public AllCheckinsViewModel(List<CheckinDisplayViewModel> activities, int currentPageIndex, int totalRecords) {
