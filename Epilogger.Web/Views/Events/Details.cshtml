@@ -78,12 +78,38 @@
     <h1>@Model.Name</h1>
     <h2>@Model.SubTitle</h2>
 
-    <p>@Html.Raw(Model.Description.Replace("\r", "<br />"))
-        @if (Model.Description.Length > 266) { 
-            @: ... (<a href="#">read more</a>)
-                        }
-    </p>
-
+    <div id="event-intro">
+        @Html.Raw(Model.Description.Replace("\r", "<br />"))
+    </div>
+    <br style="clear:both;" />
+    <div class="grid_1 alpha">
+        @if (Model.HasSubscribed) {
+            using (Html.BeginForm("unsubscribe", "events", FormMethod.Post, new { @class = "remove-bottom" })) {
+                <input type="submit" value="Unsubscribe" name="SubscribeToEvent" class="blue-action-button remove-bottom" id="" />
+                @Html.HiddenFor(model => model.ID)
+            }
+        } else {
+            using (Html.BeginForm("subscribe", "events", FormMethod.Post, new { @class = "remove-bottom" })) {
+                <input type="submit" value="Subscribe" name="SubscribeToEvent" class="blue-action-button remove-bottom" id="" />
+                @Html.HiddenFor(model => model.ID)
+            }
+        }
+    </div>
+    <div class="grid_2">
+        @if (!Model.HasUserRated) {
+            using (Html.BeginForm("eventRating", "events", FormMethod.Post, new { @class = "remove-bottom" })) {   
+                <input class="remove-bottom" type="button" value="+" name="ThumbsUpButton" id="" onclick="$('#ThumbsUp').val('1'); $(form).submit();" /> @:&nbsp;/&nbsp;
+                <input class="remove-bottom" type="button" value="-" name="ThumbsDownButton" id="" onclick="$('#ThumbsUp').val('0'); $(form).submit();" />
+                @Html.HiddenFor(model => model.ID)
+                @Html.Hidden("ThumbsUp")
+            }
+        } else {
+            @Model.EventRatings.Where(i => i.UserRating == "+").Count().ToString() @: ThumbsUp<br/>
+            @Model.EventRatings.Where(i => i.UserRating == "-").Count().ToString() @: ThumbsDown<br/>
+            @: You voted on:
+            @String.Format("{0:MMM d, yyyy h:mm}{1}", Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime.ToUserTimeZone(Model.TimeZoneOffSet), Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime.ToUserTimeZone(Model.TimeZoneOffSet).ToString("tt").ToLower())
+        }
+    </div>
     <div class="grid_6 filter-by-time">
         @using (Html.BeginForm()) {
             @:<label>Show Data from:</label> @Html.TextBoxFor(m => m.FromDateTime) &nbsp;&nbsp;<label>To</label>&nbsp;&nbsp; @Html.TextBoxFor(m => m.ToDateTime) &nbsp;&nbsp;<input type="submit" value="Apply" />
@@ -116,38 +142,12 @@
             </script>
         }
     </div>
-    <div class="grid_2">
-        @if (Model.HasSubscribed) {
-            using (Html.BeginForm("unsubscribe", "events", FormMethod.Post, new { @class = "remove-bottom" })) {
-            <input type="submit" value="Unsubscribe" name="SubscribeToEvent" id="" />
-            @Html.HiddenFor(model => model.ID)
-            }
-        } else {
-            using (Html.BeginForm("subscribe", "events", FormMethod.Post, new { @class = "remove-bottom" })) {
-            <input type="submit" value="Subscribe to Event" name="SubscribeToEvent" id="" />
-            @Html.HiddenFor(model => model.ID)
-            }
-        }
-    </div>
-    <div class="grid_2">
-        @if (!Model.HasUserRated) {
-            using (Html.BeginForm("eventRating", "events", FormMethod.Post, new { @class = "remove-bottom" })) {   
-                <input class="remove-bottom" type="button" value="+" name="ThumbsUpButton" id="" onclick="$('#ThumbsUp').val('1'); $(form).submit();" /> @:&nbsp;/&nbsp;
-                <input class="remove-bottom" type="button" value="-" name="ThumbsDownButton" id="" onclick="$('#ThumbsUp').val('0'); $(form).submit();" />
-                @Html.HiddenFor(model => model.ID)
-                @Html.Hidden("ThumbsUp")
-            }
-        } else {
-            @Model.EventRatings.Where(i => i.UserRating == "+").Count().ToString() @: ThumbsUp<br/>
-            @Model.EventRatings.Where(i => i.UserRating == "-").Count().ToString() @: ThumbsDown<br/>
-            @: You voted on:
-            @String.Format("{0:MMM d, yyyy h:mm}{1}", Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime.ToUserTimeZone(Model.TimeZoneOffSet), Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime.ToUserTimeZone(Model.TimeZoneOffSet).ToString("tt").ToLower())
-        }
-    </div>
+
+
 </div>
 
 <div class="clear"></div>
-
+<div class="spacer"></div>
 <div id="event-details">
     <span class="event-details-label">When:</span> <span class="event-details-detail">
         @if (Model.StartDateTime.Subtract(Model.EndDateTime).Days == 0) {

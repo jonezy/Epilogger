@@ -36,6 +36,12 @@
         head.js('@Url.Content("~/Public/js/prettyPhoto/js/jquery.prettyPhoto.js")');
         head.js('@Url.Content("~/Public/js/epilogger.js")');
         head.js('@Url.Content("~/Public/js/AnyTime/anytimec.js")');
+        head.js('@Url.Content("~/Public/js/jquery.expander.min.js")', function () {
+            $('div#event-intro').expander({
+                slicePoint: 256,  // default is 100
+                expandPrefix: ' ', // default is '... '
+            });
+        });
 
 
         head.js('@Url.Content("~/Public/js/clickmap.js")');
