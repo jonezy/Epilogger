@@ -44,6 +44,10 @@ namespace Epilogger.Web
             return db.Tweets.Where(t => t.EventID == EventID && t.CreatedDate >= F && t.CreatedDate <= T).OrderByDescending(t => t.CreatedDate).Take(6);
         }
 
+        public IEnumerable<Epilogger.Web.Core.Stats.Tweeter> GetTop10TweetersByEventID(int EventID, DateTime F, DateTime T)
+        {
+            return db.GetTop10TweetersByEventID(EventID, F, T).ExecuteTypedList<Epilogger.Web.Core.Stats.Tweeter>();
+        }
 
 
 
