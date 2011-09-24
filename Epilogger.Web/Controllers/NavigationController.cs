@@ -41,10 +41,13 @@ namespace Epilogger.Web.Controllers {
 
                         // this handles the event section, just overrides the values set above.
                         if (routeKey == "id") {
-                            int eventId = int.Parse(routeValue);
-                            Event currentEvent = eventService.FindByID(eventId);
-                            label = currentEvent.Name;
-                            url = string.Format("{0}{1}", App.BaseUrl, Url.Action("details", "events", Request.RequestContext.RouteData.Values).TrimStart('/'));
+                            int eventId;
+                            int.TryParse(routeValue, out eventId);
+                            if (eventId > 0) {
+                                Event currentEvent = eventService.FindByID(eventId);
+                                label = currentEvent.Name;
+                                url = string.Format("{0}{1}", App.BaseUrl, Url.Action("details", "events", Request.RequestContext.RouteData.Values).TrimStart('/'));
+                            }
                         }
 
                         if(!trail.ContainsKey(label) && !label.Equals("details") )
