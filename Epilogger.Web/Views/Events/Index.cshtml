@@ -14,7 +14,7 @@
     if ((item.EndDateTime - DateTime.UtcNow) > new TimeSpan(30, 0, 0, 0))
     {
         if (!string.IsNullOrEmpty(item.Name)) {
-            <li class="grid_4">@Html.ActionLink(@item.Name, "Details", "Events", new { id = @item.ID }, null)</li>
+            <li class="grid_4">@Html.RouteLink(@item.Name, "EventsRoutes", new { controller = "events", action = "details", id = @item.ID })</li>
         }    
     }
 }
@@ -29,7 +29,7 @@
     if ((item.EndDateTime - DateTime.UtcNow) < new TimeSpan(30, 0, 0, 0))
     {
         if (!string.IsNullOrEmpty(item.Name)) {
-            <li class="grid_4">@Html.ActionLink(@item.Name, "Details", "Events", new { id = @item.ID }, null)</li>
+            <li class="grid_4">@Html.RouteLink(@item.Name, "EventsRoutes", new { controller = "events", action = "details", id = @item.ID })</li>
         }    
     }
 }
