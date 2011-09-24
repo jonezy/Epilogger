@@ -30,16 +30,17 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 			hideflash: false, /* Hides all the flash object on a page, set to TRUE if flash appears over prettyPhoto */
 			wmode: 'opaque', /* Set the flash wmode attribute */
 			autoplay: true, /* Automatically start videos: True/False */
-			modal: false, /* If set to true, only the close button will close the window */
-			deeplinking: true, /* Allow prettyPhoto to update the url to enable deeplinking. */
+			modal: false, /* If set to true, only the close button will close the window */deeplinking: true, /* Allow prettyPhoto to update the url to enable deeplinking. */
 			overlay_gallery: true, /* If set to true, a gallery will overlay the fullscreen image on mouse over */
 			keyboard_shortcuts: true, /* Set to false if you open forms inside prettyPhoto */
 			changepicturecallback: function(){}, /* Called everytime an item is shown/changed */
 			callback: function(){}, /* Called when prettyPhoto is closed */
 			ie6_fallback: true,
 			markup: '<div class="pp_pic_holder"> \
-						<div class="ppt">&nbsp;</div> \
-						<div class="pp_top"> \
+                        <a href="" class="pp_shareDrawerTab"></a> \
+						<div class="pp_shareDrawer">Test</div> \
+                        <div class="ppt">&nbsp;</div> \
+                        <div class="pp_top"> \
 							<div class="pp_left"></div> \
 							<div class="pp_middle"></div> \
 							<div class="pp_right"><a class="pp_close" href="#">Close</a></div> \
@@ -485,7 +486,7 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 			$('.pp_loaderIcon').hide();
 
 			// Calculate the opened top position of the pic holder
-			projectedTop = scroll_pos['scrollTop'] + ((windowHeight/2) - (pp_dimensions['containerHeight']/1.5));
+			projectedTop = scroll_pos['scrollTop'] + ((windowHeight/2) - (pp_dimensions['containerHeight']/2));
 			if(projectedTop < 0) projectedTop = 0;
 
 			$ppt.fadeTo(settings.animation_speed,1);
@@ -640,6 +641,7 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 			pp_contentWidth = width;
 			pp_containerHeight = pp_contentHeight + titleHeight + $pp_pic_holder.find('.pp_top').height() + $pp_pic_holder.find('.pp_bottom').height();
 			pp_containerWidth = width;
+            // + 355
 		}
 	
 		function _getFileType(itemSrc){
@@ -835,6 +837,37 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 		
 				return false;
 			});
+
+
+            $('a.pp_shareDrawerTab').bind('click',function(e){
+				// Expand the image
+//				if($(this).hasClass('pp_shareDrawerTab')){
+//					//$(this).removeClass('pp_shareDrawerTabClosed').addClass('pp_shareDrawerTabOpen');
+//                    $(".pp_shareDrawer").animate({top:'0px'}, 400);
+//                    $(this).animate({ marginTop: '-27px' }, 400);
+//				}else{
+//					//$(this).removeClass('pp_shareDrawerTabOpen').addClass('pp_shareDrawerTabClosed');
+//                    $(".pp_shareDrawer").animate({top:'32px'}, 400);
+//                    $(this).animate({ marginTop: '0px' }, 400);
+//				};
+
+
+                if($(this).css('marginTop')=='0px'){
+                    $(".pp_shareDrawer").animate({top:'0px'}, 400);
+                    $(this).animate({ marginTop: '-27px' }, 400);
+				}else{
+                    $(".pp_shareDrawer").animate({top:'32px'}, 400);
+                    $(this).animate({ marginTop: '0px' }, 400);
+				};
+
+
+				return false;
+			});
+
+
+
+
+
 		
 			$pp_pic_holder.find('.pp_previous, .pp_nav .pp_arrow_previous').bind('click',function(){
 				$.prettyPhoto.changePage('previous');

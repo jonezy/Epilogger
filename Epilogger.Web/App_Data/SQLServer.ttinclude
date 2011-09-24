@@ -62,7 +62,10 @@ const string COLUMN_SQL=@"SELECT
 List<SPParam> GetSPParams(string spName)
 {
     var result = new List<SPParam>();
-    string[] restrictions = new string[4] { DatabaseName, null, spName, null };
+    //string[] restrictions = new string[4] { DatabaseName, null, spName, null };
+	//Fix so that it pulls the SP parameters
+	string[] restrictions = new string[3] { null, null, spName };
+
     using(SqlConnection conn = new SqlConnection(ConnectionString))
 	{
         conn.Open();
