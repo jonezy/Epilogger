@@ -412,6 +412,7 @@
     <Content Include="Views\Events\AllBlogPosts.cshtml" />
     <Content Include="Views\Events\AllCheckins.cshtml" />
     <Content Include="Views\Shared\Navigation.cshtml" />
+    <Content Include="Views\Events\EventToolbar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
