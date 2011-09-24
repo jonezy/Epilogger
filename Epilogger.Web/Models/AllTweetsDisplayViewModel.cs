@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Epilogger.Web.Core.Stats;
 
 namespace Epilogger.Web.Models {
     public class AllTweetsDisplayViewModel {
@@ -11,6 +12,6 @@ namespace Epilogger.Web.Models {
         public int TimeZoneOffSet { get; set; }
         public int UniqueTweeterCount { get; set; }
         public IEnumerable<TweetDisplayViewModel> Tweets { get; set; }
-
+        public List<Tweeter> TopTweeters { get; set; }
     }
 }

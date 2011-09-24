@@ -164,6 +164,7 @@
     <Compile Include="Core\Services\TweetService.cs" />
     <Compile Include="Core\Services\UserAuthenticationProfileService.cs" />
     <Compile Include="Core\Services\UserService.cs" />
+    <Compile Include="Core\Stats\TopTweeters.cs" />
     <Compile Include="Core\UserRole.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -232,6 +233,7 @@
     <Content Include="Public\images\bg\sample5.jpg" />
     <Content Include="Public\images\bg\sample6.jpg" />
     <Content Include="Public\images\bg\sample7.jpg" />
+    <Content Include="Public\images\body-bg.jpg" />
     <Content Include="Public\images\btn-checkinmore.png" />
     <Content Include="Public\images\btn-submit.png" />
     <Content Include="Public\images\click.png" />
@@ -239,6 +241,7 @@
     <Content Include="Public\images\event_activity_title_icons.png" />
     <Content Include="Public\images\icons\bubble.png" />
     <Content Include="Public\images\icons\dashboard-event-totals.png" />
+    <Content Include="Public\images\icons\header-person.png" />
     <Content Include="Public\images\icons\pencil.png" />
     <Content Include="Public\images\icons\profile-eventlist.png" />
     <Content Include="Public\images\icons\tweet-black.png" />
@@ -383,6 +386,7 @@
     <Content Include="Views\Events\AllLinks.cshtml" />
     <Content Include="Views\Events\AllBlogPosts.cshtml" />
     <Content Include="Views\Events\AllCheckins.cshtml" />
+    <Content Include="Views\Shared\Navigation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

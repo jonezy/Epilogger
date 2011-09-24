@@ -1,5 +1,7 @@
 ﻿@using Epilogger.Web;
 @using Epilogger.Web.Models;
+@using Epilogger.Web.Core.Stats;
+
 @model Epilogger.Web.Models.AllTweetsDisplayViewModel
 @{
     ViewBag.Title = "Epilogger - " + Model.Name + "- Tweets";
@@ -16,6 +18,41 @@
     <div class="total-tweets">
         <h2>TOTAL:</h2>
         <h1>@Model.TweetCount.ToString("#,###")</h1>
+    </div>
+    <br style="clear:both;" />
+    <div id="top-tweeters">
+        <h2>Top 10 Tweeters</h2>
+        @for (int i = 0; i < 3; i++) {
+            try {
+                if (Model.TopTweeters[i] != null) {
+                    Tweeter tweeter = Model.TopTweeters[i];
+                    <img src="@tweeter.Picture" class="fleft" height="48" width="48" alt="" />
+                    <div class="toptweeter-item primary clearfix">
+                        <strong><a href="http://twitter.com/@tweeter.Name" target="_blank">@@@tweeter.Name</a></strong><br />
+                        <div style="width:@tweeter.PercentOfTotal%;" class="bar"></div>@if(tweeter.PercentOfTotal < 100) {<div class="count">@tweeter.Total</div>}
+                    </div>
+                    <br style="clear:both;" />
+                }
+            } catch { }
+        }
+        <br style="clear:both;" />
+        <div class="spacer dotted light"></div>
+        
+        @for (int i = 4; i < 10; i++) {
+            try {
+            if (Model.TopTweeters[i] != null) {
+                Tweeter tweeter = Model.TopTweeters[i];
+                <div class="toptweeter-item small clearfix left">
+                    <strong><a href="http://twitter.com/@tweeter.Name" target="_blank">@@@tweeter.Name</a></strong><br />
+                    <div style="width:@tweeter.PercentOfTotal%;" class="bar small"></div><div class="count small">@tweeter.Total</div>
+                </div>
+                if (i % 2 == 1) {
+                <br style="clear:both;" />
+                }
+            }
+            } catch {}
+        }
+        
     </div>
 </div>
 <div id="events-content">
