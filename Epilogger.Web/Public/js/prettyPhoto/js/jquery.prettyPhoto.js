@@ -30,15 +30,14 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 			hideflash: false, /* Hides all the flash object on a page, set to TRUE if flash appears over prettyPhoto */
 			wmode: 'opaque', /* Set the flash wmode attribute */
 			autoplay: true, /* Automatically start videos: True/False */
-			modal: false, /* If set to true, only the close button will close the window */
-			deeplinking: true, /* Allow prettyPhoto to update the url to enable deeplinking. */
+			modal: false, /* If set to true, only the close button will close the window */deeplinking: true, /* Allow prettyPhoto to update the url to enable deeplinking. */
 			overlay_gallery: true, /* If set to true, a gallery will overlay the fullscreen image on mouse over */
 			keyboard_shortcuts: true, /* Set to false if you open forms inside prettyPhoto */
 			changepicturecallback: function(){}, /* Called everytime an item is shown/changed */
 			callback: function(){}, /* Called when prettyPhoto is closed */
 			ie6_fallback: true,
 			markup: '<div class="pp_pic_holder"> \
-                        <a href="" class="pp_shareDrawerTabClosed"></a> \
+                        <a href="" class="pp_shareDrawerTab"></a> \
 						<div class="pp_shareDrawer">Test</div> \
                         <div class="ppt">&nbsp;</div> \
                         <div class="pp_top"> \
@@ -840,15 +839,28 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 			});
 
 
-            $('a.pp_shareDrawerTabClosed').bind('click',function(e){
+            $('a.pp_shareDrawerTab').bind('click',function(e){
 				// Expand the image
-				if($(this).hasClass('pp_shareDrawerTabClosed')){
-					$(this).removeClass('pp_shareDrawerTabClosed').addClass('pp_shareDrawerTabOpen');
-                    $(".pp_shareDrawer").slideUp();
+//				if($(this).hasClass('pp_shareDrawerTab')){
+//					//$(this).removeClass('pp_shareDrawerTabClosed').addClass('pp_shareDrawerTabOpen');
+//                    $(".pp_shareDrawer").animate({top:'0px'}, 400);
+//                    $(this).animate({ marginTop: '-27px' }, 400);
+//				}else{
+//					//$(this).removeClass('pp_shareDrawerTabOpen').addClass('pp_shareDrawerTabClosed');
+//                    $(".pp_shareDrawer").animate({top:'32px'}, 400);
+//                    $(this).animate({ marginTop: '0px' }, 400);
+//				};
+
+
+                if($(this).css('marginTop')=='0px'){
+                    $(".pp_shareDrawer").animate({top:'0px'}, 400);
+                    $(this).animate({ marginTop: '-27px' }, 400);
 				}else{
-					$(this).removeClass('pp_shareDrawerTabOpen').addClass('pp_shareDrawerTabClosed');
-                    $(".pp_shareDrawer").slideDown();
+                    $(".pp_shareDrawer").animate({top:'32px'}, 400);
+                    $(this).animate({ marginTop: '0px' }, 400);
 				};
+
+
 				return false;
 			});
 
