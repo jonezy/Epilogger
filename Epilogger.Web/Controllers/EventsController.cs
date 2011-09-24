@@ -10,6 +10,7 @@ using Epilogger.Web.Models;
 using Epilogger.Web;
 using RichmondDay.Helpers;
 using System.Text;
+using Epilogger.Web.Core.Stats;
 
 namespace Epilogger.Web.Controllers {
     public class EventsController : BaseController {
@@ -187,6 +188,8 @@ namespace Epilogger.Web.Controllers {
             Model.TweetCount = TS.FindTweetCountByEventID(id, this.FromDateTime(), this.ToDateTime());
             Model.UniqueTweeterCount = TS.FindUniqueTweetCountByEventID(id, this.FromDateTime(), this.ToDateTime());
             Model.CurrentPageIndex = currentPage;
+            TopTweetersStats topTweetersStats = new TopTweetersStats();
+            List<Tweeter> topTweeters = topTweetersStats.Calculate(TS.FindByEventID(id));
 
             if (currentPage + 1 == 1) {
                 Model.ShowTopTweets = true;
