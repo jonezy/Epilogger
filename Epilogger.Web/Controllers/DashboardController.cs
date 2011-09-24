@@ -7,8 +7,6 @@ using AutoMapper;
 
 using Epilogger.Data;
 using Epilogger.Web.Models;
-using System.Diagnostics;
-using System;
 
 namespace Epilogger.Web.Controllers {
     [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view your dashboard")]
