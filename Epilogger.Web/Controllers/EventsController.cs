@@ -189,7 +189,8 @@ namespace Epilogger.Web.Controllers {
             Model.TweetCount = TS.FindTweetCountByEventID(id, this.FromDateTime(), this.ToDateTime());
             Model.UniqueTweeterCount = TS.FindUniqueTweetCountByEventID(id, this.FromDateTime(), this.ToDateTime());
             Model.CurrentPageIndex = currentPage;
-            Model.TopTweeters = topTweetersStats.Calculate(TS.FindByEventID(id, this.FromDateTime(), this.ToDateTime()));
+            //Model.TopTweeters = topTweetersStats.Calculate(TS.FindByEventID(id, this.FromDateTime(), this.ToDateTime()));
+            Model.TopTweeters = TS.GetTop10TweetersByEventID(id, this.FromDateTime(), this.ToDateTime()).ToList();
 
             if (currentPage + 1 == 1) {
                 Model.ShowTopTweets = true;
