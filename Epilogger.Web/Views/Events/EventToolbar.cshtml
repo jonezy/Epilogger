@@ -1,0 +1,14 @@
+﻿
+@{
+    var action = ViewContext.RouteData.Values["action"] as string ?? "";
+}
+<div id="event-toolbar">
+    @Html.ActionLink("overview", "details", "events", new {id=Model.ID},  action.ToLower() == "details" ? new { @class="overview current"} : new {@class="overview"})
+    @Html.ActionLink("photos", "allphotos", "events", new {id=Model.ID},  action.ToLower() == "allphotos" ? new { @class="allphotos current"} : new {@class="allphotos"})
+    @Html.ActionLink("tweets", "alltweets", "events", new {id=Model.ID},  action.ToLower() == "alltweets" ? new { @class="alltweets current"} : new {@class="alltweets"})
+    @Html.ActionLink("allcontent", "allcontent", "events", new { id = Model.ID }, action.ToLower() == "allcontent" ? new { @class = "allcontent current" } : new { @class = "allcontent" })
+    @Html.ActionLink("allinks", "alllinks", "events", new { id = Model.ID }, action.ToLower() == "alllinks" ? new { @class = "alllinks current" } : new { @class = "alllinks" })
+    @Html.ActionLink("allcheckins", "allcheckins", "events", new { id = Model.ID }, action.ToLower() == "allcheckins" ? new { @class = "allcheckins current" } : new { @class = "allcheckins" })
+    @Html.ActionLink("allblogposts", "allblogposts", "events", new { id = Model.ID }, action.ToLower() == "allblogposts" ? new { @class = "allblogposts current" } : new { @class = "allblogposts" })
+    @Html.ActionLink("allstats", "allstats", "events", new { id = Model.ID }, action.ToLower() == "allstats" ? new { @class = "allstats current" } : new { @class = "allstats" })
+</div>
