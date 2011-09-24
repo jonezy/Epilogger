@@ -52,32 +52,27 @@
     
 @Html.Raw(Html.Notify())
 <div id="flash"></div>
-<div class="container_12" id="outer-container">
-	<div class="grid_8" id="logo">
-		 @Html.Raw(Html.Image("logo.png", "id='logo'"))
-	</div>
-	<div class="grid_4">
-        @Html.Action("GlobalNavigation", "Navigation")
-		
-		<div class="clear"></div>
-		
-		<div id="search-container">
-			<input type="text" value="Find an event..." class="remove-bottom"/>
-			<input type="image" src="@Url.Content("~/Public/images/btn-submit.png")"/>
-		</div>		
-	</div>           
 
-	<div class="clear"></div>
-        
-    <ul id="navigation">
-        <li>@Html.ActionLink("HOME", "Index", "Home")</li>
-        <li>@Html.ActionLink("BROWSE EVENTS", "index", "events")</li>
-        <li>@Html.ActionLink("MY EVENTS", "events", "dashboard")</li>
-        <li>@Html.ActionLink("DASHBOARD", "index", "dashboard")</li>
-        <li>@Html.ActionLink("WHAT IS EPILOGGER?", "index", "home")</li>
-        <li><a href="http://www.epilogger.com/blog/">BLOG</a></li>
-        <li>@Html.ActionLink("HELP", "index", "home")</li>
-    </ul>
+<div id="global-bar">  
+    <div class="container_12 clearfix">
+
+        <div id="search-container">
+		    <input type="text" value="Search" class="remove-bottom"/>
+		    <input type="image" src="@Url.Content("~/Public/images/btn-submit.png")"/>
+	    </div>	
+
+        @Html.Action("GlobalNavigation", "Navigation")
+        <div id="admin-area"><a href="#demo" class="displayClicks">CM</a></div> 	
+    </div>     
+</div>
+
+<div class="container_12 clearfix" id="outer-container">
+    <div id="header">
+        @Html.Raw(Html.Image("logo.png", "id='logo'"))
+        @Html.Partial("Navigation")
+
+    </div>
+
     <div id="content-container">
         @Html.Action("RenderBreadCrumb", "Navigation")
         <br style="clear:both;" />

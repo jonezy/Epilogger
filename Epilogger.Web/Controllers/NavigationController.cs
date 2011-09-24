@@ -9,6 +9,10 @@ namespace Epilogger.Web.Controllers {
         [ChildActionOnly]
         public ActionResult GlobalNavigation() {
             GlobalNavigationModel model = new GlobalNavigationModel { UserLoggedIn = CurrentUserID != Guid.Empty ? true : false };
+            if (CurrentUser != null) {
+                model.Username = CurrentUser.Username;
+            }
+
             return PartialView("GlobalNavigation", model);
         }
 
