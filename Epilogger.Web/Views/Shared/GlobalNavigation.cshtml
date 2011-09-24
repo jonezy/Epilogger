@@ -4,14 +4,7 @@
 <div id="user-status">
            
     @if (Model.UserLoggedIn) {
-        @:Bonjour @Model.Username (@Html.ActionLink("logout", "logout", "account", null, new { @class = "person" }))
-        
-        
-@*        <li>@Html.ActionLink("Logout", "logout", "account")</li>
-        <li>@Html.ActionLink("Account", "account", "dashboard")</li>
-        <li><a href="#" onclick="window.open('http://tracker.epilogger.com/projects/epiloggerfeedback/issues/new','','width=920,height=550');return false;">FEEDBACK</a></li>
-        <li class="button displayClicks"><a href="#demo">CM</a></li>*@
-        
+        @:<span class="person">Bonjour <strong>@Model.Username</strong></span> (@Html.ActionLink("logout", "logout", "account"))
     }
     else
     {

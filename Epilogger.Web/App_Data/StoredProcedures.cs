@@ -449,6 +449,11 @@ namespace Epilogger.Data{
             sp.Command.AddParameter("ToDate",ToDate,DbType.DateTime);
             return sp;
         }
+        public StoredProcedure GetUserDashboardActivity(string UserID){
+            StoredProcedure sp=new StoredProcedure("GetUserDashboardActivity",this.Provider);
+            sp.Command.AddParameter("UserID",UserID,DbType.AnsiString);
+            return sp;
+        }
 	
 	}
 	

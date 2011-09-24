@@ -9,11 +9,11 @@ namespace Epilogger.Web.Models {
     }
 
     public enum ActivityType {
-        ALL,
-        PHOTOS_VIDEOS,
-        TWEET,
-        EVENT_CREATION,
-        EVENT_RATING,
-        FOLLOW_EVENT
+        ALL             = 0,
+        PHOTOS_VIDEOS   = 1,
+        TWEET           = 2,
+        EVENT_CREATION  = 3,
+        EVENT_RATING    = 4,
+        FOLLOW_EVENT    = 5
     }
 }
