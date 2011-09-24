@@ -2,7 +2,7 @@
 
 body {
 	color:#707070;
-	background:#252525;
+	background:#252525 url(../images/body-bg.jpg) repeat-x;
 	font:normal 11pt times, 'Georgia', 'Times New Roman', serif}
 
 a {
@@ -26,35 +26,38 @@ font-family:'InterstatePlusRegular';text-transform:uppercase;}
 #outer-container {position:relative;z-index:0;}
 
 #content-container {
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;     
 	background:#fff;
 	padding:15px}
 	
-	
+	#header {padding:10px 0px 30px 0px;}
+	img#logo {float:left;}
+
 /* ------------------------------ MENUS */
 
 /* --- main menu */	
-ul#navigation {
-	background:#d1d1d1}
+ul#navigation {float:right;margin-top:10px;}
 	
 ul#navigation li {
 	display:inline-block;
 	padding:9px 0 5px 0}
 
 ul#navigation li a {
-	color:#000;
+	color:#989898;
 	padding: 9px 10px 7px 10px;
 	text-transform:uppercase;
 	margin:0 5px;
 	font:normal 13pt 'InterstatePlusRegular', impact, sans-serif;}
 
-ul#navigation li a:hover {
-	background:#fff;
-	color:#60143b}
-
-ul#navigation li a.selected {
-	background:#fc5daf;
+ul#navigation li a:hover,
+ul#navigation li a.current {
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;    
+	background:#162734;
 	color:#fff}
-	
 	
 /* -- Sub Nav */
 	
@@ -79,28 +82,6 @@ ul#subnavigation li a:hover {
 ul#subnavigation li a.selected {
 	background:#fc5daf;
 	color:#fff}	
-	
-
-
-/* --- top tabs */
-ul.tabs li {
-	float:right;
-	display:inline-block;}
-	
-ul.tabs a {
-	color:#fc5daf;
-	font:normal 12pt 'InterstatePlusRegular', impact, sans-serif;;
-	text-transform:uppercase;
-	margin:0 0 0 8px;
-	padding:20px 10px 10px 10px;
-	line-height:40px;
-	background:#000}
-
-ul.tabs a:hover {
-	color:#ee4490;
-	line-height:45px;
-	background:#111}
-	
 	
 	
 /* ------------------------------ CONTENT */
@@ -315,27 +296,34 @@ ul#left-nav li a.current {background:#f6f6f6;border-bottom:solid 1px #bdbdbd;}
 #top-tweeters .toptweeter-item .bar.small {height:10px;background-color:#efeeee;float:left;margin-right:5px;}
 #top-tweeters .toptweeter-item .count.small {font-size:11px;float:left;padding-top:0px;}
 
-/* ------------------------------ FORMS */
+/* ------------------------------ GLOBAL BAR */
+#admin-area {float:right;padding:5px 20px 5px 20px;margin-right:10px;border-left:dotted 1px #3e3e3e;font-size:11px;font-style:italic;}	
+
+#global-bar {display:block;background:#000;height:28px;color:#aeaeae;padding-top:5px;}
+#global-bar a {color:#aeaeae;}
 
 div#search-container {
-	background:#333;
-	margin-top:20px;
+	background:#141414;
+
 	float:right;
-	width:214px;position:absolute;top:40px;right:10px;}
+	width:214px;}
 
 div#search-container input[type=text] {
     float:left;
 	background:transparent;
 	color:#888;
-	font:normal 9pt tahoma;
+	font:italic 9pt tahoma;
 	border:0;
 	width:170px;
+	height:10px;
 	padding:5px 0 0 5px}
 
 div#search-container input[type=image] {
 	vertical-align:top;
 	float:right;}
 
+#user-status {float:right;padding:5px 20px 5px 20px;margin-right:10px;border-right:dotted 1px #3e3e3e;border-left:dotted 1px #3e3e3e;font-size:11px;font-style:italic;}
+#user-status a.person {background:url(../images/icons/header-person.png) no-repeat;padding-left:16px;}
 #breadcrumb {text-transform:uppercase;font-size:12px;}
 	
 	.Pager {font-family:InterstatePlusRegular;font-size:12px;}
