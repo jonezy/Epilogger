@@ -3,6 +3,8 @@ using System.Linq;
 
 using Epilogger.Data;
 using System.Collections.Generic;
+using Epilogger.Web.Models;
+using SubSonic.Schema;
 
 namespace Epilogger.Web {
     public class UserService : ServiceBase<User>{
@@ -60,6 +62,11 @@ namespace Epilogger.Web {
         public void DeleteEventSubscription(Guid userId, int eventId) {
             UserFollowsEvent followsEvent = base.db.UserFollowsEvents.Where(ufe => ufe.EventID == eventId && ufe.UserID == userId).FirstOrDefault();
             base.GetRepository<UserFollowsEvent>().Delete(followsEvent);
+        }
+
+        public IEnumerable<DashboardActivityModel> GetUserDashboardActivity(Guid userID) {
+            StoredProcedure sp = db.GetUserDashboardActivity(userID.ToString());
+            return sp.ExecuteTypedList<DashboardActivityModel>();
         }
     }
 }

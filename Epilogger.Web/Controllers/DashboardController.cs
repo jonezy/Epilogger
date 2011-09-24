@@ -27,99 +27,14 @@ namespace Epilogger.Web.Controllers {
 
         public ActionResult Index(int? page) {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
-            List<DashboardActivityModel> activity = new List<DashboardActivityModel>();
-
-            if (CurrentUserTwitterAuthorization != null) {
-                List<Tweet> tweets = tweetService.FindByUserScreenName(CurrentUserTwitterAuthorization.ServiceUsername).ToList();
-                List<Event> events = eventService.FindByUserID(CurrentUserID);
-                List<Image> images = new List<Image>();
-                List<UserRatesEvent> eventrating = userService.GetUserEventRatings(CurrentUserID);
-
-                foreach (var item in events) {
-                    List<ImageMetaDatum> usersEventImages = item.ImageMetaData.Where(imd => imd.TwitterName == CurrentUserTwitterAuthorization.ServiceUsername).Distinct().ToList();
-                    foreach (var image in usersEventImages) {
-                        images.Add(image.Images.First());
-                    }
-                }
-
-
-                foreach (var item in CurrentUser.UserFollowsEvents) {
-                    activity.Add(new DashboardActivityModel() {
-                        ActivityType = ActivityType.FOLLOW_EVENT,
-                        Date = item.Timestamp,
-                        ActivityContent = item.Events.FirstOrDefault().Name,
-                        EventName = item.Events.First().Name
-                    });
-                }
-
-
-                // events
-                activity.AddRange(FillTweets(tweets));
-                //DateTime start = DateTime.Now;
-                //Elmah.ErrorSignal.FromCurrentContext().Raise(new Exception("STARTED Adding tweets"));
-                //tweets
-                //foreach (var item in tweets) {
-                //    activity.Add(new DashboardActivityModel() {
-                //        ActivityType = ActivityType.TWEET,
-                //        Date = item.CreatedDate.Value,
-                //        ActivityContent = item.TextAsHTML,
-                //        EventName = item.Events.First().Name
-                //    });
-                //}
-                //DateTime finish = DateTime.Now;
-                //Elmah.ErrorSignal.FromCurrentContext().Raise(new Exception("Finished Adding tweets in" + (finish - start).TotalMilliseconds));
-
-                foreach (var item in events) {
-                    List<Tweet> userTweets = item.Tweets.Where(t => t.FromUserScreenName == CurrentUserTwitterAuthorization.ServiceUsername).ToList();
-                    activity.Add(new DashboardActivityModel() {
-                        ActivityType = ActivityType.EVENT_CREATION,
-                        Date = item.StartDateTime.Value,
-                        ActivityContent = item.Description,
-                        EventName = item.Name
-                    });
-                }
-
-
-                // photo's & video's
-                foreach (var item in images) {
-                    activity.Add(new DashboardActivityModel() {
-                        ActivityType = ActivityType.PHOTOS_VIDEOS,
-                        Date = item.DateTime,
-                        ActivityContent = item.Fullsize,
-                        EventName = item.Events.First().Name
-                    });
-                }
-
-                // event ratings
-                foreach (var item in eventrating) {
-                    activity.Add(new DashboardActivityModel() {
-                        ActivityType = ActivityType.EVENT_RATING,
-                        Date = item.RatingDateTime,
-                        ActivityContent = string.Format("{0}'d {1}", item.UserRating, item.Events.FirstOrDefault().Name),
-                        EventName = item.Events.First().Name
-                    });
-                }
-            }
-
-
+            IEnumerable<DashboardActivityModel> activity = userService.GetUserDashboardActivity(CurrentUser.ID);
             DashboardIndexViewModel model = new DashboardIndexViewModel(
                 activity.OrderByDescending(a => a.Date).Skip(currentPage * 12).Take(12).ToList(),
                 currentPage,
-                activity.Count
+                activity.Count()
             );
-
+            
             return View(model);
-        }
-
-        private IEnumerable<DashboardActivityModel> FillTweets(List<Tweet> tweets) {
-            foreach (var item in tweets) {
-                yield return new DashboardActivityModel() {
-                    ActivityType = ActivityType.TWEET,
-                    Date = item.CreatedDate.Value,
-                    ActivityContent = item.TextAsHTML,
-                    EventName = item.Events.First().Name
-                };
-            }
         }
 
         public ActionResult Profile() {
