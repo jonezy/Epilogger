@@ -183,13 +183,13 @@ namespace Epilogger.Web.Controllers {
 
         public ActionResult AllTweets(int id, int? page) {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
-
+            
+            TopTweetersStats topTweetersStats = new TopTweetersStats();
             AllTweetsDisplayViewModel Model = Mapper.Map<Event, AllTweetsDisplayViewModel>(ES.FindByID(id));
             Model.TweetCount = TS.FindTweetCountByEventID(id, this.FromDateTime(), this.ToDateTime());
             Model.UniqueTweeterCount = TS.FindUniqueTweetCountByEventID(id, this.FromDateTime(), this.ToDateTime());
             Model.CurrentPageIndex = currentPage;
-            TopTweetersStats topTweetersStats = new TopTweetersStats();
-            List<Tweeter> topTweeters = topTweetersStats.Calculate(TS.FindByEventID(id));
+            Model.TopTweeters = topTweetersStats.Calculate(TS.FindByEventID(id));
 
             if (currentPage + 1 == 1) {
                 Model.ShowTopTweets = true;

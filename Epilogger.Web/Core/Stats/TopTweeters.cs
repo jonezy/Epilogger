@@ -2,6 +2,7 @@
 using System.Linq;
 
 using Epilogger.Data;
+using System;
 
 namespace Epilogger.Web.Core.Stats {
     public class TopTweetersStats {
@@ -15,20 +16,29 @@ namespace Epilogger.Web.Core.Stats {
             var results = (from t in tweets
                            group t by t.FromUserScreenName into grouping
                            orderby grouping.Count() descending 
-                           select new Tweeter { Name = grouping.FirstOrDefault().FromUserScreenName, Total = grouping.Count() }).ToList();
+                           select new Tweeter { 
+                               Name = grouping.FirstOrDefault().FromUserScreenName, 
+                               Total = grouping.Count()
+                           }).ToList();
 
 
             for (int i = 0; i < 10; i++) {
+                Tweeter tweeter = results[i];
+                float userTotal = tweeter.Total;
+                float totalTweets = tweets.Count();
+
+                tweeter.PercentOfTotal = (int) Math.Round(((userTotal / totalTweets) * 100));
+
                 topTweeters.Add(results[i]);
             }
 
             return topTweeters;
         }
-
     }
 
     public class Tweeter {
         public string Name { get; set; }
         public int Total { get; set; }
+        public int PercentOfTotal { get; set; }
     }
 }
