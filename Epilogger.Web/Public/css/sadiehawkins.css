@@ -308,6 +308,8 @@ ul#left-nav li a.current {background:#f6f6f6;border-bottom:solid 1px #bdbdbd;}
 #top-tweeters .toptweeter-item .bar.small {height:10px;background-color:#efeeee;float:left;margin-right:5px;}
 #top-tweeters .toptweeter-item .count.small {font-size:11px;float:left;padding-top:0px;}
 
+#tweetlist .tweet {margin-bottom:10px;}
+#tweetlist .tweet .tweet-body {float:left;width:280px;font-size:13px;}
 /* ------------------------------ GLOBAL BAR */
 #admin-area {float:right;padding:5px 20px 5px 20px;margin-right:10px;border-left:dotted 1px #3e3e3e;font-size:11px;font-style:italic;}	
 

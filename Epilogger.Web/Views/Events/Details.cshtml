@@ -198,7 +198,7 @@
 <div class="spacer"></div>
 
 <!-- TWEETS -->
-<div class="grid_4 omega">
+<div class="grid_5 alpha omega">
     <h2><span class="number" id="tweetCount">@string.Format("{0:#,###}", Model.TweetCount)</span>Tweets & Shoutouts</h2>
     <h4>filter:</h4>
     <span class="sm-spacer"></span>
@@ -211,13 +211,9 @@
 </div>
 
 <!-- PHOTOS & VIDEOS -->
-<div class="grid_7 alpha">
-    <h2>
-        <span class="number" id="photoCount">@string.Format("{0:#,###}", Model.ImageCount)</span>
-        Photos & Videos</h2>
-    <h4>
-        filter:</h4>
-    <span class="sm-spacer"></span>
+<div class="grid_7 omega">
+    <h2><span class="number" id="photoCount">@string.Format("{0:#,###}", Model.ImageCount)</span>Photos & Videos</h2>
+    <h4>filter:</h4>
     <div class="image-grid" id="photosvideos">
         @foreach (Epilogger.Data.Image EPLImage in Model.Images) {
             <div class="withcomment newPhotoupdates" id="photo-@EPLImage.ID">
@@ -229,12 +225,12 @@
             </div>
         }
     </div>
-    <div class="clear"></div>
-    <div class="spacer"></div>
-    <p>
-        @if (!IncludeDateRange) { @: (@Html.ActionLink("See all photos and videos", "AllPhotos/" + Model.ID, "Events"))
-            } else { @: (@Html.ActionLink("See all photos and videos", "AllPhotos/" + Model.ID, "Events", new { f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { }))
-                }
+    <p>@if (!IncludeDateRange) { 
+            @: (@Html.ActionLink("See all photos and videos", "AllPhotos/" + Model.ID, "Events"))
+       } else { 
+           @: (@Html.ActionLink("See all photos and videos", "AllPhotos/" + Model.ID, "Events", new { f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { }))
+                
+       }
     </p>
 </div>
 
