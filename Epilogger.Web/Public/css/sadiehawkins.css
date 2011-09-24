@@ -314,7 +314,6 @@ ul#left-nav li a.current {background:#f6f6f6;border-bottom:solid 1px #bdbdbd;}
 
 div#search-container {
 	background:#141414;
-
 	float:right;
 	width:214px;}
 
@@ -333,7 +332,7 @@ div#search-container input[type=image] {
 	float:right;}
 
 #user-status {float:right;padding:5px 20px 5px 20px;margin-right:10px;border-right:dotted 1px #3e3e3e;border-left:dotted 1px #3e3e3e;font-size:11px;font-style:italic;}
-#user-status a.person {background:url(../images/icons/header-person.png) no-repeat;padding-left:16px;}
+#user-status .person {background:url(../images/icons/header-person.png) no-repeat;padding-left:16px;}
 #breadcrumb {text-transform:uppercase;font-size:12px;}
 	
 	.Pager {font-family:InterstatePlusRegular;font-size:12px;}
