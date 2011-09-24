@@ -241,6 +241,8 @@
     <Content Include="Public\images\event_activity_title_icons.png" />
     <Content Include="Public\images\icons\bubble.png" />
     <Content Include="Public\images\icons\dashboard-event-totals.png" />
+    <Content Include="Public\images\icons\event-toolbar-ov.png" />
+    <Content Include="Public\images\icons\event-toolbar.png" />
     <Content Include="Public\images\icons\header-person.png" />
     <Content Include="Public\images\icons\pencil.png" />
     <Content Include="Public\images\icons\profile-eventlist.png" />
