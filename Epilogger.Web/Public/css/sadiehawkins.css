@@ -14,12 +14,14 @@ p a {
 
 a.edit_icon {background:url(../images/icons/pencil.png) no-repeat 0px 2px;padding-left:15px;}
 
-a.blue-action-button {-webkit-border-radius: 2px;-moz-border-radius: 2px;border-radius: 2px;
-border:solid 1px #3789bc;
-padding:5px;
-background:#408ebf;
-color:#fff;
-font-family:'InterstatePlusRegular';text-transform:uppercase;}
+.blue-action-button {-webkit-border-radius: 2px;-moz-border-radius: 2px;border-radius: 2px;
+border:solid 1px #3789bc !important;
+padding:5px !important;
+background:#408ebf !important;
+color:#fff !important;
+text-shadow:none !important;
+border:none !important;
+font-family:'InterstatePlusRegular' !important;font-size:12px !important;text-transform:uppercase;font-weight:normal !important;}
 
 /* ------------------------------ CONTAINERS */
 
@@ -182,7 +184,10 @@ image-grid#photosvideos {
 
 .image-grid .commentbubble:hover {
 	opacity:1;}
-	
+
+
+#event-intro {font-size:12px;}	
+#event-details {font-size:12px;}	
 
 
 /*------------------------------- ALL PHOTOS */
