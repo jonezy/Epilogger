@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web.Mvc;
 
 using AutoMapper;
 
 using Epilogger.Data;
-using Epilogger.Web.Models;
-using Epilogger.Web;
-using RichmondDay.Helpers;
-using System.Text;
 using Epilogger.Web.Core.Stats;
+using Epilogger.Web.Models;
+
+using RichmondDay.Helpers;
 
 namespace Epilogger.Web.Controllers {
     public class EventsController : BaseController {
@@ -23,43 +23,29 @@ namespace Epilogger.Web.Controllers {
         BlogService BS = new BlogService();
 
         DateTime _FromDateTime = DateTime.Parse("2000-01-01 00:00:00");
-        private DateTime FromDateTime()
-        {
-            try
-            {
-                if (Request.QueryString["f"] != null)
-                {
+        private DateTime FromDateTime() {
+            try {
+                if (Request.QueryString["f"] != null) {
                     _FromDateTime = DateTime.Parse(Epilogger.Web.Helpers.base64Decode(Request.QueryString["f"])).FromUserTimeZoneToUtc();
                 }
-                return _FromDateTime;                    
-            }
-            catch (Exception)
-            {
+                return _FromDateTime;
+            } catch (Exception) {
                 return _FromDateTime;
             }
         }
-        
 
         DateTime _ToDateTime = DateTime.Parse("2200-12-31 00:00:00");
-        private DateTime ToDateTime()
-        {
-            try
-            {
-                if (Request.QueryString["t"] != null)
-                {
+        private DateTime ToDateTime() {
+            try {
+                if (Request.QueryString["t"] != null) {
                     _ToDateTime = DateTime.Parse(Epilogger.Web.Helpers.base64Decode(Request.QueryString["t"])).FromUserTimeZoneToUtc();
                 }
                 return _ToDateTime;
-            }
-            catch (Exception)
-            {
+            } catch (Exception) {
                 return _ToDateTime;
             }
-                
+
         }
-        
-
-
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext) {
             if (db == null) db = new EpiloggerDB();
@@ -73,7 +59,6 @@ namespace Epilogger.Web.Controllers {
             base.Initialize(requestContext);
         }
 
-        //[RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the list of events")]
         public ActionResult Index() {
             List<Event> events = ES.AllEvents();
             List<EventDisplayViewModel> model = Mapper.Map<List<Event>, List<EventDisplayViewModel>>(events);
@@ -81,11 +66,8 @@ namespace Epilogger.Web.Controllers {
             return View(model);
         }
 
-        //[RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the details of that event")]
         public ActionResult Details(int id) {
-
             EventDisplayViewModel Model = Mapper.Map<Event, EventDisplayViewModel>(ES.FindByID(id));
-
             Model.TweetCount = TS.FindTweetCountByEventID(id, this.FromDateTime(), this.ToDateTime());
             Model.Tweets = TS.FindByEventIDOrderDescTake6(id, this.FromDateTime(), this.ToDateTime());
             Model.ImageCount = IS.FindImageCountByEventID(id, this.FromDateTime(), this.ToDateTime());
@@ -97,38 +79,28 @@ namespace Epilogger.Web.Controllers {
             Model.HasUserRated = false;
             Model.CurrentUserID = CurrentUserID;
 
-            if (Request.QueryString["f"] != null)
-            {
+            if (Request.QueryString["f"] != null) {
                 Model.FromDateTime = this.FromDateTime().ToUserTimeZone();
-            }
-            else
-            {
+            } else {
                 Model.FromDateTime = null;
             }
-            if (Request.QueryString["t"] != null)
-            {
+            if (Request.QueryString["t"] != null) {
                 Model.ToDateTime = this.ToDateTime().ToUserTimeZone();
-            }
-            else
-            {
+            } else {
                 Model.ToDateTime = null;
             }
-            
+
 
             //If there is a user logged in
-            if (CurrentUserID != Guid.Empty)
-            {
+            if (CurrentUserID != Guid.Empty) {
                 Model.HasSubscribed = CurrentUser.UserFollowsEvents.Where(ufe => ufe.EventID == id).FirstOrDefault() != null ? true : false;
-                if (Model.EventRatings.Where(i => i.UserID == CurrentUserID).Count() > 0)
-                {
+                if (Model.EventRatings.Where(i => i.UserID == CurrentUserID).Count() > 0) {
                     Model.HasUserRated = true;
-                }
-                else
-                {
+                } else {
                     Model.HasUserRated = false;
                 }
             }
-            
+
 
             //Not optimized
             Model.BlogPosts = BS.FindByEventID(id);
@@ -136,13 +108,8 @@ namespace Epilogger.Web.Controllers {
             return View(Model);
         }
 
-
-
-
         [HttpPost]
-        public ActionResult Details(int id, FormCollection collection)
-        {
-
+        public ActionResult Details(int id, FormCollection collection) {
             DateTime FromDateTime;
             DateTime ToDateTime;
 
@@ -153,51 +120,40 @@ namespace Epilogger.Web.Controllers {
             string encodedTo = Epilogger.Web.Helpers.base64Encode(String.Format("{0:yyyy-MM-dd HH:mm:ss}", ToDateTime));
 
             return Redirect("/Events/Details/" + id + "?f=" + encodedFrom + "&t=" + encodedTo);
-
         }
-
-
-
-
 
         public ActionResult AllPhotos(int id, int? page) {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
 
             AllPhotosDisplayViewModel Model = Mapper.Map<Event, AllPhotosDisplayViewModel>(ES.FindByID(id));
-
             Model.PhotoCount = IS.FindImageCountByEventID(id, this.FromDateTime(), this.ToDateTime());
             Model.CurrentPageIndex = currentPage;
-
+            Model.ShowTopPhotos = false;
+            Model.Images = IS.GetPagedPhotos(id, currentPage + 1, 30, this.FromDateTime(), this.ToDateTime());
 
             if (currentPage + 1 == 1) {
                 Model.ShowTopPhotos = true;
                 Model.Images = IS.GetPagedPhotos(id, currentPage + 1, 30, this.FromDateTime(), this.ToDateTime());
-            } else {
-                Model.ShowTopPhotos = false;
-                Model.Images = IS.GetPagedPhotos(id, currentPage + 1, 30, this.FromDateTime(), this.ToDateTime());
             }
-
 
             return View(Model);
         }
 
         public ActionResult AllTweets(int id, int? page) {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
-            
+
             TopTweetersStats topTweetersStats = new TopTweetersStats();
             AllTweetsDisplayViewModel Model = Mapper.Map<Event, AllTweetsDisplayViewModel>(ES.FindByID(id));
             Model.TweetCount = TS.FindTweetCountByEventID(id, this.FromDateTime(), this.ToDateTime());
             Model.UniqueTweeterCount = TS.FindUniqueTweetCountByEventID(id, this.FromDateTime(), this.ToDateTime());
             Model.CurrentPageIndex = currentPage;
-            //Model.TopTweeters = topTweetersStats.Calculate(TS.FindByEventID(id, this.FromDateTime(), this.ToDateTime()));
-            Model.TopTweeters = TS.GetTop10TweetersByEventID(id, this.FromDateTime(), this.ToDateTime()).ToList();
+            Model.TopTweeters = topTweetersStats.Calculate(TS.GetTop10TweetersByEventID(id, this.FromDateTime(), this.ToDateTime())).ToList();
+            Model.ShowTopTweets = false;
+            Model.Tweets = Mapper.Map<IEnumerable<Tweet>, IEnumerable<TweetDisplayViewModel>>(TS.GetPagedTweets(id, currentPage + 1, 100, this.FromDateTime(), this.ToDateTime()));
 
             if (currentPage + 1 == 1) {
                 Model.ShowTopTweets = true;
                 Model.Tweets = Mapper.Map<IEnumerable<Tweet>, IEnumerable<TweetDisplayViewModel>>(TS.GetPagedTweets(id, currentPage + 1, 10, this.FromDateTime(), this.ToDateTime()));
-            } else {
-                Model.ShowTopTweets = false;
-                Model.Tweets = Mapper.Map<IEnumerable<Tweet>, IEnumerable<TweetDisplayViewModel>>(TS.GetPagedTweets(id, currentPage + 1, 100, this.FromDateTime(), this.ToDateTime()));
             }
 
             return View(Model);
@@ -206,7 +162,6 @@ namespace Epilogger.Web.Controllers {
         [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the details of that event")]
         public ActionResult Create() {
             CreateEventViewModel Model = new CreateEventViewModel();
-
             Model.TimeZoneOffset = Helpers.GetUserTimeZoneOffset();
 
             DateTime roundTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, 0, 0);
@@ -216,8 +171,6 @@ namespace Epilogger.Web.Controllers {
 
             Model.StartDateTime = roundTime;
             Model.EndDateTime = roundTime.AddHours(3);
-
-
             Model.CollectionStartDateTime = roundTime.AddDays(-2);
             Model.CollectionEndDateTime = roundTime.AddDays(3);
 
@@ -420,7 +373,7 @@ namespace Epilogger.Web.Controllers {
         public ActionResult UnSubscribe(FormCollection fc) {
             int id;
             int.TryParse(fc["ID"].ToString(), out id);
-            
+
             if (id > 0) {
                 if (CurrentUserID == Guid.Empty) {
                     this.StoreWarning("You must be logged in to your epilogger account to subscribe to an event");
@@ -440,20 +393,15 @@ namespace Epilogger.Web.Controllers {
             return RedirectToAction("details", new { id = id });
         }
 
-
-
         [HttpPost]
-        public ActionResult eventRating(FormCollection fc) 
-        {
+        public ActionResult eventRating(FormCollection fc) {
             int id;
             string ThumbsUp;
             int.TryParse(fc["ID"].ToString(), out id);
             ThumbsUp = fc["ThumbsUp"].ToString();
 
-            if (id > 0)
-            {
-                if (CurrentUserID == Guid.Empty)
-                {
+            if (id > 0) {
+                if (CurrentUserID == Guid.Empty) {
                     this.StoreWarning("You must be logged in to your epilogger account to subscribe to an event");
                     return RedirectToAction("details", new { id = id });
                 }
@@ -465,12 +413,9 @@ namespace Epilogger.Web.Controllers {
                 ratesEvent.UserID = CurrentUserID;
                 ratesEvent.RatingDateTime = DateTime.UtcNow;
 
-                if (ThumbsUp=="1")
-                {
+                if (ThumbsUp == "1") {
                     ratesEvent.UserRating = "+";
-                }
-                else
-                {
+                } else {
                     ratesEvent.UserRating = "-";
                 }
 
@@ -481,8 +426,6 @@ namespace Epilogger.Web.Controllers {
 
             return RedirectToAction("details", new { id = id });
         }
-
-
 
         public ActionResult AllContent(int id) {
             AllContentViewModel model = Mapper.Map<Event, AllContentViewModel>(ES.FindByID(id));
@@ -496,15 +439,15 @@ namespace Epilogger.Web.Controllers {
 
         public ActionResult AllCheckins(int id, int? page) {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
-            
+
             Event currentEvent = ES.FindByID(id);
             List<CheckinDisplayViewModel> checkins = Mapper.Map<List<CheckIn>, List<CheckinDisplayViewModel>>(CS.FindByEventIDPaged(id, currentPage, 10).ToList());
-            
+
             AllCheckinsViewModel model = new AllCheckinsViewModel(checkins, currentPage, 10);
             model.ID = currentEvent.ID.ToString();
             model.Name = currentEvent.Name;
             model.TotalRecords = currentEvent.CheckIns.Count();
-            
+
             return View(model);
         }
 

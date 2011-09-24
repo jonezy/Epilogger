@@ -1,40 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-
-using Epilogger.Data;
 
 namespace Epilogger.Web.Core.Stats {
     public class TopTweetersStats {
-        
-        
-        //public List<Tweeter> Calculate(IEnumerable<Tweet> tweets) {
-        //    //List<Tweeter> topTweeters = new List<Tweeter>();
-        //    //var results = (from t in tweets
-        //    //               group t by t.FromUserScreenName into grouping
-        //    //               orderby grouping.Count() descending 
-        //    //               select new Tweeter { 
-        //    //                   Name = grouping.FirstOrDefault().FromUserScreenName,
-        //    //                   Picture = grouping.FirstOrDefault().ProfileImageURL,
-        //    //                   Total = grouping.Count()
-        //    //               }).ToList();
+        public List<Tweeter> Calculate(IEnumerable<Tweeter> tweeters) {
+            List<Tweeter> topTweeters = new List<Tweeter>();
+            // first loop through all the results and get a total
+            float totalTweets = 0;
+            foreach (var item in tweeters){
+                totalTweets = totalTweets + item.Total;
+            }
 
+            //calculate percent of the above total
+            int count = 1;
+            foreach (var item in tweeters) {
+                float userTotal = item.Total;
+                item.PercentOfTotal = (int)Math.Round(((userTotal / totalTweets) * 100));
+                topTweeters.Add(item);
 
-        //    int count = 1;
-        //    foreach (var item in results) {
-        //        float userTotal = item.Total;
-        //        float totalTweets = tweets.Count();
+                if (count == 10) break;
+                count++;
+            }
 
-        //        item.PercentOfTotal = (int)Math.Round(((userTotal / totalTweets) * 100));
-
-        //        topTweeters.Add(item);
-
-        //        if (count == 10) break;
-        //        count++;
-        //    }
-
-        //    return topTweeters;
-        //}
+            return topTweeters;
+        }
     }
 
     public class Tweeter {
