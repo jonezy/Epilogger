@@ -344,6 +344,11 @@ div#search-container input[type=image] {
 	.Pager a:hover {background:#fc5daf;color:#fff;-webkit-border-radius: 2px;-moz-border-radius: 2px;border-radius: 2px;}
 	
 	.Pager .disabled {color:#fff;}
+	
+.filter-by-time form {margin-bottom:0;}
+.filter-by-time form label {float:left !important;display:inline;padding:6px 6px;}
+.filter-by-time form input[type=text] {float:left !important;display:inline;width:100px;margin-bottom:0;}
+.filter-by-time form input[type=submit] {float:left;margin-bottom:0;}
 /* ------------------------------ MISC */
 
 .spacer.dotted {border-top:dotted 1px #b5b5b5;} 
