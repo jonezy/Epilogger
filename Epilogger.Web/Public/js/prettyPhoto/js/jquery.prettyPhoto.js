@@ -38,8 +38,10 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 			callback: function(){}, /* Called when prettyPhoto is closed */
 			ie6_fallback: true,
 			markup: '<div class="pp_pic_holder"> \
-						<div class="ppt">&nbsp;</div> \
-						<div class="pp_top"> \
+                        <a href="" class="pp_shareDrawerTabClosed"></a> \
+						<div class="pp_shareDrawer">Test</div> \
+                        <div class="ppt">&nbsp;</div> \
+                        <div class="pp_top"> \
 							<div class="pp_left"></div> \
 							<div class="pp_middle"></div> \
 							<div class="pp_right"><a class="pp_close" href="#">Close</a></div> \
@@ -836,6 +838,24 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 		
 				return false;
 			});
+
+
+            $('a.pp_shareDrawerTabClosed').bind('click',function(e){
+				// Expand the image
+				if($(this).hasClass('pp_shareDrawerTabClosed')){
+					$(this).removeClass('pp_shareDrawerTabClosed').addClass('pp_shareDrawerTabOpen');
+                    $(".pp_shareDrawer").slideUp();
+				}else{
+					$(this).removeClass('pp_shareDrawerTabOpen').addClass('pp_shareDrawerTabClosed');
+                    $(".pp_shareDrawer").slideDown();
+				};
+				return false;
+			});
+
+
+
+
+
 		
 			$pp_pic_holder.find('.pp_previous, .pp_nav .pp_arrow_previous').bind('click',function(){
 				$.prettyPhoto.changePage('previous');
