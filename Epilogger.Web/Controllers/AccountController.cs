@@ -150,11 +150,10 @@ namespace Epilogger.Web.Controllers {
                     CookieHelpers.WriteCookie("lc", "tz", user.TimeZoneOffSet.ToString());    
                 }
 
+                //if (TempData["returnUrl"] != null)
+                //    return Redirect(TempData["returnUrl"].ToString());
 
-                if (TempData["returnUrl"] != null)
-                    return Redirect(TempData["returnUrl"].ToString());
-
-                return RedirectToAction("Index");
+                return RedirectToAction("index","events");
             }
 
             return View(model);
