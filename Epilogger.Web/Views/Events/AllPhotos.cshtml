@@ -15,9 +15,7 @@
     var EventURL = 'http://www.epilogger.com/Events/Details/@Model.ID';
 </script>
 
-@Html.Partial("_EventMenu", new Epilogger.Web.Models._EventMenuViewModel { EventID = Model.ID })
-
-<span class="spacer"></span>
+@Html.Partial("EventToolbar")
 
 <div class="grid_11 alpha">
 	<h1>ALL PHOTOS</h1>

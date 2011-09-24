@@ -30,7 +30,8 @@ font-family:'InterstatePlusRegular';text-transform:uppercase;}
 	-webkit-border-radius: 5px;
 	border-radius: 5px;     
 	background:#fff;
-	padding:15px}
+	padding:15px;
+	position:relative;}
 	
 	#header {padding:10px 0px 30px 0px;}
 	img#logo {float:left;}
@@ -198,14 +199,25 @@ ul#connected-networks {list-style:none;}
 
 
 /* ------------------------------ CREATE EVENT */
-
-
 .item-card {margin-bottom:10px;}
 .item-card h4 {background:#ee4490;color:#fff;float:left;padding:5px 10px 5px 10px;}
 .item-data {background:#dcdcdc;padding:10px;border-top:solid 5px #ee4490;margin:-5px 0px 10px 0px;}
 .item-data .item-content { width:400px; }
 .item-data h1 {border-bottom:2px solid #fff;padding-bottom:10px;margin-bottom:10px;}
 
+#event-toolbar {position:absolute;left:-33px;top:20px;width:33px;height:269px;xbackground:url(../images/icons/event-toolbar-ov.png) no-repeat;}
+#event-toolbar a {background-image:url(../images/icons/event-toolbar.png);height:25px;width:33px;text-indent:-9999px;display:block;margin-bottom:10px;}
+#event-toolbar a.current,
+#event-toolbar a:hover {background-image:url(../images/icons/event-toolbar-ov.png);}
+
+#event-toolbar a.overview {}
+#event-toolbar a.allphotos {background-position:0 -37px;}
+#event-toolbar a.alltweets {background-position:0 -72px;}
+#event-toolbar a.allcontent {background-position:0 -108px;}
+#event-toolbar a.alllinks {background-position:0 -144px;}
+#event-toolbar a.allcheckins {background-position:0 -181px;}
+#event-toolbar a.allblogposts {background-position:0 -216px;}
+#event-toolbar a.allstats {background-position:0 -244px;}
 
 /* ------------------------------ DASHBOARD */
 #dashboard-nav {float:left;width:268px;margin-right:17px;}
