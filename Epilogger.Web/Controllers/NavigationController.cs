@@ -32,18 +32,20 @@ namespace Epilogger.Web.Controllers {
                     string routeValue = item.Value.ToString().ToLower();
                     string routeKey = item.Key.ToString().ToLower();
                     
-                    if (routeValue != "index" && (routeValue != "details")) {
+                    if (routeValue != "index") {
+                        // this handles the majority of breadcrumb cases
                         string label = item.Value.ToString();
-                        // if this is an event id let's grab the name for the label
+                        string url = count == 1 ? 
+                            string.Format("{0}{1}", App.BaseUrl, Url.Action("index", Request.RequestContext.RouteData.Values["controller"].ToString()).TrimStart('/')) :
+                            string.Format("{0}{1}", App.BaseUrl, Url.Action(Request.RequestContext.RouteData.Values["action"].ToString(), Request.RequestContext.RouteData.Values["controller"].ToString(), Request.RequestContext.RouteData.Values).TrimStart('/'));
+
+                        // this handles the event section, just overrides the values set above.
                         if (routeKey == "id") {
                             int eventId = int.Parse(routeValue);
                             Event currentEvent = eventService.FindByID(eventId);
                             label = currentEvent.Name;
+                            url = string.Format("{0}{1}", App.BaseUrl, Url.Action("details", "events", Request.RequestContext.RouteData.Values).TrimStart('/'));
                         }
-
-                        string url = count == 1 ? 
-                            string.Format("{0}{1}", App.BaseUrl, Url.Action("index", Request.RequestContext.RouteData.Values["controller"].ToString()).TrimStart('/')) :
-                            string.Format("{0}{1}", App.BaseUrl, Url.Action(Request.RequestContext.RouteData.Values["action"].ToString(), Request.RequestContext.RouteData.Values["controller"].ToString(), Request.RequestContext.RouteData.Values).TrimStart('/'));
 
                         trail.Add(label, url);
 
