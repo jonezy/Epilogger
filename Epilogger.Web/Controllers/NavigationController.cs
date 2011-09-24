@@ -47,7 +47,8 @@ namespace Epilogger.Web.Controllers {
                             url = string.Format("{0}{1}", App.BaseUrl, Url.Action("details", "events", Request.RequestContext.RouteData.Values).TrimStart('/'));
                         }
 
-                        trail.Add(label, url);
+                        if(!trail.ContainsKey(label) && !label.Equals("details") )
+                            trail.Add(label, url);
 
                         count++;
                     }

@@ -69,6 +69,12 @@ namespace Epilogger.Web {
 
         public static void RegisterRoutes(RouteCollection routes) {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            
+            routes.MapRoute(
+                "EventsRoutes",
+                "{controller}/{id}/{action}",
+                new { contrller = "events", action = "index" }
+            );
 
             routes.MapRoute(
                 "Default", // Route name

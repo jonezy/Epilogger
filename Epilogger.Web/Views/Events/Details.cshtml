@@ -208,7 +208,6 @@
 <!-- TWEETS -->
 <div class="grid_5 alpha omega">
     <h2><span class="number" id="tweetCount">@string.Format("{0:#,###}", Model.TweetCount)</span>Tweets & Shoutouts</h2>
-    <h4>filter:</h4>
     <span class="sm-spacer"></span>
     <ul class="plain-list" id="tweetlist">
         @foreach (Epilogger.Data.Tweet EPLTweet in Model.Tweets) {
@@ -221,7 +220,6 @@
 <!-- PHOTOS & VIDEOS -->
 <div class="grid_7 omega">
     <h2><span class="number" id="photoCount">@string.Format("{0:#,###}", Model.ImageCount)</span>Photos & Videos</h2>
-    <h4>filter:</h4>
     <div class="image-grid" id="photosvideos">
         @foreach (Epilogger.Data.Image EPLImage in Model.Images) {
             <div class="withcomment newPhotoupdates" id="photo-@EPLImage.ID">
