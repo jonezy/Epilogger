@@ -485,7 +485,7 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 			$('.pp_loaderIcon').hide();
 
 			// Calculate the opened top position of the pic holder
-			projectedTop = scroll_pos['scrollTop'] + ((windowHeight/2) - (pp_dimensions['containerHeight']/1.5));
+			projectedTop = scroll_pos['scrollTop'] + ((windowHeight/2) - (pp_dimensions['containerHeight']/2));
 			if(projectedTop < 0) projectedTop = 0;
 
 			$ppt.fadeTo(settings.animation_speed,1);
@@ -640,6 +640,7 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 			pp_contentWidth = width;
 			pp_containerHeight = pp_contentHeight + titleHeight + $pp_pic_holder.find('.pp_top').height() + $pp_pic_holder.find('.pp_bottom').height();
 			pp_containerWidth = width;
+            // + 355
 		}
 	
 		function _getFileType(itemSrc){
