@@ -101,8 +101,8 @@
     <div class="grid_2">
         @if (!Model.HasUserRated) {
             using (Html.BeginForm("eventRating", "events", FormMethod.Post, new { @class = "remove-bottom" })) {   
-                <input class="remove-bottom" type="button" value="+" name="ThumbsUpButton" id="" onclick="$('#ThumbsUp').val('1'); $(form).submit();" /> @:&nbsp;/&nbsp;
-                <input class="remove-bottom" type="button" value="-" name="ThumbsDownButton" id="" onclick="$('#ThumbsUp').val('0'); $(form).submit();" />
+                <input class="blue-action-button remove-bottom" type="button" value="+" name="ThumbsUpButton" id="" onclick="$('#ThumbsUp').val('1'); $(form).submit();" /> @:&nbsp;/&nbsp;
+                <input class="blue-action-button remove-bottom" type="button" value="-" name="ThumbsDownButton" id="" onclick="$('#ThumbsUp').val('0'); $(form).submit();" />
                 @Html.HiddenFor(model => model.ID)
                 @Html.Hidden("ThumbsUp")
             }
