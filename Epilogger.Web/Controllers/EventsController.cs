@@ -468,5 +468,49 @@ namespace Epilogger.Web.Controllers {
             AllLinksViewModel model = Mapper.Map<Event, AllLinksViewModel>(ES.FindByID(id));
             return View(model);
         }
+
+        public ActionResult Edit(int id) {
+            Event currentEvent = ES.FindByID(id);
+            CreateEventViewModel model = Mapper.Map<Event, CreateEventViewModel>(currentEvent);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(CreateEventViewModel model) {
+            if (ModelState.IsValid) {
+                try {
+                    Event currentEvent = ES.FindByID(model.ID);
+                    currentEvent.SubTitle = model.Subtitle;
+                    currentEvent.Name = model.Name;
+                    currentEvent.SearchTerms = model.SearchTerms;
+                    currentEvent.Description = model.Description;
+                    currentEvent.Cost = model.Cost;
+
+                    if (model.CollectionStartDateTime == DateTime.MinValue) {
+                        currentEvent.CollectionStartDateTime = DateTime.Now.FromUserTimeZoneToUtc();
+                    } else {
+                        currentEvent.CollectionStartDateTime = model.CollectionStartDateTime.FromUserTimeZoneToUtc();
+                    }
+                    if (model.CollectionEndDateTime == DateTime.MinValue) {
+                        currentEvent.CollectionEndDateTime = model.EndDateTime.AddDays(14);
+                    } else {
+                        currentEvent.CollectionEndDateTime = model.CollectionEndDateTime.FromUserTimeZoneToUtc();
+                    }
+
+                    currentEvent.StartDateTime = model.StartDateTime.FromUserTimeZoneToUtc();
+                    currentEvent.EndDateTime = model.EndDateTime.FromUserTimeZoneToUtc();
+
+                  
+                    ES.Save(currentEvent);
+                    this.StoreSuccess("Your Event was updated");
+                } catch (Exception ex) {
+                    this.StoreError(string.Format("There was an error: {0}", ex.Message));
+                    return View(model);
+                }
+
+            }
+            return View(model);
+        }
     }
 }

@@ -142,7 +142,6 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.DateOfBirth, opt => opt.MapFrom(src => src.DateOfBirth.HasValue ? src.DateOfBirth.Value.ToShortDateString() : ""));
 
             Mapper.CreateMap<CreateEventViewModel, Event>()
-                .ForMember(dest => dest.ID, opt => opt.Ignore())
                 .ForMember(dest => dest.WebsiteURL, opt => opt.Ignore())
                 .ForMember(dest => dest.CategoryID, opt => opt.UseValue(19))
                 .ForMember(dest => dest.VenueID, opt => opt.Ignore())
@@ -179,6 +178,9 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.Tweets, opt => opt.Ignore())
                 .ForMember(dest => dest.UniqueTweeterCount, opt => opt.Ignore())
                 .ForMember(dest => dest.TopTweeters, opt => opt.Ignore());
+
+
+            Mapper.CreateMap<Event, CreateEventViewModel>();
 
             Mapper.AssertConfigurationIsValid();
         }
