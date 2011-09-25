@@ -22,7 +22,7 @@
     head.js('@Url.Content("~/Public/js/EventDetails.js")');
 </script>
 
-
+0
 @if (Model.Tweets.FirstOrDefault() != null) {
     <script language="javascript" type="text/javascript">
         var pageLoadTime = '@string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.Tweets.FirstOrDefault().CreatedDate)';
@@ -116,14 +116,15 @@
     <div class="grid_6 filter-by-time clearfix">
         @using (Html.BeginForm("details", "events", new { id = Model.ID }, FormMethod.Post,null)) {
             
+            @Html.Hidden("ResetDates")
             <div class="left">
                 <label>Show Data from:</label><br />
                 @Html.EditorFor(m => m.FromDateTime)
             </div>
             <div class="left">
                 <label>To:</label><br style="clear:both;" />
-                @Html.EditorFor(m => m.ToDateTime) <input type="submit" value="Apply" />
-            </div>            
+                @Html.EditorFor(m => m.ToDateTime) <input type="submit" value="Apply" /> &nbsp; <input class="blue-action-button remove-bottom" type="button" value="Clear" name="ClearDates" id="" onclick="$('#ResetDates').val('1'); $(form).submit();" />
+            </div>
             @*@:<label>Show Data from:</label> @Html.TextBoxFor(m => m.FromDateTime) &nbsp;&nbsp;<label>To</label>&nbsp;&nbsp; @Html.TextBoxFor(m => m.ToDateTime) &nbsp;&nbsp;<input type="submit" value="Apply" />*@
 @*            <script type="text/javascript">
                 head.ready(function () {
