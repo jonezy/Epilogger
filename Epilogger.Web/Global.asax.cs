@@ -77,6 +77,12 @@ namespace Epilogger.Web {
             );
 
             routes.MapRoute(
+                "GetImageComments",
+                "events/getimagecomments/{id}",
+                new { controller = "events", action = "getimagecomments", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 "EventsRoutes",
                 "events/{id}/{action}",
                 new { controller = "events", action = "index", id = UrlParameter.Optional }
