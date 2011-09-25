@@ -1,0 +1,53 @@
+﻿@model Epilogger.Web.Models.CreateEventViewModel
+
+@{
+    ViewBag.Title = "Epilogger - Create Event";
+}
+
+@Html.Partial("EventToolbar")
+
+<div id="events-nav">
+    <h1>EDIT EVENT</h1>
+    <h2>@Model.Name</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tincidunt tellus vel tellus placerat faucibus. Maecenas adipiscing venenatis aliquam.</p>
+
+</div>
+<div id="events-content">
+
+@Html.ValidationSummary("Please correct the following issues")
+@using (Html.BeginForm("edit", "events", FormMethod.Post)) {
+
+    <div id="createevent-info" class="item-card">
+        <h4>EVENT INFORMATION</h4>
+        <br style="clear:both;" />
+        <div class="item-data clearfix">
+            <p>@Html.LabelFor(model => model.Name) @Html.TextBoxFor(model => model.Name, new { @class="wide" })</p>
+            <p>@Html.LabelFor(model => model.Subtitle) @Html.TextBoxFor(model => model.Subtitle, new { @class = "wide" })</p>
+            
+            <p><label>Search Terms:</label> @Html.TextBoxFor(model => model.SearchTerms, new { @class = "wide" })</p>
+
+            <p>@Html.LabelFor(model => model.Description) @Html.TextAreaFor(model => model.Description, new { @class="wide" })</p>
+            <p>@Html.LabelFor(model => model.Cost) @Html.TextBoxFor(model => model.Cost, new { @class = "wide" })</p>
+        </div>
+    </div>
+    <div class="spacer"></div>
+    <div id="createevent-time" class="item-card">
+        <h4>WHEN AND WHERE</h4>
+        <br style="clear:both;" />
+        <div class="item-data clearfix">
+
+            <label class="wide">Start Date:</label> @Html.EditorFor(model => model.StartDateTime)
+            <p><label class="wide">Event End:</label> @Html.EditorFor(model => model.EndDateTime)</p>
+            <p><label class="wide">Time Zone:</label> @Html.DropDownListFor(model => model.TimeZoneOffset, Model.TimeZones, "Select your timezone", new { @class = "wide" })</p>
+            <p><label class="wide">Start Collecting Data:</label> @Html.EditorFor(model => model.CollectionStartDateTime)</p>
+            <p><label class="wide">Finish Collecting Data:</label> @Html.EditorFor(model => model.CollectionEndDateTime)</p>
+
+            
+        </div>
+    </div>
+    <input type="submit" class="blue-action-button" value="Save Event" />
+}
+</div>
+
+
+
