@@ -113,7 +113,7 @@
             @String.Format("{0:MMM d, yyyy h:mm}{1}", Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime.ToUserTimeZone(Model.TimeZoneOffSet), Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime.ToUserTimeZone(Model.TimeZoneOffSet).ToString("tt").ToLower())
         }
     </div>
-    <div class="grid_6 filter-by-time clearfix">
+    <div class="grid_7 filter-by-time clearfix">
         @using (Html.BeginForm("details", "events", new { id = Model.ID }, FormMethod.Post,null)) {
             
             @Html.Hidden("ResetDates")
@@ -123,8 +123,12 @@
             </div>
             <div class="left">
                 <label>To:</label><br style="clear:both;" />
-                @Html.EditorFor(m => m.ToDateTime) <input type="submit" value="Apply" /> &nbsp; <input class="blue-action-button remove-bottom" type="button" value="Clear" name="ClearDates" id="" onclick="$('#ResetDates').val('1'); $(form).submit();" />
+                @Html.EditorFor(m => m.ToDateTime) 
             </div>
+            
+            <br />
+            <input type="submit" class="blue-action-button remove-bottom" value="Apply" /> <input class="blue-action-button remove-bottom" type="button" value="Clear" name="ClearDates" id="" onclick="$('#ResetDates').val('1'); $(form).submit();" />
+            
             @*@:<label>Show Data from:</label> @Html.TextBoxFor(m => m.FromDateTime) &nbsp;&nbsp;<label>To</label>&nbsp;&nbsp; @Html.TextBoxFor(m => m.ToDateTime) &nbsp;&nbsp;<input type="submit" value="Apply" />*@
 @*            <script type="text/javascript">
                 head.ready(function () {
@@ -164,10 +168,13 @@
 <div id="event-details" class="clearfix">
     <ul>
         <li><label>When:</label><div class="value">
-            @if (Model.StartDateTime.Subtract(Model.EndDateTime).Days == 0) {
+            @if (Model.StartDateTime.Subtract(Model.EndDateTime).Days == 0)
+            {
                 @String.Format("{0:MMMM dd, yyyy}", Model.StartDateTime.ToUserTimeZone(Model.TimeZoneOffSet)) <br />
                 @String.Format("{0:h:mm tt}", Model.StartDateTime.ToUserTimeZone(Model.TimeZoneOffSet)) @:to @String.Format("{0:h:mm tt}", Model.EndDateTime.ToUserTimeZone(Model.TimeZoneOffSet))
-            } else {
+            }
+            else
+            {
                 @String.Format("{0:MMM d, yyyy h:mm}{1}", Model.StartDateTime.ToUserTimeZone(Model.TimeZoneOffSet), Model.StartDateTime.ToUserTimeZone(Model.TimeZoneOffSet).ToString("tt").ToLower()) @: to <br />
                 @String.Format("{0:MMM d, yyyy h:mm}{1}", Model.EndDateTime.ToUserTimeZone(Model.TimeZoneOffSet), Model.EndDateTime.ToUserTimeZone(Model.TimeZoneOffSet).ToString("tt").ToLower())
             }    
@@ -180,16 +187,20 @@
     <ul class="hashtags">
         <li><label>Hastag(s):</label><div class="value">
             @{
-                try {
+                try
+                {
                     string[] SearchT = Model.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None);
                     string SearchTerms = "";
 
-                    foreach (string s in SearchT) {
+                    foreach (string s in SearchT)
+                    {
                         SearchTerms += s + ", ";
                     }
         
                     @Html.Raw("<strong>" + SearchTerms.Substring(0, (SearchTerms.Length - 2)) + "</strong>")
-                } catch {
+                }
+                catch
+                {
                     <strong>@Model.SearchTerms</strong>
                 }
             }    
@@ -197,18 +208,23 @@
     </ul>    
     <ul>
         <li><label>Cost:</label><div class="value">
-            @if (Model.Cost != null) {
+            @if (Model.Cost != null)
+            {
                 @Model.Cost
-            } else {
+            }
+            else
+            {
                 @:N/A
             }
         </div></li>
         <li><label>Url:</label><div class="value"><a href="@Model.WebsiteURL" target="_blank">@Model.WebsiteURL</a></div></li>
         <li><label></label><div class="value">
-            @if (Model.TwitterAccount != null) {
+            @if (Model.TwitterAccount != null)
+            {
                 @:tw: <a href="http://www.twitter.com/@Model.TwitterAccount">@Model.TwitterAccount</a>
             }
-            @if (Model.FacebookPageURL != null) {
+            @if (Model.FacebookPageURL != null)
+            {
                 @:fb: <a href="@Model.FacebookPageURL" target="_blank">@Model.FacebookPageURL</a><br />
             }    
         </div></li>
@@ -223,7 +239,8 @@
     <h2><span class="number" id="tweetCount">@string.Format("{0:#,###}", Model.TweetCount)</span>Tweets & Shoutouts</h2>
     <span class="sm-spacer"></span>
     <ul class="plain-list" id="tweetlist">
-        @foreach (Epilogger.Data.Tweet EPLTweet in Model.Tweets) {
+        @foreach (Epilogger.Data.Tweet EPLTweet in Model.Tweets)
+        {
             @Html.Partial("_TweetTemplate", EPLTweet);
         }
     </ul>
@@ -234,7 +251,8 @@
 <div class="grid_7 omega">
     <h2><span class="number" id="photoCount">@string.Format("{0:#,###}", Model.ImageCount)</span>Photos & Videos</h2>
     <div class="image-grid" id="photosvideos">
-        @foreach (Epilogger.Data.Image EPLImage in Model.Images) {
+        @foreach (Epilogger.Data.Image EPLImage in Model.Images)
+        {
             <div class="withcomment newPhotoupdates" id="photo-@EPLImage.ID">
                 <a href="@EPLImage.Fullsize" rel="prettyPhoto[latestphotos]" title="@EPLImage.ID" id="@EPLImage.ID">
                     <img src="@EPLImage.Thumb" height="154" width="180" border="0" alt="" /></a>
@@ -247,9 +265,11 @@
     <div class="clear"></div>
     <span class="sm-spacer"></span>
     <p>@if (!IncludeDateRange)
-           { 
+       { 
                 @: (@Html.ActionLink("See all photos and videos", "AllPhotos", "events", new { id = Model.ID }))
-           } else { 
+           }
+       else
+       { 
                @: (@Html.ActionLink("See all photos and videos", "AllPhotos", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { }))
            }
     </p>
@@ -263,7 +283,8 @@
     <div class="grid_4 alpha">
         <h2>Blog postings</h2>
         <ul class="plain-list">
-            @foreach (Epilogger.Data.BlogPost TheBlogPost in Model.BlogPosts.Take(3)) {
+            @foreach (Epilogger.Data.BlogPost TheBlogPost in Model.BlogPosts.Take(3))
+            {
                 <li>
                     <img src="@Url.Content("~/Public/images/samples/avatar.png")" class="fleft"/>
                     <a href="@TheBlogPost.BlogURL">@TheBlogPost.Title</a><br />
@@ -281,7 +302,8 @@
     <div class="grid_4 overflowhide">
         <h2>External Links</h2>
         <ul class="plain-list">
-            @foreach (Epilogger.Data.URL TheURL in Model.ExternalLinks) {
+            @foreach (Epilogger.Data.URL TheURL in Model.ExternalLinks)
+            {
                 <li><a href="@TheURL.ShortURL" title="@TheURL.Tweets.Where(t => t.ID == TheURL.TweetID).FirstOrDefault().Text">@TheURL.FullURL</a><br />
                     <small><img src="@Url.Content("~/Public/images/icons/tweet-black.png")" class="valign" />VIA @TheURL.Tweets.Where(t => t.ID == TheURL.TweetID).FirstOrDefault().FromUserScreenName</small>
                 </li>
@@ -291,7 +313,9 @@
         <p>@if (!IncludeDateRange)
            { 
                 @: (@Html.ActionLink("See all links", "alllinks", "events", new { id = Model.ID }))
-           } else { 
+           }
+           else
+           { 
                @: (@Html.ActionLink("See all links", "alllinks", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { }))
            }
         </p>
@@ -302,7 +326,8 @@
         <h2><span class="number">@Model.CheckInCount</span> Check-ins</h2>
         <p>All these lovely people attended @Model.Name!</p>
         <div class="event-checkins clearfix">
-            @foreach (Epilogger.Data.CheckIn checkin in @Model.CheckIns) {
+            @foreach (Epilogger.Data.CheckIn checkin in @Model.CheckIns)
+            {
                 Epilogger.Data.Tweet ThisTweet = checkin.Tweets.Where(t => t.ID == checkin.TweetID).FirstOrDefault();
                 <a href="@checkin.FourSquareCheckInURL" target="_blank"><img src="@Url.Content(ThisTweet.ProfileImageURL)" class="fleft" height="48" width="48" alt="" /></a>
             }
