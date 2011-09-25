@@ -25,9 +25,9 @@ namespace Epilogger.Web
             return db.CheckIns.Where(t => t.EventID == EventID && t.CheckInDateTime >= F && t.CheckInDateTime <= T).OrderByDescending(t => t.CheckInDateTime).Take(5);
         }
 
-        public IEnumerable<CheckIn> FindByEventIDPaged(int EventID, int currentPage, int recordsPerPage) {
-
-            var checkins = db.CheckIns.Where(e => e.EventID == EventID);
+        public IEnumerable<CheckIn> FindByEventIDPaged(int EventID, int currentPage, int recordsPerPage, DateTime F, DateTime T)
+        {
+            var checkins = db.CheckIns.Where(e => e.EventID == EventID && e.CheckInDateTime >= F && e.CheckInDateTime <= T);
             return checkins.Skip(currentPage * recordsPerPage).Take(recordsPerPage).OrderBy(c => c.CheckInDateTime);
         }
 

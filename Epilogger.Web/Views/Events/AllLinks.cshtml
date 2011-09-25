@@ -2,16 +2,27 @@
 @using Epilogger.Web.Models;
 @model Epilogger.Web.Models.AllLinksViewModel
 @{
-    ViewBag.Title = "Epilogger - " + Model.Name + "- Tweets";
+    ViewBag.Title = "Epilogger - " + Model.Name + "- Links";
 }
+@Html.Partial("EventToolbar")
+
 @Html.Partial("EventToolbar")
 
 <div id="events-nav">
     <h1>ALL LINKS</h1>
     <h2>FROM @Model.Name</h2>
-    @Html.Partial("Menu")
-
+    <br style="clear:both;" />
 </div>
 <div id="events-content">
+    
+    @foreach (Epilogger.Data.URL TheURL in Model.Links) {
+        <div class="alllinks-entry">
+            <a href="@TheURL.ShortURL" title="@TheURL.Tweets.FirstOrDefault().Text">@TheURL.FullURL</a><br />
+            <div class="tweet"><small><img src="@TheURL.Tweets.FirstOrDefault().ProfileImageURL" class="fleft" height="34" width="34" alt="" />@Html.Raw(TheURL.Tweets.FirstOrDefault().TextAsHTML)</small><br /></div>
+            <small><img src="@Url.Content("~/Public/images/icons/tweet-black.png")" class="valign" />VIA @TheURL.Tweets.Where(t => t.ID == TheURL.TweetID).FirstOrDefault().FromUserScreenName</small>
+        </div>
+    }
+    
 
+    @MvcHtmlString.Create(Html.Pager(10, Model.CurrentPageIndex, Model.TotalRecords, new { controller = "events", action = "alllinks", id = Model.ID }))
 </div>
