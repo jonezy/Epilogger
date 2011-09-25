@@ -286,6 +286,10 @@ ul#left-nav li a.current {background:#f6f6f6;border-bottom:solid 1px #bdbdbd;}
 .alltweets-entry .tweet-content p {margin-bottom:2px;}
 .alltweets-entry .tweet-content span.tweet-date {font-size:11px;color:#c2c2c2;}
 
+.alllinks-entry { padding: 10px 0; border-bottom: dotted 1px #3e3e3e; }
+.alllinks-entry .tweet { margin: 5px 0 5px 20px; border-left: 2px solid #EE4490; padding-left: 5px; }
+.alllinks-entry .tweet img { margin-right: 5px; }
+
 
 #top-tweeters {padding-top:15px;border-top:dotted 1px #e8e8e8;margin-top:20px;}
 #top-tweeters .primary {margin:0px 0px 10px 10px;float:left;width:78%;}

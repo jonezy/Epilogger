@@ -3,10 +3,16 @@
 	Use: Lightbox clone for jQuery
 	Author: Stephane Caron (http://www.no-margin-for-errors.com)
 	Version: 3.1.2
+    Modified by: Chris Brooker, Epilogger Inc.
 ------------------------------------------------------------------------- */
 
 function fbs_click() {u=location.href;t=document.title;window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}
-
+  
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
 
 (function($) {
     var locURL = document.location.href;
@@ -37,8 +43,7 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 			callback: function(){}, /* Called when prettyPhoto is closed */
 			ie6_fallback: true,
 			markup: '<div class="pp_pic_holder"> \
-                        <a href="" class="pp_shareDrawerTab"></a> \
-						<div class="pp_shareDrawer">Test</div> \
+						<div class="pp_shareDrawer">{pp_share}<a href="" class="pp_shareDrawerTab"></a></div> \
                         <div class="ppt">&nbsp;</div> \
                         <div class="pp_top"> \
 							<div class="pp_left"></div> \
@@ -89,7 +94,8 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 			iframe_markup: '<iframe src ="{path}" width="{width}" height="{height}" frameborder="no"></iframe>',
 			inline_markup: '<div class="pp_inline">{content}</div>',
 			custom_markup: '',
-            social_tools: '<a href="#">Link goes here somehow</a>',}, pp_settings);
+            social_tools: '<a href="#">Link goes here somehow</a>',
+            share_tools: '<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script><a name="fb_share"></a><a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="epilogger">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script><g:plusone></g:plusone>',}, pp_settings);
 
             //<span class="fright fblue"><small>Share: </small> <a href="http://twitter.com/intent/tweet?text=I+was+at+' + EventName + '+and+Epilogger+remembered+it+for+me!+Reminisce+with+me!+'+ EventURL +'+%23Epilogger" target="_blank"><img src="/Content/images/icons/twitter.png" class="valign"></a> <a target="_blank" href="http://www.facebook.com/sharer.php?u='+EventURL+'" onclick="return fbs_click()" text="I was at '+ EventName + ' and Epilogger remembered it for me! Reminisce with me and help write the story!'+EventURL+'" #Epilogger><img src="/Content/images/icons/facebook.png" class="valign"/></a></span>
             
@@ -741,6 +747,7 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 		function _build_overlay(caller){
 			
 			settings.markup=settings.markup.replace('{pp_social}',(settings.social_tools)?settings.social_tools:'');
+            settings.markup=settings.markup.replace('{pp_share}',(settings.share_tools)?settings.share_tools:'');
 			
 			$('body').append(settings.markup); // Inject the markup
 			
@@ -851,13 +858,13 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 //                    $(this).animate({ marginTop: '0px' }, 400);
 //				};
 
-
-                if($(this).css('marginTop')=='0px'){
-                    $(".pp_shareDrawer").animate({top:'0px'}, 400);
-                    $(this).animate({ marginTop: '-27px' }, 400);
+                if($(".pp_shareDrawer").css('top')=='25px'){
+                //if($(this).css('marginTop')=='0px'){
+                    $(".pp_shareDrawer").animate({top:'-9px'}, 400);
+                    //$(this).animate({ marginTop: '-27px' }, 400);
 				}else{
-                    $(".pp_shareDrawer").animate({top:'32px'}, 400);
-                    $(this).animate({ marginTop: '0px' }, 400);
+                    $(".pp_shareDrawer").animate({top:'25px'}, 400);
+                    //$(this).animate({ marginTop: '0px' }, 400);
 				};
 
 
