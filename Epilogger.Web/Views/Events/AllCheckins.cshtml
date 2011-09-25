@@ -2,24 +2,25 @@
 @using Epilogger.Web.Models;
 @model Epilogger.Web.Models.AllCheckinsViewModel
 @{
-    ViewBag.Title = "Epilogger - " + Model.Name + "- Tweets";
+    ViewBag.Title = "Epilogger - " + Model.Name + "- Check Ins";
 }
 @Html.Partial("EventToolbar")
 
 <div id="events-nav">
-    <h1>ALL CHECKINS</h1>
+    <h1>ALL CHECK INS</h1>
     <h2>FROM @Model.Name</h2>
-    @Html.Partial("Menu")
+    <br style="clear:both;" />
 </div>
-<div id="events-content">
 
+
+<div id="events-content">
     @foreach (CheckinDisplayViewModel item in Model.Checkins) {
         <div class="alltweets-entry clearfix">
             <img src="@item.Tweet.ProfileImageUrl" class="fleft" height="48" width="48" alt="" />
             <div class="tweet-content">
                 <strong><a href="http://www.twitter.com/@item.Tweet.FromUserScreenName" class="tweet-content-username" target="_blank">@item.Tweet.FromUserScreenName</a></strong>
                 <p>@Html.Raw(item.Tweet.TextAsHTML)</p>
-                <span class="tweet-date">(@item.Tweet.CreatedDate.Value.ToUserTimeZone(-5).ToString("MMMM dd, yyyy"))</span>
+                <span class="tweet-date">(@item.Tweet.CreatedDate.Value.ToUserTimeZone().ToString("MMMM dd, yyyy h:mmtt"))</span>
             </div>
         </div>
     }

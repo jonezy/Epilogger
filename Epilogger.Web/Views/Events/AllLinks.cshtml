@@ -6,7 +6,6 @@
 }
 @Html.Partial("EventToolbar")
 
-@Html.Partial("EventToolbar")
 
 <div id="events-nav">
     <h1>ALL LINKS</h1>
@@ -19,7 +18,7 @@
         <div class="alllinks-entry">
             <a href="@TheURL.ShortURL" title="@TheURL.Tweets.FirstOrDefault().Text">@TheURL.FullURL</a><br />
             <div class="tweet"><small><img src="@TheURL.Tweets.FirstOrDefault().ProfileImageURL" class="fleft" height="34" width="34" alt="" />@Html.Raw(TheURL.Tweets.FirstOrDefault().TextAsHTML)</small><br /></div>
-            <small><img src="@Url.Content("~/Public/images/icons/tweet-black.png")" class="valign" />VIA @TheURL.Tweets.Where(t => t.ID == TheURL.TweetID).FirstOrDefault().FromUserScreenName</small>
+            <small><img src="@Url.Content("~/Public/images/icons/tweet-black.png")" class="valign" alt="" />VIA @TheURL.Tweets.Where(t => t.ID == TheURL.TweetID).FirstOrDefault().FromUserScreenName</small>
         </div>
     }
     
