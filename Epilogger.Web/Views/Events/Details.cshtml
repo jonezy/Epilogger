@@ -21,6 +21,8 @@
 <script type="text/javascript" language="javascript">
     head.js('@Url.Content("~/Public/js/EventDetails.js")');
 </script>
+
+
 @if (Model.Tweets.FirstOrDefault() != null) {
     <script language="javascript" type="text/javascript">
         var pageLoadTime = '@string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.Tweets.FirstOrDefault().CreatedDate)';
