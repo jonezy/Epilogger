@@ -194,7 +194,8 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.TopTweeters, opt => opt.Ignore());
 
 
-            Mapper.CreateMap<Event, CreateEventViewModel>();
+            Mapper.CreateMap<Event, CreateEventViewModel>()
+                .ForMember(dest => dest.TimeZones, opt => opt.ResolveUsing<TimezonesResolver>());
 
             Mapper.AssertConfigurationIsValid();
         }
