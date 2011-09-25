@@ -163,7 +163,7 @@ namespace Epilogger.Web.Controllers {
 
             if (currentPage + 1 == 1) {
                 Model.ShowTopTweets = true;
-                Model.Tweets = Mapper.Map<IEnumerable<Tweet>, IEnumerable<TweetDisplayViewModel>>(TS.GetPagedTweets(id, currentPage + 1, 10, this.FromDateTime(), this.ToDateTime()));
+                Model.Tweets = Mapper.Map<IEnumerable<Tweet>, IEnumerable<TweetDisplayViewModel>>(TS.GetPagedTweets(id, currentPage + 1, 100, this.FromDateTime(), this.ToDateTime()));
             }
 
             return View(Model);
