@@ -1,5 +1,7 @@
 ﻿
 
+
+
 jQuery(function ($) {
     //AUTO refreshing tweets on Event Page
     function getPosts() {
