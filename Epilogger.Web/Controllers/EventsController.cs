@@ -278,10 +278,20 @@ namespace Epilogger.Web.Controllers {
                         //HTMLString.Append(PartialView("_TweetTemplate", TheT).ToString());
 
 
-                        string ProfilePicture = "<img src='" + TheT.ProfileImageURL + "' class='fleft' alt='' height='48' width='48'  />";
-                        string FromLine = "<small><a href='http://www.twitter.com/" + TheT.FromUserScreenName + "' target='_blank'>" + TheT.FromUserScreenName + "</a></small>";
-                        HTMLString.Append("<li id='Tweet-" + TheT.TwitterID + "' class='tweet newupdates'>" + ProfilePicture + FromLine + "<p>" + TheT.TextAsHTML + "</p></li>");
+                        StringBuilder tweet = new StringBuilder();
+                        tweet.AppendFormat("<li id='{0}' class='tweet clearfix'>", TheT.TwitterID);
+                        tweet.AppendFormat("<img src='{0}' class='fleft' alt='' height='48' width='48'  />", TheT.ProfileImageURL);
+                        tweet.Append("<div class='tweet-body'><strong>");
+                        tweet.AppendFormat("<a href='http://www.twitter.com/{0}' target='_blank'>@{1}</a></strong>", TheT.FromUserScreenName, TheT.FromUserScreenName);
+                        tweet.AppendFormat("<p>{0}</p>", TheT.TextAsHTML);
+                        tweet.Append("</div>");
+                        tweet.Append("</li>");
+                        
+                        //string ProfilePicture = "<img src='" + TheT.ProfileImageURL + "' class='fleft' alt='' height='48' width='48'  />";
+                        //string FromLine = "<div class='tweet-body'><string><a href='http://www.twitter.com/" + TheT.FromUserScreenName + "' target='_blank'>" + TheT.FromUserScreenName + "</a></storng></div>";
+                        //HTMLString.Append(ProfilePicture + FromLine + "<p>" + TheT.TextAsHTML + "</p></li>");
 
+                        HTMLString.Append(tweet.ToString());
                         RecordCount++;
                     }
 
