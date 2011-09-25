@@ -177,7 +177,8 @@ ul#connected-networks {list-style:none;}
 .item-data .item-content { width:400px; }
 .item-data h1 {border-bottom:2px solid #fff;padding-bottom:10px;margin-bottom:10px;}
 
-#createevent-info h4 {font-size:16px !important;}
+#createevent-info h4,
+#createevent-time h4 {font-size:16px !important;}
 
 /* form overrides */
 
@@ -201,10 +202,10 @@ ul#connected-networks {list-style:none;}
 #event-toolbar a.overview {}
 #event-toolbar a.allphotos {background-position:0 -37px;}
 #event-toolbar a.alltweets {background-position:0 -72px;}
-#event-toolbar a.allcontent {background-position:0 -108px;}
+#event-toolbar a.allblogposts {background-position:0 -108px;}
 #event-toolbar a.alllinks {background-position:0 -144px;}
 #event-toolbar a.allcheckins {background-position:0 -181px;}
-#event-toolbar a.allblogposts {background-position:0 -216px;}
+#event-toolbar a.edit {background-position:0 -216px;}
 #event-toolbar a.allstats {background-position:0 -244px;}
 
 /* ------------------------------ DASHBOARD */
