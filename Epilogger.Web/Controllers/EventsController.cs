@@ -184,23 +184,36 @@ namespace Epilogger.Web.Controllers {
 
         [HttpPost]
         public ActionResult Create(CreateEventViewModel model) {
-            try {
-                model.UserID = Guid.Parse(CookieHelpers.GetCookieValue("lc", "uid").ToString());
-                model.CreatedDateTime = DateTime.UtcNow;
+            if (ModelState.IsValid) {
+                try {
+                    model.UserID = Guid.Parse(CookieHelpers.GetCookieValue("lc", "uid").ToString());
+                    model.CreatedDateTime = DateTime.UtcNow;
 
-                model.CollectionStartDateTime = model.CollectionStartDateTime.FromUserTimeZoneToUtc();
-                model.CollectionEndDateTime = model.CollectionEndDateTime.FromUserTimeZoneToUtc();
-                model.StartDateTime = model.StartDateTime.FromUserTimeZoneToUtc();
-                model.EndDateTime = model.EndDateTime.FromUserTimeZoneToUtc();
+                    if (model.CollectionStartDateTime == DateTime.MinValue) {
+                        model.CollectionStartDateTime = DateTime.Now.FromUserTimeZoneToUtc();
+                    } else {
+                        model.CollectionStartDateTime = model.CollectionStartDateTime.FromUserTimeZoneToUtc();
+                    }
+                    if (model.CollectionEndDateTime == DateTime.MinValue) {
+                        model.CollectionEndDateTime = model.EndDateTime.AddDays(14);
+                    } else {
+                        model.CollectionEndDateTime = model.CollectionEndDateTime.FromUserTimeZoneToUtc();
+                    }
 
-                Event EPLevent = Mapper.Map<CreateEventViewModel, Event>(model);
-                ES.Save(EPLevent);
-                this.StoreSuccess("Your Event was created");
-            } catch (Exception ex) {
-                this.StoreError(string.Format("There was an error: {0}", ex.Message));
+                    model.StartDateTime = model.StartDateTime.FromUserTimeZoneToUtc();
+                    model.EndDateTime = model.EndDateTime.FromUserTimeZoneToUtc();
+
+                    Event EPLevent = Mapper.Map<CreateEventViewModel, Event>(model);
+                    ES.Save(EPLevent);
+                    this.StoreSuccess("Your Event was created");
+                    return RedirectToAction("details", new { id = EPLevent.ID });
+                } catch (Exception ex) {
+                    this.StoreError(string.Format("There was an error: {0}", ex.Message));
+                    return View(model);
+                }
+
             }
-
-            return View();
+            return View(model);
         }
 
         public ActionResult EventBySlug(string eventSlug) {

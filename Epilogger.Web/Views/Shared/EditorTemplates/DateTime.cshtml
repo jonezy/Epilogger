@@ -1,7 +1,9 @@
 ﻿@model System.DateTime?
-<div class="left" style="padding:2px;">
-    @Html.TextBox("", Model.HasValue ? Model.Value.ToShortDateString() : "", new { @class = "datepicker", @maxlength = "10" })
-</div>
-<div class="left" style="padding:2px;">
-    @Html.TextBox("", Model.HasValue ? new DateTime(Model.Value.Ticks).ToString("h:mm tt") : "", new { @class = "timedropdown", @maxlength = "8" })
+<div class="datetime-container">
+    <div class="left" style="padding:2px;">
+        @Html.TextBox("", Model.HasValue ? Model.Value.ToShortDateString() : "", new { @class = "datepicker", @maxlength = "10" })
+    </div>
+    <div class="left" style="padding:2px;">
+        @Html.TextBox("", Model.HasValue ? new DateTime(Model.Value.Ticks).ToString("h:mm tt") : "", new { @class = "timedropdown", @maxlength = "8" })
+    </div>
 </div>
