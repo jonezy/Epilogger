@@ -160,7 +160,8 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.TimeZone, opt => opt.MapFrom(src => src.TimeZoneOffSet))
                 .ForMember(dest => dest.TwitterProfilePicture, opt => opt.ResolveUsing<TwitterProfilePictureResolver>())
                 .ForMember(dest => dest.FacebookProfilePicture, opt => opt.ResolveUsing<FacebookProfilePictureResolver>())
-                .ForMember(dest => dest.DateOfBirth, opt => opt.MapFrom(src => src.DateOfBirth.HasValue ? src.DateOfBirth.Value.ToShortDateString() : ""));
+                .ForMember(dest => dest.DateOfBirth, opt => opt.MapFrom(src => src.DateOfBirth.HasValue ? src.DateOfBirth.Value.ToShortDateString() : ""))
+                .ForMember(dest => dest.TimeZones, opt => opt.ResolveUsing<UserTimezonesResolver>());
 
             Mapper.CreateMap<CreateEventViewModel, Event>()
                 .ForMember(dest => dest.WebsiteURL, opt => opt.Ignore())

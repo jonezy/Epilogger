@@ -1,7 +1,8 @@
-﻿@model Epilogger.Web.Models.CreateEventViewModel
+﻿@using Epilogger.Web;
+@model Epilogger.Web.Models.CreateEventViewModel
 
 @{
-    ViewBag.Title = "Epilogger - Create Event";
+    ViewBag.Title = "Epilogger - Edit Event - " + @Model.Name;
 }
 
 @Html.Partial("EventToolbar")

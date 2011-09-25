@@ -79,7 +79,7 @@ namespace Epilogger.Web.Controllers {
                 user.LastName = model.LastName;
                 user.EmailAddress = model.EmailAddress;
                 user.DateOfBirth = DateTime.Parse(model.DateOfBirth);
-                //user.TimeZoneOffSet = Int32.Parse(c["TimeZoneOffset"].ToString());
+                user.TimeZoneOffSet = model.TimeZone;
 
                 string imagePath = string.Empty;
                 if (c["ProfilePictures"] != null) {

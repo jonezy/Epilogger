@@ -189,7 +189,7 @@ namespace Epilogger.Web.Controllers {
 
         [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the details of that event")]
         public ActionResult Create() {
-            CreateEventViewModel Model = new CreateEventViewModel();
+            CreateEventViewModel Model = Mapper.Map<Event, CreateEventViewModel>(new Event());
             Model.TimeZoneOffset = Helpers.GetUserTimeZoneOffset();
 
             DateTime roundTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, 0, 0);
@@ -296,10 +296,20 @@ namespace Epilogger.Web.Controllers {
                         //HTMLString.Append(PartialView("_TweetTemplate", TheT).ToString());
 
 
-                        string ProfilePicture = "<img src='" + TheT.ProfileImageURL + "' class='fleft' alt='' height='48' width='48'  />";
-                        string FromLine = "<small><a href='http://www.twitter.com/" + TheT.FromUserScreenName + "' target='_blank'>" + TheT.FromUserScreenName + "</a></small>";
-                        HTMLString.Append("<li id='Tweet-" + TheT.TwitterID + "' class='tweet newupdates'>" + ProfilePicture + FromLine + "<p>" + TheT.TextAsHTML + "</p></li>");
+                        StringBuilder tweet = new StringBuilder();
+                        tweet.AppendFormat("<li id='{0}' class='tweet clearfix'>", TheT.TwitterID);
+                        tweet.AppendFormat("<img src='{0}' class='fleft' alt='' height='48' width='48'  />", TheT.ProfileImageURL);
+                        tweet.Append("<div class='tweet-body'><strong>");
+                        tweet.AppendFormat("<a href='http://www.twitter.com/{0}' target='_blank'>@{1}</a></strong>", TheT.FromUserScreenName, TheT.FromUserScreenName);
+                        tweet.AppendFormat("<p>{0}</p>", TheT.TextAsHTML);
+                        tweet.Append("</div>");
+                        tweet.Append("</li>");
+                        
+                        //string ProfilePicture = "<img src='" + TheT.ProfileImageURL + "' class='fleft' alt='' height='48' width='48'  />";
+                        //string FromLine = "<div class='tweet-body'><string><a href='http://www.twitter.com/" + TheT.FromUserScreenName + "' target='_blank'>" + TheT.FromUserScreenName + "</a></storng></div>";
+                        //HTMLString.Append(ProfilePicture + FromLine + "<p>" + TheT.TextAsHTML + "</p></li>");
 
+                        HTMLString.Append(tweet.ToString());
                         RecordCount++;
                     }
 
@@ -513,7 +523,7 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpPost]
-        public ActionResult Edit(CreateEventViewModel model) {
+        public ActionResult Edit(FormCollection fc, CreateEventViewModel model) {
             if (ModelState.IsValid) {
                 try {
                     Event currentEvent = ES.FindByID(model.ID);
@@ -522,20 +532,11 @@ namespace Epilogger.Web.Controllers {
                     currentEvent.SearchTerms = model.SearchTerms;
                     currentEvent.Description = model.Description;
                     currentEvent.Cost = model.Cost;
-
-                    if (model.CollectionStartDateTime == DateTime.MinValue) {
-                        currentEvent.CollectionStartDateTime = DateTime.Now.FromUserTimeZoneToUtc();
-                    } else {
-                        currentEvent.CollectionStartDateTime = model.CollectionStartDateTime.FromUserTimeZoneToUtc();
-                    }
-                    if (model.CollectionEndDateTime == DateTime.MinValue) {
-                        currentEvent.CollectionEndDateTime = model.EndDateTime.AddDays(14);
-                    } else {
-                        currentEvent.CollectionEndDateTime = model.CollectionEndDateTime.FromUserTimeZoneToUtc();
-                    }
-
-                    currentEvent.StartDateTime = model.StartDateTime.FromUserTimeZoneToUtc();
-                    currentEvent.EndDateTime = model.EndDateTime.FromUserTimeZoneToUtc();
+                    currentEvent.StartDateTime = DateTime.Parse(fc[5]).FromUserTimeZoneToUtc();
+                    currentEvent.EndDateTime = DateTime.Parse(fc[6]).FromUserTimeZoneToUtc(); // 7 is timezone offset
+                    currentEvent.CollectionStartDateTime = DateTime.Parse(fc[8]).FromUserTimeZoneToUtc();
+                    currentEvent.CollectionEndDateTime = DateTime.Parse(fc[9]).FromUserTimeZoneToUtc();
+                    
                   
                     ES.Save(currentEvent);
                     this.StoreSuccess("Your Event was updated");
@@ -546,7 +547,7 @@ namespace Epilogger.Web.Controllers {
                 }
             }
             
-            return View(model);
+            return RedirectToAction("edit", new { id = model.ID});
         }
     }
 }
