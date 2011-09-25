@@ -59,8 +59,26 @@ namespace Epilogger.Web.Controllers {
             base.Initialize(requestContext);
         }
 
-        public ActionResult Index() {
-            List<Event> events = ES.AllEvents();
+        public ActionResult Index(string filter) {
+
+            List<Event> events = new List<Event>();
+
+            switch (filter)
+            {
+                case "upcoming":
+                    events = ES.UpcomingEvents();
+                    break;
+                case "past":
+                    events = ES.PastEvents();
+                    break;
+                case "now":
+                    events = ES.GoingOnNowEvents();
+                    break;
+                case "random":
+                    Epilogger.Data.Event e = ES.GetRandomEvent();
+                    return RedirectToAction("details", new { id = e.ID });
+            }
+            
             List<EventDisplayViewModel> model = Mapper.Map<List<Event>, List<EventDisplayViewModel>>(events);
 
             return View(model);
