@@ -1,14 +1,46 @@
-﻿
-@{
+﻿@{
     var action = ViewContext.RouteData.Values["action"] as string ?? "";
+
+    bool IncludeDateRange = false;
+    int YesCount = 0;
+
+    if (Request.QueryString["f"] != null)
+    {
+        YesCount++;
+    }
+    if (Request.QueryString["t"] != null)
+    {
+        YesCount++;
+    }
+    if (YesCount == 2)
+    {
+        IncludeDateRange = true;
+    }
 }
-<div id="event-toolbar">
-    @Html.ActionLink("overview", "details", "events", new {id=Model.ID},  action.ToLower() == "details" ? new { @class="overview current"} : new {@class="overview"})
-    @Html.ActionLink("photos", "allphotos", "events", new {id=Model.ID},  action.ToLower() == "allphotos" ? new { @class="allphotos current"} : new {@class="allphotos"})
-    @Html.ActionLink("tweets", "alltweets", "events", new {id=Model.ID},  action.ToLower() == "alltweets" ? new { @class="alltweets current"} : new {@class="alltweets"})
-    @Html.ActionLink("allblogposts", "allblogposts", "events", new { id = Model.ID }, action.ToLower() == "allcontent" ? new { @class = "allblogposts current" } : new { @class = "allblogposts" })
-    @Html.ActionLink("allinks", "alllinks", "events", new { id = Model.ID }, action.ToLower() == "alllinks" ? new { @class = "alllinks current" } : new { @class = "alllinks" })
-    @Html.ActionLink("allcheckins", "allcheckins", "events", new { id = Model.ID }, action.ToLower() == "allcheckins" ? new { @class = "allcheckins current" } : new { @class = "allcheckins" })
-    @Html.ActionLink("edit", "edit", "events", new { id = Model.ID }, action.ToLower() == "edit" ? new { @class = "edit current" } : new { @class = "edit" })
-    @Html.ActionLink("allstats", "allstats", "events", new { id = Model.ID }, action.ToLower() == "allstats" ? new { @class = "allstats current" } : new { @class = "allstats" })
-</div>
+
+@if (!IncludeDateRange)
+{ 
+    <div id="event-toolbar">
+        @Html.ActionLink("overview", "details", "events", new { id = Model.ID }, action.ToLower() == "details" ? new { @class = "overview current" } : new { @class = "overview" })
+        @Html.ActionLink("photos", "allphotos", "events", new { id = Model.ID }, action.ToLower() == "allphotos" ? new { @class = "allphotos current" } : new { @class = "allphotos" })
+        @Html.ActionLink("tweets", "alltweets", "events", new { id = Model.ID }, action.ToLower() == "alltweets" ? new { @class = "alltweets current" } : new { @class = "alltweets" })
+        @Html.ActionLink("allblogposts", "allblogposts", "events", new { id = Model.ID }, action.ToLower() == "allcontent" ? new { @class = "allblogposts current" } : new { @class = "allblogposts" })
+        @Html.ActionLink("allinks", "alllinks", "events", new { id = Model.ID }, action.ToLower() == "alllinks" ? new { @class = "alllinks current" } : new { @class = "alllinks" })
+        @Html.ActionLink("allcheckins", "allcheckins", "events", new { id = Model.ID }, action.ToLower() == "allcheckins" ? new { @class = "allcheckins current" } : new { @class = "allcheckins" })
+        @Html.ActionLink("edit", "edit", "events", new { id = Model.ID }, action.ToLower() == "edit" ? new { @class = "edit current" } : new { @class = "edit" })
+        @Html.ActionLink("allstats", "allstats", "events", new { id = Model.ID }, action.ToLower() == "allstats" ? new { @class = "allstats current" } : new { @class = "allstats" })
+    </div>
+}
+else
+{
+    <div id="event-toolbar">
+        @Html.ActionLink("overview", "details", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "details" ? new { @class = "overview current" } : new { @class = "overview" })
+        @Html.ActionLink("photos", "allphotos", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "allphotos" ? new { @class = "allphotos current" } : new { @class = "allphotos" })
+        @Html.ActionLink("tweets", "alltweets", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "alltweets" ? new { @class = "alltweets current" } : new { @class = "alltweets" })
+        @Html.ActionLink("allblogposts", "allblogposts", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "allcontent" ? new { @class = "allblogposts current" } : new { @class = "allblogposts" })
+        @Html.ActionLink("allinks", "alllinks", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "alllinks" ? new { @class = "alllinks current" } : new { @class = "alllinks" })
+        @Html.ActionLink("allcheckins", "allcheckins", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "allcheckins" ? new { @class = "allcheckins current" } : new { @class = "allcheckins" })
+        @Html.ActionLink("edit", "edit", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "edit" ? new { @class = "edit current" } : new { @class = "edit" })
+        @Html.ActionLink("allstats", "allstats", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "allstats" ? new { @class = "allstats current" } : new { @class = "allstats" })
+    </div>
+}
