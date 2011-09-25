@@ -3,9 +3,9 @@
            
 <div class="datetime-container">
     <div class="left" style="padding:2px;">
-        @Html.TextBox("", Model.HasValue ? Model.Value.ToUserTimeZone().ToShortDateString() : "", new { @class = "datepicker", @maxlength = "10" })
+        @Html.TextBox("", Model.HasValue ? Model.Value.ToUserTimeZone(Helpers.GetUserTimeZoneOffset()).ToShortDateString() : "", new { @class = "datepicker", @maxlength = "10" })
     </div>
     <div class="left" style="padding:2px;">
-        @Html.TextBox("", Model.HasValue ? new DateTime(Model.Value.Ticks).ToUserTimeZone().ToString("h:mm tt") : "", new { @class = "timedropdown", @maxlength = "8" })
+        @Html.TextBox("", Model.HasValue ? new DateTime(Model.Value.Ticks).ToUserTimeZone(Helpers.GetUserTimeZoneOffset()).ToString("h:mm tt") : "", new { @class = "timedropdown", @maxlength = "8" })
     </div>
 </div>
