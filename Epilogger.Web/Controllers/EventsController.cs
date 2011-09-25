@@ -80,12 +80,12 @@ namespace Epilogger.Web.Controllers {
             Model.CurrentUserID = CurrentUserID;
 
             if (Request.QueryString["f"] != null) {
-                Model.FromDateTime = this.FromDateTime().ToUserTimeZone();
+                Model.FromDateTime = this.FromDateTime();
             } else {
                 Model.FromDateTime = null;
             }
             if (Request.QueryString["t"] != null) {
-                Model.ToDateTime = this.ToDateTime().ToUserTimeZone();
+                Model.ToDateTime = this.ToDateTime();
             } else {
                 Model.ToDateTime = null;
             }
@@ -110,16 +110,26 @@ namespace Epilogger.Web.Controllers {
 
         [HttpPost]
         public ActionResult Details(int id, FormCollection collection) {
-            DateTime FromDateTime;
-            DateTime ToDateTime;
 
-            FromDateTime = DateTime.Parse(collection["FromDateTime"]);
-            ToDateTime = DateTime.Parse(collection["ToDateTime"]);
 
-            string encodedFrom = Epilogger.Web.Helpers.base64Encode(String.Format("{0:yyyy-MM-dd HH:mm:ss}", FromDateTime));
-            string encodedTo = Epilogger.Web.Helpers.base64Encode(String.Format("{0:yyyy-MM-dd HH:mm:ss}", ToDateTime));
-            return RedirectToAction("Details", new { id = id, f = encodedFrom, t = encodedTo });
-            //return Redirect("/Events/Details/" + id + "?f=" + encodedFrom + "&t=" + encodedTo);
+            if (collection["ResetDates"] == "1")
+            {
+                return RedirectToAction("Details", new { id = id });
+            }        
+            else 
+            {
+                DateTime FromDateTime;
+                DateTime ToDateTime;
+
+                FromDateTime = DateTime.Parse(collection["FromDateTime"]);
+                ToDateTime = DateTime.Parse(collection["ToDateTime"]);
+
+                string encodedFrom = Epilogger.Web.Helpers.base64Encode(String.Format("{0:yyyy-MM-dd HH:mm:ss}", FromDateTime));
+                string encodedTo = Epilogger.Web.Helpers.base64Encode(String.Format("{0:yyyy-MM-dd HH:mm:ss}", ToDateTime));
+
+
+                return RedirectToAction("Details", new { id = id, f = encodedFrom, t = encodedTo });
+            }
         }
 
         public ActionResult AllPhotos(int id, int? page) {
@@ -459,7 +469,7 @@ namespace Epilogger.Web.Controllers {
             AllCheckinsViewModel model = new AllCheckinsViewModel(checkins, currentPage, 10);
             model.ID = currentEvent.ID.ToString();
             model.Name = currentEvent.Name;
-            model.TotalRecords = currentEvent.CheckIns.Count();
+            model.TotalRecords = CS.FindCheckInCountByEventID(id, this.FromDateTime(), this.ToDateTime());
 
             return View(model);
         }
