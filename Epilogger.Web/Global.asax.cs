@@ -118,7 +118,10 @@ namespace Epilogger.Web {
 
             Mapper.CreateMap<Event, AllContentViewModel>();
             Mapper.CreateMap<Event, AllBlogPostsViewModel>();
-            Mapper.CreateMap<Event, AllLinksViewModel>();
+            Mapper.CreateMap<Event, AllLinksViewModel>()
+                .ForMember(dest => dest.CurrentPageIndex, opt => opt.Ignore())
+                .ForMember(dest => dest.TotalRecords, opt => opt.Ignore())
+                .ForMember(dest => dest.Links, opt => opt.Ignore());
 
             Mapper.CreateMap<CheckIn, CheckinDisplayViewModel>()
                 .ForMember(dest =>dest.Tweet, opt => opt.MapFrom(src => src.Tweets.FirstOrDefault()));
