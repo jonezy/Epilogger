@@ -495,7 +495,7 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpPost]
-        public ActionResult Edit(CreateEventViewModel model) {
+        public ActionResult Edit(FormCollection fc, CreateEventViewModel model) {
             if (ModelState.IsValid) {
                 try {
                     Event currentEvent = ES.FindByID(model.ID);
@@ -504,20 +504,11 @@ namespace Epilogger.Web.Controllers {
                     currentEvent.SearchTerms = model.SearchTerms;
                     currentEvent.Description = model.Description;
                     currentEvent.Cost = model.Cost;
-
-                    if (model.CollectionStartDateTime == DateTime.MinValue) {
-                        currentEvent.CollectionStartDateTime = DateTime.Now.FromUserTimeZoneToUtc();
-                    } else {
-                        currentEvent.CollectionStartDateTime = model.CollectionStartDateTime.FromUserTimeZoneToUtc();
-                    }
-                    if (model.CollectionEndDateTime == DateTime.MinValue) {
-                        currentEvent.CollectionEndDateTime = model.EndDateTime.AddDays(14);
-                    } else {
-                        currentEvent.CollectionEndDateTime = model.CollectionEndDateTime.FromUserTimeZoneToUtc();
-                    }
-
-                    currentEvent.StartDateTime = model.StartDateTime.FromUserTimeZoneToUtc();
-                    currentEvent.EndDateTime = model.EndDateTime.FromUserTimeZoneToUtc();
+                    currentEvent.StartDateTime = DateTime.Parse(fc[5]).FromUserTimeZoneToUtc();
+                    currentEvent.EndDateTime = DateTime.Parse(fc[6]).FromUserTimeZoneToUtc(); // 7 is timezone offset
+                    currentEvent.CollectionStartDateTime = DateTime.Parse(fc[8]).FromUserTimeZoneToUtc();
+                    currentEvent.CollectionEndDateTime = DateTime.Parse(fc[9]).FromUserTimeZoneToUtc();
+                    
                   
                     ES.Save(currentEvent);
                     this.StoreSuccess("Your Event was updated");
@@ -528,7 +519,7 @@ namespace Epilogger.Web.Controllers {
                 }
             }
             
-            return View(model);
+            return RedirectToAction("edit", new { id = model.ID});
         }
     }
 }
