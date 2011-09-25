@@ -74,6 +74,12 @@
     }
 </style>
 @Html.Partial("EventToolbar")
+
+<div class="grid_7">
+
+    
+
+</div>
 <div class="grid_12 alpha">
     <h1>@Model.Name</h1>
     <h2>@Model.SubTitle</h2>
@@ -110,10 +116,19 @@
             @String.Format("{0:MMM d, yyyy h:mm}{1}", Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime.ToUserTimeZone(Model.TimeZoneOffSet), Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime.ToUserTimeZone(Model.TimeZoneOffSet).ToString("tt").ToLower())
         }
     </div>
-    <div class="grid_6 filter-by-time">
-        @using (Html.BeginForm()) {
-            @:<label>Show Data from:</label> @Html.TextBoxFor(m => m.FromDateTime) &nbsp;&nbsp;<label>To</label>&nbsp;&nbsp; @Html.TextBoxFor(m => m.ToDateTime) &nbsp;&nbsp;<input type="submit" value="Apply" />
-            <script type="text/javascript">
+    <div class="grid_6 filter-by-time clearfix">
+        @using (Html.BeginForm("details", "events", new { id = Model.ID }, FormMethod.Post,null)) {
+            
+            <div class="left">
+                <label>Show Data from:</label><br />
+                @Html.EditorFor(m => m.FromDateTime)
+            </div>
+            <div class="left">
+                <label>To:</label><br style="clear:both;" />
+                @Html.EditorFor(m => m.ToDateTime) <input type="submit" value="Apply" />
+            </div>            
+            @*@:<label>Show Data from:</label> @Html.TextBoxFor(m => m.FromDateTime) &nbsp;&nbsp;<label>To</label>&nbsp;&nbsp; @Html.TextBoxFor(m => m.ToDateTime) &nbsp;&nbsp;<input type="submit" value="Apply" />*@
+@*            <script type="text/javascript">
                 head.ready(function () {
                     $("#FromDateTime").AnyTime_picker(
                             { format: "%M %d, %Y %l:%i %p" });
@@ -139,7 +154,7 @@
                         td = $("#ToDateTime")
                     }
                 });
-            </script>
+            </script>*@
         }
     </div>
 
@@ -170,7 +185,7 @@
                 try {
                     string[] SearchT = Model.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None);
                     string SearchTerms = "";
-        
+
                     foreach (string s in SearchT) {
                         SearchTerms += s + ", ";
                     }
