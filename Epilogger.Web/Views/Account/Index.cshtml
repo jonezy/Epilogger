@@ -32,9 +32,9 @@
     <div class="grid_3 alpha">
         <p>@Html.LabelFor(model => model.DateOfBirth) @Html.TextBoxFor(model => model.DateOfBirth, new { @class = "dob" })</p>
     </div>
-@*    <div class="grid_4">
-        <p>@Html.LabelFor(model => model.TimeZone) @Html.DropDownList("timez", Model.TimeZones, "Select your timezone")</p>
-    </div>    *@
+    <div class="grid_4">
+        <p>@Html.LabelFor(model => model.TimeZone) @Html.DropDownListFor(model => model.TimeZone, Model.TimeZones, "Select your timezone", new { style = "width:100% !important;" })</p>
+    </div>
     <br style="clear:both;" />
     @Html.LabelFor(model => model.ProfilePicture)
     @if (Model.ConnectedNetworks.Where(cn => cn.Service == "TWITTER").FirstOrDefault() != null) {
