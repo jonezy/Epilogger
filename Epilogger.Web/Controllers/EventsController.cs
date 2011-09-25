@@ -161,7 +161,7 @@ namespace Epilogger.Web.Controllers {
 
         [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the details of that event")]
         public ActionResult Create() {
-            CreateEventViewModel Model = new CreateEventViewModel();
+            CreateEventViewModel Model = Mapper.Map<Event, CreateEventViewModel>(new Event());
             Model.TimeZoneOffset = Helpers.GetUserTimeZoneOffset();
 
             DateTime roundTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, 0, 0);

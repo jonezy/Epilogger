@@ -35,7 +35,7 @@
         <div id="createevent-time" class="item-data clearfix">
             <label class="wide">Start Date:</label> @Html.EditorFor(model => model.StartDateTime)
             <p><label class="wide">Event End:</label> @Html.EditorFor(model => model.EndDateTime)</p>
-            <p><label class="wide">Time Zone:</label> @Html.DropDownListFor(model => model.TimeZoneOffset, Model.TimeZones, "Select your timezone", new { @class = "wide" })</p>
+            <p><label class="wide">Time Zone:</label> @Html.DropDownListFor(model => model.TimeZones, Model.TimeZones, "Select your timezone", new { @class = "wide" })</p>
         </div>
     </div>
     <input type="submit" class="blue-action-button" value="Create Event" />
