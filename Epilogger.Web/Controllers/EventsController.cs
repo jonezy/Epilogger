@@ -508,16 +508,16 @@ namespace Epilogger.Web.Controllers {
 
                     currentEvent.StartDateTime = model.StartDateTime.FromUserTimeZoneToUtc();
                     currentEvent.EndDateTime = model.EndDateTime.FromUserTimeZoneToUtc();
-
                   
                     ES.Save(currentEvent);
                     this.StoreSuccess("Your Event was updated");
+                    model = Mapper.Map<Event, CreateEventViewModel>(currentEvent);
                 } catch (Exception ex) {
                     this.StoreError(string.Format("There was an error: {0}", ex.Message));
                     return View(model);
                 }
-
             }
+            
             return View(model);
         }
     }
