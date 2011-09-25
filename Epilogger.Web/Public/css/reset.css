@@ -304,8 +304,7 @@ svg {
 		display: block;
 		margin-bottom: 20px;
 		background: #fff; }
-	select { 
-		padding: 0; }
+
 	input[type="text"]:focus,
 	input[type="password"]:focus,
 	input[type="email"]:focus, 

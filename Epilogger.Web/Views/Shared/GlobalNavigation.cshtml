@@ -4,7 +4,7 @@
 <div id="user-status">
            
     @if (Model.UserLoggedIn) {
-        @:<span class="person">Bonjour <strong>@Model.Username</strong></span> (@Html.ActionLink("logout", "logout", "account"))
+        @:<span class="person">Bonjour <strong>@Html.ActionLink(Model.Username, "index", "account")</strong></span> (@Html.ActionLink("logout", "logout", "account"))
     }
     else
     {
