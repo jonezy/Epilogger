@@ -441,7 +441,7 @@ namespace Epilogger.Web.Controllers {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
 
             Event currentEvent = ES.FindByID(id);
-            List<CheckinDisplayViewModel> checkins = Mapper.Map<List<CheckIn>, List<CheckinDisplayViewModel>>(CS.FindByEventIDPaged(id, currentPage, 10).ToList());
+            List<CheckinDisplayViewModel> checkins = Mapper.Map<List<CheckIn>, List<CheckinDisplayViewModel>>(CS.FindByEventIDPaged(id, currentPage, 10, this.FromDateTime(), this.ToDateTime()).ToList());
 
             AllCheckinsViewModel model = new AllCheckinsViewModel(checkins, currentPage, 10);
             model.ID = currentEvent.ID.ToString();
@@ -451,8 +451,16 @@ namespace Epilogger.Web.Controllers {
             return View(model);
         }
 
-        public ActionResult AllLinks(int id) {
+        public ActionResult AllLinks(int id, int? page) {
+
+            int currentPage = page.HasValue ? page.Value - 1 : 0;
             AllLinksViewModel model = Mapper.Map<Event, AllLinksViewModel>(ES.FindByID(id));
+
+            
+            model.Links = LS.FindByEventIDPaged(id, currentPage, 10, this.FromDateTime(), this.ToDateTime());
+            model.CurrentPageIndex = currentPage;
+            model.TotalRecords = LS.FindCountByEventID(id, this.FromDateTime(), this.ToDateTime());
+
             return View(model);
         }
     }
