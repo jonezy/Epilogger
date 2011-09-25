@@ -259,6 +259,12 @@
     <Content Include="Public\js\AnyTime\anytimec.css" />
     <Content Include="Public\js\AnyTime\anytimec.js" />
     <Content Include="Public\js\clickmap.js" />
+    <Content Include="Public\js\datetime\timedropdown\timedropdown.js" />
+    <Content Include="Public\js\datetime\txtdropdown\jquery.scrollTo-min.js" />
+    <Content Include="Public\js\datetime\txtdropdown\txtdropdown-btn-hover.png" />
+    <Content Include="Public\js\datetime\txtdropdown\txtdropdown-btn.png" />
+    <Content Include="Public\js\datetime\txtdropdown\txtdropdown.css" />
+    <Content Include="Public\js\datetime\txtdropdown\txtdropdown.js" />
     <Content Include="Public\js\epilogger.js" />
     <Content Include="Public\js\EventDetails.js" />
     <Content Include="Public\js\head.load.min.js" />
@@ -391,6 +397,8 @@
     <Content Include="Views\Events\AllCheckins.cshtml" />
     <Content Include="Views\Shared\Navigation.cshtml" />
     <Content Include="Views\Events\EventToolbar.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\TimeSpan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

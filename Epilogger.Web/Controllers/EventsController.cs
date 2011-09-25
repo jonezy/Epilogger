@@ -118,8 +118,8 @@ namespace Epilogger.Web.Controllers {
 
             string encodedFrom = Epilogger.Web.Helpers.base64Encode(String.Format("{0:yyyy-MM-dd HH:mm:ss}", FromDateTime));
             string encodedTo = Epilogger.Web.Helpers.base64Encode(String.Format("{0:yyyy-MM-dd HH:mm:ss}", ToDateTime));
-
-            return Redirect("/Events/Details/" + id + "?f=" + encodedFrom + "&t=" + encodedTo);
+            return RedirectToAction("Details", new { id = id, f = encodedFrom, t = encodedTo });
+            //return Redirect("/Events/Details/" + id + "?f=" + encodedFrom + "&t=" + encodedTo);
         }
 
         public ActionResult AllPhotos(int id, int? page) {

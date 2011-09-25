@@ -26,9 +26,9 @@
     <link href="@Url.Content("~/Public/css/jquery-ui-1.8.16.custom.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Public/js/prettyPhoto/css/prettyPhoto.css")" rel="stylesheet" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
     <link href="@Url.Content("~/Public/js/AnyTime/anytimec.css")" rel="stylesheet" type="text/css" />
-    
-    <script src="@Url.Content("~/Public/js/head.load.min.js")" type="text/javascript" language="javascript"></script>
+    <link href="@Url.Content("~/Public/js/datetime/txtdropdown/txtdropdown.css")" rel="stylesheet" type="text/css" />
 
+    <script src="@Url.Content("~/Public/js/head.load.min.js")" type="text/javascript" language="javascript"></script>
     <script type="text/javascript" language="javascript">
         head.js('@Url.Content("~/Public/js/jquery-1.6.2.min.js")');
         head.js('@Url.Content("~/Public/js/jquery-ui-1.8.16.custom.min.js")');
@@ -42,7 +42,9 @@
                 expandPrefix: ' ', // default is '... '
             });
         });
-
+        head.js('@Url.Content("~/Public/js/datetime/txtdropdown/jquery.scrollTo-min.js")');
+        head.js('@Url.Content("~/Public/js/datetime/txtdropdown/txtdropdown.js")');
+        head.js('@Url.Content("~/Public/js/datetime/timedropdown/timedropdown.js")');
 
         head.js('@Url.Content("~/Public/js/clickmap.js")');
     </script>
@@ -120,6 +122,17 @@
             $(document).stopSaveClicks();
             return false;
         });
+
+        $(".datepicker").datepicker({
+            showAnim: '',
+            dateFormat: 'm/d/yy',
+            showOn: 'button',
+            buttonImageOnly: true,
+            buttonImage: '@Url.Content("~/Public/js/datetime/txtdropdown/txtdropdown-btn.png")',
+            buttonText: 'Select a date'
+        });
+
+        $(".timedropdown").timedropdown();
     });
 
 
