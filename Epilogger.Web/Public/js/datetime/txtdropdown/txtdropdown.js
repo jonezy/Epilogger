@@ -12,9 +12,9 @@
 
                 // Position the dropdown directly below the textbox
                 css('position', 'absolute');
-                css('width', txt.width() + 18);
-                css('left', txt.position().left + 19);
-                css('top', txt.position().top + txt.height() + 6);
+                css('width', txt.width() + 29);
+                css('left', txt.position().left + 23);
+                css('top', txt.position().top + txt.height() + 12);
 
                 // Hide the dropdown
                 hide();

@@ -1,6 +1,6 @@
 ﻿.txtdropdown-btn {
-  width: 18px;
-  height: 20px;
+  width: 23px;
+  height: 29px;
   float: right;
   background: url('txtdropdown-btn.png') no-repeat center;
 }
@@ -13,6 +13,7 @@
 {
   background-color:White;
   border: 1px solid;
+  border-top:0px;
   padding: 0px;
   list-style: none;
   margin: 0px;
@@ -20,6 +21,7 @@
   overflow:auto;
   cursor:default;
   visibility: hidden;
+  font-size:12px;
 }
 
 .txtdropdown-ddl li {
