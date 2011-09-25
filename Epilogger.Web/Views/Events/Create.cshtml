@@ -32,19 +32,10 @@
     <div class="item-card">
         <h4>WHEN AND WHERE</h4>
         <br style="clear:both;" />
-        <div class="item-data clearfix">
-
+        <div id="createevent-time" class="item-data clearfix">
             <label class="wide">Start Date:</label> @Html.EditorFor(model => model.StartDateTime)
             <p><label class="wide">Event End:</label> @Html.EditorFor(model => model.EndDateTime)</p>
-
-            
             <p><label class="wide">Time Zone:</label> @Html.DropDownListFor(model => model.TimeZoneOffset, Model.TimeZones, "Select your timezone", new { @class = "wide" })</p>
-
-            
-@*          <label class="wide">Start Collecting Data:</label> @Html.EditorFor(model => model.CollectionStartDateTime)</p>
-            <p><label class="wide">Finish Collecting Data:</label> @Html.EditorFor(model => model.CollectionEndDateTime)</p>
-
-            *@
         </div>
     </div>
     <input type="submit" class="blue-action-button" value="Create Event" />

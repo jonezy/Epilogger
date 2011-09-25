@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Web.Mvc;
 
-namespace Epilogger.Web.Models
-{
-    public class CreateEventViewModel
-    {
+namespace Epilogger.Web.Models {
+    public class CreateEventViewModel {
+        public int ID { get; set; }
         public Guid UserID { get; set; }
         public DateTime CreatedDateTime { get; set; }
 
-        
+
         [Required]
         [DisplayName("Name")]
         public String Name { get; set; }
@@ -23,11 +21,11 @@ namespace Epilogger.Web.Models
         public String Cost { get; set; }
         [DisplayName("Description")]
         public String Description { get; set; }
-        
+
         [Required]
         [DisplayName("Data Collection Start Time")]
         public DateTime CollectionStartDateTime { get; set; }
-        
+
         [DisplayName("Event Start Date and Time")]
         public DateTime StartDateTime { get; set; }
         [Required]
