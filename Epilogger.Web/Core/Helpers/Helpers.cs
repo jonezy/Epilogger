@@ -117,5 +117,12 @@ namespace Epilogger.Web {
             }
         }
 
+        public static int RandomInt(Random rng, int min, int max)
+        {
+            //return min + (rng.Next() * (max - min));
+            return rng.Next(min, max);
+        }
+
+
     }
 }

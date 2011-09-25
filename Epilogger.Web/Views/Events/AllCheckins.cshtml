@@ -25,5 +25,5 @@
         </div>
     }
 
-    @MvcHtmlString.Create(Html.Pager(10, Model.CurrentPageIndex, Model.TotalRecords, new { controller = "events", action = "allcheckins", id = Model.ID }))
+    @MvcHtmlString.Create(Html.Pager(10, Model.CurrentPageIndex, Model.TotalRecords, new { controller = "Events", action = "allcheckins", id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }))
 </div>

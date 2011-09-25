@@ -15,6 +15,53 @@ namespace Epilogger.Web {
             return base.GetData();
         }
 
+        public List<Event> UpcomingEvents()
+        {
+            return base.GetData(e => e.StartDateTime > DateTime.UtcNow);
+        }
+
+        public List<Event> PastEvents()
+        {
+            return base.GetData(e => e.EndDateTime < DateTime.UtcNow);
+        }
+
+        public List<Event> GoingOnNowEvents()
+        {
+            return base.GetData(e => e.StartDateTime >= DateTime.UtcNow && e.EndDateTime <= DateTime.UtcNow);
+        }
+
+        
+
+        public Event GetRandomEvent()
+        {
+            int lowerbound = 1;
+            int upperbound = this.GetHighestEventID();
+
+            System.Random r = new System.Random();
+            int RandomNumber = r.Next(lowerbound, upperbound);
+            
+            do
+            {
+                Event EE = this.FindByID(RandomNumber);
+                if (EE == null)
+                {
+                    RandomNumber = Helpers.RandomInt(r, lowerbound, upperbound);
+                }
+                else
+                {
+                    return EE;
+                }
+            } while (true);
+
+        }
+
+        public int GetHighestEventID()
+        {
+            return db.Events.OrderByDescending(e => e.ID).First().ID;
+        }
+
+
+
         public Event FindByID(int EventID)
         {
             return GetData().Where(e => e.ID == EventID).FirstOrDefault();
