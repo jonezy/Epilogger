@@ -150,8 +150,8 @@ span.number {
 
 .image-grid .commentbubble:hover {opacity:1;}
 
-.hottest-photogridTop { margin-bottom: 16px; height:73px; }
-.hottest-photogridBottom { margin-top: 16px; height:73px; }
+.hottest-photogrid { height:73px; }
+.hottest-Title { margin: 16px 0 16px 5px; }
 .hottestimage { height:73px; width:105px; overflow:hidden; float:left; margin-right: 6px; }
 
 

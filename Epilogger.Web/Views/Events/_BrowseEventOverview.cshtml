@@ -11,9 +11,12 @@
         @foreach (Epilogger.Data.Event item in Model.HottestEvents)
         {
             System.Random r = new System.Random();
+            //@foreach (Epilogger.Data.Image image in item.Images.AsEnumerable().Skip(r.Next(1, item.Images.Count())).Take(5))
+            //This is way too slow.
             
-            <div class="hottest-photogridTop">
-                @foreach (Epilogger.Data.Image image in item.Images.ToList().Skip(r.Next(1, item.Images.Count())).Take(5))
+            <div class="hottest-photogrid">
+                
+                @foreach (Epilogger.Data.Image image in item.Images.AsEnumerable().Skip(r.Next(1, item.Images.Count())).Take(5))
                 {
                     <div class="hottestimage" id="photo-@image.ID">
                         <a href="@image.Fullsize" rel="prettyPhoto[latestphotos]" title="@image.ID" id="@image.ID">
@@ -21,12 +24,11 @@
                     </div>
                 }
             </div>
-            <div class="grid_7 omega">
+            <div class="hottest-Title">
                 <h1>@item.Name</h1>
             </div>
-            <br style="clear:both;" />
-            <div class="hottest-photogridBottom">
-                @foreach (Epilogger.Data.Image image in item.Images.ToList().Skip(r.Next(1, item.Images.Count())).Take(5))
+            <div class="hottest-photogrid">
+                @foreach (Epilogger.Data.Image image in item.Images.AsEnumerable().Skip(r.Next(1, item.Images.Count())).Take(5))
                 {
                     <div class="hottestimage" id="photo-@image.ID">
                         <a href="@image.Fullsize" rel="prettyPhoto[latestphotos]" title="@image.ID" id="@image.ID">
@@ -34,8 +36,10 @@
                     </div>
                 }
             </div>
-            
-         
+            <br />
+            <br />
+            <br />            
+            <br />         
         }
         
 </div>

@@ -18,17 +18,16 @@ namespace Epilogger.Web {
         public List<Event> UpcomingEvents()
         {
             return GetData(e => e.StartDateTime > DateTime.UtcNow);
-            //db.Events.Where(e => e.StartDateTime > DateTime.UtcNow).ToList();
         }
 
         public List<Event> PastEvents()
         {
-            return db.Events.Where(e => e.EndDateTime < DateTime.UtcNow).ToList();
+            return GetData(e => e.EndDateTime < DateTime.UtcNow).ToList();
         }
 
         public List<Event> GoingOnNowEvents()
         {
-            return db.Events.Where(e => e.StartDateTime <= DateTime.UtcNow && e.EndDateTime >= DateTime.UtcNow).ToList();
+            return GetData(e => e.StartDateTime <= DateTime.UtcNow && e.EndDateTime >= DateTime.UtcNow).ToList();
         }
 
         
