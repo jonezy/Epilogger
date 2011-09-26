@@ -61,8 +61,13 @@ namespace Epilogger.Web.Controllers {
 
         public ActionResult Index(string filter) {
 
-            List<Event> events = new List<Event>();
 
+            BrowseEventsDisplayViewModel model = new BrowseEventsDisplayViewModel();
+
+            List<Event> events = new List<Event>();
+            IEnumerable<Event> hottestevents = ES.GetHottestEvents(10);
+
+            //Fillthe events of the time selected
             switch (filter)
             {
                 case "upcoming":
@@ -77,9 +82,15 @@ namespace Epilogger.Web.Controllers {
                 case "random":
                     Epilogger.Data.Event e = ES.GetRandomEvent();
                     return RedirectToAction("details", new { id = e.ID });
+                default:
+                    filter = "overview";
+                    break;
             }
+
+            model.BrowsePageFilter = filter;
             
-            List<EventDisplayViewModel> model = Mapper.Map<List<Event>, List<EventDisplayViewModel>>(events);
+            model.Events = Mapper.Map<List<Event>, List<EventDisplayViewModel>>(events);
+            model.HottestEvents = ES.GetHottestEvents(10);
 
             return View(model);
         }

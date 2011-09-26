@@ -150,6 +150,10 @@ span.number {
 
 .image-grid .commentbubble:hover {opacity:1;}
 
+.hottest-photogridTop { margin-bottom: 16px; height:73px; }
+.hottest-photogridBottom { margin-top: 16px; height:73px; }
+.hottestimage { height:73px; width:105px; overflow:hidden; float:left; margin-right: 6px; }
+
 
 #event-intro {font-size:12px;}
 #event-details {font-size:12px;padding:10px;border-top:dotted 1px #d9d9d9;border-bottom:dotted 1px #d9d9d9;}	
