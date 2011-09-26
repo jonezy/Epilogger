@@ -1,10 +1,33 @@
-﻿@model List<Epilogger.Web.Models.EventDisplayViewModel>
+﻿@model Epilogger.Web.Models.BrowseEventsDisplayViewModel
 
 @{
-    ViewBag.Title = "Epilogger - Browse ()";
+    ViewBag.Title = "Epilogger - Browse (" + @Model.BrowsePageFilter + ")";
 }
 
-<h2>@Html.ActionLink("Create Event", "Create", "Events")</h2>
+
+
+@switch (Model.BrowsePageFilter)
+    {
+        case "upcoming":
+        case "past":
+        case "now":
+            @Html.Partial("_BrowseEventLists")
+       break;
+        default:
+            @Html.Partial("_BrowseEventOverview")
+       break;
+    }
+
+
+
+
+
+
+
+
+
+@*
+
 <div class="clear"></div>
 <div class="spacer"></div>
 
@@ -33,4 +56,4 @@
         }    
     }
 }
-</ul>
+</ul>*@
