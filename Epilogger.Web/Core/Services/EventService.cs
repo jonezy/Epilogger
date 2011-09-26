@@ -17,17 +17,17 @@ namespace Epilogger.Web {
 
         public List<Event> UpcomingEvents()
         {
-            return base.GetData(e => e.StartDateTime > DateTime.UtcNow);
+            return db.Events.Where(e => e.StartDateTime > DateTime.UtcNow).ToList();
         }
 
         public List<Event> PastEvents()
         {
-            return base.GetData(e => e.EndDateTime < DateTime.UtcNow);
+            return db.Events.Where(e => e.EndDateTime < DateTime.UtcNow).ToList();
         }
 
         public List<Event> GoingOnNowEvents()
         {
-            return base.GetData(e => e.StartDateTime >= DateTime.UtcNow && e.EndDateTime <= DateTime.UtcNow);
+            return db.Events.Where(e => e.StartDateTime >= DateTime.UtcNow && e.EndDateTime <= DateTime.UtcNow).ToList();
         }
 
         
@@ -60,6 +60,12 @@ namespace Epilogger.Web {
             return db.Events.OrderByDescending(e => e.ID).First().ID;
         }
 
+
+
+        public IEnumerable<Event> GetHottestEvents(int ItemsToReturn)
+        {
+            return db.Events.Where(e => e.StartDateTime > DateTime.UtcNow.AddMonths(-1) && e.StartDateTime < DateTime.UtcNow).OrderByDescending(e => e.Tweets.Where(f => f.EventID == e.ID).Count() + (e.Images.Where(f => f.EventID == e.ID).Count() * 4)).Take(ItemsToReturn);
+        }
 
 
         public Event FindByID(int EventID)

@@ -1,0 +1,42 @@
+﻿@model Epilogger.Web.Models.BrowseEventsDisplayViewModel
+           
+<div id="events-nav">
+    <h1>BROWSE EVENTS</h1>
+    <br style="clear:both;" />
+</div>
+
+<div id="events-content">
+        <h2>HOTTEST EVENTS:</h2>
+        
+        @foreach (Epilogger.Data.Event item in Model.HottestEvents)
+        {
+            System.Random r = new System.Random();
+            
+            <div class="hottest-photogridTop">
+                @foreach (Epilogger.Data.Image image in item.Images.ToList().Skip(r.Next(1, item.Images.Count())).Take(5))
+                {
+                    <div class="hottestimage" id="photo-@image.ID">
+                        <a href="@image.Fullsize" rel="prettyPhoto[latestphotos]" title="@image.ID" id="@image.ID">
+                        <img src="@image.Thumb" height="154" width="180" border="0" alt="" /></a>
+                    </div>
+                }
+            </div>
+            <div class="grid_7 omega">
+                <h1>@item.Name</h1>
+            </div>
+            <br style="clear:both;" />
+            <div class="hottest-photogridBottom">
+                @foreach (Epilogger.Data.Image image in item.Images.ToList().Skip(r.Next(1, item.Images.Count())).Take(5))
+                {
+                    <div class="hottestimage" id="photo-@image.ID">
+                        <a href="@image.Fullsize" rel="prettyPhoto[latestphotos]" title="@image.ID" id="@image.ID">
+                        <img src="@image.Thumb" height="154" width="180" border="0" alt="" /></a>
+                    </div>
+                }
+            </div>
+            
+         
+        }
+        
+</div>
+

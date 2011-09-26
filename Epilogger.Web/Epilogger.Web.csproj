@@ -181,6 +181,7 @@
     <Compile Include="Models\AllLinksViewModel.cs" />
     <Compile Include="Models\AllCheckinsViewModel.cs" />
     <Compile Include="Models\AllBlogPostsViewModel.cs" />
+    <Compile Include="Models\BrowseEventsDisplayViewModel.cs" />
     <Compile Include="Models\CreateAccountModel.cs" />
     <Compile Include="Models\CreateEventViewModel.cs" />
     <Compile Include="Models\DashboardAccountViewModel.cs" />
@@ -402,6 +403,8 @@
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TimeSpan.cshtml" />
     <Content Include="Views\Events\Edit.cshtml" />
+    <Content Include="Views\Events\_BrowseEventOverview.cshtml" />
+    <Content Include="Views\Events\_BrowseEventLists.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
