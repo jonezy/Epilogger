@@ -91,6 +91,7 @@ namespace Epilogger.Web.Controllers {
             
             model.Events = Mapper.Map<List<Event>, List<EventDisplayViewModel>>(events);
             model.HottestEvents = ES.GetHottestEvents(10);
+            
 
             return View(model);
         }
