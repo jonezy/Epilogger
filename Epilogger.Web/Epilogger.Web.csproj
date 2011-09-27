@@ -193,6 +193,7 @@
     <Compile Include="Models\EventDisplayViewModel.cs" />
     <Compile Include="Models\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\GlobalNavigationModel.cs" />
+    <Compile Include="Models\HotestEventsModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ResetPasswordViewModel.cs" />
     <Compile Include="Models\TweetDisplayViewModel.cs" />

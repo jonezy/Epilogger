@@ -442,6 +442,12 @@ namespace Epilogger.Data{
             sp.Command.AddParameter("EventID",EventID,DbType.Int32);
             return sp;
         }
+        public StoredProcedure GetRandomImagesByEventID(int EventID,int RecordsToReturn){
+            StoredProcedure sp=new StoredProcedure("GetRandomImagesByEventID",this.Provider);
+            sp.Command.AddParameter("EventID",EventID,DbType.Int32);
+            sp.Command.AddParameter("RecordsToReturn",RecordsToReturn,DbType.Int32);
+            return sp;
+        }
         public StoredProcedure GetTop10TweetersByEventID(int EventID,DateTime FromDate,DateTime ToDate){
             StoredProcedure sp=new StoredProcedure("GetTop10TweetersByEventID",this.Provider);
             sp.Command.AddParameter("EventID",EventID,DbType.Int32);

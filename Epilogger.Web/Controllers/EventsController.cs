@@ -90,8 +90,16 @@ namespace Epilogger.Web.Controllers {
             model.BrowsePageFilter = filter;
             
             model.Events = Mapper.Map<List<Event>, List<EventDisplayViewModel>>(events);
-            model.HottestEvents = ES.GetHottestEvents(10);
             
+            //For the Overview page, the hottest events
+            model.HottestEvents = new List<HotestEventsModel>();
+            foreach (Epilogger.Data.Event item in ES.GetHottestEvents(10))
+            {
+                HotestEventsModel HE = new HotestEventsModel();
+                HE.Event = item;
+                HE.RandomHottestImages = IS.GetRandomImagesByEventID(item.ID, 10);
+                model.HottestEvents.Add(HE);
+            }
 
             return View(model);
         }
