@@ -5,7 +5,7 @@ namespace Epilogger.Web.Models {
         public string BrowsePageFilter { get; set; }
 
         public IEnumerable<EventDisplayViewModel> Events { get; set; }
-        public IEnumerable<Epilogger.Data.Event> HottestEvents { get; set; }
+        public List<HotestEventsModel> HottestEvents { get; set; }
 
     }
 }
