@@ -8,39 +8,41 @@
 <div id="events-content">
         <h2>HOTTEST EVENTS:</h2>
         
-        @foreach (Epilogger.Data.Event item in Model.HottestEvents)
+        @foreach (Epilogger.Web.Models.HotestEventsModel item in Model.HottestEvents)
         {
-            System.Random r = new System.Random();
-            //@foreach (Epilogger.Data.Image image in item.Images.AsEnumerable().Skip(r.Next(1, item.Images.Count())).Take(5))
-            //This is way too slow.
-            
-            <div class="hottest-photogrid">
+            <div class="HottestEventBig">
+                <div class="hottest-photogrid">
                 
-                @foreach (Epilogger.Data.Image image in item.Images.AsEnumerable().Skip(r.Next(1, item.Images.Count())).Take(5))
-                {
-                    <div class="hottestimage" id="photo-@image.ID">
-                        <a href="@image.Fullsize" rel="prettyPhoto[latestphotos]" title="@image.ID" id="@image.ID">
-                        <img src="@image.Thumb" height="154" width="180" border="0" alt="" /></a>
-                    </div>
-                }
+                    @foreach (Epilogger.Data.Image image in item.RandomHottestImages.Take(5))
+                    {
+                        <div class="hottestimage" id="photo-@image.ID">
+                            <a href="@image.Fullsize" rel="prettyPhoto[latestphotos]" title="@image.ID" id="@image.ID">
+                            <img src="@image.Thumb" height="154" width="180" border="0" alt="" /></a>
+                        </div>
+                    }
+                </div>
+                <div class="hottest-Title">
+                    <h1>@item.Event.Name</h1>
+                </div>
+                <div class="hottest-photogrid">
+                    @foreach (Epilogger.Data.Image image in item.RandomHottestImages.Skip(5).Take(5))
+                    {
+                        <div class="hottestimage" id="photo-@image.ID">
+                            <a href="@image.Fullsize" rel="prettyPhoto[latestphotos]" title="@image.ID" id="@image.ID">
+                            <img src="@image.Thumb" height="154" width="180" border="0" alt="" /></a>
+                        </div>
+                    }
+                </div>
             </div>
-            <div class="hottest-Title">
-                <h1>@item.Name</h1>
-            </div>
-            <div class="hottest-photogrid">
-                @foreach (Epilogger.Data.Image image in item.Images.AsEnumerable().Skip(r.Next(1, item.Images.Count())).Take(5))
-                {
-                    <div class="hottestimage" id="photo-@image.ID">
-                        <a href="@image.Fullsize" rel="prettyPhoto[latestphotos]" title="@image.ID" id="@image.ID">
-                        <img src="@image.Thumb" height="154" width="180" border="0" alt="" /></a>
-                    </div>
-                }
-            </div>
-            <br />
-            <br />
-            <br />            
-            <br />         
         }
         
+        @*Links*@
+        @foreach (Epilogger.Web.Models.HotestEventsModel item in Model.HottestEvents)
+        {
+            <div class="HottestListItem"><a href="#" class="">@item.Event.Name</a></div>
+        }
+
+
+
 </div>
 

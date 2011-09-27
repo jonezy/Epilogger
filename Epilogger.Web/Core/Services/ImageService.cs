@@ -23,6 +23,10 @@ namespace Epilogger.Web
             return db.Images.Where(t => t.EventID == EventID && t.DateTime >= F && t.DateTime <= T).OrderByDescending(t => t.DateTime).Take(9);
         }
 
+        public List<Image> GetRandomImagesByEventID(int EventID, int NumberToGet)
+        {
+            return db.GetRandomImagesByEventID(EventID, NumberToGet).ExecuteTypedList<Image>();
+        }
 
 
 

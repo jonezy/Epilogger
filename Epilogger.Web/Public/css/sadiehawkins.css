@@ -153,6 +153,8 @@ span.number {
 .hottest-photogrid { height:73px; }
 .hottest-Title { margin: 16px 0 16px 5px; }
 .hottestimage { height:73px; width:105px; overflow:hidden; float:left; margin-right: 6px; }
+.HottestListItem a { display: inline; margin-right: 15px; text-transform: uppercase; color: #acacac; }
+.HottestListItem a.active { }
 
 
 #event-intro {font-size:12px;}
