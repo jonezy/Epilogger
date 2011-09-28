@@ -42,7 +42,7 @@
     @foreach (Epilogger.Data.Image EPLImage in Model.Images)
     {
         <div class="withcomment newPhotoupdates" id="photo-@EPLImage.ID">
-            <a href="@EPLImage.Fullsize" rel="prettyPhoto[latestphotos]" title="@EPLImage.ID" id="@EPLImage.ID"><img src="@EPLImage.Thumb" height="154" width="180" border="0" alt="" /></a>
+            <a href="@EPLImage.Fullsize" rel="prettyPhoto[latestphotos]" title="@EPLImage.ID" id="@EPLImage.ID"><img src="@EPLImage.Fullsize" width="200" border="0" alt="" /></a>
 		    <a href="#" class="commentbubble">
                 @*Number of Comments*@
                 @EPLImage.ImageMetaData.Count()
