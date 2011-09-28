@@ -243,6 +243,7 @@
     <Content Include="Public\images\click.png" />
     <Content Include="Public\images\event-list-icons\test.png" />
     <Content Include="Public\images\event_activity_title_icons.png" />
+    <Content Include="Public\images\icons\BrowseBullet.png" />
     <Content Include="Public\images\icons\bubble.png" />
     <Content Include="Public\images\icons\dashboard-event-totals.png" />
     <Content Include="Public\images\icons\event-toolbar-ov.png" />
@@ -262,6 +263,7 @@
     <Content Include="Public\images\shoutbox.png" />
     <Content Include="Public\js\AnyTime\anytimec.css" />
     <Content Include="Public\js\AnyTime\anytimec.js" />
+    <Content Include="Public\js\BrowseEvents.js" />
     <Content Include="Public\js\clickmap.js" />
     <Content Include="Public\js\datetime\timedropdown\timedropdown.js" />
     <Content Include="Public\js\datetime\txtdropdown\jquery.scrollTo-min.js" />
