@@ -234,7 +234,7 @@ namespace Epilogger.Web.Controllers {
         public ActionResult Create(CreateEventViewModel model) {
             if (ModelState.IsValid) {
                 try {
-                    model.UserID = Guid.Parse(CookieHelpers.GetCookieValue("lc", "uid").ToString());
+                    model.UserID = CurrentUserID;
                     model.CreatedDateTime = DateTime.UtcNow;
 
                     if (model.CollectionStartDateTime == DateTime.MinValue) {
@@ -253,14 +253,17 @@ namespace Epilogger.Web.Controllers {
 
                     Event EPLevent = Mapper.Map<CreateEventViewModel, Event>(model);
                     ES.Save(EPLevent);
-                    this.StoreSuccess("Your Event was created");
+                    this.StoreSuccess("Your Event was created successfully!  Don't forget to share it with your friends and attendees!");
                     return RedirectToAction("details", new { id = EPLevent.ID });
                 } catch (Exception ex) {
                     this.StoreError(string.Format("There was an error: {0}", ex.Message));
+                    Event EPLevent = Mapper.Map<CreateEventViewModel, Event>(model);
+                    model = Mapper.Map<Event, CreateEventViewModel>(EPLevent);
                     return View(model);
                 }
-
             }
+            Event tempEvent = Mapper.Map<CreateEventViewModel, Event>(model);
+            model = Mapper.Map<Event, CreateEventViewModel>(tempEvent);
             return View(model);
         }
 
