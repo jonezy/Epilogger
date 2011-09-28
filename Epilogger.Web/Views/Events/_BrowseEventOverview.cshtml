@@ -1,4 +1,9 @@
 ﻿@model Epilogger.Web.Models.BrowseEventsDisplayViewModel
+      
+<script type="text/javascript" language="javascript">
+    head.js('@Url.Content("~/Public/js/BrowseEvents.js")');
+</script>
+
            
 <div id="events-nav">
     <h1>BROWSE EVENTS</h1>
@@ -8,41 +13,54 @@
 <div id="events-content">
         <h2>HOTTEST EVENTS:</h2>
         
+        <div id="HottestSlides">
         @foreach (Epilogger.Web.Models.HotestEventsModel item in Model.HottestEvents)
         {
-            <div class="HottestEventBig">
-                <div class="hottest-photogrid">
+            <div class="HottestEventBig" id="HotestEventDetails@(item.Event.ID)">
+                <div class="hottest-photogridTop">
                 
                     @foreach (Epilogger.Data.Image image in item.RandomHottestImages.Take(5))
                     {
                         <div class="hottestimage" id="photo-@image.ID">
-                            <a href="@image.Fullsize" rel="prettyPhoto[latestphotos]" title="@image.ID" id="@image.ID">
-                            <img src="@image.Thumb" height="154" width="180" border="0" alt="" /></a>
+                            <a href="@image.Fullsize" rel="prettyPhoto[@item.Event.ID]" title="@image.ID" id="@image.ID">
+                            <img src="@image.Fullsize" height="154" width="180" border="0" alt="" /></a>
                         </div>
                     }
                 </div>
                 <div class="hottest-Title">
                     <h1>@item.Event.Name</h1>
                 </div>
-                <div class="hottest-photogrid">
+                <div class="hottest-photogridBottom">
                     @foreach (Epilogger.Data.Image image in item.RandomHottestImages.Skip(5).Take(5))
                     {
                         <div class="hottestimage" id="photo-@image.ID">
-                            <a href="@image.Fullsize" rel="prettyPhoto[latestphotos]" title="@image.ID" id="@image.ID">
-                            <img src="@image.Thumb" height="154" width="180" border="0" alt="" /></a>
+                            <a href="@image.Fullsize" rel="prettyPhoto[@item.Event.ID]" title="@image.ID" id="@image.ID">
+                            <img src="@image.Fullsize" height="154" width="180" border="0" alt="" /></a>
                         </div>
                     }
                 </div>
             </div>
         }
+        </div>
         
         @*Links*@
+        <ul class="HottestList">
         @foreach (Epilogger.Web.Models.HotestEventsModel item in Model.HottestEvents)
         {
-            <div class="HottestListItem"><a href="#" class="">@item.Event.Name</a></div>
+            <li><a href="#" class="HottestListLink" id="@(item.Event.ID)">@item.Event.Name</a></li>
         }
-
-
-
+        </ul>
 </div>
 
+
+
+<script type="text/javascript" language="javascript">
+    head.ready(function () {
+        $("a[rel^='prettyPhoto']").prettyPhoto({
+            theme: 'light_square',
+            animation_speed: 'fast',
+            overlay_gallery: false,
+            changepicturecallback: function () { changeDescription(); }
+        });
+    });
+</script>
