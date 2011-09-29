@@ -6,20 +6,16 @@ using System.Web.Mvc;
 
 namespace Epilogger.Web.Models {
     public class CreateAccountModel {
-        [DisplayName("First name"), Required(ErrorMessage="Please enter your first name")]
-        public string FirstName { get; set; }
 
-        [DisplayName("Last name"), Required(ErrorMessage = "Please enter your last name")]
-        public string LastName { get; set; }
+        [Required(ErrorMessage="Please enter your desired username")]
+        public string Username { get; set; }
+        
+        [Required(ErrorMessage = "Please enter your password")]
+        public string Password { get; set; }
 
         [DisplayName("Email address"), Required(ErrorMessage = "Please enter your email address")]
         public string EmailAddress { get; set; }
         
-        [Required(ErrorMessage="Please enter your desired username")]
-        public string Username { get; set; }
-        [Required(ErrorMessage = "Please enter your password")]
-        public string Password { get; set; }
-
         [DisplayName("Your timezone"), Required(ErrorMessage="Please select your timezone")]
         public double TimeZoneOffset { get; set; }
 
