@@ -77,7 +77,7 @@ namespace Epilogger.Web.Controllers {
                     events = ES.PastEvents();
                     break;
                 case "now":
-                    events = ES.GoingOnNowEvents();
+                    events = ES.GoingOnNowEvents().ToList();
                     break;
                 case "random":
                     Epilogger.Data.Event e = ES.GetRandomEvent();
@@ -89,20 +89,29 @@ namespace Epilogger.Web.Controllers {
 
             model.BrowsePageFilter = filter;
             
-            model.Events = Mapper.Map<List<Event>, List<EventDisplayViewModel>>(events);
+            //model.Events = Mapper.Map<List<Event>, List<EventDisplayViewModel>>(events);
+            model.Events = events;
             
             //For the Overview page, the hottest events
+
+
             model.HottestEvents = new List<HotestEventsModel>();
             foreach (Epilogger.Data.Event item in ES.GetHottestEvents(10))
             {
                 HotestEventsModel HE = new HotestEventsModel();
                 HE.Event = item;
                 HE.RandomHottestImages = IS.GetRandomImagesByEventID(item.ID, 10);
+                HE.TweetCount = TS.FindTweetCountByEventID(item.ID, DateTime.Parse("2000-01-01 00:00:00"), DateTime.Parse("2200-12-31 00:00:00"));
+                HE.PhotoCount = IS.FindImageCountByEventID(item.ID, DateTime.Parse("2000-01-01 00:00:00"), DateTime.Parse("2200-12-31 00:00:00"));
                 model.HottestEvents.Add(HE);
             }
 
             return View(model);
         }
+
+
+
+
 
         public ActionResult Details(int id) {
             EventDisplayViewModel Model = Mapper.Map<Event, EventDisplayViewModel>(ES.FindByID(id));

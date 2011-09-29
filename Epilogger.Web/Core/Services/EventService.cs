@@ -2,8 +2,8 @@
 
 using System;
 using System.Linq;
-
 using Epilogger.Data;
+using System.Data.Linq.SqlClient;
 
 namespace Epilogger.Web {
     public class EventService : ServiceBase<Event> {
@@ -17,17 +17,26 @@ namespace Epilogger.Web {
 
         public List<Event> UpcomingEvents()
         {
-            return GetData(e => e.StartDateTime > DateTime.UtcNow);
+            return db.Events.Where(e => e.StartDateTime > DateTime.UtcNow).ToList();
         }
 
         public List<Event> PastEvents()
         {
-            return GetData(e => e.EndDateTime < DateTime.UtcNow).ToList();
+            return db.Events.Where(e => e.EndDateTime < DateTime.UtcNow).ToList();
         }
 
-        public List<Event> GoingOnNowEvents()
+        public IEnumerable<Event> GoingOnNowEvents()
         {
-            return GetData(e => e.StartDateTime <= DateTime.UtcNow && e.EndDateTime >= DateTime.UtcNow).ToList();
+            return db.Events.Where(e => e.StartDateTime <= DateTime.UtcNow && e.EndDateTime.Value >= DateTime.UtcNow).ToList();
+
+            //var GoingOn = (from e in db.Events
+            //               where e.StartDateTime.CompareTo(DateTime.UtcNow) >= 0  &&
+            //               e.EndDateTime.CompareTo(DateTime.UtcNow) > 0
+            //               select e);
+            
+            
+            //return GoingOn;
+
         }
 
         

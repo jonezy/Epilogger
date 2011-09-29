@@ -18,7 +18,6 @@
         {
             <div class="HottestEventBig" id="HotestEventDetails@(item.Event.ID)">
                 <div class="hottest-photogridTop">
-                
                     @foreach (Epilogger.Data.Image image in item.RandomHottestImages.Take(5))
                     {
                         <div class="hottestimage" id="photo-@image.ID">
@@ -29,6 +28,7 @@
                 </div>
                 <div class="hottest-Title">
                     <h1>@item.Event.Name</h1>
+                    <br style="clear:both;" />
                 </div>
                 <div class="hottest-photogridBottom">
                     @foreach (Epilogger.Data.Image image in item.RandomHottestImages.Skip(5).Take(5))
@@ -38,6 +38,10 @@
                             <img src="@image.Fullsize" width="200" border="0" alt="" /></a>
                         </div>
                     }
+                </div>
+                <div class="event-totals">
+                    <div class="total-tweets">@item.TweetCount</div>
+                    <div class="total-media">@item.PhotoCount</div>
                 </div>
             </div>
         }

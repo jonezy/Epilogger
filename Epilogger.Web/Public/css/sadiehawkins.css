@@ -305,11 +305,16 @@ ul#left-nav li a.current {background:#f6f6f6;border-bottom:solid 1px #bdbdbd;}
 .dashboard-event-item .event-content h6 {margin-bottom:3px;}
 .dashboard-event-item .event-content-searchterms {width:70%;}
 
-.dashboard-event-item .event-totals {float:right;margin-top:15px;}
+/*.dashboard-event-item .event-totals {float:right;margin-top:15px;}
 .dashboard-event-item .event-totals .total-tweets,
 .dashboard-event-item .event-totals .total-media {background-color:#fff;background-image:url(../images/icons/dashboard-event-totals.png); background-repeat:no-repeat;height:25px;font-weight:bold;color:#2c70cc;font-size:11px;}
 .dashboard-event-item .event-totals .total-tweets {float:left;padding:4px 40px 0px 0px;background-position:40px 0px;width:40px;}
-.dashboard-event-item .event-totals .total-media {float:left;padding:4px 30px 0px 0px;background-position:24px -50px;width:40px;}
+.dashboard-event-item .event-totals .total-media {float:left;padding:4px 30px 0px 0px;background-position:24px -50px;width:40px;}*/
+.event-totals {float:right;margin-top:15px;}
+.event-totals .total-tweets,
+.event-totals .total-media {background-color:#fff;background-image:url(../images/icons/dashboard-event-totals.png); background-repeat:no-repeat;height:25px;font-weight:bold;color:#2c70cc;font-size:11px;}
+.event-totals .total-tweets {float:left;padding:4px 40px 0px 0px;background-position:40px 0px;width:40px;}
+.event-totals .total-media {float:left;padding:4px 30px 0px 0px;background-position:24px -50px;width:40px;}
 
 .account-overview {border-top:dotted 1px #b5b5b5;border-bottom:dotted 1px #b5b5b5;padding:10px;margin-bottom:20px;}
 .account-overview table {float:left;margin-right:20px;font-size:11px;}
