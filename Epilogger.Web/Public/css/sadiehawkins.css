@@ -11,14 +11,26 @@ p a {text-decoration:underline}
 a.edit_icon {background:url(../images/icons/pencil.png) no-repeat 0px 2px;padding-left:15px;}
 
 .blue-action-button {
-    -webkit-border-radius: 2px;-moz-border-radius: 2px;border-radius: 2px;
-    border:solid 1px #3789bc !important;
-    padding:5px !important;
-    background:#408ebf !important;
-    color:#fff !important;
-    text-shadow:none !important;
-    border:none !important;
-    font-family:'InterstatePlusRegular' !important;font-size:12px !important;text-transform:uppercase;font-weight:normal !important;}
+
+     border:solid 1px #3789bc;
+	  border-top: 1px solid #ccc;
+	  border-left: 1px solid #ccc;
+	  padding: 4px 12px;
+	  -moz-border-radius: 3px;
+	  -webkit-border-radius: 3px;
+	  border-radius: 3px;
+
+	  font-size: 11px;
+	  text-decoration: none;
+	  cursor: pointer;
+	  margin-bottom: 20px;
+
+    font-size:15px;
+
+    background:#408ebf;
+    color:#fff;
+    text-transform:uppercase;
+    font-family:'InterstatePlusRegular';}
 
 
 .datetime-container{}
@@ -238,6 +250,17 @@ ul#connected-networks {list-style:none;}
 #event-toolbar a.edit {background-position:0 -216px;}
 #event-toolbar a.allstats {background-position:0 -244px;}
 
+fieldset.login label {padding:8px;width:70px;text-transform:uppercase;font-size:11px;}
+fieldset.login label,
+fieldset.login input[type="text"],
+fieldset.login input[type="password"] {float:left;}
+
+fieldset.login input[type="text"],
+fieldset.login input[type="password"] {width:340px;}
+
+fieldset.login p.rememberme,
+fieldset.login p.submit {padding-left:82px;}
+fieldset.login label.left {width:auto !important;padding:2px 0;}
 /* ------------------------------ DASHBOARD */
 #dashboard-nav {float:left;width:268px;margin-right:17px;}
 
@@ -361,7 +384,7 @@ div#search-container input[type=image] {
 
 #user-status {float:right;padding:5px 20px 5px 20px;margin-right:10px;border-right:dotted 1px #3e3e3e;border-left:dotted 1px #3e3e3e;font-size:11px;font-style:italic;}
 #user-status .person {background:url(../images/icons/header-person.png) no-repeat;padding-left:16px;}
-#breadcrumb {text-transform:uppercase;font-size:12px;}
+#breadcrumb a {text-transform:lowercase;font-size:13px;text-decoration:underline;}
 	
 	.Pager {font-family:InterstatePlusRegular;font-size:12px;}
 	.Pager a, .Pager span {color:#000;padding:5px;margin:0px 10px 0px 10px;display:inline-block;margin:0 2px 0px 2px;}

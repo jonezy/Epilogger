@@ -3,7 +3,7 @@
     @foreach (KeyValuePair<string, string> item in ViewBag.Trail) {
         @:<a href="@item.Value">@item.Key</a> 
         if (i + 1 < ViewBag.Trail.Count) {
-            @:>> 
+            @:»
             i++;
         } else {
             i = 0;
