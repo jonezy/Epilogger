@@ -4,42 +4,28 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create an Epilogger Account</h2>
-<p>1 minute, that's about all it takes to fill out the fields below to create your very own epilogger.com account.</p>
-<p>You shouldn't still be reading, should you?</p>
+<h1>Create An Account</h1>
+<h2>You'll be done in just a minute</h2>
+<br style="clear:both;" />
 <div class="grid_7 alpha">
 @Html.ValidationSummary("Please correct the following issues")
-<fieldset>
 @using(Html.BeginForm("Create", "Account", FormMethod.Post)) {
-    <div class="grid_3 alpha">
-        <p>@Html.LabelFor(model => model.FirstName) @Html.TextBoxFor(model => model.FirstName)</p>
-    </div>
-    <div class="grid_4">
-        <p>@Html.LabelFor(model => model.LastName) @Html.TextBoxFor(model => model.LastName)</p>
-    </div>
-    <br style="clear:both;" />
-    
-    <div class="grid_7 alpha">
+    <div id="create-account" class="item-card">
+        <h4>ACCOUNT INFORMATION</h4>
+        <br style="clear:both;" />
+        <div class="item-data clearfix">
+        <fieldset class="login">
+
         <p>@Html.LabelFor(model => model.EmailAddress) @Html.TextBoxFor(model => model.EmailAddress)</p>
-    </div>
-    <br style="clear:both;" />
-    
-    <div class="grid_3 alpha">
         <p>@Html.LabelFor(model => model.Username) @Html.TextBoxFor(model => model.Username)</p>
-    </div>
-    <div class="grid_4">
         <p>@Html.LabelFor(model => model.Password) @Html.PasswordFor(model => model.Password)</p>
-    </div>
-    
-    <div class="grid_3 alpha">
         <p>@Html.LabelFor(model => model.DateOfBirth) @Html.TextBoxFor(model => model.DateOfBirth, new { @class = "dob" })</p>
-    </div>
-    <div class="grid_4">
         <p>@Html.LabelFor(model => model.TimeZoneOffset) @Html.DropDownListFor(model => model.TimeZoneOffset, Model.TimeZones, "Select your timezone")</p>
-    </div>    
-    <br style="clear:both;" />
-    
-    <p><input type="submit" class="submit" value="register" /></p>
+    </fieldset>
+
+            </div>
+    </div>
+        <p><input type="submit" class="blue-action-button" value="register" /></p>
 }
-</fieldset>
+
 </div>

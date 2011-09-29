@@ -123,10 +123,10 @@ namespace Epilogger.Data
 			
         public Query<EventCategory> EventCategories { get; set; }
         public Query<Tweet> Tweets { get; set; }
+        public Query<User> Users { get; set; }
         public Query<URL> URLS { get; set; }
         public Query<BlogPost> BlogPosts { get; set; }
         public Query<aspnet_User> aspnet_Users { get; set; }
-        public Query<User> Users { get; set; }
         public Query<UserRatesEvent> UserRatesEvents { get; set; }
         public Query<BetaSignup> BetaSignups { get; set; }
         public Query<UserFollowsEvent> UserFollowsEvents { get; set; }
@@ -249,10 +249,10 @@ namespace Epilogger.Data
             #region ' Query Defs '
             EventCategories = new Query<EventCategory>(provider);
             Tweets = new Query<Tweet>(provider);
+            Users = new Query<User>(provider);
             URLS = new Query<URL>(provider);
             BlogPosts = new Query<BlogPost>(provider);
             aspnet_Users = new Query<aspnet_User>(provider);
-            Users = new Query<User>(provider);
             UserRatesEvents = new Query<UserRatesEvent>(provider);
             BetaSignups = new Query<BetaSignup>(provider);
             UserFollowsEvents = new Query<UserFollowsEvent>(provider);
@@ -278,10 +278,10 @@ namespace Epilogger.Data
 			{
             	DataProvider.Schema.Tables.Add(new EventCategoriesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new TweetsTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new UserTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new URLsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new BlogPostsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new aspnet_UsersTable(DataProvider));
-            	DataProvider.Schema.Tables.Add(new UserTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserRatesEventTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new BetaSignupsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserFollowsEventTable(DataProvider));

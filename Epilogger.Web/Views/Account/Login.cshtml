@@ -3,19 +3,32 @@
 @{
     ViewBag.Title = "Login";
 }
-<h2>Login</h2>
+<div class="grid_5 alpha" style="width:440px;">
+<h1>Existing User Login:</h1>
 @Html.ValidationSummary("Please correct the following issues")
-<p>If you already have an Epilogger account sign in to view events and create your own.</p>
-<p>If you don't have an account, why not @Html.ActionLink("sign up?", "create", "account").</p>
-<div class="grid_3 alpha">
 
 @using (Html.BeginForm("Login", "Account", FormMethod.Post)) {
-    <fieldset>
+    <fieldset class="login">
         <p>@Html.LabelFor(model => model.Username) @Html.TextBoxFor(model => model.Username)</p>
-        <p>@Html.LabelFor(model => model.Password) @Html.PasswordFor(model => model.Password)</p>
-        <p class="clearfix"><label class="left">Remember me?</label> @Html.CheckBoxFor(model => model.RememberMe, new { @class = "left" })</p>
+        <br style="clear:both;" />
+        <p>@Html.LabelFor(model => model.Password) @Html.PasswordFor(model => model.Password, new { @class = "remove-bottom" })</p>
+        <br style="clear:both;" />
+        <p class="clearfix rememberme"> @Html.CheckBoxFor(model => model.RememberMe, new { @class = "left" })<label class="left">Remember me?</label></p>
 
-        <p><input type="submit" class="submit" value="login" /> - @Html.ActionLink("I forgot my password", "forgotpassword", "account")</p>
+        <p class="submit"><input type="submit" class="blue-action-button" value="login" /> - @Html.ActionLink("I forgot my password", "forgotpassword", "account")</p>
     </fieldset>
 }
+
+</div>
+
+<div class="grid_6 omega clearfix">
+<h1>3 Reasons To Join</h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tincidunt tellus vel tellus placerat faucibus. Maecenas adipiscing venenatis aliquam.</p>
+<img src="@Url.Content("~/Public/images/reasons/1.png")" class="left" style="margin-right:5px;" />
+<img src="@Url.Content("~/Public/images/reasons/2.png")" class="left" style="margin-right:5px;" />
+<img src="@Url.Content("~/Public/images/reasons/3.png")" class="left" />
+<br style="clear:both;" >
+<div align="center" style="margin-top:20px;">
+@Html.ActionLink("Create An Account", "create", "account", null, new { @class = "blue-action-button" })
+</div>
 </div>

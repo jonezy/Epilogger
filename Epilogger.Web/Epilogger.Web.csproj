@@ -255,6 +255,9 @@
     <Content Include="Public\images\linebg.png" />
     <Content Include="Public\images\loading.gif" />
     <Content Include="Public\images\logo.png" />
+    <Content Include="Public\images\reasons\1.png" />
+    <Content Include="Public\images\reasons\2.png" />
+    <Content Include="Public\images\reasons\3.png" />
     <Content Include="Public\images\samples\ad.png" />
     <Content Include="Public\images\samples\avatar.png" />
     <Content Include="Public\images\samples\checkin.png" />
