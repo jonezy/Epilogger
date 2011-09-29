@@ -2,7 +2,7 @@
 
 body {
 	color:#707070;
-	background:#252525 url(../images/body-bg.jpg) repeat-x;
+	background:#252525 url(../images/body-bg.jpg) repeat;
 	font:normal 11pt times, 'Georgia', 'Times New Roman', serif}
 
 a {color:#2d8ac5;text-decoration:none}
