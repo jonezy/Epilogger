@@ -529,12 +529,19 @@ namespace Epilogger.Web.Controllers {
         [HttpPost]
         public ActionResult Edit(FormCollection fc, CreateEventViewModel model) {
             if (ModelState.IsValid) {
+                Event currentEvent = ES.FindByID(model.ID);
                 try {
-                    Event currentEvent = ES.FindByID(model.ID);
+                    
+                    
                     currentEvent.SubTitle = model.Subtitle;
                     currentEvent.Name = model.Name;
                     currentEvent.SearchTerms = model.SearchTerms;
                     currentEvent.Description = model.Description;
+                    currentEvent.TwitterAccount = model.TwitterAccount;
+                    currentEvent.FacebookPageURL = model.FacebookPageURL;
+                    currentEvent.WebsiteURL = !string.IsNullOrEmpty(model.WebsiteURL) && !model.WebsiteURL.StartsWith("http://") ? 
+                        model.WebsiteURL.Insert(0, "http://") : 
+                        model.WebsiteURL;
                     currentEvent.Cost = model.Cost;
                     currentEvent.StartDateTime = model.StartDateTime.FromUserTimeZoneToUtc();
                     if (model.EndDateTime.HasValue) {
@@ -551,6 +558,7 @@ namespace Epilogger.Web.Controllers {
                     model = Mapper.Map<Event, CreateEventViewModel>(currentEvent);
                 } catch (Exception ex) {
                     this.StoreError(string.Format("There was an error: {0}", ex.Message));
+                    model = Mapper.Map<Event, CreateEventViewModel>(currentEvent);
                     return View(model);
                 }
             }
