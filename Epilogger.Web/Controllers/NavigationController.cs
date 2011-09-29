@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
@@ -28,6 +29,7 @@ namespace Epilogger.Web.Controllers {
             trail.Add("home", App.BaseUrl);
             if (Request.Url.AbsoluteUri != App.BaseUrl) {
                 int count = 1;
+
                 foreach (var item in Request.RequestContext.RouteData.Values) {
                     string routeValue = item.Value.ToString().ToLower();
                     string routeKey = item.Key.ToString().ToLower();
@@ -39,8 +41,14 @@ namespace Epilogger.Web.Controllers {
                             string.Format("{0}{1}", App.BaseUrl, Url.Action("index", Request.RequestContext.RouteData.Values["controller"].ToString()).TrimStart('/')) :
                             string.Format("{0}{1}", App.BaseUrl, Url.Action(Request.RequestContext.RouteData.Values["action"].ToString(), Request.RequestContext.RouteData.Values["controller"].ToString(), Request.RequestContext.RouteData.Values).TrimStart('/'));
 
+                        // this unfucks the ordering in the events section
+                        if(Request.RequestContext.RouteData.Values["controller"].ToString() == "events") {
+                            trail.Remove("events");
+                            trail.Add("events", url);
+                        }
+
                         // this handles the event section, just overrides the values set above.
-                        if (routeKey == "id") {
+                        if (routeKey == "id" && routeValue != "events") {
                             int eventId;
                             int.TryParse(routeValue, out eventId);
                             if (eventId > 0) {
