@@ -27,7 +27,16 @@ namespace Epilogger.Web {
 
         public List<Event> GoingOnNowEvents()
         {
-            return GetData(e => e.StartDateTime <= DateTime.UtcNow && e.EndDateTime >= DateTime.UtcNow).ToList();
+            IEnumerable<Event> neverEndingEvents = from e in GetData()
+                                                   where e.EndDateTime == null
+                                                   select e;
+
+            IEnumerable<Event> happeningNow = from e in GetData()
+                                         where (e.StartDateTime <= DateTime.UtcNow && (e.EndDateTime != null && e.EndDateTime >= DateTime.UtcNow))
+                                         select e;
+
+            return neverEndingEvents.Concat(happeningNow).OrderBy(e=>e.StartDateTime).ToList();
+            //return GetData(e => e.StartDateTime <= DateTime.UtcNow && e.EndDateTime >= DateTime.UtcNow).ToList();
         }
 
         

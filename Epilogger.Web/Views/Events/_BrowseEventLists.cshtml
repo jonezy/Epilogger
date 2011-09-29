@@ -1,28 +1,19 @@
 ﻿@model Epilogger.Web.Models.BrowseEventsDisplayViewModel
-
 <div id="events-nav">
     <h1>BROWSE @Model.BrowsePageFilter.ToUpper() EVENTS</h1>
-    <br style="clear:both;" />
+    <br style="clear: both;" />
 </div>
-
 <div id="events-content">
-        <h2>EVENTS:</h2>
-
-        <ul class="plain-list" id="">
-            @if (Model.Events.Count() == 0)
-            {
-                <li>There are currently no events going on. Why not add one?!</li>
-                @Html.ActionLink("CREATE EVENT", "create", "events")
+    <h2>EVENTS:</h2>
+    <ul class="plain-list" id="">
+        @if (Model.Events.Count() == 0) {
+            <li>There are currently no events going on. Why not add one?!</li>
+            @Html.ActionLink("CREATE EVENT", "create", "events")
+        }
+        @foreach (var item in Model.Events.OrderByDescending(t => t.EndDateTime)) {
+            if (!string.IsNullOrEmpty(item.Name)) {
+                <li class="grid_4">@Html.RouteLink(@item.Name, "EventsRoutes", new { controller = "events", action = "details", id = @item.ID })</li>
             }
-            @foreach (var item in Model.Events.OrderByDescending(t => t.EndDateTime))
-            {
-                if ((item.EndDateTime - DateTime.UtcNow) < new TimeSpan(30, 0, 0, 0))
-                {
-                    if (!string.IsNullOrEmpty(item.Name))
-                    {
-                        <li class="grid_4">@Html.RouteLink(@item.Name, "EventsRoutes", new { controller = "events", action = "details", id = @item.ID })</li>
-                    }    
-                }
-            }
-        </ul>
+        }
+    </ul>
 </div>
