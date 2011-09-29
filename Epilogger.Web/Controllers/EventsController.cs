@@ -536,10 +536,14 @@ namespace Epilogger.Web.Controllers {
                     currentEvent.SearchTerms = model.SearchTerms;
                     currentEvent.Description = model.Description;
                     currentEvent.Cost = model.Cost;
-                    currentEvent.StartDateTime = DateTime.Parse(fc[5]).FromUserTimeZoneToUtc();
-                    currentEvent.EndDateTime = DateTime.Parse(fc[6]).FromUserTimeZoneToUtc(); // 7 is timezone offset
-                    currentEvent.CollectionStartDateTime = DateTime.Parse(fc[8]).FromUserTimeZoneToUtc();
-                    currentEvent.CollectionEndDateTime = DateTime.Parse(fc[9]).FromUserTimeZoneToUtc();
+                    currentEvent.StartDateTime = model.StartDateTime.FromUserTimeZoneToUtc();
+                    if (model.EndDateTime.HasValue) {
+                        currentEvent.EndDateTime = model.EndDateTime.Value.FromUserTimeZoneToUtc(); // 7 is timezone offset
+                    }
+                    currentEvent.CollectionStartDateTime = model.CollectionStartDateTime.FromUserTimeZoneToUtc();
+                    if (model.CollectionEndDateTime.HasValue) {
+                        currentEvent.CollectionEndDateTime = model.CollectionEndDateTime.Value.FromUserTimeZoneToUtc();
+                    }
                     
                   
                     ES.Save(currentEvent);
