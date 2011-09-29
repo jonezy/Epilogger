@@ -164,7 +164,6 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.TimeZones, opt => opt.ResolveUsing<UserTimezonesResolver>());
 
             Mapper.CreateMap<CreateEventViewModel, Event>()
-                .ForMember(dest => dest.WebsiteURL, opt => opt.Ignore())
                 .ForMember(dest => dest.CategoryID, opt => opt.UseValue(19))
                 .ForMember(dest => dest.VenueID, opt => opt.Ignore())
                 .ForMember(dest => dest.EventStatus, opt => opt.UseValue(1))
@@ -172,9 +171,7 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.IsPrivate, opt => opt.UseValue(false))
                 .ForMember(dest => dest.IsAdult, opt => opt.UseValue(false))
                 .ForMember(dest => dest.IsActive, opt => opt.UseValue(true))
-                .ForMember(dest => dest.CollectionMode, opt => opt.UseValue(2))
-                .ForMember(dest => dest.TwitterAccount, opt => opt.Ignore())
-                .ForMember(dest => dest.FacebookPageURL, opt => opt.Ignore());
+                .ForMember(dest => dest.CollectionMode, opt => opt.UseValue(2));
 
             Mapper.CreateMap<User, DashboardProfileViewModel>()
                 .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => string.Format("{0} {1}", src.FirstName, src.LastName)))
