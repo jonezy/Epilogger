@@ -231,34 +231,25 @@ namespace Epilogger.Web.Controllers {
                 try {
                     model.UserID = CurrentUserID;
                     model.CreatedDateTime = DateTime.UtcNow;
+                    model.EndDateTime = null;
+                    model.CollectionEndDateTime = null;
 
-                    if (model.CollectionStartDateTime == DateTime.MinValue) {
-                        model.CollectionStartDateTime = DateTime.Now.FromUserTimeZoneToUtc();
-                    } else {
-                        model.CollectionStartDateTime = model.CollectionStartDateTime.FromUserTimeZoneToUtc();
+                    // get yer dates.
+                    // 7 is start date, 8 is end
+                    DateTime startDate;
+                    DateTime endDate;
+                    DateTime.TryParse(Request.Form[7], out startDate); // start date
+                    DateTime.TryParse(Request.Form[8], out endDate); // end date (could be null)
+
+                    model.CollectionStartDateTime = startDate.AddDays(-2);
+                    if (endDate != DateTime.MinValue) {
+                        model.CollectionEndDateTime = endDate.AddDays(3);
                     }
 
-                    if (model.CollectionEndDateTime == null) {
-                        if(model.EndDateTime != DateTime.MinValue) {
-                            model.CollectionEndDateTime = model.EndDateTime.Value.AddDays(14);
-                        }
-                    } else {
-                        if (model.CollectionEndDateTime.HasValue) {
-                            model.CollectionEndDateTime = model.CollectionEndDateTime.Value.FromUserTimeZoneToUtc();
-                        }
+                    model.StartDateTime = startDate;
+                    if(endDate != DateTime.MinValue) {
+                        model.EndDateTime = endDate;
                     }
-
-                    model.StartDateTime = model.StartDateTime.FromUserTimeZoneToUtc();
-                    if(model.EndDateTime != DateTime.MinValue) {
-                        if (model.EndDateTime.HasValue) {
-                            model.EndDateTime = model.EndDateTime.Value.FromUserTimeZoneToUtc();
-                        }
-                    }
-
-                    if (model.EndDateTime == DateTime.MinValue)
-                        model.EndDateTime = null;
-                    if (model.CollectionEndDateTime == DateTime.MinValue)
-                        model.CollectionEndDateTime = null;
 
                     Event EPLevent = Mapper.Map<CreateEventViewModel, Event>(model);
                     ES.Save(EPLevent);
@@ -531,8 +522,6 @@ namespace Epilogger.Web.Controllers {
             if (ModelState.IsValid) {
                 Event currentEvent = ES.FindByID(model.ID);
                 try {
-                    
-                    
                     currentEvent.SubTitle = model.Subtitle;
                     currentEvent.Name = model.Name;
                     currentEvent.SearchTerms = model.SearchTerms;
@@ -543,13 +532,26 @@ namespace Epilogger.Web.Controllers {
                         model.WebsiteURL.Insert(0, "http://") : 
                         model.WebsiteURL;
                     currentEvent.Cost = model.Cost;
-                    currentEvent.StartDateTime = model.StartDateTime.FromUserTimeZoneToUtc();
-                    if (model.EndDateTime.HasValue) {
-                        currentEvent.EndDateTime = model.EndDateTime.Value.FromUserTimeZoneToUtc(); // 7 is timezone offset
+                    currentEvent.TimeZoneOffset = model.TimeZoneOffset;
+
+                    DateTime startDate;
+                    DateTime endDate;
+                    DateTime collectionStart;
+                    DateTime collectionEnd;
+
+                    DateTime.TryParse(Request.Form[7], out startDate); // start date
+                    DateTime.TryParse(Request.Form[8], out endDate); // end date (could be null)
+                    DateTime.TryParse(Request.Form[10], out collectionStart); 
+                    DateTime.TryParse(Request.Form[11], out collectionEnd);
+
+                    currentEvent.StartDateTime = startDate;
+                    if (endDate != DateTime.MinValue) {
+                        currentEvent.EndDateTime = endDate; // 7 is timezone offset
                     }
-                    currentEvent.CollectionStartDateTime = model.CollectionStartDateTime.FromUserTimeZoneToUtc();
-                    if (model.CollectionEndDateTime.HasValue) {
-                        currentEvent.CollectionEndDateTime = model.CollectionEndDateTime.Value.FromUserTimeZoneToUtc();
+                    
+                    currentEvent.CollectionStartDateTime = collectionStart;
+                    if (collectionEnd != DateTime.MinValue) {
+                        currentEvent.CollectionEndDateTime = collectionEnd;
                     }
                     
                   
