@@ -28,7 +28,16 @@
             <p><label>Search Terms:</label> @Html.TextBoxFor(model => model.SearchTerms, new { @class = "wide" })</p>
 
             <p>@Html.LabelFor(model => model.Description) @Html.TextAreaFor(model => model.Description, new { @class="wide" })</p>
-            <p>@Html.LabelFor(model => model.Cost) @Html.TextBoxFor(model => model.Cost, new { @class = "wide" })</p>
+
+            <div class="grid_4 alpha">
+                <p>@Html.LabelFor(model => model.TwitterAccount) @Html.TextBoxFor(model => model.TwitterAccount, new { @class = "med" })</p>
+            </div>
+
+            <div class="grid_4 alpha">
+                <p>@Html.LabelFor(model => model.FacebookPageURL) @Html.TextBoxFor(model => model.FacebookPageURL, new { @class = "med" })</p>
+            </div>
+
+            <p>@Html.LabelFor(model => model.Cost) @Html.TextBoxFor(model => model.Cost, new { @class = "small" })</p>
         </div>
     </div>
     <div class="spacer"></div>
