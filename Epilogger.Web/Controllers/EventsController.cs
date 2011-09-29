@@ -218,14 +218,9 @@ namespace Epilogger.Web.Controllers {
             }
 
             Model.StartDateTime = roundTime;
-            Model.EndDateTime = roundTime.AddHours(3);
+            //Model.EndDateTime = roundTime.AddHours(3);
             Model.CollectionStartDateTime = roundTime.AddDays(-2);
             Model.CollectionEndDateTime = roundTime.AddDays(3);
-
-            //Model.IsActive = true;
-            //Model.WebsiteURL = "http://";
-            //this.Mode = "Create";
-
 
             return View(Model);
         }
@@ -242,18 +237,34 @@ namespace Epilogger.Web.Controllers {
                     } else {
                         model.CollectionStartDateTime = model.CollectionStartDateTime.FromUserTimeZoneToUtc();
                     }
-                    if (model.CollectionEndDateTime == DateTime.MinValue) {
-                        model.CollectionEndDateTime = model.EndDateTime.AddDays(14);
+
+                    if (model.CollectionEndDateTime == null) {
+                        if(model.EndDateTime != DateTime.MinValue) {
+                            model.CollectionEndDateTime = model.EndDateTime.Value.AddDays(14);
+                        }
                     } else {
-                        model.CollectionEndDateTime = model.CollectionEndDateTime.FromUserTimeZoneToUtc();
+                        if (model.CollectionEndDateTime.HasValue) {
+                            model.CollectionEndDateTime = model.CollectionEndDateTime.Value.FromUserTimeZoneToUtc();
+                        }
                     }
 
                     model.StartDateTime = model.StartDateTime.FromUserTimeZoneToUtc();
-                    model.EndDateTime = model.EndDateTime.FromUserTimeZoneToUtc();
+                    if(model.EndDateTime != DateTime.MinValue) {
+                        if (model.EndDateTime.HasValue) {
+                            model.EndDateTime = model.EndDateTime.Value.FromUserTimeZoneToUtc();
+                        }
+                    }
+
+                    if (model.EndDateTime == DateTime.MinValue)
+                        model.EndDateTime = null;
+                    if (model.CollectionEndDateTime == DateTime.MinValue)
+                        model.CollectionEndDateTime = null;
 
                     Event EPLevent = Mapper.Map<CreateEventViewModel, Event>(model);
                     ES.Save(EPLevent);
-                    this.StoreSuccess("Your Event was created successfully!  Don't forget to share it with your friends and attendees!");
+
+                    this.StoreSuccess("Your Event was created successfully!  Dont forget to share it with your friends and attendees!");
+                    
                     return RedirectToAction("details", new { id = EPLevent.ID });
                 } catch (Exception ex) {
                     this.StoreError(string.Format("There was an error: {0}", ex.Message));
@@ -294,8 +305,6 @@ namespace Epilogger.Web.Controllers {
 
                     EpiloggerDB db = TS.Thedb();
                     IEnumerable<Tweet> TheTweets = TS.Thedb().Tweets.Where(t => t.EventID == EventID & t.CreatedDate > DateTime.Parse(pageLoadTime)).OrderByDescending(t => t.CreatedDate).Take(Count);
-                    //IEnumerable<Tweet> TheTweets = TS.Thedb().Tweets.Where(t => t.EventID == EventID).OrderByDescending(t => t.CreatedDate).Take(1);
-
 
                     StringBuilder HTMLString = new StringBuilder();
                     string lasttweettime = string.Empty;
@@ -308,17 +317,6 @@ namespace Epilogger.Web.Controllers {
                             TheFirst = false;
                         }
 
-                        //TODO - This will need to be replaced with something better
-
-                        //<li>
-                        //    <img src="@EPLTweet.ProfileImageURL" class="fleft" alt="" />
-                        //    <small><a href="http://www.twitter.com/@EPLTweet.FromUserScreenName">@EPLTweet.FromUserScreenName</a></small>
-                        //    <p>@Html.Raw(EPLTweet.TextAsHTML)</p>
-                        //</li>
-
-                        //HTMLString.Append(PartialView("_TweetTemplate", TheT).ToString());
-
-
                         StringBuilder tweet = new StringBuilder();
                         tweet.AppendFormat("<li id='{0}' class='tweet clearfix'>", TheT.TwitterID);
                         tweet.AppendFormat("<img src='{0}' class='fleft' alt='' height='48' width='48'  />", TheT.ProfileImageURL);
@@ -327,10 +325,6 @@ namespace Epilogger.Web.Controllers {
                         tweet.AppendFormat("<p>{0}</p>", TheT.TextAsHTML);
                         tweet.Append("</div>");
                         tweet.Append("</li>");
-                        
-                        //string ProfilePicture = "<img src='" + TheT.ProfileImageURL + "' class='fleft' alt='' height='48' width='48'  />";
-                        //string FromLine = "<div class='tweet-body'><string><a href='http://www.twitter.com/" + TheT.FromUserScreenName + "' target='_blank'>" + TheT.FromUserScreenName + "</a></storng></div>";
-                        //HTMLString.Append(ProfilePicture + FromLine + "<p>" + TheT.TextAsHTML + "</p></li>");
 
                         HTMLString.Append(tweet.ToString());
                         RecordCount++;
@@ -356,13 +350,10 @@ namespace Epilogger.Web.Controllers {
 
             if (pageLoadTime.Length > 0) {
                 if (pageLoadTime != "undefined") {
-
                     pageLoadTime = string.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.Parse(pageLoadTime));
 
                     EpiloggerDB db = TS.Thedb();
                     IEnumerable<Image> TheImages = db.Images.Where(t => t.EventID == EventID & t.DateTime > DateTime.Parse(pageLoadTime)).OrderByDescending(t => t.DateTime).Take(Count);
-                    //IEnumerable<Image> TheImages = db.Images.Where(t => t.EventID == EventID).OrderByDescending(t => t.DateTime).Take(1);
-
 
                     StringBuilder HTML = new StringBuilder();
                     string lastphototime = string.Empty;
@@ -375,15 +366,6 @@ namespace Epilogger.Web.Controllers {
                             TheFirst = false;
                         }
 
-                        //TODO - This will need to be replaced with something better
-
-                        //<div class="withcomment" id="photo-@EPLImage.ID">
-                        //    <a href="@EPLImage.Fullsize" rel="prettyPhoto[latestphotos]" title="@EPLImage.ID" id="@EPLImage.ID"><img src="@EPLImage.Thumb" height="154" width="180" border="0" alt="" /></a>
-                        //    <a href="#" class="commentbubble">
-                        //        @EPLImage.ImageMetaData.Count()
-                        //    </a>
-                        //</div>
-
                         string TheImage = "<a href='" + TheI.Fullsize + "' rel='prettyPhoto[latestphotos]' title='" + TheI.ID + "' id='" + TheI.ID + "'><img src='" + TheI.Fullsize + "' width='200' border='0' alt='' /></a>";
                         string CommentCount = "<a href='#' class='commentbubble'>" + TheI.ImageMetaData.Count() + "</a>";
 
@@ -392,7 +374,6 @@ namespace Epilogger.Web.Controllers {
 
                         RecordCount++;
                     }
-
 
                     //Return the Dictionary as it's IEnumerable and it creates the correct JSON doc.
                     dict = new Dictionary<String, Object>();
@@ -562,7 +543,7 @@ namespace Epilogger.Web.Controllers {
                     
                   
                     ES.Save(currentEvent);
-                    this.StoreSuccess("Your Event was updated");
+                    this.StoreSuccess("Your event was updated successfully!  Make sure you let all your friends know about the changes you just made!");
                     model = Mapper.Map<Event, CreateEventViewModel>(currentEvent);
                 } catch (Exception ex) {
                     this.StoreError(string.Format("There was an error: {0}", ex.Message));

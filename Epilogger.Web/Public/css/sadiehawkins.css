@@ -23,11 +23,12 @@ a.edit_icon {background:url(../images/icons/pencil.png) no-repeat 0px 2px;paddin
 
 .datetime-container{}
 
-.datepicker,.timedropdown  {margin:0 !important;display:inline !important;width: 5em !important;border-right:0px !important;}
+.datepicker,
+.timedropdown  {margin:0 !important;display:inline !important;width: 5em !important;border-right:0px !important;}
 .datepicker {width:5em !important;}
 
 .item-data .ui-datepicker-trigger {margin-top:-3px;}
-
+.hidden {display:none;}
 /* ------------------------------ CONTAINERS */
 
 #outer-container {position:relative;z-index:0;}
@@ -203,16 +204,22 @@ ul#connected-networks {list-style:none;}
 #createevent-info h4,
 #createevent-time h4 {font-size:16px !important;}
 
+.end-time {margin-left:110px;clear:both;}
+.end-time input#end-time {float:left;margin-bottom:10px !important;}
+.end-time label {float:right;width:auto !important;padding:2px 0px !important;font-weight:normal;font-style:italic;}
 /* form overrides */
 
 .item-data label {float:left;font-size:11px;width:80px;text-align:right;text-transform:uppercase;padding:8px 10px 0px 0px;}
+.item-data label.wide {width:100px;}
 .item-data label.wide {width:100px;}
 .item-data label.wider {width:100px;}
 .item-data input,
 .item-data textarea {margin-bottom:15px !important;}
 .item-data input.wide,
 .item-data textarea.wide,
-.item-data select.wide {float:left;width:425px !important;max-width:425px !important;}
+.item-data select.wide {float:left;width:510px !important;max-width:550px !important;}
+.item-data input.med {width:200px;}
+.item-data input.small {width:100px;}
 .item-data p {display:block;clear:both;}
 
 .item-data select {padding:6px 4px;}

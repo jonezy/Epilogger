@@ -25,7 +25,16 @@
             <p><label>Search Terms:</label> @Html.TextBoxFor(model => model.SearchTerms, new { @class = "wide" })</p>
 
             <p>@Html.LabelFor(model => model.Description) @Html.TextAreaFor(model => model.Description, new { @class="wide" })</p>
-            <p>@Html.LabelFor(model => model.Cost) @Html.TextBoxFor(model => model.Cost, new { @class = "wide" })</p>
+
+            <div class="grid_4 alpha">
+                <p>@Html.LabelFor(model => model.TwitterAccount) @Html.TextBoxFor(model => model.TwitterAccount, new { @class = "med" })</p>
+            </div>
+
+            <div class="grid_4 alpha">
+                <p>@Html.LabelFor(model => model.FacebookPageURL) @Html.TextBoxFor(model => model.FacebookPageURL, new { @class = "med" })</p>
+            </div>
+
+            <p>@Html.LabelFor(model => model.Cost) @Html.TextBoxFor(model => model.Cost, new { @class = "small" })</p>
         </div>
     </div>
     <div class="spacer"></div>
@@ -34,13 +43,24 @@
         <br style="clear:both;" />
         <div id="createevent-time" class="item-data clearfix">
             <label class="wide">Start Date:</label> @Html.EditorFor(model => model.StartDateTime)
-            <p><label class="wide">Event End:</label> @Html.EditorFor(model => model.EndDateTime)</p>
-            <p><label class="wide">Time Zone:</label> @Html.DropDownListFor(model => model.TimeZones, Model.TimeZones, "Select your timezone", new { @class = "wide" })</p>
+            <div class="end-time"><input type="checkbox" id="end-time" class="unhide" /><label for="end-time">Specifiy an ending time</label><br style="clear:both;" /></div>
+            <div class="hidden">
+                <div style="clear:both;"><label class="wide">Event End:</label> @Html.EditorFor(model => model.EndDateTime)</div>
+            </div>
+            <p><label class="wide">Time Zone:</label> @Html.DropDownListFor(model => model.TimeZoneOffset, Model.TimeZones, "Select your timezone", new { @class = "wide" })</p>
         </div>
     </div>
     <input type="submit" class="blue-action-button" value="Create Event" />
 }
 </div>
 
+<script>
+    head.ready(function () {
+        $('.unhide').click(function () {
+            var unhide = $('.hidden');
+            unhide.toggle();
+        });
+    });
+</script>
 
 
