@@ -69,6 +69,13 @@ namespace Epilogger.Web {
 
         public static void RegisterRoutes(RouteCollection routes) {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            routes.MapRoute(
+                "VenueSearch",
+                "events/venuesearch",
+                new { controller = "events", action = "venuesearch" }
+            );
+
             routes.MapRoute(
                 "GetLatestTweets",
                 "Events/GetLastTweetsJSON",
