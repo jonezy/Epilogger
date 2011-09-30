@@ -127,35 +127,6 @@
             
             <br />
             <input type="submit" class="blue-action-button remove-bottom" value="Apply" /> <input class="blue-action-button remove-bottom" type="button" value="Clear" name="ClearDates" id="" onclick="$('#ResetDates').val('1'); $(form).submit();" />
-            
-            @*@:<label>Show Data from:</label> @Html.TextBoxFor(m => m.FromDateTime) &nbsp;&nbsp;<label>To</label>&nbsp;&nbsp; @Html.TextBoxFor(m => m.ToDateTime) &nbsp;&nbsp;<input type="submit" value="Apply" />*@
-@*            <script type="text/javascript">
-                head.ready(function () {
-                    $("#FromDateTime").AnyTime_picker(
-                            { format: "%M %d, %Y %l:%i %p" });
-                    $("#ToDateTime").AnyTime_picker(
-                            { format: "%M %d, %Y %l:%i %p" });
-
-                    //If there are dates set, disable the auto refresh events
-                    if ($("#FromDateTime").val() != '') {
-                        if ($("#ToDateTime").val() != '') {
-                            disableAutoupdate = true;
-                        }
-                        else {
-                            disableAutoupdate = false;
-                        }
-                    }
-                    else {
-                        disableAutoupdate = false;
-                    }
-
-
-                    function setDate(fd, td) {
-                        fd = $("#FromDateTime")
-                        td = $("#ToDateTime")
-                    }
-                });
-            </script>*@
         }
     </div>
 
