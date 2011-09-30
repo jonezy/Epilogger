@@ -184,6 +184,7 @@
     <Compile Include="Models\AllCheckinsViewModel.cs" />
     <Compile Include="Models\AllBlogPostsViewModel.cs" />
     <Compile Include="Models\BrowseEventsDisplayViewModel.cs" />
+    <Compile Include="Models\BrowseCategoriesDisplayViewModel.cs" />
     <Compile Include="Models\CreateAccountModel.cs" />
     <Compile Include="Models\CreateEventViewModel.cs" />
     <Compile Include="Models\DashboardAccountViewModel.cs" />
@@ -436,6 +437,7 @@
     <Content Include="Views\Events\VenueSearch.cshtml" />
     <Content Include="Views\Events\_BrowseEventTabContentTemplate.cshtml" />
     <Content Include="Views\Events\_VenueSearchResults.cshtml" />
+    <Content Include="Views\Events\Category.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

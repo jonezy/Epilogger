@@ -1,16 +1,26 @@
-﻿@model Epilogger.Web.Models.BrowseEventsDisplayViewModel
+﻿@model Epilogger.Web.Models.BrowseCategoriesDisplayViewModel
+
+@{
+    ViewBag.Title = "Epilogger - " + @Model.CategoryName;
+}
+
 <div id="events-nav">
-    <h1>BROWSE @Model.BrowsePageFilter.ToUpper() EVENTS</h1>
+    <h1>@Model.CategoryName.ToUpper()</h1>
     <br style="clear: both;" />
+    @foreach (Epilogger.Data.EventCategory item in Model.EventCategories)
+    {
+        <h2>@Html.ActionLink(item.CategoryName, "Category", new { CategoryName = item.URLStub })</h2>
+    }
 </div>
 <div id="events-content">
     <h2>EVENTS:</h2>
-    @if (Model.Events.Count() == 0) {
+    @if (Model.Events.Count() == 0)
+    {
         <div class="dashboard-event-item clearfix">There are currently no events going on. Why not add one?!</div>
         @Html.ActionLink("CREATE EVENT", "create", "events")
     }
 
-    @foreach (var item in Model.Events) 
+    @foreach (var item in Model.Events)
     {
         <div class="dashboard-event-item clearfix">
             <div class="month-day">

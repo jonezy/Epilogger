@@ -40,6 +40,16 @@ namespace Epilogger.Data {
 	                IsForeignKey = false,
 	                MaxLength = 255
                 });
+
+                Columns.Add(new DatabaseColumn("URLStub", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 255
+                });
                     
                 
                 
@@ -66,6 +76,18 @@ namespace Epilogger.Data {
    			public static string CategoryNameColumn{
 			      get{
         			return "CategoryName";
+      			}
+		    }
+           
+            public IColumn URLStub{
+                get{
+                    return this.GetColumn("URLStub");
+                }
+            }
+            				
+   			public static string URLStubColumn{
+			      get{
+        			return "URLStub";
       			}
 		    }
            

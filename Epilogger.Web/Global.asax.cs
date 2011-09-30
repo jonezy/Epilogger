@@ -114,6 +114,13 @@ namespace Epilogger.Web {
             );
 
             routes.MapRoute(
+                "BrowseCategtoryRoutes",
+                "events/category/{categoryname}",
+                new { controller = "events", action = "category", categoryname = UrlParameter.Optional }
+            );
+
+
+            routes.MapRoute(
                 "EventsRoutes",
                 "events/{id}/{action}",
                 new { controller = "events", action = "index", id = UrlParameter.Optional }

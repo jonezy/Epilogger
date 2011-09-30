@@ -86,6 +86,18 @@ namespace Epilogger.Web {
             return GetData().Where(e => e.ID == EventID).FirstOrDefault();
         }
 
+        public List<Event> GetEventsByCategoryID(int CategoryID)
+        {
+            return GetData(e => e.CategoryID == CategoryID);
+        }
+
+        public List<Event> GetEventsByCategorySlug(string CategorySlug)
+        {
+            CategoryService CS = new CategoryService();
+            Epilogger.Data.EventCategory TheCat = CS.GetCategoryBySlug(CategorySlug);
+            return GetData(e => e.CategoryID == TheCat.ID);
+        }
+
         public List<Event> FindByUserID(Guid userID) {
             return GetData().Where(e => e.UserID == userID).OrderByDescending(e=>e.StartDateTime).ToList();
         }
