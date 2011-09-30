@@ -157,6 +157,7 @@
     <Compile Include="Core\Services\CheckInService.cs" />
     <Compile Include="Core\Services\BlogService.cs" />
     <Compile Include="Core\Services\clickLogService.cs" />
+    <Compile Include="Core\Services\CategoryService.cs" />
     <Compile Include="Core\Services\UserLogService.cs" />
     <Compile Include="Core\Services\ExternalLinksService.cs" />
     <Compile Include="Core\Services\ImageMetaDataService.cs" />
