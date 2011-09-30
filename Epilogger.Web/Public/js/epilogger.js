@@ -46,9 +46,10 @@ function SearchVenues(url) {
             address: venue_address
         },
         function (data) {
-            $('#VenueContentDiv').html(data);
+            $('#searchresults').html(data);
         });
-}
+    }
+
 function SetSelectedVenue(venueId) {
     $("#selectedVenue").text(venueId);
 }
