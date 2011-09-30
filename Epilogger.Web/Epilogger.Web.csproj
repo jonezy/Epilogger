@@ -434,6 +434,7 @@
     <Content Include="Views\Events\_BrowseEventLists.cshtml" />
     <Content Include="Views\Shared\_ModalLayout.cshtml" />
     <Content Include="Views\Events\VenueSearch.cshtml" />
+    <Content Include="Views\Events\_VenueSearchResults.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
