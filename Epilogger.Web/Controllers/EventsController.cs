@@ -11,6 +11,9 @@ using Epilogger.Web.Core.Stats;
 using Epilogger.Web.Models;
 
 using RichmondDay.Helpers;
+using System.Net;
+using System.IO;
+using System.Xml;
 
 namespace Epilogger.Web.Controllers {
     public class EventsController : BaseController {
@@ -583,5 +586,71 @@ namespace Epilogger.Web.Controllers {
             
             return RedirectToAction("edit", new { id = model.ID});
         }
+
+        public ActionResult VenueSearch() {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult VenueSearch(FormCollection fc) {
+            string url = string.Format("http://maps.google.com/maps/geo?output=csv&q={0}", "toronto");
+            string results = GetResults(url, null, "Get");
+            var parts = results.Split(',');
+            
+            Double longitude = Convert.ToDouble(parts[2]);
+            Double latitude = Convert.ToDouble(parts[3]);
+
+            string clientId = "GRBSH3HPYZYHIACLAL1GHGYHVHVWLJ0GGUUB1OLV41GV5EF1";
+            string clientSecret = "FFCUYMPWPVTCP5AVNDS2VCA1JPTTR4FKCE35ZQUV3TKON5MH";
+            string latLong = string.Format("{0},{1}",longitude, latitude);
+            string version = DateTime.Today.ToString("yyyyMMdd");
+            string query = "";
+
+            string searchRequest = string.Format("https://api.foursquare.com/v2/venues/search?ll={0}&query={1}&client_id={2}&client_secret={3}&v={4}",
+                latLong,
+                query,
+                clientId,
+                clientSecret,
+                version);
+
+            var client = new FoursquareVenueClient();
+            var venues = client.Execute(searchRequest);
+
+            foreach (var item in venues.response) {
+
+            }
+
+            return View(new VenueSearchModel());
+        }
+
+        string GetResults(string url, string postData, string method) {
+            string returnValue = string.Empty;
+            WebRequest webRequest = WebRequest.Create(url);
+            webRequest.ContentType = "application/x-www-form-urlencoded";
+
+            if (!string.IsNullOrEmpty(method)) {
+                webRequest.Method = method;
+
+                if (!string.IsNullOrEmpty(postData)) {
+                    // posting data to a url
+                    byte[] byteSend = Encoding.ASCII.GetBytes(postData);
+                    webRequest.ContentLength = byteSend.Length;
+
+                    using (Stream streamOut = webRequest.GetRequestStream())
+                        streamOut.Write(byteSend, 0, byteSend.Length);
+                }
+            } else
+                webRequest.Method = "GET";
+
+            WebResponse webResponse = webRequest.GetResponse();
+            using (StreamReader streamReader = new StreamReader(webResponse.GetResponseStream(), Encoding.UTF8))
+                if (streamReader.Peek() > -1) return streamReader.ReadToEnd();
+
+            return "";
+        }
+    }
+
+    class FoursquareVenue {
+        public string Name { get; set; }
     }
 }

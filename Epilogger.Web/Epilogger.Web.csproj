@@ -145,6 +145,7 @@
     <Compile Include="Core\Filters\RequiresAuthentication.cs" />
     <Compile Include="Core\Helpers\AzureTableHelper.cs" />
     <Compile Include="Core\Helpers\FacebookHelper.cs" />
+    <Compile Include="Core\Helpers\FoursquareVenueClient.cs" />
     <Compile Include="Core\Helpers\Helpers.cs" />
     <Compile Include="Core\Helpers\HtmlHelpers.cs" />
     <Compile Include="Core\Helpers\PasswordHelpers.cs" />
@@ -199,6 +200,7 @@
     <Compile Include="Models\ResetPasswordViewModel.cs" />
     <Compile Include="Models\TweetDisplayViewModel.cs" />
     <Compile Include="Models\UpdatePasswordModel.cs" />
+    <Compile Include="Models\VenueSearchModel.cs" />
     <Compile Include="Models\_EventMenuViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\Emails\AccountEmails.Designer.cs">
@@ -211,6 +213,20 @@
     <Content Include="Global.asax" />
     <Content Include="Public\css\960_12_col.css" />
     <Content Include="Public\css\base.css" />
+    <Content Include="Public\css\cbimages\border.png" />
+    <Content Include="Public\css\cbimages\controls.png" />
+    <Content Include="Public\css\cbimages\ie6\borderBottomCenter.png" />
+    <Content Include="Public\css\cbimages\ie6\borderBottomLeft.png" />
+    <Content Include="Public\css\cbimages\ie6\borderBottomRight.png" />
+    <Content Include="Public\css\cbimages\ie6\borderMiddleLeft.png" />
+    <Content Include="Public\css\cbimages\ie6\borderMiddleRight.png" />
+    <Content Include="Public\css\cbimages\ie6\borderTopCenter.png" />
+    <Content Include="Public\css\cbimages\ie6\borderTopLeft.png" />
+    <Content Include="Public\css\cbimages\ie6\borderTopRight.png" />
+    <Content Include="Public\css\cbimages\loading.gif" />
+    <Content Include="Public\css\cbimages\loading_background.png" />
+    <Content Include="Public\css\cbimages\overlay.png" />
+    <Content Include="Public\css\colorbox.css" />
     <Content Include="Public\css\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Public\css\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Public\css\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -227,6 +243,7 @@
     <Content Include="Public\css\jquery-ui-1.8.16.custom.css" />
     <Content Include="Public\css\layout.css" />
     <Content Include="Public\css\messages.css" />
+    <Content Include="Public\css\modal.css" />
     <Content Include="Public\css\reset.css" />
     <Content Include="Public\css\sadiehawkins.css" />
     <Content Include="Public\css\skeleton.css" />
@@ -281,6 +298,7 @@
     <Content Include="Public\js\head.load.min.js" />
     <Content Include="Public\js\jquery-1.6.2.min.js" />
     <Content Include="Public\js\jquery-ui-1.8.16.custom.min.js" />
+    <Content Include="Public\js\jquery.colorbox-min.js" />
     <Content Include="Public\js\jquery.expander.min.js" />
     <Content Include="Public\js\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Public\js\prettyPhoto\css\prettyPhoto.css" />
@@ -413,6 +431,8 @@
     <Content Include="Views\Events\Edit.cshtml" />
     <Content Include="Views\Events\_BrowseEventOverview.cshtml" />
     <Content Include="Views\Events\_BrowseEventLists.cshtml" />
+    <Content Include="Views\Shared\_ModalLayout.cshtml" />
+    <Content Include="Views\Events\VenueSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

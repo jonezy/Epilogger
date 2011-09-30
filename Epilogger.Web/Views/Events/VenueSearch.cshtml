@@ -1,0 +1,14 @@
+﻿@model Epilogger.Web.Models.VenueSearchModel
+@{
+    ViewBag.Title = "VenueSearch";
+    Layout = "~/Views/Shared/_ModalLayout.cshtml";
+}
+
+<h2>VenueSearch</h2>
+<fieldset class="modal">
+    <p><label>Venue name:</label>@Html.TextBoxFor(m => m.VenueName)</p>
+    <p><label>Venue city:</label>@Html.TextBoxFor(m => m.City)</p>
+    <a href="#" id="search" onclick="SearchVenues('@Url.Action("venuesearch", "events")');return false;">Search Venues</a><br />
+    <a href="#" id="search" onclick="SetSelectedVenue(1);return false;">Set Venue</a>
+@*    <input type="submit" id="search" class="blue-action-button" value="Search" />*@
+</fieldset>
