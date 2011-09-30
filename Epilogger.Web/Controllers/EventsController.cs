@@ -66,6 +66,29 @@ namespace Epilogger.Web.Controllers {
             base.Initialize(requestContext);
         }
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        public ActionResult Category(string CategoryName)
+        {
+            BrowseCategoriesDisplayViewModel model = new BrowseCategoriesDisplayViewModel();
+            List<Event> events = new List<Event>();
+            
+            if (CategoryName != string.Empty)
+            {
+                events = ES.GetEventsByCategorySlug(CategoryName);
+            }
+            
+            List<DashboardEventViewModel> TheEvents = new List<DashboardEventViewModel>();
+            model.Events = Mapper.Map<List<Event>, List<DashboardEventViewModel>>(events).OrderByDescending(f => f.StartDateTime);
+            model.EventCategories = CatS.AllCategories();
+            model.CategoryName = CatS.GetCategoryBySlug(CategoryName).CategoryName;
+
+
+            return View(model);
+        }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+        
         public ActionResult Index(string filter) {
 
 
@@ -87,10 +110,10 @@ namespace Epilogger.Web.Controllers {
             switch (filter)
             {
                 case "upcoming":
-                    events = ES.UpcomingEvents();
+                    events = ES.UpcomingEvents().OrderBy(i => i.StartDateTime).ToList();
                     break;
                 case "past":
-                    events = ES.PastEvents();
+                    events = ES.PastEvents().OrderByDescending(i => i.StartDateTime).ToList();
                     break;
                 case "now":
                     events = ES.GoingOnNowEvents().OrderBy(ne=>ne.EndDateTime.GetValueOrDefault()).ToList();
@@ -138,6 +161,8 @@ namespace Epilogger.Web.Controllers {
 
             return View(model);
         }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         [HttpPost]
         public ActionResult GetBrowseOverviewTabData(int Tab)
