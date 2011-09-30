@@ -62,6 +62,23 @@ namespace Epilogger.Data
 		    }
 		}
 		
+        partial void OnURLStubChanging(string value);
+        partial void OnURLStubChanged();
+		
+		private string _URLStub;
+		public string URLStub { 
+		    get{
+		        return _URLStub;
+		    } 
+		    set{
+		        this.OnURLStubChanging(value);
+                this.SendPropertyChanging();
+                this._URLStub = value;
+                this.SendPropertyChanged("URLStub");
+                this.OnURLStubChanged();
+		    }
+		}
+		
 
         #endregion
 

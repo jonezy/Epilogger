@@ -77,7 +77,7 @@
                     }
                 </div>
                 <div class="hottest-Title">
-                    <h1>@item.Event.Name</h1>
+                    <a href="/Events/@item.Event.ID/details"><h1>@item.Event.Name</h1></a>
                     <div class="event-totals">
                         <div class="total-tweets">@string.Format("{0:#,###}", item.TweetCount)</div>
                         <div class="total-media">@string.Format("{0:#,###}", item.PhotoCount)</div>
@@ -113,7 +113,7 @@
         <ul class="browseCategoryList">
             @foreach (Epilogger.Data.EventCategory c in Model.EventCategories)
             {
-                <li><a href="">@c.CategoryName</a></li>
+                <li>@Html.ActionLink(c.CategoryName, "Category", new { CategoryName = c.URLStub })</li>
             }
         </ul>
 
