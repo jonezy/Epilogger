@@ -194,6 +194,7 @@
     <Compile Include="Models\DashboardProfileViewModel.cs" />
     <Compile Include="Models\EventDisplayViewModel.cs" />
     <Compile Include="Models\ForgotPasswordViewModel.cs" />
+    <Compile Include="Models\FoursquareVenue.cs" />
     <Compile Include="Models\GlobalNavigationModel.cs" />
     <Compile Include="Models\HotestEventsModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
