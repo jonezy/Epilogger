@@ -83,6 +83,12 @@ namespace Epilogger.Web {
             );
 
             routes.MapRoute(
+                "GetBrowseOverviewTabData",
+                "Events/GetBrowseOverviewTabData",
+                new { controller = "events", action = "GetBrowseOverviewTabData" }
+            );
+
+            routes.MapRoute(
                 "CreateEvent",
                 "events/create",
                 new { controller = "events", action = "create"}

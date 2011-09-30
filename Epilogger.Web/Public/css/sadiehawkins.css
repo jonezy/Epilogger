@@ -6,6 +6,7 @@ body {
 	font:normal 11pt times, 'Georgia', 'Times New Roman', serif}
 
 a {color:#2d8ac5;text-decoration:none}
+a:hover {text-decoration:underline;}
 
 p a {text-decoration:underline}
 a.edit_icon {background:url(../images/icons/pencil.png) no-repeat 0px 2px;padding-left:15px;}

@@ -68,5 +68,23 @@ namespace Epilogger.Web {
             StoredProcedure sp = db.GetUserDashboardActivity(userID.ToString());
             return sp.ExecuteTypedList<DashboardActivityModel>();
         }
+
+        public List<Epilogger.Data.Event> GetUserSubscribedAndCreatedEvents(Guid userID)
+        {
+            StoredProcedure sp = db.GetUserDashboardActivity(userID.ToString());
+            List<DashboardActivityModel> DAM = sp.ExecuteTypedList<DashboardActivityModel>();
+
+            List<Epilogger.Data.Event> MyEvents = new List<Epilogger.Data.Event>();
+            Epilogger.Data.Event MyEvent;
+            EventService ES = new EventService();
+            foreach (DashboardActivityModel item in DAM.Where(d => d.ActivityType == ActivityType.FOLLOW_EVENT || d.ActivityType == ActivityType.EVENT_CREATION))
+            {
+                MyEvent = ES.FindByID(item.EventID);
+                MyEvents.Add(MyEvent);
+            }
+
+            return MyEvents.OrderByDescending(e => e.StartDateTime).ToList();
+        }
+
     }
 }
