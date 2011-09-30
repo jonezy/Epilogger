@@ -21,6 +21,7 @@ namespace Epilogger.Web.Controllers {
         CheckInService CS = new CheckInService();
         ExternalLinkService LS = new ExternalLinkService();
         BlogService BS = new BlogService();
+        CategoryService CatS = new CategoryService();
 
         DateTime _FromDateTime = DateTime.Parse("2000-01-01 00:00:00");
         private DateTime FromDateTime() {
@@ -55,6 +56,7 @@ namespace Epilogger.Web.Controllers {
             if (CS == null) CS = new CheckInService();
             if (LS == null) LS = new ExternalLinkService();
             if (BS == null) BS = new BlogService();
+            if (CatS == null) CatS = new CategoryService();
 
             base.Initialize(requestContext);
         }
@@ -84,13 +86,17 @@ namespace Epilogger.Web.Controllers {
                     return RedirectToAction("details", new { id = e.ID });
                 default:
                     filter = "overview";
+                    model.UpcomingEvents = ES.UpcomingEvents();
+                    model.EventCategories = CatS.AllCategories();
                     break;
             }
 
             model.BrowsePageFilter = filter;
             
             //model.Events = Mapper.Map<List<Event>, List<EventDisplayViewModel>>(events);
+            //Not use if this is needed yet.
             model.Events = events;
+
             
             //For the Overview page, the hottest events
 

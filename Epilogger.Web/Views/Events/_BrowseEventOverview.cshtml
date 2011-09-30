@@ -8,6 +8,26 @@
 <div id="events-nav">
     <h1>BROWSE EVENTS</h1>
     <br style="clear:both;" />
+    @Html.TextBox("Search")
+    A calendar goes here.
+    <br style="clear:both;" />
+    <br style="clear:both;" />
+    
+    @foreach (Epilogger.Data.Event UpE in Model.UpcomingEvents.OrderBy(e => e.StartDateTime))
+    {
+        <h2>@UpE.StartDateTime.ToString("MMMM d, yyyy"):</h2>
+        <ul class="browseEventList">
+            <li><a href="/events/@UpE.ID/details"><div>@UpE.StartDateTime.ToString("h:mmtt")</div>@UpE.Name</a></li>
+        </ul>
+        <br style="clear:both;" />
+    }
+       
+    
+    
+    @*<h2>EVENTS FOR (selected date):</h2>
+    <ul class="browseEventList">
+        <li><div>8:00p</div>Event Name</li>
+    </ul>*@
 </div>
 
 <div id="events-content">
@@ -53,7 +73,21 @@
         {
             <li><a href="#" class="HottestListLink" id="@(item.Event.ID)">@item.Event.Name</a></li>
         }
+        </ul>   
+        <br style="clear:both;" />
+        <br style="clear:both;" />
+
+
+        @*Categories*@
+        <h2>BROWSE BY CATEGORY:</h2>
+        <ul class="browseCategoryList">
+            @foreach (Epilogger.Data.EventCategory c in Model.EventCategories)
+            {
+                <li><a href="">@c.CategoryName</a></li>
+            }
         </ul>
+
+
 </div>
 
 

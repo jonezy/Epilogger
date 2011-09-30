@@ -179,12 +179,14 @@ span.number {
 .HottestList li a:hover { color: #000; background-position:0 2px; }
 .HottestList li.active { color: #000; background-position:0 2px; }
 
+.browseEventList { list-style-type: none; }
+.browseEventList li { list-style:none; margin: 0; padding: 0; color: #2d8ac5;  }
+.browseEventList li div { padding: 2px 5px 2px 0; margin-right: 5px; border-right: 1px solid #e1e1e1; display: inline; color: #9e9c9c; }
+.browseEventList a:hover { text-decoration: underline; }
 
-
-
-
-
-
+.browseCategoryList { list-style-type: none; }
+.browseCategoryList li { list-style:none; float:left; width: 150px; height: 30px; padding: 6px 0 6px 40px; margin: 10px 5px 10px 0; color: #2d8ac5; font-weight: bold; background: url(../images/icons/Crown.png) no-repeat; overflow: hidden; }
+.browseCategoryList li a:hover { text-decoration: underline; }
 
 
 #event-intro {font-size:12px;}
