@@ -199,6 +199,7 @@
     <Compile Include="Models\ResetPasswordViewModel.cs" />
     <Compile Include="Models\TweetDisplayViewModel.cs" />
     <Compile Include="Models\UpdatePasswordModel.cs" />
+    <Compile Include="Models\VenueSearchModel.cs" />
     <Compile Include="Models\_EventMenuViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\Emails\AccountEmails.Designer.cs">
@@ -227,6 +228,7 @@
     <Content Include="Public\css\jquery-ui-1.8.16.custom.css" />
     <Content Include="Public\css\layout.css" />
     <Content Include="Public\css\messages.css" />
+    <Content Include="Public\css\modal.css" />
     <Content Include="Public\css\reset.css" />
     <Content Include="Public\css\sadiehawkins.css" />
     <Content Include="Public\css\skeleton.css" />
@@ -413,6 +415,8 @@
     <Content Include="Views\Events\Edit.cshtml" />
     <Content Include="Views\Events\_BrowseEventOverview.cshtml" />
     <Content Include="Views\Events\_BrowseEventLists.cshtml" />
+    <Content Include="Views\Shared\_ModalLayout.cshtml" />
+    <Content Include="Views\Events\VenueSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -30,3 +30,13 @@ function changeDescription() {
         }, "html");
 }
 
+function SearchVenues(url) {
+    $.post(url,
+        { name: venuename, city: venuecity, state: venuestate, zip: venuezip, address: venueaddress },
+        function (data) {
+            $('#VenueContentDiv').html(data);
+        });
+}
+function SetSelectedVenue(venueId) {
+    $("#selectedVenue").text(venueId);
+}

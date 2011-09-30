@@ -11,6 +11,9 @@ using Epilogger.Web.Core.Stats;
 using Epilogger.Web.Models;
 
 using RichmondDay.Helpers;
+using System.Net;
+using System.IO;
+using System.Xml;
 
 namespace Epilogger.Web.Controllers {
     public class EventsController : BaseController {
@@ -582,6 +585,46 @@ namespace Epilogger.Web.Controllers {
             }
             
             return RedirectToAction("edit", new { id = model.ID});
+        }
+
+        public ActionResult VenueSearch() {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult VenueSearch(FormCollection fc) {
+            string url = string.Format("http://maps.googleapis.com/maps/api/geocode/xml?address={0}&sensor=false", "toronto");
+            string xml = GetXml(url, null, "Get");
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.Load(xml);
+
+            return View();
+        }
+
+        string GetXml(string url, string postData, string method) {
+            string returnValue = string.Empty;
+            WebRequest webRequest = WebRequest.Create(url);
+            webRequest.ContentType = "application/x-www-form-urlencoded";
+
+            if (!string.IsNullOrEmpty(method)) {
+                webRequest.Method = method;
+
+                if (!string.IsNullOrEmpty(postData)) {
+                    // posting data to a url
+                    byte[] byteSend = Encoding.ASCII.GetBytes(postData);
+                    webRequest.ContentLength = byteSend.Length;
+
+                    using (Stream streamOut = webRequest.GetRequestStream())
+                        streamOut.Write(byteSend, 0, byteSend.Length);
+                }
+            } else
+                webRequest.Method = "GET";
+
+            WebResponse webResponse = webRequest.GetResponse();
+            using (StreamReader streamReader = new StreamReader(webResponse.GetResponseStream(), Encoding.UTF8))
+                if (streamReader.Peek() > -1) returnValue = streamReader.ReadToEnd();
+
+            return returnValue;
         }
     }
 }

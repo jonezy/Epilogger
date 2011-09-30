@@ -48,18 +48,39 @@
                 <div style="clear:both;"><label class="wide">Event End:</label> @Html.EditorFor(model => model.EndDateTime)</div>
             </div>
             <p><label class="wide">Time Zone:</label> @Html.DropDownListFor(model => model.TimeZoneOffset, Model.TimeZones, "Select your timezone", new { @class = "wide" })</p>
+            @*@Html.ActionLink("Venue Search", "venuesearch", "events", null, new { @class="modal"})*@
+<a href="#" class="modal">Venue Search</a>
+<div id="selectedVenue">adsfasdfasdf</div>
         </div>
     </div>
     <input type="submit" class="blue-action-button" value="Create Event" />
 }
 </div>
-
+<div style='display:none'>
+<div id="venue-search">
+    <div style="background:#fff;padding:10px;">
+        <h2>VenueSearch</h2>
+        @using (Html.BeginForm("VenueSearch", "Events", FormMethod.Post)) {
+        <fieldset class="modal">
+            <p><label>Venue name:</label>@Html.TextBox("venue_name")</p>
+            <input type="submit" id="search" class="blue-action-button" value="Search" />
+        </fieldset>
+        }
+    </div>
+</div>
+</div>
 <script>
     head.ready(function () {
         $('.unhide').click(function () {
             var unhide = $('.hidden');
             unhide.toggle();
         });
+
+        $(".modal").colorbox({
+            width: "60%", height: "60%",
+            href:'@Url.Action("VenueSearch","Events")'
+        });
+
     });
 </script>
 
