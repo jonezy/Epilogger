@@ -88,14 +88,15 @@ namespace Epilogger.Web.Controllers {
                     filter = "overview";
                     model.UpcomingEvents = ES.UpcomingEvents();
                     model.EventCategories = CatS.AllCategories();
+                    events = ES.TodaysEvents();
                     break;
             }
 
             model.BrowsePageFilter = filter;
-            
-            //model.Events = Mapper.Map<List<Event>, List<EventDisplayViewModel>>(events);
+
+            model.Events = Mapper.Map<List<Event>, List<DashboardEventViewModel>>(events);
             //Not use if this is needed yet.
-            model.Events = events;
+            //model.Events = events;
 
             
             //For the Overview page, the hottest events

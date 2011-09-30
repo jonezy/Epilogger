@@ -1,4 +1,5 @@
-﻿@model Epilogger.Web.Models.BrowseEventsDisplayViewModel
+﻿@using Epilogger.Web;
+@model Epilogger.Web.Models.BrowseEventsDisplayViewModel
       
 <script type="text/javascript" language="javascript">
     head.js('@Url.Content("~/Public/js/BrowseEvents.js")');
@@ -8,6 +9,44 @@
 <div id="events-nav">
     <h1>BROWSE EVENTS</h1>
     <br style="clear:both;" />
+    
+    
+    <ul class="BrowseWhenMenu">
+        <li><a href="" class="active">TODAY</a></li>
+        @*<li><a href="">PAST</a></li>
+        <li><a href="">UPCOMING</a></li>*@
+    </ul>
+    <br style="clear:both;" />
+    <div class="BEventListContainer">
+        @foreach (var item in Model.Events) {
+            <div class="dashboard-event-item clearfix">
+                <div class="month-day">
+                    <div class="month">@item.StartDateTime.ToString("MMM")</div>    
+                    <h2>@item.StartDateTime.Day</h2>
+                    <div class="icon"></div>
+                </div>
+                <div class="event-content">
+                    <h6>@Html.ActionLink(item.Name, "details", "events", new { @id = item.ID }, null)</h6>
+                
+                    <div class="event-content-time2">@item.StartDateTime.ToUserTimeZone().ToString("hh:mmtt").ToLower()</div>
+                    <div class="event-content-searchterms2">@item.SearchTerms</div>
+                </div>
+                <div class="event-totals">
+                    <div class="total-tweets">@string.Format("{0:#,###}", item.TotalTweets)</div>
+                    <div class="total-media">@string.Format("{0:#,###}", item.TotalMedia)</div>
+                </div>
+            </div>
+        }
+    
+    </div>
+
+    
+
+
+
+
+    @*This is styled and working for when the Calendar tab is built*@
+    @*
     @Html.TextBox("Search")
     A calendar goes here.
     <br style="clear:both;" />
@@ -21,9 +60,8 @@
         </ul>
         <br style="clear:both;" />
     }
-       
-    
-    
+    *@
+
     @*<h2>EVENTS FOR (selected date):</h2>
     <ul class="browseEventList">
         <li><div>8:00p</div>Event Name</li>
@@ -48,6 +86,10 @@
                 </div>
                 <div class="hottest-Title">
                     <h1>@item.Event.Name</h1>
+                    <div class="event-totals">
+                        <div class="total-tweets">@string.Format("{0:#,###}", item.TweetCount)</div>
+                        <div class="total-media">@string.Format("{0:#,###}", item.PhotoCount)</div>
+                    </div>
                     <br style="clear:both;" />
                 </div>
                 <div class="hottest-photogridBottom">
@@ -58,10 +100,6 @@
                             <img src="@image.Fullsize" width="200" border="0" alt="" /></a>
                         </div>
                     }
-                </div>
-                <div class="event-totals">
-                    <div class="total-tweets">@item.TweetCount</div>
-                    <div class="total-media">@item.PhotoCount</div>
                 </div>
             </div>
         }

@@ -2,7 +2,6 @@
 
 using System;
 using System.Linq;
-
 using Epilogger.Data;
 
 namespace Epilogger.Web {
@@ -23,6 +22,11 @@ namespace Epilogger.Web {
         public List<Event> PastEvents()
         {
             return GetData(e => e.EndDateTime < DateTime.UtcNow).ToList();
+        }
+
+        public List<Event> TodaysEvents()
+        {
+            return GetData(IsSameDate<Event>(e => e.StartDateTime, DateTime.UtcNow)).ToList();
         }
 
         public List<Event> GoingOnNowEvents()
