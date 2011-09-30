@@ -241,14 +241,14 @@ namespace Epilogger.Web.Controllers {
                     DateTime.TryParse(Request.Form[7], out startDate); // start date
                     DateTime.TryParse(Request.Form[8], out endDate); // end date (could be null)
 
-                    model.CollectionStartDateTime = startDate.AddDays(-2);
+                    model.CollectionStartDateTime = startDate.FromUserTimeZoneToUtc().AddDays(-2);
                     if (endDate != DateTime.MinValue) {
-                        model.CollectionEndDateTime = endDate.AddDays(3);
+                        model.CollectionEndDateTime = endDate.FromUserTimeZoneToUtc().AddDays(3);
                     }
 
-                    model.StartDateTime = startDate;
+                    model.StartDateTime = startDate.FromUserTimeZoneToUtc();
                     if(endDate != DateTime.MinValue) {
-                        model.EndDateTime = endDate;
+                        model.EndDateTime = endDate.FromUserTimeZoneToUtc();
                     }
 
                     Event EPLevent = Mapper.Map<CreateEventViewModel, Event>(model);
@@ -544,14 +544,14 @@ namespace Epilogger.Web.Controllers {
                     DateTime.TryParse(Request.Form[10], out collectionStart); 
                     DateTime.TryParse(Request.Form[11], out collectionEnd);
 
-                    currentEvent.StartDateTime = startDate;
+                    currentEvent.StartDateTime = startDate.FromUserTimeZoneToUtc();
                     if (endDate != DateTime.MinValue) {
-                        currentEvent.EndDateTime = endDate; // 7 is timezone offset
+                        currentEvent.EndDateTime = endDate.FromUserTimeZoneToUtc(); // 7 is timezone offset
                     }
-                    
-                    currentEvent.CollectionStartDateTime = collectionStart;
+
+                    currentEvent.CollectionStartDateTime = collectionStart.FromUserTimeZoneToUtc();
                     if (collectionEnd != DateTime.MinValue) {
-                        currentEvent.CollectionEndDateTime = collectionEnd;
+                        currentEvent.CollectionEndDateTime = collectionEnd.FromUserTimeZoneToUtc();
                     }
                     
                   
