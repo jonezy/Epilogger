@@ -10,7 +10,7 @@
             <li>There are currently no events going on. Why not add one?!</li>
             @Html.ActionLink("CREATE EVENT", "create", "events")
         }
-        @foreach (var item in Model.Events.OrderByDescending(t => t.EndDateTime)) {
+        @foreach (var item in Model.Events) {
             if (!string.IsNullOrEmpty(item.Name)) {
                 <li class="grid_4">@Html.RouteLink(@item.Name, "EventsRoutes", new { controller = "events", action = "details", id = @item.ID })</li>
             }
