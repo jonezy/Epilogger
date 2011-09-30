@@ -592,17 +592,17 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpPost]
-        public ActionResult VenueSearch(FormCollection fc) {
+        public PartialViewResult SearchVenues(FormCollection fc) {
             string url = string.Format("http://maps.google.com/maps/geo?output=csv&q={0}", "toronto");
             string results = GetResults(url, null, "Get");
             var parts = results.Split(',');
-            
+
             Double longitude = Convert.ToDouble(parts[2]);
             Double latitude = Convert.ToDouble(parts[3]);
 
             string clientId = "GRBSH3HPYZYHIACLAL1GHGYHVHVWLJ0GGUUB1OLV41GV5EF1";
             string clientSecret = "FFCUYMPWPVTCP5AVNDS2VCA1JPTTR4FKCE35ZQUV3TKON5MH";
-            string latLong = string.Format("{0},{1}",longitude, latitude);
+            string latLong = string.Format("{0},{1}", longitude, latitude);
             string version = DateTime.Today.ToString("yyyyMMdd");
             string query = "";
 
@@ -620,10 +620,7 @@ namespace Epilogger.Web.Controllers {
                 foundVenues.Add(new FoursquareVenue { Name = item.name });
             }
 
-            VenueSearchModel model = new VenueSearchModel();
-            model.Venues = foundVenues;
-
-            return View(model);
+            return PartialView("_VenueSearchResults", foundVenues);
         }
 
         string GetResults(string url, string postData, string method) {

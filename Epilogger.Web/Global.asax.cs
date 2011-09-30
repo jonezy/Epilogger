@@ -77,6 +77,12 @@ namespace Epilogger.Web {
             );
 
             routes.MapRoute(
+                "SearchVenues",
+                "events/searchvenues",
+                new { controller = "events", action = "searchvenues" }
+            );
+
+            routes.MapRoute(
                 "GetLatestTweets",
                 "Events/GetLastTweetsJSON",
                 new { controller = "events", action = "GetLastTweetsJSON" }
