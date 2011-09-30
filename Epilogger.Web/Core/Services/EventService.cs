@@ -2,8 +2,8 @@
 
 using System;
 using System.Linq;
+
 using Epilogger.Data;
-using System.Data.Linq.SqlClient;
 
 namespace Epilogger.Web {
     public class EventService : ServiceBase<Event> {
@@ -17,26 +17,26 @@ namespace Epilogger.Web {
 
         public List<Event> UpcomingEvents()
         {
-            return db.Events.Where(e => e.StartDateTime > DateTime.UtcNow).ToList();
+            return GetData(e => e.StartDateTime > DateTime.UtcNow);
         }
 
         public List<Event> PastEvents()
         {
-            return db.Events.Where(e => e.EndDateTime < DateTime.UtcNow).ToList();
+            return GetData(e => e.EndDateTime < DateTime.UtcNow).ToList();
         }
 
-        public IEnumerable<Event> GoingOnNowEvents()
+        public List<Event> GoingOnNowEvents()
         {
-            return db.Events.Where(e => e.StartDateTime <= DateTime.UtcNow && e.EndDateTime.Value >= DateTime.UtcNow).ToList();
+            IEnumerable<Event> neverEndingEvents = from e in GetData()
+                                                   where e.EndDateTime == null
+                                                   select e;
 
-            //var GoingOn = (from e in db.Events
-            //               where e.StartDateTime.CompareTo(DateTime.UtcNow) >= 0  &&
-            //               e.EndDateTime.CompareTo(DateTime.UtcNow) > 0
-            //               select e);
-            
-            
-            //return GoingOn;
+            IEnumerable<Event> happeningNow = from e in GetData()
+                                         where (e.StartDateTime <= DateTime.UtcNow && (e.EndDateTime != null && e.EndDateTime >= DateTime.UtcNow))
+                                         select e;
 
+            return neverEndingEvents.Concat(happeningNow).OrderBy(e=>e.StartDateTime).ToList();
+            //return GetData(e => e.StartDateTime <= DateTime.UtcNow && e.EndDateTime >= DateTime.UtcNow).ToList();
         }
 
         
