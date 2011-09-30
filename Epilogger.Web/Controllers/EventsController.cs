@@ -82,7 +82,7 @@ namespace Epilogger.Web.Controllers {
                     events = ES.PastEvents();
                     break;
                 case "now":
-                    events = ES.GoingOnNowEvents().ToList();
+                    events = ES.GoingOnNowEvents().OrderBy(ne=>ne.EndDateTime.GetValueOrDefault()).ToList();
                     break;
                 case "random":
                     Epilogger.Data.Event e = ES.GetRandomEvent();
