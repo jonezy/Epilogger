@@ -3,7 +3,7 @@
     ViewBag.Title = "VenueSearch";
     Layout = "~/Views/Shared/_ModalLayout.cshtml";
 }
-
+<div id="searchresults">
 <h2>VenueSearch</h2>
 <fieldset class="modal">
     <p><label>Venue name:</label>@Html.TextBoxFor(m => m.VenueName)</p>
@@ -12,3 +12,13 @@
     <a href="#" id="search" onclick="SetSelectedVenue(1);return false;">Set Venue</a>
 @*    <input type="submit" id="search" class="blue-action-button" value="Search" />*@
 </fieldset>
+
+@if (Model.Venues != null) {
+    foreach (var item in Model.Venues) {
+        @item.Name<br />
+    }
+}
+</div>
+
+
+

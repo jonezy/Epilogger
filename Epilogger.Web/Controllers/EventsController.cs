@@ -588,7 +588,7 @@ namespace Epilogger.Web.Controllers {
         }
 
         public ActionResult VenueSearch() {
-            return View();
+            return View(new VenueSearchModel());
         }
 
         [HttpPost]
@@ -615,12 +615,15 @@ namespace Epilogger.Web.Controllers {
 
             var client = new FoursquareVenueClient();
             var venues = client.Execute(searchRequest);
-
+            List<FoursquareVenue> foundVenues = new List<FoursquareVenue>();
             foreach (var item in venues.response) {
-
+                foundVenues.Add(new FoursquareVenue { Name = item.name });
             }
 
-            return View(new VenueSearchModel());
+            VenueSearchModel model = new VenueSearchModel();
+            model.Venues = foundVenues;
+
+            return View(model);
         }
 
         string GetResults(string url, string postData, string method) {
@@ -650,7 +653,4 @@ namespace Epilogger.Web.Controllers {
         }
     }
 
-    class FoursquareVenue {
-        public string Name { get; set; }
-    }
 }
