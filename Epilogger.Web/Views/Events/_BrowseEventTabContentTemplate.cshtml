@@ -1,0 +1,26 @@
+﻿@using Epilogger.Web;
+@using Epilogger.Web.Models;
+@model List<DashboardEventViewModel>
+
+@foreach (var item in Model)
+{
+    <div class="dashboard-event-item clearfix">
+        <div class="month-day">
+            <div class="month">@item.StartDateTime.ToString("MMM")</div>    
+            <h2>@item.StartDateTime.Day</h2>
+            <div class="icon"></div>
+        </div>
+        <div class="event-content">
+            <h6>@Html.ActionLink(item.Name, "details", "events", new { @id = item.ID }, null)</h6>
+                
+            <div class="event-content-time2">@item.StartDateTime.ToUserTimeZone().ToString("hh:mmtt").ToLower()</div>
+            @*Too long in most cases, looks like shit. Not important information*@
+            @*<div class="event-content-searchterms2">@item.SearchTerms</div>*@
+        </div>
+        <div class="event-totals">
+            <div class="total-tweets">@string.Format("{0:#,###}", item.TotalTweets)</div>
+            <div class="total-media">@string.Format("{0:#,###}", item.TotalMedia)</div>
+        </div>
+    </div>
+}
+@Html.ActionLink("See all of your activity and event in the Dahboard", "events", "dashboard")

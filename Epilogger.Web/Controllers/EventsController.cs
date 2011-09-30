@@ -25,6 +25,7 @@ namespace Epilogger.Web.Controllers {
         ExternalLinkService LS = new ExternalLinkService();
         BlogService BS = new BlogService();
         CategoryService CatS = new CategoryService();
+        UserService US = new UserService();
 
         DateTime _FromDateTime = DateTime.Parse("2000-01-01 00:00:00");
         private DateTime FromDateTime() {
@@ -60,6 +61,7 @@ namespace Epilogger.Web.Controllers {
             if (LS == null) LS = new ExternalLinkService();
             if (BS == null) BS = new BlogService();
             if (CatS == null) CatS = new CategoryService();
+            if (US == null) US = new UserService();
 
             base.Initialize(requestContext);
         }
@@ -68,6 +70,15 @@ namespace Epilogger.Web.Controllers {
 
 
             BrowseEventsDisplayViewModel model = new BrowseEventsDisplayViewModel();
+
+            if (CurrentUserID == Guid.Empty)
+            {
+                model.Authorized = false;
+            }
+            else
+            {
+                model.Authorized = true;
+            }
 
             List<Event> events = new List<Event>();
             IEnumerable<Event> hottestevents = ES.GetHottestEvents(10);
@@ -91,7 +102,16 @@ namespace Epilogger.Web.Controllers {
                     filter = "overview";
                     model.UpcomingEvents = ES.UpcomingEvents();
                     model.EventCategories = CatS.AllCategories();
-                    events = ES.TodaysEvents();
+
+                    if (model.Authorized)
+                    {
+                        events = US.GetUserSubscribedAndCreatedEvents(CurrentUserID).Take(8).ToList();
+                    }
+                    else
+                    {
+                        events = ES.TodaysEvents();
+                    }
+                    
                     break;
             }
 
@@ -119,8 +139,28 @@ namespace Epilogger.Web.Controllers {
             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult GetBrowseOverviewTabData(int Tab)
+        {
+            List<Event> events = new List<Event>();
 
+            switch (Tab)
+            {
+                case 1: //My Events
+                    events = US.GetUserSubscribedAndCreatedEvents(CurrentUserID).Take(8).ToList();
+                    break;
+                case 2: //Today
+                    events = ES.TodaysEvents();
+                    break;
+            }
+            List<DashboardEventViewModel> TheEvents = new List<DashboardEventViewModel>();
+            TheEvents = Mapper.Map<List<Event>, List<DashboardEventViewModel>>(events);
 
+            //PartialViewResult TabContent = PartialView("_BrowseEventTabContentTemplate.cshtml", TheEvents);
+            //return TabContent;
+
+            return PartialView("_BrowseEventTabContentTemplate", TheEvents);
+        }
 
 
         public ActionResult Details(int id) {
