@@ -593,15 +593,37 @@ namespace Epilogger.Web.Controllers {
 
         [HttpPost]
         public ActionResult VenueSearch(FormCollection fc) {
-            string url = string.Format("http://maps.googleapis.com/maps/api/geocode/xml?address={0}&sensor=false", "toronto");
-            string xml = GetXml(url, null, "Get");
-            XmlDocument xmlDocument = new XmlDocument();
-            xmlDocument.Load(xml);
+            string url = string.Format("http://maps.google.com/maps/geo?output=csv&q={0}", "toronto");
+            string results = GetResults(url, null, "Get");
+            var parts = results.Split(',');
+            
+            Double longitude = Convert.ToDouble(parts[2]);
+            Double latitude = Convert.ToDouble(parts[3]);
 
-            return View();
+            string clientId = "GRBSH3HPYZYHIACLAL1GHGYHVHVWLJ0GGUUB1OLV41GV5EF1";
+            string clientSecret = "FFCUYMPWPVTCP5AVNDS2VCA1JPTTR4FKCE35ZQUV3TKON5MH";
+            string latLong = string.Format("{0},{1}",longitude, latitude);
+            string version = DateTime.Today.ToString("yyyyMMdd");
+            string query = "";
+
+            string searchRequest = string.Format("https://api.foursquare.com/v2/venues/search?ll={0}&query={1}&client_id={2}&client_secret={3}&v={4}",
+                latLong,
+                query,
+                clientId,
+                clientSecret,
+                version);
+
+            var client = new FoursquareVenueClient();
+            var venues = client.Execute(searchRequest);
+
+            foreach (var item in venues.response) {
+
+            }
+
+            return View(new VenueSearchModel());
         }
 
-        string GetXml(string url, string postData, string method) {
+        string GetResults(string url, string postData, string method) {
             string returnValue = string.Empty;
             WebRequest webRequest = WebRequest.Create(url);
             webRequest.ContentType = "application/x-www-form-urlencoded";
@@ -622,9 +644,13 @@ namespace Epilogger.Web.Controllers {
 
             WebResponse webResponse = webRequest.GetResponse();
             using (StreamReader streamReader = new StreamReader(webResponse.GetResponseStream(), Encoding.UTF8))
-                if (streamReader.Peek() > -1) returnValue = streamReader.ReadToEnd();
+                if (streamReader.Peek() > -1) return streamReader.ReadToEnd();
 
-            return returnValue;
+            return "";
         }
+    }
+
+    class FoursquareVenue {
+        public string Name { get; set; }
     }
 }

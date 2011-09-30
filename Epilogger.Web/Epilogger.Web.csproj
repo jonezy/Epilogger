@@ -145,6 +145,7 @@
     <Compile Include="Core\Filters\RequiresAuthentication.cs" />
     <Compile Include="Core\Helpers\AzureTableHelper.cs" />
     <Compile Include="Core\Helpers\FacebookHelper.cs" />
+    <Compile Include="Core\Helpers\FoursquareVenueClient.cs" />
     <Compile Include="Core\Helpers\Helpers.cs" />
     <Compile Include="Core\Helpers\HtmlHelpers.cs" />
     <Compile Include="Core\Helpers\PasswordHelpers.cs" />
@@ -212,6 +213,20 @@
     <Content Include="Global.asax" />
     <Content Include="Public\css\960_12_col.css" />
     <Content Include="Public\css\base.css" />
+    <Content Include="Public\css\cbimages\border.png" />
+    <Content Include="Public\css\cbimages\controls.png" />
+    <Content Include="Public\css\cbimages\ie6\borderBottomCenter.png" />
+    <Content Include="Public\css\cbimages\ie6\borderBottomLeft.png" />
+    <Content Include="Public\css\cbimages\ie6\borderBottomRight.png" />
+    <Content Include="Public\css\cbimages\ie6\borderMiddleLeft.png" />
+    <Content Include="Public\css\cbimages\ie6\borderMiddleRight.png" />
+    <Content Include="Public\css\cbimages\ie6\borderTopCenter.png" />
+    <Content Include="Public\css\cbimages\ie6\borderTopLeft.png" />
+    <Content Include="Public\css\cbimages\ie6\borderTopRight.png" />
+    <Content Include="Public\css\cbimages\loading.gif" />
+    <Content Include="Public\css\cbimages\loading_background.png" />
+    <Content Include="Public\css\cbimages\overlay.png" />
+    <Content Include="Public\css\colorbox.css" />
     <Content Include="Public\css\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Public\css\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Public\css\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -283,6 +298,7 @@
     <Content Include="Public\js\head.load.min.js" />
     <Content Include="Public\js\jquery-1.6.2.min.js" />
     <Content Include="Public\js\jquery-ui-1.8.16.custom.min.js" />
+    <Content Include="Public\js\jquery.colorbox-min.js" />
     <Content Include="Public\js\jquery.expander.min.js" />
     <Content Include="Public\js\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Public\js\prettyPhoto\css\prettyPhoto.css" />

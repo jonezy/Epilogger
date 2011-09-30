@@ -31,8 +31,20 @@ function changeDescription() {
 }
 
 function SearchVenues(url) {
+    var venue_name = $("#VenueName").val();
+    var venue_city = $("#City").val();
+    var venue_state = "";
+    var venue_zip = "";
+    var venue_address = "";
+
     $.post(url,
-        { name: venuename, city: venuecity, state: venuestate, zip: venuezip, address: venueaddress },
+        {
+            name: venue_name,
+            city: venue_city,
+            state: venue_state,
+            zip: venue_zip,
+            address: venue_address
+        },
         function (data) {
             $('#VenueContentDiv').html(data);
         });
