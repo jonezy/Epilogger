@@ -434,6 +434,7 @@
     <Content Include="Views\Events\_BrowseEventLists.cshtml" />
     <Content Include="Views\Shared\_ModalLayout.cshtml" />
     <Content Include="Views\Events\VenueSearch.cshtml" />
+    <Content Include="Views\Events\_BrowseEventTabContentTemplate.cshtml" />
     <Content Include="Views\Events\_VenueSearchResults.cshtml" />
   </ItemGroup>
   <ItemGroup>

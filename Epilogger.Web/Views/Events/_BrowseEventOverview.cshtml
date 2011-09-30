@@ -12,32 +12,24 @@
     
     
     <ul class="BrowseWhenMenu">
-        <li><a href="" class="active">TODAY</a></li>
+        @if (Model.Authorized)
+        {
+            <li><a href="" id="1" class="browseTabs active">IMPORTANT TO ME</a></li>
+            <li><a href="" id="2" class="browseTabs ">TODAY</a></li>
+        }
+        else
+        {
+            <li><a href="" id="2" class="browseTabs active">TODAY</a></li>
+        }
+        
         @*<li><a href="">PAST</a></li>
         <li><a href="">UPCOMING</a></li>*@
     </ul>
     <br style="clear:both;" />
     <div class="BEventListContainer">
-        @foreach (var item in Model.Events) {
-            <div class="dashboard-event-item clearfix">
-                <div class="month-day">
-                    <div class="month">@item.StartDateTime.ToString("MMM")</div>    
-                    <h2>@item.StartDateTime.Day</h2>
-                    <div class="icon"></div>
-                </div>
-                <div class="event-content">
-                    <h6>@Html.ActionLink(item.Name, "details", "events", new { @id = item.ID }, null)</h6>
-                
-                    <div class="event-content-time2">@item.StartDateTime.ToUserTimeZone().ToString("hh:mmtt").ToLower()</div>
-                    <div class="event-content-searchterms2">@item.SearchTerms</div>
-                </div>
-                <div class="event-totals">
-                    <div class="total-tweets">@string.Format("{0:#,###}", item.TotalTweets)</div>
-                    <div class="total-media">@string.Format("{0:#,###}", item.TotalMedia)</div>
-                </div>
-            </div>
-        }
-    
+        
+        @Html.Partial("_BrowseEventTabContentTemplate", Model.Events)
+
     </div>
 
     
@@ -109,7 +101,7 @@
         <ul class="HottestList">
         @foreach (Epilogger.Web.Models.HotestEventsModel item in Model.HottestEvents)
         {
-            <li><a href="#" class="HottestListLink" id="@(item.Event.ID)">@item.Event.Name</a></li>
+            <li><a href="" onclick="return false;" class="HottestListLink" id="@(item.Event.ID)">@item.Event.Name</a></li>
         }
         </ul>   
         <br style="clear:both;" />
