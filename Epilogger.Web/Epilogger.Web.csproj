@@ -200,6 +200,8 @@
     <Compile Include="Models\HotestEventsModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ResetPasswordViewModel.cs" />
+    <Compile Include="Models\SearchInEventModel.cs" />
+    <Compile Include="Models\SearchInEventViewModel.cs" />
     <Compile Include="Models\TweetDisplayViewModel.cs" />
     <Compile Include="Models\UpdatePasswordModel.cs" />
     <Compile Include="Models\VenueSearchModel.cs" />
@@ -265,6 +267,7 @@
     <Content Include="Public\images\event_activity_title_icons.png" />
     <Content Include="Public\images\icons\BrowseBullet.png" />
     <Content Include="Public\images\icons\bubble.png" />
+    <Content Include="Public\images\icons\CreateAccountArrow.png" />
     <Content Include="Public\images\icons\Crown.png" />
     <Content Include="Public\images\icons\dashboard-event-totals.png" />
     <Content Include="Public\images\icons\event-toolbar-ov.png" />
@@ -439,6 +442,7 @@
     <Content Include="Views\Events\_VenueSearchResults.cshtml" />
     <Content Include="Views\Events\Category.cshtml" />
     <Content Include="Views\Events\_ImageTemplate.cshtml" />
+    <Content Include="Views\Events\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

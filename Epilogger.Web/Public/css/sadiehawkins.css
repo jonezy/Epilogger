@@ -144,6 +144,7 @@ span.number {
 .image-grid img { padding:2px 0}
 .image-grid#photosvideos img {margin:8px}
 
+
 .image-grid .withcomment {
 	text-align:right;
 	height:154px;
@@ -152,17 +153,20 @@ span.number {
 	float:left;}
 
 .image-grid .commentbubble {
-	background:url('../images/icons/bubble.png') no-repeat;
-	opacity:0.7;
-	padding:3px 5px 5px 5px;
+	background: url('../images/icons/bubble.png') no-repeat;
+	opacity: 0.7;
+	padding: 3px 5px 5px 5px;
 	font-family:InterstatePlusRegular;
 	color:#3399ff;
-	position:relative;
+	position: relative;
 	top:-155px;
-	right:6px;
-	z-index:10}
+	right: 6px;
+	z-index: 10}
 
 .image-grid .commentbubble:hover {opacity:1;}
+
+
+
 
 
 /*Browse Events */

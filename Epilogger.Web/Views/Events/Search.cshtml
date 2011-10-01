@@ -1,0 +1,34 @@
+﻿@using Epilogger.Web;
+@using Epilogger.Web.Models;
+
+@model Epilogger.Web.Models.SearchInEventViewModel
+@{
+    ViewBag.Title = "Epilogger - " + Model.Name + "- Search";
+}
+@Html.Partial("EventToolbar")
+<div id="events-nav">
+    <h1>SEARCH EVENT</h1>
+    <h2>@Model.SearchTerm</h2>
+    <br style="clear:both;" />
+    @using (Html.BeginForm("Search", "events", FormMethod.Post, null))
+    {
+        @Html.TextBoxFor(t => t.SearchTerm)
+        @Html.HiddenFor(model => model.ID)
+        <input type="submit" class="blue-action-button remove-bottom" value="Search" />
+    }
+</div>
+<div id="events-content">
+
+    @foreach (SearchInEventModel item in Model.SearchResults) {
+        <div class="alltweets-entry clearfix">
+            <img src="@item.Tweet.ProfileImageURL" class="fleft" height="48" width="48" alt="" />
+            <div class="tweet-content">
+                <strong><a href="http://www.twitter.com/@item.Tweet.FromUserScreenName" class="tweet-content-username" target="_blank">@item.Tweet.FromUserScreenName</a></strong>
+                <p>@Html.Raw(item.Tweet.TextAsHTML)</p>
+                <span class="tweet-date">(@item.Tweet.CreatedDate.Value.ToUserTimeZone(-5).ToString("MMMM dd, yyyy"))</span>
+            </div>
+        </div>
+    }
+
+    @MvcHtmlString.Create(Html.Pager(100, Model.CurrentPageIndex, Model.SearchResults.Count(), new { controller = "Events", action = "Search", id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }))
+</div>
