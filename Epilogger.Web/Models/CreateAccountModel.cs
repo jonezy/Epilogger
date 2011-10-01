@@ -13,7 +13,10 @@ namespace Epilogger.Web.Models {
         [Required(ErrorMessage = "Please enter your password")]
         public string Password { get; set; }
 
-        [DisplayName("Email address"), Required(ErrorMessage = "Please enter your email address")]
+        [DisplayName("Confirm Password"), Required(ErrorMessage = "Please enter your password again")]
+        public string ConfirmPassword { get; set; }
+
+        [DisplayName("Email"), Required(ErrorMessage = "Please enter your email address")]
         public string EmailAddress { get; set; }
         
         [DisplayName("Your timezone"), Required(ErrorMessage="Please select your timezone")]
@@ -58,7 +61,7 @@ namespace Epilogger.Web.Models {
             }
         }
 
-        [DisplayName("Date of birth")]
+        [DisplayName("Birthday")]
         public string DateOfBirth { get; set; }
     }
 }

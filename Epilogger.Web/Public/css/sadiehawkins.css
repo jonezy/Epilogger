@@ -144,6 +144,7 @@ span.number {
 .image-grid img { padding:2px 0}
 .image-grid#photosvideos img {margin:8px}
 
+
 .image-grid .withcomment {
 	text-align:right;
 	height:154px;
@@ -152,17 +153,20 @@ span.number {
 	float:left;}
 
 .image-grid .commentbubble {
-	background:url('../images/icons/bubble.png') no-repeat;
-	opacity:0.7;
-	padding:3px 5px 5px 5px;
+	background: url('../images/icons/bubble.png') no-repeat;
+	opacity: 0.7;
+	padding: 3px 5px 5px 5px;
 	font-family:InterstatePlusRegular;
 	color:#3399ff;
-	position:relative;
+	position: relative;
 	top:-155px;
-	right:6px;
-	z-index:10}
+	right: 6px;
+	z-index: 10}
 
 .image-grid .commentbubble:hover {opacity:1;}
+
+
+
 
 
 /*Browse Events */
@@ -219,19 +223,30 @@ div#photos-filterbar {padding:15px 0;border-bottom:1px dotted #000;}
 
 ul#connected-networks {list-style:none;}
 
-/* ------------------------------ CREATE EVENT */
+
+/* ------------------------------ Universal TAB style */
 .item-card {margin-bottom:10px;}
-.item-card h4 {background:#ee4490;color:#fff;float:left;padding:5px 10px 5px 10px;}
-.item-data {background:#dcdcdc;padding:10px;border-top:solid 5px #ee4490;margin:-5px 0px 10px 0px;}
+.item-card h4 {background:#fe60b1;color:#fff;float:left;padding:7px 10px 5px 10px; font-size: 14px !important;
+                -webkit-border-top-left-radius: 3px;
+                -webkit-border-top-right-radius: 3px;
+                -moz-border-radius-topleft: 3px;
+                -moz-border-radius-topright: 3px;
+                border-top-left-radius: 3px;
+                border-top-right-radius: 3px;
+}
+.item-data {background:#dcdcdc;padding:10px;border-top:solid 5px #fe60b1;margin:-5px 0px 10px 0px;}
 .item-data .item-content { width:400px; }
 .item-data h1 {border-bottom:2px solid #fff;padding-bottom:10px;margin-bottom:10px;}
 
-#createevent-info h4,
-#createevent-time h4 {font-size:16px !important;}
+
+/* ------------------------------ CREATE EVENT */
+/*#createevent-info h4,
+#createevent-time h4 {font-size:16px !important;}*/
 
 .end-time {margin-left:110px;clear:both;}
 .end-time input#end-time {float:left;margin-bottom:10px !important;}
 .end-time label {float:right;width:auto !important;padding:2px 0px !important;font-weight:normal;font-style:italic;}
+
 /* form overrides */
 
 .item-data label {float:left;font-size:11px;width:80px;text-align:right;text-transform:uppercase;padding:8px 10px 0px 0px;}
@@ -274,6 +289,29 @@ fieldset.login input[type="password"] {width:340px;}
 fieldset.login p.rememberme,
 fieldset.login p.submit {padding-left:82px;}
 fieldset.login label.left {width:auto !important;padding:2px 0;}
+
+/*CREATE ACCOUNT*/
+
+fieldset.create label {padding:8px;width:100px;margin-top: 8px;text-transform:uppercase;font-size:11px;}
+fieldset.create label,
+fieldset.create select,
+fieldset.create input[type="text"],
+fieldset.create input[type="password"] {float:left;}
+
+fieldset.create input[type="text"],
+fieldset.create select,
+fieldset.create input[type="password"] {width:300px; font-size: 26px;}
+
+fieldset.create select { width:310px; font-size: 26px; }
+
+fieldset.create p.rememberme,
+fieldset.create p.submit {padding-left:82px;}
+fieldset.create label.left {width:auto !important;padding:2px 0;}
+
+.createArrow { background: url(../images/icons/CreateAccountArrow.png) no-repeat; height: 350px; background-position: 0 65px; }
+.createAccountButton { position:relative; top: 155px; left: 80px; height: 40px; }
+
+
 /* ------------------------------ DASHBOARD */
 #dashboard-nav {float:left;width:268px;margin-right:17px;}
 
@@ -291,8 +329,8 @@ ul#left-nav li a.current {background:#f6f6f6;border-bottom:solid 1px #bdbdbd;}
 .dashboard-activity-entry strong.title.EVENT_CREATION {background-position:0 -56px;padding-left:28px;}
 
 .profile-card {margin-bottom:10px;}
-.profile-card h4 {background:#ee4490;color:#fff;float:left;padding:5px 10px 5px 10px;}
-.profile-data {background:#dcdcdc;padding:10px;border-top:solid 5px #ee4490;margin:-5px 0px 10px 0px;}
+.profile-card h4 {background:#fe60b1;color:#fff;float:left;padding:5px 10px 5px 10px;}
+.profile-data {background:#dcdcdc;padding:10px;border-top:solid 5px #fe60b1;margin:-5px 0px 10px 0px;}
 .profile-data .profile-picture {margin-right:20px;}
 .profile-data .profile-content {width:400px;}
 .profile-data h1 {border-bottom:2px solid #fff;padding-bottom:10px;margin-bottom:10px;}
@@ -368,7 +406,7 @@ ul#left-nav li a.current {background:#f6f6f6;border-bottom:solid 1px #bdbdbd;}
 .alltweets-entry .tweet-content span.tweet-date {font-size:11px;color:#c2c2c2;}
 
 .alllinks-entry { padding: 10px 0; border-bottom: dotted 1px #3e3e3e; }
-.alllinks-entry .tweet { margin: 5px 0 5px 20px; border-left: 2px solid #EE4490; padding-left: 5px; }
+.alllinks-entry .tweet { margin: 5px 0 5px 20px; border-left: 2px solid #fe60b1; padding-left: 5px; }
 .alllinks-entry .tweet img { margin-right: 5px; }
 
 
@@ -436,7 +474,7 @@ div#search-container input[type=image] {
 .fleft		{ float:left}
 .fright		{ float:right}
 .overflowhide { overflow: hidden; }
-.required { color:#ee4490; }
+.required { color:#fe60b1; }
 .seperator { border-bottom: 1px dotted #CCC; }
 
 

@@ -460,6 +460,14 @@ namespace Epilogger.Data{
             sp.Command.AddParameter("UserID",UserID,DbType.AnsiString);
             return sp;
         }
+        public StoredProcedure SearchInEvent(int EventID,string SearchTerm,DateTime FromDate,DateTime ToDate){
+            StoredProcedure sp=new StoredProcedure("SearchInEvent",this.Provider);
+            sp.Command.AddParameter("EventID",EventID,DbType.Int32);
+            sp.Command.AddParameter("SearchTerm",SearchTerm,DbType.String);
+            sp.Command.AddParameter("FromDate",FromDate,DbType.DateTime);
+            sp.Command.AddParameter("ToDate",ToDate,DbType.DateTime);
+            return sp;
+        }
 	
 	}
 	

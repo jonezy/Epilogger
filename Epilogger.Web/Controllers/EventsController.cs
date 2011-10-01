@@ -187,6 +187,7 @@ namespace Epilogger.Web.Controllers {
             return PartialView("_BrowseEventTabContentTemplate", TheEvents);
         }
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         public ActionResult Details(int id) {
             EventDisplayViewModel Model = Mapper.Map<Event, EventDisplayViewModel>(ES.FindByID(id));
@@ -230,6 +231,8 @@ namespace Epilogger.Web.Controllers {
             return View(Model);
         }
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
         [HttpPost]
         public ActionResult Details(int id, FormCollection collection) {
 
@@ -254,6 +257,8 @@ namespace Epilogger.Web.Controllers {
             }
         }
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
         public ActionResult AllPhotos(int id, int? page) {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
 
@@ -270,6 +275,8 @@ namespace Epilogger.Web.Controllers {
 
             return View(Model);
         }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         public ActionResult AllTweets(int id, int? page) {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
@@ -291,6 +298,8 @@ namespace Epilogger.Web.Controllers {
             return View(Model);
         }
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
         [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the details of that event")]
         public ActionResult Create() {
             CreateEventViewModel Model = Mapper.Map<Event, CreateEventViewModel>(new Event());
@@ -308,6 +317,8 @@ namespace Epilogger.Web.Controllers {
 
             return View(Model);
         }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         [HttpPost]
         public ActionResult Create(CreateEventViewModel model) {
@@ -353,6 +364,8 @@ namespace Epilogger.Web.Controllers {
             return View(model);
         }
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
         public ActionResult EventBySlug(string eventSlug) {
             Event foundEvent = null;
             foreach (var e in db.Events) {
@@ -365,9 +378,13 @@ namespace Epilogger.Web.Controllers {
             return View("Details", Mapper.Map<Event, EventDisplayViewModel>(foundEvent));
         }
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
         public ActionResult GetImageComments(int id) {
             return PartialView("_ImageComments", TS.FindByImageID(id));
         }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         [HttpPost]
         public ActionResult GetLastTweetsJSON(int Count, string pageLoadTime, int EventID) {
@@ -419,6 +436,8 @@ namespace Epilogger.Web.Controllers {
             return Json(dict);
         }
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
         [HttpPost]
         public ActionResult GetLastPhotosJSON(int Count, string pageLoadTime, int EventID) {
             Dictionary<String, Object> dict = new Dictionary<String, Object>();
@@ -463,6 +482,8 @@ namespace Epilogger.Web.Controllers {
             return Json(dict);
         }
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
         public bool UpdateSubscription(int EventID, bool HasSubscribed) {
             //Save the Selectiob
             if (HasSubscribed) {
@@ -474,6 +495,8 @@ namespace Epilogger.Web.Controllers {
 
             return HasSubscribed;
         }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         [HttpPost]
         public ActionResult Subscribe(FormCollection fc) {
@@ -499,6 +522,8 @@ namespace Epilogger.Web.Controllers {
             return RedirectToAction("details", new { id = id });
         }
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
         [HttpPost]
         public ActionResult UnSubscribe(FormCollection fc) {
             int id;
@@ -522,6 +547,8 @@ namespace Epilogger.Web.Controllers {
 
             return RedirectToAction("details", new { id = id });
         }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         [HttpPost]
         public ActionResult eventRating(FormCollection fc) {
@@ -557,15 +584,54 @@ namespace Epilogger.Web.Controllers {
             return RedirectToAction("details", new { id = id });
         }
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        public ActionResult Search(int id)
+        {
+            SearchInEventViewModel s = new SearchInEventViewModel();
+            s.ID = id;
+            Event ThisEvent = new Event();
+            ThisEvent = ES.FindByID(id);
+            s.Name = ThisEvent.Name;
+            return View(s);
+        }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        [HttpPost]
+        public ActionResult Search(FormCollection fc)
+        {
+            int id;
+            string SearchTerm;
+            int.TryParse(fc["ID"].ToString(), out id);
+            SearchTerm = fc["SearchTerm"].ToString();
+
+            SearchInEventViewModel s = new SearchInEventViewModel();
+            s.ID = id;
+            s.SearchTerm = SearchTerm;
+            Event ThisEvent = new Event();
+            ThisEvent = ES.FindByID(id);
+            s.Name = ThisEvent.Name;
+            s.SearchResults = ES.SearchInEvent(id, SearchTerm, this.FromDateTime(), this.ToDateTime());
+
+            return View(s);
+        }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
         public ActionResult AllContent(int id) {
             AllContentViewModel model = Mapper.Map<Event, AllContentViewModel>(ES.FindByID(id));
             return View(model);
         }
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
         public ActionResult AllBlogPosts(int id) {
             AllBlogPostsViewModel model = Mapper.Map<Event, AllBlogPostsViewModel>(ES.FindByID(id));
             return View(model);
         }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         public ActionResult AllCheckins(int id, int? page) {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
@@ -580,6 +646,8 @@ namespace Epilogger.Web.Controllers {
 
             return View(model);
         }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         public ActionResult AllLinks(int id, int? page) {
 
