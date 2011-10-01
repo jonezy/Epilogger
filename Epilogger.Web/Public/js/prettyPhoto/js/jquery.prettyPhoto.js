@@ -7,12 +7,7 @@
 ------------------------------------------------------------------------- */
 
 function fbs_click() {u=location.href;t=document.title;window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}
-  
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
+
 
 (function($) {
     var locURL = document.location.href;
@@ -94,8 +89,8 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 			iframe_markup: '<iframe src ="{path}" width="{width}" height="{height}" frameborder="no"></iframe>',
 			inline_markup: '<div class="pp_inline">{content}</div>',
 			custom_markup: '',
-            social_tools: '<a href="#">Link goes here somehow</a>',
-            share_tools: '<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script><a name="fb_share"></a><a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="epilogger">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script><g:plusone></g:plusone>',}, pp_settings);
+            social_tools: '', //
+            share_tools: '<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script><a name="fb_share"></a><a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="epilogger">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script><g:plusone></g:plusone>'}, pp_settings);
 
             //<span class="fright fblue"><small>Share: </small> <a href="http://twitter.com/intent/tweet?text=I+was+at+' + EventName + '+and+Epilogger+remembered+it+for+me!+Reminisce+with+me!+'+ EventURL +'+%23Epilogger" target="_blank"><img src="/Content/images/icons/twitter.png" class="valign"></a> <a target="_blank" href="http://www.facebook.com/sharer.php?u='+EventURL+'" onclick="return fbs_click()" text="I was at '+ EventName + ' and Epilogger remembered it for me! Reminisce with me and help write the story!'+EventURL+'" #Epilogger><img src="/Content/images/icons/facebook.png" class="valign"/></a></span>
             
@@ -148,7 +143,7 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 		* Initialize prettyPhoto.
 		*/
 		$.prettyPhoto.initialize = function() {
-			
+
 			settings = pp_settings;
 			
 			if(settings.theme == 'pp_default') settings.horizontal_padding = 16;
@@ -162,7 +157,8 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 			// Put the SRCs, TITLEs, ALTs into an array.
 			pp_images = (isSet) ? jQuery.map(matchedObjects, function(n, i){ if($(n).attr('rel').indexOf(theRel) != -1) return $(n).attr('href'); }) : $.makeArray($(this).attr('href'));
 			pp_titles = (isSet) ? jQuery.map(matchedObjects, function(n, i){ if($(n).attr('rel').indexOf(theRel) != -1) return ($(n).find('img').attr('alt')) ? $(n).find('img').attr('alt') : ""; }) : $.makeArray($(this).find('img').attr('alt'));
-			pp_descriptions = (isSet) ? jQuery.map(matchedObjects, function(n, i){ if($(n).attr('rel').indexOf(theRel) != -1) return ($(n).attr('title')) ? $(n).attr('title') : ""; }) : $.makeArray($(this).attr('title'));
+            //pp_descriptions = (isSet) ? jQuery.map(matchedObjects, function(n, i){ if($(n).attr('rel').indexOf(theRel) != -1) return ($(n).attr('title')) ? $(n).attr('title') : ""; }) : $.makeArray($(this).attr('title'));
+            pp_descriptions = (isSet) ? jQuery.map(matchedObjects, function(n, i){ if($(n).attr('rel').indexOf(theRel) != -1) return ($(n).attr('photoid')) ? $(n).attr('photoid') : ""; }) : $.makeArray($(this).attr('photoid'));
 			
 			set_position = jQuery.inArray($(this).attr('href'), pp_images); // Define where in the array the clicked item is positionned
 			rel_index = (isSet) ? set_position : $("a[rel^='"+theRel+"']").index($(this));
@@ -206,12 +202,16 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 				_build_overlay(event.target); // Build the overlay {this} being the caller
 			}
 
+            //Google Plus
+            //gapi.plusone.go("content");
+
 			if($.browser.msie && $.browser.version == 6) $('select').css('visibility','hidden'); // To fix the bug with IE select boxes
 			
 			if(settings.hideflash) $('object,embed,iframe[src*=youtube],iframe[src*=vimeo]').css('visibility','hidden'); // Hide the flash
 
 			_checkPosition($(pp_images).size()); // Hide the next/previous links if on first or last images.
 		
+
 			$('.pp_loaderIcon').show();
 		
 			// Fade the content in
@@ -363,6 +363,7 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 				
 					// Show content
 					_showContent();
+
 				};
 			});
 
@@ -525,7 +526,14 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 					$('a.pp_expand').hide();
 				}
 				
-				if(settings.autoplay_slideshow && !pp_slideshow && !pp_open) $.prettyPhoto.startSlideshow();
+
+                //Show the div with the comments
+                $(".pp_Comments").show();
+
+                //Fade in the Share Drawer
+			    $(".pp_shareDrawer").fadeIn(2000);
+            
+            	if(settings.autoplay_slideshow && !pp_slideshow && !pp_open) $.prettyPhoto.startSlideshow();
 				
 				if(settings.deeplinking)
 					setHashtag();
@@ -535,6 +543,7 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 				pp_open = true;
 			});
 			
+
 			_insert_gallery();
 		};
 		
@@ -602,7 +611,7 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 				height:Math.floor(imageHeight),
 				containerHeight:Math.floor(pp_containerHeight),
 				containerWidth:Math.floor(pp_containerWidth + 355) + (settings.horizontal_padding * 2),
-				contentHeight:Math.floor(pp_contentHeight),
+				contentHeight:Math.floor(pp_contentHeight -30),
 				contentWidth:Math.floor(pp_contentWidth),
 				resized:resized
 			};
@@ -846,28 +855,13 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 			});
 
 
+            //Bind the Share Drawer Animation
             $('a.pp_shareDrawerTab').bind('click',function(e){
-				// Expand the image
-//				if($(this).hasClass('pp_shareDrawerTab')){
-//					//$(this).removeClass('pp_shareDrawerTabClosed').addClass('pp_shareDrawerTabOpen');
-//                    $(".pp_shareDrawer").animate({top:'0px'}, 400);
-//                    $(this).animate({ marginTop: '-27px' }, 400);
-//				}else{
-//					//$(this).removeClass('pp_shareDrawerTabOpen').addClass('pp_shareDrawerTabClosed');
-//                    $(".pp_shareDrawer").animate({top:'32px'}, 400);
-//                    $(this).animate({ marginTop: '0px' }, 400);
-//				};
-
                 if($(".pp_shareDrawer").css('top')=='25px'){
-                //if($(this).css('marginTop')=='0px'){
                     $(".pp_shareDrawer").animate({top:'-9px'}, 400);
-                    //$(this).animate({ marginTop: '-27px' }, 400);
 				}else{
                     $(".pp_shareDrawer").animate({top:'25px'}, 400);
-                    //$(this).animate({ marginTop: '0px' }, 400);
 				};
-
-
 				return false;
 			});
 
