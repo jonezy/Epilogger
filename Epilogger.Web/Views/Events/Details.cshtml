@@ -130,6 +130,16 @@
         }
     </div>
 
+    <div class="grid_4">
+        @using (Html.BeginForm("Search", "events", FormMethod.Post, null))
+        {
+            @Html.TextBox("SearchTerm")
+            @Html.HiddenFor(model => model.ID)
+            <input type="submit" class="blue-action-button remove-bottom" value="Search" />
+        }
+    </div>
+
+
 
 </div>
 
