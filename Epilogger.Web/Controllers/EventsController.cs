@@ -590,6 +590,9 @@ namespace Epilogger.Web.Controllers {
         {
             SearchInEventViewModel s = new SearchInEventViewModel();
             s.ID = id;
+            Event ThisEvent = new Event();
+            ThisEvent = ES.FindByID(id);
+            s.Name = ThisEvent.Name;
             return View(s);
         }
 
@@ -606,6 +609,9 @@ namespace Epilogger.Web.Controllers {
             SearchInEventViewModel s = new SearchInEventViewModel();
             s.ID = id;
             s.SearchTerm = SearchTerm;
+            Event ThisEvent = new Event();
+            ThisEvent = ES.FindByID(id);
+            s.Name = ThisEvent.Name;
             s.SearchResults = ES.SearchInEvent(id, SearchTerm, this.FromDateTime(), this.ToDateTime());
 
             return View(s);
