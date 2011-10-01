@@ -1,0 +1,10 @@
+﻿
+@model Epilogger.Data.Image
+
+<div class="withcomment newPhotoupdates" id="photo-@Model.ID">
+    <a href="@Model.Fullsize" rel="prettyPhoto[latestphotos]" photoid="@Model.ID" title="" id="@Model.ID">
+        <img src="@Model.Fullsize" width="250" border="0" alt="" /></a>
+    <a href="#" class="commentbubble">
+        @Model.ImageMetaData.Count()
+    </a>
+</div>

@@ -7,6 +7,9 @@
     ViewBag.Title = "Epilogger - " + Model.Name + "- Photos";
 }
 
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+      {"parsetags": "explicit"}
+    </script>
 
 <script language="javascript" type="text/javascript">
     var EventID = @Model.ID;
@@ -41,13 +44,7 @@
 <div class="image-grid" id="photosvideos">
     @foreach (Epilogger.Data.Image EPLImage in Model.Images)
     {
-        <div class="withcomment newPhotoupdates" id="photo-@EPLImage.ID">
-            <a href="@EPLImage.Fullsize" rel="prettyPhoto[latestphotos]" title="@EPLImage.ID" id="@EPLImage.ID"><img src="@EPLImage.Fullsize" width="200" border="0" alt="" /></a>
-		    <a href="#" class="commentbubble">
-                @*Number of Comments*@
-                @EPLImage.ImageMetaData.Count()
-            </a>
-	    </div>
+        @Html.Partial("_ImageTemplate", EPLImage)
     }
 </div>
 
@@ -65,3 +62,4 @@
         });
     });
 </script>
+
