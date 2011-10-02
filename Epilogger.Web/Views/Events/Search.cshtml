@@ -8,7 +8,8 @@
 @Html.Partial("EventToolbar")
 <div id="events-nav">
     <h1>SEARCH EVENT</h1>
-    <h2>@Model.SearchTerm</h2>
+    @if (@Model.SearchResults.Count() > 0)
+    {<h2>@Model.SearchTerm - @Model.SearchResults.Count() results</h2>}
     <br style="clear:both;" />
     @using (Html.BeginForm("Search", "events", FormMethod.Post, null))
     {
@@ -25,6 +26,10 @@
             <div class="tweet-content">
                 <strong><a href="http://www.twitter.com/@item.Tweet.FromUserScreenName" class="tweet-content-username" target="_blank">@item.Tweet.FromUserScreenName</a></strong>
                 <p>@Html.Raw(item.Tweet.TextAsHTML)</p>
+                @if (@item.Image != null)
+                {
+                    @Html.Partial("_ImageTemplate", item.Image)
+                }
                 <span class="tweet-date">(@item.Tweet.CreatedDate.Value.ToUserTimeZone(-5).ToString("MMMM dd, yyyy"))</span>
             </div>
         </div>
@@ -32,3 +37,14 @@
 
     @*@MvcHtmlString.Create(Html.Pager(100, Model.CurrentPageIndex, Model.SearchResults.Count(), new { controller = "Events", action = "Search", id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }))*@
 </div>
+
+<script type="text/javascript" charset="utf-8">
+    head.ready(function () {
+        $("a[rel^='prettyPhoto']").prettyPhoto({
+            theme: 'light_square',
+            animation_speed: 'fast',
+            overlay_gallery: false,
+            changepicturecallback: function () { changeDescription(); }
+        });
+    });
+</script>
