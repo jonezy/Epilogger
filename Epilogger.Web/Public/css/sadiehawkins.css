@@ -222,7 +222,7 @@ span.number {
 
 .topPhotosBar { background-color: #f2f2f2; padding: 9px; display: none; }
 
-.topPhoto { float: left; }
+.topPhoto { float: left; overflow: hidden; height: 302px; }
 .topPhotoComments { overflow: auto; margin-left: 430px; height: 302px; width: 491px; }
 
 .topPhotosList { list-style-type: none; margin-top: 10px; }
