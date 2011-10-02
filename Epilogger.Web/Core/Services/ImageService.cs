@@ -3,9 +3,17 @@ using System;
 using System.Linq;
 using Epilogger.Data;
 using Epilogger.Web.Model;
+using SubSonic.Schema;
+using System.Data;
 
 namespace Epilogger.Web
 {
+
+    public class TopPhotos { 
+        public int ImageID { get; set; }
+        public int countcol { get; set; }
+    }
+
     public class ImageService : ServiceBase<Image>
     {
         protected override string CacheKey
@@ -28,7 +36,20 @@ namespace Epilogger.Web
             return db.GetRandomImagesByEventID(EventID, NumberToGet).ExecuteTypedList<Image>();
         }
 
+        public List<Image> GetTopPhotosByEventID(int EventID, int RecordsToReturn, DateTime FromDateTime, DateTime ToDateTime)
+        {
+            List<TopPhotos> TPs = db.GetTopPhotosByEventID(EventID, RecordsToReturn, FromDateTime, ToDateTime).ExecuteTypedList<TopPhotos>();
 
+            List<Image> TheTopPhotos = new List<Image>();
+            foreach (TopPhotos TP in TPs)
+            {
+                Image TheImage = new Image();
+                TheImage = FindByID(TP.ImageID);
+                TheTopPhotos.Add(TheImage);
+            }
+
+            return TheTopPhotos;
+        }
 
 
 

@@ -8,10 +8,12 @@
 }
 
 <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
-      {"parsetags": "explicit"}
-    </script>
+    {"parsetags": "explicit"}
+</script>
 
-<script language="javascript" type="text/javascript">
+<script type="text/javascript" language="javascript">
+    head.js('@Url.Content("~/Public/js/AllPhotos.js")');
+
     var EventID = @Model.ID;
 
     var EventName = '@Model.Name';
@@ -29,9 +31,29 @@
 
 @if (Model.ShowTopPhotos)
 {
-    <div class="grid_11 alpha" style="background-color: #333; height: 200px">Temp space</div>
-    <div class="clear"></div>
-    <div class="spacer"></div>
+    foreach (Epilogger.Data.Image Image in Model.TopImages)
+    {
+        <div id="TopPhoto@(Image.ID)" class="topPhotosBar">
+            <div class="topPhoto">
+                <a href="@Image.Fullsize" rel="prettyPhoto[topphotos]" photoid="@Image.ID" title="" id="@Image.ID">
+                    <img src="@Image.Fullsize" height="302" border="0" alt="" />
+                </a>
+            </div>
+            <div class="topPhotoComments">
+            </div>
+        </div>
+        <div class="clear"></div>
+    }
+     @*Links*@
+    <ul class="topPhotosList">
+        <li>TOP @Model.TopImages.Count():</li>
+        @foreach (Epilogger.Data.Image Image in Model.TopImages)
+        {
+            <li><a href="" onclick="return false;" class="topPhotosListLink" id="@(Image.ID)"></a></li>
+        }
+    </ul>   
+    <br style="clear:both;" />
+    <br style="clear:both;" />
 }
 
 <div id="photos-filterbar">

@@ -221,7 +221,8 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.Page, opt => opt.Ignore())
                 .ForMember(dest => dest.CurrentPageIndex, opt => opt.Ignore())
                 .ForMember(dest => dest.ShowTopPhotos, opt => opt.Ignore())
-                .ForMember(dest => dest.Images, opt => opt.Ignore());
+                .ForMember(dest => dest.Images, opt => opt.Ignore())
+                .ForMember(dest => dest.TopImages, opt => opt.Ignore());
 
             Mapper.CreateMap<Event, AllTweetsDisplayViewModel>()
                 .ForMember(dest => dest.TweetCount, opt => opt.Ignore())

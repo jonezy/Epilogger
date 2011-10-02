@@ -295,6 +295,7 @@
     <Content Include="Public\js\AnyTime\anytimec.js" />
     <Content Include="Public\js\BrowseEvents.js" />
     <Content Include="Public\js\clickmap.js" />
+    <Content Include="Public\js\AllPhotos.js" />
     <Content Include="Public\js\datetime\timedropdown\timedropdown.js" />
     <Content Include="Public\js\datetime\txtdropdown\jquery.scrollTo-min.js" />
     <Content Include="Public\js\datetime\txtdropdown\txtdropdown-btn-hover.png" />

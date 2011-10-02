@@ -10,5 +10,6 @@ namespace Epilogger.Web.Models {
         public int CurrentPageIndex { get; set; }
         public int TimeZoneOffSet { get; set; }
         public IEnumerable<Epilogger.Data.Image> Images { get; set;}
+        public List<Epilogger.Data.Image> TopImages { get; set; }
     }
 }
