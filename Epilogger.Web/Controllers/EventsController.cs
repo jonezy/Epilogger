@@ -593,6 +593,8 @@ namespace Epilogger.Web.Controllers {
             Event ThisEvent = new Event();
             ThisEvent = ES.FindByID(id);
             s.Name = ThisEvent.Name;
+            s.SearchResults = new List<SearchInEventModel>();
+
             return View(s);
         }
 

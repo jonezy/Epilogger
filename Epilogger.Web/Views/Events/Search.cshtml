@@ -8,7 +8,8 @@
 @Html.Partial("EventToolbar")
 <div id="events-nav">
     <h1>SEARCH EVENT</h1>
-    <h2>@Model.SearchTerm - @Model.SearchResults.Count() results</h2>
+    @if (@Model.SearchResults.Count() > 0)
+    {<h2>@Model.SearchTerm - @Model.SearchResults.Count() results</h2>}
     <br style="clear:both;" />
     @using (Html.BeginForm("Search", "events", FormMethod.Post, null))
     {
