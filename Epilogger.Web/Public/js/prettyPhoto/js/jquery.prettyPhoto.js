@@ -916,7 +916,7 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 
     //CB this is my function to remove the stupid hash when you close the photo.
     function removeHashtag(){
-        location.hash = '';
+        location.hash = '_';
 	};
 
 	
