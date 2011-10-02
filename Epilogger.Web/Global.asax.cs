@@ -89,6 +89,12 @@ namespace Epilogger.Web {
             );
 
             routes.MapRoute(
+                "GetLatestPhotos",
+                "Events/GetLastPhotosJSON",
+                new { controller = "events", action = "GetLastPhotosJSON" }
+            );
+
+            routes.MapRoute(
                 "GetBrowseOverviewTabData",
                 "Events/GetBrowseOverviewTabData",
                 new { controller = "events", action = "GetBrowseOverviewTabData" }

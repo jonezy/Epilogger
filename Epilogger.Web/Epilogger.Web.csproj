@@ -101,6 +101,9 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="TagCloud">
+      <HintPath>..\lib\TagCloud.dll</HintPath>
+    </Reference>
     <Reference Include="Twitterizer2">
       <HintPath>..\packages\twitterizer.2.3.2\lib\Twitterizer2.dll</HintPath>
     </Reference>
