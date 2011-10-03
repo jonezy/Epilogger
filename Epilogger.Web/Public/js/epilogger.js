@@ -33,9 +33,9 @@ function changeDescription() {
 function SearchVenues(url) {
     var venue_name = $("#VenueName").val();
     var venue_city = $("#City").val();
-    var venue_state = "";
-    var venue_zip = "";
-    var venue_address = "";
+    var venue_state = $("#ProvinceState").val();
+    var venue_zip = $("#ZipPostal").val();
+    var venue_address = $("#Address").val();
 
     $.post(url,
         {
@@ -50,6 +50,6 @@ function SearchVenues(url) {
         });
     }
 
-function SetSelectedVenue(venueId) {
-    $("#selectedVenue").text(venueId);
+function SetSelectedVenue(venueId, venueName) {
+    $("#selectedVenue").text("You selected: <strong>" + venueName + "</strong> as your venue!");
 }
