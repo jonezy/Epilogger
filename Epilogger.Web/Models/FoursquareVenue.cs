@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Epilogger.Web.Models {
+﻿namespace Epilogger.Web.Models {
     public class FoursquareVenue {
+        public string id { get; set; }
         public string Name { get; set; }
     }
 }

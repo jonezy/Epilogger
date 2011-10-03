@@ -1,3 +1,8 @@
 ﻿body {background:#fff;}
-fieldset.modal {width:45%;}
+fieldset.modal {}
 fieldset.modal input[type="text"] {width:100%;}
+
+.modal_left {float:left;width:350px;}
+.modal_right {float:left;width:300px;margin-left:10px;}
+
+.three_col {width:100px;float:left;}

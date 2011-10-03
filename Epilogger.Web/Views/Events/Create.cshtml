@@ -49,8 +49,8 @@
             </div>
             <p><label class="wide">Time Zone:</label> @Html.DropDownListFor(model => model.TimeZoneOffset, Model.TimeZones, "Select your timezone", new { @class = "wide" })</p>
             @*@Html.ActionLink("Venue Search", "venuesearch", "events", null, new { @class="modal"})*@
-<a href="#" class="modal">Venue Search</a>
-<div id="selectedVenue">adsfasdfasdf</div>
+<div id="selectedVenue"></div> - <a href="#" class="modal">Venue Search</a>
+
         </div>
     </div>
     <input type="submit" class="blue-action-button" value="Create Event" />

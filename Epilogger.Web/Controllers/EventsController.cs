@@ -728,7 +728,21 @@ namespace Epilogger.Web.Controllers {
 
         [HttpPost]
         public PartialViewResult SearchVenues(FormCollection fc) {
-            string url = string.Format("http://maps.google.com/maps/geo?output=csv&q={0}", fc["city"] as string ?? "");
+            StringBuilder location = new StringBuilder();
+            if (fc["address"] != null) {
+                location.AppendFormat("{0},",fc["address"].ToString());
+            }
+            if (fc["state"] != null) {
+                location.AppendFormat("{0},",fc["state"].ToString());
+            }
+            if (fc["city"] != null) {
+                location.AppendFormat("{0},",fc["city"].ToString());
+            }
+            if (fc["zip"] != null) {
+                location.AppendFormat("{0},", fc["zip"].ToString());
+            }
+            
+            string url = string.Format("http://maps.google.com/maps/geo?output=csv&q={0}", Url.Encode(location.ToString().TrimEnd(',')));
             string results = GetResults(url, null, "Get");
             var parts = results.Split(',');
 
@@ -752,7 +766,7 @@ namespace Epilogger.Web.Controllers {
             var venues = client.Execute(searchRequest);
             List<FoursquareVenue> foundVenues = new List<FoursquareVenue>();
             foreach (var item in venues.response) {
-                foundVenues.Add(new FoursquareVenue { Name = item.name });
+                foundVenues.Add(new FoursquareVenue { id = item.id, Name = item.name });
             }
 
             return PartialView("_VenueSearchResults", foundVenues);
