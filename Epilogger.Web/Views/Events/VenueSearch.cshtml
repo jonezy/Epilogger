@@ -4,18 +4,29 @@
     Layout = "~/Views/Shared/_ModalLayout.cshtml";
 }
 
+<div class="modal_left">
 <h2>VenueSearch</h2>
 <fieldset class="modal">
     <p><label>Venue name:</label>@Html.TextBoxFor(m => m.VenueName)</p>
-    <p><label>Venue city:</label>@Html.TextBoxFor(m => m.City)</p>
-    <a href="#" id="search" onclick="SearchVenues('@Url.Action("searchvenues", "events")');return false;">Search Venues</a><br />
+    <p><label>Address</label>@Html.TextBoxFor(m => m.Address)</p>
+    
+    <div class="three_col alpha">
+    <p><label>City:</label>@Html.TextBoxFor(m => m.City)</p>
+        
+    </div>
+    <div class="three_col omega" style="margin-left:10px !important;">
+        <p><label>Province/State:</label>@Html.TextBoxFor(m => m.ProvinceState)</p>
+    </div>
+    <div class="three_col omega" style="margin-left:10px !important;">
+        <p><label>Zip/Postal:</label>@Html.TextBoxFor(m => m.ZipPostal)</p> 
+    </div>    
+    <br style="clear:both;" />
+    <input type="submit" onclick="SearchVenues('@Url.Action("searchvenues", "events")');return false;" id="search" class="blue-action-button" value="Search" />
+    @*<a href="#" id="search" onclick="SearchVenues('@Url.Action("searchvenues", "events")');return false;">Search Venues</a><br />
     <a href="#" id="search" onclick="SetSelectedVenue(1);return false;">Set Venue</a>
-@*    <input type="submit" id="search" class="blue-action-button" value="Search" />*@
+*@
 </fieldset>
+</div>
+<div class="modal_right">
 <div id="searchresults"></div>
-@*@if (Model.Venues != null) {
-    foreach (var item in Model.Venues) {
-        @item.Name<br />
-    }
-}
-</div>*@
+</div>
