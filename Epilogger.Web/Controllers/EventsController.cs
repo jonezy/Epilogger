@@ -30,6 +30,7 @@ namespace Epilogger.Web.Controllers {
         BlogService BS = new BlogService();
         CategoryService CatS = new CategoryService();
         UserService US = new UserService();
+        VenueService venueService = new VenueService();
 
         DateTime _FromDateTime = DateTime.Parse("2000-01-01 00:00:00");
         private DateTime FromDateTime() {
@@ -66,7 +67,7 @@ namespace Epilogger.Web.Controllers {
             if (BS == null) BS = new BlogService();
             if (CatS == null) CatS = new CategoryService();
             if (US == null) US = new UserService();
-
+            if (venueService == null) venueService = new VenueService();
             base.Initialize(requestContext);
         }
 
@@ -334,15 +335,15 @@ namespace Epilogger.Web.Controllers {
 
                     // convert it to a Venue
                     Venue venue = new Venue();
-                    venue.VenueID = foursquareVenue.id;
+                    venue.VenueID = foursquareVenue.response.id;
                     venue.Address = locationNode.address;
-                    venue.Name = foursquareVenue.name;
+                    venue.Name = foursquareVenue.response.name;
                     venue.City = locationNode.city;
                     venue.State = locationNode.state;
                     venue.CrossStreet = locationNode.crossStreet;
                     venue.Geolat = locationNode.lat;
                     venue.Geolong = locationNode.lng;
-
+                    venueService.
                     // save the venue
                     model.VenueID = venue.VenueID;
                     model.UserID = CurrentUserID;
