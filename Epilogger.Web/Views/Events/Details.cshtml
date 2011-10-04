@@ -8,25 +8,31 @@
     bool IncludeDateRange = false;
     int YesCount = 0;
 
-    if (Request.QueryString["f"] != null) {
+    if (Request.QueryString["f"] != null)
+    {
         YesCount++;
     }
-    if (Request.QueryString["t"] != null) {
+    if (Request.QueryString["t"] != null)
+    {
         YesCount++;
     }
-    if (YesCount == 2) { 
-        IncludeDateRange = true; 
+    if (YesCount == 2)
+    {
+        IncludeDateRange = true;
     }
 }
 <script type="text/javascript" language="javascript">
     head.js('@Url.Content("~/Public/js/EventDetails.js")');
 </script>
 
-@if (Model.Tweets.FirstOrDefault() != null) {
+@if (Model.Tweets.FirstOrDefault() != null)
+{
     <script language="javascript" type="text/javascript">
         var pageLoadTime = '@string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.Tweets.FirstOrDefault().CreatedDate)';
     </script>
-} else {
+}
+else
+{
     <script language="javascript" type="text/javascript">
         var pageLoadTime = '@string.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.UtcNow)';
     </script>
@@ -85,27 +91,36 @@
     </div>
     <br style="clear:both;" />
     <div class="grid_1 alpha">
-        @if (Model.HasSubscribed) {
-            using (Html.BeginForm("unsubscribe", "events", FormMethod.Post, new { @class = "remove-bottom" })) {
+        @if (Model.HasSubscribed)
+        {
+            using (Html.BeginForm("unsubscribe", "events", FormMethod.Post, new { @class = "remove-bottom" }))
+            {
                 <input type="submit" value="Unsubscribe" name="SubscribeToEvent" class="blue-action-button remove-bottom" id="" />
                 @Html.HiddenFor(model => model.ID)
             }
-        } else {
-            using (Html.BeginForm("subscribe", "events", FormMethod.Post, new { @class = "remove-bottom" })) {
+        }
+        else
+        {
+            using (Html.BeginForm("subscribe", "events", FormMethod.Post, new { @class = "remove-bottom" }))
+            {
                 <input type="submit" value="Subscribe" name="SubscribeToEvent" class="blue-action-button remove-bottom" id="" />
                 @Html.HiddenFor(model => model.ID)
             }
         }
     </div>
     <div class="grid_2">
-        @if (!Model.HasUserRated) {
-            using (Html.BeginForm("eventRating", "events", FormMethod.Post, new { @class = "remove-bottom" })) {   
+        @if (!Model.HasUserRated)
+        {
+            using (Html.BeginForm("eventRating", "events", FormMethod.Post, new { @class = "remove-bottom" }))
+            {   
                 <input class="blue-action-button remove-bottom" type="button" value="+" name="ThumbsUpButton" id="" onclick="$('#ThumbsUp').val('1'); $(form).submit();" /> @:&nbsp;/&nbsp;
                 <input class="blue-action-button remove-bottom" type="button" value="-" name="ThumbsDownButton" id="" onclick="$('#ThumbsUp').val('0'); $(form).submit();" />
                 @Html.HiddenFor(model => model.ID)
                 @Html.Hidden("ThumbsUp")
             }
-        } else {
+        }
+        else
+        {
             @Model.EventRatings.Where(i => i.UserRating == "+").Count().ToString() @: ThumbsUp<br/>
             @Model.EventRatings.Where(i => i.UserRating == "-").Count().ToString() @: ThumbsDown<br/>
             @: You voted on:
@@ -113,7 +128,8 @@
         }
     </div>
     <div class="grid_7 filter-by-time clearfix">
-        @using (Html.BeginForm("details", "events", new { id = Model.ID }, FormMethod.Post,null)) {
+        @using (Html.BeginForm("details", "events", new { id = Model.ID }, FormMethod.Post, null))
+        {
             
             @Html.Hidden("ResetDates")
             <div class="left">
@@ -150,13 +166,25 @@
         <li><label>When:</label><div class="value">
             @if (Model.StartDateTime.Subtract(Model.EndDateTime).Days == 0)
             {
-                @String.Format("{0:MMMM dd, yyyy}", Model.StartDateTime.ToUserTimeZone(Model.TimeZoneOffSet)) <br />
-                @String.Format("{0:h:mm tt}", Model.StartDateTime.ToUserTimeZone(Model.TimeZoneOffSet)) @:to @String.Format("{0:h:mm tt}", Model.EndDateTime.ToUserTimeZone(Model.TimeZoneOffSet))
+                @*
+                @Html.Raw(String.Format("{0:MMMM dd, yyyy hh:mm:ss}", Model.StartDateTime)) <br />
+                @Html.Encode(String.Format("{0:MMMM dd, yyyy hh:mm}", Model.StartDateTime)) <br />
+                *@
+
+                @:TZ adjusted<br />                
+                @Html.DisplayFor(e => e.StartDateTime)
+                @: to<br />
+                @Html.DisplayFor(e => e.EndDateTime)<br /><br />
+                
+               
+                               
+                @String.Format("{0:MMMM dd, yyyy}", Model.StartDateTime) <br />
+                @String.Format("{0:h:mm tt}", Model.StartDateTime) @:to @String.Format("{0:h:mm tt}", Model.EndDateTime)
             }
             else
             {
-                @String.Format("{0:MMM d, yyyy h:mm}{1}", Model.StartDateTime.ToUserTimeZone(Model.TimeZoneOffSet), Model.StartDateTime.ToUserTimeZone(Model.TimeZoneOffSet).ToString("tt").ToLower()) @: to <br />
-                @String.Format("{0:MMM d, yyyy h:mm}{1}", Model.EndDateTime.ToUserTimeZone(Model.TimeZoneOffSet), Model.EndDateTime.ToUserTimeZone(Model.TimeZoneOffSet).ToString("tt").ToLower())
+                @String.Format("{0:MMM d, yyyy h:mm}{1}", Model.StartDateTime, Model.StartDateTime.ToString("tt").ToLower()) @: to <br />
+                @String.Format("{0:MMM d, yyyy h:mm}{1}", Model.EndDateTime, Model.EndDateTime.ToString("tt").ToLower())
             }    
         </div></li>
 
