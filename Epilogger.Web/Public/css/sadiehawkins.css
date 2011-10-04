@@ -206,14 +206,14 @@ span.number {
 
 #event-intro {font-size:12px;}
 #event-details {font-size:12px;padding:10px;border-top:dotted 1px #d9d9d9;border-bottom:dotted 1px #d9d9d9;}	
-#event-details ul {float:left;list-style:none;min-width:150px;margin-right:25px;}
+#event-details ul { float:left;list-style:none;min-width:150px;margin-right:25px; }
 
-#event-details ul.hashtags {width:200px;}
-#event-details ul.hashtags li label {width:70px;}
+#event-details ul.hashtags { width:200px;}
+#event-details ul.hashtags li label { width:70px; }
 
-#event-details ul li {clear:both;margin-bottom}
-#event-details ul li label {float:left;margin-right:5px;text-transform:uppercase;font-size:11px;width:40px;}
-#event-details ul li .value {float:left;}
+#event-details ul li { clear:both; }
+#event-details ul li label { float:left;margin-right:5px;text-transform:uppercase;font-size:11px;width:40px; }
+#event-details ul li .value {float:left; }
 
 .event-bottom {font-size:13px;}
 .event-checkins img {float:left;margin:0px 4px 4px 0px;}

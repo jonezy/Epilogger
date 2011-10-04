@@ -10,6 +10,7 @@ using AutoMapper;
 using Epilogger.Data;
 using Epilogger.Web.Core.Email;
 using Epilogger.Web.Models;
+using Timezone.Framework;
 
 namespace Epilogger.Web {
     public class App : System.Web.HttpApplication {
@@ -139,12 +140,23 @@ namespace Epilogger.Web {
             );
         }
 
+        protected void Application_BeginRequest()
+        {
+            TimeZoneManager.UpdateTimeZone(this.Request);
+        }
+
         protected void Application_Start() {
             AreaRegistration.RegisterAllAreas();
 
             RegisterAutomapperMappings();
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+
+            //Wire up the date-time model-binders
+            ModelBinders.Binders[typeof(DateTime)] = new DateTimeModelBinder();
+            ModelBinders.Binders[typeof(DateTime?)] = new DateTimeModelBinder();
+            //Wire up the Metadata provider
+            ModelMetadataProviders.Current = new DateTimeMetadataProvider();
         }
 
         private void RegisterAutomapperMappings() {
