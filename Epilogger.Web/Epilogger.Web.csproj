@@ -146,6 +146,9 @@
     <Compile Include="Core\Email\TemplateParser.cs" />
     <Compile Include="Core\Filters\ElmahLoggerFilter.cs" />
     <Compile Include="Core\Filters\RequiresAuthentication.cs" />
+    <Compile Include="Core\Framework\DateTimeMedataDataProvider.cs" />
+    <Compile Include="Core\Framework\DateTimeModelBinder.cs" />
+    <Compile Include="Core\Framework\TimezoneManager.cs" />
     <Compile Include="Core\Helpers\AzureTableHelper.cs" />
     <Compile Include="Core\Helpers\FacebookHelper.cs" />
     <Compile Include="Core\Helpers\FoursquareVenueClient.cs" />
@@ -308,6 +311,7 @@
     <Content Include="Public\js\jquery-1.6.2.min.js" />
     <Content Include="Public\js\jquery-ui-1.8.16.custom.min.js" />
     <Content Include="Public\js\jquery.colorbox-min.js" />
+    <Content Include="Public\js\jquery.cookie.js" />
     <Content Include="Public\js\jquery.expander.min.js" />
     <Content Include="Public\js\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Public\js\prettyPhoto\css\prettyPhoto.css" />
@@ -447,6 +451,7 @@
     <Content Include="Views\Events\Category.cshtml" />
     <Content Include="Views\Events\_ImageTemplate.cshtml" />
     <Content Include="Views\Events\Search.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

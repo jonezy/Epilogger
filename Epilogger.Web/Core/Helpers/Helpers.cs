@@ -14,14 +14,14 @@ namespace Epilogger.Web {
         }
 
         public static int GetUserTimeZoneOffset() {
-            //This takes into account the Daylight savings time and all that BS.
-            TimeZone localZone = TimeZone.CurrentTimeZone;
-            TimeSpan currentOffset = localZone.GetUtcOffset(DateTime.Now);
-            return currentOffset.Hours;
+            //This takes into account the Daylight savings time and all that BS. But seems to fuck up when on 
+            //TimeZone localZone = TimeZone.CurrentTimeZone;
+            //TimeSpan currentOffset = localZone.GetUtcOffset(DateTime.Now);
+            //return currentOffset.Hours;
 
-            //int TimeZoneOffSet;
-            //TimeZoneOffSet =  int.Parse(CookieHelpers.GetCookieValue("lc", "tz").ToString());
-            //return TimeZoneOffSet;
+            int TimeZoneOffSet;
+            TimeZoneOffSet = int.Parse(CookieHelpers.GetCookieValue("lc", "tz").ToString());
+            return TimeZoneOffSet;
 
         }
 
@@ -106,6 +106,9 @@ namespace Epilogger.Web {
             //return min + (rng.Next() * (max - min));
             return rng.Next(min, max);
         }
+
+
+        
 
 
     }
