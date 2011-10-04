@@ -13,7 +13,7 @@ namespace Timezone.Framework
         public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {
             var value = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
-            if (value == null || value.AttemptedValue == "null" || value.AttemptedValue == String.Empty) return null;
+            if (value == null || value.AttemptedValue == "null" || value.AttemptedValue == String.Empty || value.AttemptedValue.Trim(',') == String.Empty) return null;
             return TimeZoneManager.ToUtcTime(((DateTime?)value.ConvertTo(typeof(DateTime))).Value);
         }
 

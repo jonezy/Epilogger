@@ -135,14 +135,14 @@ namespace Epilogger.Data
         public Query<CheckIn> CheckIns { get; set; }
         public Query<Role> Roles { get; set; }
         public Query<userClickTracking> userClickTrackings { get; set; }
+        public Query<Venue> Venues { get; set; }
         public Query<UserRole> UserRoles { get; set; }
+        public Query<Event> Events { get; set; }
         public Query<ImageMetaDatum> ImageMetaData { get; set; }
         public Query<Image> Images { get; set; }
         public Query<ActiveVisitorsQueueOLD> ActiveVisitorsQueueOLDs { get; set; }
         public Query<AggregateVisitHistoryOLD> AggregateVisitHistoryOLDs { get; set; }
         public Query<VisitHistoryOLD> VisitHistoryOLDs { get; set; }
-        public Query<Venue> Venues { get; set; }
-        public Query<Event> Events { get; set; }
         public Query<UserFollowsUser> UserFollowsUsers { get; set; }
 
 			
@@ -261,14 +261,14 @@ namespace Epilogger.Data
             CheckIns = new Query<CheckIn>(provider);
             Roles = new Query<Role>(provider);
             userClickTrackings = new Query<userClickTracking>(provider);
+            Venues = new Query<Venue>(provider);
             UserRoles = new Query<UserRole>(provider);
+            Events = new Query<Event>(provider);
             ImageMetaData = new Query<ImageMetaDatum>(provider);
             Images = new Query<Image>(provider);
             ActiveVisitorsQueueOLDs = new Query<ActiveVisitorsQueueOLD>(provider);
             AggregateVisitHistoryOLDs = new Query<AggregateVisitHistoryOLD>(provider);
             VisitHistoryOLDs = new Query<VisitHistoryOLD>(provider);
-            Venues = new Query<Venue>(provider);
-            Events = new Query<Event>(provider);
             UserFollowsUsers = new Query<UserFollowsUser>(provider);
             #endregion
 
@@ -290,14 +290,14 @@ namespace Epilogger.Data
             	DataProvider.Schema.Tables.Add(new CheckInsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new RolesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new userClickTrackingTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new VenuesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserRolesTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new EventsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ImageMetaDataTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ImagesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ActiveVisitorsQueueOLDTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new AggregateVisitHistoryOLDTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new VisitHistoryOLDTable(DataProvider));
-            	DataProvider.Schema.Tables.Add(new VenuesTable(DataProvider));
-            	DataProvider.Schema.Tables.Add(new EventsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserFollowsUserTable(DataProvider));
             }
             #endregion

@@ -174,6 +174,7 @@
     <Compile Include="Core\Services\TweetService.cs" />
     <Compile Include="Core\Services\UserAuthenticationProfileService.cs" />
     <Compile Include="Core\Services\UserService.cs" />
+    <Compile Include="Core\Services\VenueService.cs" />
     <Compile Include="Core\Stats\TopTweeters.cs" />
     <Compile Include="Core\UserRole.cs" />
     <Compile Include="Global.asax.cs">
@@ -210,6 +211,7 @@
     <Compile Include="Models\SearchInEventViewModel.cs" />
     <Compile Include="Models\TweetDisplayViewModel.cs" />
     <Compile Include="Models\UpdatePasswordModel.cs" />
+    <Compile Include="Models\VenueDisplayViewModel.cs" />
     <Compile Include="Models\VenueSearchModel.cs" />
     <Compile Include="Models\_EventMenuViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
