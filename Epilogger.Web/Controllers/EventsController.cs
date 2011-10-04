@@ -329,23 +329,27 @@ namespace Epilogger.Web.Controllers {
         public ActionResult Create(CreateEventViewModel model) {
             if (ModelState.IsValid) {
                 try {
-                    // have to look up the foursquare venue and then create it and save it to the db.
-                    dynamic foursquareVenue = LookupFoursquareVenue(model.VenueID);
-                    var locationNode = foursquareVenue.response.location;
+                    if (!string.IsNullOrEmpty(model.FoursquareVenueID)) {
+                        // have to look up the foursquare venue and then create it and save it to the db.
+                        dynamic foursquareVenue = LookupFoursquareVenue(model.FoursquareVenueID);
+                        var locationNode = foursquareVenue.response.location;
 
-                    // convert it to a Venue
-                    Venue venue = new Venue();
-                    venue.VenueID = foursquareVenue.response.id;
-                    venue.Address = locationNode.address;
-                    venue.Name = foursquareVenue.response.name;
-                    venue.City = locationNode.city;
-                    venue.State = locationNode.state;
-                    venue.CrossStreet = locationNode.crossStreet;
-                    venue.Geolat = locationNode.lat;
-                    venue.Geolong = locationNode.lng;
+                        // convert it to a Venue
+                        Venue venue = new Venue();
+                        venue.FoursquareVenueID = foursquareVenue.response.id;
+                        venue.Address = locationNode.address;
+                        venue.Name = foursquareVenue.response.name;
+                        venue.City = locationNode.city;
+                        venue.State = locationNode.state;
+                        venue.CrossStreet = locationNode.crossStreet;
+                        venue.Geolat = locationNode.lat;
+                        venue.Geolong = locationNode.lng;
 
-                    // save the venue
-                    model.VenueID = venue.VenueID;
+                        // save the venue
+                        venueService.Save(venue);
+                        model.VenueID = venue.ID;
+                    }
+
                     model.UserID = CurrentUserID;
                     model.CreatedDateTime = DateTime.UtcNow;
                     model.EndDateTime = null;
@@ -355,8 +359,8 @@ namespace Epilogger.Web.Controllers {
                     // 7 is start date, 8 is end
                     DateTime startDate;
                     DateTime endDate;
-                    DateTime.TryParse(Request.Form[7], out startDate); // start date
-                    DateTime.TryParse(Request.Form[8], out endDate); // end date (could be null)
+                    DateTime.TryParse(Request.Form[3], out startDate); // start date
+                    DateTime.TryParse(Request.Form[4], out endDate); // end date (could be null)
 
                     model.CollectionStartDateTime = startDate.FromUserTimeZoneToUtc().AddDays(-2);
                     if (endDate != DateTime.MinValue) {

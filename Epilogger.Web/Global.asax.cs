@@ -210,7 +210,7 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.TimeZones, opt => opt.ResolveUsing<UserTimezonesResolver>());
 
             Mapper.CreateMap<CreateEventViewModel, Event>()
-                .ForMember(dest => dest.CategoryID, opt => opt.UseValue(19))
+                .ForMember(dest => dest.CategoryID, opt => opt.UseValue(11))
                 .ForMember(dest => dest.VenueID, opt => opt.Ignore())
                 .ForMember(dest => dest.EventStatus, opt => opt.UseValue(1))
                 .ForMember(dest => dest.NumberOfTweets, opt => opt.UseValue(0))
@@ -247,6 +247,7 @@ namespace Epilogger.Web {
 
 
             Mapper.CreateMap<Event, CreateEventViewModel>()
+                .ForMember(dest => dest.FoursquareVenueID, opt => opt.MapFrom(src => src.VenueID.HasValue ? src.Venues.FirstOrDefault().FoursquareVenueID : string.Empty))
                 .ForMember(dest => dest.TimeZones, opt => opt.ResolveUsing<TimezonesResolver>())
                 .ForMember(dest => dest.CollectionStartDateTime, opt => opt.MapFrom(src => src.CollectionStartDateTime.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5"))))
                 .ForMember(dest => dest.CollectionEndDateTime, opt => opt.MapFrom(src => src.CollectionEndDateTime.HasValue ? src.CollectionEndDateTime.Value.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5")) : src.CollectionEndDateTime))

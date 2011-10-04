@@ -51,7 +51,8 @@ namespace Epilogger.Web.Models {
         [DisplayName("Data Collection End Time")]
         public DateTime? CollectionEndDateTime { get; set; }
         
-        public string VenueID { get; set; }
+        public string FoursquareVenueID { get; set; }
+        public int VenueID { get; set; }
 
         [DisplayName("Time Zone")]
         public int TimeZoneOffset { get; set; }

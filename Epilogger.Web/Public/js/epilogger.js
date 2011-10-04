@@ -58,6 +58,6 @@ function SearchVenues(url) {
     }
 
 function SetSelectedVenue(venueId, venueName) {
-    $("#VenueID").val(venueId);
+    $("#FoursquareVenueID").val(venueId);
     $("#selectedVenue").html("You selected: <strong>" + venueName + "</strong> as your venue!");
 }
