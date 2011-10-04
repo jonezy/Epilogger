@@ -47,7 +47,7 @@ using System.Web.Script.Serialization;
             var result = new ExpandoObject();
             var d = result as IDictionary<string, object>;
             d.Add("meta", meta.Values().First());
-            d.Add("response", response.Values().Children());
+            d.Add("response", response.Values().First());
 
             return result;
         }

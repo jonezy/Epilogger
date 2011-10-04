@@ -210,6 +210,7 @@
     <Compile Include="Models\SearchInEventViewModel.cs" />
     <Compile Include="Models\TweetDisplayViewModel.cs" />
     <Compile Include="Models\UpdatePasswordModel.cs" />
+    <Compile Include="Models\VenueDisplayViewModel.cs" />
     <Compile Include="Models\VenueSearchModel.cs" />
     <Compile Include="Models\_EventMenuViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

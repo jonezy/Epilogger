@@ -19,22 +19,10 @@
         <h4>EVENT INFORMATION</h4>
         <br style="clear:both;" />
         <div class="item-data clearfix">
-            <p>@Html.LabelFor(model => model.Name) @Html.TextBoxFor(model => model.Name, new { @class="wide" })</p>
+            <p>@Html.LabelFor(model => model.Name) @Html.TextBoxFor(model => model.Name, new { @class = "wide" })</p>
             <p>@Html.LabelFor(model => model.Subtitle) @Html.TextBoxFor(model => model.Subtitle, new { @class = "wide" })</p>
             
             <p><label>Search Terms:</label> @Html.TextBoxFor(model => model.SearchTerms, new { @class = "wide" })</p>
-
-            <p>@Html.LabelFor(model => model.Description) @Html.TextAreaFor(model => model.Description, new { @class="wide" })</p>
-
-            <div class="grid_4 alpha">
-                <p>@Html.LabelFor(model => model.TwitterAccount) @Html.TextBoxFor(model => model.TwitterAccount, new { @class = "med" })</p>
-            </div>
-
-            <div class="grid_4 alpha">
-                <p>@Html.LabelFor(model => model.FacebookPageURL) @Html.TextBoxFor(model => model.FacebookPageURL, new { @class = "med" })</p>
-            </div>
-
-            <p>@Html.LabelFor(model => model.Cost) @Html.TextBoxFor(model => model.Cost, new { @class = "small" })</p>
         </div>
     </div>
     <div class="spacer"></div>
@@ -49,10 +37,30 @@
             </div>
             <p><label class="wide">Time Zone:</label> @Html.DropDownListFor(model => model.TimeZoneOffset, Model.TimeZones, "Select your timezone", new { @class = "wide" })</p>
             @*@Html.ActionLink("Venue Search", "venuesearch", "events", null, new { @class="modal"})*@
-<div id="selectedVenue"></div> - <a href="#" class="modal">Venue Search</a>
-
+            <div id="selectedVenue"></div> - <a href="#" class="modal">Venue Search</a>
+            @Html.HiddenFor(model => model.VenueID)
         </div>
     </div>
+    <div class="spacer"></div>
+    
+    <div class="item-card">
+        <h4>MORE INFORMATION (optional)</h4>
+        <br style="clear:both;" />
+        <div class="item-data clearfix">
+            <p>@Html.LabelFor(model => model.Description) @Html.TextAreaFor(model => model.Description, new { @class = "wide" })</p>
+
+            <div class="grid_4 alpha">
+                <p>@Html.LabelFor(model => model.TwitterAccount) @Html.TextBoxFor(model => model.TwitterAccount, new { @class = "med" })</p>
+            </div>
+
+            <div class="grid_4 alpha">
+                <p>@Html.LabelFor(model => model.FacebookPageURL) @Html.TextBoxFor(model => model.FacebookPageURL, new { @class = "med" })</p>
+            </div>
+
+            <p>@Html.LabelFor(model => model.Cost) @Html.TextBoxFor(model => model.Cost, new { @class = "small" })</p>
+        </div>
+    </div>
+    <div class="spacer"></div>    
     <input type="submit" class="blue-action-button" value="Create Event" />
 }
 </div>
@@ -78,7 +86,7 @@
 
         $(".modal").colorbox({
             width: "60%", height: "60%",
-            href:'@Url.Action("VenueSearch","Events")'
+            href:'@Url.Action("VenueSearch", "Events")'
         });
 
     });
