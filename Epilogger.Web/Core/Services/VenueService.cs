@@ -11,11 +11,11 @@ namespace Epilogger.Web {
         }
 
 
-        public object Save(Venue entity) {
-            if (entity.ID > 0)
-                return base.GetRepository<Venue>().Update(entity);
+        //public object Save(Venue entity) {
+        //    if (entity. > 0)
+        //        return base.GetRepository<Venue>().Update(entity);
 
-            return base.GetRepository<Venue>().Add(entity);
-        }
+        //    return base.GetRepository<Venue>().Add(entity);
+        //}
     }
 }

@@ -343,7 +343,7 @@ namespace Epilogger.Web.Controllers {
                     venue.CrossStreet = locationNode.crossStreet;
                     venue.Geolat = locationNode.lat;
                     venue.Geolong = locationNode.lng;
-                    venueService.
+
                     // save the venue
                     model.VenueID = venue.VenueID;
                     model.UserID = CurrentUserID;
