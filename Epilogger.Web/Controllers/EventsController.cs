@@ -17,6 +17,10 @@ using System.Xml;
 
 namespace Epilogger.Web.Controllers {
     public class EventsController : BaseController {
+        string clientId = "GRBSH3HPYZYHIACLAL1GHGYHVHVWLJ0GGUUB1OLV41GV5EF1";
+        string clientSecret = "FFCUYMPWPVTCP5AVNDS2VCA1JPTTR4FKCE35ZQUV3TKON5MH";
+        string version = DateTime.Today.ToString("yyyyMMdd");
+
         EpiloggerDB db;
         EventService ES = new EventService();
         TweetService TS = new TweetService();
@@ -26,6 +30,7 @@ namespace Epilogger.Web.Controllers {
         BlogService BS = new BlogService();
         CategoryService CatS = new CategoryService();
         UserService US = new UserService();
+        VenueService venueService = new VenueService();
 
         DateTime _FromDateTime = DateTime.Parse("2000-01-01 00:00:00");
         private DateTime FromDateTime() {
@@ -62,7 +67,7 @@ namespace Epilogger.Web.Controllers {
             if (BS == null) BS = new BlogService();
             if (CatS == null) CatS = new CategoryService();
             if (US == null) US = new UserService();
-
+            if (venueService == null) venueService = new VenueService();
             base.Initialize(requestContext);
         }
 
@@ -324,6 +329,27 @@ namespace Epilogger.Web.Controllers {
         public ActionResult Create(CreateEventViewModel model) {
             if (ModelState.IsValid) {
                 try {
+                    if (!string.IsNullOrEmpty(model.FoursquareVenueID)) {
+                        // have to look up the foursquare venue and then create it and save it to the db.
+                        dynamic foursquareVenue = LookupFoursquareVenue(model.FoursquareVenueID);
+                        var locationNode = foursquareVenue.response.location;
+
+                        // convert it to a Venue
+                        Venue venue = new Venue();
+                        venue.FoursquareVenueID = foursquareVenue.response.id;
+                        venue.Address = locationNode.address;
+                        venue.Name = foursquareVenue.response.name;
+                        venue.City = locationNode.city;
+                        venue.State = locationNode.state;
+                        venue.CrossStreet = locationNode.crossStreet;
+                        venue.Geolat = locationNode.lat;
+                        venue.Geolong = locationNode.lng;
+
+                        // save the venue
+                        venueService.Save(venue);
+                        model.VenueID = venue.ID;
+                    }
+
                     model.UserID = CurrentUserID;
                     model.CreatedDateTime = DateTime.UtcNow;
                     model.EndDateTime = null;
@@ -333,8 +359,8 @@ namespace Epilogger.Web.Controllers {
                     // 7 is start date, 8 is end
                     DateTime startDate;
                     DateTime endDate;
-                    DateTime.TryParse(Request.Form[7], out startDate); // start date
-                    DateTime.TryParse(Request.Form[8], out endDate); // end date (could be null)
+                    DateTime.TryParse(Request.Form[3], out startDate); // start date
+                    DateTime.TryParse(Request.Form[4], out endDate); // end date (could be null)
 
                     model.CollectionStartDateTime = startDate.FromUserTimeZoneToUtc().AddDays(-2);
                     if (endDate != DateTime.MinValue) {
@@ -749,27 +775,41 @@ namespace Epilogger.Web.Controllers {
             Double longitude = Convert.ToDouble(parts[2]);
             Double latitude = Convert.ToDouble(parts[3]);
 
-            string clientId = "GRBSH3HPYZYHIACLAL1GHGYHVHVWLJ0GGUUB1OLV41GV5EF1";
-            string clientSecret = "FFCUYMPWPVTCP5AVNDS2VCA1JPTTR4FKCE35ZQUV3TKON5MH";
-            string latLong = string.Format("{0},{1}", longitude, latitude);
-            string version = DateTime.Today.ToString("yyyyMMdd");
-            string query = fc["name"] as string ?? "";
+            var venues = FoursquareVenueSearch(fc["name"] as string ?? "", longitude, latitude);
 
-            string searchRequest = string.Format("https://api.foursquare.com/v2/venues/search?ll={0}&query={1}&client_id={2}&client_secret={3}&v={4}",
-                latLong,
-                query,
-                clientId,
-                clientSecret,
-                version);
-
-            var client = new FoursquareVenueClient();
-            var venues = client.Execute(searchRequest);
             List<FoursquareVenue> foundVenues = new List<FoursquareVenue>();
             foreach (var item in venues.response) {
                 foundVenues.Add(new FoursquareVenue { id = item.id, Name = item.name });
             }
 
             return PartialView("_VenueSearchResults", foundVenues);
+        }
+
+        private dynamic FoursquareVenueSearch(string venueName, Double longitude, Double latitude) {
+            string searchRequest = string.Format("https://api.foursquare.com/v2/venues/search?ll={0}&query={1}&client_id={2}&client_secret={3}&v={4}",
+                string.Format("{0},{1}", longitude, latitude),
+                venueName,
+                clientId,
+                clientSecret,
+                version);
+
+            var client = new FoursquareVenueClient();
+            var venues = client.Execute(searchRequest);
+            
+            return venues;
+        }
+
+        private dynamic LookupFoursquareVenue(string venueId) {
+            string searchRequest = string.Format("https://api.foursquare.com/v2/venues/{0}?client_id={1}&client_secret={2}&v={3}",
+                venueId,
+                clientId,
+                clientSecret,
+                version);
+
+            var client = new FoursquareVenueClient();
+            var venue = client.Execute(searchRequest);
+            
+            return venue;
         }
 
         string GetResults(string url, string postData, string method) {

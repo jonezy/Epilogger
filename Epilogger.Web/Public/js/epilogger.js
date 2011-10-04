@@ -19,7 +19,6 @@ head.ready(function () {
     }
 });
 
-
 //attaches  a calendar to date of birth fields.
 $(".dob").datepicker({
     changeMonth: true,
@@ -45,7 +44,7 @@ function SearchVenues(url) {
     var venue_zip = $("#ZipPostal").val();
     var venue_address = $("#Address").val();
 
-    $.post(url,
+    $.post(url, 
         {
             name: venue_name,
             city: venue_city,
@@ -59,5 +58,6 @@ function SearchVenues(url) {
     }
 
 function SetSelectedVenue(venueId, venueName) {
-    $("#selectedVenue").text("You selected: <strong>" + venueName + "</strong> as your venue!");
+    $("#FoursquareVenueID").val(venueId);
+    $("#selectedVenue").html("You selected: <strong>" + venueName + "</strong> as your venue!");
 }

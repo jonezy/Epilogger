@@ -8,8 +8,6 @@
 <h2>VenueSearch</h2>
 <fieldset class="modal">
     <p><label>Venue name:</label>@Html.TextBoxFor(m => m.VenueName)</p>
-    <p><label>Address</label>@Html.TextBoxFor(m => m.Address)</p>
-    
     <div class="three_col alpha">
     <p><label>City:</label>@Html.TextBoxFor(m => m.City)</p>
         
@@ -21,6 +19,9 @@
         <p><label>Zip/Postal:</label>@Html.TextBoxFor(m => m.ZipPostal)</p> 
     </div>    
     <br style="clear:both;" />
+    <p><label>Address</label>@Html.TextBoxFor(m => m.Address)</p>
+    
+
     <input type="submit" onclick="SearchVenues('@Url.Action("searchvenues", "events")');return false;" id="search" class="blue-action-button" value="Search" />
     @*<a href="#" id="search" onclick="SearchVenues('@Url.Action("searchvenues", "events")');return false;">Search Venues</a><br />
     <a href="#" id="search" onclick="SetSelectedVenue(1);return false;">Set Venue</a>
