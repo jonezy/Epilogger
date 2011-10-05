@@ -308,11 +308,12 @@ namespace Epilogger.Web.Controllers {
         [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the details of that event")]
         public ActionResult Create() {
             CreateEventViewModel Model = Mapper.Map<Event, CreateEventViewModel>(new Event());
-            Model.TimeZoneOffset = Helpers.GetUserTimeZoneOffset();
+            //Model.TimeZoneOffset = Helpers.GetUserTimeZoneOffset();
 
-            DateTime roundTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, 0, 0);
-            if (DateTime.Now.Minute > 30) {
-                roundTime.AddHours(1);
+            DateTime roundTime = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day, DateTime.UtcNow.Hour, 0, 0);
+            if (DateTime.UtcNow.Minute > 30)
+            {
+                roundTime = roundTime.AddHours(1);
             }
 
             Model.StartDateTime = roundTime;
@@ -352,25 +353,27 @@ namespace Epilogger.Web.Controllers {
 
                     model.UserID = CurrentUserID;
                     model.CreatedDateTime = DateTime.UtcNow;
-                    model.EndDateTime = null;
-                    model.CollectionEndDateTime = null;
+                    //model.EndDateTime = null;
+                    //model.CollectionEndDateTime = null;
 
                     // get yer dates.
                     // 7 is start date, 8 is end
-                    DateTime startDate;
-                    DateTime endDate;
-                    DateTime.TryParse(Request.Form[4], out startDate); // start date
-                    DateTime.TryParse(Request.Form[5], out endDate); // end date (could be null)
+                    //DateTime startDate;
+                    //DateTime endDate;
+                    //DateTime.TryParse(Request.Form[4], out startDate); // start date
+                    //DateTime.TryParse(Request.Form[5], out endDate); // end date (could be null)
 
-                    model.CollectionStartDateTime = startDate.FromUserTimeZoneToUtc(model.TimeZoneOffset).AddDays(-2);
-                    if (endDate != DateTime.MinValue) {
-                        model.CollectionEndDateTime = endDate.FromUserTimeZoneToUtc(model.TimeZoneOffset).AddDays(3);
+                    
+
+                    model.CollectionStartDateTime = model.StartDateTime.AddDays(-2);
+                    if (model.EndDateTime.HasValue) {
+                        model.CollectionEndDateTime = model.EndDateTime.Value.AddDays(3);
                     }
 
-                    model.StartDateTime = startDate.FromUserTimeZoneToUtc(model.TimeZoneOffset);
-                    if(endDate != DateTime.MinValue) {
-                        model.EndDateTime = endDate.FromUserTimeZoneToUtc(model.TimeZoneOffset);
-                    }
+                    //model.StartDateTime = startDate.FromUserTimeZoneToUtc(model.TimeZoneOffset);
+                    //if(endDate == DateTime.MinValue) {
+                    //    model.EndDateTime = model.StartDateTime.AddHours(3)
+                    //}
 
                     Event EPLevent = Mapper.Map<CreateEventViewModel, Event>(model);
                     ES.Save(EPLevent);

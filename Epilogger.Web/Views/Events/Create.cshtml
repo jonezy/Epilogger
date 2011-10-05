@@ -35,7 +35,9 @@
             <div class="hidden">
                 <div style="clear:both;"><label class="wide">Event End:</label> @Html.EditorFor(model => model.EndDateTime)</div>
             </div>
-            <p><label class="wide">Time Zone:</label> @Html.DropDownListFor(model => model.TimeZoneOffset, Model.TimeZones, "Select your timezone", new { @class = "wide" })</p>
+            <p>Collection will start 3 hours prior to the Start time at your current account level. Want to start it sooner? Update to a payed acoount.</p>
+
+            @*<p><label class="wide">Time Zone:</label> @Html.DropDownListFor(model => model.TimeZoneOffset, Model.TimeZones, "Select your timezone", new { @class = "wide" })</p>*@
             @*@Html.ActionLink("Venue Search", "venuesearch", "events", null, new { @class="modal"})*@
             <div id="selectedVenue"></div> - <a href="#" class="modal">Venue Search</a>
             @Html.HiddenFor(model => model.FoursquareVenueID)
