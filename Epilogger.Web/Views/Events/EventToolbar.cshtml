@@ -53,8 +53,17 @@ else
         $(".tooltip-trigger").hover(function () {
             var thisLine = $(this);
             var position = $(this).position();
-            $("#event-toolbar").append("<div id='" + thisLine.id + "-hover' class='tool-tip' style='display:none;'><div class='nub'></div><div class='tip'>" + this.title + "</div></div>");
-            $("#event-toolbar").find(".tool-tip").css({ top: position.top })
+
+            $("#event-toolbar").append(
+                "<div id='" + thisLine.id + "-hover' class='tool-tip' style='display:none;'>"
+                    +"<div class='tip-container'>"
+                        +"<div class='nub'></div>"
+                        +"<div class='tip'>" + this.title + "</div>"
+                    +"</div>"
+                +"</div>"
+            );
+
+            $("#event-toolbar").find(".tool-tip").css({ top: position.top - 3 })
             $(".tool-tip").fadeIn(300);
         },
         function () {
