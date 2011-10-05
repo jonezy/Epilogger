@@ -30,7 +30,7 @@
                 {
                     @Html.Partial("_ImageTemplate", item.Image)
                 }
-                <span class="tweet-date">(@item.Tweet.CreatedDate.Value.ToUserTimeZone(-5).ToString("MMMM dd, yyyy"))</span>
+                <span class="tweet-date">(@Html.DisplayFor(thing => item.Tweet.CreatedDate))</span>
             </div>
         </div>
     }
