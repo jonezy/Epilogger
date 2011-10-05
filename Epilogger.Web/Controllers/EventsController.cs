@@ -275,7 +275,7 @@ namespace Epilogger.Web.Controllers {
 
             if (currentPage + 1 == 1) {
                 Model.ShowTopPhotos = true;
-                Model.TopImages = IS.GetTopPhotosByEventID(id, 5, this.FromDateTime(), this.ToDateTime());
+                Model.TopImages = IS.GetTopPhotosByEventID(id, 10, this.FromDateTime(), this.ToDateTime());
             }
 
             return View(Model);
