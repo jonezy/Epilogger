@@ -21,15 +21,15 @@
 @if (!IncludeDateRange)
 { 
     <div id="event-toolbar">
-        @Html.ActionLink("overview", "details", "events", new { id = Model.ID }, action.ToLower() == "details" ? new { @class = "overview current" } : new { @class = "overview" })
-        @Html.ActionLink("photos", "allphotos", "events", new { id = Model.ID }, action.ToLower() == "allphotos" ? new { @class = "allphotos current" } : new { @class = "allphotos" })
-        @Html.ActionLink("tweets", "alltweets", "events", new { id = Model.ID }, action.ToLower() == "alltweets" ? new { @class = "alltweets current" } : new { @class = "alltweets" })
-        @Html.ActionLink("allblogposts", "allblogposts", "events", new { id = Model.ID }, action.ToLower() == "allcontent" ? new { @class = "allblogposts current" } : new { @class = "allblogposts" })
-        @Html.ActionLink("allinks", "alllinks", "events", new { id = Model.ID }, action.ToLower() == "alllinks" ? new { @class = "alllinks current" } : new { @class = "alllinks" })
-        @Html.ActionLink("allcheckins", "allcheckins", "events", new { id = Model.ID }, action.ToLower() == "allcheckins" ? new { @class = "allcheckins current" } : new { @class = "allcheckins" })
-        @Html.ActionLink("search", "search", "events", new { id = Model.ID }, action.ToLower() == "search" ? new { @class = "search current" } : new { @class = "search" })
-        @Html.ActionLink("edit", "edit", "events", new { id = Model.ID }, action.ToLower() == "edit" ? new { @class = "edit current" } : new { @class = "edit" })
-        @Html.ActionLink("allstats", "allstats", "events", new { id = Model.ID }, action.ToLower() == "allstats" ? new { @class = "allstats current" } : new { @class = "allstats" })
+        @Html.ActionLink("overview", "details", "events", new { id = Model.ID }, action.ToLower() == "details" ? new { @class = "tooltip-trigger overview current", @title = "Event Overview" } : new { @class = "tooltip-trigger overview", @title = "Event Overview" })
+        @Html.ActionLink("photos", "allphotos", "events", new { id = Model.ID }, action.ToLower() == "allphotos" ? new { @class = "tooltip-trigger allphotos current", @title = "All Photos" } : new { @class = "tooltip-trigger allphotos", @title = "All Photos" })
+        @Html.ActionLink("tweets", "alltweets", "events", new { id = Model.ID }, action.ToLower() == "alltweets" ? new { @class = "tooltip-trigger alltweets current", @title = "All Tweets" } : new { @class = "tooltip-trigger alltweets", @title = "All Tweets" })
+        @Html.ActionLink("allblogposts", "allblogposts", "events", new { id = Model.ID }, action.ToLower() == "allcontent" ? new { @class = "tooltip-trigger allblogposts current", @title = "All Blog Posts" } : new { @class = "tooltip-trigger allblogposts", @title = "All Blog Posts" })
+        @Html.ActionLink("allinks", "alllinks", "events", new { id = Model.ID }, action.ToLower() == "alllinks" ? new { @class = "tooltip-trigger alllinks current", @title = "All Links" } : new { @class = "tooltip-trigger alllinks", @title = "All Links" })
+        @Html.ActionLink("allcheckins", "allcheckins", "events", new { id = Model.ID }, action.ToLower() == "allcheckins" ? new { @class = "tooltip-trigger allcheckins current", @title = "All Checkins" } : new { @class = "tooltip-trigger allcheckins", @title = "All Checkins" })
+        @Html.ActionLink("search", "search", "events", new { id = Model.ID }, action.ToLower() == "search" ? new { @class = "tooltip-trigger search current", @title = "Search" } : new { @class = "tooltip-trigger search", @title = "Search" })
+        @Html.ActionLink("edit", "edit", "events", new { id = Model.ID }, action.ToLower() == "edit" ? new { @class = "tooltip-trigger edit current", @title = "Edit Event" } : new { @class = "tooltip-trigger edit", @title = "Edit Event" })
+        @Html.ActionLink("allstats", "allstats", "events", new { id = Model.ID }, action.ToLower() == "allstats" ? new { @class = "tooltip-trigger allstats current", @title = "Event Stats" } : new { @class = "tooltip-trigger allstats", @title = "Event Stats" })
     </div>
 }
 else
@@ -47,4 +47,21 @@ else
     </div>
 }
 
-<script></script>
+<script>
+
+    head.ready(function () {
+        $(".tooltip-trigger").hover(function () {
+            var thisLine = $(this);
+            var position = $(this).position();
+            $("#event-toolbar").append("<div id='" + thisLine.id + "-hover' class='tool-tip' style='display:none;'><div class='nub'></div><div class='tip'>" + this.title + "</div></div>");
+            $("#event-toolbar").find(".tool-tip").css({ top: position.top })
+            $(".tool-tip").fadeIn(300);
+        },
+        function () {
+            $(".tool-tip").fadeOut(100);
+            $("#event-toolbar").children(".tool-tip").remove();
+        });
+
+    });
+
+</script>
