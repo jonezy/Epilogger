@@ -455,6 +455,10 @@
     <Content Include="Views\Events\_ImageTemplate.cshtml" />
     <Content Include="Views\Events\Search.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\FullDate.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Time.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Month.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Day.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
