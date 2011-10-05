@@ -166,20 +166,8 @@ else
         <li><label>When:</label><div class="value">
             @if (Model.StartDateTime.Subtract(Model.EndDateTime).Days == 0)
             {
-                @*
-                @Html.Raw(String.Format("{0:MMMM dd, yyyy hh:mm:ss}", Model.StartDateTime)) <br />
-                @Html.Encode(String.Format("{0:MMMM dd, yyyy hh:mm}", Model.StartDateTime)) <br />
-                *@
-
-                @:TZ adjusted<br />                
-                @Html.DisplayFor(e => e.StartDateTime)
-                @: to<br />
-                @Html.DisplayFor(e => e.EndDateTime)<br /><br />
-                
-               
-                               
-                @String.Format("{0:MMMM dd, yyyy}", Model.StartDateTime) <br />
-                @String.Format("{0:h:mm tt}", Model.StartDateTime) @:to @String.Format("{0:h:mm tt}", Model.EndDateTime)
+                @Html.DisplayFor(e => e.StartDateTime, "FullDate") <br />
+                @Html.DisplayFor(e => e.StartDateTime, "Time") @:to @Html.DisplayFor(e => e.EndDateTime, "Time")
             }
             else
             {

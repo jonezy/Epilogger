@@ -63,7 +63,7 @@
             <div class="tweet-content">
                 <strong><a href="http://www.twitter.com/@item.FromUserScreenName" class="tweet-content-username" target="_blank">@item.FromUserScreenName</a></strong>
                 <p>@Html.Raw(item.TextAsHTML)</p>
-                <span class="tweet-date">(@item.CreatedDate.Value.ToUserTimeZone(-5).ToString("MMMM dd, yyyy"))</span>
+                <span class="tweet-date">(@Html.DisplayFor(thing => item.CreatedDate))</span>
             </div>
         </div>
     }
