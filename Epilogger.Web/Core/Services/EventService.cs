@@ -149,7 +149,7 @@ namespace Epilogger.Web {
                 {
                     SearchItem.Image = new Epilogger.Data.Image();
                     SearchItem.Image.AzureContainerPrefix = row["AzureContainerPrefix"].ToString();
-                    SearchItem.Image.DateTime = DateTime.Parse(row["DateTime"].ToString());
+                    SearchItem.Image.DateTime = DateTime.Parse(row["DateTime1"].ToString());
                     SearchItem.Image.EventID = int.Parse(row["EventID"].ToString());
                     SearchItem.Image.Fullsize = row["Fullsize"].ToString();
                     SearchItem.Image.ID = int.Parse(row["ID2"].ToString());
