@@ -211,7 +211,6 @@ namespace Epilogger.Web {
 
             Mapper.CreateMap<CreateEventViewModel, Event>()
                 .ForMember(dest => dest.CategoryID, opt => opt.UseValue(11))
-                .ForMember(dest => dest.VenueID, opt => opt.Ignore())
                 .ForMember(dest => dest.EventStatus, opt => opt.UseValue(1))
                 .ForMember(dest => dest.NumberOfTweets, opt => opt.UseValue(0))
                 .ForMember(dest => dest.IsPrivate, opt => opt.UseValue(false))
