@@ -286,18 +286,20 @@ ul#connected-networks {list-style:none;}
 #event-toolbar a:hover {background-image:url(../images/icons/event-toolbar-ov.png);}
 
 #event-toolbar a.overview {}
-#event-toolbar a.allphotos {background-position:0 -41px;}
-#event-toolbar a.alltweets {background-position:0 -84px;}
-#event-toolbar a.allblogposts {background-position:0 -125px;}
+#event-toolbar a.allphotos {background-position:0 -42px;}
+#event-toolbar a.alltweets {background-position:0 -85px;}
+#event-toolbar a.allblogposts {background-position:0 -127px;}
 #event-toolbar a.alllinks {background-position:0 -169px;}
-#event-toolbar a.allcheckins {background-position:0 -207px;}
-#event-toolbar a.search {background-position:0 -253px;}
-#event-toolbar a.edit {background-position:0 -293px;}
-#event-toolbar a.allstats {background-position:0 -334px;}
+#event-toolbar a.allcheckins {background-position:0 -207px;margin-top:-3px;}
+#event-toolbar a.search {background-position:0 -252px;}
+#event-toolbar a.edit {background-position:0 -294px;}
+#event-toolbar a.allstats {background-position:0 -336px;height:18px;}
 
-#event-toolbar .tool-tip {color:#fff;position:absolute;left:33px;font-size:11px;z-index:1000;white-space:nowrap;}
-#event-toolbar .tool-tip .nub {width:5px;background: url(../images/icons/hovernub.png) no-repeat;float:left;}
-#event-toolbar .tool-tip .tip {background:#2d8ac5;padding:2px;} 
+#event-toolbar .tool-tip {color:#fff;position:absolute;left:28px;font-size:12px;z-index:1000;white-space:nowrap;}
+#event-toolbar .tool-tip .tip-container {position:relative;}
+#event-toolbar .tool-tip .nub {position:absolute;top:8px;left:0;width:5px;height:23px;background: url(../images/icons/hovernub.png) no-repeat;}
+#event-toolbar .tool-tip .tip {position:absolute;top:0;left:5px;height:17px;background:#2d8ac5;padding:4px 5px 2px 5px;text-transform:lowercase;} 
+
 fieldset.login label {padding:8px;width:70px;text-transform:uppercase;font-size:11px;}
 fieldset.login label,
 fieldset.login input[type="text"],
