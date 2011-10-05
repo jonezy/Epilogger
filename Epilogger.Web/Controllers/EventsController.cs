@@ -353,28 +353,37 @@ namespace Epilogger.Web.Controllers {
 
                     model.UserID = CurrentUserID;
                     model.CreatedDateTime = DateTime.UtcNow;
-                    //model.EndDateTime = null;
-                    //model.CollectionEndDateTime = null;
+                    model.EndDateTime = null;
+                    model.CollectionEndDateTime = null;
 
                     // get yer dates.
                     // 7 is start date, 8 is end
-                    //DateTime startDate;
-                    //DateTime endDate;
-                    //DateTime.TryParse(Request.Form[4], out startDate); // start date
-                    //DateTime.TryParse(Request.Form[5], out endDate); // end date (could be null)
+                    DateTime startDate;
+                    DateTime endDate;
+                    DateTime.TryParse(Request.Form[4], out startDate); // start date
+                    DateTime.TryParse(Request.Form[5], out endDate); // end date (could be null)
 
-                    
-
-                    model.CollectionStartDateTime = model.StartDateTime.AddDays(-2);
-                    if (model.EndDateTime.HasValue) {
-                        model.CollectionEndDateTime = model.EndDateTime.Value.AddDays(3);
+                    //Time zone hack
+                    model.StartDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(startDate);
+                    if (endDate != DateTime.MinValue)
+                    {
+                        endDate = Timezone.Framework.TimeZoneManager.ToUtcTime(endDate);
                     }
 
-                    //model.StartDateTime = startDate.FromUserTimeZoneToUtc(model.TimeZoneOffset);
-                    //if(endDate == DateTime.MinValue) {
-                    //    model.EndDateTime = model.StartDateTime.AddHours(3)
-                    //}
 
+                    model.CollectionStartDateTime = model.StartDateTime.AddDays(-2);
+                    if (endDate != DateTime.MinValue)
+                    {
+                        model.CollectionEndDateTime = endDate.AddDays(3);
+                    }
+
+                    if (endDate != DateTime.MinValue)
+                    {
+                        model.EndDateTime = endDate;
+                    }
+
+
+                    
                     Event EPLevent = Mapper.Map<CreateEventViewModel, Event>(model);
                     ES.Save(EPLevent);
 
