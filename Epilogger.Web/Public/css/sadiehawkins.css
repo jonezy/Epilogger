@@ -82,7 +82,7 @@ ul#navigation li a.current {
 	color:#fff}
 	
 /* -- Sub Nav */
-ul#events-subnav{position:absolute;top:55px;right:14px;display:none;}
+ul#events-subnav{position:absolute;top:55px;right:113px;display:none;}
 ul.subnav {
     margin:0;
     background:#152632;padding:5px 0px 5px 5px;
