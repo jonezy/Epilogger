@@ -222,6 +222,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Public\css\960_12_col.css" />
     <Content Include="Public\css\base.css" />
