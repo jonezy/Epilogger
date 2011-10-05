@@ -205,6 +205,11 @@ span.number {
 
 
 #event-intro {font-size:12px;}
+
+
+#event-optionBar { font-size:12px;padding:10px;border-top:dotted 1px #d9d9d9;border-bottom:dotted 1px #d9d9d9; height: 35px }
+#event-optionBar input[type="text"] { width: 200px; float: left; }
+
 #event-details {font-size:12px;padding:10px;border-top:dotted 1px #d9d9d9;border-bottom:dotted 1px #d9d9d9;}	
 #event-details ul { float:left;list-style:none;min-width:150px;margin-right:25px; }
 
@@ -396,6 +401,8 @@ ul#left-nav li a.current {background:#f6f6f6;border-bottom:solid 1px #bdbdbd;}
 #events-nav {float:left;width:268px;margin-right:17px;position:relative;}
 #events-content {float:left;width:641px;}
 
+.subscribedIndicator { background-color: #f2f9fb; color: #c4cacc; border-top: 1px dotted #b1e9fa; border-bottom: 1px dotted #b1e9fa; padding: 1px 0 0 20px; width: 110px; margin-bottom: 10px; height: 16px; background-image: url(../images/icons/SubscribedCheck.png); background-repeat:no-repeat; background-position: 5px 5px;  }
+
 .alltweets-nub {background:url(../images/alltweets-nub.png) no-repeat; width:17px;height:19px;margin-left:10px;}
 .unique-tweets,
 .total-tweets {background:#f3f3f3;padding:10px 20px 10px 20px;float:left;}
@@ -466,13 +473,14 @@ div#search-container input[type=image] {
 	.Pager {font-family:InterstatePlusRegular;font-size:12px;}
 	.Pager a, .Pager span {color:#000;padding:5px;margin:0px 10px 0px 10px;display:inline-block;margin:0 2px 0px 2px;}
 	.Pager span.current,
-	.Pager a:hover {background:#fc5daf;color:#fff;-webkit-border-radius: 2px;-moz-border-radius: 2px;border-radius: 2px;}
+	.Pager a:hover {background:#fc5daf;color:#fff;-webkit-border-radius: 2px;-moz-border-radius: 2px; border-radius: 2px;}
 	
 	.Pager .disabled {color:#fff;}
 	
-.filter-by-time form {margin-bottom:0;}
+.filter-by-time form { margin-bottom:0; margin-left: 370px; text-align: right;}
 .filter-by-time form label {float:left !important;display:inline;padding:6px 6px;}
 .filter-by-time form input[type=text] {float:left !important;display:inline;width:100px;margin-bottom:0;}
+.filter-by-time form input[type=button] {float:left;margin-bottom:0;}
 .filter-by-time form input[type=submit] {float:left;margin-bottom:0;}
 /* ------------------------------ MISC */
 

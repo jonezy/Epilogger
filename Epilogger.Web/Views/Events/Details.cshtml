@@ -83,9 +83,33 @@ else
 @Html.Partial("EventToolbar")
 
 <div class="grid_12 alpha">
+    @if (Model.HasSubscribed)
+    {
+        <div class="subscribedIndicator">SUBSCRIBED</div>
+    }
     <h1>@Model.Name</h1>
+    <div class="grid_2 fright">
+        @if (!Model.HasUserRated)
+        {
+            using (Html.BeginForm("eventRating", "events", FormMethod.Post, new { @class = "remove-bottom" }))
+            {   
+                <input class="blue-action-button remove-bottom" type="button" value="+" name="ThumbsUpButton" id="" onclick="$('#ThumbsUp').val('1'); $(form).submit();" /> @:&nbsp;/&nbsp;
+                <input class="blue-action-button remove-bottom" type="button" value="-" name="ThumbsDownButton" id="" onclick="$('#ThumbsUp').val('0'); $(form).submit();" />
+                @Html.HiddenFor(model => model.ID)
+                @Html.Hidden("ThumbsUp")
+            }
+        }
+        else
+        {
+            @Model.EventRatings.Where(i => i.UserRating == "+").Count().ToString() @: ThumbsUp<br/>
+            @Model.EventRatings.Where(i => i.UserRating == "-").Count().ToString() @: ThumbsDown<br/>
+            @: You voted on:
+            @*@String.Format("{0:MMM d, yyyy h:mm}{1}", Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime.ToUserTimeZone(Model.TimeZoneOffSet), Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime.ToUserTimeZone(Model.TimeZoneOffSet).ToString("tt").ToLower())*@
+            @Html.DisplayFor(thing => Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime)
+        }
+    </div>
     <h2>@Model.SubTitle</h2>
-
+    <br style="clear:both;" />
     <div id="event-intro">
         @Html.Raw(Model.Description.Replace("\r", "<br />"))
     </div>
@@ -108,59 +132,48 @@ else
             }
         }
     </div>
-    <div class="grid_2">
-        @if (!Model.HasUserRated)
-        {
-            using (Html.BeginForm("eventRating", "events", FormMethod.Post, new { @class = "remove-bottom" }))
-            {   
-                <input class="blue-action-button remove-bottom" type="button" value="+" name="ThumbsUpButton" id="" onclick="$('#ThumbsUp').val('1'); $(form).submit();" /> @:&nbsp;/&nbsp;
-                <input class="blue-action-button remove-bottom" type="button" value="-" name="ThumbsDownButton" id="" onclick="$('#ThumbsUp').val('0'); $(form).submit();" />
-                @Html.HiddenFor(model => model.ID)
-                @Html.Hidden("ThumbsUp")
-            }
-        }
-        else
-        {
-            @Model.EventRatings.Where(i => i.UserRating == "+").Count().ToString() @: ThumbsUp<br/>
-            @Model.EventRatings.Where(i => i.UserRating == "-").Count().ToString() @: ThumbsDown<br/>
-            @: You voted on:
-            @String.Format("{0:MMM d, yyyy h:mm}{1}", Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime.ToUserTimeZone(Model.TimeZoneOffSet), Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime.ToUserTimeZone(Model.TimeZoneOffSet).ToString("tt").ToLower())
-        }
-    </div>
+
     <div class="grid_7 filter-by-time clearfix">
-        @using (Html.BeginForm("details", "events", new { id = Model.ID }, FormMethod.Post, null))
-        {
-            
-            @Html.Hidden("ResetDates")
-            <div class="left">
-                <label>Show Data from:</label><br />
-                @Html.EditorFor(m => m.FromDateTime)
-            </div>
-            <div class="left">
-                <label>To:</label><br style="clear:both;" />
-                @Html.EditorFor(m => m.ToDateTime) 
-            </div>
-            
-            <br />
-            <input type="submit" class="blue-action-button remove-bottom" value="Apply" /> <input class="blue-action-button remove-bottom" type="button" value="Clear" name="ClearDates" id="" onclick="$('#ResetDates').val('1'); $(form).submit();" />
-        }
+        
     </div>
-
-    <div class="grid_4">
-        @using (Html.BeginForm("Search", "events", FormMethod.Post, null))
-        {
-            @Html.TextBox("SearchTerm")
-            @Html.HiddenFor(model => model.ID)
-            <input type="submit" class="blue-action-button remove-bottom" value="Search" />
-        }
-    </div>
-
 
 
 </div>
 
 <div class="clear"></div>
 <div class="spacer"></div>
+
+
+<div id="event-optionBar">
+    <div class="inEventSearch fleft">
+        @using (Html.BeginForm("Search", "events", FormMethod.Post, null))
+        {
+            @Html.TextBox("SearchTerm")
+            <input type="submit" class="blue-action-button remove-bottom" value="Search" />
+            @Html.HiddenFor(model => model.ID)
+        }
+    </div>
+    <div class="filter-by-time">
+        @using (Html.BeginForm("details", "events", new { id = Model.ID }, FormMethod.Post, null))
+        {
+            @Html.Hidden("ResetDates")
+            <div class="left">
+                @*<label>Show Data from:</label><br />*@
+                @Html.EditorFor(m => m.FromDateTime)
+            </div>
+            <div class="left">
+                @*<label>To:</label><br style="clear:both;" />*@
+                @Html.EditorFor(m => m.ToDateTime) 
+            </div>
+            <input type="submit" class="blue-action-button remove-bottom" value="Apply" /> <input class="blue-action-button remove-bottom" type="button" value="Clear" name="ClearDates" id="" onclick="$('#ResetDates').val('1'); $(form).submit();" />
+        }
+    </div>
+    
+
+
+</div>
+<div class="clear"></div>
+<br style="clear:both;" />
 <div id="event-details" class="clearfix">
     <ul>
         <li><label>When:</label><div class="value">
@@ -171,8 +184,8 @@ else
             }
             else
             {
-                @String.Format("{0:MMM d, yyyy h:mm}{1}", Model.StartDateTime, Model.StartDateTime.ToString("tt").ToLower()) @: to <br />
-                @String.Format("{0:MMM d, yyyy h:mm}{1}", Model.EndDateTime, Model.EndDateTime.ToString("tt").ToLower())
+                @Html.DisplayFor(e => e.StartDateTime) @: to <br />
+                @Html.DisplayFor(e => e.EndDateTime)
             }    
         </div></li>
 
