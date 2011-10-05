@@ -281,13 +281,14 @@ ul#connected-networks {list-style:none;}
 #event-toolbar a:hover {background-image:url(../images/icons/event-toolbar-ov.png);}
 
 #event-toolbar a.overview {}
-#event-toolbar a.allphotos {background-position:0 -37px;}
-#event-toolbar a.alltweets {background-position:0 -72px;}
-#event-toolbar a.allblogposts {background-position:0 -108px;}
-#event-toolbar a.alllinks {background-position:0 -144px;}
-#event-toolbar a.allcheckins {background-position:0 -181px;}
-#event-toolbar a.edit {background-position:0 -216px;}
-#event-toolbar a.allstats {background-position:0 -244px;}
+#event-toolbar a.allphotos {background-position:0 -41px;}
+#event-toolbar a.alltweets {background-position:0 -84px;}
+#event-toolbar a.allblogposts {background-position:0 -125px;}
+#event-toolbar a.alllinks {background-position:0 -169px;}
+#event-toolbar a.allcheckins {background-position:0 -207px;}
+#event-toolbar a.search {background-position:0 -253px;}
+#event-toolbar a.edit {background-position:0 -293px;}
+#event-toolbar a.allstats {background-position:0 -334px;}
 
 fieldset.login label {padding:8px;width:70px;text-transform:uppercase;font-size:11px;}
 fieldset.login label,

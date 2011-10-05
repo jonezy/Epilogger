@@ -27,6 +27,7 @@
         @Html.ActionLink("allblogposts", "allblogposts", "events", new { id = Model.ID }, action.ToLower() == "allcontent" ? new { @class = "allblogposts current" } : new { @class = "allblogposts" })
         @Html.ActionLink("allinks", "alllinks", "events", new { id = Model.ID }, action.ToLower() == "alllinks" ? new { @class = "alllinks current" } : new { @class = "alllinks" })
         @Html.ActionLink("allcheckins", "allcheckins", "events", new { id = Model.ID }, action.ToLower() == "allcheckins" ? new { @class = "allcheckins current" } : new { @class = "allcheckins" })
+        @Html.ActionLink("search", "search", "events", new { id = Model.ID }, action.ToLower() == "search" ? new { @class = "search current" } : new { @class = "search" })
         @Html.ActionLink("edit", "edit", "events", new { id = Model.ID }, action.ToLower() == "edit" ? new { @class = "edit current" } : new { @class = "edit" })
         @Html.ActionLink("allstats", "allstats", "events", new { id = Model.ID }, action.ToLower() == "allstats" ? new { @class = "allstats current" } : new { @class = "allstats" })
     </div>
@@ -40,7 +41,10 @@ else
         @Html.ActionLink("allblogposts", "allblogposts", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "allcontent" ? new { @class = "allblogposts current" } : new { @class = "allblogposts" })
         @Html.ActionLink("allinks", "alllinks", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "alllinks" ? new { @class = "alllinks current" } : new { @class = "alllinks" })
         @Html.ActionLink("allcheckins", "allcheckins", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "allcheckins" ? new { @class = "allcheckins current" } : new { @class = "allcheckins" })
+        @Html.ActionLink("search", "search", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "search" ? new { @class = "search current" } : new { @class = "search" })
         @Html.ActionLink("edit", "edit", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "edit" ? new { @class = "edit current" } : new { @class = "edit" })
         @Html.ActionLink("allstats", "allstats", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "allstats" ? new { @class = "allstats current" } : new { @class = "allstats" })
     </div>
 }
+
+<script></script>
