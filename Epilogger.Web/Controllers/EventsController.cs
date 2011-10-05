@@ -359,17 +359,17 @@ namespace Epilogger.Web.Controllers {
                     // 7 is start date, 8 is end
                     DateTime startDate;
                     DateTime endDate;
-                    DateTime.TryParse(Request.Form[3], out startDate); // start date
-                    DateTime.TryParse(Request.Form[4], out endDate); // end date (could be null)
+                    DateTime.TryParse(Request.Form[4], out startDate); // start date
+                    DateTime.TryParse(Request.Form[5], out endDate); // end date (could be null)
 
-                    model.CollectionStartDateTime = startDate.FromUserTimeZoneToUtc().AddDays(-2);
+                    model.CollectionStartDateTime = startDate.FromUserTimeZoneToUtc(model.TimeZoneOffset).AddDays(-2);
                     if (endDate != DateTime.MinValue) {
-                        model.CollectionEndDateTime = endDate.FromUserTimeZoneToUtc().AddDays(3);
+                        model.CollectionEndDateTime = endDate.FromUserTimeZoneToUtc(model.TimeZoneOffset).AddDays(3);
                     }
 
-                    model.StartDateTime = startDate.FromUserTimeZoneToUtc();
+                    model.StartDateTime = startDate.FromUserTimeZoneToUtc(model.TimeZoneOffset);
                     if(endDate != DateTime.MinValue) {
-                        model.EndDateTime = endDate.FromUserTimeZoneToUtc();
+                        model.EndDateTime = endDate.FromUserTimeZoneToUtc(model.TimeZoneOffset);
                     }
 
                     Event EPLevent = Mapper.Map<CreateEventViewModel, Event>(model);
@@ -385,6 +385,7 @@ namespace Epilogger.Web.Controllers {
                     return View(model);
                 }
             }
+
             Event tempEvent = Mapper.Map<CreateEventViewModel, Event>(model);
             model = Mapper.Map<Event, CreateEventViewModel>(tempEvent);
             return View(model);
@@ -702,6 +703,7 @@ namespace Epilogger.Web.Controllers {
             if (ModelState.IsValid) {
                 Event currentEvent = ES.FindByID(model.ID);
                 try {
+                    currentEvent.CategoryID = model.CategoryID;
                     currentEvent.SubTitle = model.Subtitle;
                     currentEvent.Name = model.Name;
                     currentEvent.SearchTerms = model.SearchTerms;
@@ -719,22 +721,21 @@ namespace Epilogger.Web.Controllers {
                     DateTime collectionStart;
                     DateTime collectionEnd;
 
-                    DateTime.TryParse(Request.Form[7], out startDate); // start date
-                    DateTime.TryParse(Request.Form[8], out endDate); // end date (could be null)
-                    DateTime.TryParse(Request.Form[10], out collectionStart); 
-                    DateTime.TryParse(Request.Form[11], out collectionEnd);
+                    DateTime.TryParse(Request.Form[4], out startDate); // start date
+                    DateTime.TryParse(Request.Form[5], out endDate); // end date (could be null)
+                    DateTime.TryParse(Request.Form[7], out collectionStart); 
+                    DateTime.TryParse(Request.Form[8], out collectionEnd);
 
-                    currentEvent.StartDateTime = startDate.FromUserTimeZoneToUtc();
+                    currentEvent.StartDateTime = startDate.FromUserTimeZoneToUtc(model.TimeZoneOffset);
                     if (endDate != DateTime.MinValue) {
-                        currentEvent.EndDateTime = endDate.FromUserTimeZoneToUtc(); // 7 is timezone offset
+                        currentEvent.EndDateTime = endDate.FromUserTimeZoneToUtc(model.TimeZoneOffset); // 7 is timezone offset
                     }
 
-                    currentEvent.CollectionStartDateTime = collectionStart.FromUserTimeZoneToUtc();
+                    currentEvent.CollectionStartDateTime = collectionStart.FromUserTimeZoneToUtc(model.TimeZoneOffset);
                     if (collectionEnd != DateTime.MinValue) {
-                        currentEvent.CollectionEndDateTime = collectionEnd.FromUserTimeZoneToUtc();
+                        currentEvent.CollectionEndDateTime = collectionEnd.FromUserTimeZoneToUtc(model.TimeZoneOffset);
                     }
                     
-                  
                     ES.Save(currentEvent);
                     this.StoreSuccess("Your event was updated successfully!  Make sure you let all your friends know about the changes you just made!");
                     model = Mapper.Map<Event, CreateEventViewModel>(currentEvent);

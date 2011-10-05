@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
+using Epilogger.Data;
 
 namespace Epilogger.Web.Models {
     public class CreateEventViewModel {
@@ -52,12 +53,23 @@ namespace Epilogger.Web.Models {
         public DateTime? CollectionEndDateTime { get; set; }
         
         public string FoursquareVenueID { get; set; }
-        public int VenueID { get; set; }
+        public int? VenueID { get; set; }
 
         [DisplayName("Time Zone")]
         public int TimeZoneOffset { get; set; }
 
         public IEnumerable<SelectListItem> TimeZones { get; set; }
 
+        [DisplayName("Category"), Required(ErrorMessage="Please select a category for your event")]
+        public int CategoryID { get; set; }
+        public IEnumerable<SelectListItem> Categories {
+            get {
+                // grab categories from the database!
+                CategoryService service = new CategoryService();
+                List<EventCategory> categories = service.AllCategories();
+
+                return categories.Select(c => new SelectListItem { Text = c.CategoryName, Value = c.ID.ToString()});
+            }
+        }
     }
 }

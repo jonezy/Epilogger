@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using System;
 using System.Linq;
 using Epilogger.Data;
-using Epilogger.Web.Model;
 
 namespace Epilogger.Web
 {
@@ -15,7 +13,7 @@ namespace Epilogger.Web
 
         public List<EventCategory> AllCategories()
         {
-            return base.GetData();
+            return base.GetData().OrderBy(c => c.CategoryName).ToList();
         }
 
         public EventCategory GetCategoryBySlug(string CategorySlug)
