@@ -210,8 +210,6 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.TimeZones, opt => opt.ResolveUsing<UserTimezonesResolver>());
 
             Mapper.CreateMap<CreateEventViewModel, Event>()
-                .ForMember(dest => dest.CategoryID, opt => opt.UseValue(11))
-                .ForMember(dest => dest.VenueID, opt => opt.Ignore())
                 .ForMember(dest => dest.EventStatus, opt => opt.UseValue(1))
                 .ForMember(dest => dest.NumberOfTweets, opt => opt.UseValue(0))
                 .ForMember(dest => dest.IsPrivate, opt => opt.UseValue(false))
@@ -248,11 +246,11 @@ namespace Epilogger.Web {
 
             Mapper.CreateMap<Event, CreateEventViewModel>()
                 .ForMember(dest => dest.FoursquareVenueID, opt => opt.MapFrom(src => src.VenueID.HasValue ? src.Venues.FirstOrDefault().FoursquareVenueID : string.Empty))
-                .ForMember(dest => dest.TimeZones, opt => opt.ResolveUsing<TimezonesResolver>())
-                .ForMember(dest => dest.CollectionStartDateTime, opt => opt.MapFrom(src => src.CollectionStartDateTime.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5"))))
-                .ForMember(dest => dest.CollectionEndDateTime, opt => opt.MapFrom(src => src.CollectionEndDateTime.HasValue ? src.CollectionEndDateTime.Value.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5")) : src.CollectionEndDateTime))
-                .ForMember(dest => dest.StartDateTime, opt => opt.MapFrom(src => src.StartDateTime.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5"))))
-                .ForMember(dest => dest.EndDateTime, opt => opt.MapFrom(src => src.EndDateTime.HasValue ? src.EndDateTime.Value.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5")) : src.EndDateTime));
+                .ForMember(dest => dest.TimeZones, opt => opt.ResolveUsing<TimezonesResolver>());
+                //.ForMember(dest => dest.CollectionStartDateTime, opt => opt.MapFrom(src => src.CollectionStartDateTime.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5"))))
+                //.ForMember(dest => dest.CollectionEndDateTime, opt => opt.MapFrom(src => src.CollectionEndDateTime.HasValue ? src.CollectionEndDateTime.Value.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5")) : src.CollectionEndDateTime))
+                //.ForMember(dest => dest.StartDateTime, opt => opt.MapFrom(src => src.StartDateTime.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5"))))
+                //.ForMember(dest => dest.EndDateTime, opt => opt.MapFrom(src => src.EndDateTime.HasValue ? src.EndDateTime.Value.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5")) : src.EndDateTime));
                 
             Mapper.AssertConfigurationIsValid();
         }

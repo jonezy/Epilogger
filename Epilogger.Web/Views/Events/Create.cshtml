@@ -21,8 +21,8 @@
         <div class="item-data clearfix">
             <p>@Html.LabelFor(model => model.Name) @Html.TextBoxFor(model => model.Name, new { @class = "wide" })</p>
             <p>@Html.LabelFor(model => model.Subtitle) @Html.TextBoxFor(model => model.Subtitle, new { @class = "wide" })</p>
-            
             <p><label>Search Terms:</label> @Html.TextBoxFor(model => model.SearchTerms, new { @class = "wide" })</p>
+            <p>@Html.LabelFor(model => model.CategoryID) @Html.DropDownListFor(model => model.CategoryID, Model.Categories, "Select your event category", new { @class = "wide" })</p>
         </div>
     </div>
     <div class="spacer"></div>

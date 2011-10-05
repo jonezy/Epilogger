@@ -281,6 +281,7 @@
     <Content Include="Public\images\icons\event-toolbar-ov.png" />
     <Content Include="Public\images\icons\event-toolbar.png" />
     <Content Include="Public\images\icons\header-person.png" />
+    <Content Include="Public\images\icons\hovernub.png" />
     <Content Include="Public\images\icons\pencil.png" />
     <Content Include="Public\images\icons\profile-eventlist.png" />
     <Content Include="Public\images\icons\tweet-black.png" />
