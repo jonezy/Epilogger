@@ -181,6 +181,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\AddBlogPostViewModel.cs" />
+    <Compile Include="Models\AddLinkViewModel.cs" />
     <Compile Include="Models\AllContentViewModel.cs" />
     <Compile Include="Models\AllPhotosDisplayViewModel.cs" />
     <Compile Include="Models\AzureTweetModel.cs" />
@@ -450,6 +452,8 @@
     <Content Include="Views\Shared\DisplayTemplates\Time.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Month.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Day.cshtml" />
+    <Content Include="Views\Events\AddBlogPost.cshtml" />
+    <Content Include="Views\Events\AddLink.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

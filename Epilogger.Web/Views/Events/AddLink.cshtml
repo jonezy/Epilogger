@@ -1,0 +1,19 @@
+﻿@model Epilogger.Web.Models.AddLinkViewModel
+@{
+    ViewBag.Title = "Add a blog post";
+    Layout = "~/Views/Shared/_ModalLayout.cshtml";
+}
+
+<div class="modal_left">
+<h2>1) Add a blog, link or flickr photo album</h2>
+
+</div>
+<div class="modal_right">
+<h2>Add a website link</h2>
+<fieldset class="modal">
+    <p>@Html.LabelFor(m => m.Url)@Html.TextBoxFor(m => m.Url)</p>
+    <p>@Html.LabelFor(m => m.Title)@Html.TextBoxFor(m => m.Title)</p>
+    <p>@Html.LabelFor(m => m.Caption)@Html.TextBoxFor(m => m.Caption)</p>
+    <input type="submit" id="search" class="blue-action-button" value="Submit" />
+</fieldset>
+</div>
