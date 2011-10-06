@@ -1,0 +1,48 @@
+﻿@model Epilogger.Web.Models.SearchEventViewModel
+
+@{
+    ViewBag.Title = "Epilogger | Event Search";
+}
+
+
+
+<div id="events-nav">
+    <h1>SEARCH EVENTS</h1>
+    @if (Model.Events.Count() > 0)
+    {<h2>@Model.SearchTerm - @Model.Events.Count() results</h2>}
+    <br style="clear:both;" />
+    @using (Html.BeginForm("Search", "Home", FormMethod.Post, null))
+    {
+        @Html.TextBoxFor(t => t.SearchTerm)
+        <input type="submit" class="blue-action-button remove-bottom" value="Search" />
+    }
+</div>
+<div id="events-content">
+    <h2>EVENTS:</h2>
+    @if (Model.Events.Count() == 0) {
+        <div class="dashboard-event-item clearfix">There are currently no events going on. Why not add one?!</div>
+        @Html.ActionLink("CREATE EVENT", "create", "events")
+    }
+
+    @foreach (var item in Model.Events) 
+    {
+        <div class="dashboard-event-item clearfix"> 
+            <div class="month-day">
+                <div class="month">@Html.DisplayFor(thing => item.StartDateTime, "Month")</div>    
+                <h2>@Html.DisplayFor(thing => item.StartDateTime, "Day")</h2>
+                <div class="icon"></div>
+            </div>
+            <div class="event-content">
+                <h6>@Html.ActionLink(item.Name, "details", "events", new { @id = item.ID }, null)</h6>
+                
+                <div class="event-content-time">@Html.DisplayFor(thing => item.StartDateTime, "Time")</div>
+                <div class="event-content-searchterms">@item.SearchTerms</div>
+            </div>
+            <div class="event-totals">
+                <div class="total-tweets">@item.TotalTweets</div>
+                <div class="total-media">@item.TotalMedia</div>
+            </div>
+        </div>
+    }
+
+</div>
