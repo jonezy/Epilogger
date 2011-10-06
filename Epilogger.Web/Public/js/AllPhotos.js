@@ -12,7 +12,7 @@ head.ready(function () {
 var intval = "";
 function start_Int() {
     if (intval == "") {
-        intval = window.setInterval(ChangeToNextPhoto, 5000);
+        intval = window.setInterval(ChangeToNextPhoto, 10000);
     } else {
         stop_Int()
     }

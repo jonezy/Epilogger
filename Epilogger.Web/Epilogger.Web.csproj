@@ -207,6 +207,7 @@
     <Compile Include="Models\HotestEventsModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ResetPasswordViewModel.cs" />
+    <Compile Include="Models\SearchEventViewModel.cs" />
     <Compile Include="Models\SearchInEventModel.cs" />
     <Compile Include="Models\SearchInEventViewModel.cs" />
     <Compile Include="Models\TweetDisplayViewModel.cs" />
@@ -450,6 +451,7 @@
     <Content Include="Views\Shared\DisplayTemplates\Time.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Month.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Day.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

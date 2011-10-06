@@ -1,10 +1,14 @@
 ﻿using System.Web.Mvc;
 using System;
+using Epilogger.Web.Models;
+using System.Collections.Generic;
+using AutoMapper;
 
 namespace Epilogger.Web.Controllers {
     public class HomeController : BaseController {
         UserLogService LS = new UserLogService();
         ClickLogService CS = new ClickLogService();
+        EventService ES = new EventService();
 
 
         public ActionResult Index() {
@@ -31,8 +35,6 @@ namespace Epilogger.Web.Controllers {
         }
 
 
-
-
         [HttpPost]
         public ActionResult ClickMap(Epilogger.Data.userClickTracking clickactions)
         {
@@ -48,6 +50,23 @@ namespace Epilogger.Web.Controllers {
         public ActionResult _GetClickMap(Epilogger.Data.userClickTracking clickactions)
         {
             return PartialView(CS.GetLast200ClicksByLocation(clickactions.location));
+        }
+
+
+        public ActionResult Search()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Search(SearchEventViewModel model)
+        {
+
+            IEnumerable<Epilogger.Data.Event> Evs = ES.GetEventsBySearchTerm(model.SearchTerm);
+
+            model.Events = Mapper.Map<IEnumerable<Epilogger.Data.Event>, List<DashboardEventViewModel>>(Evs);
+            
+            return View(model);
         }
 
 

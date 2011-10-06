@@ -164,5 +164,22 @@ namespace Epilogger.Web {
         }
 
 
+        public IEnumerable<Event> GetEventsBySearchTerm(string SearchTerm)
+        {
+
+            var EVs = from e in db.Events
+                      where e.Name.Contains(SearchTerm) ||
+                            e.SearchTerms.Contains(SearchTerm) || e.SubTitle.Contains(SearchTerm) || e.Description.Contains(SearchTerm)
+                      orderby e.CreatedDateTime
+                      select e;
+
+            return EVs;
+
+        }
+
+
+    
+
+
     }
 }
