@@ -38,6 +38,7 @@ function changeDescription() {
 }
 
 function SearchVenues(url) {
+    $('#searchresults').html("Searching foursquare for your venue...");
     var venue_name = $("#VenueName").val();
     var venue_city = $("#City").val();
     var venue_state = $("#ProvinceState").val();
@@ -59,5 +60,5 @@ function SearchVenues(url) {
 
 function SetSelectedVenue(venueId, venueName) {
     $("#FoursquareVenueID").val(venueId);
-    $("#selectedVenue").html("You selected: <strong>" + venueName + "</strong> as your venue!");
+    $("#selectedVenue").html("You selected: <strong>" + escape(venueName) + "</strong> as your venue!");
 }

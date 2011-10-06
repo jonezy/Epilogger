@@ -1,8 +1,11 @@
 ﻿body {background:#fff;}
 fieldset.modal {}
-fieldset.modal input[type="text"] {width:100%;}
+fieldset.modal input[type="text"] {width:100%;background:#e3e3e3;border:none;}
 
 .modal_left {float:left;width:350px;}
 .modal_right {float:left;width:300px;margin-left:10px;}
 
-.three_col {width:100px;float:left;}
+.three_col, .three_col input {width:110px;}
+.three_col {float:left;}
+
+.venuesearchresult-item {padding:5px;border-bottom:1px dotted #dbdbdb;}

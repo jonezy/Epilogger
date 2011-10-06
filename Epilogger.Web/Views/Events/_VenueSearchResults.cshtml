@@ -1,5 +1,11 @@
 ﻿@model IEnumerable<Epilogger.Web.Models.FoursquareVenue>
 
 @foreach (var item in Model) {
-    @:@item.Name - <a href="#" onclick="SetSelectedVenue('@item.id', '@item.Name');return false;">Set</a><br />
+    <div class="venuesearchresult-item">
+    <strong>@item.Name</strong><br />
+    @if (!string.IsNullOrEmpty(item.Address)) {
+        @item.Address<br />
+    }
+    <a href="#" onclick="SetSelectedVenue('@item.id', '@Url.Encode(@item.Name)');parent.$.fn.colorbox.close();">Select this venue</a>
+    </div>
 }
