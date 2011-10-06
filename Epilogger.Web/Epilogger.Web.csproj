@@ -278,6 +278,7 @@
     <Content Include="Public\images\icons\hovernub.png" />
     <Content Include="Public\images\icons\pencil.png" />
     <Content Include="Public\images\icons\profile-eventlist.png" />
+    <Content Include="Public\images\icons\SubscribedCheck.png" />
     <Content Include="Public\images\icons\tweet-black.png" />
     <Content Include="Public\images\linebg.png" />
     <Content Include="Public\images\loading.gif" />
