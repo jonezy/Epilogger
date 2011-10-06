@@ -109,7 +109,7 @@ namespace Epilogger.Web.Controllers {
             }
 
             List<Event> events = new List<Event>();
-            IEnumerable<Event> hottestevents = ES.GetHottestEvents(10);
+            //IEnumerable<Event> hottestevents = ES.GetHottestEvents(5);
 
             //Fillthe events of the time selected
             switch (filter)
@@ -154,7 +154,7 @@ namespace Epilogger.Web.Controllers {
 
 
             model.HottestEvents = new List<HotestEventsModel>();
-            foreach (Epilogger.Data.Event item in ES.GetHottestEvents(10))
+            foreach (Epilogger.Data.Event item in ES.GetHottestEvents(5))
             {
                 HotestEventsModel HE = new HotestEventsModel();
                 HE.Event = item;
