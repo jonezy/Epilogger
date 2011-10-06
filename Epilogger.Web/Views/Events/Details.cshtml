@@ -286,12 +286,11 @@
         <div class="clear">
         </div>
         <p>
-            (<a href="#">See all blog posts</a>)</p>
+            (<a href="#">See all blog posts</a>) (<a href="#" class="blogposts-modal">Submit blog post</a>)</p>
     </div>
     <!-- EXTERNAL LINKS -->
     <div class="grid_4 overflowhide">
-        <h2>
-            External Links</h2>
+        <h2>External Links</h2>
         <ul class="plain-list">
             @foreach (Epilogger.Data.URL TheURL in Model.ExternalLinks) {
                 <li><a href="@TheURL.ShortURL" title="@TheURL.Tweets.Where(t => t.ID == TheURL.TweetID).FirstOrDefault().Text">@TheURL.FullURL</a><br />
@@ -309,6 +308,8 @@
            } else { 
                 @: (@Html.ActionLink("See all links", "alllinks", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { }))
                        }
+
+                       (<a href="#" class="links-modal">Submit a link</a>)
         </p>
     </div>
     <!-- CHECKINS -->
@@ -341,5 +342,16 @@
             overlay_gallery: false,
             changepicturecallback: function () { changeDescription(); }
         });
+
+        $(".blogposts-modal").colorbox({
+            width: "60%", height: "60%",
+            href: '@Url.Action("AddBlogPost", "Events")'
+        });
+        $(".links-modal").colorbox({
+            width: "60%", height: "60%",
+            href: '@Url.Action("AddLink", "Events")'
+        });
     });
 </script>
+
+

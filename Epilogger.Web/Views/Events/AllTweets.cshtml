@@ -8,16 +8,12 @@
 }
 @Html.Partial("EventToolbar")
 <div id="events-nav">
-    <h1>ALL TWEETS</h1>
+    <h1>ALL @Model.TweetCount.ToString("#,###") TWEETS</h1>
     <h2>FROM @Model.Name</h2>
     <div class="alltweets-nub"></div>
     <div class="unique-tweets">
-        <h2>UNIQUE:</h2>
+        <h2>UNIQUE TWEETERS:</h2>
         <h1>@Model.UniqueTweeterCount.ToString("#,###")</h1>
-    </div>
-    <div class="total-tweets">
-        <h2>TOTAL:</h2>
-        <h1>@Model.TweetCount.ToString("#,###")</h1>
     </div>
     <br style="clear:both;" />
     <div id="top-tweeters">
@@ -29,28 +25,28 @@
                     <img src="@tweeter.Picture" class="fleft" height="48" width="48" alt="" />
                     <div class="toptweeter-item primary clearfix">
                         <strong><a href="http://twitter.com/@tweeter.Name" target="_blank">@@@tweeter.Name</a></strong><br />
-                        <div style="width:@tweeter.PercentOfTotal%;" class="bar"></div>@if(tweeter.PercentOfTotal < 100) {<div class="count">@tweeter.Total</div>}
+                        @{
+                            string color_class = "color_" + i;
+                            }
+                        <div style="width:@tweeter.PercentOfTotal%;" class="bar @color_class"></div>@if(tweeter.PercentOfTotal < 100) {<div class="count">@tweeter.Total</div>}
                     </div>
                     <br style="clear:both;" />
                 }
             } catch { }
         }
         <br style="clear:both;" />
-        <div class="spacer dotted light"></div>
-        
-        @for (int i = 4; i < 10; i++) {
+        @for (int i = 4; i <= 10; i++) {
             try {
             if (Model.TopTweeters[i] != null) {
                 Tweeter tweeter = Model.TopTweeters[i];
+                <img src="@tweeter.Picture" class="fleft" height="29" width="29" alt="" />
                 <div class="toptweeter-item small clearfix left">
                     <strong><a href="http://twitter.com/@tweeter.Name" target="_blank">@@@tweeter.Name</a></strong><br />
                     <div style="width:@tweeter.PercentOfTotal%;" class="bar small"></div><div class="count small">@tweeter.Total</div>
                 </div>
-                if (i % 2 == 1) {
                 <br style="clear:both;" />
-                }
             }
-            } catch {}
+            } catch { }
         }
         
     </div>

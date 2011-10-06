@@ -1,9 +1,9 @@
 ﻿body {background:#fff;}
 fieldset.modal {}
-fieldset.modal input[type="text"] {width:100%;background:#e3e3e3;border:none;}
+fieldset.modal input[type="text"], textarea {width:100%;background:#e3e3e3;border:none;}
 
 .modal_left {float:left;width:350px;}
-.modal_right {float:left;width:300px;margin-left:10px;}
+.modal_right {float:left;width:300px;padding-left:10px;border-left:dotted 1px #dbdbdb;}
 
 .three_col, .three_col input {width:110px;}
 .three_col {float:left;}

@@ -798,6 +798,7 @@ namespace Epilogger.Web.Controllers {
             return PartialView("_VenueSearchResults", foundVenues);
         }
 
+        #region venue search helpers
         private dynamic FoursquareVenueSearch(string venueName, Double longitude, Double latitude) {
             string searchRequest = string.Format("https://api.foursquare.com/v2/venues/search?ll={0}&query={1}&client_id={2}&client_secret={3}&v={4}",
                 string.Format("{0},{1}", longitude, latitude),
@@ -808,7 +809,7 @@ namespace Epilogger.Web.Controllers {
 
             var client = new FoursquareVenueClient();
             var venues = client.Execute(searchRequest);
-            
+
             return venues;
         }
 
@@ -821,7 +822,7 @@ namespace Epilogger.Web.Controllers {
 
             var client = new FoursquareVenueClient();
             var venue = client.Execute(searchRequest);
-            
+
             return venue;
         }
 
@@ -849,6 +850,16 @@ namespace Epilogger.Web.Controllers {
                 if (streamReader.Peek() > -1) return streamReader.ReadToEnd();
 
             return "";
+        } 
+        #endregion
+
+
+        public ActionResult AddBlogPost() {
+            return View();
+        }
+
+        public ActionResult AddLink() {
+            return View();
         }
     }
 

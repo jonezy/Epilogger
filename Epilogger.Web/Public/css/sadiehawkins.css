@@ -411,12 +411,9 @@ ul#left-nav li a.current {background:#f6f6f6;border-bottom:solid 1px #bdbdbd;tex
 .subscribedIndicator { background-color: #f2f9fb; color: #c4cacc; border-top: 1px dotted #b1e9fa; border-bottom: 1px dotted #b1e9fa; padding: 1px 0 0 20px; width: 110px; margin-bottom: 10px; height: 16px; background-image: url(../images/icons/SubscribedCheck.png); background-repeat:no-repeat; background-position: 5px 5px;  }
 
 .alltweets-nub {background:url(../images/alltweets-nub.png) no-repeat; width:17px;height:19px;margin-left:10px;}
-.unique-tweets,
-.total-tweets {background:#f3f3f3;padding:10px 20px 10px 20px;float:left;}
-.unique-tweets {width:20%;margin-right:1px;}
-.total-tweets {width:50%;}
-.unique-tweets h1,
-.total-tweets h1 {color:#8c8c8c;}
+.unique-tweets {background:#f3f3f3;padding:10px 20px 10px 20px;float:left;}
+.unique-tweets {width:225px;margin-right:1px;}
+.unique-tweets h1{color:#8c8c8c;}
 
 .unique-tweets h2,
 .total-tweets h2 {color:#747474;margin-bottom:0px;}
@@ -437,12 +434,15 @@ ul#left-nav li a.current {background:#f6f6f6;border-bottom:solid 1px #bdbdbd;tex
 
 #top-tweeters {padding-top:15px;border-top:dotted 1px #e8e8e8;margin-top:20px;}
 #top-tweeters .primary {margin:0px 0px 10px 10px;float:left;width:78%;}
-#top-tweeters .toptweeter-item.small {width:50%;}
+#top-tweeters .toptweeter-item.small {margin:0px 0px 10px 10px;float:left;width:78%;}
 #top-tweeters .toptweeter-item strong a {text-transform:uppercase;font-size:11px;}
 #top-tweeters .toptweeter-item strong a.small {font-size:10px;}
-#top-tweeters .toptweeter-item .bar {height:20px;background-color:#f2eec8;float:left;margin-right:5px;}
+#top-tweeters .toptweeter-item .bar {height:20px;float:left;margin-right:5px;}
+#top-tweeters .toptweeter-item .bar.color_0 {background:#ca118b;}
+#top-tweeters .toptweeter-item .bar.color_1 {background:#fb75b7;}
+#top-tweeters .toptweeter-item .bar.color_2 {background:#fba2c6;}
 #top-tweeters .toptweeter-item .count {font:normal 13px 'InterstatePlusRegular';float:left;padding-top:2px;}
-#top-tweeters .toptweeter-item .bar.small {height:10px;background-color:#efeeee;float:left;margin-right:5px;}
+#top-tweeters .toptweeter-item .bar.small {height:10px;background-color:#fb75b7;float:left;margin-right:5px;}
 #top-tweeters .toptweeter-item .count.small {font-size:11px;float:left;padding-top:0px;}
 
 #tweetlist .tweet {margin-bottom:10px;}
