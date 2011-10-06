@@ -2,42 +2,59 @@
 
 head.ready(function () {
     $('.HottestEventBig:first').show();
-//    $('.HottestEventBig:first').addClass('HottestEventBigActive');
-//    $('.HottestEventBig:first').css("margin-left", '0px');
+    start_Int();
 });
+
+var intval = "";
+function start_Int() {
+    if (intval == "") {
+        intval = window.setInterval(ChangeToNextHottest, 5000);
+    } else {
+        stop_Int()
+    }
+}
+function stop_Int() {
+    if (intval != "") {
+        window.clearInterval(intval)
+        intval = ""
+    }
+}
+
+
+function ChangeToNextHottest() {
+
+    if ($('.HottestEventBig:visible').next().length > 0) {
+        var me = $('.HottestEventBig:visible').next();
+        $('.HottestEventBig:visible').fadeOut(1000, function () {
+            me.fadeIn(1000);
+        });
+    }
+    else {
+        $('.HottestEventBig:visible').fadeOut(1000, function () {
+            $('.HottestEventBig:first').fadeIn(1000);
+        });
+    }
+
+}
+
 
 $('.HottestListLink').click(function (e) {
     e.preventDefault();
-
-    //    theID = this.id;
-
-    //    $('.HottestEventBigActive').animate({
-    //        marginLeft: '-600px',
-    //        opacity: 'toggle'
-    //    }, 200, function () {
-    //        // Animation complete.
-    //        $('#HottestEventDetails' + this.id).css("margin-left", '600px')
-    //        $('#HottestEventDetails' + this.id).removeClass('HottestEventBigActive');
-
-    //        $('#HotestEventDetails' + theID).animate({
-    //            marginLeft: '0px',
-    //            opacity: 'toggle'
-    //        }, 200, function () {
-    //            // Animation complete.
-    //            $('#HotestEventDetails' + theID).addClass('HottestEventBigActive');
-    //        });
-
-    //    });
-
-
-    //This is the working shit. laeve if for now.
+    stop_Int();
     theID = this.id;
     $('.HottestEventBig:visible').fadeOut(100, function () {
         $('#HotestEventDetails' + theID).fadeIn(100);
     });
 
-
 });
+
+
+
+
+
+
+
+
 
 $('.browseTabs').click(function (e) {
     e.preventDefault();

@@ -79,7 +79,7 @@ namespace Epilogger.Web {
 
         public IEnumerable<Event> GetHottestEvents(int ItemsToReturn)
         {
-            return db.Events.Where(e => e.StartDateTime > DateTime.UtcNow.AddMonths(-1) && e.StartDateTime < DateTime.UtcNow).OrderByDescending(e => e.Tweets.Where(f => f.EventID == e.ID).Count() + (e.Images.Where(f => f.EventID == e.ID).Count() * 4)).Take(ItemsToReturn);
+            return db.Events.Where(e => e.StartDateTime > DateTime.UtcNow.AddDays(-14) && e.StartDateTime < DateTime.UtcNow).OrderByDescending(e => e.Tweets.Where(f => f.EventID == e.ID).Count() + (e.Images.Where(f => f.EventID == e.ID).Count() * 4)).Take(ItemsToReturn);
         }
 
 
@@ -162,6 +162,23 @@ namespace Epilogger.Web {
 
             return ResultsList;
         }
+
+
+        public IEnumerable<Event> GetEventsBySearchTerm(string SearchTerm)
+        {
+
+            var EVs = from e in db.Events
+                      where e.Name.Contains(SearchTerm) ||
+                            e.SearchTerms.Contains(SearchTerm) || e.SubTitle.Contains(SearchTerm) || e.Description.Contains(SearchTerm)
+                      orderby e.CreatedDateTime
+                      select e;
+
+            return EVs;
+
+        }
+
+
+    
 
 
     }
