@@ -792,7 +792,7 @@ namespace Epilogger.Web.Controllers {
 
             List<FoursquareVenue> foundVenues = new List<FoursquareVenue>();
             foreach (var item in venues.response) {
-                foundVenues.Add(new FoursquareVenue { id = item.id, Name = item.name });
+                foundVenues.Add(new FoursquareVenue { id = item.id, Name = item.name, Address = item.location.address });
             }
 
             return PartialView("_VenueSearchResults", foundVenues);
