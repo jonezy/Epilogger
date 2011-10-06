@@ -5,27 +5,16 @@
 }
 
 <div class="modal_left">
-<h2>VenueSearch</h2>
+<h2>Search for your venue on Foursquare!</h2>
+<p>Please enter at least the venue name and city to get results, the more info the better the results!</p>
 <fieldset class="modal">
     <p><label>Venue name:</label>@Html.TextBoxFor(m => m.VenueName)</p>
-    <div class="three_col alpha">
-    <p><label>City:</label>@Html.TextBoxFor(m => m.City)</p>
-        
-    </div>
-    <div class="three_col omega" style="margin-left:10px !important;">
-        <p><label>Province/State:</label>@Html.TextBoxFor(m => m.ProvinceState)</p>
-    </div>
-    <div class="three_col omega" style="margin-left:10px !important;">
-        <p><label>Zip/Postal:</label>@Html.TextBoxFor(m => m.ZipPostal)</p> 
-    </div>    
+    <div class="three_col"><p><label>City:</label>@Html.TextBoxFor(m => m.City)</p></div>
+    <div class="three_col" style="margin-left:10px !important;"><p><label>Province/State:</label>@Html.TextBoxFor(m => m.ProvinceState)</p></div>
+    <div class="three_col" style="margin-left:10px !important;"><p><label>Zip/Postal:</label>@Html.TextBoxFor(m => m.ZipPostal)</p> </div>    
     <br style="clear:both;" />
     <p><label>Address</label>@Html.TextBoxFor(m => m.Address)</p>
-    
-
     <input type="submit" onclick="SearchVenues('@Url.Action("searchvenues", "events")');return false;" id="search" class="blue-action-button" value="Search" />
-    @*<a href="#" id="search" onclick="SearchVenues('@Url.Action("searchvenues", "events")');return false;">Search Venues</a><br />
-    <a href="#" id="search" onclick="SetSelectedVenue(1);return false;">Set Venue</a>
-*@
 </fieldset>
 </div>
 <div class="modal_right">
