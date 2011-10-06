@@ -27,10 +27,7 @@
     </ul>
     <br style="clear:both;" />
     <div class="BEventListContainer">
-        @foreach (Epilogger.Web.Models.DashboardEventViewModel item in Model.Events)
-        {        
-            @Html.Partial("_BrowseEventTabContentTemplate", item)
-        }
+        @Html.Partial("_BrowseEventTabContentTemplate", Model.Events)
         @Html.ActionLink("See all of your activity and event in the Dahboard", "events", "dashboard")
     </div>
 
