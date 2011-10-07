@@ -667,8 +667,10 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        public ActionResult AllBlogPosts(int id) {
-            AllBlogPostsViewModel model = Mapper.Map<Event, AllBlogPostsViewModel>(ES.FindByID(id));
+        public ActionResult AllBlogPosts(int id, int? page) {
+            int currentPage = page.HasValue ? page.Value - 1 : 0;
+            List<BlogPostDisplayViewModel> blogPosts = Mapper.Map<List<BlogPost>, List<BlogPostDisplayViewModel>>(BS.FindByEventID(id).ToList());
+            AllBlogPostsViewModel model = new AllBlogPostsViewModel(blogPosts, currentPage, 10);
             return View(model);
         }
 
@@ -856,6 +858,20 @@ namespace Epilogger.Web.Controllers {
 
         public ActionResult AddBlogPost() {
             return View();
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public bool AddBlogPost(int id, AddBlogPostViewModel model) {
+            try {
+                BlogPost blogPost = Mapper.Map<AddBlogPostViewModel, BlogPost>(model);
+                blogPost.EventID = id;
+                blogPost.UserID = CurrentUserID;
+                BS.Save(blogPost);
+
+                return true;
+            } catch (Exception ex) {
+                return false;
+            }
         }
 
         public ActionResult AddLink() {

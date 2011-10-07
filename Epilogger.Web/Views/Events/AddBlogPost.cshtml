@@ -10,11 +10,12 @@
 </div>
 <div class="modal_right">
 <h2>Blog Post</h2>
+
 <fieldset class="modal">
-    <p>@Html.LabelFor(m => m.Url)@Html.TextBoxFor(m => m.Url)</p>
+    <p>@Html.LabelFor(m => m.BlogURL)@Html.TextBoxFor(m => m.BlogURL)</p>
     <p>@Html.LabelFor(m => m.Title)@Html.TextBoxFor(m => m.Title)</p>
-    <p>@Html.LabelFor(m => m.Author)@Html.TextBoxFor(m => m.Author)</p>
-    <p>@Html.LabelFor(m => m.Excerpt)@Html.TextAreaFor(m => m.Excerpt)</p>
-    <input type="submit" id="search" class="blue-action-button" value="Submit" />
+    <p>@Html.LabelFor(m => m.Description)@Html.TextAreaFor(m => m.Description)</p>
+    <input type="submit" onclick="AddBlogPost('@Url.Action("addblogpost", "events")');return false;" id="search" class="blue-action-button" value="Submit" />
 </fieldset>
+
 </div>
