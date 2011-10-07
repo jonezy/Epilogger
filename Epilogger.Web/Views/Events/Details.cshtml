@@ -235,7 +235,7 @@
         <span class="number" id="tweetCount">@string.Format("{0:#,###}", Model.TweetCount)</span>Tweets
         & Shoutouts</h2>
     <span class="sm-spacer"></span>
-    <ul class="plain-list" id="tweetlist">
+    <ul class="plain-list" id="tweetlist" style="height:500px;overflow:hidden;">
         @foreach (Epilogger.Data.Tweet EPLTweet in Model.Tweets) {
             @Html.Partial("_TweetTemplate", EPLTweet);
         }

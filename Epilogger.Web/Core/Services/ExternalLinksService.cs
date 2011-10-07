@@ -13,7 +13,12 @@ namespace Epilogger.Web
             get { return "Epilogger.Web.ExternalLink"; }
         }
 
+        public object Save(URL entity) {
+            if (entity.ID > 0)
+                return base.GetRepository<URL>().Update(entity);
 
+            return base.GetRepository<URL>().Add(entity);
+        }
         public IEnumerable<URL> FindByEventIDOrderDescTake3(int EventID, DateTime F, DateTime T)
         {
             return db.URLS.Where(t => t.EventID == EventID && t.DateTime >= F && t.DateTime <= T).OrderByDescending(t => t.DateTime).Take(3);
