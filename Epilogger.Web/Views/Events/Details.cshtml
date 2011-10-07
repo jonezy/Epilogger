@@ -275,11 +275,11 @@
         <ul class="plain-list">
             @foreach (Epilogger.Data.BlogPost TheBlogPost in Model.BlogPosts.Take(3)) {
                 <li>
-                    <img src="@Url.Content("~/Public/images/samples/avatar.png")" class="fleft"/>
+                    @*<img src="@Url.Content("~/Public/images/samples/avatar.png")" class="fleft"/>*@
                     <a href="@TheBlogPost.BlogURL">@TheBlogPost.Title</a><br />
-                    <small><a href="#">BY MICHAEL NUS</a></small><br />
-                    <p>
-                        After a very busy day of meetings and wheeling...</p>
+                    @*<small><a href="#">BY MICHAEL NUS</a></small><br />*@
+                    @*<p>
+                        After a very busy day of meetings and wheeling...</p>*@
                     @*TODO - Add move fiels to the Blog table to store more Info!*@ </li>
             }
         </ul>

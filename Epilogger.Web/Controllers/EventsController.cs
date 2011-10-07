@@ -873,6 +873,7 @@ namespace Epilogger.Web.Controllers {
                 return false;
             }
         }
+
         public ActionResult AddLink() {
             return View();
         }

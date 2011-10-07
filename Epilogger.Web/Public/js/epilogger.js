@@ -69,9 +69,25 @@ function AddBlogPost(url) {
             Title: $("#Title").val(),
             Description: $("#Description").val()
     };
-    
+
     $.post(url, blogPost,
         function (data) {
-            alert(data);
-    });
+            if (data == "True") {
+                FlashMessage("Your blog post was added", "Message_Success");
+            } else {
+                FlashMessage("There was a problem adding your blog post", "Message_Error");
+            }
+        });
+}
+
+function FlashMessage(message, cssClas) {
+    $('#flash').html(message);
+    $('#flash').removeClass();
+    $('#flash').addClass(cssClas);
+    $('#flash').slideDown('med');
+    $('#flash').click(function () { $('#flash').toggle('highlight') });
+
+    window.setTimeout(function () {
+        $("#flash").fadeOut("slow");
+    }, 3000);
 }
