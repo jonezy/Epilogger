@@ -55,10 +55,39 @@ function SearchVenues(url) {
         },
         function (data) {
             $('#searchresults').html(data);
-        });
-    }
+    });
+}
 
 function SetSelectedVenue(venueId, venueName) {
     $("#FoursquareVenueID").val(venueId);
     $("#selectedVenue").html("You selected: <strong>" + escape(venueName) + "</strong> as your venue!");
+}
+
+function AddBlogPost(url) {
+    var blogPost = {
+            BlogURL: $("#BlogURL").val(),
+            Title: $("#Title").val(),
+            Description: $("#Description").val()
+    };
+
+    $.post(url, blogPost,
+        function (data) {
+            if (data == "True") {
+                FlashMessage("Your blog post was added", "Message_Success");
+            } else {
+                FlashMessage("There was a problem adding your blog post", "Message_Error");
+            }
+        });
+}
+
+function FlashMessage(message, cssClas) {
+    $('#flash').html(message);
+    $('#flash').removeClass();
+    $('#flash').addClass(cssClas);
+    $('#flash').slideDown('med');
+    $('#flash').click(function () { $('#flash').toggle('highlight') });
+
+    window.setTimeout(function () {
+        $("#flash").fadeOut("slow");
+    }, 3000);
 }

@@ -187,6 +187,7 @@
     <Compile Include="Models\AllPhotosDisplayViewModel.cs" />
     <Compile Include="Models\AzureTweetModel.cs" />
     <Compile Include="Models\AllTweetsDisplayViewModel.cs" />
+    <Compile Include="Models\BlogPostDisplayViewModel.cs" />
     <Compile Include="Models\CheckinDisplayViewModel.cs" />
     <Compile Include="Models\ConnectedNetworksViewModel.cs" />
     <Compile Include="Models\AllLinksViewModel.cs" />

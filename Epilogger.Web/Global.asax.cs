@@ -179,7 +179,6 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.ToDateTime, opt => opt.Ignore());
 
             Mapper.CreateMap<Event, AllContentViewModel>();
-            Mapper.CreateMap<Event, AllBlogPostsViewModel>();
             Mapper.CreateMap<Event, AllLinksViewModel>()
                 .ForMember(dest => dest.CurrentPageIndex, opt => opt.Ignore())
                 .ForMember(dest => dest.TotalRecords, opt => opt.Ignore())
@@ -187,6 +186,16 @@ namespace Epilogger.Web {
 
             Mapper.CreateMap<CheckIn, CheckinDisplayViewModel>()
                 .ForMember(dest =>dest.Tweet, opt => opt.MapFrom(src => src.Tweets.FirstOrDefault()));
+            
+            Mapper.CreateMap<BlogPost, BlogPostDisplayViewModel>()
+                .ForMember(dest => dest.Url, opt => opt.Ignore());
+            
+            Mapper.CreateMap<AddBlogPostViewModel, BlogPost>()
+                .ForMember(dest => dest.ID, opt => opt.Ignore())
+                .ForMember(dest => dest.UserID, opt => opt.Ignore())
+                .ForMember(dest => dest.EventID, opt => opt.Ignore())
+                .ForMember(dest => dest.Thumbnail, opt => opt.Ignore())
+                .ForMember(dest => dest.DateTime, opt => opt.UseValue(DateTime.Now));
 
             Mapper.CreateMap<CreateAccountModel, User>()
                 .ForMember(dest => dest.FirstName, opt => opt.Ignore())
