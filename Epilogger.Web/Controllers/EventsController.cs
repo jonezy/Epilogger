@@ -36,7 +36,8 @@ namespace Epilogger.Web.Controllers {
         private DateTime FromDateTime() {
             try {
                 if (Request.QueryString["f"] != null) {
-                    _FromDateTime = DateTime.Parse(Epilogger.Web.Helpers.base64Decode(Request.QueryString["f"])).FromUserTimeZoneToUtc();
+                    //_FromDateTime = DateTime.Parse(Epilogger.Web.Helpers.base64Decode(Request.QueryString["f"])).FromUserTimeZoneToUtc();
+                    _FromDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(DateTime.Parse(Epilogger.Web.Helpers.base64Decode(Request.QueryString["f"])));
                 }
                 return _FromDateTime;
             } catch (Exception) {
@@ -48,7 +49,8 @@ namespace Epilogger.Web.Controllers {
         private DateTime ToDateTime() {
             try {
                 if (Request.QueryString["t"] != null) {
-                    _ToDateTime = DateTime.Parse(Epilogger.Web.Helpers.base64Decode(Request.QueryString["t"])).FromUserTimeZoneToUtc();
+                    //_ToDateTime = DateTime.Parse(Epilogger.Web.Helpers.base64Decode(Request.QueryString["t"])).FromUserTimeZoneToUtc();
+                    _ToDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(DateTime.Parse(Epilogger.Web.Helpers.base64Decode(Request.QueryString["t"])));
                 }
                 return _ToDateTime;
             } catch (Exception) {
@@ -363,7 +365,7 @@ namespace Epilogger.Web.Controllers {
                     DateTime.TryParse(Request.Form[4], out startDate); // start date
                     DateTime.TryParse(Request.Form[5], out endDate); // end date (could be null)
 
-                    //Time zone hack
+                    //Time zone hack - because the Edit Template isn't returning the selected time.
                     model.StartDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(startDate);
                     if (endDate != DateTime.MinValue)
                     {
@@ -740,15 +742,18 @@ namespace Epilogger.Web.Controllers {
                     DateTime.TryParse(Request.Form[7], out collectionStart); 
                     DateTime.TryParse(Request.Form[8], out collectionEnd);
 
-                    currentEvent.StartDateTime = startDate.FromUserTimeZoneToUtc(model.TimeZoneOffset);
-                    if (endDate != DateTime.MinValue) {
-                        currentEvent.EndDateTime = endDate.FromUserTimeZoneToUtc(model.TimeZoneOffset); // 7 is timezone offset
+                    //Adjust the timezone. this is becuase the EditTemplate is not returning the Time.
+                    currentEvent.StartDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(startDate);
+                    if (endDate != DateTime.MinValue)
+                    {
+                        currentEvent.EndDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(endDate);
                     }
 
-                    currentEvent.CollectionStartDateTime = collectionStart.FromUserTimeZoneToUtc(model.TimeZoneOffset);
+                    currentEvent.CollectionStartDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(collectionStart); 
                     if (collectionEnd != DateTime.MinValue) {
-                        currentEvent.CollectionEndDateTime = collectionEnd.FromUserTimeZoneToUtc(model.TimeZoneOffset);
+                        currentEvent.CollectionEndDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(collectionEnd);
                     }
+
                     
                     ES.Save(currentEvent);
                     this.StoreSuccess("Your event was updated successfully!  Make sure you let all your friends know about the changes you just made!");

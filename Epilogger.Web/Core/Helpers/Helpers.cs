@@ -13,64 +13,67 @@ namespace Epilogger.Web {
             return uid;
         }
 
-        public static int GetUserTimeZoneOffset() {
-            //This takes into account the Daylight savings time and all that BS. But seems to fuck up when on 
-            //TimeZone localZone = TimeZone.CurrentTimeZone;
-            //TimeSpan currentOffset = localZone.GetUtcOffset(DateTime.Now);
-            //return currentOffset.Hours;
 
-            int TimeZoneOffSet;
-            TimeZoneOffSet = int.Parse(CookieHelpers.GetCookieValue("lc", "tz").ToString());
-            return TimeZoneOffSet;
+        //DEPRECATED!
 
-        }
+        //public static int GetUserTimeZoneOffset() {
+        //    //This takes into account the Daylight savings time and all that BS. But seems to fuck up when on 
+        //    //TimeZone localZone = TimeZone.CurrentTimeZone;
+        //    //TimeSpan currentOffset = localZone.GetUtcOffset(DateTime.Now);
+        //    //return currentOffset.Hours;
 
+        //    int TimeZoneOffSet;
+        //    TimeZoneOffSet = int.Parse(CookieHelpers.GetCookieValue("lc", "tz").ToString());
+        //    return TimeZoneOffSet;
 
-
-        public static DateTime ToUserTimeZone(this DateTime dt) {
-            TimeSpan offset;
-            //user User offset
-            offset = new TimeSpan(GetUserTimeZoneOffset(), 0, 0);
-
-            return dt.Add(offset);
-        }
-
-        public static DateTime ToUserTimeZone(this DateTime dt, int EventTimeZoneOffSet) {
-            if (dt == DateTime.MinValue)
-                return dt;
-
-            TimeSpan offset;
-            if (GetUserGuid() == Guid.Parse("{00000000-0000-0000-0000-000000000000}")) {
-                //Use Event Offset
-                offset = new TimeSpan(EventTimeZoneOffSet, 0, 0);
-            } else {
-                //user User offset
-                offset = new TimeSpan(GetUserTimeZoneOffset(), 0, 0);
-            }
-
-            return dt.Add(offset);
-        }
+        //}
 
 
-        public static DateTime FromUserTimeZoneToUtc(this DateTime dt) {
-            TimeSpan offset;
-            //user User offset
-            offset = new TimeSpan(-GetUserTimeZoneOffset(), 0, 0);
 
-            return dt.Add(offset);
-        }
-        public static DateTime FromUserTimeZoneToUtc(this DateTime dt, int EventTimeZoneOffSet) {
-            TimeSpan offset;
-            if (GetUserGuid() == Guid.Parse("{00000000-0000-0000-0000-000000000000}")) {
-                //Use Event Offset
-                offset = new TimeSpan(-EventTimeZoneOffSet, 0, 0);
-            } else {
-                //user User offset
-                offset = new TimeSpan(-GetUserTimeZoneOffset(), 0, 0);
-            }
+        //public static DateTime ToUserTimeZone(this DateTime dt) {
+        //    TimeSpan offset;
+        //    //user User offset
+        //    offset = new TimeSpan(GetUserTimeZoneOffset(), 0, 0);
 
-            return dt.Add(offset);
-        }
+        //    return dt.Add(offset);
+        //}
+
+        //public static DateTime ToUserTimeZone(this DateTime dt, int EventTimeZoneOffSet) {
+        //    if (dt == DateTime.MinValue)
+        //        return dt;
+
+        //    TimeSpan offset;
+        //    if (GetUserGuid() == Guid.Parse("{00000000-0000-0000-0000-000000000000}")) {
+        //        //Use Event Offset
+        //        offset = new TimeSpan(EventTimeZoneOffSet, 0, 0);
+        //    } else {
+        //        //user User offset
+        //        offset = new TimeSpan(GetUserTimeZoneOffset(), 0, 0);
+        //    }
+
+        //    return dt.Add(offset);
+        //}
+
+
+        //public static DateTime FromUserTimeZoneToUtc(this DateTime dt) {
+        //    TimeSpan offset;
+        //    //user User offset
+        //    offset = new TimeSpan(-GetUserTimeZoneOffset(), 0, 0);
+
+        //    return dt.Add(offset);
+        //}
+        //public static DateTime FromUserTimeZoneToUtc(this DateTime dt, int EventTimeZoneOffSet) {
+        //    TimeSpan offset;
+        //    if (GetUserGuid() == Guid.Parse("{00000000-0000-0000-0000-000000000000}")) {
+        //        //Use Event Offset
+        //        offset = new TimeSpan(-EventTimeZoneOffSet, 0, 0);
+        //    } else {
+        //        //user User offset
+        //        offset = new TimeSpan(-GetUserTimeZoneOffset(), 0, 0);
+        //    }
+
+        //    return dt.Add(offset);
+        //}
 
 
 
