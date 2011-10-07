@@ -877,6 +877,18 @@ namespace Epilogger.Web.Controllers {
         public ActionResult AddLink() {
             return View();
         }
+
+        [HttpPost, ValidateInput(false)]
+        public bool AddLink(int id, AddLinkViewModel model) {
+            try {
+                URL externalLink = Mapper.Map<AddLinkViewModel, URL>(model);
+                //ES.Save(externalLink);
+
+                return true;
+            } catch (Exception ex) {
+                return false;
+            }
+        }
     }
 
 }

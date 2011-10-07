@@ -12,8 +12,8 @@
 <h2>Add a website link</h2>
 <fieldset class="modal">
     <p>@Html.LabelFor(m => m.Url)@Html.TextBoxFor(m => m.Url)</p>
-    <p>@Html.LabelFor(m => m.Title)@Html.TextBoxFor(m => m.Title)</p>
-    <p>@Html.LabelFor(m => m.Caption)@Html.TextBoxFor(m => m.Caption)</p>
-    <input type="submit" id="search" class="blue-action-button" value="Submit" />
+@*    <p>@Html.LabelFor(m => m.Title)@Html.TextBoxFor(m => m.Title)</p>
+    <p>@Html.LabelFor(m => m.Caption)@Html.TextBoxFor(m => m.Caption)</p>*@
+    <input type="submit" id="search" onclick="AddLink('@Url.Action("addlink", "events")');return false;" class="blue-action-button" value="Submit" />
 </fieldset>
 </div>

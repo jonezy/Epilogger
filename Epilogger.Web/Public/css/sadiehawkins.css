@@ -38,7 +38,7 @@ a.edit_icon {background:url(../images/icons/pencil.png) no-repeat 0px 2px;paddin
 .datetime-container{}
 
 .datepicker,
-.timedropdown  {margin:0 !important;display:inline !important;width: 5em !important;border-right:0px !important;}
+.timedropdown  {margin:0 !important;display:inline !important;width: 4.4em !important;border-right:0px !important;}
 .datepicker {width:5em !important;}
 
 .item-data .ui-datepicker-trigger {margin-top:-3px;}
@@ -604,3 +604,6 @@ div#search-container input[type=image] {
 
 	/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
 	@media only screen and (max-width: 479px) {}
+	
+	
+	.txtdropdown-outer {position:relative;}
