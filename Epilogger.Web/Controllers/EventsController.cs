@@ -859,9 +859,19 @@ namespace Epilogger.Web.Controllers {
         public ActionResult AddBlogPost() {
             return View();
         }
+
         [HttpPost, ValidateInput(false)]
-        public ActionResult AddBlogPost(AddBlogPostViewModel model) {
-            return View();
+        public bool AddBlogPost(int id, AddBlogPostViewModel model) {
+            try {
+                BlogPost blogPost = Mapper.Map<AddBlogPostViewModel, BlogPost>(model);
+                blogPost.EventID = id;
+                blogPost.UserID = CurrentUserID;
+                BS.Save(blogPost);
+
+                return true;
+            } catch (Exception ex) {
+                return false;
+            }
         }
         public ActionResult AddLink() {
             return View();

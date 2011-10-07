@@ -125,7 +125,6 @@ namespace Epilogger.Data
         public Query<Tweet> Tweets { get; set; }
         public Query<User> Users { get; set; }
         public Query<URL> URLS { get; set; }
-        public Query<BlogPost> BlogPosts { get; set; }
         public Query<aspnet_User> aspnet_Users { get; set; }
         public Query<UserRatesEvent> UserRatesEvents { get; set; }
         public Query<BetaSignup> BetaSignups { get; set; }
@@ -141,6 +140,7 @@ namespace Epilogger.Data
         public Query<ImageMetaDatum> ImageMetaData { get; set; }
         public Query<Image> Images { get; set; }
         public Query<ActiveVisitorsQueueOLD> ActiveVisitorsQueueOLDs { get; set; }
+        public Query<BlogPost> BlogPosts { get; set; }
         public Query<AggregateVisitHistoryOLD> AggregateVisitHistoryOLDs { get; set; }
         public Query<VisitHistoryOLD> VisitHistoryOLDs { get; set; }
         public Query<UserFollowsUser> UserFollowsUsers { get; set; }
@@ -251,7 +251,6 @@ namespace Epilogger.Data
             Tweets = new Query<Tweet>(provider);
             Users = new Query<User>(provider);
             URLS = new Query<URL>(provider);
-            BlogPosts = new Query<BlogPost>(provider);
             aspnet_Users = new Query<aspnet_User>(provider);
             UserRatesEvents = new Query<UserRatesEvent>(provider);
             BetaSignups = new Query<BetaSignup>(provider);
@@ -267,6 +266,7 @@ namespace Epilogger.Data
             ImageMetaData = new Query<ImageMetaDatum>(provider);
             Images = new Query<Image>(provider);
             ActiveVisitorsQueueOLDs = new Query<ActiveVisitorsQueueOLD>(provider);
+            BlogPosts = new Query<BlogPost>(provider);
             AggregateVisitHistoryOLDs = new Query<AggregateVisitHistoryOLD>(provider);
             VisitHistoryOLDs = new Query<VisitHistoryOLD>(provider);
             UserFollowsUsers = new Query<UserFollowsUser>(provider);
@@ -280,7 +280,6 @@ namespace Epilogger.Data
             	DataProvider.Schema.Tables.Add(new TweetsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new URLsTable(DataProvider));
-            	DataProvider.Schema.Tables.Add(new BlogPostsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new aspnet_UsersTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserRatesEventTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new BetaSignupsTable(DataProvider));
@@ -296,6 +295,7 @@ namespace Epilogger.Data
             	DataProvider.Schema.Tables.Add(new ImageMetaDataTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ImagesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ActiveVisitorsQueueOLDTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new BlogPostsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new AggregateVisitHistoryOLDTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new VisitHistoryOLDTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserFollowsUserTable(DataProvider));

@@ -473,6 +473,11 @@ namespace Epilogger.Data{
             sp.Command.AddParameter("EventID",EventID,DbType.Int32);
             return sp;
         }
+        public StoredProcedure SearchEvents(string SearchTerm){
+            StoredProcedure sp=new StoredProcedure("SearchEvents",this.Provider);
+            sp.Command.AddParameter("SearchTerm",SearchTerm,DbType.String);
+            return sp;
+        }
         public StoredProcedure SearchInEvent(int EventID,string SearchTerm,DateTime FromDate,DateTime ToDate){
             StoredProcedure sp=new StoredProcedure("SearchInEvent",this.Provider);
             sp.Command.AddParameter("EventID",EventID,DbType.Int32);

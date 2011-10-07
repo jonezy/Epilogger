@@ -55,10 +55,23 @@ function SearchVenues(url) {
         },
         function (data) {
             $('#searchresults').html(data);
-        });
-    }
+    });
+}
 
 function SetSelectedVenue(venueId, venueName) {
     $("#FoursquareVenueID").val(venueId);
     $("#selectedVenue").html("You selected: <strong>" + escape(venueName) + "</strong> as your venue!");
+}
+
+function AddBlogPost(url) {
+    var blogPost = {
+            BlogURL: $("#BlogURL").val(),
+            Title: $("#Title").val(),
+            Description: $("#Description").val()
+    };
+    
+    $.post(url, blogPost,
+        function (data) {
+            alert(data);
+    });
 }
