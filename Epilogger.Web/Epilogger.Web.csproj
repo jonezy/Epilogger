@@ -314,6 +314,7 @@
     <Content Include="Public\js\jquery.expander.min.js" />
     <Content Include="Public\js\jquery.tweet.js" />
     <Content Include="Public\js\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Public\js\jquery.zrssfeed.min.js" />
     <Content Include="Public\js\prettyPhoto\css\prettyPhoto.css" />
     <Content Include="Public\js\prettyPhoto\images\fullscreen\1.jpg" />
     <Content Include="Public\js\prettyPhoto\images\fullscreen\2.jpg" />
