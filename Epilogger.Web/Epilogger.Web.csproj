@@ -268,6 +268,7 @@
     <Content Include="Public\images\click.png" />
     <Content Include="Public\images\event-list-icons\test.png" />
     <Content Include="Public\images\event_activity_title_icons.png" />
+    <Content Include="Public\images\icons\blog.png" />
     <Content Include="Public\images\icons\BrowseBullet.png" />
     <Content Include="Public\images\icons\bubble.png" />
     <Content Include="Public\images\icons\CreateAccountArrow.png" />
@@ -275,12 +276,14 @@
     <Content Include="Public\images\icons\dashboard-event-totals.png" />
     <Content Include="Public\images\icons\event-toolbar-ov.png" />
     <Content Include="Public\images\icons\event-toolbar.png" />
+    <Content Include="Public\images\icons\facebook.png" />
     <Content Include="Public\images\icons\header-person.png" />
     <Content Include="Public\images\icons\hovernub.png" />
     <Content Include="Public\images\icons\pencil.png" />
     <Content Include="Public\images\icons\profile-eventlist.png" />
     <Content Include="Public\images\icons\SubscribedCheck.png" />
     <Content Include="Public\images\icons\tweet-black.png" />
+    <Content Include="Public\images\icons\twitter.png" />
     <Content Include="Public\images\linebg.png" />
     <Content Include="Public\images\loading.gif" />
     <Content Include="Public\images\logo.png" />
@@ -312,7 +315,9 @@
     <Content Include="Public\js\jquery.colorbox-min.js" />
     <Content Include="Public\js\jquery.cookie.js" />
     <Content Include="Public\js\jquery.expander.min.js" />
+    <Content Include="Public\js\jquery.tweet.js" />
     <Content Include="Public\js\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Public\js\jquery.zrssfeed.min.js" />
     <Content Include="Public\js\prettyPhoto\css\prettyPhoto.css" />
     <Content Include="Public\js\prettyPhoto\images\fullscreen\1.jpg" />
     <Content Include="Public\js\prettyPhoto\images\fullscreen\2.jpg" />
@@ -458,6 +463,9 @@
     <Content Include="Views\Events\AddBlogPost.cshtml" />
     <Content Include="Views\Events\AddLink.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Home\Terms.cshtml" />
+    <Content Include="Views\Home\Privacy.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
