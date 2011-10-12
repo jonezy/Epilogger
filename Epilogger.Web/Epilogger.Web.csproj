@@ -312,6 +312,7 @@
     <Content Include="Public\js\jquery.colorbox-min.js" />
     <Content Include="Public\js\jquery.cookie.js" />
     <Content Include="Public\js\jquery.expander.min.js" />
+    <Content Include="Public\js\jquery.tweet.js" />
     <Content Include="Public\js\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Public\js\prettyPhoto\css\prettyPhoto.css" />
     <Content Include="Public\js\prettyPhoto\images\fullscreen\1.jpg" />

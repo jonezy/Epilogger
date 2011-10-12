@@ -51,6 +51,16 @@
         head.js('@Url.Content("~/Public/js/clickmap.js")');
         head.js('@Url.Content("~/Public/js/jquery.colorbox-min.js")');
         head.js('@Url.Content("~/Public/js/jquery.cookie.js")');
+        head.js('@Url.Content("~/Public/js/jquery.tweet.js")',function() {
+            $(".tweet").tweet({
+                username: "epilogger",
+                join_text: "auto",
+                avatar_size: 32,
+                count: 2,
+                loading_text: "loading tweets...",
+                template: "{text} >> {time}"
+            });            
+        });
     </script>
 	<!-- Favicons
 	================================================== 
@@ -93,6 +103,26 @@
         @RenderBody()
         <div class="clear"></div>
 		<div class="spacer"></div>
+    </div>
+
+    <div id="footer">
+        <div id="column-one">
+        <a href="/">@Html.Raw(Html.Image("logo.png"))</a>
+        <ul>
+            <li>@Html.ActionLink("About", "About", "Home")</li>
+            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            <li>@Html.ActionLink("Contact", "Privacy Policy", "Home")</li>
+            <li>@Html.ActionLink("TOS", "Terms", "Home")</li>
+        </ul>
+        <p>Copyright © 2011 Epilogger Inc. All rights reserved. Made with lots of love and caffeine.</p>
+        
+        </div>
+        <div id="column-two">
+            <h2>Tweets</h2>
+            <div class="tweet"></div>
+        
+        </div>
+        <div id="column-three"></div>
     </div>
 </div>
 
