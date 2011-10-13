@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Epilogger.Web.Models.HomepageViewModel
+@{
     Layout = "~/Views/Shared/_HomepageLayout.cshtml";
     ViewBag.Title = "Epilogger | We'll remember it for you";
 }
@@ -6,5 +7,34 @@
     <div id="homepage-toolbar" class="clearfix">
         <h4>See What's Happening</h4><div class="Pager"><span class="current">All</span><a href="#">Now</a><a href="#">Future</a></div><img src="@Url.Content("~/Public/images/homepage/refresh.png")" id="refresh" />
     </div>
+<div class="clear"></div>
+<div class="spacer"></div>
 
+@foreach (var item in Model.Activity) {
+    <div class="dashboard-activity-entry">
+        <strong class="title @item.ActivityType">
+        @if(item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION) {
+            @:NEW EVENT ADDED:
+        } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.FOLLOW_EVENT) {
+            @:SUBSCRIBED TO EVENT
+        } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_RATING) {
+            @:RATED AN EVENT
+        } else {
+            @item.EventName
+        }</strong>
+        
+        @if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION || 
+            item.ActivityType == Epilogger.Web.Models.ActivityType.FOLLOW_EVENT) {
+            <h2>@MvcHtmlString.Create(item.EventName)</h2>
+        } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_RATING) {
+           <h2>you @MvcHtmlString.Create(item.ActivityContent)'d @item.EventName</h2>
+        } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.PHOTOS_VIDEOS) {
+            <img src="@item.ActivityContent" width="170" height="140" />
+        } else {
+           <p> @MvcHtmlString.Create(item.ActivityContent)</p>
+        }
+        
+        
+    </div>
+}
 </div>

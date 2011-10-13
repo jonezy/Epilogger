@@ -5,6 +5,7 @@ using System.Linq;
 using Epilogger.Data;
 using System.Data;
 using SubSonic.Schema;
+using Epilogger.Web.Models;
 
 namespace Epilogger.Web {
     public class EventService : ServiceBase<Event> {
@@ -30,7 +31,10 @@ namespace Epilogger.Web {
         {
             return GetData(IsSameDate<Event>(e => e.StartDateTime, DateTime.UtcNow)).ToList();
         }
-
+        public IEnumerable<HomepageActivityModel> GetHomepageActivity() {
+            StoredProcedure sp = db.GetHomePageActivity();
+            return sp.ExecuteTypedList<HomepageActivityModel>();
+        }
         public List<Event> GoingOnNowEvents()
         {
             IEnumerable<Event> neverEndingEvents = from e in GetData()
