@@ -4,9 +4,6 @@
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
 <head>
-
-	<!-- Basic Page Needs
-  ================================================== -->
 	<meta charset="utf-8" />
     <title>@ViewBag.Title</title>
 	<meta name="description" content="">
@@ -14,10 +11,6 @@
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-	
-	<!-- Mobile Specific Metas
-  ================================================== -->
-	@*<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> *@
 	
     <link href="@Url.Content("~/Public/css/reset.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Public/css/960_12_col.css")" rel="stylesheet" type="text/css" />
@@ -51,7 +44,7 @@
         head.js('@Url.Content("~/Public/js/jquery.colorbox-min.js")');
         head.js('@Url.Content("~/Public/js/jquery.cookie.js")');
         head.js('@Url.Content("~/Public/js/jquery.tweet.js")',function() {
-            $(".tweet").tweet({
+            $(".footer-tweet").tweet({
                 username: "epilogger",
                 join_text: "auto",
                 avatar_size: 32,
@@ -65,13 +58,6 @@
             $('#blog-posts').rssfeed('http://feeds.feedburner.com/epilogger?format=xml', {		        limit: 1	        });
         });
     </script>
-	<!-- Favicons
-	================================================== 
-	<link rel="shortcut icon" href="/favicon.ico">
-	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png" />
-	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png" />-->
-	
 </head>
 <body>
     
@@ -99,15 +85,7 @@
         @Html.Partial("Navigation")
 
     </div>
-
-    <div id="content-container">
-        @Html.Action("RenderBreadCrumb", "Navigation")
-        <br style="clear:both;" />
-        @RenderBody()
-        <div class="clear"></div>
-		<div class="spacer"></div>
-    </div>
-
+    @RenderBody()
     <div id="footer">
         <div id="column-one">
             <a href="/">@Html.Raw(Html.Image("logo.png"))</a>
@@ -121,7 +99,7 @@
         </div>
         <div id="column-two">
             <h4>Tweetings</h4>
-            <div class="tweet"></div>
+            <div class="footer-tweet"></div>
         </div>
         <div id="column-three">
             <div id="blog-posts"></div>
@@ -190,7 +168,6 @@
     });
 
 </script>
-
 
 </body>
 </html>
