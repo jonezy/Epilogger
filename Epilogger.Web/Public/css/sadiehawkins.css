@@ -54,7 +54,14 @@ a.edit_icon {background:url(../images/icons/pencil.png) no-repeat 0px 2px;paddin
 	background:#fff;
 	padding:15px;
 	position:relative;}
-	
+
+#homepage-container {
+    margin:120px 0px 0px -40px;
+	background:transparent url(../images/homepage/book.png) no-repeat top center;
+	min-height:728px;
+	padding:0px;
+	position:relative;}
+		
 	#header {padding:10px 0px 30px 0px;position:relative;}
 	img#logo {float:left;}
 

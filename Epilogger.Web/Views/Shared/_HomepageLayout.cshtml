@@ -1,8 +1,5 @@
 ﻿@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
-    <div id="content-container">
-        @Html.Action("RenderBreadCrumb", "Navigation")
-        <br style="clear:both;" />
-        @RenderBody()
-        <div class="clear"></div>
-		<div class="spacer"></div>
-    </div>
+<img src="@Url.Content("~/Public/images/homepage/rockout.png")" style="position:absolute;top:118px;left:18px;z-index:20000" />
+<div id="homepage-container">
+    @RenderBody()
+</div>
