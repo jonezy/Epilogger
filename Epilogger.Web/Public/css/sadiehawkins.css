@@ -62,6 +62,14 @@ a.edit_icon {background:url(../images/icons/pencil.png) no-repeat 0px 2px;paddin
 	padding:0px;
 	position:relative;}
 		
+#homepage-content {
+    position:absolute;
+    top:50px;left:80px;}
+
+#homepage-toolbar {padding-bottom:10px;border-bottom:dotted 1px #b4b4b4;width:390px;}    
+#homepage-toolbar h4 {float:left;}
+#homepage-toolbar .Pager {float:left;margin:-10px 0px 0px 10px;text-transform:uppercase; }
+#homepage-toolbar #refresh {float:right;margin:-4px 0px 0px 0px;}
 	#header {padding:10px 0px 30px 0px;position:relative;}
 	img#logo {float:left;}
 
