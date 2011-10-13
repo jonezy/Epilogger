@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
@@ -15,7 +16,14 @@ namespace Epilogger.Web.Controllers {
         public ActionResult Index() {
             ViewBag.Message = "Welcome to Epilogger!";
 
-            return View();
+            IEnumerable<HomepageActivityModel> activity = ES.GetHomepageActivity();
+            HomepageViewModel model = new HomepageViewModel(
+                activity.OrderByDescending(a => a.Date).Take(12).ToList(),
+                0,
+                activity.Count()
+            );
+
+            return View(model);
         }
 
         [HttpPost]
