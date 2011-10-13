@@ -4,6 +4,7 @@
 
 @model Epilogger.Web.Models.AllTweetsDisplayViewModel
 @{
+    Layout = "~/Views/Shared/_InteriorLayout.cshtml";
     ViewBag.Title = "Epilogger - " + Model.Name + "- Tweets";
 }
 @Html.Partial("EventToolbar")

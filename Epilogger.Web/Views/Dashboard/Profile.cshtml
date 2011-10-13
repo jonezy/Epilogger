@@ -1,6 +1,7 @@
 ﻿@model Epilogger.Web.Models.DashboardProfileViewModel
 
 @{
+    Layout = "~/Views/Shared/_InteriorLayout.cshtml";
     ViewBag.Title = "Profile";
 }
 
@@ -15,8 +16,8 @@
         <div class="clear"></div>
         <div class="profile-data clearfix">
             @if(!string.IsNullOrEmpty(Model.ProfilePicture)) {
-                <img src="@Url.Content(Model.ProfilePicture.Replace("_normal", ""))" class="profile-picture fleft" />
-            } 
+                <img src="@Url.Content(Model.ProfilePicture.Replace("_normal", ""))" class="profile-picture fleft" width="150" height="150" />
+            }
             
             <div class="profile-content fleft">
                 <h2>Hello my name is</h2>

@@ -2,6 +2,7 @@
 @using Epilogger.Web.Models;
 @model Epilogger.Web.Models.AllBlogPostsViewModel
 @{
+    Layout = "~/Views/Shared/_InteriorLayout.cshtml";
     ViewBag.Title = "Epilogger - " + Model.Name + "- All Blogs";
 }
 @Html.Partial("EventToolbar")
