@@ -18,7 +18,7 @@ namespace Epilogger.Web.Controllers {
 
             IEnumerable<HomepageActivityModel> activity = ES.GetHomepageActivity();
             HomepageViewModel model = new HomepageViewModel(
-                activity.OrderByDescending(a => a.Date).Take(12).ToList(),
+                activity.Take(12).ToList(),
                 0,
                 activity.Count()
             );
