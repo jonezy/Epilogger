@@ -227,7 +227,7 @@ span.number {
 #event-optionBar input[type="text"] { width: 200px; float: left; }
 
 #event-details {font-size:12px;padding:10px;border-top:dotted 1px #d9d9d9;border-bottom:dotted 1px #d9d9d9;}	
-#event-details ul { float:left;list-style:none;min-width:150px;margin-right:25px; }
+#event-details ul { float:left;list-style:none;margin-right:25px; }
 
 #event-details ul.hashtags { width:200px;}
 #event-details ul.hashtags li label { width:70px; }
@@ -374,7 +374,7 @@ ul#left-nav li a.current {background:#f6f6f6;border-bottom:solid 1px #bdbdbd;tex
 .profile-data h1 {border-bottom:2px solid #fff;padding-bottom:10px;margin-bottom:10px;}
 
 .profile-event-item {float:left;width:300px;margin:0px 10px 10px 0px;}
-.profile-event-item .month-day {font-size:12px;float:left;background:#e9e9e9;padding:2px 0px 2px 0px;width:39px;height:42px;text-align:center;}
+.profile-event-item .month-day {font-size:12px;float:left;background:#e9e9e9;padding:0px 0px 2px 0px;width:39px;height:42px;text-align:center;}
 .profile-event-item .month-day h2 {margin:0;color:#555 !important;font-weight:bold;}
 .profile-event-item .event-content {margin-left:5px;float:left;width:250px;}
 
@@ -393,7 +393,7 @@ ul#left-nav li a.current {background:#f6f6f6;border-bottom:solid 1px #bdbdbd;tex
 
 .dashboard-event-item {border-bottom:solid 1px #e1e1e1;padding:12px 0px 12px 0px;}
 
-.dashboard-event-item .month-day {font-size:12px;float:left;background:#e9e9e9;padding:2px 0px 2px 0px;width:52px;height:55px;text-align:center;position:relative;}
+.dashboard-event-item .month-day {font-size:12px;float:left;background:#e9e9e9;padding:0px 0px 2px 0px;width:52px;height:55px;text-align:center;position:relative;}
 .dashboard-event-item .month-day .month {background:#ee5b8f;color:#fff;text-transform:uppercase;font:normal 14px 'InterstatePlusRegular'}
 .dashboard-event-item .month-day .icon {position:absolute;bottom:0;right:0;background:url(../images/event-list-icons/test.png) no-repeat;width:21px;height:21px;}
 .dashboard-event-item .month-day h2 {margin:0;color:#555 !important;font-weight:bold;font:normal 38px 'InterstatePlusRegular'}
