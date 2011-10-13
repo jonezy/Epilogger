@@ -269,6 +269,7 @@
     <Content Include="Public\images\event-list-icons\test.png" />
     <Content Include="Public\images\event_activity_title_icons.png" />
     <Content Include="Public\images\homepage\book.png" />
+    <Content Include="Public\images\homepage\refresh.png" />
     <Content Include="Public\images\homepage\rockout.png" />
     <Content Include="Public\images\icons\blog.png" />
     <Content Include="Public\images\icons\BrowseBullet.png" />
