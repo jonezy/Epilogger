@@ -16,19 +16,18 @@
 
 
 <div class="account-overview clearfix">
-<table>
-    <tr>
-        <td class="label">EMAIL ADDRESS:</td>
-        <td>@Model.EmailAddress</td>
-    </tr>
-    <tr>
-        <td class="label">MEMBER SINCE:</td>
-        <td>@Html.DisplayFor(e => e.CreatedDate)</td>
-    </tr>
-</table>
-<br /><br /><br />
-@Html.ActionLink("+ Edit My Profile", "index", "account", null, new { @class = "blue-action-button" })
+    <table>
+        <tr>
+            <td class="label">EMAIL ADDRESS:</td>
+            <td>@Model.EmailAddress</td>
+        </tr>
+        <tr>
+            <td class="label">MEMBER SINCE:</td>
+            <td>@Html.DisplayFor(e => e.CreatedDate)</td>
+        </tr>
+    </table>
 
+    @Html.ActionLink("+ Edit My Profile", "index", "account", null, new { @class = "blue-action-button" })
 </div>
 
 <em>Why should I upgrade/renew my account?</em>
