@@ -12,6 +12,7 @@ namespace Epilogger.Web.Controllers {
         UserLogService LS = new UserLogService();
         ClickLogService CS = new ClickLogService();
         EventService ES = new EventService();
+        ImageService IS = new ImageService();
 
         public ActionResult Index() {
             ViewBag.Message = "Welcome to Epilogger!";
@@ -22,6 +23,15 @@ namespace Epilogger.Web.Controllers {
                 0,
                 activity.Count()
             );
+
+            //Convert the Image ID in the ActivityContent to the Image HTML from the template. Facilite common HTML and single place for image HTML.
+            foreach (HomepageActivityModel item in model.Activity)
+            {
+                if (item.ActivityType == ActivityType.PHOTOS_VIDEOS)
+                {
+                    item.Image = IS.FindByID(Convert.ToInt32(item.ActivityContent));
+                }
+            }
 
             return View(model);
         }
