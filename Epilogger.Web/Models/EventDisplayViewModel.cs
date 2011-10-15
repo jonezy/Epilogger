@@ -50,6 +50,7 @@ namespace Epilogger.Web.Models {
         public IEnumerable<Epilogger.Data.CheckIn> CheckIns { get; set; }
         public IEnumerable<Epilogger.Data.URL> ExternalLinks { get; set; }
         public IEnumerable<Epilogger.Data.BlogPost> BlogPosts { get; set; }
+        public Epilogger.Data.Venue Venue { get; set; }
         
     }
 }
