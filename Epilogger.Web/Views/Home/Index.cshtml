@@ -1,8 +1,11 @@
 ﻿@model Epilogger.Web.Models.HomepageViewModel
+           
 @{
     Layout = "~/Views/Shared/_HomepageLayout.cshtml";
     ViewBag.Title = "Epilogger | We'll remember it for you";
 }
+
+
 <div id="homepage-content">
     <div id="homepage-toolbar" class="clearfix">
         <h4>See What's Happening</h4><div class="Pager"><span class="current">All</span><a href="#">Now</a><a href="#">Future</a></div><img src="@Url.Content("~/Public/images/homepage/refresh.png")" id="refresh" />
@@ -10,23 +13,32 @@
 <div class="clear"></div>
 <div class="spacer"></div>
 
-@foreach (var item in Model.Activity) {
+@foreach (var item in Model.Activity)
+{
     <div class="homepage-activity-entry">
         <strong class="title @item.ActivityType">
-        @if(item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION) {
+        @if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION)
+        {
             @:NEW EVENT ADDED:
-        } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.FOLLOW_EVENT) {
+        }
+        else if (item.ActivityType == Epilogger.Web.Models.ActivityType.FOLLOW_EVENT)
+        {
             @:SUBSCRIBED TO EVENT
-        } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_RATING) {
+        }
+        else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_RATING)
+        {
             @:RATED AN EVENT
-        } else {
+        }
+        else
+        {
             @Html.ActionLink(item.EventName, "details", "events", new { @id = item.EventID }, null)
         }</strong>
         
         @if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION ||
             item.ActivityType == Epilogger.Web.Models.ActivityType.FOLLOW_EVENT)
         {
-            <h2>@MvcHtmlString.Create(item.EventName)</h2>
+            @*<h2>@MvcHtmlString.Create(item.EventName)</h2>*@
+            <h2><br />@Html.ActionLink(item.EventName, "details", "events", new { @id = item.EventID }, null)</h2>
         }
         else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_RATING)
         {
@@ -34,7 +46,13 @@
         }
         else if (item.ActivityType == Epilogger.Web.Models.ActivityType.PHOTOS_VIDEOS)
         {
-            <img src="@item.ActivityContent" width="170" height="140" />
+            @*<img src="@item.ActivityContent" width="170" height="140" />*@
+            <div class="withcomment newPhotoupdates" id="photo-@item.Image.ID">
+                <a href="@item.Image.Fullsize" rel="prettyPhoto[latestphotos]" photoid="@item.Image.ID" title="" id="@item.Image.ID">
+                    <img src="@item.Image.Fullsize" width="250" border="0" alt="" />
+                </a>
+            </div>
+            
         }
         else
         {
@@ -45,3 +63,14 @@
     </div>
 }
 </div>
+
+<script type="text/javascript" charset="utf-8">
+    head.ready(function () {
+        $("a[rel^='prettyPhoto']").prettyPhoto({
+            theme: 'light_square',
+            animation_speed: 'fast',
+            overlay_gallery: false,
+            changepicturecallback: function () { changeDescription(); }
+        });
+    });
+</script>
