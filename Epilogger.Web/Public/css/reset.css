@@ -243,7 +243,6 @@ svg {
 	label,
 	legend { 
 		display: block;
-		font-weight: bold;
 		font-size: 13px;  }
 	select { 
 		width: 220px; }

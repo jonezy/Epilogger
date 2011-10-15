@@ -2,7 +2,7 @@ body {
     padding:0px 40px;
 	color:#606060;	
 	background:#252525 url(../images/body-bg.jpg) repeat;
-	font:normal 12px/22px 'Georgia', times, 'Times New Roman', serif}
+	font:normal 13px/22px 'Georgia', times, 'Times New Roman', serif}
 
 a {
    color:#2d8ac5;
@@ -451,23 +451,67 @@ ul#connected-networks, .topPhotosList, .topPhotosList li {
 
 
 /* ------------------------------ CREATE EVENT */
+.item-data label {
+    float:left;
+    font-size:10px;
+    width:90px;
+    text-align:right;
+    text-transform:uppercase;
+    color:#3e3e3e;
+    padding:6px 10px 0px 0px;}
+    
+.item-data input[type=text], .item-data textarea, select, #foursquare-search {
+    border-radius:0;
+    border:0;
+    background:#fff;
+    box-shadow:inset 1px 1px 1px #888;
+    margin-bottom:15px !important;
+    font-family:georgia}
+    
+.item-data input.wide, .item-data textarea.wide, .item-data select.wide, #foursquare-search {
+    float:left;
+    width:480px !important;
+    max-width:510px !important;}    
+    
+.item-data label.wide, .item-data label.wider, .item-data input.small {
+    width:100px;}
+    
+.item-data input.med {
+    width:200px;}
+    
+.item-data p {
+    display:block;
+    clear:both;}
 
-.end-time {margin-left:110px;clear:both;}
-.end-time input#end-time {float:left;margin-bottom:10px !important;}
-.end-time label {float:right;width:auto !important;padding:2px 0px !important;font-weight:normal;font-style:italic;}
+.item-data select {
+    padding:6px 4px;}
+    
+   
+/* --- time select */
+.end-time {
+    margin-left:110px;
+    clear:both;}
+    
+.end-time input#end-time {
+    float:left;
+    margin-bottom:10px !important;}
+    
+.end-time label {
+    width:auto !important;
+    text-transform:none;
+    position:relative;
+    top:-6px;
+    font-size:8pt;
+    color:#858585}
+    
+/* --- location select */
+#foursquare-search {
+    padding:5px;
+    color:#888;}
 
-/* form overrides */
-.item-data label {float:left;font-size:11px;width:80px;text-align:right;text-transform:uppercase;padding:8px 10px 0px 0px;}
-.item-data label.wide, .item-data label.wider {width:100px;}
-.item-data input, .item-data textarea {margin-bottom:15px !important;}
-.item-data input.wide, .item-data textarea.wide, .item-data select.wide {float:left;width:510px !important;max-width:550px !important;}
-.item-data input.med {width:200px;}
-.item-data input.small {width:100px;}
-.item-data p {display:block;clear:both;}
 
-.item-data select {padding:6px 4px;}
-
-#event-toolbar {position:absolute;left:-33px;top:20px;width:33px;height:269px;xbackground:url(../images/icons/event-toolbar-ov.png) no-repeat;}
+/* --- toolbar */
+#event-toolbar {position:absolute;left:-33px;top:20px;width:33px;height:269px;background:url(../images/icons/event-toolbar-ov.png) no-repeat;}
 #event-toolbar a {background-image:url(../images/icons/event-toolbar.png);height:25px;width:33px;text-indent:-9999px;display:block;margin-bottom:10px;}
 #event-toolbar a.current, #event-toolbar a:hover {background-image:url(../images/icons/event-toolbar-ov.png);}
 
