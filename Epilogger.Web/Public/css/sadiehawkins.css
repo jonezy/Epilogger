@@ -2,7 +2,7 @@ body {
     padding:0px 40px;
 	color:#606060;	
 	background:#252525 url(../images/body-bg.jpg) repeat;
-	font:normal 13px/22px 'Georgia', times, 'Times New Roman', serif}
+	font:normal 13px/18px 'Georgia', times, 'Times New Roman', serif}
 
 a {
    color:#2d8ac5;
@@ -19,22 +19,26 @@ a.edit_icon {
     padding-left:15px;}
 
 .blue-action-button {
-    border:solid 1px #3789bc;
-    border-top: 1px solid #ccc;
-    border-left: 1px solid #ccc;
-    padding: 4px 12px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    font-size: 11px;
-    text-decoration: none;
-    cursor: pointer;
-    margin-bottom: 20px;
-    font-size:15px;
-    background:#408ebf;
-    color:#fff;
+    border:1px solid #3485b7;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    background:#418fbf; /* no css3 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4aa0d7', endColorstr='#3486b7'); /*IE */
+    background:-webkit-gradient(linear, left top, left bottom, from (#4aa0d7) to (#3486b7)); /* webkit */
+    background:-moz-linear-gradient(top, #4aa0d7, #3486b7); /* ff */
+    box-shadow:0 0 1px #a1b9c8;
+    color:#e6f5fa;
+    font:bold 15px 'InterstatePlusRegular';
+    padding:5px 10px;
     text-transform:uppercase;
-    font-family:'InterstatePlusRegular';}
+    cursor:pointer;
+    box-shadow:0 0 1px #777;}
+   
+.blue-action-button:hover {
+    opacity:0.9;
+    position:relative;
+    top:1px;}
 
 .datepicker, .timedropdown {
     margin:0 !important;
@@ -61,10 +65,11 @@ a.edit_icon {
 	border-radius: 5px;     
 	background:#fff;
 	padding:15px;
-	position:relative;}
+	position:relative;
+	min-height:600px;}
 
 #homepage-container {
-    margin:120px 0px 0px -40px;
+    margin:120px 0 0 -40px;
 	background:transparent url(../images/homepage/book.png) no-repeat top center;
 	min-height:728px;
 	padding:0px;
@@ -158,7 +163,10 @@ ul.subnav li a:hover, ul.subnav li a.current {
 h1, h2, h4 {
 	color:#000;
 	text-transform:uppercase;
-	font:normal 26pt 'InterstatePlusRegular', arial, sans-serif;}
+	font:bold 24pt 'InterstatePlusRegular', arial, sans-serif;}
+
+h1 {
+    margin-bottom:10px}
 	
 h2 {
 	color:#ee4490;
@@ -555,22 +563,23 @@ fieldset.create label.left {width:auto !important;padding:2px 0;}
     margin-right:17px;}
 
 ul#left-nav {
-    margin-bottom:30px;}
+    margin:30px 0;}
     
 ul#left-nav li {
     list-style:none;}
 
 ul#left-nav li a {
-    font:normal 18px 'InterstatePlusRegular', arial, sans-serif;
+    font:bold 18px 'InterstatePlusRegular', arial, sans-serif;
     text-transform:uppercase;
     padding:10px;
     display:block;
-    border-bottom:solid 1p #fff;}
+    border-bottom:1px solid #fff}
     
 ul#left-nav li a:hover, ul#left-nav li a.current {
+    color:#fc5daf;
     background:#f6f6f6;
     border-bottom:solid 1px #bdbdbd;
-    text-decoration:none;}
+    text-decoration:none}
 
 #dashboard-content {
     float:left;
@@ -652,8 +661,17 @@ ul#left-nav li a:hover, ul#left-nav li a.current {
 .event-totals .total-tweets {float:left;padding:4px 40px 0px 0px;background-position:50px 0px;width:50px;}
 .event-totals .total-media {float:left;padding:4px 30px 0px 0px;background-position:34px -50px;width:40px;}
 
-.account-overview {border-top:dotted 1px #b5b5b5;border-bottom:dotted 1px #b5b5b5;padding:10px;margin-bottom:20px;}
-.account-overview table {float:left;margin-right:20px;font-size:11px;}
+.account-overview {
+    border-top:dotted 1px #b5b5b5;
+    border-bottom:dotted 1px #b5b5b5;
+    padding:10px 10px 20px 10px;
+    margin-bottom:20px;}
+    
+.account-overview table {
+    margin:0 50px 20px 0;
+    font-size:11px;}
+    
+.account-overview table > .blue-action-button {clear:both}
 .account-overview table td.label {font-weight:bold;width:100px;}
 
 
@@ -749,18 +767,42 @@ div#search-container input[type=image] {
 #user-status {float:right;padding:5px 20px 5px 20px;margin-right:10px;border-right:dotted 1px #3e3e3e;border-left:dotted 1px #3e3e3e;font-size:11px;font-style:italic;}
 #user-status .person {background:url(../images/icons/header-person.png) no-repeat;padding-left:16px;}
 #breadcrumb a {text-transform:lowercase;font-size:13px;text-decoration:underline;}
-	
-.Pager {font-family:InterstatePlusRegular;font-size:12px;}
-.Pager a, .Pager span {color:#000;padding:5px;margin:0px 10px 0px 10px;display:inline-block;margin:0 2px 0px 2px;}
-.Pager span.current, .Pager a:hover {background:#fc5daf;color:#fff;-webkit-border-radius: 2px;-moz-border-radius: 2px; border-radius: 2px;}
-.Pager .disabled {color:#fff;}
+
+
+/* --- pager */
+.Pager {
+    border-top:1px dotted #c0c0c0;
+    width:250px;
+    padding-top:10px;
+    font:bold 12px/20px InterstatePlusRegular}
+        
+.Pager a, .Pager span {
+    color:#000;
+    padding:1px 8px;
+    margin-right:2px;
+    display:inline-block}
+    
+.Pager span.current, .Pager a:hover {
+    color:#fff;
+    background:#fc5daf;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px; 
+    border-radius: 2px;}
+   
+ 
+ .Pager a:hover {
+     background:#e0e0e0;
+     color:#777}
+    
+.Pager .disabled {
+    color:#fff;}
 	
 .filter-by-time form { margin-bottom:0; margin-left: 370px; text-align: right;}
 .filter-by-time form label {float:left !important;display:inline;padding:6px 6px;}
 .filter-by-time form input[type=text] {float:left !important;display:inline;width:100px;margin-bottom:0;}
 .filter-by-time form input[type=button], .filter-by-time form input[type=submit] {float:left;margin-bottom:0;}
 
-#footer {margin-top:20px;font-size:13px;color:#bfbfbf;}
+#footer {margin-top:40px;font-size:13px;color:#bfbfbf;}
 #footer h4 {color:#7fbaee;font:normal 14px 'InterstatePlusRegular',sans-serif;text-transform:uppercase;}
 #footer a {color:#7fbaee;}
 #footer #column-one,#footer #column-two,#footer #column-three {float:left;margin-right:20px;} 
@@ -809,6 +851,17 @@ div#search-container input[type=image] {
          url('../fonts/interstateplus_regular_cond-webfont.svg#InterstatePlusRegular') format('svg');
     font-weight: normal;
     font-style: normal}
+ 
+ @font-face {
+    font-family: 'InterstatePlusRegular';
+    src: url('../fonts/interstateplus_bold_cond-webfont.eot');
+    src: url('../fonts/interstateplus_bold_cond-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/interstateplus_bold_cond-webfont.woff') format('woff'),
+         url('../fonts/interstateplus_bold_cond-webfont.ttf') format('truetype'),
+         url('../fonts/interstateplus_bold_cond-webfont.svg#InterstatePlusRegular') format('svg');
+    font-weight: bold;
+    font-style: normal;}
+
     
     
 /* ----------------------------- Click Map */
