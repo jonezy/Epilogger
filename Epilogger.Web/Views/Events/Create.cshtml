@@ -5,7 +5,6 @@
     ViewBag.Title = "Epilogger - Create Event";
 }
 
-
 <div id="events-nav">
     <h1>ADD AN EVENT</h1>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tincidunt tellus vel tellus placerat faucibus. Maecenas adipiscing venenatis aliquam.</p>
@@ -31,16 +30,20 @@
         <h4>WHEN AND WHERE</h4>
         <br style="clear:both;" />
         <div id="createevent-time" class="item-data clearfix">
-            <label class="wide">Start Date:</label> @Html.EditorFor(model => model.StartDateTime)
+            <label class="wide">Start Date</label> @Html.EditorFor(model => model.StartDateTime)
             <div class="end-time"><input type="checkbox" id="end-time" class="unhide" /><label for="end-time">Specifiy an ending time</label><br style="clear:both;" /></div>
             <div class="hidden">
-                <div style="clear:both;"><label class="wide">Event End:</label> @Html.EditorFor(model => model.EndDateTime)</div>
+                <div style="clear:both;"><label class="wide">Event End</label> @Html.EditorFor(model => model.EndDateTime)</div>
             </div>
             <p>Data collection will start 3 hours prior to the Start time at your current account level. Want to start it sooner? Update to a payed acoount.</p>
 
             @*<p><label class="wide">Time Zone:</label> @Html.DropDownListFor(model => model.TimeZoneOffset, Model.TimeZones, "Select your timezone", new { @class = "wide" })</p>*@
             @*@Html.ActionLink("Venue Search", "venuesearch", "events", null, new { @class="modal"})*@
-            <div id="selectedVenue"></div><a href="#" id="foursquare-search" class="modal">Venue Search</a>
+            <label class="wide">Venue</label>
+            <div style="display: block; margin-left: 112px; padding-top: 8px;">
+                <div id="selectedVenue"></div>
+                <h3><a href="#" id="foursquare-search" class="modal">Search for a venue</a></h3>
+            </div>
             @Html.HiddenFor(model => model.FoursquareVenueID)
         </div>
     </div>
@@ -80,19 +83,23 @@
     </div>
 </div>
 </div>
-<script>
+<script language="javascript" type="text/javascript">
     head.ready(function () {
         $('.unhide').click(function () {
             var unhide = $('.hidden');
             unhide.toggle();
         });
 
-        $(".modal").colorbox({
+        $("#foursquare-search").colorbox({
             width: "60%", height: "62%",
-            href:'@Url.Action("VenueSearch", "Events")',
+            href: '@Url.Action("VenueSearch", "Events")',
+            onComplete: function () { $("#VenueName").focus(); }
         });
 
     });
 </script>
 
-
+@*$(".modal").colorbox({
+            width: "60%", height: "62%",
+            href:'@Url.Action("VenueSearch", "Events")'
+        });*@
