@@ -55,12 +55,17 @@ function SearchVenues(url) {
         },
         function (data) {
             $('#searchresults').html(data);
-    });
+        });
+        return false;
 }
 
-function SetSelectedVenue(venueId, venueName) {
+function SetSelectedVenue(venueId, venueName, venueAddress, venueCity, venueState, venueZip) {
     $("#FoursquareVenueID").val(venueId);
-    $("#selectedVenue").html("You selected: <strong>" + escape(venueName) + "</strong> as your venue!");
+    //$("#selectedVenue").html("You selected: <strong>" + venueName + "</strong> as your venue!");
+    $("#selectedVenue").html("<strong>" + venueName + "</strong><br />" + venueAddress + "<br />" + venueCity + ", " + venueState + "<br />" + venueZip);
+    $("#foursquare-search").text("Change venue")
+    //Dismis the popup
+    $.colorbox.close();
 }
 
 function AddBlogPost(url) {

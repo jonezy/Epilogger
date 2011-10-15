@@ -769,7 +769,13 @@ namespace Epilogger.Web.Controllers {
         }
 
         public ActionResult VenueSearch() {
-            return View(new VenueSearchModel());
+
+            //TODO replace with IP geo coded data.
+            VenueSearchModel VSM = new VenueSearchModel();
+            VSM.City = "Toronto";
+            VSM.ProvinceState = "ON";
+
+            return PartialView(VSM);
         }
 
         [HttpPost]
@@ -799,7 +805,7 @@ namespace Epilogger.Web.Controllers {
 
             List<FoursquareVenue> foundVenues = new List<FoursquareVenue>();
             foreach (var item in venues.response) {
-                foundVenues.Add(new FoursquareVenue { id = item.id, Name = item.name, Address = item.location.address });
+                foundVenues.Add(new FoursquareVenue { id = item.id, Name = item.name, Address = item.location.address, City = item.location.city, State = item.location.state, Zip = item.location.postalCode });
             }
 
             return PartialView("_VenueSearchResults", foundVenues);

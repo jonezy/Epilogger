@@ -6,6 +6,7 @@
     @if (!string.IsNullOrEmpty(item.Address)) {
         @item.Address<br />
     }
-    <a href="#" onclick="SetSelectedVenue('@item.id', '@Url.Encode(@item.Name)');parent.$.fn.colorbox.close();">Select this venue</a>
+    <a href="#" onclick="SetSelectedVenue('@item.id', '@item.Name', '@item.Address', '@item.City', '@item.State', '@item.Zip');">Select this venue</a>
+    @*parent.$.fn.colorbox.close();*@
     </div>
 }
