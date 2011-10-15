@@ -113,8 +113,11 @@ else
             }
         }
     </div>
+
+    @*Event Rating Section*@
     <div class="grid_2 omega">
-        @if (!Model.HasUserRated)
+        @*OLD SYSTEM*@
+        @*@if (!Model.HasUserRated)
         {
             using (Html.BeginForm("eventRating", "events", FormMethod.Post, new { @class = "remove-bottom" }))
             {   
@@ -131,8 +134,26 @@ else
             @Model.EventRatings.Where(i => i.UserRating == "+").Count().ToString() @: ThumbsUp<br/>
             @Model.EventRatings.Where(i => i.UserRating == "-").Count().ToString() @: ThumbsDown<br/>
             @: You voted on:
-            @*@String.Format("{0:MMM d, yyyy h:mm}{1}", Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime.ToUserTimeZone(Model.TimeZoneOffSet), Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime.ToUserTimeZone(Model.TimeZoneOffSet).ToString("tt").ToLower())*@
             @Html.DisplayFor(thing => Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime)
+        }*@
+
+        @if (!Model.HasUserRated)
+        {
+            <ul class="star-rating">
+                @if (Model.EventRatings.Sum(i => int.Parse(i.UserRating)) > 0)
+                {
+                    <li class="current-rating" style="width:@(Model.EventRatings.Sum(i => int.Parse(i.UserRating)) / Model.EventRatings.Count())%;">Currently 2 Stars.</li>
+                }
+	            <li><a href="#" title="1 star out of 5" class="one-star">1</a></li>
+	            <li><a href="#" title="2 stars out of 5" class="two-stars">2</a></li>
+	            <li><a href="#" title="3 stars out of 5" class="three-stars">3</a></li>
+	            <li><a href="#" title="4 stars out of 5" class="four-stars">4</a></li>
+	            <li><a href="#" title="5 stars out of 5" class="five-stars">5</a></li>
+            </ul>
+        }
+        else
+        {
+
         }
     </div>
 
