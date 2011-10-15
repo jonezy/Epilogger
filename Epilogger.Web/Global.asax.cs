@@ -176,7 +176,8 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.EventRatings, opt => opt.Ignore())
                 .ForMember(dest => dest.CurrentUserID, opt => opt.Ignore())
                 .ForMember(dest => dest.FromDateTime, opt => opt.Ignore())
-                .ForMember(dest => dest.ToDateTime, opt => opt.Ignore());
+                .ForMember(dest => dest.ToDateTime, opt => opt.Ignore())
+                .ForMember(dest => dest.Venue, opt => opt.MapFrom(src => src.Venues.FirstOrDefault()));
 
             Mapper.CreateMap<Event, AllContentViewModel>();
             Mapper.CreateMap<Event, AllLinksViewModel>()
