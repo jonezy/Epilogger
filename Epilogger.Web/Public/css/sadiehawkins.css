@@ -499,7 +499,8 @@ ul#connected-networks, .topPhotosList, .topPhotosList li {
     padding:6px 10px 0px 0px;}
     
 .item-data input[type=text], .item-data textarea, select, #foursquare-search,
-fieldset.login input[type="text"], fieldset.login input[type="password"] {
+fieldset.login input[type="text"], fieldset.login input[type="password"], fieldset.create input[type="password"],
+.inEventSearch input[type="text"] {
     border-radius:0;
     border:0;
     background:#fff;
@@ -585,6 +586,7 @@ fieldset.create p#confirmPW label {position:relative; top:-4px; line-height:13px
 
 .createArrow { background: url('../images/icons/CreateAccountArrow.png') no-repeat; height: 350px; background-position: 0 65px; }
 .createAccountButton { position:relative; top: 155px; left: 80px; height: 40px; }
+.createAccountButton:hover { top: 156px;}
 
 
 /* ------------------------------ DASHBOARD */
