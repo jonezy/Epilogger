@@ -1028,3 +1028,27 @@ a.smallRateLink:hover { text-decoration: underline; }
 
 
 .starSmall { font-size: 0.7em; line-height: 1em; }
+
+/* Some Popup stuff
+================================================== */
+    
+/*.uiPopUp {
+    color:#888;
+    padding:10px; 
+    border-top:2px solid #000;
+    background: #2e3335 url('images/layout/bg-dropdown.png') top center no-repeat; 
+    width: 350px; 
+    position: relative; 
+    left: 460px;
+    top: -15px;
+    z-index: 10}  */
+    
+/* for the Rating popup */
+ #RatingPopUpDiv.uiPopUp {
+    padding: 10px;
+    background: #418fbf url('../images/icons/popUpNub.png') top center no-repeat;  
+    width: 75px; 
+    position: relative; 
+    left: -10px;
+    top: 0px;
+    z-index: 1000; }

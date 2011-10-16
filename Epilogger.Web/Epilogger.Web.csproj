@@ -475,6 +475,7 @@
     <Content Include="Views\Shared\_HomepageLayout.cshtml" />
     <Content Include="Views\Shared\_InteriorLayout.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ShortDateTime.cshtml" />
+    <Content Include="Views\Events\_StarRatingTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

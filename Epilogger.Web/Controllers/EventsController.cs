@@ -714,6 +714,8 @@ namespace Epilogger.Web.Controllers {
             return View(model);
         }
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
         [HttpPost]
         public ActionResult Edit(FormCollection fc, CreateEventViewModel model) {
             if (ModelState.IsValid) {
@@ -768,6 +770,8 @@ namespace Epilogger.Web.Controllers {
             return RedirectToAction("edit", new { id = model.ID});
         }
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
         public ActionResult VenueSearch() {
 
             //TODO replace with IP geo coded data.
@@ -777,6 +781,8 @@ namespace Epilogger.Web.Controllers {
 
             return PartialView(VSM);
         }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         [HttpPost]
         public PartialViewResult SearchVenues(FormCollection fc) {
@@ -810,6 +816,8 @@ namespace Epilogger.Web.Controllers {
 
             return PartialView("_VenueSearchResults", foundVenues);
         }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         #region venue search helpers
         private dynamic FoursquareVenueSearch(string venueName, Double longitude, Double latitude) {
@@ -866,10 +874,13 @@ namespace Epilogger.Web.Controllers {
         } 
         #endregion
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         public ActionResult AddBlogPost() {
             return View();
         }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         [HttpPost, ValidateInput(false)]
         public bool AddBlogPost(int id, AddBlogPostViewModel model) {
@@ -885,9 +896,13 @@ namespace Epilogger.Web.Controllers {
             }
         }
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
         public ActionResult AddLink() {
             return View();
         }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         [HttpPost, ValidateInput(false)]
         public bool AddLink(int id, AddLinkViewModel model) {
@@ -900,6 +915,18 @@ namespace Epilogger.Web.Controllers {
                 return false;
             }
         }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        public ActionResult StarRatings()
+        {
+            return PartialView("_StarRatingTemplate");
+        }
+
+
+
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
     }
 
 }

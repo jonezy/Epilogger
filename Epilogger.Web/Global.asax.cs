@@ -72,6 +72,12 @@ namespace Epilogger.Web {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                "StarRatings",
+                "events/StarRatings",
+                new { controller = "events", action = "StarRatings" }
+            );
+
+            routes.MapRoute(
                 "VenueSearch",
                 "events/venuesearch",
                 new { controller = "events", action = "venuesearch" }
