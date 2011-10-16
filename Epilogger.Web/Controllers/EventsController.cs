@@ -209,6 +209,9 @@ namespace Epilogger.Web.Controllers {
             Model.HasUserRated = false;
             Model.CurrentUserID = CurrentUserID;
 
+            //@(((Model.EventRatings.Sum(i => i.UserRating) / Model.EventRatings.Count()) / 5) * 100)
+
+
             if (Request.QueryString["f"] != null) {
                 Model.FromDateTime = this.FromDateTime();
             } else {
@@ -591,6 +594,8 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
+        //Depricated
+        //See StarRating
         [HttpPost]
         public ActionResult eventRating(FormCollection fc) {
             int id;
@@ -923,7 +928,39 @@ namespace Epilogger.Web.Controllers {
             return PartialView("_StarRatingTemplate");
         }
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
+        [HttpPost]
+        public ActionResult StarRatings(FormCollection fc)
+        {
+            int id;
+            int UserRating;
+            int.TryParse(fc["ID"].ToString(), out id);
+            int.TryParse(fc["UserRating"].ToString(), out UserRating);
+
+            if (id > 0)
+            {
+                if (CurrentUserID == Guid.Empty)
+                {
+                    this.StoreWarning("You must be logged in to your epilogger account to subscribe to an event");
+                    return RedirectToAction("details", new { id = id });
+                }
+
+                UserService service = new UserService();
+                UserRatesEvent ratesEvent = new UserRatesEvent();
+
+                ratesEvent.EventID = id;
+                ratesEvent.UserID = CurrentUserID;
+                ratesEvent.RatingDateTime = DateTime.UtcNow;
+                ratesEvent.UserRating = UserRating;
+
+                service.SaveUserRatesEvent(ratesEvent);
+                this.StoreSuccess("Rating saved!");
+
+            }
+
+            return RedirectToAction("details", new { id = id });
+        }
 
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
