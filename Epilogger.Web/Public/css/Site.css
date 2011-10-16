@@ -23,7 +23,7 @@ section { display: block; }
 
 @font-face {
     font-family: 'InterstatePlusBoldCond';
-    src: url('../fonts/InterstatePlusBoldCond.ttf') format('truetype');
+    src: url('../fonts/interstateplus_bold_cond-webfont.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;}
 
