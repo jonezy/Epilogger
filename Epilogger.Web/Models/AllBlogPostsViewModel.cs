@@ -9,7 +9,11 @@ namespace Epilogger.Web.Models {
         public int TotalRecords { get; set; }
         public List<BlogPostDisplayViewModel> BlogPosts { get; set; }
 
-        public AllBlogPostsViewModel(List<BlogPostDisplayViewModel> activities, int currentPageIndex, int totalRecords) {
+        public AllBlogPostsViewModel()
+        {
+        }
+
+        public void SetAllBlogPostsViewModel(List<BlogPostDisplayViewModel> activities, int currentPageIndex, int totalRecords) {
             CurrentPageIndex = currentPageIndex;
             TotalRecords = totalRecords;
 
