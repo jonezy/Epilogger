@@ -126,7 +126,6 @@ namespace Epilogger.Data
         public Query<User> Users { get; set; }
         public Query<URL> URLS { get; set; }
         public Query<aspnet_User> aspnet_Users { get; set; }
-        public Query<UserRatesEvent> UserRatesEvents { get; set; }
         public Query<BetaSignup> BetaSignups { get; set; }
         public Query<UserFollowsEvent> UserFollowsEvents { get; set; }
         public Query<UserAuthenticationProfile> UserAuthenticationProfiles { get; set; }
@@ -143,6 +142,7 @@ namespace Epilogger.Data
         public Query<BlogPost> BlogPosts { get; set; }
         public Query<AggregateVisitHistoryOLD> AggregateVisitHistoryOLDs { get; set; }
         public Query<VisitHistoryOLD> VisitHistoryOLDs { get; set; }
+        public Query<UserRatesEvent> UserRatesEvents { get; set; }
         public Query<UserFollowsUser> UserFollowsUsers { get; set; }
 
 			
@@ -252,7 +252,6 @@ namespace Epilogger.Data
             Users = new Query<User>(provider);
             URLS = new Query<URL>(provider);
             aspnet_Users = new Query<aspnet_User>(provider);
-            UserRatesEvents = new Query<UserRatesEvent>(provider);
             BetaSignups = new Query<BetaSignup>(provider);
             UserFollowsEvents = new Query<UserFollowsEvent>(provider);
             UserAuthenticationProfiles = new Query<UserAuthenticationProfile>(provider);
@@ -269,6 +268,7 @@ namespace Epilogger.Data
             BlogPosts = new Query<BlogPost>(provider);
             AggregateVisitHistoryOLDs = new Query<AggregateVisitHistoryOLD>(provider);
             VisitHistoryOLDs = new Query<VisitHistoryOLD>(provider);
+            UserRatesEvents = new Query<UserRatesEvent>(provider);
             UserFollowsUsers = new Query<UserFollowsUser>(provider);
             #endregion
 
@@ -281,7 +281,6 @@ namespace Epilogger.Data
             	DataProvider.Schema.Tables.Add(new UserTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new URLsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new aspnet_UsersTable(DataProvider));
-            	DataProvider.Schema.Tables.Add(new UserRatesEventTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new BetaSignupsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserFollowsEventTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserAuthenticationProfileTable(DataProvider));
@@ -298,6 +297,7 @@ namespace Epilogger.Data
             	DataProvider.Schema.Tables.Add(new BlogPostsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new AggregateVisitHistoryOLDTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new VisitHistoryOLDTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new UserRatesEventTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserFollowsUserTable(DataProvider));
             }
             #endregion

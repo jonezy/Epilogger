@@ -286,6 +286,7 @@
     <Content Include="Public\images\icons\hovernub.png" />
     <Content Include="Public\images\icons\pencil.png" />
     <Content Include="Public\images\icons\profile-eventlist.png" />
+    <Content Include="Public\images\icons\star.png" />
     <Content Include="Public\images\icons\SubscribedCheck.png" />
     <Content Include="Public\images\icons\tweet-black.png" />
     <Content Include="Public\images\icons\twitter.png" />
@@ -473,6 +474,8 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Shared\_HomepageLayout.cshtml" />
     <Content Include="Views\Shared\_InteriorLayout.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\ShortDateTime.cshtml" />
+    <Content Include="Views\Events\_StarRatingTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

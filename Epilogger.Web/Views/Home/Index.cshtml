@@ -42,7 +42,7 @@
         }
         else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_RATING)
         {
-           <h2>you @MvcHtmlString.Create(item.ActivityContent)'d @item.EventName</h2>
+           <h2>@item.EventName was just rated @MvcHtmlString.Create(item.ActivityContent) out of 5 stars </h2>
         }
         else if (item.ActivityType == Epilogger.Web.Models.ActivityType.PHOTOS_VIDEOS)
         {
