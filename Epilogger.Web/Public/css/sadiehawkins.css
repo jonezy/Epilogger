@@ -897,7 +897,8 @@ div#search-container input[type=image] {
 .valign		{ vertical-align:middle}
 .fleft		{ float:left}
 .fright		{ float:right}
-.overflowhide, .hidden { overflow: hidden}
+.overflowhide{ overflow: hidden}
+.hidden { display: none; }
 .required  { color:#fe60b1}
 .seperator { border-bottom: 1px dotted #CCC}
 
