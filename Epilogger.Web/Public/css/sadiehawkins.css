@@ -327,6 +327,11 @@ span.number {
     background: url('../images/icons/BrowseBullet.png') 0 -15px no-repeat;
     font:normal 14px 'InterstatePlusRegular';
     padding-left: 20px;}
+
+.HottestList li a.active { 
+    text-transform: uppercase; 
+    color: #000; 
+    background-position:0 2px; }    
     
 .HottestList li a:hover, .HottestList li.active { 
     color: #000; 
