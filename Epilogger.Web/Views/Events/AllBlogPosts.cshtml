@@ -12,5 +12,27 @@
     <h2>FROM @Model.Name</h2>
 </div>
 <div id="events-content">
-    Put content here
+    
+    @foreach (BlogPostDisplayViewModel BP in Model.BlogPosts)
+    {
+        <div class="blogPost">
+            @{
+                string TheURL;
+                if (BP.Url.Contains("http://")) 
+                { 
+                    TheURL = BP.Url;
+                } 
+                else 
+                {
+                    TheURL = "http://" + BP.Url;
+                }   
+            }
+            <a href="@TheURL" target="_blank">@BP.Title</a><br />
+            <span class="small">@TheURL</span><br /><br />
+            <div class="blogDescription">
+                @BP.Description
+            </div>
+        </div>
+    }
+
 </div>
