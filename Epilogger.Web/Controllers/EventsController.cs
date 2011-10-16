@@ -680,7 +680,7 @@ namespace Epilogger.Web.Controllers {
             List<BlogPostDisplayViewModel> blogPosts = Mapper.Map<List<BlogPost>, List<BlogPostDisplayViewModel>>(BS.FindByEventID(id).ToList());
 
             AllBlogPostsViewModel model = Mapper.Map<Event, AllBlogPostsViewModel>(ES.FindByID(id));
-            model.SetAllBlogPostsViewModel(blogPosts, currentPage, 10);
+            model.SetAllBlogPostsViewModel(blogPosts, currentPage, blogPosts.Count());
 
             return View(model);
         }
