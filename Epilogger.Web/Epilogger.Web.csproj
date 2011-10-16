@@ -256,6 +256,7 @@
     <Content Include="Public\css\reset.css" />
     <Content Include="Public\css\sadiehawkins.css" />
     <Content Include="Public\css\skeleton.css" />
+    <Content Include="Public\fonts\interstateplus_bold_cond-webfont.svg" />
     <Content Include="Public\images\alltweets-nub.png" />
     <Content Include="Public\images\bg\sample1.jpg" />
     <Content Include="Public\images\bg\sample2.jpg" />
@@ -285,6 +286,7 @@
     <Content Include="Public\images\icons\header-person.png" />
     <Content Include="Public\images\icons\hovernub.png" />
     <Content Include="Public\images\icons\pencil.png" />
+    <Content Include="Public\images\icons\popUpNub.png" />
     <Content Include="Public\images\icons\profile-eventlist.png" />
     <Content Include="Public\images\icons\star.png" />
     <Content Include="Public\images\icons\SubscribedCheck.png" />
@@ -467,6 +469,9 @@
     <Content Include="Views\Shared\_InteriorLayout.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ShortDateTime.cshtml" />
     <Content Include="Views\Events\_StarRatingTemplate.cshtml" />
+    <None Include="Public\fonts\interstateplus_bold_cond-webfont.eot" />
+    <None Include="Public\fonts\interstateplus_bold_cond-webfont.ttf" />
+    <None Include="Public\fonts\interstateplus_bold_cond-webfont.woff" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
