@@ -327,6 +327,11 @@ span.number {
     background: url('../images/icons/BrowseBullet.png') 0 -15px no-repeat;
     font:normal 14px 'InterstatePlusRegular';
     padding-left: 20px;}
+
+.HottestList li a.active { 
+    text-transform: uppercase; 
+    color: #000; 
+    background-position:0 2px; }    
     
 .HottestList li a:hover, .HottestList li.active { 
     color: #000; 
@@ -899,7 +904,8 @@ div#search-container input[type=image] {
 .valign		{ vertical-align:middle}
 .fleft		{ float:left}
 .fright		{ float:right}
-.overflowhide, .hidden { overflow: hidden}
+.overflowhide{ overflow: hidden}
+.hidden { display: none; }
 .required  { color:#fe60b1}
 .seperator { border-bottom: 1px dotted #CCC}
 

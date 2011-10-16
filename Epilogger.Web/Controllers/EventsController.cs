@@ -676,8 +676,12 @@ namespace Epilogger.Web.Controllers {
 
         public ActionResult AllBlogPosts(int id, int? page) {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
+
             List<BlogPostDisplayViewModel> blogPosts = Mapper.Map<List<BlogPost>, List<BlogPostDisplayViewModel>>(BS.FindByEventID(id).ToList());
-            AllBlogPostsViewModel model = new AllBlogPostsViewModel(blogPosts, currentPage, 10);
+
+            AllBlogPostsViewModel model = Mapper.Map<Event, AllBlogPostsViewModel>(ES.FindByID(id));
+            model.SetAllBlogPostsViewModel(blogPosts, currentPage, 10);
+
             return View(model);
         }
 

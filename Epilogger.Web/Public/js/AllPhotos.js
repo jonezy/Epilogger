@@ -51,7 +51,6 @@ function changePhoto(item, theID, speed) {
 function ChangeToNextPhoto() {
 
     if ($('.topPhotosListLink.active').parent().next("li").find("a").length > 0) {
-        //$('.topPhotosListLink.active').parent().next("li").find("a").click()
         changePhoto($('.topPhotosListLink.active').parent().next("li").find("a"), $('.topPhotosListLink.active').parent().next("li").find("a").attr("id"), 1000);
     }
     else {

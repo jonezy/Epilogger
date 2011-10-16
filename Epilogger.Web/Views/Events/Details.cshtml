@@ -1,4 +1,5 @@
 ﻿@using Epilogger.Web;
+
 @model Epilogger.Web.Models.EventDisplayViewModel
 @{
     Layout = "~/Views/Shared/_InteriorLayout.cshtml";
@@ -373,7 +374,7 @@ else
         <div class="clear">
         </div>
         <p>
-            (<a href="#">See all blog posts</a>) (<a href="#" class="blogposts-modal">Submit blog post</a>)</p>
+             (@Html.ActionLink("See all blog posts", "allblogposts", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { })) (<a href="#" class="blogposts-modal">Submit blog post</a>)</p>
     </div>
     <!-- EXTERNAL LINKS -->
     <div class="grid_4 overflowhide">
