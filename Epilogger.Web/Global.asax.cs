@@ -204,6 +204,16 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.Thumbnail, opt => opt.Ignore())
                 .ForMember(dest => dest.DateTime, opt => opt.UseValue(DateTime.Now));
 
+
+
+            Mapper.CreateMap<Event, AllBlogPostsViewModel>()
+                .ForMember(dest => dest.BlogPosts, opt => opt.Ignore())
+                .ForMember(dest => dest.CurrentPageIndex, opt => opt.Ignore())
+                .ForMember(dest => dest.PageSize, opt => opt.Ignore())
+                .ForMember(dest => dest.TotalRecords, opt => opt.Ignore());
+
+
+
             Mapper.CreateMap<CreateAccountModel, User>()
                 .ForMember(dest => dest.FirstName, opt => opt.Ignore())
                 .ForMember(dest => dest.LastName, opt => opt.Ignore())
