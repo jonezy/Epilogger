@@ -168,13 +168,6 @@ jQuery(function ($) {
 
 
 
-
-
-
-
-
-
-
     //Photos
     $.ajaxSetup({ timeout: photoUpdateTimeout,
         cache: false,
@@ -203,4 +196,13 @@ jQuery(function ($) {
     //        }
     //    }
     //    $(window).scroll(function () { removeYellowPhoto(); });
+});
+
+
+
+
+
+//RATINGS
+head.ready(function () {
+    $(".noratings").animate({ width: '100%' }, 4000, function () {  });
 });

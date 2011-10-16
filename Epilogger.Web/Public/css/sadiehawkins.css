@@ -1022,3 +1022,9 @@ div#search-container input[type=image] {
 	display:inline-block;
 	vertical-align: middle;
 }
+
+.smallRateLink { font-size: 0.8em; }
+a.smallRateLink:hover { text-decoration: underline; }
+
+
+.starSmall { font-size: 0.7em; line-height: 1em; }

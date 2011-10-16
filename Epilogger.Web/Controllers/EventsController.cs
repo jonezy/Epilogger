@@ -612,9 +612,9 @@ namespace Epilogger.Web.Controllers {
                 ratesEvent.RatingDateTime = DateTime.UtcNow;
 
                 if (ThumbsUp == "1") {
-                    ratesEvent.UserRating = "+";
+                    //ratesEvent.UserRating = "+";
                 } else {
-                    ratesEvent.UserRating = "-";
+                    //ratesEvent.UserRating = "-";
                 }
 
                 service.SaveUserRatesEvent(ratesEvent);

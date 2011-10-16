@@ -137,24 +137,57 @@ else
             @Html.DisplayFor(thing => Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime)
         }*@
 
+
         @if (!Model.HasUserRated)
         {
             <ul class="star-rating">
-                @if (Model.EventRatings.Sum(i => int.Parse(i.UserRating)) > 0)
+                @if (Model.EventRatings.Sum(i => i.UserRating) > 0)
                 {
-                    <li class="current-rating" style="width:@(Model.EventRatings.Sum(i => int.Parse(i.UserRating)) / Model.EventRatings.Count())%;">Currently 2 Stars.</li>
+                    <li class="current-rating" style="width:@(((Model.EventRatings.Sum(i => i.UserRating) / Model.EventRatings.Count()) / 5) * 100)%;" title="@((Model.EventRatings.Sum(i => i.UserRating) / Model.EventRatings.Count())) out of 5 stars">
+                        @((Model.EventRatings.Sum(i => i.UserRating) / Model.EventRatings.Count())) out of 5 stars
+                    </li>
                 }
-	            <li><a href="#" title="1 star out of 5" class="one-star">1</a></li>
-	            <li><a href="#" title="2 stars out of 5" class="two-stars">2</a></li>
-	            <li><a href="#" title="3 stars out of 5" class="three-stars">3</a></li>
-	            <li><a href="#" title="4 stars out of 5" class="four-stars">4</a></li>
-	            <li><a href="#" title="5 stars out of 5" class="five-stars">5</a></li>
+                    else
+                {
+                    <li class="current-rating noratings" style="width:0%;" title="No ratings">
+                        No ratings
+                    </li>
+                }
             </ul>
+            <a href="" class="smallRateLink">Rate this event</a>
         }
         else
         {
-
+            <ul class="star-rating">
+                @if (Model.EventRatings.Sum(i => i.UserRating) > 0)
+                {
+                    <li class="current-rating" style="width:@(((Model.EventRatings.Sum(i => i.UserRating) / Model.EventRatings.Count()) / 5) * 100)%;" title="@((Model.EventRatings.Sum(i => i.UserRating) / Model.EventRatings.Count())) out of 5 stars">
+                        @((Model.EventRatings.Sum(i => i.UserRating) / Model.EventRatings.Count())) out of 5 stars
+                    </li>
+                }
+            </ul>
+            <div class="starSmall">You rated @Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID && i.EventID == Model.ID).FirstOrDefault().UserRating stars on <br /> @Html.DisplayFor(thing => Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime, "ShortDateTime")</div>
+           
+                
+            
+            @*<ul class="star-rating">
+                @if (Model.EventRatings.Sum(i => i.UserRating) > 0)
+                {
+                    <li class="current-rating" style="width:@(((Model.EventRatings.Sum(i => i.UserRating) / Model.EventRatings.Count()) / 5) * 100)%;">
+                        Currently @(((Model.EventRatings.Sum(i => i.UserRating) / Model.EventRatings.Count()) / 5)) Stars.
+                    </li>
+                }
+	            <li><a href="" title="1 star out of 5" class="one-star">1</a></li>
+	            <li><a href="" onclick="" title="2 stars out of 5" class="two-stars">2</a></li>
+	            <li><a href="" onclick="" title="3 stars out of 5" class="three-stars">3</a></li>
+	            <li><a href="" onclick="" title="4 stars out of 5" class="four-stars">4</a></li>
+	            <li><a href="" onclick="" title="5 stars out of 5" class="five-stars">5</a></li>
+            </ul>
+            <div id="starCount">Currently @((Model.EventRatings.Sum(i => i.UserRating) / Model.EventRatings.Count())) Stars</div>
+            <div id="starCount">You rated x stars on datetime</div>*@
         }
+        @Html.Hidden("ThumbsUp")
+
     </div>
 
 </div>
