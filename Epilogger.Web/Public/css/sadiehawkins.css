@@ -511,7 +511,7 @@ ul#connected-networks, .topPhotosList, .topPhotosList li {
 
 
 /* --- toolbar */
-#event-toolbar {position:absolute;left:-33px;top:20px;width:33px;height:269px;background:url(../images/icons/event-toolbar-ov.png) no-repeat;}
+#event-toolbar {position:absolute;left:-33px;top:20px;width:33px;height:269px;}
 #event-toolbar a {background-image:url(../images/icons/event-toolbar.png);height:25px;width:33px;text-indent:-9999px;display:block;margin-bottom:10px;}
 #event-toolbar a.current, #event-toolbar a:hover {background-image:url(../images/icons/event-toolbar-ov.png);}
 
