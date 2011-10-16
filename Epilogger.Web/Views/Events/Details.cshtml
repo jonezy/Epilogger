@@ -113,8 +113,11 @@ else
             }
         }
     </div>
+
+    @*Event Rating Section*@
     <div class="grid_2 omega">
-        @if (!Model.HasUserRated)
+        @*OLD SYSTEM*@
+        @*@if (!Model.HasUserRated)
         {
             using (Html.BeginForm("eventRating", "events", FormMethod.Post, new { @class = "remove-bottom" }))
             {   
@@ -131,9 +134,48 @@ else
             @Model.EventRatings.Where(i => i.UserRating == "+").Count().ToString() @: ThumbsUp<br/>
             @Model.EventRatings.Where(i => i.UserRating == "-").Count().ToString() @: ThumbsDown<br/>
             @: You voted on:
-            @*@String.Format("{0:MMM d, yyyy h:mm}{1}", Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime.ToUserTimeZone(Model.TimeZoneOffSet), Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime.ToUserTimeZone(Model.TimeZoneOffSet).ToString("tt").ToLower())*@
             @Html.DisplayFor(thing => Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime)
+        }*@
+
+
+        @if (!Model.HasUserRated)
+        {
+            <ul class="star-rating">
+                @if (Model.EventRatings.Sum(i => i.UserRating) > 0)
+                {
+                    <li class="current-rating" style="width:@(((Convert.ToDecimal(Model.EventRatings.Sum(i => i.UserRating)) / Convert.ToDecimal(Model.EventRatings.Count())) / 5) * 100)%;" title="@((Model.EventRatings.Sum(i => i.UserRating) / Model.EventRatings.Count())) out of 5 stars - based on @Model.EventRatings.Count() ratings">
+                        @((Model.EventRatings.Sum(i => i.UserRating) / Model.EventRatings.Count())) out of 5 stars
+                    </li>
+                }
+                    else
+                {
+                    <li class="current-rating noratings" style="width:0%;" title="No ratings">
+                        No ratings
+                    </li>
+                }
+            </ul>
+            <a href="" class="smallRateLink">Rate this event</a>
+            using (Html.BeginForm("StarRatings", "events", FormMethod.Post, new { @id = "ratingForm" }))
+            {
+                @Html.Partial("_StarRatingTemplate")
+                @Html.HiddenFor(model => model.ID)
+                @Html.Hidden("UserRating")
+            }
         }
+        else
+        {
+            <ul class="star-rating">
+                @if (Model.EventRatings.Sum(i => i.UserRating) > 0)
+                {
+                    <li class="current-rating" style="width:@(((Convert.ToDecimal(Model.EventRatings.Sum(i => i.UserRating)) / Convert.ToDecimal(Model.EventRatings.Count())) / 5) * 100)%;" title="@((Model.EventRatings.Sum(i => i.UserRating) / Model.EventRatings.Count())) out of 5 stars - based on @Model.EventRatings.Count() ratings">
+                        @((Model.EventRatings.Sum(i => i.UserRating) / Model.EventRatings.Count())) out of 5 stars
+                    </li>
+                }
+            </ul>
+            <div class="starSmall">You rated @Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID && i.EventID == Model.ID).FirstOrDefault().UserRating stars on <br /> @Html.DisplayFor(thing => Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime, "ShortDateTime")</div>
+        }
+        
+
     </div>
 
 </div>
