@@ -312,12 +312,16 @@ else
         <span class="number" id="tweetCount">@string.Format("{0:#,###}", Model.TweetCount)</span>Tweets
         & Shoutouts</h2>
     <span class="sm-spacer"></span>
-    <ul class="plain-list" id="tweetlist" style="height:500px;overflow:hidden;">
+    <ul class="plain-list" id="tweetlist">
         @foreach (Epilogger.Data.Tweet EPLTweet in Model.Tweets)
         {
             @Html.Partial("_TweetTemplate", EPLTweet);
         }
     </ul>
+
+    
+     <p>(@Html.ActionLink("See all tweets", "allTweets", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { }))</p>
+                   
     <span class="sm-spacer"></span>
 </div>
 <!-- PHOTOS & VIDEOS -->

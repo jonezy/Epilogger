@@ -17,11 +17,14 @@
     
     @foreach (Epilogger.Data.URL TheURL in Model.Links) {
         <div class="alllinks-entry">
+            <small><img src="@Url.Content("~/Public/images/icons/tweet-black.png")" class="valign" alt="" />VIA @TheURL.Tweets.Where(t => t.ID == TheURL.TweetID).FirstOrDefault().FromUserScreenName</small><br />
             <a href="@TheURL.ShortURL" title="@TheURL.Tweets.FirstOrDefault().Text">@TheURL.FullURL</a><br />
-            <div class="tweet"><small><img src="@TheURL.Tweets.FirstOrDefault().ProfileImageURL" class="fleft" height="34" width="34" alt="" />@Html.Raw(TheURL.Tweets.FirstOrDefault().TextAsHTML)</small><br /></div>
-            <small><img src="@Url.Content("~/Public/images/icons/tweet-black.png")" class="valign" alt="" />VIA @TheURL.Tweets.Where(t => t.ID == TheURL.TweetID).FirstOrDefault().FromUserScreenName</small>
+            <div class="tweet"><img src="@TheURL.Tweets.FirstOrDefault().ProfileImageURL" class="fleft" height="34" width="34" alt="" />@Html.Raw(TheURL.Tweets.FirstOrDefault().TextAsHTML)</div>
+            
         </div>
     }
+
+    <span class="spacer"></span>
     
     @MvcHtmlString.Create(Html.Pager(10, Model.CurrentPageIndex, Model.TotalRecords, new { controller = "Events", action = "alllinks", id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }))
 </div>

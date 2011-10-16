@@ -8,6 +8,9 @@ a {
    color:#2d8ac5;
    text-decoration:none}
 
+a:hover {
+    color:#0957a0}
+
 p a {
     text-decoration:underline}
    
@@ -64,9 +67,9 @@ a.edit_icon {
 	-webkit-border-radius: 5px;
 	border-radius: 5px;     
 	background:#fff;
-	padding:15px;
+	padding:15px 15px 40px 15px;
 	position:relative;
-	min-height:600px;}
+	min-height:650px;}
 
 #homepage-container {
     margin:120px 0 0 -40px;
@@ -495,7 +498,8 @@ ul#connected-networks, .topPhotosList, .topPhotosList li {
     color:#3e3e3e;
     padding:6px 10px 0px 0px;}
     
-.item-data input[type=text], .item-data textarea, select, #foursquare-search {
+.item-data input[type=text], .item-data textarea, select, #foursquare-search,
+fieldset.login input[type="text"], fieldset.login input[type="password"] {
     border-radius:0;
     border:0;
     background:#fff;
@@ -566,17 +570,18 @@ ul#connected-networks, .topPhotosList, .topPhotosList li {
 
 fieldset.login label {padding:8px;width:70px;text-transform:uppercase;font-size:11px;}
 fieldset.login label, fieldset.login input[type="text"], fieldset.login input[type="password"] {float:left;}
-fieldset.login input[type="text"], fieldset.login input[type="password"] {width:340px;}
+fieldset.login input[type="text"], fieldset.login input[type="password"] {width:340px; background:#e1e1e1}
 fieldset.login p.rememberme, fieldset.login p.submit {padding-left:82px;}
 fieldset.login label.left {width:auto !important;padding:2px 0;}
 
 /*CREATE ACCOUNT*/
-fieldset.create label {padding:8px;width:100px;margin-top: 8px;text-transform:uppercase;font-size:11px;}
+fieldset.create label {width:100px;text-transform:uppercase;font-size:11px;}
 fieldset.create label, fieldset.create select, fieldset.create input[type="text"], fieldset.create input[type="password"] {float:left;}
-fieldset.create input[type="text"], fieldset.create select, fieldset.create input[type="password"] {width:300px; font-size: 26px;}
-fieldset.create select { width:310px; font-size: 26px; }
+fieldset.create input[type="text"], fieldset.create select, fieldset.create input[type="password"] {width:300px}
+fieldset.create select { width:310px;}
 fieldset.create p.rememberme, fieldset.create p.submit {padding-left:82px;}
-fieldset.create label.left {width:auto !important;padding:2px 0;}
+fieldset.create label.left {width:auto !important;}
+fieldset.create p#confirmPW label {position:relative; top:-4px; line-height:13px}
 
 .createArrow { background: url('../images/icons/CreateAccountArrow.png') no-repeat; height: 350px; background-position: 0 65px; }
 .createAccountButton { position:relative; top: 155px; left: 80px; height: 40px; }
@@ -671,7 +676,12 @@ ul#left-nav li a:hover, ul#left-nav li a.current {
 .event-content-time2 {width:63px;float:left;background-position: 0 2px;padding-left:14px;}
 .event-content-searchterms2 {width:40px;float:left;background-position: 0px -22px;padding-left:14px;}
 
-.dashboard-event-item {border-bottom:solid 1px #e1e1e1;padding:12px 0px 12px 0px;}
+.dashboard-event-item {
+    border-bottom:solid 1px #e1e1e1;
+    padding:8px 0px;}
+   
+.dashboard-event-item .event-totals {
+    display:none}
 
 .dashboard-event-item .month-day {
     font:bold 12px helvetica, arial, sans-serif;
@@ -707,7 +717,6 @@ ul#left-nav li a:hover, ul#left-nav li a.current {
 .dashboard-event-item .event-content {margin-left:15px;float:left;width:60%;}
 .dashboard-event-item .event-content h6 {margin-bottom:3px;}
 .dashboard-event-item .event-content-searchterms {width:70%;}
-.dashboard-event-item .event-content-searchterms2 {}
 
 .event-totals { float:right; } /*margin-top:15px; --took this out so the style could be reused better - Using on BrowseEvents.*/
 .event-totals .total-tweets, .event-totals .total-media {background-color:#fff;background-image:url(../images/icons/dashboard-event-totals.png); background-repeat:no-repeat;height:25px;font-weight:bold;color:#2c70cc;font-size:11px;}
@@ -751,9 +760,9 @@ ul#left-nav li a:hover, ul#left-nav li a.current {
 .alltweets-entry .tweet-content p {margin-bottom:2px;}
 .alltweets-entry .tweet-content span.tweet-date {font-size:11px;color:#c2c2c2;}
 
-.alllinks-entry { padding: 10px 0; border-bottom: dotted 1px #3e3e3e; }
-.alllinks-entry .tweet { margin: 5px 0 5px 20px; border-left: 2px solid #fe60b1; padding-left: 5px; }
-.alllinks-entry .tweet img { margin-right: 5px; }
+.alllinks-entry { padding: 10px 0;}
+.alllinks-entry .tweet {color:#696969;margin: 5px 0 5px 15px; border-left: 3px solid #fe60b1; padding:5px; height:40px; background:#e6f7f9 }
+.alllinks-entry .tweet img { margin-right: 8px; }
 
 #top-tweeters {padding-top:15px;border-top:dotted 1px #e8e8e8;margin-top:20px;}
 #top-tweeters .primary {margin:0px 0px 20px 10px;float:left;width:78%;}
@@ -819,7 +828,7 @@ div#search-container input[type=image] {
 
 #user-status {float:right;padding:5px 20px 5px 20px;margin-right:10px;border-right:dotted 1px #3e3e3e;border-left:dotted 1px #3e3e3e;font-size:11px;font-style:italic;}
 #user-status .person {background:url(../images/icons/header-person.png) no-repeat;padding-left:16px;}
-#breadcrumb a {text-transform:lowercase;font-size:13px;text-decoration:underline;}
+#breadcrumb a {text-transform:lowercase;font-size:11px;text-decoration:underline;}
 
 
 /* --- pager */
