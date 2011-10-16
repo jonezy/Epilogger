@@ -25,11 +25,13 @@
         @*<li><a href="">PAST</a></li>
         <li><a href="">UPCOMING</a></li>*@
     </ul>
-    <br style="clear:both;" />
+
     <div class="BEventListContainer">
         @Html.Partial("_BrowseEventTabContentTemplate", Model.Events)
-        @Html.ActionLink("See all of your activity and event in the Dahboard", "events", "dashboard")
     </div>
+
+    <span class="spacer"></span>
+    @Html.ActionLink("Your Activity", "events", "dashboard", null, new { @class = "blue-action-button" })
 
     
 
@@ -103,9 +105,8 @@
             <li><a href="" onclick="return false;" class="HottestListLink" id="@(item.Event.ID)">@item.Event.Name</a></li>
         }
         </ul>   
-        <br style="clear:both;" />
-        <br style="clear:both;" />
-
+        
+        <span class="big-spacer" style="clear:left"></span>
 
         @*Categories*@
         <h2>BROWSE BY CATEGORY:</h2>
@@ -115,8 +116,6 @@
                 <li>@Html.ActionLink(c.CategoryName, "Category", new { CategoryName = c.URLStub })</li>
             }
         </ul>
-
-
 </div>
 
 
