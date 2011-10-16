@@ -408,11 +408,6 @@
     <Content Include="Areas\Authentication\Views\Web.config" />
     <Content Include="Views\Shared\GlobalNavigation.cshtml" />
     <Content Include="Views\Events\Create.cshtml" />
-    <Content Include="Public\fonts\BEBAS___-webfont.eot" />
-    <Content Include="Public\fonts\BEBAS___-webfont.svg" />
-    <Content Include="Public\fonts\BEBAS___-webfont.ttf" />
-    <Content Include="Public\fonts\BEBAS___-webfont.woff" />
-    <Content Include="Public\fonts\InterstatePlusBoldCond.ttf" />
     <Content Include="Public\fonts\interstateplus_regular-webfont.eot" />
     <Content Include="Public\fonts\interstateplus_regular-webfont.svg" />
     <Content Include="Public\fonts\interstateplus_regular-webfont.ttf" />
@@ -421,10 +416,6 @@
     <Content Include="Public\fonts\interstateplus_regular_cond-webfont.svg" />
     <Content Include="Public\fonts\interstateplus_regular_cond-webfont.ttf" />
     <Content Include="Public\fonts\interstateplus_regular_cond-webfont.woff" />
-    <Content Include="Public\fonts\OSP-DIN-webfont.eot" />
-    <Content Include="Public\fonts\OSP-DIN-webfont.svg" />
-    <Content Include="Public\fonts\OSP-DIN-webfont.ttf" />
-    <Content Include="Public\fonts\OSP-DIN-webfont.woff" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Dashboard\Profile.cshtml" />
     <Content Include="Views\Dashboard\Menu.cshtml" />
