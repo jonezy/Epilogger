@@ -265,11 +265,11 @@ else
             <div class="value">
                 @if (Model.TwitterAccount != null)
                 {
-                    @:tw: <a href="http://www.twitter.com/@Model.TwitterAccount">@Model.TwitterAccount</a>
+                    @:<span class="label">tw:</span> <a href="http://www.twitter.com/@Model.TwitterAccount">@Model.TwitterAccount</a>
                             }
                 @if (Model.FacebookPageURL != null)
                 {
-                    @:fb: <a href="@Model.FacebookPageURL" target="_blank">@Model.FacebookPageURL</a><br/>
+                    @:<span class="label">fb:</span> <a href="@Model.FacebookPageURL" target="_blank">@Model.FacebookPageURL</a><br/>
                             }
             </div>
         </li>
