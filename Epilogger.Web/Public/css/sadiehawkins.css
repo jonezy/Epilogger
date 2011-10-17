@@ -451,10 +451,13 @@ span.number {
     padding:0; 
     margin: 0 20px 10px 0;}
     
-.topPhotosList li a { 
+.topPhotosList li a  
+{
     text-transform: uppercase; 
     color: #acacac; 
-    background-image: url(../images/icons/BrowseBullet.png) 0 -15px no-repeat;
+    background-image: url(../images/icons/BrowseBullet.png); 
+    background-position:0 -15px; 
+    background-repeat: no-repeat; 
     padding-left: 20px; }
     
 .topPhotosList li a:hover, .topPhotosList li a.active { 
