@@ -90,57 +90,13 @@ else
     }
     <div class="grid_10 alpha">
         <h1>@Model.Name</h1>
-        <h2>@Model.SubTitle</h2>
-        <div id="event-intro">
-            @Html.Raw(Model.Description.Replace("\r", "<br />"))
-        </div>
-        <div class="sm-spacer"></div>
-        @if (Model.HasSubscribed)
-        {
-            using (Html.BeginForm("unsubscribe", "events", FormMethod.Post, new { @class = "remove-bottom" }))
-            {
-            <input type="submit" value="Unsubscribe" name="SubscribeToEvent" class="blue-action-button remove-bottom"
-                id="" />
-            @Html.HiddenFor(model => model.ID)
-            }
-        }
-        else
-        {
-            using (Html.BeginForm("subscribe", "events", FormMethod.Post, new { @class = "remove-bottom" }))
-            {
-            <input type="submit" value="Subscribe" name="SubscribeToEvent" class="blue-action-button remove-bottom"
-                id="" />
-            @Html.HiddenFor(model => model.ID)
-            }
-        }
-    </div>
+        <h2>
+            <span style="float:left">@Model.SubTitle</span>
+            
 
-    @*Event Rating Section*@
-    <div class="grid_2 omega">
-        @*OLD SYSTEM*@
-        @*@if (!Model.HasUserRated)
-        {
-            using (Html.BeginForm("eventRating", "events", FormMethod.Post, new { @class = "remove-bottom" }))
-            {   
-            <input class="blue-action-button remove-bottom" type="button" value="+" name="ThumbsUpButton"
-                id="" onclick="$('#ThumbsUp').val('1'); $(form).submit();" /> @:&nbsp;/&nbsp;
-                <input class="blue-action-button remove-bottom" type="button" value="-" name="ThumbsDownButton"
-                    id="" onclick="$('#ThumbsUp').val('0'); $(form).submit();" />
-            @Html.HiddenFor(model => model.ID)
-            @Html.Hidden("ThumbsUp")
-            }
-        }
-        else
-        {
-            @Model.EventRatings.Where(i => i.UserRating == "+").Count().ToString() @: ThumbsUp<br/>
-            @Model.EventRatings.Where(i => i.UserRating == "-").Count().ToString() @: ThumbsDown<br/>
-            @: You voted on:
-            @Html.DisplayFor(thing => Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime)
-        }*@
-
-
-        @if (!Model.HasUserRated)
-        {
+             @*Event Rating Section*@
+             @if (!Model.HasUserRated)
+             {
             <ul class="star-rating">
                 @if (Model.EventRatings.Sum(i => i.UserRating) > 0)
                 {
@@ -155,7 +111,7 @@ else
                     </li>
                 }
             </ul>
-            <a href="" class="smallRateLink">Rate this event</a>
+            <a href="" class="smallRateLink">(Rate this event)</a>
             using (Html.BeginForm("StarRatings", "events", FormMethod.Post, new { @id = "ratingForm" }))
             {
                 @Html.Partial("_StarRatingTemplate")
@@ -175,16 +131,19 @@ else
             </ul>
             <div class="starSmall">You rated @Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID && i.EventID == Model.ID).FirstOrDefault().UserRating stars on <br /> @Html.DisplayFor(thing => Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime, "ShortDateTime")</div>
         }
-        
+        </h2>
 
+        <div id="event-intro">
+            @Html.Raw(Model.Description.Replace("\r", "<br />"))
+        </div>
+
+        <div class="sm-spacer"></div>
     </div>
+</div>
 
-</div>
-<div class="clear">
-</div>
-<div class="spacer">
-</div>
-<div id="event-optionBar">
+<div class="sm-spacer"></div>
+
+    <!--
     <div class="inEventSearch fleft">
         @using (Html.BeginForm("Search", "events", FormMethod.Post, null))
         {
@@ -193,27 +152,40 @@ else
             @Html.HiddenFor(model => model.ID)
         }
     </div>
-    <div class="filter-by-time">
+    -->
+    @if (Model.HasSubscribed)
+        {
+            using (Html.BeginForm("unsubscribe", "events", FormMethod.Post, new { @class = "remove-bottom" }))
+            {
+            <input type="submit" value="Unsubscribe" name="SubscribeToEvent" class="fleft blue-action-button remove-bottom" id="" />
+            @Html.HiddenFor(model => model.ID)
+            }
+        }
+        else
+        {
+            using (Html.BeginForm("subscribe", "events", FormMethod.Post, new { @class = "remove-bottom" }))
+            {
+            <input type="submit" value="Subscribe" name="SubscribeToEvent" class="fleft blue-action-button remove-bottom" id="" />
+            @Html.HiddenFor(model => model.ID)
+            }
+        }
+
+    <div class="filter-by-time fright">
         @using (Html.BeginForm("details", "events", new { id = Model.ID }, FormMethod.Post, null))
         {
             @Html.Hidden("ResetDates")
-            <div class="left">
-                @*<label>Show Data from:</label><br />*@
+                <h4>Filter timespan:&nbsp; </h4>
                 @Html.EditorFor(m => m.FromDateTime)
-            </div>
-            <div class="left">
-                @*<label>To:</label><br style="clear:both;" />*@
-                @Html.EditorFor(m => m.ToDateTime)
-            </div>
-            <input type="submit" class="blue-action-button remove-bottom" value="Apply" /> <input
-                class="blue-action-button remove-bottom" type="button" value="Clear" name="ClearDates"
-                id="" onclick="$('#ResetDates').val('1'); $(form).submit();" />
+                    <label style="position:relative; left:-10px">to</label>
+                    @Html.EditorFor(m => m.ToDateTime)
+            <input type="submit" value="ok" /> 
+            <input type="button" value="x" name="ClearDates" onclick="$('#ResetDates').val('1'); $(form).submit();" />
         }
     </div>
-</div>
-<div class="clear">
-</div>
-<br style="clear: both;" />
+
+<br class="clear" />
+<div class="sm-spacer"></div>
+
 <div id="event-details" class="clearfix">
     <ul>
         <li>

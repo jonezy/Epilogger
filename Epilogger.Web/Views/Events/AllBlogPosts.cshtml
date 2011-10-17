@@ -27,10 +27,9 @@
                     TheURL = "http://" + BP.Url;
                 }   
             }
-            <a href="@TheURL" target="_blank">@BP.Title</a><br />
-            <span class="small">@TheURL</span><br /><br />
+            <a href="@TheURL" target="_blank" class="title">@BP.Title</a><br />
             <div class="blogDescription">
-                @BP.Description
+                @BP.Description... <a href="@TheURL" class="small">Read the full post &raquo;</a>
             </div>
         </div>
     }
