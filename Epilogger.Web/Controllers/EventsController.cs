@@ -948,7 +948,17 @@ namespace Epilogger.Web.Controllers {
         public bool AddLink(int id, AddLinkViewModel model) {
             try {
                 URL externalLink = Mapper.Map<AddLinkViewModel, URL>(model);
-                //ES.Save(externalLink);
+
+                externalLink.DateTime = DateTime.UtcNow;
+                externalLink.Deleted = false;
+                externalLink.EventID = id;
+                externalLink.Type = "User Submitted";
+
+                //Need to save with no twitterID, BUT the db has a FK relationship. Need to break it and fix the rest of EPL.
+                //Removing the link for now.
+
+
+                //LS.Save(externalLink);
 
                 return true;
             } catch (Exception ex) {
