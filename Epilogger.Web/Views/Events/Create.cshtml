@@ -7,13 +7,52 @@
 
 <div id="events-nav">
     <h1>ADD AN EVENT</h1>
-    <p>Create an event here and we’ll remember it for you! Make sure to put as much detail as possible to get the most complete record of your history-making soiree!</p>
+    <p>Create an event here and we’ll remember it for you! Make sure to put as much detail as possible to get the most complete record of your history-making soiree!
+        Tool tips:</p>
+
+    <p class="small">
+        <strong>Name:</strong> The name of the event<br /><br />
+        <strong>Subtitle:</strong> Additional information i.e. sponsored by, presented by<br /><br />
+        <strong>Search terms:</strong><br />
+        Enter any hashtags, twitter accounts or keywords related to the event. If your event has an official hashtag, also enter it here.<br />
+        <@@EventTwitter> OR <#OfficialHashtag> OR &lt;unique keyword&gt;<br /><br />
+        <a href="" id="AdvancedSearchHelp">Advanced operators</a>
+        <br /><br />
+        <strong>Category:</strong> Give us a general idea of what your event is about
+    </p>
+
+    <div id="SearchHelpPopUpDiv" class="uiPopUp" style="display: none;">
+        <div id="SearchHelpPopUpContentDiv" class="uiPopUpBody">
+            <table celpadding="0" celspacing="0">
+                <tbody><tr><th>Operator</th><th>Finds data...</th></tr>
+                    <tr><td>epilogger search</td><td>containing both "epilogger" and "search". This is the default operator.</td></tr>
+                    <tr><td><b>"</b>happy hour<b>"</b></td><td>containing the exact phrase "happy hour".</td></tr>
+                    <tr><td>love <b>OR</b> hate</td><td>containing either "love" or "hate" (or both).</td></tr>
+                    <tr><td>beer <b>-</b>root</td><td>containing "beer" but not "root".</td></tr>
+                    <tr><td><b>#</b>haiku</td><td>containing the hashtag "haiku".</td></tr>
+                    <tr><td><b>from:</b>alexiskold</td><td>sent from person "alexiskold".</td></tr>
+                    <tr><td><b>to:</b>techcrunch</td><td>sent to person "techcrunch".</td></tr>
+                    <tr><td><b>@@</b>mashable</td><td>referencing person "mashable".</td></tr>
+                    <tr><td>"happy hour" <b>near:</b>"san francisco"</td><td>containing the exact phrase "happy hour" and sent near "san francisco".</td></tr>
+                    <tr><td><b>near:</b>NYC <b>within:</b>15mi</td><td>sent within 15 miles of "NYC".</td></tr>
+                    <tr><td>superhero <b>since:</b>2010-12-27</td><td>containing "superhero" and sent since date "2010-12-27" (year-month-day).</td></tr>
+                    <tr><td>ftw <b>until:</b>2010-12-27</td><td>containing "ftw" and sent up to date "2010-12-27".</td></tr>
+                    <tr><td>movie -scary <b>:)</b></td><td>containing "movie", but not "scary", and with a positive attitude.</td></tr>
+                    <tr><td>flight <b>:(</b></td><td>containing "flight" and with a negative attitude.</td></tr>
+                    <tr><td>traffic <b>?</b></td><td>containing "traffic" and asking a question.</td></tr>
+                    <tr><td>hilarious <b>filter:links</b></td><td>containing "hilarious" and linking to URLs.</td></tr>
+                    <tr><td>news <b>source:twitterfeed</b></td><td>containing "news" and entered via TwitterFeed</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 </div>
 <div id="events-content">
 
 @Html.ValidationSummary("Please correct the following issues")
-@using (Html.BeginForm("Create", "Events", FormMethod.Post)) {
+@using (Html.BeginForm("Create", "Events", FormMethod.Post))
+{
 
     <div id="createevent-info" class="item-card">
         <h4>EVENT INFORMATION</h4>
@@ -74,7 +113,8 @@
 <div id="venue-search">
     <div style="background:#fff;padding:10px;">
         <h2>VenueSearch</h2>
-        @using (Html.BeginForm("VenueSearch", "Events", FormMethod.Post)) {
+        @using (Html.BeginForm("VenueSearch", "Events", FormMethod.Post))
+        {
         <fieldset class="modal">
             <p><label>Venue name:</label>@Html.TextBox("venue_name")</p>
             <input type="submit" id="search" class="blue-action-button" value="Search" />

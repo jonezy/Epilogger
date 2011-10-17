@@ -1181,3 +1181,25 @@ a.smallRateLink:hover { text-decoration: underline; }
     left: -10px;
     top: 0px;
     z-index: 1000; }
+
+#SearchHelpPopUpDiv.uiPopUp 
+{
+    padding: 20px;
+    background: #eee;  
+    width: 550px; 
+    position: relative; 
+    left: 200px;
+    top: -400px;
+    z-index: 1000;
+
+}
+
+#SearchHelpPopUpDiv.uiPopUp table th
+{ font-weight: bold; }
+
+#SearchHelpPopUpDiv.uiPopUp table
+{   display: table;
+    border-collapse: separate;
+    border-spacing: 2px;
+    border-color: gray;
+    font-size: 10px; }
