@@ -178,7 +178,7 @@ else
                 @Html.EditorFor(m => m.FromDateTime)
                     <label style="position:relative; left:-10px">to</label>
                     @Html.EditorFor(m => m.ToDateTime)
-            <input type="submit" value="ok" /> 
+            <input type="submit" value="ok" class="blue-action-button" /> 
             <input type="button" value="x" name="ClearDates" onclick="$('#ResetDates').val('1'); $(form).submit();" />
         }
     </div>
@@ -269,7 +269,7 @@ else
                             }
                 @if (Model.FacebookPageURL != null)
                 {
-                    @:<span class="label">fb:</span> <a href="@Model.FacebookPageURL" target="_blank">@Model.FacebookPageURL</a><br/>
+                    @:<br/><span class="label">fb:</span> <a href="@Model.FacebookPageURL" target="_blank">visit page</a><br/>
                             }
             </div>
         </li>
