@@ -37,9 +37,26 @@
 
             <label class="wide">Start Date:</label> @Html.EditorFor(model => model.StartDateTime)
             <p><label class="wide">Event End:</label> @Html.EditorFor(model => model.EndDateTime)</p>
-            <p><label class="wide">Time Zone:</label> @Html.DropDownListFor(model => model.TimeZoneOffset, Model.TimeZones, "Select your timezone", new { @class = "wide" })</p>
+            <p>&nbsp;</p>
+            @*<p><label class="wide">Time Zone:</label> @Html.DropDownListFor(model => model.TimeZoneOffset, Model.TimeZones, "Select your timezone", new { @class = "wide" })</p>*@
             <p><label class="wide">Start Collecting Data:</label> @Html.EditorFor(model => model.CollectionStartDateTime)</p>
             <p><label class="wide">Finish Collecting Data:</label> @Html.EditorFor(model => model.CollectionEndDateTime)</p>
+            <p>&nbsp;</p>
+            <label class="wide">Venue</label>
+            <div style="display: block; margin-left: 112px; padding-top: 8px;">
+                <div id="selectedVenue">
+                    @if (Model.Venue != null)
+                    {
+                        <strong>@Model.Venue.Name</strong><br />
+                        @Model.Venue.Address<br />
+                        @Model.Venue.City@:, @Model.Venue.State<br />
+                        @Model.Venue.Zip<br />
+                    }
+                </div>
+                <h3><a href="#" id="foursquare-search" class="modal">Search for a venue</a></h3>
+            </div>
+            @Html.HiddenFor(model => model.FoursquareVenueID)
+            @Html.HiddenFor(model => model.VenueID)
         </div>
     </div>
     
@@ -67,4 +84,12 @@
 </div>
 
 
-
+<script language="javascript" type="text/javascript">
+    head.ready(function () {
+        $("#foursquare-search").colorbox({
+            width: "60%", height: "62%",
+            href: '@Url.Action("VenueSearch", "Events")',
+            onComplete: function () { $("#VenueName").focus(); }
+        });
+    });
+</script>

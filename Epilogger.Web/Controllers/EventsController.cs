@@ -716,6 +716,8 @@ namespace Epilogger.Web.Controllers {
             return View(model);
         }
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
         public ActionResult Edit(int id) {
             Event currentEvent = ES.FindByID(id);
             CreateEventViewModel model = Mapper.Map<Event, CreateEventViewModel>(currentEvent);
@@ -764,6 +766,35 @@ namespace Epilogger.Web.Controllers {
                     if (collectionEnd != DateTime.MinValue) {
                         currentEvent.CollectionEndDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(collectionEnd);
                     }
+
+                    currentEvent.VenueID = model.VenueID ?? 0;
+
+                    if (!string.IsNullOrEmpty(model.FoursquareVenueID))
+                    {
+                        if (!venueService.DoesVenueExist(currentEvent.VenueID ?? 0))
+                        {
+                            // have to look up the foursquare venue and then create it and save it to the db.
+                            dynamic foursquareVenue = LookupFoursquareVenue(model.FoursquareVenueID);
+                            var locationNode = foursquareVenue.response.location;
+
+                            // convert it to a Venue
+                            Venue venue = new Venue();
+                            venue.FoursquareVenueID = foursquareVenue.response.id;
+                            venue.Address = locationNode.address;
+                            venue.Name = foursquareVenue.response.name;
+                            venue.City = locationNode.city;
+                            venue.State = locationNode.state;
+                            venue.CrossStreet = locationNode.crossStreet;
+                            venue.Geolat = locationNode.lat;
+                            venue.Geolong = locationNode.lng;
+
+                            // save the venue
+                            venueService.Save(venue);
+                            currentEvent.VenueID = venue.ID;
+                        }
+                    }
+
+
 
                     
                     ES.Save(currentEvent);
