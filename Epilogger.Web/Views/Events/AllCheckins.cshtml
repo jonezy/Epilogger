@@ -19,7 +19,7 @@
         <div class="alltweets-entry clearfix">
             <img src="@item.Tweet.ProfileImageUrl" class="fleft" height="48" width="48" alt="" />
             <div class="tweet-content">
-                <strong><a href="http://www.twitter.com/@item.Tweet.FromUserScreenName" class="tweet-content-username" target="_blank">@item.Tweet.FromUserScreenName</a></strong>
+                <strong><a href="http://www.twitter.com/@item.Tweet.FromUserScreenName" class="tweet-content-username-small" target="_blank">@item.Tweet.FromUserScreenName</a></strong>
                 <p>@Html.Raw(item.Tweet.TextAsHTML)</p>
                 <span class="tweet-date">(@Html.DisplayFor(thing => item.Tweet.CreatedDate))</span>
             </div>
