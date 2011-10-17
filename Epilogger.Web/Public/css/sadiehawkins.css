@@ -463,7 +463,7 @@ span.number {
 
 div#photos-filterbar {
     padding:15px 0;
-    border-bottom:1px dotted #000;}
+    border-bottom:1px dotted #ccc;}
     
 ul#connected-networks, .topPhotosList, .topPhotosList li {
     list-style:none;}

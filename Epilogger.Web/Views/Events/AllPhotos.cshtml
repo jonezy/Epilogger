@@ -16,7 +16,6 @@
     head.js('@Url.Content("~/Public/js/AllPhotos.js")');
 
     var EventID = @Model.ID;
-
     var EventName = '@Model.Name';
     var EventURL = 'http://www.epilogger.com/Events/Details/@Model.ID';
 </script>
@@ -46,6 +45,7 @@
         <div class="clear"></div>
     }
      @*Links*@
+    
     <ul class="topPhotosList">
         <li>TOP @Model.TopImages.Count():</li>
         @foreach (Epilogger.Data.Image Image in Model.TopImages)
@@ -54,11 +54,12 @@
         }
     </ul>   
     <br style="clear:both;" />
-    <br style="clear:both;" />
+    <br />
 }
 
+
 <div id="photos-filterbar">
-    FILTER:
+    &nbsp; <!-- FILTER: -->
 </div>
 
 <div class="clear"></div>

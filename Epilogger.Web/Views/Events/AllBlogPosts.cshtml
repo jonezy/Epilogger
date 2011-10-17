@@ -10,6 +10,13 @@
 <div id="events-nav">
     <h1>ALL @Model.TotalRecords BLOG POSTS</h1>
     <h2>FROM @Model.Name</h2>
+
+    <p> Submit your blog post and see your hard work in lights on the page where everyone is looking to find out what happened last night!</p>
+    
+    <span class="spacer"></span>
+
+    <a href="#" class="blue-action-button blogposts-modal">Submit blog post</a>
+    
 </div>
 <div id="events-content">
     
@@ -33,5 +40,24 @@
             </div>
         </div>
     }
-
 </div>
+
+<script>
+    head.ready(function () {
+        $("a[rel^='prettyPhoto']").prettyPhoto({
+            theme: 'light_square',
+            animation_speed: 'fast',
+            overlay_gallery: false,
+            changepicturecallback: function () { changeDescription(); }
+        });
+
+        $(".blogposts-modal").colorbox({
+            width: "60%", height: "60%",
+            href: '@Url.Action("AddBlogPost", "Events")'
+        });
+        $(".links-modal").colorbox({
+            width: "60%", height: "60%",
+            href: '@Url.Action("AddLink", "Events")'
+        });
+    });
+</script>
