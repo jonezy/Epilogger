@@ -386,12 +386,16 @@ span.number {
     
 #event-details ul { 
     float:left;
-    margin-right:25px; }
+    margin-right:25px;
+    width:200px}
 
 #event-details ul.hashtags { 
     width:200px;}
     
-#event-details ul.hashtags li label { 
+#event-details ul.hashtags li label, #event-details ul li label, #event-details .label {
+    text-transform:uppercase;
+    font-size:10px;
+    color:#222;
     width:70px;}
 
 #event-details ul li { 
@@ -401,11 +405,15 @@ span.number {
     float:left;
     margin-right:5px;
     text-transform:uppercase;
-    font-size:11px;
     width:40px;}
     
 #event-details ul li .value {
     float:left; }
+
+#event-details .value strong, .tweet-body strong { font-weight:normal}
+.tweet-body strong {
+    text-transform:uppercase;
+    font-size:11px}
 
 .event-bottom {
     font-size:13px;}
@@ -747,8 +755,17 @@ ul#left-nav li a:hover, ul#left-nav li a.current {
 #events-nav {float:left;width:268px;margin-right:17px;position:relative;}
 #events-content {float:left;width:641px;}
 
-.subscribedIndicator { background-color: #f2f9fb; color: #c4cacc; border-top: 1px dotted #b1e9fa; border-bottom: 1px dotted #b1e9fa; padding: 1px 0 0 20px; width: 110px; margin-bottom: 10px; height: 16px; background-image: url(../images/icons/SubscribedCheck.png); background-repeat:no-repeat; background-position: 5px 5px;  }
-
+.subscribedIndicator { 
+    color: #c4cacc; 
+    border-top: 1px dotted #b1e9fa; 
+    border-bottom: 1px dotted #b1e9fa; 
+    padding: 2px 0 2px 20px; 
+    width: 110px; 
+    margin-bottom: 10px;
+    height: 16px; 
+    font-size:11px;
+    background: #f2f9fb url(../images/icons/SubscribedCheck.png) no-repeat 5px 6px;}
+    
 .alltweets-nub {background:url(../images/alltweets-nub.png) no-repeat; width:17px;height:19px;margin-left:10px;}
 .unique-tweets {background:#f3f3f3;padding:10px 20px 10px 20px;float:left;}
 .unique-tweets {width:225px;margin-right:1px;}
