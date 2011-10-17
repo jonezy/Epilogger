@@ -54,6 +54,8 @@ namespace Epilogger.Web.Models {
         
         public string FoursquareVenueID { get; set; }
         public int? VenueID { get; set; }
+        public Epilogger.Data.Venue Venue { get; set; }
+
 
         [DisplayName("Time Zone")]
         public int TimeZoneOffset { get; set; }
