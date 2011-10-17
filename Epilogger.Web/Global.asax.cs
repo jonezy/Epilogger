@@ -278,7 +278,20 @@ namespace Epilogger.Web {
                 //.ForMember(dest => dest.CollectionEndDateTime, opt => opt.MapFrom(src => src.CollectionEndDateTime.HasValue ? src.CollectionEndDateTime.Value.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5")) : src.CollectionEndDateTime))
                 //.ForMember(dest => dest.StartDateTime, opt => opt.MapFrom(src => src.StartDateTime.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5"))))
                 //.ForMember(dest => dest.EndDateTime, opt => opt.MapFrom(src => src.EndDateTime.HasValue ? src.EndDateTime.Value.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5")) : src.EndDateTime));
-                
+
+            Mapper.CreateMap<AddLinkViewModel, URL>()
+                .ForMember(dest => dest.DateTime, opt => opt.Ignore())
+                .ForMember(dest => dest.Deleted, opt => opt.Ignore())
+                .ForMember(dest => dest.DeleteVoteCount, opt => opt.Ignore())
+                .ForMember(dest => dest.Events, opt => opt.Ignore())
+                .ForMember(dest => dest.FullURL, opt => opt.MapFrom(src => src.Url))
+                .ForMember(dest => dest.ShortURL, opt => opt.Ignore())
+                .ForMember(dest => dest.TweetID, opt => opt.Ignore())
+                .ForMember(dest => dest.Tweets, opt => opt.Ignore())
+                .ForMember(dest => dest.Type, opt => opt.Ignore())
+                .ForMember(dest => dest.ID, opt => opt.Ignore())
+                .ForMember(dest => dest.EventID, opt => opt.Ignore());
+
             Mapper.AssertConfigurationIsValid();
         }
 
