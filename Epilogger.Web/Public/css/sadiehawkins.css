@@ -563,6 +563,7 @@ fieldset.login input[type="text"], fieldset.login input[type="password"], fields
     
 /* --- location select */
 #foursquare-search {
+    font-weight:normal;
     padding:5px;
     color:#888;}
 
@@ -926,6 +927,13 @@ div#search-container input[type=image] {
     float:left;
     margin-bottom:0;}
     
+.filter-by-time form input[type=button] {
+    background:url('../js/datetime/txtdropdown/clear.png') no-repeat 0 8px;
+    border:0;
+    text-indent:-100em;
+    margin-left:5px;
+    height:25px;}
+    
 .filter-by-time form img { 
     position:relative; 
     left:-18px}
@@ -933,8 +941,7 @@ div#search-container input[type=image] {
 .txtdropdown-btn {
     left:-23px;
     position:relative;
-    z-index:20}
-    
+    z-index:20}    
     
 #createevent-time input[type=text] {
     padding-right:30px}
