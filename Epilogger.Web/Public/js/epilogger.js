@@ -96,3 +96,22 @@ function FlashMessage(message, cssClas) {
         $("#flash").fadeOut("slow");
     }, 3000);
 }
+
+
+
+//PopUp for Advanced Operators
+head.ready(function () {
+
+    var myHelp = $("#SearchHelpPopUpDiv");
+    var myHelp_link = $("#AdvancedSearchHelp");
+
+    myHelp_link.toggle(
+        function () {
+            myHelp.show();
+            return false;
+        },
+        function () {
+            myHelp.hide();
+            return false;
+        });
+});
