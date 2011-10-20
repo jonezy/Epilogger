@@ -6,10 +6,16 @@
 <ul id="left-nav">
     <li>@Html.ActionLink("Account Activity", "index", null,  action.ToLower() == "index" ? new { @class="current"} : null)</li>
     <li>@Html.ActionLink("Profile Information", "profile", null, action.ToLower() == "profile" ? new { @class = "current" } : null)</li>
-    <li>@Html.ActionLink("My Events & Subscriptions", "events", null, action.ToLower() == "events" ? new { @class = "current" } : null)</li>
-    @*<li>@Html.ActionLink("Friends Feed", "index", null, action.ToLower() == "friends" ? new { @class = "current" } : null)</li>*@
-    <li>@Html.ActionLink("Account", "account", null, action.ToLower() == "account" ? new { @class = "current" } : null)</li>
+    <li>@Html.ActionLink("My Created Events", "events", null, action.ToLower() == "events" || action.ToLower() == "allevents" ? new { @class = "current no-border" } : null)
+        @if (action.ToLower() == "events" || action.ToLower() == "allevents") {
+            <ul>
+                <li>@Html.ActionLink("- Recent Activity", "events", null, action.ToLower() == "events" ? new { @class = "current" } : null)</li>
+                <li>@Html.ActionLink("- List All", "allevents", null, action.ToLower() == "allevents" ? new { @class = "current" } : null)</li>
+            </ul>
+        }
+    </li>
+    <li>@Html.ActionLink("Subscriptions", "subscriptions", null, action.ToLower() == "subscriptions" ? new { @class = "current" } : null)</li>
+    <li>@Html.ActionLink("Account & Preferences", "account", null, action.ToLower() == "account" ? new { @class = "current" } : null)</li>
 </ul>
-
 
 @Html.ActionLink("+ Create New Event", "create", "events", null, new { @class = "blue-action-button" })

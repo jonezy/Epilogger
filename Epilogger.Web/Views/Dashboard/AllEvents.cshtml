@@ -10,9 +10,9 @@
 </div>
 
 <div id="dashboard-content">
-
+    @Html.Partial("_EventListItem", Model.Events)
     <br class="clear" />
     <div class="clear">
 </div>
-@MvcHtmlString.Create(Html.Pager(Model.PageSize, Model.CurrentPageIndex, Model.TotalRecords, new { controller = "dashboard", action = "events" }))
+@MvcHtmlString.Create(Html.Pager(Model.PageSize, Model.CurrentPageIndex, Model.TotalRecords, new { controller = "dashboard", action = "allevents" }))
 </div>

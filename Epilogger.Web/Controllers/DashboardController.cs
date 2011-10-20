@@ -45,7 +45,7 @@ namespace Epilogger.Web.Controllers {
 
         public ActionResult Events(int? page) {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
-            List<Event> events = BuildEventsAndSubscriptions();
+            List<Event> events = eventService.FindByUserID(CurrentUserID);
 
             DashboardEventsViewModel model = new DashboardEventsViewModel() {
                 CurrentPageIndex = currentPage,
@@ -55,6 +55,42 @@ namespace Epilogger.Web.Controllers {
 
             return View(model);
         }
+
+        public ActionResult AllEvents(int? page) {
+            int currentPage = page.HasValue ? page.Value - 1 : 0;
+            List<Event> events = eventService.FindByUserID(CurrentUserID);
+
+            DashboardEventsViewModel model = new DashboardEventsViewModel() {
+                CurrentPageIndex = currentPage,
+                TotalRecords = events.Count(),
+                Events = Mapper.Map<List<Event>, List<DashboardEventViewModel>>(events.Skip(currentPage * 12).Take(12).ToList())
+            };
+
+            return View(model);
+        }
+
+        public ActionResult Subscriptions(int? page) {
+            int currentPage = page.HasValue ? page.Value - 1 : 0;
+            List<Event> events = BuildEventSubscriptions();
+
+            DashboardEventsViewModel model = new DashboardEventsViewModel() {
+                CurrentPageIndex = currentPage,
+                TotalRecords = events.Count(),
+                Events = Mapper.Map<List<Event>, List<DashboardEventViewModel>>(events.Skip(currentPage * 12).Take(12).ToList())
+            };
+
+            return View(model);
+        }
+
+        public ActionResult Account() {
+            DashboardAccountViewModel model = new DashboardAccountViewModel() {
+                EmailAddress = CurrentUser.EmailAddress,
+                CreatedDate = CurrentUser.CreatedDate
+            };
+
+            return View(model);
+        }
+
 
         private List<Event> BuildEventsAndSubscriptions() {
             List<Event> events = eventService.FindByUserID(CurrentUserID);
@@ -66,13 +102,15 @@ namespace Epilogger.Web.Controllers {
             return events.OrderByDescending(e => e.StartDateTime).ToList();
         }
 
-        public ActionResult Account() {
-            DashboardAccountViewModel model = new DashboardAccountViewModel() {
-                EmailAddress = CurrentUser.EmailAddress,
-                CreatedDate = CurrentUser.CreatedDate
-            };
+        private List<Event> BuildEventSubscriptions() {
+            List<Event> events = new List<Event>();
+            List<UserFollowsEvent> subscribedEvents = CurrentUser.UserFollowsEvents.ToList();
+            foreach (var item in subscribedEvents) {
+                events.Add(item.Events.FirstOrDefault());
+            }
 
-            return View(model);
+            return events.OrderByDescending(e => e.StartDateTime).ToList();
         }
+
     }
 }
