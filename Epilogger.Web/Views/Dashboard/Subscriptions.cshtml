@@ -1,0 +1,20 @@
+﻿@model Epilogger.Web.Models.DashboardEventsViewModel
+
+@{
+    Layout = "~/Views/Shared/_InteriorLayout.cshtml";
+    ViewBag.Title = "Epilogger - Your Event Subscriptions";
+}
+
+<div id="dashboard-nav">
+    <h1>DASHBOARD</h1>
+    <p>Here's all of the events you've subscribed to.</p>
+    @Html.Partial("Menu")
+</div>
+
+<div id="dashboard-content">
+    @Html.Partial("_EventListItem", Model.Events)
+    <br class="clear" />
+    <div class="clear">
+</div>
+@MvcHtmlString.Create(Html.Pager(Model.PageSize, Model.CurrentPageIndex, Model.TotalRecords, new { controller = "dashboard", action = "subscriptions" }))
+</div>

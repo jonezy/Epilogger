@@ -472,6 +472,11 @@ namespace Epilogger.Data{
             sp.Command.AddParameter("UserID",UserID,DbType.AnsiString);
             return sp;
         }
+        public StoredProcedure GetUsersEventActivity(string UserID){
+            StoredProcedure sp=new StoredProcedure("GetUsersEventActivity",this.Provider);
+            sp.Command.AddParameter("UserID",UserID,DbType.AnsiString);
+            return sp;
+        }
         public StoredProcedure GetWeightedKeyWords(int EventID){
             StoredProcedure sp=new StoredProcedure("GetWeightedKeyWords",this.Provider);
             sp.Command.AddParameter("EventID",EventID,DbType.Int32);
