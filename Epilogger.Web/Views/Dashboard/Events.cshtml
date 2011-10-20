@@ -1,4 +1,4 @@
-﻿@model Epilogger.Web.Models.DashboardEventsViewModel
+﻿@model Epilogger.Web.Models.DashboardIndexViewModel
 
 @{
     Layout = "~/Views/Shared/_InteriorLayout.cshtml";
@@ -10,7 +10,33 @@
 </div>
 
 <div id="dashboard-content">
-
+@foreach (var item in Model.Activity) {
+    <div class="dashboard-activity-entry">
+        <strong class="title @item.ActivityType">
+        @if(item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION) {
+            @:NEW EVENT ADDED:
+        } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.FOLLOW_EVENT) {
+            @:SUBSCRIBED TO EVENT
+        } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_RATING) {
+            @:RATED AN EVENT
+        } else {
+            @item.EventName
+        }</strong>
+        
+        @if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION || 
+            item.ActivityType == Epilogger.Web.Models.ActivityType.FOLLOW_EVENT) {
+            <h2>@MvcHtmlString.Create(item.EventName)</h2>
+        } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_RATING) {
+           <h2>you rated @item.EventName @MvcHtmlString.Create(item.ActivityContent) out of 5 stars</h2>
+        } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.PHOTOS_VIDEOS) {
+            <img src="@item.ActivityContent" width="170" height="140" />
+        } else {
+           <p> @MvcHtmlString.Create(item.ActivityContent)</p>
+        }
+        
+        
+    </div>
+}
     <br class="clear" />
     <div class="clear">
 </div>
