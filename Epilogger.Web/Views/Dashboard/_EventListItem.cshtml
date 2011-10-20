@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Epilogger.Web.Models.DashboardEventViewModel>
+
+@foreach (var item in Model) {
+    <div class="dashboard-event-item clearfix">
+        <div class="month-day">
+            <div class="month">@Html.DisplayFor(thing => item.StartDateTime, "Month")</div>
+            <h2>@Html.DisplayFor(thing => item.StartDateTime, "Day")</h2>
+            <div class="icon"></div>
+        </div>
+        <div class="event-content">
+            <h6>@Html.ActionLink(item.Name, "details", "events", new { @id = item.ID }, null)</h6>
+                
+            <div class="event-content-time">@Html.DisplayFor(thing => item.StartDateTime, "Time")</div>
+            <div class="event-content-searchterms">@item.SearchTerms</div>
+        </div>
+        <div class="event-totals">
+            <div class="total-tweets">@item.TotalTweets</div>
+            <div class="total-media">@item.TotalMedia</div>
+        </div>
+    </div>
+}

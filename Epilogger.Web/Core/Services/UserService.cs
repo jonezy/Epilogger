@@ -68,7 +68,10 @@ namespace Epilogger.Web {
             StoredProcedure sp = db.GetUserDashboardActivity(userID.ToString());
             return sp.ExecuteTypedList<DashboardActivityModel>();
         }
-
+        public IEnumerable<DashboardActivityModel> GetUsersEventActivity(Guid userID) {
+            StoredProcedure sp = db.GetUsersEventActivity(userID.ToString());
+            return sp.ExecuteTypedList<DashboardActivityModel>();
+        }
         public List<Epilogger.Data.Event> GetUserSubscribedAndCreatedEvents(Guid userID)
         {
             StoredProcedure sp = db.GetUserDashboardActivity(userID.ToString());
