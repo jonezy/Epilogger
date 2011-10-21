@@ -624,7 +624,7 @@ ul#left-nav li {
     list-style:none;}
 
 ul#left-nav li a {
-    font:bold 18px 'InterstatePlusRegular', arial, sans-serif;
+    font:normal 18px 'InterstatePlusRegular', arial, sans-serif;
     text-transform:uppercase;
     padding:10px;
     display:block;
@@ -808,7 +808,7 @@ x.dashboard-event-item .event-totals {
 #top-tweeters .toptweeter-item .bar.color_0 {background:#ca118b;}
 #top-tweeters .toptweeter-item .bar.color_1 {background:#fb75b7;}
 #top-tweeters .toptweeter-item .bar.color_2 {background:#fba2c6;}
-#top-tweeters .toptweeter-item .count {font:normal 13px 'InterstatePlusRegular';float:left;padding-top:2px;}
+#top-tweeters .toptweeter-item .count {font:bold 13px 'InterstatePlusRegular';float:left;padding-top:2px;}
 #top-tweeters .toptweeter-item .bar.small {height:10px;background-color:#fb75b7;float:left;margin-right:5px;}
 #top-tweeters .toptweeter-item .count.small {font-size:11px;float:left;padding-top:0px;}
 

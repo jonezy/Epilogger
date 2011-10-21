@@ -469,9 +469,9 @@
     <Content Include="Views\Shared\_InteriorLayout.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ShortDateTime.cshtml" />
     <Content Include="Views\Events\_StarRatingTemplate.cshtml" />
-    <None Include="Public\fonts\interstateplus_bold_cond-webfont.eot" />
-    <None Include="Public\fonts\interstateplus_bold_cond-webfont.ttf" />
-    <None Include="Public\fonts\interstateplus_bold_cond-webfont.woff" />
+    <Content Include="Public\fonts\interstateplus_bold_cond-webfont.eot" />
+    <Content Include="Public\fonts\interstateplus_bold_cond-webfont.ttf" />
+    <Content Include="Public\fonts\interstateplus_bold_cond-webfont.woff" />
     <Content Include="Views\Dashboard\Subscriptions.cshtml" />
     <Content Include="Views\Dashboard\AllEvents.cshtml" />
     <Content Include="Views\Dashboard\_EventListItem.cshtml" />
