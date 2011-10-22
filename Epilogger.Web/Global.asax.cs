@@ -227,6 +227,7 @@ namespace Epilogger.Web {
 
 
             Mapper.CreateMap<CreateAccountModel, User>()
+                .ForMember(dest => dest.RoleID, opt => opt.UseValue(2))
                 .ForMember(dest => dest.FirstName, opt => opt.Ignore())
                 .ForMember(dest => dest.LastName, opt => opt.Ignore())
                 .ForMember(dest => dest.ForgotPasswordHash, opt => opt.Ignore())
