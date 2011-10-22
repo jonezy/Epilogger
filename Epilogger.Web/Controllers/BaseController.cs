@@ -35,5 +35,14 @@ namespace Epilogger.Web.Controllers {
                 return CurrentUser.UserAuthenticationProfiles.Where(ua => ua.Service == AuthenticationServices.FACEBOOK.ToString()).FirstOrDefault();
             }
         }
+
+        protected UserRoleType CurrentUserRole {
+            get {
+                if (CurrentUser == null)
+                    return UserRoleType.Unknown;
+
+                return (UserRoleType) Enum.Parse(typeof(UserRoleType), CurrentUser.RoleID.ToString());
+            }
+        }
     }
 }

@@ -20,6 +20,7 @@ namespace Epilogger.Web.Controllers {
             if (CurrentUser != null) {
                 model.Username = CurrentUser.Username;
             }
+            model.CurrentUserRole = CurrentUserRole;
 
             return PartialView("GlobalNavigation", model);
         }
