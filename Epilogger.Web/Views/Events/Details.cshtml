@@ -174,10 +174,10 @@ else
         @using (Html.BeginForm("details", "events", new { id = Model.ID }, FormMethod.Post, null))
         {
             @Html.Hidden("ResetDates")
-                <h4>Filter timespan:&nbsp; </h4>
-                @Html.EditorFor(m => m.FromDateTime)
-                    <label style="position:relative; left:-10px">to</label>
-                    @Html.EditorFor(m => m.ToDateTime)
+            <h4>Filter timespan:&nbsp; </h4>
+            @Html.EditorFor(m => m.FromDateTime)
+            <label style="position:relative; left:-10px">to</label>
+            @Html.EditorFor(m => m.ToDateTime)
             <input type="submit" value="ok" class="blue-action-button" /> 
             <input type="button" value="x" name="ClearDates" onclick="$('#ResetDates').val('1'); $(form).submit();" />
         }
@@ -195,11 +195,11 @@ else
                     {
                         @Html.DisplayFor(e => e.StartDateTime, "FullDate") <br />
                         @Html.DisplayFor(e => e.StartDateTime, "Time") @:to @Html.DisplayFor(e => e.EndDateTime, "Time")
-            }
+                    }
                     else
                     {
                         @Html.DisplayFor(e => e.StartDateTime) @: to <br />
-                @Html.DisplayFor(e => e.EndDateTime)
+                        @Html.DisplayFor(e => e.EndDateTime)
                     }
                 </div>
         </li>

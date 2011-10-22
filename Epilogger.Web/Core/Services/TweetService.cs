@@ -116,7 +116,10 @@ namespace Epilogger.Web
 
 
 
-
+        public Tweet FindByTwitterID(long? TwitterID)
+        {
+            return db.Tweets.Where(t => t.TwitterID == TwitterID).FirstOrDefault();
+        }
 
 
 

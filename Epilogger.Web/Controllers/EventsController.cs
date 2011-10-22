@@ -718,6 +718,44 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
+        public ActionResult AllStats(int id)
+        {
+
+            //int currentPage = page.HasValue ? page.Value - 1 : 0;
+            AllStatsViewModel Model = Mapper.Map<Event, AllStatsViewModel>(ES.FindByID(id));
+
+            if (Request.QueryString["f"] != null)
+            {
+                Model.FromDateTime = this.FromDateTime();
+            }
+            else
+            {
+                Model.FromDateTime = null;
+            }
+            if (Request.QueryString["t"] != null)
+            {
+                Model.ToDateTime = this.ToDateTime();
+            }
+            else
+            {
+                Model.ToDateTime = null;
+            }
+
+            Model.TweetCount = TS.FindTweetCountByEventID(id, this.FromDateTime(), this.ToDateTime());
+            Model.ImageCount = IS.FindImageCountByEventID(id, this.FromDateTime(), this.ToDateTime());
+            Model.ExternalLinkCount = LS.FindCountByEventID(id, this.FromDateTime(), this.ToDateTime());
+            Model.TopImages = Model.TopImages = IS.GetTopPhotosAndTweetByEventID(id, 10, this.FromDateTime(), this.ToDateTime());
+
+            //model.Links = LS.FindByEventIDPaged(id, currentPage, 10, this.FromDateTime(), this.ToDateTime());
+            //model.CurrentPageIndex = currentPage;
+            //model.TotalRecords = LS.FindCountByEventID(id, this.FromDateTime(), this.ToDateTime());
+
+
+            return View(Model);
+        }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
         public ActionResult Edit(int id) {
             Event currentEvent = ES.FindByID(id);
             CreateEventViewModel model = Mapper.Map<Event, CreateEventViewModel>(currentEvent);

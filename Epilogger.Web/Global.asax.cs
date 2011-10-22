@@ -185,7 +185,19 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.ToDateTime, opt => opt.Ignore())
                 .ForMember(dest => dest.Venue, opt => opt.MapFrom(src => src.Venues.FirstOrDefault()));
 
+            Mapper.CreateMap<Event, AllStatsViewModel>()
+                .ForMember(dest => dest.CurrentPageIndex, opt => opt.Ignore())
+                .ForMember(dest => dest.TotalRecords, opt => opt.Ignore())
+                .ForMember(dest => dest.FromDateTime, opt => opt.Ignore())
+                .ForMember(dest => dest.ToDateTime, opt => opt.Ignore())
+                .ForMember(dest => dest.ImageCount, opt => opt.Ignore())
+                .ForMember(dest => dest.TweetCount, opt => opt.Ignore())
+                .ForMember(dest => dest.ExternalLinkCount, opt => opt.Ignore())
+                .ForMember(dest => dest.TopImages, opt => opt.Ignore());
+               
+
             Mapper.CreateMap<Event, AllContentViewModel>();
+            
             Mapper.CreateMap<Event, AllLinksViewModel>()
                 .ForMember(dest => dest.CurrentPageIndex, opt => opt.Ignore())
                 .ForMember(dest => dest.TotalRecords, opt => opt.Ignore())
