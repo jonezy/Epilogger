@@ -23,7 +23,7 @@ namespace Epilogger.Web.Models {
 
         public List<TopImageAndTweet> TopImages { get; set; }
         public List<CheckinDisplayViewModel> AllCheckIns { get; set; }
-
+        public List<TopURLs> TopLinks { get; set; }
         
         public int PageSize { get { return 12; } }
         public int CurrentPageIndex { get; set; }

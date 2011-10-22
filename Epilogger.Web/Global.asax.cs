@@ -196,7 +196,8 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.TopImages, opt => opt.Ignore())
                 .ForMember(dest => dest.MyUTCNow, opt => opt.Ignore())
                 .ForMember(dest => dest.TopTweeters, opt => opt.Ignore())
-                .ForMember(dest => dest.AllCheckIns, opt => opt.Ignore());
+                .ForMember(dest => dest.AllCheckIns, opt => opt.Ignore())
+                .ForMember(dest => dest.TopLinks, opt => opt.Ignore());
                
 
             Mapper.CreateMap<Event, AllContentViewModel>();

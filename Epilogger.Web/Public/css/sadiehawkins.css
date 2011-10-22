@@ -1318,11 +1318,22 @@ div.one-third {
 	padding: 5px 10px 5px 25px;
 	background:#000 url('/Public/images/reports/ribbon-endr.png') center left no-repeat;}
 	
+/*.ribbon-edging {
+	border-top:1px dotted #000;
+	border-bottom:1px dotted #000;
+	height:25px;
+	display:inline-block; }*/
+	
 .ribbon-edging {
 	border-top:1px dotted #000;
 	border-bottom:1px dotted #000;
 	height:25px;
-	display:inline-block; }
+	display: inline-block;
+	position:absolute;
+	top: 125px; }
+	
+.robbin-right { right: 20px; }	
+	
 
 .two-thirds .ribbon-edging {
 	padding:5px 5px 0 0;}
