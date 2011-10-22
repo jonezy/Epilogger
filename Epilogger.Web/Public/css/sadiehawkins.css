@@ -515,7 +515,9 @@ ul#connected-networks, .topPhotosList, .topPhotosList li {
     padding:6px 10px 0px 0px;}
     
 .item-data input[type=text], .item-data textarea, select, #foursquare-search,
-fieldset.login input[type="text"], fieldset.forgotpassword input[type="text"], fieldset.login input[type="password"], fieldset.create input[type="password"],
+
+fieldset.forgotpassword input[type="text"],  fieldset.forgotpassword input[type="password"], 
+fieldset.login input[type="text"],fieldset.login input[type="password"], fieldset.create input[type="password"],
 .inEventSearch input[type="text"], .filter-by-time form input[type="text"],
 .modal input[type="text"], .modal textarea {
     border-radius:0;
@@ -591,10 +593,17 @@ fieldset.login input[type="text"], fieldset.forgotpassword input[type="text"], f
 #event-toolbar .tool-tip .nub {position:absolute;top:8px;left:0;width:5px;height:23px;background: url(../images/icons/hovernub.png) no-repeat;}
 #event-toolbar .tool-tip .tip {position:absolute;top:0;left:5px;height:17px;background:#2d8ac5;padding:4px 5px 2px 5px;text-transform:lowercase;} 
 
-fieldset.login label {padding:8px;width:70px;text-transform:uppercase;font-size:11px;}
-fieldset.login label, fieldset.login input[type="text"], fieldset.login input[type="password"] {float:left;}
-fieldset.forgotpassword input[type="text"],fieldset.login input[type="text"], fieldset.login input[type="password"] {width:340px; background:#e1e1e1}
+fieldset.login label, fieldset.forgotpassword label {padding:8px;width:70px;text-transform:uppercase;font-size:11px;}
+fieldset.forgotpassword label {width:100px;}
+fieldset.forgotpassword label, fieldset.login label, fieldset.forgotpassword input[type="text"],fieldset.forgotpassword input[type="password"] 
+fieldset.login input[type="text"], fieldset.login input[type="password"] {float:left;}
+
+fieldset.forgotpassword input[type="text"],fieldset.forgotpassword input[type="password"],
+fieldset.login input[type="text"], fieldset.login input[type="password"] 
+{width:340px; background:#e1e1e1}
+
 fieldset.login p.rememberme, fieldset.login p.submit {padding-left:82px;}
+fieldset.forgotpassword p.submit {padding-left:112px;}
 fieldset.login label.left {width:auto !important;padding:2px 0;}
 
 /*CREATE ACCOUNT*/
