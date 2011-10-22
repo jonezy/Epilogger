@@ -189,8 +189,10 @@ namespace Epilogger.Web.Controllers {
 
                 TemplateParser parser = new TemplateParser();
                 Dictionary<string, string> replacements = new Dictionary<string, string>();
+                replacements.Add("[BASE_URL]", App.BaseUrl);
                 replacements.Add("[USERNAME]", user.Username);
-                replacements.Add("[LINKTORESETPASSWORD]", resetPasswordUrl);
+                replacements.Add("[USER_EMAIL]", user.EmailAddress);
+                replacements.Add("[RESET_PASSWORD_URL]", resetPasswordUrl);
 
                 string message = parser.Replace(AccountEmails.ForgotPassword, replacements);
 
