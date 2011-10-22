@@ -115,10 +115,10 @@
         <h2>VenueSearch</h2>
         @using (Html.BeginForm("VenueSearch", "Events", FormMethod.Post))
         {
-        <fieldset class="modal">
-            <p><label>Venue name:</label>@Html.TextBox("venue_name")</p>
-            <input type="submit" id="search" class="blue-action-button" value="Search" />
-        </fieldset>
+            <fieldset class="modal">
+                <p><label>Venue name:</label>@Html.TextBox("venue_name")</p>
+                <input type="submit" id="search" class="blue-action-button" value="Search" />
+            </fieldset>
         }
     </div>
 </div>

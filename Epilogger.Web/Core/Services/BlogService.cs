@@ -25,5 +25,10 @@ namespace Epilogger.Web {
             return db.BlogPosts.Where(t => t.EventID == EventID & t.DateTime >= StartDateTimeFilter & t.DateTime <= EndDateTimeFilter);
         }
 
+        public IEnumerable<BlogPost> FindByEventIDTake5(int EventID, DateTime StartDateTimeFilter, DateTime EndDateTimeFilter)
+        {
+            return db.BlogPosts.Where(t => t.EventID == EventID & t.DateTime >= StartDateTimeFilter & t.DateTime <= EndDateTimeFilter).OrderByDescending(t => t.DateTime).Take(5);
+        }
+
     }
 }

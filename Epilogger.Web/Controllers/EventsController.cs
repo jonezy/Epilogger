@@ -205,6 +205,7 @@ namespace Epilogger.Web.Controllers {
             Model.CheckInCount = CS.FindCheckInCountByEventID(id, this.FromDateTime(), this.ToDateTime());
             Model.CheckIns = CS.FindByEventIDOrderDescTake5(id, this.FromDateTime(), this.ToDateTime());
             Model.ExternalLinks = LS.FindByEventIDOrderDescTake3(id, this.FromDateTime(), this.ToDateTime());
+            Model.BlogPosts = BS.FindByEventIDTake5(id, this.FromDateTime(), this.ToDateTime());
             Model.EventRatings = ES.FindEventRatingsByID(id, this.FromDateTime(), this.ToDateTime());
             Model.HasUserRated = false;
             Model.CurrentUserID = CurrentUserID;
@@ -236,7 +237,7 @@ namespace Epilogger.Web.Controllers {
 
 
             //Not optimized
-            Model.BlogPosts = BS.FindByEventID(id);
+            
 
             return View(Model);
         }
@@ -963,8 +964,12 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        public ActionResult AddBlogPost() {
-            return PartialView();
+        public ActionResult AddBlogPost(int id) {
+            AddBlogPostViewModel model = new AddBlogPostViewModel();
+            model.BlogURL = "http://";
+            model.EventID = id;
+
+            return PartialView(model);
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -975,6 +980,7 @@ namespace Epilogger.Web.Controllers {
                 BlogPost blogPost = Mapper.Map<AddBlogPostViewModel, BlogPost>(model);
                 blogPost.EventID = id;
                 blogPost.UserID = CurrentUserID;
+                blogPost.DateTime = DateTime.UtcNow;
                 BS.Save(blogPost);
 
                 return true;

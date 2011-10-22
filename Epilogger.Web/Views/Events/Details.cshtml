@@ -334,13 +334,17 @@ else
         <ul class="plain-list">
             @foreach (Epilogger.Data.BlogPost TheBlogPost in Model.BlogPosts.Take(3))
             {
-                <li>
-                    @*<img src="@Url.Content("~/Public/images/samples/avatar.png")" class="fleft"/>*@
+                <li class="blogpost">
+                    
                     <a href="@TheBlogPost.BlogURL">@TheBlogPost.Title</a><br />
+                    <p class="blogDescription">@TheBlogPost.Description<br />
+                        <span class="small">@Html.DisplayFor(e => TheBlogPost.DateTime)</span>
+                    </p>
+                </li>
+                    @*<img src="@Url.Content("~/Public/images/samples/avatar.png")" class="fleft"/>*@
                     @*<small><a href="#">BY MICHAEL NUS</a></small><br />*@
-                    @*<p>
-                        After a very busy day of meetings and wheeling...</p>*@
-                    @*TODO - Add move fiels to the Blog table to store more Info!*@ </li>
+                    @*<p>After a very busy day of meetings and wheeling...</p>*@
+                    @*TODO - Add move fiels to the Blog table to store more Info!*@ 
             }
         </ul>
         <div class="clear">
@@ -409,14 +413,18 @@ else
         });
 
         $(".blogposts-modal").colorbox({
-            width: "60%", height: "60%",
-            href: '@Url.Action("AddBlogPost", "Events")'
+            width: "60%", height: "370px",
+            href: '@Url.Action("AddBlogPost", "Events", new { id = Model.ID })',
+            onComplete: function () { $("#BlogURL").focus(); }
         });
+
+
         $(".links-modal").colorbox({
             width: "60%", height: "60%",
             href: '@Url.Action("AddLink", "Events")'
         });
     });
+
 </script>
 
 
