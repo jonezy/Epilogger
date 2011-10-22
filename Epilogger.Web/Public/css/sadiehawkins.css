@@ -81,20 +81,20 @@ a.edit_icon {
 		
 #homepage-content {
     position:absolute;
-    top:50px;
+    top:35px;
     left:80px;}
 
 #homepage-toolbar {
     padding-bottom:10px;
     border-bottom:dotted 1px #b4b4b4;
-    width:390px;}    
+    width:860px; height: 50px; }    
     
 #homepage-toolbar h4, img#logo {
-    float:left;}
+    float:left ;}
    
 #homepage-toolbar h4 {
     position:relative;
-    top:4px}
+    top:4px }
     
 #homepage-toolbar .Pager {
     float:left;
@@ -103,12 +103,15 @@ a.edit_icon {
     border-top:0}
     
 #homepage-toolbar #refresh {
-    float:right;
-    margin:-4px 0px 0px 0px;}
+
+    }
     
 #header {
     padding:10px 0px 30px 0px;
     position:relative;}
+	
+.homeBlurb { width: 425px; }
+.homePager { float: right; margin-top: -20px; }
 	
 
 /* ------------------------------ MENUS */
@@ -678,20 +681,20 @@ ul#left-nav li ul li a.current {color:#a44b79;}
     background-position:0 0;}
     
 .dashboard-activity-entry strong.title.PHOTOS_VIDEOS {
-    background-position:0 -24px;
+    background-position:0 -50px;
     padding-left:28px;}
     
 .dashboard-activity-entry strong.title.EVENT_CREATION {
-    background-position:0 -56px;
+    background-position:0 -100px;
     padding-left:28px;}
 
 #homepage-content {float:left;width:880px;}
 .homepage-activity-entry { float:left;height:184px;overflow:hidden;margin:0px 20px 20px 0px;width:200px;color:#828282; }
 .homepage-activity-entry h2 a { color: #ee4490;}
-.homepage-activity-entry strong.title {font-weight:normal; color:#5086b9;margin-bottom:10px;padding-left:24px;background-image:url(../images/event_activity_title_icons.png);background-repeat: no-repeat;font-size:12px;text-transform:uppercase;margin-bottom:5px;display:block;}
+.homepage-activity-entry strong.title {font-weight:normal; color:#5086b9;margin-bottom:10px;padding-left:24px;background-image:url(../images/event_activity_title_icons.png);background-repeat: no-repeat;font-size:12px;text-transform:uppercase;margin-bottom:5px;display:block; }
 .homepage-activity-entry strong.title.TWEET {background-position:0 0;}
-.homepage-activity-entry strong.title.PHOTOS_VIDEOS { background-position:0 -24px;padding-left:28px; }
-.homepage-activity-entry strong.title.EVENT_CREATION {background-position:0 -56px;padding-left:28px;}
+.homepage-activity-entry strong.title.PHOTOS_VIDEOS { background-position:0 -50px;padding-left:28px; }
+.homepage-activity-entry strong.title.EVENT_CREATION {background-position:0 -100px;padding-left:28px;}
 
 .profile-card {margin-bottom:10px;}
 .profile-card h4 {background:#fe60b1;color:#fff;float:left;padding:5px 10px 5px 10px;}
@@ -920,7 +923,7 @@ div#search-container input[type=image] {
 
 /* --- filter by time */
 .filter-by-time { 
-    width:650px; 
+    width:655px; 
     text-align:right;}
     
 .filter-by-time h4 { 
@@ -952,7 +955,8 @@ div#search-container input[type=image] {
     border:0;
     text-indent:-100em;
     margin-left:5px;
-    height:25px;}
+    height:25px;
+    width: 25px; }
     
 .filter-by-time form img { 
     position:relative; 
