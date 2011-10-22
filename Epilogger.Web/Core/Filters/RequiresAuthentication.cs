@@ -36,7 +36,7 @@ namespace Epilogger.Web {
                 int currentRole = (int)Enum.Parse(typeof(UserRoleType), ValidUserRole.ToString());
                 if (user == null || user.RoleID > currentRole) {
                     if (!string.IsNullOrEmpty(AccessDeniedMessage)) {
-                        controller.StoreWarning(AccessDeniedMessage);
+                        controller.StoreInfo(AccessDeniedMessage);
                     }
 
                     filterContext.Result = new RedirectToRouteResult(BuildLoginRouteDictionary(filterContext.HttpContext.Request.Url.AbsoluteUri));
