@@ -8,6 +8,7 @@ using AutoMapper;
 using Epilogger.Web.Models;
 
 namespace Epilogger.Web.Controllers {
+    [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to participate in the epilogger alpha.")]
     public class HomeController : BaseController {
         UserLogService LS = new UserLogService();
         ClickLogService CS = new ClickLogService();
