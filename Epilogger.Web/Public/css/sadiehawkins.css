@@ -1318,11 +1318,22 @@ div.one-third {
 	padding: 5px 10px 5px 25px;
 	background:#000 url('/Public/images/reports/ribbon-endr.png') center left no-repeat;}
 	
+/*.ribbon-edging {
+	border-top:1px dotted #000;
+	border-bottom:1px dotted #000;
+	height:25px;
+	display:inline-block; }*/
+	
 .ribbon-edging {
 	border-top:1px dotted #000;
 	border-bottom:1px dotted #000;
 	height:25px;
-	display:inline-block; }
+	display: inline-block;
+	position:absolute;
+	top: 125px; }
+	
+.robbin-right { right: 20px; }	
+	
 
 .two-thirds .ribbon-edging {
 	padding:5px 5px 0 0;}
@@ -1334,23 +1345,22 @@ div.one-third {
 /* ---------------------------- REPORT --- */
 #report .one-third {
 	float:left;
-	width:28%}
+	width:28%; }
 	
 .reportNumber {
 	font-size: 4em !important;
 	float:left;
 	color: #000;
-	
     line-height: 0.83em; }
 	
-	
+.reportTables { font-size: 0.8em; }
 	
 td.amount {
 	width:25px;
-	text-align:right}
+	text-align:right; }
 
 td.separator {
-	width:75px;}
+	width:75px; vertical-align: middle; }
 
 td.separator span.separator {
 	background:#9E6928;
@@ -1358,7 +1368,7 @@ td.separator span.separator {
 	display:block;
 	position:relative;
 	left:7px;
-	width:85%}
+	width:85%; }
 
 div.photo-item {
 	clear:left; font-size: 0.8em; }
@@ -1370,7 +1380,7 @@ div.photo-item img {
 	width:100px}
 	
 .pie-chart table {
-	background:#f4f8e8}
+	background:#f4f8e8; }
 	
 /* ---------------------------- MISC --- */
 .rmargin { margin-right:15px;}

@@ -213,16 +213,10 @@ function scaleUp($elt) {
     });
 }
 function scaleDown($elt) {
-    $elt.animate({ width: '0%' }, 10000, function () {
+    $elt.animate({ width: '0%' }, 1100000, function () {
         scaleUp($elt);
     });
 }
-
-//Kind of shitty, new solution time
-//$(".smallRateLink").colorbox({
-//    width: "100px", height: "125px",
-//    href: '/events/StarRatings'
-//});
 
 //PopUp for Ratings
 head.ready(function () {
@@ -232,20 +226,10 @@ head.ready(function () {
 
     myRating_link.toggle(
         function () {
-//            $(this).removeClass('dropdown');
-//            $(this).addClass('dropdown2');
             myRating.show();
-
-//            $.get('/Events/StarRatings',
-//                function (data) {
-//                    $('#RatingPopUpDiv').html(data);
-//                }, "html");
-
             return false;
         },
         function () {
-            $(this).removeClass('dropdown2');
-            $(this).addClass('dropdown');
             myRating.hide();
             return false;
         });

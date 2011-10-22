@@ -382,6 +382,17 @@ namespace Epilogger.Data
             }
         }
 
+        public IQueryable<UserRole> UserRoles
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.UserRoles
+                       where items.ID == _RoleID
+                       select items;
+            }
+        }
+
         public IQueryable<UserAuthenticationProfile> UserAuthenticationProfiles
         {
             get
@@ -415,7 +426,7 @@ namespace Epilogger.Data
             }
         }
 
-        public IQueryable<UserFollowsUser> UserFollowsUsers5
+        public IQueryable<UserFollowsUser> UserFollowsUsers6
         {
             get
             {
@@ -444,17 +455,6 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.UserInRoles
                        where items.UserID == _ID
-                       select items;
-            }
-        }
-
-        public IQueryable<UserRole> UserRoles
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.UserRoles
-                       where items.ID == _RoleID
                        select items;
             }
         }
@@ -940,17 +940,6 @@ namespace Epilogger.Data
         #endregion
 
         #region Foreign Keys
-        public IQueryable<Event> Events
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Events
-                       where items.ID == _EventID
-                       select items;
-            }
-        }
-
         public IQueryable<CheckIn> CheckIns
         {
             get
@@ -958,6 +947,17 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.CheckIns
                        where items.TweetID == _ID
+                       select items;
+            }
+        }
+
+        public IQueryable<Event> Events
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Events
+                       where items.ID == _EventID
                        select items;
             }
         }
@@ -2672,17 +2672,6 @@ namespace Epilogger.Data
         #endregion
 
         #region Foreign Keys
-        public IQueryable<User> Users
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Users
-                       where items.ID == _UserID
-                       select items;
-            }
-        }
-
         public IQueryable<Role> Roles
         {
             get
@@ -2690,6 +2679,17 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.Roles
                        where items.ID == _RoleID
+                       select items;
+            }
+        }
+
+        public IQueryable<User> Users
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Users
+                       where items.ID == _UserID
                        select items;
             }
         }
@@ -3147,17 +3147,6 @@ namespace Epilogger.Data
         #endregion
 
         #region Foreign Keys
-        public IQueryable<EventCategory> EventCategories
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.EventCategories
-                       where items.ID == _CategoryID
-                       select items;
-            }
-        }
-
         public IQueryable<BlogPost> BlogPosts
         {
             get
@@ -3176,6 +3165,39 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.CheckIns
                        where items.EventID == _ID
+                       select items;
+            }
+        }
+
+        public IQueryable<EventCategory> EventCategories
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.EventCategories
+                       where items.ID == _CategoryID
+                       select items;
+            }
+        }
+
+        public IQueryable<User> Users
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Users
+                       where items.ID == _UserID
+                       select items;
+            }
+        }
+
+        public IQueryable<Venue> Venues
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Venues
+                       where items.ID == _VenueID
                        select items;
             }
         }
@@ -3242,28 +3264,6 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.UserRatesEvents
                        where items.EventID == _ID
-                       select items;
-            }
-        }
-
-        public IQueryable<User> Users
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Users
-                       where items.ID == _UserID
-                       select items;
-            }
-        }
-
-        public IQueryable<Venue> Venues
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Venues
-                       where items.ID == _VenueID
                        select items;
             }
         }
@@ -3669,17 +3669,6 @@ namespace Epilogger.Data
         #endregion
 
         #region Foreign Keys
-        public IQueryable<Event> Events
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Events
-                       where items.ID == _EventID
-                       select items;
-            }
-        }
-
         public IQueryable<ImageMetaDatum> ImageMetaData
         {
             get
@@ -3687,6 +3676,17 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.ImageMetaData
                        where items.ImageID == _ID
+                       select items;
+            }
+        }
+
+        public IQueryable<Event> Events
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Events
+                       where items.ID == _EventID
                        select items;
             }
         }
@@ -4138,17 +4138,6 @@ namespace Epilogger.Data
         #endregion
 
         #region Foreign Keys
-        public IQueryable<Event> Events
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Events
-                       where items.ID == _EventID
-                       select items;
-            }
-        }
-
         public IQueryable<User> Users
         {
             get
@@ -4156,6 +4145,17 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.Users
                        where items.ID == _UserID
+                       select items;
+            }
+        }
+
+        public IQueryable<Event> Events
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Events
+                       where items.ID == _EventID
                        select items;
             }
         }

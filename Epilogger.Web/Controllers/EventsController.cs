@@ -740,11 +740,20 @@ namespace Epilogger.Web.Controllers {
             {
                 Model.ToDateTime = null;
             }
+            Model.MyUTCNow = DateTime.UtcNow;
 
             Model.TweetCount = TS.FindTweetCountByEventID(id, this.FromDateTime(), this.ToDateTime());
             Model.ImageCount = IS.FindImageCountByEventID(id, this.FromDateTime(), this.ToDateTime());
             Model.ExternalLinkCount = LS.FindCountByEventID(id, this.FromDateTime(), this.ToDateTime());
             Model.TopImages = Model.TopImages = IS.GetTopPhotosAndTweetByEventID(id, 10, this.FromDateTime(), this.ToDateTime());
+            Model.TopLinks = LS.GetTopURLsByEventID(id, 5, this.FromDateTime(), this.ToDateTime());
+
+            List<CheckinDisplayViewModel> checkins = Mapper.Map<List<CheckIn>, List<CheckinDisplayViewModel>>(CS.FindByEventID(id, this.FromDateTime(), this.ToDateTime()).ToList());
+            Model.AllCheckIns = checkins;
+
+            TopTweetersStats topTweetersStats = new TopTweetersStats();
+            Model.TopTweeters = Model.TopTweeters = topTweetersStats.Calculate(TS.GetTop10TweetersByEventID(id, this.FromDateTime(), this.ToDateTime())).ToList();
+
 
             //model.Links = LS.FindByEventIDPaged(id, currentPage, 10, this.FromDateTime(), this.ToDateTime());
             //model.CurrentPageIndex = currentPage;

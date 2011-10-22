@@ -467,6 +467,14 @@ namespace Epilogger.Data{
             sp.Command.AddParameter("ToDate",ToDate,DbType.DateTime);
             return sp;
         }
+        public StoredProcedure GetTopURLsByEventID(int EventID,int ItemToReturn,DateTime FromDate,DateTime ToDate){
+            StoredProcedure sp=new StoredProcedure("GetTopURLsByEventID",this.Provider);
+            sp.Command.AddParameter("EventID",EventID,DbType.Int32);
+            sp.Command.AddParameter("ItemToReturn",ItemToReturn,DbType.Int32);
+            sp.Command.AddParameter("FromDate",FromDate,DbType.DateTime);
+            sp.Command.AddParameter("ToDate",ToDate,DbType.DateTime);
+            return sp;
+        }
         public StoredProcedure GetUserDashboardActivity(string UserID){
             StoredProcedure sp=new StoredProcedure("GetUserDashboardActivity",this.Provider);
             sp.Command.AddParameter("UserID",UserID,DbType.AnsiString);

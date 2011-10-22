@@ -6,6 +6,12 @@ using Epilogger.Web.Model;
 
 namespace Epilogger.Web
 {
+    public class TopURLs
+    {
+        public string FullURL { get; set; }
+        public int countcol { get; set; }
+    }
+
     public class ExternalLinkService : ServiceBase<URL>
     {
         protected override string CacheKey
@@ -43,6 +49,13 @@ namespace Epilogger.Web
         public int FindCountByEventID(int EventID, DateTime F, DateTime T)
         {
             return db.URLS.Where(t => t.EventID == EventID && t.DateTime >= F && t.DateTime <= T).Count();
+        }
+
+        public List<TopURLs> GetTopURLsByEventID(int EventID, int RecordsToReturn, DateTime FromDateTime, DateTime ToDateTime)
+        {
+            List<TopURLs> TLs = db.GetTopURLsByEventID(EventID, RecordsToReturn, FromDateTime, ToDateTime).ExecuteTypedList<TopURLs>();
+
+            return TLs;
         }
 
     }
