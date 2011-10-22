@@ -133,6 +133,11 @@ namespace Epilogger.Web.Controllers {
                     return View(model);
                 }
 
+                if (user.IsActive == false) {
+                    this.StoreError("Your account hasn't been activated yet");
+                    return View(model);
+                }
+
                 if (user == null) {
                     this.StoreError("Login failed");
                     return View(model);
