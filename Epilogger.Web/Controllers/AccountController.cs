@@ -42,32 +42,62 @@ namespace Epilogger.Web.Controllers {
             if (ModelState.IsValid) {
                 try {
                     User user = Mapper.Map<CreateAccountModel, User>(model);
+                    user.IsActive = false; // ensure this is set.
                     service.Save(user);
 
                     // build a message to send to the user.
-                    string loginUrl = string.Format("{0}account/login", App.BaseUrl);
+                    string validateUrl = string.Format("{0}account/validate/{1}", App.BaseUrl, Helpers.base64Encode(user.EmailAddress));
 
                     TemplateParser parser = new TemplateParser();
                     Dictionary<string, string> replacements = new Dictionary<string, string>();
-                    replacements.Add("[FULLNAME]", string.Format("{0} {1}", user.FirstName, user.LastName));
-                    replacements.Add("[LINKTOLOGIN]", loginUrl);
+                    replacements.Add("[BASE_URL]", App.BaseUrl);
+                    replacements.Add("[FIRST_NAME]", user.EmailAddress);
+                    replacements.Add("[VALIDATE_ACCOUNT_URL]", validateUrl);
 
-                    string message = parser.Replace(AccountEmails.WelcomeMessage, replacements);
+                    string message = parser.Replace(AccountEmails.ValidateAccount, replacements);
 
                     EmailSender sender = new EmailSender();
                     sender.Send(App.MailConfiguration, model.EmailAddress, "", "Thank you for registering on epilogger.com", message);
 
-                    this.StoreSuccess("Your account was created successfully<br /><br/>Please check your inbox for our welcome message.");
+                    this.StoreSuccess("Your account was created successfully<br /><br/>Please check your inbox for our validation message, your account will be inaccessable until you validate it.");
 
-                    CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString());
-
-                    return RedirectToAction("index", "account");
+                    return RedirectToAction("login", "account");
                 } catch (Exception ex) {
                     this.StoreError("There was a problem creating your account");
                     return View(model);
                 }
             } else
                 return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Validate(string validationCode) {
+            if (string.IsNullOrEmpty(validationCode)) {
+                this.StoreError("The verification code couldn't be determined, please try clicking the link in your email again.");
+                return View();
+            }
+            // decode the email address from base64
+            // look up the usre account using the email address
+            // set isactive = true and update, redirect to login with thank you message.
+            string email = Helpers.base64Decode(validationCode);
+            if (string.IsNullOrEmpty(email)) {
+                this.StoreError("The verificatoin code couldn't be determined, please try clicking the link in your email again.");
+                return View();
+            }
+
+            User user = service.GetUserByEmail(email);
+            if (user == null) {
+                this.StoreError("We couldn't find an account to activate with that verification code");
+                return View();
+            }
+
+            user.IsActive = true;
+            
+            service.Save(user);
+            this.StoreSuccess("Your account has been activated!  You can go ahead and login to unleash the epicness!");
+            return RedirectToAction("login", "account");
+
+            return View();
         }
 
         [HttpPost]

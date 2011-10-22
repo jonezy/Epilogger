@@ -70,6 +70,10 @@ namespace Epilogger.Web {
 
         public static void RegisterRoutes(RouteCollection routes) {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.MapRoute("ValidateAccount",
+                "account/validate/{validationCode}",
+                new { controller = "account", action = "validate" }
+            );
 
             routes.MapRoute(
                 "StarRatings",
