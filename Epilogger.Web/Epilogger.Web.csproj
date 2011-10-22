@@ -256,6 +256,9 @@
     <Content Include="Public\css\reset.css" />
     <Content Include="Public\css\sadiehawkins.css" />
     <Content Include="Public\css\skeleton.css" />
+    <Content Include="Public\emails\ValidateAccount.html" />
+    <Content Include="Public\emails\ForgotPassword.html" />
+    <Content Include="Public\emails\Welcome.html" />
     <Content Include="Public\fonts\interstateplus_bold_cond-webfont.svg" />
     <Content Include="Public\fonts\interstateplus_regular-webfont.eot" />
     <Content Include="Public\fonts\interstateplus_regular-webfont.svg" />
