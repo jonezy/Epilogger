@@ -1224,3 +1224,148 @@ a.smallRateLink:hover { text-decoration: underline; }
     border-spacing: 2px;
     border-color: gray;
     font-size: 10px; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/********************** Report **********************/
+
+
+#reportContainer h1, #reportContainer h2 { 
+	font:bold 32px 'InterstatePlusRegular';
+	text-transform:uppercase;
+	color:#000; margin: 0; padding: 0;}
+
+#reportContainer h2 {
+	font-size:1.75em;
+	margin-top: 30px;
+	padding-bottom:15px;
+	border-bottom:1px dotted #ccc;
+	height:85px; }
+	
+	
+#reportContainer h3 {
+	font:italic normal 0.84em georgia, 'times new roman', times, sans-serif;
+	color:#9E6928;
+	text-transform:uppercase;
+	margin:0 0 10px 0}
+
+
+/* ---------------------------- CONTAINERS --- */
+
+.two-thirds, .one-third {
+	padding:0 15px}
+
+div.two-thirds {
+	width:60%}
+
+div.one-third {
+	width:30% }
+	
+
+/* ---------------------------- HEADER AREA --- */
+.two-thirds.postit {
+	float:left;
+	height:115px;
+    background-image: url(/Public/Images/Reports/BottomRightPostItCorner.png);
+    background-repeat: no-repeat;
+    background-position: bottom right; }
+
+.one-third.postit {
+	text-align:right;
+	float:right;
+	height: 115px;
+	background-image: url(/Public/Images/Reports/BottomLeftPostItCorner.png);
+    background-repeat: no-repeat;
+    background-position: bottom left; }
+
+.postit {
+	background:#FCEF46;
+	padding:20px}
+
+.eventHashTags { font-size: 0.85em; margin:0; padding:0; }
+
+
+.ribbon {
+	color:#fff;
+	font-style:italic;
+	font-size: 0.85em; }
+
+.two-thirds .ribbon {
+	padding: 5px 25px 5px 10px;
+	background:#000 url('/Public/images/reports/ribbon-end.png') center right no-repeat;}
+
+.one-third .ribbon {
+	padding: 5px 10px 5px 25px;
+	background:#000 url('/Public/images/reports/ribbon-endr.png') center left no-repeat;}
+	
+.ribbon-edging {
+	border-top:1px dotted #000;
+	border-bottom:1px dotted #000;
+	height:25px;
+	display:inline-block; }
+
+.two-thirds .ribbon-edging {
+	padding:5px 5px 0 0;}
+
+.one-third .ribbon-edging {
+	padding:5px 0 0 5px}
+	
+
+/* ---------------------------- REPORT --- */
+#report .one-third {
+	float:left;
+	width:28%}
+	
+.reportNumber {
+	font-size: 4em !important;
+	float:left;
+	color: #000;
+	
+    line-height: 0.83em; }
+	
+	
+	
+td.amount {
+	width:25px;
+	text-align:right}
+
+td.separator {
+	width:75px;}
+
+td.separator span.separator {
+	background:#9E6928;
+	height:1px;
+	display:block;
+	position:relative;
+	left:7px;
+	width:85%}
+
+div.photo-item {
+	clear:left; font-size: 0.8em; }
+	
+div.photo-item img {
+	float:left;
+	padding:0 10px 0 0;
+	margin:0 0 15px 0;
+	width:100px}
+	
+.pie-chart table {
+	background:#f4f8e8}
+	
+/* ---------------------------- MISC --- */
+.rmargin { margin-right:15px;}
+.lmargin { margin-left:15px}
+
+.lightgray { color:#888; }
+
