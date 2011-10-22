@@ -9,7 +9,7 @@ using Epilogger.Data;
 using Epilogger.Web.Models;
 
 namespace Epilogger.Web.Controllers {
-    [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view your dashboard")]
+    [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to view your dashboard.")]
     public class DashboardController : BaseController {
         TweetService tweetService;
         EventService eventService;

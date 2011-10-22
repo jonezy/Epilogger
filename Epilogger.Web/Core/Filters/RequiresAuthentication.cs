@@ -32,16 +32,16 @@ namespace Epilogger.Web {
             }
 
             // TODO: Implement role checking here.
-            //if (!string.IsNullOrEmpty(ValidUserRole.ToString())) {
-            //    int currentRole = (int)Enum.Parse(typeof(UserRoleType), ValidUserRole.ToString());
-            //    if (user == null || user.UserRoleID > currentRole) {
-            //        if (!string.IsNullOrEmpty(AccessDeniedMessage)) {
-            //            controller.StoreWarning(AccessDeniedMessage);
-            //        }
+            if (!string.IsNullOrEmpty(ValidUserRole.ToString())) {
+                int currentRole = (int)Enum.Parse(typeof(UserRoleType), ValidUserRole.ToString());
+                if (user == null || user.RoleID > currentRole) {
+                    if (!string.IsNullOrEmpty(AccessDeniedMessage)) {
+                        controller.StoreInfo(AccessDeniedMessage);
+                    }
 
-            //        filterContext.Result = new RedirectToRouteResult(BuildLoginRouteDictionary(filterContext.HttpContext.Request.Url.AbsoluteUri));
-            //    }
-            //}
+                    filterContext.Result = new RedirectToRouteResult(BuildLoginRouteDictionary(filterContext.HttpContext.Request.Url.AbsoluteUri));
+                }
+            }
 
             base.OnActionExecuting(filterContext);
         }

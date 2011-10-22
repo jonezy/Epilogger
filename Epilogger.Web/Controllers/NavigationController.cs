@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
-using Epilogger.Web.Models;
 using Epilogger.Data;
+using Epilogger.Web.Models;
 
 namespace Epilogger.Web.Controllers {
     public class NavigationController : BaseController {
@@ -20,6 +19,7 @@ namespace Epilogger.Web.Controllers {
             if (CurrentUser != null) {
                 model.Username = CurrentUser.Username;
             }
+            model.CurrentUserRole = CurrentUserRole;
 
             return PartialView("GlobalNavigation", model);
         }
