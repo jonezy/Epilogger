@@ -259,6 +259,8 @@
     <Content Include="Public\css\reset.css" />
     <Content Include="Public\css\sadiehawkins.css" />
     <Content Include="Public\css\skeleton.css" />
+    <Content Include="Public\emails\images\footer-tear.gif" />
+    <Content Include="Public\emails\images\logo.png" />
     <Content Include="Public\emails\ValidateAccount.html" />
     <Content Include="Public\emails\ForgotPassword.html" />
     <Content Include="Public\emails\Welcome.html" />
