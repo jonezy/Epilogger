@@ -923,7 +923,7 @@ div#search-container input[type=image] {
 
 /* --- filter by time */
 .filter-by-time { 
-    width:650px; 
+    width:655px; 
     text-align:right;}
     
 .filter-by-time h4 { 
@@ -955,7 +955,8 @@ div#search-container input[type=image] {
     border:0;
     text-indent:-100em;
     margin-left:5px;
-    height:25px;}
+    height:25px;
+    width: 25px; }
     
 .filter-by-time form img { 
     position:relative; 
