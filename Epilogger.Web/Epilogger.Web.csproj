@@ -195,6 +195,7 @@
     <Compile Include="Models\AllBlogPostsViewModel.cs" />
     <Compile Include="Models\BrowseEventsDisplayViewModel.cs" />
     <Compile Include="Models\BrowseCategoriesDisplayViewModel.cs" />
+    <Compile Include="Models\AllStatsViewModel.cs" />
     <Compile Include="Models\CreateAccountModel.cs" />
     <Compile Include="Models\CreateEventViewModel.cs" />
     <Compile Include="Models\DashboardAccountViewModel.cs" />
@@ -206,6 +207,7 @@
     <Compile Include="Models\EventDisplayViewModel.cs" />
     <Compile Include="Models\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\FoursquareVenue.cs" />
+    <Compile Include="Models\GetTopPhotosAndTweetByEventID.cs" />
     <Compile Include="Models\GlobalNavigationModel.cs" />
     <Compile Include="Models\HomepageActivityModel.cs" />
     <Compile Include="Models\HomepageViewModel.cs" />
@@ -215,6 +217,7 @@
     <Compile Include="Models\SearchEventViewModel.cs" />
     <Compile Include="Models\SearchInEventModel.cs" />
     <Compile Include="Models\SearchInEventViewModel.cs" />
+    <Compile Include="Models\TopImageAndTweet.cs" />
     <Compile Include="Models\TweetDisplayViewModel.cs" />
     <Compile Include="Models\UpdatePasswordModel.cs" />
     <Compile Include="Models\VenueDisplayViewModel.cs" />
@@ -306,6 +309,11 @@
     <Content Include="Public\images\reasons\1.png" />
     <Content Include="Public\images\reasons\2.png" />
     <Content Include="Public\images\reasons\3.png" />
+    <Content Include="Public\images\reports\BottomLeftPostItCorner.png" />
+    <Content Include="Public\images\reports\BottomRightPostItCorner.png" />
+    <Content Include="Public\images\reports\logo.png" />
+    <Content Include="Public\images\reports\ribbon-end.png" />
+    <Content Include="Public\images\reports\ribbon-endr.png" />
     <Content Include="Public\images\samples\ad.png" />
     <Content Include="Public\images\samples\avatar.png" />
     <Content Include="Public\images\samples\checkin.png" />
@@ -475,6 +483,7 @@
     <Content Include="Views\Dashboard\Subscriptions.cshtml" />
     <Content Include="Views\Dashboard\AllEvents.cshtml" />
     <Content Include="Views\Dashboard\_EventListItem.cshtml" />
+    <Content Include="Views\Events\AllStats.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

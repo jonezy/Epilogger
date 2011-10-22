@@ -5,6 +5,7 @@ using Epilogger.Data;
 using Epilogger.Web.Model;
 using SubSonic.Schema;
 using System.Data;
+using Epilogger.Web.Models;
 
 namespace Epilogger.Web
 {
@@ -51,7 +52,25 @@ namespace Epilogger.Web
             return TheTopPhotos;
         }
 
+        public List<TopImageAndTweet> GetTopPhotosAndTweetByEventID(int EventID, int RecordsToReturn, DateTime FromDateTime, DateTime ToDateTime)
+        {
+            List<TopPhotos> TPs = db.GetTopPhotosByEventID(EventID, RecordsToReturn, FromDateTime, ToDateTime).ExecuteTypedList<TopPhotos>();
 
+            TweetService TS = new TweetService();
+            
+            List<TopImageAndTweet> TheTopPhotos = new List<TopImageAndTweet>();
+            foreach (TopPhotos TP in TPs)
+            {
+                TopImageAndTweet TheImage = new TopImageAndTweet();
+                TheImage.Image = FindByID(TP.ImageID);
+                TheImage.Tweet = TS.FindByTwitterID(TheImage.Image.ImageMetaData.FirstOrDefault().TwitterID);
+                TheTopPhotos.Add(TheImage);
+            }
+
+            return TheTopPhotos;
+        }
+
+        //TopImageAndTweet
 
 
 
