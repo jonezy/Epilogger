@@ -15,4 +15,6 @@
            
 </div>
 
-
+@if (Model.UserLoggedIn && Model.CurrentUserRole == UserRoleType.Administrator) {
+    <div id="admin-area"><a href="#demo" class="displayClicks">CM</a></div> 
+}
