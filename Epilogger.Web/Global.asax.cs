@@ -202,7 +202,7 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.CurrentPageIndex, opt => opt.Ignore())
                 .ForMember(dest => dest.TotalRecords, opt => opt.Ignore())
                 .ForMember(dest => dest.Links, opt => opt.Ignore());
-            //Mapper.CreateMap<AddLinkViewModel, URL>();
+
             Mapper.CreateMap<CheckIn, CheckinDisplayViewModel>()
                 .ForMember(dest =>dest.Tweet, opt => opt.MapFrom(src => src.Tweets.FirstOrDefault()));
             
@@ -232,7 +232,7 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.ForgotPasswordHash, opt => opt.Ignore())
                 .ForMember(dest => dest.ID, opt => opt.Ignore())
                 .ForMember(dest => dest.Password, opt => opt.MapFrom(src => PasswordHelpers.EncryptPassword(src.Password)))
-                .ForMember(dest => dest.IsActive, opt => opt.UseValue(true))
+                .ForMember(dest => dest.IsActive, opt => opt.UseValue(false))
                 .ForMember(dest => dest.CreatedDate, opt => opt.UseValue(DateTime.UtcNow))
                 .ForMember(dest => dest.ProfilePicture, opt => opt.Ignore())
                 .ForMember(dest => dest.DateOfBirth, opt => opt.MapFrom(src => DateTime.Parse(src.DateOfBirth)));
