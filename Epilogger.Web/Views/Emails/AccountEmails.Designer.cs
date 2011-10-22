@@ -72,7 +72,7 @@ namespace Epilogger.Web.Views.Emails {
         ///    
         ///        /* Client-specific Styles */
         ///        #outlook a { padding: 0; } /* Force Outlook to provide a &quot;view in browser&quot; button. */
-        ///        body { width: 100% !important; } .ReadM [rest of string was truncated]&quot;;.
+        ///        body { width: 100% !importan [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ForgotPassword {
             get {
@@ -92,7 +92,7 @@ namespace Epilogger.Web.Views.Emails {
         ///    
         ///        /* Client-specific Styles */
         ///        #outlook a { padding: 0; } /* Force Outlook to provide a &quot;view in browser&quot; button. */
-        ///        body { width: 100% !important; } .ReadM [rest of string was truncated]&quot;;.
+        ///        body { width: 100% !importan [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ValidateAccount {
             get {

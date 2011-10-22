@@ -489,6 +489,7 @@
     <Content Include="Views\Dashboard\AllEvents.cshtml" />
     <Content Include="Views\Dashboard\_EventListItem.cshtml" />
     <Content Include="Views\Events\AllStats.cshtml" />
+    <Content Include="Views\Account\Validate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
