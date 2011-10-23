@@ -71,7 +71,6 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpGet]
-        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to participate in the epilogger alpha.")]
         public ActionResult Validate(string validationCode) {
             if (string.IsNullOrEmpty(validationCode)) {
                 this.StoreError("The verification code couldn't be determined, please try clicking the link in your email again.");
@@ -204,13 +203,11 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpGet]
-        //[RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to participate in the epilogger alpha.")]
         public ActionResult ForgotPassword() {
             return View();
         }
 
         [HttpPost, ValidateInput(false)]
-        //[RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to participate in the epilogger alpha.")]
         public ActionResult ForgotPassword(ForgotPasswordViewModel model) {
             try {
                 Guid passwordResetHash = Guid.NewGuid();
@@ -247,7 +244,6 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpGet]
-        //[RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to participate in the epilogger alpha.")]
         public ActionResult ResetPassword() {
             Guid passwordResetHash = Guid.Parse(Request.QueryString["hash"].ToString());
             User user = service.GetUserByResetHash(passwordResetHash);
@@ -262,7 +258,6 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpPost, ValidateInput(false)]
-        //[RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to participate in the epilogger alpha.")]
         public ActionResult ResetPassword(ResetPasswordViewModel model) {
             try {
                 User user = service.GetUserByID(CurrentUserID);
