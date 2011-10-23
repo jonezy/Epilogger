@@ -96,8 +96,9 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         
-        public ActionResult Index(string filter) {
+        public ActionResult Index(string filter, int? page) {
 
+            int currentPage = page.HasValue ? page.Value - 1 : 0;
 
             BrowseEventsDisplayViewModel model = new BrowseEventsDisplayViewModel();
 
@@ -117,13 +118,15 @@ namespace Epilogger.Web.Controllers {
             switch (filter)
             {
                 case "upcoming":
-                    events = ES.UpcomingEvents().OrderBy(i => i.StartDateTime).ToList();
+                    events = ES.UpcomingEventsPaged(currentPage, 10);
                     break;
                 case "past":
-                    events = ES.PastEvents().OrderByDescending(i => i.StartDateTime).ToList();
+                    events = ES.PastEventsPaged(currentPage, 10);
+                    model.TotalRecords = ES.PastEventCount();
                     break;
                 case "now":
-                    events = ES.GoingOnNowEvents().OrderBy(ne=>ne.EndDateTime.GetValueOrDefault()).ToList();
+                    events = ES.GoingOnNowEventsPaged(currentPage, 10);
+                    model.TotalRecords = ES.GoingOnNowEventsCount();
                     break;
                 case "random":
                     Epilogger.Data.Event e = ES.GetRandomEvent();
@@ -147,14 +150,12 @@ namespace Epilogger.Web.Controllers {
 
             model.BrowsePageFilter = filter;
 
-            model.Events = Mapper.Map<List<Event>, List<DashboardEventViewModel>>(events);
-            //Not use if this is needed yet.
-            //model.Events = events;
+            model.CurrentPageIndex = currentPage;
+            
 
+            model.Events = Mapper.Map<List<Event>, List<DashboardEventViewModel>>(events);           
             
             //For the Overview page, the hottest events
-
-
             model.HottestEvents = new List<HotestEventsModel>();
             foreach (Epilogger.Data.Event item in ES.GetHottestEvents(5))
             {

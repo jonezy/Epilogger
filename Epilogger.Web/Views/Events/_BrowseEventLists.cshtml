@@ -31,4 +31,6 @@
         </div>
     }
 
+    @MvcHtmlString.Create(Html.Pager(10, Model.CurrentPageIndex, Model.TotalRecords, new { controller = "Events", action = "index", filter = Model.BrowsePageFilter }))
+
 </div>
