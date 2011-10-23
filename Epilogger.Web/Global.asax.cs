@@ -144,6 +144,12 @@ namespace Epilogger.Web {
 
 
             routes.MapRoute(
+                "InEventSearch",
+                "events/{id}/{action}/{IEsearchterm}",
+                new { controller = "events", action = "index", id = UrlParameter.Optional, IEsearchterm = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 "EventsRoutes",
                 "events/{id}/{action}",
                 new { controller = "events", action = "index", id = UrlParameter.Optional }
