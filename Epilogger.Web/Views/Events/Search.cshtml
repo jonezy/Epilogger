@@ -6,10 +6,10 @@
     Layout = "~/Views/Shared/_InteriorLayout.cshtml";
     ViewBag.Title = "Epilogger - " + Model.Name + "- Search";
 }
-@Html.Partial("EventToolbar")
+@Html.Partial("EventToolbar", Model.ToolbarViewModel)
 <div id="events-nav">
     <h1>SEARCH EVENT</h1>
-    @if (@Model.SearchResults.Count() > 0)
+    @if (@Model.SearchResults != null && @Model.SearchResults.Count() > 0)
     {<h2>@Model.SearchTerm - @Model.SearchResults.Count() results</h2>}
     <br style="clear:both;" />
     @using (Html.BeginForm("Search", "events", FormMethod.Post, null))
@@ -21,20 +21,21 @@
 </div>
 <div id="events-content">
 
-    @foreach (SearchInEventModel item in Model.SearchResults) {
+@if (Model.SearchResults != null) {
+    foreach (SearchInEventModel item in Model.SearchResults) {
         <div class="alltweets-entry clearfix">
             <img src="@item.Tweet.ProfileImageURL" class="fleft" height="48" width="48" alt="" />
             <div class="tweet-content">
                 <strong><a href="http://www.twitter.com/@item.Tweet.FromUserScreenName" class="tweet-content-username" target="_blank">@item.Tweet.FromUserScreenName</a></strong>
                 <p>@Html.Raw(item.Tweet.TextAsHTML)</p>
-                @if (@item.Image != null)
-                {
+                @if (@item.Image != null) {
                     @Html.Partial("_ImageTemplate", item.Image)
                 }
                 <span class="tweet-date">(@Html.DisplayFor(thing => item.Tweet.CreatedDate))</span>
             </div>
         </div>
     }
+}
 
     @*@MvcHtmlString.Create(Html.Pager(100, Model.CurrentPageIndex, Model.SearchResults.Count(), new { controller = "Events", action = "Search", id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }))*@
 </div>

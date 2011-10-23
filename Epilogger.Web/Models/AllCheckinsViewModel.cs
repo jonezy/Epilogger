@@ -8,6 +8,7 @@ namespace Epilogger.Web.Models {
         public int CurrentPageIndex { get; set; }
         public int TotalRecords { get; set; }
         public List<CheckinDisplayViewModel> Checkins { get; set; }
+        public EventToolbarViewModel ToolbarViewModel { get; set; }
 
         public AllCheckinsViewModel(List<CheckinDisplayViewModel> activities, int currentPageIndex, int totalRecords) {
             CurrentPageIndex = currentPageIndex;

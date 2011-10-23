@@ -6,7 +6,7 @@
     ViewBag.Title = "Epilogger - Edit Event - " + @Model.Name;
 }
 
-@Html.Partial("EventToolbar")
+@Html.Partial("EventToolbar", Model.ToolbarViewModel)
 
 <div id="events-nav">
     <h1>EDIT EVENT</h1>

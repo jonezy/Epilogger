@@ -9,6 +9,8 @@ namespace Epilogger.Web.Models {
         public int TotalRecords { get; set; }
         public List<BlogPostDisplayViewModel> BlogPosts { get; set; }
 
+        public EventToolbarViewModel ToolbarViewModel { get; set; }
+
         public AllBlogPostsViewModel()
         {
         }

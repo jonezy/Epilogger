@@ -6,7 +6,7 @@
     ViewBag.Title = "Epilogger - All Stats";
     Layout = "~/Views/Shared/_InteriorLayout.cshtml";
 }
-@Html.Partial("EventToolbar")
+@Html.Partial("EventToolbar", Model.ToolbarViewModel)
 
 <div id="reportContainer">
     <strong>While Epilogger is in Alpha, please enjoy just some of the statistics that we can provide about your event.</strong>

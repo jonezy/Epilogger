@@ -16,5 +16,7 @@ namespace Epilogger.Web.Models
         
 
         public List<SearchInEventModel> SearchResults { get; set; }
+
+        public EventToolbarViewModel ToolbarViewModel { get; set; }
     }
 }

@@ -183,7 +183,7 @@ namespace Epilogger.Web {
 
         private void RegisterAutomapperMappings() {
             Mapper.CreateMap<Tweet, TweetDisplayViewModel>();
-                
+
             Mapper.CreateMap<Event, EventDisplayViewModel>()
                 .ForMember(dest => dest.Images, opt => opt.Ignore())
                 .ForMember(dest => dest.CheckIns, opt => opt.Ignore())
@@ -199,7 +199,8 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.CurrentUserID, opt => opt.Ignore())
                 .ForMember(dest => dest.FromDateTime, opt => opt.Ignore())
                 .ForMember(dest => dest.ToDateTime, opt => opt.Ignore())
-                .ForMember(dest => dest.Venue, opt => opt.MapFrom(src => src.Venues.FirstOrDefault()));
+                .ForMember(dest => dest.Venue, opt => opt.MapFrom(src => src.Venues.FirstOrDefault()))
+                .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore());
 
             Mapper.CreateMap<Event, AllStatsViewModel>()
                 .ForMember(dest => dest.CurrentPageIndex, opt => opt.Ignore())
@@ -213,7 +214,8 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.MyUTCNow, opt => opt.Ignore())
                 .ForMember(dest => dest.TopTweeters, opt => opt.Ignore())
                 .ForMember(dest => dest.AllCheckIns, opt => opt.Ignore())
-                .ForMember(dest => dest.TopLinks, opt => opt.Ignore());
+                .ForMember(dest => dest.TopLinks, opt => opt.Ignore())
+                .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore()); ;
                
 
             Mapper.CreateMap<Event, AllContentViewModel>();
@@ -221,7 +223,8 @@ namespace Epilogger.Web {
             Mapper.CreateMap<Event, AllLinksViewModel>()
                 .ForMember(dest => dest.CurrentPageIndex, opt => opt.Ignore())
                 .ForMember(dest => dest.TotalRecords, opt => opt.Ignore())
-                .ForMember(dest => dest.Links, opt => opt.Ignore());
+                .ForMember(dest => dest.Links, opt => opt.Ignore())
+                .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore());
 
             Mapper.CreateMap<CheckIn, CheckinDisplayViewModel>()
                 .ForMember(dest =>dest.Tweet, opt => opt.MapFrom(src => src.Tweets.FirstOrDefault()));
@@ -242,7 +245,8 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.BlogPosts, opt => opt.Ignore())
                 .ForMember(dest => dest.CurrentPageIndex, opt => opt.Ignore())
                 .ForMember(dest => dest.PageSize, opt => opt.Ignore())
-                .ForMember(dest => dest.TotalRecords, opt => opt.Ignore());
+                .ForMember(dest => dest.TotalRecords, opt => opt.Ignore())
+                .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore());
 
 
 
@@ -291,7 +295,8 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.CurrentPageIndex, opt => opt.Ignore())
                 .ForMember(dest => dest.ShowTopPhotos, opt => opt.Ignore())
                 .ForMember(dest => dest.Images, opt => opt.Ignore())
-                .ForMember(dest => dest.TopImages, opt => opt.Ignore());
+                .ForMember(dest => dest.TopImages, opt => opt.Ignore())
+                .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore());
 
             Mapper.CreateMap<Event, AllTweetsDisplayViewModel>()
                 .ForMember(dest => dest.TweetCount, opt => opt.Ignore())
@@ -300,13 +305,15 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.ShowTopTweets, opt => opt.Ignore())
                 .ForMember(dest => dest.Tweets, opt => opt.Ignore())
                 .ForMember(dest => dest.UniqueTweeterCount, opt => opt.Ignore())
-                .ForMember(dest => dest.TopTweeters, opt => opt.Ignore());
+                .ForMember(dest => dest.TopTweeters, opt => opt.Ignore())
+                .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore());
 
 
             Mapper.CreateMap<Event, CreateEventViewModel>()
                 .ForMember(dest => dest.FoursquareVenueID, opt => opt.MapFrom(src => src.VenueID.HasValue ? src.Venues.FirstOrDefault().FoursquareVenueID : string.Empty))
                 .ForMember(dest => dest.TimeZones, opt => opt.ResolveUsing<TimezonesResolver>())
-                .ForMember(dest => dest.Venue, opt => opt.MapFrom(src => src.Venues.FirstOrDefault()));
+                .ForMember(dest => dest.Venue, opt => opt.MapFrom(src => src.Venues.FirstOrDefault()))
+                .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore());
                 //.ForMember(dest => dest.CollectionStartDateTime, opt => opt.MapFrom(src => src.CollectionStartDateTime.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5"))))
                 //.ForMember(dest => dest.CollectionEndDateTime, opt => opt.MapFrom(src => src.CollectionEndDateTime.HasValue ? src.CollectionEndDateTime.Value.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5")) : src.CollectionEndDateTime))
                 //.ForMember(dest => dest.StartDateTime, opt => opt.MapFrom(src => src.StartDateTime.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5"))))

@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_InteriorLayout.cshtml";
     ViewBag.Title = "Epilogger - " + Model.Name + "- Check Ins";
 }
-@Html.Partial("EventToolbar")
+@Html.Partial("EventToolbar", Model.ToolbarViewModel)
 
 <div id="events-nav">
     <h1>ALL @Model.TotalRecords CHECK INS</h1>

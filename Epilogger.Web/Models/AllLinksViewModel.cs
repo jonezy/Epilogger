@@ -9,6 +9,7 @@ namespace Epilogger.Web.Models {
         public int TotalRecords { get; set; }
 
         public IEnumerable<Epilogger.Data.URL> Links { get; set; }
+        public EventToolbarViewModel ToolbarViewModel { get; set; }
 
     }
 }
