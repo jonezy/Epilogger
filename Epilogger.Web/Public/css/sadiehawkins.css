@@ -666,6 +666,9 @@ ul#left-nav li ul li a.current {color:#a44b79;}
     width:185px;
     color:#828282;}
     
+.dashboard-activity-entry h2 a { color: #ee4490;}
+.dashboard-activity-entry h2 a:hover { text-decoration: underline; }
+    
 .dashboard-activity-entry strong.title {
     color:#5086b9;
     margin-bottom:10px;
@@ -691,6 +694,7 @@ ul#left-nav li ul li a.current {color:#a44b79;}
 #homepage-content {float:left;width:880px;}
 .homepage-activity-entry { float:left;height:184px;overflow:hidden;margin:0px 20px 20px 0px;width:200px;color:#828282; }
 .homepage-activity-entry h2 a { color: #ee4490;}
+.homepage-activity-entry h2 a:hover { text-decoration: underline; }
 .homepage-activity-entry strong.title {font-weight:normal; color:#5086b9;margin-bottom:10px;padding-left:24px;background-image:url(../images/event_activity_title_icons.png);background-repeat: no-repeat;font-size:12px;text-transform:uppercase;margin-bottom:5px;display:block; }
 .homepage-activity-entry strong.title.TWEET {background-position:0 0;}
 .homepage-activity-entry strong.title.PHOTOS_VIDEOS { background-position:0 -50px;padding-left:28px; }
@@ -1133,8 +1137,7 @@ div#search-container input[type=image] {
 	margin:0;
 	padding:0;
 	background-position: left top;
-	float:left;
-	margin:0 0 0 15px}
+	float:left; }
 
 .star-rating li {
 	display: inline;}
@@ -1185,7 +1188,7 @@ div#search-container input[type=image] {
 
 .smallRateLink { 
     position:relative;
-    top:10px;
+    top:15px;
     left:-83px;
     color:#c0c0c0; 
     padding-left:4px; 
@@ -1213,11 +1216,11 @@ a.smallRateLink:hover { text-decoration: underline; }
 /* for the Rating popup */
  #RatingPopUpDiv.uiPopUp {
     padding: 10px;
-    background: #418fbf url('../images/icons/popUpNub.png') top center no-repeat;  
+    background: #9ab1bf url('../images/icons/popUpNub.png') top center no-repeat;  
     width: 75px; 
-    position: relative; 
-    left: -10px;
-    top: 0px;
+    position: absolute; 
+    left: 9px;
+    top: 100px;
     z-index: 1000; }
 
 #SearchHelpPopUpDiv.uiPopUp 

@@ -90,13 +90,12 @@ else
     }
     <div class="grid_10 alpha">
         <h1>@Model.Name</h1>
-        <h2>
-            <span style="float:left">@Model.SubTitle</span>
-            
+        <h2><span style="float:left">@Model.SubTitle</span></h2>
+        <br class="clear" />
 
-             @*Event Rating Section*@
-             @if (!Model.HasUserRated)
-             {
+        @*Event Rating Section*@
+        @if (!Model.HasUserRated)
+        {
             <ul class="star-rating">
                 @if (Model.EventRatings.Sum(i => i.UserRating) > 0)
                 {
@@ -131,7 +130,7 @@ else
             </ul>
             <div class="starSmall">You rated @Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID && i.EventID == Model.ID).FirstOrDefault().UserRating stars on <br /> @Html.DisplayFor(thing => Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime, "ShortDateTime")</div>
         }
-        </h2>
+        
 
         <div id="event-intro">
             @Html.Raw(Model.Description.Replace("\r", "<br />"))
