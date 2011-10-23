@@ -211,7 +211,7 @@ namespace Epilogger.Web.Controllers {
         public ActionResult ForgotPassword(ForgotPasswordViewModel model) {
             try {
                 Guid passwordResetHash = Guid.NewGuid();
-                User user = service.GetUserByEmail(model.EmailAddress);
+                User user = service.GetUserByEmail(model.EmailAddress.Trim());
                 if (user == null) {
                     this.StoreWarning("There is no account on epilogger.com that uses that email address");
                     return View();
@@ -252,15 +252,16 @@ namespace Epilogger.Web.Controllers {
                 return View();
             }
 
-            CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString());
+            ResetPasswordViewModel model = new ResetPasswordViewModel();
+            model.UserID = user.ID.ToString();
 
-            return View(new ResetPasswordViewModel());
+            return View(model);
         }
 
         [HttpPost, ValidateInput(false)]
         public ActionResult ResetPassword(ResetPasswordViewModel model) {
             try {
-                User user = service.GetUserByID(CurrentUserID);
+                User user = service.GetUserByID(Guid.Parse(model.UserID));
                 user.Password = PasswordHelpers.EncryptPassword(model.NewPassword);
                 user.ForgotPasswordHash = null;
 
