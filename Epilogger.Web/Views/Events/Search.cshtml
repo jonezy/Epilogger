@@ -6,7 +6,9 @@
     Layout = "~/Views/Shared/_InteriorLayout.cshtml";
     ViewBag.Title = "Epilogger - " + Model.Name + "- Search";
 }
+
 @Html.Partial("EventToolbar", Model.ToolbarViewModel)
+
 <div id="events-nav">
     <h1>SEARCH EVENT</h1>
     @if (@Model.SearchResults != null && @Model.SearchResults.Count() > 0)

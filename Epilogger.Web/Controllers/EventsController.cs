@@ -685,6 +685,8 @@ namespace Epilogger.Web.Controllers {
             s.Name = ThisEvent.Name;
             s.SearchResults = ES.SearchInEvent(id, SearchTerm, this.FromDateTime(), this.ToDateTime());
 
+            s.ToolbarViewModel = BuildToolbarViewModel(ThisEvent);
+
             return View(s);
         }
 
