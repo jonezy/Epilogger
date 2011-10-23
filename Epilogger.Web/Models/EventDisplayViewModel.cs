@@ -51,6 +51,8 @@ namespace Epilogger.Web.Models {
         public IEnumerable<Epilogger.Data.URL> ExternalLinks { get; set; }
         public IEnumerable<Epilogger.Data.BlogPost> BlogPosts { get; set; }
         public Epilogger.Data.Venue Venue { get; set; }
+
+        public EventToolbarViewModel ToolbarViewModel { get; set; }
         
     }
 }

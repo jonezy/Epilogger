@@ -73,5 +73,8 @@ namespace Epilogger.Web.Models {
                 return categories.Select(c => new SelectListItem { Text = c.CategoryName, Value = c.ID.ToString()});
             }
         }
+
+        public EventToolbarViewModel ToolbarViewModel { get; set; }
+
     }
 }
