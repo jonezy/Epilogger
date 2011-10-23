@@ -1,6 +1,15 @@
-﻿@{
-    Layout = "~/Views/Shared/_InteriorLayout.cshtml";
-    ViewBag.Title = "Index.cshtml";
+﻿@model Epilogger.Web.Areas.Admin.Models.InviteUsersViewModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Invite Beta Users";
 }
 
 <h2>Invite Beta Users</h2>
+<p>Enter one or more (if more than one make sure that the addresses are delimeted with a comma, me@me.com,you@you.com) email addreses to invite to use the epilogger alpha</p>
+<p>You must also ensure that the users email address is in the BetaInvite table in the database or they won't be able to sign up for an account!</p>
+@using (Html.BeginForm("Index", "Email", FormMethod.Post)) {
+<fieldset style="width:75%;">
+    <p>@Html.LabelFor(m => m.EmailAddresses) @Html.TextAreaFor(m => m.EmailAddresses)</p>
+    <p><input type="submit" class="blue-action-button" value="invite users" onclick="return confirm('Are you sure you want to invite those users?')" /></p>
+</fieldset>
+}

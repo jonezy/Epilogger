@@ -131,6 +131,8 @@
     </Compile>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\EmailController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Models\InviteUsersViewModel.cs" />
     <Compile Include="Areas\Authentication\AuthenticationAreaRegistration.cs" />
     <Compile Include="Areas\Authentication\Controllers\FacebookController.cs" />
     <Compile Include="Areas\Authentication\Controllers\IAuthenticationController.cs" />
@@ -400,7 +402,6 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Authentication\Models\" />
     <Folder Include="Areas\Authentication\Views\Shared\" />
@@ -497,6 +498,8 @@
     <Content Include="Views\Account\Validate.cshtml" />
     <Content Include="Areas\Admin\Views\Web.config" />
     <Content Include="Areas\Admin\Views\Email\Index.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
