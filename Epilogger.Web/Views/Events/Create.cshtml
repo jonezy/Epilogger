@@ -94,6 +94,8 @@
         <div class="item-data clearfix">
             <p>@Html.LabelFor(model => model.Description) @Html.TextAreaFor(model => model.Description, new { @class = "wide" })</p>
 
+            <p>@Html.LabelFor(model => model.WebsiteURL) @Html.TextBoxFor(model => model.WebsiteURL, new { @class = "wide" })</p>
+
             <div class="grid_4 alpha">
                 <p>@Html.LabelFor(model => model.TwitterAccount) @Html.TextBoxFor(model => model.TwitterAccount, new { @class = "med" })</p>
             </div>
