@@ -83,10 +83,12 @@ function AddBlogPost(url) {
                 FlashMessage("Your blog post was added", "Message_Success");
                 //Dismis the popup
                 $.colorbox.close();
+                window.location.reload();
             } else {
                 FlashMessage("There was a problem adding your blog post", "Message_Error");
             }
         });
+    return false;
 }
 
 
