@@ -170,7 +170,7 @@ namespace Epilogger.Web.Controllers {
                 }
 
                 if (user.IsActive == false) {
-                    this.StoreError("Your account hasn't been activated yet");
+                    this.StoreError("Your account has not been activated yet, please click the link in the verification email that was sent to you.");
                     return RedirectToAction("login");
                 }
 
