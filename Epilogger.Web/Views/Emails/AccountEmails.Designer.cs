@@ -74,6 +74,26 @@ namespace Epilogger.Web.Views.Emails {
         ///        #outlook a { padding: 0; } /* Force Outlook to provide a &quot;view in browser&quot; button. */
         ///        body { width: 100% !importan [rest of string was truncated]&quot;;.
         /// </summary>
+        internal static string BetaInvite {
+            get {
+                return ResourceManager.GetString("BetaInvite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;
+        ///    &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt; 
+        ///    
+        ///&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+        ///&lt;head&gt;
+        ///    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+        ///    &lt;title&gt;Welcome to Epilogger.com&lt;/title&gt;
+        ///    &lt;style type=&quot;text/css&quot;&gt;
+        ///    
+        ///        /* Client-specific Styles */
+        ///        #outlook a { padding: 0; } /* Force Outlook to provide a &quot;view in browser&quot; button. */
+        ///        body { width: 100% !importan [rest of string was truncated]&quot;;.
+        /// </summary>
         internal static string ForgotPassword {
             get {
                 return ResourceManager.GetString("ForgotPassword", resourceCulture);
