@@ -677,17 +677,19 @@ namespace Epilogger.Web.Controllers {
             int.TryParse(fc["ID"].ToString(), out id);
             SearchTerm = fc["SearchTerm"].ToString();
 
-            SearchInEventViewModel s = new SearchInEventViewModel();
-            s.ID = id;
-            s.SearchTerm = SearchTerm;
-            Event ThisEvent = new Event();
-            ThisEvent = ES.FindByID(id);
-            s.Name = ThisEvent.Name;
-            s.SearchResults = ES.SearchInEvent(id, SearchTerm, this.FromDateTime(), this.ToDateTime());
+            return RedirectToAction("Search", new { id = id, IEsearchterm = SearchTerm });
 
-            s.ToolbarViewModel = BuildToolbarViewModel(ThisEvent);
+            //SearchInEventViewModel s = new SearchInEventViewModel();
+            //s.ID = id;
+            //s.SearchTerm = SearchTerm;
+            //Event ThisEvent = new Event();
+            //ThisEvent = ES.FindByID(id);
+            //s.Name = ThisEvent.Name;
+            //s.SearchResults = ES.SearchInEvent(id, SearchTerm, this.FromDateTime(), this.ToDateTime());
 
-            return View(s);
+            //s.ToolbarViewModel = BuildToolbarViewModel(ThisEvent);
+
+            //return View(s);
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
