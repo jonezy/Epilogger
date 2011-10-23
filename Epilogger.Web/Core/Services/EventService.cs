@@ -17,24 +17,39 @@ namespace Epilogger.Web {
             return base.GetData();
         }
 
+
+        /* Upcoming events */
         public List<Event> UpcomingEvents()
         {
-            return GetData(e => e.StartDateTime > DateTime.UtcNow);
+            return db.Events.Where(e => e.StartDateTime > DateTime.UtcNow).ToList();
+        }
+        public int UpcomingEventCount()
+        {
+            return db.Events.Where(e => e.StartDateTime > DateTime.UtcNow).Count();
+        }
+        public List<Event> UpcomingEventsPaged(int currentPage, int recordsPerPage)
+        {
+            var es = db.Events.Where(e => e.StartDateTime > DateTime.UtcNow);
+            return es.Skip(currentPage * recordsPerPage).Take(recordsPerPage).OrderBy(c => c.CreatedDateTime).ToList();
         }
 
+
+        /* Past events */
         public List<Event> PastEvents()
         {
             return GetData(e => e.EndDateTime < DateTime.UtcNow).ToList();
         }
-
-        public List<Event> TodaysEvents()
+        public int PastEventCount()
         {
-            return GetData(IsSameDate<Event>(e => e.StartDateTime, DateTime.UtcNow)).ToList();
+            return db.Events.Where(e => e.EndDateTime < DateTime.UtcNow).Count();
         }
-        public IEnumerable<HomepageActivityModel> GetHomepageActivity() {
-            StoredProcedure sp = db.GetHomePageActivity();
-            return sp.ExecuteTypedList<HomepageActivityModel>();
+        public List<Event> PastEventsPaged(int currentPage, int recordsPerPage)
+        {
+            var es = db.Events.Where(e => e.EndDateTime < DateTime.UtcNow);
+            return es.Skip(currentPage * recordsPerPage).Take(recordsPerPage).OrderByDescending(c => c.CreatedDateTime).ToList();
         }
+
+        /* Now events */
         public List<Event> GoingOnNowEvents()
         {
             IEnumerable<Event> neverEndingEvents = from e in GetData()
@@ -42,13 +57,51 @@ namespace Epilogger.Web {
                                                    select e;
 
             IEnumerable<Event> happeningNow = from e in GetData()
-                                         where (e.StartDateTime <= DateTime.UtcNow && (e.EndDateTime != null && e.EndDateTime >= DateTime.UtcNow))
-                                         select e;
+                                              where (e.StartDateTime <= DateTime.UtcNow && (e.EndDateTime != null && e.EndDateTime >= DateTime.UtcNow))
+                                              select e;
 
-            return neverEndingEvents.Concat(happeningNow).OrderBy(e=>e.StartDateTime).ToList();
-            //return GetData(e => e.StartDateTime <= DateTime.UtcNow && e.EndDateTime >= DateTime.UtcNow).ToList();
+            return neverEndingEvents.Concat(happeningNow).OrderBy(e => e.StartDateTime).ToList();
+        }
+        public int GoingOnNowEventsCount()
+        {
+            IEnumerable<Event> neverEndingEvents = from e in GetData()
+                                                   where e.EndDateTime == null
+                                                   select e;
+
+            IEnumerable<Event> happeningNow = from e in GetData()
+                                              where (e.StartDateTime <= DateTime.UtcNow && (e.EndDateTime != null && e.EndDateTime >= DateTime.UtcNow))
+                                              select e;
+
+            return neverEndingEvents.Concat(happeningNow).Count();
+        }
+        public List<Event> GoingOnNowEventsPaged(int currentPage, int recordsPerPage)
+        {
+            IEnumerable<Event> neverEndingEvents = from e in GetData()
+                                                   where e.EndDateTime == null
+                                                   select e;
+
+            IEnumerable<Event> happeningNow = from e in GetData()
+                                              where (e.StartDateTime <= DateTime.UtcNow && (e.EndDateTime != null && e.EndDateTime >= DateTime.UtcNow))
+                                              select e;
+
+            neverEndingEvents = neverEndingEvents.Concat(happeningNow).OrderBy(e => e.StartDateTime);
+            return neverEndingEvents.Skip(currentPage * recordsPerPage).Take(recordsPerPage).ToList();
         }
 
+
+
+
+
+
+        public List<Event> TodaysEvents()
+        {
+            return GetData(IsSameDate<Event>(e => e.StartDateTime, DateTime.UtcNow)).ToList();
+        }
+
+        public IEnumerable<HomepageActivityModel> GetHomepageActivity() {
+            StoredProcedure sp = db.GetHomePageActivity();
+            return sp.ExecuteTypedList<HomepageActivityModel>();
+        }
       
 
         public Event GetRandomEvent()

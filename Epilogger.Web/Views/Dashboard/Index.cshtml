@@ -22,14 +22,15 @@
         } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_RATING) {
             @:RATED AN EVENT
         } else {
-            @item.EventName
+            @Html.ActionLink(item.EventName, "details", "events", new { @id = item.EventID }, null)
         }</strong>
         
         @if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION || 
             item.ActivityType == Epilogger.Web.Models.ActivityType.FOLLOW_EVENT) {
-            <h2>@MvcHtmlString.Create(item.EventName)</h2>
+            @*<h2>@MvcHtmlString.Create(item.EventName)</h2>*@
+            <h2><br />@Html.ActionLink(item.EventName, "details", "events", new { @id = item.EventID }, null)</h2>
         } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_RATING) {
-           <h2>you rated @item.EventName @MvcHtmlString.Create(item.ActivityContent) out of 5 stars</h2>
+           <h2>you rated @Html.ActionLink(item.EventName, "details", "events", new { @id = item.EventID }, null) @MvcHtmlString.Create(item.ActivityContent) out of 5 stars</h2>
         } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.PHOTOS_VIDEOS) {
             <img src="@item.ActivityContent" width="170" height="140" />
         } else {

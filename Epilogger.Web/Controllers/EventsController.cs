@@ -97,8 +97,9 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         
-        public ActionResult Index(string filter) {
+        public ActionResult Index(string filter, int? page) {
 
+            int currentPage = page.HasValue ? page.Value - 1 : 0;
 
             BrowseEventsDisplayViewModel model = new BrowseEventsDisplayViewModel();
 
@@ -118,13 +119,15 @@ namespace Epilogger.Web.Controllers {
             switch (filter)
             {
                 case "upcoming":
-                    events = ES.UpcomingEvents().OrderBy(i => i.StartDateTime).ToList();
+                    events = ES.UpcomingEventsPaged(currentPage, 10);
                     break;
                 case "past":
-                    events = ES.PastEvents().OrderByDescending(i => i.StartDateTime).ToList();
+                    events = ES.PastEventsPaged(currentPage, 10);
+                    model.TotalRecords = ES.PastEventCount();
                     break;
                 case "now":
-                    events = ES.GoingOnNowEvents().OrderBy(ne=>ne.EndDateTime.GetValueOrDefault()).ToList();
+                    events = ES.GoingOnNowEventsPaged(currentPage, 10);
+                    model.TotalRecords = ES.GoingOnNowEventsCount();
                     break;
                 case "random":
                     Epilogger.Data.Event e = ES.GetRandomEvent();
@@ -148,14 +151,12 @@ namespace Epilogger.Web.Controllers {
 
             model.BrowsePageFilter = filter;
 
-            model.Events = Mapper.Map<List<Event>, List<DashboardEventViewModel>>(events);
-            //Not use if this is needed yet.
-            //model.Events = events;
+            model.CurrentPageIndex = currentPage;
+            
 
+            model.Events = Mapper.Map<List<Event>, List<DashboardEventViewModel>>(events);           
             
             //For the Overview page, the hottest events
-
-
             model.HottestEvents = new List<HotestEventsModel>();
             foreach (Epilogger.Data.Event item in ES.GetHottestEvents(5))
             {
@@ -206,6 +207,7 @@ namespace Epilogger.Web.Controllers {
             Model.CheckInCount = CS.FindCheckInCountByEventID(id, this.FromDateTime(), this.ToDateTime());
             Model.CheckIns = CS.FindByEventIDOrderDescTake5(id, this.FromDateTime(), this.ToDateTime());
             Model.ExternalLinks = LS.FindByEventIDOrderDescTake3(id, this.FromDateTime(), this.ToDateTime());
+            Model.BlogPosts = BS.FindByEventIDTake5(id, this.FromDateTime(), this.ToDateTime());
             Model.EventRatings = ES.FindEventRatingsByID(id, this.FromDateTime(), this.ToDateTime());
             Model.HasUserRated = false;
             Model.CurrentUserID = CurrentUserID;
@@ -237,7 +239,7 @@ namespace Epilogger.Web.Controllers {
 
 
             //Not optimized
-            Model.BlogPosts = BS.FindByEventID(id);
+            
 
             return View(Model);
         }
@@ -964,8 +966,12 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        public ActionResult AddBlogPost() {
-            return PartialView();
+        public ActionResult AddBlogPost(int id) {
+            AddBlogPostViewModel model = new AddBlogPostViewModel();
+            model.BlogURL = "http://";
+            model.EventID = id;
+
+            return PartialView(model);
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -976,6 +982,7 @@ namespace Epilogger.Web.Controllers {
                 BlogPost blogPost = Mapper.Map<AddBlogPostViewModel, BlogPost>(model);
                 blogPost.EventID = id;
                 blogPost.UserID = CurrentUserID;
+                blogPost.DateTime = DateTime.UtcNow;
                 BS.Save(blogPost);
 
                 return true;

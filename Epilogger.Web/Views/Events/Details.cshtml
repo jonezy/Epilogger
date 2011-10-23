@@ -90,13 +90,12 @@ else
     }
     <div class="grid_10 alpha">
         <h1>@Model.Name</h1>
-        <h2>
-            <span style="float:left">@Model.SubTitle</span>
-            
+        <h2><span style="float:left">@Model.SubTitle</span></h2>
+        <br class="clear" />
 
-             @*Event Rating Section*@
-             @if (!Model.HasUserRated)
-             {
+        @*Event Rating Section*@
+        @if (!Model.HasUserRated)
+        {
             <ul class="star-rating">
                 @if (Model.EventRatings.Sum(i => i.UserRating) > 0)
                 {
@@ -131,7 +130,7 @@ else
             </ul>
             <div class="starSmall">You rated @Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID && i.EventID == Model.ID).FirstOrDefault().UserRating stars on <br /> @Html.DisplayFor(thing => Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime, "ShortDateTime")</div>
         }
-        </h2>
+        
 
         <div id="event-intro">
             @Html.Raw(Model.Description.Replace("\r", "<br />"))
@@ -334,13 +333,18 @@ else
         <ul class="plain-list">
             @foreach (Epilogger.Data.BlogPost TheBlogPost in Model.BlogPosts.Take(3))
             {
-                <li>
-                    @*<img src="@Url.Content("~/Public/images/samples/avatar.png")" class="fleft"/>*@
+                <li class="blogpost">
+                    
                     <a href="@TheBlogPost.BlogURL">@TheBlogPost.Title</a><br />
+                    <p class="blogDescription">
+                        @TheBlogPost.Description<br />
+                        <span class="blogPostDate">@Html.DisplayFor(e => TheBlogPost.DateTime)</span>
+                    </p>
+                </li>
+                    @*<img src="@Url.Content("~/Public/images/samples/avatar.png")" class="fleft"/>*@
                     @*<small><a href="#">BY MICHAEL NUS</a></small><br />*@
-                    @*<p>
-                        After a very busy day of meetings and wheeling...</p>*@
-                    @*TODO - Add move fiels to the Blog table to store more Info!*@ </li>
+                    @*<p>After a very busy day of meetings and wheeling...</p>*@
+                    @*TODO - Add move fiels to the Blog table to store more Info!*@ 
             }
         </ul>
         <div class="clear">
@@ -409,14 +413,18 @@ else
         });
 
         $(".blogposts-modal").colorbox({
-            width: "60%", height: "60%",
-            href: '@Url.Action("AddBlogPost", "Events")'
+            width: "60%", height: "370px",
+            href: '@Url.Action("AddBlogPost", "Events", new { id = Model.ID })',
+            onComplete: function () { $("#BlogURL").focus(); }
         });
+
+
         $(".links-modal").colorbox({
             width: "60%", height: "60%",
             href: '@Url.Action("AddLink", "Events")'
         });
     });
+
 </script>
 
 
