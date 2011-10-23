@@ -1,16 +1,22 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 
 using Epilogger.Web.Areas.Admin.Models;
 using Epilogger.Web.Controllers;
 using Epilogger.Web.Core.Email;
-using System.Collections.Generic;
 using Epilogger.Web.Views.Emails;
+using Epilogger.Data;
 
 namespace Epilogger.Web.Areas.Admin.Controllers {
     [RequiresAuthentication(ValidUserRole = UserRoleType.Administrator, AccessDeniedMessage = "You must be an administrator to access this part of the site.")]
     public class EmailController : BaseController {
-        //
-        // GET: /Admin/Email/
+        UserService service;
+
+        protected override void Initialize(System.Web.Routing.RequestContext requestContext) {
+            if (service == null) service = new UserService();
+
+            base.Initialize(requestContext);
+        }
 
         public ActionResult Index() {
             return View(new InviteUsersViewModel());
@@ -23,8 +29,16 @@ namespace Epilogger.Web.Areas.Admin.Controllers {
                     this.StoreError("There are no email addresses to send the invite to, please enter at least one.");
                     return View(model);
                 }
+
                 int count = 0;
                 foreach (var email in emailAddresses) {
+                    // if the address isn't in the beta signup table, add it so they will pass the temp check on the create screen.
+                    if (!service.IsBetaUser(email)) {
+                        BetaSignup signup = new BetaSignup();
+                        signup.EmailAddress = email;
+
+                        service.SaveBetaSignup(signup);
+                    }
                     TemplateParser parser = new TemplateParser();
                     Dictionary<string, string> replacements = new Dictionary<string, string>();
                     replacements.Add("[BASE_URL]", App.BaseUrl);

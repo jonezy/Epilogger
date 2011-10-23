@@ -89,5 +89,12 @@ namespace Epilogger.Web {
             return MyEvents.OrderByDescending(e => e.StartDateTime).ToList();
         }
 
+        public bool IsBetaUser(string emailAddress) {
+            return base.db.BetaSignups.Where(b => b.EmailAddress == emailAddress).Count() > 0;
+        }
+
+        public object SaveBetaSignup(BetaSignup entity) {
+            return base.GetRepository<BetaSignup>().Add(entity);
+        }
     }
 }
