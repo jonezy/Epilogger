@@ -33,13 +33,11 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpGet]
-        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to participate in the epilogger alpha.")]
         public ActionResult Create() {
             return View(new CreateAccountModel());
         }
 
         [HttpPost]
-        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to participate in the epilogger alpha.")]
         public ActionResult Create(CreateAccountModel model) {
             if (ModelState.IsValid) {
                 try {
