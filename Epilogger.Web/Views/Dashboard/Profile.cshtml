@@ -18,7 +18,7 @@
         <div class="clear"></div>
         <div class="profile-data clearfix">
             @if(!string.IsNullOrEmpty(Model.ProfilePicture)) {
-                <img src="@Url.Content(Model.ProfilePicture.Replace("_normal", ""))" class="profile-picture fleft" width="150" height="150" />
+                <img src="@Url.Content(Model.ProfilePicture.Replace("_normal", ""))" class="profile-picture fleft" />
             }
             
             <div class="profile-content fleft">

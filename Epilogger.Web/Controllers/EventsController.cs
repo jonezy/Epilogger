@@ -635,14 +635,16 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        public ActionResult Search(int id)
+        public ActionResult Search(int id, string IEsearchterm)
         {
+
             SearchInEventViewModel s = new SearchInEventViewModel();
             s.ID = id;
+            s.SearchTerm = IEsearchterm;
             Event ThisEvent = new Event();
             ThisEvent = ES.FindByID(id);
             s.Name = ThisEvent.Name;
-            s.SearchResults = new List<SearchInEventModel>();
+            s.SearchResults = ES.SearchInEvent(id, IEsearchterm, this.FromDateTime(), this.ToDateTime());
 
             return View(s);
         }

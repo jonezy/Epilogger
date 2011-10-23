@@ -149,7 +149,10 @@
                     <tr>
 		 			    <td class="amount">@T.Total</td>
 		 			    <td valign="middle" class="separator"><span class="separator"></span></td>
-		 			    <td class="tweeter"><a href="http://www.twitter.com/@T.Name" target="_blank"><font class="lightgray">@@</font> @T.Name</a></td>
+		 			    @*<td class="tweeter"><a href="http://www.twitter.com/@T.Name" target="_blank"><font class="lightgray">@@</font> @T.Name</a></td>*@
+                        <td class="tweeter">
+                            <a href="@Url.Action("Search", "Events", new { id = @Model.ID, IEsearchterm = T.Name })"><font class="lightgray">@@</font> @T.Name</a>
+                        </td>
 		 		    </tr>
                 }
 		 	</table>
