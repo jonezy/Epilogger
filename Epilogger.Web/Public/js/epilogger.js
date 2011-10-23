@@ -68,6 +68,8 @@ function SetSelectedVenue(venueId, venueName, venueAddress, venueCity, venueStat
     $.colorbox.close();
 }
 
+
+
 function AddBlogPost(url) {
     var blogPost = {
             BlogURL: $("#BlogURL").val(),
@@ -79,11 +81,20 @@ function AddBlogPost(url) {
         function (data) {
             if (data == "True") {
                 FlashMessage("Your blog post was added", "Message_Success");
+                //Dismis the popup
+                $.colorbox.close();
+                window.location.reload();
             } else {
                 FlashMessage("There was a problem adding your blog post", "Message_Error");
             }
         });
+    return false;
 }
+
+
+
+
+
 
 function FlashMessage(message, cssClas) {
     $('#flash').html(message);

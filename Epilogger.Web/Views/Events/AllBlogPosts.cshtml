@@ -36,7 +36,9 @@
             }
             <a href="@TheURL" target="_blank" class="title">@BP.Title</a><br />
             <div class="blogDescription">
-                @BP.Description... <a href="@TheURL" class="small">Read the full post &raquo;</a>
+                @BP.Description<br />
+                <span class="blogPostDate">@Html.DisplayFor(model => BP.DateTime)</span>
+                @*<a href="@TheURL" class="small">Read the full post &raquo;</a>*@
             </div>
         </div>
     }
@@ -52,12 +54,9 @@
         });
 
         $(".blogposts-modal").colorbox({
-            width: "60%", height: "60%",
-            href: '@Url.Action("AddBlogPost", "Events")'
-        });
-        $(".links-modal").colorbox({
-            width: "60%", height: "60%",
-            href: '@Url.Action("AddLink", "Events")'
+            width: "60%", height: "370px",
+            href: '@Url.Action("AddBlogPost", "Events", new { id = Model.ID })',
+            onComplete: function () { $("#BlogURL").focus(); }
         });
     });
 </script>
