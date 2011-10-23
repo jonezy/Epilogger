@@ -25,8 +25,8 @@
                 <div class="event-content-searchterms">@item.SearchTerms</div>
             </div>
             <div class="event-totals">
-                <div class="total-tweets">@item.TotalTweets</div>
-                <div class="total-media">@item.TotalMedia</div>
+                <div class="total-tweets">@string.Format("{0:#,###}", item.TotalTweets)</div>
+                <div class="total-media">@string.Format("{0:#,###}", item.TotalMedia)</div>
             </div>
         </div>
     }
