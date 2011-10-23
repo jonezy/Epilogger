@@ -13,5 +13,7 @@ namespace Epilogger.Web.Models {
         public int UniqueTweeterCount { get; set; }
         public IEnumerable<TweetDisplayViewModel> Tweets { get; set; }
         public List<Tweeter> TopTweeters { get; set; }
+
+        public EventToolbarViewModel ToolbarViewModel { get; set; }
     }
 }

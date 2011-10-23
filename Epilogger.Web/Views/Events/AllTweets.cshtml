@@ -7,7 +7,7 @@
     Layout = "~/Views/Shared/_InteriorLayout.cshtml";
     ViewBag.Title = "Epilogger - " + Model.Name + "- Tweets";
 }
-@Html.Partial("EventToolbar")
+@Html.Partial("EventToolbar", Model.ToolbarViewModel)
 <div id="events-nav">
     <h1>ALL @Model.TweetCount.ToString("#,###") TWEETS</h1>
     <h2>FROM @Model.Name</h2>

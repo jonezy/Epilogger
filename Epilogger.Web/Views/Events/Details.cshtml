@@ -81,7 +81,7 @@ else
         background: #eebad1;
     }
 </style>
-@Html.Partial("EventToolbar")
+@Html.Partial("EventToolbar", Model.ToolbarViewModel)
 <div class="grid_12 alpha">
     @if (Model.HasSubscribed)
     {

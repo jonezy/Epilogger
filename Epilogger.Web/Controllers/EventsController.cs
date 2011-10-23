@@ -199,7 +199,8 @@ namespace Epilogger.Web.Controllers {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         public ActionResult Details(int id) {
-            EventDisplayViewModel Model = Mapper.Map<Event, EventDisplayViewModel>(ES.FindByID(id));
+            Event requestedEvent = ES.FindByID(id);
+            EventDisplayViewModel Model = Mapper.Map<Event, EventDisplayViewModel>(requestedEvent);
             Model.TweetCount = TS.FindTweetCountByEventID(id, this.FromDateTime(), this.ToDateTime());
             Model.Tweets = TS.FindByEventIDOrderDescTake6(id, this.FromDateTime(), this.ToDateTime());
             Model.ImageCount = IS.FindImageCountByEventID(id, this.FromDateTime(), this.ToDateTime());
@@ -211,6 +212,7 @@ namespace Epilogger.Web.Controllers {
             Model.EventRatings = ES.FindEventRatingsByID(id, this.FromDateTime(), this.ToDateTime());
             Model.HasUserRated = false;
             Model.CurrentUserID = CurrentUserID;
+            Model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
 
             //@(((Model.EventRatings.Sum(i => i.UserRating) / Model.EventRatings.Count()) / 5) * 100)
 
@@ -244,6 +246,16 @@ namespace Epilogger.Web.Controllers {
             return View(Model);
         }
 
+        private EventToolbarViewModel BuildToolbarViewModel(Event requestedEvent) {
+            EventToolbarViewModel toolbarModel = new EventToolbarViewModel();
+            toolbarModel.EventID = requestedEvent.ID;
+            toolbarModel.CreatedByID = requestedEvent.UserID.Value;
+            toolbarModel.CurrentUserID = CurrentUserID;
+            toolbarModel.CurrentUserRole = CurrentUserRole;
+
+            return toolbarModel;
+        }
+
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         [HttpPost]
@@ -274,12 +286,13 @@ namespace Epilogger.Web.Controllers {
 
         public ActionResult AllPhotos(int id, int? page) {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
-
-            AllPhotosDisplayViewModel Model = Mapper.Map<Event, AllPhotosDisplayViewModel>(ES.FindByID(id));
+            Event requestedEvent = ES.FindByID(id);
+            AllPhotosDisplayViewModel Model = Mapper.Map<Event, AllPhotosDisplayViewModel>(requestedEvent);
             Model.PhotoCount = IS.FindImageCountByEventID(id, this.FromDateTime(), this.ToDateTime());
             Model.CurrentPageIndex = currentPage;
             Model.ShowTopPhotos = false;
             Model.Images = IS.GetPagedPhotos(id, currentPage + 1, 30, this.FromDateTime(), this.ToDateTime());
+            Model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
 
             if (currentPage + 1 == 1) {
                 Model.ShowTopPhotos = true;
@@ -294,14 +307,16 @@ namespace Epilogger.Web.Controllers {
         public ActionResult AllTweets(int id, int? page) {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
 
+            Event requestedEvent = ES.FindByID(id);
             TopTweetersStats topTweetersStats = new TopTweetersStats();
-            AllTweetsDisplayViewModel Model = Mapper.Map<Event, AllTweetsDisplayViewModel>(ES.FindByID(id));
+            AllTweetsDisplayViewModel Model = Mapper.Map<Event, AllTweetsDisplayViewModel>(requestedEvent);
             Model.TweetCount = TS.FindTweetCountByEventID(id, this.FromDateTime(), this.ToDateTime());
             Model.UniqueTweeterCount = TS.FindUniqueTweetCountByEventID(id, this.FromDateTime(), this.ToDateTime());
             Model.CurrentPageIndex = currentPage;
             Model.TopTweeters = topTweetersStats.Calculate(TS.GetTop10TweetersByEventID(id, this.FromDateTime(), this.ToDateTime())).ToList();
             Model.ShowTopTweets = false;
             Model.Tweets = Mapper.Map<IEnumerable<Tweet>, IEnumerable<TweetDisplayViewModel>>(TS.GetPagedTweets(id, currentPage + 1, 100, this.FromDateTime(), this.ToDateTime()));
+            Model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
 
             if (currentPage + 1 == 1) {
                 Model.ShowTopTweets = true;
@@ -644,7 +659,10 @@ namespace Epilogger.Web.Controllers {
             Event ThisEvent = new Event();
             ThisEvent = ES.FindByID(id);
             s.Name = ThisEvent.Name;
-            s.SearchResults = ES.SearchInEvent(id, IEsearchterm, this.FromDateTime(), this.ToDateTime());
+            if (!string.IsNullOrEmpty(IEsearchterm)) {
+                s.SearchResults = ES.SearchInEvent(id, IEsearchterm, this.FromDateTime(), this.ToDateTime());
+            }
+            s.ToolbarViewModel = BuildToolbarViewModel(ThisEvent);
 
             return View(s);
         }
@@ -681,11 +699,12 @@ namespace Epilogger.Web.Controllers {
 
         public ActionResult AllBlogPosts(int id, int? page) {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
-
+            Event requestedEvent = ES.FindByID(id);
             List<BlogPostDisplayViewModel> blogPosts = Mapper.Map<List<BlogPost>, List<BlogPostDisplayViewModel>>(BS.FindByEventID(id).ToList());
 
-            AllBlogPostsViewModel model = Mapper.Map<Event, AllBlogPostsViewModel>(ES.FindByID(id));
+            AllBlogPostsViewModel model = Mapper.Map<Event, AllBlogPostsViewModel>(requestedEvent);
             model.SetAllBlogPostsViewModel(blogPosts, currentPage, blogPosts.Count());
+            model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
 
             return View(model);
         }
@@ -702,6 +721,7 @@ namespace Epilogger.Web.Controllers {
             model.ID = currentEvent.ID.ToString();
             model.Name = currentEvent.Name;
             model.TotalRecords = CS.FindCheckInCountByEventID(id, this.FromDateTime(), this.ToDateTime());
+            model.ToolbarViewModel = BuildToolbarViewModel(currentEvent);
 
             return View(model);
         }
@@ -711,12 +731,13 @@ namespace Epilogger.Web.Controllers {
         public ActionResult AllLinks(int id, int? page) {
 
             int currentPage = page.HasValue ? page.Value - 1 : 0;
-            AllLinksViewModel model = Mapper.Map<Event, AllLinksViewModel>(ES.FindByID(id));
-
+            Event requestedEvent = ES.FindByID(id);
             
+            AllLinksViewModel model = Mapper.Map<Event, AllLinksViewModel>(requestedEvent);
             model.Links = LS.FindByEventIDPaged(id, currentPage, 10, this.FromDateTime(), this.ToDateTime());
             model.CurrentPageIndex = currentPage;
             model.TotalRecords = LS.FindCountByEventID(id, this.FromDateTime(), this.ToDateTime());
+            model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
 
             return View(model);
         }
@@ -727,7 +748,8 @@ namespace Epilogger.Web.Controllers {
         {
 
             //int currentPage = page.HasValue ? page.Value - 1 : 0;
-            AllStatsViewModel Model = Mapper.Map<Event, AllStatsViewModel>(ES.FindByID(id));
+            Event requestedEvent = ES.FindByID(id);
+            AllStatsViewModel Model = Mapper.Map<Event, AllStatsViewModel>(requestedEvent);
 
             if (Request.QueryString["f"] != null)
             {
@@ -759,6 +781,7 @@ namespace Epilogger.Web.Controllers {
             TopTweetersStats topTweetersStats = new TopTweetersStats();
             Model.TopTweeters = Model.TopTweeters = topTweetersStats.Calculate(TS.GetTop10TweetersByEventID(id, this.FromDateTime(), this.ToDateTime())).ToList();
 
+            Model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
 
             //model.Links = LS.FindByEventIDPaged(id, currentPage, 10, this.FromDateTime(), this.ToDateTime());
             //model.CurrentPageIndex = currentPage;
@@ -773,6 +796,7 @@ namespace Epilogger.Web.Controllers {
         public ActionResult Edit(int id) {
             Event currentEvent = ES.FindByID(id);
             CreateEventViewModel model = Mapper.Map<Event, CreateEventViewModel>(currentEvent);
+            model.ToolbarViewModel = BuildToolbarViewModel(currentEvent);
 
             return View(model);
         }
