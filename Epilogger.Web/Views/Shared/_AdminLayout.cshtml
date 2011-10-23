@@ -1,0 +1,19 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+    <div id="content-container">
+
+        <div id="dashboard-nav">
+            <h1>Admin</h1>
+            @{
+                var action = ViewContext.RouteData.Values["action"] as string ?? "";
+            }
+            <ul id="left-nav">
+                <li>@Html.ActionLink("Invite Users", "index","email")</li>
+            </ul>
+        </div>
+
+        <div id="dashboard-content">
+            @RenderBody()
+        </div>
+        <div class="clear"></div>
+		<div class="spacer"></div>
+    </div>

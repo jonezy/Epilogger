@@ -40,6 +40,12 @@ namespace Epilogger.Web.Controllers {
         [HttpPost]
         public ActionResult Create(CreateAccountModel model) {
             if (ModelState.IsValid) {
+                // TEMP: check to make sure the email address provided is in the beta invite table.
+                if(!service.IsBetaUser(model.EmailAddress)) {
+                    this.StoreError("You must be invited to use the epilogger alpha, please click the create account link in your invite email to create your account, if you would like to be invited email team@epilogger.com");
+                    return View(model);
+                }
+
                 try {
                     User user = Mapper.Map<CreateAccountModel, User>(model);
                     user.IsActive = false; // ensure this is set.
@@ -165,7 +171,7 @@ namespace Epilogger.Web.Controllers {
 
                 if (user.IsActive == false) {
                     this.StoreError("Your account hasn't been activated yet");
-                    return View(model);
+                    return RedirectToAction("login");
                 }
 
                 if (user == null) {
@@ -278,13 +284,11 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpGet]
-        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to participate in the epilogger alpha.")]
         public ActionResult UpdatePassword() {
             return View(new UpdatePasswordModel());
         }
 
         [HttpPost]
-        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to participate in the epilogger alpha.")]
         public ActionResult UpdatePassword(UpdatePasswordModel model) {
             if (ModelState.IsValid) {
                 // update password.

@@ -117,6 +117,121 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BetaInvite" xml:space="preserve">
+    <value>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt; 
+    
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+    &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;
+    &lt;title&gt;Welcome to Epilogger.com&lt;/title&gt;
+    &lt;style type="text/css"&gt;
+    
+        /* Client-specific Styles */
+        #outlook a { padding: 0; } /* Force Outlook to provide a "view in browser" button. */
+        body { width: 100% !important; } .ReadMsgBody { width: 100%; } .ExternalClass { width: 100%; } /* Force Hotmail to display emails at full width */
+        body { -webkit-text-size-adjust: none; -ms-text-size-adjust: none; } /* Prevent Webkit and Windows Mobile platforms from changing default font sizes. */
+
+        /* Reset Styles */
+        body { margin: 0; padding: 0; background:#000;color:#5a5a5a;font: normal 14px Georgia;}
+        img { height: auto; line-height: 100%; outline: none; text-decoration: none; }
+		a img { border:none; }
+		a {color:#4b9ed8;}
+        #backgroundTable { margin: 0; padding: 0; width: 100% !important;background:#000; }
+        #mainTable { margin: 0; padding: 0; width: 555px !important;background:#fff; padding:30px !important;}
+        #footerTable { font-size:11px;color:#b7b8b8;}
+       p {
+           margin: 1em 0;
+       }
+       
+       h1, h2, h3, h4, h5, h6 {
+           color: black !important;
+           line-height: 100% !important;
+       }
+       
+       h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+           color: blue !important;
+       }
+       
+       h1 a:active, h2 a:active,  h3 a:active, h4 a:active, h5 a:active, h6 a:active {
+           color: red !important; /* Preferably not the same color as the normal header link color.  There is limited support for psuedo classes in email clients, this was added just for good measure. */
+       }
+       
+       h1 a:visited, h2 a:visited,  h3 a:visited, h4 a:visited, h5 a:visited, h6 a:visited {
+           color: purple !important; /* Preferably not the same color as the normal header link color. There is limited support for psuedo classes in email clients, this was added just for good measure. */
+       }
+       
+       table td {
+           border-collapse: collapse;
+       }
+
+       .yshortcuts, .yshortcuts a, .yshortcuts a:link,.yshortcuts a:visited, .yshortcuts a:hover, .yshortcuts a span { color: #4b9ed8; text-decoration: none !important; border-bottom: none !important; background: none !important; } /* Body text color for the New Yahoo.  This example sets the font of Yahoo's Shortcuts to black. */
+       
+       
+       &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;table width="100%" cellpadding="0" cellspacing="0" border="0" id="backgroundTable"&gt;
+        &lt;tr&gt;
+            &lt;td align="center" valign="top"&gt;
+                &lt;table width="555" id="mainTable" cellpadding="0" cellspacing="0" border="0"&gt;
+                    &lt;tr&gt;
+                        &lt;td&gt;&lt;img src="[BASE_URL]Public/emails/images/logo.png" alt="Epilogger" title="Epilogger" width="186" height="71" style="display: block;" /&gt;&lt;br /&gt;&lt;/td&gt;
+                    &lt;/tr&gt;
+                    &lt;tr&gt;
+                        &lt;td&gt;
+&lt;p&gt;Congratulations! You’ve been selected to be one of a handful of people to see Epilogger before the open beta! If you’ve received this email that means that the Epilogger team holds you in high regard, and highly values your input. We’d be honoured by your feedback and you may very well see your suggestions in actions in the release version!&lt;/p&gt;
+
+&lt;p&gt;Here’s how to get started:&lt;/p&gt;
+
+&lt;b&gt;Step One: Make a new account&lt;/b&gt;
+&lt;ul&gt;
+    &lt;li&gt;&lt;a style="color:#4b9ed8;" href="[CREATE_ACCOUNT_URL]"&gt;Create an account&lt;/a&gt; and update your profile picture, information, and add your Twitter and Facebook accounts.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;b&gt;Step Two: Have a look around &lt;/b&gt;
+&lt;ul&gt;
+    &lt;li&gt;Try the Browse Events link at the top to see what’s happening around town.&lt;/li&gt;
+    &lt;li&gt;You can browse by category at the bottom half of the page. You can see which events your Twitter friends are at!&lt;/li&gt;
+    &lt;li&gt;Use the Feedback button at the left of your screen to give us your feedback, report a bug, or let us know if anything can be improved in the interface.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;b&gt;Step Three: Subscribe to events and check your dashboard&lt;/b&gt;
+&lt;ul&gt;
+    &lt;li&gt;Find an event you like, click on it and subscribe to it with the subscribe button.&lt;/li&gt;
+    &lt;li&gt;You should be able to see a feed of all your event subscriptions in your dashboard. &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;b&gt;Step Four: Create an event &lt;/b&gt;
+&lt;ul&gt;
+    &lt;li&gt;Create your own event and watch Epilogger track and record if for you by clicking “add an event” at the top of the screen.&lt;/li&gt;
+&lt;/ul&gt;
+If you have any questions outside of feedback please email us directly at &lt;a style="color:#4b9ed8;" href="team@epilogger.com"&gt;team@epilogger.com&lt;/a&gt;
+
+&lt;p&gt;Sincerely,&lt;br /&gt;
+Michael and Chris&lt;br /&gt;
+Epilogger Inc.&lt;/p&gt;
+                        &lt;/td&gt;
+                    &lt;/tr&gt;
+                    &lt;tr&gt;
+                        &lt;td&gt;
+                            &lt;br /&gt;
+                            &lt;hr style="border:solid 1px #d4d4d4;" /&gt;
+                            &lt;table width="100%" cellpadding="0" cellspacing="0" border="0" id="footerTable"&gt;
+                                &lt;tr&gt;
+                                    &lt;td width="50%" align="left"&gt;&lt;i&gt;Follow &lt;a style="color:#4b9ed8;" href="http://twitter.com/Epilogger"&gt;@epilogger&lt;/a&gt; on twitter or &lt;a style="color:#4b9ed8;" href="http://www.facebook.com/Epilogger"&gt;facebook&lt;/a&gt;.&lt;br /&gt;&lt;a style="color:#4b9ed8;" href="http://epilogger.com"&gt;http://epilogger.com&lt;/a&gt;&lt;/i&gt;&lt;/td&gt;
+                                    &lt;td width="50%" align="right"&gt;&lt;i&gt;&lt;a style="color:#4b9ed8;" href="mailto:info@epilogger.com"&gt;info@epilogger.com&lt;/a&gt;&lt;br /&gt;We’ll Remember!&lt;/i&gt;&lt;/td&gt;
+                                &lt;/tr&gt;
+                            &lt;/table&gt;
+                        &lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;  
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;  
+&lt;/body&gt;
+&lt;/html&gt;</value>
+  </data>
   <data name="ForgotPassword" xml:space="preserve">
     <value>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt; 

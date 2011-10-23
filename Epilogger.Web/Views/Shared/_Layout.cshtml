@@ -74,7 +74,7 @@
             }		    
 	    </div>	
 
-        @Html.Action("GlobalNavigation", "Navigation")
+        @Html.Action("GlobalNavigation", "Navigation", new { Area = "" })
         	
     </div>     
 </div>
@@ -82,7 +82,7 @@
 <div class="container_12 clearfix" id="outer-container">
     <div id="header">
         <a href="/">@Html.Raw(Html.Image("logo.png", "id='logo'"))</a>
-        @Html.Partial("Navigation")
+        @Html.Partial("Navigation", new { Area = "" }   )
 
     </div>
     @RenderBody()
