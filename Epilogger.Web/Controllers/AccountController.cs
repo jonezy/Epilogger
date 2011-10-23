@@ -165,7 +165,7 @@ namespace Epilogger.Web.Controllers {
 
                 if (user.IsActive == false) {
                     this.StoreError("Your account hasn't been activated yet");
-                    return View(model);
+                    return RedirectToAction("login");
                 }
 
                 if (user == null) {
@@ -278,13 +278,11 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpGet]
-        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to participate in the epilogger alpha.")]
         public ActionResult UpdatePassword() {
             return View(new UpdatePasswordModel());
         }
 
         [HttpPost]
-        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to participate in the epilogger alpha.")]
         public ActionResult UpdatePassword(UpdatePasswordModel model) {
             if (ModelState.IsValid) {
                 // update password.
