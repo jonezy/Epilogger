@@ -404,7 +404,15 @@ namespace Epilogger.Web.Controllers {
                         model.EndDateTime = endDate;
                     }
 
-
+                    //Quick Hack
+                    if (model.EndDateTime == DateTime.MinValue)
+                    {
+                        model.EndDateTime = null;
+                    }
+                    if (model.CollectionEndDateTime == DateTime.MinValue)
+                    {
+                        model.CollectionEndDateTime = null;
+                    }
                     
                     Event EPLevent = Mapper.Map<CreateEventViewModel, Event>(model);
                     ES.Save(EPLevent);
@@ -829,10 +837,10 @@ namespace Epilogger.Web.Controllers {
                     DateTime collectionStart;
                     DateTime collectionEnd;
 
-                    DateTime.TryParse(Request.Form[4], out startDate); // start date
-                    DateTime.TryParse(Request.Form[5], out endDate); // end date (could be null)
-                    DateTime.TryParse(Request.Form[7], out collectionStart); 
-                    DateTime.TryParse(Request.Form[8], out collectionEnd);
+                    DateTime.TryParse(Request.Form["StartDateTime"], out startDate); // start date
+                    DateTime.TryParse(Request.Form["EndDateTime"], out endDate); // end date (could be null)
+                    DateTime.TryParse(Request.Form["CollectionStartDateTime"], out collectionStart);
+                    DateTime.TryParse(Request.Form["CollectionEndDateTime"], out collectionEnd);
 
                     //Adjust the timezone. this is becuase the EditTemplate is not returning the Time.
                     currentEvent.StartDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(startDate);
@@ -873,7 +881,15 @@ namespace Epilogger.Web.Controllers {
                         }
                     }
 
-
+                    //Quick Hack
+                    if (model.EndDateTime == DateTime.MinValue)
+                    {
+                        model.EndDateTime = null;
+                    }
+                    if (model.CollectionEndDateTime == DateTime.MinValue)
+                    {
+                        model.CollectionEndDateTime = null;
+                    }
 
                     
                     ES.Save(currentEvent);
