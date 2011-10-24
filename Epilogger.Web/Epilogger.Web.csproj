@@ -37,6 +37,12 @@
     <Reference Include="AutoMapper">
       <HintPath>..\packages\AutoMapper.1.1.0.118\lib\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="DataAnnotationsExtensions">
+      <HintPath>..\packages\DataAnnotationsExtensions.1.0.0.0\lib\NETFramework40\DataAnnotationsExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAnnotationsExtensions.ClientValidation">
+      <HintPath>..\packages\DataAnnotationsExtensions.MVC3.1.0.0.0\lib\NETFramework40\DataAnnotationsExtensions.ClientValidation.dll</HintPath>
+    </Reference>
     <Reference Include="DevOne.Security.Cryptography.BCrypt">
       <HintPath>..\packages\BCrypt.1.0.0.0\lib\DevOne.Security.Cryptography.BCrypt.dll</HintPath>
     </Reference>
@@ -107,6 +113,9 @@
     <Reference Include="Twitterizer2">
       <HintPath>..\packages\twitterizer.2.3.2\lib\Twitterizer2.dll</HintPath>
     </Reference>
+    <Reference Include="WebActivator">
+      <HintPath>..\packages\WebActivator.1.2.0.0\lib\NETFramework40\WebActivator.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Data\Classes.cs">
@@ -129,6 +138,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Structs.tt</DependentUpon>
     </Compile>
+    <Compile Include="App_Start\RegisterClientValidationExtensions.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\EmailController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
@@ -169,6 +179,7 @@
     <Compile Include="Core\Services\BlogService.cs" />
     <Compile Include="Core\Services\clickLogService.cs" />
     <Compile Include="Core\Services\CategoryService.cs" />
+    <Compile Include="Core\Services\BetaService.cs" />
     <Compile Include="Core\Services\UserLogService.cs" />
     <Compile Include="Core\Services\ExternalLinksService.cs" />
     <Compile Include="Core\Services\ImageMetaDataService.cs" />
@@ -200,6 +211,7 @@
     <Compile Include="Models\BrowseEventsDisplayViewModel.cs" />
     <Compile Include="Models\BrowseCategoriesDisplayViewModel.cs" />
     <Compile Include="Models\AllStatsViewModel.cs" />
+    <Compile Include="Models\BetaSignUpViewModel.cs" />
     <Compile Include="Models\CreateAccountModel.cs" />
     <Compile Include="Models\CreateEventViewModel.cs" />
     <Compile Include="Models\DashboardAccountViewModel.cs" />
@@ -351,6 +363,8 @@
     <Content Include="Public\js\jquery.expander.min.js" />
     <Content Include="Public\js\jquery.tweet.js" />
     <Content Include="Public\js\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Public\js\jquery.validate.min.js" />
+    <Content Include="Public\js\jquery.validate.unobtrusive.min.js" />
     <Content Include="Public\js\jquery.zrssfeed.min.js" />
     <Content Include="Public\js\prettyPhoto\css\prettyPhoto.css" />
     <Content Include="Public\js\prettyPhoto\images\fullscreen\1.jpg" />
@@ -500,6 +514,7 @@
     <Content Include="Areas\Admin\Views\Email\Index.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\BetaSignUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
