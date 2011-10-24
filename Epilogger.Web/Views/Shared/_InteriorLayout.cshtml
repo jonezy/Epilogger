@@ -1,6 +1,6 @@
 ﻿@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
     <div id="content-container">
-        @Html.Action("RenderBreadCrumb", "Navigation")
+        @Html.Action("RenderBreadCrumb", "Navigation", new { Area = "" })
         <br style="clear:both;" />
         @RenderBody()
         <div class="clear"></div>

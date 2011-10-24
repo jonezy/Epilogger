@@ -328,7 +328,6 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to view the details of that event")]
         public ActionResult Create() {
             CreateEventViewModel Model = Mapper.Map<Event, CreateEventViewModel>(new Event());
             //Model.TimeZoneOffset = Helpers.GetUserTimeZoneOffset();
