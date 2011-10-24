@@ -216,8 +216,23 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.TopTweeters, opt => opt.Ignore())
                 .ForMember(dest => dest.AllCheckIns, opt => opt.Ignore())
                 .ForMember(dest => dest.TopLinks, opt => opt.Ignore())
-                .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore()); ;
-               
+                .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore());
+
+            Mapper.CreateMap<BetaSignup, BetaSignUpViewModel>()
+                .ForMember(dest => dest.Activity, opt => opt.Ignore())
+                .ForMember(dest => dest.TotalRecords, opt => opt.Ignore())
+                .ForMember(dest => dest.CurrentPageIndex, opt => opt.Ignore())
+                .ForMember(dest => dest.PageSize, opt => opt.Ignore())
+                .ForMember(dest => dest.TotalRecordsLabel, opt => opt.Ignore())
+                .ForMember(dest => dest.Submitted, opt => opt.Ignore())
+                .ForMember(dest => dest.ipAddress, opt => opt.MapFrom(t => t.IPAddress))
+                .ForMember(dest => dest.regDateTime, opt => opt.MapFrom(t => t.DateTimeSubmitted));
+
+            Mapper.CreateMap<BetaSignUpViewModel, BetaSignup>()
+                .ForMember(dest => dest.DateTimeSubmitted, opt => opt.MapFrom(t => t.regDateTime))
+                .ForMember(dest => dest.IPAddress, opt => opt.MapFrom(t => t.ipAddress))
+                .ForMember(dest => dest.ID, opt => opt.Ignore());
+
 
             Mapper.CreateMap<Event, AllContentViewModel>();
             

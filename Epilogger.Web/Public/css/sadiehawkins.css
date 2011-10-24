@@ -1400,3 +1400,18 @@ div.photo-item img {
 
 .lightgray { color:#888; }
 
+
+
+
+
+
+/***** Beta *****/
+#betaLeft { float: left; width: 408px; height: 640px; margin-top: 35px; }
+#betaLeft input[type="text"] {  width: 340px; margin: 0; margin-bottom: 10px; float: left; font-size: 1.2em; color: #ee4490; }
+#betaLeft p { font-size: 1.1em; margin: 0; }
+#betaLeft a {  color: #ee4490; font-weight: bold; }
+
+#betaRight { margin-left: 450px; width: 450px; margin-top: 35px; }
+
+#about {  }
+#about h1 { font-size: 2.2em;  }

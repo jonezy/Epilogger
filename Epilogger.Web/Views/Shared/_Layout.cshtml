@@ -55,7 +55,9 @@
         });
 
         head.js('@Url.Content("~/Public/js/jquery.zrssfeed.min.js")', function() {
-            $('#blog-posts').rssfeed('http://feeds.feedburner.com/epilogger?format=xml', {		        limit: 1	        });
+            $('#blog-posts').rssfeed('http://feeds.feedburner.com/epilogger?format=xml', {
+		        limit: 1
+	        });
         });
     </script>
 </head>
