@@ -194,7 +194,7 @@ namespace Epilogger.Web.Controllers {
                 //if (TempData["returnUrl"] != null)
                 //    return Redirect(TempData["returnUrl"].ToString());
 
-                return RedirectToAction("index","events");
+                return RedirectToAction("index","home");
             }
 
             return View(model);
