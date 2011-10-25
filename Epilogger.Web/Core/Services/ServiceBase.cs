@@ -21,6 +21,24 @@ namespace Epilogger.Web {
         } // a unique way to identify the item in the cache
 
         protected CacheHelper CacheHelper;
+        /// <summary>
+        /// Boolean flag to indicate whether or not caching should be enabled.
+        /// </summary>
+        public static bool CachingEnabled
+        {
+            get
+            {
+                if (ConfigurationManager.AppSettings["CachingEnabled"] != null)
+                {
+                    bool enabled;
+                    bool.TryParse(ConfigurationManager.AppSettings["CachingEnabled"].ToString(), out enabled);
+
+                    return enabled;
+                }
+
+                return false;
+            }
+        }
 
         protected EpiloggerDB db;
 
