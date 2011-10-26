@@ -37,113 +37,114 @@
     });
 </script>
 
-
-<div id="homepage-content">
+<div id="homepage-container">
+    <div id="homepage-content">
     
-    <div id="betaLeft">
+        <div id="betaLeft">
         
-        <h1>Currently in private alpha.</h1>
-        <h2>Opening to the public soon.</h2>
-		@*<h3>()</h3>*@
+            <h1>Currently in private alpha.</h1>
+            <h2>Opening to the public soon.</h2>
+		    @*<h3>()</h3>*@
 
 						       
-        <!-- BEFORE FORM SUBMISSION -->
-        @if (!Model.Submitted)
-        {
-            
-            <p>Want to get in before anyone else?Add your email to our list:</p>
-            
-            using (Html.BeginForm("BetaSignUp", "Home", FormMethod.Post, new {@class = "clearit"}))
+            <!-- BEFORE FORM SUBMISSION -->
+            @if (!Model.Submitted)
             {
-                Html.ValidationSummary(true, "Beta sign up was unsuccessful. Please correct the errors and try again.");
-                <div>
-                    @Html.TextBoxFor(model => model.EmailAddress)
-                    <input type="submit" id="search" class="blue-action-button" value="Send" />
-                </div>
-                <br /><h4>@Html.ValidationMessageFor(model => model.EmailAddress)</h4>
-                
-            }
-        }
-        else
-        {
-            <p>Added your e-mail to our beta invite-list!</p>
-            <span class="spacer"></span>
-			@: <div class="btn"><a href="http://twitter.com/intent/tweet?text=I'm+next+in+line+for+an+@@Epilogger.+Beta+invite+at+http://epilogger.com" target="_blank">Tweet about it</a></div> &nbsp; 
-            @: <div class="btn"><a target="_blank" href="http://www.facebook.com/sharer.php?u=http://www.epilogger.com&t=I%27m+next+in+line+for+an+Epilogger+invite%27+http%3A%2F%2Fepilogger.com" onclick="return fbs_click()" text="I'm next in line for an Epilogger invite! http://epilogger.com" #Epilogger class="rokkitt">Facebook share it</a></div>
-            <br />
-        }
-                        
-        <p>Already have an accout?, amazing! <a href="/account/login" class="inlineLink">Go ahead and Log in</a></p>
-        <span class="spacer"></span>
-		<span class="spacer"></span>
-        <span class="spacer dotted"></span>
-        
-
-
-        <div id="about">
-			<h1>Epilogue + Blogger = Epilogger</h1>
-			<h2>Epilogger wants to answer the question: What the hell happened last night and where are my pants?</h2>
-			<p>We found that after attending an event, online or offline, its a feat trying to track down all the great content shared by all those who tweeted, blogged, or checked-in. It’s even harder when you check back a few weeks later and some of the content has disappeared with age!<br/><br/></p>
-			<p>We went ahead and did the work for you and put all that content into a sexy scrapbooked time capsule for you and your friends to enjoy for many years to come. Epilogger will even give you the stats so you can tell your boss that your night of hedonism was really a clever ethnographic study in disguise!</p>
-
-		</div>
-
-
-
-    </div>
-
-    <div id="betaRight">
-        @foreach (var item in Model.Activity)
-        {
-                <div class="homepage-activity-entry">
-                    <strong class="title @item.ActivityType">
-                    @if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION)
-                    {
-                        @:NEW EVENT ADDED:
-                    }
-                    else if (item.ActivityType == Epilogger.Web.Models.ActivityType.FOLLOW_EVENT)
-                    {
-                        @:SUBSCRIBED TO EVENT
-                    }
-                    else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_RATING)
-                    {
-                        @:RATED AN EVENT
-                    }
-                    else
-                    {
-                        @item.EventName
-                    }</strong>
-        
-                    @if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION ||
-                        item.ActivityType == Epilogger.Web.Models.ActivityType.FOLLOW_EVENT)
-                    {
-                        @*<h2>@MvcHtmlString.Create(item.EventName)</h2>*@
-                        <h2><br />@item.EventName</h2>
-                    }
-                    else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_RATING)
-                    {
-                       <h2>@item.EventName was just rated @MvcHtmlString.Create(item.ActivityContent) out of 5 stars </h2>
-                    }
-                    else if (item.ActivityType == Epilogger.Web.Models.ActivityType.PHOTOS_VIDEOS)
-                    {
-                        <div class="withcomment newPhotoupdates" id="photo-@item.Image.ID">
-                            <img src="@item.Image.Fullsize" width="250" border="0" alt="" />
-                        </div>
             
-                    }
-                    else
-                    {
-                       <p> @MvcHtmlString.Create(item.ActivityContent)</p>
-                    }
-        
-        
-                </div>
+                <p>Want to get in before anyone else?Add your email to our list:</p>
+            
+                using (Html.BeginForm("BetaSignUp", "Home", FormMethod.Post, new {@class = "clearit"}))
+                {
+                    Html.ValidationSummary(true, "Beta sign up was unsuccessful. Please correct the errors and try again.");
+                    <div>
+                        @Html.TextBoxFor(model => model.EmailAddress)
+                        <input type="submit" id="search" class="blue-action-button" value="Send" />
+                    </div>
+                    <br /><h4>@Html.ValidationMessageFor(model => model.EmailAddress)</h4>
+                
+                }
             }
-    </div>
+            else
+            {
+                <p>Added your e-mail to our beta invite-list!</p>
+                <span class="spacer"></span>
+			    @: <div class="btn"><a href="http://twitter.com/intent/tweet?text=I'm+next+in+line+for+an+@@Epilogger.+Beta+invite+at+http://epilogger.com" target="_blank">Tweet about it</a></div> &nbsp; 
+                @: <div class="btn"><a target="_blank" href="http://www.facebook.com/sharer.php?u=http://www.epilogger.com&t=I%27m+next+in+line+for+an+Epilogger+invite%27+http%3A%2F%2Fepilogger.com" onclick="return fbs_click()" text="I'm next in line for an Epilogger invite! http://epilogger.com" #Epilogger class="rokkitt">Facebook share it</a></div>
+                <br />
+            }
+                        
+            <p>Already have an accout?, amazing! <a href="/account/login" class="inlineLink">Go ahead and Log in</a></p>
+            <span class="spacer"></span>
+		    <span class="spacer"></span>
+            <span class="spacer dotted"></span>
+        
+
+
+            <div id="about">
+			    <h1>Epilogue + Blogger = Epilogger</h1>
+			    <h2>Epilogger wants to answer the question: What the hell happened last night and where are my pants?</h2>
+			    <p>We found that after attending an event, online or offline, its a feat trying to track down all the great content shared by all those who tweeted, blogged, or checked-in. It’s even harder when you check back a few weeks later and some of the content has disappeared with age!<br/><br/></p>
+			    <p>We went ahead and did the work for you and put all that content into a sexy scrapbooked time capsule for you and your friends to enjoy for many years to come. Epilogger will even give you the stats so you can tell your boss that your night of hedonism was really a clever ethnographic study in disguise!</p>
+
+		    </div>
+
+
+
+        </div>
+
+        <div id="betaRight">
+            @foreach (var item in Model.Activity)
+            {
+                    <div class="homepage-activity-entry">
+                        <strong class="title @item.ActivityType">
+                        @if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION)
+                        {
+                            @:NEW EVENT ADDED:
+                        }
+                        else if (item.ActivityType == Epilogger.Web.Models.ActivityType.FOLLOW_EVENT)
+                        {
+                            @:SUBSCRIBED TO EVENT
+                        }
+                        else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_RATING)
+                        {
+                            @:RATED AN EVENT
+                        }
+                        else
+                        {
+                            @item.EventName
+                        }</strong>
+        
+                        @if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION ||
+                            item.ActivityType == Epilogger.Web.Models.ActivityType.FOLLOW_EVENT)
+                        {
+                            @*<h2>@MvcHtmlString.Create(item.EventName)</h2>*@
+                            <h2><br />@item.EventName</h2>
+                        }
+                        else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_RATING)
+                        {
+                           <h2>@item.EventName was just rated @MvcHtmlString.Create(item.ActivityContent) out of 5 stars </h2>
+                        }
+                        else if (item.ActivityType == Epilogger.Web.Models.ActivityType.PHOTOS_VIDEOS)
+                        {
+                            <div class="withcomment newPhotoupdates" id="photo-@item.Image.ID">
+                                <img src="@item.Image.Fullsize" width="250" border="0" alt="" />
+                            </div>
+            
+                        }
+                        else
+                        {
+                           <p> @MvcHtmlString.Create(item.ActivityContent)</p>
+                        }
+        
+        
+                    </div>
+                }
+        </div>
 
 
     
 
 
 
+    </div>
 </div>
