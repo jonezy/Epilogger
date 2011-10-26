@@ -1397,6 +1397,91 @@ namespace Epilogger.Data {
         }
         
         /// <summary>
+        /// Table: StatusMessages
+        /// Primary Key: ID
+        /// </summary>
+
+        public class StatusMessagesTable: DatabaseTable {
+            
+            public StatusMessagesTable(IDataProvider provider):base("StatusMessages",provider){
+                ClassName = "StatusMessage";
+                SchemaName = "dbo";
+                
+
+                Columns.Add(new DatabaseColumn("ID", this)
+                {
+	                IsPrimaryKey = true,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = true,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("MSGDateTime", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.DateTime,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("MSG", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 500
+                });
+                    
+                
+                
+            }
+            
+            public IColumn ID{
+                get{
+                    return this.GetColumn("ID");
+                }
+            }
+            				
+   			public static string IDColumn{
+			      get{
+        			return "ID";
+      			}
+		    }
+           
+            public IColumn MSGDateTime{
+                get{
+                    return this.GetColumn("MSGDateTime");
+                }
+            }
+            				
+   			public static string MSGDateTimeColumn{
+			      get{
+        			return "MSGDateTime";
+      			}
+		    }
+           
+            public IColumn MSG{
+                get{
+                    return this.GetColumn("MSG");
+                }
+            }
+            				
+   			public static string MSGColumn{
+			      get{
+        			return "MSG";
+      			}
+		    }
+           
+                    
+        }
+        
+        /// <summary>
         /// Table: UserAuthenticationProfile
         /// Primary Key: ID
         /// </summary>

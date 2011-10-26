@@ -27,9 +27,6 @@ namespace Epilogger.Web.Controllers {
                 activity.Count()
             );
 
-            
-
-
             //Convert the Image ID in the ActivityContent to the Image HTML from the template. Facilite common HTML and single place for image HTML.
             foreach (HomepageActivityModel item in model.Activity)
             {
@@ -39,14 +36,15 @@ namespace Epilogger.Web.Controllers {
                 }
             }
             
-
-
             if (CurrentUserID == Guid.Empty)
             {
                 return RedirectToAction("BetaSignUp");
             }
             else
             {
+                StatusMessagesService SC = new StatusMessagesService();
+                model.StatusMessages = SC.GetLast10Messages();
+
                 return View(model);
             }
             
@@ -113,6 +111,24 @@ namespace Epilogger.Web.Controllers {
         }
 
 
+        public ActionResult StatusMessages()
+        {
+            StatusMessage model = new StatusMessage();
+            model.MSGDateTime = DateTime.UtcNow;
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult StatusMessages(StatusMessage model)
+        {
+
+            StatusMessagesService SC = new StatusMessagesService();
+            SC.Save(model);
+                       
+            return View();
+        }
+
+        
 
 
         [HttpPost]

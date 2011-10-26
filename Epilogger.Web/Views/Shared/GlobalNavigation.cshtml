@@ -17,4 +17,5 @@
 
 @if (Model.UserLoggedIn && Model.CurrentUserRole == UserRoleType.Administrator) {
     <div id="admin-area"><a href="#demo" class="displayClicks">CM</a></div> 
+    <div id="admin-area">@Html.ActionLink("Add Status MSGs", "StatusMessages", "Home")</div> 
 }
