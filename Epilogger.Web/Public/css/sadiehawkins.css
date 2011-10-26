@@ -1412,7 +1412,7 @@ div.photo-item img {
     background:#fff;
     box-shadow:inset 1px 1px 1px #888;
     margin-bottom:15px !important;
-    font-family:georgia width: 340px; margin: 0; margin-bottom: 10px; float: left; font-size: 1.2em; color: #ee4490;  background:#e1e1e1}
+    font-family:georgia width: 340px; margin: 0; margin-bottom: 10px; float: left; font-size: 1.2em; color: #ee4490;  background:#e1e1e1; }
 #betaLeft p { font-size: 1.1em; margin: 0; }
 #betaLeft a {  color: #ee4490; font-weight: bold; }
 
@@ -1420,3 +1420,9 @@ div.photo-item img {
 
 #about {  }
 #about h1 { font-size: 2.2em;  }
+
+
+#StatusMessages { position:absolute; top:65px; left:508px; z-index:20000; width: 412px; height: 125px; background-color: #fff;
+                  -webkit-border-radius: 20px;
+                    -moz-border-radius: 20px;
+                    border-radius: 20px; padding: 15px 10px 10px 15px; font-size: 0.8em; overflow: auto; }

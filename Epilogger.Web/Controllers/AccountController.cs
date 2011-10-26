@@ -107,7 +107,7 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpPost]
-        [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to edit your account")]
+        //[RequiresAuthentication(AccessDeniedMessage = "You must be logged in to edit your account")]
         public ActionResult Update(AccountModel model, FormCollection c) {
             try {
                 User user = CurrentUser;

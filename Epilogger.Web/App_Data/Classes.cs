@@ -1613,6 +1613,102 @@ namespace Epilogger.Data
     
     
     /// <summary>
+    /// A class which represents the StatusMessages table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.StatusMessage 
+    /// </summary>
+
+	public partial class StatusMessage: INotifyPropertyChanging, INotifyPropertyChanged
+	{
+        partial void OnLoaded();
+        partial void OnValidate(System.Data.Linq.ChangeAction action);
+        partial void OnCreated();
+	    
+	    public StatusMessage(){
+	        OnCreated();
+	    }
+	    
+	    #region Properties
+	    
+        partial void OnIDChanging(int value);
+        partial void OnIDChanged();
+		
+		private int _ID;
+		public int ID { 
+		    get{
+		        return _ID;
+		    } 
+		    set{
+		        this.OnIDChanging(value);
+                this.SendPropertyChanging();
+                this._ID = value;
+                this.SendPropertyChanged("ID");
+                this.OnIDChanged();
+		    }
+		}
+		
+        partial void OnMSGDateTimeChanging(DateTime? value);
+        partial void OnMSGDateTimeChanged();
+		
+		private DateTime? _MSGDateTime;
+		public DateTime? MSGDateTime { 
+		    get{
+		        return _MSGDateTime;
+		    } 
+		    set{
+		        this.OnMSGDateTimeChanging(value);
+                this.SendPropertyChanging();
+                this._MSGDateTime = value;
+                this.SendPropertyChanged("MSGDateTime");
+                this.OnMSGDateTimeChanged();
+		    }
+		}
+		
+        partial void OnMSGChanging(string value);
+        partial void OnMSGChanged();
+		
+		private string _MSG;
+		public string MSG { 
+		    get{
+		        return _MSG;
+		    } 
+		    set{
+		        this.OnMSGChanging(value);
+                this.SendPropertyChanging();
+                this._MSG = value;
+                this.SendPropertyChanged("MSG");
+                this.OnMSGChanged();
+		    }
+		}
+		
+
+        #endregion
+
+        #region Foreign Keys
+        #endregion
+
+
+        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+        public event PropertyChangingEventHandler PropertyChanging;
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void SendPropertyChanging()
+        {
+            var handler = PropertyChanging;
+            if (handler != null)
+               handler(this, emptyChangingEventArgs);
+        }
+
+        protected virtual void SendPropertyChanged(String propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+	}
+	
+    
+    
+    /// <summary>
     /// A class which represents the UserAuthenticationProfile table in the Epilogger Database.
     /// This class is queryable through EpiloggerDB.UserAuthenticationProfile 
     /// </summary>
