@@ -1420,3 +1420,9 @@ div.photo-item img {
 
 #about {  }
 #about h1 { font-size: 2.2em;  }
+
+
+#StatusMessages { position:absolute; top:90px; left:520px; z-index:20000; width: 391px; height: 110px; background-color: #fff;
+                  -webkit-border-radius: 20px;
+                    -moz-border-radius: 20px;
+                    border-radius: 20px; padding: 15px 10px 10px 15px; font-size: 0.8em; overflow: auto; }

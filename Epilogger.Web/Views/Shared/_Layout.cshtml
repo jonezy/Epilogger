@@ -60,8 +60,70 @@
 	        });
         });
     </script>
+    
+    @*TEMP HACK FOR THE FEEDBACK TAB*@
+    <style type="text/css">
+            
+        a#fdbk_tab {
+          background-image:url(http://s3.amazonaws.com/getsatisfaction.com/images/feedback_trans_tab.png);
+          color:white;
+          cursor:pointer;
+          height:102px;
+          left:0;
+          margin-left:-7px;
+          overflow-x:hidden;
+          overflow-y:hidden;
+          position:fixed;
+          text-indent:-100000px;
+          top:25%;
+          width:42px;
+          z-index:100000;
+        }
+        a#fdbk_tab:hover {
+          margin-left:-4px;
+        }
+        a.fdbk_tab_right {
+          left:auto !important;
+          margin-left:auto !important;
+          margin-right:0 !important;
+          right:0 !important;
+          width:35px !important;
+        }
+        a.fdbk_tab_right:hover {
+          margin-left:auto !important;
+          margin-right:0 !important;
+          width:38px !important;
+        }
+        a.fdbk_tab_bottom {
+          background-position:0 -102px !important;
+          bottom:0 !important;
+          height:38px !important;
+          left:20% !important;
+          margin-bottom:-7px !important;
+          margin-left:auto !important;
+          top:auto !important;
+          width:102px !important;
+        }
+        a.fdbk_tab_bottom:hover {
+          margin-bottom:-4px !important;
+          margin-left:auto !important;
+        }
+        a.fdbk_tab_hidden {
+          display:none !important;
+        }
+       
+        .feedback_tab_on embed, .feedback_tab_on select, .feedback_tab_on object {
+          visibility:hidden;
+        }
+    
+    
+    </style>
+
 </head>
 <body>
+    <div id="feedback">
+        <a href="#" id="fdbk_tab" class="fdbk_tab_left" style="background-color:#7c7c7c" onclick="window.open('http://tracker.epilogger.com/projects/epiloggerfeedback/issues/new','','width=920,height=550');return false;">FEEDBACK</a>
+    </div>
     
 @Html.Raw(Html.Notify())
 <div id="flash"></div>

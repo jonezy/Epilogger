@@ -128,6 +128,7 @@ namespace Epilogger.Data
         public Query<aspnet_User> aspnet_Users { get; set; }
         public Query<BetaSignup> BetaSignups { get; set; }
         public Query<UserFollowsEvent> UserFollowsEvents { get; set; }
+        public Query<StatusMessage> StatusMessages { get; set; }
         public Query<UserAuthenticationProfile> UserAuthenticationProfiles { get; set; }
         public Query<UserClickAction> UserClickActions { get; set; }
         public Query<CheckIn> CheckIns { get; set; }
@@ -255,6 +256,7 @@ namespace Epilogger.Data
             aspnet_Users = new Query<aspnet_User>(provider);
             BetaSignups = new Query<BetaSignup>(provider);
             UserFollowsEvents = new Query<UserFollowsEvent>(provider);
+            StatusMessages = new Query<StatusMessage>(provider);
             UserAuthenticationProfiles = new Query<UserAuthenticationProfile>(provider);
             UserClickActions = new Query<UserClickAction>(provider);
             CheckIns = new Query<CheckIn>(provider);
@@ -285,6 +287,7 @@ namespace Epilogger.Data
             	DataProvider.Schema.Tables.Add(new aspnet_UsersTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new BetaSignupsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserFollowsEventTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new StatusMessagesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserAuthenticationProfileTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserClickActionsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new CheckInsTable(DataProvider));

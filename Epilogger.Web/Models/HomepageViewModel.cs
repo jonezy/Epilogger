@@ -9,6 +9,7 @@ namespace Epilogger.Web.Models {
         public string TotalRecordsLabel { get; set; }
 
         public List<HomepageActivityModel> Activity { get; set; }
+        public IEnumerable<Epilogger.Data.StatusMessage> StatusMessages { get; set; }
 
         public HomepageViewModel(List<HomepageActivityModel> activities, int currentPageIndex, int totalRecords) {
             CurrentPageIndex = currentPageIndex;

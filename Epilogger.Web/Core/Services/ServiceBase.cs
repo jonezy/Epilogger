@@ -9,6 +9,7 @@ using Epilogger.Data;
 using RichmondDay.Helpers;
 
 using SubSonic.Repository;
+using System.Configuration;
 
 namespace Epilogger.Web {
     public abstract class ServiceBase<T> where T :class, new() {

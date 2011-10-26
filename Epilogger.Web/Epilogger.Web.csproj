@@ -180,6 +180,7 @@
     <Compile Include="Core\Services\clickLogService.cs" />
     <Compile Include="Core\Services\CategoryService.cs" />
     <Compile Include="Core\Services\BetaService.cs" />
+    <Compile Include="Core\Services\StatusMessagesService.cs" />
     <Compile Include="Core\Services\UserLogService.cs" />
     <Compile Include="Core\Services\ExternalLinksService.cs" />
     <Compile Include="Core\Services\ImageMetaDataService.cs" />
@@ -515,6 +516,7 @@
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Views\Home\BetaSignUp.cshtml" />
+    <Content Include="Views\Home\StatusMessages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
