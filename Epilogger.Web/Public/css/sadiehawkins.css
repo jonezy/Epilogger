@@ -883,13 +883,14 @@ div#search-container {
 
 div#search-container input[type=text] {
     float:left;
-	background:transparent;
-	color:#888;
+	/*background:transparent;
+    height:10px;*/
+	color:#eee;
 	font:italic 9pt tahoma;
 	border:0;
 	width:170px;
-	height:10px;
-	padding:5px 0 0 5px}
+	padding:5px 0 5px 5px;
+    background-color: #555; }
 
 div#search-container input[type=image] {
 	vertical-align:top;
