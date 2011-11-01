@@ -21,7 +21,7 @@ namespace Epilogger.Web {
         /* Upcoming events */
         public List<Event> UpcomingEvents()
         {
-            return db.Events.Where(e => e.StartDateTime > DateTime.UtcNow).ToList();
+            return db.Events.Where(e => e.StartDateTime > DateTime.UtcNow).OrderByDescending(c => c.StartDateTime).ToList();
         }
         public int UpcomingEventCount()
         {
@@ -30,7 +30,7 @@ namespace Epilogger.Web {
         public List<Event> UpcomingEventsPaged(int currentPage, int recordsPerPage)
         {
             var es = db.Events.Where(e => e.StartDateTime > DateTime.UtcNow);
-            return es.Skip(currentPage * recordsPerPage).Take(recordsPerPage).OrderBy(c => c.CreatedDateTime).ToList();
+            return es.Skip(currentPage * recordsPerPage).Take(recordsPerPage).OrderBy(c => c.StartDateTime).ToList();
         }
 
 
@@ -46,7 +46,7 @@ namespace Epilogger.Web {
         public List<Event> PastEventsPaged(int currentPage, int recordsPerPage)
         {
             var es = db.Events.Where(e => e.EndDateTime < DateTime.UtcNow);
-            return es.Skip(currentPage * recordsPerPage).Take(recordsPerPage).OrderByDescending(c => c.CreatedDateTime).ToList();
+            return es.Skip(currentPage * recordsPerPage).Take(recordsPerPage).OrderByDescending(c => c.StartDateTime).ToList();
         }
 
         /* Now events */
@@ -77,15 +77,15 @@ namespace Epilogger.Web {
         public List<Event> GoingOnNowEventsPaged(int currentPage, int recordsPerPage)
         {
             IEnumerable<Event> neverEndingEvents = from e in GetData()
-                                                   where e.EndDateTime == null
+                                                   where e.StartDateTime <= DateTime.UtcNow && e.EndDateTime == null
                                                    select e;
 
             IEnumerable<Event> happeningNow = from e in GetData()
                                               where (e.StartDateTime <= DateTime.UtcNow && (e.EndDateTime != null && e.EndDateTime >= DateTime.UtcNow))
                                               select e;
 
-            neverEndingEvents = neverEndingEvents.Concat(happeningNow).OrderBy(e => e.StartDateTime);
-            return neverEndingEvents.Skip(currentPage * recordsPerPage).Take(recordsPerPage).ToList();
+            neverEndingEvents = neverEndingEvents.Concat(happeningNow);
+            return neverEndingEvents.Skip(currentPage * recordsPerPage).Take(recordsPerPage).OrderByDescending(e => e.StartDateTime).ToList();
         }
 
 
