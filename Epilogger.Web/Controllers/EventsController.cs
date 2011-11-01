@@ -854,7 +854,7 @@ namespace Epilogger.Web.Controllers {
                         currentEvent.CollectionEndDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(collectionEnd);
                     }
 
-                    currentEvent.VenueID = model.VenueID ?? 0;
+                    currentEvent.VenueID = model.VenueID;
 
                     if (!string.IsNullOrEmpty(model.FoursquareVenueID))
                     {
