@@ -84,8 +84,8 @@ namespace Epilogger.Web {
                                               where (e.StartDateTime <= DateTime.UtcNow && (e.EndDateTime != null && e.EndDateTime >= DateTime.UtcNow))
                                               select e;
 
-            neverEndingEvents = neverEndingEvents.Concat(happeningNow);
-            return neverEndingEvents.Skip(currentPage * recordsPerPage).Take(recordsPerPage).OrderByDescending(e => e.StartDateTime).ToList();
+            neverEndingEvents = neverEndingEvents.Concat(happeningNow).OrderByDescending(e => e.StartDateTime);
+            return neverEndingEvents.Skip(currentPage * recordsPerPage).Take(recordsPerPage).ToList();
         }
 
 
