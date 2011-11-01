@@ -30,7 +30,7 @@ namespace Epilogger.Web {
         public List<Event> UpcomingEventsPaged(int currentPage, int recordsPerPage)
         {
             var es = db.Events.Where(e => e.StartDateTime > DateTime.UtcNow);
-            return es.Skip(currentPage * recordsPerPage).Take(recordsPerPage).OrderBy(c => c.CreatedDateTime).ToList();
+            return es.Skip(currentPage * recordsPerPage).Take(recordsPerPage).OrderByDescending(c => c.CreatedDateTime).ToList();
         }
 
 
@@ -84,7 +84,7 @@ namespace Epilogger.Web {
                                               where (e.StartDateTime <= DateTime.UtcNow && (e.EndDateTime != null && e.EndDateTime >= DateTime.UtcNow))
                                               select e;
 
-            neverEndingEvents = neverEndingEvents.Concat(happeningNow).OrderBy(e => e.StartDateTime);
+            neverEndingEvents = neverEndingEvents.Concat(happeningNow).OrderByDescending(e => e.StartDateTime);
             return neverEndingEvents.Skip(currentPage * recordsPerPage).Take(recordsPerPage).ToList();
         }
 
