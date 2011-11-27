@@ -1,8 +1,8 @@
 body {
     padding:0px 40px;
 	color:#606060;	
-	background:#252525 url(../images/body-bg.jpg) repeat;
-	font:normal 13px/18px 'Georgia', times, 'Times New Roman', serif}
+	background-color: #efefef;
+	font: normal 13px/18px 'Georgia', times, 'Times New Roman', serif; }
 
 a {
    color:#2d8ac5;
@@ -64,11 +64,8 @@ a.edit_icon {
       z-index:0;}
 
 #content-container {
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;     
-	background:#fff;
-	padding:15px 15px 40px 15px;
+	background: #efefef;
+	padding:0px 0px 40px 0px;
 	position:relative;
 	min-height:650px;}
 
@@ -173,18 +170,19 @@ ul.subnav li a:hover, ul.subnav li a.current {
 /* ------------------------------ CONTENT */
 
 h1, h2, h4 {
-	color:#000;
 	text-transform:uppercase;
 	font:bold 24pt 'InterstatePlusRegular', arial, sans-serif;}
 
 h1 {
-    margin-bottom:10px}
+    margin-bottom:10px;
+    color: #f51282;
+    }
 
 h1+h2 {
     position:relative;
     top:-10px}
 h2 {
-	color:#ee4490;
+	color:#245d96;
 	font-size:15pt;
 	margin-bottom:10px}
 
@@ -609,6 +607,19 @@ fieldset.login p.rememberme, fieldset.login p.submit {padding-left:82px;}
 fieldset.forgotpassword p.submit {padding-left:112px;}
 fieldset.login label.left {width:auto !important;padding:2px 0;}
 
+/* --- New Event Details Menu -- */
+/*ul#EventDetailsMenu {  }
+ul#EventDetailsMenu li { display:inline-block; padding: 0; margin:0;}
+ul#EventDetailsMenu li a { color:#000; padding: 0; text-transform:uppercase; margin: 0 20px; font-size: 12px;}
+ul#EventDetailsMenu li a:hover, ul#navigation li a.current {  color:#858585; }*/
+
+ul#EventDetailsMenu { list-style-type: none; border-bottom: 1px solid #c7c7c7; height: 30px; }
+ul#EventDetailsMenu li { float:left; padding:0; margin-right: 25px;  }
+ul#EventDetailsMenu li a { text-transform: uppercase; color: #000; font-size: 12px; }
+ul#EventDetailsMenu li a.active { text-transform: uppercase;  color: #858585; }
+ul#EventDetailsMenu li a:hover {  color: #858585; }
+
+
 /*CREATE ACCOUNT*/
 fieldset.create label {width:100px;text-transform:uppercase;font-size:11px;}
 fieldset.create label, fieldset.create select, fieldset.create input[type="text"], fieldset.create input[type="password"] {float:left;}
@@ -666,7 +677,7 @@ ul#left-nav li ul li a.current {color:#a44b79;}
     width:185px;
     color:#828282;}
     
-.dashboard-activity-entry h2 a { color: #ee4490;}
+.dashboard-activity-entry h2 a { color: #f51282;}
 .dashboard-activity-entry h2 a:hover { text-decoration: underline; }
     
 .dashboard-activity-entry strong.title {
@@ -693,7 +704,7 @@ ul#left-nav li ul li a.current {color:#a44b79;}
 
 #homepage-content {float:left;width:880px;}
 .homepage-activity-entry { float:left;height:184px;overflow:hidden;margin:0px 20px 20px 0px;width:200px;color:#828282; }
-.homepage-activity-entry h2 a { color: #ee4490;}
+.homepage-activity-entry h2 a { color: #f51282;}
 .homepage-activity-entry h2 a:hover { text-decoration: underline; }
 .homepage-activity-entry strong.title {font-weight:normal; color:#5086b9;margin-bottom:10px;padding-left:24px;background-image:url(../images/event_activity_title_icons.png);background-repeat: no-repeat;font-size:12px;text-transform:uppercase;margin-bottom:5px;display:block; }
 .homepage-activity-entry strong.title.TWEET {background-position:0 0;}
@@ -763,7 +774,7 @@ x.dashboard-event-item .event-totals {
 .dashboard-event-item .event-content-searchterms {width:70%;}
 
 .event-totals { float:right; } /*margin-top:15px; --took this out so the style could be reused better - Using on BrowseEvents.*/
-.event-totals .total-tweets, .event-totals .total-media {background-color:#fff;background-image:url(../images/icons/dashboard-event-totals.png); background-repeat:no-repeat;height:25px;font-weight:bold;color:#2c70cc;font-size:11px;}
+.event-totals .total-tweets, .event-totals .total-media {background-image:url(../images/icons/dashboard-event-totals.png); background-repeat:no-repeat;height:25px;font-weight:bold;color:#2c70cc;font-size:11px;}
 .event-totals .total-tweets {float:left;padding:4px 40px 0px 0px;background-position:50px 0px;width:50px;}
 .event-totals .total-media {float:left;padding:4px 30px 0px 0px;background-position:34px -50px;width:40px;}
 
@@ -898,7 +909,7 @@ div#search-container input[type=image] {
 
 #user-status {float:right;padding:5px 20px 5px 20px;margin-right:10px;border-right:dotted 1px #3e3e3e;border-left:dotted 1px #3e3e3e;font-size:11px;font-style:italic;}
 #user-status .person {background:url(../images/icons/header-person.png) no-repeat;padding-left:16px;}
-#breadcrumb a {text-transform:uppercase;font-size:10px;}
+#breadcrumb a {text-transform: lowercase; font-size:10px; color: #5e5e5e; }
 #breadcrumb { color:#999}
 
 
@@ -984,7 +995,8 @@ div#search-container input[type=image] {
     position:relative;
     left:-20px}
 
-#footer {margin-top:40px;font-size:13px;color:#bfbfbf;}
+#footer-container { background:#252525 url(../images/body-bg.jpg) repeat; padding-bottom: 40px; }
+#footer { margin-top:40px;font-size:13px;color:#bfbfbf; }
 #footer h4 {color:#7fbaee;font:normal 14px 'InterstatePlusRegular',sans-serif;text-transform:uppercase;}
 #footer a {color:#7fbaee;}
 #footer #column-one,#footer #column-two,#footer #column-three {float:left;margin-right:20px;} 
@@ -1413,9 +1425,9 @@ div.photo-item img {
     background:#fff;
     box-shadow:inset 1px 1px 1px #888;
     margin-bottom:15px !important;
-    font-family:georgia width: 340px; margin: 0; margin-bottom: 10px; float: left; font-size: 1.2em; color: #ee4490;  background:#e1e1e1; }
+    font-family:georgia width: 340px; margin: 0; margin-bottom: 10px; float: left; font-size: 1.2em; color: #f51282;  background:#e1e1e1; }
 #betaLeft p { font-size: 1.1em; margin: 0; }
-#betaLeft a {  color: #ee4490; font-weight: bold; }
+#betaLeft a {  color: #f51282; font-weight: bold; }
 
 #betaRight { margin-left: 450px; width: 450px; margin-top: 35px; }
 
