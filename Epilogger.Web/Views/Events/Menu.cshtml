@@ -1,4 +1,4 @@
-﻿<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tincidunt tellus vel tellus placerat faucibus. Maecenas adipiscing venenatis aliquam.</p>
+﻿@model Epilogger.Web.Models.EventToolbarViewModel
 @{
     var action = ViewContext.RouteData.Values["action"] as string ?? "";
     var id = ViewContext.RouteData.Values["id"] as string ?? "";
@@ -22,23 +22,35 @@
 
 @if (!IncludeDateRange)
 { 
-    <ul id="left-nav">
-        <li>@Html.ActionLink("All", "allcontent", null, new { id = @id }, action.ToLower() == "allcontent" ? new { @class = "current" } : null)</li>
+    <ul id="EventDetailsMenu">
+        <li>@Html.ActionLink("Overview", "allcontent", null, new { id = @id }, action.ToLower() == "allcontent" ? new { @class = "current" } : null)</li>
+        <li>@Html.ActionLink("Photos", "allphotos", null, new { id = @id }, action.ToLower() == "allphotos" ? new { @class = "current" } : null)</li>
         <li>@Html.ActionLink("Tweets", "alltweets", null, new { id = @id }, action.ToLower() == "alltweets" ? new { @class = "current" } : null)</li>
-        <li>@Html.ActionLink("Photo Albums", "allphotos", null, new { id = @id }, action.ToLower() == "allphotos" ? new { @class = "current" } : null)</li>
         <li>@Html.ActionLink("Blog Posts", "allblogposts", null, new { id = @id }, action.ToLower() == "allblogposts" ? new { @class = "current" } : null)</li>
         <li>@Html.ActionLink("Checkins", "allcheckins", null, new { id = @id }, action.ToLower() == "allcheckins" ? new { @class = "current" } : null)</li>
         <li>@Html.ActionLink("Links", "alllinks", null, new { id = @id }, action.ToLower() == "alllinks" ? new { @class = "current" } : null)</li>
+        <li>@Html.ActionLink("Reports", "Reports", null, new { id = @id }, action.ToLower() == "Reports" ? new { @class = "current" } : null)</li>
+        <li>@Html.ActionLink("Time Filters", "timefilters", null, new { id = @id }, action.ToLower() == "timefilters" ? new { @class = "current" } : null)</li>
+        @if ((Model.CreatedByID == Model.CurrentUserID) || Model.CurrentUserRole == UserRoleType.Administrator) {
+            <li>@Html.ActionLink("edit", "edit", "events", new { id = @id }, action.ToLower() == "edit" ? new { @class = "current" } : null)</li>
+        }
+        
     </ul>
 }
 else
 { 
-    <ul id="left-nav">
-        <li>@Html.ActionLink("All", "allcontent", null, new { id = @id, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "allcontent" ? new { @class = "current" } : null)</li>
+    <ul id="EventDetailsMenu">
+        <li>@Html.ActionLink("Overview", "allcontent", null, new { id = @id, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "allcontent" ? new { @class = "current" } : null)</li>
+        <li>@Html.ActionLink("Photos", "allphotos", null, new { id = @id, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "allphotos" ? new { @class = "current" } : null)</li>
         <li>@Html.ActionLink("Tweets", "alltweets", null, new { id = @id, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "alltweets" ? new { @class = "current" } : null)</li>
-        <li>@Html.ActionLink("Photo Albums", "allphotos", null, new { id = @id, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "allphotos" ? new { @class = "current" } : null)</li>
         <li>@Html.ActionLink("Blog Posts", "allblogposts", null, new { id = @id, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "allblogposts" ? new { @class = "current" } : null)</li>
         <li>@Html.ActionLink("Checkins", "allcheckins", null, new { id = @id, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "allcheckins" ? new { @class = "current" } : null)</li>
         <li>@Html.ActionLink("Links", "alllinks", null, new { id = @id, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "alllinks" ? new { @class = "current" } : null)</li>
+        <li>@Html.ActionLink("Reports", "Reports", null, new { id = @id, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "Reports" ? new { @class = "current" } : null)</li>
+        <li>@Html.ActionLink("Time Filters", "timefilters", null, new { id = @id, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "timefilters" ? new { @class = "current" } : null)</li>
+
+        @if ((Model.CreatedByID == Model.CurrentUserID) || Model.CurrentUserRole == UserRoleType.Administrator) {
+            <li>@Html.ActionLink("edit", "edit", "events", new { id = Model.EventID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "edit" ? new { @class = "current" } : null)</li>
+        }
     </ul>
 }

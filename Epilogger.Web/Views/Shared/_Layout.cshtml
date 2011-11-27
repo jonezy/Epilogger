@@ -150,35 +150,39 @@
 
     </div>
     @RenderBody()
-    <div id="footer">
-        <div id="column-one">
-            <a href="/">@Html.Raw(Html.Image("logo.png"))</a>
-            <ul>
-                <li id="footerAbout">@Html.ActionLink("About", "about", "Home")</li>
-                <li id="footerContact">@Html.ActionLink("Contact", "contact", "home")</li>
-                <li>@Html.ActionLink("Privacy Policy", "privacy", "home")</li>
-                <li>@Html.ActionLink("TOS", "terms", "home")</li>
-            </ul>
-            <p>Copyright © 2011 Epilogger Inc. All rights reserved. Made with lots of love and caffeine.</p>
-        </div>
-        <div id="column-two">
-            <h4>Tweetings</h4>
-            <div class="footer-tweet"></div>
-        </div>
-        <div id="column-three">
-            <div id="blog-posts"></div>
-            <div class="social">
-                <h4>Follow us on</h4> 
-                <a href="http://www.facebook.com/epilogger" target="_blank"><img src="@Url.Content("~/Public/images/icons/facebook.png")" width="25" height="25" /></a>
-                <a href="http://twitter.com/epilogger" target="_blank"><img src="@Url.Content("~/Public/images/icons/twitter.png")" width="25" height="25" /></a>
-                <a href="http://blog.epilogger.com/" target="_blank"><img src="@Url.Content("~/Public/images/icons/blog.png")" width="25" height="25" /></a>
+    
+</div>
+
+<div id="footer-container">
+    <div class="container_12 clearfix">
+        <div id="footer">
+            <div id="column-one">
+                <a href="/">@Html.Raw(Html.Image("logo.png"))</a>
+                <ul>
+                    <li id="footerAbout">@Html.ActionLink("About", "about", "Home")</li>
+                    <li id="footerContact">@Html.ActionLink("Contact", "contact", "home")</li>
+                    <li>@Html.ActionLink("Privacy Policy", "privacy", "home")</li>
+                    <li>@Html.ActionLink("TOS", "terms", "home")</li>
+                </ul>
+                <p>Copyright © 2011 Epilogger Inc. All rights reserved. Made with lots of love and caffeine.</p>
+            </div>
+            <div id="column-two">
+                <h4>Tweetings</h4>
+                <div class="footer-tweet"></div>
+            </div>
+            <div id="column-three">
+                <div id="blog-posts"></div>
+                <div class="social">
+                    <h4>Follow us on</h4> 
+                    <a href="http://www.facebook.com/epilogger" target="_blank"><img src="@Url.Content("~/Public/images/icons/facebook.png")" width="25" height="25" /></a>
+                    <a href="http://twitter.com/epilogger" target="_blank"><img src="@Url.Content("~/Public/images/icons/twitter.png")" width="25" height="25" /></a>
+                    <a href="http://blog.epilogger.com/" target="_blank"><img src="@Url.Content("~/Public/images/icons/blog.png")" width="25" height="25" /></a>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-
-<br /><br />
 
 <script language="javascript" type="text/javascript">
     //Store all clicks, for interface tweaking.
