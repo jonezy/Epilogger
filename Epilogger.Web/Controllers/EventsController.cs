@@ -339,9 +339,10 @@ namespace Epilogger.Web.Controllers {
             }
 
             Model.StartDateTime = roundTime;
-            //Model.EndDateTime = roundTime.AddHours(3);
+            Model.EndDateTime = roundTime.AddHours(3);
             Model.CollectionStartDateTime = roundTime.AddDays(-2);
             Model.CollectionEndDateTime = roundTime.AddDays(3);
+            Model.WebsiteURL = "http://";
 
             return View(Model);
         }
@@ -350,77 +351,65 @@ namespace Epilogger.Web.Controllers {
 
         [HttpPost]
         public ActionResult Create(CreateEventViewModel model) {
-            if (ModelState.IsValid) {
-                try {
-                    if (!string.IsNullOrEmpty(model.FoursquareVenueID)) {
-                        // have to look up the foursquare venue and then create it and save it to the db.
-                        dynamic foursquareVenue = LookupFoursquareVenue(model.FoursquareVenueID);
-                        var locationNode = foursquareVenue.response.location;
 
-                        // convert it to a Venue
-                        Venue venue = new Venue();
-                        venue.FoursquareVenueID = foursquareVenue.response.id;
-                        venue.Address = locationNode.address;
-                        venue.Name = foursquareVenue.response.name;
-                        venue.City = locationNode.city;
-                        venue.State = locationNode.state;
-                        venue.CrossStreet = locationNode.crossStreet;
-                        venue.Geolat = locationNode.lat;
-                        venue.Geolong = locationNode.lng;
+            DateTime startDate;
+            DateTime endDate;
+            DateTime collectionStart;
+            DateTime collectionEnd;
 
-                        // save the venue
-                        venueService.Save(venue);
-                        model.VenueID = venue.ID;
-                    }
+            DateTime.TryParse(Request.Form["start_date"] + " " + Request.Form["start_time"], out startDate); // start date
+            DateTime.TryParse(Request.Form["end_date"] + " " + Request.Form["end_time"], out endDate); // end date (could be null)
+            DateTime.TryParse(Request.Form["collection_start_date"] + " " + Request.Form["collection_start_time"], out collectionStart);
+            DateTime.TryParse(Request.Form["collection_end_date"] + " " + Request.Form["collection_end_time"], out collectionEnd);
 
+            //Adjust the timezone. this is becuase the EditTemplate is not returning the Time.
+            model.StartDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(startDate);
+            model.EndDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(endDate);
+            model.CollectionStartDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(collectionStart);
+            model.CollectionEndDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(collectionEnd);
+            
+            if (!string.IsNullOrEmpty(model.FoursquareVenueID))
+            {
+                // have to look up the foursquare venue and then create it and save it to the db.
+                dynamic foursquareVenue = LookupFoursquareVenue(model.FoursquareVenueID);
+                var locationNode = foursquareVenue.response.location;
+
+                // convert it to a Venue
+                Venue venue = new Venue();
+                venue.FoursquareVenueID = foursquareVenue.response.id;
+                venue.Address = locationNode.address;
+                venue.Name = foursquareVenue.response.name;
+                venue.City = locationNode.city;
+                venue.State = locationNode.state;
+                venue.Zip = locationNode.postalCode;
+                venue.CrossStreet = locationNode.crossStreet;
+                venue.Geolat = locationNode.lat;
+                venue.Geolong = locationNode.lng;
+
+                // save the venue
+                venueService.Save(venue);
+                model.VenueID = venue.ID;
+                model.Venue = venue;
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
                     model.UserID = CurrentUserID;
                     model.CreatedDateTime = DateTime.UtcNow;
                     model.EndDateTime = null;
                     model.CollectionEndDateTime = null;
 
-                    // get yer dates.
-                    // 7 is start date, 8 is end
-                    DateTime startDate;
-                    DateTime endDate;
-                    DateTime.TryParse(Request.Form[4], out startDate); // start date
-                    DateTime.TryParse(Request.Form[5], out endDate); // end date (could be null)
-
-                    //Time zone hack - because the Edit Template isn't returning the selected time.
-                    model.StartDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(startDate);
-                    if (endDate != DateTime.MinValue)
-                    {
-                        endDate = Timezone.Framework.TimeZoneManager.ToUtcTime(endDate);
-                    }
-
-
-                    model.CollectionStartDateTime = model.StartDateTime.AddDays(-2);
-                    if (endDate != DateTime.MinValue)
-                    {
-                        model.CollectionEndDateTime = endDate.AddDays(3);
-                    }
-
-                    if (endDate != DateTime.MinValue)
-                    {
-                        model.EndDateTime = endDate;
-                    }
-
-                    //Quick Hack
-                    if (model.EndDateTime == DateTime.MinValue)
-                    {
-                        model.EndDateTime = null;
-                    }
-                    if (model.CollectionEndDateTime == DateTime.MinValue)
-                    {
-                        model.CollectionEndDateTime = null;
-                    }
-                    
                     Event EPLevent = Mapper.Map<CreateEventViewModel, Event>(model);
                     ES.Save(EPLevent);
 
                     this.StoreSuccess("Your Event was created successfully!  Dont forget to share it with your friends and attendees!");
-                    
+
                     return RedirectToAction("details", new { id = EPLevent.ID });
-                } catch (Exception ex) {
+                }
+                catch (Exception ex)
+                {
                     this.StoreError(string.Format("There was an error: {0}", ex.Message));
                     Event EPLevent = Mapper.Map<CreateEventViewModel, Event>(model);
                     model = Mapper.Map<Event, CreateEventViewModel>(EPLevent);
@@ -428,8 +417,6 @@ namespace Epilogger.Web.Controllers {
                 }
             }
 
-            Event tempEvent = Mapper.Map<CreateEventViewModel, Event>(model);
-            model = Mapper.Map<Event, CreateEventViewModel>(tempEvent);
             return View(model);
         }
 

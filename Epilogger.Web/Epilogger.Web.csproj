@@ -348,6 +348,10 @@
     <Content Include="Public\js\BrowseEvents.js" />
     <Content Include="Public\js\clickmap.js" />
     <Content Include="Public\js\AllPhotos.js" />
+    <Content Include="Public\js\DateSpanPicker\datespan.css" />
+    <Content Include="Public\js\DateSpanPicker\example.html" />
+    <Content Include="Public\js\DateSpanPicker\jquery.datespan-picker.js" />
+    <Content Include="Public\js\DateSpanPicker\jquery.date_input.js" />
     <Content Include="Public\js\datetime\timedropdown\timedropdown.js" />
     <Content Include="Public\js\datetime\txtdropdown\jquery.scrollTo-min.js" />
     <Content Include="Public\js\datetime\txtdropdown\txtdropdown-btn-hover.png" />
@@ -517,6 +521,8 @@
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Views\Home\BetaSignUp.cshtml" />
     <Content Include="Views\Home\StatusMessages.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\FullTime.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\ShortDate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
