@@ -2,7 +2,7 @@ body {
     padding:0px 40px;
 	color:#606060;	
 	background-color: #efefef;
-	font: normal 13px/18px 'Georgia', times, 'Times New Roman', serif; }
+	font: normal 13px/18px Helvetica, Arial, Sans-Serif; }
 
 a {
    color:#2d8ac5;
@@ -44,16 +44,16 @@ a.edit_icon {
     top:1px;
     color:#fff}
 
-.datepicker, .timedropdown {
+.datepicker, .timedropdown, .picker-start-date, .picker-end-date, .picker-start-time, .picker-end-time {
     margin:0 !important;
     display:inline !important;
     width: 4.4em !important;
     border-right:0px !important;}
     
-.datepicker {
-    width:5em !important;}
+.datepicker, .picker-start-date, .picker-end-date, .picker-start-time, .picker-end-time {
+    width:6em !important;}
 
-.item-data .ui-datepicker-trigger { 
+.item-data .ui-datepicker-trigger, .picker-start-date, .picker-end-date, .picker-start-time, .picker-end-time { 
     margin-top:-3px;}
 
 
@@ -105,7 +105,7 @@ a.edit_icon {
     
 #header {
     padding:10px 0px 30px 0px;
-    position:relative;}
+    position:relative; }
 	
 .homeBlurb { width: 425px; }
 .homePager { float: right; margin-top: -20px; }
@@ -515,8 +515,7 @@ ul#connected-networks, .topPhotosList, .topPhotosList li {
     color:#3e3e3e;
     padding:6px 10px 0px 0px;}
     
-.item-data input[type=text], .item-data textarea, select, #foursquare-search,
-
+.item-data input[type=text], .item-data textarea, select,
 fieldset.forgotpassword input[type="text"],  fieldset.forgotpassword input[type="password"], 
 fieldset.login input[type="text"],fieldset.login input[type="password"], fieldset.create input[type="password"],
 .inEventSearch input[type="text"], .filter-by-time form input[type="text"],
@@ -525,16 +524,21 @@ fieldset.login input[type="text"],fieldset.login input[type="password"], fieldse
     border:0;
     background:#fff;
     box-shadow:inset 1px 1px 1px #888;
-    margin-bottom:15px !important;
-    font-family:georgia}
+    margin-bottom:15px !important; }
  
  .modal textarea {
      background:#e0e0e0}
     
-.item-data input.wide, .item-data textarea.wide, .item-data select.wide, #foursquare-search {
+.item-data input.wide, .item-data textarea.wide, .item-data select.wide {
     float:left;
     width:480px !important;
-    max-width:510px !important;}    
+    max-width:510px !important;}
+    
+/*Override this for dropdowns so they line up*/
+.item-data select.wide {
+    float:left;
+    width:487px !important;
+    max-width:540px !important; }
     
 .item-data label.wide, .item-data label.wider, .item-data input.small {
     width:100px;}
@@ -568,11 +572,11 @@ fieldset.login input[type="text"],fieldset.login input[type="password"], fieldse
     color:#858585}
     
     
-/* --- location select */
+/* --- location select 
 #foursquare-search {
     font-weight:normal;
     padding:5px;
-    color:#888;}
+    color:#888;}*/
 
 
 /* --- toolbar */
@@ -1206,7 +1210,7 @@ div#search-container input[type=image] {
     left:-83px;
     color:#c0c0c0; 
     padding-left:4px; 
-    font:italic 10px georgia; 
+    font: italic 10px;
     text-transform:lowercase}
     
 a.smallRateLink:hover { text-decoration: underline; }
@@ -1240,7 +1244,7 @@ a.smallRateLink:hover { text-decoration: underline; }
 #SearchHelpPopUpDiv.uiPopUp 
 {
     padding: 20px;
-    background: #eee;  
+    background: #fff;  
     width: 550px; 
     position: relative; 
     left: 200px;
@@ -1289,7 +1293,7 @@ a.smallRateLink:hover { text-decoration: underline; }
 	
 	
 #reportContainer h3 {
-	font:italic normal 0.84em georgia, 'times new roman', times, sans-serif;
+	font:italic normal 0.84em Helvetica, Arial, Sans-Serif;
 	color:#9E6928;
 	text-transform:uppercase;
 	margin:0 0 10px 0}
@@ -1425,7 +1429,7 @@ div.photo-item img {
     background:#fff;
     box-shadow:inset 1px 1px 1px #888;
     margin-bottom:15px !important;
-    font-family:georgia width: 340px; margin: 0; margin-bottom: 10px; float: left; font-size: 1.2em; color: #f51282;  background:#e1e1e1; }
+    font-family: Helvetica, Arial, Sans-Serif; width: 340px; margin: 0; margin-bottom: 10px; float: left; font-size: 1.2em; color: #f51282;  background:#e1e1e1; }
 #betaLeft p { font-size: 1.1em; margin: 0; }
 #betaLeft a {  color: #f51282; font-weight: bold; }
 

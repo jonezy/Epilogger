@@ -5,20 +5,31 @@
     ViewBag.Title = "Epilogger - Create Event";
 }
 
+<script type="text/javascript">
+    head.ready(function () {
+        $('#TestTimePicker').dateSpanPicker();
+        $('#EventTimePicker').dateSpanPicker();
+        $('#CollectionTimePicker').dateSpanPicker();
+    });
+</script>
+
 <div id="events-nav">
     <h1>ADD AN EVENT</h1>
-    <p>Create an event here and we’ll remember it for you! Make sure to put as much detail as possible to get the most complete record of your history-making soiree!
-        Tool tips:</p>
+    <p>Create an event here and we’ll remember it for you! Make sure to put as much detail as possible to get the most complete record of your history-making soiree!</p>
 
     <p class="small">
         <strong>Name:</strong> The name of the event<br /><br />
         <strong>Subtitle:</strong> Additional information i.e. sponsored by, presented by<br /><br />
+        <strong>Category:</strong> Give us a general idea of what your event is about<br /><br />
         <strong>Search terms:</strong><br />
         Enter any hashtags, twitter accounts or keywords related to the event. If your event has an official hashtag, also enter it here.<br />
         <@@EventTwitter> OR <#OfficialHashtag> OR &lt;unique keyword&gt;<br /><br />
         <a href="" id="AdvancedSearchHelp">Advanced operators</a>
         <br /><br />
-        <strong>Category:</strong> Give us a general idea of what your event is about
+
+        <strong>Event Time:</strong> This is the actual time of the event<br /><br />
+        <strong>Collection Time:</strong> This is the amount of time Epilogger will collect data about your event. Some people want to collect all the chatter leading up to an event and after an event. Select a range that works best for you.<br /><br />
+        
     </p>
 
     <div id="SearchHelpPopUpDiv" class="uiPopUp" style="display: none;">
@@ -60,31 +71,87 @@
         <div class="item-data clearfix">
             <p>@Html.LabelFor(model => model.Name) @Html.TextBoxFor(model => model.Name, new { @class = "wide" })</p>
             <p>@Html.LabelFor(model => model.Subtitle) @Html.TextBoxFor(model => model.Subtitle, new { @class = "wide" })</p>
-            <p><label>Search Terms:</label> @Html.TextBoxFor(model => model.SearchTerms, new { @class = "wide" })</p>
             <p>@Html.LabelFor(model => model.CategoryID) @Html.DropDownListFor(model => model.CategoryID, Model.Categories, "Select your event category", new { @class = "wide" })</p>
         </div>
     </div>
     <div class="spacer"></div>
+    
+    <div class="item-card">
+        <h4>WHAT TO INCLUDE</h4>
+        <br style="clear:both;" />
+        <div class="item-data clearfix">
+            <p><label>Search Terms</label> @Html.TextBoxFor(model => model.SearchTerms, new { @class = "wide" })</p>
+        </div>
+    </div>
+    <div class="spacer"></div>
+    
+    
+    
     <div class="item-card">
         <h4>WHEN AND WHERE</h4>
         <br style="clear:both;" />
         <div id="createevent-time" class="item-data clearfix">
-            <label class="wide">Start Date</label> @Html.EditorFor(model => model.StartDateTime)
-            <div class="end-time"><input type="checkbox" id="end-time" class="unhide" /><label for="end-time">Specifiy an ending time</label><br style="clear:both;" /></div>
-            <div class="hidden">
-                <div style="clear:both;"><label class="wide">Event End</label> @Html.EditorFor(model => model.EndDateTime)</div>
+            
+            
+           @* <div id="TestTimePicker">
+                <input type="text" class="picker-start-date" name="start_date" value="2011-12-04" />
+                <input type="text" class="picker-start-time" name="start_time" value="7:31pm" />
+                &nbsp;to&nbsp;
+                <input type="text" class="picker-end-time" name="end_time" value="8:31pm" />
+                <input type="text" class="picker-end-date" name="end_date" value="2011-12-04" />
+            </div>*@
+            
+            <br />
+            <label class="wide">Event Time</label>
+            <div id="EventTimePicker">
+                <input type="text" class="picker-start-date" name="start_date" value="@Html.DisplayFor(e => e.StartDateTime, "ShortDate")" />
+                <input type="text" class="picker-start-time" name="start_time" value="@Html.DisplayFor(e => e.StartDateTime, "FullTime")" />
+                &nbsp;to&nbsp;
+                <input type="text" class="picker-end-time" name="end_time" value="@Html.DisplayFor(e => e.EndDateTime, "FullTime")" />
+                <input type="text" class="picker-end-date" name="end_date" value="@Html.DisplayFor(e => e.EndDateTime, "ShortDate")" />
             </div>
-            <strong>For the alpha, if you want to change when data starts being collected, edit the event after you've created it. (It's the pencil icon)</strong><br /><br />
-            <p>By default data collection starts 3 hours prior to the event start time</p>
-            @*<p>Data collection will start 3 hours prior to the Start time at your current account level. Want to start it sooner? Update to a payed acoount.</p>*@
 
-            @*<p><label class="wide">Time Zone:</label> @Html.DropDownListFor(model => model.TimeZoneOffset, Model.TimeZones, "Select your timezone", new { @class = "wide" })</p>*@
-            @*@Html.ActionLink("Venue Search", "venuesearch", "events", null, new { @class="modal"})*@
+            <label class="wide">Collection Time</label>
+            <div id="CollectionTimePicker">
+                <input type="text" class="picker-start-date" name="collection_start_date" value="@Html.DisplayFor(e => e.CollectionStartDateTime, "ShortDate")" />
+                <input type="text" class="picker-start-time" name="collection_start_time" value="@Html.DisplayFor(e => e.CollectionStartDateTime, "FullTime")" />
+                &nbsp;to&nbsp;
+                <input type="text" class="picker-end-time" name="collection_end_time" value="@Html.DisplayFor(e => e.CollectionEndDateTime, "FullTime")" />
+                <input type="text" class="picker-end-date" name="collection_end_date" value="@Html.DisplayFor(e => e.CollectionEndDateTime, "ShortDate")" />
+            </div>
+
+
+
+
+            @*<label class="wide">Start Date</label> 
+            @Html.EditorFor(model => model.StartDateTime)
+
+            <div class="end-time">
+                <input type="checkbox" id="end-time" class="unhide" />
+                <label for="end-time">Specifiy an ending time</label>
+                <br style="clear:both;" />
+            </div>
+            
+            <div class="hidden">
+                <div style="clear:both;">
+                    <label class="wide">Event End</label> 
+                    @Html.EditorFor(model => model.EndDateTime)
+                </div>
+            </div>*@
+
+
             <label class="wide">Venue</label>
-            <div style="display: block; margin-left: 112px; padding-top: 8px;">
+            @*<a href="#" id="foursquare-search" class="blue-action-button">Search for a venue</a>*@
+            <div style="display: block; margin-left: 112px;">
+                <div id="selectedVenue"></div>
+                <input type="button" id="foursquare-search" class="blue-action-button" value="Search for a venue" />
+            </div>
+
+
+            @*<div style="display: block; margin-left: 112px; padding-top: 8px;">
                 <div id="selectedVenue"></div>
                 <h3><a href="#" id="foursquare-search" class="modal">Search for a venue</a></h3>
-            </div>
+            </div>*@
             @Html.HiddenFor(model => model.FoursquareVenueID)
         </div>
     </div>
@@ -98,13 +165,13 @@
 
             <p>@Html.LabelFor(model => model.WebsiteURL) @Html.TextBoxFor(model => model.WebsiteURL, new { @class = "wide" })</p>
 
-            <div class="grid_4 alpha">
+            @*<div class="grid_4 alpha">*@
                 <p>@Html.LabelFor(model => model.TwitterAccount) @Html.TextBoxFor(model => model.TwitterAccount, new { @class = "med" })</p>
-            </div>
+            @*</div>
 
-            <div class="grid_4 alpha">
+            <div class="grid_4 alpha">*@
                 <p>@Html.LabelFor(model => model.FacebookPageURL) @Html.TextBoxFor(model => model.FacebookPageURL, new { @class = "med" })</p>
-            </div>
+            @*</div>*@
 
             <p>@Html.LabelFor(model => model.Cost) @Html.TextBoxFor(model => model.Cost, new { @class = "small" })</p>
         </div>

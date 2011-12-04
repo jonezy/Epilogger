@@ -339,9 +339,10 @@ namespace Epilogger.Web.Controllers {
             }
 
             Model.StartDateTime = roundTime;
-            //Model.EndDateTime = roundTime.AddHours(3);
+            Model.EndDateTime = roundTime.AddHours(3);
             Model.CollectionStartDateTime = roundTime.AddDays(-2);
             Model.CollectionEndDateTime = roundTime.AddDays(3);
+            Model.WebsiteURL = "http://";
 
             return View(Model);
         }
