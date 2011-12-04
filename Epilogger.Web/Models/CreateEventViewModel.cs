@@ -20,7 +20,7 @@ namespace Epilogger.Web.Models {
         [DisplayName("Subtitle")]
         public String Subtitle { get; set; }
 
-        [Required(ErrorMessage = "Please enter some search terms for your event (ex:#epilogger OR epilogger)")]
+        [Required(ErrorMessage = "Please enter some search terms for your event (ex: epilogger OR EPL)")]
         [DisplayName("Search Terms")]
         public string SearchTerms { get; set; }
         
@@ -39,11 +39,11 @@ namespace Epilogger.Web.Models {
         [DisplayName("Cost")]
         public String Cost { get; set; }
 
-        [Required(ErrorMessage="Please enter your events start date and time.")]
+        [Required(ErrorMessage="Please enter your events start date and time")]
         [DisplayName("Event Start Date and Time")]
         public DateTime StartDateTime { get; set; }
         
-        [DisplayName("EventEnd Date and Time")]
+        [DisplayName("Event End Date and Time")]
         public DateTime? EndDateTime { get; set; }
 
         [DisplayName("Data Collection Start Time")]

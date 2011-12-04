@@ -62,7 +62,7 @@ function SearchVenues(url) {
 function SetSelectedVenue(venueId, venueName, venueAddress, venueCity, venueState, venueZip) {
     $("#FoursquareVenueID").val(venueId);
     //$("#selectedVenue").html("You selected: <strong>" + venueName + "</strong> as your venue!");
-    $("#selectedVenue").html("<strong>" + venueName + "</strong><br />" + venueAddress + "<br />" + venueCity + ", " + venueState + "<br />" + venueZip);
+    $("#selectedVenue").html("<strong>" + venueName + "</strong><br />" + venueAddress + "<br />" + venueCity + ", " + venueState + "<br />" + venueZip + "<br />");
     $("#foursquare-search").text("Change venue")
     //Dismis the popup
     $.colorbox.close();

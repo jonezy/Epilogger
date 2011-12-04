@@ -7,9 +7,9 @@
 
 <script type="text/javascript">
     head.ready(function () {
-        $('#TestTimePicker').dateSpanPicker();
         $('#EventTimePicker').dateSpanPicker();
         $('#CollectionTimePicker').dateSpanPicker();
+        $('#Name').focus();
     });
 </script>
 
@@ -34,7 +34,7 @@
 
     <div id="SearchHelpPopUpDiv" class="uiPopUp" style="display: none;">
         <div id="SearchHelpPopUpContentDiv" class="uiPopUpBody">
-            <table celpadding="0" celspacing="0">
+            <table cellpadding="0" cellspacing="0">
                 <tbody><tr><th>Operator</th><th>Finds data...</th></tr>
                     <tr><td>epilogger search</td><td>containing both "epilogger" and "search". This is the default operator.</td></tr>
                     <tr><td><b>"</b>happy hour<b>"</b></td><td>containing the exact phrase "happy hour".</td></tr>
@@ -91,16 +91,6 @@
         <h4>WHEN AND WHERE</h4>
         <br style="clear:both;" />
         <div id="createevent-time" class="item-data clearfix">
-            
-            
-           @* <div id="TestTimePicker">
-                <input type="text" class="picker-start-date" name="start_date" value="2011-12-04" />
-                <input type="text" class="picker-start-time" name="start_time" value="7:31pm" />
-                &nbsp;to&nbsp;
-                <input type="text" class="picker-end-time" name="end_time" value="8:31pm" />
-                <input type="text" class="picker-end-date" name="end_date" value="2011-12-04" />
-            </div>*@
-            
             <br />
             <label class="wide">Event Time</label>
             <div id="EventTimePicker">
@@ -143,7 +133,15 @@
             <label class="wide">Venue</label>
             @*<a href="#" id="foursquare-search" class="blue-action-button">Search for a venue</a>*@
             <div style="display: block; margin-left: 112px;">
-                <div id="selectedVenue"></div>
+                <div id="selectedVenue">
+                    @if (Model.Venue != null)
+                    {
+                        <strong>@Model.Venue.Name</strong><br />
+                        @Model.Venue.Address<br />
+                        @Model.Venue.City@:, @Model.Venue.State<br />
+                        @Model.Venue.Zip<br />
+                    }
+                </div>
                 <input type="button" id="foursquare-search" class="blue-action-button" value="Search for a venue" />
             </div>
 
