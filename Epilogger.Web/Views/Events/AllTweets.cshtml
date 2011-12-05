@@ -7,7 +7,13 @@
     Layout = "~/Views/Shared/_InteriorLayout.cshtml";
     ViewBag.Title = "Epilogger - " + Model.Name + "- Tweets";
 }
-@Html.Partial("EventToolbar", Model.ToolbarViewModel)
+
+
+    @*New event menu*@
+    @Html.Partial("Menu", Model.ToolbarViewModel)
+    <div class="spacer"></div>
+
+
 <div id="events-nav">
     <h1>ALL @Model.TweetCount.ToString("#,###") TWEETS</h1>
     <h2>FROM @Model.Name</h2>
@@ -17,6 +23,8 @@
         <h1>@Model.UniqueTweeterCount.ToString("#,###")</h1>
     </div>
     <br style="clear:both;" />
+
+
     <div id="top-tweeters">
         <h2>Top 10 Tweeters</h2>
         @for (int i = 0; i < 3; i++) {
@@ -36,7 +44,7 @@
             } catch { }
         }
         <br style="clear:both;" />
-        @for (int i = 4; i <= 10; i++) {
+        @for (int i = 3; i <= 9; i++) {
             try {
             if (Model.TopTweeters[i] != null) {
                 Tweeter tweeter = Model.TopTweeters[i];

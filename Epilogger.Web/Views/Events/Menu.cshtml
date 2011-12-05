@@ -24,7 +24,7 @@
 { 
     <button class="fright blue-action-button" style="font:bold 13px 'InterstatePlusRegular'; padding:2px 3px">subscribe</button>
     <ul id="EventDetailsMenu">
-        <li>@Html.ActionLink("Overview", "allcontent", null, new { id = @id }, action.ToLower() == "allcontent" ? new { @class = "current" } : null)</li>
+        <li>@Html.ActionLink("Overview", "details", null, new { id = @id }, action.ToLower() == "details" ? new { @class = "current" } : null)</li>
         <li>@Html.ActionLink("Photos", "allphotos", null, new { id = @id }, action.ToLower() == "allphotos" ? new { @class = "current" } : null)</li>
         <li>@Html.ActionLink("Tweets", "alltweets", null, new { id = @id }, action.ToLower() == "alltweets" ? new { @class = "current" } : null)</li>
         <li>@Html.ActionLink("Blog Posts", "allblogposts", null, new { id = @id }, action.ToLower() == "allblogposts" ? new { @class = "current" } : null)</li>
@@ -40,7 +40,7 @@ else
 { 
     <button class="fright smaller-blue-action-button">subscribe</button>
     <ul id="EventDetailsMenu">
-        <li>@Html.ActionLink("Overview", "allcontent", null, new { id = @id, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "allcontent" ? new { @class = "current" } : null)</li>
+        <li>@Html.ActionLink("Overview", "details", null, new { id = @id, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "details" ? new { @class = "current" } : null)</li>
         <li>@Html.ActionLink("Photos", "allphotos", null, new { id = @id, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "allphotos" ? new { @class = "current" } : null)</li>
         <li>@Html.ActionLink("Tweets", "alltweets", null, new { id = @id, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "alltweets" ? new { @class = "current" } : null)</li>
         <li>@Html.ActionLink("Blog Posts", "allblogposts", null, new { id = @id, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "allblogposts" ? new { @class = "current" } : null)</li>

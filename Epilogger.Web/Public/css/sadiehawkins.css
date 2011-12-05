@@ -824,7 +824,7 @@ x.dashboard-event-item .event-totals {
 .alltweets-entry {margin-bottom:20px;}
 .alltweets-entry .tweet-content {float:left;margin-left:10px;width:560px;font-size:13px;}
 .tweet-content strong {font-weight:normal; background:url(../images/linebg.png) repeat-x 0 50%;display:block;}
-.tweet-content strong a {padding-right:10px;background:#fff;}
+.tweet-content strong a {padding-right:10px;}
 .tweet-content .tweet-content-username {text-transform:uppercase;padding-bottom:4px;}
 .tweet-content .tweet-content-username-small {text-transform:uppercase;padding-bottom:4px;font-size:8pt;}
 .alltweets-entry .tweet-content p {margin-bottom:2px;}
