@@ -153,13 +153,13 @@ else
         <td>
             @if (Model.Venue != null)
             {
-                <span class="fleft"><img src="../images/icons/checkin.png" /></span>
-                <span class="fleft">@Model.Venue.Name,<br/> @Model.Venue.Address,<br /> @Model.Venue.City (<a href="http://maps.google.com/?q=@Model.Venue.Name @Model.Venue.Address @Model.Venue.City @Model.Venue.State @Model.Venue.Zip" target="_blank">map</a>)</span>
+                <span class="img"><img src="@Url.Content("~/Public/images/icons/checkin.png")" /></span>
+                <span>@Model.Venue.Name,<br/> @Model.Venue.Address,<br /> @Model.Venue.City (<a href="http://maps.google.com/?q=@Model.Venue.Name @Model.Venue.Address @Model.Venue.City @Model.Venue.State @Model.Venue.Zip" target="_blank">map</a>)</span>
             }
        </td>
        <td>
-            <span class="fleft"><img src="../images/icons/time.png" /></span>
-            <span class="fleft">
+            <span class="img"><img src="@Url.Content("~/Public/images/icons/time.png")" /></span>
+            <span>
             @if (Model.StartDateTime.Subtract(Model.EndDateTime).Days == 0)
             {
                 @Html.DisplayFor(e => e.StartDateTime, "FullDate") <br />
@@ -174,8 +174,8 @@ else
     </tr>
     <tr>
         <td>
-            <span class="fleft"><img src="../images/icons/cost.png" /></span>
-            <span class="fleft">
+            <span class="img"><img src="@Url.Content("~/Public/images/icons/cost.png")" /></span>
+            <span>
             @if (Model.Cost != null)
             {
                 @Model.Cost
@@ -187,8 +187,8 @@ else
             </span>
         </td>
         <td>
-            <span class="fleft"><img src="../images/icons/hashtag.png" /></span>
-            <span class="fleft">
+            <span class="img"><img src="@Url.Content("~/Public/images/icons/hashtag.png")" /></span>
+            <span>
             @{
                 try
                 {
@@ -205,13 +205,15 @@ else
                 
                 catch
                 {
-                <strong>@Model.SearchTerms</strong>
+                    @Model.SearchTerms
                 }
             }
             </span> 
         </td>
     </tr>
     </table>
+
+    <a href="#" id="collapse"><span><img src="@Url.Content("~/Public/images/icons/less.png")" /> hide details</span></a>
 </div>
 
 <div class="grid_7 alpha omega">

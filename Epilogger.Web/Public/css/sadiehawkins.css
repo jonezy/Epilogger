@@ -2,7 +2,7 @@ body {
     padding:0px 40px;
 	color:#606060;	
 	background:#efefef url('../images/bg/top.png') repeat-x;
-	font: normal 13px/18px Helvetica, Arial, Sans-Serif; }
+	font: normal 12px/18px Helvetica, Arial, Sans-Serif; }
 
 a {
    color:#287cbe;
@@ -121,12 +121,20 @@ ul#navigation li {
 	display:inline-block;
 	padding:9px 0 5px 0}
 
-ul#navigation li a {
+ul#navigation li a{
 	color:#1e72c8;
 	padding: 9px 10px 7px 10px;
 	text-transform:uppercase;
 	margin:0 5px;
 	font:bold 13pt 'InterstatePlusRegular', impact, sans-serif;}
+
+ul#navigation li input {
+    width:60px;
+	font:bold 13pt 'InterstatePlusRegular', impact, sans-serif;
+	padding:5px;
+	max-width:none !mportant;
+	margin:0;
+	text-transform:uppercase;}
 
 ul#navigation li a:hover, ul#navigation li a.current {
 	-moz-border-radius: 2px;
@@ -163,6 +171,7 @@ ul.subnav li a {
 
 ul.subnav li a:hover, ul.subnav li a.current {
 	color:#245d96}
+	
 	
 /* ------------------------------ CONTENT */
 
@@ -223,6 +232,16 @@ span.number {
 	
 
 /* --- SINGLE EVENT PAGE */
+a#collapse {
+    font-size:11px;
+    display:block;
+    padding:0 0 0 10px;
+	background:url('../images/bg/collapse.png') repeat-x 0 10px;}
+
+a#collapse span {
+    background:#eee;
+    padding:0 3px}
+    
 .image-grid img { 
     padding:2px 0}
     
@@ -241,6 +260,14 @@ span.number {
 table#event-particulars td {
     width:50%;
     padding:0 10px 10px 0}
+    
+table#event-particulars td span {
+    float:left;
+    display:block;
+    width:155px}
+    
+table#event-particulars td span.img {
+    width:16px}
 
 .image-grid .commentbubble {
 	background:url('../images/icons/bubble.png') no-repeat 0 2px;
@@ -249,6 +276,7 @@ table#event-particulars td {
 	color:#fff;
 	width:25px;
 	height:30px;
+	padding:2px 0 0 0;
 	text-align:center;
 	display:block;
 	position: absolute;
@@ -455,18 +483,17 @@ table#event-particulars td {
     padding:0; 
     margin: 0 20px 10px 0;}
     
-.topPhotosList li a  
-{
+.topPhotosList li a {
     text-transform: uppercase; 
     color: #acacac; 
     background-image: url(../images/icons/BrowseBullet.png); 
     background-position:0 -15px; 
     background-repeat: no-repeat; 
-    padding-left: 20px; }
+    padding-left: 20px;}
     
 .topPhotosList li a:hover, .topPhotosList li a.active { 
     color: #000; 
-    background-position:0 2px; }
+    background-position:0 2px;}
 
 div#photos-filterbar {
     padding:15px 0;
