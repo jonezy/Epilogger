@@ -20,7 +20,7 @@
     var EventURL = 'http://www.epilogger.com/Events/Details/@Model.ID';
 </script>
 
-@Html.Partial("EventToolbar", Model.ToolbarViewModel)
+
 
 <div class="grid_11 alpha">
 	<h1>ALL PHOTOS</h1>
@@ -28,6 +28,10 @@
 </div>
 
 <div class="clear"></div>
+
+@*New event menu*@
+@Html.Partial("Menu", Model.ToolbarViewModel)
+<div class="spacer"></div>
 
 @if (Model.ShowTopPhotos)
 {
@@ -63,7 +67,7 @@
 </div>
 
 <div class="clear"></div>
-<div class="spacer"></div>
+
 
 <div class="image-grid" id="photosvideos">
     @foreach (Epilogger.Data.Image EPLImage in Model.Images)

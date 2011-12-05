@@ -5,7 +5,10 @@
     Layout = "~/Views/Shared/_InteriorLayout.cshtml";
     ViewBag.Title = "Epilogger - " + Model.Name + "- All Blogs";
 }
-@Html.Partial("EventToolbar", Model.ToolbarViewModel)
+
+@*New event menu*@
+@Html.Partial("Menu", Model.ToolbarViewModel)
+<div class="spacer"></div>
 
 <div id="events-nav">
     <h1>ALL @Model.TotalRecords BLOG POSTS</h1>
