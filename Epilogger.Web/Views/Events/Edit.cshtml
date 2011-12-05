@@ -6,7 +6,9 @@
     ViewBag.Title = "Epilogger - Edit Event - " + @Model.Name;
 }
 
-@Html.Partial("EventToolbar", Model.ToolbarViewModel)
+@*New event menu*@
+@Html.Partial("Menu", Model.ToolbarViewModel)
+<div class="spacer"></div>
 
 <div id="events-nav">
     <h1>EDIT EVENT</h1>
