@@ -1,15 +1,15 @@
 body {
     padding:0px 40px;
 	color:#606060;	
-	background-color: #efefef;
+	background:#efefef url('../images/bg/top.png') repeat-x;
 	font: normal 13px/18px Helvetica, Arial, Sans-Serif; }
 
 a {
-   color:#2d8ac5;
+   color:#287cbe;
    text-decoration:none}
 
 a:hover {
-    color:#0957a0}
+    color:#31a5f8}
 
 p a {
     text-decoration:underline}
@@ -37,7 +37,7 @@ a.edit_icon {
     text-transform:uppercase;
     cursor:pointer;
     box-shadow:0 0 1px #777;}
-   
+
 .blue-action-button:hover {
     opacity:0.85;
     position:relative;
@@ -64,7 +64,7 @@ a.edit_icon {
       z-index:0;}
 
 #content-container {
-	background: #efefef;
+	/*background: #efefef;*/
 	padding:0px 0px 40px 0px;
 	position:relative;
 	min-height:650px;}
@@ -99,13 +99,12 @@ a.edit_icon {
     text-transform:uppercase;
     border-top:0}
     
-#homepage-toolbar #refresh {
-
-    }
+#homepage-toolbar #refresh {}
     
 #header {
     padding:10px 0px 30px 0px;
-    position:relative; }
+    position:relative;
+    min-height:85px}
 	
 .homeBlurb { width: 425px; }
 .homePager { float: right; margin-top: -20px; }
@@ -123,29 +122,27 @@ ul#navigation li {
 	padding:9px 0 5px 0}
 
 ul#navigation li a {
-	color:#989898;
+	color:#1e72c8;
 	padding: 9px 10px 7px 10px;
 	text-transform:uppercase;
 	margin:0 5px;
-	font:normal 13pt 'InterstatePlusRegular', impact, sans-serif;}
+	font:bold 13pt 'InterstatePlusRegular', impact, sans-serif;}
 
 ul#navigation li a:hover, ul#navigation li a.current {
 	-moz-border-radius: 2px;
 	-webkit-border-radius: 2px;
-	border-radius: 2px;    
-	background:#162734;
-	color:#fff}
+	border-radius: 2px;
+	color:#245d96}
 	
 /* -- Sub Nav */
 ul#events-subnav{
     position:absolute;
     top:55px;
-    right:113px;
+    left:484px;
     display:none;}
     
 ul.subnav {
     margin:0;
-    background:#152632;padding:5px 0px 5px 5px;
     display:inline-block;
     -moz-border-radius: 2px;
 	-webkit-border-radius: 2px;
@@ -158,31 +155,33 @@ ul.subnav li {
     margin:0;}
     
 ul.subnav li a {
-    color:#989898;
-	padding: 0px 10px 0px 10px;
+    color:#5695d6;
+	padding: 0 5px;
 	text-transform:uppercase;
 	margin:0 5px;
-	font:normal 11pt 'InterstatePlusRegular', impact, sans-serif;}
+	font:bold 11pt 'InterstatePlusRegular', impact, sans-serif;}
 
 ul.subnav li a:hover, ul.subnav li a.current {
-	color:#fff}
+	color:#245d96}
 	
 /* ------------------------------ CONTENT */
 
 h1, h2, h4 {
+    color: #f51282;
 	text-transform:uppercase;
-	font:bold 24pt 'InterstatePlusRegular', arial, sans-serif;}
+	font:bold 22pt 'InterstatePlusRegular', arial, sans-serif;}
 
 h1 {
     margin-bottom:10px;
-    color: #f51282;
-    }
+    color: #f51282;}
 
 h1+h2 {
+    text-transform:none;
     position:relative;
+    color:#245d96;
     top:-10px}
+    
 h2 {
-	color:#245d96;
 	font-size:15pt;
 	margin-bottom:10px}
 
@@ -223,7 +222,7 @@ span.number {
 	top:4px;margin-right:10px;}
 	
 
-/* --- single event page */
+/* --- SINGLE EVENT PAGE */
 .image-grid img { 
     padding:2px 0}
     
@@ -238,6 +237,10 @@ span.number {
 	z-index:10;
 	overflow:hidden;
 	float:left;}
+
+table#event-particulars td {
+    width:50%;
+    padding:0 10px 10px 0}
 
 .image-grid .commentbubble {
 	background:url('../images/icons/bubble.png') no-repeat 0 2px;
@@ -473,7 +476,7 @@ ul#connected-networks, .topPhotosList, .topPhotosList li {
     list-style:none;}
 
 
-/* ------------------------------ Universal TAB style */
+/* ------------------------------ UNIVERSAL TAB STYLE */
 .item-card {
     margin-bottom:10px;}
     
@@ -617,11 +620,11 @@ ul#EventDetailsMenu li { display:inline-block; padding: 0; margin:0;}
 ul#EventDetailsMenu li a { color:#000; padding: 0; text-transform:uppercase; margin: 0 20px; font-size: 12px;}
 ul#EventDetailsMenu li a:hover, ul#navigation li a.current {  color:#858585; }*/
 
-ul#EventDetailsMenu { list-style-type: none; border-bottom: 1px solid #c7c7c7; height: 30px; }
-ul#EventDetailsMenu li { float:left; padding:0; margin-right: 25px;  }
-ul#EventDetailsMenu li a { text-transform: uppercase; color: #000; font-size: 12px; }
-ul#EventDetailsMenu li a.active { text-transform: uppercase;  color: #858585; }
-ul#EventDetailsMenu li a:hover {  color: #858585; }
+ul#EventDetailsMenu { display:block; list-style-type:none; border-bottom:1px solid #c7c7c7; height:30px;}
+ul#EventDetailsMenu li { float:left; padding:0; margin-right:25px; }
+ul#EventDetailsMenu li a { text-transform:uppercase; color:#000; font-size:11px;}
+ul#EventDetailsMenu li a.active { color:#888;}
+ul#EventDetailsMenu li a:hover {  color:#858585;}
 
 
 /*CREATE ACCOUNT*/
@@ -882,7 +885,7 @@ x.dashboard-event-item .event-totals {
 
 #global-bar {
     display:block;
-    background:#000;
+    background:#5695d6;
     height:28px;
     padding:2px;
     margin:0px -40px 0px -40px;}

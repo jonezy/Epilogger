@@ -1,22 +1,19 @@
-﻿@model Epilogger.Web.Models.GlobalNavigationModel
-          
+﻿@model Epilogger.Web.Models.GlobalNavigationModel          
 
 <div id="user-status">
-           
     @if (Model.UserLoggedIn) {
-        @:<span class="person">Bonjour <strong>@Html.ActionLink(Model.Username, "index", "account")</strong></span> (@Html.ActionLink("logout", "logout", "account"))
+        @:<span class="person">Bonjour <strong>@Html.ActionLink(Model.Username, "index", "account")</strong></span> 
+        @Html.ActionLink("logout", "logout", "account")
     }
     else
     {
         
         @Html.ActionLink("Login & Register", "login", "account", null, new { @class = "person" })
-    }           
-           
-           
+    }     
 </div>
 
 @if (Model.UserLoggedIn && Model.CurrentUserRole == UserRoleType.Administrator) {
     <div id="admin-area"><a href="#demo" class="displayClicks">CM</a></div> 
     <div id="admin-area">@Html.ActionLink("Add Status MSGs", "StatusMessages", "Home")</div> 
-    <div id="admin-area"><a href="/admin/email">Alpha Invite</a></div> 
+    <div id="admin-area"><a href="/admin/email">Alpha Invite</a></div>
 }

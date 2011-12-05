@@ -24,10 +24,12 @@
     displayModifier = "display:block !important;";
 }
 <ul class="subnav" style="@displayModifier" id="events-subnav">
+    <li>@Html.ActionLink("Today's", "index", "events", new { filter = "now" }, new { })</li>
     <li>@Html.ActionLink("Upcoming", "index", "events", new { filter = "upcoming" }, new { })</li>
     <li>@Html.ActionLink("Past", "index", "events", new { filter = "past" }, new { })</li>
-    <li>@Html.ActionLink("Going on now", "index", "events", new { filter = "now" }, new { })</li>
-    <li>@Html.ActionLink("Randomize", "index", "events", new { filter = "random" }, new { })</li>
+    <li>@Html.ActionLink("Subscribed", "index", "events", new { filter = "now" }, new { })</li>
+    <li>@Html.ActionLink("My Events", "index", "events", new { filter = "now" }, new { })</li>
+    <li>@Html.ActionLink("Random", "index", "events", new { filter = "random" }, new { })</li>
 </ul>
 
 

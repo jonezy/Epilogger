@@ -3,9 +3,9 @@
 @model Epilogger.Web.Models.EventDisplayViewModel
 @{
     Layout = "~/Views/Shared/_InteriorLayout.cshtml";
-    ViewBag.Title = "Epilogger - " + Model.Name;
-    
+    ViewBag.Title = "Epilogger - " + Model.Name;    
 }
+
 @{
     bool IncludeDateRange = false;
     int YesCount = 0;
@@ -23,9 +23,11 @@
         IncludeDateRange = true;
     }
 }
+
 <script type="text/javascript" language="javascript">
     head.js('@Url.Content("~/Public/js/EventDetails.js")');
 </script>
+
 @if (Model.Tweets.FirstOrDefault() != null)
 {
     <script language="javascript" type="text/javascript">
@@ -88,12 +90,12 @@ else
 <div class="grid_12 alpha">
     @if (Model.HasSubscribed)
     {
-        <div class="subscribedIndicator">
-            SUBSCRIBED</div>
+        <div class="subscribedIndicator">SUBSCRIBED</div>
     }
     
     <div class="grid_12 alpha">
         <h1>@Model.Name</h1>
+        <h2 style="margin:0; padding:0">@Model.SubTitle</h2>
 
         @*Event Rating Section*@
         @if (!Model.HasUserRated)
@@ -133,24 +135,90 @@ else
             <div class="starSmall">You rated @Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID && i.EventID == Model.ID).FirstOrDefault().UserRating stars on <br /> @Html.DisplayFor(thing => Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime, "ShortDateTime")</div>
         }
 
-
-        <h2><span style="float:left">@Model.SubTitle</span></h2>
-        <br class="clear" />
-        <div class="spacer"></div>
-    
+        <span class="spacer"></span>    
 
         @*New event menu*@
         @Html.Partial("Menu", Model.ToolbarViewModel)
 
         <div class="spacer"></div>
-
-        <div id="event-intro">
-            @Html.Raw(Model.Description.Replace("\r", "<br />"))
-        </div>
     </div>
 </div>
 
 
+<div class="grid_5 alpha omega">
+    @Html.Raw(Model.Description.Replace("\r", "<br />"))
+
+    <span class="spacer"></span>
+    
+    <table id="event-particulars">
+    <tr>
+        <td>
+            @if (Model.Venue != null)
+            {
+                <span class="fleft"><img src="../images/icons/checkin.png" /></span>
+                <span class="fleft">@Model.Venue.Name,<br/> @Model.Venue.Address,<br /> @Model.Venue.City (<a href="http://maps.google.com/?q=@Model.Venue.Name @Model.Venue.Address @Model.Venue.City @Model.Venue.State @Model.Venue.Zip" target="_blank">map</a>)</span>
+            }
+       </td>
+       <td>
+            <span class="fleft"><img src="../images/icons/time.png" /></span>
+            <span class="fleft">
+            @if (Model.StartDateTime.Subtract(Model.EndDateTime).Days == 0)
+            {
+                @Html.DisplayFor(e => e.StartDateTime, "FullDate") <br />
+                @Html.DisplayFor(e => e.StartDateTime, "Time") @:to @Html.DisplayFor(e => e.EndDateTime, "Time")
+            }
+            else
+            {
+                @Html.DisplayFor(e => e.StartDateTime) @:to @Html.DisplayFor(e => e.EndDateTime)
+            }
+            </span>
+       </td>
+    </tr>
+    <tr>
+        <td>
+            <span class="fleft"><img src="../images/icons/cost.png" /></span>
+            <span class="fleft">
+            @if (Model.Cost != null)
+            {
+                @Model.Cost
+            }
+            else
+            {
+                @:N/A
+            }
+            </span>
+        </td>
+        <td>
+            <span class="fleft"><img src="../images/icons/hashtag.png" /></span>
+            <span class="fleft">
+            @{
+                try
+                {
+                    string[] SearchT = Model.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None);
+                    string SearchTerms = "";
+
+                    foreach (string s in SearchT)
+                    {
+                        SearchTerms += s + ", ";
+                    }
+        
+                    @Html.Raw(SearchTerms.Substring(0, (SearchTerms.Length - 2)))
+                }
+                
+                catch
+                {
+                <strong>@Model.SearchTerms</strong>
+                }
+            }
+            </span> 
+        </td>
+    </tr>
+    </table>
+</div>
+
+<div class="grid_7 alpha omega">
+    MAP
+</div>
 
 @*
 
@@ -221,11 +289,12 @@ else
 <br class="clear" />
 <div class="sm-spacer"></div>*@
 
+@*
 <div id="event-details" class="clearfix">
     <ul>
         <li>
-            <label>
-                When:</label><div class="value">
+            <label>When:</label><div class="value">
+            <div class="value">
                     @if (Model.StartDateTime.Subtract(Model.EndDateTime).Days == 0)
                     {
                         @Html.DisplayFor(e => e.StartDateTime, "FullDate") <br />
@@ -239,6 +308,7 @@ else
                 </div>
         </li>
     </ul>
+
     <ul>
         <li>
             <label>Where:</label>
@@ -250,10 +320,11 @@ else
             </div>
         </li>
     </ul>
+
     <ul class="hashtags">
         <li>
-            <label>
-                Hashtag(s):</label><div class="value">
+            <label> Hashtag(s):</label>
+            <div class="value">
                     @{
                         try
                         {
@@ -272,13 +343,14 @@ else
                         <strong>@Model.SearchTerms</strong>
                         }
                     }
-                </div>
+            </div>
         </li>
     </ul>
+
     <ul>
         <li>
-            <label>
-                Cost:</label><div class="value">
+            <label>Cost:</label>
+            <div class="value">
                     @if (Model.Cost != null)
                     {
                         @Model.Cost
@@ -286,17 +358,15 @@ else
                     else
                     {
                         @:N/A
-                                }
-                </div>
+                    }
+            </div>
         </li>
         <li>
-            <label>
-                Url:</label><div class="value">
-                    <a href="@Model.WebsiteURL" target="_blank">@Model.WebsiteURL</a></div>
+            <label>Url:</label>
+            <div class="value"><a href="@Model.WebsiteURL" target="_blank">@Model.WebsiteURL</a></div>
         </li>
         <li>
-            <label>
-            </label>
+            <label></label>
             <div class="value">
                 @if (Model.TwitterAccount != null)
                 {
@@ -309,11 +379,11 @@ else
             </div>
         </li>
     </ul>
-</div>
-<div class="clear">
-</div>
-<div class="spacer">
-</div>
+</div>*@
+
+<div class="spacer clear"></div>
+
+
 <!-- TWEETS -->
 <div class="grid_5 alpha omega">
     <h2>
@@ -332,20 +402,23 @@ else
                    
     <span class="sm-spacer"></span>
 </div>
+
+
 <!-- PHOTOS & VIDEOS -->
 <div class="grid_7 omega">
     <h2>
         <span class="number" id="photoCount">@string.Format("{0:#,###}", Model.ImageCount)</span>Photos
-        & Videos</h2>
+        & Videos
+    </h2>
     <div class="image-grid" id="photosvideos">
         @foreach (Epilogger.Data.Image EPLImage in Model.Images)
         {
             @Html.Partial("_ImageTemplate", EPLImage)
         }
     </div>
-    <div class="clear">
-    </div>
-    <span class="sm-spacer"></span>
+
+    <span class="clear sm-spacer"></span>
+
     <p>
         @if (!IncludeDateRange)
         { 
@@ -354,13 +427,12 @@ else
         else
         { 
             @: (@Html.ActionLink("See all photos and videos", "AllPhotos", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { }))
-                   }
+        }
     </p>
 </div>
-<div class="clear">
-</div>
-<div class="spacer">
-</div>
+
+<div class="clear spacer"></div>
+
 <div class="event-bottom">
     <!-- BLOG POSTINGS -->
     <div class="grid_4 alpha">
