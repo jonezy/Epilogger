@@ -187,7 +187,7 @@ h1, h2, h4 {
 
 h1 {
     margin-bottom:10px;
-    color: #f51282;}
+    color: #000;}
 
 h1+h2 {
     text-transform:none;
@@ -836,11 +836,10 @@ x.dashboard-event-item .event-totals {
 .account-overview table > .blue-action-button {clear:both}
 .account-overview table td.label {font-weight:bold;width:100px;}
 
-
 /* ------------------------------ EVENTS */
 
-#events-nav {float:left;width:268px;margin-right:17px;position:relative;}
-#events-content {float:left;width:641px;}
+#events-nav {float:left;width:303px;margin-right:17px;position:relative;}
+#events-content {float:left;width:560px;}
 
 .subscribedIndicator { 
     color: #c4cacc; 
@@ -1527,3 +1526,86 @@ body::-webkit-scrollbar-corner{background-clip:padding-box;background-color:#f5f
 #calendars_fav::-webkit-scrollbar-track,#calendars_my::-webkit-scrollbar-track{border-width:0 5px 0 2px}
 
 */
+
+
+
+
+/* new browse event list table */
+.browse-event-table 
+{
+    margin-bottom:5px;
+    padding: 2px 0px 2px 0px;
+    border-bottom:dotted 1px #d6d6d6;
+}
+
+.table-date, .table-name,  .table-tweets, .table-media {float:left;}
+
+.browse-event-table .table-date 
+{
+    width:32px;
+    font-weight:bold;
+}
+
+.browse-event-table .table-name 
+{
+    width:140px;
+    margin-left:10px;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+    font-weight:bold;
+}
+
+.browse-event-table .table-tweets 
+{
+    width:80px;
+    text-align:right;
+}
+
+.browse-event-table .table-media
+{
+    width:40px;
+    text-align:right;
+}
+
+/* dropbutton menus */
+.dropbutton { min-width: 10em; max-width: 9em; white-space: nowrap; background: #ff0084; -webkit-border-radius: 3px; -moz-border-radius: 3px; font-size: 10px; list-style: none outside; margin: 0px; padding:0px; position:absolute; }
+.dropbutton:hover { z-index: 1000; }
+.dropbutton * { cursor: pointer; }
+.dropbutton.alert { background: #FF4500; top: 30px important;}
+.dropbutton li { padding: 0 5px; display: none;}
+.dropbutton li.first-child { display: block; }
+.dropbutton:hover li, .dropbutton.hovering li { display: block; }
+.dropbutton a, 
+.dropbutton button, 
+.dropbutton input { color: white; font-weight: normal; display: block; padding-right: 20px;line-height: 16px;text-overflow: ellipsis;overflow: hidden;font-size: 10px;font-family: Arial, Verdana, Sans-Serif;padding-left: 0px;outline: none;}
+.dropbutton button { border: none; xbackground: none; font-size: 10px; font-family: Arial, Verdana, Sans-Serif; padding: 0px; height: auto;}
+.dropbutton li.first-child, .dropbutton li.last-child { -webkit-border-top-right-radius: 3px; -webkit-border-top-left-radius: 3px; -moz-border-radius-topright: 3px; -moz-border-radius-topleft: 3px; }
+.dropbutton li:hover { background: #ff0084; }
+.dropbutton li.first-child a { background: url(../images/arrowdown.png) right 6px no-repeat; -webkit-border-top-right-radius: 3px; -webkit-border-top-left-radius: 3px; -moz-border-radius-topright: 3px; -moz-border-radius-topleft: 3px; }
+.dropbutton li.first-child.last-child a { background: none; padding: 0; }
+
+	/* dropbutton containers */
+	.dropcontainer {float:right;margin-right:100px;display:inline;}
+	.dropcontainer.pagelist {float:none;display:block;margin:5px 0px 0px 0px;position:relative;left:400px;width:11em;}
+	.dropcontainer.small {float:right;margin-right:20px;}
+	.dropcontainer.subnav {margin-right:140px;}
+
+	/* dropbutton.subnav */
+	.dropbutton.subnav {min-width: 14em !important; max-width: 14em !important;position:absolute;}
+	.dropbutton.subnav * {	font-size: 14px !important;}
+	.dropbutton.subnav li * {	padding:4px 0px 4px 0px !important;}
+	
+	/* dropbutton sizes */
+	.dropbutton.small {min-width: 4em !important; max-width: 4em !important;}
+	.dropbutton.small a {line-height:normal;}
+	.dropbutton.med {min-width: 7em !important; max-width: 7em !important;}
+	.dropbutton.med-small {min-width: 5em !important; max-width: 5em !important;}
+	.dropbutton.med-large {min-width: 9em !important; max-width: 9em !important;}
+	.dropbutton.large-big {min-width: 11em !important; max-width: 11em !important;}
+	.dropbutton.big {min-width: 16em !important; max-width: 16em !important;}
+	.dropbutton.big * {	font-size: 14px !important;}
+	.dropbutton.big li * {	padding:4px 0px 4px 0px !important;}
+	.dropbutton.huge {min-width: 33em !important; max-width: 33em !important;}
+	.dropbutton.huge * {	font-size: 14px !important;}
+	.dropbutton.huge li * {	padding:4px 0px 4px 0px !important;}
