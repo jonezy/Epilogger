@@ -136,27 +136,28 @@
 @Html.Raw(Html.Notify())
 <div id="flash"></div>
 
-<div id="global-bar">  
+<div id="global-bar" class="clearfix">
     <div class="container_12 clearfix">
-
-        <div id="search-container">
-            @using (Html.BeginForm("Search", "Home", FormMethod.Post, null)) {
-                @Html.TextBox("SearchTerm", null, new { @class = "remove-bottom" })
-                <input type="image" src="@Url.Content("~/Public/images/btn-submit.png")"/>
-            }		    
-	    </div>	
-
+        
         @Html.Action("GlobalNavigation", "Navigation", new { Area = "" })
-        	
+        <br style="clear:both;" />
+        <div id="header">
+
+            <a href="/">@Html.Raw(Html.Image("logo.png", "id='logo'"))</a>
+            
+
+            <div id="search-container">
+                @using (Html.BeginForm("Search", "Home", FormMethod.Post, null)) {
+                    @Html.TextBox("SearchTerm", null, new { @class = "remove-bottom" })
+                }		    
+	        </div>	
+            @Html.Partial("Navigation", new { Area = "" }   )
+        </div>
     </div>     
 </div>
 
 <div class="container_12 clearfix" id="outer-container">
-    <div id="header">
-        <a href="/">@Html.Raw(Html.Image("logo.png", "id='logo'"))</a>
-        @Html.Partial("Navigation", new { Area = "" }   )
 
-    </div>
     @RenderBody()
     
 </div>
