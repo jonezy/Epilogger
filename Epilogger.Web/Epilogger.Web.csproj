@@ -292,6 +292,7 @@
     <Content Include="Public\fonts\interstateplus_regular_cond-webfont.ttf" />
     <Content Include="Public\fonts\interstateplus_regular_cond-webfont.woff" />
     <Content Include="Public\images\alltweets-nub.png" />
+    <Content Include="Public\images\bg\jaggies.gif" />
     <Content Include="Public\images\bg\sample1.jpg" />
     <Content Include="Public\images\bg\sample2.jpg" />
     <Content Include="Public\images\bg\sample3.jpg" />
@@ -299,6 +300,7 @@
     <Content Include="Public\images\bg\sample5.jpg" />
     <Content Include="Public\images\bg\sample6.jpg" />
     <Content Include="Public\images\bg\sample7.jpg" />
+    <Content Include="Public\images\bg\search-bg.gif" />
     <Content Include="Public\images\body-bg.jpg" />
     <Content Include="Public\images\btn-checkinmore.png" />
     <Content Include="Public\images\btn-submit.png" />
