@@ -66,7 +66,7 @@ a.edit_icon {
 
 #content-container {
 	/*background: #efefef;*/
-	padding:0px 0px 40px 0px;
+	padding:10px 0px 40px 0px;
 	position:relative;
 	min-height:650px;}
 
@@ -928,7 +928,7 @@ x.dashboard-event-item .event-totals {
     border-top:solid 3px #5695d6;
     margin:0px -40px 0px -40px;
     color:#fff; 
-    padding-bottom:10px;
+    padding-bottom:16px;
     background:#fff url(../images/bg/jaggies.gif) repeat-x bottom;}
     
 #admin-area a, #user-status a {
@@ -943,8 +943,8 @@ div#search-container
 
 div#search-container input[type=text] {
     float:left;
-	color:#eee;
-	font:italic 9pt tahoma;
+	color:#1e72c8;
+	font-size:20px;
 	border:solid 1px #e3e3e3;
 	width:120px;
 	height:20px;
@@ -1041,7 +1041,7 @@ div#search-container input[type=image] {
     position:relative;
     left:-20px}
 
-#footer-container {background:#fff;padding-bottom: 40px; }
+#footer-container {background:#fff;padding-bottom: 40px;margin:0px -40px 0px -40px;}
 #footer { margin-top:40px;font-size:13px;color:#bfbfbf; }
 #footer h4 {color:#7fbaee;font:normal 14px 'InterstatePlusRegular',sans-serif;text-transform:uppercase;}
 #footer a {color:#7fbaee;}
