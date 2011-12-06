@@ -2,6 +2,7 @@ body {
     padding:0px 40px;
 	color:#606060;	
 	background:#efefef url('../images/bg/top.png') repeat-x;
+	
 	font: normal 12px/18px Helvetica, Arial, Sans-Serif; }
 
 a {
@@ -65,7 +66,7 @@ a.edit_icon {
 
 #content-container {
 	/*background: #efefef;*/
-	padding:0px 0px 40px 0px;
+	padding:10px 0px 40px 0px;
 	position:relative;
 	min-height:650px;}
 
@@ -102,9 +103,13 @@ a.edit_icon {
 #homepage-toolbar #refresh {}
     
 #header {
-    padding:10px 0px 30px 0px;
+    padding:0px;
     position:relative;
-    min-height:85px}
+    
+   background:#fff;}
+	
+	
+	
 	
 .homeBlurb { width: 425px; }
 .homePager { float: right; margin-top: -20px; }
@@ -115,7 +120,7 @@ a.edit_icon {
 /* --- main menu */	
 ul#navigation {
     float:right;
-    margin-top:10px;}
+    margin-top:16px;}
 	
 ul#navigation li {
 	display:inline-block;
@@ -126,7 +131,7 @@ ul#navigation li a{
 	padding: 9px 10px 7px 10px;
 	text-transform:uppercase;
 	margin:0 5px;
-	font:bold 13pt 'InterstatePlusRegular', impact, sans-serif;}
+	font:bold 20px 'InterstatePlusRegular', impact, sans-serif;}
 
 ul#navigation li input {
     width:60px;
@@ -146,7 +151,7 @@ ul#navigation li a:hover, ul#navigation li a.current {
 ul#events-subnav{
     position:absolute;
     top:55px;
-    left:484px;
+    left:338px;
     display:none;}
     
 ul.subnav {
@@ -908,47 +913,54 @@ x.dashboard-event-item .event-totals {
 
 /* ------------------------------ GLOBAL BAR */
 
-#admin-area {
+#admin-area, #user-status  {
     float:right;
-    padding:5px 20px 5px 20px;
+    padding:0px 10px 0px 10px;
     margin-right:10px;
-    border-left:dotted 1px #3e3e3e;
-    font-size:11px;
-    font-style:italic;}	
+    
+    -moz-border-radius-topleft: 0px;
+    -moz-border-radius-topright: 0px;
+    -moz-border-radius-bottomright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    -webkit-border-radius: 0px 0px 5px 5px;
+    border-radius: 0px 0px 5px 5px;
+
+    background:#5695d6;
+    color:#fff;
+}	
 
 #global-bar {
     display:block;
-    background:#5695d6;
-    height:28px;
-    padding:2px;
-    margin:0px -40px 0px -40px;}
+    border-top:solid 3px #5695d6;
+    margin:0px -40px 0px -40px;
+    color:#fff; 
+    padding-bottom:16px;
+    background:#fff url(../images/bg/jaggies.gif) repeat-x bottom;}
     
-#global-bar a, #global-bar {
-    color:#aeaeae;}
+#admin-area a, #user-status a {
+    color:#fff;}
 
-div#search-container {
-    margin:2px 0px;
-	background:#141414;
+div#search-container 
+{
+    margin:20px 0px;
 	float:right;
-	width:214px;}
+	width:120px;
+	}
 
 div#search-container input[type=text] {
     float:left;
-	/*background:transparent;
-    height:10px;*/
-	color:#eee;
-	font:italic 9pt tahoma;
-	border:0;
-	width:170px;
+	color:#1e72c8;
+	font-size:20px;
+	border:solid 1px #e3e3e3;
+	width:120px;
+	height:20px;
 	padding:5px 0 5px 5px;
-    background-color: #555; }
+    background-color: #f7f7f7; }
 
 div#search-container input[type=image] {
 	vertical-align:top;
 	float:right;}
 
-#user-status {float:right;padding:5px 20px 5px 20px;margin-right:10px;border-right:dotted 1px #3e3e3e;border-left:dotted 1px #3e3e3e;font-size:11px;font-style:italic;}
-#user-status .person {background:url(../images/icons/header-person.png) no-repeat;padding-left:16px;}
 #breadcrumb a {text-transform: lowercase; font-size:10px; color: #5e5e5e; }
 #breadcrumb { color:#999}
 
@@ -1035,7 +1047,7 @@ div#search-container input[type=image] {
     position:relative;
     left:-20px}
 
-#footer-container { background:#252525 url(../images/body-bg.jpg) repeat; padding-bottom: 40px; }
+#footer-container {background:#fff;padding-bottom: 40px;margin:0px -40px 0px -40px;}
 #footer { margin-top:40px;font-size:13px;color:#bfbfbf; }
 #footer h4 {color:#7fbaee;font:normal 14px 'InterstatePlusRegular',sans-serif;text-transform:uppercase;}
 #footer a {color:#7fbaee;}
