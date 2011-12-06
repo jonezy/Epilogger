@@ -5,6 +5,7 @@
     ViewBag.Title = "Epilogger - Browse (" + @Model.BrowsePageFilter + ")";
 }
 
+<<<<<<< HEAD
 
 
 @switch (Model.BrowsePageFilter)
@@ -58,5 +59,15 @@
             <li class="grid_4">@Html.RouteLink(@item.Name, "EventsRoutes", new { controller = "events", action = "details", id = @item.ID })</li>
         }    
     }
+=======
+@switch (Model.BrowsePageFilter) {
+    case "upcoming":
+    case "past":
+    case "now":
+        @Html.Partial("_BrowseEventLists")
+    break;
+    default:
+        @Html.Partial("_BrowseEventOverview")
+    break;
+>>>>>>> e9641591cb6b81cc04e7a17970ae57517941c5f9
 }
-</ul>*@
