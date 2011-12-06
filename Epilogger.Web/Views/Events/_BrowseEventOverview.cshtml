@@ -1,17 +1,14 @@
 ﻿@using Epilogger.Web;
 @model Epilogger.Web.Models.BrowseEventsDisplayViewModel
-      
 <script type="text/javascript" language="javascript">
     head.js('@Url.Content("~/Public/js/BrowseEvents.js")');
 </script>
-
-           
 <div id="events-nav">
-    <h1>BROWSE EVENTS</h1>
-    <br style="clear:both;" />
-    
-    
-    <ul class="BrowseWhenMenu">
+    <h1>
+        BROWSE EVENTS</h1>
+    <br style="clear: both;" />
+    @Html.TextBox("Search")
+    @*    <ul class="BrowseWhenMenu clearfix">
         @if (Model.Authorized)
         {
             <li><a href="" id="1" class="browseTabs active">IMPORTANT TO ME</a></li>
@@ -21,25 +18,37 @@
         {
             <li><a href="" id="2" class="browseTabs active">TODAY</a></li>
         }
+
+    </ul>*@
+    <div class="browse-event-table-header clearfix">
+
+        <ul class="dropbutton big">
+            @if (Model.Authorized) { <li class="first-child"><a href="" id="1" class="browseTabs ">My Events</a></li> }
+            <li class="last-child"><a href="" id="2" class="browseTabs ">Today</a></li>
+        </ul>   
+    </div><br style="clear:both;" />
         
-        @*<li><a href="">PAST</a></li>
-        <li><a href="">UPCOMING</a></li>*@
-    </ul>
-
     <div class="BEventListContainer">
-        @Html.Partial("_BrowseEventTabContentTemplate", Model.Events)
-    </div>
 
+        @foreach (var item in Model.Events) {
+    
+            <div class="browse-event-table clearfix">
+                <div class="table-date">@Html.Encode(item.StartDateTime.ToString("dd/M"))</div>
+                <div class="table-name">@Html.ActionLink(item.Name, "details", "events", new { @id = item.ID }, null)</div>
+                <div class="table-tweets">@string.Format("{0:#,###}", item.TotalTweets)</div>
+                <div class="table-media">@string.Format("{0:#,###}", item.TotalMedia)</div>
+            </div>
+
+
+        }
+        @*
+
+
+        @Html.Partial("_BrowseEventTabContentTemplate", Model.Events)*@
+    </div>
     <span class="spacer"></span>
     @Html.ActionLink("Your Activity", "events", "dashboard", null, new { @class = "blue-action-button" })
-
-    
-
-
-
-
-    @*This is styled and working for when the Calendar tab is built*@
-    @*
+    @*This is styled and working for when the Calendar tab is built*@ @*
     @Html.TextBox("Search")
     A calendar goes here.
     <br style="clear:both;" />
@@ -53,73 +62,61 @@
         </ul>
         <br style="clear:both;" />
     }
-    *@
-
-    @*<h2>EVENTS FOR (selected date):</h2>
+    *@ @*<h2>EVENTS FOR (selected date):</h2>
     <ul class="browseEventList">
         <li><div>8:00p</div>Event Name</li>
     </ul>*@
 </div>
-
 <div id="events-content">
-        <h2>HOTTEST EVENTS:</h2>
-        
-        <div id="HottestSlides">
-        @foreach (Epilogger.Web.Models.HotestEventsModel item in Model.HottestEvents)
-        {
+    <h2>
+        HOTTEST EVENTS:</h2>
+    <div id="HottestSlides">
+        @foreach (Epilogger.Web.Models.HotestEventsModel item in Model.HottestEvents) {
             <div class="HottestEventBig" id="HotestEventDetails@(item.Event.ID)">
                 <div class="hottest-photogridTop">
-                    @foreach (Epilogger.Data.Image image in item.RandomHottestImages.Take(5))
-                    {
+                    @foreach (Epilogger.Data.Image image in item.RandomHottestImages.Take(5)) {
                         <div class="hottestimage" id="photo-@image.ID">
                             <a href="@image.Fullsize" rel="prettyPhoto[@item.Event.ID]" photoid="@image.ID" id="@image.ID">
-                            <img src="@image.Fullsize" width="200" border="0" alt="" /></a>
+                                <img src="@image.Fullsize" width="200" border="0" alt="" /></a>
                         </div>
                     }
                 </div>
                 <div class="hottest-Title">
-                    <a href="/Events/@item.Event.ID/details"><h1>@item.Event.Name</h1></a>
+                    <a href="/Events/@item.Event.ID/details">
+                        <h1>@item.Event.Name</h1>
+                    </a>
                     <div class="event-totals">
                         <div class="total-tweets">@string.Format("{0:#,###}", item.TweetCount)</div>
                         <div class="total-media">@string.Format("{0:#,###}", item.PhotoCount)</div>
                     </div>
-                    <br style="clear:both;" />
+                    <br style="clear: both;" />
                 </div>
                 <div class="hottest-photogridBottom">
-                    @foreach (Epilogger.Data.Image image in item.RandomHottestImages.Skip(5).Take(5))
-                    {
+                    @foreach (Epilogger.Data.Image image in item.RandomHottestImages.Skip(5).Take(5)) {
                         <div class="hottestimage" id="photo-@image.ID">
                             <a href="@image.Fullsize" rel="prettyPhoto[@item.Event.ID]" photoid="@image.ID" id="@image.ID">
-                            <img src="@image.Fullsize" width="200" border="0" alt="" /></a>
+                                <img src="@image.Fullsize" width="200" border="0" alt="" /></a>
                         </div>
                     }
                 </div>
             </div>
         }
-        </div>
-        
-        @*Links*@
-        <ul class="HottestList">
-        @foreach (Epilogger.Web.Models.HotestEventsModel item in Model.HottestEvents)
-        {
+    </div>
+    @*Links*@
+    <ul class="HottestList">
+        @foreach (Epilogger.Web.Models.HotestEventsModel item in Model.HottestEvents) {
             <li><a href="" onclick="return false;" class="HottestListLink" id="@(item.Event.ID)">@item.Event.Name</a></li>
         }
-        </ul>   
-        
-        <span class="big-spacer" style="clear:left"></span>
-
-        @*Categories*@
-        <h2>BROWSE BY CATEGORY:</h2>
-        <ul class="browseCategoryList">
-            @foreach (Epilogger.Data.EventCategory c in Model.EventCategories)
-            {
-                <li>@Html.ActionLink(c.CategoryName, "Category", new { CategoryName = c.URLStub })</li>
-            }
-        </ul>
+    </ul>
+    <span class="big-spacer" style="clear: left"></span>@*Categories*@
+    <h2>
+        BROWSE BY CATEGORY:</h2>
+    <ul class="browseCategoryList">
+        @foreach (Epilogger.Data.EventCategory c in Model.EventCategories) {
+            <li>@Html.ActionLink(c.CategoryName, "Category", new { CategoryName = c.URLStub })</li>
+        }
+    </ul>
 </div>
-
-
-
 <script type="text/javascript" language="javascript">
     head.ready(function () {
         $("a[rel^='prettyPhoto']").prettyPhoto({
