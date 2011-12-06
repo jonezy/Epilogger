@@ -350,6 +350,7 @@
     <Content Include="Public\js\BrowseEvents.js" />
     <Content Include="Public\js\clickmap.js" />
     <Content Include="Public\js\AllPhotos.js" />
+    <Content Include="Public\js\CreateEditEvent.js" />
     <Content Include="Public\js\DateSpanPicker\datespan.css" />
     <Content Include="Public\js\DateSpanPicker\example.html" />
     <Content Include="Public\js\DateSpanPicker\jquery.datespan-picker.js" />

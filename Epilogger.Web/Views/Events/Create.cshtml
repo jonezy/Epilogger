@@ -6,6 +6,8 @@
 }
 
 <script type="text/javascript">
+    head.js('@Url.Content("~/Public/js/CreateEditEvent.js")');
+    
     head.ready(function () {
         $('#EventTimePicker').dateSpanPicker();
         $('#CollectionTimePicker').dateSpanPicker();
@@ -80,11 +82,33 @@
         <h4>WHAT TO INCLUDE</h4>
         <br style="clear:both;" />
         <div class="item-data clearfix">
-            <p><label>Search Terms</label> @Html.TextBoxFor(model => model.SearchTerms, new { @class = "wide" })</p>
+            
+
+            <div id="rule-group">
+                <div class="rule" id="rule1">
+                    <label>* 1ST Term<br />(# " @@ allowed)</label><input type="text" id="seachTerm1" class="med" />
+                    <a href="#" class="plus blue-action-button">+</a>
+                </div>
+
+                <div class="rule hidden" id="template">
+                    <label>NEXT TERM</label>
+                    <select id="operator1" class="med">
+                        <option value="OR">or</option>
+                        <option value="AND">and</option>
+                        <option value="NOT">not</option>
+                    </select>
+                    <input type="text" id="hst" class="med" />
+                    <a href="#" class="minus blue-action-button">-</a> <a href="#" class="plus blue-action-button">+</a>
+                </div>
+            </div>
+
+            <div class="spacer"></div>        
+            <p><label>Advanced (soon hidden)</label> @Html.TextBoxFor(model => model.SearchTerms, new { @class = "wide" })</p>
+
         </div>
     </div>
-    <div class="spacer"></div>
     
+    <div class="spacer"></div>
     
     
     <div class="item-card">
@@ -162,15 +186,8 @@
             <p>@Html.LabelFor(model => model.Description) @Html.TextAreaFor(model => model.Description, new { @class = "wide" })</p>
 
             <p>@Html.LabelFor(model => model.WebsiteURL) @Html.TextBoxFor(model => model.WebsiteURL, new { @class = "wide" })</p>
-
-            @*<div class="grid_4 alpha">*@
-                <p>@Html.LabelFor(model => model.TwitterAccount) @Html.TextBoxFor(model => model.TwitterAccount, new { @class = "med" })</p>
-            @*</div>
-
-            <div class="grid_4 alpha">*@
-                <p>@Html.LabelFor(model => model.FacebookPageURL) @Html.TextBoxFor(model => model.FacebookPageURL, new { @class = "med" })</p>
-            @*</div>*@
-
+            <p>@Html.LabelFor(model => model.TwitterAccount) @Html.TextBoxFor(model => model.TwitterAccount, new { @class = "med" })</p>
+            <p>@Html.LabelFor(model => model.FacebookPageURL) @Html.TextBoxFor(model => model.FacebookPageURL, new { @class = "med" })</p>
             <p>@Html.LabelFor(model => model.Cost) @Html.TextBoxFor(model => model.Cost, new { @class = "small" })</p>
         </div>
     </div>
