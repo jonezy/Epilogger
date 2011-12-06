@@ -129,6 +129,15 @@ namespace Epilogger.Web.Controllers {
                     events = ES.GoingOnNowEventsPaged(currentPage, 10);
                     model.TotalRecords = ES.GoingOnNowEventsCount();
                     break;
+                case "subscribed":
+                    events = BuildEventSubscriptions(currentPage, 10);
+                    model.TotalRecords = CurrentUser.UserFollowsEvents.Count();
+                    break;
+                case "myevents":
+                    events = ES.FindByUserIDPaged(CurrentUserID, currentPage, 10);
+                    model.TotalRecords = ES.FindCountByUserID(CurrentUserID);
+                    break;
+                
                 case "random":
                     Epilogger.Data.Event e = ES.GetRandomEvent();
                     return RedirectToAction("details", new { id = e.ID });
@@ -169,6 +178,18 @@ namespace Epilogger.Web.Controllers {
             }
 
             return View(model);
+        }
+
+        private List<Event> BuildEventSubscriptions(int currentPage, int recordsPerPage)
+        {
+            List<Event> events = new List<Event>();
+            List<UserFollowsEvent> subscribedEvents = CurrentUser.UserFollowsEvents.ToList();
+            foreach (var item in subscribedEvents)
+            {
+                events.Add(item.Events.FirstOrDefault());
+            }
+
+            return events.Skip(currentPage * recordsPerPage).Take(recordsPerPage).OrderByDescending(c => c.StartDateTime).ToList();
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------

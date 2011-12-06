@@ -8,16 +8,18 @@
 
 
 @switch (Model.BrowsePageFilter)
-    {
-        case "upcoming":
-        case "past":
-        case "now":
-            @Html.Partial("_BrowseEventLists")
-       break;
-        default:
-            @Html.Partial("_BrowseEventOverview")
-       break;
-    }
+{
+    case "upcoming":
+    case "past":
+    case "now":
+    case "subscribed":
+    case "myevents":
+        @Html.Partial("_BrowseEventLists")
+        break;
+    default:
+        @Html.Partial("_BrowseEventOverview")
+    break;
+}
 
 
 
