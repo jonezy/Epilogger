@@ -536,6 +536,9 @@ ul#connected-networks, .topPhotosList, .topPhotosList li {
 
 
 /* ------------------------------ CREATE EVENT */
+
+#rule-group input[type="text"] { display: inline-block; }
+
 .item-data label {
     float:left;
     font-size:10px;
@@ -575,13 +578,16 @@ fieldset.login input[type="text"],fieldset.login input[type="password"], fieldse
     
 .item-data input.med {
     width:200px;}
-    
+
 .item-data p {
     display:block;
     clear:both;}
 
 .item-data select {
     padding:6px 4px;}
+    
+/*Override this for dropdowns so they line up*/    
+.item-data select.med { width:208px !important; display: inline-block; }      
     
    
 /* --- time select */
@@ -1498,6 +1504,9 @@ body::-webkit-scrollbar-track-piece:horizontal{border-width:3px 0 0;box-shadow:i
 body::-webkit-scrollbar-thumb{background-clip:padding-box;border-width:1px 1px 1px 5px}
 body::-webkit-scrollbar-thumb:horizontal{border-width:5px 1px 1px}
 body::-webkit-scrollbar-corner{background-clip:padding-box;background-color:#f5f5f5;border:solid #fff;border-width:3px 0 0 3px;box-shadow:inset 1px 1px 0 rgba(0,0,0,.14)}
+
+
+
 
 
 
