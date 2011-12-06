@@ -20,10 +20,16 @@
         }
 
     </ul>*@
+    <div class="browse-event-table-header clearfix">
+
+        <ul class="dropbutton big">
+            @if (Model.Authorized) { <li class="first-child"><a href="" id="1" class="browseTabs ">My Events</a></li> }
+            <li class="last-child"><a href="" id="2" class="browseTabs ">Today</a></li>
+        </ul>   
+    </div><br style="clear:both;" />
+        
     <div class="BEventListContainer">
-        <div class="browse-event-table-header">
-            
-        </div>
+
         @foreach (var item in Model.Events) {
     
             <div class="browse-event-table clearfix">

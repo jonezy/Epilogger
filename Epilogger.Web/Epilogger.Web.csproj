@@ -292,6 +292,7 @@
     <Content Include="Public\fonts\interstateplus_regular_cond-webfont.ttf" />
     <Content Include="Public\fonts\interstateplus_regular_cond-webfont.woff" />
     <Content Include="Public\images\alltweets-nub.png" />
+    <Content Include="Public\images\arrowdown.png" />
     <Content Include="Public\images\bg\jaggies.gif" />
     <Content Include="Public\images\bg\sample1.jpg" />
     <Content Include="Public\images\bg\sample2.jpg" />
