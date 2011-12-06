@@ -187,7 +187,7 @@ h1, h2, h4 {
 
 h1 {
     margin-bottom:10px;
-    color: #f51282;}
+    color: #000;}
 
 h1+h2 {
     text-transform:none;
@@ -836,11 +836,10 @@ x.dashboard-event-item .event-totals {
 .account-overview table > .blue-action-button {clear:both}
 .account-overview table td.label {font-weight:bold;width:100px;}
 
-
 /* ------------------------------ EVENTS */
 
-#events-nav {float:left;width:268px;margin-right:17px;position:relative;}
-#events-content {float:left;width:641px;}
+#events-nav {float:left;width:303px;margin-right:17px;position:relative;}
+#events-content {float:left;width:560px;}
 
 .subscribedIndicator { 
     color: #c4cacc; 
@@ -1527,3 +1526,44 @@ body::-webkit-scrollbar-corner{background-clip:padding-box;background-color:#f5f
 #calendars_fav::-webkit-scrollbar-track,#calendars_my::-webkit-scrollbar-track{border-width:0 5px 0 2px}
 
 */
+
+
+
+
+/* new browse event list table */
+.browse-event-table 
+{
+    margin-bottom:5px;
+    padding: 2px 0px 2px 0px;
+    border-bottom:dotted 1px #d6d6d6;
+}
+
+.table-date, .table-name,  .table-tweets, .table-media {float:left;}
+
+.browse-event-table .table-date 
+{
+    width:32px;
+    font-weight:bold;
+}
+
+.browse-event-table .table-name 
+{
+    width:140px;
+    margin-left:10px;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+    font-weight:bold;
+}
+
+.browse-event-table .table-tweets 
+{
+    width:80px;
+    text-align:right;
+}
+
+.browse-event-table .table-media
+{
+    width:40px;
+    text-align:right;
+}
