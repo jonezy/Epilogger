@@ -64,22 +64,24 @@
             </div>
         }
     </div>
-    @*Links*@
     <ul class="HottestList">
         @foreach (Epilogger.Web.Models.HotestEventsModel item in Model.HottestEvents) {
             <li><a href="" onclick="return false;" class="HottestListLink" id="@(item.Event.ID)">@item.Event.Name</a></li>
         }
-    </ul>
-    
+    </ul>  
     
     <span class="big-spacer" style="clear: left"></span>@*Categories*@
-    <h2>
-        BROWSE BY CATEGORY:</h2>
-    <ul class="browseCategoryList">
+    <h2>FIND AN EVENT BY CATEGORY:</h2>
+    @{int count = 0;}
         @foreach (Epilogger.Data.EventCategory c in Model.EventCategories) {
-            <li>@Html.ActionLink(c.CategoryName, "Category", new { CategoryName = c.URLStub })</li>
+            <div class="browse-category-list-item" style="background-image:url(@Url.Content("~/Public/images/category-icons/" + c.ID + ".png"))">@Html.ActionLink(c.CategoryName, "Category", new { CategoryName = c.URLStub })</div>
+            if (count == 2) {
+                @:<br style="clear:both;" />
+                count = 0;
+            } else {
+                count++;    
+            }
         }
-    </ul>
 </div>
 <script type="text/javascript" language="javascript">
     head.ready(function () {
