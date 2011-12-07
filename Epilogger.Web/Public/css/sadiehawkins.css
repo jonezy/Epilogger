@@ -307,14 +307,14 @@ table#event-particulars td span.img {
     background-color: #fc5daf; 
     border-radius: 3px}
 
-.BEventListContainer {padding:0px;}
+.BEventListContainer {margin-top:-10px;}
 
 /* --- hottest event slider */
 #HottestSlides { 
     width: 610px; 
+    margin:35px 0px 0px 0px;
     overflow: hidden; 
-    margin-bottom: 20px;
-    background:#ececec;}
+    background:#fff;}
     
 .HottestEventBig {
     display: none;}
@@ -329,16 +329,30 @@ table#event-particulars td span.img {
     height:73px;}
     
 .hottest-Title {
-    margin: 16px 0 0 5px;}
+    margin: 16px 15px 12px 5px;}
  
- .hottest-Title .event-totals { /* hiding slider totals for now until I make them better */
-     display:none}
+.hottest-totals {
+    float:right;
+}
+.hottest-totals .total-tweets, .hottest-totals .total-media {
+    padding-right:30px;
+    text-align:right;
+    font: 20px 'InterstatePlusRegular', sans-serif;
+    color:#3e3e3e;
+}
 
+.hottest-totals .total-media {
+    background:url(../images/jaggie-icons/hottest-events-media.gif) no-repeat right;
+    margin-bottom:4px;
+}
+.hottest-totals .total-tweets {
+    background:url(../images/jaggie-icons/hottest-events-twitter.gif) no-repeat right;
+}
 .hottest-Title h1 {
     float:left;
     color:#3e3e3e;
-    font-size:28pt;
-    padding:0 0 0 10px;
+    font-size:28px;
+    padding:10px 0 0 10px;
     width:400px}
     
 .hottestimage { 
@@ -352,22 +366,29 @@ table#event-particulars td span.img {
 .browseCategoryList, .browseCategoryList li, #event-details ul { 
     list-style-type: none;}
  
-.HottestList li { 
+.HottestList li  
+{
     float:left; 
     padding:0; 
-    margin: 0 20px 10px 0;}
+    margin: 11px 5px 0px 0;}
     
-.HottestList li a { 
+.HottestList li a  
+{
+    max-width:75px;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    padding:10px 5px 10px 5px;
     text-transform: uppercase; 
-    color: #888; 
-    background: url('../images/icons/BrowseBullet.png') 0 -15px no-repeat;
+    color: #636363; 
     font:normal 14px 'InterstatePlusRegular';
-    padding-left: 20px;}
+    background:#e1e1e1;}
 
 .HottestList li a.active { 
     text-transform: uppercase; 
-    color: #000; 
-    background-position:0 2px; }    
+    color: #287acf; 
+    background:#fff;
+    
+    border-top:dotted 1px #dbdbdb; }    
     
 .HottestList li a:hover, .HottestList li.active { 
     color: #000; 
@@ -1514,20 +1535,22 @@ body::-webkit-scrollbar-thumb{background-clip:padding-box;border-width:1px 1px 1
 body::-webkit-scrollbar-thumb:horizontal{border-width:5px 1px 1px}
 body::-webkit-scrollbar-corner{background-clip:padding-box;background-color:#f5f5f5;border:solid #fff;border-width:3px 0 0 3px;box-shadow:inset 1px 1px 0 rgba(0,0,0,.14)}
 
-
-
-
-
-
 /*
 #calendars_fav::-webkit-scrollbar-thumb,#calendars_my::-webkit-scrollbar-thumb{border-width:0 5px 0 2px}
 #calendars_fav::-webkit-scrollbar-track,#calendars_my::-webkit-scrollbar-track{border-width:0 5px 0 2px}
 
 */
 
-
-
-
+#event-search-container input[type="text"]
+{
+	color:#1e72c8;
+	font-size:20px;
+	border:inset 1px #e3e3e3;
+	height:20px;
+	padding:5px 0 5px 5px;
+    background-color: #f7f7f7;
+    }
+    
 /* new browse event list table */
 .browse-event-table 
 {
@@ -1535,7 +1558,8 @@ body::-webkit-scrollbar-corner{background-clip:padding-box;background-color:#f5f
     padding: 2px 0px 2px 0px;
     border-bottom:dotted 1px #d6d6d6;
 }
-.browse-event-table-header {position:relative;}
+
+.browse-event-table-header {position:relative;height:26px;}
 .browse-event-table-header .icons 
 {
     position:absolute;
@@ -1586,19 +1610,11 @@ body::-webkit-scrollbar-corner{background-clip:padding-box;background-color:#f5f
 .dropbutton button { border: none; xbackground: none; font-size: 10px; font-family: Arial, Verdana, Sans-Serif; padding: 0px; height: auto;}
 .dropbutton li.first-child, .dropbutton li.last-child { -webkit-border-top-right-radius: 3px; -webkit-border-top-left-radius: 3px; -moz-border-radius-topright: 3px; -moz-border-radius-topleft: 3px; }
 .dropbutton li:hover { background: #ff0084; }
-.dropbutton li.first-child a { background: url(../images/arrowdown.png) right 6px no-repeat; -webkit-border-top-right-radius: 3px; -webkit-border-top-left-radius: 3px; -moz-border-radius-topright: 3px; -moz-border-radius-topleft: 3px; }
+.dropbutton li.first-child a { background: url(../images/arrowdown.png) right 10px no-repeat; -webkit-border-top-right-radius: 3px; -webkit-border-top-left-radius: 3px; -moz-border-radius-topright: 3px; -moz-border-radius-topleft: 3px; }
 .dropbutton li.first-child.last-child a { background: none; padding: 0; }
 
 	/* dropbutton sizes */
-	.dropbutton.small {min-width: 4em !important; max-width: 4em !important;}
-	.dropbutton.small a {line-height:normal;}
-	.dropbutton.med {min-width: 7em !important; max-width: 7em !important;}
-	.dropbutton.med-small {min-width: 5em !important; max-width: 5em !important;}
-	.dropbutton.med-large {min-width: 9em !important; max-width: 9em !important;}
-	.dropbutton.large-big {min-width: 11em !important; max-width: 11em !important;}
-	.dropbutton.big {min-width: 16em !important; max-width: 16em !important;}
+	.dropbutton.big {min-width: 12em !important; max-width: 12em !important;}
 	.dropbutton.big * {	font-size: 14px !important;}
 	.dropbutton.big li * {	padding:4px 0px 4px 0px !important;}
-	.dropbutton.huge {min-width: 33em !important; max-width: 33em !important;}
-	.dropbutton.huge * {	font-size: 14px !important;}
-	.dropbutton.huge li * {	padding:4px 0px 4px 0px !important;}
+
