@@ -407,18 +407,17 @@ table#event-particulars td span.img {
     border-right: 1px solid #e1e1e1; 
     display: inline; color: #9e9c9c; }
     
-.browseEventList a:hover, .browseCategoryList li a:hover { 
-    text-decoration: underline; }
-
-.browseCategoryList li {
+.browse-category-list-item {
     float:left; 
     width: 165px;
     height: 30px; 
-    padding: 6px 0 6px 35px; 
+    padding: 0px 0 6px 35px; 
     margin: 10px 5px 10px 0; 
     color: #2d8ac5;
     background-repeat:no-repeat;
-    overflow: hidden;}
+    overflow: hidden;
+    font-weight:bold;     
+}
 
 #event-intro, #event-optionBar {
     font-size:12px;
@@ -858,7 +857,7 @@ x.dashboard-event-item .event-totals {
 /* ------------------------------ EVENTS */
 
 #events-nav {float:left;width:303px;margin-right:17px;position:relative;}
-#events-content {float:left;width:560px;}
+#events-content {float:left;width:640px;}
 
 .subscribedIndicator { 
     color: #c4cacc; 
