@@ -45,19 +45,12 @@ function ChangeToNextHottest() {
 $('.HottestListLink').click(function (e) {
     e.preventDefault();
     stop_Int();
-    changeHottest(this, this.id, 100);
+    changeHottest(this, this.id, 800);
 });
-
-
-
-
-
-
-
 
 $('.browseTabs').click(function (e) {
     e.preventDefault();
-    $('.browseTabs').removeClass("active");
+    $(".BEventListContainer").css('margin-top', '10px');
     $(".BEventListContainer").html("Loading...");
 
     $.ajax({
@@ -67,6 +60,7 @@ $('.browseTabs').click(function (e) {
         contentType: "application/json; charset=utf-8",
         success: function (returnedHTML) {
             $(".BEventListContainer").html(returnedHTML);
+
             $(e.target).addClass("active");
         }
     });

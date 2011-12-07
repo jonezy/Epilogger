@@ -4,72 +4,34 @@
     head.js('@Url.Content("~/Public/js/BrowseEvents.js")');
 </script>
 <div id="events-nav">
-    <h1>
-        BROWSE EVENTS</h1>
-    <br style="clear: both;" />
-    @Html.TextBox("Search")
-    @*    <ul class="BrowseWhenMenu clearfix">
-        @if (Model.Authorized)
-        {
-            <li><a href="" id="1" class="browseTabs active">IMPORTANT TO ME</a></li>
-            <li><a href="" id="2" class="browseTabs ">TODAY</a></li>
-        }
-        else
-        {
-            <li><a href="" id="2" class="browseTabs active">TODAY</a></li>
-        }
+    <h1>BROWSE EVENTS</h1>
 
-    </ul>*@
+    <div id="event-search-container">
+        @using (Html.BeginForm("Search", "Home", FormMethod.Post, null)) {
+            @Html.TextBox("SearchTerm", null, new { @class = "remove-bottom", @title="Search for an event" })
+        }		    
+	</div>
+
     <div class="browse-event-table-header clearfix">
-
         <ul class="dropbutton big">
             @if (Model.Authorized) { <li class="first-child"><a href="" id="1" class="browseTabs ">My Events</a></li> }
             <li class="last-child"><a href="" id="2" class="browseTabs ">Today</a></li>
         </ul>   
-    </div><br style="clear:both;" />
+
+        <div class="icons">
+            <img src="@Url.Content("~/Public/images/jaggie-icons/event-list-header-twitter.gif")" />
+            <img src="@Url.Content("~/Public/images/jaggie-icons/event-list-header-media.gif")" />
+        </div>
+    </div>
         
     <div class="BEventListContainer">
-
-        @foreach (var item in Model.Events) {
+        @Html.Partial("_BrowseEventTabContentTemplate", Model.Events)
+    </div>   
     
-            <div class="browse-event-table clearfix">
-                <div class="table-date">@Html.Encode(item.StartDateTime.ToString("dd/M"))</div>
-                <div class="table-name">@Html.ActionLink(item.Name, "details", "events", new { @id = item.ID }, null)</div>
-                <div class="table-tweets">@string.Format("{0:#,###}", item.TotalTweets)</div>
-                <div class="table-media">@string.Format("{0:#,###}", item.TotalMedia)</div>
-            </div>
-
-
-        }
-        @*
-
-
-        @Html.Partial("_BrowseEventTabContentTemplate", Model.Events)*@
-    </div>
-    <span class="spacer"></span>
-    @Html.ActionLink("Your Activity", "events", "dashboard", null, new { @class = "blue-action-button" })
-    @*This is styled and working for when the Calendar tab is built*@ @*
-    @Html.TextBox("Search")
-    A calendar goes here.
-    <br style="clear:both;" />
-    <br style="clear:both;" />
-    
-    @foreach (Epilogger.Data.Event UpE in Model.UpcomingEvents.OrderBy(e => e.StartDateTime))
-    {
-        <h2>@UpE.StartDateTime.ToString("MMMM d, yyyy"):</h2>
-        <ul class="browseEventList">
-            <li><a href="/events/@UpE.ID/details"><div>@UpE.StartDateTime.ToString("h:mmtt")</div>@UpE.Name</a></li>
-        </ul>
-        <br style="clear:both;" />
-    }
-    *@ @*<h2>EVENTS FOR (selected date):</h2>
-    <ul class="browseEventList">
-        <li><div>8:00p</div>Event Name</li>
-    </ul>*@
+    <span class="spacer"></span>        
+    @Html.ActionLink("Add an Event", "create", "events", null, new { @class = "blue-action-button" })
 </div>
 <div id="events-content">
-    <h2>
-        HOTTEST EVENTS:</h2>
     <div id="HottestSlides">
         @foreach (Epilogger.Web.Models.HotestEventsModel item in Model.HottestEvents) {
             <div class="HottestEventBig" id="HotestEventDetails@(item.Event.ID)">
@@ -85,9 +47,9 @@
                     <a href="/Events/@item.Event.ID/details">
                         <h1>@item.Event.Name</h1>
                     </a>
-                    <div class="event-totals">
-                        <div class="total-tweets">@string.Format("{0:#,###}", item.TweetCount)</div>
+                    <div class="hottest-totals">
                         <div class="total-media">@string.Format("{0:#,###}", item.PhotoCount)</div>
+                        <div class="total-tweets">@string.Format("{0:#,###}", item.TweetCount)</div>
                     </div>
                     <br style="clear: both;" />
                 </div>
@@ -108,6 +70,8 @@
             <li><a href="" onclick="return false;" class="HottestListLink" id="@(item.Event.ID)">@item.Event.Name</a></li>
         }
     </ul>
+    
+    
     <span class="big-spacer" style="clear: left"></span>@*Categories*@
     <h2>
         BROWSE BY CATEGORY:</h2>

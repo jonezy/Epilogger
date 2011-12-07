@@ -329,6 +329,10 @@
     <Content Include="Public\images\icons\SubscribedCheck.png" />
     <Content Include="Public\images\icons\tweet-black.png" />
     <Content Include="Public\images\icons\twitter.png" />
+    <Content Include="Public\images\jaggie-icons\event-list-header-media.gif" />
+    <Content Include="Public\images\jaggie-icons\event-list-header-twitter.gif" />
+    <Content Include="Public\images\jaggie-icons\hottest-events-media.gif" />
+    <Content Include="Public\images\jaggie-icons\hottest-events-twitter.gif" />
     <Content Include="Public\images\linebg.png" />
     <Content Include="Public\images\loading.gif" />
     <Content Include="Public\images\logo.png" />

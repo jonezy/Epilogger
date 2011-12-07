@@ -167,7 +167,7 @@ namespace Epilogger.Web.Controllers {
             
             //For the Overview page, the hottest events
             model.HottestEvents = new List<HotestEventsModel>();
-            foreach (Epilogger.Data.Event item in ES.GetHottestEvents(5))
+            foreach (Epilogger.Data.Event item in ES.GetHottestEvents(4))
             {
                 HotestEventsModel HE = new HotestEventsModel();
                 HE.Event = item;
