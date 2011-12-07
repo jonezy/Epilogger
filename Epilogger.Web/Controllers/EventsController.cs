@@ -9,6 +9,7 @@ using AutoMapper;
 using Epilogger.Data;
 using Epilogger.Web.Core.Stats;
 using Epilogger.Web.Models;
+using Epilogger.Common;
 
 using RichmondDay.Helpers;
 using System.Net;
@@ -1117,6 +1118,29 @@ namespace Epilogger.Web.Controllers {
 
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        [HttpPost]
+        public bool Delete(int EventID)
+        {
+            try
+            {
+                MQ.MSGProducer MP = new MQ.MSGProducer("Epilogger", "System");
+                MQ.Messages.SystemProcessingMSG DeleteMSG = new MQ.Messages.SystemProcessingMSG();
+                DeleteMSG.EventID = EventID;
+                DeleteMSG.Task = MQ.Messages.SystemMessageType.Delete;
+                MP.SendMessage(DeleteMSG);
+                MP.Dispose();
+
+                this.StoreSuccess("Your event has been added to the Delete queue! Due to the large volumn of data, your event may take a few minutes to be removed from the system.");
+            }
+            catch (Exception)
+            {    
+                throw;
+            }
+            
+            return true;
+        }
+    
     }
 
 }

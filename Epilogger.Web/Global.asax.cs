@@ -123,6 +123,13 @@ namespace Epilogger.Web {
                 new { controller = "events", action = "create"}
             );
 
+
+            routes.MapRoute(
+                "DeleteEvent",
+                "events/delete/{eventid}",
+                new { controller = "events", action = "Delete", eventid = UrlParameter.Optional }
+            );
+
             routes.MapRoute(
                 "GetImageComments",
                 "events/getimagecomments/{id}",
