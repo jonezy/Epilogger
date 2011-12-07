@@ -417,7 +417,7 @@ table#event-particulars td span.img {
     padding: 6px 0 6px 35px; 
     margin: 10px 5px 10px 0; 
     color: #2d8ac5;
-    background: url(../images/icons/Crown.png) no-repeat;
+    background-repeat:no-repeat;
     overflow: hidden;}
 
 #event-intro, #event-optionBar {
