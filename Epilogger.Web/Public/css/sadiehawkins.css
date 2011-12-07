@@ -71,22 +71,20 @@ a.edit_icon {
 	min-height:650px;}
 
 #homepage-container {
-    margin:120px 0 0 -40px;
-	background:transparent url(../images/homepage/book.png) no-repeat top center;
 	min-height:748px;
-	padding:0px;
+	padding:30px 0px 0px 0px;
 	position:relative;}
-		
-#homepage-content {
-    position:absolute;
-    top:35px;
-    left:80px;}
 
-#homepage-toolbar {
-    padding-bottom:10px;
-    border-bottom:dotted 1px #b4b4b4;
-    width:860px; height: 70px; }    
-    
+#homepage-intro {
+    float:left;
+    width:360px;   
+}
+
+#homepage-video {
+    float:right;
+    width:560px;   
+}
+
 #homepage-toolbar h4, img#logo {
     float:left ;}
    
@@ -180,7 +178,7 @@ ul.subnav li a:hover, ul.subnav li a.current {
 	
 /* ------------------------------ CONTENT */
 
-h1, h2, h4 {
+h1, h2, h3, h4 {
     color: #f51282;
 	text-transform:uppercase;
 	font:bold 22pt 'InterstatePlusRegular', arial, sans-serif;}
@@ -198,7 +196,14 @@ h1+h2 {
 h2 {
 	font-size:15pt;
 	margin-bottom:10px}
-
+h2+h3 {
+    text-transform:none;
+}
+h3 {
+ font-size:13pt;
+ color:#0770d2;   
+ margin-bottom:5px;
+}
 h4 {
 	color:#333;
 	font-size:10pt;
@@ -381,7 +386,16 @@ table#event-particulars td span.img {
     text-transform: uppercase; 
     color: #636363; 
     font:normal 14px 'InterstatePlusRegular';
-    background:#e1e1e1;}
+    background:#e1e1e1;
+    
+-moz-border-radius-topleft: 0px;
+-moz-border-radius-topright: 0px;
+-moz-border-radius-bottomright: 3px;
+-moz-border-radius-bottomleft: 3px;
+-webkit-border-radius: 0px 0px 3px 3px;
+border-radius: 0px 0px 3px 3px; 
+    
+    }
 
 .HottestList li a.active { 
     text-transform: uppercase; 
@@ -952,7 +966,9 @@ x.dashboard-event-item .event-totals {
     margin:0px -40px 0px -40px;
     color:#fff; 
     padding-bottom:16px;
-    background:#fff url(../images/bg/jaggies.gif) repeat-x bottom;}
+    background:#fff url(../images/bg/jaggies.gif) repeat-x bottom;
+    z-index:2000;
+}
     
 #admin-area a, #user-status a {
     color:#fff;}
@@ -1483,10 +1499,6 @@ div.photo-item img {
 .lightgray { color:#888; }
 
 
-
-
-
-
 /***** Beta *****/
 #betaLeft { float: left; width: 408px; height: 640px; margin-top: 35px; }
 #betaLeft input[type="text"] {border-radius:0;
@@ -1504,15 +1516,8 @@ div.photo-item img {
 #about h1 { font-size: 2.2em;  }
 
 
-#StatusMessages { position:absolute; top:65px; left:508px; z-index:20000; width: 412px; height: 125px; background-color: #fff;
-                  -webkit-border-radius: 20px;
-                    -moz-border-radius: 20px;
-                    border-radius: 20px; padding: 15px 10px 10px 15px; font-size: 0.8em; overflow: auto; }
-
-
-
-
-
+#StatusMessages { position:absolute; top:-5px; left:208px; z-index:0; width: 456px; height: 75px; background-color: #f2f177;
+                 padding: 15px 10px 10px 15px; font-size: 0.8em; overflow: auto;border:solid 1px #e5e5e5; }
 
 /* Makes the nice scroll bars */
 ::-webkit-scrollbar{height:16px;overflow:visible;width:16px}
