@@ -1,7 +1,16 @@
 ﻿﻿@using Epilogger.Web;
 @using Epilogger.Web.Models;
 @model List<DashboardEventViewModel>
-           
+@foreach (var item in Model) {
+    <div class="browse-event-table clearfix">
+        <div class="table-date">@Html.Encode(item.StartDateTime.ToString("dd/M"))</div>
+        <div class="table-name">@Html.ActionLink(item.Name, "details", "events", new { @id = item.ID }, null)</div>
+        <div class="table-tweets">@string.Format("{0:#,###}", item.TotalTweets)</div>
+        <div class="table-media">@string.Format("{0:#,###}", item.TotalMedia)</div>
+    </div>
+}
+
+         @*  
 @foreach (var item in Model)
 {
     <div class="dashboard-event-item clearfix">
@@ -14,8 +23,6 @@
             <h6>@Html.ActionLink(item.Name, "details", "events", new { @id = item.ID }, null)</h6>
                 
             <div class="event-content-time2">@Html.DisplayFor(e => item.StartDateTime, "Time")</div>
-            @*Too long in most cases, looks like shit. Not important information*@
-            @*<div class="event-content-searchterms2">@item.SearchTerms</div>*@
         </div>
         <div class="event-totals">
             <div class="total-tweets">@string.Format("{0:#,###}", item.TotalTweets)</div>
@@ -24,3 +31,4 @@
     </div>
 
 }
+*@
