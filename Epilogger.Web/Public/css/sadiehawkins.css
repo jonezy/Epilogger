@@ -44,7 +44,7 @@ a.edit_icon {
     font:bold 15px 'InterstatePlusRegular';
     padding:5px 10px;
     text-transform:uppercase;
-    cursor:pointer;
+    cursor: default;
     box-shadow:0 0 1px #777;}    
 
 .blue-action-button.disabled:hover
