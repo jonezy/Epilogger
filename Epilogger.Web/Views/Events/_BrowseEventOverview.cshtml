@@ -11,25 +11,26 @@
             @Html.TextBox("SearchTerm", null, new { @class = "remove-bottom", @title="Search for an event" })
         }		    
 	</div>
+    @if (Model.Authorized) { 
+        <div class="browse-event-table-header clearfix">
+            <ul class="dropbutton big">
+                <li class="first-child"><a href="" id="1" class="browseTabs ">My Events</a></li>
+                <li class="last-child"><a href="" id="2" class="browseTabs ">Today</a></li>
+            </ul>   
 
-    <div class="browse-event-table-header clearfix">
-        <ul class="dropbutton big">
-            @if (Model.Authorized) { <li class="first-child"><a href="" id="1" class="browseTabs ">My Events</a></li> }
-            <li class="last-child"><a href="" id="2" class="browseTabs ">Today</a></li>
-        </ul>   
-
-        <div class="icons">
-            <img src="@Url.Content("~/Public/images/jaggie-icons/event-list-header-twitter.gif")" />
-            <img src="@Url.Content("~/Public/images/jaggie-icons/event-list-header-media.gif")" />
+            <div class="icons">
+                <img src="@Url.Content("~/Public/images/jaggie-icons/event-list-header-twitter.gif")" />
+                <img src="@Url.Content("~/Public/images/jaggie-icons/event-list-header-media.gif")" />
+            </div>
         </div>
-    </div>
         
-    <div class="BEventListContainer">
-        @Html.Partial("_BrowseEventTabContentTemplate", Model.Events)
-    </div>   
+        <div class="BEventListContainer">
+            @Html.Partial("_BrowseEventTabContentTemplate", Model.Events)
+        </div>   
     
-    <span class="spacer"></span>        
-    @Html.ActionLink("Add an Event", "create", "events", null, new { @class = "blue-action-button" })
+        <span class="spacer"></span>        
+        @Html.ActionLink("Add an Event", "create", "events", null, new { @class = "blue-action-button" })
+    }
 </div>
 <div id="events-content">
     <div id="HottestSlides">
@@ -79,7 +80,7 @@
                 @:<br style="clear:both;" />
                 count = 0;
             } else {
-                count++;    
+                count++;
             }
         }
 </div>
