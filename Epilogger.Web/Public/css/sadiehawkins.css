@@ -71,13 +71,14 @@ a.edit_icon {
 	min-height:650px;}
 
 #homepage-container {
-	min-height:748px;
+	min-height:548px;
 	padding:30px 0px 0px 0px;
 	position:relative;}
 
 #homepage-intro {
     float:left;
-    width:400px;   
+    padding-right:10px;
+    width:390px;   
 }
 
 .totals .total {
@@ -87,6 +88,7 @@ a.edit_icon {
     font-weight:bold;
     border-left:solid 1px #3c3c3c;
 }
+
 .totals .total h1 {
     margin:0;
     font-size:18pt;
@@ -796,10 +798,22 @@ ul#left-nav li ul li a.current {color:#a44b79;}
     padding-left:28px;}
 
 #homepage-content {float:left;width:880px;}
-.homepage-activity-entry { float:left;height:184px;overflow:hidden;margin:0px 20px 20px 0px;width:200px;color:#828282; }
+.homepage-activity-entry { 
+    float:left;
+    width:216px;
+    height:218px;
+    overflow:hidden;
+    margin:0px 20px 20px 0px;
+    color:#828282; 
+    background:url(../images/homepage/feed.bg.png) no-repeat;
+}
+
+.homepage-activity-entry img {
+    width:196px;height:161px;margin:10px;}
+    
 .homepage-activity-entry h2 a { color: #f51282;}
 .homepage-activity-entry h2 a:hover { text-decoration: underline; }
-.homepage-activity-entry strong.title {font-weight:normal; color:#5086b9;margin-bottom:10px;padding-left:24px;background-image:url(../images/event_activity_title_icons.png);background-repeat: no-repeat;font-size:12px;text-transform:uppercase;margin-bottom:5px;display:block; }
+.homepage-activity-entry strong.title {font-weight:normal; color:#5086b9;margin:0px 0px 10px 10px;padding-left:24px;background-image:url(../images/event_activity_title_icons.png);background-repeat: no-repeat;font-size:12px;text-transform:uppercase;margin-bottom:5px;display:block; }
 .homepage-activity-entry strong.title.TWEET {background-position:0 0;}
 .homepage-activity-entry strong.title.PHOTOS_VIDEOS { background-position:0 -50px;padding-left:28px; }
 .homepage-activity-entry strong.title.EVENT_CREATION {background-position:0 -100px;padding-left:28px;}

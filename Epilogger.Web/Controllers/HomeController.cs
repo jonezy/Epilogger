@@ -16,15 +16,13 @@ namespace Epilogger.Web.Controllers {
         ClickLogService CS = new ClickLogService();
         EventService ES = new EventService();
         ImageService IS = new ImageService();
-        TweetService tweetService = new TweetService();
-
 
         public ActionResult Index() {
             ViewBag.Message = "Welcome to Epilogger!";
 
             IEnumerable<HomepageActivityModel> activity = ES.GetHomepageActivity();
             HomepageViewModel model = new HomepageViewModel(
-                activity.Take(12).ToList(),
+                activity.Take(4).ToList(),
                 0,
                 activity.Count()
             );
