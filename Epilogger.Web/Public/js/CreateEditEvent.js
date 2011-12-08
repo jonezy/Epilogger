@@ -21,6 +21,9 @@ head.ready(function () {
     $("#moreinformation-info .blocking").block({ message: null });
     $("#moreinformation-info h4").block({ message: null });
 
+    //$("input[type=submit]").attr('disabled', 'disabled');
+    //    $("input[type=submit]").block({ message: null });
+
 
 
     $(":input", "#createevent-info").not(":button, :submit, :reset, :hidden").bind("blur", function (e) {
@@ -88,7 +91,7 @@ head.ready(function () {
 
     }
 
-
+    checkBlocking();
 
 
 
