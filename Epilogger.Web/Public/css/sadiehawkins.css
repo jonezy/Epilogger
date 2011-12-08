@@ -29,6 +29,33 @@ a.edit_icon {
     background:url(../images/icons/pencil.png) no-repeat 0px 2px;
     padding-left:15px;}
 
+
+.blue-action-button.disabled {
+    border:1px solid #B0B0B0;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    background:#d3d3d3; /* no css3 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d3d3d3', endColorstr='#d3d3d3'); /*IE */
+    background:-webkit-gradient(linear, left top, left bottom, from (#d3d3d3) to (#d3d3d3)); /* webkit */
+    background:-moz-linear-gradient(top, #d3d3d3, #d3d3d3); /* ff */
+    box-shadow:0 0 1px #a1b9c8;
+    color:#e6f5fa;
+    font:bold 15px 'InterstatePlusRegular';
+    padding:5px 10px;
+    text-transform:uppercase;
+    cursor:pointer;
+    box-shadow:0 0 1px #777;}    
+
+.blue-action-button.disabled:hover
+{
+    opacity:1;
+    position:relative;
+    top:0px;
+    color:#e6f5fa;
+}
+
+
 .blue-action-button {
     border:1px solid #3485b7;
     border-radius:3px;
@@ -51,6 +78,10 @@ a.edit_icon {
     position:relative;
     top:1px;
     color:#fff}
+    
+    
+
+    
 
 .datepicker, .timedropdown, .picker-start-date, .picker-end-date, .picker-start-time, .picker-end-time {
     margin:0 !important;
