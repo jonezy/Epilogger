@@ -329,6 +329,14 @@
     <Content Include="Public\images\event-list-icons\test.png" />
     <Content Include="Public\images\event_activity_title_icons.png" />
     <Content Include="Public\images\fakevideo.jpg" />
+    <Content Include="Public\images\homepage\about-em.png" />
+    <Content Include="Public\images\homepage\about-fb.png" />
+    <Content Include="Public\images\homepage\about-fragmented.png" />
+    <Content Include="Public\images\homepage\about-relive.png" />
+    <Content Include="Public\images\homepage\about-share.png" />
+    <Content Include="Public\images\homepage\about-tw.png" />
+    <Content Include="Public\images\homepage\about-unite.png" />
+    <Content Include="Public\images\homepage\bg-about.png" />
     <Content Include="Public\images\homepage\book.png" />
     <Content Include="Public\images\homepage\refresh.png" />
     <Content Include="Public\images\homepage\rockout.png" />

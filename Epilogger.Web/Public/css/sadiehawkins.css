@@ -77,36 +77,32 @@ a.edit_icon {
 
 #homepage-intro {
     float:left;
-    width:400px;   
-}
+    width:400px;}
 
 .totals .total {
     float:left;
     padding: 0px 20px 0px 5px;
     color:#3c3c3c;
     font-weight:bold;
-    border-left:solid 1px #3c3c3c;
-}
+    border-left:solid 1px #3c3c3c;}
+    
 .totals .total h1 {
     margin:0;
-    font-size:18pt;
-}
+    font-size:18pt;}
 .totals .totals-left {
-    float:left;
-}
+    float:left;}
 
 
 #homepage-video {
     float:right;
-    width:560px;   
-}
+    width:560px;}
 
 #homepage-toolbar h4, img#logo {
     float:left ;}
    
 #homepage-toolbar h4 {
     position:relative;
-    top:4px }
+    top:4px}
     
 #homepage-toolbar .Pager {
     float:left;
@@ -117,13 +113,9 @@ a.edit_icon {
 #homepage-toolbar #refresh {}
     
 #header {
-    padding:0px;
-    position:relative;
-    
+   padding:0px;
+   position:relative;    
    background:#fff;}
-	
-	
-	
 	
 .homeBlurb { width: 425px; }
 .homePager { float: right; margin-top: -20px; }
@@ -212,14 +204,15 @@ h1+h2 {
 h2 {
 	font-size:15pt;
 	margin-bottom:10px}
+	
 h2+h3 {
-    text-transform:none;
-}
+    text-transform:none;}
+    
 h3 {
- font-size:13pt;
- color:#0770d2;   
- margin-bottom:5px;
-}
+    font-size:13pt;
+    color:#0770d2;   
+    margin-bottom:5px;}
+ 
 h4 {
 	color:#333;
 	font-size:10pt;
@@ -229,8 +222,7 @@ h4 {
 
 h6 {
     font-weight:normal;
-    font-size:11pt}
-    
+    font-size:11pt}    
 
 .small-label, small {
 	text-transform:uppercase;
@@ -313,7 +305,47 @@ table#event-particulars td span.img {
 .image-grid .commentbubble:hover {
     opacity:1;}
 
-/*Browse Events */    
+
+/* --- about */
+.about-paper {
+    background:url('../images/homepage/bg-about.png') no-repeat;
+    width:211px;
+    height:180px;
+    float:left;
+    text-align:center;
+    margin:0 10px 0 0;
+    padding:10px 0 0 0;
+	font-family:InterstatePlusRegular;
+	text-transform:uppercase;
+	font-size:16pt}
+
+.about-paper.fpink { color:#ee4490}
+.about-paper.fblue { color:#00b0ea}
+
+ul#contact-list li {
+    list-style:none;
+    border-bottom:1px solid #ccc;
+    padding:7px 0;
+    font-size:13px;
+    width:87%}
+
+ul#contact-list li img {
+    margin-right:3px}
+    
+div.profile {
+    float:left;
+    width:47%;
+    margin:0 15px 20px 0}
+
+div.profile b {
+    font-size:13px}
+
+div.profile img {
+    float:left;
+    margin:0 5px 0 0}
+    
+
+/* --- browse events */    
 .BrowseWhenMenu li {
     float:left; 
     margin: 0 3px; 
@@ -329,6 +361,7 @@ table#event-particulars td span.img {
     border-radius: 3px}
 
 .BEventListContainer {margin-top:-10px;}
+
 
 /* --- hottest event slider */
 #HottestSlides { 
@@ -353,22 +386,21 @@ table#event-particulars td span.img {
     margin: 16px 15px 12px 5px;}
  
 .hottest-totals {
-    float:right;
-}
+    float:right;}
+    
 .hottest-totals .total-tweets, .hottest-totals .total-media {
     padding-right:30px;
     text-align:right;
     font: 20px 'InterstatePlusRegular', sans-serif;
-    color:#3e3e3e;
-}
+    color:#3e3e3e;}
 
 .hottest-totals .total-media {
     background:url(../images/jaggie-icons/hottest-events-media.gif) no-repeat right;
-    margin-bottom:4px;
-}
+    margin-bottom:4px;}
+    
 .hottest-totals .total-tweets {
-    background:url(../images/jaggie-icons/hottest-events-twitter.gif) no-repeat right;
-}
+    background:url(../images/jaggie-icons/hottest-events-twitter.gif) no-repeat right;}
+    
 .hottest-Title h1 {
     float:left;
     color:#3e3e3e;
@@ -387,14 +419,12 @@ table#event-particulars td span.img {
 .browseCategoryList, .browseCategoryList li, #event-details ul { 
     list-style-type: none;}
  
-.HottestList li  
-{
+.HottestList li {
     float:left; 
     padding:0; 
     margin: 11px 5px 0px 0;}
     
-.HottestList li a  
-{
+.HottestList li a {
     max-width:75px;
     white-space:nowrap;
     text-overflow:ellipsis;
@@ -402,27 +432,23 @@ table#event-particulars td span.img {
     text-transform: uppercase; 
     color: #636363; 
     font:normal 14px 'InterstatePlusRegular';
-    background:#e1e1e1;
-    
--moz-border-radius-topleft: 0px;
--moz-border-radius-topright: 0px;
--moz-border-radius-bottomright: 3px;
--moz-border-radius-bottomleft: 3px;
--webkit-border-radius: 0px 0px 3px 3px;
-border-radius: 0px 0px 3px 3px; 
-    
-    }
+    background:#e1e1e1;    
+    -moz-border-radius-topleft: 0px;
+    -moz-border-radius-topright: 0px;
+    -moz-border-radius-bottomright: 3px;
+    -moz-border-radius-bottomleft: 3px;
+    -webkit-border-radius: 0px 0px 3px 3px;
+    border-radius: 0px 0px 3px 3px;}
 
 .HottestList li a.active { 
     text-transform: uppercase; 
     color: #287acf; 
-    background:#fff;
-    
-    border-top:dotted 1px #dbdbdb; }    
+    background:#fff;    
+    border-top:dotted 1px #dbdbdb;}    
     
 .HottestList li a:hover, .HottestList li.active { 
     color: #000; 
-    background-position:0 2px; }
+    background-position:0 2px;}
     
     
 /* --- event categories */
@@ -435,7 +461,7 @@ border-radius: 0px 0px 3px 3px;
     padding: 2px 5px 2px 0; 
     margin-right: 5px; 
     border-right: 1px solid #e1e1e1; 
-    display: inline; color: #9e9c9c; }
+    display: inline; color: #9e9c9c;}
     
 .browse-category-list-item {
     float:left; 
@@ -446,8 +472,7 @@ border-radius: 0px 0px 3px 3px;
     color: #2d8ac5;
     background-repeat:no-repeat;
     overflow: hidden;
-    font-weight:bold;     
-}
+    font-weight:bold;}
 
 #event-intro, #event-optionBar {
     font-size:12px;
@@ -495,7 +520,9 @@ border-radius: 0px 0px 3px 3px;
 #event-details ul li .value {
     float:left; }
 
-#event-details .value strong, .tweet-body strong { font-weight:normal}
+#event-details .value strong, .tweet-body strong { 
+    font-weight:normal}
+    
 .tweet-body strong {
     text-transform:uppercase;
     font-size:11px}
@@ -963,18 +990,15 @@ x.dashboard-event-item .event-totals {
 #admin-area, #user-status  {
     float:right;
     padding:0px 10px 0px 10px;
-    margin-right:10px;
-    
+    margin-right:10px;    
     -moz-border-radius-topleft: 0px;
     -moz-border-radius-topright: 0px;
     -moz-border-radius-bottomright: 5px;
     -moz-border-radius-bottomleft: 5px;
     -webkit-border-radius: 0px 0px 5px 5px;
     border-radius: 0px 0px 5px 5px;
-
     background:#5695d6;
-    color:#fff;
-}	
+    color:#fff;}	
 
 #global-bar {
     display:block;
@@ -983,18 +1007,15 @@ x.dashboard-event-item .event-totals {
     color:#fff; 
     padding-bottom:16px;
     background:#fff url(../images/bg/jaggies.gif) repeat-x bottom;
-    z-index:2000;
-}
+    z-index:2000;}
     
 #admin-area a, #user-status a {
     color:#fff;}
 
-div#search-container 
-{
+div#search-container {
     margin:20px 0px;
 	float:right;
-	width:120px;
-	}
+	width:120px;}
 
 div#search-container input[type=text] {
     float:left;
@@ -1338,23 +1359,19 @@ a.smallRateLink:hover { text-decoration: underline; }
     top: 100px;
     z-index: 1000; }
 
-#SearchHelpPopUpDiv.uiPopUp 
-{
+#SearchHelpPopUpDiv.uiPopUp {
     padding: 20px;
     background: #fff;  
     width: 550px; 
     position: relative; 
     left: 200px;
     top: -400px;
-    z-index: 1000;
+    z-index: 1000;}
 
-}
+#SearchHelpPopUpDiv.uiPopUp table th { font-weight: bold; }
 
-#SearchHelpPopUpDiv.uiPopUp table th
-{ font-weight: bold; }
-
-#SearchHelpPopUpDiv.uiPopUp table
-{   display: table;
+#SearchHelpPopUpDiv.uiPopUp table {
+    display: table;
     border-collapse: separate;
     border-spacing: 2px;
     border-color: gray;
@@ -1528,7 +1545,7 @@ div.photo-item img {
 
 #betaRight { margin-left: 450px; width: 450px; margin-top: 35px; }
 
-#about {  }
+#about {}
 #about h1 { font-size: 2.2em;  }
 
 
@@ -1561,60 +1578,48 @@ body::-webkit-scrollbar-corner{background-clip:padding-box;background-color:#f5f
 
 */
 
-#event-search-container input[type="text"]
-{
+#event-search-container input[type="text"] {
 	color:#1e72c8;
 	font-size:20px;
 	border:inset 1px #e3e3e3;
 	height:20px;
 	padding:5px 0 5px 5px;
-    background-color: #f7f7f7;
-    }
+    background-color: #f7f7f7;}
     
 /* new browse event list table */
-.browse-event-table 
-{
+.browse-event-table {
     margin-bottom:5px;
     padding: 2px 0px 2px 0px;
-    border-bottom:dotted 1px #d6d6d6;
-}
+    border-bottom:dotted 1px #d6d6d6;}
 
 .browse-event-table-header {position:relative;height:26px;}
-.browse-event-table-header .icons 
-{
+.browse-event-table-header .icons {
     position:absolute;
     top:10px;
-    right:0px;
-}
-.table-date, .table-name,  .table-tweets, .table-media {float:left;}
+    right:0px;}
+    
+.table-date, .table-name,  .table-tweets, .table-media {
+    float:left;}
 
-.browse-event-table .table-date 
-{
+.browse-event-table .table-date {
     width:32px;
-    font-weight:bold;
-}
+    font-weight:bold;}
 
-.browse-event-table .table-name 
-{
+.browse-event-table .table-name {
     width:140px;
     margin-left:10px;
     overflow:hidden;
     text-overflow: ellipsis;
     white-space:nowrap;
-    font-weight:bold;
-}
+    font-weight:bold;}
 
-.browse-event-table .table-tweets 
-{
+.browse-event-table .table-tweets {
     width:80px;
-    text-align:right;
-}
+    text-align:right;}
 
-.browse-event-table .table-media
-{
+.browse-event-table .table-media {
     width:40px;
-    text-align:right;
-}
+    text-align:right;}
 
 /* dropbutton menus */
 .dropbutton { min-width: 10em; max-width: 9em; white-space: nowrap; background: #ff0084; -webkit-border-radius: 3px; -moz-border-radius: 3px; font-size: 10px; list-style: none outside; margin: 0px; padding:0px; position:absolute; }
@@ -1633,8 +1638,7 @@ body::-webkit-scrollbar-corner{background-clip:padding-box;background-color:#f5f
 .dropbutton li.first-child a { background: url(../images/arrowdown.png) right 10px no-repeat; -webkit-border-top-right-radius: 3px; -webkit-border-top-left-radius: 3px; -moz-border-radius-topright: 3px; -moz-border-radius-topleft: 3px; }
 .dropbutton li.first-child.last-child a { background: none; padding: 0; }
 
-	/* dropbutton sizes */
-	.dropbutton.big {min-width: 12em !important; max-width: 12em !important;}
-	.dropbutton.big * {	font-size: 14px !important;}
-	.dropbutton.big li * {	padding:4px 0px 4px 0px !important;}
-
+/* dropbutton sizes */
+.dropbutton.big {min-width: 12em !important; max-width: 12em !important;}
+.dropbutton.big * {	font-size: 14px !important;}
+.dropbutton.big li * {	padding:4px 0px 4px 0px !important;}
