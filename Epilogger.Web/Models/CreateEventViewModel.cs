@@ -76,5 +76,8 @@ namespace Epilogger.Web.Models {
 
         public EventToolbarViewModel ToolbarViewModel { get; set; }
 
+        public UserRoleType CurrentUserRole { get; set; }
+        public Guid CurrentUserID { get; set; }
+
     }
 }

@@ -818,6 +818,9 @@ namespace Epilogger.Web.Controllers {
             CreateEventViewModel model = Mapper.Map<Event, CreateEventViewModel>(currentEvent);
             model.ToolbarViewModel = BuildToolbarViewModel(currentEvent);
 
+            model.CurrentUserRole = CurrentUserRole;
+            model.CurrentUserID = CurrentUser.ID;
+
             return View(model);
         }
 

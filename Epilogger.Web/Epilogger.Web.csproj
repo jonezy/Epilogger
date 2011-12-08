@@ -331,6 +331,7 @@
     <Content Include="Public\images\icons\blog.png" />
     <Content Include="Public\images\icons\BrowseBullet.png" />
     <Content Include="Public\images\icons\bubble.png" />
+    <Content Include="Public\images\icons\Checkmark.png" />
     <Content Include="Public\images\icons\CreateAccountArrow.png" />
     <Content Include="Public\images\icons\Crown.png" />
     <Content Include="Public\images\icons\dashboard-event-totals.png" />
@@ -344,8 +345,10 @@
     <Content Include="Public\images\icons\profile-eventlist.png" />
     <Content Include="Public\images\icons\star.png" />
     <Content Include="Public\images\icons\SubscribedCheck.png" />
+    <Content Include="Public\images\icons\Tab-EventInfo.png" />
     <Content Include="Public\images\icons\tweet-black.png" />
     <Content Include="Public\images\icons\twitter.png" />
+    <Content Include="Public\images\icons\WhenandWhere.png" />
     <Content Include="Public\images\jaggie-icons\event-list-header-media.gif" />
     <Content Include="Public\images\jaggie-icons\event-list-header-twitter.gif" />
     <Content Include="Public\images\jaggie-icons\hottest-events-media.gif" />
@@ -393,6 +396,7 @@
     <Content Include="Public\js\head.load.min.js" />
     <Content Include="Public\js\jquery-1.6.2.min.js" />
     <Content Include="Public\js\jquery-ui-1.8.16.custom.min.js" />
+    <Content Include="Public\js\jquery.blockUI.js" />
     <Content Include="Public\js\jquery.colorbox-min.js" />
     <Content Include="Public\js\jquery.cookie.js" />
     <Content Include="Public\js\jquery.expander.min.js" />
