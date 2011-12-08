@@ -3,6 +3,7 @@
 <script type="text/javascript" language="javascript">
     head.js('@Url.Content("~/Public/js/BrowseEvents.js")');
 </script>
+
 <div id="events-nav">
     <h1>BROWSE EVENTS</h1>
 
@@ -11,6 +12,9 @@
             @Html.TextBox("SearchTerm", null, new { @class = "remove-bottom", @title="Search for an event" })
         }		    
 	</div>
+
+    <span class="sm-spacer"></span>
+
     @if (Model.Authorized) { 
         <div class="browse-event-table-header clearfix">
             <ul class="dropbutton big">
@@ -30,8 +34,16 @@
     
         <span class="spacer"></span>        
         @Html.ActionLink("Add an Event", "create", "events", null, new { @class = "blue-action-button" })
+
+        <span class="clear big-spacer"></span>
+        
+        <h2>Random Upcoming Event</h2>
+        <h1 style="font-size:18pt">Event Title Holder</h1>
+        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</p>
+        
     }
 </div>
+
 <div id="events-content">
     <div id="HottestSlides">
         @foreach (Epilogger.Web.Models.HotestEventsModel item in Model.HottestEvents) {
@@ -45,33 +57,38 @@
                     }
                 </div>
                 <div class="hottest-Title">
-                    <a href="/Events/@item.Event.ID/details">
-                        <h1>@item.Event.Name</h1>
-                    </a>
+                    <a href="/Events/@item.Event.ID/details"><h1>@item.Event.Name</h1></a>
+
                     <div class="hottest-totals">
                         <div class="total-media">@string.Format("{0:#,###}", item.PhotoCount)</div>
                         <div class="total-tweets">@string.Format("{0:#,###}", item.TweetCount)</div>
                     </div>
+
                     <br style="clear: both;" />
                 </div>
+
                 <div class="hottest-photogridBottom">
                     @foreach (Epilogger.Data.Image image in item.RandomHottestImages.Skip(5).Take(5)) {
                         <div class="hottestimage" id="photo-@image.ID">
                             <a href="@image.Fullsize" rel="prettyPhoto[@item.Event.ID]" photoid="@image.ID" id="@image.ID">
-                                <img src="@image.Fullsize" width="200" border="0" alt="" /></a>
+                                <img src="@image.Fullsize" width="200" border="0" alt="" />
+                            </a>
                         </div>
                     }
                 </div>
             </div>
         }
     </div>
+
     <ul class="HottestList">
         @foreach (Epilogger.Web.Models.HotestEventsModel item in Model.HottestEvents) {
             <li><a href="" onclick="return false;" class="HottestListLink" id="@(item.Event.ID)">@item.Event.Name</a></li>
         }
     </ul>  
     
-    <span class="big-spacer" style="clear: left"></span>@*Categories*@
+    <span class="big-spacer" style="clear: left"></span>
+    
+    @*Categories*@
     <h2>FIND AN EVENT BY CATEGORY:</h2>
     @{int count = 0;}
         @foreach (Epilogger.Data.EventCategory c in Model.EventCategories) {
@@ -84,6 +101,7 @@
             }
         }
 </div>
+
 <script type="text/javascript" language="javascript">
     head.ready(function () {
         $("a[rel^='prettyPhoto']").prettyPhoto({

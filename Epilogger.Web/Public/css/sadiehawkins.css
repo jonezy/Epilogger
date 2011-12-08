@@ -18,6 +18,13 @@ p a {
 p a:hover {
     text-decoration:none}
     
+big {
+    padding-top:12px;
+    font-size:18pt;
+    color:#000;
+    display:block;
+    letter-spacing:-1px}
+    
 a.edit_icon {
     background:url(../images/icons/pencil.png) no-repeat 0px 2px;
     padding-left:15px;}
@@ -90,7 +97,7 @@ a.edit_icon {
     padding: 0px 20px 0px 5px;
     color:#3c3c3c;
     font-weight:bold;
-    border-left:solid 1px #3c3c3c;}
+    border-left:solid 1px #999;}
     
 .totals .total h1 {
     margin:0;
@@ -187,6 +194,8 @@ ul.subnav li a {
 
 ul.subnav li a:hover, ul.subnav li a.current {
 	color:#245d96}
+	
+	
 	
 	
 /* ------------------------------ CONTENT */
@@ -299,7 +308,7 @@ table#event-particulars td span.img {
 	color:#fff;
 	width:25px;
 	height:30px;
-	padding:2px 0 0 0;
+	padding:1px 0 0 0;
 	text-align:center;
 	display:block;
 	position: absolute;
@@ -427,23 +436,20 @@ div.profile img {
 .HottestList li {
     float:left; 
     padding:0; 
-    margin: 11px 5px 0px 0;}
+    margin:8px 7px 0px 0;}
     
 .HottestList li a {
     max-width:75px;
     white-space:nowrap;
     text-overflow:ellipsis;
-    padding:10px 5px 10px 5px;
+    padding:8px 10px;
     text-transform: uppercase; 
     color: #636363; 
-    font:normal 14px 'InterstatePlusRegular';
+    font:bold 14px 'InterstatePlusRegular';
     background:#e1e1e1;    
-    -moz-border-radius-topleft: 0px;
-    -moz-border-radius-topright: 0px;
-    -moz-border-radius-bottomright: 3px;
-    -moz-border-radius-bottomleft: 3px;
-    -webkit-border-radius: 0px 0px 3px 3px;
-    border-radius: 0px 0px 3px 3px;}
+    -moz-border-radius-topleft: 0 0 5px 5px;
+    -webkit-border-radius: 0 0 5px 5px;
+    border-radius: 0 0 5px 5px;}
 
 .HottestList li a.active { 
     text-transform: uppercase; 
@@ -1054,12 +1060,11 @@ x.dashboard-event-item .event-totals {
 
 #admin-area, #user-status  {
     float:right;
-    padding:0px 10px 0px 10px;
-    margin-right:10px;    
-    -moz-border-radius-topleft: 0px;
-    -moz-border-radius-topright: 0px;
-    -moz-border-radius-bottomright: 5px;
-    -moz-border-radius-bottomleft: 5px;
+    font-size:8pt;
+    padding: 0 10px 2px 10px;
+    margin-left:10px;
+    text-transform:lowercase;
+    -moz-border-radius: 0 0 5px 5px;
     -webkit-border-radius: 0px 0px 5px 5px;
     border-radius: 0px 0px 5px 5px;
     background:#5695d6;
@@ -1085,7 +1090,8 @@ div#search-container {
 div#search-container input[type=text] {
     float:left;
 	color:#1e72c8;
-	font-size:20px;
+	font:bold 20px InterstatePlusRegular;
+	text-transform:uppercase;
 	border:solid 1px #e3e3e3;
 	width:120px;
 	height:20px;
@@ -1646,8 +1652,10 @@ body::-webkit-scrollbar-corner{background-clip:padding-box;background-color:#f5f
 
 #event-search-container input[type="text"] {
 	color:#1e72c8;
-	font-size:20px;
-	border:inset 1px #e3e3e3;
+	font:bold 20px InterstatePlusRegular;
+	text-transform:uppercase;
+	width:98%;
+	border:inset 1px #ccc;
 	height:20px;
 	padding:5px 0 5px 5px;
     background-color: #f7f7f7;}
@@ -1672,7 +1680,7 @@ body::-webkit-scrollbar-corner{background-clip:padding-box;background-color:#f5f
     font-weight:bold;}
 
 .browse-event-table .table-name {
-    width:140px;
+    width:150px;
     margin-left:10px;
     overflow:hidden;
     text-overflow: ellipsis;
@@ -1680,11 +1688,11 @@ body::-webkit-scrollbar-corner{background-clip:padding-box;background-color:#f5f
     font-weight:bold;}
 
 .browse-event-table .table-tweets {
-    width:80px;
+    width:55px;
     text-align:right;}
 
 .browse-event-table .table-media {
-    width:40px;
+    width:55px;
     text-align:right;}
 
 /* dropbutton menus */

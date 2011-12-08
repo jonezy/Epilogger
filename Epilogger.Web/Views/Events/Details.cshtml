@@ -153,12 +153,12 @@ else
         <td>
             @if (Model.Venue != null)
             {
-                <span class="img"><img src="@Url.Content("~/Public/images/icons/checkin.png")" /></span>
+                <span class="img"><img src="@Url.Content("~/Public/images/icons/details-checkin.png")" /></span>
                 <span>@Model.Venue.Name,<br/> @Model.Venue.Address,<br /> @Model.Venue.City (<a href="http://maps.google.com/?q=@Model.Venue.Name @Model.Venue.Address @Model.Venue.City @Model.Venue.State @Model.Venue.Zip" target="_blank">map</a>)</span>
             }
        </td>
        <td>
-            <span class="img"><img src="@Url.Content("~/Public/images/icons/time.png")" /></span>
+            <span class="img"><img src="@Url.Content("~/Public/images/icons/details-time.png")" /></span>
             <span>
             @if (Model.StartDateTime.Subtract(Model.EndDateTime).Days == 0)
             {
@@ -174,7 +174,7 @@ else
     </tr>
     <tr>
         <td>
-            <span class="img"><img src="@Url.Content("~/Public/images/icons/cost.png")" /></span>
+            <span class="img"><img src="@Url.Content("~/Public/images/icons/details-cost.png")" /></span>
             <span>
             @if (Model.Cost != null)
             {
@@ -187,7 +187,7 @@ else
             </span>
         </td>
         <td>
-            <span class="img"><img src="@Url.Content("~/Public/images/icons/hashtag.png")" /></span>
+            <span class="img"><img src="@Url.Content("~/Public/images/icons/details-hashtag.png")" /></span>
             <span>
             @{
                 try

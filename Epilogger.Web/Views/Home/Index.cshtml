@@ -17,38 +17,37 @@
 
 
 <div id="homepage-container">
+    <span class="spacer"></span>
 
     <div id="homepage-intro">
-
         <div class="totals">
             <div class="total">
-                <h1>@Model.HomepageTotal.TotalEvents.ToString("0,0,0")</h1>
+                <big>@Model.HomepageTotal.TotalEvents.ToString("0,0,0")</big>
                 Events
             </div>
+
             <div class="total">
-                <h1>@Model.HomepageTotal.TotalMedia.ToString("0,0,0")</h1>
+                <big>@Model.HomepageTotal.TotalMedia.ToString("0,0,0")</big>
                 Media
             </div>
         
             <div class="total">
-                <h1>@Model.HomepageTotal.TotalTweets.ToString("0,0,0")</h1>
+                <big>@Model.HomepageTotal.TotalTweets.ToString("0,0,0")</big>
                 Tweets
             </div>
+
             <div class="total">
-                <h1>@Model.HomepageTotal.TotalCheckins.ToString("0,0,0")</h1>
+                <big>@Model.HomepageTotal.TotalCheckins.ToString("0,0,0")</big>
                 Checkins
             </div>
-
         </div>
-        <br style="clear:both;" />
-        <div class="spacer"></div>
+
+        <span class="clear spacer"></span>
             
 
-        <h2>EPILOGGER WANTS TO ANSWER THE QUESTION:</h2>
-        <h3>What happened last night and where are my pants?</h3>
-
-        <p>We found that after attending an event, online or offline, its a feat trying to track down all the great content shared by all those who tweeted, blogged, or checked-in. It’s even harder when you check back a few weeks later and some of the content has disappeared with age!</p>
-
+        <h1 style="color:#f51282">EPILOGGER WANTS TO ANSWER THE QUESTION:</h1>
+        <h2 style="font-size:18pt; margin-bottom:0px">What happened last night and where<br /> are my pants?</h2>
+        <p style="margin-bottom:10px">We found that after attending an event, online or offline, its a feat trying to track down all the great content shared by all those who tweeted, blogged, or checked-in. It’s even harder when you check back a few weeks later and some of the content has disappeared with age!</p>
         <img src="@Url.Content("~/Public/images/homepage/tldr.png")" />
     </div>
     
@@ -56,37 +55,36 @@
         <img src="@Url.Content("~/Public/images/fakevideo.jpg")" />
     </div>
     
-    <div class="clear"></div>
-    <div class="spacer"></div>
+    <div class="clear spacer"></div>
 
-        @foreach (var item in Model.Activity)
-        {
-            <div class="homepage-activity-entry">
 
-                @if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION || item.ActivityType == Epilogger.Web.Models.ActivityType.FOLLOW_EVENT) {
-                    <h2><br />@Html.ActionLink(item.EventName, "details", "events", new { @id = item.EventID }, null)</h2>
+    @foreach (var item in Model.Activity)
+    {
+        <div class="homepage-activity-entry">
+            @if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION || item.ActivityType == Epilogger.Web.Models.ActivityType.FOLLOW_EVENT) {
+                <h2><br />@Html.ActionLink(item.EventName, "details", "events", new { @id = item.EventID }, null)</h2>
+            } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_RATING) {
+                <h2>@Html.ActionLink(item.EventName, "details", "events", new { @id = item.EventID }, null) was just rated @MvcHtmlString.Create(item.ActivityContent) out of 5 stars</h2>
+            } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.PHOTOS_VIDEOS) {
+                <div class="withcomment newPhotoupdates" id="photo-@item.Image.ID">
+                    <a href="@item.Image.Fullsize" rel="prettyPhoto[latestphotos]" photoid="@item.Image.ID" title="" id="@item.Image.ID">
+                        <img src="@item.Image.Fullsize" width="250" border="0" alt="" />
+                    </a>
+                </div>
+            } else {
+                <p>@MvcHtmlString.Create(item.ActivityContent)</p>
+            }
+            <strong class="title @item.ActivityType">
+                @if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION) {
+                    @:NEW EVENT ADDED:
+                } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.FOLLOW_EVENT) {
+                    @:SUBSCRIBED TO EVENT
                 } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_RATING) {
-                    <h2>@Html.ActionLink(item.EventName, "details", "events", new { @id = item.EventID }, null) was just rated @MvcHtmlString.Create(item.ActivityContent) out of 5 stars</h2>
-                } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.PHOTOS_VIDEOS) {
-                    <div class="withcomment newPhotoupdates" id="photo-@item.Image.ID">
-                        <a href="@item.Image.Fullsize" rel="prettyPhoto[latestphotos]" photoid="@item.Image.ID" title="" id="@item.Image.ID">
-                            <img src="@item.Image.Fullsize" width="250" border="0" alt="" />
-                        </a>
-                    </div>
+                    @:RATED AN EVENT
                 } else {
-                    <p>@MvcHtmlString.Create(item.ActivityContent)</p>
+                    @Html.ActionLink(item.EventName, "details", "events", new { @id = item.EventID }, null)
                 }
-                <strong class="title @item.ActivityType">
-                    @if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION) {
-                        @:NEW EVENT ADDED:
-                    } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.FOLLOW_EVENT) {
-                        @:SUBSCRIBED TO EVENT
-                    } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_RATING) {
-                        @:RATED AN EVENT
-                    } else {
-                        @Html.ActionLink(item.EventName, "details", "events", new { @id = item.EventID }, null)
-                    }
-                </strong>
+            </strong>
         </div>
     }
 
@@ -101,5 +99,6 @@
             });
         });
     </script>
-
 </div>
+
+<span class="big-spacer clear"></span>

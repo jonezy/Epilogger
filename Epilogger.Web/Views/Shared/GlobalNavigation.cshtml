@@ -3,7 +3,7 @@
 <div id="user-status">
     @if (Model.UserLoggedIn) {
         @:<span class="person">hello <strong>@Html.ActionLink(Model.Username, "index", "account")</strong></span> 
-        @Html.ActionLink("x ", "logout", "account")
+        @Html.ActionLink("x", "logout", "account")
     }
     else
     {
@@ -16,5 +16,4 @@
 @if (Model.UserLoggedIn && Model.CurrentUserRole == UserRoleType.Administrator) {
     <div id="admin-area"><a href="#demo" class="displayClicks">CM</a></div> 
     <div id="admin-area">@Html.ActionLink("Add Status MSGs", "StatusMessages", "Home")</div> 
-    <div id="admin-area"><a href="/admin/email">Alpha Invite</a></div>
-}
+    <div id="admin-area"><a href="/admin/email">Alpha Invite</a></div>}
