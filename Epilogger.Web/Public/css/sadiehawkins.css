@@ -1110,10 +1110,11 @@ div#search-container input[type=image] {
     position:relative;
     left:-20px}
 
-#footer-container {background:#fff;padding-bottom: 40px;margin:0px -40px 0px -40px;}
-#footer { margin-top:40px;font-size:13px;color:#bfbfbf; }
-#footer h4 {color:#7fbaee;font:normal 14px 'InterstatePlusRegular',sans-serif;text-transform:uppercase;}
-#footer a {color:#7fbaee;}
+#footer-container {background:#1464ae;padding-bottom: 40px;margin:0px -40px 0px -40px;}
+#footer { margin-top:20px;font-size:13px;color:#bfbfbf; }
+#footer h4 {color:#e54576;font:normal 14px 'InterstatePlusRegular',sans-serif;text-transform:uppercase;}
+#footer h4 a {color:#e54576 !important;}
+#footer a {color:#1b8cf8;}
 #footer #column-one,#footer #column-two,#footer #column-three {float:left;margin-right:20px;} 
 #footer #column-one {width:280px;font-size:13px;}
 #footer #column-one ul {float:left;margin:0;}

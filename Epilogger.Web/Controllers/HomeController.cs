@@ -36,18 +36,11 @@ namespace Epilogger.Web.Controllers {
                 }
             }
 
-            if (CurrentUserID == Guid.Empty) {
-                return RedirectToAction("BetaSignUp");
-            } else {
-                StatusMessagesService SC = new StatusMessagesService();
-                model.StatusMessages = SC.GetLast10Messages();
+            StatusMessagesService SC = new StatusMessagesService();
+            model.StatusMessages = SC.GetLast10Messages();
 
-                return View(model);
-            }
-
+            return View(model);
         }
-
-
 
         public ActionResult BetaSignUp() {
             IEnumerable<HomepageActivityModel> activity = ES.GetHomepageActivity();
