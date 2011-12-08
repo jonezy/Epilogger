@@ -104,6 +104,9 @@ namespace Epilogger.Web
             return photos;
 
         }
-        
+
+        public int Count() {
+            return base.db.Images.Count();
+        }
     }
 }

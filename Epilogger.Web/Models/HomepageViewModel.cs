@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Epilogger.Web.Core.Stats;
 
 namespace Epilogger.Web.Models {
     public class HomepageViewModel {
@@ -10,6 +11,8 @@ namespace Epilogger.Web.Models {
 
         public List<HomepageActivityModel> Activity { get; set; }
         public IEnumerable<Epilogger.Data.StatusMessage> StatusMessages { get; set; }
+
+        public HomepageTotal HomepageTotal { get; set; }
 
         public HomepageViewModel(List<HomepageActivityModel> activities, int currentPageIndex, int totalRecords) {
             CurrentPageIndex = currentPageIndex;

@@ -73,7 +73,7 @@
     </Reference>
     <Reference Include="RichmondDay.Helpers, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\RichmondDay.Helpers.1.4.1\lib\net35\RichmondDay.Helpers.dll</HintPath>
+      <HintPath>..\lib\RichmondDay.Helpers.dll</HintPath>
     </Reference>
     <Reference Include="smokesignals">
       <HintPath>..\packages\smokesignals.1.4\lib\smokesignals.dll</HintPath>
@@ -192,6 +192,7 @@
     <Compile Include="Core\Services\UserAuthenticationProfileService.cs" />
     <Compile Include="Core\Services\UserService.cs" />
     <Compile Include="Core\Services\VenueService.cs" />
+    <Compile Include="Core\Stats\HomepageTotals.cs" />
     <Compile Include="Core\Stats\TopTweeters.cs" />
     <Compile Include="Core\UserRole.cs" />
     <Compile Include="Global.asax.cs">
@@ -316,6 +317,8 @@
     <Content Include="Public\images\category-icons\2.png" />
     <Content Include="Public\images\category-icons\20.png" />
     <Content Include="Public\images\category-icons\21.png" />
+    <Content Include="Public\images\category-icons\22.png" />
+    <Content Include="Public\images\category-icons\23.png" />
     <Content Include="Public\images\category-icons\3.png" />
     <Content Include="Public\images\category-icons\5.png" />
     <Content Include="Public\images\category-icons\6.png" />
@@ -325,9 +328,12 @@
     <Content Include="Public\images\click.png" />
     <Content Include="Public\images\event-list-icons\test.png" />
     <Content Include="Public\images\event_activity_title_icons.png" />
+    <Content Include="Public\images\fakevideo.jpg" />
     <Content Include="Public\images\homepage\book.png" />
+    <Content Include="Public\images\homepage\feed.bg.png" />
     <Content Include="Public\images\homepage\refresh.png" />
     <Content Include="Public\images\homepage\rockout.png" />
+    <Content Include="Public\images\homepage\tldr.png" />
     <Content Include="Public\images\icons\blog.png" />
     <Content Include="Public\images\icons\BrowseBullet.png" />
     <Content Include="Public\images\icons\bubble.png" />

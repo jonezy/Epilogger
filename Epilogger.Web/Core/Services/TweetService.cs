@@ -168,6 +168,8 @@ namespace Epilogger.Web
         //    return db.Tweets.Where(t => t.EventID == EventID & t.CreatedDate >= StartDateTimeFilter & t.CreatedDate <= EndDateTimeFilter).Take(NumberToReturn).ToList();
         //}
 
-
+        public int Count() {
+            return base.db.Tweets.Count();
+        }
     }
 }
