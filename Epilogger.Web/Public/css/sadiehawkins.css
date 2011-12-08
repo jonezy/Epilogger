@@ -77,8 +77,24 @@ a.edit_icon {
 
 #homepage-intro {
     float:left;
-    width:360px;   
+    width:400px;   
 }
+
+.totals .total {
+    float:left;
+    padding: 0px 20px 0px 5px;
+    color:#3c3c3c;
+    font-weight:bold;
+    border-left:solid 1px #3c3c3c;
+}
+.totals .total h1 {
+    margin:0;
+    font-size:18pt;
+}
+.totals .totals-left {
+    float:left;
+}
+
 
 #homepage-video {
     float:right;

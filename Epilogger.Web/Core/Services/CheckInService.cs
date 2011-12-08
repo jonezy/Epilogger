@@ -40,6 +40,9 @@ namespace Epilogger.Web
         {
             return db.CheckIns.Where(t => t.EventID == EventID & t.CheckInDateTime >= StartDateTimeFilter & t.CheckInDateTime <= EndDateTimeFilter);
         }
-
+        
+        public int Count() {
+            return base.db.CheckIns.Count();
+        }
     }
 }

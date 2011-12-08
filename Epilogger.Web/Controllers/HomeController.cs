@@ -1,22 +1,24 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 using AutoMapper;
 
-using Epilogger.Web.Models;
 using Epilogger.Data;
+using Epilogger.Web.Models;
+using Epilogger.Web.Core.Stats;
 
 namespace Epilogger.Web.Controllers {
-    
+
     public class HomeController : BaseController {
         UserLogService LS = new UserLogService();
         ClickLogService CS = new ClickLogService();
         EventService ES = new EventService();
         ImageService IS = new ImageService();
+        TweetService tweetService = new TweetService();
 
-        
+
         public ActionResult Index() {
             ViewBag.Message = "Welcome to Epilogger!";
 
@@ -27,43 +29,37 @@ namespace Epilogger.Web.Controllers {
                 activity.Count()
             );
 
+            model.HomepageTotal = new HomepageTotals().HomepageTotal;
+
             //Convert the Image ID in the ActivityContent to the Image HTML from the template. Facilite common HTML and single place for image HTML.
-            foreach (HomepageActivityModel item in model.Activity)
-            {
-                if (item.ActivityType == ActivityType.PHOTOS_VIDEOS)
-                {
+            foreach (HomepageActivityModel item in model.Activity) {
+                if (item.ActivityType == ActivityType.PHOTOS_VIDEOS) {
                     item.Image = IS.FindByID(Convert.ToInt32(item.ActivityContent));
                 }
             }
-            
-            if (CurrentUserID == Guid.Empty)
-            {
+
+            if (CurrentUserID == Guid.Empty) {
                 return RedirectToAction("BetaSignUp");
-            }
-            else
-            {
+            } else {
                 StatusMessagesService SC = new StatusMessagesService();
                 model.StatusMessages = SC.GetLast10Messages();
 
                 return View(model);
             }
-            
+
         }
 
 
 
-        public ActionResult BetaSignUp()
-        {
+        public ActionResult BetaSignUp() {
             IEnumerable<HomepageActivityModel> activity = ES.GetHomepageActivity();
             BetaSignUpViewModel bmodel = new BetaSignUpViewModel(
                 activity.Take(6).ToList(),
                 0,
                 activity.Count()
             );
-            foreach (HomepageActivityModel item in bmodel.Activity)
-            {
-                if (item.ActivityType == ActivityType.PHOTOS_VIDEOS)
-                {
+            foreach (HomepageActivityModel item in bmodel.Activity) {
+                if (item.ActivityType == ActivityType.PHOTOS_VIDEOS) {
                     item.Image = IS.FindByID(Convert.ToInt32(item.ActivityContent));
                 }
             }
@@ -73,24 +69,19 @@ namespace Epilogger.Web.Controllers {
             return View(bmodel);
         }
 
-
         [HttpPost]
-        public ActionResult BetaSignUp(BetaSignUpViewModel model)
-        {
+        public ActionResult BetaSignUp(BetaSignUpViewModel model) {
 
-            if (!ModelState.IsValid)
-            {
+            if (!ModelState.IsValid) {
                 return View(model);
             }
 
             IEnumerable<HomepageActivityModel> activity = ES.GetHomepageActivity();
             model.Activity = activity.Take(6).ToList();
             model.CurrentPageIndex = 0;
-                
-            foreach (HomepageActivityModel item in model.Activity)
-            {
-                if (item.ActivityType == ActivityType.PHOTOS_VIDEOS)
-                {
+
+            foreach (HomepageActivityModel item in model.Activity) {
+                if (item.ActivityType == ActivityType.PHOTOS_VIDEOS) {
                     item.Image = IS.FindByID(Convert.ToInt32(item.ActivityContent));
                 }
             }
@@ -107,29 +98,23 @@ namespace Epilogger.Web.Controllers {
             BetaService betaS = new BetaService();
             betaS.Save(bsu);
 
-            return View(model); 
+            return View(model);
         }
 
-
-        public ActionResult StatusMessages()
-        {
+        public ActionResult StatusMessages() {
             StatusMessage model = new StatusMessage();
             model.MSGDateTime = DateTime.UtcNow;
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult StatusMessages(StatusMessage model)
-        {
+        public ActionResult StatusMessages(StatusMessage model) {
 
             StatusMessagesService SC = new StatusMessagesService();
             SC.Save(model);
-                       
+
             return View();
         }
-
-        
-
 
         [HttpPost]
         public ActionResult LogClick(Epilogger.Data.UserClickAction clickactions) {

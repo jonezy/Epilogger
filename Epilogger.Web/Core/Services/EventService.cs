@@ -246,7 +246,9 @@ namespace Epilogger.Web {
         }
 
 
-    
+        public int Count() {
+            return base.db.Events.Count();
+        }
 
 
     }
