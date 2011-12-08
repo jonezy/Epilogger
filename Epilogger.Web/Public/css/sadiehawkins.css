@@ -81,6 +81,10 @@ a.edit_icon {
     width:390px;   
 }
 
+#homepage-intro h2{
+    font-size:26px;   
+}
+#homepage-intro h3 {font-size:22px;}
 .totals .total {
     float:left;
     padding: 0px 20px 0px 5px;
