@@ -21,6 +21,9 @@ head.ready(function () {
     $("#moreinformation-info .blocking").block({ message: null });
     $("#moreinformation-info h4").block({ message: null });
 
+    $(".submitForm").attr('disabled', 'disabled');
+    //$(".disabled").block({ message: null });
+
 
 
     $(":input", "#createevent-info").not(":button, :submit, :reset, :hidden").bind("blur", function (e) {
@@ -79,6 +82,8 @@ head.ready(function () {
             $("#step4").removeClass("stepDisable");
             $("#step3 span").html("&nbsp;")
             $("#step3").addClass("stepComplete");
+            $(".submitForm").removeClass("disabled");
+            $(".submitForm").removeAttr("disabled");
         }
 
         if ($("#Description").val().length > 0 && $("#WebsiteURL").val().length > 0 && $("#TwitterAccount").val().length > 0 && $("#FacebookPageURL").val().length > 0 && $("#Cost").val().length > 0) {
@@ -88,7 +93,7 @@ head.ready(function () {
 
     }
 
-
+    checkBlocking();
 
 
 
