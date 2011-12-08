@@ -73,7 +73,7 @@
     </Reference>
     <Reference Include="RichmondDay.Helpers, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\RichmondDay.Helpers.1.4.1\lib\net35\RichmondDay.Helpers.dll</HintPath>
+      <HintPath>..\lib\RichmondDay.Helpers.dll</HintPath>
     </Reference>
     <Reference Include="smokesignals">
       <HintPath>..\packages\smokesignals.1.4\lib\smokesignals.dll</HintPath>
