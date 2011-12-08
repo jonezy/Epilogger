@@ -330,6 +330,7 @@
     <Content Include="Public\images\event_activity_title_icons.png" />
     <Content Include="Public\images\fakevideo.jpg" />
     <Content Include="Public\images\homepage\book.png" />
+    <Content Include="Public\images\homepage\feed.bg.png" />
     <Content Include="Public\images\homepage\refresh.png" />
     <Content Include="Public\images\homepage\rockout.png" />
     <Content Include="Public\images\homepage\tldr.png" />
