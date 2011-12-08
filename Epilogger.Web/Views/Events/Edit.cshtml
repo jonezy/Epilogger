@@ -90,8 +90,12 @@
             <p>@Html.LabelFor(model => model.Cost) @Html.TextBoxFor(model => model.Cost, new { @class = "small" })</p>
         </div>
     </div>
-    <div class="spacer"></div>   
-    <input type="button" class="blue-action-button fright confirm" value="Delete Event" name="confirm" />
+    <div class="spacer"></div>  
+    
+    if (@Model.CurrentUserID == @Model.UserID || @Model.CurrentUserRole == UserRoleType.Administrator)
+    {
+        <input type="button" class="blue-action-button fright confirm" value="Delete Event" name="confirm" />
+    }
     <input type="submit" class="blue-action-button" value="Save Event" />
     
     

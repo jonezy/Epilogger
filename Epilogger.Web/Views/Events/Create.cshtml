@@ -6,20 +6,26 @@
 }
 
 <script type="text/javascript">
+    head.js('@Url.Content("~/Public/js/jquery.blockUI.js")');
     head.js('@Url.Content("~/Public/js/CreateEditEvent.js")');
-    
-    head.ready(function () {
-        $('#EventTimePicker').dateSpanPicker();
-        $('#CollectionTimePicker').dateSpanPicker();
-        $('#Name').focus();
-    });
 </script>
 
 <div id="events-nav">
     <h1>ADD AN EVENT</h1>
     <p>Create an event here and we’ll remember it for you! Make sure to put as much detail as possible to get the most complete record of your history-making soiree!</p>
 
-    <p class="small">
+
+    <ul id="createSteps">
+        <li id="step1"><span>1</span><h2>Event Information</h2></li>
+        <li id="step2" class="stepDisable"><span>2</span><h2>Search Terms</h2></li>
+        <li id="step3" class="stepDisable"><span>3</span><h2>When and Where</h2></li>
+        <li id="step4" class="borderTop stepDisable"><span>4</span><h2>Add More Details</h2></li>
+    </ul>
+    <div class="spacer"></div>
+    <input type="submit" class="blue-action-button" value="+ Add this event" />
+
+
+    @*<p class="small">
         <strong>Name:</strong> The name of the event<br /><br />
         <strong>Subtitle:</strong> Additional information i.e. sponsored by, presented by<br /><br />
         <strong>Category:</strong> Give us a general idea of what your event is about<br /><br />
@@ -58,7 +64,7 @@
                 </tbody>
             </table>
         </div>
-    </div>
+    </div>*@
 
 </div>
 <div id="events-content">
@@ -70,129 +76,116 @@
     <div id="createevent-info" class="item-card">
         <h4>EVENT INFORMATION</h4>
         <br style="clear:both;" />
-        <div class="item-data clearfix">
-            <p>@Html.LabelFor(model => model.Name) @Html.TextBoxFor(model => model.Name, new { @class = "wide" })</p>
-            <p>@Html.LabelFor(model => model.Subtitle) @Html.TextBoxFor(model => model.Subtitle, new { @class = "wide" })</p>
-            <p>@Html.LabelFor(model => model.CategoryID) @Html.DropDownListFor(model => model.CategoryID, Model.Categories, "Select your event category", new { @class = "wide" })</p>
+        <div class="blocking" >
+            <div class="item-data clearfix">
+                <p>@Html.LabelFor(model => model.Name) @Html.TextBoxFor(model => model.Name, new { @class = "wide" })</p>
+                <p>@Html.LabelFor(model => model.Subtitle) @Html.TextBoxFor(model => model.Subtitle, new { @class = "wide" })</p>
+                <p>@Html.LabelFor(model => model.CategoryID) @Html.DropDownListFor(model => model.CategoryID, Model.Categories, "Select your event category", new { @class = "wide" })</p>
+            </div>
         </div>
     </div>
     <div class="spacer"></div>
     
-    <div class="item-card">
+    <div id="whattoinclude-info" class="item-card">
         <h4>WHAT TO INCLUDE</h4>
         <br style="clear:both;" />
-        <div class="item-data clearfix">
+        <div class="blocking">
+            <div class="item-data clearfix">
             
 
-            <div id="rule-group">
-                <div class="rule" id="rule1">
-                    <label>* 1ST Term<br />(# " @@ allowed)</label><input type="text" id="seachTerm1" class="med" />
-                    <a href="#" class="plus blue-action-button">+</a>
+                <div id="rule-group">
+                    <div class="rule" id="rule1">
+                        <label>* 1ST Term<br />(# " @@ allowed)</label><input type="text" id="seachTerm1" class="med" />
+                        <a href="#" class="plus blue-action-button">+</a>
+                    </div>
+
+                    <div class="rule hidden" id="template">
+                        <label>NEXT TERM</label>
+                        <select id="operator1" class="med">
+                            <option value="OR">or</option>
+                            <option value="AND">and</option>
+                            <option value="NOT">not</option>
+                        </select>
+                        <input type="text" id="hst" class="med" />
+                        <a href="#" class="minus blue-action-button">-</a> <a href="#" class="plus blue-action-button">+</a>
+                    </div>
                 </div>
 
-                <div class="rule hidden" id="template">
-                    <label>NEXT TERM</label>
-                    <select id="operator1" class="med">
-                        <option value="OR">or</option>
-                        <option value="AND">and</option>
-                        <option value="NOT">not</option>
-                    </select>
-                    <input type="text" id="hst" class="med" />
-                    <a href="#" class="minus blue-action-button">-</a> <a href="#" class="plus blue-action-button">+</a>
-                </div>
+                <div class="spacer"></div>        
+                <p><label>Advanced (soon hidden)</label> @Html.TextBoxFor(model => model.SearchTerms, new { @class = "wide" })</p>
+
             </div>
-
-            <div class="spacer"></div>        
-            <p><label>Advanced (soon hidden)</label> @Html.TextBoxFor(model => model.SearchTerms, new { @class = "wide" })</p>
-
         </div>
     </div>
     
     <div class="spacer"></div>
     
     
-    <div class="item-card">
+    <div id="whenandwhere-info" class="item-card">
         <h4>WHEN AND WHERE</h4>
         <br style="clear:both;" />
-        <div id="createevent-time" class="item-data clearfix">
-            <br />
-            <label class="wide">Event Time</label>
-            <div id="EventTimePicker">
-                <input type="text" class="picker-start-date" name="start_date" value="@Html.DisplayFor(e => e.StartDateTime, "ShortDate")" />
-                <input type="text" class="picker-start-time" name="start_time" value="@Html.DisplayFor(e => e.StartDateTime, "FullTime")" />
-                &nbsp;to&nbsp;
-                <input type="text" class="picker-end-time" name="end_time" value="@Html.DisplayFor(e => e.EndDateTime, "FullTime")" />
-                <input type="text" class="picker-end-date" name="end_date" value="@Html.DisplayFor(e => e.EndDateTime, "ShortDate")" />
-            </div>
-
-            <label class="wide">Collection Time</label>
-            <div id="CollectionTimePicker">
-                <input type="text" class="picker-start-date" name="collection_start_date" value="@Html.DisplayFor(e => e.CollectionStartDateTime, "ShortDate")" />
-                <input type="text" class="picker-start-time" name="collection_start_time" value="@Html.DisplayFor(e => e.CollectionStartDateTime, "FullTime")" />
-                &nbsp;to&nbsp;
-                <input type="text" class="picker-end-time" name="collection_end_time" value="@Html.DisplayFor(e => e.CollectionEndDateTime, "FullTime")" />
-                <input type="text" class="picker-end-date" name="collection_end_date" value="@Html.DisplayFor(e => e.CollectionEndDateTime, "ShortDate")" />
-            </div>
-
-
-
-
-            @*<label class="wide">Start Date</label> 
-            @Html.EditorFor(model => model.StartDateTime)
-
-            <div class="end-time">
-                <input type="checkbox" id="end-time" class="unhide" />
-                <label for="end-time">Specifiy an ending time</label>
-                <br style="clear:both;" />
-            </div>
-            
-            <div class="hidden">
-                <div style="clear:both;">
-                    <label class="wide">Event End</label> 
-                    @Html.EditorFor(model => model.EndDateTime)
+        <div class="blocking">
+            <div id="createevent-time" class="item-data clearfix">
+                <br />
+                <label class="wide">Event Time</label>
+                <div id="EventTimePicker">
+                    <input type="text" class="picker-start-date" name="start_date" value="@Html.DisplayFor(e => e.StartDateTime, "ShortDate")" />
+                    <input type="text" class="picker-start-time" name="start_time" value="@Html.DisplayFor(e => e.StartDateTime, "FullTime")" />
+                    &nbsp;to&nbsp;
+                    <input type="text" class="picker-end-time" name="end_time" value="@Html.DisplayFor(e => e.EndDateTime, "FullTime")" />
+                    <input type="text" class="picker-end-date" name="end_date" value="@Html.DisplayFor(e => e.EndDateTime, "ShortDate")" />
                 </div>
-            </div>*@
 
-
-            <label class="wide">Venue</label>
-            @*<a href="#" id="foursquare-search" class="blue-action-button">Search for a venue</a>*@
-            <div style="display: block; margin-left: 112px;">
-                <div id="selectedVenue">
-                    @if (Model.Venue != null)
-                    {
-                        <strong>@Model.Venue.Name</strong><br />
-                        @Model.Venue.Address<br />
-                        @Model.Venue.City@:, @Model.Venue.State<br />
-                        @Model.Venue.Zip<br />
-                    }
+                <label class="wide">Collection Time</label>
+                <div id="CollectionTimePicker">
+                    <input type="text" class="picker-start-date" name="collection_start_date" value="@Html.DisplayFor(e => e.CollectionStartDateTime, "ShortDate")" />
+                    <input type="text" class="picker-start-time" name="collection_start_time" value="@Html.DisplayFor(e => e.CollectionStartDateTime, "FullTime")" />
+                    &nbsp;to&nbsp;
+                    <input type="text" class="picker-end-time" name="collection_end_time" value="@Html.DisplayFor(e => e.CollectionEndDateTime, "FullTime")" />
+                    <input type="text" class="picker-end-date" name="collection_end_date" value="@Html.DisplayFor(e => e.CollectionEndDateTime, "ShortDate")" />
                 </div>
-                <input type="button" id="foursquare-search" class="blue-action-button" value="Search for a venue" />
+
+                <label class="wide">Venue</label>
+                @*<a href="#" id="foursquare-search" class="blue-action-button">Search for a venue</a>*@
+                <div style="display: block; margin-left: 112px;">
+                    <div id="selectedVenue">
+                        @if (Model.Venue != null)
+                        {
+                            <strong>@Model.Venue.Name</strong><br />
+                            @Model.Venue.Address<br />
+                            @Model.Venue.City@:, @Model.Venue.State<br />
+                            @Model.Venue.Zip<br />
+                        }
+                    </div>
+                    <input type="button" id="foursquare-search" class="blue-action-button" value="Search for a venue" />
+                </div>
+
+
+                @*<div style="display: block; margin-left: 112px; padding-top: 8px;">
+                    <div id="selectedVenue"></div>
+                    <h3><a href="#" id="foursquare-search" class="modal">Search for a venue</a></h3>
+                </div>*@
+                @Html.HiddenFor(model => model.FoursquareVenueID)
             </div>
-
-
-            @*<div style="display: block; margin-left: 112px; padding-top: 8px;">
-                <div id="selectedVenue"></div>
-                <h3><a href="#" id="foursquare-search" class="modal">Search for a venue</a></h3>
-            </div>*@
-            @Html.HiddenFor(model => model.FoursquareVenueID)
         </div>
     </div>
     <div class="spacer"></div>
     
-    <div class="item-card">
+    <div id="moreinformation-info" class="item-card">
         <h4>MORE INFORMATION (optional)</h4>
         <br style="clear:both;" />
-        <div class="item-data clearfix">
-            <p>@Html.LabelFor(model => model.Description) @Html.TextAreaFor(model => model.Description, new { @class = "wide" })</p>
+        <div class="blocking">
+            <div class="item-data clearfix">
+                <p>@Html.LabelFor(model => model.Description) @Html.TextAreaFor(model => model.Description, new { @class = "wide" })</p>
 
-            <p>@Html.LabelFor(model => model.WebsiteURL) @Html.TextBoxFor(model => model.WebsiteURL, new { @class = "wide" })</p>
-            <p>@Html.LabelFor(model => model.TwitterAccount) @Html.TextBoxFor(model => model.TwitterAccount, new { @class = "med" })</p>
-            <p>@Html.LabelFor(model => model.FacebookPageURL) @Html.TextBoxFor(model => model.FacebookPageURL, new { @class = "med" })</p>
-            <p>@Html.LabelFor(model => model.Cost) @Html.TextBoxFor(model => model.Cost, new { @class = "small" })</p>
+                <p>@Html.LabelFor(model => model.WebsiteURL) @Html.TextBoxFor(model => model.WebsiteURL, new { @class = "wide" })</p>
+                <p>@Html.LabelFor(model => model.TwitterAccount) @Html.TextBoxFor(model => model.TwitterAccount, new { @class = "med" })</p>
+                <p>@Html.LabelFor(model => model.FacebookPageURL) @Html.TextBoxFor(model => model.FacebookPageURL, new { @class = "med" })</p>
+                <p>@Html.LabelFor(model => model.Cost) @Html.TextBoxFor(model => model.Cost, new { @class = "small" })</p>
+            </div>
         </div>
     </div>
-    <div class="spacer"></div>    
-    <input type="submit" class="blue-action-button" value="Create Event" />
+    
 }
 </div>
 <div style='display:none'>

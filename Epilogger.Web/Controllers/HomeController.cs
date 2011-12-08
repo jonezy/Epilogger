@@ -16,15 +16,13 @@ namespace Epilogger.Web.Controllers {
         ClickLogService CS = new ClickLogService();
         EventService ES = new EventService();
         ImageService IS = new ImageService();
-        TweetService tweetService = new TweetService();
-
 
         public ActionResult Index() {
             ViewBag.Message = "Welcome to Epilogger!";
 
             IEnumerable<HomepageActivityModel> activity = ES.GetHomepageActivity();
             HomepageViewModel model = new HomepageViewModel(
-                activity.Take(12).ToList(),
+                activity.Take(4).ToList(),
                 0,
                 activity.Count()
             );
@@ -38,18 +36,11 @@ namespace Epilogger.Web.Controllers {
                 }
             }
 
-            if (CurrentUserID == Guid.Empty) {
-                return RedirectToAction("BetaSignUp");
-            } else {
-                StatusMessagesService SC = new StatusMessagesService();
-                model.StatusMessages = SC.GetLast10Messages();
+            StatusMessagesService SC = new StatusMessagesService();
+            model.StatusMessages = SC.GetLast10Messages();
 
-                return View(model);
-            }
-
+            return View(model);
         }
-
-
 
         public ActionResult BetaSignUp() {
             IEnumerable<HomepageActivityModel> activity = ES.GetHomepageActivity();
@@ -142,12 +133,10 @@ namespace Epilogger.Web.Controllers {
             return PartialView(CS.GetLast200ClicksByLocation(clickactions.location));
         }
 
-        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to participate in the epilogger alpha.")]
         public ActionResult Search() {
             return View();
         }
 
-        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to participate in the epilogger alpha.")]
         [HttpPost]
         public ActionResult Search(SearchEventViewModel model) {
 
@@ -158,22 +147,18 @@ namespace Epilogger.Web.Controllers {
             return View(model);
         }
 
-        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to participate in the epilogger alpha.")]
         public ActionResult About() {
             return View();
         }
 
-        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to participate in the epilogger alpha.")]
         public ActionResult Contact() {
             return View();
         }
 
-        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to participate in the epilogger alpha.")]
         public ActionResult Terms() {
             return View();
         }
 
-        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to participate in the epilogger alpha.")]
         public ActionResult Privacy() {
             return View();
         }
