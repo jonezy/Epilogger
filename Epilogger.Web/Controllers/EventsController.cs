@@ -812,7 +812,7 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-        
+        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to edit an event")]
         [HttpPost]
         public ActionResult Edit(FormCollection fc, CreateEventViewModel model) {
 
