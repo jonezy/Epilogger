@@ -45,6 +45,12 @@ head.ready(function () {
         checkBlocking();
     });
 
+    $("#AdvancedToggle").bind("click", function (e) {
+        e.preventDefault();
+        $("#AdvancedSearchTerms").toggle();
+    });
+
+
 
     function checkBlocking() {
         //        var i = 0;
@@ -60,7 +66,7 @@ head.ready(function () {
         //        }
 
         //Add the Complete style
-        if ($("#Name").val().length > 0 && $("#Subtitle").val().length > 0 && $("#CategoryID").val() != 0) {
+        if ($("#Name").val().length > 0 && $("#CategoryID").val() != 0) {
             $("#whattoinclude-info .blocking").unblock();
             $("#whattoinclude-info h4").unblock();
             $("#step2").removeClass("stepDisable");
@@ -164,6 +170,37 @@ head.ready(function () {
             SearchString += $(this).val() + " ";
         });
         $("#SearchTerms").val(SearchString);
+        if ($("#seachTerm1").val().length > 1) {
+            $("#PlainTextSearch").html("You're searching for data containing <strong>" + $("#seachTerm1").val() + "</strong>");
+        }
+
+        if ($("#seachTerm1").parent().next().find(":input").next(":input").val().length != 0) {
+            PlainTextString = "";
+            PlainTextString = "You're searching for data containing <strong>" + $("#seachTerm1").val() + "</strong> "
+
+            $(":input", "#rule-group").not(":button, :submit, :reset, :hidden, #seachTerm1").each(function (index) {
+                switch ($(this).val()) {
+                    case "OR":
+                        PlainTextString += "<span class='blueBalls'>" + $(this).val() + "</span> ";
+                        break;
+                    case "AND":
+                        PlainTextString += "<span class='blueBalls'>combined with</span> ";
+                        break;
+                    case "NOT":
+                        PlainTextString += "<span class='blueBalls'>but " + $(this).val() + "</span> ";
+                        break;
+                    default:
+                        PlainTextString += "<strong>" + $(this).val() + "</strong> ";
+                        break;
+                }
+            });
+
+            //            $("#seachTerm1").parent().next().find(":input").each(function (index) {
+            //                PlainTextString += $(this).val() + " ";
+            //            });
+            $("#PlainTextSearch").html(PlainTextString);
+
+        }
     }
 
 

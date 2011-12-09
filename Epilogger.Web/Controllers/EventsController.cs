@@ -419,9 +419,7 @@ namespace Epilogger.Web.Controllers {
                 {
                     model.UserID = CurrentUserID;
                     model.CreatedDateTime = DateTime.UtcNow;
-                    model.EndDateTime = null;
-                    model.CollectionEndDateTime = null;
-                    
+                                        
                     Event EPLevent = Mapper.Map<CreateEventViewModel, Event>(model);
                     ES.Save(EPLevent);
 
