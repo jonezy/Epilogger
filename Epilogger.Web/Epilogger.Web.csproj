@@ -296,6 +296,7 @@
     <Content Include="Public\images\alltweets-nub.png" />
     <Content Include="Public\images\arrowdown.png" />
     <Content Include="Public\images\bg\bg-collapse.png" />
+    <Content Include="Public\images\bg\bg-footer.png" />
     <Content Include="Public\images\bg\jaggies.gif" />
     <Content Include="Public\images\bg\sample1.jpg" />
     <Content Include="Public\images\bg\sample2.jpg" />
@@ -373,6 +374,10 @@
     <Content Include="Public\images\icons\CreateAccountArrow.png" />
     <Content Include="Public\images\icons\Crown.png" />
     <Content Include="Public\images\icons\dashboard-event-totals.png" />
+    <Content Include="Public\images\icons\details-checkin.png" />
+    <Content Include="Public\images\icons\details-cost.png" />
+    <Content Include="Public\images\icons\details-hashtag.png" />
+    <Content Include="Public\images\icons\details-time.png" />
     <Content Include="Public\images\icons\event-toolbar-ov.png" />
     <Content Include="Public\images\icons\event-toolbar.png" />
     <Content Include="Public\images\icons\facebook.png" />
@@ -394,6 +399,7 @@
     <Content Include="Public\images\linebg.png" />
     <Content Include="Public\images\loading.gif" />
     <Content Include="Public\images\logo.png" />
+    <Content Include="Public\images\logow.png" />
     <Content Include="Public\images\reasons\1.png" />
     <Content Include="Public\images\reasons\2.png" />
     <Content Include="Public\images\reasons\3.png" />
