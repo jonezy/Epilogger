@@ -51,7 +51,9 @@
             <h1 style="font-size:18pt">@Html.ActionLink(Model.RandomEvent.Name, "details", "events", new { @id = Model.RandomEvent.ID }, null)</h1>
         </div>
         <br style="clear:both;" /><br />
+        @if (!string.IsNullOrEmpty(Model.RandomEvent.Description)) {
         <p>@Model.RandomEvent.Description.Length > 75 ? @string.Format("{0}...", Model.RandomEvent.Description.Substring(0, 75)) : @Model.RandomEvent.Description</p>
+        }
         
 </div>
 
