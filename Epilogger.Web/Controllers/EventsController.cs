@@ -338,7 +338,7 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
         public ActionResult Create() {
             CreateEventViewModel Model = Mapper.Map<Event, CreateEventViewModel>(new Event());
             //Model.TimeZoneOffset = Helpers.GetUserTimeZoneOffset();
@@ -359,7 +359,7 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
         [HttpPost]
         public ActionResult Create(CreateEventViewModel model) {
 
@@ -799,7 +799,7 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to your epilogger account to edit an event")]
         public ActionResult Edit(int id) {
             Event currentEvent = ES.FindByID(id);
             CreateEventViewModel model = Mapper.Map<Event, CreateEventViewModel>(currentEvent);
@@ -812,7 +812,7 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to your epilogger account to edit an event")]
         [HttpPost]
         public ActionResult Edit(FormCollection fc, CreateEventViewModel model) {
             if (ModelState.IsValid) {
