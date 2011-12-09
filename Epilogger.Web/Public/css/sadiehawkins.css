@@ -582,7 +582,7 @@ div.profile img {
 
 /*------------------------------- ALL PHOTOS */
 .topPhotosBar { 
-    background-color: #f2f2f2; 
+    background-color: #fff; 
     padding:9px; 
     display:none;}
 
@@ -1054,7 +1054,7 @@ x.dashboard-event-item .event-totals {
     background: #f2f9fb url(../images/icons/SubscribedCheck.png) no-repeat 5px 6px;}
     
 .alltweets-nub {background:url(../images/alltweets-nub.png) no-repeat; width:17px;height:19px;margin-left:10px;}
-.unique-tweets {background:#f3f3f3;padding:10px 20px 10px 20px;float:left;}
+.unique-tweets {background:#fff;padding:10px 20px 10px 20px;float:left;}
 .unique-tweets {width:225px;margin-right:1px;}
 .unique-tweets h1{color:#8c8c8c;}
 .unique-tweets h2, .total-tweets h2 {color:#747474;margin-bottom:0px;}
@@ -1069,7 +1069,7 @@ x.dashboard-event-item .event-totals {
 .alltweets-entry .tweet-content span.tweet-date {font-size:11px;color:#c2c2c2}
 
 .alllinks-entry { padding: 10px 0;}
-.alllinks-entry .tweet {color:#696969;margin: 5px 0 5px 15px; border-left: 3px solid #fe60b1; padding:5px; height:40px; background:#e6f7f9 }
+.alllinks-entry .tweet {color:#696969;margin: 5px 0 5px 10px; border-left: 3px solid #fe60b1; padding:5px; height:40px; background:#fff }
 .alllinks-entry .tweet img { margin-right: 8px; }
 
 #top-tweeters {padding-top:15px;border-top:dotted 1px #e8e8e8;margin-top:20px;}
