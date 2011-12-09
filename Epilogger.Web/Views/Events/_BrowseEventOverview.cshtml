@@ -37,11 +37,22 @@
 
         <span class="clear big-spacer"></span>
         
-        <h2>Random Upcoming Event</h2>
-        <h1 style="font-size:18pt">Event Title Holder</h1>
-        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</p>
-        
+
     }
+
+        <h2>Random Upcoming Event</h2>
+        <div class="random-event-title">
+            <div class="month-day">
+                <div class="month">@Html.DisplayFor(model => model.RandomEvent.StartDateTime, "Month")</div>    
+                <h2>@Html.DisplayFor(model => model.RandomEvent.StartDateTime, "Day")</h2>
+                <h3>@Html.Encode(Model.RandomEvent.StartDateTime.Year)</h3>
+                <div class="icon" style="background-image:url(@Url.Content("~/Public/images/date-icons/" + Model.RandomEvent.EventCategories.FirstOrDefault().ID + ".png"))"></div>
+            </div>        
+            <h1 style="font-size:18pt">@Html.ActionLink(Model.RandomEvent.Name, "details", "events", new { @id = Model.RandomEvent.ID }, null)</h1>
+        </div>
+        <br style="clear:both;" /><br />
+        <p>@Model.RandomEvent.Description.Length > 75 ? @string.Format("{0}...", Model.RandomEvent.Description.Substring(0, 75)) : @Model.RandomEvent.Description</p>
+        
 </div>
 
 <div id="events-content">
