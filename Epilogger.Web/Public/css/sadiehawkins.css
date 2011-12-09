@@ -963,7 +963,7 @@ ul#left-nav li ul li a.current {color:#a44b79;}
 x.dashboard-event-item .event-totals {
     display:none}
 
-.dashboard-event-item .month-day {
+.month-day {
     font:bold 12px helvetica, arial, sans-serif;
     float:left;
     background:#fff;
@@ -973,14 +973,14 @@ x.dashboard-event-item .event-totals {
     text-align:right;
     position:relative;}
     
-.dashboard-event-item .month-day .month {
+.month-day .month {
     padding:0px 2px 0px 0px;
     background:#f40069;
     color:#fff;
     text-transform:uppercase;
     font-size:14px}
     
-.dashboard-event-item .month-day .icon {
+.month-day .icon {
     position:absolute;
     top:18px;
     left:2px;
@@ -988,7 +988,7 @@ x.dashboard-event-item .event-totals {
     width:17px;
     height:37px;}
     
-.dashboard-event-item .month-day h2 {
+.month-day h2 {
     margin:0;
     color:#555 !important;
     font-size:34px;
@@ -997,7 +997,7 @@ x.dashboard-event-item .event-totals {
     top:13px;
     right:0px;}
     
-.dashboard-event-item .month-day h3 {
+.month-day h3 {
     margin:0;
     position:absolute;
     bottom:0px;
@@ -1005,6 +1005,7 @@ x.dashboard-event-item .event-totals {
     font-size:10px;
     color:#918e8e;
     }
+
 .dashboard-event-item .event-content {margin-left:15px;float:left;width:60%;}
 .dashboard-event-item .event-content h6 {margin-bottom:3px;}
 .dashboard-event-item .event-content-searchterms {width:70%;}
@@ -1031,6 +1032,15 @@ x.dashboard-event-item .event-totals {
 
 #events-nav {float:left;width:303px;margin-right:17px;position:relative;}
 #events-content {float:left;width:640px;}
+
+
+#events-nav  .random-event-title {
+       
+}
+#events-nav  .random-event-title .month-day {float:left;}
+#events-nav  .random-event-title h1 {
+    margin:0 0 0 5px;
+    width:80%;float:left;}
 
 .subscribedIndicator { 
     color: #c4cacc; 

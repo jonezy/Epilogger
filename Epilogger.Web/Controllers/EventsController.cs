@@ -96,28 +96,25 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-        
+
         public ActionResult Index(string filter, int? page) {
 
             int currentPage = page.HasValue ? page.Value - 1 : 0;
 
             BrowseEventsDisplayViewModel model = new BrowseEventsDisplayViewModel();
 
-            if (CurrentUserID == Guid.Empty)
-            {
+            if (CurrentUserID == Guid.Empty) {
                 model.Authorized = false;
-            }
-            else
-            {
+            } else {
                 model.Authorized = true;
             }
 
             List<Event> events = new List<Event>();
             //IEnumerable<Event> hottestevents = ES.GetHottestEvents(5);
-
+            Epilogger.Data.Event randomEvent = ES.GetRandomEvent();
+            model.RandomEvent = ES.RandomUpcomingEvent();
             //Fillthe events of the time selected
-            switch (filter)
-            {
+            switch (filter) {
                 case "upcoming":
                     events = ES.UpcomingEventsPaged(currentPage, 10);
                     break;
@@ -137,38 +134,31 @@ namespace Epilogger.Web.Controllers {
                     events = ES.FindByUserIDPaged(CurrentUserID, currentPage, 10);
                     model.TotalRecords = ES.FindCountByUserID(CurrentUserID);
                     break;
-                
+
                 case "random":
-                    Epilogger.Data.Event e = ES.GetRandomEvent();
-                    return RedirectToAction("details", new { id = e.ID });
+                    
+                    return RedirectToAction("details", new { id = randomEvent.ID });
                 default:
                     filter = "overview";
                     model.UpcomingEvents = ES.UpcomingEvents();
                     model.EventCategories = CatS.AllCategories();
 
-                    if (model.Authorized)
-                    {
-                        events = US.GetUserSubscribedAndCreatedEvents(CurrentUserID).Take(8).ToList();
-                    }
-                    else
-                    {
+                    if (model.Authorized) {
+                        events = US.GetUserSubscribedAndCreatedEvents(CurrentUserID, 8).ToList();
+                    } else {
                         events = ES.TodaysEvents();
                     }
-                    
+
                     break;
             }
 
             model.BrowsePageFilter = filter;
-
             model.CurrentPageIndex = currentPage;
-            
+            model.Events = Mapper.Map<List<Event>, List<DashboardEventViewModel>>(events);
 
-            model.Events = Mapper.Map<List<Event>, List<DashboardEventViewModel>>(events);           
-            
             //For the Overview page, the hottest events
             model.HottestEvents = new List<HotestEventsModel>();
-            foreach (Epilogger.Data.Event item in ES.GetHottestEvents(4))
-            {
+            foreach (Epilogger.Data.Event item in ES.GetHottestEvents(4)) {
                 HotestEventsModel HE = new HotestEventsModel();
                 HE.Event = item;
                 HE.RandomHottestImages = IS.GetRandomImagesByEventID(item.ID, 10);
@@ -202,7 +192,7 @@ namespace Epilogger.Web.Controllers {
             switch (Tab)
             {
                 case 1: //My Events
-                    events = US.GetUserSubscribedAndCreatedEvents(CurrentUserID).Take(8).ToList();
+                    events = US.GetUserSubscribedAndCreatedEvents(CurrentUserID, 8).ToList();
                     break;
                 case 2: //Today
                     events = ES.TodaysEvents();
