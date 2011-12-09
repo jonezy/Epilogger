@@ -871,11 +871,12 @@ ul#EventDetailsMenu li { display:inline-block; padding: 0; margin:0;}
 ul#EventDetailsMenu li a { color:#000; padding: 0; text-transform:uppercase; margin: 0 20px; font-size: 12px;}
 ul#EventDetailsMenu li a:hover, ul#navigation li a.current {  color:#858585; }*/
 
-ul#EventDetailsMenu { display:block; list-style-type:none; border-bottom:1px solid #c7c7c7; height:30px;}
+ul#EventDetailsMenu { display:block; list-style-type:none; border-bottom:1px solid #c7c7c7;}
 ul#EventDetailsMenu li { float:left; padding:0; margin-right:25px; }
-ul#EventDetailsMenu li a { text-transform:uppercase; color:#000; font-size:11px;}
+ul#EventDetailsMenu li a { padding-bottom:10px;text-transform:uppercase; color:#000; font-size:11px;}
 ul#EventDetailsMenu li a.active { color:#888;}
-ul#EventDetailsMenu li a:hover {  color:#858585;}
+ul#EventDetailsMenu li a:hover,
+ul#EventDetailsMenu li a.current {  color:#858585;background:url(../images/jaggie-icons/event-menu-jaggie.gif) no-repeat bottom center;}
 
 
 /*CREATE ACCOUNT*/
