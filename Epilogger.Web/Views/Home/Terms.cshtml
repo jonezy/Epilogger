@@ -3,7 +3,2399 @@
     ViewBag.Title = "Terms & Conditions";
 }
 
+<style>
+<!--
+ /* Font Definitions */
+ @@font-face
+	{font-family:Albertus;
+	panose-1:0 0 0 0 0 0 0 0 0 0;
+	mso-font-charset:0;
+	mso-generic-font-family:roman;
+	mso-font-format:other;
+	mso-font-pitch:variable;
+	mso-font-signature:3 0 0 0 1 0;
+	mso-font-src:0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.MsoHeader, li.MsoHeader, div.MsoHeader
+	{mso-style-unhide:no;
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:center 3.0in right 6.0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.MsoFooter, li.MsoFooter, div.MsoFooter
+	{mso-style-unhide:no;
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:center 3.0in right 6.0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+a:link, span.MsoHyperlink
+	{mso-style-unhide:no;
+	color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-noshow:yes;
+	mso-style-priority:99;
+	color:purple;
+	mso-themecolor:followedhyperlink;
+	text-decoration:underline;
+	text-underline:single;}
+p.DocID, li.DocID, div.DocID
+	{mso-style-name:DocID;
+	mso-style-unhide:no;
+	mso-style-link:"DocID Char";
+	mso-style-next:Normal;
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:8.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Arial","sans-serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+span.DocIDChar
+	{mso-style-name:"DocID Char";
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:DocID;
+	mso-ansi-font-size:8.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Arial","sans-serif";
+	mso-ascii-font-family:Arial;
+	mso-hansi-font-family:Arial;
+	mso-bidi-font-family:Arial;}
+p.zzbasebodytext, li.zzbasebodytext, div.zzbasebodytext
+	{mso-style-name:"zz\!base body text";
+	mso-style-unhide:no;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.BodyText, li.BodyText, div.BodyText
+	{mso-style-name:"\#BodyText";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base body text";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.BodyText5Indent, li.BodyText5Indent, div.BodyText5Indent
+	{mso-style-name:"\#BodyText= \.5\0022 Indent";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base body text";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:.5in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.BodyText1Indent, li.BodyText1Indent, div.BodyText1Indent
+	{mso-style-name:"\#BodyText= 1\0022 Indent";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base body text";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:1.0in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.BodyText15Indent, li.BodyText15Indent, div.BodyText15Indent
+	{mso-style-name:"\#BodyText= 1\.5\0022 Indent";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base body text";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:1.5in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.BodyText2Indent, li.BodyText2Indent, div.BodyText2Indent
+	{mso-style-name:"\#BodyText= 2\0022 Indent";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base body text";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:2.0in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.BodyTextFirstLineIndent5, li.BodyTextFirstLineIndent5, div.BodyTextFirstLineIndent5
+	{mso-style-name:"\#BodyText= First Line Indent \.5\0022";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base body text";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	text-align:justify;
+	text-indent:.5in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.BodyTextFirstLineIndent1, li.BodyTextFirstLineIndent1, div.BodyTextFirstLineIndent1
+	{mso-style-name:"\#BodyText= First Line Indent 1\0022";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base body text";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	text-align:justify;
+	text-indent:1.0in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.zzbaseaddress, li.zzbaseaddress, div.zzbaseaddress
+	{mso-style-name:"zz\!base address";
+	mso-style-unhide:no;
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.Address, li.Address, div.Address
+	{mso-style-name:$Address;
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base address";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.AddressIndent5, li.AddressIndent5, div.AddressIndent5
+	{mso-style-name:"$Address=Indent \.5\0022";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base address";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.AddressIndent1, li.AddressIndent1, div.AddressIndent1
+	{mso-style-name:"$Address=Indent 1\0022";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base address";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:1.0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.AddressIndent15, li.AddressIndent15, div.AddressIndent15
+	{mso-style-name:"$Address=Indent 1\.5\0022";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base address";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:1.5in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.MiscRedHerring, li.MiscRedHerring, div.MiscRedHerring
+	{mso-style-name:"$Misc=Red Herring";
+	mso-style-unhide:no;
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:8.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	color:red;
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;
+	font-weight:bold;
+	mso-bidi-font-weight:normal;}
+p.zzbaseheading, li.zzbaseheading, div.zzbaseheading
+	{mso-style-name:"zz\!base heading";
+	mso-style-unhide:no;
+	mso-style-next:Normal;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan lines-together;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.HeadingCentre, li.HeadingCentre, div.HeadingCentre
+	{mso-style-name:%Heading=Centre;
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base heading";
+	mso-style-next:"\#BodyText";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	text-align:center;
+	mso-pagination:widow-orphan lines-together;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.HeadingCentreBold, li.HeadingCentreBold, div.HeadingCentreBold
+	{mso-style-name:%Heading=Centre+Bold;
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base heading";
+	mso-style-next:"\#BodyText";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	text-align:center;
+	mso-pagination:widow-orphan lines-together;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;
+	font-weight:bold;
+	mso-bidi-font-weight:normal;}
+p.HeadingCentreBoldUnd, li.HeadingCentreBoldUnd, div.HeadingCentreBoldUnd
+	{mso-style-name:%Heading=Centre+Bold+Und;
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base heading";
+	mso-style-next:"\#BodyText";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	text-align:center;
+	mso-pagination:widow-orphan lines-together;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;
+	font-weight:bold;
+	mso-bidi-font-weight:normal;
+	text-decoration:underline;
+	text-underline:single;}
+p.HeadingCentreUnd, li.HeadingCentreUnd, div.HeadingCentreUnd
+	{mso-style-name:%Heading=Centre+Und;
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base heading";
+	mso-style-next:"\#BodyText";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	text-align:center;
+	mso-pagination:widow-orphan lines-together;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;
+	text-decoration:underline;
+	text-underline:single;}
+p.HeadingDocTitle, li.HeadingDocTitle, div.HeadingDocTitle
+	{mso-style-name:"%Heading=Doc Title";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base heading";
+	mso-style-next:"\#BodyText";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	text-align:center;
+	mso-pagination:widow-orphan lines-together;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	text-transform:uppercase;
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;
+	font-weight:bold;
+	mso-bidi-font-weight:normal;}
+p.HeadingLeftBold, li.HeadingLeftBold, div.HeadingLeftBold
+	{mso-style-name:%Heading=Left+Bold;
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base heading";
+	mso-style-next:"\#BodyText";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan lines-together;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;
+	font-weight:bold;
+	mso-bidi-font-weight:normal;}
+p.HeadingLeftBoldItalics, li.HeadingLeftBoldItalics, div.HeadingLeftBoldItalics
+	{mso-style-name:%Heading=Left+Bold+Italics;
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base heading";
+	mso-style-next:"\#BodyText";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan lines-together;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;
+	font-weight:bold;
+	mso-bidi-font-weight:normal;
+	font-style:italic;
+	mso-bidi-font-style:normal;}
+p.HeadingLeftBoldUnd, li.HeadingLeftBoldUnd, div.HeadingLeftBoldUnd
+	{mso-style-name:%Heading=Left+Bold+Und;
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base heading";
+	mso-style-next:"\#BodyText";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan lines-together;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;
+	font-weight:bold;
+	mso-bidi-font-weight:normal;
+	text-decoration:underline;
+	text-underline:single;}
+p.HeadingLeftItalics, li.HeadingLeftItalics, div.HeadingLeftItalics
+	{mso-style-name:%Heading=Left+Italics;
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base heading";
+	mso-style-next:"\#BodyText";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan lines-together;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;
+	font-style:italic;
+	mso-bidi-font-style:normal;}
+p.HeadingLeftUnderline, li.HeadingLeftUnderline, div.HeadingLeftUnderline
+	{mso-style-name:%Heading=Left+Underline;
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base heading";
+	mso-style-next:"\#BodyText";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan lines-together;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;
+	text-decoration:underline;
+	text-underline:single;}
+p.zzbaseparties, li.zzbaseparties, div.zzbaseparties
+	{mso-style-name:"zz\!base parties";
+	mso-style-unhide:no;
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.PartiesCentreAlign, li.PartiesCentreAlign, div.PartiesCentreAlign
+	{mso-style-name:"*Parties=Centre Align";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base parties";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.PartiesLRIndent10, li.PartiesLRIndent10, div.PartiesLRIndent10
+	{mso-style-name:"*Parties=L\/R Indent 1\.0";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base parties";
+	margin-top:0in;
+	margin-right:1.0in;
+	margin-bottom:12.0pt;
+	margin-left:1.0in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.PartiesLeftAligned, li.PartiesLeftAligned, div.PartiesLeftAligned
+	{mso-style-name:"*Parties=Left Aligned";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base parties";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.PartiesRightAlign, li.PartiesRightAlign, div.PartiesRightAlign
+	{mso-style-name:"*Parties=Right Align";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base parties";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	text-align:right;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.zzbasequotes, li.zzbasequotes, div.zzbasequotes
+	{mso-style-name:"zz\!base quotes";
+	mso-style-unhide:no;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.QuotesLeft5Right5, li.QuotesLeft5Right5, div.QuotesLeft5Right5
+	{mso-style-name:"\@@Quotes=Left \.5\0022 \/ Right \.5\0022";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base quotes";
+	margin-top:0in;
+	margin-right:.5in;
+	margin-bottom:12.0pt;
+	margin-left:.5in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.QuotesLeft1Right5-10Pts, li.QuotesLeft1Right5-10Pts, div.QuotesLeft1Right5-10Pts
+	{mso-style-name:"\@@Quotes=Left 1\0022 \/ Right \.5\0022 - 10 Pts";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base quotes";
+	margin-top:0in;
+	margin-right:.5in;
+	margin-bottom:12.0pt;
+	margin-left:1.0in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.QuotesLeft1Right1, li.QuotesLeft1Right1, div.QuotesLeft1Right1
+	{mso-style-name:"\@@Quotes=Left 1\0022 \/ Right 1\0022";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base quotes";
+	margin-top:0in;
+	margin-right:1.0in;
+	margin-bottom:12.0pt;
+	margin-left:1.0in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.QuotesLeft15Right5, li.QuotesLeft15Right5, div.QuotesLeft15Right5
+	{mso-style-name:"\@@Quotes=Left 1\.5\0022 \/ Right \.5\0022";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base quotes";
+	margin-top:0in;
+	margin-right:.5in;
+	margin-bottom:12.0pt;
+	margin-left:1.5in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.zzbasetables, li.zzbasetables, div.zzbasetables
+	{mso-style-name:"zz\!base tables";
+	mso-style-unhide:no;
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.TableCentrem, li.TableCentrem, div.TableCentrem
+	{mso-style-name:^Table=Centre+m;
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base tables";
+	margin:0in;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.TableDecimalm, li.TableDecimalm, div.TableDecimalm
+	{mso-style-name:^Table=Decimal+m;
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base tables";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:decimal .7in;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.TableHeadingm, li.TableHeadingm, div.TableHeadingm
+	{mso-style-name:^Table=Heading+m;
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base tables";
+	margin-top:2.0pt;
+	margin-right:0in;
+	margin-bottom:2.0pt;
+	margin-left:0in;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;
+	font-weight:bold;
+	mso-bidi-font-weight:normal;}
+p.TableJustifiedm, li.TableJustifiedm, div.TableJustifiedm
+	{mso-style-name:^Table=Justified+m;
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base tables";
+	margin:0in;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.TableLeftm, li.TableLeftm, div.TableLeftm
+	{mso-style-name:^Table=Left+m;
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base tables";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.TableRightm, li.TableRightm, div.TableRightm
+	{mso-style-name:^Table=Right+m;
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base tables";
+	margin:0in;
+	margin-bottom:.0001pt;
+	text-align:right;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.TableTitlem, li.TableTitlem, div.TableTitlem
+	{mso-style-name:^Table=Title+m;
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base tables";
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;
+	font-weight:bold;
+	mso-bidi-font-weight:normal;}
+p.BodyTextBold, li.BodyTextBold, div.BodyTextBold
+	{mso-style-name:"\#BodyText=Bold";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base body text";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;
+	font-weight:bold;
+	mso-bidi-font-weight:normal;}
+p.BodyTextItalics, li.BodyTextItalics, div.BodyTextItalics
+	{mso-style-name:"\#BodyText=Italics";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base body text";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;
+	font-style:italic;
+	mso-bidi-font-style:normal;}
+p.BodyTextBoldItalics, li.BodyTextBoldItalics, div.BodyTextBoldItalics
+	{mso-style-name:"\#BodyText=Bold+Italics";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base body text";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;
+	font-weight:bold;
+	mso-bidi-font-weight:normal;
+	font-style:italic;
+	mso-bidi-font-style:normal;}
+p.HeadingCentreItalics, li.HeadingCentreItalics, div.HeadingCentreItalics
+	{mso-style-name:%Heading=Centre+Italics;
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base heading";
+	mso-style-next:"\#BodyText";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	text-align:center;
+	mso-pagination:widow-orphan lines-together;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;
+	font-style:italic;
+	mso-bidi-font-style:normal;}
+p.HeadingCentreBoldItalics, li.HeadingCentreBoldItalics, div.HeadingCentreBoldItalics
+	{mso-style-name:%Heading=Centre+Bold+Italics;
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base heading";
+	mso-style-next:"\#BodyText";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	text-align:center;
+	mso-pagination:widow-orphan lines-together;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;
+	font-weight:bold;
+	mso-bidi-font-weight:normal;
+	font-style:italic;
+	mso-bidi-font-style:normal;}
+p.PartiesCentreNoPSpace, li.PartiesCentreNoPSpace, div.PartiesCentreNoPSpace
+	{mso-style-name:"*Parties=Centre + No PSpace";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base parties";
+	margin:0in;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.PartiesCentreBoldNoPSpace, li.PartiesCentreBoldNoPSpace, div.PartiesCentreBoldNoPSpace
+	{mso-style-name:"*Parties=Centre + Bold + No PSpace";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base parties";
+	margin:0in;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;
+	font-weight:bold;
+	mso-bidi-font-weight:normal;}
+p.PartiesLRIndent10Bold, li.PartiesLRIndent10Bold, div.PartiesLRIndent10Bold
+	{mso-style-name:"*Parties=L\/R Indent 1\.0+Bold";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base parties";
+	mso-style-next:"*Parties=L\/R Indent 1\.0";
+	margin-top:0in;
+	margin-right:1.0in;
+	margin-bottom:12.0pt;
+	margin-left:1.0in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;
+	font-weight:bold;
+	mso-bidi-font-weight:normal;}
+p.Parties15Indent, li.Parties15Indent, div.Parties15Indent
+	{mso-style-name:"*Parties=1\.5\0022 Indent";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base parties";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:24.0pt;
+	margin-left:1.5in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.MiscPrecNote, li.MiscPrecNote, div.MiscPrecNote
+	{mso-style-name:$Misc=PrecNote;
+	mso-style-unhide:no;
+	mso-style-parent:"\#BodyText";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	background:#CCFFFF;
+	border:none;
+	mso-border-alt:dot-dot-dash windowtext 1.5pt;
+	padding:0in;
+	mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";
+	mso-fareast-language:EN-CA;}
+p.BodyTextUserDefined1, li.BodyTextUserDefined1, div.BodyTextUserDefined1
+	{mso-style-name:"\#BodyText= User Defined 1";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base body text";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.BodyTextUserDefined2, li.BodyTextUserDefined2, div.BodyTextUserDefined2
+	{mso-style-name:"\#BodyText= User Defined 2";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base body text";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.BodyTextUserDefined3, li.BodyTextUserDefined3, div.BodyTextUserDefined3
+	{mso-style-name:"\#BodyText= User Defined 3";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base body text";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.AddressUserDefined1, li.AddressUserDefined1, div.AddressUserDefined1
+	{mso-style-name:"$Address=User Defined 1";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base address";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.AddressUserDefined2, li.AddressUserDefined2, div.AddressUserDefined2
+	{mso-style-name:"$Address=User Defined 2";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base address";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.AddressUserDefined3, li.AddressUserDefined3, div.AddressUserDefined3
+	{mso-style-name:"$Address=User Defined 3";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base address";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.MiscUserDefined1, li.MiscUserDefined1, div.MiscUserDefined1
+	{mso-style-name:"$Misc=User Defined 1";
+	mso-style-unhide:no;
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.MiscUserDefined2, li.MiscUserDefined2, div.MiscUserDefined2
+	{mso-style-name:"$Misc=User Defined 2";
+	mso-style-unhide:no;
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.MiscUserDefined3, li.MiscUserDefined3, div.MiscUserDefined3
+	{mso-style-name:"$Misc=User Defined 3";
+	mso-style-unhide:no;
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.HeadingUserDefined1, li.HeadingUserDefined1, div.HeadingUserDefined1
+	{mso-style-name:"%Heading=User Defined 1";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base heading";
+	mso-style-next:"\#BodyText";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan lines-together;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.HeadingUserDefined2, li.HeadingUserDefined2, div.HeadingUserDefined2
+	{mso-style-name:"%Heading=User Defined 2";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base heading";
+	mso-style-next:"\#BodyText";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan lines-together;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.HeadingUserDefined3, li.HeadingUserDefined3, div.HeadingUserDefined3
+	{mso-style-name:"%Heading=User Defined 3";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base heading";
+	mso-style-next:"\#BodyText";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan lines-together;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.QuotesUserDefined1, li.QuotesUserDefined1, div.QuotesUserDefined1
+	{mso-style-name:"\@@Quotes=User Defined 1";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base quotes";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.QuotesUserDefined2, li.QuotesUserDefined2, div.QuotesUserDefined2
+	{mso-style-name:"\@@Quotes=User Defined 2";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base quotes";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.QuotesUserDefined3, li.QuotesUserDefined3, div.QuotesUserDefined3
+	{mso-style-name:"\@@Quotes=User Defined 3";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base quotes";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.TableUserDefined1, li.TableUserDefined1, div.TableUserDefined1
+	{mso-style-name:"^Table=User Defined 1";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base tables";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.TableUserDefined2, li.TableUserDefined2, div.TableUserDefined2
+	{mso-style-name:"^Table=User Defined 2";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base tables";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.TableUserDefined3, li.TableUserDefined3, div.TableUserDefined3
+	{mso-style-name:"^Table=User Defined 3";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base tables";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.PartiesUserDefined1, li.PartiesUserDefined1, div.PartiesUserDefined1
+	{mso-style-name:"*Parties=User Defined 1";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base parties";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.PartiesUserDefined2, li.PartiesUserDefined2, div.PartiesUserDefined2
+	{mso-style-name:"*Parties=User Defined 2";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base parties";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.PartiesUserDefined3, li.PartiesUserDefined3, div.PartiesUserDefined3
+	{mso-style-name:"*Parties=User Defined 3";
+	mso-style-unhide:no;
+	mso-style-parent:"zz\!base parties";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+p.Standard1Cont1, li.Standard1Cont1, div.Standard1Cont1
+	{mso-style-name:"Standard1 Cont 1";
+	mso-style-unhide:no;
+	mso-style-link:"Standard1 Cont 1 Char";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:.5in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+span.Standard1Cont1Char
+	{mso-style-name:"Standard1 Cont 1 Char";
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Standard1 Cont 1";
+	mso-ansi-font-size:12.0pt;
+	mso-bidi-font-size:12.0pt;}
+p.Standard1Cont2, li.Standard1Cont2, div.Standard1Cont2
+	{mso-style-name:"Standard1 Cont 2";
+	mso-style-unhide:no;
+	mso-style-parent:"Standard1 Cont 1";
+	mso-style-link:"Standard1 Cont 2 Char";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:1.0in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+span.Standard1Cont2Char
+	{mso-style-name:"Standard1 Cont 2 Char";
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Standard1 Cont 2";
+	mso-ansi-font-size:12.0pt;
+	mso-bidi-font-size:12.0pt;}
+p.Standard1Cont3, li.Standard1Cont3, div.Standard1Cont3
+	{mso-style-name:"Standard1 Cont 3";
+	mso-style-unhide:no;
+	mso-style-parent:"Standard1 Cont 2";
+	mso-style-link:"Standard1 Cont 3 Char";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:1.5in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+span.Standard1Cont3Char
+	{mso-style-name:"Standard1 Cont 3 Char";
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Standard1 Cont 3";
+	mso-ansi-font-size:12.0pt;
+	mso-bidi-font-size:12.0pt;}
+p.Standard1Cont4, li.Standard1Cont4, div.Standard1Cont4
+	{mso-style-name:"Standard1 Cont 4";
+	mso-style-unhide:no;
+	mso-style-parent:"Standard1 Cont 3";
+	mso-style-link:"Standard1 Cont 4 Char";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:2.0in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+span.Standard1Cont4Char
+	{mso-style-name:"Standard1 Cont 4 Char";
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Standard1 Cont 4";
+	mso-ansi-font-size:12.0pt;
+	mso-bidi-font-size:12.0pt;}
+p.Standard1Cont5, li.Standard1Cont5, div.Standard1Cont5
+	{mso-style-name:"Standard1 Cont 5";
+	mso-style-unhide:no;
+	mso-style-parent:"Standard1 Cont 4";
+	mso-style-link:"Standard1 Cont 5 Char";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:2.5in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+span.Standard1Cont5Char
+	{mso-style-name:"Standard1 Cont 5 Char";
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Standard1 Cont 5";
+	mso-ansi-font-size:12.0pt;
+	mso-bidi-font-size:12.0pt;}
+p.Standard1Cont6, li.Standard1Cont6, div.Standard1Cont6
+	{mso-style-name:"Standard1 Cont 6";
+	mso-style-unhide:no;
+	mso-style-parent:"Standard1 Cont 5";
+	mso-style-link:"Standard1 Cont 6 Char";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:3.0in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+span.Standard1Cont6Char
+	{mso-style-name:"Standard1 Cont 6 Char";
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Standard1 Cont 6";
+	mso-ansi-font-size:12.0pt;
+	mso-bidi-font-size:12.0pt;}
+p.Standard1Cont7, li.Standard1Cont7, div.Standard1Cont7
+	{mso-style-name:"Standard1 Cont 7";
+	mso-style-unhide:no;
+	mso-style-parent:"Standard1 Cont 6";
+	mso-style-link:"Standard1 Cont 7 Char";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:3.5in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+span.Standard1Cont7Char
+	{mso-style-name:"Standard1 Cont 7 Char";
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Standard1 Cont 7";
+	mso-ansi-font-size:12.0pt;
+	mso-bidi-font-size:12.0pt;}
+p.Standard1Cont8, li.Standard1Cont8, div.Standard1Cont8
+	{mso-style-name:"Standard1 Cont 8";
+	mso-style-unhide:no;
+	mso-style-parent:"Standard1 Cont 7";
+	mso-style-link:"Standard1 Cont 8 Char";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:4.0in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+span.Standard1Cont8Char
+	{mso-style-name:"Standard1 Cont 8 Char";
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Standard1 Cont 8";
+	mso-ansi-font-size:12.0pt;
+	mso-bidi-font-size:12.0pt;}
+p.Standard1Cont9, li.Standard1Cont9, div.Standard1Cont9
+	{mso-style-name:"Standard1 Cont 9";
+	mso-style-unhide:no;
+	mso-style-parent:"Standard1 Cont 8";
+	mso-style-link:"Standard1 Cont 9 Char";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:4.5in;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+span.Standard1Cont9Char
+	{mso-style-name:"Standard1 Cont 9 Char";
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Standard1 Cont 9";
+	mso-ansi-font-size:12.0pt;
+	mso-bidi-font-size:12.0pt;}
+p.Standard1L1, li.Standard1L1, div.Standard1L1
+	{mso-style-name:Standard1_L1;
+	mso-style-unhide:no;
+	mso-style-link:"Standard1_L1 Char";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:.5in;
+	text-align:justify;
+	text-indent:-.5in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:1;
+	mso-list:l0 level1 lfo1;
+	tab-stops:list .5in;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;
+	font-weight:bold;
+	mso-bidi-font-weight:normal;}
+span.Standard1L1Char
+	{mso-style-name:"Standard1_L1 Char";
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:Standard1_L1;
+	mso-ansi-font-size:12.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-weight:bold;
+	mso-bidi-font-weight:normal;}
+p.Standard1L2, li.Standard1L2, div.Standard1L2
+	{mso-style-name:Standard1_L2;
+	mso-style-unhide:no;
+	mso-style-parent:Standard1_L1;
+	mso-style-link:"Standard1_L2 Char";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:1.0in;
+	text-align:justify;
+	text-indent:-.5in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:2;
+	mso-list:l0 level2 lfo1;
+	tab-stops:list 1.0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+span.Standard1L2Char
+	{mso-style-name:"Standard1_L2 Char";
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:Standard1_L2;
+	mso-ansi-font-size:12.0pt;
+	mso-bidi-font-size:12.0pt;}
+p.Standard1L3, li.Standard1L3, div.Standard1L3
+	{mso-style-name:Standard1_L3;
+	mso-style-unhide:no;
+	mso-style-parent:Standard1_L2;
+	mso-style-link:"Standard1_L3 Char";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:1.5in;
+	text-align:justify;
+	text-indent:-.5in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:3;
+	mso-list:l0 level3 lfo1;
+	tab-stops:list 1.5in;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+span.Standard1L3Char
+	{mso-style-name:"Standard1_L3 Char";
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:Standard1_L3;
+	mso-ansi-font-size:12.0pt;
+	mso-bidi-font-size:12.0pt;}
+p.Standard1L4, li.Standard1L4, div.Standard1L4
+	{mso-style-name:Standard1_L4;
+	mso-style-unhide:no;
+	mso-style-parent:Standard1_L3;
+	mso-style-link:"Standard1_L4 Char";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:2.0in;
+	text-align:justify;
+	text-indent:-.5in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:4;
+	mso-list:l0 level4 lfo1;
+	tab-stops:list 2.0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+span.Standard1L4Char
+	{mso-style-name:"Standard1_L4 Char";
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:Standard1_L4;
+	mso-ansi-font-size:12.0pt;
+	mso-bidi-font-size:12.0pt;}
+p.Standard1L5, li.Standard1L5, div.Standard1L5
+	{mso-style-name:Standard1_L5;
+	mso-style-unhide:no;
+	mso-style-parent:Standard1_L4;
+	mso-style-link:"Standard1_L5 Char";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:2.5in;
+	text-align:justify;
+	text-indent:-.5in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:5;
+	mso-list:l0 level5 lfo1;
+	tab-stops:list 2.5in;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+span.Standard1L5Char
+	{mso-style-name:"Standard1_L5 Char";
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:Standard1_L5;
+	mso-ansi-font-size:12.0pt;
+	mso-bidi-font-size:12.0pt;}
+p.Standard1L6, li.Standard1L6, div.Standard1L6
+	{mso-style-name:Standard1_L6;
+	mso-style-unhide:no;
+	mso-style-parent:Standard1_L5;
+	mso-style-link:"Standard1_L6 Char";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:3.0in;
+	text-align:justify;
+	text-indent:-.5in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:6;
+	mso-list:l0 level6 lfo1;
+	tab-stops:list 3.0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+span.Standard1L6Char
+	{mso-style-name:"Standard1_L6 Char";
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:Standard1_L6;
+	mso-ansi-font-size:12.0pt;
+	mso-bidi-font-size:12.0pt;}
+p.Standard1L7, li.Standard1L7, div.Standard1L7
+	{mso-style-name:Standard1_L7;
+	mso-style-unhide:no;
+	mso-style-parent:Standard1_L6;
+	mso-style-link:"Standard1_L7 Char";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:3.5in;
+	text-align:justify;
+	text-indent:-.5in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:7;
+	mso-list:l0 level7 lfo1;
+	tab-stops:list 3.5in;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+span.Standard1L7Char
+	{mso-style-name:"Standard1_L7 Char";
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:Standard1_L7;
+	mso-ansi-font-size:12.0pt;
+	mso-bidi-font-size:12.0pt;}
+p.Standard1L8, li.Standard1L8, div.Standard1L8
+	{mso-style-name:Standard1_L8;
+	mso-style-unhide:no;
+	mso-style-parent:Standard1_L7;
+	mso-style-link:"Standard1_L8 Char";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:4.0in;
+	text-align:justify;
+	text-indent:-.5in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:8;
+	mso-list:l0 level8 lfo1;
+	tab-stops:list 4.0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+span.Standard1L8Char
+	{mso-style-name:"Standard1_L8 Char";
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:Standard1_L8;
+	mso-ansi-font-size:12.0pt;
+	mso-bidi-font-size:12.0pt;}
+p.Standard1L9, li.Standard1L9, div.Standard1L9
+	{mso-style-name:Standard1_L9;
+	mso-style-unhide:no;
+	mso-style-parent:Standard1_L8;
+	mso-style-link:"Standard1_L9 Char";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:4.5in;
+	text-align:justify;
+	text-indent:-.5in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:9;
+	mso-list:l0 level9 lfo1;
+	tab-stops:list 4.5in;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+span.Standard1L9Char
+	{mso-style-name:"Standard1_L9 Char";
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:Standard1_L9;
+	mso-ansi-font-size:12.0pt;
+	mso-bidi-font-size:12.0pt;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	mso-default-props:yes;
+	mso-ansi-language:EN-CA;
+	mso-fareast-language:EN-CA;}
+ /* Page Definitions */
+ @@page
+	{mso-footnote-separator:url("Epilogger%20Terms%20of%20Use_files/header.htm") fs;
+	mso-footnote-continuation-separator:url("Epilogger%20Terms%20of%20Use_files/header.htm") fcs;
+	mso-endnote-separator:url("Epilogger%20Terms%20of%20Use_files/header.htm") es;
+	mso-endnote-continuation-separator:url("Epilogger%20Terms%20of%20Use_files/header.htm") ecs;}
+@@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:35.4pt;
+	mso-footer-margin:35.4pt;
+	mso-paper-source:0;}
+div.WordSection1
+	{page:WordSection1;}
+ /* List Definitions */
+ @@list l0
+	{mso-list-id:907963601;
+	mso-list-template-ids:947915344;
+	mso-list-name:"zzmpStandard1||Standard 1|2|3|1|1|2|33||1|2|32||1|2|32||1|2|32||1|2|32||1|2|32||1|2|32||1|2|32||1|2|32||";}
+@@list l0:level1
+	{mso-level-style-link:Standard1_L1;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.5in;
+	text-transform:none;
+	mso-ansi-font-weight:bold;
+	mso-ansi-font-style:normal;
+	text-decoration:none;
+	text-underline:none;}
+@@list l0:level2
+	{mso-level-number-format:alpha-lower;
+	mso-level-style-link:Standard1_L2;
+	mso-level-text:"\(%2\)";
+	mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.5in;
+	text-transform:none;
+	mso-ansi-font-weight:normal;
+	mso-ansi-font-style:normal;
+	text-decoration:none;
+	text-underline:none;}
+@@list l0:level3
+	{mso-level-number-format:roman-lower;
+	mso-level-style-link:Standard1_L3;
+	mso-level-text:"\(%3\)";
+	mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.5in;
+	text-transform:none;
+	mso-ansi-font-weight:normal;
+	mso-ansi-font-style:normal;
+	text-decoration:none;
+	text-underline:none;}
+@@list l0:level4
+	{mso-level-style-link:Standard1_L4;
+	mso-level-text:"\(%4\)";
+	mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.5in;
+	text-transform:none;
+	mso-ansi-font-weight:normal;
+	mso-ansi-font-style:normal;
+	text-decoration:none;
+	text-underline:none;}
+@@list l0:level5
+	{mso-level-number-format:alpha-upper;
+	mso-level-style-link:Standard1_L5;
+	mso-level-text:"\(%5\)";
+	mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.5in;
+	text-transform:none;
+	mso-ansi-font-weight:normal;
+	mso-ansi-font-style:normal;
+	text-decoration:none;
+	text-underline:none;}
+@@list l0:level6
+	{mso-level-number-format:roman-upper;
+	mso-level-style-link:Standard1_L6;
+	mso-level-text:"\(%6\)";
+	mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.5in;
+	text-transform:none;
+	mso-ansi-font-weight:normal;
+	mso-ansi-font-style:normal;
+	text-decoration:none;
+	text-underline:none;}
+@@list l0:level7
+	{mso-level-style-link:Standard1_L7;
+	mso-level-text:"%7\)";
+	mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.5in;
+	text-transform:none;
+	mso-ansi-font-weight:normal;
+	mso-ansi-font-style:normal;
+	text-decoration:none;
+	text-underline:none;}
+@@list l0:level8
+	{mso-level-number-format:alpha-lower;
+	mso-level-style-link:Standard1_L8;
+	mso-level-text:"%8\)";
+	mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.5in;
+	text-transform:none;
+	mso-ansi-font-weight:normal;
+	mso-ansi-font-style:normal;
+	text-decoration:none;
+	text-underline:none;}
+@@list l0:level9
+	{mso-level-number-format:roman-lower;
+	mso-level-style-link:Standard1_L9;
+	mso-level-text:"%9\)";
+	mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.5in;
+	text-transform:none;
+	mso-ansi-font-weight:normal;
+	mso-ansi-font-style:normal;
+	text-decoration:none;
+	text-underline:none;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+
+
 <h2>Terms & Conditions</h2>
-<p>
-     Put content here.
-</p>
+
+<div class=WordSection1>
+
+<p class=HeadingCentreBold><span lang=EN-CA>TERMS OF USE</span></p>
+
+<p class=BodyText><span lang=EN-CA>Last updated: November 30, 2011</span></p>
+
+<p class=BodyText><span lang=EN-CA>Please read these Terms of Use carefully, as
+they constitute a binding agreement (the <b style='mso-bidi-font-weight:normal'>“Agreement”</b>)
+between you and Epilogger Inc. (<b style='mso-bidi-font-weight:normal'>“Epilogger”</b>).<span
+style='mso-spacerun:yes'>  </span>In particular, this Agreement governs your
+use of </span><span lang=EN-CA style='font-family:"Albertus","serif"'>Epilogger,
+whether such use be over the Internet at </span><span lang=EN-CA>www.</span><span
+lang=EN-CA style='font-family:"Albertus","serif"'>epilogger.</span><span
+lang=EN-CA>com (the <b style='mso-bidi-font-weight:normal'>“Web Site”</b>) or
+whether such Web Site is accessed through your mobile or other wireless device,
+and your use of any of Epilogger’s services, software, information, text,
+graphics, photos or other material uploaded, downloaded or appearing as
+Epilogger’s services provided through the Web Site or elsewhere (the “<b
+style='mso-bidi-font-weight:normal'>Service</b>”).<span
+style='mso-spacerun:yes'>  </span>This Agreement exempts Epilogger and other
+persons from liability or limits their liability and contains other important
+provisions that you should read.<span style='mso-spacerun:yes'>  </span>By
+using the Web Site (which includes visiting, accessing and browsing the Web
+Site), you acknowledge and signify that you have read, understood, and agreed
+to be bound by this Agreement.<span style='mso-spacerun:yes'>  </span>You must
+agree to this Agreement in order to use Epilogger’s Service and Web Site.<span
+style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=BodyText><span lang=EN-CA>Each time you use the Web Site, the text of this
+Agreement, as it then reads, will govern your use.<span
+style='mso-spacerun:yes'>  </span>Accordingly, when you use the Web Site, you
+should check the date of this Agreement and review any changes since the last
+time you visited.<span style='mso-spacerun:yes'>  </span>The changes will be
+clearly shown in the revised document for ease of reference.<span
+style='mso-spacerun:yes'>  </span>The Web Site and the Service are always evolving
+and may be modified with reasonable notice.<span style='mso-spacerun:yes'> 
+</span>If you have any questions about this Agreement, the Web Site, the
+Service or Epilogger, please email us at contact@@epilogger.com.</span></p>
+
+<p class=BodyText><span lang=EN-CA>Please note that the Web Site may be used
+only by those who are <b style='mso-bidi-font-weight:normal'><u>13 years of age
+or older.</u><span style='mso-spacerun:yes'>  </span></b>If you are 13 years of
+age or older, but have not reached the age of majority or legal age in Canada, <b
+style='mso-bidi-font-weight:normal'><u>you must have permission from a parent
+or guardian to use Epilogger.<o:p></o:p></u></b></span></p>
+
+<p class=Standard1L1 style='mso-list:l0 level1 lfo1'><![if !supportLists]><span
+lang=EN-CA><span style='mso-list:Ignore'>1.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=EN-CA>YOUR ACCEPTANCE OF THIS
+AGREEMENT </span></p>
+
+<p class=BodyText><span lang=EN-CA>This is an agreement between you and Epilogger,
+and governs your use of the Web Site and its content and the Services provided
+through the Web Site.<span style='mso-spacerun:yes'>  </span>Each time you use the
+Web Site you signify your acceptance and agreement, and the acceptance and
+agreement of any person you purport to represent (and for purposes of this Agreement,
+<b style='mso-bidi-font-weight:normal'>“person”</b> includes any type of
+incorporated or unincorporated entity, including your employer), without
+limitation or qualification, to be bound by this Agreement for using the Web
+Site, and to comply with all applicable laws and regulations, and you represent
+and warrant that you have the legal authority to agree to and accept this Agreement
+on behalf of yourself and any person you purport to represent.<span
+style='mso-spacerun:yes'>  </span>If you do not agree with each provision of this
+Agreement, or you are not authorized to agree to and accept this Agreement, or
+you do not have the legal authority to agree to and accept this Agreement, you
+may not use the Web Site and Service.<span style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=BodyText><span lang=EN-CA><o:p>&nbsp;</o:p></span></p>
+
+<p class=Standard1L1 style='mso-list:l0 level1 lfo1'><![if !supportLists]><span
+lang=EN-CA><span style='mso-list:Ignore'>2.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=EN-CA>CHANGES TO THIS AGREEMENT </span></p>
+
+<p class=BodyText><span lang=EN-CA>You may not change, supplement, or amend this
+Agreement in any manner.<span style='mso-spacerun:yes'>  </span>However, Epilogger
+may, in its sole discretion, change, supplement or amend this Agreement as it
+relates to your future use of the Web Site from time to time, for any reason, with
+reasonable notice and without liability to you or any other person.<span
+style='mso-spacerun:yes'>  </span>You should check for revisions to this
+Agreement each time you log into the Web Site.</span></p>
+
+<p class=Standard1L1 style='mso-list:l0 level1 lfo1'><![if !supportLists]><span
+lang=EN-CA><span style='mso-list:Ignore'>3.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=EN-CA>PERMITTED USERS AND ACCESS </span></p>
+
+<p class=BodyText><span lang=EN-CA>The Web Site may be used only by those who are
+<b style='mso-bidi-font-weight:normal'>13 years of age or older.<span
+style='mso-spacerun:yes'>  </span></b>If you are 13 years of age or older, but
+have not reached the age of majority or legal age in Canada, you must have
+permission from a parent or guardian to use Epilogger.<span
+style='mso-spacerun:yes'>  </span>The parent or guardian, along with all users
+who have reached the age of majority or legal age in their jurisdictions, must
+also be able to form legally binding contracts under applicable law.<span
+style='mso-spacerun:yes'>  </span>The Web Site may not be used by persons in
+jurisdictions where access to or use of the Web Site or any part of it may be
+illegal or prohibited.<span style='mso-spacerun:yes'>  </span>It is solely your
+responsibility to determine whether your use of the Web Site is lawful, and you
+must comply with all applicable laws.</span></p>
+
+<p class=Standard1L1 style='mso-list:l0 level1 lfo1'><![if !supportLists]><span
+lang=EN-CA><span style='mso-list:Ignore'>4.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=EN-CA>INFORMATION SUBMISSIONS </span></p>
+
+<p class=BodyText><span lang=EN-CA>All information you provide through the Web
+Site, including registration information (name, email address, birthday, time
+zone information), must be true, accurate, current and complete.<span
+style='mso-spacerun:yes'>  </span>You must also provide Epilogger with updated
+registration information within 30 days of any changes.<span
+style='mso-spacerun:yes'>  </span>The collection, use and disclosure of your
+personal information is governed by Epilogger’s Privacy Policy, which can be
+viewed at <a href="http://www.Epilogger.com/home/privacy" target="_blank">Privacy Policy</a></span>.
+<span style='mso-spacerun:yes'>  </span><b style='mso-bidi-font-weight:normal'><o:p></o:p></b></span></p>
+
+<p class=BodyText><span lang=EN-CA>Epilogger will rely on the information you
+provide.<span style='mso-spacerun:yes'>  </span>You will be solely responsible
+and liable for any and all loss, damage, and additional costs that you, Epilogger
+or any other person may incur as a result of your submission of any false,
+incorrect or incomplete information or your failure to update your registration
+information and payment information, as applicable, within 30 days of any
+change.<span style='mso-spacerun:yes'>  </span>Epilogger may require a copy of
+a government-issued form of identification before making any changes to your
+registration information.</span></p>
+
+<p class=Standard1L1 style='mso-list:l0 level1 lfo1'><![if !supportLists]><span
+lang=EN-CA><span style='mso-list:Ignore'>5.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=EN-CA>OWNERSHIP OF CONTENT AND LICENSING</span></p>
+
+<p class=BodyText><span lang=EN-CA>All content and information provided,
+posted, published, linked to/from or uploaded by the users of the Web Site,
+including but not limited to, postings, messages, pictures, videos, texts,
+hyper-links, data, and sound files (<b style='mso-bidi-font-weight:normal'>“Uploaded
+Content”</b>) is the sole responsibility of the users who share such content.<span
+style='mso-spacerun:yes'>  </span>Epilogger is not responsible for and does not
+control user generated content.<span style='mso-spacerun:yes'>  </span>Epilogger
+does not represent, support, approve, or guarantee the completeness,
+truthfulness, accuracy or reliability of Uploaded Content.<span
+style='mso-spacerun:yes'>  </span>By using Epilogger you may be exposed to Uploaded
+Content that may be harmful, offensive, misleading, inaccurate, deceptive or
+otherwise inappropriate and Epilogger is in no way liable or responsible for
+this type of content.<span style='mso-spacerun:yes'>  </span>Epilogger is not
+responsible for removing this type of content but may, at its absolute
+discretion, remove or edit any Uploaded Content without notice to the user
+responsible for the content.</span></p>
+
+<p class=BodyText><span lang=EN-CA>You retain your rights to any Uploaded
+Content that you provide to Epilogger.<span style='mso-spacerun:yes'> 
+</span>By providing Uploaded Content to Epilogger, you grant Epilogger a
+worldwide, non-exclusive, royalty-free license to use, copy, distribute,
+process, adapt, modify, publish, and transmit such Uploaded Content in any and
+all media or distribution methods, even where such Uploaded Content contains,
+consists of, or includes content covered by intellectual property rights.<span
+style='mso-spacerun:yes'>  </span>By providing Epilogger with Uploaded Content,
+you grant Epilogger a right to sublicense and allow Epilogger to distribute
+such Uploaded Content to other companies, organizations or persons who partner
+with Epilogger for the syndication, consolidation, broadcast, distribution or
+publication of such Uploaded Content.<span style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=BodyText><span lang=EN-CA>You are responsible for your use of the
+Service and for your Uploaded Content.<span style='mso-spacerun:yes'>  </span>You
+understand that, by providing Epilogger with Uploaded Content, you represent
+that you have the right to submit such Uploaded Content, and you represent and
+warrant that you have all the rights, power and authority necessary to grant
+the rights granted herein with respect to such Uploaded Content.<span
+style='mso-spacerun:yes'>   </span></span></p>
+
+<p class=Standard1L1 style='mso-list:l0 level1 lfo1'><![if !supportLists]><span
+lang=EN-CA><span style='mso-list:Ignore'>6.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=EN-CA>PERMITTED USE OF THE WEB SITE</span></p>
+
+<p class=BodyText><span lang=EN-CA>The Web Site and all information (in text,
+graphical, video and audio forms), images, icons, software, design,
+applications and other elements available on or through the Web Site, that are
+not Uploaded Content, are the property of Epilogger, and of its service
+providers, subsidiaries, affiliates, officers, employees, agents, partners and
+licensors (the <b style='mso-bidi-font-weight:normal'>“Epilogger Parties”</b>),
+as applicable, and are protected by Canadian and international copyright,
+trade-mark, and other laws.<span style='mso-spacerun:yes'>  </span>Your use of
+the Web Site does not transfer to you or any other person any ownership or
+other rights in the Web Site or its content.<span style='mso-spacerun:yes'> 
+</span>You may only use the Web Site in the manner described specifically in
+this Agreement.<span style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=BodyText><span lang=EN-CA>The Web Site may not be used for any purpose
+not expressly permitted by this Agreement.<span style='mso-spacerun:yes'> 
+</span>In particular, except as expressly stated otherwise in this Agreement,
+the Web Site may not be copied, imitated, reproduced, republished, uploaded,
+posted, transmitted, modified, indexed, catalogued, or distributed in any way,
+in whole or in part, without the express prior written consent of Epilogger.<span
+style='mso-spacerun:yes'>  </span>You may not use any of the software that is
+used in the operation of the Web Site except in the course of using the Web
+Site.<span style='mso-spacerun:yes'>  </span>You may not reproduce, copy,
+duplicate, sell, or resell any part of the Web Site (including the software
+used in the operation of the Web Site) or access to the Web Site.<span
+style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=BodyText><span lang=EN-CA>The Web Site is made available to you for
+your lawful use only.<span style='mso-spacerun:yes'>  </span>You may access, browse,
+post, publish, link to/from or upload to the Web Site using commercially
+available, SSL-capable Web browser software.<span style='mso-spacerun:yes'> 
+</span>You may print or download the pages of the Web Site for your personal
+use provided that you do not modify any of the Web Site pages or other content
+and you do not remove or alter any visible or non-visible identification,
+marks, notices, or disclaimers.<span style='mso-spacerun:yes'>  </span>You are
+expressly prohibited from participating in, conducting, and promoting illegal
+activities, sending viruses, spamming, interfering with the Website or Service
+or creating any other undue burden on the Web Site or through the Service.<span
+style='mso-spacerun:yes'>  </span>You understand that your account with
+Epilogger and your ability to access and use the Service is dependent on your compliance
+with this Agreement. Breach of this Agreement and any of its provisions may
+result in termination of your ability to access and/or use the Web Site or
+Service.<span style='mso-spacerun:yes'>  </span><span
+style='mso-spacerun:yes'> </span><span style='mso-spacerun:yes'>  </span><span
+style='mso-spacerun:yes'> </span><span style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=Standard1L1 style='mso-list:l0 level1 lfo1'><![if !supportLists]><span
+lang=EN-CA><span style='mso-list:Ignore'>7.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=EN-CA>PRIVACY </span></p>
+
+<p class=BodyText><span lang=EN-CA>All information you provide to Epilogger is
+subject to its Privacy Policy, which can be found at <a href="http://www.Epilogger.com/home/privacy" target="_blank">Privacy Policy</a>.<b style='mso-bidi-font-weight:normal'><span
+style='mso-spacerun:yes'>  </span></b>Epilogger’s Privacy Policy governs the collection,
+use and disclosure of personally identifiable information.<span
+style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=Standard1L1 style='mso-list:l0 level1 lfo1'><![if !supportLists]><span
+lang=EN-CA><span style='mso-list:Ignore'>8.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=EN-CA>LOGIN INFORMATION </span></p>
+
+<p class=BodyText><span lang=EN-CA>Web Site accounts may be accessed only by
+use of a unique login name and password. However, the use of a password does
+not restrict access by Epilogger, its service providers, subsidiaries,
+employees and agents to the password-protected information.<span
+style='mso-spacerun:yes'>  </span>Passwords may not be shared.<span
+style='mso-spacerun:yes'>  </span>For security reasons, you must keep your
+password confidential and not disclose it to any person or permit any other
+person to use it, except an authorized Epilogger representative.<span
+style='mso-spacerun:yes'>  </span>Passwords must be non-obvious, hard-to-guess,
+confidential and changed on a regular basis, and you must log-out at the end of
+each session.<span style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=BodyText><span lang=EN-CA>You (or your employer, if you use the Web
+Site on behalf of your employer) are solely responsible and liable for any use
+and misuse of your login name and password and for all activities that occur
+under your login name and password.<span style='mso-spacerun:yes'>  </span>You
+must ensure that all uses of your login name and password comply with this Agreement.<span
+style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=BodyText><span lang=EN-CA>You must immediately notify Epilogger of any
+unauthorized use of your login name or password, or if you know or suspect that
+your password has been lost or stolen, has become known to any other person, or
+has been otherwise compromised.<span style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=BodyText><span lang=EN-CA>All login names and passwords remain the
+property of Epilogger, and may be cancelled or suspended at any time by Epilogger
+without any notice or liability to you or any other person.<span
+style='mso-spacerun:yes'>  </span>Epilogger is not under any obligation to
+verify the actual identity or authority of the user of any login name or
+password.<span style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=BodyText><span lang=EN-CA>You must respond promptly to all email and
+other correspondence from Epilogger, including, without limitation, email and
+correspondence concerning complaints or concerns regarding your use of your
+login name or password or your use of the Web Site.<span
+style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=BodyText><span lang=EN-CA>THE SECURITY AND PRIVACY PROVIDED BY
+PASSWORDS IS NOT COMPLETE, AND CAN BE CIRCUMVENTED.<span
+style='mso-spacerun:yes'>  </span>YOUR USE OF PASSWORDS IS AT YOUR OWN RISK.<span
+style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=Standard1L1 style='text-indent:0in;mso-list:none;tab-stops:.5in'><span
+lang=EN-CA><o:p>&nbsp;</o:p></span></p>
+
+<p class=Standard1L1 style='mso-list:l0 level1 lfo1'><![if !supportLists]><span
+lang=EN-CA><span style='mso-list:Ignore'>9.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=EN-CA>NO ADVICE OR SOLICITATION </span></p>
+
+<p class=BodyText><span lang=EN-CA>The content of the Web Site does not
+constitute advice or recommendations.<span style='mso-spacerun:yes'>  </span>You
+should seek third party professional advice and recommendations before acting
+or omitting to act based upon any information provided on or though the Web Site.<span
+style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=BodyText><span lang=EN-CA><o:p>&nbsp;</o:p></span></p>
+
+<p class=Standard1L1 style='mso-list:l0 level1 lfo1'><![if !supportLists]><span
+lang=EN-CA><span style='mso-list:Ignore'>10.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=EN-CA>DISCLAIMER, LIABILITY
+EXCLUSION, LIABILITY LIMITATION, RELEASE AND INDEMNITY </span></p>
+
+<p class=BodyText><span lang=EN-CA>Epilogger strives to make your use of the
+Web Site a useful experience.<span style='mso-spacerun:yes'>  </span>Nevertheless,
+Epilogger and the Epilogger Parties do not accept any liability for your use of
+the Web Site.<span style='mso-spacerun:yes'>  </span>For that reason, the
+following provisions apply to your use of the Web Site: </span></p>
+
+<p class=HeadingCentreBold><span lang=EN-CA>DISCLAIMER</span></p>
+
+<p class=BodyText><span lang=EN-CA>YOUR USE OF THE WEB SITE IS AT YOUR OWN RISK.<span
+style='mso-spacerun:yes'>  </span>THE WEB SITE IS PROVIDED ON AN “AS IS” AND
+“AS AVAILABLE” BASIS, AND WITHOUT ANY REPRESENTATIONS, WARRANTIES OR CONDITIONS
+OF ANY KIND, WHETHER EXPRESS OR IMPLIED, AND INCLUDING WITHOUT LIMITATION
+FITNESS FOR A PARTICULAR PURPOSE, PERFORMANCE OR USEFULNESS, ALL OF WHICH EACH
+OF EPILOGGER AND THE EPILOGGER PARTIES HEREBY DISCLAIMS TO THE FULLEST EXTENT
+PERMITTED BY LAW.<span style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=BodyText><span lang=EN-CA>YOU (AND NOT EPILOGGER OR THE EPILOGGER
+PARTIES) ASSUME THE ENTIRE COST OF ALL NECESSARY SERVICING, REPAIR OR
+CORRECTION TO ANY COMPUTER OR OTHER EQUIPMENT ARISING FROM, CONNECTED WITH, OR
+RELATING TO YOUR USE OF THE WEB SITE.<span style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=BodyText><span lang=EN-CA>THE OPERATION OF THE WEB SITE MAY BE
+AFFECTED BY NUMEROUS FACTORS BEYOND EPILOGGER’S CONTROL.<span
+style='mso-spacerun:yes'>  </span>THE OPERATION OF THE WEB SITE MAY NOT BE
+CONTINUOUS OR UNINTERRUPTED OR SECURE.<span style='mso-spacerun:yes'>  </span>SECURITY
+AND PRIVACY AND CONFIDENTIALITY RISKS CANNOT BE ELIMINATED.<span
+style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=BodyText><span lang=EN-CA>EPILOGGER IS UNDER NO OBLIGATION TO VERIFY
+THE IDENTITY OF USERS OF THE WEB SITE.<span style='mso-spacerun:yes'>  </span>HOWEVER,
+YOU PROMISE NOT TO SHARE USE OF YOUR PASSWORD NOR TO ALLOW ANYONE TO USE THE
+WEB SITE POSING AS YOU.</span></p>
+
+<p class=BodyText><span lang=EN-CA>THROUGH OR BECAUSE OF YOUR USE OF THE WEB
+SITE, YOU MAY HAVE THE OPPORTUNITY TO ENGAGE IN COMMERCIAL TRANSACTIONS WITH
+OTHER PERSONS.<span style='mso-spacerun:yes'>  </span>ALL SUCH TRANSACTIONS ARE
+AT YOUR OWN RISK.<span style='mso-spacerun:yes'>  </span>EPILOGGER IS NOT A
+PARTY TO ANY SUCH TRANSACTIONS AND DISCLAIMS ANY AND ALL LIABILITY REGARDING ALL
+SUCH TRANSACTIONS.<span style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=BodyText><span lang=EN-CA>WITHOUT LIMITING THE GENERALITY OF THE
+FOREGOING, EPILOGGER AND THE EPILOGGER PARTIES MAKE NO REPRESENTATION, WARRANTY
+OR CONDITION THAT: </span></p>
+
+<p class=BodyText><span lang=EN-CA>•<span style='mso-spacerun:yes'>  </span><span
+style='mso-tab-count:1'>         </span>THE WEB SITE WILL BE COMPATIBLE WITH
+YOUR COMPUTER AND RELATED EQUIPMENT AND SOFTWARE; </span></p>
+
+<p class=BodyText><span lang=EN-CA>• <span style='mso-spacerun:yes'> </span><span
+style='mso-tab-count:1'>         </span>THE WEB SITE WILL BE AVAILABLE OR WILL
+FUNCTION WITHOUT INTERRUPTION OR WILL BE FREE OF ERRORS OR THAT ANY ERRORS WILL
+BE CORRECTED; </span></p>
+
+<p class=BodyText><span lang=EN-CA>•<span style='mso-spacerun:yes'>  </span><span
+style='mso-tab-count:1'>         </span>THE INFORMATION AVAILABLE ON OR THROUGH
+THE WEB SITE WILL BE ACCURATE, COMPLETE, SEQUENTIAL, OR TIMELY;</span></p>
+
+<p class=BodyText><span lang=EN-CA>•<span style='mso-spacerun:yes'>  </span><span
+style='mso-tab-count:1'>         </span>PARTICULAR RESULTS OR ANY RESULTS AT
+ALL MAY BE OBTAINED THROUGH THE USE OF THE WEB SITE;</span></p>
+
+<p class=BodyText><span lang=EN-CA>•<span style='mso-spacerun:yes'>  </span><span
+style='mso-tab-count:1'>         </span>THE USE OF THE WEB SITE, INCLUDING THE
+BROWSING AND DOWNLOADING OF ANY INFORMATION, WILL BE FREE OF VIRUSES, TROJAN
+HORSES, WORMS OR OTHER DESTRUCTIVE OR DISRUPTIVE COMPONENTS; OR </span></p>
+
+<p class=BodyText><span lang=EN-CA>•<span style='mso-spacerun:yes'>  </span><span
+style='mso-tab-count:1'>         </span>THE USE OF THE WEB SITE WILL NOT
+INFRINGE THE RIGHTS (INCLUDING INTELLECTUAL PROPERTY RIGHTS) OF ANY PERSON. </span></p>
+
+<p class=BodyText><span lang=EN-CA>EPILOGGER AND THE EPILOGGER PARTIES DISCLAIM
+ANY AND ALL LIABILITY REGARDING SUCH MATTERS TO THE FULLEST EXTENT PERMITTED BY
+LAW.<span style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=HeadingCentreBold><span lang=EN-CA>LIABILITY EXCLUSION </span></p>
+
+<p class=BodyText><span lang=EN-CA>EPILOGGER AND THE EPILOGGER PARTIES WILL NOT
+UNDER ANY CIRCUMSTANCES BE LIABLE TO YOU OR ANY OTHER PERSON FOR ANY LOSS OF
+USE, LOSS OF PRODUCTION, LOSS OF INCOME OR PROFITS (ANTICIPATED OR OTHERWISE),
+LOSS OF MARKETS, ECONOMIC LOSS, SPECIAL, INDIRECT OR CONSEQUENTIAL LOSS OR
+DAMAGE OR PUNITIVE DAMAGES, WHETHER IN CONTRACT, TORT OR UNDER ANY OTHER THEORY
+OF LAW OR EQUITY, ARISING FROM, CONNECTED WITH, OR RELATING TO THE USE OF THE
+WEB SITE BY YOU OR ANY OTHER PERSON, AND REGARDLESS OF ANY NEGLIGENCE OR OTHER
+FAULT OR WRONGDOING BY EPILOGGER OR ANY OF THE EPILOGGER PARTIES OR ANY PERSON
+FOR WHOM EPILOGGER OR ANY OF THE EPILOGGER PARTIES ARE RESPONSIBLE, AND
+NOTWITHSTANDING THAT EPILOGGER OR THE EPILOGGER PARTIES MAY HAVE BEEN ADVISED
+OF THE POSSIBILITY OF SUCH LOSS OR DAMAGES BEING INCURRED BY YOU OR ANY OTHER
+PERSON.<span style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=HeadingCentreBold><span lang=EN-CA>LIMITATION OF LIABILITY</span></p>
+
+<p class=BodyText><span lang=EN-CA>IN NO EVENT WILL EPILOGGER OR THE EPILOGGER
+PARTIES BE LIABLE, TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, FOR ANY
+CLAIMS, PROCEEDINGS, LIABILITIES, OBLIGATIONS, DAMAGES, LOSSES, AND COSTS,
+WHETHER IN CONTRACT, TORT OR UNDER ANY OTHER THEORY OF LAW OR EQUITY, AND
+REGARDLESS OF ANY NEGLIGENCE OR OTHER FAULT OR WRONGDOING BY EPILOGGER, THE
+EPILOGGER PARTIES OR ANY SUCH PERSONS FOR WHOM EPILOGGER IS RESPONSIBLE.</span></p>
+
+<p class=HeadingCentreBold><span lang=EN-CA>RELEASE </span></p>
+
+<p class=BodyText><span lang=EN-CA>YOU HEREBY RELEASE, REMISE AND FOREVER
+DISCHARGE EACH OF EPILOGGER AND THE EPILOGGER PARTIES, AND ALL OF THEIR
+RESPECTIVE AGENTS, DIRECTORS, OFFICERS, EMPLOYEES, INFORMATION PROVIDERS, SERVICE
+PROVIDERS, SUPPLIERS, LICENSORS AND LICENSEES, AND ALL OTHER RELATED,
+ASSOCIATED, OR CONNECTED PERSONS, FROM ANY AND ALL MANNER OF RIGHTS, CLAIMS,
+COMPLAINTS, DEMANDS, CAUSES OF ACTION, PROCEEDINGS, LIABILITIES, OBLIGATIONS,
+LEGAL FEES, COSTS, AND DISBURSEMENTS OF ANY NATURE AND KIND WHATSOEVER AND
+HOWSOEVER ARISING, WHETHER KNOWN OR UNKNOWN, WHICH NOW OR HEREAFTER EXIST,
+WHICH ARISE FROM, RELATE TO, OR ARE CONNECTED WITH YOUR USE OF THE WEB SITE.<span
+style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=HeadingCentreBold><span lang=EN-CA>INDEMNITY </span></p>
+
+<p class=BodyText><span lang=EN-CA>YOU AGREE TO INDEMNIFY, DEFEND AND HOLD
+HARMLESS EACH OF EPILOGGER AND THE EPILOGGER PARTIES AND ALL OF THEIR
+RESPECTIVE AGENTS, DIRECTORS, OFFICERS, EMPLOYEES, INFORMATION PROVIDERS,
+SERVICE PROVIDERS, SUPPLIERS, LICENSORS AND LICENSEES, AND ALL OTHER RELATED,
+ASSOCIATED, OR CONNECTED PERSONS (COLLECTIVELY, THE <b style='mso-bidi-font-weight:
+normal'>“INDEMNIFIED PARTIES”</b>) FROM AND AGAINST ANY AND ALL LIABILITIES,
+EXPENSES AND COSTS, INCLUDING WITHOUT LIMITATION REASONABLE LEGAL FEES AND
+EXPENSES, INCURRED BY THE INDEMNIFIED PARTIES IN CONNECTION WITH ANY CLAIM OR
+DEMAND ARISING OUT OF, RELATED TO, OR CONNECTED WITH YOUR USE OF THE WEB SITE,
+THE USE OF THE WEB SITE BY SOMEONE POSING AS YOU, OR YOUR BREACH OF THIS
+AGREEMENT.<span style='mso-spacerun:yes'>  </span>YOU WILL ASSIST AND
+CO-OPERATE AS FULLY AS REASONABLY REQUIRED BY THE INDEMNIFIED PARTIES IN THE
+DEFENCE OF ANY SUCH CLAIM OR DEMAND.<span style='mso-spacerun:yes'>  </span>YOU
+FURTHER AGREE TO INDEMNIFY EPILOGGER AND THE EPILOGGER PARTIES FROM ALL SUITS,
+DAMAGES, COSTS AND LIABILITIES WHATSOEVER ARISING FROM ANY TRANSACTIONS IN
+WHICH YOU ENGAGE USING PRODUCTS OR SERVICES OBTAINED FROM OR THROUGH THE WEB
+SITE.</span></p>
+
+<p class=BodyText><span lang=EN-CA>ADVICE AND INFORMATION PROVIDED BY EPILOGGER
+OR ITS REPRESENTATIVES, WHETHER ORAL OR WRITTEN, WILL NOT CREATE ANY
+REPRESENTATION, WARRANTY OR CONDITION OR VARY OR AMEND THIS AGREEMENT,
+INCLUDING THE ABOVE DISCLAIMER, LIABILITY EXCLUSION, LIABILITY LIMITATION,
+RELEASE AND INDEMNITY PROVISIONS, AND YOU MAY NOT RELY UPON ANY SUCH ADVICE OR
+INFORMATION.<span style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=BodyText><span lang=EN-CA>The exclusion of certain warranties and the
+limitation of certain liabilities is prohibited by legislation in some
+jurisdictions.<span style='mso-spacerun:yes'>  </span>Such legislative
+limitations may apply to you.<span style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=BodyText><span lang=EN-CA>The disclaimer, liability exclusion,
+liability limitation, release, and indemnity provisions in this Agreement
+survive indefinitely after the termination of this Agreement.<span
+style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=Standard1L1 style='mso-list:l0 level1 lfo1'><![if !supportLists]><span
+lang=EN-CA><span style='mso-list:Ignore'>11.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=EN-CA>TERMINATION OF THIS AGREEMENT</span></p>
+
+<p class=BodyText><span lang=EN-CA>If you breach any provision of this Agreement,
+you may no longer use the Web Site and Service.<span style='mso-spacerun:yes'> 
+</span></span></p>
+
+<p class=BodyText><span lang=EN-CA>Epilogger may, in its sole discretion,
+change, suspend or terminate, temporarily or permanently, the Web Site or any
+part of it or any of its features at any time, for any reason, without any
+notice or liability to you or any other person.<span style='mso-spacerun:yes'> 
+</span></span></p>
+
+<p class=BodyText><span lang=EN-CA>Epilogger may at any time and for any
+reason, with or without cause, with or without notice or liability to you or
+any other person, and in its sole discretion, immediately suspend or terminate
+(in whole or in part) your permission to use the Web Site and Service and your login
+name and password.<span style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=BodyText><span lang=EN-CA>If this Agreement or your permission to use
+the Web Site or Service is terminated by you or Epilogger for any reason, this
+Agreement will nevertheless continue to apply and be binding upon you in
+respect of your prior use of the Web Site and your engagement of the services of
+Epilogger through the Web Site and anything connected with, relating to or
+arising from those matters.<span style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=Standard1L1 style='mso-list:l0 level1 lfo1'><![if !supportLists]><span
+lang=EN-CA><span style='mso-list:Ignore'>12.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=EN-CA>EPILOGGER BRAND INFORMATION </span></p>
+
+<p class=BodyText><span lang=EN-CA>Epilogger logos are trade-marks and/or trade-names
+owned by Epilogger. <span style='mso-spacerun:yes'> </span>Other product and
+company names and logos appearing on the Web Site may be registered or
+unregistered trade-names, trade-marks and service marks of their respective
+owners.</span></p>
+
+<p class=BodyText><span lang=EN-CA>Any use, including reproduction, of the
+trade-names, trade-marks, service-marks and logos displayed on the Web Site (collectively,
+the <b style='mso-bidi-font-weight:normal'>“Marks”</b>), except as expressly
+provided in this Agreement, is strictly prohibited.<span
+style='mso-spacerun:yes'>  </span>Nothing appearing on the Web Site or
+elsewhere shall be construed as granting, by implication, estoppel, or
+otherwise, any licence or right to use any Marks displayed on the Web Site.<span
+style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=Standard1L1 style='mso-list:l0 level1 lfo1'><![if !supportLists]><span
+lang=EN-CA><span style='mso-list:Ignore'>13.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=EN-CA>OTHER SITES </span></p>
+
+<p class=BodyText><span lang=EN-CA>The Web Site may include links to other web sites,
+advertisements or resources and businesses operated by other persons (<b
+style='mso-bidi-font-weight:normal'>“Other Sites”</b>).<span
+style='mso-spacerun:yes'>  </span>Other Sites are independent from Epilogger,
+and Epilogger has no responsibility for, liability with respect to, or control
+over Other Sites, their businesses, goods, services, or content.<span
+style='mso-spacerun:yes'>  </span>Links to Other Sites are provided solely for
+your convenience.<span style='mso-spacerun:yes'>  </span>Links to Other Sites,
+including advertisements, may be targeted to the information available from the
+Service.<span style='mso-spacerun:yes'>  </span>By using the Service, you agree
+that Epilogger and Other Sites may publish advertising on the Web Site in
+connection with the information available from the Service.<span
+style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=BodyText><span lang=EN-CA>Epilogger does not sponsor or endorse any
+Other Sites or their content or the services available through those Other Sites.<span
+style='mso-spacerun:yes'>  </span>Your use of Other Sites and your dealings
+with the owners or operators of Other Sites is at your own risk, and you shall
+not make any claim against Epilogger arising out of your use of any Other Sites
+or your dealings with the owners or operators of any Other Sites.<span
+style='mso-spacerun:yes'>  </span>As between you and Epilogger, the provisions
+of this Agreement under the section headed Disclaimer, Liability Exclusion,
+Liability Limitation, Release and Indemnity apply, with all necessary
+modifications, to your access to and use of any Other Sites and their business,
+goods, services, and content.<span style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=Standard1L1 style='mso-list:l0 level1 lfo1'><![if !supportLists]><span
+lang=EN-CA><span style='mso-list:Ignore'>14.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=EN-CA>UNSOLICITED SUBMISSIONS </span></p>
+
+<p class=BodyText><span lang=EN-CA>Epilogger does not accept or consider
+unsolicited ideas, including ideas for new advertising campaigns, new or
+improved services or technologies, website enhancements, processes or marketing
+plans.<span style='mso-spacerun:yes'>  </span>The purpose of this policy is to
+avoid potential misunderstandings or disputes.<span style='mso-spacerun:yes'> 
+</span>Accordingly, please do not send any unsolicited ideas, suggestions or
+other materials (<b style='mso-bidi-font-weight:normal'>“Submissions”</b>) to Epilogger
+or the Web Site.<span style='mso-spacerun:yes'>  </span>However, if you do send
+Submissions to Epilogger or the Web Site, you automatically grant (or warrant
+that the owner of the Submissions grants) to Epilogger and its assigns a
+perpetual, royalty-free, irrevocable, unrestricted, non-exclusive, world-wide,
+assignable, sub-licensable, right and license to use, copy, reproduce, modify,
+adapt, publish, translate, create derivative works from, distribute, perform,
+display and otherwise exploit the Submissions or any ideas, concepts, know-how
+or techniques associated with the Submissions for any purpose whatsoever,
+commercial or otherwise, using any form, media or technology now known or later
+developed, without providing compensation to you or any other person, without
+any liability whatsoever, and free from any obligation of confidence or other
+duties on the part of Epilogger or its assigns, and you agree, represent and
+warrant that all moral rights in the Submissions are waived in favour of Epilogger
+and its assigns.<span style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=Standard1L1 style='mso-list:l0 level1 lfo1'><![if !supportLists]><span
+lang=EN-CA><span style='mso-list:Ignore'>15.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=EN-CA>GOVERNING LAW AND DISPUTE
+RESOLUTION </span></p>
+
+<p class=BodyText><span lang=EN-CA>This Agreement, your use of the Web Site,
+and all related matters are governed solely by the laws of the Province of
+Ontario and the federal laws of Canada applicable therein, <span
+style='mso-spacerun:yes'> </span>to the exclusion of any rules of private
+international law or conflict of laws which would lead to the application of
+any other laws.<span style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=BodyText><span lang=EN-CA>Any dispute between Epilogger and you or any
+other person arising from, connected with or relating to the Web Site, this Agreement
+or any related matters must be resolved before the Courts of Ontario sitting in
+the City of Toronto, Ontario, Canada, and you hereby irrevocably submit and
+attorn to the original and exclusive jurisdiction of those Courts in respect of
+any such dispute or matter.<span style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=BodyText><span lang=EN-CA>Any claim or cause of action you may have
+arising from, connected with, or relating to your use of the Web Site, this Agreement,
+or any related matters must be commenced in a court of competent jurisdiction
+in the City of Toronto, Ontario, Canada within six (6) months after the claim
+or cause of action arises, after which time the claim or cause of action is
+forever barred, regardless of any statute or law to the contrary. </span></p>
+
+<p class=Standard1L1 style='mso-list:l0 level1 lfo1'><![if !supportLists]><span
+lang=EN-CA><span style='mso-list:Ignore'>16.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span lang=EN-CA>OTHER MATTERS </span></p>
+
+<p class=BodyText><span lang=EN-CA>If any provision of this Agreement is found
+to be unlawful, void, or for any reason unenforceable, then that provision
+shall be deemed to be severed from the rest of this Agreement and shall not
+affect the validity and enforceability of any remaining provisions.<span
+style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=BodyText><span lang=EN-CA>The provisions of this Agreement will enure
+to the benefit of and be binding upon each of Epilogger and the Epilogger
+Parties and each of their respective successors and assigns and related persons
+and you and your heirs, executors, administrators, successors, permitted
+assigns, and personal representatives.<span style='mso-spacerun:yes'>  </span>You
+may not assign this Agreement or your rights and obligations under this Agreement
+without the express prior written consent of Epilogger, which may be withheld
+in Epilogger’s sole discretion.<span style='mso-spacerun:yes'>  </span>Epilogger
+may assign this Agreement and its rights and obligations under this Agreement
+without your consent and without notice to you.<span style='mso-spacerun:yes'> 
+</span></span></p>
+
+<p class=BodyText><span lang=EN-CA>No waiver, express or implied, by either
+party of any breach of or default under this Agreement will constitute a
+continuing waiver of such breach or default or be deemed to be a waiver of any
+preceding or subsequent breach or default.<span style='mso-spacerun:yes'> 
+</span></span></p>
+
+<p class=BodyText><span lang=EN-CA>You and Epilogger are independent
+contractors and no agency, partnership, joint venture, employment or franchise
+relationship is intended or created by this Agreement or your use of the Web
+Site.<span style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=BodyText><span lang=EN-CA>Any rights not expressly granted by this Agreement
+are reserved to Epilogger.<span style='mso-spacerun:yes'>  </span></span></p>
+
+<p class=BodyText><span lang=EN-CA>This Agreement is subject to change without
+notice.</span></p>
+
+<p class=MsoNormal><span lang=EN-CA><o:p>&nbsp;</o:p></span></p>
+
+</div>

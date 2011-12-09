@@ -217,7 +217,7 @@ namespace Epilogger.Web.Controllers {
             Model.ImageCount = IS.FindImageCountByEventID(id, this.FromDateTime(), this.ToDateTime());
             Model.Images = IS.FindByEventIDOrderDescTake9(id, this.FromDateTime(), this.ToDateTime());
             Model.CheckInCount = CS.FindCheckInCountByEventID(id, this.FromDateTime(), this.ToDateTime());
-            Model.CheckIns = CS.FindByEventIDOrderDescTake5(id, this.FromDateTime(), this.ToDateTime());
+            Model.CheckIns = CS.FindByEventIDOrderDescTakeAll(id, this.FromDateTime(), this.ToDateTime());
             Model.ExternalLinks = LS.FindByEventIDOrderDescTake3(id, this.FromDateTime(), this.ToDateTime());
             Model.BlogPosts = BS.FindByEventIDTake5(id, this.FromDateTime(), this.ToDateTime());
             Model.EventRatings = ES.FindEventRatingsByID(id, this.FromDateTime(), this.ToDateTime());
@@ -409,9 +409,7 @@ namespace Epilogger.Web.Controllers {
                 {
                     model.UserID = CurrentUserID;
                     model.CreatedDateTime = DateTime.UtcNow;
-                    model.EndDateTime = null;
-                    model.CollectionEndDateTime = null;
-                    
+                                        
                     Event EPLevent = Mapper.Map<CreateEventViewModel, Event>(model);
                     ES.Save(EPLevent);
 

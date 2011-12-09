@@ -12,55 +12,50 @@ head.ready(function () {
     //$("#step1").removeClass("stepDisable"); 
 
     //Block the Other sections
-    $("#whattoinclude-info .blocking").block({ message: null });
-    $("#whattoinclude-info h4").block({ message: null });
+    if (page == 'Create') {
+        $("#whattoinclude-info .blocking").block({ message: null });
+        $("#whattoinclude-info h4").block({ message: null });
 
-    $("#whenandwhere-info .blocking").block({ message: null });
-    $("#whenandwhere-info h4").block({ message: null });
+        $("#whenandwhere-info .blocking").block({ message: null });
+        $("#whenandwhere-info h4").block({ message: null });
 
-    $("#moreinformation-info .blocking").block({ message: null });
-    $("#moreinformation-info h4").block({ message: null });
+        $("#moreinformation-info .blocking").block({ message: null });
+        $("#moreinformation-info h4").block({ message: null });
 
-    $(".submitForm").attr('disabled', 'disabled');
-    //$(".disabled").block({ message: null });
-
+        $(".submitForm").attr('disabled', 'disabled');
 
 
-    $(":input", "#createevent-info").not(":button, :submit, :reset, :hidden").bind("blur", function (e) {
-        checkBlocking();
-    });
-    $("#CategoryID").bind("change", function (e) {
-        checkBlocking();
-    });
 
-    $(":input", "#whattoinclude-info").not(":button, :submit, :reset, :hidden").bind("keyup", function (e) {
-        checkBlocking();
-    });
-    var showMore = false;
-    $(":input", "#whenandwhere-info").not(":button, :submit, :reset, :hidden").bind("click", function (e) {
-        showMore = true;
-        checkBlocking();
-    });
-    $(":input", "#moreinformation-info").not(":button, :submit, :reset, :hidden").bind("keyup", function (e) {
-        checkBlocking();
-    });
+        $(":input", "#createevent-info").not(":button, :submit, :reset, :hidden").bind("blur", function (e) {
+            checkBlocking();
+        });
+        $("#CategoryID").bind("change", function (e) {
+            checkBlocking();
+        });
 
+        $(":input", "#whattoinclude-info").not(":button, :submit, :reset, :hidden").bind("keyup", function (e) {
+            checkBlocking();
+        });
+        var showMore = false;
+        $(":input", "#whenandwhere-info").not(":button, :submit, :reset, :hidden").bind("click", function (e) {
+            showMore = true;
+            checkBlocking();
+        });
+        $(":input", "#moreinformation-info").not(":button, :submit, :reset, :hidden").bind("keyup", function (e) {
+            checkBlocking();
+        });
+
+        $("#AdvancedToggle").bind("click", function (e) {
+            e.preventDefault();
+            $("#AdvancedSearchTerms").toggle();
+        });
+
+    }
 
     function checkBlocking() {
-        //        var i = 0;
-        //        $(":input", "#createevent-info").not(":button, :submit, :reset, :hidden").each(function (index) {
-        //            if ($(this).val().length > 0) {
-        //                i++;
-        //            }
-        //        });
-        //        if (i == 2) {
-        //            $("#whattoinclude-info .blocking").unblock();
-        //            $("#whattoinclude-info h4").unblock();
-        //            $("#step2").removeClass("stepDisable");
-        //        }
 
         //Add the Complete style
-        if ($("#Name").val().length > 0 && $("#Subtitle").val().length > 0 && $("#CategoryID").val() != 0) {
+        if ($("#Name").val().length > 0 && $("#CategoryID").val() != 0) {
             $("#whattoinclude-info .blocking").unblock();
             $("#whattoinclude-info h4").unblock();
             $("#step2").removeClass("stepDisable");
@@ -154,6 +149,39 @@ head.ready(function () {
         }
     }
 
+
+
+//    function buildSearchBoxes() {
+//        //Take the value from the DB and parse it into all the correct search boxes
+//        
+
+//        
+//        counter++;
+
+//        var newItem = $("#template").clone();
+//        newItem.removeClass("hidden");
+//        newItem.insertAfter(this).attr('id', 'rule' + counter);
+//        $(':input', '#rule' + counter)
+//			.not(':button, :submit, :reset, :hidden')
+//			.val('')
+//			.removeAttr('checked')
+//			.removeAttr('selected')
+//            .attr("id", "seachTerm" + counter);
+
+//        $("select", "#rule" + counter).attr("id", "operator" + counter);
+
+//        $("#seachTerm" + counter).bind("keyup", function (e) {
+//            buildSearchString();
+//        });
+//        
+//    }
+
+
+
+
+
+
+
     $(":input", "#rule-group").not(":button, :submit, :reset, :hidden").bind("keyup", function (e) {
         buildSearchString();
     });
@@ -164,6 +192,37 @@ head.ready(function () {
             SearchString += $(this).val() + " ";
         });
         $("#SearchTerms").val(SearchString);
+        if ($("#seachTerm1").val().length > 1) {
+            $("#PlainTextSearch").html("You're searching for data containing <strong>" + $("#seachTerm1").val() + "</strong>");
+        }
+
+        if ($("#seachTerm1").parent().next().find(":input").next(":input").val().length != 0) {
+            PlainTextString = "";
+            PlainTextString = "You're searching for data containing <strong>" + $("#seachTerm1").val() + "</strong> "
+
+            $(":input", "#rule-group").not(":button, :submit, :reset, :hidden, #seachTerm1").each(function (index) {
+                switch ($(this).val()) {
+                    case "OR":
+                        PlainTextString += "<span class='blueBalls'>" + $(this).val() + "</span> ";
+                        break;
+                    case "AND":
+                        PlainTextString += "<span class='blueBalls'>combined with</span> ";
+                        break;
+                    case "NOT":
+                        PlainTextString += "<span class='blueBalls'>but " + $(this).val() + "</span> ";
+                        break;
+                    default:
+                        PlainTextString += "<strong>" + $(this).val() + "</strong> ";
+                        break;
+                }
+            });
+
+            //            $("#seachTerm1").parent().next().find(":input").each(function (index) {
+            //                PlainTextString += $(this).val() + " ";
+            //            });
+            $("#PlainTextSearch").html(PlainTextString);
+
+        }
     }
 
 

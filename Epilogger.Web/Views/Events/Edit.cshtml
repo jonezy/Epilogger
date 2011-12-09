@@ -9,9 +9,13 @@
 <!-- Confirm CSS files --> 
 <link type='text/css' href="@Url.Content("~/Public/js/confirm/css/confirm.css")" rel='stylesheet' media='screen' /> 
 
-<script type="text/javascript" language="javascript">
+<script type="text/javascript">
+    head.js('@Url.Content("~/Public/js/jquery.blockUI.js")');
+    head.js('@Url.Content("~/Public/js/CreateEditEvent.js")');
     var EventID = @Model.ID;
+    var page = "Edit";
 </script>
+
 
 @*New event menu*@
 @Html.Partial("Menu", Model.ToolbarViewModel)
@@ -20,7 +24,12 @@
 <div id="events-nav">
     <h1>EDIT EVENT</h1>
     <h2>@Model.Name</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tincidunt tellus vel tellus placerat faucibus. Maecenas adipiscing venenatis aliquam.</p>
+    <div class="spacer"></div>
+    <input type="button" onclick="$('#CreateForm').submit();" class="blue-action-button submitForm" value="Save" />
+    @if (Model.CurrentUserID == Model.UserID || Model.CurrentUserRole == UserRoleType.Administrator)
+    {
+        <input type="button" class="red-action-button confirm" value="Delete Event" name="confirm" />
+    }
 
 </div>
 <div id="events-content">
@@ -33,43 +42,110 @@
         <h4>EVENT INFORMATION</h4>
         <br style="clear:both;" />
         <div class="item-data clearfix">
-            <p>@Html.LabelFor(model => model.Name) @Html.TextBoxFor(model => model.Name, new { @class = "wide" })</p>
-            <p>@Html.LabelFor(model => model.Subtitle) @Html.TextBoxFor(model => model.Subtitle, new { @class = "wide" })</p>
-            <p><label>Search Terms:</label> @Html.TextBoxFor(model => model.SearchTerms, new { @class = "wide" })</p>
-            <p>@Html.LabelFor(model => model.CategoryID) @Html.DropDownListFor(model => model.CategoryID, Model.Categories, "Select your event category", new { @class = "wide" })</p>
+            <p>@Html.LabelFor(model => model.Name) @Html.TextBoxFor(model => model.Name, new { @class = "wide padded" })</p>
+            <p>@Html.LabelFor(model => model.Subtitle) @Html.TextBoxFor(model => model.Subtitle, new { @class = "wide padded" })</p>
+            
+            <p>@Html.LabelFor(model => model.CategoryID) @Html.DropDownListFor(model => model.CategoryID, Model.Categories, "Select your event category", new { @class = "wide padded" })</p>
         </div>
     </div>
     <div class="spacer"></div>
-    <div id="createevent-time" class="item-card">
-        <h4>WHEN AND WHERE</h4>
+    
+    
+    <div id="whattoinclude-info" class="item-card">
+        <h4>SEARCH TERMS</h4>
         <br style="clear:both;" />
-        <div class="item-data clearfix">
+        <div class="blocking">
+            <div class="item-data clearfix">
+            
+                <p><label>Search Terms</label> @Html.TextBoxFor(model => model.SearchTerms, new { @class = "wide padded" })</p>
 
-            <label class="wide">Start Date:</label> @Html.EditorFor(model => model.StartDateTime)
-            <p><label class="wide">Event End:</label> @Html.EditorFor(model => model.EndDateTime)</p>
-            <p>&nbsp;</p>
-            @*<p><label class="wide">Time Zone:</label> @Html.DropDownListFor(model => model.TimeZoneOffset, Model.TimeZones, "Select your timezone", new { @class = "wide" })</p>*@
-            <p><label class="wide">Start Collecting Data:</label> @Html.EditorFor(model => model.CollectionStartDateTime)</p>
-            <p><label class="wide">Finish Collecting Data:</label> @Html.EditorFor(model => model.CollectionEndDateTime)</p>
-            <p>&nbsp;</p>
-            <label class="wide">Venue</label>
-            <div style="display: block; margin-left: 112px; padding-top: 8px;">
-                <div id="selectedVenue">
-                    @if (Model.Venue != null)
-                    {
-                        <strong>@Model.Venue.Name</strong><br />
-                        @Model.Venue.Address<br />
-                        @Model.Venue.City@:, @Model.Venue.State<br />
-                        @Model.Venue.Zip<br />
-                    }
+               @* <div id="rule-group">
+                    <div class="rule" id="rule1">
+                        <div id="addMoreArrow">
+                            <img src="/Public/images/icons/addMoreArrow.png" alt="" class="fleft" />
+                            <span>Add More</span>
+                        </div>
+                        <label>* 1ST Term<br /><span class="small">(# " @@ allowed)</span></label><input type="text" id="seachTerm1" class="searchBox1 padded" />
+                        &nbsp;&nbsp;&nbsp;<a href="#" class="plus blue-action-button">+</a>
+                    </div>
+
+                    <div class="rule hidden" id="template">
+                        <label>NEXT TERM</label>
+                        <select id="operator1" class="searchOperator">
+                            <option value="OR">or</option>
+                            <option value="AND">and</option>
+                            <option value="NOT">not</option>
+                        </select>
+                        <input type="text" id="hst" class="med textPadding" />
+                        &nbsp;&nbsp;&nbsp;<a href="#" class="minus blue-action-button">-</a> <a href="#" class="plus blue-action-button">+</a>
+                    </div>
                 </div>
-                <h3><a href="#" id="foursquare-search" class="modal">Search for a venue</a></h3>
+
+                <div id="SearchTermsImage">
+                    <img src="/Public/images/icons/SearchPlainText.png" alt="" />
+                </div>
+                <div id="PlainTextSearch">
+                    
+                </div>
+                <div class="spacer"></div><br />
+                <div id="AdvancedContainer">
+                    (Too annoying? <a href="" id="AdvancedToggle">Switch to quick mode</a>)
+                    <div id="AdvancedSearchTerms">
+                        
+                    </div>
+                </div>*@
             </div>
-            @Html.HiddenFor(model => model.FoursquareVenueID)
-            @Html.HiddenFor(model => model.VenueID)
         </div>
     </div>
     
+    <div class="spacer"></div>
+    
+    
+    
+    <div id="whenandwhere-info" class="item-card">
+        <h4>WHEN AND WHERE</h4>
+        <br style="clear:both;" />
+        <div class="item-data clearfix">
+            <br />
+            <label class="wide">Event Time</label>
+            <div id="EventTimePicker">
+                <input type="text" class="picker-start-date" name="start_date" value="@Html.DisplayFor(e => e.StartDateTime, "ShortDate")" />
+                <input type="text" class="picker-start-time" name="start_time" value="@Html.DisplayFor(e => e.StartDateTime, "FullTime")" />
+                &nbsp;to&nbsp;
+                <input type="text" class="picker-end-time" name="end_time" value="@Html.DisplayFor(e => e.EndDateTime, "FullTime")" />
+                <input type="text" class="picker-end-date" name="end_date" value="@Html.DisplayFor(e => e.EndDateTime, "ShortDate")" />
+            </div>
+
+            <label class="wide">Collection Time</label>
+            <div id="CollectionTimePicker">
+                <input type="text" class="picker-start-date" name="collection_start_date" value="@Html.DisplayFor(e => e.CollectionStartDateTime, "ShortDate")" />
+                <input type="text" class="picker-start-time" name="collection_start_time" value="@Html.DisplayFor(e => e.CollectionStartDateTime, "FullTime")" />
+                &nbsp;to&nbsp;
+                <input type="text" class="picker-end-time" name="collection_end_time" value="@Html.DisplayFor(e => e.CollectionEndDateTime, "FullTime")" />
+                <input type="text" class="picker-end-date" name="collection_end_date" value="@Html.DisplayFor(e => e.CollectionEndDateTime, "ShortDate")" />
+            </div>
+
+
+            <label class="wide">Venue</label>
+                @*<a href="#" id="foursquare-search" class="blue-action-button">Search for a venue</a>*@
+                <div style="display: block; margin-left: 112px;">
+                    <div id="selectedVenue">
+                        @if (Model.Venue != null)
+                        {
+                            <strong>@Model.Venue.Name</strong><br />
+                            @Model.Venue.Address<br />
+                            @Model.Venue.City@:, @Model.Venue.State<br />
+                            @Model.Venue.Zip<br />
+                        }
+                    </div>
+                    <input type="button" id="foursquare-search" class="blue-action-button" value="Search for a venue" />
+                </div>
+                @Html.HiddenFor(model => model.FoursquareVenueID)
+                @Html.HiddenFor(model => model.VenueID)
+        </div>
+    </div>
+    
+    <div class="spacer"></div>
     
     <div class="item-card">
         <h4>MORE INFORMATION (optional)</h4>
@@ -78,26 +154,19 @@
             <p>@Html.LabelFor(model => model.Description) @Html.TextAreaFor(model => model.Description, new { @class = "wide" })</p>
 
             <p>@Html.LabelFor(model => model.WebsiteURL) @Html.TextBoxFor(model => model.WebsiteURL, new { @class = "wide" })</p>
-
-            <div class="grid_4 alpha">
-                <p>@Html.LabelFor(model => model.TwitterAccount) @Html.TextBoxFor(model => model.TwitterAccount, new { @class = "med" })</p>
-            </div>
-
-            <div class="grid_4 alpha">
-                <p>@Html.LabelFor(model => model.FacebookPageURL) @Html.TextBoxFor(model => model.FacebookPageURL, new { @class = "med" })</p>
-            </div>
-
+            <p>@Html.LabelFor(model => model.TwitterAccount) @Html.TextBoxFor(model => model.TwitterAccount, new { @class = "med" })</p>
+            <p>@Html.LabelFor(model => model.FacebookPageURL) @Html.TextBoxFor(model => model.FacebookPageURL, new { @class = "med" })</p>
             <p>@Html.LabelFor(model => model.Cost) @Html.TextBoxFor(model => model.Cost, new { @class = "small" })</p>
         </div>
     </div>
     <div class="spacer"></div>  
     
-    if (@Model.CurrentUserID == @Model.UserID || @Model.CurrentUserRole == UserRoleType.Administrator)
-    {
-        <input type="button" class="blue-action-button fright confirm" value="Delete Event" name="confirm" />
-    }
-    <input type="submit" class="blue-action-button" value="Save Event" />
-    
+        
+        <input type="submit" class="blue-action-button fright" value="Save Event" />
+                        if (Model.CurrentUserID == Model.UserID || Model.CurrentUserRole == UserRoleType.Administrator)
+                        {
+            <input type="button" class="red-action-button confirm" value="Delete Event" name="confirm" />
+                        }
     
     <!-- modal content --> 
 	<div id='confirm'> 
