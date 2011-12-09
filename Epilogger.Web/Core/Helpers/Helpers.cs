@@ -13,6 +13,11 @@ namespace Epilogger.Web {
             return uid;
         }
 
+        static IEnumerable<T> Randomize<T>(this IEnumerable<T> source) {
+            var array = source.ToArray();
+            // randomize indexes (several approaches are possible)
+            return array;
+        }
 
         //DEPRECATED!
 
