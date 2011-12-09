@@ -13,5 +13,6 @@ namespace Epilogger.Web.Models {
         public IEnumerable<Epilogger.Data.Event> UpcomingEvents { get; set; }
         public IEnumerable<Epilogger.Data.EventCategory> EventCategories { get; set; }
         public List<HotestEventsModel> HottestEvents { get; set; }
+        public Epilogger.Data.Event RandomEvent { get; set; }
     }
 }

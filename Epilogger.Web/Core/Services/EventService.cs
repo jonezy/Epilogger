@@ -16,7 +16,26 @@ namespace Epilogger.Web {
         public List<Event> AllEvents() {
             return base.GetData();
         }
+        public Event RandomUpcomingEvent() {
+     int lowerbound = 1;
+            int upperbound = this.GetHighestEventID();
 
+            System.Random r = new System.Random();
+            int RandomNumber = r.Next(lowerbound, upperbound);
+            
+            do
+            {
+                Event EE = this.FindByID(RandomNumber);
+                if (EE == null || EE.StartDateTime < DateTime.UtcNow)
+                {
+                    RandomNumber = Helpers.RandomInt(r, lowerbound, upperbound);
+                }
+                else
+                {
+                    return EE;
+                }
+            } while (true);
+        }
 
         /* Upcoming events */
         public List<Event> UpcomingEvents()
