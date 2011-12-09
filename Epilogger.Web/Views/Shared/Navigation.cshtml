@@ -20,7 +20,7 @@
 @{
     string displayModifier = "style='display:none'";
 }
-@if (controller.ToLower() == "events") {
+@if (controller.ToLower() == "events" && action != "create") {
     displayModifier = "display:block !important;";
 }
 <ul class="subnav" style="@displayModifier" id="events-subnav">
