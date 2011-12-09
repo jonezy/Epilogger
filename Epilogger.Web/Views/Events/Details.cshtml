@@ -143,7 +143,7 @@ else
 </div>
 
 
-<div class="grid_5 alpha omega">
+<div class="grid_5 alpha omega" id="eventDescriptionSection">
     @Html.Raw(Model.Description.Replace("\r", "<br />"))
 
     <span class="spacer"></span>
@@ -212,9 +212,10 @@ else
         </td>
     </tr>
     </table>
-
-    <a href="#" id="collapse"><span><img src="@Url.Content("~/Public/images/icons/less.png")" /> hide details</span></a>
+   
 </div>
+<div class="clearfix"></div>
+<a href="#" id="collapse"><span><img src="@Url.Content("~/Public/images/icons/less.png")" /> hide details</span></a>
 
 <div class="grid_7 alpha omega">
 @if (Model.Venue != null) {
