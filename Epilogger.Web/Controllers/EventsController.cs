@@ -338,7 +338,7 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-        [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
+        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
         public ActionResult Create() {
             CreateEventViewModel Model = Mapper.Map<Event, CreateEventViewModel>(new Event());
             //Model.TimeZoneOffset = Helpers.GetUserTimeZoneOffset();
@@ -359,7 +359,7 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-        [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
+        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
         [HttpPost]
         public ActionResult Create(CreateEventViewModel model) {
 
@@ -799,7 +799,7 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-        [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to your epilogger account to edit an event")]
+        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to edit an event")]
         public ActionResult Edit(int id) {
             Event currentEvent = ES.FindByID(id);
             CreateEventViewModel model = Mapper.Map<Event, CreateEventViewModel>(currentEvent);
@@ -812,9 +812,10 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-        [RequiresAuthentication(AccessDeniedMessage = "You must be logged in to your epilogger account to edit an event")]
+        
         [HttpPost]
         public ActionResult Edit(FormCollection fc, CreateEventViewModel model) {
+
             if (ModelState.IsValid) {
                 Event currentEvent = ES.FindByID(model.ID);
                 try {
@@ -836,22 +837,29 @@ namespace Epilogger.Web.Controllers {
                     DateTime collectionStart;
                     DateTime collectionEnd;
 
-                    DateTime.TryParse(Request.Form["StartDateTime"], out startDate); // start date
-                    DateTime.TryParse(Request.Form["EndDateTime"], out endDate); // end date (could be null)
-                    DateTime.TryParse(Request.Form["CollectionStartDateTime"], out collectionStart);
-                    DateTime.TryParse(Request.Form["CollectionEndDateTime"], out collectionEnd);
+                    DateTime.TryParse(Request.Form["start_date"] + " " + Request.Form["start_time"], out startDate); // start date
+                    DateTime.TryParse(Request.Form["end_date"] + " " + Request.Form["end_time"], out endDate); // end date (could be null)
+                    DateTime.TryParse(Request.Form["collection_start_date"] + " " + Request.Form["collection_start_time"], out collectionStart);
+                    DateTime.TryParse(Request.Form["collection_end_date"] + " " + Request.Form["collection_end_time"], out collectionEnd);
 
                     //Adjust the timezone. this is becuase the EditTemplate is not returning the Time.
-                    currentEvent.StartDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(startDate);
-                    if (endDate != DateTime.MinValue)
-                    {
-                        currentEvent.EndDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(endDate);
-                    }
+                    model.StartDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(startDate);
+                    model.EndDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(endDate);
+                    model.CollectionStartDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(collectionStart);
+                    model.CollectionEndDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(collectionEnd);
 
-                    currentEvent.CollectionStartDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(collectionStart); 
-                    if (collectionEnd != DateTime.MinValue) {
-                        currentEvent.CollectionEndDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(collectionEnd);
-                    }
+
+                    ////Adjust the timezone. this is becuase the EditTemplate is not returning the Time.
+                    //currentEvent.StartDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(startDate);
+                    //if (endDate != DateTime.MinValue)
+                    //{
+                    //    currentEvent.EndDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(endDate);
+                    //}
+
+                    //currentEvent.CollectionStartDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(collectionStart); 
+                    //if (collectionEnd != DateTime.MinValue) {
+                    //    currentEvent.CollectionEndDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(collectionEnd);
+                    //}
 
                     currentEvent.VenueID = model.VenueID;
 

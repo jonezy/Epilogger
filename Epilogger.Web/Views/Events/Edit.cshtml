@@ -25,7 +25,7 @@
     <h1>EDIT EVENT</h1>
     <h2>@Model.Name</h2>
     <div class="spacer"></div>
-    <input type="button" onclick="$('#CreateForm').submit();" class="blue-action-button submitForm" value="Save" />
+    <input type="button" onclick="$('#EditForm').submit();" class="blue-action-button submitForm" value="Save" />
     @if (Model.CurrentUserID == Model.UserID || Model.CurrentUserRole == UserRoleType.Administrator)
     {
         <input type="button" class="red-action-button confirm" value="Delete Event" name="confirm" />
@@ -35,7 +35,7 @@
 <div id="events-content">
 
 @Html.ValidationSummary("Please correct the following issues")
-@using (Html.BeginForm("edit", "events", FormMethod.Post))
+@using (Html.BeginForm("edit", "events", FormMethod.Post, new { id = "EditForm" }))
 {
 
     <div id="createevent-info" class="item-card">
