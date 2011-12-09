@@ -22,7 +22,23 @@
 
 @if (!IncludeDateRange)
 { 
-    <button class="fright blue-action-button" style="font:bold 13px 'InterstatePlusRegular'; padding:2px 3px">subscribe</button>
+    if (Model.HasSubscribed)
+    {
+        using (Html.BeginForm("unsubscribe", "events", FormMethod.Post, new { @class = "remove-bottom" }))
+        {
+            <input type="submit" value="Unsubscribe" name="SubscribeToEvent" class="fright blue-action-button" style="font:bold 13px 'InterstatePlusRegular'; padding:2px 3px" id="" />
+            @Html.HiddenFor(model => model.EventID)
+        }
+    }
+    else
+    {
+        using (Html.BeginForm("subscribe", "events", FormMethod.Post, new { @class = "remove-bottom" }))
+        {
+            <input type="submit" value="Subscribe" name="SubscribeToEvent" class="fright blue-action-button" style="font:bold 13px 'InterstatePlusRegular'; padding:2px 3px" id="" />
+            @Html.HiddenFor(model => model.EventID)
+        }
+    }
+    
     <ul id="EventDetailsMenu" class="clearfix">
         <li>@Html.ActionLink("Overview", "details", null, new { id = @id }, action.ToLower() == "details" ? new { @class = "current" } : null)</li>
         <li>@Html.ActionLink("Photos", "allphotos", null, new { id = @id }, action.ToLower() == "allphotos" ? new { @class = "current" } : null)</li>
@@ -31,14 +47,30 @@
         <li>@Html.ActionLink("Check-ins", "allcheckins", null, new { id = @id }, action.ToLower() == "allcheckins" ? new { @class = "current" } : null)</li>
         <li>@Html.ActionLink("Links", "alllinks", null, new { id = @id }, action.ToLower() == "alllinks" ? new { @class = "current" } : null)</li>
         <li>@Html.ActionLink("Stats", "allstats", null, new { id = @id }, action.ToLower() == "allstats" ? new { @class = "current" } : null)</li>
-        @if ((Model.CreatedByID == Model.CurrentUserID) || Model.CurrentUserRole == UserRoleType.Administrator) {
+        @if ((Model.CreatedByID == Model.CurrentUserID) || Model.CurrentUserRole == UserRoleType.Administrator)
+        {
             <li>@Html.ActionLink("edit", "edit", "events", new { id = @id }, action.ToLower() == "edit" ? new { @class = "current" } : null)</li>}
         <li>@Html.ActionLink("Search/Time Filter", "timefilters", null, new { id = @id }, action.ToLower() == "timefilters" ? new { @class = "current" } : null)</li>
     </ul>
 }
 else
 { 
-    <button class="fright smaller-blue-action-button">subscribe</button>
+    if (Model.HasSubscribed)
+    {
+        using (Html.BeginForm("unsubscribe", "events", FormMethod.Post, new { @class = "remove-bottom" }))
+        {
+            <input type="submit" value="Unsubscribe" name="SubscribeToEvent" class="fright blue-action-button" style="font:bold 13px 'InterstatePlusRegular'; padding:2px 3px" id="" />
+            @Html.HiddenFor(model => model.EventID)
+        }
+    }
+    else
+    {
+        using (Html.BeginForm("subscribe", "events", FormMethod.Post, new { @class = "remove-bottom" }))
+        {
+            <input type="submit" value="Subscribe" name="SubscribeToEvent" class="fright blue-action-button" style="font:bold 13px 'InterstatePlusRegular'; padding:2px 3px" id="" />
+            @Html.HiddenFor(model => model.EventID)
+        }
+    }
     <ul id="EventDetailsMenu" class="clearfix">
         <li>@Html.ActionLink("Overview", "details", null, new { id = @id, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "details" ? new { @class = "current" } : null)</li>
         <li>@Html.ActionLink("Photos", "allphotos", null, new { id = @id, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "allphotos" ? new { @class = "current" } : null)</li>
@@ -47,7 +79,8 @@ else
         <li>@Html.ActionLink("Checkins", "allcheckins", null, new { id = @id, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "allcheckins" ? new { @class = "current" } : null)</li>
         <li>@Html.ActionLink("Links", "alllinks", null, new { id = @id, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "alllinks" ? new { @class = "current" } : null)</li>
         <li>@Html.ActionLink("Stats", "allstats", null, new { id = @id, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "allstats" ? new { @class = "current" } : null)</li>
-        @if ((Model.CreatedByID == Model.CurrentUserID) || Model.CurrentUserRole == UserRoleType.Administrator) {
+        @if ((Model.CreatedByID == Model.CurrentUserID) || Model.CurrentUserRole == UserRoleType.Administrator)
+        {
             <li>@Html.ActionLink("edit", "edit", "events", new { id = Model.EventID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "edit" ? new { @class = "current" } : null)</li>}
         <li>@Html.ActionLink("Search/Time Filter", "timefilters", null, new { id = @id, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "timefilters" ? new { @class = "current" } : null)</li>
     </ul>

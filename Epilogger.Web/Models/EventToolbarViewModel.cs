@@ -6,5 +6,6 @@ namespace Epilogger.Web.Models {
         public Guid CreatedByID { get; set; }
         public Guid CurrentUserID { get; set; }
         public UserRoleType CurrentUserRole { get; set; }
+        public bool HasSubscribed { get; set;  }
     }
 }
