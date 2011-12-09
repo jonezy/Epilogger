@@ -234,3 +234,21 @@ head.ready(function () {
             return false;
         });
 });
+
+head.ready(function () {
+    $("#collapse").bind("click", function (e) {
+        e.preventDefault();
+
+        if ($("#eventDescriptionSection").is(':visible') == true) {
+            $("#eventDescriptionSection").slideUp();
+            $("#collapse span").html("<img src='/Public/images/icons/more.png') /> show details");
+            
+        }
+        else {
+            $("#eventDescriptionSection").slideDown();
+            $("#collapse span").html("<img src='/Public/images/icons/less.png') /> hide details");
+        }
+
+        
+    });
+});

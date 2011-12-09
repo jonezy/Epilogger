@@ -41,10 +41,18 @@ namespace Epilogger.Web.Controllers {
         public ActionResult Create(CreateAccountModel model) {
             if (ModelState.IsValid) {
                 // TEMP: check to make sure the email address provided is in the beta invite table.
-                if(!service.IsBetaUser(model.EmailAddress)) {
-                    this.StoreError("You must be invited to use the epilogger alpha, please click the create account link in your invite email to create your account, if you would like to be invited email team@epilogger.com");
+                //if(!service.IsBetaUser(model.EmailAddress)) {
+                //    this.StoreError("You must be invited to use the epilogger alpha, please click the create account link in your invite email to create your account, if you would like to be invited email team@epilogger.com");
+                //    return View(model);
+                //}
+
+                //Ensure the User is over 13
+                if ((DateTime.Now - DateTime.Parse(model.DateOfBirth)).Days / 366 < 13)
+                {
+                    this.StoreError("You must be must be 13 years of age or older to use Epilogger.");
                     return View(model);
                 }
+
 
                 try {
                     User user = Mapper.Map<CreateAccountModel, User>(model);
