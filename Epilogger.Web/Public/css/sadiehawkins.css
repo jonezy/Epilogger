@@ -1524,8 +1524,8 @@ a.smallRateLink:hover { text-decoration: underline; }
     background: #9ab1bf url('../images/icons/popUpNub.png') top center no-repeat;  
     width: 75px; 
     position: absolute; 
-    left: 9px;
-    top: 100px;
+    left: 0px;
+    top: 90px;
     z-index: 1000; }
 
 #SearchHelpPopUpDiv.uiPopUp {
