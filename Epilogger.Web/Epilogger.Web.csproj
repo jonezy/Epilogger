@@ -330,7 +330,6 @@
     <Content Include="Public\images\click.png" />
     <Content Include="Public\images\date-icons\1.png" />
     <Content Include="Public\images\date-icons\10.png" />
-    <Content Include="Public\images\date-icons\11.png" />
     <Content Include="Public\images\date-icons\12.png" />
     <Content Include="Public\images\date-icons\13.png" />
     <Content Include="Public\images\date-icons\14.png" />
@@ -340,6 +339,7 @@
     <Content Include="Public\images\date-icons\21.png" />
     <Content Include="Public\images\date-icons\22.png" />
     <Content Include="Public\images\date-icons\23.png" />
+    <Content Include="Public\images\date-icons\3.png" />
     <Content Include="Public\images\date-icons\5.png" />
     <Content Include="Public\images\date-icons\6.png" />
     <Content Include="Public\images\date-icons\7.png" />
@@ -399,6 +399,7 @@
     <Content Include="Public\images\icons\WhenandWhere.png" />
     <Content Include="Public\images\jaggie-icons\event-list-header-media.gif" />
     <Content Include="Public\images\jaggie-icons\event-list-header-twitter.gif" />
+    <Content Include="Public\images\jaggie-icons\event-menu-jaggie.gif" />
     <Content Include="Public\images\jaggie-icons\hottest-events-media.gif" />
     <Content Include="Public\images\jaggie-icons\hottest-events-twitter.gif" />
     <Content Include="Public\images\linebg.png" />
