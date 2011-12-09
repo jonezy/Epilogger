@@ -413,7 +413,8 @@ div.profile img {
     width: 610px; 
     margin:35px 0px 0px 0px;
     overflow: hidden; 
-    background:#fff;}
+    background:#fff;
+    box-shadow:  0 0 1px #777;}
     
 .HottestEventBig {
     display: none;}
@@ -480,13 +481,15 @@ div.profile img {
     background:#e1e1e1;    
     -moz-border-radius-topleft: 0 0 5px 5px;
     -webkit-border-radius: 0 0 5px 5px;
-    border-radius: 0 0 5px 5px;}
+    border-radius: 0 0 5px 5px;
+    box-shadow:  0 1px 1px #999;}
 
 .HottestList li a.active { 
     text-transform: uppercase; 
-    color: #287acf; 
-    background:#fff;    
-    border-top:dotted 1px #dbdbdb;}    
+    color: #287acf;
+    position:relative;
+    top:-1px;
+    background:#fff;}    
     
 .HottestList li a:hover, .HottestList li.active { 
     color: #000; 
