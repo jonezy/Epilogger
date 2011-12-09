@@ -80,6 +80,30 @@ a.edit_icon {
     color:#fff}
     
     
+.red-action-button {
+    border:1px solid #b83852;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    background:#ce4a64; /* no css3 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d84e69', endColorstr='#ce4a64'); /*IE */
+    background:-webkit-gradient(linear, left top, left bottom, from (#d84e69) to (#ce4a64)); /* webkit */
+    background:-moz-linear-gradient(top, #d84e69, #ce4a64); /* ff */
+    box-shadow:0 0 1px #a1b9c8;
+    color:#fefefe;
+    font:bold 15px 'InterstatePlusRegular';
+    padding:5px 10px;
+    text-transform:uppercase;
+    cursor:pointer;
+    box-shadow:0 0 1px #777;}
+
+.red-action-button:hover {
+    opacity:0.85;
+    position:relative;
+    top:1px;
+    color:#fff}
+    
+    
 
     
 
