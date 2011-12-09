@@ -295,6 +295,7 @@
     <Content Include="Public\fonts\interstateplus_regular_cond-webfont.woff" />
     <Content Include="Public\images\alltweets-nub.png" />
     <Content Include="Public\images\arrowdown.png" />
+    <Content Include="Public\images\bg\bg-collapse.png" />
     <Content Include="Public\images\bg\jaggies.gif" />
     <Content Include="Public\images\bg\sample1.jpg" />
     <Content Include="Public\images\bg\sample2.jpg" />
@@ -360,6 +361,7 @@
     <Content Include="Public\images\homepage\bg-about.png" />
     <Content Include="Public\images\homepage\book.png" />
     <Content Include="Public\images\homepage\feed.bg.png" />
+    <Content Include="Public\images\homepage\icon-logout.png" />
     <Content Include="Public\images\homepage\refresh.png" />
     <Content Include="Public\images\homepage\rockout.png" />
     <Content Include="Public\images\homepage\tldr.png" />
