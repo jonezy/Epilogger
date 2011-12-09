@@ -24,6 +24,7 @@
                     <p>@Html.LabelFor(model => model.DateOfBirth) @Html.TextBoxFor(model => model.DateOfBirth, new { @class = "dob" })</p>
                     <p>@Html.LabelFor(model => model.TimeZoneOffset) @Html.DropDownListFor(model => model.TimeZoneOffset, Model.TimeZones, "Select your timezone")</p>
                 </fieldset>
+                By clicking the "Create this Account" button you agree to the Epilogger @Html.ActionLink("Terms of Use", "Terms", "Home") and <a href="http://www.Epilogger.com/home/Privacy" target="_blank">Privacy Policy</a>
             </div>
         </div>
     </div>

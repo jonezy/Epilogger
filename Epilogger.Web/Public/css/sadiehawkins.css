@@ -80,6 +80,30 @@ a.edit_icon {
     color:#fff}
     
     
+.red-action-button {
+    border:1px solid #b83852;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    background:#ce4a64; /* no css3 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d84e69', endColorstr='#ce4a64'); /*IE */
+    background:-webkit-gradient(linear, left top, left bottom, from (#d84e69) to (#ce4a64)); /* webkit */
+    background:-moz-linear-gradient(top, #d84e69, #ce4a64); /* ff */
+    box-shadow:0 0 1px #a1b9c8;
+    color:#fefefe;
+    font:bold 15px 'InterstatePlusRegular';
+    padding:5px 10px;
+    text-transform:uppercase;
+    cursor:pointer;
+    box-shadow:0 0 1px #777;}
+
+.red-action-button:hover {
+    opacity:0.85;
+    position:relative;
+    top:1px;
+    color:#fff}
+    
+    
 
     
 
@@ -709,7 +733,21 @@ ul#connected-networks, .topPhotosList, .topPhotosList li {
     background: #ff0084; padding: 2px 7px; color: #fff; font-size: 18px; font-weight: bold;}
 
 
+#addMoreArrow { float: right; margin: 11px 20px 0 0;  }
+#addMoreArrow img { padding-top: 3px;  }
+#addMoreArrow span { text-transform: uppercase; color: #747474; font-weight: bold; padding-left: 5px; display:inline-block;  }
 
+#SearchTermsImage { float: left; width: 50px; width: 90px; text-align: right; }
+#PlainTextSearch { margin-left: 90px; padding-left: 10px; padding-top: 13px; font-size: 14px; }
+
+#AdvancedContainer { font-size: 10px; padding-left: 5px; }
+#AdvancedSearchTerms { display: none; }
+
+.item-data input.searchBox1 { width:350px; }
+label span.small { font-size: 8px; }
+.blueBalls { color: #287cbe; text-transform: lowercase; font-weight: bold; }
+.item-data select.searchOperator { width: 149px !important;
+display: inline-block; }
 
 #rule-group input[type="text"] { display: inline-block; }
 
@@ -740,6 +778,12 @@ fieldset.login input[type="text"],fieldset.login input[type="password"], fieldse
     float:left;
     width:480px !important;
     max-width:510px !important;}
+    
+.item-data input.padded, .item-data textarea.padded, .item-data select.padded 
+{
+    padding: 12px 5px;
+    
+    }    
     
 /*Override this for dropdowns so they line up*/
 .item-data select.wide {
