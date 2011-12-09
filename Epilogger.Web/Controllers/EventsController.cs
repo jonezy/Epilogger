@@ -148,7 +148,7 @@ namespace Epilogger.Web.Controllers {
 
                     if (model.Authorized)
                     {
-                        events = US.GetUserSubscribedAndCreatedEvents(CurrentUserID).Take(8).ToList();
+                        events = US.GetUserSubscribedAndCreatedEvents(CurrentUserID, 8).ToList();
                     }
                     else
                     {
@@ -202,7 +202,7 @@ namespace Epilogger.Web.Controllers {
             switch (Tab)
             {
                 case 1: //My Events
-                    events = US.GetUserSubscribedAndCreatedEvents(CurrentUserID).Take(8).ToList();
+                    events = US.GetUserSubscribedAndCreatedEvents(CurrentUserID, 8).ToList();
                     break;
                 case 2: //Today
                     events = ES.TodaysEvents();
