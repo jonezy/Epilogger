@@ -345,9 +345,14 @@
     <Content Include="Public\images\event-list-icons\test.png" />
     <Content Include="Public\images\event_activity_title_icons.png" />
     <Content Include="Public\images\fakevideo.jpg" />
+    <Content Include="Public\images\homepage\about-astrid.jpg" />
+    <Content Include="Public\images\homepage\about-chris.jpg" />
+    <Content Include="Public\images\homepage\about-chris2.jpg" />
     <Content Include="Public\images\homepage\about-em.png" />
     <Content Include="Public\images\homepage\about-fb.png" />
     <Content Include="Public\images\homepage\about-fragmented.png" />
+    <Content Include="Public\images\homepage\about-michael.jpg" />
+    <Content Include="Public\images\homepage\about-reb.jpg" />
     <Content Include="Public\images\homepage\about-relive.png" />
     <Content Include="Public\images\homepage\about-share.png" />
     <Content Include="Public\images\homepage\about-tw.png" />
