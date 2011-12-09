@@ -502,18 +502,18 @@ div.profile img {
     text-transform: uppercase; 
     color: #636363; 
     font:bold 14px 'InterstatePlusRegular';
-    background:#e1e1e1;    
+    background:#ddd;    
     -moz-border-radius-topleft: 0 0 5px 5px;
     -webkit-border-radius: 0 0 5px 5px;
-    border-radius: 0 0 5px 5px;
-    box-shadow:  0 1px 1px #999;}
+    border-radius: 0 0 5px 5px;}
 
 .HottestList li a.active { 
     text-transform: uppercase; 
     color: #287acf;
     position:relative;
     top:-1px;
-    background:#fff;}    
+    background:#fff;
+    box-shadow:  0 1px 1px #999;}    
     
 .HottestList li a:hover, .HottestList li.active { 
     color: #000; 
@@ -962,6 +962,7 @@ ul#left-nav li ul li a.current {color:#a44b79;}
     padding-left:28px;}
 
 #homepage-content {float:left;width:880px;}
+
 .homepage-activity-entry { 
     float:left;
     width:216px;
@@ -970,6 +971,9 @@ ul#left-nav li ul li a.current {color:#a44b79;}
     margin:0px 20px 20px 0px;
     color:#828282; 
     background:url(../images/homepage/feed.bg.png) no-repeat;}
+
+.homepage-activity-entry h2 {
+    padding:10px 10px 0 10px}
 
 .homepage-activity-entry img {
     width:196px;height:161px;margin:10px;}
@@ -1033,21 +1037,24 @@ x.dashboard-event-item .event-totals {
     
 .month-day h2 {
     margin:0;
+    font:bold 32px helvetica, arial, sans-serif;
     color:#555 !important;
-    font-size:34px;
     font-weight:bold;
+    padding:0 2px 0 0;
     position:absolute;
+    letter-spacing:-1px;
     top:13px;
     right:0px;}
     
 .month-day h3 {
     margin:0;
+    font:normal 12px helvetica, arial, sans-serif;
     position:absolute;
+    padding:0 2px 0 0;
     bottom:0px;
-    right:10px;
+    right:3px;
     font-size:10px;
-    color:#918e8e;
-    }
+    color:#918e8e;}
 
 .dashboard-event-item .event-content {margin-left:15px;float:left;width:60%;}
 .dashboard-event-item .event-content h6 {margin-bottom:3px;}
@@ -1747,11 +1754,11 @@ body::-webkit-scrollbar-corner{background-clip:padding-box;background-color:#f5f
 
 */
 
-#event-search-container input[type="text"] {
+#event-search-container input[type="text"], input#SearchTerm[type="text"] {
 	color:#1e72c8;
 	font:bold 20px InterstatePlusRegular;
 	text-transform:uppercase;
-	width:98%;
+	width:95%;
 	border:inset 1px #ccc;
 	height:20px;
 	padding:5px 0 5px 5px;

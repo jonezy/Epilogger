@@ -15,7 +15,8 @@
 
     <span class="sm-spacer"></span>
 
-    @if (Model.Authorized) { 
+    @if (Model.Authorized) 
+    { 
         <div class="browse-event-table-header clearfix">
             <ul class="dropbutton big">
                 <li class="first-child"><a href="" id="1" class="browseTabs ">My Events</a></li>
@@ -35,9 +36,7 @@
         <span class="spacer"></span>        
         @Html.ActionLink("Add an Event", "create", "events", null, new { @class = "blue-action-button" })
 
-        <span class="clear big-spacer"></span>
-        
-
+        <span class="clear big-spacer"></span>  
     }
 
         <h2>Random Upcoming Event</h2>
