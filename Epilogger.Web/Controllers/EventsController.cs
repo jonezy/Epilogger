@@ -263,6 +263,10 @@ namespace Epilogger.Web.Controllers {
             toolbarModel.CreatedByID = requestedEvent.UserID.Value;
             toolbarModel.CurrentUserID = CurrentUserID;
             toolbarModel.CurrentUserRole = CurrentUserRole;
+            if (CurrentUserID != Guid.Empty)
+            {
+                toolbarModel.HasSubscribed = CurrentUser.UserFollowsEvents.Where(ufe => ufe.EventID == requestedEvent.ID).FirstOrDefault() != null ? true : false;
+            }
 
             return toolbarModel;
         }
@@ -566,7 +570,7 @@ namespace Epilogger.Web.Controllers {
         [HttpPost]
         public ActionResult Subscribe(FormCollection fc) {
             int id;
-            int.TryParse(fc["ID"].ToString(), out id);
+            int.TryParse(fc["EventID"].ToString(), out id);
             if (id > 0) {
                 if (CurrentUserID == Guid.Empty) {
                     this.StoreWarning("You must be logged in to your epilogger account to subscribe to an event");
@@ -592,7 +596,7 @@ namespace Epilogger.Web.Controllers {
         [HttpPost]
         public ActionResult UnSubscribe(FormCollection fc) {
             int id;
-            int.TryParse(fc["ID"].ToString(), out id);
+            int.TryParse(fc["EventID"].ToString(), out id);
 
             if (id > 0) {
                 if (CurrentUserID == Guid.Empty) {
