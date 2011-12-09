@@ -963,34 +963,45 @@ x.dashboard-event-item .event-totals {
 .dashboard-event-item .month-day {
     font:bold 12px helvetica, arial, sans-serif;
     float:left;
-    background:#e9e9e9;
-    padding:0 0 2px 0;
-    width:52px;
-    height:55px;
-    text-align:center;
+    background:#fff;
+    padding:0;
+    width:54px;
+    height:56px;
+    text-align:right;
     position:relative;}
     
 .dashboard-event-item .month-day .month {
-    background:#ee5b8f;
+    padding:0px 2px 0px 0px;
+    background:#f40069;
     color:#fff;
     text-transform:uppercase;
     font-size:14px}
     
 .dashboard-event-item .month-day .icon {
     position:absolute;
-    bottom:0;
-    right:0;
-    background:url(../images/event-list-icons/test.png) no-repeat;
-    width:21px;
-    height:21px;}
+    top:18px;
+    left:2px;
+    background:url(../images/date-icons/date-celebration.png) no-repeat;
+    width:17px;
+    height:37px;}
     
 .dashboard-event-item .month-day h2 {
     margin:0;
     color:#555 !important;
-    font-size:38px;
-    position:relative;
-    top:-2px}
-
+    font-size:34px;
+    font-weight:bold;
+    position:absolute;
+    top:13px;
+    right:0px;}
+    
+.dashboard-event-item .month-day h3 {
+    margin:0;
+    position:absolute;
+    bottom:0px;
+    right:10px;
+    font-size:10px;
+    color:#918e8e;
+    }
 .dashboard-event-item .event-content {margin-left:15px;float:left;width:60%;}
 .dashboard-event-item .event-content h6 {margin-bottom:3px;}
 .dashboard-event-item .event-content-searchterms {width:70%;}

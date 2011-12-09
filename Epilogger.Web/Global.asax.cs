@@ -309,6 +309,7 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.Events, opt => opt.Ignore());
 
             Mapper.CreateMap<Event, DashboardEventViewModel>()
+                .ForMember(dest => dest.EventCategoryID, opt => opt.MapFrom(src => src.EventCategories.FirstOrDefault().ID))
                 .ForMember(dest => dest.TotalTweets, opt => opt.MapFrom(src => src.Tweets.Count()))
                 .ForMember(dest => dest.TotalMedia, opt => opt.MapFrom(src => src.Images.Count()));
             
