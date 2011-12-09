@@ -96,7 +96,7 @@
     <ul class="HottestList">
         @foreach (Epilogger.Web.Models.HotestEventsModel item in Model.HottestEvents) {
             <li>
-            <a href="" onclick="return false;" id="@(item.Event.ID)">
+            <a href="" onclick="return false;" class="HottestListLink" id="@(item.Event.ID)">
             @if(item.Event.Name.Length > 18) {
                 @string.Format("{0}...", item.Event.Name.Substring(0, 18));
                
