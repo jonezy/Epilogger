@@ -383,8 +383,16 @@
     <Content Include="Public\images\icons\event-toolbar-ov.png" />
     <Content Include="Public\images\icons\event-toolbar.png" />
     <Content Include="Public\images\icons\facebook.png" />
+    <Content Include="Public\images\icons\for-buttons\add.png" />
+    <Content Include="Public\images\icons\for-buttons\edit.png" />
+    <Content Include="Public\images\icons\for-buttons\login.png" />
+    <Content Include="Public\images\icons\for-buttons\newuser.png" />
+    <Content Include="Public\images\icons\for-buttons\search.png" />
+    <Content Include="Public\images\icons\for-buttons\submit.png" />
     <Content Include="Public\images\icons\header-person.png" />
     <Content Include="Public\images\icons\hovernub.png" />
+    <Content Include="Public\images\icons\less.png" />
+    <Content Include="Public\images\icons\more.png" />
     <Content Include="Public\images\icons\not.png" />
     <Content Include="Public\images\icons\or.png" />
     <Content Include="Public\images\icons\pencil.png" />
