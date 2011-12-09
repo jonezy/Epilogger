@@ -76,7 +76,7 @@ namespace Epilogger.Web {
         public List<Epilogger.Data.Event> GetUserSubscribedAndCreatedEvents(Guid userID, int? limit)
         {
             StoredProcedure sp = db.GetUserDashboardActivity(userID.ToString());
-            List<DashboardActivityModel> DAM = sp.ExecuteTypedList<DashboardActivityModel>().Where(d => d.ActivityType == ActivityType.FOLLOW_EVENT || d.ActivityType == ActivityType.EVENT_CREATION).ToList();
+            List<DashboardActivityModel> DAM = sp.ExecuteTypedList<DashboardActivityModel>().Where(d => d.ActivityType == ActivityType.FOLLOW_EVENT || d.ActivityType == ActivityType.EVENT_CREATION).OrderByDescending(d=>d.Date).ToList();
             if (limit.HasValue) {
                 DAM = DAM.Take(limit.Value).ToList();
             }
