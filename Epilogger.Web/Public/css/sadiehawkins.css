@@ -979,7 +979,9 @@ ul#left-nav li ul li a.current {color:#a44b79;}
     background:url(../images/homepage/feed.bg.png) no-repeat;}
 
 .homepage-activity-entry h2 {
-    padding:10px 10px 0 10px}
+    margin:10px;
+    padding:10px 10px 0 10px;
+}
 
 .homepage-activity-entry img {
     width:196px;height:161px;margin:10px;}
