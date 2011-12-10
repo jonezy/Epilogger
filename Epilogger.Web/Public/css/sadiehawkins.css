@@ -543,6 +543,12 @@ div.profile img {
     overflow: hidden;
     font-weight:bold;}
 
+#events-nav .browse-category-list-item {
+    padding-top:5px;
+    margin:0;   
+    font-size:20px;
+    width:100%;
+}
 #event-intro, #event-optionBar {
     font-size:12px;
     margin-bottom:15px;}
