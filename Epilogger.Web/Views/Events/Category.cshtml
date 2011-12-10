@@ -1,37 +1,35 @@
 ﻿@model Epilogger.Web.Models.BrowseCategoriesDisplayViewModel
-
 @{
     Layout = "~/Views/Shared/_InteriorLayout.cshtml";
     ViewBag.Title = "Epilogger - " + @Model.CategoryName;
 }
-
 <div id="events-nav">
     <h1>@Model.CategoryName.ToUpper()</h1>
     <br style="clear: both;" />
-    @foreach (Epilogger.Data.EventCategory item in Model.EventCategories)
-    {
-        <h2>@Html.ActionLink(item.CategoryName, "Category", new { CategoryName = item.URLStub })</h2>
+    @foreach (Epilogger.Data.EventCategory item in Model.EventCategories) {
+        <div class="browse-category-list-item" style="background-image:url(@Url.Content("~/Public/images/category-icons/" + item.ID + ".png"))">@Html.ActionLink(item.CategoryName, "Category", new { CategoryName = item.URLStub })</div>
     }
 </div>
 <div id="events-content">
-    <h2>EVENTS:</h2>
-    @if (Model.Events.Count() == 0)
-    {
-        <div class="dashboard-event-item clearfix">There are currently no events going on. Why not add one?!</div>
-        @Html.ActionLink("CREATE EVENT", "create", "events")
+    <h2>
+        EVENTS:</h2>
+    @if (Model.Events.Count() == 0) {
+        <div class="dashboard-event-item clearfix">
+            There are currently no events going on. Why not add one?!</div>
+        <span class="spacer"></span>        
+        @Html.ActionLink("Add an Event", "create", "events", null, new { @class = "blue-action-button" })
     }
-
-    @foreach (var item in Model.Events)
-    {
+    @foreach (var item in Model.Events) {
         <div class="dashboard-event-item clearfix">
             <div class="month-day">
-                <div class="month">@Html.DisplayFor(e => item.StartDateTime, "Month")</div>    
-                <h2>@Html.DisplayFor(e => item.StartDateTime, "Day")</h2>
-                <div class="icon"></div>
+                <div class="month">@Html.DisplayFor(thing => item.StartDateTime, "Month")</div>
+                <h2>@Html.DisplayFor(thing => item.StartDateTime, "Day")</h2>
+                <h3>@Html.Encode(item.StartDateTime.Year)</h3>
+                <div class="icon" style="background-image:url(@Url.Content("~/Public/images/date-icons/" + item.EventCategoryID + ".png"))">
+                </div>
             </div>
             <div class="event-content">
                 <h6>@Html.ActionLink(item.Name, "details", "events", new { @id = item.ID }, null)</h6>
-                
                 <div class="event-content-time">@Html.DisplayFor(thing => item.StartDateTime, "Time")</div>
                 <div class="event-content-searchterms">@item.SearchTerms</div>
             </div>
@@ -41,5 +39,4 @@
             </div>
         </div>
     }
-
 </div>

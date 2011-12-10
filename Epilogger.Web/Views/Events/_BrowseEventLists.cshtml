@@ -1,7 +1,6 @@
 ﻿@model Epilogger.Web.Models.BrowseEventsDisplayViewModel
 <div id="events-nav">
-    <h1>
-        BROWSE @Model.BrowsePageFilter.ToUpper() EVENTS</h1>
+    <h1>BROWSE @Model.BrowsePageFilter.ToUpper() EVENTS</h1>
     <br style="clear: both;" />
 </div>
 <div id="events-content">
@@ -10,7 +9,8 @@
     @if (Model.Events.Count() == 0) {
         <div class="dashboard-event-item clearfix">
             There are currently no events going on. Why not add one?!</div>
-        @Html.ActionLink("CREATE EVENT", "create", "events")
+        <span class="spacer"></span>        
+        @Html.ActionLink("Add an Event", "create", "events", null, new { @class = "blue-action-button" })
     }
     @foreach (var item in Model.Events) {
         <div class="dashboard-event-item clearfix">

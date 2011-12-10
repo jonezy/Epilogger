@@ -3,26 +3,21 @@
 <script type="text/javascript" language="javascript">
     head.js('@Url.Content("~/Public/js/BrowseEvents.js")');
 </script>
-
 <div id="events-nav">
-    <h1>BROWSE EVENTS</h1>
-
+    <h1>
+        BROWSE EVENTS</h1>
     <div id="event-search-container">
         @using (Html.BeginForm("Search", "Home", FormMethod.Post, null)) {
-            @Html.TextBox("SearchTerm", null, new { @class = "remove-bottom", @title="Search for an event" })
-        }		    
-	</div>
-
+            @Html.TextBox("SearchTerm", null, new { @class = "remove-bottom", @title = "Search for an event" })
+        }
+    </div>
     <span class="sm-spacer"></span>
-
-    @if (Model.Authorized) 
-    { 
+    @if (Model.Authorized) { 
         <div class="browse-event-table-header clearfix">
             <ul class="dropbutton big">
                 <li class="first-child"><a href="" id="1" class="browseTabs ">My Events</a></li>
                 <li class="last-child"><a href="" id="2" class="browseTabs ">Today</a></li>
-            </ul>   
-
+            </ul>
             <div class="icons">
                 <img src="@Url.Content("~/Public/images/jaggie-icons/event-list-header-twitter.gif")" />
                 <img src="@Url.Content("~/Public/images/jaggie-icons/event-list-header-media.gif")" />
@@ -38,24 +33,25 @@
 
         <span class="clear big-spacer"></span>  
     }
-
-        <h2>Random Upcoming Event</h2>
-        <div class="random-event-title">
-            <div class="month-day">
-                <div class="month">@Html.DisplayFor(model => model.RandomEvent.StartDateTime, "Month")</div>    
-                <h2>@Html.DisplayFor(model => model.RandomEvent.StartDateTime, "Day")</h2>
-                <h3>@Html.Encode(Model.RandomEvent.StartDateTime.Year)</h3>
-                <div class="icon" style="background-image:url(@Url.Content("~/Public/images/date-icons/" + Model.RandomEvent.EventCategories.FirstOrDefault().ID + ".png"))"></div>
-            </div>        
-            <h1 style="font-size:18pt">@Html.ActionLink(Model.RandomEvent.Name, "details", "events", new { @id = Model.RandomEvent.ID }, null)</h1>
+    <h2>
+        Random Upcoming Event</h2>
+    <div class="random-event-title">
+        <div class="month-day">
+            <div class="month">@Html.DisplayFor(model => model.RandomEvent.StartDateTime, "Month")</div>
+            <h2>@Html.DisplayFor(model => model.RandomEvent.StartDateTime, "Day")</h2>
+            <h3>@Html.Encode(Model.RandomEvent.StartDateTime.Year)</h3>
+            <div class="icon" style="background-image:url(@Url.Content("~/Public/images/date-icons/" + Model.RandomEvent.EventCategories.FirstOrDefault().ID + ".png"))">
+            </div>
         </div>
-        <br style="clear:both;" /><br />
-        @if (!string.IsNullOrEmpty(Model.RandomEvent.Description)) {
-        <p>@Model.RandomEvent.Description.Length > 75 ? @string.Format("{0}...", Model.RandomEvent.Description.Substring(0, 75)) : @Model.RandomEvent.Description</p>
-        }
-        
+        <h1 style="font-size: 18pt">@Html.ActionLink(Model.RandomEvent.Name, "details", "events", new { @id = Model.RandomEvent.ID }, null)</h1>
+    </div>
+    <br style="clear: both;" />
+    <br />
+    @if (!string.IsNullOrEmpty(Model.RandomEvent.Description)) {
+        <p>@Model.RandomEvent.Description.Length > 75 ? @string.Format("{0}...", Model.RandomEvent.Description.Substring(0, 75))
+            : @Model.RandomEvent.Description</p>
+    }
 </div>
-
 <div id="events-content">
     <div id="HottestSlides">
         @foreach (Epilogger.Web.Models.HotestEventsModel item in Model.HottestEvents) {
@@ -69,16 +65,15 @@
                     }
                 </div>
                 <div class="hottest-Title">
-                    <a href="/Events/@item.Event.ID/details"><h1>@item.Event.Name</h1></a>
-
+                    <a href="/Events/@item.Event.ID/details">
+                        <h1>@item.Event.Name</h1>
+                    </a>
                     <div class="hottest-totals">
                         <div class="total-media">@string.Format("{0:#,###}", item.PhotoCount)</div>
                         <div class="total-tweets">@string.Format("{0:#,###}", item.TweetCount)</div>
                     </div>
-
                     <br style="clear: both;" />
                 </div>
-
                 <div class="hottest-photogridBottom">
                     @foreach (Epilogger.Data.Image image in item.RandomHottestImages.Skip(5).Take(5)) {
                         <div class="hottestimage" id="photo-@image.ID">
@@ -91,37 +86,32 @@
             </div>
         }
     </div>
-
     <ul class="HottestList">
         @foreach (Epilogger.Web.Models.HotestEventsModel item in Model.HottestEvents) {
-            <li>
-            <a href="" onclick="return false;" class="HottestListLink" id="@(item.Event.ID)">
-            @if(item.Event.Name.Length > 18) {
-                @string.Format("{0}...", item.Event.Name.Substring(0, 18));
-               
-            } else {            
-                @item.Event.Name
-            }
+            <li><a href="" onclick="return false;" class="HottestListLink" id="@(item.Event.ID)">
+                @if (item.Event.Name.Length > 18) {
+                    @string.Format("{0}...", item.Event.Name.Substring(0, 18));
+
+                } else {            
+                    @item.Event.Name
+                }
             </a></li>
         }
-    </ul>  
-    
-    <span class="big-spacer" style="clear: left"></span>
-    
-    @*Categories*@
-    <h2>FIND AN EVENT BY CATEGORY:</h2>
+    </ul>
+    <span class="big-spacer" style="clear: left"></span>@*Categories*@
+    <h2>
+        FIND AN EVENT BY CATEGORY:</h2>
     @{int count = 0;}
-        @foreach (Epilogger.Data.EventCategory c in Model.EventCategories) {
-            <div class="browse-category-list-item" style="background-image:url(@Url.Content("~/Public/images/category-icons/" + c.ID + ".png"))">@Html.ActionLink(c.CategoryName, "Category", new { CategoryName = c.URLStub })</div>
-            if (count == 2) {
-                @:<br style="clear:both;" />
-                count = 0;
-            } else {
-                count++;
-            }
+    @foreach (Epilogger.Data.EventCategory c in Model.EventCategories) {
+        <div class="browse-category-list-item" style="background-image:url(@Url.Content("~/Public/images/category-icons/" + c.ID + ".png"))">@Html.ActionLink(c.CategoryName, "Category", new { CategoryName = c.URLStub })</div>
+        if (count == 2) {
+        @:<br style="clear:both;" />
+                    count = 0;
+        } else {
+            count++;
         }
+    }
 </div>
-
 <script type="text/javascript" language="javascript">
     head.ready(function () {
         $("a[rel^='prettyPhoto']").prettyPhoto({
