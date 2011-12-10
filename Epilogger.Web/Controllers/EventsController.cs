@@ -852,6 +852,10 @@ namespace Epilogger.Web.Controllers {
                     model.CollectionStartDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(collectionStart);
                     model.CollectionEndDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(collectionEnd);
 
+                    currentEvent.StartDateTime = model.StartDateTime;
+                    currentEvent.EndDateTime = model.EndDateTime;
+                    currentEvent.CollectionStartDateTime = model.CollectionStartDateTime;
+                    currentEvent.CollectionEndDateTime = model.CollectionEndDateTime;
 
                     ////Adjust the timezone. this is becuase the EditTemplate is not returning the Time.
                     //currentEvent.StartDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(startDate);
