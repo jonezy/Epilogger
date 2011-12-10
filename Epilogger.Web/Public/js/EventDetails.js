@@ -238,17 +238,18 @@ head.ready(function () {
 head.ready(function () {
     $("#collapse").bind("click", function (e) {
         e.preventDefault();
+        
+        if ($(".eventDescriptionSection").is(':visible') == true) {
 
-        if ($("#eventDescriptionSection").is(':visible') == true) {
-            $("#eventDescriptionSection").slideUp();
+            $(".eventDescriptionSection").slideUp();
             $("#collapse span").html("<img src='/Public/images/icons/more.png') /> show details");
-            
+
         }
         else {
-            $("#eventDescriptionSection").slideDown();
+            $(".eventDescriptionSection").slideDown();
             $("#collapse span").html("<img src='/Public/images/icons/less.png') /> hide details");
         }
 
-        
+
     });
 });
