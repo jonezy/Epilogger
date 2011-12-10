@@ -536,13 +536,19 @@ div.profile img {
     float:left; 
     width: 165px;
     height: 30px; 
-    padding: 0px 0 6px 35px; 
+    padding: 5px 0 6px 35px; 
     margin: 10px 5px 10px 0; 
     color: #2d8ac5;
     background-repeat:no-repeat;
     overflow: hidden;
+    font-size:14px;
     font-weight:bold;}
 
+#events-nav .browse-category-list-item {
+    margin:0;   
+    font-size:20px;
+    width:100%;
+}
 #event-intro, #event-optionBar {
     font-size:12px;
     margin-bottom:15px;}
@@ -973,7 +979,9 @@ ul#left-nav li ul li a.current {color:#a44b79;}
     background:url(../images/homepage/feed.bg.png) no-repeat;}
 
 .homepage-activity-entry h2 {
-    padding:10px 10px 0 10px}
+    margin:10px;
+    padding:10px 10px 0 10px;
+}
 
 .homepage-activity-entry img {
     width:196px;height:161px;margin:10px;}
