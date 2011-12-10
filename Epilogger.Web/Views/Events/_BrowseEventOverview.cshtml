@@ -48,8 +48,13 @@
     <br style="clear: both;" />
     <br />
     @if (!string.IsNullOrEmpty(Model.RandomEvent.Description)) {
-        <p>@Model.RandomEvent.Description.Length > 75 ? @string.Format("{0}...", Model.RandomEvent.Description.Substring(0, 75))
-            : @Model.RandomEvent.Description</p>
+        <p>@if (Model.RandomEvent.Description.Length > 150) {
+               @string.Format("{0}...", Model.RandomEvent.Description.Substring(0, 150))
+           } else {
+            @Model.RandomEvent.Description
+           }
+           @Html.ActionLink("read more", "details", "events", new { id = Model.RandomEvent.ID })
+        </p>
     }
 </div>
 <div id="events-content">
