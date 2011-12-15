@@ -83,7 +83,8 @@ namespace Epilogger.Web.Controllers {
             
             if (CategoryName != string.Empty)
             {
-                events = ES.GetEventsByCategorySlug(CategoryName);
+                if (CategoryName == "All") { events = ES.AllEvents(); }
+                else { events = ES.GetEventsByCategorySlug(CategoryName); }
             }
             
             List<DashboardEventViewModel> TheEvents = new List<DashboardEventViewModel>();
