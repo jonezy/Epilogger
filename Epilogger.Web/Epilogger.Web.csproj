@@ -428,6 +428,15 @@
     <Content Include="Public\images\samples\photo.png" />
     <Content Include="Public\images\samples\twitter.png" />
     <Content Include="Public\images\shoutbox.png" />
+    <Content Include="Public\images\slideshow\1.png" />
+    <Content Include="Public\images\slideshow\2.png" />
+    <Content Include="Public\images\slideshow\3.png" />
+    <Content Include="Public\images\slideshow\4.png" />
+    <Content Include="Public\images\slideshow\6.png" />
+    <Content Include="Public\images\slideshow\7a.png" />
+    <Content Include="Public\images\slideshow\7b.png" />
+    <Content Include="Public\images\slideshow\7c.png" />
+    <Content Include="Public\images\slideshow\8.png" />
     <Content Include="Public\js\AnyTime\anytimec.css" />
     <Content Include="Public\js\AnyTime\anytimec.js" />
     <Content Include="Public\js\BrowseEvents.js" />
@@ -457,6 +466,8 @@
     <Content Include="Public\js\jquery.blockUI.js" />
     <Content Include="Public\js\jquery.colorbox-min.js" />
     <Content Include="Public\js\jquery.cookie.js" />
+    <Content Include="Public\js\jquery.cycle.all.js" />
+    <Content Include="Public\js\jquery.cycle.lite.js" />
     <Content Include="Public\js\jquery.expander.min.js" />
     <Content Include="Public\js\jquery.tweet.js" />
     <Content Include="Public\js\jquery.unobtrusive-ajax.min.js" />

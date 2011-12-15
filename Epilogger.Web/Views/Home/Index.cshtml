@@ -52,7 +52,17 @@
     </div>
     
     <div id="homepage-video">
-        <img src="@Url.Content("~/Public/images/fakevideo.jpg")" />
+        <div id="s3" class="pics" style="position: relative; ">
+            <img src="/Public/images/slideshow/1.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 560px; height: 376px; z-index: 3; opacity: 0; display: none; " />
+            <img src="/Public/images/slideshow/2.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 560px; height: 376px; z-index: 3; opacity: 0; display: none; " />
+            <img src="/Public/images/slideshow/3.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 560px; height: 376px; z-index: 3; opacity: 0; display: none; " />
+            <img src="/Public/images/slideshow/4.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 560px; height: 376px; z-index: 3; opacity: 0; display: none; " />
+            <img src="/Public/images/slideshow/6.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 560px; height: 376px; z-index: 3; opacity: 0; display: none; " />
+            <img src="/Public/images/slideshow/7a.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 560px; height: 376px; z-index: 3; opacity: 0; display: none; " />
+            <img src="/Public/images/slideshow/7b.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 560px; height: 376px; z-index: 3; opacity: 0; display: none; " />
+            <img src="/Public/images/slideshow/7c.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 560px; height: 376px; z-index: 3; opacity: 0; display: none; " />
+            <img src="/Public/images/slideshow/8.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 560px; height: 376px; z-index: 3; opacity: 0; display: none; " />
+        </div>
     </div>
     
     <div class="clear spacer"></div>
@@ -96,6 +106,16 @@
                 animation_speed: 'fast',
                 overlay_gallery: false,
                 changepicturecallback: function () { changeDescription(); }
+            });
+        });
+
+        head.ready(function () {
+            $('#s3').cycle({
+                fx: 'scrollLeft',
+                speed: 300,
+                timeout: 3000,
+                next: '#s3',
+                pause: 1
             });
         });
     </script>
