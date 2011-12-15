@@ -983,8 +983,21 @@ ul#left-nav li ul li a.current {color:#a44b79;}
     padding:10px 10px 0 10px;
 }
 
-.homepage-activity-entry img {
-    width:196px;height:161px;margin:10px;}
+.homepage-activity-entry img 
+{
+    
+   
+	text-align:right;
+	height:161px;
+	width:196px;
+	position:relative;
+	z-index:10;
+	overflow:hidden;
+	float:left;
+    margin:10px;
+    clear: both;
+    
+    /*width:196px;height:161px;margin:10px;*/ }
     
 .homepage-activity-entry h2 a { color: #f51282;}
 .homepage-activity-entry h2 a:hover { text-decoration: underline; }
