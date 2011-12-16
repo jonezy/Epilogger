@@ -7,7 +7,9 @@
     ViewBag.Title = "Epilogger - " + Model.Name + "- Search";
 }
 
-@Html.Partial("EventToolbar", Model.ToolbarViewModel)
+@*New event menu*@
+@Html.Partial("Menu", Model.ToolbarViewModel)
+<div class="spacer"></div>
 
 <div id="events-nav">
     <h1>SEARCH EVENT</h1>

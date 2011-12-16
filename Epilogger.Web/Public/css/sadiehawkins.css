@@ -1279,8 +1279,8 @@ div#search-container input[type=image] {
 
 /* --- filter by time */
 .filter-by-time { 
-    width:655px; 
-    text-align:right;}
+    width:690px; 
+    }
     
 .filter-by-time h4 { 
     float:left; 
@@ -1857,3 +1857,17 @@ body::-webkit-scrollbar-corner{background-clip:padding-box;background-color:#f5f
 .dropbutton.big {min-width: 12em !important; max-width: 12em !important;}
 .dropbutton.big * {	font-size: 14px !important;}
 .dropbutton.big li * {	padding:4px 0px 4px 0px !important;}
+
+
+
+#SearchTimeFilter { float: right; margin-top: -35px; margin-right: 110px; }
+div#SearchTimeFilter input[type=text] {
+    float:left;
+	color:#1e72c8;
+	font:bold 20px InterstatePlusRegular;
+	text-transform:uppercase;
+	border:solid 1px #e3e3e3;
+	width:200px;
+	height:20px;
+	padding:5px 0 5px 5px;
+    background-color: #f7f7f7; }

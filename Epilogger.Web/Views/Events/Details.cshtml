@@ -105,7 +105,7 @@ else
                         @((Model.EventRatings.Sum(i => i.UserRating) / Model.EventRatings.Count())) out of 5 stars
                     </li>
                 }
-                    else
+                else
                 {
                     <li class="current-rating noratings" style="width:0%;" title="No ratings">
                         No ratings
@@ -113,12 +113,12 @@ else
                 }
             </ul>
             <a href="" class="smallRateLink">(Rate this event)</a>
-            using (Html.BeginForm("StarRatings", "events", FormMethod.Post, new { @id = "ratingForm" }))
-            {
+                using (Html.BeginForm("StarRatings", "events", FormMethod.Post, new { @id = "ratingForm" }))
+                {
                 @Html.Partial("_StarRatingTemplate")
                 @Html.HiddenFor(model => model.ID)
                 @Html.Hidden("UserRating")
-            }
+                }
         }
         else
         {
@@ -137,6 +137,37 @@ else
 
         @*New event menu*@
         @Html.Partial("Menu", Model.ToolbarViewModel)
+
+        <div id="SearchTimeFilter">
+            @using (Html.BeginForm("Search", "events", FormMethod.Post, null))
+            {
+                @Html.TextBox("SearchTerm", null, new { @class = "remove-bottom blur", title = "Search within Event ..." }) @*<input type="submit" class="blue-action-button remove-bottom fleft" value="Search" />*@
+                @Html.HiddenFor(model => model.ID)
+            }
+        </div>
+
+
+
+        @*<div id="SearchTimeFilter">
+            <div class="filter-by-time">
+                @using (Html.BeginForm("details", "events", new { id = Model.ID }, FormMethod.Post, null))
+                {
+                    @Html.Hidden("ResetDates")
+                    <h4>Filter timespan:&nbsp; </h4>
+                    <input type="text" class="picker-start-date" name="start_date" value="@Html.DisplayFor(e => e.FromDateTime, "ShortDate")" />
+                    <input type="text" class="picker-start-time" name="start_time" value="@Html.DisplayFor(e => e.FromDateTime, "FullTime")" />
+                    <div style="float: left;">&nbsp; to &nbsp;</div>
+                    <input type="text" class="picker-end-time" name="end_time" value="@Html.DisplayFor(e => e.ToDateTime, "FullTime")" />
+                    <input type="text" class="picker-end-date" name="end_date" value="@Html.DisplayFor(e => e.ToDateTime, "ShortDate")" />
+                    <input type="submit" value="ok" class="blue-action-button" /> 
+                    <input type="button" value="x" name="ClearDates" onclick="$('#ResetDates').val('1'); $(form).submit();" />
+                }
+            </div>
+            
+        </div>*@
+
+
+
 
         <div class="spacer"></div>
     </div>
@@ -203,7 +234,7 @@ else
         
                         @Html.Raw(SearchTerms.Substring(0, (SearchTerms.Length - 2)))
                     }
-                
+
                     catch
                     {
                         @Model.SearchTerms
@@ -218,7 +249,8 @@ else
 
 
     <div class="grid_7 alpha omega eventDescriptionSection">
-    @if (Model.Venue != null) {
+    @if (Model.Venue != null)
+    {
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
         <script type="text/javascript">
             var shape = {
