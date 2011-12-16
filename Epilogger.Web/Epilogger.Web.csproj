@@ -413,6 +413,7 @@
     <Content Include="Public\images\linebg.png" />
     <Content Include="Public\images\loading.gif" />
     <Content Include="Public\images\logo.png" />
+    <Content Include="Public\images\logo2.png" />
     <Content Include="Public\images\logow.png" />
     <Content Include="Public\images\reasons\1.png" />
     <Content Include="Public\images\reasons\2.png" />

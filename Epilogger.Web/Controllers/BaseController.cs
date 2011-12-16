@@ -10,10 +10,18 @@ namespace Epilogger.Web.Controllers {
     public class BaseController : Controller {
         protected Guid CurrentUserID {
             get {
-                Guid userId;
-                Guid.TryParse(CookieHelpers.GetCookieValue("lc", "uid").ToString(), out userId);
+
+                Guid userId = new Guid();
+                try
+                {
+                    Guid.TryParse(CookieHelpers.GetCookieValue("lc", "uid").ToString(), out userId);   
+                }
+                catch (Exception)
+                {
+                }
 
                 return userId;
+                
             }
         }
         

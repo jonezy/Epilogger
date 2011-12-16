@@ -36,8 +36,10 @@ jQuery(function ($) {
                             counter++;
                         });
                         $("#tweetlist li.tweet").each(function (index) {
-                            if (index >= maxItemsOnPage)
-                            { $(this).slideUp(); }
+                            if (index >= maxItemsOnPage) {
+                                $(this).slideUp();
+                                $(this).html();
+                            }
                         });
 
                         //There are new photos, update the count
@@ -91,8 +93,10 @@ jQuery(function ($) {
 
                         //This removes items that move off the end of the visible area
                         $("#photosvideos div.withcomment").each(function (index) {
-                            if (index >= photoMaxItemsOnPage)
-                            { $(this).hide(); }
+                            if (index >= photoMaxItemsOnPage) {
+                                $(this).hide(); 
+                                $(this).html();
+                             }
                         });
 
                         //Add the Pretty photo stuff to the photos

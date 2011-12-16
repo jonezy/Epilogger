@@ -218,7 +218,7 @@ namespace Epilogger.Web.Controllers {
             Model.ImageCount = IS.FindImageCountByEventID(id, this.FromDateTime(), this.ToDateTime());
             Model.Images = IS.FindByEventIDOrderDescTake9(id, this.FromDateTime(), this.ToDateTime());
             Model.CheckInCount = CS.FindCheckInCountByEventID(id, this.FromDateTime(), this.ToDateTime());
-            Model.CheckIns = CS.FindByEventIDOrderDescTakeAll(id, this.FromDateTime(), this.ToDateTime());
+            Model.CheckIns = CS.FindByEventIDOrderDescTake16(id, this.FromDateTime(), this.ToDateTime());
             Model.ExternalLinks = LS.FindByEventIDOrderDescTake3(id, this.FromDateTime(), this.ToDateTime());
             Model.BlogPosts = BS.FindByEventIDTake5(id, this.FromDateTime(), this.ToDateTime());
             Model.EventRatings = ES.FindEventRatingsByID(id, this.FromDateTime(), this.ToDateTime());

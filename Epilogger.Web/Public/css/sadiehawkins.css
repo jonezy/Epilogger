@@ -1,8 +1,8 @@
 body {
     padding:0px 40px;
 	color:#606060;	
-	background:#efefef url('../images/bg/top.png') repeat-x;
-	
+	/*background:#efefef url('../images/bg/top.png') repeat-x;*/
+	background-color: #efefef;
 	font: normal 12px/18px Helvetica, Arial, Sans-Serif; }
 
 a {
@@ -323,7 +323,7 @@ a#collapse {
     font-size:11px;
     display:block;
     padding:0 0 0 10px;
-	background:url('../images/bg/collapse.png') repeat-x 0 10px;}
+	/*background:url('../images/bg/collapse.png') repeat-x 0 10px;*/}
 
 a#collapse span {
     background:#eee;

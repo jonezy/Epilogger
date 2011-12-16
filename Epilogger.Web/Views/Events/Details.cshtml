@@ -541,7 +541,7 @@ else
             else
             { 
                 @: (@Html.ActionLink("See all links", "alllinks", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { }))
-                       }
+            }
 
                        @*(<a href="#" class="links-modal">Submit a link</a>)*@
         </p>
@@ -558,6 +558,14 @@ else
                 Epilogger.Data.Tweet ThisTweet = checkin.Tweets.Where(t => t.ID == checkin.TweetID).FirstOrDefault();
                 <a href="@checkin.FourSquareCheckInURL" target="_blank">
                     <img src="@Url.Content(ThisTweet.ProfileImageURL)" class="fleft" height="48" width="48" alt="" /></a>
+            }
+            @if (!IncludeDateRange)
+            { 
+                @: (@Html.ActionLink("See all checkins", "allcheckins", "events", new { id = Model.ID }))
+           }
+            else
+            { 
+                @: (@Html.ActionLink("See all checkins", "allcheckins", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { }))
             }
         </div>
     </div>
