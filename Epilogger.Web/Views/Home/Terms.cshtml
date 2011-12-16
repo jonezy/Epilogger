@@ -1,6 +1,9 @@
-﻿@{
+﻿@using Epilogger.Web;
+@using Epilogger.Web.Models;
+           
+@{
     Layout = "~/Views/Shared/_InteriorLayout.cshtml";
-    ViewBag.Title = "Terms & Conditions";
+    ViewBag.Title = "Epilogger - Terms of use";
 }
 
 <style>
@@ -53,15 +56,14 @@ p.MsoFooter, li.MsoFooter, div.MsoFooter
 a:link, span.MsoHyperlink
 	{mso-style-unhide:no;
 	color:blue;
-	text-decoration:underline;
-	text-underline:single;}
+	}
 a:visited, span.MsoHyperlinkFollowed
 	{mso-style-noshow:yes;
 	mso-style-priority:99;
 	color:purple;
 	mso-themecolor:followedhyperlink;
-	text-decoration:underline;
-	text-underline:single;}
+	}
+	
 p.DocID, li.DocID, div.DocID
 	{mso-style-name:DocID;
 	mso-style-unhide:no;

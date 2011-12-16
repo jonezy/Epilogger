@@ -1604,12 +1604,12 @@ a.smallRateLink:hover { text-decoration: underline; }
 
 
 /********************** Report **********************/
-
+#reportContainer { background-color: #fff; }
 
 #reportContainer h1, #reportContainer h2 { 
 	font:bold 32px 'InterstatePlusRegular';
 	text-transform:uppercase;
-	color:#000; margin: 0; padding: 0;}
+	color:#000; margin: 0; padding: 0; }
 
 #reportContainer h2 {
 	font-size:1.75em;
