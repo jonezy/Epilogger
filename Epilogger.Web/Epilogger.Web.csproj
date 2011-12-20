@@ -470,6 +470,7 @@
     <Content Include="Public\js\jquery.cycle.all.js" />
     <Content Include="Public\js\jquery.cycle.lite.js" />
     <Content Include="Public\js\jquery.expander.min.js" />
+    <Content Include="Public\js\jquery.jtruncate.pack.js" />
     <Content Include="Public\js\jquery.tweet.js" />
     <Content Include="Public\js\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Public\js\jquery.validate.min.js" />

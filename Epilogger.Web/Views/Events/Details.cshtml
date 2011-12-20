@@ -176,10 +176,11 @@ else
 
 
     <div class="grid_5 alpha omega eventDescriptionSection">
-        @Html.Raw(Model.Description.Replace("\r", "<br />"))
-
+        <div id="eventDescription">
+            @Html.Raw(Model.Description.Replace("\r", "<br />"))
+        </div>
         <span class="spacer"></span>
-    
+
         <table id="event-particulars">
         <tr>
             <td>
@@ -244,7 +245,8 @@ else
             </td>
         </tr>
         </table>
-   
+        
+        
     </div>
 
 
@@ -306,8 +308,8 @@ else
     }
 
     </div>
-
-<div class="clearfix"></div>
+    <div class="clearfix"></div>
+    
 <a href="#" id="collapse"><span><img src="@Url.Content("~/Public/images/icons/less.png")" /> hide details</span></a>
 
 @*

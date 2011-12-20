@@ -257,3 +257,18 @@ head.ready(function () {
 
     });
 });
+
+
+//Truncation
+head.ready(function () {
+    $('#eventDescription').jTruncate({
+        length: 160,
+        minTrail: 0,
+        moreText: "read more",
+        lessText: "read less",
+        ellipsisText: " ...",
+        moreAni: "fast",
+        lessAni: "fast"
+    });
+});
+
