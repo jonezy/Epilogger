@@ -437,13 +437,59 @@ namespace Epilogger.Data{
             sp.Command.AddParameter("EventID",EventID,DbType.Int32);
             return sp;
         }
+        public StoredProcedure DeleteEventBlogPostsBatch(int EventID){
+            StoredProcedure sp=new StoredProcedure("DeleteEventBlogPostsBatch",this.Provider);
+            sp.Command.AddParameter("EventID",EventID,DbType.Int32);
+            return sp;
+        }
+        public StoredProcedure DeleteEventCheckinsBatch(int EventID){
+            StoredProcedure sp=new StoredProcedure("DeleteEventCheckinsBatch",this.Provider);
+            sp.Command.AddParameter("EventID",EventID,DbType.Int32);
+            return sp;
+        }
         public StoredProcedure DeleteEventData(int EventID){
             StoredProcedure sp=new StoredProcedure("DeleteEventData",this.Provider);
             sp.Command.AddParameter("EventID",EventID,DbType.Int32);
             return sp;
         }
+        public StoredProcedure DeleteEventImageMetaDataBatch(int EventID){
+            StoredProcedure sp=new StoredProcedure("DeleteEventImageMetaDataBatch",this.Provider);
+            sp.Command.AddParameter("EventID",EventID,DbType.Int32);
+            return sp;
+        }
+        public StoredProcedure DeleteEventImagesBatch(int EventID){
+            StoredProcedure sp=new StoredProcedure("DeleteEventImagesBatch",this.Provider);
+            sp.Command.AddParameter("EventID",EventID,DbType.Int32);
+            return sp;
+        }
+        public StoredProcedure DeleteEventTweetsBatch(int EventID){
+            StoredProcedure sp=new StoredProcedure("DeleteEventTweetsBatch",this.Provider);
+            sp.Command.AddParameter("EventID",EventID,DbType.Int32);
+            return sp;
+        }
+        public StoredProcedure DeleteEventURLsBatch(int EventID){
+            StoredProcedure sp=new StoredProcedure("DeleteEventURLsBatch",this.Provider);
+            sp.Command.AddParameter("EventID",EventID,DbType.Int32);
+            return sp;
+        }
         public StoredProcedure GetHomePageActivity(){
             StoredProcedure sp=new StoredProcedure("GetHomePageActivity",this.Provider);
+            return sp;
+        }
+        public StoredProcedure GetLastTweetIDByEventID(int EventID){
+            StoredProcedure sp=new StoredProcedure("GetLastTweetIDByEventID",this.Provider);
+            sp.Command.AddParameter("EventID",EventID,DbType.Int32);
+            return sp;
+        }
+        public StoredProcedure GetNumberOfImageRecordsByURL(string TheURL){
+            StoredProcedure sp=new StoredProcedure("GetNumberOfImageRecordsByURL",this.Provider);
+            sp.Command.AddParameter("TheURL",TheURL,DbType.AnsiString);
+            return sp;
+        }
+        public StoredProcedure GetNumberOfRecordsByTwitterID(long TwitterID,long EventID){
+            StoredProcedure sp=new StoredProcedure("GetNumberOfRecordsByTwitterID",this.Provider);
+            sp.Command.AddParameter("TwitterID",TwitterID,DbType.Int64);
+            sp.Command.AddParameter("EventID",EventID,DbType.Int64);
             return sp;
         }
         public StoredProcedure GetRandomImagesByEventID(int EventID,int RecordsToReturn){

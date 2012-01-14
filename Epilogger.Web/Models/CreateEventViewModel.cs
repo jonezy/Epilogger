@@ -17,6 +17,10 @@ namespace Epilogger.Web.Models {
         [DisplayName("Name")]
         public String Name { get; set; }
 
+        [Required(ErrorMessage = "Please enter your events name")]
+        [DisplayName("Stub")]
+        public String EventStub { get; set; }
+        
         [DisplayName("Subtitle")]
         public String Subtitle { get; set; }
 
