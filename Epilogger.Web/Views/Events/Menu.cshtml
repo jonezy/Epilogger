@@ -27,7 +27,7 @@
         using (Html.BeginForm("unsubscribe", "events", FormMethod.Post, new { @class = "remove-bottom" }))
         {
             <input type="submit" value="Unsubscribe" name="SubscribeToEvent" class="fright blue-action-button" style="font:bold 13px 'InterstatePlusRegular'; padding:2px 3px" id="" />
-            @Html.HiddenFor(model => model.EventID)
+            @Html.HiddenFor(model => model.EventSlug)
         }
     }
     else
@@ -35,7 +35,7 @@
         using (Html.BeginForm("subscribe", "events", FormMethod.Post, new { @class = "remove-bottom" }))
         {
             <input type="submit" value="Subscribe" name="SubscribeToEvent" class="fright blue-action-button" style="font:bold 13px 'InterstatePlusRegular'; padding:2px 3px" id="" />
-            @Html.HiddenFor(model => model.EventID)
+            @Html.HiddenFor(model => model.EventSlug)
         }
     }
     

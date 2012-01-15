@@ -44,7 +44,7 @@ else
     var EventID = @Model.ID;
 
     var EventName = '@Model.Name';
-    var EventURL = 'http://www.epilogger.com/Events/Details/@Model.ID';
+    var EventURL = 'http://www.epilogger.com/Events/@Model.EventSlug/Details';
     var HasSubscribed = @Model.HasSubscribed.ToString().ToLower();
     
     var disableAutoupdate = false;
@@ -116,7 +116,7 @@ else
                 using (Html.BeginForm("StarRatings", "events", FormMethod.Post, new { @id = "ratingForm" }))
                 {
                 @Html.Partial("_StarRatingTemplate")
-                @Html.HiddenFor(model => model.ID)
+                @Html.HiddenFor(model => model.EventSlug)
                 @Html.Hidden("UserRating")
                 }
         }
@@ -142,7 +142,7 @@ else
             @using (Html.BeginForm("Search", "events", FormMethod.Post, null))
             {
                 @Html.TextBox("SearchTerm", null, new { @class = "remove-bottom blur", title = "Search within Event ..." }) @*<input type="submit" class="blue-action-button remove-bottom fleft" value="Search" />*@
-                @Html.HiddenFor(model => model.ID)
+                @Html.HiddenFor(model => model.EventSlug)
             }
         </div>
 
@@ -550,7 +550,7 @@ else
         <div class="clear">
         </div>
         <p>
-             (@Html.ActionLink("See all blog posts", "allblogposts", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { })) (<a href="#" class="blogposts-modal">Submit blog post</a>)</p>
+             (@Html.ActionLink("See all blog posts", "allblogposts", "events", new { id = Model.EventSlug, f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { })) (<a href="#" class="blogposts-modal">Submit blog post</a>)</p>
     </div>
     <!-- EXTERNAL LINKS -->
     <div class="grid_4 overflowhide">

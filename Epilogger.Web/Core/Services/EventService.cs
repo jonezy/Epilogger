@@ -171,6 +171,12 @@ namespace Epilogger.Web {
             return GetData().Where(e => e.ID == EventID).FirstOrDefault();
         }
 
+        public Event FindBySlug(String Slug)
+        {
+            return GetData().Where(e => e.EventSlug == Slug).FirstOrDefault();
+        }
+
+
         public List<Event> GetEventsByCategoryID(int CategoryID)
         {
             return GetData(e => e.CategoryID == CategoryID);

@@ -82,6 +82,7 @@
         <div class="blocking" >
             <div class="item-data clearfix">
                 <p>@Html.LabelFor(model => model.Name) @Html.TextBoxFor(model => model.Name, new { @class = "wide padded" })</p>
+                <p>@Html.LabelFor(model => model.EventSlug) @Html.TextBoxFor(model => model.EventSlug, new { @class = "wide padded" })</p>
                 <p>@Html.LabelFor(model => model.Subtitle) @Html.TextBoxFor(model => model.Subtitle, new { @class = "wide padded" })</p>
                 <p>@Html.LabelFor(model => model.CategoryID) @Html.DropDownListFor(model => model.CategoryID, Model.Categories, "Select your event category", new { @class = "wide padded" })</p>
             </div>
@@ -157,7 +158,7 @@
                 <div id="CollectionTimePicker">
                     <input type="text" class="picker-start-date" name="collection_start_date" value="@Html.DisplayFor(e => e.CollectionStartDateTime, "ShortDate")" />
                     <input type="text" class="picker-start-time" name="collection_start_time" value="@Html.DisplayFor(e => e.CollectionStartDateTime, "FullTime")" />
-                    <div style="float: left;">&nbsp;to&nbsp;</div>
+                    &nbsp;to&nbsp;
                     <input type="text" class="picker-end-time" name="collection_end_time" value="@Html.DisplayFor(e => e.CollectionEndDateTime, "FullTime")" />
                     <input type="text" class="picker-end-date" name="collection_end_date" value="@Html.DisplayFor(e => e.CollectionEndDateTime, "ShortDate")" />
                 </div>
