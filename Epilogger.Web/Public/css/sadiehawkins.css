@@ -785,6 +785,10 @@ fieldset.login input[type="text"],fieldset.login input[type="password"], fieldse
     width:480px !important;
     max-width:510px !important;}
     
+.item-data input.inlineTextbox, .item-data textarea.inlineTextbox, .item-data select.inlineTextbox {
+    display: inline;
+    width:298px !important; }
+    
 .item-data input.padded, .item-data textarea.padded, .item-data select.padded 
 {
     padding: 12px 5px;

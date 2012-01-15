@@ -425,7 +425,7 @@ namespace Epilogger.Web.Controllers {
 
                     this.StoreSuccess("Your Event was created successfully!  Dont forget to share it with your friends and attendees!");
 
-                    return RedirectToAction("details", new { id = EPLevent.ID });
+                    return RedirectToAction("details", new { id = EPLevent.EventSlug });
                 }
                 catch (Exception ex)
                 {
@@ -1138,7 +1138,7 @@ namespace Epilogger.Web.Controllers {
                 MP.SendMessage(DeleteMSG);
                 MP.Dispose();
 
-                this.StoreSuccess("Your event has been added to the Delete queue! Due to the large volumn of data, your event may take a few minutes to be removed from the system.");
+                this.StoreSuccess("Your event has been added to the Delete queue! Due to the large volume of data, your event may take a few minutes to be removed from the system.");
             }
             catch (Exception)
             {    

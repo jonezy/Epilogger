@@ -151,30 +151,53 @@ head.ready(function () {
 
 
 
-//    function buildSearchBoxes() {
-//        //Take the value from the DB and parse it into all the correct search boxes
-//        
+    //    function buildSearchBoxes() {
+    //        //Take the value from the DB and parse it into all the correct search boxes
+    //        
 
-//        
-//        counter++;
+    //        
+    //        counter++;
 
-//        var newItem = $("#template").clone();
-//        newItem.removeClass("hidden");
-//        newItem.insertAfter(this).attr('id', 'rule' + counter);
-//        $(':input', '#rule' + counter)
-//			.not(':button, :submit, :reset, :hidden')
-//			.val('')
-//			.removeAttr('checked')
-//			.removeAttr('selected')
-//            .attr("id", "seachTerm" + counter);
+    //        var newItem = $("#template").clone();
+    //        newItem.removeClass("hidden");
+    //        newItem.insertAfter(this).attr('id', 'rule' + counter);
+    //        $(':input', '#rule' + counter)
+    //			.not(':button, :submit, :reset, :hidden')
+    //			.val('')
+    //			.removeAttr('checked')
+    //			.removeAttr('selected')
+    //            .attr("id", "seachTerm" + counter);
 
-//        $("select", "#rule" + counter).attr("id", "operator" + counter);
+    //        $("select", "#rule" + counter).attr("id", "operator" + counter);
 
-//        $("#seachTerm" + counter).bind("keyup", function (e) {
-//            buildSearchString();
-//        });
-//        
-//    }
+    //        $("#seachTerm" + counter).bind("keyup", function (e) {
+    //            buildSearchString();
+    //        });
+    //        
+    //    }
+
+
+    //Friendly URL creation
+
+    $("#Name").bind("keyup", function (e) {
+        buildFriendlyURL($("#Name").val());
+    });
+
+
+    function buildFriendlyURL(title) {
+        var url = title
+        //.toLowerCase() // change everything to lowercase
+		.replace(/^\s+|\s+$/g, "") // trim leading and trailing spaces		
+		.replace(/[_|\s]+/g, "-") // change all spaces and underscores to a hyphen
+		.replace(/[^a-zA-Z0-9-]+/g, "") // remove all non-alphanumeric characters except the hyphen
+		.replace(/[-]+/g, "-") // replace multiple instances of the hyphen with a single instance
+		.replace(/^-+|-+$/g, "") // trim leading and trailing hyphens				
+		;
+
+        $("#EventSlug").val(url);
+    }
+
+
 
 
 
@@ -185,7 +208,6 @@ head.ready(function () {
     $(":input", "#rule-group").not(":button, :submit, :reset, :hidden").bind("keyup", function (e) {
         buildSearchString();
     });
-
     function buildSearchString() {
         var SearchString = "";
         $(":input", "#rule-group").not(":button, :submit, :reset, :hidden").each(function (index) {
