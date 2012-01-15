@@ -22,7 +22,7 @@
         } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_RATING) {
             @:RATED AN EVENT
         } else {
-            @Html.ActionLink(item.EventName, "details", "events", new { @id = item.EventID }, null)
+            @Html.ActionLink(item.EventName, "details", "events", new { @id = item.EventSlug }, null)
         }</strong>
         
         @if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION || 

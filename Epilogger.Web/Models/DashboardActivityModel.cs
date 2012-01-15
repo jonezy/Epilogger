@@ -7,6 +7,7 @@ namespace Epilogger.Web.Models {
         public string ActivityContent { get; set; }
         public string EventName { get; set; }
         public int EventID { get; set; }
+        public string EventSlug { get; set; }
     }
 
     public enum ActivityType {

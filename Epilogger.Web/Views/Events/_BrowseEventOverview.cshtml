@@ -43,7 +43,7 @@
             <div class="icon" style="background-image:url(@Url.Content("~/Public/images/date-icons/" + Model.RandomEvent.EventCategories.FirstOrDefault().ID + ".png"))">
             </div>
         </div>
-        <h1 style="font-size: 18pt">@Html.ActionLink(Model.RandomEvent.Name, "details", "events", new { @id = Model.RandomEvent.ID }, null)</h1>
+        <h1 style="font-size: 18pt">@Html.ActionLink(Model.RandomEvent.Name, "details", "events", new { @id = Model.RandomEvent.EventSlug }, null)</h1>
     </div>
     <br style="clear: both;" />
     <br />
@@ -53,7 +53,7 @@
            } else {
             @Model.RandomEvent.Description
            }
-           @Html.ActionLink("read more", "details", "events", new { id = Model.RandomEvent.ID })
+           @Html.ActionLink("read more", "details", "events", new { id = Model.RandomEvent.EventSlug })
         </p>
     }
 </div>
@@ -70,7 +70,7 @@
                     }
                 </div>
                 <div class="hottest-Title">
-                    <a href="/Events/@item.Event.ID/details">
+                    <a href="/Events/@item.Event.EventSlug/details">
                         <h1>@item.Event.Name</h1>
                     </a>
                     <div class="hottest-totals">
