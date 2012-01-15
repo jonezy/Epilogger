@@ -182,6 +182,9 @@ head.ready(function () {
     $("#Name").bind("keyup", function (e) {
         buildFriendlyURL($("#Name").val());
     });
+    $("#EventSlug").bind("keyup", function (e) {
+        buildFriendlyURL($("#EventSlug").val());
+    });
 
 
     function buildFriendlyURL(title) {
