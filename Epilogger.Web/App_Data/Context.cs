@@ -126,17 +126,18 @@ namespace Epilogger.Data
         public Query<Tweet> Tweets { get; set; }
         public Query<URL> URLS { get; set; }
         public Query<aspnet_User> aspnet_Users { get; set; }
+        public Query<Event> Events { get; set; }
         public Query<BetaSignup> BetaSignups { get; set; }
         public Query<UserFollowsEvent> UserFollowsEvents { get; set; }
         public Query<StatusMessage> StatusMessages { get; set; }
         public Query<UserAuthenticationProfile> UserAuthenticationProfiles { get; set; }
+        public Query<CollectionQueueSetting> CollectionQueueSettings { get; set; }
         public Query<UserClickAction> UserClickActions { get; set; }
         public Query<CheckIn> CheckIns { get; set; }
         public Query<Role> Roles { get; set; }
         public Query<userClickTracking> userClickTrackings { get; set; }
         public Query<Venue> Venues { get; set; }
         public Query<UserInRole> UserInRoles { get; set; }
-        public Query<Event> Events { get; set; }
         public Query<ImageMetaDatum> ImageMetaData { get; set; }
         public Query<Image> Images { get; set; }
         public Query<ActiveVisitorsQueueOLD> ActiveVisitorsQueueOLDs { get; set; }
@@ -254,17 +255,18 @@ namespace Epilogger.Data
             Tweets = new Query<Tweet>(provider);
             URLS = new Query<URL>(provider);
             aspnet_Users = new Query<aspnet_User>(provider);
+            Events = new Query<Event>(provider);
             BetaSignups = new Query<BetaSignup>(provider);
             UserFollowsEvents = new Query<UserFollowsEvent>(provider);
             StatusMessages = new Query<StatusMessage>(provider);
             UserAuthenticationProfiles = new Query<UserAuthenticationProfile>(provider);
+            CollectionQueueSettings = new Query<CollectionQueueSetting>(provider);
             UserClickActions = new Query<UserClickAction>(provider);
             CheckIns = new Query<CheckIn>(provider);
             Roles = new Query<Role>(provider);
             userClickTrackings = new Query<userClickTracking>(provider);
             Venues = new Query<Venue>(provider);
             UserInRoles = new Query<UserInRole>(provider);
-            Events = new Query<Event>(provider);
             ImageMetaData = new Query<ImageMetaDatum>(provider);
             Images = new Query<Image>(provider);
             ActiveVisitorsQueueOLDs = new Query<ActiveVisitorsQueueOLD>(provider);
@@ -285,17 +287,18 @@ namespace Epilogger.Data
             	DataProvider.Schema.Tables.Add(new TweetsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new URLsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new aspnet_UsersTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new EventsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new BetaSignupsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserFollowsEventTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new StatusMessagesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserAuthenticationProfileTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new CollectionQueueSettingsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserClickActionsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new CheckInsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new RolesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new userClickTrackingTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new VenuesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserInRolesTable(DataProvider));
-            	DataProvider.Schema.Tables.Add(new EventsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ImageMetaDataTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ImagesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ActiveVisitorsQueueOLDTable(DataProvider));

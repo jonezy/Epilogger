@@ -5,6 +5,7 @@ using Epilogger.Web.Core.Stats;
 namespace Epilogger.Web.Models {
     public class AllStatsViewModel {
         public string ID { get; set; }
+        public string EventSlug { get; set; }
         public string Name { get; set; }
         public string SearchTerms { get; set; }
 
