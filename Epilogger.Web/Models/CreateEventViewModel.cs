@@ -18,8 +18,8 @@ namespace Epilogger.Web.Models {
         public String Name { get; set; }
 
         [Required(ErrorMessage = "Please enter your events name")]
-        [DisplayName("Stub")]
-        public String EventStub { get; set; }
+        [DisplayName("Friendly URL")]
+        public String EventSlug { get; set; }
         
         [DisplayName("Subtitle")]
         public String Subtitle { get; set; }

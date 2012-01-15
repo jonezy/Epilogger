@@ -1204,7 +1204,7 @@ namespace Epilogger.Data {
 	                MaxLength = 0
                 });
 
-                Columns.Add(new DatabaseColumn("EventStub", this)
+                Columns.Add(new DatabaseColumn("EventSlug", this)
                 {
 	                IsPrimaryKey = false,
 	                DataType = DbType.String,
@@ -1460,15 +1460,15 @@ namespace Epilogger.Data {
       			}
 		    }
            
-            public IColumn EventStub{
+            public IColumn EventSlug{
                 get{
-                    return this.GetColumn("EventStub");
+                    return this.GetColumn("EventSlug");
                 }
             }
             				
-   			public static string EventStubColumn{
+   			public static string EventSlugColumn{
 			      get{
-        			return "EventStub";
+        			return "EventSlug";
       			}
 		    }
            
@@ -4113,7 +4113,7 @@ namespace Epilogger.Data {
 	                DataType = DbType.Guid,
 	                IsNullable = false,
 	                AutoIncrement = false,
-	                IsForeignKey = true,
+	                IsForeignKey = false,
 	                MaxLength = 0
                 });
 
@@ -4123,7 +4123,7 @@ namespace Epilogger.Data {
 	                DataType = DbType.Int32,
 	                IsNullable = false,
 	                AutoIncrement = false,
-	                IsForeignKey = true,
+	                IsForeignKey = false,
 	                MaxLength = 0
                 });
 

@@ -7,7 +7,7 @@ namespace Epilogger.Web.Models {
         private string mDescription = string.Empty;
         
         public int ID { get; set; }
-        public string EventStub { get; set; }
+        public string EventSlug { get; set; }
         public Guid UserID { get; set; }
         public Guid CurrentUserID { get; set; }
         public string Name { get; set; }

@@ -3,7 +3,7 @@
 namespace Epilogger.Web.Models {
     public class DashboardEventViewModel {
         public int ID { get; set; }
-        public string EventStub { get; set; }
+        public string EventSlug { get; set; }
         public int EventCategoryID { get; set; }
         public string Description { get; set; }
         public string Name { get; set; }

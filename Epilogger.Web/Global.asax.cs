@@ -164,8 +164,8 @@ namespace Epilogger.Web {
 
             routes.MapRoute(
                 "EventsRoutes",
-                "events/{stub}/{action}",
-                new { controller = "events", action = "index", stub = UrlParameter.Optional }
+                "events/{slug}/{action}",
+                new { controller = "events", action = "index", slug = UrlParameter.Optional }
             );
 
 
