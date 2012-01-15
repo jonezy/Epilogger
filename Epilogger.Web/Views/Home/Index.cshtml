@@ -2,7 +2,7 @@
            
 @{
     Layout = "~/Views/Shared/_HomepageLayout.cshtml";
-    ViewBag.Title = "Epilogger | We'll remember it for you";
+    ViewBag.Title = "Epilogger | We'll remember";
 }
 
 @*<div id="StatusMessages">
@@ -108,7 +108,7 @@
                 else
                 {
                     
-                    @Html.ActionLink(item.EventName, "details", "events", new { @id = item.EventID }, null)
+                    @Html.ActionLink(item.EventName, "details", "events", new { @id = item.EventSlug }, null)
                 }
             </strong>
         </div>
