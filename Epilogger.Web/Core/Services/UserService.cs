@@ -75,21 +75,46 @@ namespace Epilogger.Web {
 
         public List<Epilogger.Data.Event> GetUserSubscribedAndCreatedEvents(Guid userID, int? limit)
         {
-            StoredProcedure sp = db.GetUserDashboardActivity(userID.ToString());
-            List<DashboardActivityModel> DAM = sp.ExecuteTypedList<DashboardActivityModel>().Where(d => d.ActivityType == ActivityType.FOLLOW_EVENT || d.ActivityType == ActivityType.EVENT_CREATION).OrderByDescending(d=>d.Date).ToList();
-            if (limit.HasValue) {
-                DAM = DAM.Take(limit.Value).ToList();
-            }
-            List<Epilogger.Data.Event> MyEvents = new List<Epilogger.Data.Event>();
-            Epilogger.Data.Event MyEvent;
-            EventService ES = new EventService();
-            foreach (DashboardActivityModel item in DAM)
-            {
-                MyEvent = ES.FindByID(item.EventID);
-                MyEvents.Add(MyEvent);
+
+
+            // get the events that the user has created
+
+            List<Event> usersSubscribedAndCreatedEvents = new List<Event>();
+            foreach (var item in base.db.Events.Where(e=>e.UserID == userID).OrderByDescending(d=>d.CreatedDateTime)) {
+                usersSubscribedAndCreatedEvents.Add(item);
             }
 
-            return MyEvents.OrderByDescending(e => e.StartDateTime).ToList();
+            foreach (var item in base.db.UserFollowsEvents.Where(ufe => ufe.UserID == userID).OrderByDescending(d=>d.Timestamp)) {
+                usersSubscribedAndCreatedEvents.Add(item.Events.FirstOrDefault());
+            }
+
+            if (limit.HasValue) {
+                return usersSubscribedAndCreatedEvents.Take(limit.Value).ToList();
+            }
+
+            return usersSubscribedAndCreatedEvents;
+
+            //StoredProcedure sp = db.GetUserDashboardActivity(userID.ToString());
+            //List<DashboardActivityModel> DAM = new List<DashboardActivityModel>();
+            //if (limit.HasValue) {
+            //    DAM = sp.ExecuteTypedList<DashboardActivityModel>().Where(d => d.ActivityType == ActivityType.FOLLOW_EVENT || d.ActivityType == ActivityType.EVENT_CREATION).OrderByDescending(d => d.Date).Take(limit.Value).ToList();
+            //} else {
+            //    DAM = sp.ExecuteTypedList<DashboardActivityModel>().Where(d => d.ActivityType == ActivityType.FOLLOW_EVENT || d.ActivityType == ActivityType.EVENT_CREATION).OrderByDescending(d => d.Date).ToList();
+            //}
+            
+            //if (limit.HasValue) {
+            //    DAM = DAM.Take(limit.Value).ToList();
+            //}
+            //List<Epilogger.Data.Event> MyEvents = new List<Epilogger.Data.Event>();
+            //Epilogger.Data.Event MyEvent;
+            //EventService ES = new EventService();
+            //foreach (DashboardActivityModel item in DAM)
+            //{
+            //    MyEvent = ES.FindByID(item.EventID);
+            //    MyEvents.Add(MyEvent);
+            //}
+
+            //return MyEvents.OrderByDescending(e => e.StartDateTime).ToList();
         }
 
         public bool IsBetaUser(string emailAddress) {

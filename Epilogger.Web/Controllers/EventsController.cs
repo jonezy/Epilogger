@@ -145,7 +145,9 @@ namespace Epilogger.Web.Controllers {
                     model.EventCategories = CatS.AllCategories();
 
                     if (model.Authorized) {
-                        events = US.GetUserSubscribedAndCreatedEvents(CurrentUserID, 8).ToList();
+                        try {
+                            events = US.GetUserSubscribedAndCreatedEvents(CurrentUserID, 8).ToList();
+                        } catch { }
                     } else {
                         events = ES.TodaysEvents();
                     }
