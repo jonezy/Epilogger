@@ -8,5 +8,6 @@ namespace Epilogger.Web.Models {
         public Epilogger.Data.Image Image { get; set; }
         public string EventName { get; set; }
         public int EventID { get; set; }
+        public string EventSlug { get; set; }
     }
 }
