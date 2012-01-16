@@ -75,10 +75,6 @@ namespace Epilogger.Web {
 
         public List<Epilogger.Data.Event> GetUserSubscribedAndCreatedEvents(Guid userID, int? limit)
         {
-
-
-            // get the events that the user has created
-
             List<Event> usersSubscribedAndCreatedEvents = new List<Event>();
             foreach (var item in base.db.Events.Where(e=>e.UserID == userID).OrderByDescending(d=>d.CreatedDateTime)) {
                 usersSubscribedAndCreatedEvents.Add(item);
