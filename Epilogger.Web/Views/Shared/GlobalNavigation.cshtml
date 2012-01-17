@@ -1,4 +1,4 @@
-﻿@model Epilogger.Web.Models.GlobalNavigationModel          
+﻿@model Epilogger.Web.Models.GlobalNavigationModel
 
 <div id="user-status">
     @if (Model.UserLoggedIn) {
@@ -7,7 +7,6 @@
     }
     else
     {
-        
         @Html.ActionLink("Login & Register", "login", "account", null, new { @class = "person" })
     }     
 </div>

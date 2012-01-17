@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     
     var controller = ViewContext.RouteData.Values["controller"] as string ?? "";
     var action = ViewContext.RouteData.Values["action"] as string ?? "";
@@ -7,7 +8,7 @@
     @*<li>@Html.ActionLink("HOME", "Index", "Home", null, controller.ToLower() == "home" && action.ToLower() == "index" ? new { @class = "current" } : null)</li>*@
     
     
-    <li>@Html.ActionLink("BROWSE EVENTS", "index", "events", new { filter = "overview" }, controller.ToLower() == "events" ? new { @class = "current" } : null)</li>
+    <li>@Html.ActionLink("BROWSE EVENTS", "index", "browse", new { filter = "" }, controller.ToLower() == "browse" ? new { @class = "current" } : null)</li>
     @*<li><a href="#" id="event-nav" @if(controller.ToLower() == "events") {
                                         @:class = "current" 
                                    }>BROWSE EVENTS</a></li>*@
@@ -20,16 +21,21 @@
 @{
     string displayModifier = "style='display:none'";
 }
-@if (controller.ToLower() == "events" && action != "create") {
+@if (controller.ToLower() == "browse" || (controller.ToLower() == "events" && action != "create"))
+{
     displayModifier = "display:block !important;";
 }
 <ul class="subnav" style="@displayModifier" id="events-subnav">
-    <li>@Html.ActionLink("Today's", "index", "events", new { filter = "now" }, new { })</li>
-    <li>@Html.ActionLink("Upcoming", "index", "events", new { filter = "upcoming" }, new { })</li>
-    <li>@Html.ActionLink("Past", "index", "events", new { filter = "past" }, new { })</li>
-    <li>@Html.ActionLink("Subscribed", "index", "events", new { filter = "subscribed" }, new { })</li>
-    <li>@Html.ActionLink("My Events", "index", "events", new { filter = "myevents" }, new { })</li>
-    <li>@Html.ActionLink("Random", "index", "events", new { filter = "random" }, new { })</li>
+    <li>@Html.ActionLink("Today's", "index", "browse", new { filter = "now" }, new { })</li>
+    <li>@Html.ActionLink("Upcoming", "index", "browse", new { filter = "upcoming" }, new { })</li>
+    <li>@Html.ActionLink("Past", "index", "browse", new { filter = "past" }, new { })</li>
+    @*@if (Model.UserLoggedIn)
+    {*@
+        <li>@Html.ActionLink("Subscribed", "index", "browse", new { filter = "subscribed" }, new { })</li>
+        <li>@Html.ActionLink("My Events", "index", "browse", new { filter = "myevents" }, new { })</li>
+    @*}*@
+    <li>@Html.ActionLink("Random", "index", "browse", new { filter = "random" }, new { })</li>
+
 </ul>
 
 
