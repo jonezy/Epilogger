@@ -138,9 +138,9 @@ namespace Epilogger.Web {
 
 
             routes.MapRoute(
-                "EventBroseRoutes",
-                "events/{filter}",
-                new { controller = "events", action = "index", filter = UrlParameter.Optional }
+                "EventBrowseRoutes",
+                "browse/{filter}",
+                new { controller = "browse", action = "index", filter = UrlParameter.Optional }
             );
 
             routes.MapRoute(
@@ -149,11 +149,10 @@ namespace Epilogger.Web {
                 new { controller = "events", action = "category", categoryname = UrlParameter.Optional }
             );
 
-
             routes.MapRoute(
                 "InEventSearch",
                 "events/{id}/{action}/{IEsearchterm}",
-                new { controller = "events", action = "index", id = UrlParameter.Optional, IEsearchterm = UrlParameter.Optional }
+                new { controller = "events", action = "details", id = UrlParameter.Optional, IEsearchterm = UrlParameter.Optional }
             );
 
             //routes.MapRoute(
@@ -162,10 +161,16 @@ namespace Epilogger.Web {
             //    new { controller = "events", action = "index", id = UrlParameter.Optional }
             //);
 
+
+            routes.MapRoute(
+                "EventsRoutes1",
+                "events/{slug}",
+                new { controller = "events", action = "details", id = UrlParameter.Optional }
+            );
             routes.MapRoute(
                 "EventsRoutes",
                 "events/{slug}/{action}",
-                new { controller = "events", action = "index", slug = UrlParameter.Optional }
+                new { controller = "events", action = "details", id = UrlParameter.Optional }
             );
 
 

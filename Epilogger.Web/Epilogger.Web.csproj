@@ -150,6 +150,7 @@
     <Compile Include="Areas\Authentication\Controllers\TwitterController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BrowseController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -556,7 +557,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Structs.cs</LastGenOutput>
     </None>
-    <Content Include="Views\Events\Index.cshtml" />
+    <Content Include="Views\Browse\Index.cshtml" />
     <Content Include="Views\Events\Details.cshtml" />
     <Content Include="Views\Account\Create.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
@@ -592,11 +593,11 @@
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TimeSpan.cshtml" />
     <Content Include="Views\Events\Edit.cshtml" />
-    <Content Include="Views\Events\_BrowseEventOverview.cshtml" />
-    <Content Include="Views\Events\_BrowseEventLists.cshtml" />
+    <Content Include="Views\Browse\_BrowseEventOverview.cshtml" />
+    <Content Include="Views\Browse\_BrowseEventLists.cshtml" />
     <Content Include="Views\Shared\_ModalLayout.cshtml" />
     <Content Include="Views\Events\VenueSearch.cshtml" />
-    <Content Include="Views\Events\_BrowseEventTabContentTemplate.cshtml" />
+    <Content Include="Views\Browse\_BrowseEventTabContentTemplate.cshtml" />
     <Content Include="Views\Events\_VenueSearchResults.cshtml" />
     <Content Include="Views\Events\Category.cshtml" />
     <Content Include="Views\Events\_ImageTemplate.cshtml" />
