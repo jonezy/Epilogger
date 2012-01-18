@@ -7,7 +7,7 @@
     <h1>@Model.CategoryName.ToUpper()</h1>
     <br style="clear: both;" />
     @foreach (Epilogger.Data.EventCategory item in Model.EventCategories) {
-        <div class="browse-category-list-item" style="background-image:url(@Url.Content("~/Public/images/category-icons/" + item.ID + ".png"))">@Html.ActionLink(item.CategoryName, "Category", new { CategoryName = item.URLStub })</div>
+        <div class="browse-category-list-item" style="background-image:url(@Url.Content("~/Public/images/category-icons/" + item.ID + ".png"))">@Html.RouteLink(item.CategoryName, "BrowseCategtoryRoutes", new { CategoryName = item.URLStub })</div>
     }
 </div>
 <div id="events-content">

@@ -108,7 +108,7 @@
         FIND AN EVENT BY CATEGORY:</h2>
     @{int count = 0;}
     @foreach (Epilogger.Data.EventCategory c in Model.EventCategories) {
-        <div class="browse-category-list-item" style="background-image:url(@Url.Content("~/Public/images/category-icons/" + c.ID + ".png"))">@Html.ActionLink(c.CategoryName, "Category", new { CategoryName = c.URLStub })</div>
+        <div class="browse-category-list-item" style="background-image:url(@Url.Content("~/Public/images/category-icons/" + c.ID + ".png"))">@Html.RouteLink(c.CategoryName, "BrowseCategtoryRoutes", new { CategoryName = c.URLStub.ToLower() })</div>
         if (count == 2) {
         @:<br style="clear:both;" />
                     count = 0;
