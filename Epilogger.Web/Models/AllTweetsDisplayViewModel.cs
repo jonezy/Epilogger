@@ -4,6 +4,7 @@ using Epilogger.Web.Core.Stats;
 namespace Epilogger.Web.Models {
     public class AllTweetsDisplayViewModel {
         public int ID { get; set; }
+        public string EventSlug { get; set; }
         public string Name { get; set; }
         public bool ShowTopTweets { get; set; }
         public int TweetCount { get; set; }
