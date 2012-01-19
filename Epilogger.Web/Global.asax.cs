@@ -161,13 +161,7 @@ namespace Epilogger.Web {
                 new { controller = "events", action = "details", id = UrlParameter.Optional, IEsearchterm = UrlParameter.Optional }
             );
 
-            //routes.MapRoute(
-            //    "EventsRoutes",
-            //    "events/{id}/{action}",
-            //    new { controller = "events", action = "index", id = UrlParameter.Optional }
-            //);
-
-
+       
             routes.MapRoute(
                 "EventsRoutes1",
                 "events/{slug}",

@@ -33,5 +33,5 @@
             </div>
         </div>
     }
-    @MvcHtmlString.Create(Html.Pager(10, Model.CurrentPageIndex, Model.TotalRecords, new { controller = "Events", action = "index", filter = Model.BrowsePageFilter }))
+    @MvcHtmlString.Create(Html.Pager(10, Model.CurrentPageIndex, Model.TotalRecords, new { controller = "Browse", action = "index", filter = Model.BrowsePageFilter }))
 </div>

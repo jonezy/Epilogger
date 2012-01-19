@@ -3,6 +3,7 @@
 namespace Epilogger.Web.Models {
     public class AllPhotosDisplayViewModel {
         public int ID { get; set; }
+        public string EventSlug { get; set; }
         public string Name { get; set; }
         public bool ShowTopPhotos { get; set; }
         public int PhotoCount { get; set; }
