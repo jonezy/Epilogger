@@ -619,6 +619,7 @@ namespace Epilogger.Web.Controllers {
             AllCheckinsViewModel model = new AllCheckinsViewModel(checkins, currentPage, 10);
             model.ID = currentEvent.ID.ToString();
             model.Name = currentEvent.Name;
+            model.EventSlug = currentEvent.EventSlug;
             model.TotalRecords = CS.FindCheckInCountByEventID(currentEvent.ID, this.FromDateTime(), this.ToDateTime());
             model.ToolbarViewModel = BuildToolbarViewModel(currentEvent);
 

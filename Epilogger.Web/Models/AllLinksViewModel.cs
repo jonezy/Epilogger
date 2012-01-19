@@ -2,6 +2,7 @@
 namespace Epilogger.Web.Models {
     public class AllLinksViewModel {
         public string ID { get; set; }
+        public string EventSlug { get; set; }
         public string Name { get; set; }
 
         public int PageSize { get { return 12; } }

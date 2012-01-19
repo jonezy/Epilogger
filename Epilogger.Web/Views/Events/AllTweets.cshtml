@@ -73,5 +73,5 @@
         </div>
     }
 
-    @MvcHtmlString.Create(Html.Pager(100, Model.CurrentPageIndex, Model.TweetCount, new { controller = "Events", action = "AllTweets", id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }))
+    @MvcHtmlString.Create(Html.Pager(100, Model.CurrentPageIndex, Model.TweetCount, new { controller = "Events", action = "AllTweets", id = Model.EventSlug, f = Request.QueryString["f"], t = Request.QueryString["t"] }))
 </div>

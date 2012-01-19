@@ -5,9 +5,6 @@
     ViewBag.Title = "Epilogger - Browse (" + @Model.BrowsePageFilter + ")";
 }
 
-
-
-
 @switch (Model.BrowsePageFilter)
 {
     case "upcoming":
@@ -21,54 +18,3 @@
         @Html.Partial("_BrowseEventOverview")
     break;
 }
-
-
-
-
-
-
-
-
-
-
-@*
-<div class="clear"></div>
-<div class="spacer"></div>
-
-<h2>Long running Events</h2>
-<ul class="plain-list" id="">
-@foreach (var item in Model.OrderByDescending(t => t.EndDateTime)) {
-    if ((item.EndDateTime - DateTime.UtcNow) > new TimeSpan(30, 0, 0, 0))
-    {
-        if (!string.IsNullOrEmpty(item.Name)) {
-            <li class="grid_4">@Html.RouteLink(@item.Name, "EventsRoutes", new { controller = "events", action = "details", id = @item.ID })</li>
-        }    
-    }
-}
-</ul>
-
-<div class="clear"></div>
-<div class="spacer"></div>
-
-<h2>Normal Events</h2>
-<ul class="plain-list" id="">
-@foreach (var item in Model.OrderByDescending(t => t.EndDateTime)) {
-    if ((item.EndDateTime - DateTime.UtcNow) < new TimeSpan(30, 0, 0, 0))
-    {
-        if (!string.IsNullOrEmpty(item.Name)) {
-            <li class="grid_4">@Html.RouteLink(@item.Name, "EventsRoutes", new { controller = "events", action = "details", id = @item.ID })</li>
-        }    
-    }
-=======
-@switch (Model.BrowsePageFilter) {
-    case "upcoming":
-    case "past":
-    case "now":
-        @Html.Partial("_BrowseEventLists")
-    break;
-    default:
-        @Html.Partial("_BrowseEventOverview")
-    break;
-
-}
-*@

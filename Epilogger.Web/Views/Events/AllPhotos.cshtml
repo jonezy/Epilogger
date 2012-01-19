@@ -78,7 +78,7 @@
 
 <div class="clear"></div>
 <div class="spacer"></div>
-@MvcHtmlString.Create(Html.Pager(30, Model.CurrentPageIndex, Model.PhotoCount, new { controller = "Events", action = "AllPhotos", id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }))
+@MvcHtmlString.Create(Html.Pager(30, Model.CurrentPageIndex, Model.PhotoCount, new { controller = "Events", action = "AllPhotos", id = Model.EventSlug, f = Request.QueryString["f"], t = Request.QueryString["t"] }))
 
 <script type="text/javascript" charset="utf-8">
     head.ready(function () {
