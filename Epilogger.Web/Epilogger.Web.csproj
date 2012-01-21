@@ -512,6 +512,9 @@
     <Content Include="Public\js\prettyPhoto\images\thumbnails\t_4.jpg" />
     <Content Include="Public\js\prettyPhoto\images\thumbnails\t_5.jpg" />
     <Content Include="Public\js\prettyPhoto\js\jquery.prettyPhoto.js" />
+    <Content Include="Public\js\TimePicker\jquery.timePicker.js" />
+    <Content Include="Public\js\TimePicker\jquery.timePicker.min.js" />
+    <Content Include="Public\js\TimePicker\timePicker.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

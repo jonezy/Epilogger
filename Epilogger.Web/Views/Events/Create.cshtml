@@ -148,9 +148,9 @@
                 <label class="wide">Event Time</label>
                 <div id="EventTimePicker">
                     <input type="text" class="picker-start-date" name="start_date" value="@Html.DisplayFor(e => e.StartDateTime, "ShortDate")" />
-                    <input type="text" class="picker-start-time" name="start_time" value="@Html.DisplayFor(e => e.StartDateTime, "FullTime")" />
+                    <input type="text" class="picker-start-time" name="start_time" id="start_time" value="@Html.DisplayFor(e => e.StartDateTime, "FullTime")" />
                     &nbsp;to&nbsp;
-                    <input type="text" class="picker-end-time" name="end_time" value="@Html.DisplayFor(e => e.EndDateTime, "FullTime")" />
+                    <input type="text" class="picker-end-time" name="end_time" id="end_time" value="@Html.DisplayFor(e => e.EndDateTime, "FullTime")" />
                     <input type="text" class="picker-end-date" name="end_date" value="@Html.DisplayFor(e => e.EndDateTime, "ShortDate")" />
                 </div>
 

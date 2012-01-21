@@ -22,7 +22,8 @@
     <link href="@Url.Content("~/Public/js/prettyPhoto/css/prettyPhoto.css")" rel="stylesheet" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
     <link href="@Url.Content("~/Public/js/AnyTime/anytimec.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Public/js/datetime/txtdropdown/txtdropdown.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Public/js/DateSpanPicker/datespan.css")" rel="stylesheet" type="text/css" />
+    @*<link href="@Url.Content("~/Public/js/DateSpanPicker/datespan.css")" rel="stylesheet" type="text/css" />*@
+    <link href="@Url.Content("~/Public/js/TimePicker/timePicker.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Public/js/msdropdown/dd.css") rel="stylesheet" type="text/css" />
 
     <script src="@Url.Content("~/Public/js/head.load.min.js")" type="text/javascript" language="javascript"></script>
@@ -63,9 +64,10 @@
 	        });
         });
 
-        head.js('@Url.Content("~/Public/js/DateSpanPicker/jquery.date_input.js")')
-        head.js('@Url.Content("~/Public/js/DateSpanPicker/jquery.datespan-picker.js")')
+        //head.js('@Url.Content("~/Public/js/DateSpanPicker/jquery.date_input.js")')
+        //head.js('@Url.Content("~/Public/js/DateSpanPicker/jquery.datespan-picker.js")')
 //        head.js('@Url.Content("~/Public/js/jquery.cycle.lite.js")')
+        head.js('@Url.Content("~/Public/js/TimePicker/jquery.timePicker.js")')
         head.js('@Url.Content("~/Public/js/jquery.cycle.all.js")')
         head.js('@Url.Content("~/Public/js/jquery.jtruncate.pack.js")')
 

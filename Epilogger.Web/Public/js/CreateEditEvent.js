@@ -3,8 +3,30 @@ head.ready(function () {
 
 
     //Setup the Date span
-    $('#EventTimePicker').dateSpanPicker();
-    $('#CollectionTimePicker').dateSpanPicker();
+    //$('#EventTimePicker').dateSpanPicker();
+    //$('#CollectionTimePicker').dateSpanPicker();
+    $("#start_time, #end_time").timePicker({
+        show24Hours: false,
+        separator: ':',
+        step: 15,
+        leadingZero: false
+    });
+
+    // Store time used by duration.
+    var oldTime = $.timePicker("#start_time").getTime();
+
+    // Keep the duration between the two inputs.
+    $("#start_time").change(function () {
+        if ($("#end_time").val()) { // Only update when second input has a value.
+            // Calculate duration.
+            var duration = ($.timePicker("#end_time").getTime() - oldTime);
+            var time = $.timePicker("#start_time").getTime();
+            // Calculate and update the time in the second input.
+            $.timePicker("#end_time").setTime(new Date(new Date(time.getTime() + duration)));
+            oldTime = time;
+        }
+    });
+
 
     //Setup the page
     //$("#createSteps li").addClass("stepDisable");
