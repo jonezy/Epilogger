@@ -700,6 +700,7 @@ namespace Epilogger.Web.Controllers {
 
             model.CurrentUserRole = CurrentUserRole;
             model.CurrentUserID = CurrentUser.ID;
+            model.UserID = CurrentUser.ID;
             model.EventSlug = currentEvent.EventSlug;
 
             return View(model);
@@ -709,9 +710,10 @@ namespace Epilogger.Web.Controllers {
         [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to edit an event")]
         [HttpPost]
         public ActionResult Edit(FormCollection fc, CreateEventViewModel model) {
+            Event currentEvent = ES.FindBySlug(model.EventSlug);
+            model.ID = currentEvent.ID;
 
-            if (ModelState.IsValid) {
-                Event currentEvent = ES.FindByID(model.ID);
+            //if (ModelState.IsValid) {
                 try {
                     currentEvent.CategoryID = model.CategoryID;
                     currentEvent.SubTitle = model.Subtitle;
@@ -807,7 +809,7 @@ namespace Epilogger.Web.Controllers {
                     model.EventSlug = currentEvent.EventSlug;
                     return View(model);
                 }
-            }
+            //}
             
             return RedirectToAction("edit", new { id = model.EventSlug});
         }
