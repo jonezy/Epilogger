@@ -56,44 +56,7 @@
         <br style="clear:both;" />
         <div class="blocking">
             <div class="item-data clearfix">
-            
                 <p><label>Search Terms</label> @Html.TextBoxFor(model => model.SearchTerms, new { @class = "wide padded" })</p>
-
-               @* <div id="rule-group">
-                    <div class="rule" id="rule1">
-                        <div id="addMoreArrow">
-                            <img src="/Public/images/icons/addMoreArrow.png" alt="" class="fleft" />
-                            <span>Add More</span>
-                        </div>
-                        <label>* 1ST Term<br /><span class="small">(# " @@ allowed)</span></label><input type="text" id="seachTerm1" class="searchBox1 padded" />
-                        &nbsp;&nbsp;&nbsp;<a href="#" class="plus blue-action-button">+</a>
-                    </div>
-
-                    <div class="rule hidden" id="template">
-                        <label>NEXT TERM</label>
-                        <select id="operator1" class="searchOperator">
-                            <option value="OR">or</option>
-                            <option value="AND">and</option>
-                            <option value="NOT">not</option>
-                        </select>
-                        <input type="text" id="hst" class="med textPadding" />
-                        &nbsp;&nbsp;&nbsp;<a href="#" class="minus blue-action-button">-</a> <a href="#" class="plus blue-action-button">+</a>
-                    </div>
-                </div>
-
-                <div id="SearchTermsImage">
-                    <img src="/Public/images/icons/SearchPlainText.png" alt="" />
-                </div>
-                <div id="PlainTextSearch">
-                    
-                </div>
-                <div class="spacer"></div><br />
-                <div id="AdvancedContainer">
-                    (Too annoying? <a href="" id="AdvancedToggle">Switch to quick mode</a>)
-                    <div id="AdvancedSearchTerms">
-                        
-                    </div>
-                </div>*@
             </div>
         </div>
     </div>
@@ -105,24 +68,24 @@
     <div id="whenandwhere-info" class="item-card">
         <h4>WHEN AND WHERE</h4>
         <br style="clear:both;" />
-        <div class="item-data clearfix">
+        <div id="createevent-time" class="item-data clearfix">
             <br />
             <label class="wide">Event Time</label>
             <div id="EventTimePicker">
-                <input type="text" class="picker-start-date" name="start_date" value="@Html.DisplayFor(e => e.StartDateTime, "ShortDate")" />
-                <input type="text" class="picker-start-time" name="start_time" value="@Html.DisplayFor(e => e.StartDateTime, "FullTime")" />
+                <input type="text" class="picker-start-date" name="start_date" id="start_date" value="@Html.DisplayFor(e => e.StartDateTime, "ShortDate")" />
+                <input type="text" class="picker-start-time" name="start_time" id="start_time" value="@Html.DisplayFor(e => e.StartDateTime, "FullTime")" />
                 &nbsp;to&nbsp;
-                <input type="text" class="picker-end-time" name="end_time" value="@Html.DisplayFor(e => e.EndDateTime, "FullTime")" />
-                <input type="text" class="picker-end-date" name="end_date" value="@Html.DisplayFor(e => e.EndDateTime, "ShortDate")" />
+                <input type="text" class="picker-end-time" name="end_time" id="end_time" value="@Html.DisplayFor(e => e.EndDateTime, "FullTime")" />
+                <input type="text" class="picker-end-date" name="end_date" id="end_date" value="@Html.DisplayFor(e => e.EndDateTime, "ShortDate")" />
             </div>
-
+                
             <label class="wide">Collection Time</label>
             <div id="CollectionTimePicker">
-                <input type="text" class="picker-start-date" name="collection_start_date" value="@Html.DisplayFor(e => e.CollectionStartDateTime, "ShortDate")" />
-                <input type="text" class="picker-start-time" name="collection_start_time" value="@Html.DisplayFor(e => e.CollectionStartDateTime, "FullTime")" />
+                <input type="text" class="picker-start-date" name="collection_start_date" id="collection_start_date" value="@Html.DisplayFor(e => e.CollectionStartDateTime, "ShortDate")" />
+                <input type="text" class="picker-start-time" name="collection_start_time" id="collection_start_time" value="@Html.DisplayFor(e => e.CollectionStartDateTime, "FullTime")" />
                 &nbsp;to&nbsp;
-                <input type="text" class="picker-end-time" name="collection_end_time" value="@Html.DisplayFor(e => e.CollectionEndDateTime, "FullTime")" />
-                <input type="text" class="picker-end-date" name="collection_end_date" value="@Html.DisplayFor(e => e.CollectionEndDateTime, "ShortDate")" />
+                <input type="text" class="picker-end-time" name="collection_end_time" id="collection_end_time" value="@Html.DisplayFor(e => e.CollectionEndDateTime, "FullTime")" />
+                <input type="text" class="picker-end-date" name="collection_end_date" id="collection_end_date"  value="@Html.DisplayFor(e => e.CollectionEndDateTime, "ShortDate")" />
             </div>
 
 
@@ -143,6 +106,10 @@
                 @Html.HiddenFor(model => model.FoursquareVenueID)
                 @Html.HiddenFor(model => model.VenueID)
                 @Html.HiddenFor(model => model.EventSlug)
+                @Html.HiddenFor(model => model.CurrentUserRole)
+                @Html.HiddenFor(model => model.CurrentUserID)
+                @Html.HiddenFor(model => model.UserID)
+                @Html.HiddenFor(model => model.ID)
         </div>
     </div>
     

@@ -3,8 +3,6 @@ head.ready(function () {
 
 
     //Setup the Date span
-    //$('#EventTimePicker').dateSpanPicker();
-    //$('#CollectionTimePicker').dateSpanPicker();
     $("#start_time, #end_time").timePicker({
         show24Hours: false,
         separator: ':',
@@ -26,6 +24,36 @@ head.ready(function () {
             oldTime = time;
         }
     });
+
+    //Collection Time
+    $("#collection_start_time, #collection_end_time").timePicker({
+        show24Hours: false,
+        separator: ':',
+        step: 15,
+        leadingZero: false
+    });
+
+    // Store time used by duration.
+    var oldTime = $.timePicker("#collection_start_time").getTime();
+
+    // Keep the duration between the two inputs.
+    $("#collection_start_time").change(function () {
+        if ($("#collection_end_time").val()) { // Only update when second input has a value.
+            // Calculate duration.
+            var duration = ($.timePicker("#collection_end_time").getTime() - oldTime);
+            var time = $.timePicker("#collection_start_time").getTime();
+            // Calculate and update the time in the second input.
+            $.timePicker("#collection_end_time").setTime(new Date(new Date(time.getTime() + duration)));
+            oldTime = time;
+        }
+    });
+
+    //Setup up the date boxes
+    $("#start_date").datepicker();
+    $("#end_date").datepicker();
+    $("#collection_start_date").datepicker();
+    $("#collection_end_date").datepicker();
+
 
 
     //Setup the page
