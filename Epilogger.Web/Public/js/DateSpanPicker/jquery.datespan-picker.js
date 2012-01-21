@@ -84,13 +84,19 @@
             $end_time.toggle(!this.checked);
         });
 
+
+
+        
+
         $.each([$end_time, $start_time], function () {
             var $this = this;
+            keep_focus = true;
             $this
 			.click(function () {
 			    if ($this.hasClass('picker-focus')) {
 			        $this.data('time-chooser').filter(':hidden').show();
 			    }
+			    
 			})
 			.keyup(function (e) {
 			    if (e.keyCode == 40 /* down */) {
@@ -98,6 +104,8 @@
 			    }
 			})
 
+            
+            
             //            $('body').click(function (event) {
             //                if (!$(event.target).closest('.picker-time-chooser').length) {
             //                    if( $this.data( 'timeClick' ) ) {
@@ -109,28 +117,65 @@
             //                };
             //            });
 
+            .focus(function () {
+                time_has_focus = true;
+            })
+
 			.blur(function () {
 			    if ($this.data('timeClick')) {
 			        $this.data('timeClick', false);
 			        return false;
 			    }
+			    //hide dd was here
 			    $this.data('time-chooser').remove();
 			    $this.removeClass('picker-focus').removeData('time-chooser');
+
+
+
+//			    time_has_focus = false
+//			    if (!keep_focus) {
+//			        // hide dropdown
+//			        $this.data('time-chooser').remove();
+//			        $this.removeClass('picker-focus').removeData('time-chooser');
+//			    } else {
+//			        keep_focus = false;
+//			        $(this).focus();
+//			    }
+
 			});
         });
 
-//        $(".blurFixDiv").bind('clicked', function () {
-//            $.each([$end_time, $start_time], function () {
-//                var $this = this;
-//            
-//                if ($this.data('timeClick')) {
-//			            $this.data('timeClick', false);
-//			            return false;
-//			    }
-//			    $this.data('time-chooser').remove();
-//		        $this.removeClass('picker-focus').removeData('time-chooser');
-//		    });
-//        });
+//        $(".picker-time-chooser").onclick = function () {
+//            if (isChrome()) {
+//                keep_focus = time_has_focus;
+//            }
+//        }
+
+//        function timePickerClick() {
+//            if (isChrome()) {
+//                keep_focus = time_has_focus;
+//            }
+//        }
+
+        //        $(".picker-time-chooser").onclick = function () {
+        //            //if (isChrome()) {
+        //            keep_focus = time_has_focus;
+        //            //}
+        //        }
+
+
+        //        $(".blurFixDiv").bind('clicked', function () {
+        //            $.each([$end_time, $start_time], function () {
+        //                var $this = this;
+        //            
+        //                if ($this.data('timeClick')) {
+        //			            $this.data('timeClick', false);
+        //			            return false;
+        //			    }
+        //			    $this.data('time-chooser').remove();
+        //		        $this.removeClass('picker-focus').removeData('time-chooser');
+        //		    });
+        //        });
 
 
         // TODO: Merge these focus things better or something
@@ -234,6 +279,21 @@
         //var cb = $('<div>').addClass('blurFixDiv');
         var con = $('<ol>').addClass('picker-time-chooser');
 
+        //Add a click handler to call timePickerClick()
+
+
+        //        con.bind('click', function () {
+        //            timePickerClick();
+        //        });
+
+        con.bind('scroll', function () {
+            $(_options.classes.start_date, $t).focus();
+        });
+
+//        $('.picker-time-chooser').scroll(
+//            function () {
+//                $start_time.focus();
+//            });
 
         for (var x = o.minMinutes; x < o.maxMinutes; x += 30) {
             var mer = 'am';
@@ -260,6 +320,8 @@
 			});
         }
     }
+
+
 
     DateSpanPicker.prototype._stringToDate = function (string) {
         var m;
