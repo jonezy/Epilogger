@@ -49,11 +49,37 @@ head.ready(function () {
     });
 
     //Setup up the date boxes
-    $("#start_date").datepicker();
-    $("#end_date").datepicker();
-    $("#collection_start_date").datepicker();
-    $("#collection_end_date").datepicker();
+    $(function () {
+        var dates = $("#start_date, #end_date").datepicker({
+            changeMonth: true,
+            numberOfMonths: 3,
+            onSelect: function (selectedDate) {
+                var option = this.id == "start_date" ? "minDate" : "maxDate",
+					instance = $(this).data("datepicker"),
+					date = $.datepicker.parseDate(
+						instance.settings.dateFormat ||
+						$.datepicker._defaults.dateFormat,
+						selectedDate, instance.settings);
+                dates.not(this).datepicker("option", option, date);
+            }
+        });
+    });
 
+    $(function () {
+        var dates = $("#collection_start_date, #collection_end_date").datepicker({
+            changeMonth: true,
+            numberOfMonths: 3,
+            onSelect: function (selectedDate) {
+                var option = this.id == "collection_start_date" ? "minDate" : "maxDate",
+					instance = $(this).data("datepicker"),
+					date = $.datepicker.parseDate(
+						instance.settings.dateFormat ||
+						$.datepicker._defaults.dateFormat,
+						selectedDate, instance.settings);
+                dates.not(this).datepicker("option", option, date);
+            }
+        });
+    });
 
 
     //Setup the page
