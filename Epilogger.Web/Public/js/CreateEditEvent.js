@@ -265,7 +265,7 @@ head.ready(function () {
 
     function buildFriendlyURL(title) {
         var url = title
-        //.toLowerCase() // change everything to lowercase
+        .toLowerCase() // change everything to lowercase
 		.replace(/^\s+|\s+$/g, "") // trim leading and trailing spaces		
 		.replace(/[_|\s]+/g, "-") // change all spaces and underscores to a hyphen
 		.replace(/[^a-zA-Z0-9-]+/g, "") // remove all non-alphanumeric characters except the hyphen
