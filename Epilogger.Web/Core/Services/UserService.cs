@@ -23,6 +23,10 @@ namespace Epilogger.Web {
             return base.GetRepository<User>().Add(entity);
         }
 
+        public int DeleteUser(Guid userId) {
+            return base.GetRepository<User>().Delete(userId);
+        }
+
         public object SaveUserFollowsEvent(UserFollowsEvent entity) {
             return base.GetRepository<UserFollowsEvent>().Add(entity);
         }

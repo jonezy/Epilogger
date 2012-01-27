@@ -18,15 +18,10 @@ head.ready(function () {
         document.location.reload(true);
     }
 
-    $('input[title!=""]').hint();
+    $('input[title!=""]').hint();
+
 });
 
-//attaches  a calendar to date of birth fields.
-$(".dob").datepicker({
-    changeMonth: true,
-    changeYear: true,
-    yearRange: "-90:+0"
-});
 
 //This fills in the Comments on the Image popups (tweets)
 function changeDescription() {
