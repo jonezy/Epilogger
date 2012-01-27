@@ -30,7 +30,17 @@
             </div>
         </div>
     </div>
+    <script>
+        head.ready(function () {
 
+            //attaches  a calendar to date of birth fields.
+            $(".dob").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-90:+0"
+            });
+        });
+    </script>
     <div class="grid_4 createArrow">
         <p><input type="submit" class="blue-action-button createAccountButton" value="CREATE THIS ACCOUNT" /></p>
     </div>

@@ -47,15 +47,14 @@ namespace Epilogger.Web.Controllers {
                 //}
 
                 //Ensure the User is over 13
-                if ((DateTime.Now - DateTime.Parse(model.DateOfBirth)).Days / 366 < 13)
+                if (model.DateOfBirth != null && (DateTime.Now - DateTime.Parse(model.DateOfBirth)).Days / 366 < 13)
                 {
                     this.StoreError("You must be must be 13 years of age or older to use Epilogger.");
                     return View(model);
                 }
-
-
+                User user = null;
                 try {
-                    User user = Mapper.Map<CreateAccountModel, User>(model);
+                    user = Mapper.Map<CreateAccountModel, User>(model);
                     user.IsActive = false; // ensure this is set.
                     service.Save(user);
 
@@ -78,6 +77,7 @@ namespace Epilogger.Web.Controllers {
                     return RedirectToAction("login", "account");
                 } catch (Exception ex) {
                     this.StoreError("There was a problem creating your account");
+                    service.DeleteUser(user.ID);
                     return View(model);
                 }
             } else
@@ -110,12 +110,9 @@ namespace Epilogger.Web.Controllers {
             service.Save(user);
             this.StoreSuccess("Your account has been activated!  You can go ahead and login to unleash the epicness!");
             return RedirectToAction("login", "account");
-
-            return View();
         }
 
         [HttpPost]
-        //[RequiresAuthentication(AccessDeniedMessage = "You must be logged in to edit your account")]
         public ActionResult Update(AccountModel model, FormCollection c) {
             try {
                 User user = CurrentUser;
