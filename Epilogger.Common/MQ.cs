@@ -120,6 +120,13 @@ namespace Epilogger.Common
                 Delete
             }
 
+            public enum MediaType
+            {
+                Tweet,
+                Photo
+            }
+
+
             [Serializable]
             [JsonObject(MemberSerialization.OptOut)]
             public class TwitterSearchMSG
@@ -171,7 +178,15 @@ namespace Epilogger.Common
                 public object TaskObjectData { get; set; }
             }
 
-
+            [Serializable]
+            [JsonObject(MemberSerialization.OptOut)]
+            public class TrendingUpdateMSG
+            {
+                public long EventID { get; set; }
+                public MediaType MediaType { get; set; }
+                public int Incrementvalue { get; set; }
+                public DateTime UpdateDateTime { get; set; }
+            }
 
         }
 

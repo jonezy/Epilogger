@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Epilogger.Web.Core.Stats;
+using Epilogger.Data;
 
 namespace Epilogger.Web.Models {
     public class HomepageViewModel {
@@ -11,6 +12,8 @@ namespace Epilogger.Web.Models {
 
         public List<HomepageActivityModel> Activity { get; set; }
         public IEnumerable<Epilogger.Data.StatusMessage> StatusMessages { get; set; }
+
+        public List<Event> TrendingEvents { get; set; }
 
         public HomepageTotal HomepageTotal { get; set; }
 

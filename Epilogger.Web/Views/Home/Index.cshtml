@@ -1,8 +1,10 @@
 ﻿@model Epilogger.Web.Models.HomepageViewModel
-           
+
+
 @{
     Layout = "~/Views/Shared/_HomepageLayout.cshtml";
     ViewBag.Title = "Epilogger | We'll remember";
+
 }
 
 @*<div id="StatusMessages">
@@ -67,10 +69,23 @@
     
     <div class="clear spacer"></div>
 
-
+    <div class="homepage-trending">
+        <h2>Trending Events</h2>
+        <ul>
+        @foreach (Epilogger.Data.Event ev in Model.TrendingEvents)
+        {
+            <strong class="title EVENT_RATING">
+                <li>@Html.ActionLink(ev.Name, "details", "events", new { @id = ev.EventSlug }, null)<br /></li>
+            </strong>
+        }
+        </ul>
+            
+    </div>
+    
     @foreach (var item in Model.Activity)
     {
         <div class="homepage-activity-entry">
+
             @if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION || item.ActivityType == Epilogger.Web.Models.ActivityType.FOLLOW_EVENT)
             {
                 <h2><br />@Html.ActionLink(item.EventName, "details", "events", new { @id = item.EventSlug }, null)</h2>
@@ -112,6 +127,11 @@
                 }
             </strong>
         </div>
+        if (Model.Activity.IndexOf(item) < 2) 
+        { 
+            <div class="homepage-activity-entry-spacer">&nbsp;</div>
+        } 
+       
     }
 
 
