@@ -22,12 +22,24 @@ namespace Epilogger.Web.Controllers {
 
             IEnumerable<HomepageActivityModel> activity = ES.GetHomepageActivity();
             HomepageViewModel model = new HomepageViewModel(
-                activity.Take(4).ToList(),
+                activity.Take(3).ToList(),
                 0,
                 activity.Count()
             );
 
             model.HomepageTotal = new HomepageTotals().HomepageTotal;
+
+            //Do the redis stuff to get the Trending Events
+            Common.Redis EPLRedis = new Common.Redis();
+            List<string> TrendingEventID = EPLRedis.GetTrendingEvents();
+            List<Event> TrendingEvents = new List<Event>();
+            foreach (string TEventID in TrendingEventID)
+            {
+                Event e = ES.FindByID((int.Parse(TEventID)));
+                e.Name = e.Name.TruncateAtWord(35);
+                TrendingEvents.Add(e);
+            }
+            model.TrendingEvents = TrendingEvents.Take(10).ToList();
 
             //Convert the Image ID in the ActivityContent to the Image HTML from the template. Facilite common HTML and single place for image HTML.
             foreach (HomepageActivityModel item in model.Activity) {

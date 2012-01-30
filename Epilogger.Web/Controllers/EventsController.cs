@@ -765,7 +765,7 @@ namespace Epilogger.Web.Controllers {
 
                     if (!string.IsNullOrEmpty(model.FoursquareVenueID))
                     {
-                        if (!venueService.DoesVenueExist(currentEvent.VenueID ?? 0))
+                        if (!venueService.DoesVenueExist(model.FoursquareVenueID))
                         {
                             // have to look up the foursquare venue and then create it and save it to the db.
                             dynamic foursquareVenue = LookupFoursquareVenue(model.FoursquareVenueID);

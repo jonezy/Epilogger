@@ -38,6 +38,19 @@ namespace Epilogger.Web {
             }
         }
 
+        public bool DoesVenueExist(string FourSquareVenueID)
+        {
+            int v = db.Venues.Where(d => d.FoursquareVenueID == FourSquareVenueID).Count();
+            if (v == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
 
 
     }

@@ -973,14 +973,35 @@ ul#left-nav li ul li a.current {color:#a44b79;}
 
 #homepage-content {float:left;width:880px;}
 
-.homepage-activity-entry { 
+.homepage-activity-entry 
+{ 
     float:left;
     width:216px;
     height:218px;
     overflow:hidden;
-    margin:0px 20px 20px 0px;
+    margin:0px 0 20px 0px;
     color:#828282; 
-    background:url(../images/homepage/feed.bg.png) no-repeat;}
+    background:url(../images/homepage/feed.bg.png) no-repeat;
+}
+
+.homepage-activity-entry-spacer
+{ 
+    float:left;
+    width:20px;
+    height:218px;
+    overflow:hidden;
+}
+
+
+.homepage-trending     
+{
+    float:left;
+    width:252px;
+    height:218px;
+    overflow:hidden;
+    margin:0px 20px 20px 0px;
+    color:#828282;
+}
 
 .homepage-activity-entry h2 {
     margin:10px;
