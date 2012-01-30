@@ -75,6 +75,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\RichmondDay.Helpers.dll</HintPath>
     </Reference>
+    <Reference Include="ServiceStack.Common, Version=1.0.4411.10254, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Common.3.4.1\lib\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces, Version=1.0.4411.10253, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Common.3.4.1\lib\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Redis, Version=3.2.2.5191, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.Redis.3.3.6\lib\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text, Version=3.4.1.34751, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Text.3.4.1\lib\ServiceStack.Text.dll</HintPath>
+    </Reference>
     <Reference Include="smokesignals">
       <HintPath>..\packages\smokesignals.1.4\lib\smokesignals.dll</HintPath>
     </Reference>
