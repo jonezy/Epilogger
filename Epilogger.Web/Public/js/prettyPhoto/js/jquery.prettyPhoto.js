@@ -12,7 +12,7 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 (function($) {
     var locURL = document.location.href;
     var newLocURL = locURL.replace("#","%23");
-
+    
 	$.prettyPhoto = {version: '3.1.2'};
 	
 	$.fn.prettyPhoto = function(pp_settings) {
@@ -90,9 +90,9 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 			inline_markup: '<div class="pp_inline">{content}</div>',
 			custom_markup: '',
             social_tools: '', //
-            share_tools: '<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script><a name="fb_share"></a><a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="epilogger">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script><g:plusone></g:plusone>'}, pp_settings);
+            share_tools: '<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script><a name="fb_share"></a><a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-uri="'+ newLocURL +'" data-via="epilogger">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script><g:plusone></g:plusone>'}, pp_settings);
 
-            //<span class="fright fblue"><small>Share: </small> <a href="http://twitter.com/intent/tweet?text=I+was+at+' + EventName + '+and+Epilogger+remembered+it+for+me!+Reminisce+with+me!+'+ EventURL +'+%23Epilogger" target="_blank"><img src="/Content/images/icons/twitter.png" class="valign"></a> <a target="_blank" href="http://www.facebook.com/sharer.php?u='+EventURL+'" onclick="return fbs_click()" text="I was at '+ EventName + ' and Epilogger remembered it for me! Reminisce with me and help write the story!'+EventURL+'" #Epilogger><img src="/Content/images/icons/facebook.png" class="valign"/></a></span>
+            //<span class="fright fblue"><small>Share: </small> <a href="http://twitter.com/intent/tweet?text=I+was+at+' + EventName + '+and+Epilogger+remembered+it+for+me!+Reminisce+with+me!+'+ newLocURL +'+%23Epilogger" target="_blank"><img src="/Content/images/icons/twitter.png" class="valign"></a> <a target="_blank" href="http://www.facebook.com/sharer.php?u='+EventURL+'" onclick="return fbs_click()" text="I was at '+ EventName + ' and Epilogger remembered it for me! Reminisce with me and help write the story!'+EventURL+'" #Epilogger><img src="/Content/images/icons/facebook.png" class="valign"/></a></span>
             
 		//EventURL
         //newLocURL
