@@ -90,8 +90,9 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 			inline_markup: '<div class="pp_inline">{content}</div>',
 			custom_markup: '',
             social_tools: '', //
-            share_tools: '<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script><a name="fb_share"></a><a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-uri="'+ newLocURL +'" data-via="epilogger">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script><g:plusone></g:plusone>'}, pp_settings);
-
+            share_tools: '<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script><a name="fb_share"></a><a href="'+ locURL +'" class="twitter-share-button" data-count="horizontal" data-via="epilogger">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script><g:plusone></g:plusone>'}, pp_settings);
+            
+            // <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://localhost:16007/events/clickflickca-stream#!prettyPhoto[latestphotos]/0/" data-text="I remembered via epilogger" data-via="epilogger">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             //<span class="fright fblue"><small>Share: </small> <a href="http://twitter.com/intent/tweet?text=I+was+at+' + EventName + '+and+Epilogger+remembered+it+for+me!+Reminisce+with+me!+'+ newLocURL +'+%23Epilogger" target="_blank"><img src="/Content/images/icons/twitter.png" class="valign"></a> <a target="_blank" href="http://www.facebook.com/sharer.php?u='+EventURL+'" onclick="return fbs_click()" text="I was at '+ EventName + ' and Epilogger remembered it for me! Reminisce with me and help write the story!'+EventURL+'" #Epilogger><img src="/Content/images/icons/facebook.png" class="valign"/></a></span>
             
 		//EventURL
