@@ -25,7 +25,7 @@ Select * from Events
 UPDATE
     Events
 SET
-    Events.EventSlug = replace(replace(replace(replace(replace(
+    Events.EventSlug = lower(replace(replace(replace(replace(replace(
 replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(Events.Name
 			, '@', '')
 			, '.', '')
@@ -41,17 +41,17 @@ replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(
 			, '<', '')
 			, '&', '')
 			, '/', '')
-			, ' ', '-')
+			, ' ', '-'))
 FROM
     Events
 
 Select * from Events
 
-Update Events Set EventSlug='Govcamp-Canada-2011' Where ID=130
-Update Events Set EventSlug='Epilogger' Where ID=133
-Update Events Set EventSlug='Red-Bull-Music-Academy-World-Tour--Culture-Clash-TO' Where ID=213
-Update Events Set EventSlug='TechDays-2011' Where ID=169
-Update Events Set EventSlug='Love-A-Heart' Where ID=361
+Update Events Set EventSlug='govcamp-canada-2011' Where ID=130
+Update Events Set EventSlug='epilogger' Where ID=133
+Update Events Set EventSlug='red-bull-music-academy-world-tour--culture-clash-TO' Where ID=213
+Update Events Set EventSlug='techdays-2011' Where ID=169
+Update Events Set EventSlug='love-a-heart' Where ID=361
 
 
 

@@ -25,6 +25,11 @@ namespace Epilogger.Web {
             return GetData(v => v.ID == ID).FirstOrDefault();
         }
 
+        public Venue FindByFourSquareVenueID(string FourSquareVenueID)
+        {
+            return GetData(v => v.FoursquareVenueID == FourSquareVenueID).FirstOrDefault();
+        }
+
         public bool DoesVenueExist(int ID)
         {
             int v = db.Venues.Where(d => d.ID == ID).Count();

@@ -761,7 +761,7 @@ namespace Epilogger.Web.Controllers {
                     //    currentEvent.CollectionEndDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(collectionEnd);
                     //}
 
-                    currentEvent.VenueID = model.VenueID;
+                    //currentEvent.VenueID = model.VenueID;
 
                     if (!string.IsNullOrEmpty(model.FoursquareVenueID))
                     {
@@ -785,6 +785,15 @@ namespace Epilogger.Web.Controllers {
                             // save the venue
                             venueService.Save(venue);
                             currentEvent.VenueID = venue.ID;
+                        }
+                        else
+                        {
+                            //Need to look up the VenueID of the new FourSquareID
+                            Venue LookupVenue = venueService.FindByFourSquareVenueID(model.FoursquareVenueID);
+                            if (LookupVenue != null)
+                            {
+                                currentEvent.VenueID = LookupVenue.ID;
+                            }
                         }
                     }
 
