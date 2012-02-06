@@ -20,7 +20,7 @@ namespace Epilogger.Web.Controllers {
         public ActionResult Index() {
             ViewBag.Message = "Welcome to Epilogger!";
 
-            IEnumerable<HomepageActivityModel> activity = ES.GetHomepageActivity();
+            var activity = ES.GetHomepageActivity();
             HomepageViewModel model = new HomepageViewModel(
                 activity.Take(3).ToList(),
                 0,
@@ -30,26 +30,24 @@ namespace Epilogger.Web.Controllers {
             model.HomepageTotal = new HomepageTotals().HomepageTotal;
 
             //Do the redis stuff to get the Trending Events
-            Common.Redis EPLRedis = new Common.Redis();
-            List<string> TrendingEventID = EPLRedis.GetTrendingEvents();
-            List<Event> TrendingEvents = new List<Event>();
-            foreach (string TEventID in TrendingEventID)
+            var eplRedis = new Common.Redis();
+            var trendingEventId = eplRedis.GetTrendingEvents();
+            var trendingEvents = new List<Event>();
+            foreach (var e in trendingEventId.Take(10).Select(eventId => ES.FindByID((int.Parse(eventId)))))
             {
-                Event e = ES.FindByID((int.Parse(TEventID)));
                 e.Name = e.Name.TruncateAtWord(35);
-                TrendingEvents.Add(e);
+                trendingEvents.Add(e);
             }
-            model.TrendingEvents = TrendingEvents.Take(10).ToList();
+            model.TrendingEvents = trendingEvents;
 
             //Convert the Image ID in the ActivityContent to the Image HTML from the template. Facilite common HTML and single place for image HTML.
-            foreach (HomepageActivityModel item in model.Activity) {
-                if (item.ActivityType == ActivityType.PHOTOS_VIDEOS) {
-                    item.Image = IS.FindByID(Convert.ToInt32(item.ActivityContent));
-                }
+            foreach (var item in model.Activity.Where(item => item.ActivityType == ActivityType.PHOTOS_VIDEOS))
+            {
+                item.Image = IS.FindByID(Convert.ToInt32(item.ActivityContent));
             }
 
-            StatusMessagesService SC = new StatusMessagesService();
-            model.StatusMessages = SC.GetLast10Messages();
+            var sc = new StatusMessagesService();
+            model.StatusMessages = sc.GetLast10Messages();
 
             return View(model);
         }
@@ -105,16 +103,15 @@ namespace Epilogger.Web.Controllers {
         }
 
         public ActionResult StatusMessages() {
-            StatusMessage model = new StatusMessage();
-            model.MSGDateTime = DateTime.UtcNow;
+            var model = new StatusMessage {MSGDateTime = DateTime.UtcNow};
             return View(model);
         }
 
         [HttpPost]
         public ActionResult StatusMessages(StatusMessage model) {
 
-            StatusMessagesService SC = new StatusMessagesService();
-            SC.Save(model);
+            var sc = new StatusMessagesService();
+            sc.Save(model);
 
             return View();
         }
@@ -152,9 +149,9 @@ namespace Epilogger.Web.Controllers {
         [HttpPost]
         public ActionResult Search(SearchEventViewModel model) {
 
-            IEnumerable<Epilogger.Data.Event> Evs = ES.GetEventsBySearchTerm(model.SearchTerm);
+            IEnumerable<Epilogger.Data.Event> evs = ES.GetEventsBySearchTerm(model.SearchTerm);
 
-            model.Events = Mapper.Map<IEnumerable<Epilogger.Data.Event>, List<DashboardEventViewModel>>(Evs);
+            model.Events = Mapper.Map<IEnumerable<Epilogger.Data.Event>, List<DashboardEventViewModel>>(evs);
 
             return View(model);
         }
