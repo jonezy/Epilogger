@@ -1,6 +1,7 @@
 bin
 obj
 *.suo
+_Resharper.*
 *.xml
 .tests.VisualState.xml
 *.s3db
