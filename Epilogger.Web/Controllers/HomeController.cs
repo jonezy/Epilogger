@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -21,13 +22,14 @@ namespace Epilogger.Web.Controllers {
             ViewBag.Message = "Welcome to Epilogger!";
 
             var activity = ES.GetHomepageActivity();
-            HomepageViewModel model = new HomepageViewModel(
-                activity.Take(3).ToList(),
+            var model = new HomepageViewModel(
+                activity.Take(4).ToList(),
                 0,
                 activity.Count()
-            );
+                ) {HomepageTotal = new HomepageTotal()};
 
             model.HomepageTotal = new HomepageTotals().HomepageTotal;
+
 
             //Do the redis stuff to get the Trending Events
             var eplRedis = new Common.Redis();
@@ -35,7 +37,7 @@ namespace Epilogger.Web.Controllers {
             var trendingEvents = new List<Event>();
             foreach (var e in trendingEventId.Take(10).Select(eventId => ES.FindByID((int.Parse(eventId)))))
             {
-                e.Name = e.Name.TruncateAtWord(35);
+                e.Name = e.Name.TruncateAtWord(30);
                 trendingEvents.Add(e);
             }
             model.TrendingEvents = trendingEvents;
@@ -52,55 +54,55 @@ namespace Epilogger.Web.Controllers {
             return View(model);
         }
 
-        public ActionResult BetaSignUp() {
-            IEnumerable<HomepageActivityModel> activity = ES.GetHomepageActivity();
-            BetaSignUpViewModel bmodel = new BetaSignUpViewModel(
-                activity.Take(6).ToList(),
-                0,
-                activity.Count()
-            );
-            foreach (HomepageActivityModel item in bmodel.Activity) {
-                if (item.ActivityType == ActivityType.PHOTOS_VIDEOS) {
-                    item.Image = IS.FindByID(Convert.ToInt32(item.ActivityContent));
-                }
-            }
+        //public ActionResult BetaSignUp() {
+        //    IEnumerable<HomepageActivityModel> activity = ES.GetHomepageActivity();
+        //    BetaSignUpViewModel bmodel = new BetaSignUpViewModel(
+        //        activity.Take(6).ToList(),
+        //        0,
+        //        activity.Count()
+        //    );
+        //    foreach (HomepageActivityModel item in bmodel.Activity) {
+        //        if (item.ActivityType == ActivityType.PHOTOS_VIDEOS) {
+        //            item.Image = IS.FindByID(Convert.ToInt32(item.ActivityContent));
+        //        }
+        //    }
 
-            bmodel.EmailAddress = "youremail@awesome.com";
+        //    bmodel.EmailAddress = "youremail@awesome.com";
 
-            return View(bmodel);
-        }
+        //    return View(bmodel);
+        //}
 
-        [HttpPost]
-        public ActionResult BetaSignUp(BetaSignUpViewModel model) {
+        //[HttpPost]
+        //public ActionResult BetaSignUp(BetaSignUpViewModel model) {
 
-            if (!ModelState.IsValid) {
-                return View(model);
-            }
+        //    if (!ModelState.IsValid) {
+        //        return View(model);
+        //    }
 
-            IEnumerable<HomepageActivityModel> activity = ES.GetHomepageActivity();
-            model.Activity = activity.Take(6).ToList();
-            model.CurrentPageIndex = 0;
+        //    IEnumerable<HomepageActivityModel> activity = ES.GetHomepageActivity();
+        //    model.Activity = activity.Take(6).ToList();
+        //    model.CurrentPageIndex = 0;
 
-            foreach (HomepageActivityModel item in model.Activity) {
-                if (item.ActivityType == ActivityType.PHOTOS_VIDEOS) {
-                    item.Image = IS.FindByID(Convert.ToInt32(item.ActivityContent));
-                }
-            }
+        //    foreach (HomepageActivityModel item in model.Activity) {
+        //        if (item.ActivityType == ActivityType.PHOTOS_VIDEOS) {
+        //            item.Image = IS.FindByID(Convert.ToInt32(item.ActivityContent));
+        //        }
+        //    }
 
-            //save the email address
-            model.regDateTime = DateTime.UtcNow;
-            model.Submitted = true;
-            model.ipAddress = Request.ServerVariables["REMOTE_ADDR"];
+        //    //save the email address
+        //    model.regDateTime = DateTime.UtcNow;
+        //    model.Submitted = true;
+        //    model.ipAddress = Request.ServerVariables["REMOTE_ADDR"];
 
-            BetaSignup bsu = new BetaSignup();
+        //    BetaSignup bsu = new BetaSignup();
 
-            bsu = Mapper.Map<BetaSignUpViewModel, BetaSignup>(model);
+        //    bsu = Mapper.Map<BetaSignUpViewModel, BetaSignup>(model);
 
-            BetaService betaS = new BetaService();
-            betaS.Save(bsu);
+        //    BetaService betaS = new BetaService();
+        //    betaS.Save(bsu);
 
-            return View(model);
-        }
+        //    return View(model);
+        //}
 
         public ActionResult StatusMessages() {
             var model = new StatusMessage {MSGDateTime = DateTime.UtcNow};

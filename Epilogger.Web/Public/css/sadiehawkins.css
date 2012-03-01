@@ -19,7 +19,7 @@ p a:hover {
     text-decoration:none}
     
 big {
-    padding-top:12px;
+    padding-top:8px;
     font-size:18pt;
     color:#000;
     display:block;
@@ -134,13 +134,13 @@ a.edit_icon {
 
 #homepage-container {
 	min-height:548px;
-	padding:30px 0px 0px 0px;
+	padding:6px 0px 0px 0px;
 	position:relative;}
 
 #homepage-intro {
     float:left;
     padding-right:10px;
-    width:390px;}
+    width:425px;}
 
 #homepage-intro h2{
     font-size:26px;}
@@ -162,20 +162,68 @@ a.edit_icon {
 
 #homepage-video {
     float:right;
-    width:560px;}
+    margin-top: 24px; }
 
 #homepage-toolbar h4, img#logo {
     float:left ;}
    
 #homepage-toolbar h4 {
     position:relative;
-    top:4px}
+    top: 4px; }
     
 #homepage-toolbar .Pager {
     float:left;
     margin:-10px 0px 0px 10px;
     text-transform:uppercase;
-    border-top:0}
+    border-top: 0; 
+    }
+    
+    
+#homepage-statheader {
+    height: 59px;
+    border-bottom: 1px dotted #CCC;
+}
+
+#homepage-chat {
+    margin-top: 11px;
+    float: right;
+}
+
+
+.homepage-arrow {
+    margin-top: -7px;
+    margin-right: 8px;
+}
+
+.homepage-heart {
+    margin-top: -7px;
+    margin-right: 10px;
+}
+
+
+#homepage-trendinglist {
+  width: 465px;
+  margin-bottom:20px;
+  overflow:hidden;
+}
+
+#homepage-trendinglist li {
+    line-height:1.5em;
+    border-bottom:1px solid #ccc;
+    float:left;
+    display:inline;
+    border-bottom: 1px dotted #CCC;
+    width:50%;
+    font-weight: bold;
+    font-size: 10pt;
+    height: 24px;
+    padding-top: 2px;
+}
+
+
+
+
+    
     
 #homepage-toolbar #refresh {}
     
@@ -987,7 +1035,7 @@ ul#left-nav li ul li a.current {color:#a44b79;}
 .homepage-activity-entry-spacer
 { 
     float:left;
-    width:20px;
+    width:32px;
     height:218px;
     overflow:hidden;
 }
@@ -995,12 +1043,7 @@ ul#left-nav li ul li a.current {color:#a44b79;}
 
 .homepage-trending     
 {
-    float:left;
-    width:252px;
-    height:218px;
-    overflow:hidden;
-    margin:0px 20px 20px 0px;
-    color:#828282;
+    margin-top: 30px;
 }
 
 .homepage-activity-entry h2 {
@@ -1035,14 +1078,14 @@ ul#left-nav li ul li a.current {color:#a44b79;}
 	z-index:10;
 	overflow:hidden;
 	float:left;
-    margin:10px;
+    margin:10px; 
     clear: both;   
  }
 */
     
 .homepage-activity-entry h2 a { color: #f51282;}
 .homepage-activity-entry h2 a:hover { text-decoration: underline; }
-.homepage-activity-entry strong.title {font-weight:normal; color:#5086b9;margin:0px 0px 10px 10px;padding-left:24px;background-image:url(../images/event_activity_title_icons.png);background-repeat: no-repeat;font-size:12px;text-transform:uppercase;margin-bottom:5px;display:block; }
+.homepage-activity-entry strong.title {font-weight:normal; color:#5086b9;margin:0px 0px 10px 10px;padding-left:24px;background-image:url(../images/event_activity_title_icons.png);background-repeat: no-repeat;font-size:12px;margin-bottom:5px;display:block;font-weight: bold; }
 .homepage-activity-entry strong.title.TWEET {background-position:0 0;}
 .homepage-activity-entry strong.title.PHOTOS_VIDEOS { background-position:0 -50px;padding-left:28px; }
 .homepage-activity-entry strong.title.EVENT_CREATION {background-position:0 -100px;padding-left:28px;}
@@ -1055,7 +1098,7 @@ ul#left-nav li ul li a.current {color:#a44b79;}
 .profile-data .profile-content {width:400px;}
 .profile-data h1 {border-bottom:2px solid #fff;padding-bottom:10px;margin-bottom:10px;}
 
-.profile-event-item {float:left;width:310px;margin:0px 10px 10px 0px;}
+.profile-event-item {float:left;width:310px;margin:0px 10px 10px 0px; }
 .profile-event-item .event-content {margin-left:5px;float:left;width:250px;}
 
 .event-content-time, .event-content-searchterms {background-image:url(../images/icons/profile-eventlist.png);background-repeat:no-repeat;}
@@ -1357,23 +1400,25 @@ div#search-container input[type=image] {
 
 #footer-container { background:#27252a url('../images/bg/bg-footer.png') repeat-x; padding:10px 0 40px 0; margin:0px -40px 0px -40px;}
 #footer { margin-top:20px; font-size:13px; color:#666; }
-#footer h4 {color:#e54576; font:normal 13px 'InterstatePlusRegular',sans-serif;text-transform:uppercase;}
+#footer h4 {color:#fc75af; font:normal 13px 'InterstatePlusRegular',sans-serif;text-transform:uppercase;}
 #footer a, #footer h4 a {color:#70b1e3;}
-#footer #column-one,#footer #column-two,#footer #column-three {float:left;margin-right:20px;} 
-#footer #column-one {width:250px;font-size:13px;}
+#footer #column-one,#footer #column-two { float:left; margin-right:20px;} 
+
+
+#footer #column-one {width:280px;font-size:13px;}
 #footer #column-one ul {float:left;margin:0;}
 #footer #column-one ul li {list-style:none;float:left;}
 #footer #column-one ul li a {display:block;font:normal 13px 'InterstatePlusRegular',sans-serif;text-transform:uppercase;padding:10px 15px 10px 0px;}
-#footer #column-one p {width:200px;clear:both;}
+#footer #column-one p {clear:both;}
 
 #footer #column-two { padding-top:25px; width:310px;}
 #footer #column-two .tweet_list {list-style:none;}
 #footer #column-two .tweet_list li {border-bottom:solid 1px #333; padding:0px 0px 15px 0px; margin-bottom:10px;}
+#footer #column-two .social { padding-top:10px; }
+#footer #column-two .social img {float:left;margin-right:5px;}
 
-#footer #column-three { padding-top:25px; width:280px;}
-#footer #column-three .social {border-top:solid 1px #333;padding-top:10px;}
-#footer #column-three .social h4 {float:left;margin:10px 10px 0px 0px;}
-#footer #column-three .social img {float:left;margin-right:5px;}
+#footer #column-three { padding-top:25px; width:280px; float: left; margin-left: 38px; }
+
 
 .rssHeader {display:none;}
 .rssBody ul {list-style:none;}

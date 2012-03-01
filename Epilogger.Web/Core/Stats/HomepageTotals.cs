@@ -40,7 +40,6 @@ namespace Epilogger.Web.Core.Stats {
         public int TotalMedia { get; set; }
         public int TotalTweets { get; set; }
         public int TotalCheckins { get; set; }
-
     }
 
 }
