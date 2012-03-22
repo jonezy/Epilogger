@@ -1,0 +1,227 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data
+END
+OpenSearchStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/OpenSearchStore.js
+END
+CsvStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/CsvStore.js
+END
+AndOrReadStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/AndOrReadStore.js
+END
+XmlStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/XmlStore.js
+END
+ServiceStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/ServiceStore.js
+END
+StoreExplorer.js
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/StoreExplorer.js
+END
+PicasaStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/PicasaStore.js
+END
+QueryReadStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/QueryReadStore.js
+END
+GoogleSearchStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/GoogleSearchStore.js
+END
+ItemExplorer.js
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/ItemExplorer.js
+END
+restListener.js
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/restListener.js
+END
+WikipediaStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/WikipediaStore.js
+END
+ClientFilter.js
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/ClientFilter.js
+END
+OpmlStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/OpmlStore.js
+END
+FlickrRestStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/FlickrRestStore.js
+END
+FlickrStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/FlickrStore.js
+END
+RailsStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/RailsStore.js
+END
+css.js
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/css.js
+END
+HtmlTableStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/HtmlTableStore.js
+END
+CssRuleStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/CssRuleStore.js
+END
+AppStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/AppStore.js
+END
+S3Store.js
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/S3Store.js
+END
+KeyValueStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/KeyValueStore.js
+END
+jsonPathStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/jsonPathStore.js
+END
+AtomReadStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/AtomReadStore.js
+END
+JsonQueryRestStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/JsonQueryRestStore.js
+END
+PersevereStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/PersevereStore.js
+END
+GoogleFeedStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/GoogleFeedStore.js
+END
+dom.js
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/dom.js
+END
+HtmlStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/HtmlStore.js
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/README
+END
+CouchDBRestStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/CouchDBRestStore.js
+END
+JsonRestStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/JsonRestStore.js
+END
+AndOrWriteStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/AndOrWriteStore.js
+END
+CssClassStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/CssClassStore.js
+END
+FileStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/FileStore.js
+END
+SnapLogicStore.js
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/14/trunk/dojoroot/dojox/data/SnapLogicStore.js
+END

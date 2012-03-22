@@ -87,7 +87,7 @@ namespace Epilogger.Web.Controllers
 
                 case "random":
 
-                    return RedirectToRoute("EventsRoutes", new { slug = randomEvent.EventSlug, action = "" });
+                    return RedirectToRoute("EventsRoutes", new { slug = randomEvent.EventSlug, action = string.Empty });
                 default:
                     filter = "overview";
                     model.UpcomingEvents = ES.UpcomingEvents();

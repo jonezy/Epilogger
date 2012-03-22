@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/14/trunk/dojoroot/dojox/fx
+END
+text.js
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/14/trunk/dojoroot/dojox/fx/text.js
+END
+Shadow.js
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/14/trunk/dojoroot/dojox/fx/Shadow.js
+END
+easing.js
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/14/trunk/dojoroot/dojox/fx/easing.js
+END
+_core.js
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/14/trunk/dojoroot/dojox/fx/_core.js
+END
+_arg.js
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/14/trunk/dojoroot/dojox/fx/_arg.js
+END
+_base.js
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/14/trunk/dojoroot/dojox/fx/_base.js
+END
+flip.js
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/14/trunk/dojoroot/dojox/fx/flip.js
+END
+split.js
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/14/trunk/dojoroot/dojox/fx/split.js
+END
+scroll.js
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/14/trunk/dojoroot/dojox/fx/scroll.js
+END
+style.js
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/14/trunk/dojoroot/dojox/fx/style.js
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/14/trunk/dojoroot/dojox/fx/README
+END

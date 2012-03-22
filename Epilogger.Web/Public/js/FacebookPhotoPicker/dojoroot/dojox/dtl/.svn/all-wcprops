@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/14/trunk/dojoroot/dojox/dtl
+END
+html.js
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/14/trunk/dojoroot/dojox/dtl/html.js
+END
+Context.js
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/14/trunk/dojoroot/dojox/dtl/Context.js
+END
+_base.js
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/14/trunk/dojoroot/dojox/dtl/_base.js
+END
+_DomTemplated.js
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/14/trunk/dojoroot/dojox/dtl/_DomTemplated.js
+END
+_Templated.js
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/14/trunk/dojoroot/dojox/dtl/_Templated.js
+END
+Inline.js
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/14/trunk/dojoroot/dojox/dtl/Inline.js
+END
+DomInline.js
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/14/trunk/dojoroot/dojox/dtl/DomInline.js
+END
+dom.js
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/14/trunk/dojoroot/dojox/dtl/dom.js
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/14/trunk/dojoroot/dojox/dtl/README
+END
+HtmlInline.js
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/14/trunk/dojoroot/dojox/dtl/HtmlInline.js
+END
+_HtmlTemplated.js
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/14/trunk/dojoroot/dojox/dtl/_HtmlTemplated.js
+END

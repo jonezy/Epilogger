@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/14/trunk/dojoroot/dojox/storage
+END
+AirEncryptedLocalStorageProvider.js
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/14/trunk/dojoroot/dojox/storage/AirEncryptedLocalStorageProvider.js
+END
+storage_dialog.swf
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/14/trunk/dojoroot/dojox/storage/storage_dialog.swf
+END
+storage_dialog.fla
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/14/trunk/dojoroot/dojox/storage/storage_dialog.fla
+END
+manager.js
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/14/trunk/dojoroot/dojox/storage/manager.js
+END
+AirFileStorageProvider.js
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/14/trunk/dojoroot/dojox/storage/AirFileStorageProvider.js
+END
+AirDBStorageProvider.js
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/14/trunk/dojoroot/dojox/storage/AirDBStorageProvider.js
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/14/trunk/dojoroot/dojox/storage/README
+END
+Storage.swf
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/14/trunk/dojoroot/dojox/storage/Storage.swf
+END
+_common.js
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/14/trunk/dojoroot/dojox/storage/_common.js
+END
+Provider.js
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/14/trunk/dojoroot/dojox/storage/Provider.js
+END
+Storage.as
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/14/trunk/dojoroot/dojox/storage/Storage.as
+END
+FlashStorageProvider.js
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/14/trunk/dojoroot/dojox/storage/FlashStorageProvider.js
+END
+buildFlashStorage.sh
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/14/trunk/dojoroot/dojox/storage/buildFlashStorage.sh
+END
+GearsStorageProvider.js
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/14/trunk/dojoroot/dojox/storage/GearsStorageProvider.js
+END
+WhatWGStorageProvider.js
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/14/trunk/dojoroot/dojox/storage/WhatWGStorageProvider.js
+END

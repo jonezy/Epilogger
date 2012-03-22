@@ -131,6 +131,12 @@ namespace Epilogger.Web {
             );
 
             routes.MapRoute(
+                "DeleteTweet",
+                "events/deletetweetajax/{eventid}/{tweetid}",
+                new { controller = "events", action = "DeleteTweetAjax", eventid = UrlParameter.Optional, tweetid = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 "GetImageComments",
                 "events/getimagecomments/{id}",
                 new { controller = "events", action = "getimagecomments", id = UrlParameter.Optional }
@@ -220,7 +226,8 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.FromDateTime, opt => opt.Ignore())
                 .ForMember(dest => dest.ToDateTime, opt => opt.Ignore())
                 .ForMember(dest => dest.Venue, opt => opt.MapFrom(src => src.Venues.FirstOrDefault()))
-                .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore());
+                .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore())
+                .ForMember(dest => dest.CanDelete, opt => opt.Ignore());
 
             Mapper.CreateMap<Event, AllStatsViewModel>()
                 .ForMember(dest => dest.CurrentPageIndex, opt => opt.Ignore())
@@ -342,7 +349,9 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.Tweets, opt => opt.Ignore())
                 .ForMember(dest => dest.UniqueTweeterCount, opt => opt.Ignore())
                 .ForMember(dest => dest.TopTweeters, opt => opt.Ignore())
-                .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore());
+                .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore())
+                .ForMember(dest => dest.CanDelete, opt => opt.Ignore());
+            
 
 
             Mapper.CreateMap<Event, CreateEventViewModel>()

@@ -2,6 +2,7 @@
 
 namespace Epilogger.Web.Models {
     public class TweetDisplayViewModel {
+        public long Id { get; set; }
         public string Text { get; set; }
         public string TextAsHTML { get; set; }
         public string Source { get; set; }

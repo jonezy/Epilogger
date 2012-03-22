@@ -37,8 +37,11 @@ namespace Epilogger.Web.Controllers {
             var trendingEvents = new List<Event>();
             foreach (var e in trendingEventId.Take(10).Select(eventId => ES.FindByID((int.Parse(eventId)))))
             {
-                e.Name = e.Name.TruncateAtWord(30);
-                trendingEvents.Add(e);
+                if (e !=null)
+                {
+                    e.Name = e.Name.TruncateAtWord(30);
+                    trendingEvents.Add(e);
+                }
             }
             model.TrendingEvents = trendingEvents;
 

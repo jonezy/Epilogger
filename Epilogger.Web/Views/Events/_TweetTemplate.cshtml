@@ -1,10 +1,14 @@
-﻿@using Epilogger.Web;
-@model Epilogger.Data.Tweet
-
+﻿@model Epilogger.Data.Tweet
+          
 <li id="Tweet-@Model.TwitterID" class="tweet clearfix">
     <img src="@Model.ProfileImageURL" class="fleft" height="48" width="48" alt="" />
     <div class="tweet-body">
         <strong><a href="http://www.twitter.com/@Model.FromUserScreenName" target="_blank">@@@Model.FromUserScreenName</a></strong>
         <p class="half-bottom">@Html.Raw(Model.TextAsHTML)</p>
+        <span class="tweet-date">(@Html.DisplayFor(thing => Model.CreatedDate))&nbsp;
+        @if (Model.CanDelete)
+        {
+            <a href="" class="deleteTweet fright" id="@Model.ID">delete</a>
+        }</span>
     </div>
 </li>

@@ -1,0 +1,227 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/17/trunk/dojoroot/dijit
+END
+MenuBarItem.js
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/12/trunk/dojoroot/dijit/MenuBarItem.js
+END
+_Container.js
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/12/trunk/dojoroot/dijit/_Container.js
+END
+MenuItem.js
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/12/trunk/dojoroot/dijit/MenuItem.js
+END
+dijit.js.uncompressed.js
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/12/trunk/dojoroot/dijit/dijit.js.uncompressed.js
+END
+MenuSeparator.js
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/12/trunk/dojoroot/dijit/MenuSeparator.js
+END
+MenuBar.js
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/12/trunk/dojoroot/dijit/MenuBar.js
+END
+dijit-all.js.uncompressed.js
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/12/trunk/dojoroot/dijit/dijit-all.js.uncompressed.js
+END
+Tooltip.js
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/12/trunk/dojoroot/dijit/Tooltip.js
+END
+CheckedMenuItem.js
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/12/trunk/dojoroot/dijit/CheckedMenuItem.js
+END
+PopupMenuBarItem.js
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/12/trunk/dojoroot/dijit/PopupMenuBarItem.js
+END
+Dialog.js
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/12/trunk/dojoroot/dijit/Dialog.js
+END
+dijit.js
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/12/trunk/dojoroot/dijit/dijit.js
+END
+DialogUnderlay.js
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/12/trunk/dojoroot/dijit/DialogUnderlay.js
+END
+_DialogMixin.js
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/12/trunk/dojoroot/dijit/_DialogMixin.js
+END
+Menu.js
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/12/trunk/dojoroot/dijit/Menu.js
+END
+PopupMenuItem.js
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/12/trunk/dojoroot/dijit/PopupMenuItem.js
+END
+LICENSE
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/12/trunk/dojoroot/dijit/LICENSE
+END
+_Calendar.js
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/12/trunk/dojoroot/dijit/_Calendar.js
+END
+dijit-all.js
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/12/trunk/dojoroot/dijit/dijit-all.js
+END
+_base.js
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/12/trunk/dojoroot/dijit/_base.js
+END
+TooltipDialog.js
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/12/trunk/dojoroot/dijit/TooltipDialog.js
+END
+robotx.js
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/12/trunk/dojoroot/dijit/robotx.js
+END
+_Templated.js
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/12/trunk/dojoroot/dijit/_Templated.js
+END
+_Widget.js
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/12/trunk/dojoroot/dijit/_Widget.js
+END
+ToolbarSeparator.js
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/12/trunk/dojoroot/dijit/ToolbarSeparator.js
+END
+Declaration.js
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/12/trunk/dojoroot/dijit/Declaration.js
+END
+robot.js
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/12/trunk/dojoroot/dijit/robot.js
+END
+TitlePane.js
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/12/trunk/dojoroot/dijit/TitlePane.js
+END
+Editor.js
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/12/trunk/dojoroot/dijit/Editor.js
+END
+ProgressBar.js
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/12/trunk/dojoroot/dijit/ProgressBar.js
+END
+_TimePicker.js
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/12/trunk/dojoroot/dijit/_TimePicker.js
+END
+InlineEditBox.js
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/12/trunk/dojoroot/dijit/InlineEditBox.js
+END
+ColorPalette.js
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/12/trunk/dojoroot/dijit/ColorPalette.js
+END
+_KeyNavContainer.js
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/12/trunk/dojoroot/dijit/_KeyNavContainer.js
+END
+Tree.js
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/12/trunk/dojoroot/dijit/Tree.js
+END
+Toolbar.js
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/12/trunk/dojoroot/dijit/Toolbar.js
+END
+_Contained.js
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/12/trunk/dojoroot/dijit/_Contained.js
+END

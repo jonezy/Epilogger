@@ -2,14 +2,18 @@
 @using Epilogger.Web.Models;
 @using Epilogger.Web.Core.Stats;
 
-@model Epilogger.Web.Models.AllTweetsDisplayViewModel
+@model AllTweetsDisplayViewModel
 @{
     Layout = "~/Views/Shared/_InteriorLayout.cshtml";
     ViewBag.Title = "Epilogger - " + Model.Name + "- Tweets";
 }
 
+<script language="javascript" type="text/javascript">
+    var EventSlug = '@Model.EventSlug';
+</Script>
 
-    @*New event menu*@
+
+@*New event menu*@
     @Html.Partial("Menu", Model.ToolbarViewModel)
     <div class="spacer"></div>
 
@@ -68,7 +72,14 @@
             <div class="tweet-content">
                 <strong><a href="http://www.twitter.com/@item.FromUserScreenName" class="tweet-content-username" target="_blank">@item.FromUserScreenName</a></strong>
                 <p>@Html.Raw(item.TextAsHTML)</p>
-                <span class="tweet-date">(@Html.DisplayFor(thing => item.CreatedDate))</span>
+                <span class="tweet-date">
+                    (@Html.DisplayFor(thing => item.CreatedDate))&nbsp;&nbsp;&nbsp;
+                    @if (Model.CanDelete)
+                    {
+                        //@Html.ActionLink("delete", "deleteTweet");
+                        <a href="" class="deleteTweet" id="@item.Id">delete</a>
+                    }
+                </span>
             </div>
         </div>
     }

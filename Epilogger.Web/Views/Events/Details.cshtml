@@ -85,13 +85,33 @@ else
 </style>
 
 
+
+@*This is for the upload from Facebook*@
+@*<link href="@Url.Content("~/Public/css/modal.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Public/js/FacebookPhotoPicker/dojoroot/dijit/themes/tundra/tundra.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Public/js/FacebookPhotoPicker/dojoroot/dojo/resources/dojo.css")" rel="stylesheet" type="text/css" />*@
+
+<!-- Pickup the FB_API_KEY and PHOTO_PICKER_DEBUG configuration values -->
+@*<script type="text/javascript" src="@Url.Content("~/Public/js/FacebookPhotoPicker/photoPickerConfig.js")"></script>*@
+
+<!-- Initialise Dojo Javascript library -->
+@*<script type="text/javascript">
+    var djConfig = {
+        parseOnLoad: true,
+        isDebug: PHOTO_PICKER_DEBUG
+    };
+</script>
+    
+<script type="text/javascript" src="@Url.Content("~/Public/js/FacebookPhotoPicker/dojoroot/dojo/dojo.js")"></script>*@
+@*Edn Script for upload from Facebook*@
+
 <div class="grid_12 alpha">
     @if (Model.HasSubscribed)
     {
         <div class="subscribedIndicator">SUBSCRIBED</div>
     }
     
-    <div class="grid_12 alpha">
+    <div class="grid_12">
         <h1>@Model.Name</h1>
         <h2 style="margin:0; padding:0">@Model.SubTitle</h2>
 
@@ -132,6 +152,21 @@ else
             </ul>
             <div class="starSmall">You rated @Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID && i.EventID == Model.ID).FirstOrDefault().UserRating stars on <br /> @Html.DisplayFor(thing => Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime, "ShortDateTime")</div>
         }
+        
+        <div class="" style="height: 60px; width: 234px; float: right; top: 50px; position: absolute; right: 10px;">
+            <script type="text/javascript"><!--
+                google_ad_client = "ca-pub-9709690433051456";
+                /* Event Page Header */
+                google_ad_slot = "3239655459";
+                google_ad_width = 234;
+                google_ad_height = 60;
+            //-->
+            </script>
+            <script type="text/javascript"
+                    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+            </script>
+            
+        </div>
 
         <span class="spacer"></span>    
 
@@ -146,9 +181,9 @@ else
             }
         </div>
 
+        
 
-
-        @*<div id="SearchTimeFilter">
+            @*<div id="SearchTimeFilter">
             <div class="filter-by-time">
                 @using (Html.BeginForm("details", "events", new { id = Model.ID }, FormMethod.Post, null))
                 {
@@ -169,8 +204,8 @@ else
 
 
 
-        <div class="spacer"></div>
-    </div>
+            <div class="spacer"></div>
+        </div>
 </div>
 
 
@@ -520,6 +555,7 @@ else
         { 
             @: (@Html.ActionLink("See all photos and videos", "AllPhotos", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { }))
         }
+        @*(<a href="" class="uploadPhotos" alt="">Have something to contribute? Upload your photos</a>)*@
     </p>
 </div>
 
@@ -596,12 +632,15 @@ else
             @if (!IncludeDateRange)
             { 
                 @: (@Html.ActionLink("See all checkins", "allcheckins", "events", new { id = Model.ID }))
-           }
+            }
             else
             { 
                 @: (@Html.ActionLink("See all checkins", "allcheckins", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { }))
             }
         </div>
+        
+        
+        
     </div>
 </div>
 <br style="clear: both;" />
@@ -631,6 +670,13 @@ else
             width: "60%", height: "60%",
             href: '@Url.Action("AddLink", "Events")'
         });
+
+
+//        $(".uploadPhotos").colorbox({
+//            width: "60%", height: "60%",
+//            href: '@Url.Action("UploadPhotos", "Events", new { id = Model.ID })'
+//        });
+
     });
 
 </script>
