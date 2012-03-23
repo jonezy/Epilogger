@@ -134,7 +134,7 @@ a.edit_icon {
 
 #homepage-container {
 	min-height:548px;
-	padding:6px 0px 0px 0px;
+	padding: 117px 0px 0px 0px;
 	position:relative;}
 
 #homepage-intro {
@@ -1285,7 +1285,7 @@ span.tweet-date {font-size:11px;color:#c2c2c2}
     border-top:solid 3px #5695d6;
     margin:0px -40px 0px -40px;
     color:#fff; 
-    padding-bottom:10px;
+    padding-bottom:9px;
     /*background:#fff url(../images/bg/jaggies.gif) repeat-x bottom;*/
     background-color: #fff;
     z-index:2000;
@@ -1299,7 +1299,7 @@ span.tweet-date {font-size:11px;color:#c2c2c2}
     height: 7px;
     background: url(../images/bg/jaggies-trans.gif) repeat-x bottom;
     position: absolute;
-    margin-top: 10px;
+    margin-top: 9px;
 }
     
 #admin-area a, #user-status a {
