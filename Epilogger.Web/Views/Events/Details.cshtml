@@ -44,6 +44,7 @@ else
     var EventID = @Model.ID;
 
     var EventName = '@Model.Name';
+    var EventSlug = '@Model.EventSlug';
     var EventURL = 'http://www.epilogger.com/Events/@Model.EventSlug/Details';
     var HasSubscribed = @Model.HasSubscribed.ToString().ToLower();
     
@@ -520,7 +521,8 @@ else
     <ul class="plain-list" id="tweetlist">
         @foreach (Epilogger.Data.Tweet EPLTweet in Model.Tweets)
         {
-            @Html.Partial("_TweetTemplate", EPLTweet);
+            var ttvm = new Epilogger.Web.Models.TweetTemplateViewModel {Tweet = EPLTweet, CanDelete = Model.CanDelete};
+            @Html.Partial("_TweetTemplate", ttvm);
         }
     </ul>
 
