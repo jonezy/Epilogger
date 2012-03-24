@@ -1,6 +1,4 @@
-﻿@using Epilogger.Web;
-
-@model Epilogger.Web.Models.EventDisplayViewModel
+﻿@model Epilogger.Web.Models.EventDisplayViewModel
 @{
     Layout = "~/Views/Shared/_InteriorLayout.cshtml";
     ViewBag.Title = "Epilogger - " + Model.Name;    
@@ -107,12 +105,20 @@ else
 @*Edn Script for upload from Facebook*@
 
 <div class="grid_12 alpha">
+    @if (Model.CurrentUserRole == UserRoleType.Administrator)
+    {
+        <div class="grid_12 alpha" style="background-color: palegoldenrod">
+            <strong>Event was created by:</strong> @Model.TheUser.FirstName @Model.TheUser.LastName (@Model.TheUser.Username)
+        </div>
+        <span class="spacer"></span>
+    }
+
     @if (Model.HasSubscribed)
     {
         <div class="subscribedIndicator">SUBSCRIBED</div>
     }
     
-    <div class="grid_12">
+    <div class="grid_12 alpha">
         <h1>@Model.Name</h1>
         <h2 style="margin:0; padding:0">@Model.SubTitle</h2>
 
@@ -169,7 +175,7 @@ else
             
         </div>
 
-        <span class="spacer"></span>    
+        <span class="spacer"></span> 
 
         @*New event menu*@
         @Html.Partial("Menu", Model.ToolbarViewModel)
@@ -184,7 +190,7 @@ else
 
         
 
-            @*<div id="SearchTimeFilter">
+        @*<div id="SearchTimeFilter">
             <div class="filter-by-time">
                 @using (Html.BeginForm("details", "events", new { id = Model.ID }, FormMethod.Post, null))
                 {
@@ -205,8 +211,8 @@ else
 
 
 
-            <div class="spacer"></div>
-        </div>
+        <div class="spacer"></div>
+    </div>
 </div>
 
 
@@ -521,7 +527,7 @@ else
     <ul class="plain-list" id="tweetlist">
         @foreach (Epilogger.Data.Tweet EPLTweet in Model.Tweets)
         {
-            var ttvm = new Epilogger.Web.Models.TweetTemplateViewModel {Tweet = EPLTweet, CanDelete = Model.CanDelete};
+            var ttvm = new Epilogger.Web.Models.TweetTemplateViewModel { Tweet = EPLTweet, CanDelete = Model.CanDelete };
             @Html.Partial("_TweetTemplate", ttvm);
         }
     </ul>

@@ -227,7 +227,9 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.ToDateTime, opt => opt.Ignore())
                 .ForMember(dest => dest.Venue, opt => opt.MapFrom(src => src.Venues.FirstOrDefault()))
                 .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore())
-                .ForMember(dest => dest.CanDelete, opt => opt.Ignore());
+                .ForMember(dest => dest.CanDelete, opt => opt.Ignore())
+                .ForMember(dest => dest.CurrentUserRole, opt => opt.Ignore())
+                .ForMember(dest => dest.TheUser, opt => opt.MapFrom(src => src.Users.FirstOrDefault()));
 
             Mapper.CreateMap<Event, AllStatsViewModel>()
                 .ForMember(dest => dest.CurrentPageIndex, opt => opt.Ignore())

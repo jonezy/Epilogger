@@ -117,6 +117,7 @@ namespace Epilogger.Web.Controllers {
             Model.EventRatings = ES.FindEventRatingsByID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
             Model.HasUserRated = false;
             Model.CurrentUserID = CurrentUserID;
+            Model.CurrentUserRole = CurrentUserRole;
             Model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
 
             Model.CanDelete = false;

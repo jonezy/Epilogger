@@ -315,6 +315,7 @@
     <Content Include="Public\images\arrowdown.png" />
     <Content Include="Public\images\bg\bg-collapse.png" />
     <Content Include="Public\images\bg\bg-footer.png" />
+    <Content Include="Public\images\bg\jaggies-trans.gif" />
     <Content Include="Public\images\bg\jaggies.gif" />
     <Content Include="Public\images\bg\sample1.jpg" />
     <Content Include="Public\images\bg\sample2.jpg" />
