@@ -304,16 +304,18 @@ namespace Epilogger.Web.Controllers {
                 var locationNode = foursquareVenue.response.location;
 
                 // convert it to a Venue
-                Venue venue = new Venue();
-                venue.FoursquareVenueID = foursquareVenue.response.id;
-                venue.Address = locationNode.address;
-                venue.Name = foursquareVenue.response.name;
-                venue.City = locationNode.city;
-                venue.State = locationNode.state;
-                venue.Zip = locationNode.postalCode;
-                venue.CrossStreet = locationNode.crossStreet;
-                venue.Geolat = locationNode.lat;
-                venue.Geolong = locationNode.lng;
+                var venue = new Venue
+                                {
+                                    FoursquareVenueID = foursquareVenue.response.id,
+                                    Address = locationNode.address,
+                                    Name = foursquareVenue.response.name,
+                                    City = locationNode.city,
+                                    State = locationNode.state,
+                                    Zip = locationNode.postalCode,
+                                    CrossStreet = locationNode.crossStreet,
+                                    Geolat = locationNode.lat,
+                                    Geolong = locationNode.lng
+                                };
 
                 // save the venue
                 venueService.Save(venue);
@@ -328,18 +330,22 @@ namespace Epilogger.Web.Controllers {
                     model.UserID = CurrentUserID;
                     model.CreatedDateTime = DateTime.UtcNow;
                                         
-                    Event EPLevent = Mapper.Map<CreateEventViewModel, Event>(model);
-                    ES.Save(EPLevent);
+                    var epLevent = Mapper.Map<CreateEventViewModel, Event>(model);
+
+                    //Fix the search terms, if there are any problems.
+                    
+
+                    ES.Save(epLevent);
 
                     this.StoreSuccess("Your Event was created successfully!  Dont forget to share it with your friends and attendees!");
 
-                    return RedirectToAction("details", new { id = EPLevent.EventSlug });
+                    return RedirectToAction("details", new { id = epLevent.EventSlug });
                 }
                 catch (Exception ex)
                 {
                     this.StoreError(string.Format("There was an error: {0}", ex.Message));
-                    Event EPLevent = Mapper.Map<CreateEventViewModel, Event>(model);
-                    model = Mapper.Map<Event, CreateEventViewModel>(EPLevent);
+                    var epLevent = Mapper.Map<CreateEventViewModel, Event>(model);
+                    model = Mapper.Map<Event, CreateEventViewModel>(epLevent);
                     return View(model);
                 }
             }

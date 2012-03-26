@@ -288,11 +288,35 @@ head.ready(function () {
         buildSearchString();
     });
     function buildSearchString() {
-        var SearchString = "";
+        var searchString = "";
         $(":input", "#rule-group").not(":button, :submit, :reset, :hidden").each(function (index) {
-            SearchString += $(this).val() + " ";
+
+
+            switch ($(this).val()) {
+                case "OR":
+                case "AND":
+                case "NOT":
+                    if ($(this).parent().find(":text").val().length > 0) {
+                        searchString += $(this).val() + " ";    
+                    }
+                    break;
+                default:
+                    searchString += $(this).val() + " ";
+                    break;
+            }
+            
+            
+            
+            
+            
+            
+            
+//            if ($(this).val().length > 0) {
+//                searchString += $(this).val() + " ";
+//            }
+
         });
-        $("#SearchTerms").val(SearchString);
+        $("#SearchTerms").val(searchString);
         if ($("#seachTerm1").val().length > 1) {
             $("#PlainTextSearch").html("You're searching for data containing <strong>" + $("#seachTerm1").val() + "</strong>");
         }
