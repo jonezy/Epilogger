@@ -2436,238 +2436,6 @@ namespace Epilogger.Data
     
     
     /// <summary>
-    /// A class which represents the CollectionQueueSettings table in the Epilogger Database.
-    /// This class is queryable through EpiloggerDB.CollectionQueueSetting 
-    /// </summary>
-
-	public partial class CollectionQueueSetting: INotifyPropertyChanging, INotifyPropertyChanged
-	{
-        partial void OnLoaded();
-        partial void OnValidate(System.Data.Linq.ChangeAction action);
-        partial void OnCreated();
-	    
-	    public CollectionQueueSetting(){
-	        OnCreated();
-	    }
-	    
-	    #region Properties
-	    
-        partial void OnIDChanging(int value);
-        partial void OnIDChanged();
-		
-		private int _ID;
-		public int ID { 
-		    get{
-		        return _ID;
-		    } 
-		    set{
-		        this.OnIDChanging(value);
-                this.SendPropertyChanging();
-                this._ID = value;
-                this.SendPropertyChanged("ID");
-                this.OnIDChanged();
-		    }
-		}
-		
-        partial void OnUpdateEventsModeTimeChanging(int value);
-        partial void OnUpdateEventsModeTimeChanged();
-		
-		private int _UpdateEventsModeTime;
-		public int UpdateEventsModeTime { 
-		    get{
-		        return _UpdateEventsModeTime;
-		    } 
-		    set{
-		        this.OnUpdateEventsModeTimeChanging(value);
-                this.SendPropertyChanging();
-                this._UpdateEventsModeTime = value;
-                this.SendPropertyChanged("UpdateEventsModeTime");
-                this.OnUpdateEventsModeTimeChanged();
-		    }
-		}
-		
-        partial void OnBeforeEventPollingTimeChanging(int value);
-        partial void OnBeforeEventPollingTimeChanged();
-		
-		private int _BeforeEventPollingTime;
-		public int BeforeEventPollingTime { 
-		    get{
-		        return _BeforeEventPollingTime;
-		    } 
-		    set{
-		        this.OnBeforeEventPollingTimeChanging(value);
-                this.SendPropertyChanging();
-                this._BeforeEventPollingTime = value;
-                this.SendPropertyChanged("BeforeEventPollingTime");
-                this.OnBeforeEventPollingTimeChanged();
-		    }
-		}
-		
-        partial void OnDuringEventPollingTimeChanging(int value);
-        partial void OnDuringEventPollingTimeChanged();
-		
-		private int _DuringEventPollingTime;
-		public int DuringEventPollingTime { 
-		    get{
-		        return _DuringEventPollingTime;
-		    } 
-		    set{
-		        this.OnDuringEventPollingTimeChanging(value);
-                this.SendPropertyChanging();
-                this._DuringEventPollingTime = value;
-                this.SendPropertyChanged("DuringEventPollingTime");
-                this.OnDuringEventPollingTimeChanged();
-		    }
-		}
-		
-        partial void OnAfterEventPollingTimeChanging(int value);
-        partial void OnAfterEventPollingTimeChanged();
-		
-		private int _AfterEventPollingTime;
-		public int AfterEventPollingTime { 
-		    get{
-		        return _AfterEventPollingTime;
-		    } 
-		    set{
-		        this.OnAfterEventPollingTimeChanging(value);
-                this.SendPropertyChanging();
-                this._AfterEventPollingTime = value;
-                this.SendPropertyChanged("AfterEventPollingTime");
-                this.OnAfterEventPollingTimeChanged();
-		    }
-		}
-		
-        partial void OnOnGoingEventsPollingTimeChanging(int value);
-        partial void OnOnGoingEventsPollingTimeChanged();
-		
-		private int _OnGoingEventsPollingTime;
-		public int OnGoingEventsPollingTime { 
-		    get{
-		        return _OnGoingEventsPollingTime;
-		    } 
-		    set{
-		        this.OnOnGoingEventsPollingTimeChanging(value);
-                this.SendPropertyChanging();
-                this._OnGoingEventsPollingTime = value;
-                this.SendPropertyChanged("OnGoingEventsPollingTime");
-                this.OnOnGoingEventsPollingTimeChanged();
-		    }
-		}
-		
-        partial void OnFullEventPollingTimeChanging(int value);
-        partial void OnFullEventPollingTimeChanged();
-		
-		private int _FullEventPollingTime;
-		public int FullEventPollingTime { 
-		    get{
-		        return _FullEventPollingTime;
-		    } 
-		    set{
-		        this.OnFullEventPollingTimeChanging(value);
-                this.SendPropertyChanging();
-                this._FullEventPollingTime = value;
-                this.SendPropertyChanged("FullEventPollingTime");
-                this.OnFullEventPollingTimeChanged();
-		    }
-		}
-		
-        partial void OnWorkerCollectionThreadsChanging(int value);
-        partial void OnWorkerCollectionThreadsChanged();
-		
-		private int _WorkerCollectionThreads;
-		public int WorkerCollectionThreads { 
-		    get{
-		        return _WorkerCollectionThreads;
-		    } 
-		    set{
-		        this.OnWorkerCollectionThreadsChanging(value);
-                this.SendPropertyChanging();
-                this._WorkerCollectionThreads = value;
-                this.SendPropertyChanged("WorkerCollectionThreads");
-                this.OnWorkerCollectionThreadsChanged();
-		    }
-		}
-		
-        partial void OnWorkerImageThreadsChanging(int value);
-        partial void OnWorkerImageThreadsChanged();
-		
-		private int _WorkerImageThreads;
-		public int WorkerImageThreads { 
-		    get{
-		        return _WorkerImageThreads;
-		    } 
-		    set{
-		        this.OnWorkerImageThreadsChanging(value);
-                this.SendPropertyChanging();
-                this._WorkerImageThreads = value;
-                this.SendPropertyChanged("WorkerImageThreads");
-                this.OnWorkerImageThreadsChanged();
-		    }
-		}
-		
-        partial void OnWorkerLinkThreadsChanging(int value);
-        partial void OnWorkerLinkThreadsChanged();
-		
-		private int _WorkerLinkThreads;
-		public int WorkerLinkThreads { 
-		    get{
-		        return _WorkerLinkThreads;
-		    } 
-		    set{
-		        this.OnWorkerLinkThreadsChanging(value);
-                this.SendPropertyChanging();
-                this._WorkerLinkThreads = value;
-                this.SendPropertyChanged("WorkerLinkThreads");
-                this.OnWorkerLinkThreadsChanged();
-		    }
-		}
-		
-        partial void OnWorkeSystemThreadsChanging(int value);
-        partial void OnWorkeSystemThreadsChanged();
-		
-		private int _WorkeSystemThreads;
-		public int WorkeSystemThreads { 
-		    get{
-		        return _WorkeSystemThreads;
-		    } 
-		    set{
-		        this.OnWorkeSystemThreadsChanging(value);
-                this.SendPropertyChanging();
-                this._WorkeSystemThreads = value;
-                this.SendPropertyChanged("WorkeSystemThreads");
-                this.OnWorkeSystemThreadsChanged();
-		    }
-		}
-		
-
-        #endregion
-
-        #region Foreign Keys
-        #endregion
-
-
-        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-        public event PropertyChangingEventHandler PropertyChanging;
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void SendPropertyChanging()
-        {
-            var handler = PropertyChanging;
-            if (handler != null)
-               handler(this, emptyChangingEventArgs);
-        }
-
-        protected virtual void SendPropertyChanged(String propertyName)
-        {
-            var handler = PropertyChanged;
-            if (handler != null)
-                handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-	}
-	
-    
-    
-    /// <summary>
     /// A class which represents the UserClickActions table in the Epilogger Database.
     /// This class is queryable through EpiloggerDB.UserClickAction 
     /// </summary>
@@ -4935,6 +4703,272 @@ namespace Epilogger.Data
                 this._UserID = value;
                 this.SendPropertyChanged("UserID");
                 this.OnUserIDChanged();
+		    }
+		}
+		
+
+        #endregion
+
+        #region Foreign Keys
+        #endregion
+
+
+        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+        public event PropertyChangingEventHandler PropertyChanging;
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void SendPropertyChanging()
+        {
+            var handler = PropertyChanging;
+            if (handler != null)
+               handler(this, emptyChangingEventArgs);
+        }
+
+        protected virtual void SendPropertyChanged(String propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+	}
+	
+    
+    
+    /// <summary>
+    /// A class which represents the CollectionQueueSettings table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.CollectionQueueSetting 
+    /// </summary>
+
+	public partial class CollectionQueueSetting: INotifyPropertyChanging, INotifyPropertyChanged
+	{
+        partial void OnLoaded();
+        partial void OnValidate(System.Data.Linq.ChangeAction action);
+        partial void OnCreated();
+	    
+	    public CollectionQueueSetting(){
+	        OnCreated();
+	    }
+	    
+	    #region Properties
+	    
+        partial void OnIDChanging(int value);
+        partial void OnIDChanged();
+		
+		private int _ID;
+		public int ID { 
+		    get{
+		        return _ID;
+		    } 
+		    set{
+		        this.OnIDChanging(value);
+                this.SendPropertyChanging();
+                this._ID = value;
+                this.SendPropertyChanged("ID");
+                this.OnIDChanged();
+		    }
+		}
+		
+        partial void OnUpdateEventsModeTimeChanging(int value);
+        partial void OnUpdateEventsModeTimeChanged();
+		
+		private int _UpdateEventsModeTime;
+		public int UpdateEventsModeTime { 
+		    get{
+		        return _UpdateEventsModeTime;
+		    } 
+		    set{
+		        this.OnUpdateEventsModeTimeChanging(value);
+                this.SendPropertyChanging();
+                this._UpdateEventsModeTime = value;
+                this.SendPropertyChanged("UpdateEventsModeTime");
+                this.OnUpdateEventsModeTimeChanged();
+		    }
+		}
+		
+        partial void OnBeforeEventPollingTimeChanging(int value);
+        partial void OnBeforeEventPollingTimeChanged();
+		
+		private int _BeforeEventPollingTime;
+		public int BeforeEventPollingTime { 
+		    get{
+		        return _BeforeEventPollingTime;
+		    } 
+		    set{
+		        this.OnBeforeEventPollingTimeChanging(value);
+                this.SendPropertyChanging();
+                this._BeforeEventPollingTime = value;
+                this.SendPropertyChanged("BeforeEventPollingTime");
+                this.OnBeforeEventPollingTimeChanged();
+		    }
+		}
+		
+        partial void OnDuringEventPollingTimeChanging(int value);
+        partial void OnDuringEventPollingTimeChanged();
+		
+		private int _DuringEventPollingTime;
+		public int DuringEventPollingTime { 
+		    get{
+		        return _DuringEventPollingTime;
+		    } 
+		    set{
+		        this.OnDuringEventPollingTimeChanging(value);
+                this.SendPropertyChanging();
+                this._DuringEventPollingTime = value;
+                this.SendPropertyChanged("DuringEventPollingTime");
+                this.OnDuringEventPollingTimeChanged();
+		    }
+		}
+		
+        partial void OnAfterEventPollingTimeChanging(int value);
+        partial void OnAfterEventPollingTimeChanged();
+		
+		private int _AfterEventPollingTime;
+		public int AfterEventPollingTime { 
+		    get{
+		        return _AfterEventPollingTime;
+		    } 
+		    set{
+		        this.OnAfterEventPollingTimeChanging(value);
+                this.SendPropertyChanging();
+                this._AfterEventPollingTime = value;
+                this.SendPropertyChanged("AfterEventPollingTime");
+                this.OnAfterEventPollingTimeChanged();
+		    }
+		}
+		
+        partial void OnOnGoingEventsPollingTimeChanging(int value);
+        partial void OnOnGoingEventsPollingTimeChanged();
+		
+		private int _OnGoingEventsPollingTime;
+		public int OnGoingEventsPollingTime { 
+		    get{
+		        return _OnGoingEventsPollingTime;
+		    } 
+		    set{
+		        this.OnOnGoingEventsPollingTimeChanging(value);
+                this.SendPropertyChanging();
+                this._OnGoingEventsPollingTime = value;
+                this.SendPropertyChanged("OnGoingEventsPollingTime");
+                this.OnOnGoingEventsPollingTimeChanged();
+		    }
+		}
+		
+        partial void OnFullEventPollingTimeChanging(int value);
+        partial void OnFullEventPollingTimeChanged();
+		
+		private int _FullEventPollingTime;
+		public int FullEventPollingTime { 
+		    get{
+		        return _FullEventPollingTime;
+		    } 
+		    set{
+		        this.OnFullEventPollingTimeChanging(value);
+                this.SendPropertyChanging();
+                this._FullEventPollingTime = value;
+                this.SendPropertyChanged("FullEventPollingTime");
+                this.OnFullEventPollingTimeChanged();
+		    }
+		}
+		
+        partial void OnWorkerCollectionThreadsChanging(int value);
+        partial void OnWorkerCollectionThreadsChanged();
+		
+		private int _WorkerCollectionThreads;
+		public int WorkerCollectionThreads { 
+		    get{
+		        return _WorkerCollectionThreads;
+		    } 
+		    set{
+		        this.OnWorkerCollectionThreadsChanging(value);
+                this.SendPropertyChanging();
+                this._WorkerCollectionThreads = value;
+                this.SendPropertyChanged("WorkerCollectionThreads");
+                this.OnWorkerCollectionThreadsChanged();
+		    }
+		}
+		
+        partial void OnWorkerImageThreadsChanging(int value);
+        partial void OnWorkerImageThreadsChanged();
+		
+		private int _WorkerImageThreads;
+		public int WorkerImageThreads { 
+		    get{
+		        return _WorkerImageThreads;
+		    } 
+		    set{
+		        this.OnWorkerImageThreadsChanging(value);
+                this.SendPropertyChanging();
+                this._WorkerImageThreads = value;
+                this.SendPropertyChanged("WorkerImageThreads");
+                this.OnWorkerImageThreadsChanged();
+		    }
+		}
+		
+        partial void OnWorkerLinkThreadsChanging(int value);
+        partial void OnWorkerLinkThreadsChanged();
+		
+		private int _WorkerLinkThreads;
+		public int WorkerLinkThreads { 
+		    get{
+		        return _WorkerLinkThreads;
+		    } 
+		    set{
+		        this.OnWorkerLinkThreadsChanging(value);
+                this.SendPropertyChanging();
+                this._WorkerLinkThreads = value;
+                this.SendPropertyChanged("WorkerLinkThreads");
+                this.OnWorkerLinkThreadsChanged();
+		    }
+		}
+		
+        partial void OnWorkeSystemThreadsChanging(int value);
+        partial void OnWorkeSystemThreadsChanged();
+		
+		private int _WorkeSystemThreads;
+		public int WorkeSystemThreads { 
+		    get{
+		        return _WorkeSystemThreads;
+		    } 
+		    set{
+		        this.OnWorkeSystemThreadsChanging(value);
+                this.SendPropertyChanging();
+                this._WorkeSystemThreads = value;
+                this.SendPropertyChanged("WorkeSystemThreads");
+                this.OnWorkeSystemThreadsChanged();
+		    }
+		}
+		
+        partial void OnWorkerTweetsThreadsChanging(int value);
+        partial void OnWorkerTweetsThreadsChanged();
+		
+		private int _WorkerTweetsThreads;
+		public int WorkerTweetsThreads { 
+		    get{
+		        return _WorkerTweetsThreads;
+		    } 
+		    set{
+		        this.OnWorkerTweetsThreadsChanging(value);
+                this.SendPropertyChanging();
+                this._WorkerTweetsThreads = value;
+                this.SendPropertyChanged("WorkerTweetsThreads");
+                this.OnWorkerTweetsThreadsChanged();
+		    }
+		}
+		
+        partial void OnCalculateTrendingEventsUpdateIntervalChanging(int value);
+        partial void OnCalculateTrendingEventsUpdateIntervalChanged();
+		
+		private int _CalculateTrendingEventsUpdateInterval;
+		public int CalculateTrendingEventsUpdateInterval { 
+		    get{
+		        return _CalculateTrendingEventsUpdateInterval;
+		    } 
+		    set{
+		        this.OnCalculateTrendingEventsUpdateIntervalChanging(value);
+                this.SendPropertyChanging();
+                this._CalculateTrendingEventsUpdateInterval = value;
+                this.SendPropertyChanged("CalculateTrendingEventsUpdateInterval");
+                this.OnCalculateTrendingEventsUpdateIntervalChanged();
 		    }
 		}
 		

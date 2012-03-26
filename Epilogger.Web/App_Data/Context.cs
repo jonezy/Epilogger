@@ -131,7 +131,6 @@ namespace Epilogger.Data
         public Query<UserFollowsEvent> UserFollowsEvents { get; set; }
         public Query<StatusMessage> StatusMessages { get; set; }
         public Query<UserAuthenticationProfile> UserAuthenticationProfiles { get; set; }
-        public Query<CollectionQueueSetting> CollectionQueueSettings { get; set; }
         public Query<UserClickAction> UserClickActions { get; set; }
         public Query<CheckIn> CheckIns { get; set; }
         public Query<Role> Roles { get; set; }
@@ -144,6 +143,7 @@ namespace Epilogger.Data
         public Query<BlogPost> BlogPosts { get; set; }
         public Query<AggregateVisitHistoryOLD> AggregateVisitHistoryOLDs { get; set; }
         public Query<VisitHistoryOLD> VisitHistoryOLDs { get; set; }
+        public Query<CollectionQueueSetting> CollectionQueueSettings { get; set; }
         public Query<UserRatesEvent> UserRatesEvents { get; set; }
         public Query<UserRole> UserRoles { get; set; }
         public Query<UserFollowsUser> UserFollowsUsers { get; set; }
@@ -260,7 +260,6 @@ namespace Epilogger.Data
             UserFollowsEvents = new Query<UserFollowsEvent>(provider);
             StatusMessages = new Query<StatusMessage>(provider);
             UserAuthenticationProfiles = new Query<UserAuthenticationProfile>(provider);
-            CollectionQueueSettings = new Query<CollectionQueueSetting>(provider);
             UserClickActions = new Query<UserClickAction>(provider);
             CheckIns = new Query<CheckIn>(provider);
             Roles = new Query<Role>(provider);
@@ -273,6 +272,7 @@ namespace Epilogger.Data
             BlogPosts = new Query<BlogPost>(provider);
             AggregateVisitHistoryOLDs = new Query<AggregateVisitHistoryOLD>(provider);
             VisitHistoryOLDs = new Query<VisitHistoryOLD>(provider);
+            CollectionQueueSettings = new Query<CollectionQueueSetting>(provider);
             UserRatesEvents = new Query<UserRatesEvent>(provider);
             UserRoles = new Query<UserRole>(provider);
             UserFollowsUsers = new Query<UserFollowsUser>(provider);
@@ -292,7 +292,6 @@ namespace Epilogger.Data
             	DataProvider.Schema.Tables.Add(new UserFollowsEventTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new StatusMessagesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserAuthenticationProfileTable(DataProvider));
-            	DataProvider.Schema.Tables.Add(new CollectionQueueSettingsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserClickActionsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new CheckInsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new RolesTable(DataProvider));
@@ -305,6 +304,7 @@ namespace Epilogger.Data
             	DataProvider.Schema.Tables.Add(new BlogPostsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new AggregateVisitHistoryOLDTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new VisitHistoryOLDTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new CollectionQueueSettingsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserRatesEventTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserRoleTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserFollowsUserTable(DataProvider));
