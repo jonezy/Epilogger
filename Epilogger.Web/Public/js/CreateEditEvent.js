@@ -290,8 +290,7 @@ head.ready(function () {
     function buildSearchString() {
         var searchString = "";
         $(":input", "#rule-group").not(":button, :submit, :reset, :hidden").each(function (index) {
-
-
+        
             switch ($(this).val()) {
                 case "OR":
                 case "AND":
@@ -304,13 +303,7 @@ head.ready(function () {
                     searchString += $(this).val() + " ";
                     break;
             }
-            
-            
-            
-            
-            
-            
-            
+                
 //            if ($(this).val().length > 0) {
 //                searchString += $(this).val() + " ";
 //            }

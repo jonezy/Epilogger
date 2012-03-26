@@ -38,7 +38,7 @@ jQuery(function ($) {
                         $("#tweetlist li.tweet").each(function (index) {
                             if (index >= maxItemsOnPage) {
                                 $(this).slideUp();
-                                $(this).html();
+                                $(this).remove();
                             }
                         });
 
@@ -95,7 +95,7 @@ jQuery(function ($) {
                         $("#photosvideos div.withcomment").each(function (index) {
                             if (index >= photoMaxItemsOnPage) {
                                 $(this).hide(); 
-                                $(this).html();
+                                $(this).remove();
                              }
                         });
 
