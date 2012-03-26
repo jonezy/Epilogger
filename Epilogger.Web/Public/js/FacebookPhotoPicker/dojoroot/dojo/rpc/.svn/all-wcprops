@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/13/trunk/dojoroot/dojo/rpc
+END
+RpcService.js
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/13/trunk/dojoroot/dojo/rpc/RpcService.js
+END
+JsonpService.js
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/13/trunk/dojoroot/dojo/rpc/JsonpService.js
+END
+JsonService.js
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/13/trunk/dojoroot/dojo/rpc/JsonService.js
+END

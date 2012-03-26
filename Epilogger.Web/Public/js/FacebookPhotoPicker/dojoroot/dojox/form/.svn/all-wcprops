@@ -1,0 +1,125 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/14/trunk/dojoroot/dojox/form
+END
+_FormSelectWidget.js
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/14/trunk/dojoroot/dojox/form/_FormSelectWidget.js
+END
+PasswordValidator.js
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/14/trunk/dojoroot/dojox/form/PasswordValidator.js
+END
+_SelectStackMixin.js
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/14/trunk/dojoroot/dojox/form/_SelectStackMixin.js
+END
+Manager.js
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/14/trunk/dojoroot/dojox/form/Manager.js
+END
+FileUploader.js
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/14/trunk/dojoroot/dojox/form/FileUploader.js
+END
+BusyButton.js
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/14/trunk/dojoroot/dojox/form/BusyButton.js
+END
+DropDownStack.js
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/14/trunk/dojoroot/dojox/form/DropDownStack.js
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/14/trunk/dojoroot/dojox/form/README
+END
+MultiComboBox.js
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/14/trunk/dojoroot/dojox/form/MultiComboBox.js
+END
+RadioStack.js
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/14/trunk/dojoroot/dojox/form/RadioStack.js
+END
+Rating.js
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/14/trunk/dojoroot/dojox/form/Rating.js
+END
+_HasDropDown.js
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/14/trunk/dojoroot/dojox/form/_HasDropDown.js
+END
+FileInputAuto.js
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/14/trunk/dojoroot/dojox/form/FileInputAuto.js
+END
+FilePickerTextBox.js
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/14/trunk/dojoroot/dojox/form/FilePickerTextBox.js
+END
+DateTextBox.js
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/14/trunk/dojoroot/dojox/form/DateTextBox.js
+END
+DropDownSelect.js
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/14/trunk/dojoroot/dojox/form/DropDownSelect.js
+END
+TimeSpinner.js
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/14/trunk/dojoroot/dojox/form/TimeSpinner.js
+END
+FileInput.js
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/14/trunk/dojoroot/dojox/form/FileInput.js
+END
+RangeSlider.js
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/14/trunk/dojoroot/dojox/form/RangeSlider.js
+END
+CheckedMultiSelect.js
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/14/trunk/dojoroot/dojox/form/CheckedMultiSelect.js
+END

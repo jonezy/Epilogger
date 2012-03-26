@@ -16,7 +16,7 @@ namespace Epilogger.Web
 
         public List<Tweet> AllTweets()
         {
-            return base.GetData();
+            return base.GetData(t => t.Deleted==false);
         }
 
 
@@ -28,47 +28,47 @@ namespace Epilogger.Web
 
 
         //Less greedy data functions
-        public int FindTweetCountByEventID(int EventID, DateTime F, DateTime T)
+        public int FindTweetCountByEventID(int eventID, DateTime f, DateTime T)
         {
-            return db.Tweets.Where(t => t.EventID == EventID && t.CreatedDate >= F && t.CreatedDate <= T).Count();
+            return db.Tweets.Count(t => t.EventID == eventID && t.CreatedDate >= f && t.CreatedDate <= T && (t.Deleted == null || t.Deleted == false));
         }
 
-        public int FindUniqueTweetCountByEventID(int EventID, DateTime F, DateTime T)
+        public int FindUniqueTweetCountByEventID(int eventID, DateTime F, DateTime T)
         {
-            return db.Tweets.Where(t => t.EventID == EventID && t.CreatedDate >= F && t.CreatedDate <= T).Select(t => t.FromUserScreenName).Distinct().Count();
+            return db.Tweets.Where(t => t.EventID == eventID && t.CreatedDate >= F && t.CreatedDate <= T && (t.Deleted == null || t.Deleted == false)).Select(t => t.FromUserScreenName).Distinct().Count();
         }
 
 
-        public IEnumerable<Tweet> FindByEventIDOrderDescTake6(int EventID, DateTime F, DateTime T)
+        public IEnumerable<Tweet> FindByEventIDOrderDescTake6(int eventID, DateTime F, DateTime T)
         {
-            return db.Tweets.Where(t => t.EventID == EventID && t.CreatedDate >= F && t.CreatedDate <= T).OrderByDescending(t => t.CreatedDate).Take(6);
+            return db.Tweets.Where(t => t.EventID == eventID && t.CreatedDate >= F && t.CreatedDate <= T && (t.Deleted == null || t.Deleted == false)).OrderByDescending(t => t.CreatedDate).Take(6);
         }
 
-        public IEnumerable<Epilogger.Web.Core.Stats.Tweeter> GetTop10TweetersByEventID(int EventID, DateTime F, DateTime T)
+        public IEnumerable<Epilogger.Web.Core.Stats.Tweeter> GetTop10TweetersByEventID(int eventID, DateTime F, DateTime T)
         {
-            return db.GetTop10TweetersByEventID(EventID, F, T).ExecuteTypedList<Epilogger.Web.Core.Stats.Tweeter>();
+            return db.GetTop10TweetersByEventID(eventID, F, T).ExecuteTypedList<Epilogger.Web.Core.Stats.Tweeter>();
         }
 
 
 
 
         //Slower funcitons
-        public IEnumerable<Tweet> FindByEventID(int EventID)
+        public IEnumerable<Tweet> FindByEventID(int eventID)
         {
             //return FindByEventID(EventID, DateTime.Parse("2000-01-01 00:00:00"), DateTime.Parse("2200-12-31 00:00:00"));
-            return db.Tweets.Where(t => t.EventID == EventID);
+            return db.Tweets.Where(t => t.EventID == eventID && (t.Deleted == null || t.Deleted == false));
         }
 
-        public IEnumerable<Tweet> FindByEventID(int EventID, DateTime StartDateTimeFilter, DateTime EndDateTimeFilter)
+        public IEnumerable<Tweet> FindByEventID(int eventID, DateTime startDateTimeFilter, DateTime endDateTimeFilter)
         {
-            return db.Tweets.Where(t => t.EventID == EventID & t.CreatedDate >= StartDateTimeFilter & t.CreatedDate <= EndDateTimeFilter);
+            return db.Tweets.Where(t => t.EventID == eventID & t.CreatedDate >= startDateTimeFilter & t.CreatedDate <= endDateTimeFilter && (t.Deleted == null || t.Deleted == false));
         }
 
         public List<Tweet> FindByUserScreenName(string fromUserScreenName, int page, int recordsPerPage) {
             DateTime startDate = DateTime.Parse("2000-01-01 00:00:00");
             DateTime endDate = DateTime.Parse("2200-12-31 00:00:00");
 
-            return GetData(t => t.FromUserScreenName == fromUserScreenName && t.CreatedDate >= startDate && t.CreatedDate <= endDate)
+            return GetData(t => t.FromUserScreenName == fromUserScreenName && t.CreatedDate >= startDate && t.CreatedDate <= endDate && (t.Deleted == null || t.Deleted == false))
                     .Skip(page * recordsPerPage)
                     .Take(recordsPerPage)
                     .ToList();
@@ -79,49 +79,77 @@ namespace Epilogger.Web
             DateTime endDate = DateTime.Parse("2200-12-31 00:00:00");
 
             //return GetData(t => t.FromUserScreenName == fromUserScreenName && t.CreatedDate >= startDate && t.CreatedDate <= endDate);
-            return db.Tweets.Where(t => t.FromUserScreenName == fromUserScreenName && t.CreatedDate >= startDate && t.CreatedDate <= endDate);
+            return db.Tweets.Where(t => t.FromUserScreenName == fromUserScreenName && t.CreatedDate >= startDate && t.CreatedDate <= endDate && (t.Deleted == null || t.Deleted == false));
         }
 
 
-        public IEnumerable<Tweet> FindByImageID(int ImageID)
+        public IEnumerable<Tweet> FindByImageID(int imageID)
         {
-            return FindByImageID(ImageID, DateTime.Parse("2000-01-01 00:00:00"), DateTime.Parse("2200-12-31 00:00:00"));
+            return FindByImageID(imageID, DateTime.Parse("2000-01-01 00:00:00"), DateTime.Parse("2200-12-31 00:00:00"));
         }
 
-        public IEnumerable<Tweet> FindByImageID(int ImageID, DateTime StartDateTimeFilter, DateTime EndDateTimeFilter)
+        public IEnumerable<Tweet> FindByImageID(int imageID, DateTime startDateTimeFilter, DateTime endDateTimeFilter)
         {
             ImageMetaDateService IMDS = new ImageMetaDateService();
-            IEnumerable<ImageMetaDatum> IM = IMDS.FindByImageID(ImageID);
+            IEnumerable<ImageMetaDatum> IM = IMDS.FindByImageID(imageID);
 
             return from TW in db.Tweets
                    join I in IM on TW.TwitterID equals I.TwitterID
+                   where TW.Deleted == null || TW.Deleted == false
                    orderby TW.CreatedDate
                    select TW;
         }
 
-        public IEnumerable<Tweet> GetPagedTweets(int EventID, System.Nullable<int> page, int TweetsPerPage, DateTime F, DateTime T)
+        public IEnumerable<Tweet> GetPagedTweets(int eventID, System.Nullable<int> page, int tweetsPerPage, DateTime F, DateTime T)
         {
 
             int skipAmount = page.HasValue ? page.Value - 1 : 0;
 
             var tweets = (from t in db.Tweets
-                          where t.EventID == EventID && t.CreatedDate >= F && t.CreatedDate <= T
+                          where t.EventID == eventID && t.CreatedDate >= F && t.CreatedDate <= T && (t.Deleted == null || t.Deleted == false)
                           orderby t.CreatedDate descending
-                          select t).Skip(skipAmount * TweetsPerPage).Take(TweetsPerPage);
+                          select t).Skip(skipAmount * tweetsPerPage).Take(tweetsPerPage);
 
 
             return tweets;
 
         }
 
-
-
-        public Tweet FindByTwitterID(long? TwitterID)
+        public Tweet FindByTwitterID(long? twitterID)
         {
-            return db.Tweets.Where(t => t.TwitterID == TwitterID).FirstOrDefault();
+            return db.Tweets.FirstOrDefault(t => t.TwitterID == twitterID && (t.Deleted == null || t.Deleted == false));
         }
 
+        public int Count()
+        {
+            return db.Tweets.Count(t => t.Deleted == null || t.Deleted == false);
+        }
 
+        public bool MarkTweetAsDeleted(long tweetID)
+        {
+            try
+            {
+                var firstOrDefault = db.Tweets.FirstOrDefault(t => t.ID == tweetID);
+                if (firstOrDefault != null)
+                    firstOrDefault.Deleted = true;
+                Save(firstOrDefault);
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            
+        }
+
+        public object Save(Tweet entity)
+        {
+            if (entity.ID > 0)
+                return base.GetRepository<Tweet>().Update(entity);
+
+            return base.GetRepository<Tweet>().Add(entity);
+        }
 
 
         ////Reading on the performance diff of List vs iEnumerable.
@@ -168,8 +196,6 @@ namespace Epilogger.Web
         //    return db.Tweets.Where(t => t.EventID == EventID & t.CreatedDate >= StartDateTimeFilter & t.CreatedDate <= EndDateTimeFilter).Take(NumberToReturn).ToList();
         //}
 
-        public int Count() {
-            return base.db.Tweets.Count();
-        }
+        
     }
 }

@@ -117,7 +117,14 @@ namespace Epilogger.Web.Controllers {
             Model.EventRatings = ES.FindEventRatingsByID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
             Model.HasUserRated = false;
             Model.CurrentUserID = CurrentUserID;
+            Model.CurrentUserRole = CurrentUserRole;
             Model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
+
+            Model.CanDelete = false;
+            if ((requestedEvent.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator)
+            {
+                Model.CanDelete = true;
+            }
 
             //@(((Model.EventRatings.Sum(i => i.UserRating) / Model.EventRatings.Count()) / 5) * 100)
 
@@ -216,25 +223,36 @@ namespace Epilogger.Web.Controllers {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         public ActionResult AllTweets(string id, int? page) {
+            
             int currentPage = page.HasValue ? page.Value - 1 : 0;
 
             Event requestedEvent = ES.FindBySlug(id);
-            TopTweetersStats topTweetersStats = new TopTweetersStats();
-            AllTweetsDisplayViewModel Model = Mapper.Map<Event, AllTweetsDisplayViewModel>(requestedEvent);
-            Model.TweetCount = TS.FindTweetCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-            Model.UniqueTweeterCount = TS.FindUniqueTweetCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-            Model.CurrentPageIndex = currentPage;
-            Model.TopTweeters = topTweetersStats.Calculate(TS.GetTop10TweetersByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime())).ToList();
-            Model.ShowTopTweets = false;
-            Model.Tweets = Mapper.Map<IEnumerable<Tweet>, IEnumerable<TweetDisplayViewModel>>(TS.GetPagedTweets(requestedEvent.ID, currentPage + 1, 100, this.FromDateTime(), this.ToDateTime()));
-            Model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
+            var topTweetersStats = new TopTweetersStats();
+            var model = Mapper.Map<Event, AllTweetsDisplayViewModel>(requestedEvent);
+            
+            model.TweetCount = TS.FindTweetCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
+            model.UniqueTweeterCount = TS.FindUniqueTweetCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
+            
+            model.CurrentPageIndex = currentPage;
+            model.TopTweeters = topTweetersStats.Calculate(TS.GetTop10TweetersByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime())).ToList();
+            model.ShowTopTweets = false;
+            model.Tweets = Mapper.Map<IEnumerable<Tweet>, IEnumerable<TweetDisplayViewModel>>(TS.GetPagedTweets(requestedEvent.ID, currentPage + 1, 100, this.FromDateTime(), this.ToDateTime()));
+            model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
 
-            if (currentPage + 1 == 1) {
-                Model.ShowTopTweets = true;
-                Model.Tweets = Mapper.Map<IEnumerable<Tweet>, IEnumerable<TweetDisplayViewModel>>(TS.GetPagedTweets(requestedEvent.ID, currentPage + 1, 100, this.FromDateTime(), this.ToDateTime()));
+            model.CanDelete = false;
+            if ((requestedEvent.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator)
+            {
+                model.CanDelete = true;
             }
 
-            return View(Model);
+            //model.CanDelete = 
+
+            if (currentPage + 1 == 1) {
+                model.ShowTopTweets = true;
+                model.Tweets = Mapper.Map<IEnumerable<Tweet>, IEnumerable<TweetDisplayViewModel>>(TS.GetPagedTweets(requestedEvent.ID, currentPage + 1, 100, this.FromDateTime(), this.ToDateTime()));
+            }
+
+            return View(model);
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1048,6 +1066,32 @@ namespace Epilogger.Web.Controllers {
             }
             
             return true;
+        }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        [HttpPost]
+        public bool DeleteTweetAjax(string eventid, long tweetID)
+        {
+            var requestedEvent = ES.FindBySlug(eventid);
+
+            //This is called by Ajax to delete a tweet. Double check the user is allowed to do this.
+            if ((requestedEvent.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator)
+            {
+                TS.MarkTweetAsDeleted(tweetID);
+            }
+
+            return true;
+
+        }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+        public ActionResult UploadPhotos(int id)
+        {
+            var model = new UploadPhotosViewModel {EventID = id};
+            return PartialView(model);
         }
     
     }

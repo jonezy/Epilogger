@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/13/trunk/dojoroot/dojo/dnd
+END
+move.js
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/13/trunk/dojoroot/dojo/dnd/move.js
+END
+autoscroll.js
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/13/trunk/dojoroot/dojo/dnd/autoscroll.js
+END
+common.js
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/13/trunk/dojoroot/dojo/dnd/common.js
+END
+Mover.js
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/13/trunk/dojoroot/dojo/dnd/Mover.js
+END
+Moveable.js
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/13/trunk/dojoroot/dojo/dnd/Moveable.js
+END
+Manager.js
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/13/trunk/dojoroot/dojo/dnd/Manager.js
+END
+TimedMoveable.js
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/13/trunk/dojoroot/dojo/dnd/TimedMoveable.js
+END
+Avatar.js
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/13/trunk/dojoroot/dojo/dnd/Avatar.js
+END
+Selector.js
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/13/trunk/dojoroot/dojo/dnd/Selector.js
+END
+Source.js
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/13/trunk/dojoroot/dojo/dnd/Source.js
+END
+Container.js
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/13/trunk/dojoroot/dojo/dnd/Container.js
+END

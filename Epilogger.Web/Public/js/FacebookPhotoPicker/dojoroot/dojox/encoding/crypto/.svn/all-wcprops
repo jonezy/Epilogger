@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/14/trunk/dojoroot/dojox/encoding/crypto
+END
+_base.js
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/14/trunk/dojoroot/dojox/encoding/crypto/_base.js
+END
+Blowfish.js
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/14/trunk/dojoroot/dojox/encoding/crypto/Blowfish.js
+END
+SimpleAES.js
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/14/trunk/dojoroot/dojox/encoding/crypto/SimpleAES.js
+END

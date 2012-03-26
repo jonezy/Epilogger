@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/13/trunk/dojoroot/dojo/data/api
+END
+Notification.js
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/13/trunk/dojoroot/dojo/data/api/Notification.js
+END
+Request.js
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/13/trunk/dojoroot/dojo/data/api/Request.js
+END
+Identity.js
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/13/trunk/dojoroot/dojo/data/api/Identity.js
+END
+Write.js
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/13/trunk/dojoroot/dojo/data/api/Write.js
+END
+Read.js
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/13/trunk/dojoroot/dojo/data/api/Read.js
+END

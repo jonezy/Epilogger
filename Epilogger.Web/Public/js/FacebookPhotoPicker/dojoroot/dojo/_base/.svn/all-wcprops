@@ -1,0 +1,101 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/13/trunk/dojoroot/dojo/_base
+END
+html.js
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/13/trunk/dojoroot/dojo/_base/html.js
+END
+query.js
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/13/trunk/dojoroot/dojo/_base/query.js
+END
+window.js
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/13/trunk/dojoroot/dojo/_base/window.js
+END
+json.js
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/13/trunk/dojoroot/dojo/_base/json.js
+END
+fx.js
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/13/trunk/dojoroot/dojo/_base/fx.js
+END
+Color.js
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/13/trunk/dojoroot/dojo/_base/Color.js
+END
+array.js
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/13/trunk/dojoroot/dojo/_base/array.js
+END
+Deferred.js
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/13/trunk/dojoroot/dojo/_base/Deferred.js
+END
+event.js
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/13/trunk/dojoroot/dojo/_base/event.js
+END
+lang.js
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/13/trunk/dojoroot/dojo/_base/lang.js
+END
+NodeList.js
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/13/trunk/dojoroot/dojo/_base/NodeList.js
+END
+query-sizzle.js
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/13/trunk/dojoroot/dojo/_base/query-sizzle.js
+END
+browser.js
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/13/trunk/dojoroot/dojo/_base/browser.js
+END
+connect.js
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/13/trunk/dojoroot/dojo/_base/connect.js
+END
+declare.js
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/13/trunk/dojoroot/dojo/_base/declare.js
+END
+xhr.js
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/13/trunk/dojoroot/dojo/_base/xhr.js
+END

@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/14/trunk/dojoroot/dojox/encoding
+END
+base64.js
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/14/trunk/dojoroot/dojox/encoding/base64.js
+END
+ascii85.js
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/14/trunk/dojoroot/dojox/encoding/ascii85.js
+END
+LICENSE
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/14/trunk/dojoroot/dojox/encoding/LICENSE
+END
+_base.js
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/14/trunk/dojoroot/dojox/encoding/_base.js
+END
+easy64.js
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/14/trunk/dojoroot/dojox/encoding/easy64.js
+END
+bits.js
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/14/trunk/dojoroot/dojox/encoding/bits.js
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/14/trunk/dojoroot/dojox/encoding/README
+END
