@@ -221,8 +221,11 @@ else
         <div id="eventDescription">
             @Html.Raw(Model.Description.Replace("\r", "<br />"))
         </div>
-        <span class="spacer"></span>
-
+        
+        @*<span class="spacer"></span>*@
+        <br />
+        <strong>Official Website:</strong> <a href="@Model.WebsiteURL" target="_blanc">@Model.WebsiteURL</a>
+        <br /><br />
         <table id="event-particulars">
         <tr>
             <td>
