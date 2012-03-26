@@ -10,8 +10,10 @@
             <div class="pp_FirstComment tweet-content">
                 <a href="http://www.twitter.com/@t.FromUserScreenName" target="_blank" class="tweet-content-username-small">@@@t.FromUserScreenName</a>:
                 <div style="">
-                     <span class="sm-spacer"></span>
-                     <h2>@Html.Raw(t.TextAsHTML)</h2>
+                    <span class="sm-spacer"></span>
+                    <h2>@Html.Raw(t.TextAsHTML)
+                        <br /><span class="tweet-date">(@Html.DisplayFor(thing => t.CreatedDate))</span>
+                    </h2>
                 </div>
             </div>
             <span class="sm-spacer"></span>
@@ -26,6 +28,7 @@
                 <div>
                     @Html.Raw(t.TextAsHTML)
                 </div>
+                <span class="tweet-date">(@Html.DisplayFor(thing => t.CreatedDate))</span>
             </div>
             <span class="sm-spacer"></span>
         }

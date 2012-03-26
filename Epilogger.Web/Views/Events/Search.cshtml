@@ -19,7 +19,7 @@
     @using (Html.BeginForm("Search", "events", FormMethod.Post, null))
     {
         @Html.TextBoxFor(t => t.SearchTerm)
-        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.Eventslug)
         <input type="submit" class="blue-action-button remove-bottom" value="Search" />
     }
 </div>
