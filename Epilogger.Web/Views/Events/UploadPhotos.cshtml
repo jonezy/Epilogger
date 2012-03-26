@@ -1,0 +1,274 @@
+﻿@model Epilogger.Web.Models.UploadPhotosViewModel
+
+
+      
+<script type="text/javascript">
+    dojo.require("dojo.parser");
+    dojo.require("dijit.form.FilteringSelect");
+    dojo.require("dijit.form.RadioButton");
+    dojo.require("dijit.form.Button");
+    dojo.require("dojo.data.ItemFileReadStore");
+</script>
+
+<script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script>
+
+<script type="text/javascript">
+    var friends = new Object();
+    var friendsStore;
+
+</script>
+
+
+
+<table>
+<tr>
+<td width="150px" valign="top">
+
+<div id="FacebookPhotoPicker">
+    <button dojoType='dijit.form.Button' id="FacebookPhotoPickerInitButton" onclick='initFacebookPhotoPicker()'>Browse Facebook Photos</button>
+	<div id="FacebookPhotoPickerInput" class="tundra" style="display: none">
+	    <input dojoType="dijit.form.RadioButton" id="photosMine" name="photosWho" 
+	           checked="checked" value="mine" type="radio" onclick="dijit.byId('friendSelection').attr('disabled',true) ; displayAlbumList()"/>
+	           <label for="photosMine"> My Photos </label>
+	    <br/>
+	    <input dojotype="dijit.form.RadioButton" id="photosFriends" name="photosWho" 
+	           value="friends" type="radio" onclick="dijit.byId('friendSelection').attr('disabled',false); displayAlbumList()"/> 
+	           <label for="photosFriends"> Friends' Photos </label>
+	    <br/>
+	
+	    &nbsp;<select dojoType="dijit.form.FilteringSelect"
+	           name="friendSelection"
+	           id="friendSelection"
+	           style="width:150px"
+	           searchDelay=0
+	           onChange="friendSelectionChanged"
+	           disabled="disabled">
+	    </select>
+	</div>
+	<br/>
+	<div id="photoSpace"></div>
+</div>
+</td>
+<td valign="top">
+  <div id="mainContent">Normal content is displayed while the user is not picking a photo</div>
+  <div id="photoPreview" style="display: none; width: 500px"></div>
+</td>
+</tr>
+</table>
+
+
+
+
+<script type="text/javascript">
+
+    var myAlbumCovers = "";
+    var friendAlbumCovers = "";
+
+    function initFacebookPhotoPicker() {
+
+        dijit.byId("FacebookPhotoPickerInitButton").attr('disabled', true);
+
+        FB_RequireFeatures(["XFBML", "Api"], function () {
+            FB.Facebook.init(FB_API_KEY, "crossdomain/xd_receiver.htm");
+
+            //FB.FBDebug.isEnabled = true;
+            //FB.FBDebug.logLevel = 4;
+
+            var api = FB.Facebook.apiClient;
+            api.requireLogin(function (exception) {
+
+                //Get the album covers XFBML for the logged in user then, using a callback method,
+                //store them away as the logged in user's albums and display them on the page.
+                getAlbumsXFBML(api.get_session().uid, function (albumCovers) {
+                    myAlbumCovers = albumCovers;
+                    document.getElementById("photoSpace").innerHTML = myAlbumCovers;
+                });
+
+                api.fql_query("SELECT uid, name FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = " + api.get_session().uid + ") order by first_name", function (results, ex) {
+                    var friendsItems = new Array();
+                    for (var i = 0; i < results.length; i++) {
+                        friendsItems[i] = { "uid": results[i].uid, "name": results[i].name };
+                    }
+
+                    friends = { "identifier": "uid", "label": "name", "items": friendsItems };
+
+                    friendsStore = new dojo.data.ItemFileReadStore({ data: friends });
+                    dijit.byId('friendSelection').store = friendsStore;
+                    dijit.byId('friendSelection').searchAttr = "name";
+
+                    //Hide the Browse Facebook Photos button and show the user input widgets.
+                    dijit.byId('FacebookPhotoPickerInitButton').domNode.style.display = "none";
+                    document.getElementById("FacebookPhotoPickerInput").style.display = "inline";
+                });
+
+            });
+
+        });
+
+    }
+
+    function displayAlbum(aid) {
+        var api = FB.Facebook.apiClient;
+        api.requireLogin(function (exception) {
+            hideLargeImage();
+            document.getElementById("photoSpace").innerHTML = "Fetching contents of album...";
+
+            api.fql_query("SELECT pid, src_small, src_big FROM photo WHERE aid = '" + aid + "'", function (albumPhotos) {
+                var photoDisplay = "";
+
+                var photoTableWidth = 2;
+                var photoTableCount = 0;
+
+                photoDisplay += "<table>";
+
+                for (var i = 0; i < albumPhotos.length; i++) {
+                    var photo = albumPhotos[i];
+                    if (photoTableCount % photoTableWidth == 0) {
+                        if (i != photoTableCount) {
+                            photoDisplay += "</tr>";
+                        }
+                        photoDisplay += "<tr>";
+                    }
+
+                    photoDisplay += "<td onmouseover='showLargeImage(\"" + photo.src_big + "\")' onclick='selectImage(\"" + photo.pid + "\")'><img src=\"" + photo.src_small + "\" id='photo" + photo.pid + "'/></td>";
+                    photoTableCount++;
+                }
+
+                photoDisplay += "</tr></table>";
+
+                document.getElementById("photoSpace").innerHTML = "<div onmouseout='hideLargeImage()'><button dojoType='dijit.form.Button' onclick='displayAlbumList()'>Back to album list</button><br/>" + photoDisplay + "</div>";
+            });
+        });
+    }
+
+    function displayAlbumList() {
+        if (dijit.byId('photosMine').attr('checked')) {
+            document.getElementById("photoSpace").innerHTML = myAlbumCovers;
+        } else {
+            document.getElementById("photoSpace").innerHTML = friendAlbumCovers;
+        }
+    }
+
+    function friendSelectionChanged() {
+        friendUID = dijit.byId('friendSelection').attr('value');
+
+        getAlbumsXFBML(friendUID, function (albumCovers) {
+            friendAlbumCovers = albumCovers;
+            document.getElementById("photoSpace").innerHTML = friendAlbumCovers;
+        });
+    }
+
+    //Generate XFBML representing the albums that uid owns then call
+    //afterAsyncFetchFunction with the XFBML as a parameter.
+    //We use this 2nd order function callback because the album fetch
+    //happens in a separate thread and we want to perform our action
+    //after the thread has finished getting the album data. 
+    function getAlbumsXFBML(uid, afterAsyncFetchFunction) {
+
+        var albumCovers = "";
+
+        var sequencer = new FB.BatchSequencer();
+
+        var api = FB.Facebook.apiClient;
+
+        var albumsPending = api.fql_query("SELECT aid, cover_pid, name FROM album WHERE owner=" + uid, sequencer);
+        var photosPending = api.fql_query("SELECT pid, src_small, src_big FROM photo WHERE pid in (SELECT cover_pid, name FROM album WHERE owner=" + uid + ")", sequencer);
+
+        //FB.Facebook.apiClient.photos_getAlbums(uid, null, function(albums) {
+        //Executing the cut-down FQL is quicker than getting all the unnecessary details back from photos_getAlbums()
+        sequencer.execute(function () {
+
+            var albums = albumsPending.result;
+            var photos = photosPending.result;
+
+            var photosMap = new Array();
+
+            dojo.forEach(photos,
+   			    function (photo, index, array) {
+   			        photosMap[photo.pid] = photo;
+   			    }
+    	    );
+
+            var photoTableWidth = 2;
+            var photoTableCount = 0;
+
+            albumCovers += "<div onmouseout='hideLargeImage()'><table>";
+
+            for (var i = 0; i < albums.length; i++) {
+                var album = albums[i];
+                if (album.cover_pid != "") {
+                    if (photoTableCount % photoTableWidth == 0) {
+                        if (i != photoTableCount) {
+                            albumCovers += "</tr>";
+                        }
+                        albumCovers += "<tr>";
+                    }
+
+
+                    if (album.cover_pid != 0) {
+                        albumCovers += "<td onmouseover='showLargeImage(\"" + photosMap[album.cover_pid].src_big + "\", \"Album: " + album.name.replace("'", "&apos;").replace('"', '&quot;') + "\")'><a onclick='displayAlbum(\"" + album.aid + "\")'><img src=\"" + photosMap[album.cover_pid].src_small + "\"/></a></td>";
+                        photoTableCount++;
+                    }
+
+                } else {
+                    //Ignore photos without cover pictures, they're most probably empty
+                }
+            }
+
+            albumCovers += "</tr></table></div>";
+
+            //Do the actions that have been specified for after the fetch has completed.
+            afterAsyncFetchFunction(albumCovers);
+        });
+    }
+
+    //These are extension points; redefine these methods to change the mouseover behaviour.
+    function showLargeImage(imagesource, text) {
+        var content = "";
+        if (text != null) {
+            content += text + "<br/>";
+        }
+        content += "<img src='" + imagesource + "' style='maxwidth: 100%'/>";
+
+        document.getElementById("photoPreview").innerHTML = content;
+        document.getElementById("mainContent").style.display = "none";
+        document.getElementById("photoPreview").style.display = "inline";
+    }
+
+    function hideLargeImage() {
+        document.getElementById("photoPreview").style.display = "none";
+        document.getElementById("mainContent").style.display = "inline";
+    }
+
+    var currentPID;
+
+    function selectImage(pid) {
+        var currentSelection = document.getElementById("photo" + currentPID);
+        if (currentSelection != null) {
+            currentSelection.style.border = "";
+        }
+
+        currentPID = pid;
+
+        document.getElementById("photo" + pid).style.border = "medium solid black";
+    }
+    
+</script>
+
+
+@*<div class="modal_left">
+
+
+</div>
+<div class="modal_right">
+    
+    <form action="" method="post" onsubmit="return AddBlogPost('@Url.Action("UploadPhotos", "events", new { id = @Model.EventID })')">
+        <fieldset class="modal">
+            <legend></legend>
+            <p></p>
+            <p></p>
+            <p></p>
+            <input type="submit" id="search" class="blue-action-button" value="Add post" />
+        </fieldset>
+    </form>
+</div>*@

@@ -70,6 +70,7 @@
         head.js('@Url.Content("~/Public/js/jquery.cycle.all.js")')
         head.js('@Url.Content("~/Public/js/jquery.jtruncate.pack.js")')
         head.js('@Url.Content("~/Public/js/jquery.UI.DatePicker/js/jquery-ui-1.8.17.custom.min.js")')
+    
     </script>
     
     @*TEMP HACK FOR THE FEEDBACK TAB*@
@@ -153,10 +154,11 @@
                 @using (Html.BeginForm("Search", "Home", FormMethod.Post, null)) {
                     @Html.TextBox("SearchTerm", null, new { @class = "remove-bottom", @title="Search..." })
                 }		    
-	        </div>	
+            </div>	
             @Html.Partial("Navigation", new { Area = "" }   )
         </div>
-    </div>     
+    </div>
+    <div id="jaggies"></div>
 </div>
 
 <div class="container_12 clearfix" id="outer-container">
@@ -176,7 +178,7 @@
                     <li>@Html.ActionLink("Privacy Policy", "privacy", "home")</li>
                     <li>@Html.ActionLink("TOS", "terms", "home")</li>
                 </ul>
-                <p>Copyright © 2011 Epilogger Inc. All rights reserved. Made with lots of love and caffeine.</p>
+                <p>Copyright © 2012 Epilogger Inc. All rights reserved. Made with lots of love and caffeine.</p>
                 <a href="http://www.facebook.com/epilogger" target="_blank"><img src="@Url.Content("~/Public/images/icons/facebook.png")" width="25" height="25" /></a>
                 <a href="http://twitter.com/epilogger" target="_blank"><img src="@Url.Content("~/Public/images/icons/twitter.png")" width="25" height="25" /></a>
                 <a href="http://blog.epilogger.com/" target="_blank"><img src="@Url.Content("~/Public/images/icons/blog.png")" width="25" height="25" /></a>

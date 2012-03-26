@@ -1,0 +1,197 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form
+END
+_FormWidget.js
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/_FormWidget.js
+END
+NumberTextBox.js
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/NumberTextBox.js
+END
+ValidationTextBox.js
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/ValidationTextBox.js
+END
+ComboBox.js
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/ComboBox.js
+END
+CurrencyTextBox.js
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/CurrencyTextBox.js
+END
+TimeTextBox.js
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/TimeTextBox.js
+END
+_Spinner.js
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/_Spinner.js
+END
+Textarea.js
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/Textarea.js
+END
+VerticalRuleLabels.js
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/VerticalRuleLabels.js
+END
+NumberSpinner.js
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/NumberSpinner.js
+END
+DateTextBox.js
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/DateTextBox.js
+END
+TextBox.js
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/TextBox.js
+END
+VerticalRule.js
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/VerticalRule.js
+END
+Form.js
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/Form.js
+END
+HorizontalRuleLabels.js
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/HorizontalRuleLabels.js
+END
+_FormMixin.js
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/_FormMixin.js
+END
+_DateTimeTextBox.js
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/_DateTimeTextBox.js
+END
+Button.js
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/Button.js
+END
+VerticalSlider.js
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/VerticalSlider.js
+END
+ToggleButton.js
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/ToggleButton.js
+END
+HorizontalRule.js
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/HorizontalRule.js
+END
+Slider.js
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/Slider.js
+END
+FilteringSelect.js
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/FilteringSelect.js
+END
+MappedTextBox.js
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/MappedTextBox.js
+END
+CheckBox.js
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/CheckBox.js
+END
+SimpleTextarea.js
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/SimpleTextarea.js
+END
+DropDownButton.js
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/DropDownButton.js
+END
+MultiSelect.js
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/MultiSelect.js
+END
+RadioButton.js
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/RadioButton.js
+END
+ComboButton.js
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/ComboButton.js
+END
+HorizontalSlider.js
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/HorizontalSlider.js
+END
+RangeBoundTextBox.js
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/12/trunk/dojoroot/dijit/form/RangeBoundTextBox.js
+END

@@ -1,6 +1,4 @@
-﻿@using Epilogger.Web;
-
-@model Epilogger.Web.Models.EventDisplayViewModel
+﻿@model Epilogger.Web.Models.EventDisplayViewModel
 @{
     Layout = "~/Views/Shared/_InteriorLayout.cshtml";
     ViewBag.Title = "Epilogger - " + Model.Name;    
@@ -44,6 +42,7 @@ else
     var EventID = @Model.ID;
 
     var EventName = '@Model.Name';
+    var EventSlug = '@Model.EventSlug';
     var EventURL = 'http://www.epilogger.com/Events/@Model.EventSlug/Details';
     var HasSubscribed = @Model.HasSubscribed.ToString().ToLower();
     
@@ -85,7 +84,35 @@ else
 </style>
 
 
+
+@*This is for the upload from Facebook*@
+@*<link href="@Url.Content("~/Public/css/modal.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Public/js/FacebookPhotoPicker/dojoroot/dijit/themes/tundra/tundra.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Public/js/FacebookPhotoPicker/dojoroot/dojo/resources/dojo.css")" rel="stylesheet" type="text/css" />*@
+
+<!-- Pickup the FB_API_KEY and PHOTO_PICKER_DEBUG configuration values -->
+@*<script type="text/javascript" src="@Url.Content("~/Public/js/FacebookPhotoPicker/photoPickerConfig.js")"></script>*@
+
+<!-- Initialise Dojo Javascript library -->
+@*<script type="text/javascript">
+    var djConfig = {
+        parseOnLoad: true,
+        isDebug: PHOTO_PICKER_DEBUG
+    };
+</script>
+    
+<script type="text/javascript" src="@Url.Content("~/Public/js/FacebookPhotoPicker/dojoroot/dojo/dojo.js")"></script>*@
+@*Edn Script for upload from Facebook*@
+
 <div class="grid_12 alpha">
+    @if (Model.CurrentUserRole == UserRoleType.Administrator)
+    {
+        <div class="grid_12 alpha" style="background-color: palegoldenrod">
+            <strong>Event was created by:</strong> @Model.TheUser.FirstName @Model.TheUser.LastName (@Model.TheUser.Username)
+        </div>
+        <span class="spacer"></span>
+    }
+
     @if (Model.HasSubscribed)
     {
         <div class="subscribedIndicator">SUBSCRIBED</div>
@@ -132,8 +159,23 @@ else
             </ul>
             <div class="starSmall">You rated @Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID && i.EventID == Model.ID).FirstOrDefault().UserRating stars on <br /> @Html.DisplayFor(thing => Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime, "ShortDateTime")</div>
         }
+        
+        <div class="" style="height: 60px; width: 234px; float: right; top: 50px; position: absolute; right: 10px;">
+            <script type="text/javascript"><!--
+                google_ad_client = "ca-pub-9709690433051456";
+                /* Event Page Header */
+                google_ad_slot = "3239655459";
+                google_ad_width = 234;
+                google_ad_height = 60;
+            //-->
+            </script>
+            <script type="text/javascript"
+                    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+            </script>
+            
+        </div>
 
-        <span class="spacer"></span>    
+        <span class="spacer"></span> 
 
         @*New event menu*@
         @Html.Partial("Menu", Model.ToolbarViewModel)
@@ -146,7 +188,7 @@ else
             }
         </div>
 
-
+        
 
         @*<div id="SearchTimeFilter">
             <div class="filter-by-time">
@@ -485,7 +527,8 @@ else
     <ul class="plain-list" id="tweetlist">
         @foreach (Epilogger.Data.Tweet EPLTweet in Model.Tweets)
         {
-            @Html.Partial("_TweetTemplate", EPLTweet);
+            var ttvm = new Epilogger.Web.Models.TweetTemplateViewModel { Tweet = EPLTweet, CanDelete = Model.CanDelete };
+            @Html.Partial("_TweetTemplate", ttvm);
         }
     </ul>
 
@@ -520,6 +563,7 @@ else
         { 
             @: (@Html.ActionLink("See all photos and videos", "AllPhotos", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { }))
         }
+        @*(<a href="" class="uploadPhotos" alt="">Have something to contribute? Upload your photos</a>)*@
     </p>
 </div>
 
@@ -596,12 +640,15 @@ else
             @if (!IncludeDateRange)
             { 
                 @: (@Html.ActionLink("See all checkins", "allcheckins", "events", new { id = Model.ID }))
-           }
+            }
             else
             { 
                 @: (@Html.ActionLink("See all checkins", "allcheckins", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { }))
             }
         </div>
+        
+        
+        
     </div>
 </div>
 <br style="clear: both;" />
@@ -631,6 +678,13 @@ else
             width: "60%", height: "60%",
             href: '@Url.Action("AddLink", "Events")'
         });
+
+
+//        $(".uploadPhotos").colorbox({
+//            width: "60%", height: "60%",
+//            href: '@Url.Action("UploadPhotos", "Events", new { id = Model.ID })'
+//        });
+
     });
 
 </script>

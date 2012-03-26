@@ -159,3 +159,23 @@ jQuery.fn.hint = function (blurClass) {
         }
     });
 };
+
+
+head.ready(function () {
+    $(".deleteTweet").bind("click", function (e) {
+        e.preventDefault();
+
+        var theLink = this;
+
+        $.ajax({
+            url: '/Events/DeleteTweetAjax/' + EventSlug + '/' + this.id,
+            type: 'POST',
+            data: { href: e.srcElement.href, PathName: e.srcElement.pathname, UserAgent: navigator.userAgent, Host: e.srcElement.host },
+            success: function (result) {
+                $(theLink).parent().parent().parent().fadeOut();
+            }
+        });
+
+
+    });
+});

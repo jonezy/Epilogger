@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/14/trunk/dojoroot/dojox/atom/widget/templates/css
+END
+EntryHeader.css
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/14/trunk/dojoroot/dojox/atom/widget/templates/css/EntryHeader.css
+END
+HtmlFeedViewer.css
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/14/trunk/dojoroot/dojox/atom/widget/templates/css/HtmlFeedViewer.css
+END
+HtmlFeedViewerEntry.css
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/14/trunk/dojoroot/dojox/atom/widget/templates/css/HtmlFeedViewerEntry.css
+END
+HtmlFeedEntryViewer.css
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/14/trunk/dojoroot/dojox/atom/widget/templates/css/HtmlFeedEntryViewer.css
+END
+HtmlFeedEntryEditor.css
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/14/trunk/dojoroot/dojox/atom/widget/templates/css/HtmlFeedEntryEditor.css
+END
+HtmlFeedViewerGrouping.css
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/14/trunk/dojoroot/dojox/atom/widget/templates/css/HtmlFeedViewerGrouping.css
+END
