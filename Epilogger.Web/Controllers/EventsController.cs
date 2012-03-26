@@ -584,6 +584,7 @@ namespace Epilogger.Web.Controllers {
             Event ThisEvent = new Event();
             ThisEvent = ES.FindByID(requestedEvent.ID);
             s.Name = ThisEvent.Name;
+            s.Eventslug = ThisEvent.EventSlug;
             if (!string.IsNullOrEmpty(IEsearchterm)) {
                 s.SearchResults = ES.SearchInEvent(requestedEvent.ID, IEsearchterm, this.FromDateTime(), this.ToDateTime());
             }
@@ -597,12 +598,9 @@ namespace Epilogger.Web.Controllers {
         [HttpPost]
         public ActionResult Search(FormCollection fc)
         {
+            var searchTerm = fc["SearchTerm"];
 
-            string SearchTerm;
-            SearchTerm = fc["SearchTerm"].ToString();
-
-            return RedirectToAction("Search", new { id = fc["EventSlug"].ToString(), IEsearchterm = SearchTerm });
-
+            return RedirectToAction("Search", new { id = fc["EventSlug"], IEsearchterm = searchTerm });
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------

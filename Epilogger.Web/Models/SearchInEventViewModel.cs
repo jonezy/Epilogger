@@ -9,6 +9,7 @@ namespace Epilogger.Web.Models
     {
         public int ID { get; set; }
         public string Name { get; set; }
+        public string Eventslug { get; set; }
         public string SearchTerm { get; set; }
 
 
