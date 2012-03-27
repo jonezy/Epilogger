@@ -22,11 +22,11 @@
                     <p id="confirmPW">@Html.LabelFor(model => model.ConfirmPassword) @Html.PasswordFor(model => model.ConfirmPassword)</p>
                     <p>@Html.LabelFor(model => model.EmailAddress) @Html.TextBoxFor(model => model.EmailAddress)</p>
                     <p>@Html.LabelFor(model => model.DateOfBirth) @Html.TextBoxFor(model => model.DateOfBirth, new { @class = "dob" })</p>
-                    <p>@Html.LabelFor(model => model.TimeZoneOffset) @Html.DropDownListFor(model => model.TimeZoneOffset, Model.TimeZones, "Select your timezone")</p>
+                    @*<p>@Html.LabelFor(model => model.TimeZoneOffset) @Html.DropDownListFor(model => model.TimeZoneOffset, Model.TimeZones, "Select your timezone")</p>*@
                 </fieldset>
-                <center>
-                    By clicking the "Create this Account" button you agree to the Epilogger<br /> <a href="/home/Terms" target="_blank">Terms of Use</a> and <a href="/home/Privacy" target="_blank">Privacy Policy</a>
-                </center>
+                <div style="text-align: center;" >
+                    By clicking the "Create this Account" button you agree to the Epilogger<br/> <a href="/home/Terms" target="_blank">Terms of Use</a> and <a href="/home/Privacy" target="_blank">Privacy Policy</a>
+                </div>
             </div>
         </div>
     </div>

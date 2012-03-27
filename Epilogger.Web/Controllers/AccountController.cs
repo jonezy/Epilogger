@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -50,6 +51,7 @@ namespace Epilogger.Web.Controllers {
                 if (model.DateOfBirth != null && (DateTime.Now - DateTime.Parse(model.DateOfBirth)).Days / 366 < 13)
                 {
                     this.StoreError("You must be must be 13 years of age or older to use Epilogger.");
+                    ModelState.AddModelError(string.Empty, "You must be must be 13 years of age or older to use Epilogger.");
                     return View(model);
                 }
                 User user = null;
@@ -61,11 +63,13 @@ namespace Epilogger.Web.Controllers {
                     // build a message to send to the user.
                     string validateUrl = string.Format("{0}account/validate/{1}", App.BaseUrl, Helpers.base64Encode(user.EmailAddress));
 
-                    TemplateParser parser = new TemplateParser();
-                    Dictionary<string, string> replacements = new Dictionary<string, string>();
-                    replacements.Add("[BASE_URL]", App.BaseUrl);
-                    replacements.Add("[FIRST_NAME]", user.EmailAddress);
-                    replacements.Add("[VALIDATE_ACCOUNT_URL]", validateUrl);
+                    var parser = new TemplateParser();
+                    Dictionary<string, string> replacements = new Dictionary<string, string>
+                                                                  {
+                                                                      {"[BASE_URL]", App.BaseUrl},
+                                                                      {"[FIRST_NAME]", user.EmailAddress},
+                                                                      {"[VALIDATE_ACCOUNT_URL]", validateUrl}
+                                                                  };
 
                     string message = parser.Replace(AccountEmails.ValidateAccount, replacements);
 
