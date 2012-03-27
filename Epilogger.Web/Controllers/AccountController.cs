@@ -54,6 +54,14 @@ namespace Epilogger.Web.Controllers {
                     ModelState.AddModelError(string.Empty, "You must be must be 13 years of age or older to use Epilogger.");
                     return View(model);
                 }
+                //Ensure the passwords match
+                if (model.Password != model.ConfirmPassword)
+                {
+                    this.StoreError("The passwords you entered do not match.");
+                    ModelState.AddModelError(string.Empty, "The passwords you entered do not match.");
+                    return View(model);
+                }
+
                 User user = null;
                 try {
                     user = Mapper.Map<CreateAccountModel, User>(model);
