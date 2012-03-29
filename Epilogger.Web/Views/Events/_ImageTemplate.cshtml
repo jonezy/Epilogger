@@ -1,11 +1,15 @@
 ﻿
-@model Epilogger.Data.Image
+@model Epilogger.Web.Models.ImageTemplateViewModel
 
-<div class="withcomment newPhotoupdates" id="photo-@Model.ID">
-    <a href="@Model.Fullsize" rel="prettyPhoto[latestphotos]" photoid="@Model.ID" title="" id="@Model.ID">
-        <img src="@Model.Fullsize" width="250" border="0" alt="" />
+<div class="withcomment newPhotoupdates" id="photo-@Model.Image.ID">
+    <a href="@Model.Image.Fullsize" rel="prettyPhoto[latestphotos]" photoid="@Model.Image.ID" title="" id="@Model.Image.ID">
+        <img src="@Model.Image.Fullsize" width="250" border="0" alt="" />
     </a>
     <a href="#" class="commentbubble">
-        @Model.ImageMetaData.Count()
+        @Model.Image.ImageMetaData.Count()
     </a>
+    @if (Model.CanDelete)
+    {
+        <a href="#" id="@Model.Image.ID" class="imagedelete">delete</a>
+    }
 </div>

@@ -12,6 +12,10 @@
     {"parsetags": "explicit"}
 </script>
 
+<script language="javascript" type="text/javascript">
+    var EventSlug = '@Model.EventSlug';
+</Script>
+
 <script type="text/javascript" language="javascript">
     head.js('@Url.Content("~/Public/js/AllPhotos.js")');
 
@@ -72,7 +76,8 @@
 <div class="image-grid" id="photosvideos">
     @foreach (Epilogger.Data.Image EPLImage in Model.Images)
     {
-        @Html.Partial("_ImageTemplate", EPLImage)
+        var itvm = new Epilogger.Web.Models.ImageTemplateViewModel { Image = EPLImage, CanDelete = Model.CanDelete };
+        @Html.Partial("_ImageTemplate", itvm)
     }
 </div>
 

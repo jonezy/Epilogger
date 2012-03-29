@@ -212,6 +212,12 @@ namespace Epilogger.Web.Controllers {
             Model.Images = IS.GetPagedPhotos(requestedEvent.ID, currentPage + 1, 30, this.FromDateTime(), this.ToDateTime());
             Model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
 
+            Model.CanDelete = false;
+            if ((requestedEvent.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator)
+            {
+                Model.CanDelete = true;
+            }
+
             if (currentPage + 1 == 1) {
                 Model.ShowTopPhotos = true;
                 Model.TopImages = IS.GetTopPhotosByEventID(requestedEvent.ID, 10, this.FromDateTime(), this.ToDateTime());
@@ -1083,6 +1089,23 @@ namespace Epilogger.Web.Controllers {
             if ((requestedEvent.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator)
             {
                 TS.MarkTweetAsDeleted(tweetID);
+            }
+
+            return true;
+
+        }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        [HttpPost]
+        public bool DeleteImageAjax(string eventid, long imageID)
+        {
+            var requestedEvent = ES.FindBySlug(eventid);
+
+            //This is called by Ajax to delete a tweet. Double check the user is allowed to do this.
+            if ((requestedEvent.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator)
+            {
+                IS.MarkImageAsDeleted(imageID);
             }
 
             return true;

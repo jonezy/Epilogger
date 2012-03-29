@@ -137,6 +137,12 @@ namespace Epilogger.Web {
             );
 
             routes.MapRoute(
+                "DeleteImage",
+                "events/deleteimageajax/{eventid}/{imageid}",
+                new { controller = "events", action = "DeleteImageAjax", eventid = UrlParameter.Optional, tweetid = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 "GetImageComments",
                 "events/getimagecomments/{id}",
                 new { controller = "events", action = "getimagecomments", id = UrlParameter.Optional }
@@ -342,7 +348,8 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.ShowTopPhotos, opt => opt.Ignore())
                 .ForMember(dest => dest.Images, opt => opt.Ignore())
                 .ForMember(dest => dest.TopImages, opt => opt.Ignore())
-                .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore());
+                .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore())
+                .ForMember(dest => dest.CanDelete, opt => opt.Ignore());
 
             Mapper.CreateMap<Event, AllTweetsDisplayViewModel>()
                 .ForMember(dest => dest.TweetCount, opt => opt.Ignore())

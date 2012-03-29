@@ -12,10 +12,18 @@ namespace Epilogger.Common
 
         public List<string> GetTrendingEvents()
         {
-            using (var redisClient = new RedisClient("ec2-184-73-140-83.compute-1.amazonaws.com"))
+            try
             {
-                return redisClient.GetAllItemsFromSortedSetDesc("trending:events");
+                using (var redisClient = new RedisClient("ec2-50-17-76-244.compute-1.amazonaws.com"))
+                {
+                    return redisClient.GetAllItemsFromSortedSetDesc("trending:events");
+                }
             }
+            catch (Exception)
+            {
+                return new List<string>();
+            }
+            
         }
 
 

@@ -160,7 +160,7 @@ jQuery.fn.hint = function (blurClass) {
     });
 };
 
-
+//Delete Tweets
 head.ready(function () {
     $(".deleteTweet").bind("click", function (e) {
         e.preventDefault();
@@ -172,7 +172,32 @@ head.ready(function () {
             type: 'POST',
             data: { href: e.srcElement.href, PathName: e.srcElement.pathname, UserAgent: navigator.userAgent, Host: e.srcElement.host },
             success: function (result) {
+                //Remove the image from the page
                 $(theLink).parent().parent().parent().fadeOut();
+                //Update the total count
+                
+            }
+        });
+
+
+    });
+});
+
+
+//Delete Images
+head.ready(function () {
+    $(".imagedelete").bind("click", function (e) {
+        e.preventDefault();
+        var theLink = this;
+        $.ajax({
+            url: '/Events/DeleteImageAjax/' + EventSlug + '/' + this.id,
+            type: 'POST',
+            data: { href: e.srcElement.href, PathName: e.srcElement.pathname, UserAgent: navigator.userAgent, Host: e.srcElement.host },
+            success: function (result) {
+                //Remove the image from the page.
+                $(theLink).parent().fadeOut();
+                //Update the total count
+
             }
         });
 

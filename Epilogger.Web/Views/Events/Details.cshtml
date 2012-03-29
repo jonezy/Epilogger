@@ -160,7 +160,7 @@ else
             <div class="starSmall">You rated @Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID && i.EventID == Model.ID).FirstOrDefault().UserRating stars on <br /> @Html.DisplayFor(thing => Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime, "ShortDateTime")</div>
         }
         
-        <div class="" style="height: 60px; width: 234px; float: right; top: 50px; position: absolute; right: 10px;">
+        <div class="" style="height: 60px; width: 234px; float: right; top: 162px; position: absolute; right: 10px;">
             <script type="text/javascript"><!--
                 google_ad_client = "ca-pub-9709690433051456";
                 /* Event Page Header */
@@ -551,7 +551,8 @@ else
     <div class="image-grid" id="photosvideos">
         @foreach (Epilogger.Data.Image EPLImage in Model.Images)
         {
-            @Html.Partial("_ImageTemplate", EPLImage)
+            var itvm = new Epilogger.Web.Models.ImageTemplateViewModel { Image = EPLImage, CanDelete = Model.CanDelete};
+            @Html.Partial("_ImageTemplate", itvm)
         }
     </div>
 

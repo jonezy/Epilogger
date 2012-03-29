@@ -12,6 +12,7 @@ namespace Epilogger.Web.Models {
         public int TimeZoneOffSet { get; set; }
         public IEnumerable<Epilogger.Data.Image> Images { get; set;}
         public List<Epilogger.Data.Image> TopImages { get; set; }
+        public bool CanDelete { get; set; }
 
         public EventToolbarViewModel ToolbarViewModel { get; set; }
     }

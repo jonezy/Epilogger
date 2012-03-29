@@ -245,6 +245,7 @@
     <Compile Include="Models\BrowseCategoriesDisplayViewModel.cs" />
     <Compile Include="Models\AllStatsViewModel.cs" />
     <Compile Include="Models\BetaSignUpViewModel.cs" />
+    <Compile Include="Models\ImageTemplateViewModel.cs" />
     <Compile Include="Models\TweetTemplateViewModel.cs" />
     <Compile Include="Models\UploadPhotosViewModel.cs" />
     <Compile Include="Models\CreateAccountModel.cs" />

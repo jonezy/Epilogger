@@ -404,7 +404,7 @@ table#event-particulars td span {
 table#event-particulars td span.img {
     width:16px}
 
-.image-grid .commentbubble {
+.commentbubble {
 	background:url('../images/icons/bubble.png') no-repeat 0 2px;
 	opacity: 0.7;
 	font-family:InterstatePlusRegular;
@@ -419,9 +419,28 @@ table#event-particulars td span.img {
 	left:148px;
 	z-index:20}
 
-.image-grid .commentbubble:hover {
+.commentbubble:hover {
     opacity:1;}
 
+
+.image-grid .imagedelete {
+    background: #000;
+	opacity: 0.7;
+	font-family:InterstatePlusRegular;
+	color:#fff;
+	width:50px;
+	height:20px;
+	padding:1px 0 0 0;
+	text-align:center;
+	display:block;
+	position: absolute;
+	top:126px;
+	left:124px;
+	z-index:20
+}
+
+.image-grid .imagedelete:hover {
+    opacity:1;}
 
 /* --- about */
 .about-paper {

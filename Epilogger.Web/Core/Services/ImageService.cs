@@ -24,46 +24,48 @@ namespace Epilogger.Web
 
         public int FindImageCountByEventID(int EventID, DateTime F, DateTime T)
         {
-            return db.Images.Where(t => t.EventID == EventID && t.DateTime >= F && t.DateTime <= T).Count();
+            return db.Images.Count(t => t.EventID == EventID && t.DateTime >= F && t.DateTime <= T && t.Deleted == false);
         }
 
-        public IEnumerable<Image> FindByEventIDOrderDescTake9(int EventID, DateTime F, DateTime T)
+        public IEnumerable<Image> FindByEventIDOrderDescTake9(int eventID, DateTime F, DateTime T)
         {
-            return db.Images.Where(t => t.EventID == EventID && t.DateTime >= F && t.DateTime <= T).OrderByDescending(t => t.DateTime).Take(9);
+            return db.Images.Where(t => t.EventID == eventID && t.DateTime >= F && t.DateTime <= T && t.Deleted == false).OrderByDescending(t => t.DateTime).Take(9);
         }
 
-        public List<Image> GetRandomImagesByEventID(int EventID, int NumberToGet)
+        public List<Image> GetRandomImagesByEventID(int eventID, int numberToGet)
         {
-            return db.GetRandomImagesByEventID(EventID, NumberToGet).ExecuteTypedList<Image>();
+            return db.GetRandomImagesByEventID(eventID, numberToGet).ExecuteTypedList<Image>();
         }
 
-        public List<Image> GetTopPhotosByEventID(int EventID, int RecordsToReturn, DateTime FromDateTime, DateTime ToDateTime)
+        public List<Image> GetTopPhotosByEventID(int eventID, int recordsToReturn, DateTime fromDateTime, DateTime toDateTime)
         {
-            List<TopPhotos> TPs = db.GetTopPhotosByEventID(EventID, RecordsToReturn, FromDateTime, ToDateTime).ExecuteTypedList<TopPhotos>();
+            List<TopPhotos> ps = db.GetTopPhotosByEventID(eventID, recordsToReturn, fromDateTime, toDateTime).ExecuteTypedList<TopPhotos>();
 
-            List<Image> TheTopPhotos = new List<Image>();
-            foreach (TopPhotos TP in TPs)
+            List<Image> theTopPhotos = new List<Image>();
+            foreach (TopPhotos TP in ps)
             {
                 Image TheImage = new Image();
                 TheImage = FindByID(TP.ImageID);
-                TheTopPhotos.Add(TheImage);
+                theTopPhotos.Add(TheImage);
             }
 
-            return TheTopPhotos;
+            return theTopPhotos;
         }
 
-        public List<TopImageAndTweet> GetTopPhotosAndTweetByEventID(int EventID, int RecordsToReturn, DateTime FromDateTime, DateTime ToDateTime)
+        public List<TopImageAndTweet> GetTopPhotosAndTweetByEventID(int eventID, int recordsToReturn, DateTime fromDateTime, DateTime toDateTime)
         {
-            List<TopPhotos> TPs = db.GetTopPhotosByEventID(EventID, RecordsToReturn, FromDateTime, ToDateTime).ExecuteTypedList<TopPhotos>();
+            List<TopPhotos> ps = db.GetTopPhotosByEventID(eventID, recordsToReturn, fromDateTime, toDateTime).ExecuteTypedList<TopPhotos>();
 
-            TweetService TS = new TweetService();
+            var ts = new TweetService();
             
             List<TopImageAndTweet> TheTopPhotos = new List<TopImageAndTweet>();
-            foreach (TopPhotos TP in TPs)
+            foreach (TopPhotos TP in ps)
             {
                 TopImageAndTweet TheImage = new TopImageAndTweet();
                 TheImage.Image = FindByID(TP.ImageID);
-                TheImage.Tweet = TS.FindByTwitterID(TheImage.Image.ImageMetaData.FirstOrDefault().TwitterID);
+                var firstOrDefault = TheImage.Image.ImageMetaData.FirstOrDefault();
+                if (firstOrDefault != null)
+                    TheImage.Tweet = ts.FindByTwitterID(firstOrDefault.TwitterID);
                 TheTopPhotos.Add(TheImage);
             }
 
@@ -75,38 +77,66 @@ namespace Epilogger.Web
 
 
 
-        public IEnumerable<Image> FindByEventID(int EventID)
+        public IEnumerable<Image> FindByEventID(int eventID)
         {
-            return FindByEventID(EventID, DateTime.Parse("1900-01-01 00:00:00"), DateTime.Parse("9999-12-31 00:00:00"));
+            return FindByEventID(eventID, DateTime.Parse("1900-01-01 00:00:00"), DateTime.Parse("9999-12-31 00:00:00"));
         }
 
-        public IEnumerable<Image> FindByEventID(int EventID, DateTime StartDateTimeFilter, DateTime EndDateTimeFilter)
+        public IEnumerable<Image> FindByEventID(int eventID, DateTime startDateTimeFilter, DateTime endDateTimeFilter)
         {
-            return db.Images.Where(t => t.EventID == EventID & t.DateTime >= StartDateTimeFilter & t.DateTime <= EndDateTimeFilter);
+            return db.Images.Where(t => t.EventID == eventID & t.DateTime >= startDateTimeFilter & t.DateTime <= endDateTimeFilter && t.Deleted == false);
         }
 
-        public Image FindByID(int ID)
+        public Image FindByID(int id)
         {
-            return GetData(t => t.ID == ID).FirstOrDefault();
+            return GetData(t => t.ID == id).FirstOrDefault();
         }
 
 
-        public IEnumerable<Image> GetPagedPhotos(int EventID, System.Nullable<int> page, int PhotosPerPage, DateTime F, DateTime T)
+        public IEnumerable<Image> GetPagedPhotos(int eventID, int? page, int photosPerPage, DateTime F, DateTime T)
         {
 
             int skipAmount = page.HasValue ? page.Value - 1 : 0;
 
             var photos = (from t in db.Images
-                          where t.EventID == EventID && t.DateTime >= F && t.DateTime <= T
+                          where t.EventID == eventID && t.DateTime >= F && t.DateTime <= T && t.Deleted == false
                           orderby t.DateTime descending
-                          select t).Skip(skipAmount * PhotosPerPage).Take(PhotosPerPage);
+                          select t).Skip(skipAmount * photosPerPage).Take(photosPerPage);
 
             return photos;
 
         }
 
         public int Count() {
-            return base.db.Images.Count();
+            return base.db.Images.Count(t => t.Deleted == false);
         }
+
+        public bool MarkImageAsDeleted(long imageID)
+        {
+            try
+            {
+                var firstOrDefault = db.Images.FirstOrDefault(t => t.ID == imageID);
+                if (firstOrDefault != null)
+                    firstOrDefault.Deleted = true;
+                Save(firstOrDefault);
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+        }
+
+        public object Save(Image entity)
+        {
+            if (entity.ID > 0)
+                return base.GetRepository<Image>().Update(entity);
+
+            return base.GetRepository<Image>().Add(entity);
+        }
+
+
     }
 }

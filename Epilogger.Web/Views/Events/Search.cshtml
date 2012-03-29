@@ -33,7 +33,8 @@
                 <strong><a href="http://www.twitter.com/@item.Tweet.FromUserScreenName" class="tweet-content-username" target="_blank">@item.Tweet.FromUserScreenName</a></strong>
                 <p>@Html.Raw(item.Tweet.TextAsHTML)</p>
                 @if (@item.Image != null) {
-                    @Html.Partial("_ImageTemplate", item.Image)
+                    var itvm = new Epilogger.Web.Models.ImageTemplateViewModel { Image = item.Image, CanDelete = false };
+                    @Html.Partial("_ImageTemplate", itvm)
                 }
                 <span class="tweet-date">(@Html.DisplayFor(thing => item.Tweet.CreatedDate))</span>
             </div>
