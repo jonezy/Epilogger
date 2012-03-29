@@ -4,18 +4,32 @@
     var controller = ViewContext.RouteData.Values["controller"] as string ?? "";
     var action = ViewContext.RouteData.Values["action"] as string ?? "";
 }
+
 <ul id="navigation">
     @*<li>@Html.ActionLink("HOME", "Index", "Home", null, controller.ToLower() == "home" && action.ToLower() == "index" ? new { @class = "current" } : null)</li>*@
     
     
     <li>@Html.ActionLink("BROWSE EVENTS", "index", "browse", new { filter = "" }, controller.ToLower() == "browse" ? new { @class = "current" } : null)</li>
+
     @*<li><a href="#" id="event-nav" @if(controller.ToLower() == "events") {
                                         @:class = "current" 
                                    }>BROWSE EVENTS</a></li>*@
     @*<li>@Html.ActionLink("BROWSE EVENTS", "index", "events", null, controller.ToLower() == "events" && action.ToLower() != "create" ? new { @class = "current", @id = "event-nav" } : new { @class = "", @id = "event-nav" })</li>*@
-    <li>@Html.ActionLink("ADD AN EVENT", "create", "events", null, controller.ToLower() == "events" && action.ToLower() == "create" ? new { @class = "current" } : null)</li>
+    <li>@Html.ActionLink("ADD EVENT", "create", "events", null, controller.ToLower() == "events" && action.ToLower() == "create" ? new { @class = "current" } : null)</li>
     <li>@Html.ActionLink("DASHBOARD", "index", "dashboard", null, controller.ToLower() == "dashboard" ? new { @class = "current" } : null)</li>
-    <li><a href="http://www.Epilogger.com/blog" target="_blank">BLOG</a></li>
+    
+    @if (Model.UserLoggedIn)
+    {
+        <li class="noPadding">@Html.ActionLink("Logout", "logout", "account")</li>
+    }
+    else
+    {
+        <li class="noPadding">@Html.ActionLink("Login / Register", "login", "account")</li>
+    }
+    
+    
+
+    @*<li><a href="http://www.Epilogger.com/blog" target="_blank">BLOG</a></li>*@
 </ul>
 
 @{

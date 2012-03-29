@@ -23,6 +23,18 @@ namespace Epilogger.Web.Controllers {
 
             return PartialView("GlobalNavigation", model);
         }
+        [ChildActionOnly]
+        public ActionResult Navigation()
+        {
+            GlobalNavigationModel model = new GlobalNavigationModel { UserLoggedIn = CurrentUserID != Guid.Empty ? true : false };
+            if (CurrentUser != null)
+            {
+                model.Username = CurrentUser.Username;
+            }
+            model.CurrentUserRole = CurrentUserRole;
+
+            return PartialView("Navigation", model);
+        }
 
         public ActionResult RenderBreadCrumb() {
             Dictionary<string, string> trail = new Dictionary<string, string>();
