@@ -98,8 +98,8 @@
     <Reference Include="ServiceStack.Text, Version=3.6.0.3283, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ServiceStack.Text.3.6.3\lib\net35\ServiceStack.Text.dll</HintPath>
     </Reference>
-    <Reference Include="smokesignals">
-      <HintPath>..\packages\smokesignals.1.4\lib\smokesignals.dll</HintPath>
+    <Reference Include="smokesignals, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\smokesignals.1.5\lib\smokesignals.dll</HintPath>
     </Reference>
     <Reference Include="SubSonic.Core">
       <HintPath>..\packages\SubSonic.3.0.0.4\lib\SubSonic.Core.dll</HintPath>
@@ -461,6 +461,7 @@
     <Content Include="Public\images\logo.png" />
     <Content Include="Public\images\logo2.png" />
     <Content Include="Public\images\logow.png" />
+    <Content Include="Public\images\menu\MenuArrow.png" />
     <Content Include="Public\images\reasons\1.png" />
     <Content Include="Public\images\reasons\2.png" />
     <Content Include="Public\images\reasons\3.png" />
@@ -8234,6 +8235,8 @@
     <None Include="Public\js\FacebookPhotoPicker\dojoroot\dojo\_firebug\.svn\text-base\tab_rgt_over.png.svn-base" />
     <None Include="Public\js\FacebookPhotoPicker\dojoroot\dojo\_firebug\.svn\text-base\warningIcon.png.svn-base" />
     <None Include="Public\js\FacebookPhotoPicker\dojoroot\dojo\_firebug\LICENSE" />
+    <Content Include="Views\Account\AccountActivationNeeded.cshtml" />
+    <Content Include="Views\Account\ActivationSent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -39,7 +39,7 @@ namespace Epilogger.Web {
 
         public static SmtpConfiguration MailConfiguration {
             get {
-                return new SmtpConfiguration() {
+                return new SmtpConfiguration() {       
                     Server = ConfigurationManager.AppSettings["SiteSettings.Mail.Server"] as string ?? "",
                     Port = int.Parse(ConfigurationManager.AppSettings["SiteSettings.Mail.ServerPort"] as string),
                     Username = ConfigurationManager.AppSettings["SiteSettings.Mail.Username"] as string ?? "",

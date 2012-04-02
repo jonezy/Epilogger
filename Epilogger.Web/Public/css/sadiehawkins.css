@@ -239,7 +239,22 @@ a.edit_icon {
 
 /* ------------------------------ MENUS */
 
-/* --- main menu */	
+/* --- main menu */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ul#navigation {
     float:right;
     margin-top:20px;}
@@ -273,6 +288,19 @@ ul#navigation li a:hover, ul#navigation li a.current {
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
 	color:#245d96}
+
+ul#navigation li.browseMenu a:hover{
+	
+}
+
+
+
+
+
+
+
+
+
 	
 /* -- Sub Nav */
 ul#events-subnav{

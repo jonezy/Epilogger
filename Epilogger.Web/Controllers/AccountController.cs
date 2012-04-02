@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using AutoMapper;
 
 using DevOne.Security.Cryptography.BCrypt;
-
+using Epilogger.Common;
 using Epilogger.Data;
 using Epilogger.Web.Core.Email;
 using Epilogger.Web.Models;
@@ -47,6 +47,16 @@ namespace Epilogger.Web.Controllers {
                 //    return View(model);
                 //}
 
+                //Check to see if this account already exists
+                User userTest = service.GetUserByUsername(model.Username);
+                if (userTest != null)
+                {
+                    ModelState.AddModelError(string.Empty, "The username " + userTest.Username + " is already in use, please try another username");
+                    model.Username = "";
+                    return View(model);
+                }
+
+
                 //Ensure the User is over 13
                 if (model.DateOfBirth != null && (DateTime.Now - DateTime.Parse(model.DateOfBirth)).Days / 366 < 13)
                 {
@@ -69,7 +79,10 @@ namespace Epilogger.Web.Controllers {
                     service.Save(user);
 
                     // build a message to send to the user.
-                    string validateUrl = string.Format("{0}account/validate/{1}", App.BaseUrl, Helpers.base64Encode(user.EmailAddress));
+                    //string validateUrl = string.Format("{0}account/validate/{1}", App.BaseUrl, Helpers.base64Encode(user.EmailAddress));
+                    
+                    //Changed to UserID GUID to prevent problems with duplicate email addresses.
+                    string validateUrl = string.Format("{0}account/validate/{1}", App.BaseUrl, Helpers.base64Encode(user.ID.ToString()));
 
                     var parser = new TemplateParser();
                     Dictionary<string, string> replacements = new Dictionary<string, string>
@@ -81,12 +94,22 @@ namespace Epilogger.Web.Controllers {
 
                     string message = parser.Replace(AccountEmails.ValidateAccount, replacements);
 
-                    EmailSender sender = new EmailSender();
-                    sender.Send(App.MailConfiguration, model.EmailAddress, "", "Thank you for registering on epilogger.com", message);
+                    var sfEmail = new SpamSafeMail
+                    {
+                        EmailSubject = "Thank you for registering on epilogger.com",
+                        HtmlEmail = message,
+                        TextEmail = message
+                    };
+                    sfEmail.ToEmailAddresses.Add(model.EmailAddress);
 
+                    sfEmail.SendMail();
+                    
                     this.StoreSuccess("Your account was created successfully<br /><br/>Please check your inbox for our validation message, your account will be inaccessable until you validate it.");
 
-                    return RedirectToAction("login", "account");
+                    CookieHelpers.WriteCookie("lc", "tempid", user.ID.ToString());
+
+                    return RedirectToAction("AccountActivationNeeded", "account");
+
                 } catch (Exception ex) {
                     this.StoreError("There was a problem creating your account");
                     service.DeleteUser(user.ID);
@@ -105,13 +128,14 @@ namespace Epilogger.Web.Controllers {
             // decode the email address from base64
             // look up the usre account using the email address
             // set isactive = true and update, redirect to login with thank you message.
-            string email = Helpers.base64Decode(validationCode);
-            if (string.IsNullOrEmpty(email)) {
+            Guid userid = Guid.Parse(Helpers.base64Decode(validationCode));
+            if (userid== Guid.Empty)
+            {
                 this.StoreError("The verificatoin code couldn't be determined, please try clicking the link in your email again.");
                 return View();
             }
 
-            User user = service.GetUserByEmail(email);
+            User user = service.GetUserByID(userid);
             if (user == null) {
                 this.StoreError("We couldn't find an account to activate with that verification code");
                 return View();
@@ -120,6 +144,9 @@ namespace Epilogger.Web.Controllers {
             user.IsActive = true;
             
             service.Save(user);
+
+            CookieHelpers.DestroyCookie("lc");
+
             this.StoreSuccess("Your account has been activated!  You can go ahead and login to unleash the epicness!");
             return RedirectToAction("login", "account");
         }
@@ -148,7 +175,9 @@ namespace Epilogger.Web.Controllers {
 
                 service.Save(user);
 
-                this.StoreSuccess("Your account was updated successfully");
+                //this.StoreSuccess("Your account was updated successfully");
+                this.Receive(MessageType.Success, "Your account was updated successfully");
+
             } catch (Exception ex) {
                 Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
                 this.StoreError("There was a problem updating your account");
@@ -159,6 +188,8 @@ namespace Epilogger.Web.Controllers {
 
         [HttpGet]
         public ActionResult Login() {
+            CookieHelpers.DestroyCookie("lc");
+
             // store this here so that we can redirect the user back later.
             if (Request.QueryString["returnUrl"] != null)
                 TempData["returnUrl"] = Request.QueryString["returnUrl"];
@@ -174,27 +205,30 @@ namespace Epilogger.Web.Controllers {
             if (ModelState.IsValid) {
                 User user = service.GetUserByUsername(model.Username);
 
+                if (user == null)
+                {
+                    ModelState.AddModelError(string.Empty, "There is a problem with your username or password. Please try again or create an account.");
+                    return View(model);
+                }
+
                 // the user is a valid user but they need to update there password.
-                if (user != null && user.Password == string.Empty) {
-                    CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString());
+                if (user.Password == string.Empty) {
+                    CookieHelpers.WriteCookie("lc", "tempid", user.ID.ToString());
                     return RedirectToAction("UpdatePassword");
                 }
                 
                 user = service.GetUserByUsername(model.Username);
                 if (!BCryptHelper.CheckPassword(model.Password, user.Password)) {
-                    this.StoreError("The password you entered does not match the password for your account");
+                    ModelState.AddModelError(string.Empty, "There is a problem with your username or password. Please try again or create an account.");
                     return View(model);
                 }
 
                 if (user.IsActive == false) {
-                    this.StoreError("Your account has not been activated yet, please click the link in the verification email that was sent to you.");
-                    return RedirectToAction("login");
+                    ModelState.AddModelError(string.Empty, "Your account has not been activated yet, please click the link in the verification email that was sent to you.");
+                    return RedirectToAction("AccountActivationNeeded");
                 }
 
-                if (user == null) {
-                    this.StoreError("Login failed");
-                    return View(model);
-                }
+                
 
                 // write the login cookie, redirect. 
                 if (model.RememberMe) 
@@ -205,13 +239,14 @@ namespace Epilogger.Web.Controllers {
                 else
                 {
                     CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString());
-                    CookieHelpers.WriteCookie("lc", "tz", user.TimeZoneOffSet.ToString());    
+                    CookieHelpers.WriteCookie("lc", "tz", user.TimeZoneOffSet.ToString());
                 }
 
                 //if (TempData["returnUrl"] != null)
                 //    return Redirect(TempData["returnUrl"].ToString());
 
                 return RedirectToAction("index","home");
+
             }
 
             return View(model);
@@ -254,8 +289,17 @@ namespace Epilogger.Web.Controllers {
 
                 string message = parser.Replace(AccountEmails.ForgotPassword, replacements);
 
-                EmailSender sender = new EmailSender();
-                sender.Send(App.MailConfiguration, model.EmailAddress, "", "Reset your password on epilogger.com", message);
+                var sfEmail = new SpamSafeMail
+                {
+                    EmailSubject = "Reset your password on epilogger.com",
+                    HtmlEmail = message,
+                    TextEmail = message
+                };
+                sfEmail.ToEmailAddresses.Add(model.EmailAddress);
+
+                sfEmail.SendMail();
+
+
 
                 this.StoreSuccess("We\\'ve emailed you instructions on how to reset your password.");
             } catch (Exception ex) {
@@ -324,5 +368,58 @@ namespace Epilogger.Web.Controllers {
 
             return View();
         }
+
+
+        public ActionResult AccountActivationNeeded()
+        {
+            return View();
+        }
+
+
+
+        public ActionResult ActivationSent()
+        {
+
+            var userId = new Guid();
+            try
+            {
+                Guid.TryParse(CookieHelpers.GetCookieValue("lc", "tempid").ToString(), out userId);
+            }
+            catch (Exception)
+            {
+            }
+
+            var uservice = new UserService();
+            var theUser = uservice.GetUserByID(userId);
+
+            // build a message to send to the user.
+            string validateUrl = string.Format("{0}account/validate/{1}", App.BaseUrl, Helpers.base64Encode(theUser.ID.ToString()));
+
+            var parser = new TemplateParser();
+            Dictionary<string, string> replacements = new Dictionary<string, string>
+                                                                  {
+                                                                      {"[BASE_URL]", App.BaseUrl},
+                                                                      {"[FIRST_NAME]", theUser.EmailAddress},
+                                                                      {"[VALIDATE_ACCOUNT_URL]", validateUrl}
+                                                                  };
+
+            var message = parser.Replace(AccountEmails.ValidateAccount, replacements);
+
+            var sfEmail = new SpamSafeMail
+                              {
+                                  EmailSubject = "Thank you for registering on epilogger.com",
+                                  HtmlEmail = message,
+                                  TextEmail = message
+                              };
+            sfEmail.ToEmailAddresses.Add(theUser.EmailAddress);
+
+            sfEmail.SendMail();
+            
+            return View();
+        }
+
+        
+
+
     }
 }

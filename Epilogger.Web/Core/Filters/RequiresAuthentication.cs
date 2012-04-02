@@ -26,23 +26,30 @@ namespace Epilogger.Web {
             BaseController controller = (BaseController)filterContext.Controller;
             User user = controller.CurrentUser;
 
+            bool skipRoleCheck = false;
+
             if (user == null) {
-                controller.StoreWarning(AccessDeniedMessage ?? "Please login");
+                //controller.StoreWarning(AccessDeniedMessage ?? "Please login");
+                controller.Receive(MessageType.Warning, AccessDeniedMessage ?? "Please login");
                 filterContext.Result = new RedirectToRouteResult(BuildLoginRouteDictionary(filterContext.HttpContext.Request.Url.AbsoluteUri));
+                skipRoleCheck = true;
             }
 
             // TODO: Implement role checking here.
-            if (!string.IsNullOrEmpty(ValidUserRole.ToString())) {
-                int currentRole = (int)Enum.Parse(typeof(UserRoleType), ValidUserRole.ToString());
-                if (user == null || user.RoleID > currentRole) {
-                    if (!string.IsNullOrEmpty(AccessDeniedMessage)) {
-                        controller.StoreInfo(AccessDeniedMessage);
-                    }
+            if (!skipRoleCheck)
+            {
+                if (!string.IsNullOrEmpty(ValidUserRole.ToString())) {
+                    int currentRole = (int)Enum.Parse(typeof(UserRoleType), ValidUserRole.ToString());
+                    if (user == null || user.RoleID > currentRole) {
+                        if (!string.IsNullOrEmpty(AccessDeniedMessage)) {
+                            //controller.StoreInfo(AccessDeniedMessage);
+                            controller.Receive(MessageType.Warning, AccessDeniedMessage);
+                        }
 
-                    filterContext.Result = new RedirectToRouteResult(BuildLoginRouteDictionary(filterContext.HttpContext.Request.Url.AbsoluteUri));
+                        filterContext.Result = new RedirectToRouteResult(BuildLoginRouteDictionary(filterContext.HttpContext.Request.Url.AbsoluteUri));
+                    }
                 }
             }
-
             base.OnActionExecuting(filterContext);
         }
 

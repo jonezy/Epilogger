@@ -404,16 +404,24 @@ namespace Epilogger.Web.Controllers {
                             TheFirst = false;
                         }
 
-                        StringBuilder tweet = new StringBuilder();
-                        tweet.AppendFormat("<li id='{0}' class='tweet clearfix'>", TheT.TwitterID);
-                        tweet.AppendFormat("<img src='{0}' class='fleft' alt='' height='48' width='48'  />", TheT.ProfileImageURL);
-                        tweet.Append("<div class='tweet-body'><strong>");
-                        tweet.AppendFormat("<a href='http://www.twitter.com/{0}' target='_blank'>@{1}</a></strong>", TheT.FromUserScreenName, TheT.FromUserScreenName);
-                        tweet.AppendFormat("<p>{0}</p>", TheT.TextAsHTML);
-                        tweet.Append("</div>");
-                        tweet.Append("</li>");
 
-                        HTMLString.Append(tweet.ToString());
+                        //Instead of hard coding the HTML for the images, let's use the template.
+                        var firstOrDefault = TheT.Events.FirstOrDefault(t => t.ID == EventID);
+                        var canDelete = firstOrDefault != null && ((firstOrDefault.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator);
+
+                        HTMLString.Append(RenderRazorViewToString("_TweetTemplate", new TweetTemplateViewModel() { CanDelete = canDelete, Tweet = TheT }));
+
+
+                        //StringBuilder tweet = new StringBuilder();
+                        //tweet.AppendFormat("<li id='{0}' class='tweet clearfix'>", TheT.TwitterID);
+                        //tweet.AppendFormat("<img src='{0}' class='fleft' alt='' height='48' width='48'  />", TheT.ProfileImageURL);
+                        //tweet.Append("<div class='tweet-body'><strong>");
+                        //tweet.AppendFormat("<a href='http://www.twitter.com/{0}' target='_blank'>@{1}</a></strong>", TheT.FromUserScreenName, TheT.FromUserScreenName);
+                        //tweet.AppendFormat("<p>{0}</p>", TheT.TextAsHTML);
+                        //tweet.Append("</div>");
+                        //tweet.Append("</li>");
+                        //HTMLString.Append(tweet.ToString());
+
                         RecordCount++;
                     }
 
@@ -455,10 +463,19 @@ namespace Epilogger.Web.Controllers {
                             TheFirst = false;
                         }
 
-                        string TheImage = "<a href='" + TheI.Fullsize + "' rel='prettyPhoto[latestphotos]' title='" + TheI.ID + "' id='" + TheI.ID + "'><img src='" + TheI.Fullsize + "' width='200' border='0' alt='' /></a>";
-                        string CommentCount = "<a href='#' class='commentbubble'>" + TheI.ImageMetaData.Count() + "</a>";
+                        //Instead of hard coding the HTML for the images, let's use the template.
+                        var firstOrDefault = TheI.Events.FirstOrDefault(t => t.ID == EventID);
+                        var canDelete = firstOrDefault != null && ((firstOrDefault.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator);
 
-                        HTML.Append("<div class='withcomment newPhotoupdates' style='display:none;' id='photo-'" + TheI.ID + "'>" + TheImage + CommentCount + "</div>");
+                        HTML.Append(RenderRazorViewToString("_ImageTemplate", new Epilogger.Web.Models.ImageTemplateViewModel { CanDelete = canDelete, Image = TheI }));
+
+                        //string myString = RenderViewToString(this.ControllerContext, "~/Views/Order/OrderResultEmail.aspx", "~/Views/Shared/Site.Master", this.ViewData, this.TempData);
+
+
+
+                        //string TheImage = "<a href='" + TheI.Fullsize + "' rel='prettyPhoto[latestphotos]' title='" + TheI.ID + "' id='" + TheI.ID + "'><img src='" + TheI.Fullsize + "' width='200' border='0' alt='' /></a>";
+                        //string CommentCount = "<a href='#' class='commentbubble'>" + TheI.ImageMetaData.Count() + "</a>";
+                        //HTML.Append("<div class='withcomment newPhotoupdates' style='display:none;' id='photo-" + TheI.ID + "'>" + TheImage + CommentCount + "</div>");
 
 
                         RecordCount++;

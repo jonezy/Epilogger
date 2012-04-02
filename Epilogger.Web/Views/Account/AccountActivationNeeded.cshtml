@@ -1,0 +1,12 @@
+﻿
+@model Epilogger.Web.Models.ForgotPasswordViewModel
+
+@{
+    Layout = "~/Views/Shared/_InteriorLayout.cshtml";
+    ViewBag.Title = "Account Activation Required";
+}
+
+
+<h1>You're almost ready to start creating events!</h1>
+<p>Your account still needs to be activated, please check your email for a message from @@Epilogger.com and follow the activation link.</p>
+<p>If you haven't received the email please check your spam folder or @Html.ActionLink("Click here", "ActivationSent", "Account") to send it again.</p>

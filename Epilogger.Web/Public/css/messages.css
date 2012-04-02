@@ -11,13 +11,14 @@ div.Message_Error p, div.Message_Success p, div.Message_Warning p, div.Message_I
 /* shared between all messages */
 div.Message_Error, div.Message_Success, div.Message_Warning, div.Message_Info,
 .validation-summary-errors {
-  width:auto;text-align: left; display: block; 
-  padding: 8px 0px 8px 32px; 
-  margin-bottom:10px;
-  border: solid 1px; background-repeat:no-repeat; background-position: 8px 8px;
-  /*-moz-border-radius:5px; -webkit-border-radius:5px; -khtml-border-radius:5px;border-radius:5px;*/
-  border-right:none;border-left:none;
-  position:relative;z-index:1000;
+    width:auto;text-align: left; display: block; 
+    padding: 8px 0px 8px 32px; 
+    margin-bottom:10px;
+    border: solid 1px; background-repeat:no-repeat; background-position: 8px 8px;
+    /*-moz-border-radius:5px; -webkit-border-radius:5px; -khtml-border-radius:5px;border-radius:5px;*/
+    border-right:none;border-left:none;
+    position:relative;
+    z-index: 5000;
 }
 
 /* close button */
