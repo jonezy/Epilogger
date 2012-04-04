@@ -2,12 +2,11 @@
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
-
 using Epilogger.Data;
-
 using RichmondDay.Helpers;
 
 namespace Epilogger.Web.Controllers {
+
     public class BaseController : Controller {
         protected Guid CurrentUserID {
             get {

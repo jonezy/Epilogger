@@ -34,9 +34,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxMin">
+      <HintPath>..\packages\AjaxMin.4.41.4378.21434\lib\net20\AjaxMin.dll</HintPath>
+    </Reference>
     <Reference Include="AutoMapper, Version=2.1.265.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AutoMapper.2.1.265\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Combres">
+      <HintPath>..\packages\combres.2.2.2.5\lib\net40\Combres.dll</HintPath>
+    </Reference>
+    <Reference Include="Combres.Mvc">
+      <HintPath>..\packages\combres.mvc.2.2.2.5\lib\net40\Combres.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="DataAnnotationsExtensions, Version=1.0.2.0, Culture=neutral, PublicKeyToken=358a5681c50fd84c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -48,6 +57,12 @@
     </Reference>
     <Reference Include="DevOne.Security.Cryptography.BCrypt">
       <HintPath>..\packages\BCrypt.1.0.0.0\lib\DevOne.Security.Cryptography.BCrypt.dll</HintPath>
+    </Reference>
+    <Reference Include="dotless.Core">
+      <HintPath>..\packages\dotless.1.2.0.0\lib\dotless.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EcmaScript.NET.modified">
+      <HintPath>..\packages\YUICompressor.NET.1.6.0.2\lib\net35\EcmaScript.NET.modified.dll</HintPath>
     </Reference>
     <Reference Include="Elmah, Version=1.2.14318.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -61,6 +76,12 @@
     </Reference>
     <Reference Include="Facebook.Web.Mvc">
       <HintPath>..\packages\FacebookWebMvc.5.0.50.0\lib\net40\Facebook.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Fasterflect">
+      <HintPath>..\packages\fasterflect.2.0.1\lib\net40\Fasterflect.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.1.2.11\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -146,6 +167,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\WebActivator.1.5\lib\net40\WebActivator.dll</HintPath>
     </Reference>
+    <Reference Include="Yahoo.Yui.Compressor">
+      <HintPath>..\packages\YUICompressor.NET.1.6.0.2\lib\net35\Yahoo.Yui.Compressor.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Data\Classes.cs">
@@ -168,6 +192,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Structs.tt</DependentUpon>
     </Compile>
+    <Compile Include="App_Start\Combres.cs" />
     <Compile Include="App_Start\RegisterClientValidationExtensions.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\EmailController.cs" />
@@ -189,6 +214,8 @@
     <Compile Include="Core\Email\IEmailSender.cs" />
     <Compile Include="Core\Email\SmtpConfiguration.cs" />
     <Compile Include="Core\Email\TemplateParser.cs" />
+    <Compile Include="Core\Filters\CacheFilter.cs" />
+    <Compile Include="Core\Filters\CompressFilter.cs" />
     <Compile Include="Core\Filters\ElmahLoggerFilter.cs" />
     <Compile Include="Core\Filters\RequiresAuthentication.cs" />
     <Compile Include="Core\Framework\DateTimeMedataDataProvider.cs" />
@@ -284,6 +311,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\combres.xml" />
+    <Content Include="App_Data\combres_full_with_annotation.xml" />
     <Content Include="favicon.ico" />
     <Content Include="GettingStarted.txt" />
     <Content Include="Global.asax" />
@@ -294,6 +323,7 @@
     <Content Include="Public\css\cbimages\controls.png" />
     <Content Include="Public\css\cbimages\loading.gif" />
     <Content Include="Public\css\colorbox.css" />
+    <Content Include="Public\css\sadiehawkinsBackUp.css" />
     <Content Include="Public\css\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Public\css\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Public\css\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -409,6 +439,7 @@
     <Content Include="Public\images\homepage\refresh.png" />
     <Content Include="Public\images\homepage\RightArrow.png" />
     <Content Include="Public\images\homepage\rockout.png" />
+    <Content Include="Public\images\homepage\SearchIcon.png" />
     <Content Include="Public\images\homepage\socialday.png" />
     <Content Include="Public\images\homepage\socialweek.png" />
     <Content Include="Public\images\homepage\sprouter.png" />
@@ -507,6 +538,7 @@
     <Content Include="Public\js\datetime\txtdropdown\txtdropdown.css" />
     <Content Include="Public\js\datetime\txtdropdown\txtdropdown.js" />
     <Content Include="Public\js\epilogger.js" />
+    <Content Include="Public\js\epiloggerInit.js" />
     <Content Include="Public\js\EventDetails.js" />
     <Content Include="Public\js\FacebookPhotoPicker\crossdomain\xd_receiver.htm" />
     <Content Include="Public\js\FacebookPhotoPicker\dojoroot\dijit\CheckedMenuItem.js" />
@@ -4874,6 +4906,7 @@
     <Content Include="Views\Shared\DisplayTemplates\FullTime.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ShortDate.cshtml" />
     <Content Include="Views\Events\UploadPhotos.cshtml" />
+    <None Include="combres.readme" />
     <None Include="Public\js\FacebookPhotoPicker\crossdomain\.svn\all-wcprops" />
     <None Include="Public\js\FacebookPhotoPicker\crossdomain\.svn\entries" />
     <None Include="Public\js\FacebookPhotoPicker\crossdomain\.svn\text-base\xd_receiver.htm.svn-base" />
@@ -8237,6 +8270,9 @@
     <None Include="Public\js\FacebookPhotoPicker\dojoroot\dojo\_firebug\LICENSE" />
     <Content Include="Views\Account\AccountActivationNeeded.cshtml" />
     <Content Include="Views\Account\ActivationSent.cshtml" />
+    <Content Include="Views\Shared\GlobalNavigationBackUp.cshtml" />
+    <Content Include="Views\Shared\NavigationBackUp.cshtml" />
+    <Content Include="Views\Shared\_LayoutBackUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

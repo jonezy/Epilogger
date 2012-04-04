@@ -1,4 +1,5 @@
-﻿@using Epilogger.Web;
+﻿@using Combres.Mvc
+@using Epilogger.Web;
 @model Epilogger.Web.Models.CreateEventViewModel
 
 @{
@@ -9,6 +10,7 @@
 <!-- Confirm CSS files --> 
 <link type='text/css' href="@Url.Content("~/Public/js/confirm/css/confirm.css")" rel='stylesheet' media='screen' /> 
 
+@*@Html.CombresLink("CreateEventJs")*@
 <script type="text/javascript">
     head.js('@Url.Content("~/Public/js/jquery.blockUI.js")');
     head.js('@Url.Content("~/Public/js/CreateEditEvent.js")');

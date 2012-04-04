@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using AutoMapper;
 
 using Epilogger.Data;
+using Epilogger.Web.Core.Filters;
 using Epilogger.Web.Core.Stats;
 using Epilogger.Web.Models;
 using Epilogger.Common;
@@ -75,7 +76,7 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        [CompressFilter]
         public ActionResult Category(string CategoryName)
         {
             BrowseCategoriesDisplayViewModel model = new BrowseCategoriesDisplayViewModel();
@@ -101,6 +102,7 @@ namespace Epilogger.Web.Controllers {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         //public ActionResult Details(int id) {
+        [CompressFilter]
         public ActionResult Details(string id) {
 
             Event requestedEvent = ES.FindBySlug(id);
@@ -200,7 +202,7 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        [CompressFilter]
         public ActionResult AllPhotos(string id, int? page) {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
             Event requestedEvent = ES.FindBySlug(id);
@@ -227,7 +229,7 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        [CompressFilter]
         public ActionResult AllTweets(string id, int? page) {
             
             int currentPage = page.HasValue ? page.Value - 1 : 0;
@@ -375,8 +377,9 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        public ActionResult GetImageComments(int id) {
-            return PartialView("_ImageComments", TS.FindByImageID(id));
+        public ActionResult GetImageComments(int eventId, int imageid)
+        {
+            return PartialView("_ImageComments", TS.FindByImageID(imageid, eventId));
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -602,7 +605,7 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        [CompressFilter]
         public ActionResult Search(String id, string IEsearchterm)
         {
             Event requestedEvent = ES.FindBySlug(id);
@@ -633,14 +636,14 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        [CompressFilter]
         public ActionResult AllContent(int id) {
             AllContentViewModel model = Mapper.Map<Event, AllContentViewModel>(ES.FindByID(id));
             return View(model);
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        [CompressFilter]
         public ActionResult AllBlogPosts(string id, int? page) {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
             Event requestedEvent = ES.FindBySlug(id);
@@ -654,7 +657,7 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        [CompressFilter]
         public ActionResult AllCheckins(string id, int? page) {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
 
@@ -672,7 +675,7 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        [CompressFilter]
         public ActionResult AllLinks(string id, int? page) {
 
             int currentPage = page.HasValue ? page.Value - 1 : 0;
@@ -688,7 +691,7 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        [CompressFilter]
         public ActionResult AllStats(String id)
         {
 
@@ -737,6 +740,7 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+        [CompressFilter]
         [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to edit an event")]
         public ActionResult Edit(string id) {
             Event currentEvent = ES.FindBySlug(id);
@@ -973,7 +977,7 @@ namespace Epilogger.Web.Controllers {
         #endregion
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        [CompressFilter]
         public ActionResult AddBlogPost(int id) {
             AddBlogPostViewModel model = new AddBlogPostViewModel();
             model.BlogURL = "http://";

@@ -12,13 +12,10 @@
     {"parsetags": "explicit"}
 </script>
 
-<script language="javascript" type="text/javascript">
-    var EventSlug = '@Model.EventSlug';
-</Script>
-
 <script type="text/javascript" language="javascript">
     head.js('@Url.Content("~/Public/js/AllPhotos.js")');
 
+    var EventSlug = '@Model.EventSlug';
     var EventID = @Model.ID;
     var EventName = '@Model.Name';
     var EventURL = 'http://www.epilogger.com/Events/Details/@Model.ID';
@@ -41,9 +38,10 @@
 {
     foreach (Epilogger.Data.Image Image in Model.TopImages)
     {
+        var thePath = Image.EventID + "/" + Image.ID;
         <div id="TopPhoto@(Image.ID)" class="topPhotosBar">
             <div class="topPhoto">
-                <a href="@Image.Fullsize" rel="prettyPhoto[topphotos]" photoid="@Image.ID" title="" id="@Image.ID">
+                <a href="@Image.Fullsize" rel="prettyPhoto[topphotos]" photoid="@thePath" title="" id="@Image.ID">
                     <img src="@Image.Fullsize" width="415" border="0" alt="" />
                 </a>
             </div>

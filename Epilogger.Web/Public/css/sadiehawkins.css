@@ -228,8 +228,7 @@ a.edit_icon {
 #homepage-toolbar #refresh {}
     
 #header {
-   padding-top:12px;
-   padding-bottom: 10px;
+   padding:0px;
    position:relative;    
    background:#fff;}
 	
@@ -239,41 +238,21 @@ a.edit_icon {
 
 /* ------------------------------ MENUS */
 
-/* --- main menu */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* --- main menu */	
 ul#navigation {
     float:right;
-    margin-top:20px;}
+    margin-top:16px;}
 	
 ul#navigation li {
 	display:inline-block;
 	padding:9px 0 5px 0}
-
-ul#navigation li.noPadding a
-{
-    padding: 9px 0px 7px 10px;
-}
 
 ul#navigation li a{
 	color:#1e72c8;
 	padding: 9px 10px 7px 10px;
 	text-transform:uppercase;
 	margin:0 5px;
-	font:bold 24px 'InterstatePlusRegular', impact, sans-serif;}
+	font:bold 20px 'InterstatePlusRegular', impact, sans-serif;}
 
 ul#navigation li input {
     width:60px;
@@ -288,19 +267,6 @@ ul#navigation li a:hover, ul#navigation li a.current {
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
 	color:#245d96}
-
-ul#navigation li.browseMenu a:hover{
-	
-}
-
-
-
-
-
-
-
-
-
 	
 /* -- Sub Nav */
 ul#events-subnav{
@@ -1321,9 +1287,6 @@ span.tweet-date {font-size:11px;color:#c2c2c2}
 
 /* ------------------------------ GLOBAL BAR */
 
-/*This is the OLD tabbed admin menu! */
-
-/*
 #admin-area, #user-status  {
     float:right;
     font-size:8pt;
@@ -1335,29 +1298,10 @@ span.tweet-date {font-size:11px;color:#c2c2c2}
     border-radius: 0px 0px 5px 5px;
     background:#5695d6;
     color:#fff;}	
-    
-#admin-area a, #user-status a {
-    color:#fff;}*/
-    
-/* New Admin Menu - CB Mar 29, 2012 */    
-#god-menu {
-    width: 100%;
-    height: 19px;
-    background-color: #403e3a;
-    color: #bababa;
-    font-size: 12px;
-}
-
-#god-menu a {
-    color: #eeeeee;
-}
-/********************/
-
-
 
 #global-bar {
     display:block;
-    /*border-top:solid 3px #5695d6;*/
+    border-top:solid 3px #5695d6;
     margin:0px -40px 0px -40px;
     color:#fff; 
     padding-bottom:9px;
@@ -1368,7 +1312,6 @@ span.tweet-date {font-size:11px;color:#c2c2c2}
     width: 100%;
     }
     
-   
 #jaggies  
 {
     width: 100%;
@@ -1378,19 +1321,13 @@ span.tweet-date {font-size:11px;color:#c2c2c2}
     margin-top: 9px;
 }
     
-
+#admin-area a, #user-status a {
+    color:#fff;}
 
 div#search-container {
-    width: 150px;
-    position: absolute;
-    top: 5px;
-    right: 10px;
-    
-    /*
     margin:20px 0px;
 	float:right;
-	width:120px;*/
-	}
+	width:120px;}
 
 div#search-container input[type=text] {
     float:left;
@@ -1398,8 +1335,8 @@ div#search-container input[type=text] {
 	font:bold 20px InterstatePlusRegular;
 	text-transform:uppercase;
 	border:solid 1px #e3e3e3;
-	width:150px;
-	height:14px;
+	width:120px;
+	height:20px;
 	padding:5px 0 5px 5px;
     background-color: #f7f7f7; }
 
@@ -2036,3 +1973,61 @@ div#SearchTimeFilter input[type=text] {
 	height:20px;
 	padding:5px 0 5px 5px;
     background-color: #f7f7f7; }
+    
+    
+    
+    
+    
+    
+    
+    a#fdbk_tab {
+          background-image:url(http://s3.amazonaws.com/getsatisfaction.com/images/feedback_trans_tab.png);
+          color:white;
+          cursor:pointer;
+          height:102px;
+          right:0;
+          margin-left:-7px;
+          overflow-x:hidden;
+          overflow-y:hidden;
+          position:fixed;
+          text-indent:-100000px;
+          top:25%;
+          width:42px;
+          z-index:100000;
+        }
+        a#fdbk_tab:hover {
+          margin-left:-4px;
+        }
+        a.fdbk_tab_right {
+          left:auto !important;
+          margin-left:auto !important;
+          margin-right:0 !important;
+          right:0 !important;
+          width:35px !important;
+        }
+        a.fdbk_tab_right:hover {
+          margin-left:auto !important;
+          margin-right:0 !important;
+          width:38px !important;
+        }
+        a.fdbk_tab_bottom {
+          background-position:0 -102px !important;
+          bottom:0 !important;
+          height:38px !important;
+          left:20% !important;
+          margin-bottom:-7px !important;
+          margin-left:auto !important;
+          top:auto !important;
+          width:102px !important;
+        }
+        a.fdbk_tab_bottom:hover {
+          margin-bottom:-4px !important;
+          margin-left:auto !important;
+        }
+        a.fdbk_tab_hidden {
+          display:none !important;
+        }
+       
+        .feedback_tab_on embed, .feedback_tab_on select, .feedback_tab_on object {
+          visibility:hidden;
+        }
