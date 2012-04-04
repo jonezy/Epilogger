@@ -36,13 +36,13 @@
 
 @if (Model.ShowTopPhotos)
 {
-    foreach (Epilogger.Data.Image Image in Model.TopImages)
+    foreach (Epilogger.Data.Image image in Model.TopImages)
     {
-        var thePath = Image.EventID + "/" + Image.ID;
-        <div id="TopPhoto@(Image.ID)" class="topPhotosBar">
+        var thePath = image.EventID + "/" + image.ID;
+        <div id="TopPhoto@(image.ID)" class="topPhotosBar">
             <div class="topPhoto">
-                <a href="@Image.Fullsize" rel="prettyPhoto[topphotos]" photoid="@thePath" title="" id="@Image.ID">
-                    <img src="@Image.Fullsize" width="415" border="0" alt="" />
+                <a href="@image.Fullsize" rel="prettyPhoto[topphotos]" photoid="@thePath" title="" id="@image.ID">
+                    <img src="@image.Fullsize" width="415" border="0" alt="" />
                 </a>
             </div>
             <div class="topPhotoComments">

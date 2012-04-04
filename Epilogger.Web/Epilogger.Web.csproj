@@ -314,16 +314,14 @@
     <Content Include="App_Data\combres.xml" />
     <Content Include="App_Data\combres_full_with_annotation.xml" />
     <Content Include="favicon.ico" />
-    <Content Include="GettingStarted.txt" />
     <Content Include="Global.asax" />
-    <Content Include="Json.NET.license.txt" />
     <Content Include="Public\css\960_12_col.css" />
     <Content Include="Public\css\base.css" />
     <Content Include="Public\css\cbimages\close.png" />
     <Content Include="Public\css\cbimages\controls.png" />
     <Content Include="Public\css\cbimages\loading.gif" />
     <Content Include="Public\css\colorbox.css" />
-    <Content Include="Public\css\sadiehawkinsBackUp.css" />
+    <Content Include="Public\css\sadiehawkins.css" />
     <Content Include="Public\css\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Public\css\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Public\css\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -342,7 +340,7 @@
     <Content Include="Public\css\messages.css" />
     <Content Include="Public\css\modal.css" />
     <Content Include="Public\css\reset.css" />
-    <Content Include="Public\css\sadiehawkins.css" />
+    <Content Include="Public\css\sadiehawkinsOldGood.css" />
     <Content Include="Public\css\skeleton.css" />
     <Content Include="Public\emails\images\footer-tear.gif" />
     <Content Include="Public\emails\images\logo.png" />
@@ -2768,7 +2766,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LayoutOldGood.cshtml" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -4836,7 +4834,7 @@
     <Content Include="Views\Account\UpdatePassword.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Areas\Authentication\Views\Web.config" />
-    <Content Include="Views\Shared\GlobalNavigation.cshtml" />
+    <Content Include="Views\Shared\GlobalNavigationOldGood.cshtml" />
     <Content Include="Views\Events\Create.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Dashboard\Profile.cshtml" />
@@ -4860,7 +4858,7 @@
     <Content Include="Views\Events\AllLinks.cshtml" />
     <Content Include="Views\Events\AllBlogPosts.cshtml" />
     <Content Include="Views\Events\AllCheckins.cshtml" />
-    <Content Include="Views\Shared\Navigation.cshtml" />
+    <Content Include="Views\Shared\NavigationOldGood.cshtml" />
     <Content Include="Views\Events\EventToolbar.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TimeSpan.cshtml" />
@@ -4906,7 +4904,6 @@
     <Content Include="Views\Shared\DisplayTemplates\FullTime.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ShortDate.cshtml" />
     <Content Include="Views\Events\UploadPhotos.cshtml" />
-    <None Include="combres.readme" />
     <None Include="Public\js\FacebookPhotoPicker\crossdomain\.svn\all-wcprops" />
     <None Include="Public\js\FacebookPhotoPicker\crossdomain\.svn\entries" />
     <None Include="Public\js\FacebookPhotoPicker\crossdomain\.svn\text-base\xd_receiver.htm.svn-base" />
@@ -8270,9 +8267,9 @@
     <None Include="Public\js\FacebookPhotoPicker\dojoroot\dojo\_firebug\LICENSE" />
     <Content Include="Views\Account\AccountActivationNeeded.cshtml" />
     <Content Include="Views\Account\ActivationSent.cshtml" />
-    <Content Include="Views\Shared\GlobalNavigationBackUp.cshtml" />
-    <Content Include="Views\Shared\NavigationBackUp.cshtml" />
-    <Content Include="Views\Shared\_LayoutBackUp.cshtml" />
+    <Content Include="Views\Shared\GlobalNavigation.cshtml" />
+    <Content Include="Views\Shared\Navigation.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

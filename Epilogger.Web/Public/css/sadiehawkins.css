@@ -228,7 +228,8 @@ a.edit_icon {
 #homepage-toolbar #refresh {}
     
 #header {
-   padding:0px;
+   padding-top:12px;
+   padding-bottom: 10px;
    position:relative;    
    background:#fff;}
 	
@@ -238,67 +239,148 @@ a.edit_icon {
 
 /* ------------------------------ MENUS */
 
-/* --- main menu */	
-ul#navigation {
-    float:right;
-    margin-top:16px;}
-	
-ul#navigation li {
-	display:inline-block;
-	padding:9px 0 5px 0}
+/* --- main menu */
+#menu-bar 
+{
+    float: right;
+    margin-top: 30px;
+    z-index: 9000;
+    line-height: 100%;
+}
+#menu-bar li {
+  float: left;
+  position: relative;
+  list-style: none;
+}
+#menu-bar li.submenu {
+    background: url(/Public/Images/menu/MenuArrow.png) no-repeat 96% 16px;
+}
 
-ul#navigation li a{
-	color:#1e72c8;
-	padding: 9px 10px 7px 10px;
-	text-transform:uppercase;
-	margin:0 5px;
-	font:bold 20px 'InterstatePlusRegular', impact, sans-serif;}
+#menu-bar a {
+  font:bold 21px 'InterstatePlusRegular', impact, sans-serif;
+  color: #1E72C8;
+  text-decoration: none;
+  display: block;
+  padding: 8px 20px 8px 10px;
+  margin: 0;
+}
+#menu-bar li.noPadding a
+{
+    padding: 8px 0px 8px 20px;  
+}
 
-ul#navigation li input {
-    width:60px;
-	font:bold 13pt 'InterstatePlusRegular', impact, sans-serif;
-	padding:5px;
-	max-width:none !mportant;
-	margin:0;
-	text-transform:uppercase;}
+/*Main menu hover*/
+#menu-bar .current a {
+  color: #ee4490;
+}
+#menu-bar li:hover > a 
+{
+  color: #82E4FE;
+}
 
-ul#navigation li a:hover, ul#navigation li a.current {
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
-	border-radius: 2px;
-	color:#245d96}
-	
-/* -- Sub Nav */
-ul#events-subnav{
-    position:absolute;
-    top:55px;
-    left:338px;
-    display:none;}
-    
-ul.subnav {
-    margin:0;
-    display:inline-block;
-    -moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
-	border-radius: 2px;}
 
-ul.subnav li {
-    list-style:none;
-    float:left;
-    padding:0;
-    margin:0;}
-    
-ul.subnav li a {
-    color:#5695d6;
-	padding: 0 5px;
-	text-transform:uppercase;
-	margin:0 5px;
-	font:bold 11pt 'InterstatePlusRegular', impact, sans-serif;}
 
-ul.subnav li a:hover, ul.subnav li a.current {
-	color:#245d96}
-	
-	
+#menu-bar li.submenu:hover > a {
+  color: #82E4FE;
+  background: #757472 url(/Public/Images/menu/MenuArrow.png) no-repeat 96% 16px;
+}
+
+/*SubMenu Hover */
+#menu-bar ul li:hover a, #menu-bar li:hover li a {
+  background: none;
+  border: none;
+  color: #858482;
+}
+
+#menu-bar ul a:hover {
+  background: #858482 !important;
+  color: #A5EBFD !important;
+}
+
+/*Sub Menu*/
+
+/*Browse Sub*/
+#menu-bar ul.browse {
+    background: #757472;
+    display: none;
+    margin: 0;
+    padding: 5px 5px 16px 5px;
+    width: 154px;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    z-index: 9000;
+}
+
+
+
+/*Dashboard sub*/
+#menu-bar ul.dashboard {
+    background: #757472;
+    display: none;
+    margin: 0;
+    padding: 5px 5px 16px 5px;
+    width: 118px;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    z-index: 9000;
+}
+
+
+
+
+
+
+#menu-bar li:hover > ul {
+    display: block;
+}
+
+#menu-bar ul li {
+    float: none;
+    margin: 0;
+    padding: 0;
+}
+#menu-bar ul li.menuSpacer {
+    border-bottom: 1px dotted #a4a3a2;
+    margin: 5px;
+}
+
+
+#menu-bar ul a {
+    padding: 5px 0px 5px 5px;
+    color:#eeeeee !important;
+    font-size:13px;
+    font-style:normal;
+    font-family:helvetica;
+    font-weight: normal;
+}
+
+#menu-bar ul li:first-child > a {
+  
+}
+#menu-bar ul li:last-child > a {
+  
+}
+
+#menu-bar:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+#menu-bar {
+  display: inline-block;
+}
+  html[xmlns] #menu-bar {
+  display: block;
+}
+* html #menu-bar {
+  height: 1%;
+}
+
 	
 	
 /* ------------------------------ CONTENT */
@@ -1287,6 +1369,9 @@ span.tweet-date {font-size:11px;color:#c2c2c2}
 
 /* ------------------------------ GLOBAL BAR */
 
+/*This is the OLD tabbed admin menu! */
+
+/*
 #admin-area, #user-status  {
     float:right;
     font-size:8pt;
@@ -1298,10 +1383,29 @@ span.tweet-date {font-size:11px;color:#c2c2c2}
     border-radius: 0px 0px 5px 5px;
     background:#5695d6;
     color:#fff;}	
+    
+#admin-area a, #user-status a {
+    color:#fff;}*/
+    
+/* New Admin Menu - CB Mar 29, 2012 */    
+#god-menu {
+    width: 100%;
+    height: 19px;
+    background-color: #403e3a;
+    color: #bababa;
+    font-size: 12px;
+}
+
+#god-menu a {
+    color: #eeeeee;
+}
+/********************/
+
+
 
 #global-bar {
     display:block;
-    border-top:solid 3px #5695d6;
+    /*border-top:solid 3px #5695d6;*/
     margin:0px -40px 0px -40px;
     color:#fff; 
     padding-bottom:9px;
@@ -1312,6 +1416,7 @@ span.tweet-date {font-size:11px;color:#c2c2c2}
     width: 100%;
     }
     
+   
 #jaggies  
 {
     width: 100%;
@@ -1321,24 +1426,26 @@ span.tweet-date {font-size:11px;color:#c2c2c2}
     margin-top: 9px;
 }
     
-#admin-area a, #user-status a {
-    color:#fff;}
+
 
 div#search-container {
-    margin:20px 0px;
-	float:right;
-	width:120px;}
+    width: 150px;
+    position: absolute;
+    top: 7px;
+    right: 10px;
+	}
 
 div#search-container input[type=text] {
     float:left;
-	color:#1e72c8;
-	font:bold 20px InterstatePlusRegular;
-	text-transform:uppercase;
-	border:solid 1px #e3e3e3;
-	width:120px;
-	height:20px;
-	padding:5px 0 5px 5px;
-    background-color: #f7f7f7; }
+	color:#888;
+	font:bold 14px Helvetica, Arial, Sans-Serif;
+	border: solid 1px #eee;
+	width:128px;
+	height:14px;
+	padding:5px 0 5px 26px;
+    background: #eee url('/Public/images/homepage/SearchIcon.png') no-repeat 5px 5px;
+
+}
 
 div#search-container input[type=image] {
 	vertical-align:top;
@@ -1896,7 +2003,7 @@ body::-webkit-scrollbar-corner{background-clip:padding-box;background-color:#f5f
 #event-search-container input[type="text"], input#SearchTerm[type="text"] {
 	color:#1e72c8;
 	font:bold 20px InterstatePlusRegular;
-	text-transform:uppercase;
+	/*text-transform:uppercase;*/
 	width:95%;
 	border:inset 1px #ccc;
 	height:20px;
@@ -1973,61 +2080,61 @@ div#SearchTimeFilter input[type=text] {
 	height:20px;
 	padding:5px 0 5px 5px;
     background-color: #f7f7f7; }
-    
-    
-    
-    
-    
-    
-    
-    a#fdbk_tab {
-          background-image:url(http://s3.amazonaws.com/getsatisfaction.com/images/feedback_trans_tab.png);
-          color:white;
-          cursor:pointer;
-          height:102px;
-          right:0;
-          margin-left:-7px;
-          overflow-x:hidden;
-          overflow-y:hidden;
-          position:fixed;
-          text-indent:-100000px;
-          top:25%;
-          width:42px;
-          z-index:100000;
-        }
-        a#fdbk_tab:hover {
-          margin-left:-4px;
-        }
-        a.fdbk_tab_right {
-          left:auto !important;
-          margin-left:auto !important;
-          margin-right:0 !important;
-          right:0 !important;
-          width:35px !important;
-        }
-        a.fdbk_tab_right:hover {
-          margin-left:auto !important;
-          margin-right:0 !important;
-          width:38px !important;
-        }
-        a.fdbk_tab_bottom {
-          background-position:0 -102px !important;
-          bottom:0 !important;
-          height:38px !important;
-          left:20% !important;
-          margin-bottom:-7px !important;
-          margin-left:auto !important;
-          top:auto !important;
-          width:102px !important;
-        }
-        a.fdbk_tab_bottom:hover {
-          margin-bottom:-4px !important;
-          margin-left:auto !important;
-        }
-        a.fdbk_tab_hidden {
-          display:none !important;
-        }
+
+
+
+/*THE FEEDBACK TAB*/
+a#fdbk_tab {
+    background-image:url(http://s3.amazonaws.com/getsatisfaction.com/images/feedback_trans_tab.png);
+    color:white;
+    cursor:pointer;
+    height:102px;
+    right:0;
+    margin-left:-7px;
+    overflow-x:hidden;
+    overflow-y:hidden;
+    position:fixed;
+    text-indent:-100000px;
+    top:25%;
+    width:42px;
+    z-index:100000;
+}
+a#fdbk_tab:hover {
+    margin-left:-4px;
+}
+a.fdbk_tab_right {
+    left:auto !important;
+    margin-left:auto !important;
+    margin-right:0 !important;
+    right:0 !important;
+    width:35px !important;
+}
+a.fdbk_tab_right:hover {
+    margin-left:auto !important;
+    margin-right:0 !important;
+    width:38px !important;
+}
+a.fdbk_tab_bottom {
+    background-position:0 -102px !important;
+    bottom:0 !important;
+    height:38px !important;
+    left:20% !important;
+    margin-bottom:-7px !important;
+    margin-left:auto !important;
+    top:auto !important;
+    width:102px !important;
+}
+a.fdbk_tab_bottom:hover {
+    margin-bottom:-4px !important;
+    margin-left:auto !important;
+}
+a.fdbk_tab_hidden {
+    display:none !important;
+}
        
-        .feedback_tab_on embed, .feedback_tab_on select, .feedback_tab_on object {
-          visibility:hidden;
-        }
+.feedback_tab_on embed, .feedback_tab_on select, .feedback_tab_on object {
+    visibility:hidden;
+}
+    
+    
+    
