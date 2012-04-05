@@ -79,16 +79,15 @@ namespace Epilogger.Web.Controllers {
         [CompressFilter]
         public ActionResult Category(string CategoryName)
         {
-            BrowseCategoriesDisplayViewModel model = new BrowseCategoriesDisplayViewModel();
-            List<Event> events = new List<Event>();
+            var model = new BrowseCategoriesDisplayViewModel();
+            var events = new List<Event>();
             
+            //TODO - Implement paging!
             if (CategoryName != string.Empty)
             {
-                if (CategoryName == "All") { events = ES.AllEvents(); }
-                else { events = ES.GetEventsByCategorySlug(CategoryName); }
+                events = CategoryName.ToLower() == "all" ? ES.Get50Events() : ES.GetEventsByCategorySlug(CategoryName);
             }
-            
-            List<DashboardEventViewModel> TheEvents = new List<DashboardEventViewModel>();
+
             model.Events = Mapper.Map<List<Event>, List<DashboardEventViewModel>>(events).OrderByDescending(f => f.StartDateTime);
             model.EventCategories = CatS.AllCategories();
             model.CategoryName = CatS.GetCategoryBySlug(CategoryName).CategoryName;
