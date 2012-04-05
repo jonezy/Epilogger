@@ -95,7 +95,7 @@ namespace Epilogger.Web
 
             return from tw in db.Tweets
                    join I in im on tw.TwitterID equals I.TwitterID
-                   where tw.EventID == eventId && tw.Deleted == null || tw.Deleted == false
+                   where tw.EventID == eventId //&& tw.Deleted == null || tw.Deleted == false
                    orderby tw.CreatedDate
                    select tw;
         }
