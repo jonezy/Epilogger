@@ -253,11 +253,11 @@ namespace Epilogger.Web.Controllers {
         }
 
         public ActionResult Logout() {
-            RichmondDay.Helpers.CookieHelpers.DestroyCookie("lc");
+            CookieHelpers.DestroyCookie("lc");
             
             this.StoreInfo("You have been logged out of your epilogger account");
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Login");
         }
 
         [HttpGet]

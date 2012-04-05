@@ -273,7 +273,12 @@ a.edit_icon {
 #menu-bar .current a {
   color: #ee4490;
 }
-#menu-bar li:hover > a 
+#menu-bar li.current:hover > a
+{
+  color: #fb95cc !important;
+}
+
+#menu-bar li:hover > a
 {
   color: #82E4FE;
 }

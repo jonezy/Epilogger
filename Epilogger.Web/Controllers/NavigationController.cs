@@ -7,15 +7,15 @@ using Epilogger.Web.Models;
 
 namespace Epilogger.Web.Controllers {
     public class NavigationController : BaseController {
-        EventService eventService;
+        EventService _eventService;
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext) {
-            if (eventService == null) eventService = new EventService();
+            if (_eventService == null) _eventService = new EventService();
             base.Initialize(requestContext);
         }
         [ChildActionOnly]
         public ActionResult GlobalNavigation() {
-            GlobalNavigationModel model = new GlobalNavigationModel { UserLoggedIn = CurrentUserID != Guid.Empty ? true : false };
+            var model = new GlobalNavigationModel { UserLoggedIn = CurrentUserID != Guid.Empty ? true : false };
             if (CurrentUser != null) {
                 model.Username = CurrentUser.Username;
             }
@@ -23,28 +23,27 @@ namespace Epilogger.Web.Controllers {
 
             return PartialView("GlobalNavigation", model);
         }
-        [ChildActionOnly]
-        public ActionResult Navigation()
-        {
-            GlobalNavigationModel model = new GlobalNavigationModel { UserLoggedIn = CurrentUserID != Guid.Empty ? true : false };
-            if (CurrentUser != null)
-            {
-                model.Username = CurrentUser.Username;
-            }
-            model.CurrentUserRole = CurrentUserRole;
+        //[ChildActionOnly]
+        //public ActionResult Navigation()
+        //{
+        //    GlobalNavigationModel model = new GlobalNavigationModel { UserLoggedIn = CurrentUserID != Guid.Empty ? true : false };
+        //    if (CurrentUser != null)
+        //    {
+        //        model.Username = CurrentUser.Username;
+        //    }
+        //    model.CurrentUserRole = CurrentUserRole;
 
-            return PartialView("Navigation", model);
-        }
+        //    return PartialView("Navigation", model);
+        //}
 
         public ActionResult RenderBreadCrumb() {
-            Dictionary<string, string> trail = new Dictionary<string, string>();
-            trail.Add("home", App.BaseUrl);
-            if (Request.Url.AbsoluteUri != App.BaseUrl) {
-                int count = 1;
+            Dictionary<string, string> trail = new Dictionary<string, string> {{"home", App.BaseUrl}};
+            if (Request.Url != null && Request.Url.AbsoluteUri != App.BaseUrl) {
+                var count = 1;
 
                 foreach (var item in Request.RequestContext.RouteData.Values) {
-                    string routeValue = item.Value.ToString().ToLower();
-                    string routeKey = item.Key.ToString().ToLower();
+                    var routeValue = item.Value.ToString().ToLower();
+                    var routeKey = item.Key.ToString().ToLower();
                     
                     if (routeValue != "index") {
                         // this handles the majority of breadcrumb cases
@@ -64,7 +63,7 @@ namespace Epilogger.Web.Controllers {
                             int eventId;
                             int.TryParse(routeValue, out eventId);
                             if (eventId > 0) {
-                                Event currentEvent = eventService.FindByID(eventId);
+                                Event currentEvent = _eventService.FindByID(eventId);
                                 label = currentEvent.Name;
                                 url = string.Format("{0}{1}", App.BaseUrl, Url.Action("details", "events", Request.RequestContext.RouteData.Values).TrimStart('/'));
                             }

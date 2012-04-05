@@ -1,6 +1,18 @@
-﻿@{
+﻿@using RichmondDay.Helpers
+@{
     var controller = ViewContext.RouteData.Values["controller"] as string ?? "";
     var action = ViewContext.RouteData.Values["action"] as string ?? "";
+    
+    //This is a hack, BuildTemplateMethod not sure what's ThemeProvider bnest way to accomplish this
+    var userId = new Guid();
+    try
+    {
+        Guid.TryParse(CookieHelpers.GetCookieValue("lc", "uid").ToString(), out userId);
+    }
+    catch (Exception)
+    {
+    }
+    
 }
 
 <ul id="menu-bar">
@@ -30,15 +42,18 @@
         </ul>
     </li>
     
-    @*@if (Model.UserLoggedIn)
+    
+
+
+    @if (userId != Guid.Empty)
     {
         <li class="noPadding">@Html.ActionLink("LOGOUT", "logout", "account")</li>
     }
     else
     {
         <li class="noPadding">@Html.ActionLink("LOGIN / REGISTER", "login", "account")</li>
-    }*@
-    <li class="noPadding">@Html.ActionLink("LOGIN / REGISTER", "login", "account")</li>
+    }
+    @*<li class="noPadding">@Html.ActionLink("LOGIN / REGISTER", "login", "account")</li>*@
     
 </ul>
 

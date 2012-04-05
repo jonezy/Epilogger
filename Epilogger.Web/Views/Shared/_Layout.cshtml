@@ -1,4 +1,5 @@
 ﻿@using Combres.Mvc
+@using Epilogger.Web.Models
 
 <!doctype html>
 <!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
@@ -15,7 +16,7 @@
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 	
-     @Html.CombresLink("siteCss")
+    @Html.CombresLink("siteCss")
     @Html.CombresLink("siteJs")
     
     @*<script src="@Url.Content("~/Public/js/head.load.min.js")" type="text/javascript" language="javascript"></script>*@
@@ -67,9 +68,10 @@
             
 
                 <div id="search-container">
-                    @using (Html.BeginForm("Search", "Home", FormMethod.Post, null)) {
-                        @Html.TextBox("SearchTerm", null, new { @class = "remove-bottom", @title="Find an event..." })
-                    }		    
+                    @using (Html.BeginForm("Search", "Home", FormMethod.Post, null))
+                    {
+                        @Html.TextBox("SearchTerm", null, new {@class = "remove-bottom", @title = "Find an event..."})
+                    }
                 </div>
 
                 @*@Html.Action("Navigation", "Navigation", new { Area = "" })*@
