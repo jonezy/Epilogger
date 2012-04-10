@@ -63,8 +63,9 @@
             <div class="HottestEventBig" id="HotestEventDetails@(item.Event.ID)">
                 <div class="hottest-photogridTop">
                     @foreach (Epilogger.Data.Image image in item.RandomHottestImages.Take(5)) {
+                        var thePath = image.EventID + "/" + image.ID;
                         <div class="hottestimage" id="photo-@image.ID">
-                            <a href="@image.Fullsize" rel="prettyPhoto[@item.Event.ID]" photoid="@image.ID" id="@image.ID">
+                            <a href="@image.Fullsize" rel="prettyPhoto[@item.Event.ID]" photoid="@thePath" id="@image.ID">
                                 <img src="@image.Fullsize" width="200" border="0" alt="" /></a>
                         </div>
                     }
@@ -81,8 +82,9 @@
                 </div>
                 <div class="hottest-photogridBottom">
                     @foreach (Epilogger.Data.Image image in item.RandomHottestImages.Skip(5).Take(5)) {
+                        var thePath = image.EventID + "/" + image.ID;
                         <div class="hottestimage" id="photo-@image.ID">
-                            <a href="@image.Fullsize" rel="prettyPhoto[@item.Event.ID]" photoid="@image.ID" id="@image.ID">
+                            <a href="@image.Fullsize" rel="prettyPhoto[@item.Event.ID]" photoid="@thePath" id="@image.ID">
                                 <img src="@image.Fullsize" width="200" border="0" alt="" />
                             </a>
                         </div>

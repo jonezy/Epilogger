@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Epilogger.Web.Core.Filters;
 using Epilogger.Web.Models;
 using Epilogger.Data;
 using AutoMapper;
@@ -42,6 +43,8 @@ namespace Epilogger.Web.Controllers
         //{
         //    return RedirectToAction("Index", new { filter = "overview" });
         //}
+        [CompressFilter]
+        [CacheFilter(Duration = 60)]
         public ActionResult Index(string filter, int? page)
         {
 

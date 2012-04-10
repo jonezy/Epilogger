@@ -31,7 +31,8 @@ namespace Epilogger.Web.Core.Email {
             if (!string.IsNullOrEmpty(smtpConfig.Username) && !string.IsNullOrEmpty(smtpConfig.Password)) {
                 client.Credentials = new System.Net.NetworkCredential(smtpConfig.Username, smtpConfig.Password);
             }
-            
+
+
             // send the message
             client.Send(email);
         }

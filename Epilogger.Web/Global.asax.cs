@@ -13,6 +13,7 @@ using Epilogger.Web.Models;
 using Timezone.Framework;
 
 namespace Epilogger.Web {
+
     public class App : System.Web.HttpApplication {
         /// <summary>
         /// The application's base url (eg: http://www.example.com, http://localhost:21215/)
@@ -39,7 +40,7 @@ namespace Epilogger.Web {
 
         public static SmtpConfiguration MailConfiguration {
             get {
-                return new SmtpConfiguration() {
+                return new SmtpConfiguration() {       
                     Server = ConfigurationManager.AppSettings["SiteSettings.Mail.Server"] as string ?? "",
                     Port = int.Parse(ConfigurationManager.AppSettings["SiteSettings.Mail.ServerPort"] as string),
                     Username = ConfigurationManager.AppSettings["SiteSettings.Mail.Username"] as string ?? "",
@@ -144,8 +145,8 @@ namespace Epilogger.Web {
 
             routes.MapRoute(
                 "GetImageComments",
-                "events/getimagecomments/{id}",
-                new { controller = "events", action = "getimagecomments", id = UrlParameter.Optional }
+                "events/getimagecomments/{eventID}/{imageid}",
+                new { controller = "events", action = "getimagecomments", eventID = UrlParameter.Optional, imageid = UrlParameter.Optional }
             );
 
 

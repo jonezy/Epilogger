@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using AutoMapper;
 using Epilogger.Data;
 using Twitterizer;
@@ -12,13 +13,22 @@ namespace Epilogger.Web {
             if (source.UserAuthenticationProfiles.Where(ua => ua.Service == "TWITTER").FirstOrDefault() == null)
                 return string.Empty;
 
-            UserAuthenticationProfile userAuth = source.UserAuthenticationProfiles.Where(ua => ua.Service == "TWITTER").FirstOrDefault();
-            TwitterResponse<TwitterUser> twitterUser = TwitterHelper.GetUser(userAuth.Token, userAuth.TokenSecret, userAuth.ServiceUsername);
+            try
+            {
+                UserAuthenticationProfile userAuth = source.UserAuthenticationProfiles.Where(ua => ua.Service == "TWITTER").FirstOrDefault();
+                TwitterResponse<TwitterUser> twitterUser = TwitterHelper.GetUser(userAuth.Token, userAuth.TokenSecret, userAuth.ServiceUsername);
 
-            if (twitterUser == null)
+                if (twitterUser == null)
+                    return string.Empty;
+
+                return twitterUser.ResponseObject.ProfileImageLocation;
+            }
+            catch (Exception)
+            {
                 return string.Empty;
+            }
 
-            return twitterUser.ResponseObject.ProfileImageLocation;
+            
         }
     }
 }

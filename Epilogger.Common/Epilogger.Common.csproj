@@ -45,6 +45,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\RabbitMQ\lib\RabbitMQ.Client.dll</HintPath>
     </Reference>
+    <Reference Include="RichmondDay.Helpers">
+      <HintPath>..\lib\RichmondDay.Helpers.dll</HintPath>
+    </Reference>
     <Reference Include="ServiceStack.Common, Version=3.6.3.3305, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\ServiceStack.Common.3.6.3\lib\net35\ServiceStack.Common.dll</HintPath>
@@ -78,6 +81,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MQ.cs" />
     <Compile Include="Redis.cs" />
+    <Compile Include="SpamSafeMail.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

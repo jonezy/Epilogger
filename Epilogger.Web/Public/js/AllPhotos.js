@@ -14,13 +14,13 @@ function start_Int() {
     if (intval == "") {
         intval = window.setInterval(ChangeToNextPhoto, 10000);
     } else {
-        stop_Int()
+        stop_Int();
     }
 }
 function stop_Int() {
     if (intval != "") {
-        window.clearInterval(intval)
-        intval = ""
+        window.clearInterval(intval);
+        intval = "";
     }
 }
 
@@ -63,7 +63,7 @@ function ChangeToNextPhoto() {
 function getComments(photoID) {
     $(".topPhotoComments").html("");
 
-    $.get('/Events/GetImageComments/' + photoID,
+    $.get('/Events/GetImageComments/' + EventID + '/' + photoID,
         function (data) {
             $('.topPhotoComments').html(data);
         }, "html");

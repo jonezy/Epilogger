@@ -12,13 +12,13 @@ function start_Int() {
     if (intval == "") {
         intval = window.setInterval(ChangeToNextHottest, 5000);
     } else {
-        stop_Int()
+        stop_Int();
     }
 }
 function stop_Int() {
     if (intval != "") {
-        window.clearInterval(intval)
-        intval = ""
+        window.clearInterval(intval);
+        intval = "";
     }
 }
 

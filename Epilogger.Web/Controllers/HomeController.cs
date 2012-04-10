@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using AutoMapper;
 
 using Epilogger.Data;
+using Epilogger.Web.Core.Filters;
 using Epilogger.Web.Models;
 using Epilogger.Web.Core.Stats;
 
@@ -18,6 +19,8 @@ namespace Epilogger.Web.Controllers {
         EventService ES = new EventService();
         ImageService IS = new ImageService();
 
+        [CacheFilter(Duration = 10)]
+        [CompressFilter]
         public ActionResult Index() {
             ViewBag.Message = "Welcome to Epilogger!";
 

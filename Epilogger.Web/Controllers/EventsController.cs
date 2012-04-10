@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using AutoMapper;
 
 using Epilogger.Data;
+using Epilogger.Web.Core.Filters;
 using Epilogger.Web.Core.Stats;
 using Epilogger.Web.Models;
 using Epilogger.Common;
@@ -75,19 +76,18 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        [CompressFilter]
         public ActionResult Category(string CategoryName)
         {
-            BrowseCategoriesDisplayViewModel model = new BrowseCategoriesDisplayViewModel();
-            List<Event> events = new List<Event>();
+            var model = new BrowseCategoriesDisplayViewModel();
+            var events = new List<Event>();
             
+            //TODO - Implement paging!
             if (CategoryName != string.Empty)
             {
-                if (CategoryName == "All") { events = ES.AllEvents(); }
-                else { events = ES.GetEventsByCategorySlug(CategoryName); }
+                events = CategoryName.ToLower() == "all" ? ES.Get50Events() : ES.GetEventsByCategorySlug(CategoryName);
             }
-            
-            List<DashboardEventViewModel> TheEvents = new List<DashboardEventViewModel>();
+
             model.Events = Mapper.Map<List<Event>, List<DashboardEventViewModel>>(events).OrderByDescending(f => f.StartDateTime);
             model.EventCategories = CatS.AllCategories();
             model.CategoryName = CatS.GetCategoryBySlug(CategoryName).CategoryName;
@@ -101,6 +101,7 @@ namespace Epilogger.Web.Controllers {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         //public ActionResult Details(int id) {
+        [CompressFilter]
         public ActionResult Details(string id) {
 
             Event requestedEvent = ES.FindBySlug(id);
@@ -200,7 +201,7 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        [CompressFilter]
         public ActionResult AllPhotos(string id, int? page) {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
             Event requestedEvent = ES.FindBySlug(id);
@@ -227,7 +228,7 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        [CompressFilter]
         public ActionResult AllTweets(string id, int? page) {
             
             int currentPage = page.HasValue ? page.Value - 1 : 0;
@@ -375,8 +376,9 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        public ActionResult GetImageComments(int id) {
-            return PartialView("_ImageComments", TS.FindByImageID(id));
+        public ActionResult GetImageComments(int eventId, int imageid)
+        {
+            return PartialView("_ImageComments", TS.FindByImageID(imageid, eventId));
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -404,16 +406,24 @@ namespace Epilogger.Web.Controllers {
                             TheFirst = false;
                         }
 
-                        StringBuilder tweet = new StringBuilder();
-                        tweet.AppendFormat("<li id='{0}' class='tweet clearfix'>", TheT.TwitterID);
-                        tweet.AppendFormat("<img src='{0}' class='fleft' alt='' height='48' width='48'  />", TheT.ProfileImageURL);
-                        tweet.Append("<div class='tweet-body'><strong>");
-                        tweet.AppendFormat("<a href='http://www.twitter.com/{0}' target='_blank'>@{1}</a></strong>", TheT.FromUserScreenName, TheT.FromUserScreenName);
-                        tweet.AppendFormat("<p>{0}</p>", TheT.TextAsHTML);
-                        tweet.Append("</div>");
-                        tweet.Append("</li>");
 
-                        HTMLString.Append(tweet.ToString());
+                        //Instead of hard coding the HTML for the images, let's use the template.
+                        var firstOrDefault = TheT.Events.FirstOrDefault(t => t.ID == EventID);
+                        var canDelete = firstOrDefault != null && ((firstOrDefault.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator);
+
+                        HTMLString.Append(RenderRazorViewToString("_TweetTemplate", new TweetTemplateViewModel() { CanDelete = canDelete, Tweet = TheT }));
+
+
+                        //StringBuilder tweet = new StringBuilder();
+                        //tweet.AppendFormat("<li id='{0}' class='tweet clearfix'>", TheT.TwitterID);
+                        //tweet.AppendFormat("<img src='{0}' class='fleft' alt='' height='48' width='48'  />", TheT.ProfileImageURL);
+                        //tweet.Append("<div class='tweet-body'><strong>");
+                        //tweet.AppendFormat("<a href='http://www.twitter.com/{0}' target='_blank'>@{1}</a></strong>", TheT.FromUserScreenName, TheT.FromUserScreenName);
+                        //tweet.AppendFormat("<p>{0}</p>", TheT.TextAsHTML);
+                        //tweet.Append("</div>");
+                        //tweet.Append("</li>");
+                        //HTMLString.Append(tweet.ToString());
+
                         RecordCount++;
                     }
 
@@ -455,10 +465,19 @@ namespace Epilogger.Web.Controllers {
                             TheFirst = false;
                         }
 
-                        string TheImage = "<a href='" + TheI.Fullsize + "' rel='prettyPhoto[latestphotos]' title='" + TheI.ID + "' id='" + TheI.ID + "'><img src='" + TheI.Fullsize + "' width='200' border='0' alt='' /></a>";
-                        string CommentCount = "<a href='#' class='commentbubble'>" + TheI.ImageMetaData.Count() + "</a>";
+                        //Instead of hard coding the HTML for the images, let's use the template.
+                        var firstOrDefault = TheI.Events.FirstOrDefault(t => t.ID == EventID);
+                        var canDelete = firstOrDefault != null && ((firstOrDefault.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator);
 
-                        HTML.Append("<div class='withcomment newPhotoupdates' style='display:none;' id='photo-'" + TheI.ID + "'>" + TheImage + CommentCount + "</div>");
+                        HTML.Append(RenderRazorViewToString("_ImageTemplate", new Epilogger.Web.Models.ImageTemplateViewModel { CanDelete = canDelete, Image = TheI }));
+
+                        //string myString = RenderViewToString(this.ControllerContext, "~/Views/Order/OrderResultEmail.aspx", "~/Views/Shared/Site.Master", this.ViewData, this.TempData);
+
+
+
+                        //string TheImage = "<a href='" + TheI.Fullsize + "' rel='prettyPhoto[latestphotos]' title='" + TheI.ID + "' id='" + TheI.ID + "'><img src='" + TheI.Fullsize + "' width='200' border='0' alt='' /></a>";
+                        //string CommentCount = "<a href='#' class='commentbubble'>" + TheI.ImageMetaData.Count() + "</a>";
+                        //HTML.Append("<div class='withcomment newPhotoupdates' style='display:none;' id='photo-" + TheI.ID + "'>" + TheImage + CommentCount + "</div>");
 
 
                         RecordCount++;
@@ -585,7 +604,7 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        [CompressFilter]
         public ActionResult Search(String id, string IEsearchterm)
         {
             Event requestedEvent = ES.FindBySlug(id);
@@ -616,14 +635,14 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        [CompressFilter]
         public ActionResult AllContent(int id) {
             AllContentViewModel model = Mapper.Map<Event, AllContentViewModel>(ES.FindByID(id));
             return View(model);
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        [CompressFilter]
         public ActionResult AllBlogPosts(string id, int? page) {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
             Event requestedEvent = ES.FindBySlug(id);
@@ -637,7 +656,7 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        [CompressFilter]
         public ActionResult AllCheckins(string id, int? page) {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
 
@@ -655,7 +674,7 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        [CompressFilter]
         public ActionResult AllLinks(string id, int? page) {
 
             int currentPage = page.HasValue ? page.Value - 1 : 0;
@@ -671,7 +690,7 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        [CompressFilter]
         public ActionResult AllStats(String id)
         {
 
@@ -720,6 +739,7 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+        [CompressFilter]
         [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to edit an event")]
         public ActionResult Edit(string id) {
             Event currentEvent = ES.FindBySlug(id);
@@ -956,7 +976,7 @@ namespace Epilogger.Web.Controllers {
         #endregion
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        [CompressFilter]
         public ActionResult AddBlogPost(int id) {
             AddBlogPostViewModel model = new AddBlogPostViewModel();
             model.BlogURL = "http://";
