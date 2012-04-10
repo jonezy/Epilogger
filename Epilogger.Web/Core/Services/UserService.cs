@@ -43,28 +43,28 @@ namespace Epilogger.Web {
 
 
         public User GetUserByID(Guid id) {
-            return GetData().Where(u => u.ID == id).FirstOrDefault();
+            return GetData().FirstOrDefault(u => u.ID == id);
         }
 
         public User GetUserByUsername(string username) {
             //This was case-sensative for usernames - CB
-            return GetData().Where(u => string.Equals(u.Username, username, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+            return GetData().FirstOrDefault(u => string.Equals(u.Username, username, StringComparison.CurrentCultureIgnoreCase));
         }
 
         public User GetUserByEmail(string emailAddress) {
-            return GetData().Where(u => u.EmailAddress == emailAddress).FirstOrDefault();
+            return GetData().FirstOrDefault(u => u.EmailAddress == emailAddress);
         }
 
         public User GetUserByResetHash(Guid passwordResetHash) {
-            return GetData().Where(u => u.ForgotPasswordHash == passwordResetHash).FirstOrDefault();
+            return GetData().FirstOrDefault(u => u.ForgotPasswordHash == passwordResetHash);
         }
 
         public User ValidateLogin(string username, string password) {
-            return GetData().Where(u => u.Username == username && u.Password == password).FirstOrDefault();
+            return GetData().FirstOrDefault(u => u.Username == username && u.Password == password);
         }
 
         public void DeleteEventSubscription(Guid userId, int eventId) {
-            UserFollowsEvent followsEvent = base.db.UserFollowsEvents.Where(ufe => ufe.EventID == eventId && ufe.UserID == userId).FirstOrDefault();
+            UserFollowsEvent followsEvent = db.UserFollowsEvents.FirstOrDefault(ufe => ufe.EventID == eventId && ufe.UserID == userId);
             base.GetRepository<UserFollowsEvent>().Delete(followsEvent);
         }
 

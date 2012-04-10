@@ -1,8 +1,10 @@
 ﻿
 @model Epilogger.Web.Models.ImageTemplateViewModel
 
+@{ var thePath = Model.Image.EventID + "/" + Model.Image.ID;}
+
 <div class="withcomment newPhotoupdates" id="photo-@Model.Image.ID">
-    <a href="@Model.Image.Fullsize" rel="prettyPhoto[latestphotos]" photoid="@Model.Image.ID" title="" id="@Model.Image.ID">
+    <a href="@Model.Image.Fullsize" rel="prettyPhoto[latestphotos]" photoid="@thePath" title="" id="">
         <img src="@Model.Image.Fullsize" width="250" border="0" alt="" />
     </a>
     <a href="#" class="commentbubble">
