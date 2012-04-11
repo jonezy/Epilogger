@@ -16,6 +16,7 @@ using RichmondDay.Helpers;
 using System.Net;
 using System.IO;
 using System.Xml;
+using System.Text.RegularExpressions;
 
 namespace Epilogger.Web.Controllers {
     public class EventsController : BaseController {
@@ -339,11 +340,76 @@ namespace Epilogger.Web.Controllers {
                                         
                     var epLevent = Mapper.Map<CreateEventViewModel, Event>(model);
 
-                    //Fix the search terms, if there are any problems.
-                    
-
                     ES.Save(epLevent);
 
+
+                    //The event has been created and there is no error. Let's tweet out that mother.
+                    try
+                    {
+                        var apiClient = new Epilogr.APISoapClient();
+                        var shortUrlContainer = apiClient.CreateUrl("http://epilogger.com/events/" + epLevent.EventSlug);
+
+                        
+                        var theTerm = string.Empty;
+                        if (epLevent.SearchTerms.Contains("OR"))
+                        {
+                            var terms = Regex.Split(epLevent.SearchTerms, "OR");
+                            if (!terms[0].Contains("#"))
+                            {
+                                theTerm = "#" + terms[0];
+                            }
+                            else
+                            {
+                                theTerm = terms[0];
+                            }
+
+                        }
+                        else
+                        {
+                            if (!epLevent.SearchTerms.Contains("#"))
+                            {
+                                theTerm = "#" + epLevent.SearchTerms;
+                            }
+                        }
+
+
+                        var beAPartString = string.Empty;
+                        var compareToStart = DateTime.Compare(DateTime.UtcNow, epLevent.StartDateTime);
+                        if (epLevent.EndDateTime == null)
+                        {
+                            beAPartString = "See what's going on";
+                        }
+                        else
+                        {
+                            var compareToEnd = DateTime.Compare(DateTime.UtcNow, epLevent.EndDateTime ?? DateTime.MinValue);
+
+                            if (compareToStart < 0)
+                            {
+                                beAPartString = "Be a part of the lead up";
+                            }
+                            else if (compareToStart > 0 && compareToEnd < 0)
+                            {
+                                beAPartString = "See what's going on";
+                            }
+                            else if (compareToEnd > 0)
+                            {
+                                beAPartString = "See what happened";
+                            }
+                        }
+                        
+                        var eventCreatedTweet =
+                            string.Format(
+                                "{0} has been added to Epilogger! {1} at {2} {3}", epLevent.Name, beAPartString, shortUrlContainer.ShortenedUrl, theTerm);
+
+                        var mp = new MQ.MSGProducer("Epilogger", "TweetSender");
+                        var myMSG = new MQ.Messages.TweetSenderMsg { TweetText = eventCreatedTweet };
+                        mp.SendMessage(myMSG);
+                        mp.Dispose();
+                    }
+                    catch (Exception)
+                    {
+                    }
+                    
                     this.StoreSuccess("Your Event was created successfully!  Dont forget to share it with your friends and attendees!");
 
                     return RedirectToAction("details", new { id = epLevent.EventSlug });

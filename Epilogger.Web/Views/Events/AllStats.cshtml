@@ -93,8 +93,11 @@
                     <a href="@Img.Image.Fullsize" rel="prettyPhoto[reportphotos]" photoid="@Img.Image.ID" title="" id="@Img.Image.ID">
                         <img src="@Img.Image.Fullsize" border="0" alt="" />
                     </a>
-				    <a href="http://www.twitter.com/@Img.Tweet.FromUserScreenName" target="_blank"><font class="lightgray">@@</font> @Img.Tweet.FromUserScreenName</a><br/>
-				    <em class="lightgray">@Html.Raw(Img.Tweet.TextAsHTML)</em>	
+                    @if (Img.Tweet != null)
+                    {
+				        <a href="http://www.twitter.com/@Img.Tweet.FromUserScreenName" target="_blank"><font class="lightgray">@@</font> @Img.Tweet.FromUserScreenName</a><br/>
+				        <em class="lightgray">@Html.Raw(Img.Tweet.TextAsHTML)</em>	
+                    }
 		 	    </div>
             }
 		</div>

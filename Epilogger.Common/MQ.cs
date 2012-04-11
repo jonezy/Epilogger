@@ -188,6 +188,13 @@ namespace Epilogger.Common
                 public DateTime UpdateDateTime { get; set; }
             }
 
+            [Serializable]
+            [JsonObject(MemberSerialization.OptOut)]
+            public class TweetSenderMsg
+            {
+                public string TweetText { get; set; }
+            }
+
         }
 
         
