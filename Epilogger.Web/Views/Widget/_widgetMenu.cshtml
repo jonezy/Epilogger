@@ -1,0 +1,14 @@
+﻿@model Epilogger.Web.Models.WidgetMenuViewModel
+
+@{
+    var action = ViewContext.RouteData.Values["action"] as string ?? "";
+}
+
+<ul id="widgetMenu">
+    <li class="@(action.ToLower() == "index" ? "current " : string.Empty)">@Html.ActionLink("full feed", "index", new { id=Model.EventSlug, width=Model.width, height=Model.height })</li>
+    <li class="@(action.ToLower() == "photos" ? "current " : string.Empty)">@Html.ActionLink("photos", "Photos", new { id = Model.EventSlug, width = Model.width, height = Model.height })</li>
+    <li class="@(action.ToLower() == "tweets" ? "current " : string.Empty)">@Html.ActionLink("tweets", "Tweets", new { id = Model.EventSlug, width = Model.width, height = Model.height })</li>
+    <li class="@(action.ToLower() == "checkins" ? "current " : string.Empty)">@Html.ActionLink("check-ins", "Checkins", new { id = Model.EventSlug, width = Model.width, height = Model.height })</li>
+</ul>
+<a href="#" onClick="window.location.reload()" class="refreshButton"><img src="/Public/images/widget/refresh.png" alt="" /></a>
+<br class="clearfix" />

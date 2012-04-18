@@ -211,6 +211,7 @@
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
+    <Compile Include="Controllers\WidgetController.cs" />
     <Compile Include="Core\AuthenticationServices.cs" />
     <Compile Include="Core\Email\EmailSender.cs" />
     <Compile Include="Core\Email\IEmailSender.cs" />
@@ -274,6 +275,11 @@
     <Compile Include="Models\BrowseCategoriesDisplayViewModel.cs" />
     <Compile Include="Models\AllStatsViewModel.cs" />
     <Compile Include="Models\BetaSignUpViewModel.cs" />
+    <Compile Include="Models\WidgetCheckinsViewModel.cs" />
+    <Compile Include="Models\WidgetTweetsViewModel.cs" />
+    <Compile Include="Models\WidgetPhotosViewModel.cs" />
+    <Compile Include="Models\WidgetPhotosDetailsViewModel.cs" />
+    <Compile Include="Models\WidgetMenuViewModel.cs" />
     <Compile Include="Models\ImageTemplateViewModel.cs" />
     <Compile Include="Models\TweetTemplateViewModel.cs" />
     <Compile Include="Models\TwitterAuthTestViewModel.cs" />
@@ -305,6 +311,7 @@
     <Compile Include="Models\UpdatePasswordModel.cs" />
     <Compile Include="Models\VenueDisplayViewModel.cs" />
     <Compile Include="Models\VenueSearchModel.cs" />
+    <Compile Include="Models\WidgetViewModel.cs" />
     <Compile Include="Models\_EventMenuViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\Epilogr\Reference.cs">
@@ -329,6 +336,7 @@
     <Content Include="Public\css\cbimages\controls.png" />
     <Content Include="Public\css\cbimages\loading.gif" />
     <Content Include="Public\css\colorbox.css" />
+    <Content Include="Public\css\widget.css" />
     <Content Include="Public\css\sadiehawkins.css" />
     <Content Include="Public\css\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Public\css\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -378,6 +386,7 @@
     <Content Include="Public\images\bg\sample6.jpg" />
     <Content Include="Public\images\bg\sample7.jpg" />
     <Content Include="Public\images\bg\search-bg.gif" />
+    <Content Include="Public\images\bg\widgetjaggies-trans.gif" />
     <Content Include="Public\images\body-bg.jpg" />
     <Content Include="Public\images\btn-checkinmore.png" />
     <Content Include="Public\images\btn-submit.png" />
@@ -522,6 +531,10 @@
     <Content Include="Public\images\slideshow\7b.png" />
     <Content Include="Public\images\slideshow\7c.png" />
     <Content Include="Public\images\slideshow\8.png" />
+    <Content Include="Public\images\widget\BackArrow.png" />
+    <Content Include="Public\images\widget\bg-teeth.png" />
+    <Content Include="Public\images\widget\epl-logo.png" />
+    <Content Include="Public\images\widget\refresh.png" />
     <Content Include="Public\js\AnyTime\anytimec.css" />
     <Content Include="Public\js\AnyTime\anytimec.js" />
     <Content Include="Public\js\BrowseEvents.js" />
@@ -2787,6 +2800,14 @@
     <Content Include="Views\Shared\_LayoutOldGood.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Account\TwitterAuthTest.cshtml" />
+    <Content Include="Views\Widget\index.cshtml" />
+    <Content Include="Views\Widget\_EmbedLayout.cshtml" />
+    <Content Include="Views\Widget\Copy of _EmbedLayout.cshtml" />
+    <Content Include="Views\Widget\_widgetMenu.cshtml" />
+    <Content Include="Views\Widget\PhotoDetails.cshtml" />
+    <Content Include="Views\Widget\Photos.cshtml" />
+    <Content Include="Views\Widget\Tweets.cshtml" />
+    <Content Include="Views\Widget\Checkins.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Shared\" />

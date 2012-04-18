@@ -1,0 +1,42 @@
+﻿@using Combres.Mvc
+@model Epilogger.Web.Models.WidgetPhotosViewModel
+@{
+    Layout = "_EmbedLayout.cshtml";
+    ViewBag.Title = "";
+    
+}
+
+<div style="@string.Format("height:{0}px; width: {1}px;", @Model.Height, @Model.Width); overflow: hidden;">
+    <div id="header">
+        <a href="http://epilogger.com" target="_blank" border="0"><img id="epiloggerLogo" src="/Public/images/widget/epl-logo.png" alt="Epilogger" /></a>
+    </div>
+    <div id="jaggies"></div>
+    <div class="clearfix" id="outer-container">
+        
+            
+            
+            
+
+        @Html.Partial("_widgetMenu", new Epilogger.Web.Models.WidgetMenuViewModel() { EventSlug = Model.EventSlug, width = Model.Width, height = Model.Height })
+
+        <div class="contentContainer">
+            <ul class="imageListLarge">
+                @foreach (var theImage in Model.Images)
+                {
+                    <li>
+                        <a href="/widget/photoDetails/@Model.EventSlug/@theImage.ID?width=@Model.Width&height=@Model.Height&returnto=2"><img src="@theImage.Fullsize" width="200" alt="" /></a>
+                    </li>
+                }
+            </ul>
+            
+
+        </div>
+            
+            
+            
+
+
+    </div>
+</div>
+
+

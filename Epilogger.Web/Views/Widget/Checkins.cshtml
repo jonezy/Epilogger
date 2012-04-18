@@ -1,0 +1,50 @@
+﻿@model Epilogger.Web.Models.WidgetCheckinsViewModel
+@{
+    Layout = "_EmbedLayout.cshtml";
+    ViewBag.Title = "";
+    
+}
+
+<div style="@string.Format("height:{0}px; width: {1}px;", @Model.Height, @Model.Width); overflow: hidden;">
+    <div id="header">
+        <a href="http://epilogger.com" target="_blank" border="0"><img id="epiloggerLogo" src="/Public/images/widget/epl-logo.png" alt="Epilogger" /></a>
+    </div>
+    <div id="jaggies"></div>
+    <div class="clearfix" id="outer-container">
+        
+            
+            
+            
+
+        @Html.Partial("_widgetMenu", new Epilogger.Web.Models.WidgetMenuViewModel() { EventSlug = Model.EventSlug, width = Model.Width, height = Model.Height })
+
+        <div class="contentContainer" style="@string.Format("height:{0}px;", @Model.Height - 92); overflow-y: auto; overflow-x: hidden;">
+            <ul class="checkinList">
+                @foreach (var theCheckIn in Model.Checkins)
+                {
+                    <li>
+                        @{Epilogger.Data.Tweet thisTweet = theCheckIn.Tweets.FirstOrDefault(t => t.ID == theCheckIn.TweetID);}
+                        <a href="@theCheckIn.FourSquareCheckInURL" target="_blank" title="@if (thisTweet.FromUserScreenName != null){@string.Format("@{0}", thisTweet.FromUserScreenName)}">
+                            <img src="@if (thisTweet != null)
+                                      {
+                                          @Url.Content(thisTweet.ProfileImageURL)
+                                      }" height="48" width="48" alt="@if (thisTweet != null)
+                                                                     {
+                                                                         @thisTweet.FromUserScreenName
+                                                                     }
+                                                                        " /></a>
+                    </li>
+                }
+            </ul>
+            
+
+        </div>
+            
+            
+            
+
+
+    </div>
+</div>
+
+

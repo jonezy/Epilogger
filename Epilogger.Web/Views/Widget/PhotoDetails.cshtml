@@ -1,0 +1,94 @@
+﻿@model Epilogger.Web.Models.WidgetPhotosDetailsViewModel
+
+@{
+    ViewBag.Title = "photoDetails";
+    Layout = "~/Views/Widget/_EmbedLayout.cshtml";
+}
+
+<script language="javascript" type="text/javascript">
+    function getOriginalWidthOfImg  (imgElement) {
+        var t = new Image();
+        t.src = (imgElement.getAttribute ? imgElement.getAttribute("src") : false) || imgElement.src;
+        return t.width;
+    }
+    function getOriginalHeightOfImg(imgElement) {
+        var t = new Image();
+        t.src = (imgElement.getAttribute ? imgElement.getAttribute("src") : false) || imgElement.src;
+        return t.height;
+    }
+
+    $(document).ready(function () {
+        if (jQuery.browser.safari && document.readyState != "complete"){
+            //console.info('ready...');
+            setTimeout( arguments.callee, 100 );
+            return;
+        } 
+        $('.contentContainer img').each(function () {
+            var maxWidth = @(Model.Width-20); // Max width for the image
+            var maxHeight = @(Model.Height-220);    // Max height for the image
+            var ratio = 0;  // Used for aspect ratio
+            var width = getOriginalWidthOfImg(this);
+            var height = getOriginalHeightOfImg(this);
+            
+
+            // Check if the current width is larger than the max
+            if (width > maxWidth) {
+                ratio = maxWidth / width;   // get ratio for scaling image
+                $(this).css("width", maxWidth); // Set new width
+                $(this).css("height", height * ratio);  // Scale height based on ratio
+                height = height * ratio;    // Reset height to match scaled image
+                width = width * ratio;    // Reset width to match scaled image
+            }
+
+            // Check if current height is larger than max
+            if (height > maxHeight) {
+                ratio = maxHeight / height; // get ratio for scaling image
+                $(this).css("height", maxHeight);   // Set new height
+                $(this).css("width", width * ratio);    // Scale width based on ratio
+                //width = width * ratio;    // Reset width to match scaled image
+            }
+            $(this).css("display", "inline");
+        });
+    });
+</script>
+
+<div style="@string.Format("height:{0}px; width: {1}px;", @Model.Height, @Model.Width); overflow: hidden;">
+    <div id="header">
+        <a href="http://epilogger.com" target="_blank" border="0"><img id="epiloggerLogo" src="/Public/images/widget/epl-logo.png" alt="Epilogger" /></a>
+    </div>
+    <div id="jaggies"></div>
+    <div class="clearfix" id="outer-container">
+
+        @Html.Partial("_widgetMenu", new Epilogger.Web.Models.WidgetMenuViewModel(){ EventSlug=Model.EventSlug, width=Model.Width, height = Model.Height} )
+
+        <div class="contentContainer">
+            <div class="fullImage">
+                <img src="@Model.Image.Fullsize" style="display: none;" alt="" />
+            </div>
+            <span class="m-spacer"></span>
+
+            <a class="twitterName" href="http://www.twitter.com/@Model.Tweet.FromUserScreenName">@@@Model.Tweet.FromUserScreenName:</a>
+            <div class="tweet">
+                @Html.Raw(Model.Tweet.TextAsHTML)
+            </div>
+            
+            <span class="m-spacer dotted"></span>
+            <img src="/Public/images/widget/BackArrow.png" alt=""/>
+            @if (Model.returnto==1)
+            {
+                @Html.ActionLink("back to feed", "index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })  
+            }
+            else
+            {
+                @Html.ActionLink("back to photos", "photos", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })    
+            }
+
+        </div>
+            
+            
+
+            
+
+
+    </div>
+</div>

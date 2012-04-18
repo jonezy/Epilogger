@@ -1,0 +1,299 @@
+body {
+    padding:0px;
+	color:#606060;
+	font: normal 12px/18px Helvetica, Arial, Sans-Serif; }
+
+a {
+   color:#287cbe;
+   text-decoration:none}
+
+a:hover {
+    color:#31a5f8}
+
+p a {
+    text-decoration:underline}
+   
+p a:hover {
+    text-decoration:none}
+    
+big {
+    padding-top:8px;
+    font-size:18pt;
+    color:#000;
+    display:block;
+    letter-spacing:-1px}
+    
+
+.blue-action-button.disabled {
+    border:1px solid #B0B0B0;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    background:#d3d3d3; /* no css3 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d3d3d3', endColorstr='#d3d3d3'); /*IE */
+    background:-webkit-gradient(linear, left top, left bottom, from (#d3d3d3) to (#d3d3d3)); /* webkit */
+    background:-moz-linear-gradient(top, #d3d3d3, #d3d3d3); /* ff */
+    box-shadow:0 0 1px #a1b9c8;
+    color:#e6f5fa;
+    font:bold 15px 'InterstatePlusRegular';
+    padding:5px 10px;
+    text-transform:uppercase;
+    cursor: default;
+    box-shadow:0 0 1px #777;}    
+
+.blue-action-button.disabled:hover
+{
+    opacity:1;
+    position:relative;
+    top:0px;
+    color:#e6f5fa;
+}
+
+
+.blue-action-button {
+    border:1px solid #3485b7;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    background:#418fbf; /* no css3 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4aa0d7', endColorstr='#3486b7'); /*IE */
+    background:-webkit-gradient(linear, left top, left bottom, from (#4aa0d7) to (#3486b7)); /* webkit */
+    background:-moz-linear-gradient(top, #4aa0d7, #3486b7); /* ff */
+    box-shadow:0 0 1px #a1b9c8;
+    color:#e6f5fa;
+    font:bold 15px 'InterstatePlusRegular';
+    padding:5px 10px;
+    text-transform:uppercase;
+    cursor:pointer;
+    box-shadow:0 0 1px #777;}
+
+.blue-action-button:hover {
+    opacity:0.85;
+    position:relative;
+    top:1px;
+    color:#fff}
+    
+    
+.red-action-button {
+    border:1px solid #b83852;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    background:#ce4a64; /* no css3 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d84e69', endColorstr='#ce4a64'); /*IE */
+    background:-webkit-gradient(linear, left top, left bottom, from (#d84e69) to (#ce4a64)); /* webkit */
+    background:-moz-linear-gradient(top, #d84e69, #ce4a64); /* ff */
+    box-shadow:0 0 1px #a1b9c8;
+    color:#fefefe;
+    font:bold 15px 'InterstatePlusRegular';
+    padding:5px 10px;
+    text-transform:uppercase;
+    cursor:pointer;
+    box-shadow: 0 0 1px #777;
+ }
+
+.red-action-button:hover {
+    opacity:0.85;
+    position:relative;
+    top:1px;
+    color: #fff;
+}
+
+
+.spacer.dotted {border-top:dotted 1px #b5b5b5;}
+.spacer.dotted.light {border-top:dotted 1px #e8e8e8;} 
+.dotted {border-top:dotted 1px #b5b5b5;}
+.spacer 	{ height:25px; display:block}
+.sm-spacer  { height:5px; display:block}
+.m-spacer  { height:10px; display:block}
+.big-spacer { height:50px; display:block}
+.valign		{ vertical-align:middle}
+.fleft		{ float:left}
+.fright		{ float:right}
+.overflowhide{ overflow: hidden}
+.hidden { display: none; }
+.required  { color:#fe60b1}
+.seperator { border-bottom: 1px dotted #CCC}
+
+    
+/* ------------------------------ CONTAINERS */
+#header {
+    background-color: #efefef;
+    height: 41px;
+}
+#epiloggerLogo {
+    margin: 4px 0 0 5px;
+}
+#jaggies
+{
+    width: 100%;
+    height: 7px;
+    background: url(../images/widget/bg-teeth.png) repeat-x bottom;
+    
+}
+#outer-container {
+    padding: 5px;
+}
+
+
+.contentContainer {
+    
+}
+
+.fullImage { text-align: center; }
+
+.leftCol {
+    width: 57%;
+    line-height: 15px;
+}
+
+.rightCol {
+    float: right;
+    width: 40%;
+}
+
+
+.twitterName {
+    color: #02a4ed;
+    font-size: 10px;
+    top: -4px;
+    position: relative;
+    font-weight: bold;
+}
+.tweet {
+    color: #6b696a;
+    font-size: 12px;
+    margin-bottom: 16px;
+    margin-top: -4px;
+}
+
+.boldLinks a { color: #6b696a;font-weight: bold; }
+.boldLinks a:hover { text-decoration: underline; }
+
+.imageList {}
+.imageList li {
+    margin: 0 0 9px 8px;
+    float: left;
+    position: relative;
+    list-style: none;
+    width: 48px;
+    height: 48px;
+    overflow: hidden;
+}
+.imageList li img {
+     left: -24px; 
+     position: relative;
+}
+
+.imageListLarge {}
+.imageListLarge li {
+    margin: 0px 0px 6px 5px;
+    float: left;
+    position: relative;
+    list-style: none;
+    width: 89px;
+    height: 74px;
+    overflow: hidden;
+}
+.imageListLarge li img {
+     left: -44px; 
+     position: relative;
+}
+
+.checkinList {}
+.checkinList li {
+    margin: 0px 0px 6px 5px;
+    float: left;
+    position: relative;
+    list-style: none;
+    overflow: hidden;
+}
+
+
+
+.tweetli {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.tweetsTweet {
+    margin-left: 55px;
+}
+
+.refreshButton {
+    float: right;
+    margin-top: 7px;
+}
+#widgetMenu 
+{
+    margin-top: 4px;
+}
+#widgetMenu li {
+  margin: 0px 5px 0px 5px;
+  padding: 0px 0px 6px 0px;
+  float: left;
+  position: relative;
+  list-style: none;
+}
+#widgetMenu a {
+  font-weight: bold;
+  font-family: helvetica;
+  font-style: normal;
+  font-size: 12px;
+  color: #01A5ED;
+  text-decoration: none;
+  display: block;
+  padding: 3px 7px;
+  margin: 0;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+#widgetMenu .current a, #widgetMenu li:hover > a {
+  background: #01A5ED;
+  color: #FFFFFF;
+}
+
+#widgetMenu:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+#widgetMenu {
+  display: inline-block;
+}
+  html[xmlns] #menu-bar {
+  display: block;
+}
+* html #menu-bar {
+  height: 1%;
+}
+
+
+span.tweet-date {font-size:11px;color:#c2c2c2}
+
+
+
+
+/* Makes the nice scroll bars */
+::-webkit-scrollbar{height:16px;overflow:visible;width:16px}
+::-webkit-scrollbar-button{height:0;width:0}
+::-webkit-scrollbar-track{background-clip:padding-box;border:solid transparent;border-width:0 0 0 7px}
+::-webkit-scrollbar-track:horizontal{border-width:7px 0 0}
+::-webkit-scrollbar-track:hover{background-color:rgba(0,0,0,.05);box-shadow:inset 1px 1px 0 rgba(0,0,0,.1)}
+::-webkit-scrollbar-track:active{background-color:rgba(0,0,0,.05);box-shadow:inset 1px -1px 0 rgba(0,0,0,.14),inset -1px 1px 0 rgba(0,0,0,.07)}
+::-webkit-scrollbar-track:horizontal:hover{box-shadow:inset -1px 1px 0 rgba(0,0,0,.14),inset 1px -1px 0 rgba(0,0,0,.07)}
+::-webkit-scrollbar-track:vertical:hover{box-shadow:inset 1px 1px 0 rgba(0,0,0,.14),inset -1px -1px 0 rgba(0,0,0,.07)}
+::-webkit-scrollbar-thumb{background-color:rgba(0,0,0,.2);background-clip:padding-box;border:solid transparent;border-width:0 0 0 7px;min-height:28px;padding:100px 0 0;box-shadow:inset 1px 1px 0 rgba(0,0,0,.1),inset -1px -1px 0 rgba(0,0,0,.07)}
+::-webkit-scrollbar-thumb:hover{background-color:rgba(0,0,0,.4);box-shadow:inset 1px 1px 1px rgba(0,0,0,.25)}
+::-webkit-scrollbar-thumb:horizontal{border-width:7px 0 0;padding:0 0 0 100px;box-shadow:inset -1px 1px 0 rgba(0,0,0,.1),inset 1px -1px 0 rgba(0,0,0,.07)}
+::-webkit-scrollbar-thumb:active{background-color:rgba(0,0,0,0.5);box-shadow:inset 1px 1px 3px rgba(0,0,0,0.35)}
+::-webkit-scrollbar-corner{background:transparent}
+body::-webkit-scrollbar-track-piece{background-clip:padding-box;background-color:#f5f5f5;border:solid #fff;border-width:0 0 0 3px;box-shadow:inset 1px 0 0 rgba(0,0,0,.14),inset -1px 0 0 rgba(0,0,0,.07)}
+body::-webkit-scrollbar-track-piece:horizontal{border-width:3px 0 0;box-shadow:inset 0 1px 0 rgba(0,0,0,.14),inset 0 -1px 0 rgba(0,0,0,.07)}
+body::-webkit-scrollbar-thumb{background-clip:padding-box;border-width:1px 1px 1px 5px}
+body::-webkit-scrollbar-thumb:horizontal{border-width:5px 1px 1px}
+body::-webkit-scrollbar-corner{background-clip:padding-box;background-color:#f5f5f5;border:solid #fff;border-width:3px 0 0 3px;box-shadow:inset 1px 1px 0 rgba(0,0,0,.14)}
