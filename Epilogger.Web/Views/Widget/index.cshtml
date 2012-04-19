@@ -8,6 +8,7 @@
 
 <div style="@string.Format("height:{0}px; width: {1}px;", @Model.height, @Model.width); overflow: hidden;">
     <div id="header">
+        @Html.Partial("_EpiloggerCounts", @Model.EpiloggerCounts)
         <a href="http://epilogger.com" target="_blank" border="0"><img id="epiloggerLogo" src="/Public/images/widget/epl-logo.png" alt="Epilogger" /></a>
     </div>
     <div id="jaggies"></div>
@@ -17,7 +18,7 @@
             
             
 
-        @Html.Partial("_widgetMenu", new Epilogger.Web.Models.WidgetMenuViewModel(){ EventSlug=Model.EventSlug, width=Model.width, height = Model.height} )
+        @Html.Partial("_widgetMenu", new Epilogger.Web.Models.WidgetMenuViewModel() { EventSlug = Model.EventSlug, width = Model.width, height = Model.height, returnto = 1 })
 
         <div class="contentContainer">
             <div class="rightCol">
@@ -28,7 +29,7 @@
                     }
                 </ul>
             </div>
-            <div class="leftCol">
+            <div class="leftCol" style="@string.Format("height:{0}px;", @Model.height-92);">
                 @foreach(var theTweet in Model.Tweets)
                 {
                     <a class="twitterName" href="http://www.twitter.com/@theTweet.FromUserScreenName">@@@theTweet.FromUserScreenName:</a>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -7,6 +8,7 @@ using AutoMapper;
 using Epilogger.Data;
 using Epilogger.Web.Core.Filters;
 using Epilogger.Web.Models;
+
 
 namespace Epilogger.Web.Controllers
 {
@@ -63,6 +65,7 @@ namespace Epilogger.Web.Controllers
             base.Initialize(requestContext);
         }
 
+
         //
         // GET: /Widget/
         [CacheFilter]
@@ -80,6 +83,7 @@ namespace Epilogger.Web.Controllers
             model.width = width==null ? 300 : int.Parse(width);
             model.height = height == null ? 500 : int.Parse(height);
 
+            model.EpiloggerCounts = new Core.Stats.WidgetTotals().GetWidgetTotals(requestedEvent.ID, FromDateTime(), ToDateTime());
 
             if (model.height == 500 && model.width == 300)
             {
@@ -95,7 +99,7 @@ namespace Epilogger.Web.Controllers
 
         //
         // GET: /Widget/
-        
+        [CacheFilter]
         [CompressFilter]
         public ActionResult PhotoDetails(string id, int PhotoID, string width, string height, int returnto)
         {
@@ -106,6 +110,7 @@ namespace Epilogger.Web.Controllers
             model.Width = width == null ? 300 : int.Parse(width);
             model.Height = height == null ? 500 : int.Parse(height);
             model.returnto = returnto;
+            model.EpiloggerCounts = new Core.Stats.WidgetTotals().GetWidgetTotals(requestedEvent.ID, FromDateTime(), ToDateTime());
 
             //Get the photos
             model.Image = _is.FindByID(model.PhotoID);
@@ -129,6 +134,7 @@ namespace Epilogger.Web.Controllers
 
             model.Width = width == null ? 300 : int.Parse(width);
             model.Height = height == null ? 500 : int.Parse(height);
+            model.EpiloggerCounts = new Core.Stats.WidgetTotals().GetWidgetTotals(requestedEvent.ID, FromDateTime(), ToDateTime());
 
             //Get the photos
             if (model.Height==500 && model.Width==300)
@@ -155,6 +161,7 @@ namespace Epilogger.Web.Controllers
 
             model.Width = width == null ? 300 : int.Parse(width);
             model.Height = height == null ? 500 : int.Parse(height);
+            model.EpiloggerCounts = new Core.Stats.WidgetTotals().GetWidgetTotals(requestedEvent.ID, FromDateTime(), ToDateTime());
 
             //Get the tweets
             model.Tweets = _ts.FindByEventIDOrderDescTakeX(requestedEvent.ID, 20, this.FromDateTime(), this.ToDateTime());
@@ -173,6 +180,7 @@ namespace Epilogger.Web.Controllers
 
             model.Width = width == null ? 300 : int.Parse(width);
             model.Height = height == null ? 500 : int.Parse(height);
+            model.EpiloggerCounts = new Core.Stats.WidgetTotals().GetWidgetTotals(requestedEvent.ID, FromDateTime(), ToDateTime());
 
             //Get the tweets
             model.Checkins = _cs.FindByEventID(requestedEvent.ID);

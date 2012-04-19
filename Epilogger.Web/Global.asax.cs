@@ -259,7 +259,8 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.ImageCount, opt => opt.Ignore())
                 .ForMember(dest => dest.CheckInCount, opt => opt.Ignore())
                 .ForMember(dest => dest.width, opt => opt.Ignore())
-                .ForMember(dest => dest.height, opt => opt.Ignore());
+                .ForMember(dest => dest.height, opt => opt.Ignore())
+                .ForMember(dest => dest.EpiloggerCounts, opt => opt.Ignore());
 
             Mapper.CreateMap<Event, WidgetPhotosDetailsViewModel>()
                 .ForMember(dest => dest.Width, opt => opt.Ignore())
@@ -267,24 +268,28 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.PhotoID, opt => opt.Ignore())
                 .ForMember(dest => dest.Image, opt => opt.Ignore())
                 .ForMember(dest => dest.Tweet, opt => opt.Ignore())
-                .ForMember(dest => dest.returnto, opt => opt.Ignore());
+                .ForMember(dest => dest.returnto, opt => opt.Ignore())
+                .ForMember(dest => dest.EpiloggerCounts, opt => opt.Ignore());
 
 
             Mapper.CreateMap<Event, WidgetPhotosViewModel>()
                 .ForMember(dest => dest.Width, opt => opt.Ignore())
                 .ForMember(dest => dest.Height, opt => opt.Ignore())
-                .ForMember(dest => dest.Images, opt => opt.Ignore());
+                .ForMember(dest => dest.Images, opt => opt.Ignore())
+                .ForMember(dest => dest.EpiloggerCounts, opt => opt.Ignore());
 
             Mapper.CreateMap<Event, WidgetTweetsViewModel>()
                 .ForMember(dest => dest.Width, opt => opt.Ignore())
                 .ForMember(dest => dest.Height, opt => opt.Ignore())
-                .ForMember(dest => dest.Tweets, opt => opt.Ignore());
+                .ForMember(dest => dest.Tweets, opt => opt.Ignore())
+                .ForMember(dest => dest.EpiloggerCounts, opt => opt.Ignore());
 
 
             Mapper.CreateMap<Event, WidgetCheckinsViewModel>()
                 .ForMember(dest => dest.Width, opt => opt.Ignore())
                 .ForMember(dest => dest.Height, opt => opt.Ignore())
-                .ForMember(dest => dest.Checkins, opt => opt.Ignore());
+                .ForMember(dest => dest.Checkins, opt => opt.Ignore())
+                .ForMember(dest => dest.EpiloggerCounts, opt => opt.Ignore());
 
             Mapper.CreateMap<Event, AllStatsViewModel>()
                 .ForMember(dest => dest.CurrentPageIndex, opt => opt.Ignore())

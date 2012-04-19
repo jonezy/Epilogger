@@ -143,8 +143,10 @@ big {
 .fullImage { text-align: center; }
 
 .leftCol {
-    width: 57%;
+    width: 60%;
     line-height: 15px;
+    overflow-y: auto;
+    overflow-x: none;
 }
 
 .rightCol {
@@ -275,11 +277,18 @@ big {
 
 span.tweet-date {font-size:11px;color:#c2c2c2}
 
-
-
+#topTenTab {
+    position: absolute;
+}
+#epiloggerCounts {
+    float: right;
+    margin: 14px 10px 0 0;
+    font-weight: bold;
+    font-size: 14px;
+}
 
 /* Makes the nice scroll bars */
-::-webkit-scrollbar{height:16px;overflow:visible;width:16px}
+::-webkit-scrollbar{height:16px;overflow:visible;width:12px}
 ::-webkit-scrollbar-button{height:0;width:0}
 ::-webkit-scrollbar-track{background-clip:padding-box;border:solid transparent;border-width:0 0 0 7px}
 ::-webkit-scrollbar-track:horizontal{border-width:7px 0 0}

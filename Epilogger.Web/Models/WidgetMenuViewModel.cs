@@ -6,5 +6,6 @@
         public int height { get; set; }
 
         public string EventSlug { get; set; }
+        public int returnto { get; set; }
     }
 }

@@ -8,16 +8,13 @@
 
 <div style="@string.Format("height:{0}px; width: {1}px;", @Model.Height, @Model.Width); overflow: hidden;">
     <div id="header">
+        @Html.Partial("_EpiloggerCounts", @Model.EpiloggerCounts)
         <a href="http://epilogger.com" target="_blank" border="0"><img id="epiloggerLogo" src="/Public/images/widget/epl-logo.png" alt="Epilogger" /></a>
     </div>
     <div id="jaggies"></div>
     <div class="clearfix" id="outer-container">
-        
-            
-            
-            
 
-        @Html.Partial("_widgetMenu", new Epilogger.Web.Models.WidgetMenuViewModel() { EventSlug = Model.EventSlug, width = Model.Width, height = Model.Height })
+        @Html.Partial("_widgetMenu", new Epilogger.Web.Models.WidgetMenuViewModel() { EventSlug = Model.EventSlug, width = Model.Width, height = Model.Height, returnto = 2})
 
         <div class="contentContainer">
             <ul class="imageListLarge">
@@ -28,11 +25,12 @@
                     </li>
                 }
             </ul>
-            
 
         </div>
             
-            
+        <div id="topTenTab" style="@string.Format("top: {0}px; left: {1}px;", Model.Height-25, (Model.Width/2)-37)">
+            <a href="http://epilogger.com/events/@Model.EventSlug/allphotos" target="_blank"><img src="/Public/images/widget/top10.png" alt="" /></a>
+        </div>
             
 
 

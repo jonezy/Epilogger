@@ -252,6 +252,7 @@
     <Compile Include="Core\Services\UserAuthenticationProfileService.cs" />
     <Compile Include="Core\Services\UserService.cs" />
     <Compile Include="Core\Services\VenueService.cs" />
+    <Compile Include="Core\Stats\WidgetTotals.cs" />
     <Compile Include="Core\Stats\HomepageTotals.cs" />
     <Compile Include="Core\Stats\TopTweeters.cs" />
     <Compile Include="Core\UserRole.cs" />
@@ -276,6 +277,7 @@
     <Compile Include="Models\AllStatsViewModel.cs" />
     <Compile Include="Models\BetaSignUpViewModel.cs" />
     <Compile Include="Models\WidgetCheckinsViewModel.cs" />
+    <Compile Include="Models\WidgetCountsViewModel.cs" />
     <Compile Include="Models\WidgetTweetsViewModel.cs" />
     <Compile Include="Models\WidgetPhotosViewModel.cs" />
     <Compile Include="Models\WidgetPhotosDetailsViewModel.cs" />
@@ -533,8 +535,11 @@
     <Content Include="Public\images\slideshow\8.png" />
     <Content Include="Public\images\widget\BackArrow.png" />
     <Content Include="Public\images\widget\bg-teeth.png" />
+    <Content Include="Public\images\widget\count-pics.png" />
+    <Content Include="Public\images\widget\count-tweets.png" />
     <Content Include="Public\images\widget\epl-logo.png" />
     <Content Include="Public\images\widget\refresh.png" />
+    <Content Include="Public\images\widget\top10.png" />
     <Content Include="Public\js\AnyTime\anytimec.css" />
     <Content Include="Public\js\AnyTime\anytimec.js" />
     <Content Include="Public\js\BrowseEvents.js" />
@@ -2802,12 +2807,12 @@
     <Content Include="Views\Account\TwitterAuthTest.cshtml" />
     <Content Include="Views\Widget\index.cshtml" />
     <Content Include="Views\Widget\_EmbedLayout.cshtml" />
-    <Content Include="Views\Widget\Copy of _EmbedLayout.cshtml" />
     <Content Include="Views\Widget\_widgetMenu.cshtml" />
     <Content Include="Views\Widget\PhotoDetails.cshtml" />
     <Content Include="Views\Widget\Photos.cshtml" />
     <Content Include="Views\Widget\Tweets.cshtml" />
     <Content Include="Views\Widget\Checkins.cshtml" />
+    <Content Include="Views\Widget\_EpiloggerCounts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Shared\" />
