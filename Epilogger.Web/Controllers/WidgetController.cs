@@ -87,8 +87,11 @@ namespace Epilogger.Web.Controllers
 
             if (model.height == 500 && model.width == 300)
             {
-                model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, 14, this.FromDateTime(),
-                                                               this.ToDateTime());
+                model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, 14, FromDateTime(), ToDateTime());
+            }
+            else if (model.height == 330 && model.width == 550)
+            {
+                model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, 16, FromDateTime(), ToDateTime());
             }
             else
                 model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, 22, FromDateTime(),

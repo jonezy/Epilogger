@@ -39,7 +39,7 @@
         </div>
             
             
-        <div id="topTenTab" style="@string.Format("top: {0}px; left: {1}px;", Model.Height-25, (Model.Width/2)-37)">
+        <div id="topTenTab" style="@string.Format("top: {0}px; left: {1}px;", Model.Height - 25, (Model.Width >= 550) ? (Model.Width / 2) + 180 : (Model.Width / 2) - 37)">
             <a href="http://epilogger.com/events/@Model.EventSlug/alltweets" target="_blank"><img src="/Public/images/widget/top10.png" alt="" /></a>
         </div>
 

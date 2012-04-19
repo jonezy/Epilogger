@@ -20,7 +20,7 @@
             <ul class="imageListLarge">
                 @foreach (var theImage in Model.Images)
                 {
-                    <li>
+                    <li @(Model.Width >= 550 ? "style=width:85px" : "")>
                         <a href="/widget/photoDetails/@Model.EventSlug/@theImage.ID?width=@Model.Width&height=@Model.Height&returnto=2"><img src="@theImage.Fullsize" width="200" alt="" /></a>
                     </li>
                 }
@@ -28,7 +28,7 @@
 
         </div>
             
-        <div id="topTenTab" style="@string.Format("top: {0}px; left: {1}px;", Model.Height-25, (Model.Width/2)-37)">
+        <div id="topTenTab" style="@string.Format("top: {0}px; left: {1}px;", Model.Height - 25, (Model.Width>=550) ? (Model.Width / 2) + 180 : (Model.Width / 2) - 37)">
             <a href="http://epilogger.com/events/@Model.EventSlug/allphotos" target="_blank"><img src="/Public/images/widget/top10.png" alt="" /></a>
         </div>
             
