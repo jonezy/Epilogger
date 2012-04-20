@@ -97,76 +97,80 @@ namespace Epilogger.Web.Controllers {
             return View(model);
         }
 
-
-
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         //public ActionResult Details(int id) {
         [CompressFilter]
         public ActionResult Details(string id) {
 
-            Event requestedEvent = _es.FindBySlug(id);
-            
-            EventDisplayViewModel Model = Mapper.Map<Event, EventDisplayViewModel>(requestedEvent);
-            Model.TweetCount = _ts.FindTweetCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-            Model.Tweets = _ts.FindByEventIDOrderDescTake6(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-            Model.ImageCount = _is.FindImageCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-            Model.Images = _is.FindByEventIDOrderDescTake9(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-            Model.CheckInCount = _cs.FindCheckInCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-            Model.CheckIns = _cs.FindByEventIDOrderDescTake16(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-            Model.ExternalLinks = _ls.FindByEventIDOrderDescTake3(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-            Model.BlogPosts = _bs.FindByEventIDTake5(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-            Model.EventRatings = _es.FindEventRatingsByID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-            Model.HasUserRated = false;
-            Model.CurrentUserID = CurrentUserID;
-            Model.CurrentUserRole = CurrentUserRole;
-            Model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
+            var requestedEvent = _es.FindBySlug(id);
 
-            Model.CanDelete = false;
-            if ((requestedEvent.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator)
+            if (requestedEvent != null)
             {
-                Model.CanDelete = true;
-            }
+                var model = Mapper.Map<Event, EventDisplayViewModel>(requestedEvent);
+                model.TweetCount = _ts.FindTweetCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
+                model.Tweets = _ts.FindByEventIDOrderDescTake6(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
+                model.ImageCount = _is.FindImageCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
+                model.Images = _is.FindByEventIDOrderDescTake9(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
+                model.CheckInCount = _cs.FindCheckInCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
+                model.CheckIns = _cs.FindByEventIDOrderDescTake16(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
+                model.ExternalLinks = _ls.FindByEventIDOrderDescTake3(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
+                model.BlogPosts = _bs.FindByEventIDTake5(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
+                model.EventRatings = _es.FindEventRatingsByID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
+                model.HasUserRated = false;
+                model.CurrentUserID = CurrentUserID;
+                model.CurrentUserRole = CurrentUserRole;
+                model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
 
-            //@(((Model.EventRatings.Sum(i => i.UserRating) / Model.EventRatings.Count()) / 5) * 100)
-
-
-            if (Request.QueryString["f"] != null) {
-                Model.FromDateTime = this.FromDateTime();
-            } else {
-                Model.FromDateTime = null;
-            }
-            if (Request.QueryString["t"] != null) {
-                Model.ToDateTime = this.ToDateTime();
-            } else {
-                Model.ToDateTime = null;
-            }
-
-
-            //If there is a user logged in
-            if (CurrentUserID != Guid.Empty) {
-                Model.HasSubscribed = CurrentUser.UserFollowsEvents.Where(ufe => ufe.EventID == requestedEvent.ID).FirstOrDefault() != null ? true : false;
-                if (Model.EventRatings.Where(i => i.UserID == CurrentUserID).Count() > 0) {
-                    Model.HasUserRated = true;
-                } else {
-                    Model.HasUserRated = false;
+                model.CanDelete = false;
+                if ((requestedEvent.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator)
+                {
+                    model.CanDelete = true;
                 }
+
+                //@(((Model.EventRatings.Sum(i => i.UserRating) / Model.EventRatings.Count()) / 5) * 100)
+
+
+                if (Request.QueryString["f"] != null) {
+                    model.FromDateTime = this.FromDateTime();
+                } else {
+                    model.FromDateTime = null;
+                }
+                if (Request.QueryString["t"] != null) {
+                    model.ToDateTime = this.ToDateTime();
+                } else {
+                    model.ToDateTime = null;
+                }
+
+
+                //If there is a user logged in
+                if (CurrentUserID != Guid.Empty) {
+                    model.HasSubscribed = CurrentUser.UserFollowsEvents.FirstOrDefault(ufe => ufe.EventID == requestedEvent.ID) != null ? true : false;
+                    if (model.EventRatings.Any(i => i.UserID == CurrentUserID)) {
+                        model.HasUserRated = true;
+                    } else {
+                        model.HasUserRated = false;
+                    }
+                }
+
+                return View(model);
             }
+            ModelState.AddModelError(string.Empty, "The event you're trying to visit doesn't exist.");
+            return RedirectToAction("index", "browse");
 
-
-            //Not optimized
-            
-
-            return View(Model);
         }
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+        
         private EventToolbarViewModel BuildToolbarViewModel(Event requestedEvent) {
-            EventToolbarViewModel toolbarModel = new EventToolbarViewModel();
-            toolbarModel.EventID = requestedEvent.ID;
-            toolbarModel.EventSlug = requestedEvent.EventSlug;
-            toolbarModel.CreatedByID = requestedEvent.UserID.Value;
-            toolbarModel.CurrentUserID = CurrentUserID;
-            toolbarModel.CurrentUserRole = CurrentUserRole;
+            var toolbarModel = new EventToolbarViewModel
+                                   {
+                                       EventID = requestedEvent.ID,
+                                       EventSlug = requestedEvent.EventSlug,
+                                       CreatedByID = requestedEvent.UserID.Value,
+                                       CurrentUserID = CurrentUserID,
+                                       CurrentUserRole = CurrentUserRole
+                                   };
             if (CurrentUserID != Guid.Empty)
             {
                 toolbarModel.HasSubscribed = CurrentUser.UserFollowsEvents.Where(ufe => ufe.EventID == requestedEvent.ID).FirstOrDefault() != null ? true : false;
@@ -205,27 +209,32 @@ namespace Epilogger.Web.Controllers {
         [CompressFilter]
         public ActionResult AllPhotos(string id, int? page) {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
-            Event requestedEvent = _es.FindBySlug(id);
+            var requestedEvent = _es.FindBySlug(id);
 
-            AllPhotosDisplayViewModel Model = Mapper.Map<Event, AllPhotosDisplayViewModel>(requestedEvent);
-            Model.PhotoCount = _is.FindImageCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-            Model.CurrentPageIndex = currentPage;
-            Model.ShowTopPhotos = false;
-            Model.Images = _is.GetPagedPhotos(requestedEvent.ID, currentPage + 1, 30, this.FromDateTime(), this.ToDateTime());
-            Model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
+            if (requestedEvent != null)
+	        {
+                var model = Mapper.Map<Event, AllPhotosDisplayViewModel>(requestedEvent);
+                model.PhotoCount = _is.FindImageCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
+                model.CurrentPageIndex = currentPage;
+                model.ShowTopPhotos = false;
+                model.Images = _is.GetPagedPhotos(requestedEvent.ID, currentPage + 1, 30, this.FromDateTime(), this.ToDateTime());
+                model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
 
-            Model.CanDelete = false;
-            if ((requestedEvent.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator)
-            {
-                Model.CanDelete = true;
+                model.CanDelete = false;
+                if ((requestedEvent.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator)
+                {
+                    model.CanDelete = true;
+                }
+
+                if (currentPage + 1 == 1) {
+                    model.ShowTopPhotos = true;
+                    model.TopImages = _is.GetTopPhotosByEventID(requestedEvent.ID, 10, this.FromDateTime(), this.ToDateTime());
+                }
+
+                return View(model);
             }
-
-            if (currentPage + 1 == 1) {
-                Model.ShowTopPhotos = true;
-                Model.TopImages = _is.GetTopPhotosByEventID(requestedEvent.ID, 10, this.FromDateTime(), this.ToDateTime());
-            }
-
-            return View(Model);
+            ModelState.AddModelError(string.Empty, "The event you're trying to visit doesn't exist.");
+            return RedirectToAction("index", "Browse");
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -234,33 +243,49 @@ namespace Epilogger.Web.Controllers {
             
             int currentPage = page.HasValue ? page.Value - 1 : 0;
 
-            Event requestedEvent = _es.FindBySlug(id);
-            var topTweetersStats = new TopTweetersStats();
-            var model = Mapper.Map<Event, AllTweetsDisplayViewModel>(requestedEvent);
-            
-            model.TweetCount = _ts.FindTweetCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-            model.UniqueTweeterCount = _ts.FindUniqueTweetCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-            
-            model.CurrentPageIndex = currentPage;
-            model.TopTweeters = topTweetersStats.Calculate(_ts.GetTop10TweetersByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime())).ToList();
-            model.ShowTopTweets = false;
-            model.Tweets = Mapper.Map<IEnumerable<Tweet>, IEnumerable<TweetDisplayViewModel>>(_ts.GetPagedTweets(requestedEvent.ID, currentPage + 1, 100, this.FromDateTime(), this.ToDateTime()));
-            model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
-
-            model.CanDelete = false;
-            if ((requestedEvent.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator)
+            var requestedEvent = _es.FindBySlug(id);
+            if (requestedEvent != null)
             {
-                model.CanDelete = true;
+                var topTweetersStats = new TopTweetersStats();
+                var model = Mapper.Map<Event, AllTweetsDisplayViewModel>(requestedEvent);
+
+                model.TweetCount = _ts.FindTweetCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
+                model.UniqueTweeterCount = _ts.FindUniqueTweetCountByEventID(requestedEvent.ID, this.FromDateTime(),
+                                                                             this.ToDateTime());
+
+                model.CurrentPageIndex = currentPage;
+                model.TopTweeters =
+                    topTweetersStats.Calculate(_ts.GetTop10TweetersByEventID(requestedEvent.ID, this.FromDateTime(),
+                                                                             this.ToDateTime())).ToList();
+                model.ShowTopTweets = false;
+                model.Tweets =
+                    Mapper.Map<IEnumerable<Tweet>, IEnumerable<TweetDisplayViewModel>>(
+                        _ts.GetPagedTweets(requestedEvent.ID, currentPage + 1, 100, this.FromDateTime(),
+                                           this.ToDateTime()));
+                model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
+
+                model.CanDelete = false;
+                if ((requestedEvent.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator)
+                {
+                    model.CanDelete = true;
+                }
+
+                //model.CanDelete = 
+
+                if (currentPage + 1 == 1)
+                {
+                    model.ShowTopTweets = true;
+                    model.Tweets =
+                        Mapper.Map<IEnumerable<Tweet>, IEnumerable<TweetDisplayViewModel>>(
+                            _ts.GetPagedTweets(requestedEvent.ID, currentPage + 1, 100, this.FromDateTime(),
+                                               this.ToDateTime()));
+                }
+
+                return View(model);
             }
 
-            //model.CanDelete = 
-
-            if (currentPage + 1 == 1) {
-                model.ShowTopTweets = true;
-                model.Tweets = Mapper.Map<IEnumerable<Tweet>, IEnumerable<TweetDisplayViewModel>>(_ts.GetPagedTweets(requestedEvent.ID, currentPage + 1, 100, this.FromDateTime(), this.ToDateTime()));
-            }
-
-            return View(model);
+            ModelState.AddModelError(string.Empty, "The event you're trying to visit doesn't exist.");
+            return RedirectToAction("index", "Browse");
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -673,21 +698,24 @@ namespace Epilogger.Web.Controllers {
         [CompressFilter]
         public ActionResult Search(String id, string IEsearchterm)
         {
-            Event requestedEvent = _es.FindBySlug(id);
+            var requestedEvent = _es.FindBySlug(id);
 
-            SearchInEventViewModel s = new SearchInEventViewModel();
-            s.ID = requestedEvent.ID;
-            s.SearchTerm = IEsearchterm;
-            Event ThisEvent = new Event();
-            ThisEvent = _es.FindByID(requestedEvent.ID);
-            s.Name = ThisEvent.Name;
-            s.Eventslug = ThisEvent.EventSlug;
-            if (!string.IsNullOrEmpty(IEsearchterm)) {
-                s.SearchResults = _es.SearchInEvent(requestedEvent.ID, IEsearchterm, this.FromDateTime(), this.ToDateTime());
+            if (requestedEvent != null)
+	        {
+                var s = new SearchInEventViewModel {ID = requestedEvent.ID, SearchTerm = IEsearchterm};
+                var thisEvent = _es.FindByID(requestedEvent.ID);
+                s.Name = thisEvent.Name;
+                s.Eventslug = thisEvent.EventSlug;
+            
+                if (!string.IsNullOrEmpty(IEsearchterm)) {
+                    s.SearchResults = _es.SearchInEvent(requestedEvent.ID, IEsearchterm, this.FromDateTime(), this.ToDateTime());
+                }
+                s.ToolbarViewModel = BuildToolbarViewModel(thisEvent);
+
+                return View(s);
             }
-            s.ToolbarViewModel = BuildToolbarViewModel(ThisEvent);
-
-            return View(s);
+            ModelState.AddModelError(string.Empty, "The event you're trying to visit doesn't exist.");
+            return RedirectToAction("index", "Browse");
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -712,13 +740,19 @@ namespace Epilogger.Web.Controllers {
         public ActionResult AllBlogPosts(string id, int? page) {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
             Event requestedEvent = _es.FindBySlug(id);
-            List<BlogPostDisplayViewModel> blogPosts = Mapper.Map<List<BlogPost>, List<BlogPostDisplayViewModel>>(_bs.FindByEventID(requestedEvent.ID).ToList());
 
-            AllBlogPostsViewModel model = Mapper.Map<Event, AllBlogPostsViewModel>(requestedEvent);
-            model.SetAllBlogPostsViewModel(blogPosts, currentPage, blogPosts.Count());
-            model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
+            if (requestedEvent != null)
+	        {
+                var blogPosts = Mapper.Map<List<BlogPost>, List<BlogPostDisplayViewModel>>(_bs.FindByEventID(requestedEvent.ID).ToList());
 
-            return View(model);
+                var model = Mapper.Map<Event, AllBlogPostsViewModel>(requestedEvent);
+                model.SetAllBlogPostsViewModel(blogPosts, currentPage, blogPosts.Count());
+                model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
+
+                return View(model);
+            }
+            ModelState.AddModelError(string.Empty, "The event you're trying to visit doesn't exist.");
+            return RedirectToAction("index", "Browse");
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -726,17 +760,24 @@ namespace Epilogger.Web.Controllers {
         public ActionResult AllCheckins(string id, int? page) {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
 
-            Event currentEvent = _es.FindBySlug(id);
-            List<CheckinDisplayViewModel> checkins = Mapper.Map<List<CheckIn>, List<CheckinDisplayViewModel>>(_cs.FindByEventIDPaged(currentEvent.ID, currentPage, 10, this.FromDateTime(), this.ToDateTime()).ToList());
+            var currentEvent = _es.FindBySlug(id);
+            if (currentEvent != null)
+            {
+                var checkins = Mapper.Map<List<CheckIn>, List<CheckinDisplayViewModel>>(_cs.FindByEventIDPaged(currentEvent.ID, currentPage, 10, this.FromDateTime(), this.ToDateTime()).ToList());
 
-            AllCheckinsViewModel model = new AllCheckinsViewModel(checkins, currentPage, 10);
-            model.ID = currentEvent.ID.ToString();
-            model.Name = currentEvent.Name;
-            model.EventSlug = currentEvent.EventSlug;
-            model.TotalRecords = _cs.FindCheckInCountByEventID(currentEvent.ID, this.FromDateTime(), this.ToDateTime());
-            model.ToolbarViewModel = BuildToolbarViewModel(currentEvent);
+                var model = new AllCheckinsViewModel(checkins, currentPage, 10);
+                model.ID = currentEvent.ID.ToString();
+                model.Name = currentEvent.Name;
+                model.EventSlug = currentEvent.EventSlug;
+                model.TotalRecords = _cs.FindCheckInCountByEventID(currentEvent.ID, this.FromDateTime(), this.ToDateTime());
+                model.ToolbarViewModel = BuildToolbarViewModel(currentEvent);
 
-            return View(model);
+                return View(model);
+
+            }
+	        ModelState.AddModelError(string.Empty, "The event you're trying to visit doesn't exist.");
+	        return RedirectToAction("index", "Browse");
+
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -744,15 +785,19 @@ namespace Epilogger.Web.Controllers {
         public ActionResult AllLinks(string id, int? page) {
 
             int currentPage = page.HasValue ? page.Value - 1 : 0;
-            Event requestedEvent = _es.FindBySlug(id);
-            
-            AllLinksViewModel model = Mapper.Map<Event, AllLinksViewModel>(requestedEvent);
-            model.Links = _ls.FindByEventIDPaged(requestedEvent.ID, currentPage, 10, this.FromDateTime(), this.ToDateTime());
-            model.CurrentPageIndex = currentPage;
-            model.TotalRecords = _ls.FindCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-            model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
+            var requestedEvent = _es.FindBySlug(id);
+            if (requestedEvent != null)
+	        {
+                var model = Mapper.Map<Event, AllLinksViewModel>(requestedEvent);
+                model.Links = _ls.FindByEventIDPaged(requestedEvent.ID, currentPage, 10, this.FromDateTime(), this.ToDateTime());
+                model.CurrentPageIndex = currentPage;
+                model.TotalRecords = _ls.FindCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
+                model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
 
-            return View(model);
+                return View(model);
+            }
+            ModelState.AddModelError(string.Empty, "The event you're trying to visit doesn't exist.");
+            return RedirectToAction("index", "Browse");
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -761,47 +806,54 @@ namespace Epilogger.Web.Controllers {
         {
 
             //int currentPage = page.HasValue ? page.Value - 1 : 0;
-            Event requestedEvent = _es.FindBySlug(id);
-            AllStatsViewModel Model = Mapper.Map<Event, AllStatsViewModel>(requestedEvent);
-
-            if (Request.QueryString["f"] != null)
+            var requestedEvent = _es.FindBySlug(id);
+            if (requestedEvent != null)
             {
-                Model.FromDateTime = this.FromDateTime();
+
+                var model = Mapper.Map<Event, AllStatsViewModel>(requestedEvent);
+
+                if (Request.QueryString["f"] != null)
+                {
+                    model.FromDateTime = this.FromDateTime();
+                }
+                else
+                {
+                    model.FromDateTime = null;
+                }
+                if (Request.QueryString["t"] != null)
+                {
+                    model.ToDateTime = this.ToDateTime();
+                }
+                else
+                {
+                    model.ToDateTime = null;
+                }
+                model.MyUTCNow = DateTime.UtcNow;
+
+                model.TweetCount = _ts.FindTweetCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
+                model.ImageCount = _is.FindImageCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
+                model.ExternalLinkCount = _ls.FindCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
+                model.TopImages = model.TopImages = _is.GetTopPhotosAndTweetByEventID(requestedEvent.ID, 10, this.FromDateTime(), this.ToDateTime());
+                model.TopLinks = _ls.GetTopURLsByEventID(requestedEvent.ID, 5, this.FromDateTime(), this.ToDateTime());
+
+                List<CheckinDisplayViewModel> checkins = Mapper.Map<List<CheckIn>, List<CheckinDisplayViewModel>>(_cs.FindByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime()).ToList());
+                model.AllCheckIns = checkins;
+
+                TopTweetersStats topTweetersStats = new TopTweetersStats();
+                model.TopTweeters = model.TopTweeters = topTweetersStats.Calculate(_ts.GetTop10TweetersByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime())).ToList();
+
+                model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
+
+                //model.Links = LS.FindByEventIDPaged(id, currentPage, 10, this.FromDateTime(), this.ToDateTime());
+                //model.CurrentPageIndex = currentPage;
+                //model.TotalRecords = LS.FindCountByEventID(id, this.FromDateTime(), this.ToDateTime());
+
+
+                return View(model);
             }
-            else
-            {
-                Model.FromDateTime = null;
-            }
-            if (Request.QueryString["t"] != null)
-            {
-                Model.ToDateTime = this.ToDateTime();
-            }
-            else
-            {
-                Model.ToDateTime = null;
-            }
-            Model.MyUTCNow = DateTime.UtcNow;
+	        ModelState.AddModelError(string.Empty, "The event you're trying to visit doesn't exist.");
+	        return RedirectToAction("index", "Browse");
 
-            Model.TweetCount = _ts.FindTweetCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-            Model.ImageCount = _is.FindImageCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-            Model.ExternalLinkCount = _ls.FindCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-            Model.TopImages = Model.TopImages = _is.GetTopPhotosAndTweetByEventID(requestedEvent.ID, 10, this.FromDateTime(), this.ToDateTime());
-            Model.TopLinks = _ls.GetTopURLsByEventID(requestedEvent.ID, 5, this.FromDateTime(), this.ToDateTime());
-
-            List<CheckinDisplayViewModel> checkins = Mapper.Map<List<CheckIn>, List<CheckinDisplayViewModel>>(_cs.FindByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime()).ToList());
-            Model.AllCheckIns = checkins;
-
-            TopTweetersStats topTweetersStats = new TopTweetersStats();
-            Model.TopTweeters = Model.TopTweeters = topTweetersStats.Calculate(_ts.GetTop10TweetersByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime())).ToList();
-
-            Model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
-
-            //model.Links = LS.FindByEventIDPaged(id, currentPage, 10, this.FromDateTime(), this.ToDateTime());
-            //model.CurrentPageIndex = currentPage;
-            //model.TotalRecords = LS.FindCountByEventID(id, this.FromDateTime(), this.ToDateTime());
-
-
-            return View(Model);
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1112,9 +1164,9 @@ namespace Epilogger.Web.Controllers {
         {
             
             int UserRating;
-            int.TryParse(fc["UserRating"].ToString(), out UserRating);
+            int.TryParse(fc["UserRating"], out UserRating);
 
-            Event requestedEvent = _es.FindBySlug(fc["EventSlug"].ToString());
+            Event requestedEvent = _es.FindBySlug(fc["EventSlug"]);
             if (requestedEvent != null)
             {
                 if (CurrentUserID == Guid.Empty)
@@ -1123,13 +1175,15 @@ namespace Epilogger.Web.Controllers {
                     return RedirectToAction("details", new { id = requestedEvent.EventSlug });
                 }
 
-                UserService service = new UserService();
-                UserRatesEvent ratesEvent = new UserRatesEvent();
+                var service = new UserService();
+                var ratesEvent = new UserRatesEvent
+                                {
+                                    EventID = requestedEvent.ID,
+                                    UserID = CurrentUserID,
+                                    RatingDateTime = DateTime.UtcNow,
+                                    UserRating = UserRating
+                                };
 
-                ratesEvent.EventID = requestedEvent.ID;
-                ratesEvent.UserID = CurrentUserID;
-                ratesEvent.RatingDateTime = DateTime.UtcNow;
-                ratesEvent.UserRating = UserRating;
 
                 service.SaveUserRatesEvent(ratesEvent);
                 this.StoreSuccess("Rating saved!");
@@ -1206,70 +1260,6 @@ namespace Epilogger.Web.Controllers {
             var model = new UploadPhotosViewModel {EventID = id};
             return PartialView(model);
         }
-
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
-        //public ActionResult Details(int id) {
-        [CompressFilter]
-        public ActionResult Embed(string id)
-        {
-
-            var requestedEvent = _es.FindBySlug(id);
-
-            var model = Mapper.Map<Event, EventDisplayViewModel>(requestedEvent);
-            model.TweetCount = _ts.FindTweetCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-            model.Tweets = _ts.FindByEventIDOrderDescTake6(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-            model.ImageCount = _is.FindImageCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-            model.Images = _is.FindByEventIDOrderDescTake9(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-            model.CheckInCount = _cs.FindCheckInCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-            model.CheckIns = _cs.FindByEventIDOrderDescTake16(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-            model.ExternalLinks = _ls.FindByEventIDOrderDescTake3(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-            model.BlogPosts = _bs.FindByEventIDTake5(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-            model.EventRatings = _es.FindEventRatingsByID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-            model.HasUserRated = false;
-            model.CurrentUserID = CurrentUserID;
-            model.CurrentUserRole = CurrentUserRole;
-            model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
-
-            model.CanDelete = false;
-            if ((requestedEvent.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator)
-            {
-                model.CanDelete = true;
-            }
-
-            if (Request.QueryString["f"] != null)
-            {
-                model.FromDateTime = this.FromDateTime();
-            }
-            else
-            {
-                model.FromDateTime = null;
-            }
-            if (Request.QueryString["t"] != null)
-            {
-                model.ToDateTime = this.ToDateTime();
-            }
-            else
-            {
-                model.ToDateTime = null;
-            }
-
-
-            //If there is a user logged in
-            if (CurrentUserID != Guid.Empty)
-            {
-                model.HasSubscribed = CurrentUser.UserFollowsEvents.FirstOrDefault(ufe => ufe.EventID == requestedEvent.ID) != null ? true : false;
-                model.HasUserRated = model.EventRatings.Any(i => i.UserID == CurrentUserID);
-            }
-
-
-            //Not optimized
-
-
-            return View(model);
-        }
-
        
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
