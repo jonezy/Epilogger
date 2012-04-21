@@ -1,0 +1,96 @@
+﻿@using Combres.Mvc
+
+<!doctype html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+    <meta name="google-site-verification" content="CuQwuSsvoWQapx1142El31mqbNSB6Dq0RBzTjzV0lXQ" />
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+    <meta name="viewport" content="width=640" />
+	
+    @Html.CombresLink("EmbedCss")
+    @Html.CombresLink("EmbedJs")
+    
+</head>
+<body>
+    
+    
+    @RenderBody()
+
+    <script language="javascript" type="text/javascript">
+        //Store all clicks, for interface tweaking.
+        head.ready(function () {
+            $(document).saveClicks();
+
+            $('.displayClicks').click(function () {
+                $.displayClicks();
+                $('#clickmap-overlay').click(function () {
+                    $.removeClicks();
+                    $(document).saveClicks();
+                });
+                $(document).stopSaveClicks();
+                return false;
+            });
+
+            $(".datepicker").datepicker({
+                showAnim: '',
+                dateFormat: 'm/d/yy',
+                showOn: 'button',
+                buttonImageOnly: true,
+                buttonImage: '@Url.Content("~/Public/js/datetime/txtdropdown/txtdropdown-btn.png")',
+                buttonText: 'Select a date'
+            });
+
+            $(".timedropdown").timedropdown();
+        });
+
+
+
+        //Saves all information when a user clicks on a link.
+        head.ready(function () {
+            $("a").bind('click', function (e) {
+                //console.log(e)
+
+                //For the images, we need to access the parent to get the image properties.
+                if (e.srcElement.host == null) {
+                    e.srcElement = e.srcElement.parentElement;
+                }
+                if (typeof EventID == "undefined") {
+                    EventID = 0;
+                }
+
+                //Post information back to EPL
+                $.ajax({
+                    url: '/Home/LogClick',
+                    type: 'POST',
+                    data: { href: e.srcElement.href, PathName: e.srcElement.pathname, UserAgent: navigator.userAgent, Host: e.srcElement.host, EventID: EventID },
+                    success: function (result) {
+                        // TODO: nothing
+                    }
+                });
+            });
+        });
+
+    </script>
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-177636-16']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+</body>
+</html>

@@ -174,7 +174,6 @@ namespace Epilogger.Web {
                 new { controller = "events", action = "details", id = UrlParameter.Optional, IEsearchterm = UrlParameter.Optional }
             );
 
-       
             routes.MapRoute(
                 "EventsRoutes1",
                 "events/{slug}",
@@ -184,6 +183,19 @@ namespace Epilogger.Web {
                 "EventsRoutes",
                 "events/{slug}/{action}",
                 new { controller = "events", action = "details", id = UrlParameter.Optional }
+            );
+
+
+            routes.MapRoute(
+                "WidgetRoute",
+                "widget/{id}",
+                new { controller = "widget", action = "index", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                "WidgetPhotoDetailsRoute",
+                "widget/PhotoDetails/{id}/{photoID}",
+                new { controller = "widget", action = "photodetails", id = UrlParameter.Optional, photoID = UrlParameter.Optional }
             );
 
 
@@ -237,6 +249,47 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.CanDelete, opt => opt.Ignore())
                 .ForMember(dest => dest.CurrentUserRole, opt => opt.Ignore())
                 .ForMember(dest => dest.TheUser, opt => opt.MapFrom(src => src.Users.FirstOrDefault()));
+
+
+            Mapper.CreateMap<Event, WidgetViewModel>()
+                .ForMember(dest => dest.Images, opt => opt.Ignore())
+                .ForMember(dest => dest.CheckIns, opt => opt.Ignore())
+                .ForMember(dest => dest.Tweets, opt => opt.Ignore())
+                .ForMember(dest => dest.TweetCount, opt => opt.Ignore())
+                .ForMember(dest => dest.ImageCount, opt => opt.Ignore())
+                .ForMember(dest => dest.CheckInCount, opt => opt.Ignore())
+                .ForMember(dest => dest.width, opt => opt.Ignore())
+                .ForMember(dest => dest.height, opt => opt.Ignore())
+                .ForMember(dest => dest.EpiloggerCounts, opt => opt.Ignore());
+
+            Mapper.CreateMap<Event, WidgetPhotosDetailsViewModel>()
+                .ForMember(dest => dest.Width, opt => opt.Ignore())
+                .ForMember(dest => dest.Height, opt => opt.Ignore())
+                .ForMember(dest => dest.PhotoID, opt => opt.Ignore())
+                .ForMember(dest => dest.Image, opt => opt.Ignore())
+                .ForMember(dest => dest.Tweet, opt => opt.Ignore())
+                .ForMember(dest => dest.returnto, opt => opt.Ignore())
+                .ForMember(dest => dest.EpiloggerCounts, opt => opt.Ignore());
+
+
+            Mapper.CreateMap<Event, WidgetPhotosViewModel>()
+                .ForMember(dest => dest.Width, opt => opt.Ignore())
+                .ForMember(dest => dest.Height, opt => opt.Ignore())
+                .ForMember(dest => dest.Images, opt => opt.Ignore())
+                .ForMember(dest => dest.EpiloggerCounts, opt => opt.Ignore());
+
+            Mapper.CreateMap<Event, WidgetTweetsViewModel>()
+                .ForMember(dest => dest.Width, opt => opt.Ignore())
+                .ForMember(dest => dest.Height, opt => opt.Ignore())
+                .ForMember(dest => dest.Tweets, opt => opt.Ignore())
+                .ForMember(dest => dest.EpiloggerCounts, opt => opt.Ignore());
+
+
+            Mapper.CreateMap<Event, WidgetCheckinsViewModel>()
+                .ForMember(dest => dest.Width, opt => opt.Ignore())
+                .ForMember(dest => dest.Height, opt => opt.Ignore())
+                .ForMember(dest => dest.Checkins, opt => opt.Ignore())
+                .ForMember(dest => dest.EpiloggerCounts, opt => opt.Ignore());
 
             Mapper.CreateMap<Event, AllStatsViewModel>()
                 .ForMember(dest => dest.CurrentPageIndex, opt => opt.Ignore())

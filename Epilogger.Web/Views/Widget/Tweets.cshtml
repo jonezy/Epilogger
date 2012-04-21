@@ -1,0 +1,50 @@
+﻿@using Combres.Mvc
+@model Epilogger.Web.Models.WidgetTweetsViewModel
+@{
+    Layout = "_EmbedLayout.cshtml";
+    ViewBag.Title = "";
+    
+}
+
+<div style="@string.Format("height:{0}px; width: {1}px;", @Model.Height, @Model.Width); overflow: hidden;">
+    <div id="header">
+        @Html.Partial("_EpiloggerCounts", @Model.EpiloggerCounts)
+        <a href="http://epilogger.com" target="_blank" border="0"><img id="epiloggerLogo" src="/Public/images/widget/epl-logo.png" alt="Epilogger" /></a>
+    </div>
+    <div id="jaggies"></div>
+    <div class="clearfix" id="outer-container">
+
+        @Html.Partial("_widgetMenu", new Epilogger.Web.Models.WidgetMenuViewModel() { EventSlug = Model.EventSlug, width = Model.Width, height = Model.Height })
+
+        <div class="contentContainer" style="@string.Format("height:{0}px;", Model.Height - 92); overflow-y: auto; overflow-x: hidden;">
+            <ul>
+            @foreach (var theTweet in Model.Tweets)
+           {
+               <li id="Tweet-@theTweet.TwitterID" class="tweetli clearfix">
+                    <img src="@theTweet.ProfileImageURL" class="fleft" height="48" width="48" alt="" />
+                    <div class="tweetsTweet">
+                        <a class="twitterName" href="http://www.twitter.com/@theTweet.FromUserScreenName">@@@theTweet.FromUserScreenName:</a>
+                        <div class="tweet">
+                            @Html.Raw(theTweet.TextAsHTML)
+                            <br />
+                            <span class="tweet-date">(@Html.DisplayFor(thing => theTweet.CreatedDate))</span>
+                        </div>
+                    </div>
+                </li>
+           }
+           </ul>
+            <a href="http://epilogger.com/events/@Model.EventSlug" target="_blank">Want to see them all? Visit Epilogger.com</a>
+            <br />
+            <br /><br />
+        </div>
+            
+            
+        <div id="topTenTab" style="@string.Format("top: {0}px; left: {1}px;", Model.Height - 25, (Model.Width >= 550) ? (Model.Width / 2) + 180 : (Model.Width / 2) - 37)">
+            <a href="http://epilogger.com/events/@Model.EventSlug/alltweets" target="_blank"><img src="/Public/images/widget/top10.png" alt="" /></a>
+        </div>
+
+
+    </div>
+</div>
+
+
