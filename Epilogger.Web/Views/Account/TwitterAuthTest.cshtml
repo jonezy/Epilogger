@@ -1,0 +1,34 @@
+﻿@model Epilogger.Web.Models.TwitterAuthTestViewModel
+
+@{
+    ViewBag.Title = "TwitterAuthTest";
+    Layout = "~/Views/Shared/_InteriorLayout.cshtml";
+}
+
+<div class="grid_12 alpha">
+
+    <h2>TwitterAuthTest</h2>
+
+    @using (Html.BeginForm()) {
+        @Html.ValidationSummary(true)
+        <fieldset>
+            <legend></legend>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.TwitterName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.TwitterName)
+                @Html.ValidationMessageFor(model => model.TwitterName)
+            </div>
+
+            <p>
+                <input type="submit" value="Auth" />
+            </p>
+        </fieldset>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>

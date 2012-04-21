@@ -44,6 +44,11 @@ namespace Epilogger.Web
             return db.Tweets.Where(t => t.EventID == eventID && t.CreatedDate >= F && t.CreatedDate <= T && (t.Deleted == null || t.Deleted == false)).OrderByDescending(t => t.CreatedDate).Take(6);
         }
 
+        public IEnumerable<Tweet> FindByEventIDOrderDescTakeX(int eventID, int itemsToReturn, DateTime F, DateTime T)
+        {
+            return db.Tweets.Where(t => t.EventID == eventID && t.CreatedDate >= F && t.CreatedDate <= T && (t.Deleted == null || t.Deleted == false)).OrderByDescending(t => t.CreatedDate).Take(itemsToReturn);
+        }
+
         public IEnumerable<Epilogger.Web.Core.Stats.Tweeter> GetTop10TweetersByEventID(int eventID, DateTime F, DateTime T)
         {
             return db.GetTop10TweetersByEventID(eventID, F, T).ExecuteTypedList<Epilogger.Web.Core.Stats.Tweeter>();

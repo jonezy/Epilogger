@@ -140,7 +140,7 @@ a.edit_icon {
 #homepage-intro {
     float:left;
     padding-right:10px;
-    width:425px;}
+    width:470px;}
 
 #homepage-intro h2{
     font-size:26px;}
@@ -1446,6 +1446,17 @@ div#search-container input[type=text] {
 div#search-container input[type=image] {
 	vertical-align:top;
 	float:right;}
+
+
+#homepage-intro #SearchTerm {
+    color: #f51282;
+    width: 500px;
+    height: 21px;
+}
+#homepageSearchOK {
+    position: absolute;
+    left: 434px;
+}
 
 #breadcrumb a {text-transform: lowercase; font-size:10px; color: #5e5e5e; }
 #breadcrumb { color:#999}

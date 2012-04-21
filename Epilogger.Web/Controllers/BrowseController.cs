@@ -81,7 +81,7 @@ namespace Epilogger.Web.Controllers
                     break;
                 case "subscribed":
                     events = BuildEventSubscriptions(currentPage, 10);
-                    model.TotalRecords = CurrentUser.UserFollowsEvents.Count();
+                    model.TotalRecords = CurrentUser==null ? 0 : CurrentUser.UserFollowsEvents.Count();
                     break;
                 case "myevents":
                     events = ES.FindByUserIDPaged(CurrentUserID, currentPage, 10);
@@ -133,14 +133,18 @@ namespace Epilogger.Web.Controllers
 
         private List<Event> BuildEventSubscriptions(int currentPage, int recordsPerPage)
         {
-            List<Event> events = new List<Event>();
-            List<UserFollowsEvent> subscribedEvents = CurrentUser.UserFollowsEvents.ToList();
-            foreach (var item in subscribedEvents)
+            if (CurrentUser == null)
             {
-                events.Add(item.Events.FirstOrDefault());
+                return new List<Event>();
             }
-
-            return events.Skip(currentPage * recordsPerPage).Take(recordsPerPage).OrderByDescending(c => c.StartDateTime).ToList();
+            else
+            {
+                var subscribedEvents = CurrentUser.UserFollowsEvents.ToList();
+                var events = subscribedEvents.Select(item => item.Events.FirstOrDefault()).ToList();
+                return
+                    events.Skip(currentPage*recordsPerPage).Take(recordsPerPage).OrderByDescending(c => c.StartDateTime)
+                        .ToList();
+            }
         }
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------

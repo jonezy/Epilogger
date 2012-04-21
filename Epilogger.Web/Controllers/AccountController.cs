@@ -10,10 +10,12 @@ using DevOne.Security.Cryptography.BCrypt;
 using Epilogger.Common;
 using Epilogger.Data;
 using Epilogger.Web.Core.Email;
+using Epilogger.Web.Epilogr;
 using Epilogger.Web.Models;
 using Epilogger.Web.Views.Emails;
 
 using RichmondDay.Helpers;
+using Twitterizer;
 
 namespace Epilogger.Web.Controllers {
     public class AccountController : BaseController {
@@ -418,7 +420,42 @@ namespace Epilogger.Web.Controllers {
             return View();
         }
 
-        
+        public ActionResult TwitterAuthTest()
+        {
+
+            var apiClient = new APISoapClient();
+            var container = apiClient.CreateUrl("http://www.google.com");
+
+
+            
+
+            //var urlRequestBody = new Epilogr.CreateUrlRequestBody("http://www.google.com");
+            //var urlRequest = new Epilogr.CreateUrlRequest(urlRequestBody);
+
+            //var test = new Epilogr.CreateUrlResponse(new CreateUrlResponseBody());
+           
+            //var containdter = new Epilogr.Container();
+            
+            //var urlResponseBody = new CreateUrlResponseBody();
+            //var mytest = new Epilogr.CreateUrlResponse(urlResponseBody);
+            
+
+            //Epilogr.CreateUrlResponse =
+
+            var test = "test";
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult TwitterAuthTest(TwitterAuthTestViewModel model)
+        {
+
+            var tokens = new OAuthTokens { ConsumerKey = "qV0GasfpuvDRmXhnaDA", ConsumerSecret = "q3ftmYti8d4ws2iNieidofWYLswdHT3BRwmu813EA", AccessToken = "280687481-XyZq3P6v7qivApsYjES8V3LjTRgcRZIx2XRO755V", AccessTokenSecret = "Z7MG32TDldpx5USDdOUXjzsop1ZtaEbLMm1bzTnuk" };
+            TwitterResponse<TwitterStatus> tweetResponse = TwitterStatus.Update(tokens, "Test");
+
+            return View();
+        }
 
 
     }
