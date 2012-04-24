@@ -740,9 +740,11 @@ div.profile img {
 #event-details ul li .value {
     float:left; }
 
+/*
 #event-details .value strong, .tweet-body strong { 
-    font-weight:normal}
-    
+    font-weight:normal
+}
+  */  
 .tweet-body strong {
     text-transform:uppercase;
     font-size:11px}
@@ -1318,7 +1320,10 @@ x.dashboard-event-item .event-totals {
 .tweet-content .tweet-content-username {text-transform:uppercase;padding-bottom:4px;}
 .tweet-content .tweet-content-username-small {text-transform:uppercase;padding-bottom:4px;font-size:8pt;}
 .alltweets-entry .tweet-content p {margin-bottom:2px;}
-span.tweet-date {font-size:11px;color:#c2c2c2}
+
+span.tweet-date {font-size:11px;color:#888}
+span.tweet-date a {font-size:11px;color:#888}
+span.tweet-date a:hover { text-decoration: underline; }
 
 .alllinks-entry { padding: 10px 0;}
 .alllinks-entry .tweet {color:#696969;margin: 5px 0 5px 10px; border-left: 3px solid #fe60b1; padding:5px; height:40px; background:#fff }
@@ -1338,14 +1343,31 @@ span.tweet-date {font-size:11px;color:#c2c2c2}
 #top-tweeters .toptweeter-item .count.small {font-size:11px;float:left;padding-top:0px;}
 
 #tweetlist .tweet {
-    margin-bottom:10px;}
+    margin-bottom:15px;}
 
 #tweetlist .tweet .tweet-body {
-    float:left;
-    width:280px;
+    /*float:left;*/
+    /*width:280px;*/
     font-size:13px;
-    margin-left:5px;}
+    margin-left: 52px;
+    margin-top: -4px;
+    }
     
+.twitterThumb {
+    float: left;
+}
+    
+ .twitterUsername {
+     font-weight: bold;
+ }
+ .twitterName {
+     font-size: 10px;
+ }
+ .tweetText {
+     
+ }
+ 
+ 
  
  /* --- blog posts */
 .blogPost { margin-bottom: 15px; }
@@ -1573,6 +1595,7 @@ div#search-container input[type=image] {
 /* ------------------------------ MISC */
 
 .spacer.dotted {border-top:dotted 1px #b5b5b5;} 
+.dottedBottom {border-bottom: dotted 1px #b5b5b5;} 
 .spacer.dotted.light {border-top:dotted 1px #e8e8e8;} 
 .spacer 	{ height:25px; display:block}
 .sm-spacer  { height:5px; display:block}

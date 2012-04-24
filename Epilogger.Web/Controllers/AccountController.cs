@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Configuration;
 using System.Linq;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -253,6 +254,83 @@ namespace Epilogger.Web.Controllers {
 
             return View(model);
         }
+
+        // GET: Account/TwitterLogon/
+        public ActionResult TwitterLogon(string oauthToken, string oauthVerifier, string returnUrl)
+        {
+            if (string.IsNullOrEmpty(oauthToken) || string.IsNullOrEmpty(oauthVerifier))
+            {
+                var httpRequestBase = Request;
+                if (httpRequestBase != null)
+                {
+                    if (httpRequestBase.Url != null)
+                    {
+                        var builder = new UriBuilder(httpRequestBase.Url);
+                        builder.Query = string.Concat(
+                            builder.Query,
+                            string.IsNullOrEmpty(builder.Query) ? string.Empty : "&",
+                            "ReturnUrl=",
+                            returnUrl);
+
+                        var token = OAuthUtility.GetRequestToken(
+                            ConfigurationManager.AppSettings["TwitterConsumerKey"],
+                            ConfigurationManager.AppSettings["TwitterConsumerSecret"],
+                            builder.ToString()).Token;
+
+                        return Redirect(OAuthUtility.BuildAuthorizationUri(token, true).ToString());
+                    }
+                }
+            }
+
+            var tokens = OAuthUtility.GetAccessToken(
+                ConfigurationManager.AppSettings["TwitterConsumerKey"],
+                ConfigurationManager.AppSettings["TwitterConsumerSecret"],
+                oauthToken,
+                oauthVerifier);
+
+
+
+            var _us = new UserService();
+            var _uaps = new UserAuthenticationProfileService();
+
+            var authService = _uaps.UserAuthorizationByService(AuthenticationServices.TWITTER);
+
+            
+            
+
+
+
+
+            //using (TwitterizerDbContext db = new TwitterizerDbContext())
+            //{
+            //    var user = db.Users.Find(tokens.UserId);
+            //    if (user == null)
+            //    {
+            //        user = new User()
+            //        {
+            //            TwitterUserId = tokens.UserId,
+            //            ScreenName = tokens.ScreenName,
+            //            TwitterAccessKey = tokens.Token,
+            //            TwitterAccessSecret = tokens.TokenSecret
+            //        };
+
+            //        db.Users.Add(user);
+
+            //        db.SaveChanges();
+            //    }
+
+            //    FormsAuthentication.SetAuthCookie(user.ScreenName, false);
+            //}
+
+            if (string.IsNullOrEmpty(returnUrl))
+                return Redirect("/");
+            else
+                return Redirect(returnUrl);
+        }
+
+
+
+
 
         public ActionResult Logout() {
             CookieHelpers.DestroyCookie("lc");

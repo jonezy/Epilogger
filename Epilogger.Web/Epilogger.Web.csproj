@@ -463,6 +463,7 @@
     <Content Include="Public\images\homepage\tldr.png" />
     <Content Include="Public\images\icons\addMoreArrow.png" />
     <Content Include="Public\images\icons\and.png" />
+    <Content Include="Public\images\icons\bird_16_blue.png" />
     <Content Include="Public\images\icons\blog.png" />
     <Content Include="Public\images\icons\BrowseBullet.png" />
     <Content Include="Public\images\icons\bubble.png" />
@@ -493,6 +494,7 @@
     <Content Include="Public\images\icons\popUpNub.png" />
     <Content Include="Public\images\icons\profile-eventlist.png" />
     <Content Include="Public\images\icons\SearchPlainText.png" />
+    <Content Include="Public\images\icons\sign-in-with-twitter-d.png" />
     <Content Include="Public\images\icons\star.png" />
     <Content Include="Public\images\icons\SubscribedCheck.png" />
     <Content Include="Public\images\icons\Tab-EventInfo.png" />

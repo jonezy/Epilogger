@@ -1,14 +1,21 @@
 ﻿@model Epilogger.Web.Models.TweetTemplateViewModel
           
 <li id="Tweet-@Model.Tweet.TwitterID" class="tweet clearfix">
-    <img src="@Model.Tweet.ProfileImageURL" class="fleft" height="48" width="48" alt="" />
-    <div class="tweet-body">
-        <strong><a href="http://www.twitter.com/@Model.Tweet.FromUserScreenName" target="_blank">@@@Model.Tweet.FromUserScreenName</a></strong>
-        <p class="half-bottom">@Html.Raw(Model.Tweet.TextAsHTML)</p>
-        <span class="tweet-date">(@Html.DisplayFor(thing => Model.Tweet.CreatedDate))&nbsp;
+    <div class="twitterThumb">
+        <img src="@Model.Tweet.ProfileImageURL" height="48" width="48" alt="" />
+    </div>
+    <div class="tweet-body ">
+        <span class="twitterUsername"><a href="http://www.twitter.com/@Model.Tweet.FromUserScreenName" target="_blank">@Model.Tweet.FromUserScreenName</a></span>
+        <span class="twitterName">twitter Name</span>
+        
+        <div class="tweetText">@Html.Raw(Model.Tweet.TextAsHTML)</div>
+        
+        <img src="/Public/images/icons/bird_16_blue.png" alt="twitter" />
+        <span class="tweet-date">(<a href="https://twitter.com/#!/@Model.Tweet.FromUserScreenName/status/@Model.Tweet.TwitterID" target="_blank">@Html.DisplayFor(thing => Model.Tweet.CreatedDate, "ShortDateTime")</a>)</span>
+            
         @if (Model.CanDelete)
-        {
-            <a href="" class="deleteTweet fright" id="@Model.Tweet.ID">delete</a>
-        }</span>
+            {
+                @: &nbsp;<a href="" class="deleteTweet fright" id="@Model.Tweet.ID">delete</a>
+            }
     </div>
 </li>

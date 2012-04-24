@@ -17,6 +17,7 @@ using System.Net;
 using System.IO;
 using System.Xml;
 using System.Text.RegularExpressions;
+using Twitterizer;
 
 namespace Epilogger.Web.Controllers {
     public class EventsController : BaseController {
@@ -110,6 +111,14 @@ namespace Epilogger.Web.Controllers {
                 var model = Mapper.Map<Event, EventDisplayViewModel>(requestedEvent);
                 model.TweetCount = _ts.FindTweetCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
                 model.Tweets = _ts.FindByEventIDOrderDescTake6(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
+
+                
+                var tokens = new OAuthTokens { ConsumerKey = "fVWLYNqaP2wJzi9AiixitQ", ConsumerSecret = "dkkTjh4RcsxfVQIKWCFGOYhSyvuUknnxljPuC4fyM4", AccessToken = "280687481-PeC0Miak5QVt8WDW28Wb1hFJFjPGXR9YFIpQuzgT", AccessTokenSecret = "hzkUY5LQOwVEVW5t4bM7AccEorQJEvXjeflrEpwhOA" };
+                //var theTweet = Twitterizer.TwitterStatus.Show(model.Tweets.FirstOrDefault().TwitterID);
+                var test = new Twitterizer.TwitterResponse<TwitterStatus>();
+                
+
+
                 model.ImageCount = _is.FindImageCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
                 model.Images = _is.FindByEventIDOrderDescTake9(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
                 model.CheckInCount = _cs.FindCheckInCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
@@ -258,10 +267,12 @@ namespace Epilogger.Web.Controllers {
                     topTweetersStats.Calculate(_ts.GetTop10TweetersByEventID(requestedEvent.ID, this.FromDateTime(),
                                                                              this.ToDateTime())).ToList();
                 model.ShowTopTweets = false;
-                model.Tweets =
-                    Mapper.Map<IEnumerable<Tweet>, IEnumerable<TweetDisplayViewModel>>(
-                        _ts.GetPagedTweets(requestedEvent.ID, currentPage + 1, 100, this.FromDateTime(),
-                                           this.ToDateTime()));
+                //model.Tweets =
+                //    Mapper.Map<IEnumerable<Tweet>, IEnumerable<TweetDisplayViewModel>>(
+                //        _ts.GetPagedTweets(requestedEvent.ID, currentPage + 1, 100, this.FromDateTime(),
+                //                           this.ToDateTime()));
+                
+                model.Tweets = _ts.GetPagedTweets(requestedEvent.ID, currentPage + 1, 100, FromDateTime(), ToDateTime());
                 model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
 
                 model.CanDelete = false;
@@ -275,10 +286,11 @@ namespace Epilogger.Web.Controllers {
                 if (currentPage + 1 == 1)
                 {
                     model.ShowTopTweets = true;
-                    model.Tweets =
-                        Mapper.Map<IEnumerable<Tweet>, IEnumerable<TweetDisplayViewModel>>(
-                            _ts.GetPagedTweets(requestedEvent.ID, currentPage + 1, 100, this.FromDateTime(),
-                                               this.ToDateTime()));
+                    //model.Tweets =
+                    //    Mapper.Map<IEnumerable<Tweet>, IEnumerable<TweetDisplayViewModel>>(
+                    //        _ts.GetPagedTweets(requestedEvent.ID, currentPage + 1, 100, this.FromDateTime(),
+                    //                           this.ToDateTime()));
+                    model.Tweets = _ts.GetPagedTweets(requestedEvent.ID, currentPage + 1, 100, FromDateTime(), ToDateTime());
                 }
 
                 return View(model);
