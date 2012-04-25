@@ -256,9 +256,9 @@ namespace Epilogger.Web.Controllers {
         }
 
         // GET: Account/TwitterLogon/
-        public ActionResult TwitterLogon(string oauthToken, string oauthVerifier, string returnUrl)
+        public ActionResult TwitterLogon(string oauth_token, string oauth_verifier, string ReturnUrl)
         {
-            if (string.IsNullOrEmpty(oauthToken) || string.IsNullOrEmpty(oauthVerifier))
+            if (string.IsNullOrEmpty(oauth_token) || string.IsNullOrEmpty(oauth_verifier))
             {
                 var httpRequestBase = Request;
                 if (httpRequestBase != null)
@@ -270,7 +270,7 @@ namespace Epilogger.Web.Controllers {
                             builder.Query,
                             string.IsNullOrEmpty(builder.Query) ? string.Empty : "&",
                             "ReturnUrl=",
-                            returnUrl);
+                            ReturnUrl);
 
                         var token = OAuthUtility.GetRequestToken(
                             ConfigurationManager.AppSettings["TwitterConsumerKey"],
@@ -285,47 +285,63 @@ namespace Epilogger.Web.Controllers {
             var tokens = OAuthUtility.GetAccessToken(
                 ConfigurationManager.AppSettings["TwitterConsumerKey"],
                 ConfigurationManager.AppSettings["TwitterConsumerSecret"],
-                oauthToken,
-                oauthVerifier);
-
+                oauth_token,
+                oauth_verifier);
 
 
             var _us = new UserService();
             var _uaps = new UserAuthenticationProfileService();
 
-            var authService = _uaps.UserAuthorizationByService(AuthenticationServices.TWITTER);
+            var userAuthByScreenName = _uaps.UserAuthorizationByServiceScreenName(tokens.ScreenName);
 
-            
-            
+            if (userAuthByScreenName==null)
+            {
+                //Get the user details from Twitter
+                //var theTwitterUser = TwitterUser.Show(tokens.UserId);
+
+                //No auth exists. This a new user, create the account and redirect to the profile page.
+                var theNewUser = new User()
+                                     {
+                                         CreatedDate = DateTime.UtcNow,
+                                         IsActive = true,
+                                         RoleID = 2,
+                                         Username = tokens.ScreenName + "twitter",
+                                         Password = " ",
+                                         EmailAddress = " "
+                                     };
+                _us.Save(theNewUser);
+
+                //Put the auth in the auth table.
+                var theAuth = new UserAuthenticationProfile
+                                  {
+                                      UserID = theNewUser.ID,
+                                      Service = "TWITTER",
+                                      ServiceUsername = tokens.ScreenName,
+                                      Token = tokens.Token,
+                                      TokenSecret = tokens.TokenSecret
+                                  };
+                _uaps.Save(theAuth);
+
+                CookieHelpers.WriteCookie("lc", "uid", theNewUser.ID.ToString());
+                CookieHelpers.WriteCookie("lc", "tz", theNewUser.TimeZoneOffSet.ToString());
+
+                return RedirectToAction("Index");
+            }
+
+            //This user already has a token, log them in.
+            var theUser = _us.GetUserByID(userAuthByScreenName.UserID);
+            // write the login cookie, redirect. 
+            CookieHelpers.WriteCookie("lc", "uid", theUser.ID.ToString());
+            CookieHelpers.WriteCookie("lc", "tz", theUser.TimeZoneOffSet.ToString());
+
+            return RedirectToAction("index", "home");
 
 
 
-
-            //using (TwitterizerDbContext db = new TwitterizerDbContext())
-            //{
-            //    var user = db.Users.Find(tokens.UserId);
-            //    if (user == null)
-            //    {
-            //        user = new User()
-            //        {
-            //            TwitterUserId = tokens.UserId,
-            //            ScreenName = tokens.ScreenName,
-            //            TwitterAccessKey = tokens.Token,
-            //            TwitterAccessSecret = tokens.TokenSecret
-            //        };
-
-            //        db.Users.Add(user);
-
-            //        db.SaveChanges();
-            //    }
-
-            //    FormsAuthentication.SetAuthCookie(user.ScreenName, false);
-            //}
-
-            if (string.IsNullOrEmpty(returnUrl))
-                return Redirect("/");
-            else
-                return Redirect(returnUrl);
+            //if (string.IsNullOrEmpty(ReturnUrl))
+            //    return Redirect("/");
+            //else
+            //    return Redirect(ReturnUrl);
         }
 
 
