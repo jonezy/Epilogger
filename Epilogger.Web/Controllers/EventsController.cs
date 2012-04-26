@@ -111,14 +111,6 @@ namespace Epilogger.Web.Controllers {
                 var model = Mapper.Map<Event, EventDisplayViewModel>(requestedEvent);
                 model.TweetCount = _ts.FindTweetCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
                 model.Tweets = _ts.FindByEventIDOrderDescTake6(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-
-                
-                var tokens = new OAuthTokens { ConsumerKey = "fVWLYNqaP2wJzi9AiixitQ", ConsumerSecret = "dkkTjh4RcsxfVQIKWCFGOYhSyvuUknnxljPuC4fyM4", AccessToken = "280687481-PeC0Miak5QVt8WDW28Wb1hFJFjPGXR9YFIpQuzgT", AccessTokenSecret = "hzkUY5LQOwVEVW5t4bM7AccEorQJEvXjeflrEpwhOA" };
-                //var theTweet = Twitterizer.TwitterStatus.Show(model.Tweets.FirstOrDefault().TwitterID);
-                var test = new Twitterizer.TwitterResponse<TwitterStatus>();
-                
-
-
                 model.ImageCount = _is.FindImageCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
                 model.Images = _is.FindByEventIDOrderDescTake9(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
                 model.CheckInCount = _cs.FindCheckInCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
@@ -130,6 +122,7 @@ namespace Epilogger.Web.Controllers {
                 model.CurrentUserID = CurrentUserID;
                 model.CurrentUserRole = CurrentUserRole;
                 model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
+                model.TheUser = CurrentUser;
 
                 model.CanDelete = false;
                 if ((requestedEvent.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator)

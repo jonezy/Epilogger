@@ -12,7 +12,10 @@
         
         <img src="/Public/images/icons/bird_16_blue.png" alt="twitter" />
         <span class="tweet-date">(<a href="https://twitter.com/#!/@Model.Tweet.FromUserScreenName/status/@Model.Tweet.TwitterID" target="_blank">@Html.DisplayFor(thing => Model.Tweet.CreatedDate, "ShortDateTime")</a>)</span>
+        <span class="tweetControls">
             
+        </span>
+
         @if (Model.CanDelete)
             {
                 @: &nbsp;<a href="" class="deleteTweet fright" id="@Model.Tweet.ID">delete</a>

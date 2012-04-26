@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  This file contains basic settings needed for most web apps.
+  For full Combres settings (with explanation), refer to the sample definition file: combres_full_with_annotation.xml
+  Also, refer to Combres' documentation: http://combres.codeplex.com/documentation	
+-->
+<combres xmlns='urn:combres'>
+  <filters>
+    <filter type="Combres.Filters.FixUrlsInCssFilter, Combres" />
+  </filters>
+  <resourceSets url="~/combres.axd"
+                defaultDuration="30"
+                defaultVersion="auto"
+                defaultDebugEnabled="false"
+                defaultIgnorePipelineWhenDebug="true"
+                localChangeMonitorInterval="30"
+                remoteChangeMonitorInterval="60"
+                >
+    <resourceSet name="siteCss" type="css">
+      <resource path="~/Public/css/reset.css" />
+      <resource path="~/Public/css/960_12_col.css" />
+      <resource path="~/Public/css/messages.css" />
+      <resource path="~/Public/css/sadiehawkins.css" />
+      <resource path="~/Public/css/jquery-ui-1.8.16.custom.css" />
+      <resource path="~/Public/css/colorbox.css" />
+      <resource path="~/Public/js/prettyPhoto/css/prettyPhoto.css" />
+      <resource path="~/Public/js/AnyTime/anytimec.css" />
+      <resource path="~/Public/js/datetime/txtdropdown/txtdropdown.css" />
+      <resource path="~/Public/js/TimePicker/timePicker.css" />
+      <resource path="~/Public/js/jquery.UI.DatePicker/css/smoothness/jquery-ui-1.8.17.custom.css" />
+      <resource path="~/Public/js/msdropdown/dd.css" />
+    </resourceSet>
+
+    <resourceSet name="siteJs" type="js">
+      <resource path="~/Public/js/head.load.min.js" />
+      <resource path="~/Public/js/epiloggerInit.js" />
+      <resource path="~/Public/js/jquery-1.6.2.min.js" />
+      <resource path="~/Public/js/jquery-ui-1.8.16.custom.min.js" />
+      <resource path="~/Public/js/jquery.unobtrusive-ajax.min.js" />
+      <resource path="~/Public/js/prettyPhoto/js/jquery.prettyPhoto.js" />
+      <resource path="~/Public/js/epilogger.js" />
+      <resource path="~/Public/js/AnyTime/anytimec.js" />
+      <resource path="~/Public/js/datetime/txtdropdown/jquery.scrollTo-min.js" />
+      <resource path="~/Public/js/datetime/txtdropdown/txtdropdown.js" />
+      <resource path="~/Public/js/datetime/timedropdown/timedropdown.js" />
+      <resource path="~/Public/js/clickmap.js" />
+      <resource path="~/Public/js/jquery.colorbox-min.js" />
+      <resource path="~/Public/js/jquery.cookie.js" />
+      <resource path="~/Public/js/TimePicker/jquery.timePicker.js" />
+      <resource path="~/Public/js/jquery.cycle.all.js" />
+      <resource path="~/Public/js/jquery.jtruncate.pack.js" />
+      <resource path="~/Public/js/jquery.UI.DatePicker/js/jquery-ui-1.8.17.custom.min.js" />
+    </resourceSet>
+    
+    <resourceSet name="CreateEventJs" type="js">
+      <resource path="~/Public/js/jquery.blockUI.js" />
+      <resource path="~/Public/js/CreateEditEvent.js" />
+    </resourceSet>
+    
+    <resourceSet name="AllPhotosJs" type="js">
+      <resource path="~/Public/js/AllPhotos.js" />
+    </resourceSet>
+
+    
+    
+    <resourceSet name="EmbedCss" type="css">
+      <resource path="~/Public/css/reset.css" />
+      <!--<resource path="~/Public/css/960_12_col.css" />-->
+      <resource path="~/Public/css/messages.css" />
+      <resource path="~/Public/css/widget.css" />
+      <!--<resource path="~/Public/css/jquery-ui-1.8.16.custom.css" />
+      <resource path="~/Public/css/colorbox.css" />
+      <resource path="~/Public/js/prettyPhoto/css/prettyPhoto.css" />
+      <resource path="~/Public/js/AnyTime/anytimec.css" />
+      <resource path="~/Public/js/datetime/txtdropdown/txtdropdown.css" />
+      <resource path="~/Public/js/TimePicker/timePicker.css" />
+      <resource path="~/Public/js/jquery.UI.DatePicker/css/smoothness/jquery-ui-1.8.17.custom.css" />
+      <resource path="~/Public/js/msdropdown/dd.css" />-->
+    </resourceSet>
+    
+    <resourceSet name="EmbedJs" type="js">
+      <resource path="~/Public/js/head.load.min.js" />
+      <resource path="~/Public/js/epiloggerInit.js" />
+      <resource path="~/Public/js/jquery-1.6.2.min.js" />
+      <resource path="~/Public/js/jquery-ui-1.8.16.custom.min.js" />
+      <resource path="~/Public/js/jquery.unobtrusive-ajax.min.js" />
+      <!--<resource path="~/Public/js/prettyPhoto/js/jquery.prettyPhoto.js" />-->
+      <resource path="~/Public/js/epilogger.js" />
+      <!--<resource path="~/Public/js/AnyTime/anytimec.js" />
+      <resource path="~/Public/js/datetime/txtdropdown/jquery.scrollTo-min.js" />
+      <resource path="~/Public/js/datetime/txtdropdown/txtdropdown.js" />
+      <resource path="~/Public/js/datetime/timedropdown/timedropdown.js" />-->
+      <resource path="~/Public/js/clickmap.js" />
+      <!--<resource path="~/Public/js/jquery.colorbox-min.js" />-->
+      <resource path="~/Public/js/jquery.cookie.js" />
+      <!--<resource path="~/Public/js/TimePicker/jquery.timePicker.js" />
+      <resource path="~/Public/js/jquery.cycle.all.js" />
+      <resource path="~/Public/js/jquery.jtruncate.pack.js" />
+      <resource path="~/Public/js/jquery.UI.DatePicker/js/jquery-ui-1.8.17.custom.min.js" />-->
+    </resourceSet>
+
+
+  </resourceSets>
+</combres>
