@@ -276,6 +276,7 @@
     <Compile Include="Models\BrowseCategoriesDisplayViewModel.cs" />
     <Compile Include="Models\AllStatsViewModel.cs" />
     <Compile Include="Models\BetaSignUpViewModel.cs" />
+    <Compile Include="Models\TweetReplyViewModel.cs" />
     <Compile Include="Models\WidgetCheckinsViewModel.cs" />
     <Compile Include="Models\WidgetCountsViewModel.cs" />
     <Compile Include="Models\WidgetTweetsViewModel.cs" />
@@ -499,6 +500,7 @@
     <Content Include="Public\images\icons\SubscribedCheck.png" />
     <Content Include="Public\images\icons\Tab-EventInfo.png" />
     <Content Include="Public\images\icons\tweet-black.png" />
+    <Content Include="Public\images\icons\twitter-everything-spritev2.png" />
     <Content Include="Public\images\icons\twitter.png" />
     <Content Include="Public\images\icons\WhenandWhere.png" />
     <Content Include="Public\images\jaggie-icons\event-list-header-media.gif" />
@@ -2815,6 +2817,7 @@
     <Content Include="Views\Widget\Tweets.cshtml" />
     <Content Include="Views\Widget\Checkins.cshtml" />
     <Content Include="Views\Widget\_EpiloggerCounts.cshtml" />
+    <Content Include="Views\Events\TweetReply.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Shared\" />

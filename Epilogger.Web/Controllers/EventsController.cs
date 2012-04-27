@@ -1270,6 +1270,21 @@ namespace Epilogger.Web.Controllers {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+        public ActionResult TweetReply(int eventId, long tweetId)
+        {
+            var model = new TweetReplyViewModel()
+                            {
+                                Tweet = _ts.FindByTwitterID(tweetId),
+                                Event = _es.FindByID(eventId)
+                            };
+
+
+            return PartialView(model);
+        }
+
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
     }
 
 }

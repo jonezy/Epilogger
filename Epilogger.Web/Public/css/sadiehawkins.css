@@ -1107,7 +1107,7 @@ ul#left-nav li ul li a.current {color:#a44b79;}
     margin-bottom:5px;
     display:block;}
     
-.dashboard-activity-entry strong.title.TWEET {
+.dashboard-activity-entry strong.title.` {
     background-position:0 0;}
     
 .dashboard-activity-entry strong.title.PHOTOS_VIDEOS {
@@ -1211,7 +1211,7 @@ ul#left-nav li ul li a.current {color:#a44b79;}
     border-bottom:solid 1px #e1e1e1;
     padding:8px 0px;}
    
-x.dashboard-event-item .event-totals {
+.dashboard-event-item .event-totals {
     display:none}
 
 .month-day {
@@ -1321,8 +1321,8 @@ x.dashboard-event-item .event-totals {
 .tweet-content .tweet-content-username-small {text-transform:uppercase;padding-bottom:4px;font-size:8pt;}
 .alltweets-entry .tweet-content p {margin-bottom:2px;}
 
-span.tweet-date {font-size:11px;color:#888}
-span.tweet-date a {font-size:11px;color:#888}
+span.tweet-date { font-size:11px; color: #888; float: left; padding-top: 5px; }
+span.tweet-date a { font-size:11px; color:#888 }
 span.tweet-date a:hover { text-decoration: underline; }
 
 .alllinks-entry { padding: 10px 0;}
@@ -1345,7 +1345,7 @@ span.tweet-date a:hover { text-decoration: underline; }
 #tweetlist .tweet {
     margin-bottom:15px;}
 
-#tweetlist .tweet .tweet-body {
+.tweet .tweet-body {
     /*float:left;*/
     /*width:280px;*/
     font-size:13px;
@@ -1366,10 +1366,61 @@ span.tweet-date a:hover { text-decoration: underline; }
  .tweetText {
      
  }
+ 
  .tweetControls {
-     
+     font-size: 12px;
+     color: #888;
+     list-style: none;
+     padding-top: 5px;
+     margin: 0;
+ }
+ .tweetControls a {
+     color: #888;
+ }
+ .tweetControls a:hover {
+     text-decoration: underline;
+ }
+ .tweetControls li {
+    float:left;
+    display:inline;
+    padding-left: 6px;
+    margin: 0 !important;
  }
  
+.twitterIcon {
+    background:url(/Public/images/icons/twitter-everything-spritev2.png) no-repeat 0 0;
+    width:16px;
+    height:16px;
+    display: inline-block;
+    margin-bottom: -2px;
+}
+ 
+.ReplyIcon {
+    background-position: 0px 0px;
+}
+.ReplyIcon:hover {
+    background-position: -16px 0px; 
+}
+
+.RetweetIcon {
+    background-position: -80px 0px;
+}
+.RetweetIcon:hover {
+    background-position: -96px 0px;
+}
+ 
+.FavoriteIcon {
+    background-position: -32px 0px;
+}
+.FavoriteIcon:hover {
+    background-position: -48px 0px;
+}
+ 
+ 
+.tweetBox {
+    width: 97%;
+    margin-top: 15px;
+} 
  
  /* --- blog posts */
 .blogPost { margin-bottom: 15px; }

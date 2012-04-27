@@ -6,5 +6,6 @@ namespace Epilogger.Web.Models
     {
         public Tweet Tweet { get; set; }
         public bool CanDelete { get; set; }
+        public int EventId { get; set; }
     }
 }

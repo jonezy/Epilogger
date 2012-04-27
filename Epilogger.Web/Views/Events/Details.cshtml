@@ -25,7 +25,7 @@
 <script type="text/javascript" language="javascript">
     head.js('@Url.Content("~/Public/js/EventDetails.js")');
 </script>
-
+@*//href: '@Url.Action("TweetReply", "Events", new {eventId = Model.ID, TwitterId = ""})'*@
 @if (Model.Tweets.FirstOrDefault() != null)
 {
     <script language="javascript" type="text/javascript">
@@ -68,6 +68,30 @@ else
     var photoPostsOnPageQS = '';
     var photoMaxItemsOnPage = 9;
     
+
+    
+    head.ready(function() {
+        $('.Reply').click(function(e) {
+            e.preventDefault();
+
+            width = 550;
+            height = 320;
+            var left = Math.round((window.winWidth / 2) - (width / 2));
+            var top = 0;
+
+            if (window.winHeight > height) {
+                top = Math.round((window.winHeight / 2) - (height / 2));
+            }
+
+            $.colorbox({
+                width: width,
+                height: height,
+                href: "TweetReply?eventId=" + EventID + "&tweetId=" + this.id
+            });
+
+        });
+    });
+
 </script>
 <style type="text/css">
     .tweet {
@@ -530,7 +554,7 @@ else
     <ul class="plain-list" id="tweetlist">
         @foreach (Epilogger.Data.Tweet EPLTweet in Model.Tweets)
         {
-            var ttvm = new Epilogger.Web.Models.TweetTemplateViewModel { Tweet = EPLTweet, CanDelete = Model.CanDelete };
+            var ttvm = new Epilogger.Web.Models.TweetTemplateViewModel { Tweet = EPLTweet, CanDelete = Model.CanDelete, EventId = @Model.ID };
             @Html.Partial("_TweetTemplate", ttvm);
         }
     </ul>

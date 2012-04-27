@@ -124,6 +124,11 @@ namespace Epilogger.Web {
                 new { controller = "events", action = "create"}
             );
 
+            routes.MapRoute(
+                "TweetReply",
+                "events/tweetreply",
+                new { controller = "events", action = "tweetreply" }
+            );
 
             routes.MapRoute(
                 "DeleteEvent",
