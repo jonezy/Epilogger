@@ -12,30 +12,33 @@
         
         
         <span class="tweet-date"><img src="/Public/images/icons/bird_16_blue.png" alt="twitter" />&nbsp;(<a href="https://twitter.com/#!/@Model.Tweet.FromUserScreenName/status/@Model.Tweet.TwitterID" target="_blank">@Html.DisplayFor(thing => Model.Tweet.CreatedDate, "ShortDateTime")</a>)</span>
-        <ul class="tweetControls">
-            <li>
-                <a class="Reply"  href="" id="@Model.Tweet.TwitterID">
-                    <i class="twitterIcon ReplyIcon"></i>
-                    Reply
-                </a>
-            </li>
-            <li>
-                <a class="ReTweet" href="https://twitter.com/intent/retweet?tweet_id=@Model.Tweet.TwitterID" class="">
-                    <i class="twitterIcon RetweetIcon"></i>
-                    ReTweet
-                </a>
-            </li>
-            <li>
-                <a  class="Favorite"href="https://twitter.com/intent/favorite?tweet_id=@Model.Tweet.TwitterID" class="">
-                    <i class="twitterIcon FavoriteIcon"></i>
-                    Favorite
-                </a>
-            </li>
-        </ul>
-
+        @if (Model.ShowControls)
+        {
+            <ul class="tweetControls">
+                <li>
+                    <a class="Reply"  href="" id="@Model.Tweet.TwitterID">
+                        <i class="twitterIcon ReplyIcon"></i>
+                        Reply
+                    </a>
+                </li>
+                <li>
+                    <a class="ReTweet" href="https://twitter.com/intent/retweet?tweet_id=@Model.Tweet.TwitterID" class="">
+                        <i class="twitterIcon RetweetIcon"></i>
+                        ReTweet
+                    </a>
+                </li>
+                <li>
+                    <a  class="Favorite"href="https://twitter.com/intent/favorite?tweet_id=@Model.Tweet.TwitterID" class="">
+                        <i class="twitterIcon FavoriteIcon"></i>
+                        Favorite
+                    </a>
+                </li>
+            </ul>
+        }
+        
         @if (Model.CanDelete)
-            {
-                @: &nbsp;<a href="" class="deleteTweet fright" id="@Model.Tweet.ID">delete</a>
+        {
+                @: <br /><a href="" class="deleteTweet" id="@Model.Tweet.ID">delete from Epilogger</a>
             }
     </div>
 </li>

@@ -1422,6 +1422,11 @@ span.tweet-date a:hover { text-decoration: underline; }
     margin-top: 15px;
 } 
  
+#twitterCharCounter {
+    font-weight: bold;
+} 
+ 
+ 
  /* --- blog posts */
 .blogPost { margin-bottom: 15px; }
 

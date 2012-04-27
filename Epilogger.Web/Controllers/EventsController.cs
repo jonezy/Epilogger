@@ -1278,7 +1278,6 @@ namespace Epilogger.Web.Controllers {
                                 Event = _es.FindByID(eventId)
                             };
 
-
             return PartialView(model);
         }
 

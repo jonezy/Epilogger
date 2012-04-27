@@ -67,7 +67,7 @@
 <div id="events-content">
     <ul class="plain-list" id="tweetlist">
         @foreach (var item in Model.Tweets) {
-            var ttvm = new TweetTemplateViewModel { Tweet = item, CanDelete = Model.CanDelete };
+            var ttvm = new TweetTemplateViewModel { Tweet = item, CanDelete = Model.CanDelete, ShowControls = true };
             @Html.Partial("_TweetTemplate", ttvm);
         }
     </ul>

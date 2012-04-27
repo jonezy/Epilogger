@@ -554,7 +554,7 @@ else
     <ul class="plain-list" id="tweetlist">
         @foreach (Epilogger.Data.Tweet EPLTweet in Model.Tweets)
         {
-            var ttvm = new Epilogger.Web.Models.TweetTemplateViewModel { Tweet = EPLTweet, CanDelete = Model.CanDelete, EventId = @Model.ID };
+            var ttvm = new Epilogger.Web.Models.TweetTemplateViewModel { Tweet = EPLTweet, CanDelete = Model.CanDelete, EventId = @Model.ID, ShowControls = true };
             @Html.Partial("_TweetTemplate", ttvm);
         }
     </ul>

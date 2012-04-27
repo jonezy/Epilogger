@@ -1,18 +1,54 @@
-﻿@model Epilogger.Web.Models.TweetReplyViewModel
+﻿
+@model Epilogger.Web.Models.TweetReplyViewModel
+
+<script src="@Url.Content("~/Public/js/jquery-1.6.2.min.js")" type="text/javascript" language="javascript"></script>
 
 <script language="javascript" type="text/javascript">
+    new function ($) {
+        $.fn.setCursorPosition = function (pos) {
+            if ($(this).get(0).setSelectionRange) {
+                $(this).get(0).setSelectionRange(pos, pos);
+            } else if ($(this).get(0).createTextRange) {
+                var range = $(this).get(0).createTextRange();
+                range.collapse(true);
+                range.moveEnd('character', pos);
+                range.moveStart('character', pos);
+                range.select();
+            }
+        }
+    } (jQuery);
+
     $(document).ready(function () {
+        alert("test");
         //set max length
-        var max_length = 10;
+        var maxLength = 140;
 
         //load in max characters when page loads
-        $("#counter").html(max_length);
+        $("#twitterCharCounter").html(maxLength);
 
         //run listen key press
-        whenkeydown(max_length);
+        whenkeydown(maxLength);
+
+        var replyTo = '@@@Model.Tweet.FromUserScreenName';
+        var hashTag = '@Model.Event.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0]';
+
+        $("#newTweet").val(replyTo + '  ' + hashTag);
+
+        //check if we are still within our maximum number of characters or not
+        var numofchars = $("#newTweet").val().length;
+        var charsLeft = maxLength - numofchars;
+        if (numofchars <= maxLength) {
+            //set the length of the text into the counter span
+            $("#twitterCharCounter").html("").html(charsLeft).css("color", "#000000");
+        } else {
+            //style numbers in red
+            $("#twitterCharCounter").html("").html(charsLeft).css("color", "#FF0000");
+        }
+
+        $("#newTweet").setCursorPosition(replyTo.length + 1);
     });
 
-    whenkeydown = function(max_length) {
+    whenkeydown = function(maxLength) {
         $("#newTweet").unbind().keyup(function () {
             //check if the appropriate text area is being typed into
             if (document.activeElement.id === "newTweet") {
@@ -23,19 +59,20 @@
                 var numofchars = text.length;
 
                 //set the chars left
-                var chars_left = max_length - numofchars;
+                var charsLeft = maxLength - numofchars;
 
                 //check if we are still within our maximum number of characters or not
-                if (numofchars <= max_length) {
+                if (numofchars <= maxLength) {
                     //set the length of the text into the counter span
-                    $("#counter").html("").html(chars_left).css("color", "#000000");
+                    $("#twitterCharCounter").html("").html(charsLeft).css("color", "#000000");
                 } else {
                     //style numbers in red
-                    $("#counter").html("").html(chars_left).css("color", "#FF0000");
+                    $("#twitterCharCounter").html("").html(charsLeft).css("color", "#FF0000");
                 }
             }
         });
-    };
+    };    
+
 </script>
 
 
@@ -43,19 +80,20 @@
     Reply to a Tweet
 </h2>
 <div>
-    @{ var ttvm = new Epilogger.Web.Models.TweetTemplateViewModel { Tweet = Model.Tweet, CanDelete = false, EventId = Model.Event.ID };}
+    @{ var ttvm = new Epilogger.Web.Models.TweetTemplateViewModel { Tweet = Model.Tweet, CanDelete = false, EventId = Model.Event.ID, ShowControls = false };}
     @Html.Partial("_TweetTemplate", ttvm)
 </div>
 
 @using (Html.BeginForm())
 {
-    @Html.TextArea("newTweet", null, new { @class="tweetBox" })
+    
+
+    <textarea class="tweetBox" cols="20" id="newTweet" name="newTweet" rows="2"></textarea>
+    @*@Html.TextArea("newTweet", null, new { @class = "tweetBox" })*@
     <div class="fright">
-        <span id="counter"><strong>140</strong></span>
+        <span id="twitterCharCounter">140</span>
         <input type="submit" value="Tweet" class="blue-action-button confirm" />
     </div>
-    
-    
 }
 
 
