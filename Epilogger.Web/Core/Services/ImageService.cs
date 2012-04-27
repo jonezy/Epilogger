@@ -32,6 +32,11 @@ namespace Epilogger.Web
             return db.Images.Where(t => t.EventID == eventID && t.DateTime >= F && t.DateTime <= T && t.Deleted == false).OrderByDescending(t => t.DateTime).Take(9);
         }
 
+        public IEnumerable<Image> FindByEventIDOrderDescTakeX(int eventID, int numberToReturn, DateTime F, DateTime T)
+        {
+            return db.Images.Where(t => t.EventID == eventID && t.DateTime >= F && t.DateTime <= T && t.Deleted == false).OrderByDescending(t => t.DateTime).Take(numberToReturn);
+        }
+
         public List<Image> GetRandomImagesByEventID(int eventID, int numberToGet)
         {
             return db.GetRandomImagesByEventID(eventID, numberToGet).ExecuteTypedList<Image>();

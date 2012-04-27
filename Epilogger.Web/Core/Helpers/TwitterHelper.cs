@@ -37,9 +37,19 @@ public static class TwitterHelper {
         if (string.IsNullOrEmpty(username))
             throw new ArgumentNullException("user");
 
-        OAuthTokens tokens = TwitterHelper.GetTokens(token, tokenSecret);
-        TwitterResponse<TwitterUser> twitterUser = TwitterUser.Show(tokens, username);
+        try
+        {
+            OAuthTokens tokens = TwitterHelper.GetTokens(token, tokenSecret);
+            TwitterResponse<TwitterUser> twitterUser = TwitterUser.Show(tokens, username);
 
-        return twitterUser;
+            return twitterUser;
+        }
+        catch (Exception)
+        {
+            return new TwitterResponse<TwitterUser>();
+        }
+        
+
+        
     }
 }

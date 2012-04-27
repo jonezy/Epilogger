@@ -44,6 +44,11 @@ namespace Epilogger.Web
             return db.Tweets.Where(t => t.EventID == eventID && t.CreatedDate >= F && t.CreatedDate <= T && (t.Deleted == null || t.Deleted == false)).OrderByDescending(t => t.CreatedDate).Take(6);
         }
 
+        public IEnumerable<Tweet> FindByEventIDOrderDescTakeX(int eventID, int itemsToReturn, DateTime F, DateTime T)
+        {
+            return db.Tweets.Where(t => t.EventID == eventID && t.CreatedDate >= F && t.CreatedDate <= T && (t.Deleted == null || t.Deleted == false)).OrderByDescending(t => t.CreatedDate).Take(itemsToReturn);
+        }
+
         public IEnumerable<Epilogger.Web.Core.Stats.Tweeter> GetTop10TweetersByEventID(int eventID, DateTime F, DateTime T)
         {
             return db.GetTop10TweetersByEventID(eventID, F, T).ExecuteTypedList<Epilogger.Web.Core.Stats.Tweeter>();
@@ -83,21 +88,21 @@ namespace Epilogger.Web
         }
 
 
-        public IEnumerable<Tweet> FindByImageID(int imageID)
+        public IEnumerable<Tweet> FindByImageID(int imageID, int eventId)
         {
-            return FindByImageID(imageID, DateTime.Parse("2000-01-01 00:00:00"), DateTime.Parse("2200-12-31 00:00:00"));
+            return FindByImageID(imageID, DateTime.Parse("2000-01-01 00:00:00"), DateTime.Parse("2200-12-31 00:00:00"), eventId);
         }
 
-        public IEnumerable<Tweet> FindByImageID(int imageID, DateTime startDateTimeFilter, DateTime endDateTimeFilter)
+        public IEnumerable<Tweet> FindByImageID(int imageID, DateTime startDateTimeFilter, DateTime endDateTimeFilter, int eventId)
         {
-            ImageMetaDateService IMDS = new ImageMetaDateService();
-            IEnumerable<ImageMetaDatum> IM = IMDS.FindByImageID(imageID);
+            var imds = new ImageMetaDateService();
+            IEnumerable<ImageMetaDatum> im = imds.FindByImageID(imageID);
 
-            return from TW in db.Tweets
-                   join I in IM on TW.TwitterID equals I.TwitterID
-                   where TW.Deleted == null || TW.Deleted == false
-                   orderby TW.CreatedDate
-                   select TW;
+            return from tw in db.Tweets
+                   join I in im on tw.TwitterID equals I.TwitterID
+                   where tw.EventID == eventId //&& tw.Deleted == null || tw.Deleted == false
+                   orderby tw.CreatedDate
+                   select tw;
         }
 
         public IEnumerable<Tweet> GetPagedTweets(int eventID, System.Nullable<int> page, int tweetsPerPage, DateTime F, DateTime T)

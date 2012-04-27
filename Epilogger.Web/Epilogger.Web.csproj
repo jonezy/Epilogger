@@ -34,9 +34,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxMin">
+      <HintPath>..\packages\AjaxMin.4.41.4378.21434\lib\net20\AjaxMin.dll</HintPath>
+    </Reference>
     <Reference Include="AutoMapper, Version=2.1.265.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AutoMapper.2.1.265\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Combres">
+      <HintPath>..\packages\combres.2.2.2.5\lib\net40\Combres.dll</HintPath>
+    </Reference>
+    <Reference Include="Combres.Mvc">
+      <HintPath>..\packages\combres.mvc.2.2.2.5\lib\net40\Combres.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="DataAnnotationsExtensions, Version=1.0.2.0, Culture=neutral, PublicKeyToken=358a5681c50fd84c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -48,6 +57,12 @@
     </Reference>
     <Reference Include="DevOne.Security.Cryptography.BCrypt">
       <HintPath>..\packages\BCrypt.1.0.0.0\lib\DevOne.Security.Cryptography.BCrypt.dll</HintPath>
+    </Reference>
+    <Reference Include="dotless.Core">
+      <HintPath>..\packages\dotless.1.2.0.0\lib\dotless.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EcmaScript.NET.modified">
+      <HintPath>..\packages\YUICompressor.NET.1.6.0.2\lib\net35\EcmaScript.NET.modified.dll</HintPath>
     </Reference>
     <Reference Include="Elmah, Version=1.2.14318.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -61,6 +76,12 @@
     </Reference>
     <Reference Include="Facebook.Web.Mvc">
       <HintPath>..\packages\FacebookWebMvc.5.0.50.0\lib\net40\Facebook.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Fasterflect">
+      <HintPath>..\packages\fasterflect.2.0.1\lib\net40\Fasterflect.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.1.2.11\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -98,8 +119,8 @@
     <Reference Include="ServiceStack.Text, Version=3.6.0.3283, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ServiceStack.Text.3.6.3\lib\net35\ServiceStack.Text.dll</HintPath>
     </Reference>
-    <Reference Include="smokesignals">
-      <HintPath>..\packages\smokesignals.1.4\lib\smokesignals.dll</HintPath>
+    <Reference Include="smokesignals, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\smokesignals.1.5\lib\smokesignals.dll</HintPath>
     </Reference>
     <Reference Include="SubSonic.Core">
       <HintPath>..\packages\SubSonic.3.0.0.4\lib\SubSonic.Core.dll</HintPath>
@@ -114,6 +135,8 @@
     <Reference Include="System.Data.SQLite.Linq">
       <HintPath>..\packages\System.Data.SQLite.1.0.79.0\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -146,6 +169,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\WebActivator.1.5\lib\net40\WebActivator.dll</HintPath>
     </Reference>
+    <Reference Include="Yahoo.Yui.Compressor">
+      <HintPath>..\packages\YUICompressor.NET.1.6.0.2\lib\net35\Yahoo.Yui.Compressor.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Data\Classes.cs">
@@ -168,6 +194,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Structs.tt</DependentUpon>
     </Compile>
+    <Compile Include="App_Start\Combres.cs" />
     <Compile Include="App_Start\RegisterClientValidationExtensions.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\EmailController.cs" />
@@ -184,11 +211,14 @@
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
+    <Compile Include="Controllers\WidgetController.cs" />
     <Compile Include="Core\AuthenticationServices.cs" />
     <Compile Include="Core\Email\EmailSender.cs" />
     <Compile Include="Core\Email\IEmailSender.cs" />
     <Compile Include="Core\Email\SmtpConfiguration.cs" />
     <Compile Include="Core\Email\TemplateParser.cs" />
+    <Compile Include="Core\Filters\CacheFilter.cs" />
+    <Compile Include="Core\Filters\CompressFilter.cs" />
     <Compile Include="Core\Filters\ElmahLoggerFilter.cs" />
     <Compile Include="Core\Filters\RequiresAuthentication.cs" />
     <Compile Include="Core\Framework\DateTimeMedataDataProvider.cs" />
@@ -222,6 +252,7 @@
     <Compile Include="Core\Services\UserAuthenticationProfileService.cs" />
     <Compile Include="Core\Services\UserService.cs" />
     <Compile Include="Core\Services\VenueService.cs" />
+    <Compile Include="Core\Stats\WidgetTotals.cs" />
     <Compile Include="Core\Stats\HomepageTotals.cs" />
     <Compile Include="Core\Stats\TopTweeters.cs" />
     <Compile Include="Core\UserRole.cs" />
@@ -245,8 +276,15 @@
     <Compile Include="Models\BrowseCategoriesDisplayViewModel.cs" />
     <Compile Include="Models\AllStatsViewModel.cs" />
     <Compile Include="Models\BetaSignUpViewModel.cs" />
+    <Compile Include="Models\WidgetCheckinsViewModel.cs" />
+    <Compile Include="Models\WidgetCountsViewModel.cs" />
+    <Compile Include="Models\WidgetTweetsViewModel.cs" />
+    <Compile Include="Models\WidgetPhotosViewModel.cs" />
+    <Compile Include="Models\WidgetPhotosDetailsViewModel.cs" />
+    <Compile Include="Models\WidgetMenuViewModel.cs" />
     <Compile Include="Models\ImageTemplateViewModel.cs" />
     <Compile Include="Models\TweetTemplateViewModel.cs" />
+    <Compile Include="Models\TwitterAuthTestViewModel.cs" />
     <Compile Include="Models\UploadPhotosViewModel.cs" />
     <Compile Include="Models\CreateAccountModel.cs" />
     <Compile Include="Models\CreateEventViewModel.cs" />
@@ -275,8 +313,14 @@
     <Compile Include="Models\UpdatePasswordModel.cs" />
     <Compile Include="Models\VenueDisplayViewModel.cs" />
     <Compile Include="Models\VenueSearchModel.cs" />
+    <Compile Include="Models\WidgetViewModel.cs" />
     <Compile Include="Models\_EventMenuViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\Epilogr\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Views\Emails\AccountEmails.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -284,16 +328,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\combres.xml" />
+    <Content Include="App_Data\combres_full_with_annotation.xml" />
     <Content Include="favicon.ico" />
-    <Content Include="GettingStarted.txt" />
     <Content Include="Global.asax" />
-    <Content Include="Json.NET.license.txt" />
     <Content Include="Public\css\960_12_col.css" />
     <Content Include="Public\css\base.css" />
     <Content Include="Public\css\cbimages\close.png" />
     <Content Include="Public\css\cbimages\controls.png" />
     <Content Include="Public\css\cbimages\loading.gif" />
     <Content Include="Public\css\colorbox.css" />
+    <Content Include="Public\css\widget.css" />
+    <Content Include="Public\css\sadiehawkins.css" />
     <Content Include="Public\css\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Public\css\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Public\css\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -312,7 +358,7 @@
     <Content Include="Public\css\messages.css" />
     <Content Include="Public\css\modal.css" />
     <Content Include="Public\css\reset.css" />
-    <Content Include="Public\css\sadiehawkins.css" />
+    <Content Include="Public\css\sadiehawkinsOldGood.css" />
     <Content Include="Public\css\skeleton.css" />
     <Content Include="Public\emails\images\footer-tear.gif" />
     <Content Include="Public\emails\images\logo.png" />
@@ -342,6 +388,7 @@
     <Content Include="Public\images\bg\sample6.jpg" />
     <Content Include="Public\images\bg\sample7.jpg" />
     <Content Include="Public\images\bg\search-bg.gif" />
+    <Content Include="Public\images\bg\widgetjaggies-trans.gif" />
     <Content Include="Public\images\body-bg.jpg" />
     <Content Include="Public\images\btn-checkinmore.png" />
     <Content Include="Public\images\btn-submit.png" />
@@ -409,6 +456,7 @@
     <Content Include="Public\images\homepage\refresh.png" />
     <Content Include="Public\images\homepage\RightArrow.png" />
     <Content Include="Public\images\homepage\rockout.png" />
+    <Content Include="Public\images\homepage\SearchIcon.png" />
     <Content Include="Public\images\homepage\socialday.png" />
     <Content Include="Public\images\homepage\socialweek.png" />
     <Content Include="Public\images\homepage\sprouter.png" />
@@ -461,6 +509,7 @@
     <Content Include="Public\images\logo.png" />
     <Content Include="Public\images\logo2.png" />
     <Content Include="Public\images\logow.png" />
+    <Content Include="Public\images\menu\MenuArrow.png" />
     <Content Include="Public\images\reasons\1.png" />
     <Content Include="Public\images\reasons\2.png" />
     <Content Include="Public\images\reasons\3.png" />
@@ -484,6 +533,13 @@
     <Content Include="Public\images\slideshow\7b.png" />
     <Content Include="Public\images\slideshow\7c.png" />
     <Content Include="Public\images\slideshow\8.png" />
+    <Content Include="Public\images\widget\BackArrow.png" />
+    <Content Include="Public\images\widget\bg-teeth.png" />
+    <Content Include="Public\images\widget\count-pics.png" />
+    <Content Include="Public\images\widget\count-tweets.png" />
+    <Content Include="Public\images\widget\epl-logo.png" />
+    <Content Include="Public\images\widget\refresh.png" />
+    <Content Include="Public\images\widget\top10.png" />
     <Content Include="Public\js\AnyTime\anytimec.css" />
     <Content Include="Public\js\AnyTime\anytimec.js" />
     <Content Include="Public\js\BrowseEvents.js" />
@@ -506,6 +562,7 @@
     <Content Include="Public\js\datetime\txtdropdown\txtdropdown.css" />
     <Content Include="Public\js\datetime\txtdropdown\txtdropdown.js" />
     <Content Include="Public\js\epilogger.js" />
+    <Content Include="Public\js\epiloggerInit.js" />
     <Content Include="Public\js\EventDetails.js" />
     <Content Include="Public\js\FacebookPhotoPicker\crossdomain\xd_receiver.htm" />
     <Content Include="Public\js\FacebookPhotoPicker\dojoroot\dijit\CheckedMenuItem.js" />
@@ -2720,6 +2777,16 @@
     <Content Include="Public\js\TimePicker\jquery.timePicker.js" />
     <Content Include="Public\js\TimePicker\jquery.timePicker.min.js" />
     <Content Include="Public\js\TimePicker\timePicker.css" />
+    <None Include="Service References\Epilogr\api.disco" />
+    <None Include="Service References\Epilogr\configuration91.svcinfo" />
+    <None Include="Service References\Epilogr\configuration.svcinfo" />
+    <None Include="Service References\Epilogr\Epilogger.Web.Epilogr.Container.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Epilogr\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -2735,8 +2802,17 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LayoutOldGood.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Account\TwitterAuthTest.cshtml" />
+    <Content Include="Views\Widget\index.cshtml" />
+    <Content Include="Views\Widget\_EmbedLayout.cshtml" />
+    <Content Include="Views\Widget\_widgetMenu.cshtml" />
+    <Content Include="Views\Widget\PhotoDetails.cshtml" />
+    <Content Include="Views\Widget\Photos.cshtml" />
+    <Content Include="Views\Widget\Tweets.cshtml" />
+    <Content Include="Views\Widget\Checkins.cshtml" />
+    <Content Include="Views\Widget\_EpiloggerCounts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Shared\" />
@@ -4803,7 +4879,7 @@
     <Content Include="Views\Account\UpdatePassword.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Areas\Authentication\Views\Web.config" />
-    <Content Include="Views\Shared\GlobalNavigation.cshtml" />
+    <Content Include="Views\Shared\GlobalNavigationOldGood.cshtml" />
     <Content Include="Views\Events\Create.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Dashboard\Profile.cshtml" />
@@ -4827,7 +4903,7 @@
     <Content Include="Views\Events\AllLinks.cshtml" />
     <Content Include="Views\Events\AllBlogPosts.cshtml" />
     <Content Include="Views\Events\AllCheckins.cshtml" />
-    <Content Include="Views\Shared\Navigation.cshtml" />
+    <Content Include="Views\Shared\NavigationOldGood.cshtml" />
     <Content Include="Views\Events\EventToolbar.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TimeSpan.cshtml" />
@@ -8234,6 +8310,12 @@
     <None Include="Public\js\FacebookPhotoPicker\dojoroot\dojo\_firebug\.svn\text-base\tab_rgt_over.png.svn-base" />
     <None Include="Public\js\FacebookPhotoPicker\dojoroot\dojo\_firebug\.svn\text-base\warningIcon.png.svn-base" />
     <None Include="Public\js\FacebookPhotoPicker\dojoroot\dojo\_firebug\LICENSE" />
+    <Content Include="Views\Account\AccountActivationNeeded.cshtml" />
+    <Content Include="Views\Account\ActivationSent.cshtml" />
+    <Content Include="Views\Shared\GlobalNavigation.cshtml" />
+    <Content Include="Views\Shared\Navigation.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Service References\Epilogr\api.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -8249,6 +8331,12 @@
       <Project>{80AC28E2-F4B5-4D9C-8125-89238E665A02}</Project>
       <Name>Epilogger.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\Epilogr\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

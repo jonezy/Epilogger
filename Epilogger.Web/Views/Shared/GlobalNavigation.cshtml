@@ -1,18 +1,18 @@
 ﻿@model Epilogger.Web.Models.GlobalNavigationModel
 
-<div id="user-status">
-    @if (Model.UserLoggedIn) {
-        @:<span class="person">hello <strong>@Html.ActionLink(Model.Username, "index", "account")</strong></span> 
-        @Html.ActionLink("x", "logout", "account")
-    }
-    else
-    {
-        @Html.ActionLink("Login & Register", "login", "account", null, new { @class = "person" })
-    }     
-</div>
 
-
-@if (Model.UserLoggedIn && Model.CurrentUserRole == UserRoleType.Administrator) {
-    <div id="admin-area"><a href="#demo" class="displayClicks">CM</a></div> 
-    <div id="admin-area">@Html.ActionLink("Add Status MSGs", "StatusMessages", "Home")</div> 
-    <div id="admin-area"><a href="/admin/email">Alpha Invite</a></div>}
+@if (Model.UserLoggedIn && Model.CurrentUserRole == UserRoleType.Administrator)
+{
+    <div id="god-menu" class="clearfix">
+        <div class="container_12 clearfix">
+            GOD MENU:&nbsp;&nbsp;&nbsp; <a href="#demo" class="displayClicks">Click Map</a>&nbsp;&nbsp;&nbsp; @Html.ActionLink("Add Status MSGs", "StatusMessages", "Home")
+        </div>
+    </div>
+    
+    /*Hack to keep the page alignment ok*/
+    <style>
+        #content-container {
+            padding: 140px 0px 0px 0px;
+        }
+    </style>
+}

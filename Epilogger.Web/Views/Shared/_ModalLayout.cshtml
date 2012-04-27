@@ -37,10 +37,11 @@
 	
 </head>
 <body>
-@Html.Raw(Html.Notify())
-<div id="flash"></div>
+    @Html.Send(100)
+    @*@Html.Raw(Html.Notify())
+<div id="flash"></div>*@
 
-@RenderBody()
+    @RenderBody()
 
 </body>
 </html>

@@ -1,0 +1,52 @@
+﻿@using Combres.Mvc
+@model Epilogger.Web.Models.WidgetViewModel
+@{
+    Layout = "_EmbedLayout.cshtml";
+    ViewBag.Title = "";
+    
+}
+
+<div style="@string.Format("height:{0}px; width: {1}px;", @Model.height, @Model.width); overflow: hidden;">
+    <div id="header">
+        @Html.Partial("_EpiloggerCounts", @Model.EpiloggerCounts)
+        <a href="http://epilogger.com" target="_blank" border="0"><img id="epiloggerLogo" src="/Public/images/widget/epl-logo.png" alt="Epilogger" /></a>
+    </div>
+    <div id="jaggies"></div>
+    <div class="clearfix" id="outer-container">
+        
+            
+            
+            
+
+        @Html.Partial("_widgetMenu", new Epilogger.Web.Models.WidgetMenuViewModel() { EventSlug = Model.EventSlug, width = Model.width, height = Model.height, returnto = 1 })
+
+        <div class="contentContainer">
+            <div class="rightCol">
+                <ul class="imageList">
+                    @foreach(var theImage in Model.Images)
+                    {
+                        <li><a href="photoDetails/@Model.EventSlug/@theImage.ID?width=@Model.width&height=@Model.height&returnto=1"><img src="@theImage.Fullsize" width="100" alt="" /></a></li>
+                    }
+                </ul>
+            </div>
+            <div class="leftCol" style="@string.Format("height:{0}px;", @Model.height-92);">
+                @foreach(var theTweet in Model.Tweets)
+                {
+                    <a class="twitterName" href="http://www.twitter.com/@theTweet.FromUserScreenName">@@@theTweet.FromUserScreenName:</a>
+                    <div class="tweet boldLinks">
+                        @Html.Raw(theTweet.TextAsHTML)
+                    </div>
+                }
+            </div>
+                
+        </div>
+            
+            
+
+            
+
+
+    </div>
+</div>
+
+

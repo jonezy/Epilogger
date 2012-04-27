@@ -1,6 +1,8 @@
 ﻿
-head.ready(function () {
 
+
+
+head.ready(function () {
 
     //Setup the Date span
     $("#start_time, #end_time").timePicker({
@@ -135,7 +137,7 @@ head.ready(function () {
             $("#whattoinclude-info .blocking").unblock();
             $("#whattoinclude-info h4").unblock();
             $("#step2").removeClass("stepDisable");
-            $("#step1 span").html("&nbsp;")
+            $("#step1 span").html("&nbsp;");
             $("#step1").addClass("stepComplete");
         }
 
@@ -143,7 +145,7 @@ head.ready(function () {
             $("#whenandwhere-info .blocking").unblock();
             $("#whenandwhere-info h4").unblock();
             $("#step3").removeClass("stepDisable");
-            $("#step2 span").html("&nbsp;")
+            $("#step2 span").html("&nbsp;");
             $("#step2").addClass("stepComplete");
         }
 
@@ -151,14 +153,14 @@ head.ready(function () {
             $("#moreinformation-info .blocking").unblock();
             $("#moreinformation-info h4").unblock();
             $("#step4").removeClass("stepDisable");
-            $("#step3 span").html("&nbsp;")
+            $("#step3 span").html("&nbsp;");
             $("#step3").addClass("stepComplete");
             $(".submitForm").removeClass("disabled");
             $(".submitForm").removeAttr("disabled");
         }
 
         if ($("#Description").val().length > 0 && $("#WebsiteURL").val().length > 0 && $("#TwitterAccount").val().length > 0 && $("#FacebookPageURL").val().length > 0 && $("#Cost").val().length > 0) {
-            $("#step4 span").html("&nbsp;")
+            $("#step4 span").html("&nbsp;");
             $("#step4").addClass("stepComplete");
         }
 
@@ -196,7 +198,7 @@ head.ready(function () {
 
                 $("select", "#rule" + counter).attr("id", "operator" + counter);
 
-                $("#seachTerm" + counter).bind("keyup", function (e) {
+                $("#seachTerm" + counter).bind("keyup", function () {
                     buildSearchString();
                 });
 
@@ -290,23 +292,23 @@ head.ready(function () {
     function buildSearchString() {
         var searchString = "";
         $(":input", "#rule-group").not(":button, :submit, :reset, :hidden").each(function (index) {
-        
+
             switch ($(this).val()) {
                 case "OR":
                 case "AND":
                 case "NOT":
                     if ($(this).parent().find(":text").val().length > 0) {
-                        searchString += $(this).val() + " ";    
+                        searchString += $(this).val() + " ";
                     }
                     break;
                 default:
                     searchString += $(this).val() + " ";
                     break;
             }
-                
-//            if ($(this).val().length > 0) {
-//                searchString += $(this).val() + " ";
-//            }
+
+            //            if ($(this).val().length > 0) {
+            //                searchString += $(this).val() + " ";
+            //            }
 
         });
         $("#SearchTerms").val(searchString);
@@ -316,7 +318,7 @@ head.ready(function () {
 
         if ($("#seachTerm1").parent().next().find(":input").next(":input").val().length != 0) {
             PlainTextString = "";
-            PlainTextString = "You're searching for data containing <strong>" + $("#seachTerm1").val() + "</strong> "
+            PlainTextString = "You're searching for data containing <strong>" + $("#seachTerm1").val() + "</strong> ";
 
             $(":input", "#rule-group").not(":button, :submit, :reset, :hidden, #seachTerm1").each(function (index) {
                 switch ($(this).val()) {
@@ -343,5 +345,24 @@ head.ready(function () {
         }
     }
 
-
 });
+
+
+function SetSelectedVenue(venueId, venueName, venueAddress, venueCity, venueState, venueZip) {
+    $("#FoursquareVenueID").val(venueId);
+    $("#selectedVenue").html("<strong>" + venueName + "</strong><br />" + venueAddress + "<br />" + venueCity + ", " + venueState + "<br />" + venueZip + "<br />");
+    $("#foursquare-search").val("Change venue");
+
+    //Dismis the popup
+    //$.colorbox.close();
+    parent.$.fn.colorbox.close();
+
+    $("#moreinformation-info .blocking").unblock();
+    $("#moreinformation-info h4").unblock();
+    $("#step4").removeClass("stepDisable");
+    $("#step3 span").html("&nbsp;");
+    $("#step3").addClass("stepComplete");
+    $(".submitForm").removeClass("disabled");
+    $(".submitForm").removeAttr("disabled");
+
+}

@@ -1,4 +1,5 @@
-﻿@model Epilogger.Web.Models.CreateEventViewModel
+﻿@using Combres.Mvc
+@model Epilogger.Web.Models.CreateEventViewModel
 
 @{
     Layout = "~/Views/Shared/_InteriorLayout.cshtml";
@@ -6,10 +7,10 @@
 }
 
 
-
+@Html.CombresLink("CreateEventJs")
 <script type="text/javascript">
-    head.js('@Url.Content("~/Public/js/jquery.blockUI.js")');
-    head.js('@Url.Content("~/Public/js/CreateEditEvent.js")');
+//    head.js('@Url.Content("~/Public/js/jquery.blockUI.js")');
+//    head.js('@Url.Content("~/Public/js/CreateEditEvent.js")');
     var page = "Create";
 </script>
 

@@ -55,7 +55,13 @@
 
     <div id="homepage-intro">
         <span class="clear spacer"></span>
-        <h1 style="color:#f51282; font-size: 16pt;"><img src="@Url.Content("~/Public/images/homepage/RightArrow.png")" alt="" class="homepage-arrow" />WHAT IS EPILOGGER?</h1>
+        @using (Html.BeginForm("Search", "Home", FormMethod.Post, null))
+        {
+            <input type="submit" class="blue-action-button" id="homepageSearchOK" value="OK" />
+            @Html.TextBox("SearchTerm", null, new { @class = "remove-bottom", @title = "FIND YOUR EVENT..." })
+        }
+        
+        @*<h1 style="color:#f51282; font-size: 16pt;"><img src="@Url.Content("~/Public/images/homepage/RightArrow.png")" alt="" class="homepage-arrow" />WHAT IS EPILOGGER?</h1>*@
         <p>We found that after attending an event, online or offline, its a feat trying to track down all the great content shared by all those who tweeted, blogged, or checked-in. It’s even harder when you check back a few weeks later and some of the content has disappeared with age!<br /> @Html.ActionLink("Want to know more?", "about", null, new { @style = "font-weight: bold; text-decoration: none;" }) </p>
     
     
@@ -100,8 +106,9 @@
             }
             else if (item.ActivityType == Epilogger.Web.Models.ActivityType.PHOTOS_VIDEOS)
             {
+                var thePath = item.Image.EventID + "/" + item.Image.ID;
                 <div class="withcomment newPhotoupdates" id="photo-@item.Image.ID">
-                    <a href="@item.Image.Fullsize" rel="prettyPhoto[latestphotos]" photoid="@item.Image.ID" title="" id="@item.Image.ID">
+                    <a href="@item.Image.Fullsize" rel="prettyPhoto[latestphotos]" photoid="@thePath" title="" id="@item.Image.ID">
                         <img src="@item.Image.Fullsize" width="250" border="0" alt="" />
                     </a>
                 </div>
@@ -131,8 +138,8 @@
                 }
             </strong>
         </div>
-        if (Model.Activity.IndexOf(item) < 3 || Model.Activity.IndexOf(item) > 3 && Model.Activity.IndexOf(item) < 7 || Model.Activity.IndexOf(item) > 7 && Model.Activity.IndexOf(item) < 11) 
-        { 
+                if (Model.Activity.IndexOf(item) < 3 || Model.Activity.IndexOf(item) > 3 && Model.Activity.IndexOf(item) < 7 || Model.Activity.IndexOf(item) > 7 && Model.Activity.IndexOf(item) < 11)
+                { 
             <div class="homepage-activity-entry-spacer">&nbsp;</div>
         } 
        

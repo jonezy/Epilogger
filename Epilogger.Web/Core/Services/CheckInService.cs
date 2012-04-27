@@ -15,35 +15,35 @@ namespace Epilogger.Web
         }
 
 
-        public int FindCheckInCountByEventID(int EventID, DateTime F, DateTime T)
+        public int FindCheckInCountByEventID(int eventID, DateTime f, DateTime T)
         {
-            return db.CheckIns.Where(t => t.EventID == EventID && t.CheckInDateTime >= F && t.CheckInDateTime <= T).Count();
+            return db.CheckIns.Count(t => t.EventID == eventID && t.CheckInDateTime >= f && t.CheckInDateTime <= T);
         }
 
-        public IEnumerable<CheckIn> FindByEventIDOrderDescTake16(int EventID, DateTime F, DateTime T)
+        public IEnumerable<CheckIn> FindByEventIDOrderDescTake16(int eventID, DateTime F, DateTime T)
         {
-            return db.CheckIns.Where(t => t.EventID == EventID && t.CheckInDateTime >= F && t.CheckInDateTime <= T).OrderByDescending(t => t.CheckInDateTime).Take(16);
+            return db.CheckIns.Where(t => t.EventID == eventID && t.CheckInDateTime >= F && t.CheckInDateTime <= T).OrderByDescending(t => t.CheckInDateTime).Take(16);
         }
 
-        public IEnumerable<CheckIn> FindByEventIDOrderDescTakeAll(int EventID, DateTime F, DateTime T)
+        public IEnumerable<CheckIn> FindByEventIDOrderDescTakeAll(int eventID, DateTime F, DateTime T)
         {
-            return db.CheckIns.Where(t => t.EventID == EventID && t.CheckInDateTime >= F && t.CheckInDateTime <= T).OrderByDescending(t => t.CheckInDateTime);
+            return db.CheckIns.Where(t => t.EventID == eventID && t.CheckInDateTime >= F && t.CheckInDateTime <= T).OrderByDescending(t => t.CheckInDateTime);
         }
 
-        public IEnumerable<CheckIn> FindByEventIDPaged(int EventID, int currentPage, int recordsPerPage, DateTime F, DateTime T)
+        public IEnumerable<CheckIn> FindByEventIDPaged(int eventID, int currentPage, int recordsPerPage, DateTime F, DateTime T)
         {
-            var checkins = db.CheckIns.Where(e => e.EventID == EventID && e.CheckInDateTime >= F && e.CheckInDateTime <= T);
+            var checkins = db.CheckIns.Where(e => e.EventID == eventID && e.CheckInDateTime >= F && e.CheckInDateTime <= T);
             return checkins.Skip(currentPage * recordsPerPage).Take(recordsPerPage).OrderByDescending(c => c.CheckInDateTime);
         }
 
-        public IEnumerable<CheckIn> FindByEventID(int EventID)
+        public IEnumerable<CheckIn> FindByEventID(int eventID)
         {
-            return FindByEventID(EventID, DateTime.Parse("1900-01-01 00:00:00"), DateTime.Parse("9999-12-31 00:00:00"));
+            return FindByEventID(eventID, DateTime.Parse("1900-01-01 00:00:00"), DateTime.Parse("9999-12-31 00:00:00"));
         }
 
-        public IEnumerable<CheckIn> FindByEventID(int EventID, DateTime StartDateTimeFilter, DateTime EndDateTimeFilter)
+        public IEnumerable<CheckIn> FindByEventID(int eventID, DateTime startDateTimeFilter, DateTime endDateTimeFilter)
         {
-            return db.CheckIns.Where(t => t.EventID == EventID & t.CheckInDateTime >= StartDateTimeFilter & t.CheckInDateTime <= EndDateTimeFilter);
+            return db.CheckIns.Where(t => t.EventID == eventID & t.CheckInDateTime >= startDateTimeFilter & t.CheckInDateTime <= endDateTimeFilter);
         }
         
         public int Count() {

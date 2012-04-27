@@ -16,6 +16,12 @@ namespace Epilogger.Web {
         public List<Event> AllEvents() {
             return base.GetData();
         }
+
+        public List<Event> Get50Events()
+        {
+            return db.Events.OrderByDescending(t => t.ID).Take(50).ToList();
+        }
+
         public Event RandomUpcomingEvent() {
             List<Event> events = base.db.Events.Where(e => e.StartDateTime > DateTime.UtcNow).ToList();
             Random rnd = new Random();
@@ -173,7 +179,14 @@ namespace Epilogger.Web {
 
         public Event FindBySlug(String Slug)
         {
-            return GetData().Where(e => e.EventSlug == Slug).FirstOrDefault();
+            //A quick little hack to let OLD URLs work
+            int eventID;
+            if (int.TryParse(Slug, out eventID))
+            {
+                return GetData().FirstOrDefault(e => e.ID == eventID);
+            }
+
+            return GetData().FirstOrDefault(e => e.EventSlug == Slug);
         }
 
 
