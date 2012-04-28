@@ -7,15 +7,18 @@ using RichmondDay.Helpers;
 using Twitterizer;
 
 namespace Epilogger.Web.Areas.Authentication.Controllers {
-    public class TwitterController : BaseController, IAuthenticationController {
-        public ActionResult ConnectRequest() {
+    public partial class TwitterController : BaseController, IAuthenticationController
+    {
+        public virtual ActionResult ConnectRequest()
+        {
             string requestToken = OAuthUtility.GetRequestToken(TwitterHelper.TwitterConsumerKey, TwitterHelper.TwitterConsumerSecret, TwitterHelper.TwitterCallbackURL).Token;
             Uri authorizationUrl = OAuthUtility.BuildAuthorizationUri(requestToken,false);
             
             return Redirect(authorizationUrl.ToString());
         }
 
-        public ActionResult ConnectAccount() {
+        public virtual ActionResult ConnectAccount()
+        {
             if (Request.QueryString["oauth_token"] != null) {
                 OAuthTokenResponse accessTokenResponse = OAuthUtility.GetAccessTokenDuringCallback(TwitterHelper.TwitterConsumerKey, TwitterHelper.TwitterConsumerSecret);
                 // check to see if we already have the screen name in the userauth table.
@@ -47,7 +50,8 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
             return RedirectToAction("Index", "Account", new { area = "" });
         }
 
-        public ActionResult Disconnect() {
+        public virtual ActionResult Disconnect()
+        {
             UserAuthenticationProfileService service = new UserAuthenticationProfileService();
             service.DisconnectService(AuthenticationServices.TWITTER, CurrentUserID);
 

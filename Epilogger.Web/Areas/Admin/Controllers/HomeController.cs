@@ -7,11 +7,13 @@ using Epilogger.Web.Controllers;
 
 namespace Epilogger.Web.Areas.Admin.Controllers {
     [RequiresAuthentication(ValidUserRole = UserRoleType.Administrator, AccessDeniedMessage = "You must be an administrator to access this part of the site.")]
-    public class HomeController : BaseController {
+    public partial class HomeController : BaseController
+    {
         //
         // GET: /Admin/Home/
 
-        public ActionResult Index() {
+        public virtual ActionResult Index()
+        {
             return View();
         }
 

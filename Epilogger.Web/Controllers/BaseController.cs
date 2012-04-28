@@ -7,7 +7,8 @@ using RichmondDay.Helpers;
 
 namespace Epilogger.Web.Controllers {
 
-    public class BaseController : Controller {
+    public partial class BaseController : Controller
+    {
         protected Guid CurrentUserID {
             get {
 

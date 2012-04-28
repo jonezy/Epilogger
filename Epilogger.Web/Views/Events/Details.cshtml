@@ -543,6 +543,9 @@ else
 
 
 <!-- PHOTOS & VIDEOS -->
+
+@Html.Action(MVC.Image.Upload())
+
 <div class="grid_7 omega">
     <h2>
         <span class="number" id="photoCount">@string.Format("{0:#,###}", Model.ImageCount)</span>Photos

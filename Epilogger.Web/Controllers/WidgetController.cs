@@ -12,7 +12,7 @@ using Epilogger.Web.Models;
 
 namespace Epilogger.Web.Controllers
 {
-    public class WidgetController : Controller
+    public partial class WidgetController : Controller
     {
         EventService _es = new EventService();
         TweetService _ts = new TweetService();
@@ -70,7 +70,7 @@ namespace Epilogger.Web.Controllers
         // GET: /Widget/
         [CacheFilter]
         [CompressFilter]
-        public ActionResult Index(string id, string width, string height)
+        public virtual ActionResult Index(string id, string width, string height)
         {
             var requestedEvent = _es.FindBySlug(id);
             var model = Mapper.Map<Event, WidgetViewModel>(requestedEvent);
@@ -104,7 +104,7 @@ namespace Epilogger.Web.Controllers
         // GET: /Widget/
         [CacheFilter]
         [CompressFilter]
-        public ActionResult PhotoDetails(string id, int PhotoID, string width, string height, int returnto)
+        public virtual ActionResult PhotoDetails(string id, int PhotoID, string width, string height, int returnto)
         {
             var requestedEvent = _es.FindBySlug(id);
             var model = Mapper.Map<Event, WidgetPhotosDetailsViewModel>(requestedEvent);
@@ -130,7 +130,7 @@ namespace Epilogger.Web.Controllers
         // GET: /Widget/
         [CacheFilter]
         [CompressFilter]
-        public ActionResult Photos(string id, string width, string height)
+        public virtual ActionResult Photos(string id, string width, string height)
         {
             var requestedEvent = _es.FindBySlug(id);
             var model = Mapper.Map<Event, WidgetPhotosViewModel>(requestedEvent);
@@ -157,7 +157,7 @@ namespace Epilogger.Web.Controllers
         // GET: /Widget/
         [CacheFilter]
         [CompressFilter]
-        public ActionResult Tweets(string id, string width, string height)
+        public virtual ActionResult Tweets(string id, string width, string height)
         {
             var requestedEvent = _es.FindBySlug(id);
             var model = Mapper.Map<Event, WidgetTweetsViewModel>(requestedEvent);
@@ -176,7 +176,7 @@ namespace Epilogger.Web.Controllers
         // GET: /Widget/
         [CacheFilter]
         [CompressFilter]
-        public ActionResult Checkins(string id, string width, string height)
+        public virtual ActionResult Checkins(string id, string width, string height)
         {
             var requestedEvent = _es.FindBySlug(id);
             var model = Mapper.Map<Event, WidgetCheckinsViewModel>(requestedEvent);
