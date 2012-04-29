@@ -200,6 +200,10 @@
     <Compile Include="Areas\Admin\Controllers\EmailController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Models\InviteUsersViewModel.cs" />
+    <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
+    <Compile Include="Areas\Api\Controllers\EventsController.cs" />
+    <Compile Include="Areas\Api\Models\EventManager.cs" />
+    <Compile Include="Areas\Api\Models\IEventManager.cs" />
     <Compile Include="Areas\Authentication\AuthenticationAreaRegistration.cs" />
     <Compile Include="Areas\Authentication\Controllers\FacebookController.cs" />
     <Compile Include="Areas\Authentication\Controllers\IAuthenticationController.cs" />
@@ -2781,6 +2785,7 @@
     <Content Include="Public\js\TimePicker\jquery.timePicker.js" />
     <Content Include="Public\js\TimePicker\jquery.timePicker.min.js" />
     <Content Include="Public\js\TimePicker\timePicker.css" />
+    <Content Include="Areas\Api\Views\Web.config" />
     <None Include="Service References\Epilogr\api.disco" />
     <None Include="Service References\Epilogr\configuration91.svcinfo" />
     <None Include="Service References\Epilogr\configuration.svcinfo" />
@@ -2821,6 +2826,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\Api\Views\Shared\" />
     <Folder Include="Areas\Authentication\Models\" />
     <Folder Include="Areas\Authentication\Views\Shared\" />
     <Folder Include="Public\js\FacebookPhotoPicker\crossdomain\.svn\prop-base\" />
