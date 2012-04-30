@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
@@ -193,14 +195,11 @@ namespace Epilogger.Web.Controllers {
             }        
             else 
             {
-                DateTime FromDateTime;
-                DateTime ToDateTime;
+                var fromDateTime = DateTime.Parse(collection["FromDateTime"]);
+                var toDateTime = DateTime.Parse(collection["ToDateTime"]);
 
-                FromDateTime = DateTime.Parse(collection["FromDateTime"]);
-                ToDateTime = DateTime.Parse(collection["ToDateTime"]);
-
-                string encodedFrom = Epilogger.Web.Helpers.base64Encode(String.Format("{0:yyyy-MM-dd HH:mm:ss}", FromDateTime));
-                string encodedTo = Epilogger.Web.Helpers.base64Encode(String.Format("{0:yyyy-MM-dd HH:mm:ss}", ToDateTime));
+                string encodedFrom = Epilogger.Web.Helpers.base64Encode(String.Format("{0:yyyy-MM-dd HH:mm:ss}", fromDateTime));
+                string encodedTo = Epilogger.Web.Helpers.base64Encode(String.Format("{0:yyyy-MM-dd HH:mm:ss}", toDateTime));
 
 
                 return RedirectToAction("Details", new { id = id, f = encodedFrom, t = encodedTo });
@@ -1168,8 +1167,8 @@ namespace Epilogger.Web.Controllers {
         public ActionResult StarRatings(FormCollection fc)
         {
             
-            int UserRating;
-            int.TryParse(fc["UserRating"], out UserRating);
+            int userRating;
+            int.TryParse(fc["UserRating"], out userRating);
 
             Event requestedEvent = _es.FindBySlug(fc["EventSlug"]);
             if (requestedEvent != null)
@@ -1186,7 +1185,7 @@ namespace Epilogger.Web.Controllers {
                                     EventID = requestedEvent.ID,
                                     UserID = CurrentUserID,
                                     RatingDateTime = DateTime.UtcNow,
-                                    UserRating = UserRating
+                                    UserRating = userRating
                                 };
 
 
@@ -1202,24 +1201,16 @@ namespace Epilogger.Web.Controllers {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         [HttpPost]
-        public bool Delete(int EventID)
+        public bool Delete(int eventID)
         {
-            try
-            {
-                MQ.MSGProducer MP = new MQ.MSGProducer("Epilogger", "System");
-                MQ.Messages.SystemProcessingMSG DeleteMSG = new MQ.Messages.SystemProcessingMSG();
-                DeleteMSG.EventID = EventID;
-                DeleteMSG.Task = MQ.Messages.SystemMessageType.Delete;
-                MP.SendMessage(DeleteMSG);
-                MP.Dispose();
+            var mp = new MQ.MSGProducer("Epilogger", "System");
+            var deleteMSG = new MQ.Messages.SystemProcessingMSG
+                                {EventID = eventID, Task = MQ.Messages.SystemMessageType.Delete};
+            mp.SendMessage(deleteMSG);
+            mp.Dispose();
 
-                this.StoreSuccess("Your event has been added to the Delete queue! Due to the large volume of data, your event may take a few minutes to be removed from the system.");
-            }
-            catch (Exception)
-            {    
-                throw;
-            }
-            
+            this.StoreSuccess("Your event has been added to the Delete queue! Due to the large volume of data, your event may take a few minutes to be removed from the system.");
+
             return true;
         }
 
@@ -1281,6 +1272,29 @@ namespace Epilogger.Web.Controllers {
             return PartialView(model);
         }
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+        
+        [HttpPost]
+        public ActionResult TweetReply(TweetReplyViewModel model)
+        {
+            //var tokens = OAuthUtility.GetAccessToken(
+            //    ConfigurationManager.AppSettings["TwitterConsumerKey"],
+            //    ConfigurationManager.AppSettings["TwitterConsumerSecret"],
+            //    oauth_token,
+            //    oauth_verifier);
+
+            var tokens = new OAuthTokens()
+                            {
+                                ConsumerKey = ConfigurationManager.AppSettings["TwitterConsumerKey"],
+                                ConsumerSecret = ConfigurationManager.AppSettings["TwitterConsumerSecret"],
+                                AccessToken = CurrentUserTwitterAuthorization.Token,
+                                AccessTokenSecret = CurrentUserTwitterAuthorization.TokenSecret
+                            };
+
+            var ts = TwitterStatus.Update(tokens, model.ReplyNewTweet.ToString(CultureInfo.InvariantCulture));
+
+            return PartialView(model);
+        }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 

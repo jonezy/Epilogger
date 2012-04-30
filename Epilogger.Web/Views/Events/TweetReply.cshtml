@@ -1,78 +1,13 @@
 ﻿
 @model Epilogger.Web.Models.TweetReplyViewModel
 
-<script src="@Url.Content("~/Public/js/jquery-1.6.2.min.js")" type="text/javascript" language="javascript"></script>
-
-<h2>
-    Reply to a Tweet
-</h2>
-<div>
-    @{ var ttvm = new Epilogger.Web.Models.TweetTemplateViewModel { Tweet = Model.Tweet, CanDelete = false, EventId = Model.Event.ID, ShowControls = false };}
-    @Html.Partial("_TweetTemplate", ttvm)
-</div>
-
-@using (Html.BeginForm())
-{
-    
-
-    <textarea class="tweetBox" cols="20" id="newTweet" name="newTweet" rows="2"></textarea>
-    @*@Html.TextArea("newTweet", null, new { @class = "tweetBox" })*@
-    <div class="fright">
-        <span id="twitterCharCounter">140</span>
-        <input type="submit" value="Tweet" class="blue-action-button confirm" />
-    </div>
-}
-
+@*<script src="@Url.Content("~/Public/js/jquery-1.6.2.min.js")" type="text/javascript" language="javascript"></script>*@
 <script language="javascript" type="text/javascript">
 
-
-    new function ($) {
-        $.fn.setCursorPosition = function (pos) {
-            if ($(this).get(0).setSelectionRange) {
-                $(this).get(0).setSelectionRange(pos, pos);
-            } else if ($(this).get(0).createTextRange) {
-                var range = $(this).get(0).createTextRange();
-                range.collapse(true);
-                range.moveEnd('character', pos);
-                range.moveStart('character', pos);
-                range.select();
-            }
-        }
-    } (jQuery);
-
-    $(document).ready(function () {
-        //set max length
-        var maxLength = 140;
-
-        //load in max characters when page loads
-        $("#twitterCharCounter").html(maxLength);
-
-        //run listen key press
-        whenkeydown(maxLength);
-
-        var replyTo = '@@@Model.Tweet.FromUserScreenName';
-        var hashTag = '@Model.Event.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0]';
-
-        $("#newTweet").val(replyTo + '  ' + hashTag);
-
-        //check if we are still within our maximum number of characters or not
-        var numofchars = $("#newTweet").val().length;
-        var charsLeft = maxLength - numofchars;
-        if (numofchars <= maxLength) {
-            //set the length of the text into the counter span
-            $("#twitterCharCounter").html("").html(charsLeft).css("color", "#000000");
-        } else {
-            //style numbers in red
-            $("#twitterCharCounter").html("").html(charsLeft).css("color", "#FF0000");
-        }
-
-        $("#newTweet").setCursorPosition(replyTo.length + 1);
-    });
-
     whenkeydown = function (maxLength) {
-        $("#newTweet").unbind().keyup(function () {
+        $("#ReplyNewTweet").unbind().keyup(function () {
             //check if the appropriate text area is being typed into
-            if (document.activeElement.id === "newTweet") {
+            if (document.activeElement.id === "ReplyNewTweet") {
                 //get the data in the field
                 var text = $(this).val();
 
@@ -92,6 +27,64 @@
                 }
             }
         });
-    };    
+    };
+
+    if (document.readyState === "complete") { init(); }
+
+    function init() {
+        //set max length
+        var maxLength = 140;
+
+        //load in max characters when page loads
+        $("#twitterCharCounter").html(maxLength);
+
+        //run listen key press
+        whenkeydown(maxLength);
+
+        var replyTo = '@@@Model.Tweet.FromUserScreenName';
+        var hashTag = '@(Model.Event.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0].Contains("#") ? Model.Event.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0] : "#" + Model.Event.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0])';
+
+
+        $("#ReplyNewTweet").val(replyTo + '  ' + hashTag);
+
+        //check if we are still within our maximum number of characters or not
+        var numofchars = $("#ReplyNewTweet").val().length;
+        var charsLeft = maxLength - numofchars;
+        if (numofchars <= maxLength) {
+            //set the length of the text into the counter span
+            $("#twitterCharCounter").html("").html(charsLeft).css("color", "#000000");
+        } else {
+            //style numbers in red
+            $("#twitterCharCounter").html("").html(charsLeft).css("color", "#FF0000");
+        }
+
+        //$("#newTweet").focus();
+        window.setTimeout(function () {
+            $("#ReplyNewTweet").setCursorPosition(replyTo.length + 1);
+        }, 500);
+            
+            
+    };
 
 </script>
+
+<h2>
+    Reply to a Tweet
+</h2>
+<div>
+    @{ var ttvm = new Epilogger.Web.Models.TweetTemplateViewModel { Tweet = Model.Tweet, CanDelete = false, EventId = Model.Event.ID, ShowControls = false };}
+    @Html.Partial("_TweetTemplate", ttvm)
+</div>
+
+@using (Html.BeginForm())
+{
+    
+
+    <textarea class="tweetBox" cols="20" id="ReplyNewTweet" name="ReplyNewTweet" rows="2"></textarea>
+    @*@Html.TextArea("newTweet", null, new { @class = "tweetBox" })*@
+    <div class="fright">
+        <span id="twitterCharCounter">140</span>
+        <input type="submit" value="Tweet" class="blue-action-button confirm" />
+    </div>
+}
+

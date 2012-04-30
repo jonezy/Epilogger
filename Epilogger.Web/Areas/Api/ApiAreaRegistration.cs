@@ -21,30 +21,30 @@ namespace Epilogger.Web.Areas.Api
             context.MapRoute(
                 "SingleEvent",
                 "Api/Events/Event/{id}",
-                new { controller="Events", action = "Event", id = UrlParameter.Optional }
+                new { controller="ApiEvents", action = "Event", id = UrlParameter.Optional }
             );
             context.MapRoute(
                 "ListEvents",
                 "Api/Events/{page}/{count}",
-                new { controller = "Events", action = "EventList", page = UrlParameter.Optional, count = UrlParameter.Optional }
+                new { controller = "ApiEvents", action = "EventList", page = UrlParameter.Optional, count = UrlParameter.Optional }
             );
             context.MapRoute(
                 "ListEventsAll",
                 "Api/Events",
-                new { controller = "Events", action = "EventList", page = UrlParameter.Optional, count = UrlParameter.Optional }
+                new { controller = "ApiEvents", action = "EventList", page = UrlParameter.Optional, count = UrlParameter.Optional }
             );
 
             context.MapRoute(
                 "ListCategoriesAll",
                 "Api/Categories",
-                new { controller = "Events", action = "Categories" }
+                new { controller = "ApiEvents", action = "Categories" }
             );
 
-            context.MapRoute(
-                "ListEventsAll",
-                "Api/Events/Search/{searchTerms}",
-                new { controller = "Events", action = "Search", searchTerms = UrlParameter.Optional }
-            );
+            //context.MapRoute(
+            //    "ListEventsAll",
+            //    "Api/Events/Search/{searchTerms}",
+            //    new { controller = "Events", action = "Search", searchTerms = UrlParameter.Optional }
+            //);
 
             context.MapRoute(
                 "Api_default",

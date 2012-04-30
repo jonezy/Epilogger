@@ -201,7 +201,7 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Models\InviteUsersViewModel.cs" />
     <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
-    <Compile Include="Areas\Api\Controllers\EventsController.cs" />
+    <Compile Include="Areas\Api\Controllers\ApiEventsController.cs" />
     <Compile Include="Areas\Api\Models\ApiCategory.cs" />
     <Compile Include="Areas\Api\Models\ApiEvent.cs" />
     <Compile Include="Areas\Api\Models\CategoryManager.cs" />

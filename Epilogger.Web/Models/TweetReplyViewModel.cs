@@ -6,5 +6,6 @@ namespace Epilogger.Web.Models
     {
         public Tweet Tweet { get; set; }
         public Event Event { get; set; }
+        public string ReplyNewTweet { get; set; }
     }
 }
