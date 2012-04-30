@@ -202,7 +202,11 @@
     <Compile Include="Areas\Admin\Models\InviteUsersViewModel.cs" />
     <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
     <Compile Include="Areas\Api\Controllers\EventsController.cs" />
+    <Compile Include="Areas\Api\Models\ApiCategory.cs" />
+    <Compile Include="Areas\Api\Models\ApiEvent.cs" />
+    <Compile Include="Areas\Api\Models\CategoryManager.cs" />
     <Compile Include="Areas\Api\Models\EventManager.cs" />
+    <Compile Include="Areas\Api\Models\ICategoryManager.cs" />
     <Compile Include="Areas\Api\Models\IEventManager.cs" />
     <Compile Include="Areas\Authentication\AuthenticationAreaRegistration.cs" />
     <Compile Include="Areas\Authentication\Controllers\FacebookController.cs" />

@@ -16,9 +16,9 @@ namespace Epilogger.Web
             return base.GetData().OrderBy(c => c.CategoryName).ToList();
         }
 
-        public EventCategory GetCategoryBySlug(string CategorySlug)
+        public EventCategory GetCategoryBySlug(string categorySlug)
         {
-            return db.EventCategories.Where(c => c.URLStub == CategorySlug).FirstOrDefault();
+            return db.EventCategories.FirstOrDefault(c => c.URLStub == categorySlug);
         }
 
     }

@@ -8,6 +8,7 @@ using System.Web.Routing;
 using AutoMapper;
 
 using Epilogger.Data;
+using Epilogger.Web.Areas.Api.Models;
 using Epilogger.Web.Core.Email;
 using Epilogger.Web.Models;
 using Timezone.Framework;
@@ -447,6 +448,22 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.Type, opt => opt.Ignore())
                 .ForMember(dest => dest.ID, opt => opt.Ignore())
                 .ForMember(dest => dest.EventID, opt => opt.Ignore());
+
+
+            //API Mappers
+            Mapper.CreateMap<Event, ApiEvent>()
+                .ForMember(dest => dest.CanDelete, opt => opt.Ignore())
+                .ForMember(dest => dest.FromDateTime, opt => opt.Ignore())
+                .ForMember(dest => dest.ToDateTime, opt => opt.Ignore())
+                .ForMember(dest => dest.TweetCount, opt => opt.MapFrom(src => src.Tweets.Count()))
+                .ForMember(dest => dest.ImageCount, opt => opt.MapFrom(src => src.Images.Count()))
+                .ForMember(dest => dest.CheckInCount, opt => opt.MapFrom(src => src.CheckIns.Count()));
+
+            Mapper.CreateMap<EventCategory, ApiCategory>();
+
+
+
+
 
             Mapper.AssertConfigurationIsValid();
         }

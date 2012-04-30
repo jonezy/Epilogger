@@ -3,7 +3,29 @@
 
 <script src="@Url.Content("~/Public/js/jquery-1.6.2.min.js")" type="text/javascript" language="javascript"></script>
 
+<h2>
+    Reply to a Tweet
+</h2>
+<div>
+    @{ var ttvm = new Epilogger.Web.Models.TweetTemplateViewModel { Tweet = Model.Tweet, CanDelete = false, EventId = Model.Event.ID, ShowControls = false };}
+    @Html.Partial("_TweetTemplate", ttvm)
+</div>
+
+@using (Html.BeginForm())
+{
+    
+
+    <textarea class="tweetBox" cols="20" id="newTweet" name="newTweet" rows="2"></textarea>
+    @*@Html.TextArea("newTweet", null, new { @class = "tweetBox" })*@
+    <div class="fright">
+        <span id="twitterCharCounter">140</span>
+        <input type="submit" value="Tweet" class="blue-action-button confirm" />
+    </div>
+}
+
 <script language="javascript" type="text/javascript">
+
+
     new function ($) {
         $.fn.setCursorPosition = function (pos) {
             if ($(this).get(0).setSelectionRange) {
@@ -19,7 +41,6 @@
     } (jQuery);
 
     $(document).ready(function () {
-        alert("test");
         //set max length
         var maxLength = 140;
 
@@ -48,7 +69,7 @@
         $("#newTweet").setCursorPosition(replyTo.length + 1);
     });
 
-    whenkeydown = function(maxLength) {
+    whenkeydown = function (maxLength) {
         $("#newTweet").unbind().keyup(function () {
             //check if the appropriate text area is being typed into
             if (document.activeElement.id === "newTweet") {
@@ -74,29 +95,3 @@
     };    
 
 </script>
-
-
-<h2>
-    Reply to a Tweet
-</h2>
-<div>
-    @{ var ttvm = new Epilogger.Web.Models.TweetTemplateViewModel { Tweet = Model.Tweet, CanDelete = false, EventId = Model.Event.ID, ShowControls = false };}
-    @Html.Partial("_TweetTemplate", ttvm)
-</div>
-
-@using (Html.BeginForm())
-{
-    
-
-    <textarea class="tweetBox" cols="20" id="newTweet" name="newTweet" rows="2"></textarea>
-    @*@Html.TextArea("newTweet", null, new { @class = "tweetBox" })*@
-    <div class="fright">
-        <span id="twitterCharCounter">140</span>
-        <input type="submit" value="Tweet" class="blue-action-button confirm" />
-    </div>
-}
-
-
-
-
-

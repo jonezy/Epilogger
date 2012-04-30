@@ -1,4 +1,7 @@
 ﻿    using System.Web.Mvc;
+    using AutoMapper;
+    using Epilogger.Data;
+    using Epilogger.Web.Models;
 
 namespace Epilogger.Web.Areas.Api
 {
@@ -32,10 +35,24 @@ namespace Epilogger.Web.Areas.Api
             );
 
             context.MapRoute(
+                "ListCategoriesAll",
+                "Api/Categories",
+                new { controller = "Events", action = "Categories" }
+            );
+
+            context.MapRoute(
+                "ListEventsAll",
+                "Api/Events/Search/{searchTerms}",
+                new { controller = "Events", action = "Search", searchTerms = UrlParameter.Optional }
+            );
+
+            context.MapRoute(
                 "Api_default",
                 "Api/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );
         }
+
+
     }
 }
