@@ -131,6 +131,12 @@ namespace Epilogger.Web {
                 new { controller = "events", action = "tweetreply" }
             );
             routes.MapRoute(
+                "TweetRetweet",
+                "events/tweetretweet",
+                new { controller = "events", action = "tweetretweet" }
+            );
+
+            routes.MapRoute(
                 "TweetSucessy",
                 "events/twittersendsuccess",
                 new { controller = "events", action = "twittersendsuccess" }

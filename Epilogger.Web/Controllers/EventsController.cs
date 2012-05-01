@@ -1297,7 +1297,20 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+        
+        public ActionResult TweetRetweet(int eventId, long tweetId)
+        {
+            var model = new TweetReplyViewModel()
+            {
+                Tweet = _ts.FindByTwitterID(tweetId),
+                Event = _es.FindByID(eventId),
+                IsTwitterAuthed = CurrentUserTwitterAuthorization != null
+            };
 
+            return PartialView(model);
+        }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
     }

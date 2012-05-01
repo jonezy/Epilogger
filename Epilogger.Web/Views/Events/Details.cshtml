@@ -71,25 +71,34 @@ else
 
     
     head.ready(function() {
-        $('.Reply').click(function(e) {
-            e.preventDefault();
+        
 
-            width = 550;
-            height = 320;
-            var left = Math.round((window.winWidth / 2) - (width / 2));
-            var top = 0;
+        function setupTwitterAction()
+        {
+            $('.Reply').click(function(e) {
+                e.preventDefault();
 
-            if (window.winHeight > height) {
-                top = Math.round((window.winHeight / 2) - (height / 2));
-            }
+                $.colorbox({
+                    width: 550,
+                    height: 320,
+                    href: "TweetReply?eventId=" + EventID + "&tweetId=" + this.id
+                });
 
-            $.colorbox({
-                width: width,
-                height: height,
-                href: "TweetReply?eventId=" + EventID + "&tweetId=" + this.id
             });
+        
+            $('.Retweet').click(function(e) {
+                e.preventDefault();
 
-        });
+                $.colorbox({
+                    width: 550,
+                    height: 320,
+                    href: "TweetRetweet?eventId=" + EventID + "&tweetId=" + this.id
+                });
+
+            });
+        }
+
+        setupTwitterAction();
     });
 
 </script>
