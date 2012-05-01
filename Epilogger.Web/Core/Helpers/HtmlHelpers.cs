@@ -6,15 +6,15 @@ using TagCloud;
 
 namespace System.Web.Mvc {
     public static class HtmlHelpers {
-        public static MvcHtmlString RenderConnectSocialNetworkUI(this HtmlHelper helper, string network, List<ConnectedNetworksViewModel> connectedNetworks) {
+        public static MvcHtmlString RenderConnectSocialNetworkUI(this HtmlHelper helper, string network, IEnumerable<ConnectedNetworksViewModel> connectedNetworks) {
 
-            ConnectedNetworksViewModel desiredNetwork = connectedNetworks.Where(cn => cn.Service.ToLower() == network.ToLower()).FirstOrDefault();
+            var desiredNetwork = connectedNetworks.FirstOrDefault(cn => cn.Service.ToLower() == network.ToLower());
 
-            bool connect = desiredNetwork == null || string.IsNullOrEmpty(desiredNetwork.ServiceUsername);
-            UrlHelper urlHelper = new UrlHelper(helper.ViewContext.RequestContext);
-            string url = urlHelper.Action(connect ? "ConnectRequest" : "Disconnect", network, new { area = "Authentication" });
+            var connect = desiredNetwork == null || string.IsNullOrEmpty(desiredNetwork.ServiceUsername);
+            var urlHelper = new UrlHelper(helper.ViewContext.RequestContext);
+            var url = urlHelper.Action(connect ? "ConnectRequest" : "Disconnect", network, new { area = "Authentication" });
 
-            StringBuilder returnValue = new StringBuilder();
+            var returnValue = new StringBuilder();
             returnValue.Append("<div class='social_connections'>");
             returnValue.AppendFormat("<p class='remove-bottom'><strong>{0}</strong></p>", network);
             

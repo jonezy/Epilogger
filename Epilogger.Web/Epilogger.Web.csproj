@@ -471,6 +471,7 @@
     <Content Include="Public\images\homepage\sprouter.png" />
     <Content Include="Public\images\homepage\tldr.png" />
     <Content Include="Public\images\icons\addMoreArrow.png" />
+    <Content Include="Public\images\icons\ajaxWaiting.gif" />
     <Content Include="Public\images\icons\and.png" />
     <Content Include="Public\images\icons\bird_16_blue.png" />
     <Content Include="Public\images\icons\blog.png" />
@@ -2827,6 +2828,8 @@
     <Content Include="Views\Widget\Checkins.cshtml" />
     <Content Include="Views\Widget\_EpiloggerCounts.cshtml" />
     <Content Include="Views\Events\TweetReply.cshtml" />
+    <Content Include="Views\Events\TwitterSendSuccess.cshtml" />
+    <Content Include="Views\Events\TwitterSendFailed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Shared\" />

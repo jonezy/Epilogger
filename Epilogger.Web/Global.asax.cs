@@ -130,6 +130,11 @@ namespace Epilogger.Web {
                 "events/tweetreply",
                 new { controller = "events", action = "tweetreply" }
             );
+            routes.MapRoute(
+                "TweetSucessy",
+                "events/twittersendsuccess",
+                new { controller = "events", action = "twittersendsuccess" }
+            );
 
             routes.MapRoute(
                 "DeleteEvent",
@@ -377,7 +382,7 @@ namespace Epilogger.Web {
 
             Mapper.CreateMap<User, AccountModel>()
                 .ForMember(dest => dest.ConnectedNetworks, opt => opt.Ignore())
-                .ForMember(dest => dest.TimeZone, opt => opt.Ignore())
+                //.ForMember(dest => dest.TimeZone, opt => opt.Ignore())
                 .ForMember(dest => dest.TwitterProfilePicture, opt => opt.ResolveUsing<TwitterProfilePictureResolver>())
                 .ForMember(dest => dest.FacebookProfilePicture, opt => opt.ResolveUsing<FacebookProfilePictureResolver>())
                 .ForMember(dest => dest.DateOfBirth, opt => opt.MapFrom(src => src.DateOfBirth.HasValue ? src.DateOfBirth.Value.ToShortDateString() : ""))

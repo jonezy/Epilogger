@@ -1,13 +1,10 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web.Mvc;
 
 namespace Epilogger.Web.Models {
     public class CreateAccountModel {
 
-        [Required(ErrorMessage="Please enter you r desired username")]
+        [Required(ErrorMessage="Please enter your desired username")]
         public string Username { get; set; }
         
         [Required(ErrorMessage = "Please enter your password")]

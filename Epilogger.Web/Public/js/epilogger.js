@@ -92,7 +92,29 @@ function AddBlogPost(url) {
 }
 
 
+function ReplyToTweet(url) {
+    $("#submitTweet").attr('disabled', 'disabled');
+    $("#submitTweet").addClass('disabled');
+    $("#twitterLoading").show();
 
+    var twitterReply = {
+        ReplyNewTweet: $("#ReplyNewTweet").val(),
+        TwitterID: $("#TwitterID").val()
+    };
+
+    $.post(url, twitterReply,
+        function (data) {
+            if (data == "True") {
+                FlashMessage("Your tweet has been sent!", "Message_Success Message_Flash");
+                //Dismis the popup
+                $.colorbox.close();
+            } else {
+                FlashMessage("There was a problem sending your tweet, please try again.", "Message_Error Message_Flash");
+                $.colorbox.close();
+            }
+        });
+    return false;
+}
 
 
 
@@ -101,7 +123,7 @@ function FlashMessage(message, cssClas) {
     $('#flash').removeClass();
     $('#flash').addClass(cssClas);
     $('#flash').slideDown('med');
-    $('#flash').click(function () { $('#flash').toggle('highlight') });
+    $('#flash').click(function () { $('#flash').toggle('highlight'); });
 
     window.setTimeout(function () {
         $("#flash").fadeOut("slow");

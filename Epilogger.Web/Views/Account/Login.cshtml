@@ -18,7 +18,7 @@
 
         <p class="submit"><input type="submit" class="blue-action-button" value="login" /> - @Html.ActionLink("I forgot my password", "forgotpassword", "account")</p>
     </fieldset>
-    @Html.ActionImage("TwitterLogon", "account", null, "/Public/images/icons/sign-in-with-twitter-d.png", "Sign in with twitter")
+    @Html.ActionImage("ConnectRequest", "twitter", new { area = "Authentication" }, "/Public/images/icons/sign-in-with-twitter-d.png", "Sign in with twitter")
 }
 
 </div>

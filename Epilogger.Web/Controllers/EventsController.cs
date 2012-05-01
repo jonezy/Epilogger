@@ -1260,43 +1260,45 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
         public ActionResult TweetReply(int eventId, long tweetId)
         {
             var model = new TweetReplyViewModel()
                             {
                                 Tweet = _ts.FindByTwitterID(tweetId),
-                                Event = _es.FindByID(eventId)
+                                Event = _es.FindByID(eventId),
+                                IsTwitterAuthed = CurrentUserTwitterAuthorization != null
                             };
 
             return PartialView(model);
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-        
-        [HttpPost]
-        public ActionResult TweetReply(TweetReplyViewModel model)
+
+        [HttpPost] //Called by Ajax
+        public bool TweetReply(FormCollection c)
         {
-            //var tokens = OAuthUtility.GetAccessToken(
-            //    ConfigurationManager.AppSettings["TwitterConsumerKey"],
-            //    ConfigurationManager.AppSettings["TwitterConsumerSecret"],
-            //    oauth_token,
-            //    oauth_verifier);
+            try
+            {
+                var tokens = new OAuthTokens()
+                {
+                    ConsumerKey = ConfigurationManager.AppSettings["TwitterConsumerKey"],
+                    ConsumerSecret = ConfigurationManager.AppSettings["TwitterConsumerSecret"],
+                    AccessToken = CurrentUserTwitterAuthorization.Token,
+                    AccessTokenSecret = CurrentUserTwitterAuthorization.TokenSecret
+                };
 
-            var tokens = new OAuthTokens()
-                            {
-                                ConsumerKey = ConfigurationManager.AppSettings["TwitterConsumerKey"],
-                                ConsumerSecret = ConfigurationManager.AppSettings["TwitterConsumerSecret"],
-                                AccessToken = CurrentUserTwitterAuthorization.Token,
-                                AccessTokenSecret = CurrentUserTwitterAuthorization.TokenSecret
-                            };
-
-            var ts = TwitterStatus.Update(tokens, model.ReplyNewTweet.ToString(CultureInfo.InvariantCulture));
-
-            return PartialView(model);
+                var ts = TwitterStatus.Update(tokens, c["ReplyNewTweet"], new StatusUpdateOptions() { InReplyToStatusId = decimal.Parse(c["TwitterID"]) });
+                return ts.Result == RequestResult.Success;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
     }
 
