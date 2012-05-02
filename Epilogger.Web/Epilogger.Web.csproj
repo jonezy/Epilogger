@@ -2829,6 +2829,7 @@
     <Content Include="Views\Widget\_EpiloggerCounts.cshtml" />
     <Content Include="Views\Events\TweetReply.cshtml" />
     <Content Include="Views\Events\TweetRetweet.cshtml" />
+    <Content Include="Views\Events\NeedTwitterAuth.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Shared\" />

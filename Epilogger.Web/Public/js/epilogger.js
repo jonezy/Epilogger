@@ -119,7 +119,36 @@ function setupTwitterAction() {
         });
 
     });
+
+    $('.Favorite').click(function (e) {
+        e.preventDefault();
+
+        var twitterFavorite = {
+            TwitterID: this.id
+        };
+
+        $.post('/Events/TweetFavorite/', twitterFavorite,
+        function (data) {
+            if (data == "True") {
+                FlashMessage("Your tweet has been favorited!", "Message_Success Message_Flash");
+            }
+            else if (data == "Auth") {
+                $.colorbox({
+                    width: 550,
+                    height: 220,
+                    href: "NeedTwitterAuth"
+                });
+            }
+            else 
+            {
+                FlashMessage("There was a problem favoriting your tweet, please try again.", "Message_Error Message_Flash");
+            }
+        });
+        return false;
+
+    });
 }
+
 
 function ReplyToTweet(url) {
     $("#submitTweet").attr('disabled', 'disabled');

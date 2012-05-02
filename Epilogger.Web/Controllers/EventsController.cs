@@ -1350,6 +1350,44 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
+        [HttpPost] //Called by Ajax
+        public string TweetFavorite(FormCollection c)
+        {
+            try
+            {
+                
+                if (CurrentUserTwitterAuthorization == null)
+                {
+                    return "Auth";
+                }
+
+                var tokens = new OAuthTokens()
+                {
+                    ConsumerKey = ConfigurationManager.AppSettings["TwitterConsumerKey"],
+                    ConsumerSecret = ConfigurationManager.AppSettings["TwitterConsumerSecret"],
+                    AccessToken = CurrentUserTwitterAuthorization.Token,
+                    AccessTokenSecret = CurrentUserTwitterAuthorization.TokenSecret
+                };
+
+                var ts = TwitterFavorite.Create(tokens, decimal.Parse(c["TwitterID"]));
+
+                return "True";
+            }
+            catch (Exception)
+            {
+                return "False";
+            }
+        }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        public ActionResult NeedTwitterAuth()
+        {
+            return PartialView();
+        }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
     }
 

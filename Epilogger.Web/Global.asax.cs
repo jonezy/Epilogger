@@ -137,10 +137,18 @@ namespace Epilogger.Web {
             );
 
             routes.MapRoute(
-                "TweetSucessy",
-                "events/twittersendsuccess",
-                new { controller = "events", action = "twittersendsuccess" }
+                "TweetFavorite",
+                "events/tweetfavorite",
+                new { controller = "events", action = "tweetfavorite" }
             );
+            routes.MapRoute(
+                "NeedTwitterAuth",
+                "events/needtwitterauth",
+                new { controller = "events", action = "needtwitterauth" }
+            );
+            
+
+
 
             routes.MapRoute(
                 "DeleteEvent",
