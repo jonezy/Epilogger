@@ -12,6 +12,8 @@ using Epilogger.Web.Core.Email;
 using Epilogger.Web.Models;
 using Timezone.Framework;
 
+using T4MVC;
+
 namespace Epilogger.Web {
 
     public class App : System.Web.HttpApplication {
@@ -149,6 +151,7 @@ namespace Epilogger.Web {
                 new { controller = "events", action = "getimagecomments", eventID = UrlParameter.Optional, imageid = UrlParameter.Optional }
             );
 
+            routes.MapRoute("UploadImageFromFile", "events/uploadfromfile/{id}", MVC.Image.UploadFromFile());           
 
             routes.MapRoute(
                 "EventBrowseRoutes",
@@ -197,7 +200,6 @@ namespace Epilogger.Web {
                 "widget/PhotoDetails/{id}/{photoID}",
                 new { controller = "widget", action = "photodetails", id = UrlParameter.Optional, photoID = UrlParameter.Optional }
             );
-
 
             routes.MapRoute(
                 "Default", // Route name

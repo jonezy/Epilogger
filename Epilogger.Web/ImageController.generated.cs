@@ -76,7 +76,7 @@ namespace Epilogger.Web.Controllers {
         public ActionParamsClass_UploadFromFile UploadFromFileParams { get { return s_params_UploadFromFile; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_UploadFromFile {
-            public readonly string eventId = "eventId";
+            public readonly string id = "id";
             public readonly string files = "files";
         }
         static readonly ViewNames s_views = new ViewNames();
@@ -97,9 +97,9 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult UploadFromFile(string eventId, System.Collections.Generic.IEnumerable<System.Web.HttpPostedFileBase> files) {
+        public override System.Web.Mvc.ActionResult UploadFromFile(string id, System.Collections.Generic.IEnumerable<System.Web.HttpPostedFileBase> files) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.UploadFromFile);
-            callInfo.RouteValueDictionary.Add("eventId", eventId);
+            callInfo.RouteValueDictionary.Add("id", id);
             callInfo.RouteValueDictionary.Add("files", files);
             return callInfo;
         }
