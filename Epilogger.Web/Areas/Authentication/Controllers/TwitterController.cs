@@ -33,6 +33,11 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
                     {
                         CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString());
                         CookieHelpers.WriteCookie("lc", "tz", user.TimeZoneOffSet.ToString(CultureInfo.InvariantCulture));
+
+                        //This user already has an account, authed them, redirect back to where they were.
+                        this.StoreSuccess("You've been logged into your Epilogger account through twitter.");
+                        
+
                     }
                 } else {
                     //There is no auth record, this must be a login from Twitter or a new twitter connection to an existing user
@@ -63,6 +68,9 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
                         CookieHelpers.WriteCookie("lc", "uid", theNewUser.ID.ToString());
                         CookieHelpers.WriteCookie("lc", "tz", theNewUser.TimeZoneOffSet.ToString(CultureInfo.InvariantCulture));
 
+                        //This is a new User so goto the profile page
+                        this.StoreSuccess("You have logged into Epilogger with your twitter account.");
+                        return RedirectToAction("Index", "Account", new { area = "" });
                     }
                     else
                     {
@@ -76,6 +84,11 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
                             TokenSecret = accessTokenResponse.TokenSecret
                         };
                         userAuthService.Save(userAuth);
+
+                        //Had an epilogger account and just auth'ed their account, go back to where they were.
+                        this.StoreSuccess("Your twitter account has been linked to your epilogger.com account");
+                        
+
                     }
                     
                 }
@@ -83,7 +96,6 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
 
             this.StoreSuccess("Your twitter account has been linked to your epilogger.com account");
             return RedirectToAction("Index", "Account", new { area = "" });
-
         }
 
         public ActionResult Disconnect() {
