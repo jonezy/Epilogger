@@ -1288,6 +1288,7 @@ namespace Epilogger.Web.Controllers {
                 };
 
                 var ts = TwitterStatus.Update(tokens, c["ReplyNewTweet"], new StatusUpdateOptions() { InReplyToStatusId = decimal.Parse(c["TwitterID"]) });
+                
                 return ts.Result == RequestResult.Success;
             }
             catch (Exception)
@@ -1308,6 +1309,43 @@ namespace Epilogger.Web.Controllers {
             };
 
             return PartialView(model);
+        }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        [HttpPost] //Called by Ajax
+        public bool TweetRetweet(FormCollection c)
+        {
+            try
+            {
+                var tokens = new OAuthTokens()
+                {
+                    ConsumerKey = ConfigurationManager.AppSettings["TwitterConsumerKey"],
+                    ConsumerSecret = ConfigurationManager.AppSettings["TwitterConsumerSecret"],
+                    AccessToken = CurrentUserTwitterAuthorization.Token,
+                    AccessTokenSecret = CurrentUserTwitterAuthorization.TokenSecret
+                };
+
+                var classicRT = bool.Parse(c["ClassicRT"]);
+
+                TwitterResponse<TwitterStatus> ts;
+                if (classicRT)
+                {
+                    //Edit RT
+                    ts = TwitterStatus.Update(tokens, c["RetweetText"]);
+                }
+                else
+                {
+                    //Standard RT
+                    ts = TwitterStatus.Retweet(tokens, decimal.Parse(c["TwitterID"]));    
+                }
+
+                return ts.Result == RequestResult.Success;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -16,68 +16,75 @@
 @*<script src="@Url.Content("~/Public/js/jquery-1.6.2.min.js")" type="text/javascript" language="javascript"></script>*@
 <script language="javascript" type="text/javascript">
 
-//    whenkeydown = function (maxLength) {
-//        $("#ReplyNewTweet").unbind().keyup(function () {
-//            //check if the appropriate text area is being typed into
-//            if (document.activeElement.id === "ReplyNewTweet") {
-//                //get the data in the field
-//                var text = $(this).val();
+    whenkeydown = function (maxLength) {
+        $("#RetweetText").unbind().keyup(function () {
+            //check if the appropriate text area is being typed into
+            if (document.activeElement.id === "RetweetText") {
+                //get the data in the field
+                var text = $(this).val();
 
-//                //set number of characters
-//                var numofchars = text.length;
+                //set number of characters
+                var numofchars = text.length;
 
-//                //set the chars left
-//                var charsLeft = maxLength - numofchars;
+                //set the chars left
+                var charsLeft = maxLength - numofchars;
 
-//                //check if we are still within our maximum number of characters or not
-//                if (numofchars <= maxLength) {
-//                    //set the length of the text into the counter span
-//                    $("#twitterCharCounter").html("").html(charsLeft).css("color", "#000000");
-//                } else {
-//                    //style numbers in red
-//                    $("#twitterCharCounter").html("").html(charsLeft).css("color", "#FF0000");
-//                }
-//            }
-//        });
-//    };
+                //check if we are still within our maximum number of characters or not
+                if (numofchars <= maxLength) {
+                    //set the length of the text into the counter span
+                    $("#twitterCharCounter").html("").html(charsLeft).css("color", "#000000");
+                    $("#submitTweet").removeAttr("disabled");
+                    $("#submitTweet").removeClass('disabled');
+                } else {
+                    //style numbers in red
+                    $("#twitterCharCounter").html("").html(charsLeft).css("color", "#FF0000");
+                    $("#submitTweet").attr('disabled', 'disabled');
+                    $("#submitTweet").addClass('disabled');
+                }
+            }
+        });
+    };
 
-//    if (document.readyState === "complete") { init(); }
+    function initCharCount() {
+        //set max length
+        var maxLength = 140;
 
-//    function init() {
-//        //set max length
-//        var maxLength = 140;
+        //load in max characters when page loads
+        $("#twitterCharCounter").html(maxLength);
 
-//        //load in max characters when page loads
-//        $("#twitterCharCounter").html(maxLength);
+        //run listen key press
+        whenkeydown(maxLength);
 
-//        //run listen key press
-//        whenkeydown(maxLength);
+        //check if we are still within our maximum number of characters or not
+        var numofchars = $("#RetweetText").val().length;
+        var charsLeft = maxLength - numofchars;
+        if (numofchars <= maxLength) {
+            //set the length of the text into the counter span
+            $("#twitterCharCounter").html("").html(charsLeft).css("color", "#000000");
+            $("#submitTweet").removeAttr("disabled");
+            $("#submitTweet").removeClass('disabled');
+        } else {
+            //style numbers in red
+            $("#twitterCharCounter").html("").html(charsLeft).css("color", "#FF0000");
+            $("#submitTweet").attr('disabled', 'disabled');
+            $("#submitTweet").addClass('disabled');
+        }    
+    };
 
-//        var replyTo = '@@@Model.Tweet.FromUserScreenName';
-//        var hashTag = '@(Model.Event.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0].Contains("#") ? Model.Event.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0] : "#" + Model.Event.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0])';
 
+    function editTweet() {
+        resizePopUp('550px', '320px');
+        $("#editRetweet").slideDown();
+        $("#twitterCharCounter").show();
+        initCharCount();
+        $("#ClassicRT").val("true");
+        $("#RetweetText").focus();
+    }
 
-//        $("#ReplyNewTweet").val(replyTo + '  ' + hashTag);
-
-//        //check if we are still within our maximum number of characters or not
-//        var numofchars = $("#ReplyNewTweet").val().length;
-//        var charsLeft = maxLength - numofchars;
-//        if (numofchars <= maxLength) {
-//            //set the length of the text into the counter span
-//            $("#twitterCharCounter").html("").html(charsLeft).css("color", "#000000");
-//        } else {
-//            //style numbers in red
-//            $("#twitterCharCounter").html("").html(charsLeft).css("color", "#FF0000");
-//        }
-
-//        //$("#newTweet").focus();
-//        window.setTimeout(function () {
-//            $("#ReplyNewTweet").setCursorPosition(replyTo.length + 1);
-//        }, 500);
-//            
-//            
-//    };
-
+    var IsAuth = '@Model.IsTwitterAuthed';
+    if (IsAuth=='False') {
+        window.setTimeout(function () { resizePopUp('550px', '320px'); }, 500);
+    }
 </script>
 
 <h2>
@@ -88,16 +95,22 @@
     @Html.Partial("_TweetTemplate", ttvm)
 </div>
 
-<form action="" method="post" onsubmit="return ReplyToTweet('@Url.Action("TweetReply", "events")')">
-    
-    
+<form action="" method="post" onsubmit="return ActionRetweet('@Url.Action("TweetRetweet", "events")')">
+
     @if (Model.IsTwitterAuthed)
     {
-        <textarea class="tweetBox" cols="20" id="ReplyNewTweet" name="ReplyNewTweet" rows="2"></textarea>
+        <div id="editRetweet" style="display: none;">
+            <textarea class="tweetBox" cols="20" id="RetweetText" name="RetweetText" rows="2">@("RT @" + Model.Tweet.FromUserScreenName + " \"" + Model.Tweet.Text + "\"")</textarea>
+        </div>
+        
+        <div class="fleft" style="padding-top: 9px;">
+            <a href="" onclick="editTweet(); return false;">Edit before Retweet</a>
+        </div>
         <div class="fright">
             <img src="/Public/images/icons/ajaxWaiting.gif" id="twitterLoading" style="display: none;" alt="loading" />
-            <span id="twitterCharCounter">140</span>
-            <input type="submit" value="Tweet" id="submitTweet" class="blue-action-button" />
+            <span id="twitterCharCounter" style="display: none;">140</span>
+            <input type="button" value="Cancel" id="cancelTweet" onclick="cancelPopUp();" class="white-action-button" />
+            <input type="submit" value="Retweet" id="submitTweet" class="blue-action-button" />
         </div>
     }
     else
@@ -110,9 +123,9 @@
             @Html.ActionImage("ConnectRequest", "twitter", new { area = "Authentication" }, "/Public/images/icons/sign-in-with-twitter-d.png", "Sign in with twitter")
         </div>
     }
-    
-    
-    
+
+
     @Html.Hidden("TwitterID", Model.Tweet.TwitterID)
+    <input type="hidden" id="ClassicRT" value="false" />
 </form>
 

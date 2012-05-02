@@ -104,7 +104,28 @@ a.edit_icon {
     color:#fff}
     
     
+.white-action-button {
+    border:1px solid #aaa;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    background:#DDD; /* no css3 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d84e69', endColorstr='#ce4a64'); /*IE */
+    background:-webkit-gradient(linear, left top, left bottom, from (#d84e69) to (#ce4a64)); /* webkit */
+    background:-moz-linear-gradient(top, #d84e69, #ce4a64); /* ff */
+    box-shadow:0 0 1px #a1b9c8;
+    color:#333;
+    font:bold 15px 'InterstatePlusRegular';
+    padding:5px 10px;
+    text-transform:uppercase;
+    cursor:pointer;
+    box-shadow:0 0 1px #777;}
 
+.white-action-button:hover {
+    opacity:0.85;
+    position:relative;
+    top:1px;
+    color:#333}
     
 
 .datepicker, .timedropdown, .picker-start-date, .picker-end-date, .picker-start-time, .picker-end-time {
@@ -1424,6 +1445,7 @@ span.tweet-date a:hover { text-decoration: underline; }
  
 #twitterCharCounter {
     font-weight: bold;
+    padding-right: 10px;
 } 
  
  

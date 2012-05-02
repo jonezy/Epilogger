@@ -92,6 +92,35 @@ function AddBlogPost(url) {
 }
 
 
+/***** TWITTER ACTIONS ******/
+head.ready(function () {
+    setupTwitterAction();
+});
+
+function setupTwitterAction() {
+    $('.Reply').click(function (e) {
+        e.preventDefault();
+
+        $.colorbox({
+            width: 550,
+            height: 320,
+            href: "TweetReply?eventId=" + EventID + "&tweetId=" + this.id
+        });
+
+    });
+
+    $('.Retweet').click(function (e) {
+        e.preventDefault();
+
+        $.colorbox({
+            width: 550,
+            height: 230,
+            href: "TweetRetweet?eventId=" + EventID + "&tweetId=" + this.id
+        });
+
+    });
+}
+
 function ReplyToTweet(url) {
     $("#submitTweet").attr('disabled', 'disabled');
     $("#submitTweet").addClass('disabled');
@@ -106,7 +135,6 @@ function ReplyToTweet(url) {
         function (data) {
             if (data == "True") {
                 FlashMessage("Your tweet has been sent!", "Message_Success Message_Flash");
-                //Dismis the popup
                 $.colorbox.close();
             } else {
                 FlashMessage("There was a problem sending your tweet, please try again.", "Message_Error Message_Flash");
@@ -116,6 +144,38 @@ function ReplyToTweet(url) {
     return false;
 }
 
+function ActionRetweet(url) {
+    $("#submitTweet").attr('disabled', 'disabled');
+    $("#submitTweet").addClass('disabled');
+    $("#twitterLoading").show();
+
+    var twitterRetweet = {
+        RetweetText: $("#RetweetText").val(),
+        TwitterID: $("#TwitterID").val(),
+        ClassicRT: $("#ClassicRT").val()
+    };
+
+    $.post(url, twitterRetweet,
+        function (data) {
+            if (data == "True") {
+                FlashMessage("Your tweet has been sent!", "Message_Success Message_Flash");
+                $.colorbox.close();
+            } else {
+                FlashMessage("There was a problem sending your tweet, please try again.", "Message_Error Message_Flash");
+                $.colorbox.close();
+            }
+        });
+    return false;
+}
+
+
+
+function cancelPopUp() {
+    $.colorbox.close();
+}
+function resizePopUp(width, height) {
+    $.colorbox.resize({ width: width, height: height });
+}
 
 
 function FlashMessage(message, cssClas) {

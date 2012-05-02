@@ -19,6 +19,12 @@
     @Html.ValidationSummary("Please correct the following issues")
     @using (Html.BeginForm("Index", "Account", FormMethod.Post)) {
         <fieldset>
+            <div class="grid_1 alpha">
+                <p>Username:</p>
+            </div>
+            <div class="grid_6 alpha">
+                <p>@Html.DisplayFor(model => model.Username)</p>
+            </div>
             <div class="grid_3 alpha">
                 <p>@Html.LabelFor(model => model.FirstName) @Html.TextBoxFor(model => model.FirstName)</p>
             </div>

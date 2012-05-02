@@ -67,39 +67,6 @@ else
     var photoPostsOnPage = new Array;
     var photoPostsOnPageQS = '';
     var photoMaxItemsOnPage = 9;
-    
-
-    
-    head.ready(function() {
-        
-
-        function setupTwitterAction()
-        {
-            $('.Reply').click(function(e) {
-                e.preventDefault();
-
-                $.colorbox({
-                    width: 550,
-                    height: 320,
-                    href: "TweetReply?eventId=" + EventID + "&tweetId=" + this.id
-                });
-
-            });
-        
-            $('.Retweet').click(function(e) {
-                e.preventDefault();
-
-                $.colorbox({
-                    width: 550,
-                    height: 320,
-                    href: "TweetRetweet?eventId=" + EventID + "&tweetId=" + this.id
-                });
-
-            });
-        }
-
-        setupTwitterAction();
-    });
 
 </script>
 <style type="text/css">
