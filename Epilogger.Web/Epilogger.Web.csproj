@@ -259,6 +259,7 @@
     <Compile Include="Core\Services\TweetService.cs" />
     <Compile Include="Core\Services\UserAuthenticationProfileService.cs" />
     <Compile Include="Core\Services\UserService.cs" />
+    <Compile Include="Core\Services\UserTwitterActionService.cs" />
     <Compile Include="Core\Services\VenueService.cs" />
     <Compile Include="Core\Stats\WidgetTotals.cs" />
     <Compile Include="Core\Stats\HomepageTotals.cs" />
@@ -2830,6 +2831,7 @@
     <Content Include="Views\Events\TweetReply.cshtml" />
     <Content Include="Views\Events\TweetRetweet.cshtml" />
     <Content Include="Views\Events\NeedTwitterAuth.cshtml" />
+    <Content Include="Views\Events\TweetTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Shared\" />

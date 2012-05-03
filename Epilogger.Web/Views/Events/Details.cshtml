@@ -531,11 +531,11 @@ else
         @foreach (Epilogger.Data.Tweet EPLTweet in Model.Tweets)
         {
             var ttvm = new Epilogger.Web.Models.TweetTemplateViewModel { Tweet = EPLTweet, CanDelete = Model.CanDelete, EventId = @Model.ID, ShowControls = true };
-            @Html.Partial("_TweetTemplate", ttvm);
+            //@Html.Partial("_TweetTemplate", ttvm)
+            @Html.Action("TweetTemplate", ttvm)
         }
     </ul>
 
-    
      <p>(@Html.ActionLink("See all tweets", "allTweets", "events", new { id = Model.EventSlug, f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { }))</p>
                    
     <span class="sm-spacer"></span>

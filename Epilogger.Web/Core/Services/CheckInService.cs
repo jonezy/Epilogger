@@ -2,8 +2,6 @@
 using System;
 using System.Linq;
 using Epilogger.Data;
-using Epilogger.Web.Model;
-using SubSonic.Repository;
 
 namespace Epilogger.Web
 {

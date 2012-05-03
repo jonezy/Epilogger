@@ -122,8 +122,10 @@ namespace Epilogger.Data
         }
 			
         public Query<EventCategory> EventCategories { get; set; }
+        public Query<UserTwitterAction> UserTwitterActions { get; set; }
         public Query<User> Users { get; set; }
         public Query<Tweet> Tweets { get; set; }
+        public Query<ScraperURL> ScraperURLs { get; set; }
         public Query<URL> URLS { get; set; }
         public Query<aspnet_User> aspnet_Users { get; set; }
         public Query<Event> Events { get; set; }
@@ -251,8 +253,10 @@ namespace Epilogger.Data
 
             #region ' Query Defs '
             EventCategories = new Query<EventCategory>(provider);
+            UserTwitterActions = new Query<UserTwitterAction>(provider);
             Users = new Query<User>(provider);
             Tweets = new Query<Tweet>(provider);
+            ScraperURLs = new Query<ScraperURL>(provider);
             URLS = new Query<URL>(provider);
             aspnet_Users = new Query<aspnet_User>(provider);
             Events = new Query<Event>(provider);
@@ -283,8 +287,10 @@ namespace Epilogger.Data
         	if(DataProvider.Schema.Tables.Count == 0)
 			{
             	DataProvider.Schema.Tables.Add(new EventCategoriesTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new UserTwitterActionsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new TweetsTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new ScraperURLsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new URLsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new aspnet_UsersTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new EventsTable(DataProvider));

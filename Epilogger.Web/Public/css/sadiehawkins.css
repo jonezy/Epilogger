@@ -1429,12 +1429,18 @@ span.tweet-date a:hover { text-decoration: underline; }
 .RetweetIcon:hover {
     background-position: -96px 0px;
 }
+.RetweetIcon.active {
+    background-position: -112px 0px;
+}
  
 .FavoriteIcon {
     background-position: -32px 0px;
 }
 .FavoriteIcon:hover {
     background-position: -48px 0px;
+}
+.FavoriteIcon.active {
+    background-position: -64px 0px;
 }
  
  

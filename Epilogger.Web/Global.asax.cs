@@ -126,6 +126,12 @@ namespace Epilogger.Web {
             );
 
             routes.MapRoute(
+                "TweetTemplate",
+                "events/tweettemplate",
+                new { controller = "events", action = "tweettemplate" }
+            );
+
+            routes.MapRoute(
                 "TweetReply",
                 "events/tweetreply",
                 new { controller = "events", action = "tweetreply" }
