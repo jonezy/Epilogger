@@ -42,9 +42,11 @@ jQuery(function ($) {
                             }
                         });
 
-                        //There are new photos, update the count
-                        $("#tweetCount").text(newTweets.tweetcount);
+                        setupTwitterAction();
 
+                        //There are new tweets, update the count
+                        $("#tweetCount").text(newTweets.tweetcount);
+                        
                     }
                 }
 
@@ -208,7 +210,7 @@ jQuery(function ($) {
 
 //RATINGS
 head.ready(function () {
-    scaleDown($(".noratings"))
+    scaleDown($(".noratings"));
 });
 
 function scaleUp($elt) {
@@ -226,9 +228,9 @@ function scaleDown($elt) {
 head.ready(function () {
 
     var myRating = $("#RatingPopUpDiv");
-    var myRating_link = $(".smallRateLink");
+    var myRatingLink = $(".smallRateLink");
 
-    myRating_link.toggle(
+    myRatingLink.toggle(
         function () {
             myRating.show();
             return false;

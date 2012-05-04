@@ -25,7 +25,7 @@
 <script type="text/javascript" language="javascript">
     head.js('@Url.Content("~/Public/js/EventDetails.js")');
 </script>
-
+@*//href: '@Url.Action("TweetReply", "Events", new {eventId = Model.ID, TwitterId = ""})'*@
 @if (Model.Tweets.FirstOrDefault() != null)
 {
     <script language="javascript" type="text/javascript">
@@ -67,7 +67,7 @@ else
     var photoPostsOnPage = new Array;
     var photoPostsOnPageQS = '';
     var photoMaxItemsOnPage = 9;
-    
+
 </script>
 <style type="text/css">
     .tweet {
@@ -530,12 +530,12 @@ else
     <ul class="plain-list" id="tweetlist">
         @foreach (Epilogger.Data.Tweet EPLTweet in Model.Tweets)
         {
-            var ttvm = new Epilogger.Web.Models.TweetTemplateViewModel { Tweet = EPLTweet, CanDelete = Model.CanDelete };
-            @Html.Partial("_TweetTemplate", ttvm);
+            var ttvm = new Epilogger.Web.Models.TweetTemplateViewModel { Tweet = EPLTweet, CanDelete = Model.CanDelete, EventId = @Model.ID, ShowControls = true };
+            //@Html.Partial("_TweetTemplate", ttvm)
+            @Html.Action("TweetTemplate", ttvm)
         }
     </ul>
 
-    
      <p>(@Html.ActionLink("See all tweets", "allTweets", "events", new { id = Model.EventSlug, f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { }))</p>
                    
     <span class="sm-spacer"></span>
@@ -662,7 +662,7 @@ else
     <img src="@Url.Content("~/Public/images/samples/ad.png")" alt="" />
     <img src="@Url.Content("~/Public/images/samples/ad.png")" alt="" />
 </div>*@
-<script>
+<script type="text/javascript" language="javascript">
     head.ready(function () {
         $("a[rel^='prettyPhoto']").prettyPhoto({
             theme: 'light_square',

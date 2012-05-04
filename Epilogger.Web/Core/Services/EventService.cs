@@ -17,6 +17,14 @@ namespace Epilogger.Web {
             return base.GetData();
         }
 
+        public List<Event> AllEventsDescPaged(int currentPage, int recordsPerPage)
+        {
+            var es = db.Events.OrderByDescending(t => t.CreatedDateTime);
+            var recordsToSkip = currentPage == 1 ? 1 : currentPage * recordsPerPage;
+            return es.Skip(recordsToSkip).Take(recordsPerPage).ToList();
+        } 
+
+
         public List<Event> Get50Events()
         {
             return db.Events.OrderByDescending(t => t.ID).Take(50).ToList();
@@ -117,7 +125,8 @@ namespace Epilogger.Web {
                                               select e;
 
             neverEndingEvents = neverEndingEvents.Concat(happeningNow).OrderByDescending(e => e.StartDateTime);
-            return neverEndingEvents.Skip(currentPage * recordsPerPage).Take(recordsPerPage).ToList();
+            var recordsToSkip = currentPage == 1 ? 1 : currentPage * recordsPerPage;
+            return neverEndingEvents.Skip(recordsToSkip).Take(recordsPerPage).ToList();
         }
 
 
@@ -166,39 +175,39 @@ namespace Epilogger.Web {
 
 
 
-        public IEnumerable<Event> GetHottestEvents(int ItemsToReturn)
+        public IEnumerable<Event> GetHottestEvents(int itemsToReturn)
         {
-            return db.Events.Where(e => e.StartDateTime > DateTime.UtcNow.AddDays(-14) && e.StartDateTime < DateTime.UtcNow).OrderByDescending(e => e.Tweets.Where(f => f.EventID == e.ID).Count() + (e.Images.Where(f => f.EventID == e.ID).Count() * 4)).Take(ItemsToReturn);
+            return db.Events.Where(e => e.StartDateTime > DateTime.UtcNow.AddDays(-14) && e.StartDateTime < DateTime.UtcNow).OrderByDescending(e => e.Tweets.Where(f => f.EventID == e.ID).Count() + (e.Images.Where(f => f.EventID == e.ID).Count() * 4)).Take(itemsToReturn);
         }
 
 
-        public Event FindByID(int EventID)
+        public Event FindByID(int eventID)
         {
-            return GetData().Where(e => e.ID == EventID).FirstOrDefault();
+            return GetData().FirstOrDefault(e => e.ID == eventID);
         }
 
-        public Event FindBySlug(String Slug)
+        public Event FindBySlug(String slug)
         {
             //A quick little hack to let OLD URLs work
             int eventID;
-            if (int.TryParse(Slug, out eventID))
+            if (int.TryParse(slug, out eventID))
             {
                 return GetData().FirstOrDefault(e => e.ID == eventID);
             }
 
-            return GetData().FirstOrDefault(e => e.EventSlug == Slug);
+            return GetData().FirstOrDefault(e => e.EventSlug == slug);
         }
 
 
-        public List<Event> GetEventsByCategoryID(int CategoryID)
+        public List<Event> GetEventsByCategoryID(int categoryID)
         {
-            return GetData(e => e.CategoryID == CategoryID);
+            return GetData(e => e.CategoryID == categoryID);
         }
 
-        public List<Event> GetEventsByCategorySlug(string CategorySlug)
+        public List<Event> GetEventsByCategorySlug(string categorySlug)
         {
             CategoryService CS = new CategoryService();
-            Epilogger.Data.EventCategory TheCat = CS.GetCategoryBySlug(CategorySlug);
+            Epilogger.Data.EventCategory TheCat = CS.GetCategoryBySlug(categorySlug);
             return GetData(e => e.CategoryID == TheCat.ID);
         }
 

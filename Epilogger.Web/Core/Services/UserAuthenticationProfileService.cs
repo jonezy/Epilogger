@@ -17,16 +17,19 @@ namespace Epilogger.Web {
         }
 
         public void DisconnectService(AuthenticationServices serviceType, Guid userId) {
-            UserAuthenticationProfile profile = GetData().Where(p => p.UserID == userId && p.Service == serviceType.ToString()).FirstOrDefault();
+            var profile = GetData().FirstOrDefault(p => p.UserID == userId && p.Service == serviceType.ToString());
             GetRepository<UserAuthenticationProfile>().Delete(profile);
         }
 
         public UserAuthenticationProfile UserAuthorizationByService(AuthenticationServices serviceType) {
-            return GetData().Where(ua => ua.Service == serviceType.ToString()).FirstOrDefault();
+            return GetData().FirstOrDefault(ua => ua.Service == serviceType.ToString());
         }
 
         public UserAuthenticationProfile UserAuthorizationByServiceScreenName(string screenName) {
-            return GetData().Where(ua => ua.ServiceUsername == screenName).FirstOrDefault();
+            return GetData().FirstOrDefault(ua => ua.ServiceUsername == screenName);
         }
+
+
+
     }
 }

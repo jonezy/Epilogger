@@ -1,0 +1,131 @@
+﻿
+@model Epilogger.Web.Models.TweetReplyViewModel
+
+@{
+    //If this is null, just close the popup.
+    if (Model.Tweet==null)
+    {
+        
+    }
+}
+
+<script type="text/javascript">
+    head.js('@Url.Content("~/Public/js/jquery.blockUI.js")');
+</script>
+
+@*<script src="@Url.Content("~/Public/js/jquery-1.6.2.min.js")" type="text/javascript" language="javascript"></script>*@
+<script language="javascript" type="text/javascript">
+
+    whenkeydown = function (maxLength) {
+        $("#RetweetText").unbind().keyup(function () {
+            //check if the appropriate text area is being typed into
+            if (document.activeElement.id === "RetweetText") {
+                //get the data in the field
+                var text = $(this).val();
+
+                //set number of characters
+                var numofchars = text.length;
+
+                //set the chars left
+                var charsLeft = maxLength - numofchars;
+
+                //check if we are still within our maximum number of characters or not
+                if (numofchars <= maxLength) {
+                    //set the length of the text into the counter span
+                    $("#twitterCharCounter").html("").html(charsLeft).css("color", "#000000");
+                    $("#submitTweet").removeAttr("disabled");
+                    $("#submitTweet").removeClass('disabled');
+                } else {
+                    //style numbers in red
+                    $("#twitterCharCounter").html("").html(charsLeft).css("color", "#FF0000");
+                    $("#submitTweet").attr('disabled', 'disabled');
+                    $("#submitTweet").addClass('disabled');
+                }
+            }
+        });
+    };
+
+    function initCharCount() {
+        //set max length
+        var maxLength = 140;
+
+        //load in max characters when page loads
+        $("#twitterCharCounter").html(maxLength);
+
+        //run listen key press
+        whenkeydown(maxLength);
+
+        //check if we are still within our maximum number of characters or not
+        var numofchars = $("#RetweetText").val().length;
+        var charsLeft = maxLength - numofchars;
+        if (numofchars <= maxLength) {
+            //set the length of the text into the counter span
+            $("#twitterCharCounter").html("").html(charsLeft).css("color", "#000000");
+            $("#submitTweet").removeAttr("disabled");
+            $("#submitTweet").removeClass('disabled');
+        } else {
+            //style numbers in red
+            $("#twitterCharCounter").html("").html(charsLeft).css("color", "#FF0000");
+            $("#submitTweet").attr('disabled', 'disabled');
+            $("#submitTweet").addClass('disabled');
+        }    
+    };
+
+
+    function editTweet() {
+        resizePopUp('550px', '320px');
+        $("#editRetweet").slideDown();
+        $("#twitterCharCounter").show();
+        initCharCount();
+        $("#ClassicRT").val("true");
+        $("#RetweetText").focus();
+    }
+
+    var IsAuth = '@Model.IsTwitterAuthed';
+    if (IsAuth=='False') {
+        window.setTimeout(function () { resizePopUp('550px', '320px'); }, 500);
+    }
+</script>
+
+<h2>
+    Retweet this to your followers?
+</h2>
+<div>
+    @{ var ttvm = new Epilogger.Web.Models.TweetTemplateViewModel { Tweet = Model.Tweet, CanDelete = false, EventId = Model.Event.ID, ShowControls = false };}
+    @Html.Action("TweetTemplate", ttvm)
+</div>
+
+<form action="" method="post" onsubmit="return ActionRetweet('@Url.Action("TweetRetweet", "events")')">
+
+    @if (Model.IsTwitterAuthed)
+    {
+        <div id="editRetweet" style="display: none;">
+            <textarea class="tweetBox" cols="20" id="RetweetText" name="RetweetText" rows="2">@("RT @" + Model.Tweet.FromUserScreenName + " \"" + Model.Tweet.Text + "\" " + Model.ShortEventURL)</textarea>
+        </div>
+        
+        <div class="fleft" style="padding-top: 9px;">
+            <a href="" onclick="editTweet(); return false;">Edit before Retweet</a>
+        </div>
+        <div class="fright">
+            <img src="/Public/images/icons/ajaxWaiting.gif" id="twitterLoading" style="display: none;" alt="loading" />
+            <span id="twitterCharCounter" style="display: none;">140</span>
+            <input type="button" value="Cancel" id="cancelTweet" onclick="cancelPopUp();" class="white-action-button" />
+            <input type="submit" value="Retweet" id="submitTweet" class="blue-action-button" />
+        </div>
+    }
+    else
+    {
+        <div style="text-align: center;">
+            <br class="spacer"/><br class="spacer"/>
+            <textarea class="tweetBox" cols="20" id="ReplyNewTweet" name="ReplyNewTweet" style="display: none;" rows="2"></textarea>
+            <h3>You need to be authorized with Twitter to retweet a tweet. Please login with or authenticate your account with Twitter. </h3>
+            <br />
+            @Html.ActionImage("ConnectRequest", "twitter", new { area = "Authentication" }, "/Public/images/icons/sign-in-with-twitter-d.png", "Sign in with twitter")
+        </div>
+    }
+
+
+    @Html.Hidden("TwitterID", Model.Tweet.TwitterID)
+    <input type="hidden" id="ClassicRT" value="false" />
+</form>
+

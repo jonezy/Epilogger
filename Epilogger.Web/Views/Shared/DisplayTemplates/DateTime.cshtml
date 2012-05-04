@@ -1,4 +1,2 @@
-﻿@using Epilogger.Web;
-@model System.DateTime?
-
+﻿@model DateTime?
 @Html.Encode(String.Format("{0:MMMM d, yyyy} ", Model ?? DateTime.MinValue) + String.Format("{0:h:mm}", Model ?? DateTime.MinValue) + string.Format("{0:tt}", Model ?? DateTime.MinValue).ToLower().Substring(0, 1))

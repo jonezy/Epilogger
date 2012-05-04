@@ -27,6 +27,11 @@
     @RenderBody()
 
     <script language="javascript" type="text/javascript">
+        setTimeout(function () {
+            window.location.reload(1);
+        }, 60000);
+
+
         //Store all clicks, for interface tweaking.
         head.ready(function () {
             $(document).saveClicks();
