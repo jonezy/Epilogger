@@ -5,7 +5,14 @@
     
 }
 
-<div style="@string.Format("height:{0}px; width: {1}px;", @Model.Height, @Model.Width); overflow: hidden;">
+@if (Model.Width==100 && Model.Height==100)
+{
+    @: <div style="@string.Format("height:100%; width: 100%;"); overflow: hidden;">    
+}
+else
+{
+    @: <div style="@string.Format("height:{0}px; width: {1}px;", @Model.Height, @Model.Width); overflow: hidden;">
+}
     <div id="header">
         @Html.Partial("_EpiloggerCounts", @Model.EpiloggerCounts)
         <a href="http://epilogger.com" target="_blank" border="0"><img id="epiloggerLogo" src="/Public/images/widget/epl-logo.png" alt="Epilogger" /></a>
@@ -19,7 +26,14 @@
 
         @Html.Partial("_widgetMenu", new Epilogger.Web.Models.WidgetMenuViewModel() { EventSlug = Model.EventSlug, width = Model.Width, height = Model.Height })
 
-        <div class="contentContainer" style="@string.Format("height:{0}px;", @Model.Height - 92); overflow-y: auto; overflow-x: hidden;">
+        @if (Model.Width==100 && Model.Height==100)
+        {
+            @: <div class="contentContainer" style="@string.Format("height:100%;"); overflow-y: auto; overflow-x: hidden;">
+        }
+        else
+        {
+            @: <div class="contentContainer" style="@string.Format("height:{0}px;", @Model.Height - 92); overflow-y: auto; overflow-x: hidden;">
+        }
             <ul class="checkinList">
                 @foreach (var theCheckIn in Model.Checkins)
                 {

@@ -17,6 +17,18 @@
         return t.height;
     }
 
+    @{
+        int heightOffset;
+        if (Model.Width >= 550 && Model.Height >= 330)
+        {
+            heightOffset = 150;
+        }
+        else
+        {
+            heightOffset = 220;
+        }
+    }
+
     $(document).ready(function () {
         if (jQuery.browser.safari && document.readyState != "complete"){
             //console.info('ready...');
@@ -24,8 +36,9 @@
             return;
         } 
         $('.contentContainer img').each(function () {
-            var maxWidth = @(Model.Width-20); // Max width for the image
-            var maxHeight = @(Model.Height-220);    // Max height for the image
+            var maxWidth = @(Model.Width - 20); // Max width for the image
+            var maxHeight = @(Model.Height - heightOffset);    // Max height for the image
+            
             var ratio = 0;  // Used for aspect ratio
             var width = getOriginalWidthOfImg(this);
             var height = getOriginalHeightOfImg(this);
@@ -52,7 +65,15 @@
     });
 </script>
 
-<div style="@string.Format("height:{0}px; width: {1}px;", @Model.Height, @Model.Width); overflow: hidden;">
+
+    @if (Model.Width==100 && Model.Height==100)
+    {
+        @: <div style="@string.Format("height:100%; width: 100%;"); overflow: hidden;">    
+    }
+    else
+    {
+        @: <div style="@string.Format("height:{0}px; width: {1}px;", @Model.Height, @Model.Width); overflow: hidden;">
+    }
     <div id="header">
         @Html.Partial("_EpiloggerCounts", @Model.EpiloggerCounts)
         <a href="http://epilogger.com" target="_blank" border="0"><img id="epiloggerLogo" src="/Public/images/widget/epl-logo.png" alt="Epilogger" /></a>
@@ -60,29 +81,61 @@
     <div id="jaggies"></div>
     <div class="clearfix" id="outer-container">
 
-        @Html.Partial("_widgetMenu", new Epilogger.Web.Models.WidgetMenuViewModel(){ EventSlug=Model.EventSlug, width=Model.Width, height = Model.Height, returnto = Model.returnto} )
+        @Html.Partial("_widgetMenu", new Epilogger.Web.Models.WidgetMenuViewModel() { EventSlug = Model.EventSlug, width = Model.Width, height = Model.Height, returnto = Model.returnto })
 
         <div class="contentContainer">
-            <div class="fullImage">
-                <img src="@Model.Image.Fullsize" style="display: none;" alt="" />
-            </div>
-            <span class="m-spacer"></span>
-
-            <a class="twitterName" href="http://www.twitter.com/@Model.Tweet.FromUserScreenName">@@@Model.Tweet.FromUserScreenName:</a>
-            <div class="tweet">
-                @Html.Raw(Model.Tweet.TextAsHTML)
-            </div>
             
-            <span class="m-spacer dotted"></span>
-            <img src="/Public/images/widget/BackArrow.png" alt=""/>
-            @if (Model.returnto==1)
+            @if (Model.Width >= 550 && Model.Height >= 330)
             {
-                @Html.ActionLink("back to feed", "index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })  
+                <div class="tweetWide">
+                    <a class="twitterName" href="http://www.twitter.com/@Model.Tweet.FromUserScreenName">@@@Model.Tweet.FromUserScreenName:</a>
+                    <div class="tweet">
+                        @Html.Raw(Model.Tweet.TextAsHTML)
+                    </div>
+                </div>
+                
+                <div class="fullImage">
+                    <img src="@Model.Image.Fullsize" style="display: none;" alt="" />
+                </div>
+                <span class="m-spacer"></span>
+
+                <span class="m-spacer dotted"></span>
+                <img src="/Public/images/widget/BackArrow.png" alt=""/>
+                if (Model.returnto == 1)
+                {
+                    @Html.ActionLink("back to feed", "index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })  
+                }
+                else
+                {
+                    @Html.ActionLink("back to photos", "photos", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })    
+                }
             }
             else
             {
-                @Html.ActionLink("back to photos", "photos", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })    
+                <div class="fullImage">
+                    <img src="@Model.Image.Fullsize" style="display: none;" alt="" />
+                </div>
+                <span class="m-spacer"></span>
+
+                <a class="twitterName" href="http://www.twitter.com/@Model.Tweet.FromUserScreenName">@@@Model.Tweet.FromUserScreenName:</a>
+                <div class="tweet">
+                    @Html.Raw(Model.Tweet.TextAsHTML)
+                </div>
+            
+                <span class="m-spacer dotted"></span>
+                <img src="/Public/images/widget/BackArrow.png" alt=""/>
+                if (Model.returnto == 1)
+                {
+                    @Html.ActionLink("back to feed", "index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })  
+                }
+                else
+                {
+                    @Html.ActionLink("back to photos", "photos", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })    
+                }
             }
+            
+            
+            
 
         </div>
             

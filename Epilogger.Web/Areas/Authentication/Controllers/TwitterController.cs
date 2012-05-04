@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 using Epilogger.Web.Controllers;
@@ -17,33 +18,83 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
 
         public ActionResult ConnectAccount() {
             if (Request.QueryString["oauth_token"] != null) {
-                OAuthTokenResponse accessTokenResponse = OAuthUtility.GetAccessTokenDuringCallback(TwitterHelper.TwitterConsumerKey, TwitterHelper.TwitterConsumerSecret);
+                var accessTokenResponse = OAuthUtility.GetAccessTokenDuringCallback(TwitterHelper.TwitterConsumerKey, TwitterHelper.TwitterConsumerSecret);
                 // check to see if we already have the screen name in the userauth table.
-                UserService userService = new UserService();
-                UserAuthenticationProfileService userAuthService = new UserAuthenticationProfileService();
-                User user = null;
-                UserAuthenticationProfile userAuth = userAuthService.UserAuthorizationByServiceScreenName(accessTokenResponse.ScreenName);
+                var userAuthService = new UserAuthenticationProfileService();
+                var userAuth = userAuthService.UserAuthorizationByServiceScreenName(accessTokenResponse.ScreenName);
 
                 if (userAuth != null) {
                     userAuth.Token = accessTokenResponse.Token;
                     userAuth.TokenSecret = accessTokenResponse.TokenSecret;
                     userAuthService.Save(userAuth);
 
-                    user = userAuth.Users.FirstOrDefault();
-                } else {
-                    userAuth = new UserAuthenticationProfile();
-                    userAuth.UserID = CurrentUserID;
-                    userAuth.Service = AuthenticationServices.TWITTER.ToString();
-                    userAuth.ServiceUsername = accessTokenResponse.ScreenName;
-                    userAuth.Token = accessTokenResponse.Token;
-                    userAuth.TokenSecret = accessTokenResponse.TokenSecret;
+                    var user = userAuth.Users.FirstOrDefault();
+                    if (user != null)
+                    {
+                        CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString());
+                        CookieHelpers.WriteCookie("lc", "tz", user.TimeZoneOffSet.ToString(CultureInfo.InvariantCulture));
 
-                    userAuthService.Save(userAuth);
+                        //This user already has an account, authed them, redirect back to where they were.
+                        this.StoreSuccess("You've been logged into your Epilogger account through twitter.");
+                        
+
+                    }
+                } else {
+                    //There is no auth record, this must be a login from Twitter or a new twitter connection to an existing user
+                    var us = new UserService();
+                    if (CurrentUserID == Guid.Empty)
+                    {
+                        //This is a new login, create the user
+                        var theNewUser = new User()
+                        {
+                            CreatedDate = DateTime.UtcNow,
+                            IsActive = true,
+                            RoleID = 2,
+                            Username = accessTokenResponse.ScreenName + "twitter",
+                            Password = " ",
+                            EmailAddress = " "
+                        };
+                        us.Save(theNewUser);
+                        userAuth = new UserAuthenticationProfile
+                        {
+                            UserID = theNewUser.ID,
+                            Service = AuthenticationServices.TWITTER.ToString(),
+                            ServiceUsername = accessTokenResponse.ScreenName,
+                            Token = accessTokenResponse.Token,
+                            TokenSecret = accessTokenResponse.TokenSecret
+                        };
+                        userAuthService.Save(userAuth);
+
+                        CookieHelpers.WriteCookie("lc", "uid", theNewUser.ID.ToString());
+                        CookieHelpers.WriteCookie("lc", "tz", theNewUser.TimeZoneOffSet.ToString(CultureInfo.InvariantCulture));
+
+                        //This is a new User so goto the profile page
+                        this.StoreSuccess("You have logged into Epilogger with your twitter account.");
+                        return RedirectToAction("Index", "Account", new { area = "" });
+                    }
+                    else
+                    {
+                        //This is a connection to Twitter
+                        userAuth = new UserAuthenticationProfile
+                        {
+                            UserID = CurrentUserID,
+                            Service = AuthenticationServices.TWITTER.ToString(),
+                            ServiceUsername = accessTokenResponse.ScreenName,
+                            Token = accessTokenResponse.Token,
+                            TokenSecret = accessTokenResponse.TokenSecret
+                        };
+                        userAuthService.Save(userAuth);
+
+                        //Had an epilogger account and just auth'ed their account, go back to where they were.
+                        this.StoreSuccess("Your twitter account has been linked to your epilogger.com account");
+                        
+
+                    }
+                    
                 }
             }
 
             this.StoreSuccess("Your twitter account has been linked to your epilogger.com account");
-
             return RedirectToAction("Index", "Account", new { area = "" });
         }
 

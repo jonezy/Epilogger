@@ -80,8 +80,11 @@ namespace Epilogger.Web.Controllers
             model.CheckInCount = _cs.FindCheckInCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
             model.CheckIns = _cs.FindByEventIDOrderDescTake16(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
 
-            model.width = width==null ? 300 : int.Parse(width);
-            model.height = height == null ? 500 : int.Parse(height);
+            //model.width = width==null ? 300 : int.Parse(width);
+            //model.height = height == null ? 500 : int.Parse(height);
+            
+            model.width = width==null ? 100 : int.Parse(width);
+            model.height = height == null ? 100 : int.Parse(height);
 
             model.EpiloggerCounts = new Core.Stats.WidgetTotals().GetWidgetTotals(requestedEvent.ID, FromDateTime(), ToDateTime());
 
@@ -110,8 +113,12 @@ namespace Epilogger.Web.Controllers
             var model = Mapper.Map<Event, WidgetPhotosDetailsViewModel>(requestedEvent);
 
             model.PhotoID = PhotoID;
-            model.Width = width == null ? 300 : int.Parse(width);
-            model.Height = height == null ? 500 : int.Parse(height);
+
+            //model.Width = width == null ? 300 : int.Parse(width);
+            //model.Height = height == null ? 500 : int.Parse(height);
+            model.Width = width == null ? 100 : int.Parse(width);
+            model.Height = height == null ? 100 : int.Parse(height);
+
             model.returnto = returnto;
             model.EpiloggerCounts = new Core.Stats.WidgetTotals().GetWidgetTotals(requestedEvent.ID, FromDateTime(), ToDateTime());
 
@@ -135,8 +142,11 @@ namespace Epilogger.Web.Controllers
             var requestedEvent = _es.FindBySlug(id);
             var model = Mapper.Map<Event, WidgetPhotosViewModel>(requestedEvent);
 
-            model.Width = width == null ? 300 : int.Parse(width);
-            model.Height = height == null ? 500 : int.Parse(height);
+            //model.Width = width == null ? 300 : int.Parse(width);
+            //model.Height = height == null ? 500 : int.Parse(height);
+            model.Width = width == null ? 100 : int.Parse(width);
+            model.Height = height == null ? 100 : int.Parse(height);
+
             model.EpiloggerCounts = new Core.Stats.WidgetTotals().GetWidgetTotals(requestedEvent.ID, FromDateTime(), ToDateTime());
 
             //Get the photos
@@ -162,8 +172,11 @@ namespace Epilogger.Web.Controllers
             var requestedEvent = _es.FindBySlug(id);
             var model = Mapper.Map<Event, WidgetTweetsViewModel>(requestedEvent);
 
-            model.Width = width == null ? 300 : int.Parse(width);
-            model.Height = height == null ? 500 : int.Parse(height);
+            //model.Width = width == null ? 300 : int.Parse(width);
+            //model.Height = height == null ? 500 : int.Parse(height);
+            model.Width = width == null ? 100 : int.Parse(width);
+            model.Height = height == null ? 100 : int.Parse(height);
+
             model.EpiloggerCounts = new Core.Stats.WidgetTotals().GetWidgetTotals(requestedEvent.ID, FromDateTime(), ToDateTime());
 
             //Get the tweets
@@ -181,8 +194,11 @@ namespace Epilogger.Web.Controllers
             var requestedEvent = _es.FindBySlug(id);
             var model = Mapper.Map<Event, WidgetCheckinsViewModel>(requestedEvent);
 
-            model.Width = width == null ? 300 : int.Parse(width);
-            model.Height = height == null ? 500 : int.Parse(height);
+            //model.Width = width == null ? 300 : int.Parse(width);
+            //model.Height = height == null ? 500 : int.Parse(height);
+            model.Width = width == null ? 100 : int.Parse(width);
+            model.Height = height == null ? 100 : int.Parse(height);
+
             model.EpiloggerCounts = new Core.Stats.WidgetTotals().GetWidgetTotals(requestedEvent.ID, FromDateTime(), ToDateTime());
 
             //Get the tweets

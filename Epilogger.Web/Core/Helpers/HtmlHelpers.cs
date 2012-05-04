@@ -6,15 +6,15 @@ using TagCloud;
 
 namespace System.Web.Mvc {
     public static class HtmlHelpers {
-        public static MvcHtmlString RenderConnectSocialNetworkUI(this HtmlHelper helper, string network, List<ConnectedNetworksViewModel> connectedNetworks) {
+        public static MvcHtmlString RenderConnectSocialNetworkUI(this HtmlHelper helper, string network, IEnumerable<ConnectedNetworksViewModel> connectedNetworks) {
 
-            ConnectedNetworksViewModel desiredNetwork = connectedNetworks.Where(cn => cn.Service.ToLower() == network.ToLower()).FirstOrDefault();
+            var desiredNetwork = connectedNetworks.FirstOrDefault(cn => cn.Service.ToLower() == network.ToLower());
 
-            bool connect = desiredNetwork == null || string.IsNullOrEmpty(desiredNetwork.ServiceUsername);
-            UrlHelper urlHelper = new UrlHelper(helper.ViewContext.RequestContext);
-            string url = urlHelper.Action(connect ? "ConnectRequest" : "Disconnect", network, new { area = "Authentication" });
+            var connect = desiredNetwork == null || string.IsNullOrEmpty(desiredNetwork.ServiceUsername);
+            var urlHelper = new UrlHelper(helper.ViewContext.RequestContext);
+            var url = urlHelper.Action(connect ? "ConnectRequest" : "Disconnect", network, new { area = "Authentication" });
 
-            StringBuilder returnValue = new StringBuilder();
+            var returnValue = new StringBuilder();
             returnValue.Append("<div class='social_connections'>");
             returnValue.AppendFormat("<p class='remove-bottom'><strong>{0}</strong></p>", network);
             
@@ -75,6 +75,26 @@ namespace System.Web.Mvc {
         public static string TagCloud(this HtmlHelper htmlHelper, IEnumerable<Tag> tags)
         {
             return new TagCloud.TagCloud(tags).ToString();
+        }
+
+
+        public static MvcHtmlString ActionImage(this HtmlHelper html, string action, string controller, object routeValues, string imagePath, string alt)
+        {
+            var url = new UrlHelper(html.ViewContext.RequestContext);
+
+            // build the <img> tag
+            var imgBuilder = new TagBuilder("img");
+            imgBuilder.MergeAttribute("src", url.Content(imagePath));
+            imgBuilder.MergeAttribute("alt", alt);
+            string imgHtml = imgBuilder.ToString(TagRenderMode.SelfClosing);
+
+            // build the <a> tag
+            var anchorBuilder = new TagBuilder("a");
+            anchorBuilder.MergeAttribute("href", url.Action(action, controller, routeValues));
+            anchorBuilder.InnerHtml = imgHtml; // include the <img> tag inside
+            string anchorHtml = anchorBuilder.ToString(TagRenderMode.Normal);
+
+            return MvcHtmlString.Create(anchorHtml);
         }
 
     }

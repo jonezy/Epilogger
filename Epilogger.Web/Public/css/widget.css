@@ -162,12 +162,28 @@ big {
     position: relative;
     font-weight: bold;
 }
+
+.twitterNameWide {
+    color: #02a4ed;
+    font-size: 10px;
+    top: -4px;
+    position: relative;
+    font-weight: bold;
+}
+
+
 .tweet {
     color: #6b696a;
     font-size: 12px;
     margin-bottom: 16px;
     margin-top: -4px;
 }
+
+.tweetWide {
+    float: right;
+    width: 245px;
+}
+
 
 .boldLinks a { color: #6b696a;font-weight: bold; }
 .boldLinks a:hover { text-decoration: underline; }

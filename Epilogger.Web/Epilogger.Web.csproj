@@ -200,6 +200,14 @@
     <Compile Include="Areas\Admin\Controllers\EmailController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Models\InviteUsersViewModel.cs" />
+    <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
+    <Compile Include="Areas\Api\Controllers\ApiEventsController.cs" />
+    <Compile Include="Areas\Api\Models\ApiCategory.cs" />
+    <Compile Include="Areas\Api\Models\ApiEvent.cs" />
+    <Compile Include="Areas\Api\Models\CategoryManager.cs" />
+    <Compile Include="Areas\Api\Models\EventManager.cs" />
+    <Compile Include="Areas\Api\Models\ICategoryManager.cs" />
+    <Compile Include="Areas\Api\Models\IEventManager.cs" />
     <Compile Include="Areas\Authentication\AuthenticationAreaRegistration.cs" />
     <Compile Include="Areas\Authentication\Controllers\FacebookController.cs" />
     <Compile Include="Areas\Authentication\Controllers\IAuthenticationController.cs" />
@@ -251,6 +259,7 @@
     <Compile Include="Core\Services\TweetService.cs" />
     <Compile Include="Core\Services\UserAuthenticationProfileService.cs" />
     <Compile Include="Core\Services\UserService.cs" />
+    <Compile Include="Core\Services\UserTwitterActionService.cs" />
     <Compile Include="Core\Services\VenueService.cs" />
     <Compile Include="Core\Stats\WidgetTotals.cs" />
     <Compile Include="Core\Stats\HomepageTotals.cs" />
@@ -276,6 +285,7 @@
     <Compile Include="Models\BrowseCategoriesDisplayViewModel.cs" />
     <Compile Include="Models\AllStatsViewModel.cs" />
     <Compile Include="Models\BetaSignUpViewModel.cs" />
+    <Compile Include="Models\TweetReplyViewModel.cs" />
     <Compile Include="Models\WidgetCheckinsViewModel.cs" />
     <Compile Include="Models\WidgetCountsViewModel.cs" />
     <Compile Include="Models\WidgetTweetsViewModel.cs" />
@@ -462,7 +472,9 @@
     <Content Include="Public\images\homepage\sprouter.png" />
     <Content Include="Public\images\homepage\tldr.png" />
     <Content Include="Public\images\icons\addMoreArrow.png" />
+    <Content Include="Public\images\icons\ajaxWaiting.gif" />
     <Content Include="Public\images\icons\and.png" />
+    <Content Include="Public\images\icons\bird_16_blue.png" />
     <Content Include="Public\images\icons\blog.png" />
     <Content Include="Public\images\icons\BrowseBullet.png" />
     <Content Include="Public\images\icons\bubble.png" />
@@ -493,10 +505,12 @@
     <Content Include="Public\images\icons\popUpNub.png" />
     <Content Include="Public\images\icons\profile-eventlist.png" />
     <Content Include="Public\images\icons\SearchPlainText.png" />
+    <Content Include="Public\images\icons\sign-in-with-twitter-d.png" />
     <Content Include="Public\images\icons\star.png" />
     <Content Include="Public\images\icons\SubscribedCheck.png" />
     <Content Include="Public\images\icons\Tab-EventInfo.png" />
     <Content Include="Public\images\icons\tweet-black.png" />
+    <Content Include="Public\images\icons\twitter-everything-spritev2.png" />
     <Content Include="Public\images\icons\twitter.png" />
     <Content Include="Public\images\icons\WhenandWhere.png" />
     <Content Include="Public\images\jaggie-icons\event-list-header-media.gif" />
@@ -2777,6 +2791,7 @@
     <Content Include="Public\js\TimePicker\jquery.timePicker.js" />
     <Content Include="Public\js\TimePicker\jquery.timePicker.min.js" />
     <Content Include="Public\js\TimePicker\timePicker.css" />
+    <Content Include="Areas\Api\Views\Web.config" />
     <None Include="Service References\Epilogr\api.disco" />
     <None Include="Service References\Epilogr\configuration91.svcinfo" />
     <None Include="Service References\Epilogr\configuration.svcinfo" />
@@ -2813,9 +2828,14 @@
     <Content Include="Views\Widget\Tweets.cshtml" />
     <Content Include="Views\Widget\Checkins.cshtml" />
     <Content Include="Views\Widget\_EpiloggerCounts.cshtml" />
+    <Content Include="Views\Events\TweetReply.cshtml" />
+    <Content Include="Views\Events\TweetRetweet.cshtml" />
+    <Content Include="Views\Events\NeedTwitterAuth.cshtml" />
+    <Content Include="Views\Events\TweetTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\Api\Views\Shared\" />
     <Folder Include="Areas\Authentication\Models\" />
     <Folder Include="Areas\Authentication\Views\Shared\" />
     <Folder Include="Public\js\FacebookPhotoPicker\crossdomain\.svn\prop-base\" />
@@ -4896,7 +4916,7 @@
     <Content Include="Views\Dashboard\Events.cshtml" />
     <Content Include="Views\Dashboard\Account.cshtml" />
     <Content Include="Views\Home\_GetClickMap.cshtml" />
-    <Content Include="Views\Events\_TweetTemplate.cshtml" />
+    <Content Include="Views\Events\_TweetTemplateoLD.cshtml" />
     <Content Include="Views\Events\_EventMenu.cshtml" />
     <Content Include="Views\Events\AllContent.cshtml" />
     <Content Include="Views\Events\Menu.cshtml" />

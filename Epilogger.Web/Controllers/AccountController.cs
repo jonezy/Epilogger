@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Configuration;
 using System.Linq;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -35,13 +36,78 @@ namespace Epilogger.Web.Controllers {
             return View(model);
         }
 
+
+        [HttpPost]
+        public ActionResult Index(AccountModel model, FormCollection c)
+        {
+            model.ConnectedNetworks = Mapper.Map<List<UserAuthenticationProfile>, List<ConnectedNetworksViewModel>>(CurrentUser.UserAuthenticationProfiles.ToList());
+            var theUser = Mapper.Map<User, AccountModel>(CurrentUser);
+            model.TwitterProfilePicture = theUser.TwitterProfilePicture;
+            model.FacebookProfilePicture = theUser.FacebookProfilePicture;
+            model.ProfilePicture = theUser.ProfilePicture;
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var user = CurrentUser;
+                    user.FirstName = model.FirstName;
+                    user.LastName = model.LastName;
+                    user.EmailAddress = model.EmailAddress;
+                    user.DateOfBirth = DateTime.Parse(model.DateOfBirth);
+                    //user.TimeZoneOffSet = model.TimeZone;
+
+                    string imagePath = string.Empty;
+                    if (c["ProfilePictures"] != null)
+                    {
+                        string pictureProvider = c["ProfilePictures"] as string ?? "";
+
+                        if (pictureProvider.ToLower().Contains("twitter"))
+                        {
+                            imagePath =
+                                TwitterHelper.GetUser(CurrentUserTwitterAuthorization.Token,
+                                                      CurrentUserTwitterAuthorization.TokenSecret,
+                                                      CurrentUserTwitterAuthorization.ServiceUsername).ResponseObject.
+                                    ProfileImageLocation;
+                        }
+                        else if (pictureProvider.ToLower().Contains("facebook"))
+                        {
+                            imagePath = FacebookHelper.GetProfilePicture(CurrentUserFacebookAuthorization.Token);
+                        }
+                    }
+                    user.ProfilePicture = imagePath;
+
+                    service.Save(user);
+
+                    //this.StoreSuccess("Your account was updated successfully");
+                    this.Receive(MessageType.Success, "Your account was updated successfully");
+
+                }
+                catch (Exception ex)
+                {
+                    Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                    this.StoreError("There was a problem updating your account");
+                }
+            }
+            return View(model);
+        }
+
+
+
+
+
+
+
+
+
         [HttpGet]
         public ActionResult Create() {
             return View(new CreateAccountModel());
         }
 
         [HttpPost]
-        public ActionResult Create(CreateAccountModel model) {
+        public ActionResult Create(CreateAccountModel model)
+        {
             if (ModelState.IsValid) {
                 // TEMP: check to make sure the email address provided is in the beta invite table.
                 //if(!service.IsBetaUser(model.EmailAddress)) {
@@ -50,7 +116,7 @@ namespace Epilogger.Web.Controllers {
                 //}
 
                 //Check to see if this account already exists
-                User userTest = service.GetUserByUsername(model.Username);
+                var userTest = service.GetUserByUsername(model.Username);
                 if (userTest != null)
                 {
                     ModelState.AddModelError(string.Empty, "The username " + userTest.Username + " is already in use, please try another username");
@@ -114,11 +180,11 @@ namespace Epilogger.Web.Controllers {
 
                 } catch (Exception ex) {
                     this.StoreError("There was a problem creating your account");
-                    service.DeleteUser(user.ID);
+                    if (user != null) service.DeleteUser(user.ID);
                     return View(model);
                 }
-            } else
-                return View(model);
+            }
+            return View(model);
         }
 
         [HttpGet]
@@ -153,40 +219,52 @@ namespace Epilogger.Web.Controllers {
             return RedirectToAction("login", "account");
         }
 
-        [HttpPost]
-        public ActionResult Update(AccountModel model, FormCollection c) {
-            try {
-                User user = CurrentUser;
-                user.FirstName = model.FirstName;
-                user.LastName = model.LastName;
-                user.EmailAddress = model.EmailAddress;
-                user.DateOfBirth = DateTime.Parse(model.DateOfBirth);
-                user.TimeZoneOffSet = model.TimeZone;
+        //[HttpPost]
+        //public ActionResult Update(AccountModel model, FormCollection c) {
+            
+        //    try
+        //    {
+        //        User user = CurrentUser;
+        //        user.FirstName = model.FirstName;
+        //        user.LastName = model.LastName;
+        //        user.EmailAddress = model.EmailAddress;
+        //        user.DateOfBirth = DateTime.Parse(model.DateOfBirth);
+        //        //user.TimeZoneOffSet = model.TimeZone;
 
-                string imagePath = string.Empty;
-                if (c["ProfilePictures"] != null) {
-                    string pictureProvider = c["ProfilePictures"] as string ?? "";
+        //        string imagePath = string.Empty;
+        //        if (c["ProfilePictures"] != null)
+        //        {
+        //            string pictureProvider = c["ProfilePictures"] as string ?? "";
 
-                    if (pictureProvider.ToLower().Contains("twitter")) {
-                        imagePath = TwitterHelper.GetUser(CurrentUserTwitterAuthorization.Token, CurrentUserTwitterAuthorization.TokenSecret, CurrentUserTwitterAuthorization.ServiceUsername).ResponseObject.ProfileImageLocation;
-                    } else if (pictureProvider.ToLower().Contains("facebook")) {
-                        imagePath = FacebookHelper.GetProfilePicture(CurrentUserFacebookAuthorization.Token);
-                    }
-                }
-                user.ProfilePicture = imagePath;
+        //            if (pictureProvider.ToLower().Contains("twitter"))
+        //            {
+        //                imagePath =
+        //                    TwitterHelper.GetUser(CurrentUserTwitterAuthorization.Token,
+        //                                            CurrentUserTwitterAuthorization.TokenSecret,
+        //                                            CurrentUserTwitterAuthorization.ServiceUsername).ResponseObject.
+        //                        ProfileImageLocation;
+        //            }
+        //            else if (pictureProvider.ToLower().Contains("facebook"))
+        //            {
+        //                imagePath = FacebookHelper.GetProfilePicture(CurrentUserFacebookAuthorization.Token);
+        //            }
+        //        }
+        //        user.ProfilePicture = imagePath;
 
-                service.Save(user);
+        //        service.Save(user);
 
-                //this.StoreSuccess("Your account was updated successfully");
-                this.Receive(MessageType.Success, "Your account was updated successfully");
+        //        //this.StoreSuccess("Your account was updated successfully");
+        //        this.Receive(MessageType.Success, "Your account was updated successfully");
 
-            } catch (Exception ex) {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
-                this.StoreError("There was a problem updating your account");
-            }
-
-            return RedirectToAction("Index");
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+        //        this.StoreError("There was a problem updating your account");
+        //    }
+            
+        //    return RedirectToAction("Index");
+        //}
 
         [HttpGet]
         public ActionResult Login() {
@@ -253,6 +331,100 @@ namespace Epilogger.Web.Controllers {
 
             return View(model);
         }
+
+        // GET: Account/TwitterLogon/
+        public ActionResult TwitterLogon(string oauth_token, string oauth_verifier, string ReturnUrl)
+        {
+
+            if (string.IsNullOrEmpty(oauth_token) || string.IsNullOrEmpty(oauth_verifier))
+            {
+                var httpRequestBase = Request;
+                if (httpRequestBase != null)
+                {
+                    if (httpRequestBase.Url != null)
+                    {
+                        var builder = new UriBuilder(httpRequestBase.Url);
+                        builder.Query = string.Concat(
+                            builder.Query,
+                            string.IsNullOrEmpty(builder.Query) ? string.Empty : "&",
+                            "ReturnUrl=",
+                            ReturnUrl);
+
+                        var token = OAuthUtility.GetRequestToken(
+                            ConfigurationManager.AppSettings["TwitterConsumerKey"],
+                            ConfigurationManager.AppSettings["TwitterConsumerSecret"],
+                            builder.ToString()).Token;
+
+                        return Redirect(OAuthUtility.BuildAuthorizationUri(token, true).ToString());
+                    }
+                }
+            }
+
+            var tokens = OAuthUtility.GetAccessToken(
+                ConfigurationManager.AppSettings["TwitterConsumerKey"],
+                ConfigurationManager.AppSettings["TwitterConsumerSecret"],
+                oauth_token,
+                oauth_verifier);
+
+
+            var _us = new UserService();
+            var _uaps = new UserAuthenticationProfileService();
+
+            var userAuthByScreenName = _uaps.UserAuthorizationByServiceScreenName(tokens.ScreenName);
+
+            if (userAuthByScreenName == null)
+            {
+                //Get the user details from Twitter
+                //var theTwitterUser = TwitterUser.Show(tokens.UserId);
+
+                //No auth exists. This a new user, create the account and redirect to the profile page.
+                var theNewUser = new User()
+                                     {
+                                         CreatedDate = DateTime.UtcNow,
+                                         IsActive = true,
+                                         RoleID = 2,
+                                         Username = tokens.ScreenName + "twitter",
+                                         Password = " ",
+                                         EmailAddress = " "
+                                     };
+                _us.Save(theNewUser);
+
+                //Put the auth in the auth table.
+                var theAuth = new UserAuthenticationProfile
+                                  {
+                                      UserID = theNewUser.ID,
+                                      Service = "TWITTER",
+                                      ServiceUsername = tokens.ScreenName,
+                                      Token = tokens.Token,
+                                      TokenSecret = tokens.TokenSecret
+                                  };
+                _uaps.Save(theAuth);
+
+                CookieHelpers.WriteCookie("lc", "uid", theNewUser.ID.ToString());
+                CookieHelpers.WriteCookie("lc", "tz", theNewUser.TimeZoneOffSet.ToString());
+
+                return RedirectToAction("Index");
+            }
+
+            //This user already has a token, log them in.
+            var theUser = _us.GetUserByID(userAuthByScreenName.UserID);
+            // write the login cookie, redirect. 
+            CookieHelpers.WriteCookie("lc", "uid", theUser.ID.ToString());
+            CookieHelpers.WriteCookie("lc", "tz", theUser.TimeZoneOffSet.ToString());
+
+            return RedirectToAction("index", "home");
+
+
+
+            //if (string.IsNullOrEmpty(ReturnUrl))
+            //    return Redirect("/");
+            //else
+            //    return Redirect(ReturnUrl);
+        }
+
+
+
+
 
         public ActionResult Logout() {
             CookieHelpers.DestroyCookie("lc");

@@ -6,7 +6,16 @@
     
 }
 
-<div style="@string.Format("height:{0}px; width: {1}px;", @Model.Height, @Model.Width); overflow: hidden;">
+
+@if (Model.Width==100 && Model.Height==100)
+{
+    @: <div style="@string.Format("height:100%; width: 100%;"); overflow: hidden;">    
+}
+else
+{
+    @: <div style="@string.Format("height:{0}px; width: {1}px;", @Model.Height, @Model.Width); overflow: hidden;">
+}
+
     <div id="header">
         @Html.Partial("_EpiloggerCounts", @Model.EpiloggerCounts)
         <a href="http://epilogger.com" target="_blank" border="0"><img id="epiloggerLogo" src="/Public/images/widget/epl-logo.png" alt="Epilogger" /></a>
@@ -27,8 +36,16 @@
             </ul>
 
         </div>
-            
-        <div id="topTenTab" style="@string.Format("top: {0}px; left: {1}px;", Model.Height - 25, (Model.Width>=550) ? (Model.Width / 2) + 180 : (Model.Width / 2) - 37)">
+        
+        @if (Model.Width==100 && Model.Height==100)
+        {
+            @: <div id="topTenTab" style="@string.Format("bottom: 0; right: 50px;")">
+        }
+        else
+        {
+            @: <div id="topTenTab" style="@string.Format("top: {0}px; left: {1}px;", Model.Height - 25, (Model.Width>=550) ? (Model.Width / 2) + 180 : (Model.Width / 2) - 37)">    
+        }
+        
             <a href="http://epilogger.com/events/@Model.EventSlug/allphotos" target="_blank"><img src="/Public/images/widget/top10.png" alt="" /></a>
         </div>
             

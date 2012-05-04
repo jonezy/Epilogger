@@ -92,8 +92,119 @@ function AddBlogPost(url) {
 }
 
 
+/***** TWITTER ACTIONS ******/
+head.ready(function () {
+    setupTwitterAction();
+});
+
+function setupTwitterAction() {
+    $('.Reply').click(function (e) {
+        e.preventDefault();
+
+        $.colorbox({
+            width: 550,
+            height: 320,
+            href: "TweetReply?eventId=" + EventID + "&tweetId=" + this.id
+        });
+
+    });
+
+    $('.Retweet').click(function (e) {
+        e.preventDefault();
+
+        $.colorbox({
+            width: 550,
+            height: 230,
+            href: "TweetRetweet?eventId=" + EventID + "&tweetId=" + this.id
+        });
+
+    });
+
+    $('.Favorite').click(function (e) {
+        e.preventDefault();
+
+        var twitterFavorite = {
+            TwitterID: this.id
+        };
+
+        $.post('/Events/TweetFavorite/', twitterFavorite,
+        function (data) {
+            if (data == "True") {
+                FlashMessage("Your tweet has been favorited!", "Message_Success Message_Flash");
+            }
+            else if (data == "Auth") {
+                $.colorbox({
+                    width: 550,
+                    height: 220,
+                    href: "NeedTwitterAuth"
+                });
+            }
+            else 
+            {
+                FlashMessage("There was a problem favoriting your tweet, please try again.", "Message_Error Message_Flash");
+            }
+        });
+        return false;
+
+    });
+}
 
 
+function ReplyToTweet(url) {
+    $("#submitTweet").attr('disabled', 'disabled');
+    $("#submitTweet").addClass('disabled');
+    $("#twitterLoading").show();
+
+    var twitterReply = {
+        ReplyNewTweet: $("#ReplyNewTweet").val(),
+        TwitterID: $("#TwitterID").val()
+    };
+
+    $.post(url, twitterReply,
+        function (data) {
+            if (data == "True") {
+                FlashMessage("Your tweet has been sent!", "Message_Success Message_Flash");
+                $.colorbox.close();
+            } else {
+                FlashMessage("There was a problem sending your tweet, please try again.", "Message_Error Message_Flash");
+                $.colorbox.close();
+            }
+        });
+    return false;
+}
+
+function ActionRetweet(url) {
+    $("#submitTweet").attr('disabled', 'disabled');
+    $("#submitTweet").addClass('disabled');
+    $("#twitterLoading").show();
+
+    var twitterRetweet = {
+        RetweetText: $("#RetweetText").val(),
+        TwitterID: $("#TwitterID").val(),
+        ClassicRT: $("#ClassicRT").val()
+    };
+
+    $.post(url, twitterRetweet,
+        function (data) {
+            if (data == "True") {
+                FlashMessage("Your tweet has been sent!", "Message_Success Message_Flash");
+                $.colorbox.close();
+            } else {
+                FlashMessage("There was a problem sending your tweet, please try again.", "Message_Error Message_Flash");
+                $.colorbox.close();
+            }
+        });
+    return false;
+}
+
+
+
+function cancelPopUp() {
+    $.colorbox.close();
+}
+function resizePopUp(width, height) {
+    $.colorbox.resize({ width: width, height: height });
+}
 
 
 function FlashMessage(message, cssClas) {
@@ -101,7 +212,7 @@ function FlashMessage(message, cssClas) {
     $('#flash').removeClass();
     $('#flash').addClass(cssClas);
     $('#flash').slideDown('med');
-    $('#flash').click(function () { $('#flash').toggle('highlight') });
+    $('#flash').click(function () { $('#flash').toggle('highlight'); });
 
     window.setTimeout(function () {
         $("#flash").fadeOut("slow");
@@ -206,4 +317,21 @@ head.ready(function () {
 
 
     });
+});
+
+
+head.ready(function () {
+    new function ($) {
+        $.fn.setCursorPosition = function (pos) {
+            if ($(this).get(0).setSelectionRange) {
+                $(this).get(0).setSelectionRange(pos, pos);
+            } else if ($(this).get(0).createTextRange) {
+                var range = $(this).get(0).createTextRange();
+                range.collapse(true);
+                range.moveEnd('character', pos);
+                range.moveStart('character', pos);
+                range.select();
+            }
+        }
+    } (jQuery);
 });

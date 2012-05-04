@@ -10,6 +10,7 @@
 
 <script language="javascript" type="text/javascript">
     var EventSlug = '@Model.EventSlug';
+    var EventID = @Model.ID;
 </Script>
 
 
@@ -65,24 +66,12 @@
     </div>
 </div>
 <div id="events-content">
-
-    @foreach (TweetDisplayViewModel item in Model.Tweets) {
-        <div class="alltweets-entry clearfix">
-            <img src="@item.ProfileImageUrl" class="fleft" height="48" width="48" alt="" />
-            <div class="tweet-content">
-                <strong><a href="http://www.twitter.com/@item.FromUserScreenName" class="tweet-content-username" target="_blank">@item.FromUserScreenName</a></strong>
-                <p>@Html.Raw(item.TextAsHTML)</p>
-                <span class="tweet-date">
-                    (@Html.DisplayFor(thing => item.CreatedDate))&nbsp;&nbsp;&nbsp;
-                    @if (Model.CanDelete)
-                    {
-                        //@Html.ActionLink("delete", "deleteTweet");
-                        <a href="" class="deleteTweet" id="@item.Id">delete</a>
-                    }
-                </span>
-            </div>
-        </div>
-    }
+    <ul class="plain-list" id="tweetlist">
+        @foreach (var item in Model.Tweets) {
+            var ttvm = new TweetTemplateViewModel { Tweet = item, CanDelete = Model.CanDelete, ShowControls = true };
+            @Html.Action("TweetTemplate", ttvm)  
+        }
+    </ul>
 
     @MvcHtmlString.Create(Html.Pager(100, Model.CurrentPageIndex, Model.TweetCount, new { controller = "Events", action = "AllTweets", id = Model.EventSlug, f = Request.QueryString["f"], t = Request.QueryString["t"] }))
 </div>

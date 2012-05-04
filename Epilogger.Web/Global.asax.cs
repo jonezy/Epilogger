@@ -8,6 +8,7 @@ using System.Web.Routing;
 using AutoMapper;
 
 using Epilogger.Data;
+using Epilogger.Web.Areas.Api.Models;
 using Epilogger.Web.Core.Email;
 using Epilogger.Web.Models;
 using Timezone.Framework;
@@ -123,6 +124,36 @@ namespace Epilogger.Web {
                 "events/create",
                 new { controller = "events", action = "create"}
             );
+
+            routes.MapRoute(
+                "TweetTemplate",
+                "events/tweettemplate",
+                new { controller = "events", action = "tweettemplate" }
+            );
+
+            routes.MapRoute(
+                "TweetReply",
+                "events/tweetreply",
+                new { controller = "events", action = "tweetreply" }
+            );
+            routes.MapRoute(
+                "TweetRetweet",
+                "events/tweetretweet",
+                new { controller = "events", action = "tweetretweet" }
+            );
+
+            routes.MapRoute(
+                "TweetFavorite",
+                "events/tweetfavorite",
+                new { controller = "events", action = "tweetfavorite" }
+            );
+            routes.MapRoute(
+                "NeedTwitterAuth",
+                "events/needtwitterauth",
+                new { controller = "events", action = "needtwitterauth" }
+            );
+            
+
 
 
             routes.MapRoute(
@@ -371,7 +402,7 @@ namespace Epilogger.Web {
 
             Mapper.CreateMap<User, AccountModel>()
                 .ForMember(dest => dest.ConnectedNetworks, opt => opt.Ignore())
-                .ForMember(dest => dest.TimeZone, opt => opt.Ignore())
+                //.ForMember(dest => dest.TimeZone, opt => opt.Ignore())
                 .ForMember(dest => dest.TwitterProfilePicture, opt => opt.ResolveUsing<TwitterProfilePictureResolver>())
                 .ForMember(dest => dest.FacebookProfilePicture, opt => opt.ResolveUsing<FacebookProfilePictureResolver>())
                 .ForMember(dest => dest.DateOfBirth, opt => opt.MapFrom(src => src.DateOfBirth.HasValue ? src.DateOfBirth.Value.ToShortDateString() : ""))
@@ -442,6 +473,22 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.Type, opt => opt.Ignore())
                 .ForMember(dest => dest.ID, opt => opt.Ignore())
                 .ForMember(dest => dest.EventID, opt => opt.Ignore());
+
+
+            //API Mappers
+            Mapper.CreateMap<Event, ApiEvent>()
+                .ForMember(dest => dest.CanDelete, opt => opt.Ignore())
+                .ForMember(dest => dest.FromDateTime, opt => opt.Ignore())
+                .ForMember(dest => dest.ToDateTime, opt => opt.Ignore())
+                .ForMember(dest => dest.TweetCount, opt => opt.MapFrom(src => src.Tweets.Count()))
+                .ForMember(dest => dest.ImageCount, opt => opt.MapFrom(src => src.Images.Count()))
+                .ForMember(dest => dest.CheckInCount, opt => opt.MapFrom(src => src.CheckIns.Count()));
+
+            Mapper.CreateMap<EventCategory, ApiCategory>();
+
+
+
+
 
             Mapper.AssertConfigurationIsValid();
         }
