@@ -59,9 +59,9 @@
 
         var replyTo = '@@@Model.Tweet.FromUserScreenName';
         var hashTag = '@(Model.Event.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0].Contains("#") ? Model.Event.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0] : "#" + Model.Event.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0])';
+        var eventUrl = '@Model.ShortEventURL';
 
-
-        $("#ReplyNewTweet").val(replyTo + '  ' + hashTag);
+        $("#ReplyNewTweet").val(replyTo + '  ' + eventUrl + ' ' + hashTag);
 
         //check if we are still within our maximum number of characters or not
         var numofchars = $("#ReplyNewTweet").val().length;
@@ -89,7 +89,7 @@
 </h2>
 <div>
     @{ var ttvm = new Epilogger.Web.Models.TweetTemplateViewModel { Tweet = Model.Tweet, CanDelete = false, EventId = Model.Event.ID, ShowControls = false };}
-    @Html.Partial("_TweetTemplate", ttvm)
+    @Html.Action("TweetTemplate", ttvm)
 </div>
 
 <form action="" method="post" onsubmit="return ReplyToTweet('@Url.Action("TweetReply", "events")')">

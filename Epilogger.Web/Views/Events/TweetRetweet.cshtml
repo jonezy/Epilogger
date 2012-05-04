@@ -92,7 +92,7 @@
 </h2>
 <div>
     @{ var ttvm = new Epilogger.Web.Models.TweetTemplateViewModel { Tweet = Model.Tweet, CanDelete = false, EventId = Model.Event.ID, ShowControls = false };}
-    @Html.Partial("_TweetTemplate", ttvm)
+    @Html.Action("TweetTemplate", ttvm)
 </div>
 
 <form action="" method="post" onsubmit="return ActionRetweet('@Url.Action("TweetRetweet", "events")')">
@@ -100,7 +100,7 @@
     @if (Model.IsTwitterAuthed)
     {
         <div id="editRetweet" style="display: none;">
-            <textarea class="tweetBox" cols="20" id="RetweetText" name="RetweetText" rows="2">@("RT @" + Model.Tweet.FromUserScreenName + " \"" + Model.Tweet.Text + "\"")</textarea>
+            <textarea class="tweetBox" cols="20" id="RetweetText" name="RetweetText" rows="2">@("RT @" + Model.Tweet.FromUserScreenName + " \"" + Model.Tweet.Text + "\" " + Model.ShortEventURL)</textarea>
         </div>
         
         <div class="fleft" style="padding-top: 9px;">

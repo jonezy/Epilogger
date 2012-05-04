@@ -4916,7 +4916,7 @@
     <Content Include="Views\Dashboard\Events.cshtml" />
     <Content Include="Views\Dashboard\Account.cshtml" />
     <Content Include="Views\Home\_GetClickMap.cshtml" />
-    <Content Include="Views\Events\_TweetTemplate.cshtml" />
+    <Content Include="Views\Events\_TweetTemplateoLD.cshtml" />
     <Content Include="Views\Events\_EventMenu.cshtml" />
     <Content Include="Views\Events\AllContent.cshtml" />
     <Content Include="Views\Events\Menu.cshtml" />

@@ -42,9 +42,11 @@ jQuery(function ($) {
                             }
                         });
 
-                        //There are new photos, update the count
-                        $("#tweetCount").text(newTweets.tweetcount);
+                        setupTwitterAction();
 
+                        //There are new tweets, update the count
+                        $("#tweetCount").text(newTweets.tweetcount);
+                        
                     }
                 }
 

@@ -492,23 +492,23 @@ namespace Epilogger.Web.Controllers {
                     EpiloggerDB db = _ts.Thedb();
                     IEnumerable<Tweet> TheTweets = _ts.Thedb().Tweets.Where(t => t.EventID == EventID & t.CreatedDate > DateTime.Parse(pageLoadTime)).OrderByDescending(t => t.CreatedDate).Take(Count);
 
-                    StringBuilder HTMLString = new StringBuilder();
-                    string lasttweettime = string.Empty;
-                    bool TheFirst = true;
-                    int RecordCount = 0;
+                    var htmlString = new StringBuilder();
+                    var lasttweettime = string.Empty;
+                    var TheFirst = true;
+                    var RecordCount = 0;
 
-                    foreach (Tweet TheT in TheTweets) {
+                    foreach (var theT in TheTweets) {
                         if (TheFirst) {
-                            lasttweettime = string.Format("{0:yyyy-MM-dd HH:mm:ss}", TheT.CreatedDate);
+                            lasttweettime = string.Format("{0:yyyy-MM-dd HH:mm:ss}", theT.CreatedDate);
                             TheFirst = false;
                         }
 
 
                         //Instead of hard coding the HTML for the tweets, let's use the template.
-                        var firstOrDefault = TheT.Events.FirstOrDefault(t => t.ID == EventID);
+                        var firstOrDefault = theT.Events.FirstOrDefault(t => t.ID == EventID);
                         var canDelete = firstOrDefault != null && ((firstOrDefault.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator);
 
-                        HTMLString.Append(RenderRazorViewToString("_TweetTemplate", new TweetTemplateViewModel() { CanDelete = canDelete, Tweet = TheT }));
+                        htmlString.Append(RenderRazorViewToString("TweetTemplate", new TweetTemplateViewModel() { CanDelete = canDelete, Tweet = theT, ShowControls = true, EventId = EventID }));
 
                         RecordCount++;
                     }
@@ -520,7 +520,7 @@ namespace Epilogger.Web.Controllers {
                     dict.Add("numberofnewtweets", RecordCount);
                     dict.Add("lasttweettime", lasttweettime);
                     dict.Add("tweetcount", string.Format("{0:#,###}", db.Tweets.Count(t => t.EventID == EventID)));
-                    dict.Add("html", HTMLString.ToString());
+                    dict.Add("html", htmlString.ToString());
                 }
             }
 
@@ -1249,12 +1249,16 @@ namespace Epilogger.Web.Controllers {
 
         public ActionResult TweetReply(int eventId, long tweetId)
         {
+            
             var model = new TweetReplyViewModel
                             {
                                 Tweet = _ts.FindByTwitterID(tweetId),
                                 Event = _es.FindByID(eventId),
                                 IsTwitterAuthed = CurrentUserTwitterAuthorization != null
                             };
+
+            var apiClient = new Epilogr.APISoapClient();
+            model.ShortEventURL = apiClient.CreateUrl("http://epilogger.com/events/" + model.Event.EventSlug).ShortenedUrl;
 
             return PartialView(model);
         }
@@ -1303,6 +1307,9 @@ namespace Epilogger.Web.Controllers {
                 Event = _es.FindByID(eventId),
                 IsTwitterAuthed = CurrentUserTwitterAuthorization != null
             };
+
+            var apiClient = new Epilogr.APISoapClient();
+            model.ShortEventURL = apiClient.CreateUrl("http://epilogger.com/events/" + model.Event.EventSlug).ShortenedUrl;
 
             return PartialView(model);
         }
