@@ -144,7 +144,7 @@ namespace Epilogger.Common
             [JsonObject(MemberSerialization.OptOut)]
             public class TwitterImageMSG
             {
-                public long EventID { get; set; }
+                public int EventID { get; set; }
                 public long TweetID { get; set; }
                 public string TwitterName { get; set; }
                 public string ImageSource { get; set; }
@@ -156,7 +156,7 @@ namespace Epilogger.Common
             [JsonObject(MemberSerialization.OptOut)]
             public class FileImageMSG
             {
-                public long EventID { get; set; }
+                public int EventID { get; set; }
                 public long? UserID { get; set; }
                 public byte[] Content { get; set; }
                 public string FileName { get; set; }
@@ -165,7 +165,7 @@ namespace Epilogger.Common
                 {
                 }
 
-                public FileImageMSG(long eventId, long? userId, byte[] content, string fileName)
+                public FileImageMSG(int eventId, long? userId, byte[] content, string fileName)
                 {
                     EventID = eventId;
                     UserID = userId;
