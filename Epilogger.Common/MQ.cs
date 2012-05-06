@@ -178,7 +178,7 @@ namespace Epilogger.Common
             [JsonObject(MemberSerialization.OptOut)]
             public class LinkMSG
             {
-                public long EventID { get; set; }
+                public int EventID { get; set; }
                 public long TweetID { get; set; }
                 public string LinkSource { get; set; }
                 public Uri Link { get; set; }
