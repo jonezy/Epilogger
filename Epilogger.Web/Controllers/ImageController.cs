@@ -23,7 +23,8 @@ namespace Epilogger.Web.Controllers
         {
             var requestedEvent = _es.FindBySlug(id);
 
-            using (var messageProducer = new MQ.MSGProducer("Epilogger", "Image"))
+            //ToDo: Move queues names into Epilogger.Common
+            using (var messageProducer = new MQ.MSGProducer("Epilogger", "FileImage"))
             {
                 foreach (var fileKey in Request.Files.AllKeys)
                 {
