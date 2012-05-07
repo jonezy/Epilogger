@@ -10,8 +10,8 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 
 
 (function($) {
-    var locURL = document.location.href;
-    var newLocURL = locURL.replace("#","%23");
+    var locUrl = document.location.href;
+    var newLocUrl = locUrl.replace("#","%23");
     
 	$.prettyPhoto = {version: '3.1.2'};
 	
@@ -90,7 +90,7 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 			inline_markup: '<div class="pp_inline">{content}</div>',
 			custom_markup: '',
             social_tools: '', //
-            share_tools: '<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script><a name="fb_share"></a><a href="'+ locURL +'" class="twitter-share-button" data-count="horizontal" data-via="epilogger">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script><g:plusone></g:plusone>'}, pp_settings);
+            share_tools: '<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script><a name="fb_share"></a><a href="'+ locUrl +'" class="twitter-share-button" data-count="horizontal" data-via="epilogger">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script><g:plusone></g:plusone>'}, pp_settings);
             
             // <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://localhost:16007/events/clickflickca-stream#!prettyPhoto[latestphotos]/0/" data-text="I remembered via epilogger" data-via="epilogger">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             //<span class="fright fblue"><small>Share: </small> <a href="http://twitter.com/intent/tweet?text=I+was+at+' + EventName + '+and+Epilogger+remembered+it+for+me!+Reminisce+with+me!+'+ newLocURL +'+%23Epilogger" target="_blank"><img src="/Content/images/icons/twitter.png" class="valign"></a> <a target="_blank" href="http://www.facebook.com/sharer.php?u='+EventURL+'" onclick="return fbs_click()" text="I was at '+ EventName + ' and Epilogger remembered it for me! Reminisce with me and help write the story!'+EventURL+'" #Epilogger><img src="/Content/images/icons/facebook.png" class="valign"/></a></span>
@@ -143,46 +143,45 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 		/**
 		* Initialize prettyPhoto.
 		*/
-		$.prettyPhoto.initialize = function() {
+	    $.prettyPhoto.initialize = function() {
 
-			settings = pp_settings;
-			
-			if(settings.theme == 'pp_default') settings.horizontal_padding = 16;
-			if(settings.ie6_fallback && $.browser.msie && parseInt($.browser.version) == 6) settings.theme = "light_square"; // Fallback to a supported theme for IE6
-			
-			// Find out if the picture is part of a set
-			theRel = $(this).attr('rel');
-			galleryRegExp = /\[(?:.*)\]/;
-			isSet = (galleryRegExp.exec(theRel)) ? true : false;
-			
-			// Put the SRCs, TITLEs, ALTs into an array.
-			pp_images = (isSet) ? jQuery.map(matchedObjects, function(n, i){ if($(n).attr('rel').indexOf(theRel) != -1) return $(n).attr('href'); }) : $.makeArray($(this).attr('href'));
-			pp_titles = (isSet) ? jQuery.map(matchedObjects, function(n, i){ if($(n).attr('rel').indexOf(theRel) != -1) return ($(n).find('img').attr('alt')) ? $(n).find('img').attr('alt') : ""; }) : $.makeArray($(this).find('img').attr('alt'));
-            //pp_descriptions = (isSet) ? jQuery.map(matchedObjects, function(n, i){ if($(n).attr('rel').indexOf(theRel) != -1) return ($(n).attr('title')) ? $(n).attr('title') : ""; }) : $.makeArray($(this).attr('title'));
-            pp_descriptions = (isSet) ? jQuery.map(matchedObjects, function(n, i){ if($(n).attr('rel').indexOf(theRel) != -1) return ($(n).attr('photoid')) ? $(n).attr('photoid') : ""; }) : $.makeArray($(this).attr('photoid'));
-			
-			set_position = jQuery.inArray($(this).attr('href'), pp_images); // Define where in the array the clicked item is positionned
-			rel_index = (isSet) ? set_position : $("a[rel^='"+theRel+"']").index($(this));
-			
-			_build_overlay(this); // Build the overlay {this} being the caller
-			
-			if(settings.allow_resize)
-            {
-			    // For use within normal web clients 
-                var isiPad = navigator.userAgent.match(/iPad/i) != null;
+	        settings = pp_settings;
 
-                // For use within iPad developer UIWebView
-                // Thanks to Andrew Hedges!
-                var ua = navigator.userAgent;
-                var isiPad = /iPad/i.test(ua) || /iPhone OS 3_1_2/i.test(ua) || /iPhone OS 3_2_2/i.test(ua);
-                
-                if (!isiPad) $(window).bind('scroll.prettyphoto',function(){ _center_overlay(); });
-			}
-			
-			$.prettyPhoto.open();
-			
-			return false;
-		}
+	        if (settings.theme == 'pp_default') settings.horizontal_padding = 16;
+	        if (settings.ie6_fallback && $.browser.msie && parseInt($.browser.version) == 6) settings.theme = "light_square"; // Fallback to a supported theme for IE6
+
+	        // Find out if the picture is part of a set
+	        theRel = $(this).attr('rel');
+	        galleryRegExp = /\[(?:.*)\]/ ;
+	        isSet = (galleryRegExp.exec(theRel)) ? true : false;
+
+	        // Put the SRCs, TITLEs, ALTs into an array.
+	        pp_images = (isSet) ? jQuery.map(matchedObjects, function(n, i) { if ($(n).attr('rel').indexOf(theRel) != -1) return $(n).attr('href'); }) : $.makeArray($(this).attr('href'));
+	        pp_titles = (isSet) ? jQuery.map(matchedObjects, function(n, i) { if ($(n).attr('rel').indexOf(theRel) != -1) return ($(n).find('img').attr('alt')) ? $(n).find('img').attr('alt') : ""; }) : $.makeArray($(this).find('img').attr('alt'));
+	        //pp_descriptions = (isSet) ? jQuery.map(matchedObjects, function(n, i){ if($(n).attr('rel').indexOf(theRel) != -1) return ($(n).attr('title')) ? $(n).attr('title') : ""; }) : $.makeArray($(this).attr('title'));
+	        pp_descriptions = (isSet) ? jQuery.map(matchedObjects, function(n, i) { if ($(n).attr('rel').indexOf(theRel) != -1) return ($(n).attr('photoid')) ? $(n).attr('photoid') : ""; }) : $.makeArray($(this).attr('photoid'));
+
+	        set_position = jQuery.inArray($(this).attr('href'), pp_images); // Define where in the array the clicked item is positionned
+	        rel_index = (isSet) ? set_position : $("a[rel^='" + theRel + "']").index($(this));
+
+	        _build_overlay(this); // Build the overlay {this} being the caller
+
+	        if (settings.allow_resize) {
+	            // For use within normal web clients 
+	            var isiPad = navigator.userAgent.match( /iPad/i ) != null;
+
+	            // For use within iPad developer UIWebView
+	            // Thanks to Andrew Hedges!
+	            var ua = navigator.userAgent;
+	            var isiPad = /iPad/i .test(ua) || /iPhone OS 3_1_2/i .test(ua) || /iPhone OS 3_2_2/i .test(ua) || /iPhone OS/i .test(ua) || /iAndroid/i .test(ua);
+
+	            if (!isiPad) $(window).bind('scroll.prettyphoto', function() { _center_overlay(); });
+	        }
+
+	        $.prettyPhoto.open();
+
+	        return false;
+	    };
 
 
 		/**
@@ -867,10 +866,6 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 			});
 
 
-
-
-
-		
 			$pp_pic_holder.find('.pp_previous, .pp_nav .pp_arrow_previous').bind('click',function(){
 				$.prettyPhoto.changePage('previous');
 				$.prettyPhoto.stopSlideshow();
@@ -886,6 +881,8 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 			_center_overlay(); // Center it
 		};
 
+        /* This gets called when the page is loaded with a prettyphoto URL */
+        /* It decodes the URL and displays the photo */
 		if(!pp_alreadyInitialized && getHashtag()){
 			pp_alreadyInitialized = true;
 			
@@ -894,6 +891,8 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 			hashRel = hashIndex;
 			hashIndex = hashIndex.substring(hashIndex.indexOf('/')+1,hashIndex.length-1);
 			hashRel = hashRel.substring(0,hashRel.indexOf('/'));
+
+		    alert(hashIndex);
 
 			// Little timeout to make sure all the prettyPhoto initialize scripts has been run.
 			// Useful in the event the page contain several init scripts.
@@ -906,9 +905,11 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 	function getHashtag(){
 		url = location.href;
 		hashtag = (url.indexOf('#!') != -1) ? decodeURI(url.substring(url.indexOf('#!')+2,url.length)) : false;
-		return hashtag;
+        return hashtag;
 	};
 	
+
+    /* This sets the URL in the browser */
 	function setHashtag(){
 		if(typeof theRel == 'undefined') return; // theRel is set on normal calls, it's impossible to deeplink using the API
 		location.hash = '!' + theRel + '/'+rel_index+'/';
