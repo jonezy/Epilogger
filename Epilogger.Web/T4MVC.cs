@@ -33,7 +33,7 @@ public static class MVC {
     public static Epilogger.Web.Controllers.DashboardController Dashboard = new Epilogger.Web.Controllers.T4MVC_DashboardController();
     public static Epilogger.Web.Controllers.EventsController Events = new Epilogger.Web.Controllers.T4MVC_EventsController();
     public static Epilogger.Web.Controllers.HomeController Home = new Epilogger.Web.Controllers.T4MVC_HomeController();
-    public static Epilogger.Web.Controllers.ImageController Image = new Epilogger.Web.Controllers.T4MVC_ImageController();
+    public static Epilogger.Web.Controllers.ImageUploadController ImageUpload = new Epilogger.Web.Controllers.T4MVC_ImageUploadController();
     public static Epilogger.Web.Controllers.NavigationController Navigation = new Epilogger.Web.Controllers.T4MVC_NavigationController();
     public static Epilogger.Web.Controllers.WidgetController Widget = new Epilogger.Web.Controllers.T4MVC_WidgetController();
     public static T4MVC.EmailsController Emails = new T4MVC.EmailsController();
@@ -607,6 +607,20 @@ namespace Links {
                 public static readonly string tweet_black_png = Url("tweet-black.png");
                 public static readonly string twitter_png = Url("twitter.png");
                 public static readonly string WhenandWhere_png = Url("WhenandWhere.png");
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class imageupload {
+                private const string URLPATH = "~/Public/images/imageupload";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string authenticate_active_png = Url("authenticate_active.png");
+                public static readonly string facebook_png = Url("facebook.png");
+                public static readonly string flickr_png = Url("flickr.png");
+                public static readonly string selectphotos_active_png = Url("selectphotos_active.png");
+                public static readonly string source_active_png = Url("source_active.png");
+                public static readonly string source_inactive_png = Url("source_inactive.png");
+                public static readonly string yourcomputer_png = Url("yourcomputer.png");
             }
         
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

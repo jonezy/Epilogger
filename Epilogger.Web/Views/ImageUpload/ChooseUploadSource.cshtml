@@ -1,0 +1,11 @@
+﻿@{
+    Layout = MVC.ImageUpload.Views._Layout;
+}
+
+@section Navigation {
+    <img src="@Links.Public.images.imageupload.source_active_png"/>
+}
+
+<a href="@Url.Action(MVC.ImageUpload.UploadFromFacebook())"><img src="@Links.Public.images.imageupload.facebook_png"/></a>
+<a href="@Url.Action(MVC.ImageUpload.UploadFromFlickr())"><img src="@Links.Public.images.imageupload.flickr_png"/></a>
+<a href="@Url.Action(MVC.ImageUpload.UploadFromComputer())"><img src="@Links.Public.images.imageupload.yourcomputer_png"/></a>

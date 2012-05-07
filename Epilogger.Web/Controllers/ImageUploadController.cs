@@ -9,17 +9,23 @@ using Epilogger.Data;
 
 namespace Epilogger.Web.Controllers
 {
-    public partial class ImageController : Controller
+    public partial class ImageUploadController : Controller
     {
         EventService _es = new EventService();
 
-        [ChildActionOnly]
-        public virtual ActionResult Upload()
+        public virtual ActionResult ChooseUploadSource()
         {
             return View();
         }
 
-        public virtual ActionResult UploadFromFile(string id, IEnumerable<HttpPostedFileBase> files)
+        [HttpGet]
+        public virtual ActionResult UploadFromComputer(string id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public virtual ActionResult UploadFromComputer(string id, IEnumerable<HttpPostedFileBase> files)
         {
             var requestedEvent = _es.FindBySlug(id);
 
@@ -39,6 +45,16 @@ namespace Epilogger.Web.Controllers
             }
 
             return new EmptyResult();
+        }
+
+        public virtual ActionResult UploadFromFacebook(string eventId)
+        {
+            return View();
+        }
+
+        public virtual ActionResult UploadFromFlickr(string eventId)
+        {
+            return View();
         }
     }
 }

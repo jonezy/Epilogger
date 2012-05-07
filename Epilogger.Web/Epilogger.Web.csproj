@@ -237,7 +237,7 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ImageController.cs" />
+    <Compile Include="Controllers\ImageUploadController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Controllers\WidgetController.cs" />
     <Compile Include="Core\AuthenticationServices.cs" />
@@ -299,7 +299,7 @@
     <Compile Include="HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="ImageController.generated.cs">
+    <Compile Include="ImageUploadController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModel.cs" />
@@ -556,6 +556,13 @@
     <Content Include="Public\images\icons\tweet-black.png" />
     <Content Include="Public\images\icons\twitter.png" />
     <Content Include="Public\images\icons\WhenandWhere.png" />
+    <Content Include="Public\images\imageupload\authenticate_active.png" />
+    <Content Include="Public\images\imageupload\facebook.png" />
+    <Content Include="Public\images\imageupload\flickr.png" />
+    <Content Include="Public\images\imageupload\source_active.png" />
+    <Content Include="Public\images\imageupload\source_inactive.png" />
+    <Content Include="Public\images\imageupload\selectphotos_active.png" />
+    <Content Include="Public\images\imageupload\yourcomputer.png" />
     <Content Include="Public\images\jaggie-icons\event-list-header-media.gif" />
     <Content Include="Public\images\jaggie-icons\event-list-header-twitter.gif" />
     <Content Include="Public\images\jaggie-icons\event-menu-jaggie.gif" />
@@ -2970,12 +2977,16 @@
     <Content Include="Views\Widget\Tweets.cshtml" />
     <Content Include="Views\Widget\Checkins.cshtml" />
     <Content Include="Views\Widget\_EpiloggerCounts.cshtml" />
-    <Content Include="Views\Image\Upload.cshtml" />
+    <Content Include="Views\ImageUpload\UploadFromComputer.cshtml" />
     <None Include="T4MVC.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>T4MVC.cs</LastGenOutput>
     </None>
     <None Include="T4MVC.tt.settings.t4" />
+    <Content Include="Views\ImageUpload\ChooseUploadSource.cshtml" />
+    <Content Include="Views\ImageUpload\UploadFromFlickr.cshtml" />
+    <Content Include="Views\ImageUpload\UploadFromFacebook.cshtml" />
+    <Content Include="Views\ImageUpload\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Shared\" />
