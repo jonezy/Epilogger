@@ -617,9 +617,11 @@ namespace Links {
                 public static readonly string authenticate_active_png = Url("authenticate_active.png");
                 public static readonly string facebook_png = Url("facebook.png");
                 public static readonly string flickr_png = Url("flickr.png");
+                public static readonly string oops_flickr_png = Url("oops_flickr.png");
                 public static readonly string selectphotos_active_png = Url("selectphotos_active.png");
                 public static readonly string source_active_png = Url("source_active.png");
                 public static readonly string source_inactive_png = Url("source_inactive.png");
+                public static readonly string upload_png = Url("upload.png");
                 public static readonly string yourcomputer_png = Url("yourcomputer.png");
             }
         
@@ -33874,6 +33876,217 @@ namespace Links {
             public static readonly string jquery_validate_unobtrusive_min_js = Url("jquery.validate.unobtrusive.min.js");
             public static readonly string jquery_zrssfeed_min_js = Url("jquery.zrssfeed.min.js");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class jQueryFileUpload {
+                private const string URLPATH = "~/Public/js/jQueryFileUpload";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string _gitignore = Url(".gitignore");
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class cors {
+                    private const string URLPATH = "~/Public/js/jQueryFileUpload/cors";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string postmessage_html = Url("postmessage.html");
+                    public static readonly string result_html = Url("result.html");
+                }
+            
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class css {
+                    private const string URLPATH = "~/Public/js/jQueryFileUpload/css";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string jquery_fileupload_ui_css = Url("jquery.fileupload-ui.css");
+                    public static readonly string style_css = Url("style.css");
+                }
+            
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class img {
+                    private const string URLPATH = "~/Public/js/jQueryFileUpload/img";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string loading_gif = Url("loading.gif");
+                    public static readonly string progressbar_gif = Url("progressbar.gif");
+                }
+            
+                public static readonly string index_html = Url("index.html");
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class js {
+                    private const string URLPATH = "~/Public/js/jQueryFileUpload/js";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                    public static class cors {
+                        private const string URLPATH = "~/Public/js/jQueryFileUpload/js/cors";
+                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                        public static readonly string jquery_postmessage_transport_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.postmessage-transport.min.js") ? Url("jquery.postmessage-transport.min.js") : Url("jquery.postmessage-transport.js");
+                                      
+                        public static readonly string jquery_xdr_transport_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.xdr-transport.min.js") ? Url("jquery.xdr-transport.min.js") : Url("jquery.xdr-transport.js");
+                                      
+                    }
+                
+                    public static readonly string jquery_fileupload_fp_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.fileupload-fp.min.js") ? Url("jquery.fileupload-fp.min.js") : Url("jquery.fileupload-fp.js");
+                                  
+                    public static readonly string jquery_fileupload_ui_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.fileupload-ui.min.js") ? Url("jquery.fileupload-ui.min.js") : Url("jquery.fileupload-ui.js");
+                                  
+                    public static readonly string jquery_fileupload_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.fileupload.min.js") ? Url("jquery.fileupload.min.js") : Url("jquery.fileupload.js");
+                                  
+                    public static readonly string jquery_iframe_transport_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.iframe-transport.min.js") ? Url("jquery.iframe-transport.min.js") : Url("jquery.iframe-transport.js");
+                                  
+                    public static readonly string locale_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/locale.min.js") ? Url("locale.min.js") : Url("locale.js");
+                                  
+                    public static readonly string main_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/main.min.js") ? Url("main.min.js") : Url("main.js");
+                                  
+                    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                    public static class vendor {
+                        private const string URLPATH = "~/Public/js/jQueryFileUpload/js/vendor";
+                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                        public static readonly string jquery_ui_widget_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.ui.widget.min.js") ? Url("jquery.ui.widget.min.js") : Url("jquery.ui.widget.js");
+                                      
+                    }
+                
+                }
+            
+                public static readonly string package_json = Url("package.json");
+                public static readonly string README_md = Url("README.md");
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class server {
+                    private const string URLPATH = "~/Public/js/jQueryFileUpload/server";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                    public static class gae_go {
+                        private const string URLPATH = "~/Public/js/jQueryFileUpload/server/gae-go";
+                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                        public static class app {
+                            private const string URLPATH = "~/Public/js/jQueryFileUpload/server/gae-go/app";
+                            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                            public static readonly string main_go = Url("main.go");
+                        }
+                    
+                        public static readonly string app_yaml = Url("app.yaml");
+                        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                        public static class resize {
+                            private const string URLPATH = "~/Public/js/jQueryFileUpload/server/gae-go/resize";
+                            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                            public static readonly string resize_go = Url("resize.go");
+                        }
+                    
+                        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                        public static class @static {
+                            private const string URLPATH = "~/Public/js/jQueryFileUpload/server/gae-go/static";
+                            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                            public static readonly string favicon_ico = Url("favicon.ico");
+                            public static readonly string robots_txt = Url("robots.txt");
+                        }
+                    
+                    }
+                
+                    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                    public static class gae_python {
+                        private const string URLPATH = "~/Public/js/jQueryFileUpload/server/gae-python";
+                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                        public static readonly string app_yaml = Url("app.yaml");
+                        public static readonly string main_py = Url("main.py");
+                        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                        public static class @static {
+                            private const string URLPATH = "~/Public/js/jQueryFileUpload/server/gae-python/static";
+                            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                            public static readonly string favicon_ico = Url("favicon.ico");
+                            public static readonly string robots_txt = Url("robots.txt");
+                        }
+                    
+                    }
+                
+                    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                    public static class node {
+                        private const string URLPATH = "~/Public/js/jQueryFileUpload/server/node";
+                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                        public static readonly string _gitignore = Url(".gitignore");
+                        public static readonly string package_json = Url("package.json");
+                        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                        public static class @public {
+                            private const string URLPATH = "~/Public/js/jQueryFileUpload/server/node/public";
+                            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                            public static class files {
+                                private const string URLPATH = "~/Public/js/jQueryFileUpload/server/node/public/files";
+                                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                                public static class thumbnail {
+                                    private const string URLPATH = "~/Public/js/jQueryFileUpload/server/node/public/files/thumbnail";
+                                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                                    public static readonly string _gitignore = Url(".gitignore");
+                                }
+                            
+                            }
+                        
+                        }
+                    
+                        public static readonly string server_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/server.min.js") ? Url("server.min.js") : Url("server.js");
+                                      
+                        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                        public static class tmp {
+                            private const string URLPATH = "~/Public/js/jQueryFileUpload/server/node/tmp";
+                            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                            public static readonly string _gitignore = Url(".gitignore");
+                        }
+                    
+                    }
+                
+                    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                    public static class php {
+                        private const string URLPATH = "~/Public/js/jQueryFileUpload/server/php";
+                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                        public static class files {
+                            private const string URLPATH = "~/Public/js/jQueryFileUpload/server/php/files";
+                            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                            public static readonly string _htaccess = Url(".htaccess");
+                        }
+                    
+                        public static readonly string index_php = Url("index.php");
+                        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                        public static class thumbnails {
+                            private const string URLPATH = "~/Public/js/jQueryFileUpload/server/php/thumbnails";
+                            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                            public static readonly string _htaccess = Url(".htaccess");
+                        }
+                    
+                        public static readonly string upload_class_php = Url("upload.class.php");
+                    }
+                
+                }
+            
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class test {
+                    private const string URLPATH = "~/Public/js/jQueryFileUpload/test";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string index_html = Url("index.html");
+                    public static readonly string test_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/test.min.js") ? Url("test.min.js") : Url("test.js");
+                                  
+                }
+            
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class msdropdown {
                 private const string URLPATH = "~/Public/js/msdropdown";
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
@@ -33891,262 +34104,6 @@ namespace Links {
                                   
                 }
             
-            }
-        
-            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-            public static class plupload_1_5_4 {
-                private const string URLPATH = "~/Public/js/plupload_1_5_4";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                public static readonly string changelog_txt = Url("changelog.txt");
-                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-                public static class docs {
-                    private const string URLPATH = "~/Public/js/plupload_1_5_4/docs";
-                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-                    public static class api {
-                        private const string URLPATH = "~/Public/js/plupload_1_5_4/docs/api";
-                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                        public static readonly string class_plupload_File_html = Url("class_plupload.File.html");
-                        public static readonly string class_plupload_html = Url("class_plupload.html");
-                        public static readonly string class_plupload_QueueProgress_html = Url("class_plupload.QueueProgress.html");
-                        public static readonly string class_plupload_Runtime_html = Url("class_plupload.Runtime.html");
-                        public static readonly string class_plupload_runtimes_BrowserPlus_html = Url("class_plupload.runtimes.BrowserPlus.html");
-                        public static readonly string class_plupload_runtimes_Flash_html = Url("class_plupload.runtimes.Flash.html");
-                        public static readonly string class_plupload_runtimes_Gears_html = Url("class_plupload.runtimes.Gears.html");
-                        public static readonly string class_plupload_runtimes_Html4_html = Url("class_plupload.runtimes.Html4.html");
-                        public static readonly string class_plupload_runtimes_Html5_html = Url("class_plupload.runtimes.Html5.html");
-                        public static readonly string class_plupload_runtimes_Silverlight_html = Url("class_plupload.runtimes.Silverlight.html");
-                        public static readonly string class_plupload_Uploader_html = Url("class_plupload.Uploader.html");
-                        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-                        public static class css {
-                            private const string URLPATH = "~/Public/js/plupload_1_5_4/docs/api/css";
-                            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                            public static readonly string general_css = Url("general.css");
-                            public static readonly string grids_css = Url("grids.css");
-                            public static readonly string jquery_treeview_css = Url("jquery.treeview.css");
-                            public static readonly string reset_css = Url("reset.css");
-                            public static readonly string shCore_css = Url("shCore.css");
-                            public static readonly string shThemeMoxieDoc_css = Url("shThemeMoxieDoc.css");
-                        }
-                    
-                        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-                        public static class img {
-                            private const string URLPATH = "~/Public/js/plupload_1_5_4/docs/api/img";
-                            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                            public static readonly string class_gif = Url("class.gif");
-                            public static readonly string event_gif = Url("event.gif");
-                            public static readonly string help_png = Url("help.png");
-                            public static readonly string inherit_arrow_gif = Url("inherit-arrow.gif");
-                            public static readonly string inherited_gif = Url("inherited.gif");
-                            public static readonly string loader_gif = Url("loader.gif");
-                            public static readonly string magnifier_png = Url("magnifier.png");
-                            public static readonly string method_gif = Url("method.gif");
-                            public static readonly string namespace_gif = Url("namespace.gif");
-                            public static readonly string page_white_code_png = Url("page_white_code.png");
-                            public static readonly string page_white_copy_png = Url("page_white_copy.png");
-                            public static readonly string printer_png = Url("printer.png");
-                            public static readonly string property_gif = Url("property.gif");
-                            public static readonly string root_gif = Url("root.gif");
-                            public static readonly string static_gif = Url("static.gif");
-                            public static readonly string treeview_famfamfam_gif = Url("treeview-famfamfam.gif");
-                            public static readonly string wrapping_png = Url("wrapping.png");
-                        }
-                    
-                        public static readonly string index_html = Url("index.html");
-                        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-                        public static class js {
-                            private const string URLPATH = "~/Public/js/plupload_1_5_4/docs/api/js";
-                            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                            public static readonly string clipboard_swf = Url("clipboard.swf");
-                            public static readonly string general_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/general.min.js") ? Url("general.min.js") : Url("general.js");
-                                          
-                            public static readonly string jquery_treeview_min_js = Url("jquery.treeview.min.js");
-                            public static readonly string shBrushJScript_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/shBrushJScript.min.js") ? Url("shBrushJScript.min.js") : Url("shBrushJScript.js");
-                                          
-                            public static readonly string shCore_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/shCore.min.js") ? Url("shCore.min.js") : Url("shCore.js");
-                                          
-                        }
-                    
-                        public static readonly string model_xml = Url("model.xml");
-                        public static readonly string plupload_vsdoc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/plupload.vsdoc.min.js") ? Url("plupload.vsdoc.min.js") : Url("plupload.vsdoc.js");
-                                      
-                    }
-                
-                }
-            
-                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-                public static class examples {
-                    private const string URLPATH = "~/Public/js/plupload_1_5_4/examples";
-                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                    public static readonly string bg_jpg = Url("bg.jpg");
-                    public static readonly string custom_html = Url("custom.html");
-                    public static readonly string dump_php = Url("dump.php");
-                    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-                    public static class jquery {
-                        private const string URLPATH = "~/Public/js/plupload_1_5_4/examples/jquery";
-                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                        public static readonly string events_html = Url("events.html");
-                        public static readonly string jquery_ui_widget_html = Url("jquery_ui_widget.html");
-                        public static readonly string queue_widget_html = Url("queue_widget.html");
-                        public static readonly string s3_php = Url("s3.php");
-                    }
-                
-                    public static readonly string upload_php = Url("upload.php");
-                    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-                    public static class uploads {
-                        private const string URLPATH = "~/Public/js/plupload_1_5_4/examples/uploads";
-                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                    }
-                
-                }
-            
-                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-                public static class js {
-                    private const string URLPATH = "~/Public/js/plupload_1_5_4/js";
-                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-                    public static class i18n {
-                        private const string URLPATH = "~/Public/js/plupload_1_5_4/js/i18n";
-                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                        public static readonly string cs_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/cs.min.js") ? Url("cs.min.js") : Url("cs.js");
-                                      
-                        public static readonly string da_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/da.min.js") ? Url("da.min.js") : Url("da.js");
-                                      
-                        public static readonly string de_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/de.min.js") ? Url("de.min.js") : Url("de.js");
-                                      
-                        public static readonly string el_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/el.min.js") ? Url("el.min.js") : Url("el.js");
-                                      
-                        public static readonly string es_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/es.min.js") ? Url("es.min.js") : Url("es.js");
-                                      
-                        public static readonly string et_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/et.min.js") ? Url("et.min.js") : Url("et.js");
-                                      
-                        public static readonly string fa_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/fa.min.js") ? Url("fa.min.js") : Url("fa.js");
-                                      
-                        public static readonly string fi_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/fi.min.js") ? Url("fi.min.js") : Url("fi.js");
-                                      
-                        public static readonly string fr_ca_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/fr-ca.min.js") ? Url("fr-ca.min.js") : Url("fr-ca.js");
-                                      
-                        public static readonly string fr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/fr.min.js") ? Url("fr.min.js") : Url("fr.js");
-                                      
-                        public static readonly string hr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/hr.min.js") ? Url("hr.min.js") : Url("hr.js");
-                                      
-                        public static readonly string hu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/hu.min.js") ? Url("hu.min.js") : Url("hu.js");
-                                      
-                        public static readonly string it_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/it.min.js") ? Url("it.min.js") : Url("it.js");
-                                      
-                        public static readonly string ja_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ja.min.js") ? Url("ja.min.js") : Url("ja.js");
-                                      
-                        public static readonly string ko_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ko.min.js") ? Url("ko.min.js") : Url("ko.js");
-                                      
-                        public static readonly string lv_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/lv.min.js") ? Url("lv.min.js") : Url("lv.js");
-                                      
-                        public static readonly string nl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/nl.min.js") ? Url("nl.min.js") : Url("nl.js");
-                                      
-                        public static readonly string pl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/pl.min.js") ? Url("pl.min.js") : Url("pl.js");
-                                      
-                        public static readonly string pt_br_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/pt-br.min.js") ? Url("pt-br.min.js") : Url("pt-br.js");
-                                      
-                        public static readonly string ro_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ro.min.js") ? Url("ro.min.js") : Url("ro.js");
-                                      
-                        public static readonly string ru_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ru.min.js") ? Url("ru.min.js") : Url("ru.js");
-                                      
-                        public static readonly string sr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/sr.min.js") ? Url("sr.min.js") : Url("sr.js");
-                                      
-                        public static readonly string sv_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/sv.min.js") ? Url("sv.min.js") : Url("sv.js");
-                                      
-                    }
-                
-                    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-                    public static class jquery_plupload_queue {
-                        private const string URLPATH = "~/Public/js/plupload_1_5_4/js/jquery.plupload.queue";
-                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-                        public static class css {
-                            private const string URLPATH = "~/Public/js/plupload_1_5_4/js/jquery.plupload.queue/css";
-                            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                            public static readonly string jquery_plupload_queue_css = Url("jquery.plupload.queue.css");
-                        }
-                    
-                        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-                        public static class img {
-                            private const string URLPATH = "~/Public/js/plupload_1_5_4/js/jquery.plupload.queue/img";
-                            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                            public static readonly string backgrounds_gif = Url("backgrounds.gif");
-                            public static readonly string buttons_disabled_png = Url("buttons-disabled.png");
-                            public static readonly string buttons_png = Url("buttons.png");
-                            public static readonly string delete_gif = Url("delete.gif");
-                            public static readonly string done_gif = Url("done.gif");
-                            public static readonly string error_gif = Url("error.gif");
-                            public static readonly string throbber_gif = Url("throbber.gif");
-                            public static readonly string transp50_png = Url("transp50.png");
-                        }
-                    
-                        public static readonly string jquery_plupload_queue_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.plupload.queue.min.js") ? Url("jquery.plupload.queue.min.js") : Url("jquery.plupload.queue.js");
-                                      
-                    }
-                
-                    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-                    public static class jquery_ui_plupload {
-                        private const string URLPATH = "~/Public/js/plupload_1_5_4/js/jquery.ui.plupload";
-                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-                        public static class css {
-                            private const string URLPATH = "~/Public/js/plupload_1_5_4/js/jquery.ui.plupload/css";
-                            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                            public static readonly string jquery_ui_plupload_css = Url("jquery.ui.plupload.css");
-                        }
-                    
-                        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-                        public static class img {
-                            private const string URLPATH = "~/Public/js/plupload_1_5_4/js/jquery.ui.plupload/img";
-                            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                            public static readonly string plupload_bw_png = Url("plupload-bw.png");
-                            public static readonly string plupload_png = Url("plupload.png");
-                        }
-                    
-                        public static readonly string jquery_ui_plupload_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.ui.plupload.min.js") ? Url("jquery.ui.plupload.min.js") : Url("jquery.ui.plupload.js");
-                                      
-                    }
-                
-                    public static readonly string plupload_browserplus_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/plupload.browserplus.min.js") ? Url("plupload.browserplus.min.js") : Url("plupload.browserplus.js");
-                                  
-                    public static readonly string plupload_flash_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/plupload.flash.min.js") ? Url("plupload.flash.min.js") : Url("plupload.flash.js");
-                                  
-                    public static readonly string plupload_flash_swf = Url("plupload.flash.swf");
-                    public static readonly string plupload_full_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/plupload.full.min.js") ? Url("plupload.full.min.js") : Url("plupload.full.js");
-                                  
-                    public static readonly string plupload_gears_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/plupload.gears.min.js") ? Url("plupload.gears.min.js") : Url("plupload.gears.js");
-                                  
-                    public static readonly string plupload_html4_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/plupload.html4.min.js") ? Url("plupload.html4.min.js") : Url("plupload.html4.js");
-                                  
-                    public static readonly string plupload_html5_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/plupload.html5.min.js") ? Url("plupload.html5.min.js") : Url("plupload.html5.js");
-                                  
-                    public static readonly string plupload_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/plupload.min.js") ? Url("plupload.min.js") : Url("plupload.js");
-                                  
-                    public static readonly string plupload_silverlight_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/plupload.silverlight.min.js") ? Url("plupload.silverlight.min.js") : Url("plupload.silverlight.js");
-                                  
-                    public static readonly string plupload_silverlight_xap = Url("plupload.silverlight.xap");
-                }
-            
-                public static readonly string license_txt = Url("license.txt");
-                public static readonly string readme_md = Url("readme.md");
             }
         
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
