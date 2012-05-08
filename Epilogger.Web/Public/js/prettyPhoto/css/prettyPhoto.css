@@ -40,8 +40,18 @@
 
 
     /* CB */
-    div.pp_Comments { display: none; float:right; width: 340px; overflow: auto;height:480px;}
-    div.pp_FirstComment { border-left: 4px solid #e3e3e3; padding: 0 8px; }
+    .pp_RightContainer { float: right; }
+    .pp_Comments { display: none; width: 376px; overflow: auto; height:480px;}
+    .pp_TweetBox { width: 376px; }
+    
+    
+    .pp_FirstComment { border-left: 4px solid #e3e3e3; padding: 0 8px; }
+    .pp_FirstComment .tweetText  
+    {
+        color: #f51282;
+	    text-transform:uppercase;
+	    font: bold 17px 'InterstatePlusRegular', arial, sans-serif; 
+	}
     
     div.pp_shareDrawer { display: none; width: 382px; height: 32px; border-top: 2px solid #ee438f; float: right; background-color: #e3e3e3; margin-right: 16px; position: relative; top: 25px; }
     a.pp_shareDrawerTab { background: url(../images/prettyPhoto/default/ShareTab.png); height: 27px; width: 88px; float: right; margin-top: -29px; margin-right: 16px; }
@@ -259,7 +269,7 @@
 			display: none;
 			height: 20px;	
 			position: absolute;
-			right: 385px;
+			right: 420px;
 			text-indent: -10000px;
 			top: 10px;
 			width: 20px;

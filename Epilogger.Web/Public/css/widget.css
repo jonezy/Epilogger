@@ -100,26 +100,27 @@ big {
 }
 
 
-.spacer.dotted {border-top:dotted 1px #b5b5b5;}
-.spacer.dotted.light {border-top:dotted 1px #e8e8e8;} 
-.dotted {border-top:dotted 1px #b5b5b5;}
-.spacer 	{ height:25px; display:block}
-.sm-spacer  { height:5px; display:block}
-.m-spacer  { height:10px; display:block}
-.big-spacer { height:50px; display:block}
-.valign		{ vertical-align:middle}
-.fleft		{ float:left}
-.fright		{ float:right}
-.overflowhide{ overflow: hidden}
+.spacer.dotted {border-top:dotted 1px #b5b5b5; }
+.spacer.dotted.light {border-top:dotted 1px #e8e8e8; } 
+.dotted {border-top:dotted 1px #b5b5b5; }
+.spacer 	{ height:25px;display: block; }
+.sm-spacer  { height:5px;display: block; }
+.m-spacer  { height:10px;display: block; }
+.big-spacer { height:50px;display: block; }
+.valign		{ vertical-align: middle; }
+.fleft		{ float: left; }
+.fright		{ float: right; }
+.overflowhide{ overflow: hidden; }
 .hidden { display: none; }
-.required  { color:#fe60b1}
-.seperator { border-bottom: 1px dotted #CCC}
+.required  { color: #fe60b1; }
+.seperator { border-bottom: 1px dotted #CCC; }
 
     
 /* ------------------------------ CONTAINERS */
 #header {
     background-color: #efefef;
     height: 41px;
+    margin-top: 44px;
 }
 #epiloggerLogo {
     margin: 4px 0 0 5px;

@@ -9,11 +9,11 @@
 @*<div style="@string.Format("height:{0}px; width: {1}px;", @Model.height, @Model.width); overflow: hidden;">*@
 @if (Model.width==100 && Model.height==100)
 {
-    @: <div style="@string.Format("height:100%; width: 100%;"); overflow: hidden;">    
+    @: <div style="@string.Format("height:100%; width: 100%;") overflow-x: hidden; overflow-y: auto;">
 }
 else
 {
-    @: <div style="@string.Format("height:{0}px; width: {1}px;", @Model.height, @Model.width); overflow: hidden;">
+    @: <div style="@string.Format("height:{0}px; width: {1}px;", @Model.height, @Model.width) overflow: hidden;">
 }
 
     <div id="header">
@@ -30,7 +30,7 @@ else
                 <ul class="imageList">
                     @foreach (var theImage in Model.Images)
                     {
-                        <li><a href="photoDetails/@Model.EventSlug/@theImage.ID?width=@Model.width&height=@Model.height&returnto=1"><img src="@theImage.Fullsize" width="100" alt="" /></a></li>
+                        <li><a href="" onclick="location.href='photoDetails/@Model.EventSlug/@theImage.ID?width=@Model.width&height=@Model.height&returnto=1'; return false;"><img src="@theImage.Fullsize" width="100" alt="" /></a></li>
                     }
                 </ul>
             </div>

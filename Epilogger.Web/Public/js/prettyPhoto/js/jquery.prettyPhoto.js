@@ -48,7 +48,10 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 						<div class="pp_content_container"> \
 							<div class="pp_left"> \
 							<div class="pp_right"> \
-								<div class="pp_Comments">Loading...</div> \
+                                <div class="pp_RightContainer"> \
+								    <div class="pp_Comments">Loading...</div> \
+                                    <div class="pp_TweetBox">Loading...</div> \
+                                </div> \
                                 <div class="pp_content"> \
 									<div class="pp_loaderIcon"></div> \
 									<div class="pp_fade"> \
@@ -376,7 +379,7 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 		* @param direction {String} Direction of the paging, previous or next.
 		*/
 		$.prettyPhoto.changePage = function(direction){
-			currentGalleryPage = 0;
+            currentGalleryPage = 0;
 			
 			if(direction == 'previous') {
 				set_position--;
@@ -528,6 +531,8 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 				
 
                 //Show the div with the comments
+			    //-7
+			    $(".pp_Comments").height(pp_dimensions['contentHeight']-135);
                 $(".pp_Comments").show();
 
                 //Fade in the Share Drawer
@@ -602,7 +607,7 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 				_getDimensions(imageWidth,imageHeight);
 				
 				if((pp_containerWidth > windowWidth) || (pp_containerHeight > windowHeight)){
-					_fitToViewport(pp_containerWidth,pp_containerHeight)
+				    _fitToViewport(pp_containerWidth, pp_containerHeight);
 				};
 			};
 			
@@ -610,7 +615,7 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 				width:Math.floor(imageWidth),
 				height:Math.floor(imageHeight),
 				containerHeight:Math.floor(pp_containerHeight),
-				containerWidth:Math.floor(pp_containerWidth + 355) + (settings.horizontal_padding * 2),
+				containerWidth:Math.floor(pp_containerWidth + 391) + (settings.horizontal_padding * 2),
 				contentHeight:Math.floor(pp_contentHeight -30),
 				contentWidth:Math.floor(pp_contentWidth),
 				resized:resized
@@ -784,13 +789,16 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 				$pp_gallery = $('.pp_pic_holder .pp_gallery'), $pp_gallery_li = $pp_gallery.find('li'); // Set the gallery selectors
 				
 				$pp_gallery.find('.pp_arrow_next').click(function(){
-					$.prettyPhoto.changeGalleryPage('next');
+					//Hide the comments and Tweetbox
+		            $("pp_Comments").html("Loading...");
+		            $("pp_TweetBox").html("Loading...");
+                    $.prettyPhoto.changeGalleryPage('next');
 					$.prettyPhoto.stopSlideshow();
 					return false;
 				});
 				
 				$pp_gallery.find('.pp_arrow_previous').click(function(){
-					$.prettyPhoto.changeGalleryPage('previous');
+                    $.prettyPhoto.changeGalleryPage('previous');
 					$.prettyPhoto.stopSlideshow();
 					return false;
 				});
@@ -867,19 +875,20 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 
 
 			$pp_pic_holder.find('.pp_previous, .pp_nav .pp_arrow_previous').bind('click',function(){
-				$.prettyPhoto.changePage('previous');
+                $.prettyPhoto.changePage('previous');
 				$.prettyPhoto.stopSlideshow();
 				return false;
 			});
 		
 			$pp_pic_holder.find('.pp_next, .pp_nav .pp_arrow_next').bind('click',function(){
-				$.prettyPhoto.changePage('next');
+                $.prettyPhoto.changePage('next');
 				$.prettyPhoto.stopSlideshow();
 				return false;
 			});
 			
 			_center_overlay(); // Center it
 		};
+
 
         /* This gets called when the page is loaded with a prettyphoto URL */
         /* It decodes the URL and displays the photo */
@@ -889,13 +898,20 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 			// Grab the rel index to trigger the click on the correct element
 			hashIndex = getHashtag();
 			hashRel = hashIndex;
-			hashIndex = hashIndex.substring(hashIndex.indexOf('/')+1,hashIndex.length-1);
+			//hashIndex = hashIndex.substring(hashIndex.indexOf('/')+1,hashIndex.length-1);
+		    imageId = hashIndex.substring(hashIndex.lastIndexOf('/')+1);
+		    hashIndex = hashIndex.substring(hashIndex.indexOf('/')+1,hashIndex.indexOf('/', hashIndex.indexOf('/')+1));
 			hashRel = hashRel.substring(0,hashRel.indexOf('/'));
 
-		    alert(hashIndex);
+            /* Append the linked photo to the photos array and click it? */
+
+
+
 
 			// Little timeout to make sure all the prettyPhoto initialize scripts has been run.
 			// Useful in the event the page contain several init scripts.
+		    
+            /*  Finds the link by index and clicks it, for us this isn't going to work. */
 			setTimeout(function(){ $("a[rel^='"+hashRel+"']:eq("+hashIndex+")").trigger('click'); },50);
 		}
 		
@@ -913,12 +929,18 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 	function setHashtag(){
 		if(typeof theRel == 'undefined') return; // theRel is set on normal calls, it's impossible to deeplink using the API
 		location.hash = '!' + theRel + '/'+rel_index+'/';
+	    
+        //This is how I'm putting the absolute URL in the address bar
+	    window.history.pushState(null, "Images", "/events/PhotoDetails/" + pp_descriptions[rel_index]);
 	};
 
 
     //CB this is my function to remove the stupid hash when you close the photo.
     function removeHashtag(){
-        location.hash = '_';
+        //location.hash = '_';
+        
+        //This is how I'm putting the absolute URL in the address bar
+	    window.history.pushState(null, "Images", locUrl);
 	};
 
 	

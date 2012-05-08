@@ -25,12 +25,22 @@ head.ready(function () {
 
 //This fills in the Comments on the Image popups (tweets)
 function changeDescription() {
+    $(".pp_Comments").html("Loading...");
+    
+    //Loaded the comments
     var photoID = $(".pp_description").html();
     $(".pp_description").html("");
 
     $.get('/Events/GetImageComments/' + photoID,
         function (data) {
             $('.pp_Comments').html(data);
+        }, "html");
+    
+
+    //Load the TweetBox
+    $.get('/Events/TweetBox/' + photoID,
+        function (data) {
+            $('.pp_TweetBox').html(data);
         }, "html");
 }
 

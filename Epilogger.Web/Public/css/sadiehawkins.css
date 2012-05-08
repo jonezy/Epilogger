@@ -1447,12 +1447,34 @@ span.tweet-date a:hover { text-decoration: underline; }
 .tweetBox {
     width: 97%;
     margin-top: 15px;
-} 
+}
+.tweetBoxPhoto {
+    width: 97%;
+    margin-top: 5px;
+    margin-bottom: 5px !important;
+}
  
 #twitterCharCounter {
     font-weight: bold;
     padding-right: 10px;
 } 
+
+#twitterCharCounterPhoto {
+    font-weight: bold;
+    padding-right: 10px;
+    float: right;
+    font-size: 14px;
+    color: #cbcbcb;
+} 
+
+
+.twitterWhatsHappening  
+{
+    color: #7c7c7c;
+    font-weight: bold;
+    font-size: 14px;
+}
+
  
  
  /* --- blog posts */

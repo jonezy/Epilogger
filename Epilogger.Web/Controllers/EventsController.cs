@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -128,6 +129,8 @@ namespace Epilogger.Web.Controllers {
                 model.CurrentUserRole = CurrentUserRole;
                 model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
                 model.TheUser = CurrentUser;
+                if (requestedEvent.UserID != null)
+                    model.CreatedEventUser = _us.GetUserByID((Guid) requestedEvent.UserID);
 
                 model.CanDelete = false;
                 if ((requestedEvent.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator)
@@ -492,14 +495,14 @@ namespace Epilogger.Web.Controllers {
                     pageLoadTime = string.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.Parse(pageLoadTime));
 
                     EpiloggerDB db = _ts.Thedb();
-                    IEnumerable<Tweet> TheTweets = _ts.Thedb().Tweets.Where(t => t.EventID == EventID & t.CreatedDate > DateTime.Parse(pageLoadTime)).OrderByDescending(t => t.CreatedDate).Take(Count);
+                    IEnumerable<Tweet> theTweets = _ts.Thedb().Tweets.Where(t => t.EventID == EventID & t.CreatedDate > DateTime.Parse(pageLoadTime)).OrderByDescending(t => t.CreatedDate).Take(Count);
 
                     var htmlString = new StringBuilder();
                     var lasttweettime = string.Empty;
                     var TheFirst = true;
                     var RecordCount = 0;
 
-                    foreach (var theT in TheTweets) {
+                    foreach (var theT in theTweets) {
                         if (TheFirst) {
                             lasttweettime = string.Format("{0:yyyy-MM-dd HH:mm:ss}", theT.CreatedDate);
                             TheFirst = false;
@@ -696,7 +699,7 @@ namespace Epilogger.Web.Controllers {
                 s.Eventslug = thisEvent.EventSlug;
             
                 if (!string.IsNullOrEmpty(IEsearchterm)) {
-                    s.SearchResults = _es.SearchInEvent(requestedEvent.ID, IEsearchterm, this.FromDateTime(), this.ToDateTime());
+                    s.SearchResults = _es.SearchInEvent(requestedEvent.ID, IEsearchterm, FromDateTime(), ToDateTime());
                 }
                 s.ToolbarViewModel = BuildToolbarViewModel(thisEvent);
 
@@ -1397,6 +1400,45 @@ namespace Epilogger.Web.Controllers {
         public ActionResult NeedTwitterAuth()
         {
             return PartialView();
+        }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        public ActionResult PhotoDetails(int eventid, int photoid)
+        {
+            var model = new PhotoDetailsViewModel();
+            var theEvent = _es.FindByID(eventid);
+            if (theEvent != null)
+            {
+                model.EventId = eventid;
+                model.EventSlug = theEvent.EventSlug;
+                model.Image = _is.FindByID(photoid);
+                model.Tweets = _ts.FindByImageID(photoid, eventid);
+            }
+
+            return View(model);
+        }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        public ActionResult TweetBox(int eventid, int photoid)
+        {
+            //var theEvent = 
+            //var thePhoto = _is.FindByID(photoid);
+            var imageComment = _ts.FindByImageID(photoid, eventid).FirstOrDefault();
+
+            Debug.Assert(imageComment != null, "imageComment != null");
+            var model = new TweetReplyViewModel
+            {
+                Tweet = _ts.FindByTwitterID(imageComment.TwitterID),
+                Event = _es.FindByID(eventid),
+                IsTwitterAuthed = CurrentUserTwitterAuthorization != null
+            };
+            
+            var apiClient = new Epilogr.APISoapClient();
+            model.ShortEventURL = apiClient.CreateUrl("http://epilogger.com/events/" + model.Event.EventSlug).ShortenedUrl;
+
+            return PartialView(model);
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------

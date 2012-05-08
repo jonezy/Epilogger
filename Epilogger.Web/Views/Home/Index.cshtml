@@ -108,7 +108,7 @@
             {
                 var thePath = item.Image.EventID + "/" + item.Image.ID;
                 <div class="withcomment newPhotoupdates" id="photo-@item.Image.ID">
-                    <a href="@item.Image.Fullsize" rel="prettyPhoto[latestphotos]" photoid="@thePath" title="" id="@item.Image.ID">
+                    <a href="@item.Image.Fullsize" rel="EPLPhoto[latestphotos]" photoid="@thePath" title="" id="@item.Image.ID">
                         <img src="@item.Image.Fullsize" width="250" border="0" alt="" />
                     </a>
                 </div>
@@ -148,7 +148,7 @@
 
     <script type="text/javascript" charset="utf-8">
         head.ready(function () {
-            $("a[rel^='prettyPhoto']").prettyPhoto({
+            $("a[rel^='EPLPhoto']").prettyPhoto({
                 theme: 'light_square',
                 animation_speed: 'fast',
                 overlay_gallery: false,

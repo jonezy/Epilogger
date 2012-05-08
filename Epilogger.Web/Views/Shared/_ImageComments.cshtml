@@ -1,5 +1,51 @@
-﻿@model IEnumerable<Epilogger.Data.Tweet>
+﻿@using System.Diagnostics
+@model IEnumerable<Epilogger.Data.Tweet>
 
+<div id="tweetlist">
+@if (Model != null)
+{
+    bool showFirst = true;
+    <ul>
+        @foreach (Epilogger.Data.Tweet t in Model)
+        {
+            if (showFirst)
+            {
+                Debug.Assert(t.EventID != null, "t.EventID != null");
+                var ttvm = new Epilogger.Web.Models.TweetTemplateViewModel { Tweet = t, CanDelete = false, EventId = (int)t.EventID, ShowControls = false, ModifyDisplayClass = "pp_FirstComment" };
+                @Html.Action("TweetTemplate", "Events", ttvm)
+                
+                <div class="seperator"></div>
+                <div class="sm-spacer"></div>
+                <div class="sm-spacer"></div>
+                showFirst = false;
+            }
+            else
+            {
+                var ttvm = new Epilogger.Web.Models.TweetTemplateViewModel { Tweet = t, CanDelete = false, EventId = (int)t.EventID, ShowControls = false, ModifyDisplayClass = "" };
+                @Html.Action("TweetTemplate", "Events", ttvm)
+            }
+        }
+        
+    </ul>
+    
+}
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*
 @if (Model != null)
 {
     bool ShowFirst = true;
@@ -33,4 +79,4 @@
             <span class="sm-spacer"></span>
         }
     }       
-}
+}*@

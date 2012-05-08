@@ -1,12 +1,13 @@
 ﻿
 
 head.ready(function () {
-    $('.topPhotosBar:first').show();
-    getComments($('.topPhotosListLink:first').attr("id"));
-    $('.topPhotosListLink:first').addClass('active');
+    if ($(".topPhotosBar").length > 0) {
+        $('.topPhotosBar:first').show();
+        getComments($('.topPhotosListLink:first').attr("id"));
+        $('.topPhotosListLink:first').addClass('active');
 
-    start_Int();
-
+        start_Int();
+    }
 });
 
 var intval = "";

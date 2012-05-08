@@ -1,0 +1,87 @@
+﻿@model Epilogger.Web.Models.PhotoDetailsViewModel
+
+@{
+    ViewBag.Title = "Epilogger - ";
+    Layout = "~/Views/Shared/_InteriorLayoutNoBC.cshtml";
+}
+@*
+<script language="javascript" type="text/javascript">
+    function getOriginalWidthOfImg  (imgElement) {
+        var t = new Image();
+        t.src = (imgElement.getAttribute ? imgElement.getAttribute("src") : false) || imgElement.src;
+        return t.width;
+    }
+    function getOriginalHeightOfImg(imgElement) {
+        var t = new Image();
+        t.src = (imgElement.getAttribute ? imgElement.getAttribute("src") : false) || imgElement.src;
+        return t.height;
+    }
+
+    @{
+        int heightOffset;
+        if (Model.Width >= 550 && Model.Height >= 330)
+        {
+            heightOffset = 150;
+        }
+        else
+        {
+            heightOffset = 220;
+        }
+    }
+
+    $(document).ready(function () {
+        if (jQuery.browser.safari && document.readyState != "complete"){
+            //console.info('ready...');
+            setTimeout( arguments.callee, 100 );
+            return;
+        } 
+        $('.contentContainer img').each(function () {
+            var maxWidth = @(Model.Width - 20); // Max width for the image
+            var maxHeight = @(Model.Height - heightOffset);    // Max height for the image
+            
+            var ratio = 0;  // Used for aspect ratio
+            var width = getOriginalWidthOfImg(this);
+            var height = getOriginalHeightOfImg(this);
+            
+
+            // Check if the current width is larger than the max
+            if (width > maxWidth) {
+                ratio = maxWidth / width;   // get ratio for scaling image
+                $(this).css("width", maxWidth); // Set new width
+                $(this).css("height", height * ratio);  // Scale height based on ratio
+                height = height * ratio;    // Reset height to match scaled image
+                width = width * ratio;    // Reset width to match scaled image
+            }
+
+            // Check if current height is larger than max
+            if (height > maxHeight) {
+                ratio = maxHeight / height; // get ratio for scaling image
+                $(this).css("height", maxHeight);   // Set new height
+                $(this).css("width", width * ratio);    // Scale width based on ratio
+                //width = width * ratio;    // Reset width to match scaled image
+            }
+            $(this).css("display", "inline");
+        });
+    });
+</script>*@
+
+
+<div id="events-content">
+    
+    <div class="tweetWide">
+        
+        <div class="tweet">
+            
+        </div>
+    </div>
+                
+    <div class="fullImage">
+        <img src="@Model.Image.Fullsize" alt="" />
+    </div>
+    <span class="m-spacer"></span>
+
+</div>
+
+
+
+
