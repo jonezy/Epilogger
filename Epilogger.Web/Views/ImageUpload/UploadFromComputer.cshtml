@@ -1,10 +1,10 @@
-﻿@{
+﻿@model string
+
+@{
     Layout = MVC.ImageUpload.Views._Layout;
 }
 @section Head {
-    @*ToDo: Remove extra referenced files*@
-
-    @*<link type="text/css" rel="stylesheet" href="@Links.Public.js.jQueryFileUpload.css.style_css">
+    @*ToDo: Remove extra referenced files*@ @*<link type="text/css" rel="stylesheet" href="@Links.Public.js.jQueryFileUpload.css.style_css">
     <link type="text/css" rel="stylesheet" href="@Links.Public.js.jQueryFileUpload.css.jquery_fileupload_ui_css">
     <script type="text/javascript" src="@Links.Public.js.jquery_1_6_2_min_js"></script>
     <script type="text/javascript" src="@Links.Public.js.jQueryFileUpload.js.jquery_fileupload_js"></script>
@@ -46,8 +46,17 @@
     <script src="http://blueimp.github.com/jQuery-File-Upload/js/jquery.fileupload-ui.js"></script>
     <!-- The localization script -->
     <script src="http://blueimp.github.com/jQuery-File-Upload/js/locale.js"></script>
-    <!-- The main application script -->
-    <script src="http://blueimp.github.com/jQuery-File-Upload/js/main.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#fileupload').fileupload({
+                maxFileSize: 10000000,
+                acceptFileTypes: /(\.|\/)(gif|jpeg|png)$/i,
+                done: function () {
+                    window.location = '@Url.Action(MVC.ImageUpload.ChooseUploadSource(Model))';
+                }
+            });
+       });
+    </script>
     <!-- The XDomainRequest Transport is included for cross-domain file deletion for IE8+ -->
     <!--[if gte IE 8]><script src="http://blueimp.github.com/js/cors/jquery.xdr-transport.js"></script><![endif]-->
 }

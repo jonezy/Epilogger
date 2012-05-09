@@ -13,7 +13,7 @@ namespace Epilogger.Web.Controllers
     {
         EventService _es = new EventService();
 
-        public virtual ActionResult ChooseUploadSource()
+        public virtual ActionResult ChooseUploadSource(string id)
         {
             return View();
         }
@@ -21,7 +21,7 @@ namespace Epilogger.Web.Controllers
         [HttpGet]
         public virtual ActionResult UploadFromComputer(string id)
         {
-            return View();
+            return View((object)id);
         }
 
         [HttpPost]

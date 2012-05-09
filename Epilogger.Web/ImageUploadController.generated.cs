@@ -42,6 +42,11 @@ namespace Epilogger.Web.Controllers {
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult ChooseUploadSource() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.ChooseUploadSource);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult UploadFromComputer() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.UploadFromComputer);
         }
@@ -85,6 +90,13 @@ namespace Epilogger.Web.Controllers {
         }
 
 
+        static readonly ActionParamsClass_ChooseUploadSource s_params_ChooseUploadSource = new ActionParamsClass_ChooseUploadSource();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ChooseUploadSource ChooseUploadSourceParams { get { return s_params_ChooseUploadSource; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ChooseUploadSource {
+            public readonly string id = "id";
+        }
         static readonly ActionParamsClass_UploadFromComputer s_params_UploadFromComputer = new ActionParamsClass_UploadFromComputer();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_UploadFromComputer UploadFromComputerParams { get { return s_params_UploadFromComputer; } }
@@ -123,8 +135,9 @@ namespace Epilogger.Web.Controllers {
     public class T4MVC_ImageUploadController: Epilogger.Web.Controllers.ImageUploadController {
         public T4MVC_ImageUploadController() : base(Dummy.Instance) { }
 
-        public override System.Web.Mvc.ActionResult ChooseUploadSource() {
+        public override System.Web.Mvc.ActionResult ChooseUploadSource(string id) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ChooseUploadSource);
+            callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }
 

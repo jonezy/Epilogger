@@ -1,21 +1,27 @@
 ﻿@{
     Layout = "";
 }
-
 <html>
-    <head>
-        @RenderSection("Head", false)
-    </head>
+<head>
+    @RenderSection("Head", false)
+</head>
+    <body>
+        @*ToDo: remove inline styles*@
+        <div style="height: 100%; position: relative;">
+            <div style="height: 30px; margin-bottom: 20px;">
+                @RenderSection("Navigation")
+            </div>
+            <div>
+                @RenderBody()
+            </div>
+            <div style="position: absolute; left: 0; width: 100%; bottom: 0;">
+                <div style="width: 100px; height: 30px; margin: 0; float: left; text-align: left">
+                    @RenderSection("BottomLeft", false)
+                </div>
+                <div style="width: 100px; height: 30px; margin: 0; float: right; text-align: right">
+                    @RenderSection("BottomRight", false)
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
-
-@RenderSection("Navigation")
-
-<br/><br/>
-
-@RenderBody()
-
-<br /><br/>
-
-@RenderSection("BottomLeft", false)
-@RenderSection("BottomRight", false)
-
