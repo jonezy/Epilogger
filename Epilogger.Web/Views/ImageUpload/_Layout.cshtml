@@ -2,8 +2,20 @@
     Layout = "";
 }
 
+<html>
+    <head>
+        @RenderSection("Head", false)
+    </head>
+</html>
+
 @RenderSection("Navigation")
 
 <br/><br/>
 
 @RenderBody()
+
+<br /><br/>
+
+@RenderSection("BottomLeft", false)
+@RenderSection("BottomRight", false)
+
