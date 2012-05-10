@@ -4,15 +4,26 @@
     Layout = MVC.ImageUpload.Views._Layout;
 }
 @section Head {
+    <style type="text/css">
+       .selectedImage 
+       {
+           border-style: solid;
+           border-width: 1px;
+           border-color: red;
+       }
+    </style>
+
     <script type="text/javascript">
         $(function () {
             $('#uploadLink').click(function (event) {
-                var photosUrls = $('#photos').children().find(':first-child').attr('href');
-                
-                $.post(window.location,
-                    { photosUrls: photosUrls },
-                    function (data) {
-                        window.location = '@Url.Action(MVC.ImageUpload.ChooseUploadSource())';
+                var photosUrls = $('#gallery').find('img.selectedImage').attr('src');
+                if (!photosUrls)
+                    alert('Please select some photos');
+                else
+                    $.post(window.location,
+                        { photosUrls: photosUrls },
+                        function (data) {
+                            window.location = '@Url.Action(MVC.ImageUpload.ChooseUploadSource())';
                     });
 
                 return false;
@@ -37,20 +48,34 @@
 <div id="fb-root">
 </div>
 <script type="text/javascript">
-    window.getAlbumPhotos = function() {
-        FB.api('/' + @Model.AlbumId + '/photos', function(resp) {
+    window.getAlbumPhotos = function () {
+        FB.api('/' + '@Model.AlbumId' + '/photos', function (resp) {
             var ul = document.getElementById('photos');
 
+            var imagesPerColumn = 3;
+
+            var currentRowImagesCount = 0;
+            var photosGalleryHtml = '<tr>';
             for (var photoId in resp.data) {
                 var photo = resp.data[photoId];
 
-                var li = document.createElement('li'), a = document.createElement('a');
+                photosGalleryHtml += '<td><img width="100" src="' + photo.source + '"/></td>';
 
-                a.innerHTML = photo.id;
-                a.href = photo.source;
-                li.appendChild(a);
-                ul.appendChild(li);
+                currentRowImagesCount++;
+
+                if (currentRowImagesCount > imagesPerColumn) {
+                    photosGalleryHtml += "</tr><tr>";
+                    currentRowImagesCount = 0;
+                }
             }
+
+            photosGalleryHtml += '</tr>';
+
+            $('table#gallery').html(photosGalleryHtml);
+            $('table#gallery').find('img').click(function() {
+                 $(this).toggleClass('selectedImage');
+            });
+
         });
     };
 
@@ -96,5 +121,5 @@
 
 <div id="photosContainer">
     Cick photos you want to upoad
-    <ul id="photos"/>
+    <table id="gallery"></table>
 </div>

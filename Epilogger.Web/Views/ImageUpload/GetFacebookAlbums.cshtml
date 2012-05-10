@@ -23,16 +23,28 @@
         FB.api('/me/albums', function (resp) {
             var ul = document.getElementById('albums');
 
+            var albumsPerColumn = 3;
+
+            var imagesCount = 0;
+            var albumsGalleryHtml = '<tr>';
             for (var albumIndex in resp.data) {
                 var album = resp.data[albumIndex];
 
-                var li = document.createElement('li'), a = document.createElement('a');
+                var albumCoverUrl = 'https://graph.facebook.com/' + album.id + '/picture?type=album';
+                var addAlbumPhotosUrl = "/events/uploadfacebookalbumphotos/" + '@Model.EventId' + "/" + album.id;
+                albumsGalleryHtml += '<td><a href=' + addAlbumPhotosUrl + '><img src="' + albumCoverUrl + '"/></a></td>';
 
-                a.innerHTML = album.name;
-                a.href = "/events/uploadfacebookalbumphotos/" + "@Model.EventId" + "/" + album.id;
-                li.appendChild(a);
-                ul.appendChild(li);
+                imagesCount++;
+
+                if (imagesCount > albumsPerColumn) {
+                    albumsGalleryHtml += "</tr><tr>";
+                    imagesCount = 0;
+                }
             }
+
+            albumsGalleryHtml += '</tr>';
+
+            $('table#gallery').html(albumsGalleryHtml);
 
             $('#albumsContainer').show();
         });
@@ -78,6 +90,6 @@
 </div>
 
 <div id="albumsContainer" style="display: none">
-    Select album
-    <ul id="albums"/>
+    Choose album by clicking on it
+    <table id="gallery"></table>
 </div>
