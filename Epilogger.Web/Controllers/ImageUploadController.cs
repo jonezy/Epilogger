@@ -56,7 +56,7 @@ namespace Epilogger.Web.Controllers
         [HttpGet]
         public virtual ActionResult UploadFacebookAlbumPhotos(string id, string albumId)
         {
-            return View();
+            return View(new UploadFacebookAlbumPhotosViewModel(albumId));
         }
 
         [HttpPost]

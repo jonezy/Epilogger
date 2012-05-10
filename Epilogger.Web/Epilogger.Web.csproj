@@ -320,6 +320,7 @@
     <Compile Include="Models\AllStatsViewModel.cs" />
     <Compile Include="Models\BetaSignUpViewModel.cs" />
     <Compile Include="Models\GetFacebookAlbumsViewModel.cs" />
+    <Compile Include="Models\UploadFacebookAlbumPhotosViewModel.cs" />
     <Compile Include="Models\WidgetCheckinsViewModel.cs" />
     <Compile Include="Models\WidgetCountsViewModel.cs" />
     <Compile Include="Models\WidgetTweetsViewModel.cs" />
