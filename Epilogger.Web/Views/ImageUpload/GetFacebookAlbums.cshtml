@@ -21,8 +21,6 @@
 <script type="text/javascript">
     window.getAlbums = function () {
         FB.api('/me/albums', function (resp) {
-            var ul = document.getElementById('albums');
-
             var albumsPerColumn = 3;
 
             var imagesCount = 0;
@@ -86,7 +84,7 @@
 
 <div id="loginContainer" style="display: none;">
     Login to Facebook
-    <fb:login-button scope="user_photos" onlogin="checkLoginStatus()">Login</fb:login-button>
+    <fb:login-button scope="user_photos" onlogin="getAlbums()">Login</fb:login-button>
 </div>
 
 <div id="albumsContainer" style="display: none">

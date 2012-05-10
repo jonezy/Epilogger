@@ -50,8 +50,6 @@
 <script type="text/javascript">
     window.getAlbumPhotos = function () {
         FB.api('/' + '@Model.AlbumId' + '/photos', function (resp) {
-            var ul = document.getElementById('photos');
-
             var imagesPerColumn = 3;
 
             var currentRowImagesCount = 0;
@@ -116,7 +114,7 @@
 
 <div id="loginContainer" style="display: none;">
     Login to Facebook
-    <fb:login-button scope="user_photos" onlogin="checkLoginStatus()">Login</fb:login-button>
+    <fb:login-button scope="user_photos" onlogin="getAlbumPhotos()">Login</fb:login-button>
 </div>
 
 <div id="photosContainer">
