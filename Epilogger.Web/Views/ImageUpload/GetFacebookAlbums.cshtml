@@ -28,9 +28,9 @@
             for (var albumIndex in resp.data) {
                 var album = resp.data[albumIndex];
 
-                var albumCoverUrl = 'https://graph.facebook.com/' + album.id + '/picture?type=album';
+                var albumCoverUrl = 'https://graph.facebook.com/' + album.cover_photo + '/picture?access_token=' + FB.getAccessToken();
                 var addAlbumPhotosUrl = "/events/uploadfacebookalbumphotos/" + '@Model.EventId' + "/" + album.id;
-                albumsGalleryHtml += '<td><a href=' + addAlbumPhotosUrl + '><img src="' + albumCoverUrl + '"/></a></td>';
+                albumsGalleryHtml += '<td><a href=' + addAlbumPhotosUrl + '><img width="100" src="' + albumCoverUrl + '"/></a></td>';
 
                 imagesCount++;
 
