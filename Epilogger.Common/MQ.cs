@@ -154,6 +154,26 @@ namespace Epilogger.Common
 
             [Serializable]
             [JsonObject(MemberSerialization.OptOut)]
+            public class FacebookImageMSG
+            {
+                public int EventId { get; set; }
+                public string AlbumId { get; set; }
+                public Uri ImageUrl { get; set; }
+
+                public FacebookImageMSG()
+                {
+                }
+
+                public FacebookImageMSG(int eventId, string albumId, Uri imageUrl)
+                {
+                    EventId = eventId;
+                    AlbumId = albumId;
+                    ImageUrl = imageUrl;
+                }
+            }
+
+            [Serializable]
+            [JsonObject(MemberSerialization.OptOut)]
             public class FileImageMSG
             {
                 public int EventID { get; set; }

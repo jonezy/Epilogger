@@ -319,6 +319,7 @@
     <Compile Include="Models\BrowseCategoriesDisplayViewModel.cs" />
     <Compile Include="Models\AllStatsViewModel.cs" />
     <Compile Include="Models\BetaSignUpViewModel.cs" />
+    <Compile Include="Models\GetFacebookAlbumsViewModel.cs" />
     <Compile Include="Models\WidgetCheckinsViewModel.cs" />
     <Compile Include="Models\WidgetCountsViewModel.cs" />
     <Compile Include="Models\WidgetTweetsViewModel.cs" />
@@ -557,6 +558,7 @@
     <Content Include="Public\images\icons\twitter.png" />
     <Content Include="Public\images\icons\WhenandWhere.png" />
     <Content Include="Public\images\imageupload\authenticate_active.png" />
+    <Content Include="Public\images\imageupload\choosealbum_active.png" />
     <Content Include="Public\images\imageupload\facebook.png" />
     <Content Include="Public\images\imageupload\flickr.png" />
     <Content Include="Public\images\imageupload\oops_flickr.png" />
@@ -3045,8 +3047,9 @@
     <None Include="T4MVC.tt.settings.t4" />
     <Content Include="Views\ImageUpload\ChooseUploadSource.cshtml" />
     <Content Include="Views\ImageUpload\UploadFromFlickr.cshtml" />
-    <Content Include="Views\ImageUpload\UploadFromFacebook.cshtml" />
+    <Content Include="Views\ImageUpload\GetFacebookAlbums.cshtml" />
     <Content Include="Views\ImageUpload\_Layout.cshtml" />
+    <Content Include="Views\ImageUpload\UploadFacebookAlbumPhotos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Shared\" />

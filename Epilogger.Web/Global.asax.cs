@@ -153,7 +153,8 @@ namespace Epilogger.Web {
 
             routes.MapRoute("ChooseUploadSource", "events/chooseuploadsource/{id}", MVC.ImageUpload.ChooseUploadSource());
             routes.MapRoute("UploadImageFromFlickr", "events/uploadfromflickr/{id}", MVC.ImageUpload.UploadFromFlickr());
-            routes.MapRoute("UploadImageFromFacebook", "events/uploadfromfacebook/{id}", MVC.ImageUpload.UploadFromFacebook());           
+            routes.MapRoute("GetFacebookAlbums", "events/getfacebookalbums/{id}", MVC.ImageUpload.GetFacebookAlbums());
+            routes.MapRoute("UpoadFacebookAlbumPhotos", "events/uploadfacebookalbumphotos/{id}/{albumId}", MVC.ImageUpload.UploadFacebookAlbumPhotos());
             routes.MapRoute("UploadImageFromComputer", "events/uploadfromcomputer/{id}", MVC.ImageUpload.UploadFromComputer());           
 
             routes.MapRoute(

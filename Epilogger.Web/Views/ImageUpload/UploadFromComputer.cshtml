@@ -66,10 +66,13 @@
     <img src="@Links.Public.images.imageupload.selectphotos_active_png"/>
 }
 @section BottomLeft {
+    <a href="@Url.Action(MVC.ImageUpload.ChooseUploadSource())">
+        <img src="@Links.Public.images.imageupload.oops_flickr_png" />
+    </a>
 }
 @section BottomRight {
-    <a href="#" id=""></a>
 }
+
 @using (Html.BeginForm(MVC.ImageUpload.UploadFromComputer(), FormMethod.Post, new { id = "fileupload", enctype = "multipart/form-data" }))
 {
     <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->

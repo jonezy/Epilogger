@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Epilogger.Common;
 using Epilogger.Data;
+using Epilogger.Web.Models;
 
 namespace Epilogger.Web.Controllers
 {
@@ -47,12 +48,36 @@ namespace Epilogger.Web.Controllers
             return new EmptyResult();
         }
 
-        public virtual ActionResult UploadFromFacebook(string eventId)
+        public virtual ActionResult GetFacebookAlbums(string id)
+        {
+            return View(new GetFacebookAlbumsViewModel(id));
+        }
+
+        [HttpGet]
+        public virtual ActionResult UploadFacebookAlbumPhotos(string id, string albumId)
         {
             return View();
         }
 
-        public virtual ActionResult UploadFromFlickr(string eventId)
+        [HttpPost]
+        public virtual ActionResult UploadFacebookAlbumPhotos(string id, string albumId, IEnumerable<string> photosUrls)
+        {
+            var requestedEvent = _es.FindBySlug(id);
+
+            //ToDo: Move queues names into Epilogger.Common
+            using (var messageProducer = new MQ.MSGProducer("Epilogger", "FacebookImage"))
+            {
+                foreach (var photoUrl in photosUrls)
+                {
+                    var facebookImageMsg = new MQ.Messages.FacebookImageMSG(requestedEvent.ID, albumId, new Uri(photoUrl));
+                    messageProducer.SendMessage(facebookImageMsg);
+                }
+            }
+
+            return new EmptyResult();
+        }
+
+        public virtual ActionResult UploadFromFlickr(string id)
         {
             return View();
         }
