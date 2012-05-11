@@ -4,6 +4,11 @@
 <html>
     <head>
         <script type="text/javascript" src="@Links.Public.js.jquery_1_6_2_min_js"></script>
+        <script type="text/javascript">
+            $(function() {
+                jQuery.ajaxSettings.traditional = true; //set traditional parameters serialization which is used by ASP.NET
+            });
+        </script>
         @RenderSection("Head", false)
     </head>
     <body>

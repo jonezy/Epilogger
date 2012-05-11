@@ -2756,6 +2756,7 @@
     <Content Include="Public\js\jquery.cycle.all.js" />
     <Content Include="Public\js\jquery.cycle.lite.js" />
     <Content Include="Public\js\jquery.expander.min.js" />
+    <Content Include="Public\js\jquery.json-2.3.min.js" />
     <Content Include="Public\js\jquery.jtruncate.pack.js" />
     <Content Include="Public\js\jquery.tweet.js" />
     <Content Include="Public\js\jquery.UI.DatePicker\css\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />

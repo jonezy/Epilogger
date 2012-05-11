@@ -12,18 +12,21 @@
            border-color: red;
        }
     </style>
+    
+    <script type="text/javascript" src="@Links.Public.js.jquery_json_2_3_min_js"></script>
 
     <script type="text/javascript">
         $(function () {
             $('#uploadLink').click(function (event) {
-                var photosUrls = $('#gallery').find('img.selectedImage').attr('src');
+                var photosUrls = $('#gallery').find('img.selectedImage').map(function() { return $(this).attr('src'); });
                 if (!photosUrls)
                     alert('Please select some photos');
                 else
                     $.post(window.location,
-                        { photosUrls: photosUrls },
+                        { photosUrls: $.makeArray(photosUrls) },
                         function (data) {
                             window.location = '@Url.Action(MVC.ImageUpload.ChooseUploadSource())';
+                            return false;
                     });
 
                 return false;
@@ -118,6 +121,6 @@
 </div>
 
 <div id="photosContainer">
-    Cick photos you want to upoad
+    Cick photos you want to upload
     <table id="gallery"></table>
 </div>

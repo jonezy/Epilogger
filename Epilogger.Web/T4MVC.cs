@@ -33853,6 +33853,7 @@ namespace Links {
             public static readonly string jquery_cycle_lite_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.cycle.lite.min.js") ? Url("jquery.cycle.lite.min.js") : Url("jquery.cycle.lite.js");
                           
             public static readonly string jquery_expander_min_js = Url("jquery.expander.min.js");
+            public static readonly string jquery_json_2_3_min_js = Url("jquery.json-2.3.min.js");
             public static readonly string jquery_jtruncate_pack_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.jtruncate.pack.min.js") ? Url("jquery.jtruncate.pack.min.js") : Url("jquery.jtruncate.pack.js");
                           
             public static readonly string jquery_tweet_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.tweet.min.js") ? Url("jquery.tweet.min.js") : Url("jquery.tweet.js");
