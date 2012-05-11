@@ -13,8 +13,6 @@
        }
     </style>
     
-    <script type="text/javascript" src="@Links.Public.js.jquery_json_2_3_min_js"></script>
-
     <script type="text/javascript">
         $(function () {
             $('#uploadLink').click(function (event) {
@@ -60,6 +58,7 @@
             for (var photoId in resp.data) {
                 var photo = resp.data[photoId];
 
+//                ToDo: do not load full image here
                 photosGalleryHtml += '<td><img width="100" src="' + photo.source + '"/></td>';
 
                 currentRowImagesCount++;
