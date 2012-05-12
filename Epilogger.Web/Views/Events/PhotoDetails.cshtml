@@ -1,10 +1,10 @@
 ﻿@model Epilogger.Web.Models.PhotoDetailsViewModel
 
 @{
-    ViewBag.Title = "Epilogger - ";
+    ViewBag.Title = "" + Model.Event.Name + " - Photo - Epilogger";
     Layout = "~/Views/Shared/_InteriorLayoutNoBC.cshtml";
 }
-@*
+
 <script language="javascript" type="text/javascript">
     function getOriginalWidthOfImg  (imgElement) {
         var t = new Image();
@@ -17,32 +17,20 @@
         return t.height;
     }
 
-    @{
-        int heightOffset;
-        if (Model.Width >= 550 && Model.Height >= 330)
-        {
-            heightOffset = 150;
-        }
-        else
-        {
-            heightOffset = 220;
-        }
-    }
-
+  
     $(document).ready(function () {
         if (jQuery.browser.safari && document.readyState != "complete"){
             //console.info('ready...');
             setTimeout( arguments.callee, 100 );
             return;
-        } 
-        $('.contentContainer img').each(function () {
-            var maxWidth = @(Model.Width - 20); // Max width for the image
-            var maxHeight = @(Model.Height - heightOffset);    // Max height for the image
+        }
+        $('#photorightColumn img').each(function () {
+            var maxWidth = $("#photorightColumn").width(); // Max width for the image
+            var maxHeight = 50000;    // Max height for the image
             
             var ratio = 0;  // Used for aspect ratio
             var width = getOriginalWidthOfImg(this);
             var height = getOriginalHeightOfImg(this);
-            
 
             // Check if the current width is larger than the max
             if (width > maxWidth) {
@@ -63,22 +51,35 @@
             $(this).css("display", "inline");
         });
     });
-</script>*@
+</script>
 
 
-<div id="events-content">
+<div>
     
-    <div class="tweetWide">
+    <div id="photoleftColumn">
+        @*Photo Icon*@
+        <div class="photoTitle"><img src="/Public/images/icons/cameraIcon.png" alt="" />&nbsp;&nbsp;<a href="/events/@Model.EventSlug">@Model.Event.Name</a></div>
         
-        <div class="tweet">
-            
-        </div>
+        @Html.Action("ImageCommentControl", "Events", new { eventId = Model.EventId, imageid = Model.Image.ID })
+        
     </div>
-                
-    <div class="fullImage">
+    
+    <div id="photorightColumn">
         <img src="@Model.Image.Fullsize" alt="" />
+        
+        <div class="spacer"></div>
+        
+        <div class="fb-like" data-href="@Model.ShortURL" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="arial"></div>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-related="Epilogger: Epilogger" data-url="@Model.ShortURL" data-text="@Model.HashTag">Tweet</a>
+
+        <div class="spacer"></div>
+
+        <div class="sm-spacer seperator"></div>
+        <div class="spacer"></div>
+        <h1>All your event Happenings In One Place.</h1>
+        <p class="photoEpiloggerDesc">There’s tons of stuff happening at @Model.Event.Name and it’s hard to really see what’s going on. Epilogger collects it for you and puts it into a nifty looking archive for you to check out whenever you want.</p>
+        <input type="button" id="goingon" onclick="location.href='/events/@Model.EventSlug'; return false;" class="blue-action-button" value="See What's Going on Now" />
     </div>
-    <span class="m-spacer"></span>
 
 </div>
 

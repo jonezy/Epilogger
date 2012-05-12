@@ -793,7 +793,7 @@ div.profile img {
     overflow:auto; 
     height:302px; 
     padding-left:15px;
-    width:471px}
+    width: 511px; }
 
 .topPhotoComments .tweet-content {
     padding:3px 0}
@@ -1363,7 +1363,7 @@ span.tweet-date a:hover { text-decoration: underline; }
 #top-tweeters .toptweeter-item .bar.small {height:10px;background-color:#fb75b7;float:left;margin-right:5px;}
 #top-tweeters .toptweeter-item .count.small {font-size:11px;float:left;padding-top:0px;}
 
-#tweetlist .tweet {
+.tweetlist .tweet {
     margin-bottom:15px;}
 
 .tweet .tweet-body {
@@ -2218,6 +2218,35 @@ div#SearchTimeFilter input[type=text] {
 	height:20px;
 	padding:5px 0 5px 5px;
     background-color: #f7f7f7; }
+    
+    
+/* PHOTO DETAILS PAGE */
+#photoleftColumn {
+    width: 303px;
+    float: left;
+}
+#photorightColumn {
+    text-align: left;
+    margin-left: 330px;
+    width: 630px;
+}
+.photoTitle {
+    padding-bottom: 28px;
+}
+.photoTitle a {
+    color: #000;
+    font: bold 24px 'InterstatePlusRegular', arial, sans-serif;
+}
+.photoTitle img
+{
+    margin-top: -13px;
+}
+
+.photoEpiloggerDesc {
+    color: #777;
+    font-size: 14px;
+    font-weight: bold;
+}
 
 
 

@@ -7,9 +7,9 @@
 <script language="javascript" type="text/javascript">
 
     whenkeydown = function (maxLength) {
-        $("#ReplyNewTweet").unbind().keyup(function () {
+        $("#tweetBoxPhoto").unbind().keyup(function () {
             //check if the appropriate text area is being typed into
-            if (document.activeElement.id === "ReplyNewTweet") {
+            if (document.activeElement.id === "tweetBoxPhoto") {
                 //get the data in the field
                 var text = $(this).val();
 
@@ -51,10 +51,10 @@
         var hashTag = '@(Model.Event.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0].Contains("#") ? Model.Event.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0] : "#" + Model.Event.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0])';
         var eventUrl = '@Model.ShortEventURL';
 
-        $("#ReplyNewTweet").val(replyTo + '  ' + eventUrl + ' ' + hashTag);
+        $("#tweetBoxPhoto").val(replyTo + '  ' + eventUrl + ' ' + hashTag);
 
         //check if we are still within our maximum number of characters or not
-        var numofchars = $("#ReplyNewTweet").val().length;
+        var numofchars = $("#tweetBoxPhoto").val().length;
         var charsLeft = maxLength - numofchars;
         if (numofchars <= maxLength) {
             //set the length of the text into the counter span
@@ -64,10 +64,9 @@
             $("#twitterCharCounterPhoto").html("").html(charsLeft).css("color", "#FF0000");
         }
 
-        //$("#newTweet").focus();
-        window.setTimeout(function () {
-            $("#ReplyNewTweet").setCursorPosition(replyTo.length + 1);
-        }, 500);
+//        window.setTimeout(function () {
+//            $("#tweetBoxPhoto").setCursorPosition(replyTo.length + 1);
+//        }, 500);
 
 
     };
@@ -82,15 +81,16 @@
     @Html.Action("TweetTemplate", ttvm)
 </div>*@
 
-<form action="" method="post" onsubmit="return ReplyToTweet('@Url.Action("TweetReply", "events")')">
+<form action="" method="post" onsubmit="return Tweetbox('@Url.Action("Tweetbox", "events")')">
     
     
     @if (Model.IsTwitterAuthed)
     {
-        <span class="twitterWhatsHappening">What's happening?</span><span id="twitterCharCounterPhoto">140</span>
-        <textarea class="tweetBoxPhoto" cols="20" id="ReplyNewTweet" name="ReplyNewTweet" rows="2"></textarea>
+        <span class="twitterWhatsHappening">Comment and share this photo?</span><span id="twitterCharCounterPhoto">140</span>
+        <textarea class="tweetBoxPhoto" cols="20" id="tweetBoxPhoto" name="tweetBoxPhoto" rows="2"></textarea>
         <div class="fright">
             <img src="/Public/images/icons/ajaxWaiting.gif" id="twitterLoading" style="display: none;" alt="loading" />
+            <span id="statusMessage"></span>
             <input type="submit" value="Tweet" id="submitTweet" class="blue-action-button" />
         </div>
     }
@@ -98,9 +98,8 @@
     {
         <div style="text-align: center;">
             <br class="spacer"/><br class="spacer"/>
-            <textarea class="tweetBox" cols="20" id="ReplyNewTweet" name="ReplyNewTweet" style="display: none;" rows="2"></textarea>
-            <h3>You need to be authorized with Twitter to reply to a tweet. Please login with or authenticate your account with Twitter. </h3>
-            <br />
+            <textarea class="tweetBoxPhoto" cols="20" id="tweetBoxPhoto" name="tweetBoxPhoto" style="display: none;" rows="2"></textarea>
+            <p>You need to be authorized with Twitter to reply to a tweet. Please login with or authenticate your account with Twitter. </p>
             @Html.ActionImage("ConnectRequest", "twitter", new { area = "Authentication" }, "/Public/images/icons/sign-in-with-twitter-d.png", "Sign in with twitter")
         </div>
     }

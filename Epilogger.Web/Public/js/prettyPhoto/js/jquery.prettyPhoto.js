@@ -122,23 +122,25 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 			$(document).unbind('keydown.prettyphoto').bind('keydown.prettyphoto',function(e){
 				if(typeof $pp_pic_holder != 'undefined'){
 					if($pp_pic_holder.is(':visible')){
-						switch(e.keyCode){
-							case 37:
-								$.prettyPhoto.changePage('previous');
-								e.preventDefault();
-								break;
-							case 39:
-								$.prettyPhoto.changePage('next');
-								e.preventDefault();
-								break;
-							case 27:
-								if(!settings.modal)
-								$.prettyPhoto.close();
-								e.preventDefault();
-								break;
-						};
-						// return false;
-					};
+					    if (!$("#tweetBoxPhoto").is(":focus")) {
+						    switch(e.keyCode){
+							    case 37:
+								    $.prettyPhoto.changePage('previous');
+								    e.preventDefault();
+								    break;
+							    case 39:
+								    $.prettyPhoto.changePage('next');
+								    e.preventDefault();
+								    break;
+							    case 27:
+								    if(!settings.modal)
+								    $.prettyPhoto.close();
+								    e.preventDefault();
+								    break;
+						    };
+						    // return false;
+					    };
+                    };
 				};
 			});
 		};
@@ -521,11 +523,13 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 				$pp_pic_holder.find('.pp_fade').fadeIn(settings.animation_speed); // Fade the new content
 
 				// Show the nav
-				if(isSet && _getFileType(pp_images[set_position])=="image") { $pp_pic_holder.find('.pp_hoverContainer').show(); }else{ $pp_pic_holder.find('.pp_hoverContainer').hide(); }
+				if(isSet && _getFileType(pp_images[set_position])=="image") { $pp_pic_holder.find('.pp_hoverContainer').show(); } else { $pp_pic_holder.find('.pp_hoverContainer').hide(); }
 			
 				if(pp_dimensions['resized']){ // Fade the resizing link if the image is resized
 					$('a.pp_expand,a.pp_contract').show();
-				}else{
+				}
+				else
+				{
 					$('a.pp_expand').hide();
 				}
 				
@@ -534,6 +538,10 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 			    //-7
 			    $(".pp_Comments").height(pp_dimensions['contentHeight']-135);
                 $(".pp_Comments").show();
+			    
+                //Show the tweet box
+			    $(".pp_TweetBox").show();
+
 
                 //Fade in the Share Drawer
 			    $(".pp_shareDrawer").fadeIn(2000);
@@ -553,8 +561,8 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 		};
 		
 		/**
-		* Hide the content...DUH!
-		*/
+        * Hide the content...DUH!
+        */
 		function _hideContent(callback){
 			// Fade out the current picture
 			$pp_pic_holder.find('#pp_full_res object,#pp_full_res embed').css('visibility','hidden');

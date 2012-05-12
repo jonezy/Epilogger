@@ -485,6 +485,45 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
+        public ActionResult GetImageCommentsPage1(ImageCommentViewModel model)
+        {
+            return PartialView("ImageCommentsPaged", model);
+        }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+        
+        public ActionResult GetImageCommentsPaged(ImageCommentViewModel model)
+        {
+            
+            model.Tweets = _ts.FindByImageIDPaged(model.ImageId, model.EventId, model.page, 4);
+            model.ModifyDisplayClass = "";
+
+            return PartialView("ImageCommentsPaged", model);
+        }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        public ActionResult ImageCommentControl(int eventId, int imageId, int? page, string commentLocation)
+        {
+
+            var model = new ImageCommentViewModel()
+            {
+                CanDelete = false,
+                ModifyDisplayClass = "pp_FirstComment",
+                StyleFirstTweet = true,
+                ShowControls = false,
+                Tweets = _ts.FindByImageIDPaged(imageId, eventId, 1, 4),
+                EventId = eventId,
+                ImageId = imageId,
+                page = page ?? 1,
+                TotalTweetCount = _ts.FindCountByImageID(imageId, eventId)
+            };
+
+            return PartialView("ImageCommentControl", model);
+        }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
         [HttpPost]
         public ActionResult GetLastTweetsJSON(int Count, string pageLoadTime, int EventID) {
             Dictionary<String, Object> dict = new Dictionary<String, Object>();
@@ -1414,7 +1453,15 @@ namespace Epilogger.Web.Controllers {
                 model.EventSlug = theEvent.EventSlug;
                 model.Image = _is.FindByID(photoid);
                 model.Tweets = _ts.FindByImageID(photoid, eventid);
+                model.Event = theEvent;
+                model.HashTag =
+                    theEvent.SearchTerms.Split(new string[] {" OR "}, StringSplitOptions.None)[0].Contains("#")
+                        ? theEvent.SearchTerms.Split(new string[] {" OR "}, StringSplitOptions.None)[0]
+                        : "#" + theEvent.SearchTerms.Split(new string[] {" OR "}, StringSplitOptions.None)[0];
             }
+
+            var apiClient = new Epilogr.APISoapClient();
+            model.ShortURL = apiClient.CreateUrl("http://epilogger.com/events/PhotoDetails/" + eventid + "/" + photoid).ShortenedUrl;
 
             return View(model);
         }
@@ -1423,8 +1470,6 @@ namespace Epilogger.Web.Controllers {
 
         public ActionResult TweetBox(int eventid, int photoid)
         {
-            //var theEvent = 
-            //var thePhoto = _is.FindByID(photoid);
             var imageComment = _ts.FindByImageID(photoid, eventid).FirstOrDefault();
 
             Debug.Assert(imageComment != null, "imageComment != null");
@@ -1436,13 +1481,47 @@ namespace Epilogger.Web.Controllers {
             };
             
             var apiClient = new Epilogr.APISoapClient();
-            model.ShortEventURL = apiClient.CreateUrl("http://epilogger.com/events/" + model.Event.EventSlug).ShortenedUrl;
+            model.ShortEventURL = apiClient.CreateUrl("http://epilogger.com/events/PhotoDetails/" + eventid + "/" + photoid).ShortenedUrl;
 
             return PartialView(model);
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
+
+        [HttpPost] //Called by Ajax
+        public bool Tweetbox(FormCollection c)
+        {
+            try
+            {
+                var tokens = new OAuthTokens
+                {
+                    ConsumerKey = ConfigurationManager.AppSettings["TwitterConsumerKey"],
+                    ConsumerSecret = ConfigurationManager.AppSettings["TwitterConsumerSecret"],
+                    AccessToken = CurrentUserTwitterAuthorization.Token,
+                    AccessTokenSecret = CurrentUserTwitterAuthorization.TokenSecret
+                };
+
+                //var ts = TwitterStatus.Update(tokens, c["tweetBoxPhoto"], new StatusUpdateOptions { InReplyToStatusId = decimal.Parse(c["TwitterID"]) });
+
+                //var uta = new UserTwitterAction
+                //{
+                //    TweetId = (long)ts.ResponseObject.Id,
+                //    TwitterAction = "Reply",
+                //    UserId = CurrentUser.ID
+                //};
+                //_userTwitterActionService.Save(uta);
+
+                //return ts.Result == RequestResult.Success;
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
     }
 

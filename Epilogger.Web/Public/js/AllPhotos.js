@@ -38,13 +38,11 @@ $('.topPhotosListLink').click(function (e) {
 function changePhoto(item, theID, speed) {
 
     $('.topPhotosBar:visible').fadeOut(speed, function () {
+        getComments(theID);
         $('.topPhotosListLink').removeClass('active');
         $(item).addClass('active');
         $('#TopPhoto' + theID).fadeIn(speed);
     });
-    
-
-    getComments(theID);
 
 }
 
@@ -61,11 +59,32 @@ function ChangeToNextPhoto() {
 }
 
 //This fills in the Comments on the Image
-function getComments(photoID) {
+function getComments(photoId) {
+    
     $(".topPhotoComments").html("");
-
-    $.get('/Events/GetImageComments/' + EventID + '/' + photoID,
-        function (data) {
+    $.ajax({
+        url: '/Events/ImageCommentControl',
+        type: 'GET',
+        data: {
+            imageid: photoId,
+            eventid: EventID
+        },
+        contentType: 'html',
+        success: function (data) {
             $('.topPhotoComments').html(data);
-        }, "html");
+        },
+        error: function () {
+            alert("error");
+        }
+    });
+    //@Html.Action("ImageCommentControl", "Events", new { eventId = Model.EventId, imageid = Model.Image.ID })
+    
+    
+    
+    
+//    $(".topPhotoComments").html("");
+//    $.get('/Events/GetImageComments/' + EventID + '/' + photoId,
+//        function (data) {
+//            $('.topPhotoComments').html(data);
+//        }, "html");
 }
