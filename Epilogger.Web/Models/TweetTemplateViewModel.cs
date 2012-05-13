@@ -11,6 +11,7 @@ namespace Epilogger.Web.Models
         public bool Replied { get; set; }
         public bool Retweeted { get; set; }
         public bool Favorited { get; set; }
+        public string ModifyDisplayClass { get; set; }
     }
 
 }

@@ -34,7 +34,8 @@ namespace Epilogger.Web.Models {
         public int TimeZoneOffSet { get; set; }
         public string Cost { get; set; }
         public UserRoleType CurrentUserRole { get; set; }
-        public Epilogger.Data.User TheUser { get; set; }
+        public Data.User TheUser { get; set; }
+        public Data.User CreatedEventUser { get; set; }
         public string FacebookPageURL { get; set; }
         public string TwitterAccount { get; set; }
 

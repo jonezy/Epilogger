@@ -90,7 +90,7 @@
             {
                 <div class="photo-item">
 				    @*<img src="@Img.Image.Fullsize" alt ="" />*@
-                    <a href="@Img.Image.Fullsize" rel="prettyPhoto[reportphotos]" photoid="@Img.Image.ID" title="" id="@Img.Image.ID">
+                    <a href="@Img.Image.Fullsize" rel="EPLPhoto[reportphotos]" photoid="@Img.Image.ID" title="" id="@Img.Image.ID">
                         <img src="@Img.Image.Fullsize" border="0" alt="" />
                     </a>
                     @if (Img.Tweet != null)
@@ -251,7 +251,7 @@
 
 <script type="text/javascript" charset="utf-8">
     head.ready(function () {
-        $("a[rel^='prettyPhoto']").prettyPhoto({
+        $("a[rel^='EPLPhoto']").prettyPhoto({
             theme: 'light_square',
             animation_speed: 'fast',
             overlay_gallery: false,

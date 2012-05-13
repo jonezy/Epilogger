@@ -9,7 +9,7 @@
 
 @if (Model.Width==100 && Model.Height==100)
 {
-    @: <div style="@string.Format("height:100%; width: 100%;"); overflow: hidden;">    
+    @: <div style="@string.Format("height:100%; width: 100%;") overflow-x: hidden; overflow-y: auto;">
 }
 else
 {
@@ -30,7 +30,7 @@ else
                 @foreach (var theImage in Model.Images)
                 {
                     <li @(Model.Width >= 550 ? "style=width:85px" : "")>
-                        <a href="/widget/photoDetails/@Model.EventSlug/@theImage.ID?width=@Model.Width&height=@Model.Height&returnto=2"><img src="@theImage.Fullsize" width="200" alt="" /></a>
+                        <a href="" onclick="location.href='/widget/photoDetails/@Model.EventSlug/@theImage.ID?width=@Model.Width&height=@Model.Height&returnto=2'; return false;"><img src="@theImage.Fullsize" width="200" alt="" /></a>
                     </li>
                 }
             </ul>

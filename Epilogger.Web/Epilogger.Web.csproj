@@ -285,6 +285,8 @@
     <Compile Include="Models\BrowseCategoriesDisplayViewModel.cs" />
     <Compile Include="Models\AllStatsViewModel.cs" />
     <Compile Include="Models\BetaSignUpViewModel.cs" />
+    <Compile Include="Models\ImageCommentViewModel.cs" />
+    <Compile Include="Models\PhotoDetailsViewModel.cs" />
     <Compile Include="Models\TweetReplyViewModel.cs" />
     <Compile Include="Models\WidgetCheckinsViewModel.cs" />
     <Compile Include="Models\WidgetCountsViewModel.cs" />
@@ -338,7 +340,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\combres.xml" />
+    <Content Include="App_Data\combres.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\combres_full_with_annotation.xml" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -478,6 +482,7 @@
     <Content Include="Public\images\icons\blog.png" />
     <Content Include="Public\images\icons\BrowseBullet.png" />
     <Content Include="Public\images\icons\bubble.png" />
+    <Content Include="Public\images\icons\cameraIcon.png" />
     <Content Include="Public\images\icons\Checkmark.png" />
     <Content Include="Public\images\icons\CreateAccountArrow.png" />
     <Content Include="Public\images\icons\Crown.png" />
@@ -2832,6 +2837,11 @@
     <Content Include="Views\Events\TweetRetweet.cshtml" />
     <Content Include="Views\Events\NeedTwitterAuth.cshtml" />
     <Content Include="Views\Events\TweetTemplate.cshtml" />
+    <Content Include="Views\Events\PhotoDetails.cshtml" />
+    <Content Include="Views\Shared\_InteriorLayoutNoBC.cshtml" />
+    <Content Include="Views\Events\TweetBox.cshtml" />
+    <Content Include="Views\Events\ImageCommentsPaged.cshtml" />
+    <Content Include="Views\Events\ImageCommentControl.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Shared\" />
@@ -4916,7 +4926,6 @@
     <Content Include="Views\Dashboard\Events.cshtml" />
     <Content Include="Views\Dashboard\Account.cshtml" />
     <Content Include="Views\Home\_GetClickMap.cshtml" />
-    <Content Include="Views\Events\_TweetTemplateoLD.cshtml" />
     <Content Include="Views\Events\_EventMenu.cshtml" />
     <Content Include="Views\Events\AllContent.cshtml" />
     <Content Include="Views\Events\Menu.cshtml" />

@@ -40,7 +40,7 @@
         var thePath = image.EventID + "/" + image.ID;
         <div id="TopPhoto@(image.ID)" class="topPhotosBar">
             <div class="topPhoto">
-                <a href="@image.Fullsize" rel="prettyPhoto[topphotos]" photoid="@thePath" title="" id="@image.ID">
+                <a href="@image.Fullsize" rel="EPLPhoto[topphotos]" photoid="@thePath" title="" id="@image.ID">
                     <img src="@image.Fullsize" width="415" border="0" alt="" />
                 </a>
             </div>
@@ -84,7 +84,7 @@
 
 <script type="text/javascript" charset="utf-8">
     head.ready(function () {
-        $("a[rel^='prettyPhoto']").prettyPhoto({
+        $("a[rel^='EPLPhoto']").prettyPhoto({
             theme: 'light_square',
             animation_speed: 'fast',
             overlay_gallery: false,

@@ -1,0 +1,88 @@
+﻿@model Epilogger.Web.Models.PhotoDetailsViewModel
+
+@{
+    ViewBag.Title = "" + Model.Event.Name + " - Photo - Epilogger";
+    Layout = "~/Views/Shared/_InteriorLayoutNoBC.cshtml";
+}
+
+<script language="javascript" type="text/javascript">
+    function getOriginalWidthOfImg  (imgElement) {
+        var t = new Image();
+        t.src = (imgElement.getAttribute ? imgElement.getAttribute("src") : false) || imgElement.src;
+        return t.width;
+    }
+    function getOriginalHeightOfImg(imgElement) {
+        var t = new Image();
+        t.src = (imgElement.getAttribute ? imgElement.getAttribute("src") : false) || imgElement.src;
+        return t.height;
+    }
+
+  
+    $(document).ready(function () {
+        if (jQuery.browser.safari && document.readyState != "complete"){
+            //console.info('ready...');
+            setTimeout( arguments.callee, 100 );
+            return;
+        }
+        $('#photorightColumn img').each(function () {
+            var maxWidth = $("#photorightColumn").width(); // Max width for the image
+            var maxHeight = 50000;    // Max height for the image
+            
+            var ratio = 0;  // Used for aspect ratio
+            var width = getOriginalWidthOfImg(this);
+            var height = getOriginalHeightOfImg(this);
+
+            // Check if the current width is larger than the max
+            if (width > maxWidth) {
+                ratio = maxWidth / width;   // get ratio for scaling image
+                $(this).css("width", maxWidth); // Set new width
+                $(this).css("height", height * ratio);  // Scale height based on ratio
+                height = height * ratio;    // Reset height to match scaled image
+                width = width * ratio;    // Reset width to match scaled image
+            }
+
+            // Check if current height is larger than max
+            if (height > maxHeight) {
+                ratio = maxHeight / height; // get ratio for scaling image
+                $(this).css("height", maxHeight);   // Set new height
+                $(this).css("width", width * ratio);    // Scale width based on ratio
+                //width = width * ratio;    // Reset width to match scaled image
+            }
+            $(this).css("display", "inline");
+        });
+    });
+</script>
+
+
+<div>
+    
+    <div id="photoleftColumn">
+        @*Photo Icon*@
+        <div class="photoTitle"><img src="/Public/images/icons/cameraIcon.png" alt="" />&nbsp;&nbsp;<a href="/events/@Model.EventSlug">@Model.Event.Name</a></div>
+        
+        @Html.Action("ImageCommentControl", "Events", new { eventId = Model.EventId, imageid = Model.Image.ID })
+        
+    </div>
+    
+    <div id="photorightColumn">
+        <img src="@Model.Image.Fullsize" alt="" />
+        
+        <div class="spacer"></div>
+        
+        <div class="fb-like" data-href="@Model.ShortURL" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="arial"></div>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-related="Epilogger: Epilogger" data-url="@Model.ShortURL" data-text="@Model.HashTag">Tweet</a>
+
+        <div class="spacer"></div>
+
+        <div class="sm-spacer seperator"></div>
+        <div class="spacer"></div>
+        <h1>All your event Happenings In One Place.</h1>
+        <p class="photoEpiloggerDesc">There’s tons of stuff happening at @Model.Event.Name and it’s hard to really see what’s going on. Epilogger collects it for you and puts it into a nifty looking archive for you to check out whenever you want.</p>
+        <input type="button" id="goingon" onclick="location.href='/events/@Model.EventSlug'; return false;" class="blue-action-button" value="See What's Going on Now" />
+    </div>
+
+</div>
+
+
+
+

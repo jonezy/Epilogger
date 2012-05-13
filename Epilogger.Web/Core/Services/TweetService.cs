@@ -105,6 +105,54 @@ namespace Epilogger.Web
                    select tw;
         }
 
+
+
+
+
+        public int FindCountByImageID(int imageID, int eventId)
+        {
+            return FindCountByImageID(imageID, DateTime.Parse("2000-01-01 00:00:00"), DateTime.Parse("2200-12-31 00:00:00"), eventId);
+        }
+        public int FindCountByImageID(int imageID, DateTime startDateTimeFilter, DateTime endDateTimeFilter, int eventId)
+        {
+            var imds = new ImageMetaDateService();
+            IEnumerable<ImageMetaDatum> im = imds.FindByImageID(imageID);
+
+            return (from tw in db.Tweets
+                   join I in im on tw.TwitterID equals I.TwitterID
+                   where tw.EventID == eventId //&& tw.Deleted == null || tw.Deleted == false
+                   orderby tw.CreatedDate
+                   select tw).Count();
+        }
+
+
+
+
+        public IEnumerable<Tweet> FindByImageIDPaged(int imageID, int eventId, int? page, int itemsPerPage)
+        {
+            return FindByImageIDPaged(imageID, DateTime.Parse("2000-01-01 00:00:00"), DateTime.Parse("2200-12-31 00:00:00"), eventId, page, itemsPerPage);
+        }
+
+        public IEnumerable<Tweet> FindByImageIDPaged(int imageID, DateTime startDateTimeFilter, DateTime endDateTimeFilter, int eventId, int? page, int itemsPerPage)
+        {
+
+            var skipAmount = page.HasValue ? page.Value - 1 : 0;
+            
+            var imds = new ImageMetaDateService();
+            var im = imds.FindByImageID(imageID);
+
+            var tweets = (from tw in db.Tweets
+                   join I in im on tw.TwitterID equals I.TwitterID
+                   where tw.EventID == eventId
+                   orderby tw.CreatedDate
+                          select tw).Skip(skipAmount * itemsPerPage).Take(itemsPerPage);
+
+            return tweets;
+
+        }
+
+
+
         public IEnumerable<Tweet> GetPagedTweets(int eventID, System.Nullable<int> page, int tweetsPerPage, DateTime F, DateTime T)
         {
 

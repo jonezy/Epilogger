@@ -1,0 +1,109 @@
+﻿@model Epilogger.Web.Models.TweetReplyViewModel
+
+<script type="text/javascript">
+    head.js('@Url.Content("~/Public/js/jquery.blockUI.js")');
+</script>
+
+<script language="javascript" type="text/javascript">
+
+    whenkeydown = function (maxLength) {
+        $("#tweetBoxPhoto").unbind().keyup(function () {
+            //check if the appropriate text area is being typed into
+            if (document.activeElement.id === "tweetBoxPhoto") {
+                //get the data in the field
+                var text = $(this).val();
+
+                //set number of characters
+                var numofchars = text.length;
+
+                //set the chars left
+                var charsLeft = maxLength - numofchars;
+
+                //check if we are still within our maximum number of characters or not
+                if (numofchars <= maxLength) {
+                    //set the length of the text into the counter span
+                    $("#twitterCharCounterPhoto").html("").html(charsLeft).css("color", "#cbcbcb");
+                    $("#submitTweet").removeAttr("disabled");
+                    $("#submitTweet").removeClass('disabled');
+                } else {
+                    //style numbers in red
+                    $("#twitterCharCounterPhoto").html("").html(charsLeft).css("color", "#FF0000");
+                    $("#submitTweet").attr('disabled', 'disabled');
+                    $("#submitTweet").addClass('disabled');
+                }
+            }
+        });
+    };
+
+    if (document.readyState === "complete") { init(); }
+
+    function init() {
+        //set max length
+        var maxLength = 140;
+
+        //load in max characters when page loads
+        $("#twitterCharCounter").html(maxLength);
+
+        //run listen key press
+        whenkeydown(maxLength);
+
+        var replyTo = '@@@Model.Tweet.FromUserScreenName';
+        var hashTag = '@(Model.Event.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0].Contains("#") ? Model.Event.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0] : "#" + Model.Event.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0])';
+        var eventUrl = '@Model.ShortEventURL';
+
+        $("#tweetBoxPhoto").val(replyTo + '  ' + eventUrl + ' ' + hashTag);
+
+        //check if we are still within our maximum number of characters or not
+        var numofchars = $("#tweetBoxPhoto").val().length;
+        var charsLeft = maxLength - numofchars;
+        if (numofchars <= maxLength) {
+            //set the length of the text into the counter span
+            $("#twitterCharCounterPhoto").html("").html(charsLeft).css("color", "#cbcbcb");
+        } else {
+            //style numbers in red
+            $("#twitterCharCounterPhoto").html("").html(charsLeft).css("color", "#FF0000");
+        }
+
+//        window.setTimeout(function () {
+//            $("#tweetBoxPhoto").setCursorPosition(replyTo.length + 1);
+//        }, 500);
+
+
+    };
+
+</script>
+
+@*<h2>
+    Reply to @@@Model.Tweet.FromUserScreenName
+</h2>
+<div>
+    @{ var ttvm = new Epilogger.Web.Models.TweetTemplateViewModel { Tweet = Model.Tweet, CanDelete = false, EventId = Model.Event.ID, ShowControls = false };}
+    @Html.Action("TweetTemplate", ttvm)
+</div>*@
+
+<form action="" method="post" onsubmit="return Tweetbox('@Url.Action("Tweetbox", "events")')">
+    
+    
+    @if (Model.IsTwitterAuthed)
+    {
+        <span class="twitterWhatsHappening">Comment and share this photo?</span><span id="twitterCharCounterPhoto">140</span>
+        <textarea class="tweetBoxPhoto" cols="20" id="tweetBoxPhoto" name="tweetBoxPhoto" rows="2"></textarea>
+        <div class="fright">
+            <img src="/Public/images/icons/ajaxWaiting.gif" id="twitterLoading" style="display: none;" alt="loading" />
+            <span id="statusMessage"></span>
+            <input type="submit" value="Tweet" id="submitTweet" class="blue-action-button" />
+        </div>
+    }
+    else
+    {
+        <div style="text-align: center;">
+            <br class="spacer"/><br class="spacer"/>
+            <textarea class="tweetBoxPhoto" cols="20" id="tweetBoxPhoto" name="tweetBoxPhoto" style="display: none;" rows="2"></textarea>
+            <p>You need to be authorized with Twitter to reply to a tweet. Please login with or authenticate your account with Twitter. </p>
+            @Html.ActionImage("ConnectRequest", "twitter", new { area = "Authentication" }, "/Public/images/icons/sign-in-with-twitter-d.png", "Sign in with twitter")
+        </div>
+    }
+
+    @Html.Hidden("TwitterID", Model.Tweet.TwitterID)
+</form>
+
