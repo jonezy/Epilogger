@@ -148,11 +148,23 @@ namespace Epilogger.Web {
                 new { controller = "events", action = "tweetfavorite" }
             );
             routes.MapRoute(
+                "TweetBox",
+                "events/tweetbox/{eventid}/{photoid}",
+                new { controller = "events", action = "tweetbox", eventid = UrlParameter.Optional, photoid = UrlParameter.Optional }
+            );
+
+
+            routes.MapRoute(
                 "NeedTwitterAuth",
                 "events/needtwitterauth",
                 new { controller = "events", action = "needtwitterauth" }
             );
-            
+
+            routes.MapRoute(
+                "PhotoDetailsPath",
+                "events/photodetails/{eventid}/{photoid}",
+                new { controller = "events", action = "photodetails", eventid = UrlParameter.Optional, photoid = UrlParameter.Optional }
+            );
 
 
 
@@ -180,7 +192,18 @@ namespace Epilogger.Web {
                 new { controller = "events", action = "getimagecomments", eventID = UrlParameter.Optional, imageid = UrlParameter.Optional }
             );
 
+            routes.MapRoute(
+                "GetImageCommentsPaged",
+                "events/getimagecommentspaged/{eventId}/{imageId}/{page}",
+                new { controller = "events", action = "getimagecommentspaged", eventId = UrlParameter.Optional, imageId = UrlParameter.Optional, page = UrlParameter.Optional }
+            );
 
+            routes.MapRoute(
+                "ImageCommentControl",
+                "events/imagecommentcontrol/{eventId}/{imageId}",
+                new { controller = "events", action = "imagecommentcontrol", eventId = UrlParameter.Optional, imageId = UrlParameter.Optional }
+            );
+           
             routes.MapRoute(
                 "EventBrowseRoutes",
                 "browse/{filter}",
@@ -279,7 +302,9 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore())
                 .ForMember(dest => dest.CanDelete, opt => opt.Ignore())
                 .ForMember(dest => dest.CurrentUserRole, opt => opt.Ignore())
-                .ForMember(dest => dest.TheUser, opt => opt.MapFrom(src => src.Users.FirstOrDefault()));
+                .ForMember(dest => dest.TheUser, opt => opt.Ignore())
+                .ForMember(dest => dest.CurrentUserRole, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedEventUser, opt => opt.Ignore());
 
 
             Mapper.CreateMap<Event, WidgetViewModel>()

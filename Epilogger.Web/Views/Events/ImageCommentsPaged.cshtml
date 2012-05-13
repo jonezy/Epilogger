@@ -1,0 +1,28 @@
+﻿@using System.Diagnostics
+
+@model Epilogger.Web.Models.ImageCommentViewModel
+
+@if (Model != null)
+{
+    var showFirst = true;
+
+    foreach (var t in Model.Tweets)
+    {
+        if (showFirst && Model.ModifyDisplayClass.Length > 0)
+        {
+            Debug.Assert(t.EventID != null, "t.EventID != null");
+            var ttvm = new Epilogger.Web.Models.TweetTemplateViewModel { Tweet = t, CanDelete = false, EventId = (int)t.EventID, ShowControls = false, ModifyDisplayClass = Model.ModifyDisplayClass };
+            @Html.Action("TweetTemplate", "Events", ttvm)
+                
+            <div class="seperator"></div>
+            <div class="sm-spacer"></div>
+            <div class="sm-spacer"></div>
+            showFirst = false;
+        }
+        else
+        {
+            var ttvm = new Epilogger.Web.Models.TweetTemplateViewModel { Tweet = t, CanDelete = false, EventId = (int)t.EventID, ShowControls = false, ModifyDisplayClass = "" };
+            @Html.Action("TweetTemplate", "Events", ttvm)
+        }
+    }
+}

@@ -102,7 +102,7 @@ jQuery(function ($) {
                         });
 
                         //Add the Pretty photo stuff to the photos
-                        $("a[rel^='prettyPhoto']").prettyPhoto({
+                        $("a[rel^='EPLPhoto']").prettyPhoto({
                             theme: 'light_square',
                             animation_speed: 'fast',
                             overlay_gallery: false,
