@@ -4,15 +4,9 @@
     Layout = MVC.ImageUpload.Views._Layout;
 }
 @section Head {
-    <style type="text/css">
-       .selectedImage 
-       {
-           border-style: solid;
-           border-width: 1px;
-           border-color: red;
-       }
-    </style>
-    
+    <link href="@Links.Public.js.jQueryEpiloggerGallery.css.jqueryEpiloggerGallery_css" rel="stylesheet"/>
+    <script type="text/javascript" src="@Links.Public.js.jQueryEpiloggerGallery.js.jqueryEpiloggerGallery_js"></script>
+
     <script type="text/javascript">
         $(function () {
             $('#uploadLink').click(function (event) {
@@ -51,31 +45,13 @@
 <script type="text/javascript">
     window.getAlbumPhotos = function () {
         FB.api('/' + '@Model.AlbumId' + '/photos', function (resp) {
-            var imagesPerColumn = 3;
-
-            var currentRowImagesCount = 0;
-            var photosGalleryHtml = '<tr>';
-            for (var photoId in resp.data) {
-                var photo = resp.data[photoId];
-
-//                ToDo: do not load full image here
-                photosGalleryHtml += '<td><img width="100" src="' + photo.source + '"/></td>';
-
-                currentRowImagesCount++;
-
-                if (currentRowImagesCount > imagesPerColumn) {
-                    photosGalleryHtml += "</tr><tr>";
-                    currentRowImagesCount = 0;
-                }
-            }
-
-            photosGalleryHtml += '</tr>';
-
-            $('table#gallery').html(photosGalleryHtml);
-            $('table#gallery').find('img').click(function() {
-                 $(this).toggleClass('selectedImage');
+            var galleryImages = $(resp.data).map(function () {
+                return { src: this.source };
             });
 
+            $('#gallery').gallery(galleryImages, true);
+
+            $('#photosContainer').show();
         });
     };
 
@@ -119,7 +95,7 @@
     <fb:login-button scope="user_photos" onlogin="getAlbumPhotos()">Login</fb:login-button>
 </div>
 
-<div id="photosContainer">
+<div id="photosContainer" style="display: none">
     Cick photos you want to upload
     <table id="gallery"></table>
 </div>

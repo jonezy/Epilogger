@@ -4,6 +4,11 @@
     Layout = MVC.ImageUpload.Views._Layout;
 }
 
+@section Head {
+    <link href="@Links.Public.js.jQueryEpiloggerGallery.css.jqueryEpiloggerGallery_css" rel="stylesheet"/>
+    <script type="text/javascript" src="@Links.Public.js.jQueryEpiloggerGallery.js.jqueryEpiloggerGallery_js"></script>
+}
+
 @section Navigation {
     <img src="@Links.Public.images.imageupload.source_inactive_png"/>
     <img src="@Links.Public.images.imageupload.choosealbum_active_png"/>
@@ -21,28 +26,14 @@
 <script type="text/javascript">
     window.getAlbums = function () {
         FB.api('/me/albums', function (resp) {
-            var albumsPerColumn = 3;
+            var galleryImages = $(resp.data).map(function () {
+                var albumCoverUrl = 'https://graph.facebook.com/' + this.cover_photo + '/picture?access_token=' + FB.getAccessToken();
+                var addAlbumPhotosUrl = "/events/uploadfacebookalbumphotos/" + '@Model.EventId' + "/" + this.id;
 
-            var imagesCount = 0;
-            var albumsGalleryHtml = '<tr>';
-            for (var albumIndex in resp.data) {
-                var album = resp.data[albumIndex];
+                return { src: albumCoverUrl, url: addAlbumPhotosUrl };
+            });
 
-                var albumCoverUrl = 'https://graph.facebook.com/' + album.cover_photo + '/picture?access_token=' + FB.getAccessToken();
-                var addAlbumPhotosUrl = "/events/uploadfacebookalbumphotos/" + '@Model.EventId' + "/" + album.id;
-                albumsGalleryHtml += '<td><a href=' + addAlbumPhotosUrl + '><img width="100" src="' + albumCoverUrl + '"/></a></td>';
-
-                imagesCount++;
-
-                if (imagesCount > albumsPerColumn) {
-                    albumsGalleryHtml += "</tr><tr>";
-                    imagesCount = 0;
-                }
-            }
-
-            albumsGalleryHtml += '</tr>';
-
-            $('table#gallery').html(albumsGalleryHtml);
+            $('#gallery').gallery(galleryImages, false);
 
             $('#albumsContainer').show();
         });

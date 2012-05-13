@@ -33877,6 +33877,30 @@ namespace Links {
             public static readonly string jquery_validate_unobtrusive_min_js = Url("jquery.validate.unobtrusive.min.js");
             public static readonly string jquery_zrssfeed_min_js = Url("jquery.zrssfeed.min.js");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class jQueryEpiloggerGallery {
+                private const string URLPATH = "~/Public/js/jQueryEpiloggerGallery";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class css {
+                    private const string URLPATH = "~/Public/js/jQueryEpiloggerGallery/css";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string jqueryEpiloggerGallery_css = Url("jqueryEpiloggerGallery.css");
+                }
+            
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class js {
+                    private const string URLPATH = "~/Public/js/jQueryEpiloggerGallery/js";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string jqueryEpiloggerGallery_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jqueryEpiloggerGallery.min.js") ? Url("jqueryEpiloggerGallery.min.js") : Url("jqueryEpiloggerGallery.js");
+                                  
+                }
+            
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class jQueryFileUpload {
                 private const string URLPATH = "~/Public/js/jQueryFileUpload";
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
@@ -34103,6 +34127,40 @@ namespace Links {
                                   
                     public static readonly string uncompressed_jquery_dd_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/uncompressed.jquery.dd.min.js") ? Url("uncompressed.jquery.dd.min.js") : Url("uncompressed.jquery.dd.js");
                                   
+                }
+            
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class othermedia_flickr {
+                private const string URLPATH = "~/Public/js/othermedia-flickr";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string _gitignore = Url(".gitignore");
+                public static readonly string CHANGELOG = Url("CHANGELOG");
+                public static readonly string jake_yml = Url("jake.yml");
+                public static readonly string Jakefile = Url("Jakefile");
+                public static readonly string LICENSE = Url("LICENSE");
+                public static readonly string README_md = Url("README.md");
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class source {
+                    private const string URLPATH = "~/Public/js/othermedia-flickr/source";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string flickr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/flickr.min.js") ? Url("flickr.min.js") : Url("flickr.js");
+                                  
+                    public static readonly string jsonp_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jsonp.min.js") ? Url("jsonp.min.js") : Url("jsonp.js");
+                                  
+                    public static readonly string photo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/photo.min.js") ? Url("photo.min.js") : Url("photo.js");
+                                  
+                }
+            
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class test {
+                    private const string URLPATH = "~/Public/js/othermedia-flickr/test";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string index_html = Url("index.html");
                 }
             
             }

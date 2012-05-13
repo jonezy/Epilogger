@@ -2808,6 +2808,8 @@
     <Content Include="Public\js\jquery.validate.min.js" />
     <Content Include="Public\js\jquery.validate.unobtrusive.min.js" />
     <Content Include="Public\js\jquery.zrssfeed.min.js" />
+    <Content Include="Public\js\jQueryEpiloggerGallery\css\jqueryEpiloggerGallery.css" />
+    <Content Include="Public\js\jQueryEpiloggerGallery\js\jqueryEpiloggerGallery.js" />
     <Content Include="Public\js\jQueryFileUpload\.gitignore" />
     <Content Include="Public\js\jQueryFileUpload\cors\postmessage.html" />
     <Content Include="Public\js\jQueryFileUpload\cors\result.html" />
@@ -2839,6 +2841,11 @@
     <Content Include="Public\js\msdropdown\dd_arrow.gif" />
     <Content Include="Public\js\msdropdown\js\jquery.dd.js" />
     <Content Include="Public\js\msdropdown\js\uncompressed.jquery.dd.js" />
+    <Content Include="Public\js\othermedia-flickr\.gitignore" />
+    <Content Include="Public\js\othermedia-flickr\source\flickr.js" />
+    <Content Include="Public\js\othermedia-flickr\source\jsonp.js" />
+    <Content Include="Public\js\othermedia-flickr\source\photo.js" />
+    <Content Include="Public\js\othermedia-flickr\test\index.html" />
     <Content Include="Public\js\prettyPhoto\css\prettyPhoto.css" />
     <Content Include="Public\js\prettyPhoto\images\fullscreen\1.jpg" />
     <Content Include="Public\js\prettyPhoto\images\fullscreen\2.jpg" />
@@ -2885,6 +2892,11 @@
     <None Include="Public\js\jQueryFileUpload\server\php\index.php" />
     <None Include="Public\js\jQueryFileUpload\server\php\thumbnails\.htaccess" />
     <None Include="Public\js\jQueryFileUpload\server\php\upload.class.php" />
+    <None Include="Public\js\othermedia-flickr\CHANGELOG" />
+    <None Include="Public\js\othermedia-flickr\jake.yml" />
+    <None Include="Public\js\othermedia-flickr\Jakefile" />
+    <None Include="Public\js\othermedia-flickr\LICENSE" />
+    <None Include="Public\js\othermedia-flickr\README.md" />
     <None Include="Service References\Epilogr\api.disco" />
     <None Include="Service References\Epilogr\configuration91.svcinfo" />
     <None Include="Service References\Epilogr\configuration.svcinfo" />
