@@ -1502,18 +1502,17 @@ namespace Epilogger.Web.Controllers {
                     AccessTokenSecret = CurrentUserTwitterAuthorization.TokenSecret
                 };
 
-                //var ts = TwitterStatus.Update(tokens, c["tweetBoxPhoto"], new StatusUpdateOptions { InReplyToStatusId = decimal.Parse(c["TwitterID"]) });
+                var ts = TwitterStatus.Update(tokens, c["tweetBoxPhoto"], new StatusUpdateOptions { InReplyToStatusId = decimal.Parse(c["TwitterID"]) });
 
-                //var uta = new UserTwitterAction
-                //{
-                //    TweetId = (long)ts.ResponseObject.Id,
-                //    TwitterAction = "Reply",
-                //    UserId = CurrentUser.ID
-                //};
-                //_userTwitterActionService.Save(uta);
+                var uta = new UserTwitterAction
+                {
+                    TweetId = (long)ts.ResponseObject.Id,
+                    TwitterAction = "Reply",
+                    UserId = CurrentUser.ID
+                };
+                _userTwitterActionService.Save(uta);
 
-                //return ts.Result == RequestResult.Success;
-                return true;
+                return ts.Result == RequestResult.Success;
             }
             catch (Exception)
             {

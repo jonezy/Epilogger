@@ -15,6 +15,8 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
     
 	$.prettyPhoto = {version: '3.1.2'};
 	
+    //<div class="pp_shareDrawer">{pp_share}<a href="" class="pp_shareDrawerTab"></a></div> \
+
 	$.fn.prettyPhoto = function(pp_settings) {
 		pp_settings = jQuery.extend({
 			animation_speed: 'fast', /* fast/slow/normal */
@@ -38,7 +40,7 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 			callback: function(){}, /* Called when prettyPhoto is closed */
 			ie6_fallback: true,
 			markup: '<div class="pp_pic_holder"> \
-						<div class="pp_shareDrawer">{pp_share}<a href="" class="pp_shareDrawerTab"></a></div> \
+                        <div class="pp_closePhoto">close</div> \
                         <div class="ppt">&nbsp;</div> \
                         <div class="pp_top"> \
 							<div class="pp_left"></div> \
@@ -197,13 +199,14 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 		*/
 		$.prettyPhoto.open = function(event) {
 			if(typeof settings == "undefined"){ // Means it's an API call, need to manually get the settings and set the variables
-				settings = pp_settings;
+                settings = pp_settings;
 				if($.browser.msie && $.browser.version == 6) settings.theme = "light_square"; // Fallback to a supported theme for IE6
 				pp_images = $.makeArray(arguments[0]);
 				pp_titles = (arguments[1]) ? $.makeArray(arguments[1]) : $.makeArray("");
 				pp_descriptions = (arguments[2]) ? $.makeArray(arguments[2]) : $.makeArray("");
 				isSet = (pp_images.length > 1) ? true : false;
-				set_position = 0;
+				
+                set_position = 0;
 				_build_overlay(event.target); // Build the overlay {this} being the caller
 			}
 
@@ -393,6 +396,10 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 				set_position=direction;
 			};
 			
+            //Hide the comments and Tweetbox
+			$(".pp_Comments").hide();
+			$(".pp_TweetBox").hide();
+
 			rel_index = set_position;
 
 			if(!doresize) doresize = true; // Allow the resizing of the images
@@ -544,8 +551,10 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 
 
                 //Fade in the Share Drawer
-			    $(".pp_shareDrawer").fadeIn(2000);
-            
+			    //$(".pp_shareDrawer").fadeIn(2000);
+			    $(".pp_closePhoto").fadeIn();
+			    
+
             	if(settings.autoplay_slideshow && !pp_slideshow && !pp_open) $.prettyPhoto.startSlideshow();
 				
 				if(settings.deeplinking)
@@ -769,7 +778,7 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 		function _build_overlay(caller){
 			
 			settings.markup=settings.markup.replace('{pp_social}',(settings.social_tools)?settings.social_tools:'');
-            settings.markup=settings.markup.replace('{pp_share}',(settings.share_tools)?settings.share_tools:'');
+            //settings.markup=settings.markup.replace('{pp_share}',(settings.share_tools)?settings.share_tools:'');
 			
 			$('body').append(settings.markup); // Inject the markup
 			
@@ -872,15 +881,23 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 
 
             //Bind the Share Drawer Animation
-            $('a.pp_shareDrawerTab').bind('click',function(e){
-                if($(".pp_shareDrawer").css('top')=='25px'){
-                    $(".pp_shareDrawer").animate({top:'-9px'}, 400);
-				}else{
-                    $(".pp_shareDrawer").animate({top:'25px'}, 400);
-				};
+//            $('a.pp_shareDrawerTab').bind('click',function(e){
+//                if($(".pp_shareDrawer").css('top')=='25px'){
+//                    $(".pp_shareDrawer").animate({top:'-9px'}, 400);
+//				}else{
+//                    $(".pp_shareDrawer").animate({top:'25px'}, 400);
+//				};
+//				return false;
+//			});
+		    
+
+             //Bind the Share Drawer Animation
+            $('.pp_closePhoto').bind('click',function(e){
+                $.prettyPhoto.close();
 				return false;
 			});
-
+		    
+            
 
 			$pp_pic_holder.find('.pp_previous, .pp_nav .pp_arrow_previous').bind('click',function(){
                 $.prettyPhoto.changePage('previous');
