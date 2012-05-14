@@ -60,7 +60,7 @@ function ChangeToNextPhoto() {
 
 //This fills in the Comments on the Image
 function getComments(photoId) {
-    
+
     $(".topPhotoComments").html("");
     $.ajax({
         url: '/Events/ImageCommentControl',
@@ -74,7 +74,7 @@ function getComments(photoId) {
             $('.topPhotoComments').html(data);
         },
         error: function () {
-            alert("error");
+            $('.topPhotoComments').html("error");
         }
     });
     //@Html.Action("ImageCommentControl", "Events", new { eventId = Model.EventId, imageid = Model.Image.ID })

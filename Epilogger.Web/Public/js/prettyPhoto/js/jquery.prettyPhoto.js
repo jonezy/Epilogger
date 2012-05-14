@@ -673,6 +673,10 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 			titleHeight += $pp_title.height();
 			$pp_title.remove();
 			
+
+            if (height <= 250) {
+                detailsHeight = 250; }
+
 			// Get the container size, to resize the holder to the right dimensions
 			pp_contentHeight = height + detailsHeight;
 			pp_contentWidth = width;
