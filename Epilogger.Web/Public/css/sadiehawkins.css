@@ -2250,7 +2250,7 @@ div#SearchTimeFilter input[type=text] {
 
 .shareBar { list-style-type: none; }
 .shareBar li { display: inline-block; }
-
+.shareBar li.padABit { margin: 5px 0 0 0; }
 
 /*
 .fb-like  { float: left; margin: 5px 0 0 0; }
