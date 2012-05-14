@@ -10,7 +10,7 @@
 {
     <meta property="og:title" content="Photo from @Model.Event.Name"></meta>
     <meta property="og:type" content="article"></meta>
-    <meta property="og:url" content="@Model.ShortURL"></meta>
+    <meta property="og:url" content="http://epilogger.apphb.com/events/PhotoDetails/@Model.EventId/@Model.Image.ID"></meta>
     <meta property="og:image" content="@Model.Image.Fullsize"></meta>
     <meta property="og:site_name" content="Epilogger"></meta>
     <meta property="fb:admins" content="1620315015"></meta>
@@ -82,7 +82,7 @@
         <div class="spacer"></div>
         
         <ul class="shareBar">
-            <li><div class="fb-like" data-href="@Model.ShortURL" data-send="false" data-layout="button_count" data-show-faces="false" data-font="arial"></div></li>
+            <li><div class="fb-like" data-href="http://epilogger.apphb.com/events/PhotoDetails/@Model.EventId/@Model.Image.ID" data-send="false" data-layout="button_count" data-show-faces="false" data-font="arial"></div></li>
             <li><a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-related="Epilogger: Epilogger" data-url="@Model.ShortURL" data-text="@Model.HashTag">Tweet</a></li>
             <li><g:plusone size="medium" annotation="inline" width="200"></g:plusone></li>
         </ul>
