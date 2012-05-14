@@ -57,8 +57,7 @@
     div.pp_shareDrawer { display: none; width: 382px; height: 32px; border-top: 2px solid #ee438f; float: right; background-color: #e3e3e3; margin-right: 16px; position: relative; top: 25px; }
     a.pp_shareDrawerTab { background: url(../images/prettyPhoto/default/ShareTab.png); height: 27px; width: 88px; float: right; margin-top: -29px; margin-right: 16px; }
     
-    .fb_share_size_Small  { float: left; margin: 5px 0 0 15px; }
-    .twitter-share-button { float: left; margin: 4px 0 0 15px; }
+    
     
     
     /*a.pp_shareDrawerTab:hover { background: url(../images/prettyPhoto/default/ShareTab.png); border-bottom: 2px solid #e3e3e3; height: 27px; width: 88px; float: right; margin-top: -2px; margin-right: 16px; }*/

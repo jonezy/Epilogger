@@ -953,7 +953,7 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
     /* This sets the URL in the browser */
 	function setHashtag(){
 		if(typeof theRel == 'undefined') return; // theRel is set on normal calls, it's impossible to deeplink using the API
-		location.hash = '!' + theRel + '/'+rel_index+'/';
+		//location.hash = '!' + theRel + '/'+rel_index+'/';
 	    
         //This is how I'm putting the absolute URL in the address bar
 	    window.history.pushState(null, "Images", "/events/PhotoDetails/" + pp_descriptions[rel_index]);
