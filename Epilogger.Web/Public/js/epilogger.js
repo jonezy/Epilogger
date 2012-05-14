@@ -45,7 +45,7 @@ function changeDescription() {
             $('.pp_Comments').html(data);
         },
         error: function () {
-            alert("error");
+            $('.pp_Comments').html("error");
         }
     });
 
