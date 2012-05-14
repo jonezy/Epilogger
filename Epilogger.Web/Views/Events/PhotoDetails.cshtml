@@ -2,15 +2,15 @@
 @model Epilogger.Web.Models.PhotoDetailsViewModel
 
 @{
-    ViewBag.Title = "" + Model.Event.Name + " - Photo - Epilogger";
+    ViewBag.Title = "Photo from " + Model.Event.Name + " via Epilogger";
     Layout = "~/Views/Shared/_InteriorLayoutNoBC.cshtml";
 }
 
-    <meta property="og:title" content="@{ Tweet first = null; foreach (Tweet tweet in Model.Tweets) { first = tweet; break; } }@first.Text" />
+    
     <meta property="og:type" content="article" />
     <meta property="og:image" content="@Model.Image.Fullsize" />
     <meta property="og:site_name" content="Epilogger.com" />
-    <meta property="fb:admins" content="1620315015" />
+    <meta property="og:description" content="@{ Tweet first = null; foreach (Tweet tweet in Model.Tweets) { first = tweet; break; } }@first.Text"/>
 
 <script language="javascript" type="text/javascript">
     function getOriginalWidthOfImg  (imgElement) {
