@@ -46,7 +46,7 @@
     .pp_closePhoto { display: none; position:absolute; right:20px; top:1px; width:94px; height:22px; background:url(/Public/css/cbimages/close.png) no-repeat; cursor:pointer;
                      text-indent:-9999px; }
     
-    .pp_FirstComment { border-left: 4px solid #e3e3e3; padding: 0 8px; }
+    .pp_FirstComment { /*border-left: 4px solid #e3e3e3; padding: 0 8px;*/ }
     .pp_FirstComment .tweetText  
     {
         color: #f51282;
