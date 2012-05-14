@@ -9,11 +9,11 @@
 @section theHead
 {
     <meta property="og:title" content="Photo from @Model.Event.Name"/>
-@*    <meta property="og:type" content="article"/>*@
+    <meta property="og:type" content="article"/>
     <meta property="og:url" content="@Model.ShortURL"/>
     <meta property="og:image" content="@Model.Image.Fullsize"/>
     <meta property="og:site_name" content="Epilogger"/>
-    <meta property="fb:admins" content="1620315015"/>
+    <meta property="fb:admins" content="831598257"/>
     <meta property="og:description" content="@{ Tweet first = null; foreach (Tweet tweet in Model.Tweets) { first = tweet; break; } }@first.Text"/>
 }
 
