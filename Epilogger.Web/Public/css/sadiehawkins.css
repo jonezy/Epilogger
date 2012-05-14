@@ -1128,7 +1128,7 @@ ul#left-nav li ul li a.current {color:#a44b79;}
     margin-bottom:5px;
     display:block;}
     
-.dashboard-activity-entry strong.title.` {
+.dashboard-activity-entry strong.title.TWEET {
     background-position:0 0;}
     
 .dashboard-activity-entry strong.title.PHOTOS_VIDEOS {
@@ -2248,10 +2248,15 @@ div#SearchTimeFilter input[type=text] {
     font-weight: bold;
 }
 
+.shareBar { list-style-type: none; }
+.shareBar li { display: inline-block; }
+
+
+/*
 .fb-like  { float: left; margin: 5px 0 0 0; }
 .twitter-share-button { float: left; margin: 4px 0 0 15px; }
-
-
+.googlePlus { float: left !important; margin: 4px 0 0 15px !important;  }
+*/
 
 /*THE FEEDBACK TAB*/
 a#fdbk_tab {

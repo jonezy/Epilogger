@@ -69,9 +69,12 @@
         
         <div class="spacer"></div>
         
-        <div class="fb-like" data-href="@Model.ShortURL" data-send="false" data-layout="button_count" data-show-faces="false" data-font="arial"></div>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-related="Epilogger: Epilogger" data-url="@Model.ShortURL" data-text="@Model.HashTag">Tweet</a>
-
+        <ul class="shareBar">
+            <li><div class="fb-like" data-href="@Model.ShortURL" data-send="false" data-layout="button_count" data-show-faces="false" data-font="arial"></div></li>
+            <li><a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-related="Epilogger: Epilogger" data-url="@Model.ShortURL" data-text="@Model.HashTag">Tweet</a></li>
+            <li><g:plusone size="medium" annotation="inline" width="200"></g:plusone></li>
+        </ul>
+        
         <div class="spacer"></div>
 
         <div class="sm-spacer seperator"></div>
