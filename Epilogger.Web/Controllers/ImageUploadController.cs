@@ -77,7 +77,7 @@ namespace Epilogger.Web.Controllers
             return new EmptyResult();
         }
 
-        public virtual ActionResult UploadFromFlickr(string id)
+        public virtual ActionResult UploadFlickrPhotos(string id)
         {
             return View();
         }
