@@ -34189,6 +34189,7 @@ namespace Links {
             
             }
         
+            public static readonly string load_image_min_js = Url("load-image.min.js");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class msdropdown {
                 private const string URLPATH = "~/Public/js/msdropdown";
