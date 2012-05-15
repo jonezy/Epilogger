@@ -1,10 +1,15 @@
-﻿@{
+﻿@using System.Configuration
+@using Facebook
+@{
     Layout = "";
 }
 <html>
     <head>
         <script type="text/javascript" src="@Links.Public.js.jquery_1_6_2_min_js"></script>
         <script type="text/javascript">
+            var FlickrApiKey = '@ConfigurationManager.AppSettings["FlickrApiKey"]';
+            var FacebookAppId = '@(((FacebookConfigurationSection)ConfigurationManager.GetSection("facebookSettings")).AppId)';
+
             $(function() {
                 jQuery.ajaxSettings.traditional = true; //set traditional parameters serialization which is used by ASP.NET
             });
