@@ -16,7 +16,7 @@
 
                 currentRowImagesCount++;
 
-                if (currentRowImagesCount > imagesPerColumn) {
+                if (currentRowImagesCount == imagesPerColumn) {
                     html += "</tr><tr>";
                     currentRowImagesCount = 0;
                 }
