@@ -33557,6 +33557,8 @@ namespace Links {
             }
         
             public static readonly string head_load_min_js = Url("head.load.min.js");
+            public static readonly string html5shiv_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/html5shiv.min.js") ? Url("html5shiv.min.js") : Url("html5shiv.js");
+                          
             public static readonly string jquery_1_6_2_min_js = Url("jquery-1.6.2.min.js");
             public static readonly string jquery_ui_1_8_16_custom_min_js = Url("jquery-ui-1.8.16.custom.min.js");
             public static readonly string jquery_blockUI_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.blockUI.min.js") ? Url("jquery.blockUI.min.js") : Url("jquery.blockUI.js");
