@@ -48,12 +48,12 @@
     <!-- The localization script -->
     <script src="http://blueimp.github.com/jQuery-File-Upload/js/locale.js"> </script>
     <script type="text/javascript">
-        $(function() {
+        $(function () {
             $('#fileupload').fileupload({
                 maxFileSize: 10000000,
-                acceptFileTypes: /(\.|\/)(gif|jpeg|png)$/i ,
-                done: function() {
-                    window.location = '@Url.Action(MVC.ImageUpload.ChooseUploadSource(Model))';
+                acceptFileTypes: /(\.|\/)(gif|jpeg|png)$/i,
+                done: function () {
+                    window.location = '@Url.Action(MVC.ImageUpload.ChooseUploadSource())' + '?' + '@MVC.ImageUpload.ChooseUploadSourceParams.status' + '=1';
                 }
             });
         });
@@ -92,8 +92,8 @@
     <div class="row fileupload-buttonbar">
         <div class="span7">
             <!-- The fileinput-button span is used to style the file input field as button -->
-            <span class="btn btn-success fileinput-button"><i class="icon-plus icon-white"></i><span>
-                                                                                                   Add files...</span>
+            <span class="btn btn-success fileinput-button"><i class="icon-plus icon-white"></i>
+            <span> Add files...</span>
                 <input type="file" name="files[]" multiple>
             </span>
             @*ToDo: find out how to remove submit button and just call form submit*@

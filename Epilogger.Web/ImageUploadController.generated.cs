@@ -103,6 +103,7 @@ namespace Epilogger.Web.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_ChooseUploadSource {
             public readonly string id = "id";
+            public readonly string status = "status";
         }
         static readonly ActionParamsClass_UploadFromComputer s_params_UploadFromComputer = new ActionParamsClass_UploadFromComputer();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -151,9 +152,10 @@ namespace Epilogger.Web.Controllers {
     public class T4MVC_ImageUploadController: Epilogger.Web.Controllers.ImageUploadController {
         public T4MVC_ImageUploadController() : base(Dummy.Instance) { }
 
-        public override System.Web.Mvc.ActionResult ChooseUploadSource(string id) {
+        public override System.Web.Mvc.ActionResult ChooseUploadSource(string id, int? status) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ChooseUploadSource);
             callInfo.RouteValueDictionary.Add("id", id);
+            callInfo.RouteValueDictionary.Add("status", status);
             return callInfo;
         }
 

@@ -10,16 +10,16 @@
     <script type="text/javascript">
         $(function () {
             $('#uploadLink').click(function (event) {
-                var photosUrls = $('#gallery').find('img.selectedImage').map(function() { return $(this).attr('src'); });
+                var photosUrls = $('#gallery').find('img.selectedImage').map(function () { return $(this).attr('src'); });
                 if (!photosUrls)
                     alert('Please select some photos');
                 else
                     $.post(window.location,
                         { photosUrls: $.makeArray(photosUrls) },
                         function (data) {
-                            window.location = '@Url.Action(MVC.ImageUpload.ChooseUploadSource())';
+                            window.location = '@Url.Action(MVC.ImageUpload.ChooseUploadSource())' + '?' + '@MVC.ImageUpload.ChooseUploadSourceParams.status' + '=1';
                             return false;
-                    });
+                        });
 
                 return false;
             });

@@ -151,7 +151,7 @@ namespace Epilogger.Web {
                 new { controller = "events", action = "getimagecomments", eventID = UrlParameter.Optional, imageid = UrlParameter.Optional }
             );
 
-            routes.MapRoute("ChooseUploadSource", "events/chooseuploadsource/{id}", MVC.ImageUpload.ChooseUploadSource());
+            routes.MapRoute("ChooseUploadSourceWithoutStatus", "events/chooseuploadsource/{id}", MVC.ImageUpload.ChooseUploadSource());
             routes.MapRoute("UploadImageFromFlickr", "events/uploadfromflickr/{id}", MVC.ImageUpload.UploadFlickrPhotos());
             routes.MapRoute("GetFacebookAlbums", "events/getfacebookalbums/{id}", MVC.ImageUpload.GetFacebookAlbums());
             routes.MapRoute("UpoadFacebookAlbumPhotos", "events/uploadfacebookalbumphotos/{id}/{albumId}", MVC.ImageUpload.UploadFacebookAlbumPhotos());

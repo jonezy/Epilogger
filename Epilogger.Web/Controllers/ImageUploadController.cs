@@ -14,9 +14,9 @@ namespace Epilogger.Web.Controllers
     {
         EventService _es = new EventService();
 
-        public virtual ActionResult ChooseUploadSource(string id)
+        public virtual ActionResult ChooseUploadSource(string id, int? status)
         {
-            return View();
+            return View((object)status);
         }
 
         [HttpGet]

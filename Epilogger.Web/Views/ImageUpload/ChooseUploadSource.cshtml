@@ -1,4 +1,6 @@
-﻿@{
+﻿@model int?
+
+@{
     Layout = MVC.ImageUpload.Views._Layout;
 }
 
@@ -8,6 +10,11 @@
 
 @*ToDo: Remove inline styles*@
 
+@if (Model.HasValue && Model.Value == 1)
+{
+    <span>ALL DONE!</span> <br />
+    <span>Upload another?</span>
+}
 <div style="width: 100%">
     <div style="float: left;">
         <a href="@Url.Action(MVC.ImageUpload.GetFacebookAlbums())">
