@@ -1,12 +1,10 @@
 ﻿@model Epilogger.Web.Models.UploadFacebookAlbumPhotosViewModel
-
 @{
     Layout = MVC.ImageUpload.Views._Layout;
 }
 @section Head {
     <link href="@Links.Public.js.jQueryEpiloggerGallery.css.jqueryEpiloggerGallery_css" rel="stylesheet"/>
     <script type="text/javascript" src="@Links.Public.js.jQueryEpiloggerGallery.js.jqueryEpiloggerGallery_js"></script>
-
     <script type="text/javascript">
         $(function () {
             $('#uploadLink').click(function (event) {
@@ -28,10 +26,11 @@
 }
 @section Navigation {
     <img src="@Links.Public.images.imageupload.source_inactive_png"/>
-    <img src="@Links.Public.images.imageupload.choosealbum_active_png"/>
+    <img src="@Links.Public.images.imageupload.choosealbum_inactive_png"/>
+    <img src="@Links.Public.images.imageupload.selectphotos_active_png"/>
 }
 @section BottomLeft {
-    <a href="@Url.Action(MVC.ImageUpload.ChooseUploadSource())">
+    <a href="@Url.Action(MVC.ImageUpload.GetFacebookAlbums())">
         <img src="@Links.Public.images.imageupload.oops_flickr_png" />
     </a>
 }
@@ -55,7 +54,7 @@
         });
     };
 
-//    ToDo: Remove dpulication Facebook initialization
+    //    ToDo: Remove dpulication Facebook initialization
     window.fbAsyncInit = function () {
         FB.init({
             appId: FacebookAppId, // App ID
@@ -89,15 +88,17 @@
         ref.parentNode.insertBefore(js, ref);
     } (document));
 </script>
-
-<div id="loginContainer" style="display: none;">
-    Login to Facebook
-    <fb:login-button scope="user_photos" onlogin="getAlbumPhotos()">Login</fb:login-button>
-</div>
-
-<div id="photosContainer" style="display: none;">
-    Click photos you want to upload
-    <div style="height: 190px; overflow: auto;">
-        <table id="gallery"></table>
+<div style="margin-bottom: 20px;">
+    <h2>3) SELECT PHOTOS:</h2>
+    <div id="loginContainer" style="display: none;">
+        Login to Facebook
+        <fb:login-button scope="user_photos" onlogin="getAlbumPhotos()">Login</fb:login-button>
     </div>
+    <div id="photosContainer" style="display: none;">
+        Click picture(s) you'd like to upload:
+    </div>
+</div>
+<div style="height: 130px; overflow: auto;">
+    <table id="gallery">
+    </table>
 </div>

@@ -1,14 +1,11 @@
 ﻿@model Epilogger.Web.Models.GetFacebookAlbumsViewModel
-
 @{
     Layout = MVC.ImageUpload.Views._Layout;
 }
-
 @section Head {
     <link href="@Links.Public.js.jQueryEpiloggerGallery.css.jqueryEpiloggerGallery_css" rel="stylesheet"/>
     <script type="text/javascript" src="@Links.Public.js.jQueryEpiloggerGallery.js.jqueryEpiloggerGallery_js"></script>
 }
-
 @section Navigation {
     <img src="@Links.Public.images.imageupload.source_inactive_png"/>
     <img src="@Links.Public.images.imageupload.choosealbum_active_png"/>
@@ -19,7 +16,6 @@
     </a>
 }
 @section BottomRight {
-    
 }
 <div id="fb-root">
 </div>
@@ -58,7 +54,7 @@
             if (response && response.status == 'connected') {
                 $('#loginContainer').hide();
                 getAlbums();
-            } else 
+            } else
                 $('#loginContainer').show();
         }
     };
@@ -72,15 +68,18 @@
         ref.parentNode.insertBefore(js, ref);
     } (document));
 </script>
-
-<div id="loginContainer" style="display: none;">
-    Login to Facebook
-    <fb:login-button scope="user_photos" onlogin="getAlbums()">Login</fb:login-button>
-</div>
-
-<div id="albumsContainer" style="display: none">
-    Choose album by clicking on it
-    <div style="height: 180px; overflow: auto;">
-        <table id="gallery"></table>
+<div style="margin-bottom: 20px;">
+    <h2>
+        2) CHOOSE FACEBOOK ALBUM:</h2>
+    <div id="loginContainer" style="display: none;">
+        <span>Login to Facebook</span>
+        <fb:login-button scope="user_photos" onlogin="getAlbums()">Login</fb:login-button>
     </div>
+    <div id="albumsContainer" style="display: none">
+        <span>After clicking an album you'll be able to select which pictures to upload.</span>
+    </div>
+</div>
+<div style="height: 130px; overflow: auto;">
+    <table id="gallery">
+    </table>
 </div>

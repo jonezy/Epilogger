@@ -10,11 +10,19 @@
 
 @*ToDo: Remove inline styles*@
 
-@if (Model.HasValue && Model.Value == 1)
-{
-    <span>ALL DONE!</span> <br />
-    <span>Upload another?</span>
-}
+<div style="margin-bottom: 20px;">
+    @if (Model.HasValue && Model.Value == 1)
+    {
+        <h2>ALL DONE!</h2>
+        <span>Upload another?</span>
+    }
+    else
+    {
+        <h2>1) UPLOAD PHOTOS FROM:</h2>
+        <span>You can upload any of your photos on Epilogger. <br /> Choose from Facebook, Flickr, or straight from your hard drive:</span>
+    }
+</div>
+
 <div style="width: 100%">
     <div style="float: left;">
         <a href="@Url.Action(MVC.ImageUpload.GetFacebookAlbums())">

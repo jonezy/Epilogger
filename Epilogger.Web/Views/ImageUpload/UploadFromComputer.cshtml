@@ -1,5 +1,4 @@
 ﻿@model string
-
 @{
     Layout = MVC.ImageUpload.Views._Layout;
 }
@@ -8,7 +7,6 @@
     <link rel="stylesheet" href="@Links.Public.js.bootstrap.css.bootstrap_responsive_min_css">
     <link rel="stylesheet" href="@Links.Public.js.bootstrap_Image_Gallery.css.bootstrap_image_gallery_min_css">
     <link rel="stylesheet" href="@Links.Public.js.jQueryFileUpload.css.jquery_fileupload_ui_css">
-    
     <script type="text/javascript">
         $(function () {
             $('#fileupload').fileupload({
@@ -20,7 +18,6 @@
             });
         });
     </script>
-    
     <script type="text/javascript">
         $(function () {
             $('#uploadLink').click(function () {
@@ -45,46 +42,46 @@
         <img src="@Links.Public.images.imageupload.upload_png" />
     </a>
 }
-
-<div>
+<h2>
+    2) SELECT PHOTOS:</h2>
 @using (Html.BeginForm(MVC.ImageUpload.UploadFromComputer(), FormMethod.Post, new { id = "fileupload", enctype = "multipart/form-data" }))
 {
     <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
     <div class="row fileupload-buttonbar">
         <div class="span7">
             <!-- The fileinput-button span is used to style the file input field as button -->
-            <span class="btn btn-success fileinput-button"><i class="icon-plus icon-white"></i>
-            <span>Add files...</span>
+            <span class="btn btn-success fileinput-button"><i class="icon-plus icon-white"></i><span>
+                Add files...</span>
                 <input type="file" name="files[]" multiple>
-            </span>
-            @*ToDo: find out how to remove submit button and just call form submit*@
+            </span>@*ToDo: find out how to remove submit button and just call form submit*@
             <button id="submitButton" type="submit" class="btn btn-primary start" style="display: none;">
                 <i class="icon-upload icon-white"></i><span>Start upload</span>
             </button>
-        </div>
-        <!-- The global progress information -->
-        <div class="span5 fileupload-progress fade">
-            <!-- The global progress bar -->
-            <div class="progress progress-success progress-striped active">
-                <div class="bar" style="width: 0%;">
+            @*<!-- The global progress information -->
+            <div class="span5 fileupload-progress fade">
+                <!-- The global progress bar -->
+                <div class="progress progress-success progress-striped active">
+                    <div class="bar" style="width: 0%;">
+                    </div>
                 </div>
-            </div>
-            <!-- The extended global progress information -->
-            <div class="progress-extended">
-                &nbsp;</div>
+                <!-- The extended global progress information -->
+                <div class="progress-extended">
+                    &nbsp;</div>
+            </div>*@
         </div>
     </div>
     <!-- The loading indicator is shown during file processing -->
     <div class="fileupload-loading">
     </div>
     <br />
-    <!-- The table listing the files available for upload/download -->
-    <table class="table table-striped">
-        <tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery">
-        </tbody>
-    </table>
+    <div style="height: 130px; overflow: auto;">
+        <!-- The table listing the files available for upload/download -->
+        <table class="table table-striped">
+            <tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery">
+            </tbody>
+        </table>
+    </div>
 }
-</div>
 <script id="template-upload" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}
     <tr class="template-upload fade">
@@ -144,17 +141,16 @@
     </tr>
 {% } %}
 </script>
-
 <!--[if lt IE 9]><script src="@Links.Public.js.html5shiv_js"></script><![endif]-->
-    <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
-    <script src="@Links.Public.js.jQueryFileUpload.js.vendor.jquery_ui_widget_js"></script>
-    <script src="@Links.Public.js.tmpl_min_js"></script>
-    <script src="@Links.Public.js.load_image_min_js"></script>
-    <script src="@Links.Public.js.canvas_to_blob_min_js"></script>
-    <script src="@Links.Public.js.bootstrap.js.bootstrap_min_js"></script>
-    <script src="@Links.Public.js.bootstrap_Image_Gallery.js.bootstrap_image_gallery_min_js"></script>
-    <script src="@Links.Public.js.jQueryFileUpload.js.jquery_iframe_transport_js"></script>
-    <script src="@Links.Public.js.jQueryFileUpload.js.jquery_fileupload_js"></script>
-    <script src="@Links.Public.js.jQueryFileUpload.js.jquery_fileupload_fp_js"></script>
-    <script src="@Links.Public.js.jQueryFileUpload.js.jquery_fileupload_ui_js"></script>
-    <script src="@Links.Public.js.jQueryFileUpload.js.locale_js"></script>
+<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+<script src="@Links.Public.js.jQueryFileUpload.js.vendor.jquery_ui_widget_js"></script>
+<script src="@Links.Public.js.tmpl_min_js"></script>
+<script src="@Links.Public.js.load_image_min_js"></script>
+<script src="@Links.Public.js.canvas_to_blob_min_js"></script>
+<script src="@Links.Public.js.bootstrap.js.bootstrap_min_js"></script>
+<script src="@Links.Public.js.bootstrap_Image_Gallery.js.bootstrap_image_gallery_min_js"></script>
+<script src="@Links.Public.js.jQueryFileUpload.js.jquery_iframe_transport_js"></script>
+<script src="@Links.Public.js.jQueryFileUpload.js.jquery_fileupload_js"></script>
+<script src="@Links.Public.js.jQueryFileUpload.js.jquery_fileupload_fp_js"></script>
+<script src="@Links.Public.js.jQueryFileUpload.js.jquery_fileupload_ui_js"></script>
+<script src="@Links.Public.js.jQueryFileUpload.js.locale_js"></script>

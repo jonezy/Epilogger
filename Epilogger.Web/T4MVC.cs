@@ -616,6 +616,7 @@ namespace Links {
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                 public static readonly string authenticate_active_png = Url("authenticate_active.png");
                 public static readonly string choosealbum_active_png = Url("choosealbum_active.png");
+                public static readonly string choosealbum_inactive_png = Url("choosealbum_inactive.png");
                 public static readonly string facebook_png = Url("facebook.png");
                 public static readonly string flickr_png = Url("flickr.png");
                 public static readonly string oops_flickr_png = Url("oops_flickr.png");
