@@ -627,6 +627,7 @@
     <Content Include="Public\js\bootstrap\js\bootstrap.js" />
     <Content Include="Public\js\bootstrap\js\bootstrap.min.js" />
     <Content Include="Public\js\BrowseEvents.js" />
+    <Content Include="Public\js\canvas-to-blob.min.js" />
     <Content Include="Public\js\clickmap.js" />
     <Content Include="Public\js\AllPhotos.js" />
     <Content Include="Public\js\confirm\css\confirm.css" />

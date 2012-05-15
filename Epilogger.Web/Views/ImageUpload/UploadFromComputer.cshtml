@@ -4,49 +4,11 @@
     Layout = MVC.ImageUpload.Views._Layout;
 }
 @section Head {
-    @*ToDo: Remove extra referenced files*@ 
-    @*<link type="text/css" rel="stylesheet" href="@Links.Public.js.jQueryFileUpload.css.style_css">
-    <link type="text/css" rel="stylesheet" href="@Links.Public.js.jQueryFileUpload.css.jquery_fileupload_ui_css">
-    <script type="text/javascript" src="@Links.Public.js.jquery_1_6_2_min_js"></script>
-    <script type="text/javascript" src="@Links.Public.js.jQueryFileUpload.js.jquery_fileupload_js"></script>
-    <script type="text/javascript" src="@Links.Public.js.jQueryFileUpload.js.jquery_fileupload_fp_js"></script>
-    <script type="text/javascript" src="@Links.Public.js.jQueryFileUpload.js.jquery_fileupload_ui_js"></script>*@
-    <!-- Bootstrap CSS Toolkit styles -->
-    <link rel="stylesheet" href="http://blueimp.github.com/cdn/css/bootstrap.min.css">
-    <!-- Generic page styles -->
-    <link rel="stylesheet" href="http://blueimp.github.com/jQuery-File-Upload/css/style.css">
-    <!-- Bootstrap styles for responsive website layout, supporting different screen sizes -->
-    <link rel="stylesheet" href="http://blueimp.github.com/cdn/css/bootstrap-responsive.min.css">
-    <!-- Bootstrap CSS fixes for IE6 -->
-    <!--[if lt IE 7]><link rel="stylesheet" href="http://blueimp.github.com/cdn/css/bootstrap-ie6.min.css"><![endif]-->
-    <!-- Bootstrap Image Gallery styles -->
-    <link rel="stylesheet" href="http://blueimp.github.com/Bootstrap-Image-Gallery/css/bootstrap-image-gallery.min.css">
-    <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
-    <link rel="stylesheet" href="http://blueimp.github.com/jQuery-File-Upload/css/jquery.fileupload-ui.css">
-    <!-- Shim to make HTML5 elements usable in older Internet Explorer versions -->
-    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"> </script><![endif]-->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"> </script>
-    <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
-    <script src="http://blueimp.github.com/jQuery-File-Upload/js/vendor/jquery.ui.widget.js"> </script>
-    <!-- The Templates plugin is included to render the upload/download listings -->
-    <script src="http://blueimp.github.com/JavaScript-Templates/tmpl.min.js"> </script>
-    <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
-    <script src="http://blueimp.github.com/JavaScript-Load-Image/load-image.min.js"> </script>
-    <!-- The Canvas to Blob plugin is included for image resizing functionality -->
-    <script src="http://blueimp.github.com/JavaScript-Canvas-to-Blob/canvas-to-blob.min.js"> </script>
-    <!-- Bootstrap JS and Bootstrap Image Gallery are not required, but included for the demo -->
-    <script src="http://blueimp.github.com/cdn/js/bootstrap.min.js"> </script>
-    <script src="http://blueimp.github.com/Bootstrap-Image-Gallery/js/bootstrap-image-gallery.min.js"> </script>
-    <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
-    <script src="http://blueimp.github.com/jQuery-File-Upload/js/jquery.iframe-transport.js"> </script>
-    <!-- The basic File Upload plugin -->
-    <script src="http://blueimp.github.com/jQuery-File-Upload/js/jquery.fileupload.js"> </script>
-    <!-- The File Upload file processing plugin -->
-    <script src="http://blueimp.github.com/jQuery-File-Upload/js/jquery.fileupload-fp.js"> </script>
-    <!-- The File Upload user interface plugin -->
-    <script src="http://blueimp.github.com/jQuery-File-Upload/js/jquery.fileupload-ui.js"> </script>
-    <!-- The localization script -->
-    <script src="http://blueimp.github.com/jQuery-File-Upload/js/locale.js"> </script>
+    <link rel="stylesheet" href="@Links.Public.js.bootstrap.css.bootstrap_min_css">
+    <link rel="stylesheet" href="@Links.Public.js.bootstrap.css.bootstrap_responsive_min_css">
+    <link rel="stylesheet" href="@Links.Public.js.bootstrap_Image_Gallery.css.bootstrap_image_gallery_min_css">
+    <link rel="stylesheet" href="@Links.Public.js.jQueryFileUpload.css.jquery_fileupload_ui_css">
+    
     <script type="text/javascript">
         $(function () {
             $('#fileupload').fileupload({
@@ -58,8 +20,6 @@
             });
         });
     </script>
-    <!-- The XDomainRequest Transport is included for cross-domain file deletion for IE8+ -->
-    <!--[if gte IE 8]><script src="http://blueimp.github.com/js/cors/jquery.xdr-transport.js"></script><![endif]-->
     
     <script type="text/javascript">
         $(function () {
@@ -86,6 +46,7 @@
     </a>
 }
 
+<div>
 @using (Html.BeginForm(MVC.ImageUpload.UploadFromComputer(), FormMethod.Post, new { id = "fileupload", enctype = "multipart/form-data" }))
 {
     <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
@@ -93,7 +54,7 @@
         <div class="span7">
             <!-- The fileinput-button span is used to style the file input field as button -->
             <span class="btn btn-success fileinput-button"><i class="icon-plus icon-white"></i>
-            <span> Add files...</span>
+            <span>Add files...</span>
                 <input type="file" name="files[]" multiple>
             </span>
             @*ToDo: find out how to remove submit button and just call form submit*@
@@ -123,6 +84,7 @@
         </tbody>
     </table>
 }
+</div>
 <script id="template-upload" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}
     <tr class="template-upload fade">
@@ -182,3 +144,17 @@
     </tr>
 {% } %}
 </script>
+
+<!--[if lt IE 9]><script src="@Links.Public.js.html5shiv_js"></script><![endif]-->
+    <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+    <script src="@Links.Public.js.jQueryFileUpload.js.vendor.jquery_ui_widget_js"></script>
+    <script src="@Links.Public.js.tmpl_min_js"></script>
+    <script src="@Links.Public.js.load_image_min_js"></script>
+    <script src="@Links.Public.js.canvas_to_blob_min_js"></script>
+    <script src="@Links.Public.js.bootstrap.js.bootstrap_min_js"></script>
+    <script src="@Links.Public.js.bootstrap_Image_Gallery.js.bootstrap_image_gallery_min_js"></script>
+    <script src="@Links.Public.js.jQueryFileUpload.js.jquery_iframe_transport_js"></script>
+    <script src="@Links.Public.js.jQueryFileUpload.js.jquery_fileupload_js"></script>
+    <script src="@Links.Public.js.jQueryFileUpload.js.jquery_fileupload_fp_js"></script>
+    <script src="@Links.Public.js.jQueryFileUpload.js.jquery_fileupload_ui_js"></script>
+    <script src="@Links.Public.js.jQueryFileUpload.js.locale_js"></script>
