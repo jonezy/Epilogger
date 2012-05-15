@@ -611,6 +611,21 @@
     <Content Include="Public\images\widget\top10.png" />
     <Content Include="Public\js\AnyTime\anytimec.css" />
     <Content Include="Public\js\AnyTime\anytimec.js" />
+    <Content Include="Public\js\bootstrap-Image-Gallery\.gitignore" />
+    <Content Include="Public\js\bootstrap-Image-Gallery\css\bootstrap-image-gallery.css" />
+    <Content Include="Public\js\bootstrap-Image-Gallery\css\bootstrap-image-gallery.min.css" />
+    <Content Include="Public\js\bootstrap-Image-Gallery\img\loading.gif" />
+    <Content Include="Public\js\bootstrap-Image-Gallery\index.html" />
+    <Content Include="Public\js\bootstrap-Image-Gallery\js\bootstrap-image-gallery.js" />
+    <Content Include="Public\js\bootstrap-Image-Gallery\js\bootstrap-image-gallery.min.js" />
+    <Content Include="Public\js\bootstrap\css\bootstrap-responsive.css" />
+    <Content Include="Public\js\bootstrap\css\bootstrap-responsive.min.css" />
+    <Content Include="Public\js\bootstrap\css\bootstrap.css" />
+    <Content Include="Public\js\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Public\js\bootstrap\img\glyphicons-halflings-white.png" />
+    <Content Include="Public\js\bootstrap\img\glyphicons-halflings.png" />
+    <Content Include="Public\js\bootstrap\js\bootstrap.js" />
+    <Content Include="Public\js\bootstrap\js\bootstrap.min.js" />
     <Content Include="Public\js\BrowseEvents.js" />
     <Content Include="Public\js\clickmap.js" />
     <Content Include="Public\js\AllPhotos.js" />
@@ -2634,6 +2649,7 @@
     <Content Include="Public\js\FacebookPhotoPicker\dojoroot\dojo\_firebug\warningIcon.png" />
     <Content Include="Public\js\FacebookPhotoPicker\photoPickerConfig.js" />
     <Content Include="Public\js\head.load.min.js" />
+    <Content Include="Public\js\html5shiv.js" />
     <Content Include="Public\js\jquery-1.6.2.min.js" />
     <Content Include="Public\js\jquery-ui-1.8.16.custom.min.js" />
     <Content Include="Public\js\jquery.blockUI.js" />
@@ -2837,15 +2853,11 @@
     <Content Include="Public\js\jQueryFileUpload\server\node\tmp\.gitignore" />
     <Content Include="Public\js\jQueryFileUpload\test\index.html" />
     <Content Include="Public\js\jQueryFileUpload\test\test.js" />
+    <Content Include="Public\js\load-image.min.js" />
     <Content Include="Public\js\msdropdown\dd.css" />
     <Content Include="Public\js\msdropdown\dd_arrow.gif" />
     <Content Include="Public\js\msdropdown\js\jquery.dd.js" />
     <Content Include="Public\js\msdropdown\js\uncompressed.jquery.dd.js" />
-    <Content Include="Public\js\othermedia-flickr\.gitignore" />
-    <Content Include="Public\js\othermedia-flickr\source\flickr.js" />
-    <Content Include="Public\js\othermedia-flickr\source\jsonp.js" />
-    <Content Include="Public\js\othermedia-flickr\source\photo.js" />
-    <Content Include="Public\js\othermedia-flickr\test\index.html" />
     <Content Include="Public\js\prettyPhoto\css\prettyPhoto.css" />
     <Content Include="Public\js\prettyPhoto\images\fullscreen\1.jpg" />
     <Content Include="Public\js\prettyPhoto\images\fullscreen\2.jpg" />
@@ -2880,6 +2892,9 @@
     <Content Include="Public\js\TimePicker\jquery.timePicker.js" />
     <Content Include="Public\js\TimePicker\jquery.timePicker.min.js" />
     <Content Include="Public\js\TimePicker\timePicker.css" />
+    <None Include="Public\js\bootstrap-Image-Gallery\Makefile" />
+    <None Include="Public\js\bootstrap-Image-Gallery\package.json" />
+    <None Include="Public\js\bootstrap-Image-Gallery\README.md" />
     <None Include="Public\js\jQueryFileUpload\package.json" />
     <None Include="Public\js\jQueryFileUpload\README.md" />
     <None Include="Public\js\jQueryFileUpload\server\gae-go\app.yaml" />
@@ -2892,11 +2907,6 @@
     <None Include="Public\js\jQueryFileUpload\server\php\index.php" />
     <None Include="Public\js\jQueryFileUpload\server\php\thumbnails\.htaccess" />
     <None Include="Public\js\jQueryFileUpload\server\php\upload.class.php" />
-    <None Include="Public\js\othermedia-flickr\CHANGELOG" />
-    <None Include="Public\js\othermedia-flickr\jake.yml" />
-    <None Include="Public\js\othermedia-flickr\Jakefile" />
-    <None Include="Public\js\othermedia-flickr\LICENSE" />
-    <None Include="Public\js\othermedia-flickr\README.md" />
     <None Include="Service References\Epilogr\api.disco" />
     <None Include="Service References\Epilogr\configuration91.svcinfo" />
     <None Include="Service References\Epilogr\configuration.svcinfo" />
@@ -2907,6 +2917,7 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Public\js\tmpl.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

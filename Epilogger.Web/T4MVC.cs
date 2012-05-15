@@ -813,6 +813,7 @@ namespace Links {
         
             public static readonly string BrowseEvents_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/BrowseEvents.min.js") ? Url("BrowseEvents.min.js") : Url("BrowseEvents.js");
                           
+            public static readonly string canvas_to_blob_min_js = Url("canvas-to-blob.min.js");
             public static readonly string clickmap_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/clickmap.min.js") ? Url("clickmap.min.js") : Url("clickmap.js");
                           
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
