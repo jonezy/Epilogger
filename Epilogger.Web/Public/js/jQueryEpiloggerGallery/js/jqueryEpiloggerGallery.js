@@ -1,7 +1,7 @@
 ﻿(function ($) {
     $.fn.gallery = function (images, selectOnClick) {
         return this.each(function () {
-            var imagesPerColumn = 3;
+            var imagesPerColumn = 6;
 
             var html = '<tr>';
             var currentRowImagesCount = 0;
