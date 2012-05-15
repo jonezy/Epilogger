@@ -11,7 +11,7 @@
   <resourceSets url="~/combres.axd"
                 defaultDuration="30"
                 defaultVersion="auto"
-                defaultDebugEnabled="false"
+                defaultDebugEnabled="true"
                 defaultIgnorePipelineWhenDebug="true"
                 localChangeMonitorInterval="30"
                 remoteChangeMonitorInterval="60"
@@ -50,6 +50,7 @@
       <resource path="~/Public/js/jquery.cycle.all.js" />
       <resource path="~/Public/js/jquery.jtruncate.pack.js" />
       <resource path="~/Public/js/jquery.UI.DatePicker/js/jquery-ui-1.8.17.custom.min.js" />
+      <resource path="~/Public/js/jquery.history.js" />
     </resourceSet>
     
     <resourceSet name="CreateEventJs" type="js">

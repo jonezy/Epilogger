@@ -1366,6 +1366,8 @@ span.tweet-date a:hover { text-decoration: underline; }
 .tweetlist .tweet {
     margin-bottom:15px;}
 
+.tweetlist ul { list-style-type: none; }
+
 .tweet .tweet-body {
     /*float:left;*/
     /*width:280px;*/
@@ -2250,7 +2252,7 @@ div#SearchTimeFilter input[type=text] {
 
 .shareBar { list-style-type: none; }
 .shareBar li { display: inline-block; }
-.shareBar li.padABit { margin: 5px 0 0 0; }
+/*.shareBar li.padABit { margin: 5px 0 0 0; }*/
 
 /*
 .fb-like  { float: left; margin: 5px 0 0 0; }

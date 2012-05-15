@@ -1461,8 +1461,7 @@ namespace Epilogger.Web.Controllers {
             }
 
             var apiClient = new Epilogr.APISoapClient();
-            //model.ShortURL = apiClient.CreateUrl("http://epilogger.com/events/PhotoDetails/" + eventid + "/" + photoid).ShortenedUrl;
-            model.ShortURL = apiClient.CreateUrl("http://epilogger.apphb.com/events/PhotoDetails/" + eventid + "/" + photoid).ShortenedUrl;
+            model.ShortURL = apiClient.CreateUrl("http://epilogger.com/events/PhotoDetails/" + eventid + "/" + photoid).ShortenedUrl;
 
             return View(model);
         }

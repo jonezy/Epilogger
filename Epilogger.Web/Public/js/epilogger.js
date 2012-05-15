@@ -9,6 +9,17 @@ $(document).ready(function () {
 });
 */
 
+
+//This is a hack for IE. If the URL has a hash for PhotoDetails, then redirect to the correct URL
+//#/events/PhotoDetails
+url = location.href;
+hashtag = (url.indexOf('#') != -1) ? decodeURI(url.substring(url.indexOf('#') + 1, url.length)) : false;
+if (hashtag != false) {
+    window.location = 'http://epilogger.com/' + hashtag;
+}
+
+
+
 //Code to set the cookie to the current user's timezone.
 head.ready(function () {
     var storedTimeZoneOffset = $.cookie("TimeZoneOffset");

@@ -949,7 +949,7 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 	
 	function getHashtag(){
 		url = location.href;
-		hashtag = (url.indexOf('#!') != -1) ? decodeURI(url.substring(url.indexOf('#!')+2,url.length)) : false;
+		hashtag = (url.indexOf('#') != -1) ? decodeURI(url.substring(url.indexOf('#')+1,url.length)) : false;
         return hashtag;
 	};
 	
@@ -960,16 +960,26 @@ function fbs_click() {u=location.href;t=document.title;window.open('http://www.f
 		//location.hash = '!' + theRel + '/'+rel_index+'/';
 	    
         //This is how I'm putting the absolute URL in the address bar
-	    window.history.pushState(null, "Images", "/events/PhotoDetails/" + pp_descriptions[rel_index]);
+	    //window.history.pushState(null, "Images", "/events/PhotoDetails/" + pp_descriptions[rel_index]);
+	    //History.pushState(null, "", "/events/PhotoDetails/" + pp_descriptions[rel_index]);
+	    History.pushState(null, null, "/events/PhotoDetails/" + pp_descriptions[rel_index]);
+	    var theHash = getHashtag();
+        if (theHash) {
+	        if (theHash.indexOf("events/") < 0) {
+	            location.hash = 'events/' + theHash;    
+	        };
+	    };
 	};
 
 
     //CB this is my function to remove the stupid hash when you close the photo.
     function removeHashtag(){
-        //location.hash = '_';
+        
         
         //This is how I'm putting the absolute URL in the address bar
-	    window.history.pushState(null, "Images", locUrl);
+	    //window.history.pushState(null, "Images", locUrl);
+        History.pushState(null, null, locUrl);
+        location.hash = '';
 	};
 
 	
