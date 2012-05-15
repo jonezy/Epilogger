@@ -34315,6 +34315,7 @@ namespace Links {
                 public static readonly string timePicker_css = Url("timePicker.css");
             }
         
+            public static readonly string tmpl_min_js = Url("tmpl.min.js");
         }
     
     }
