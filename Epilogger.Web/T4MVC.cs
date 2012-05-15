@@ -735,6 +735,82 @@ namespace Links {
                               
             }
         
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class bootstrap {
+                private const string URLPATH = "~/Public/js/bootstrap";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class css {
+                    private const string URLPATH = "~/Public/js/bootstrap/css";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string bootstrap_responsive_css = Url("bootstrap-responsive.css");
+                    public static readonly string bootstrap_responsive_min_css = Url("bootstrap-responsive.min.css");
+                    public static readonly string bootstrap_css = Url("bootstrap.css");
+                    public static readonly string bootstrap_min_css = Url("bootstrap.min.css");
+                }
+            
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class img {
+                    private const string URLPATH = "~/Public/js/bootstrap/img";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string glyphicons_halflings_white_png = Url("glyphicons-halflings-white.png");
+                    public static readonly string glyphicons_halflings_png = Url("glyphicons-halflings.png");
+                }
+            
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class js {
+                    private const string URLPATH = "~/Public/js/bootstrap/js";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string bootstrap_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap.min.js") ? Url("bootstrap.min.js") : Url("bootstrap.js");
+                                  
+                    public static readonly string bootstrap_min_js = Url("bootstrap.min.js");
+                }
+            
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class bootstrap_Image_Gallery {
+                private const string URLPATH = "~/Public/js/bootstrap-Image-Gallery";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string _gitignore = Url(".gitignore");
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class css {
+                    private const string URLPATH = "~/Public/js/bootstrap-Image-Gallery/css";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string bootstrap_image_gallery_css = Url("bootstrap-image-gallery.css");
+                    public static readonly string bootstrap_image_gallery_min_css = Url("bootstrap-image-gallery.min.css");
+                }
+            
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class img {
+                    private const string URLPATH = "~/Public/js/bootstrap-Image-Gallery/img";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string loading_gif = Url("loading.gif");
+                }
+            
+                public static readonly string index_html = Url("index.html");
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class js {
+                    private const string URLPATH = "~/Public/js/bootstrap-Image-Gallery/js";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string bootstrap_image_gallery_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-image-gallery.min.js") ? Url("bootstrap-image-gallery.min.js") : Url("bootstrap-image-gallery.js");
+                                  
+                    public static readonly string bootstrap_image_gallery_min_js = Url("bootstrap-image-gallery.min.js");
+                }
+            
+                public static readonly string Makefile = Url("Makefile");
+                public static readonly string package_json = Url("package.json");
+                public static readonly string README_md = Url("README.md");
+            }
+        
             public static readonly string BrowseEvents_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/BrowseEvents.min.js") ? Url("BrowseEvents.min.js") : Url("BrowseEvents.js");
                           
             public static readonly string clickmap_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/clickmap.min.js") ? Url("clickmap.min.js") : Url("clickmap.js");
@@ -34127,40 +34203,6 @@ namespace Links {
                                   
                     public static readonly string uncompressed_jquery_dd_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/uncompressed.jquery.dd.min.js") ? Url("uncompressed.jquery.dd.min.js") : Url("uncompressed.jquery.dd.js");
                                   
-                }
-            
-            }
-        
-            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-            public static class othermedia_flickr {
-                private const string URLPATH = "~/Public/js/othermedia-flickr";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                public static readonly string _gitignore = Url(".gitignore");
-                public static readonly string CHANGELOG = Url("CHANGELOG");
-                public static readonly string jake_yml = Url("jake.yml");
-                public static readonly string Jakefile = Url("Jakefile");
-                public static readonly string LICENSE = Url("LICENSE");
-                public static readonly string README_md = Url("README.md");
-                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-                public static class source {
-                    private const string URLPATH = "~/Public/js/othermedia-flickr/source";
-                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                    public static readonly string flickr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/flickr.min.js") ? Url("flickr.min.js") : Url("flickr.js");
-                                  
-                    public static readonly string jsonp_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jsonp.min.js") ? Url("jsonp.min.js") : Url("jsonp.js");
-                                  
-                    public static readonly string photo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/photo.min.js") ? Url("photo.min.js") : Url("photo.js");
-                                  
-                }
-            
-                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-                public static class test {
-                    private const string URLPATH = "~/Public/js/othermedia-flickr/test";
-                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                    public static readonly string index_html = Url("index.html");
                 }
             
             }
