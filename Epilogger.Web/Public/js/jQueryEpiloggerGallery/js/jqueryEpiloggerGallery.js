@@ -9,7 +9,7 @@
                 html += '<td>';
                 if (!selectOnClick)
                     html += '<a href=' + this.url + '>';
-                html += '<img width="100" src="' + this.src + '"/>';
+                html += '<img width="100" src="' + this.src + '" class="unselectedImage"/>';
                 if (!selectOnClick)
                     html += '</a>';
                 html += '</td>';
@@ -28,7 +28,7 @@
 
             if (selectOnClick) {
                 $(this).find('img').click(function () {
-                    $(this).toggleClass('selectedImage');
+                    $(this).toggleClass('selectedImage').toggleClass('unselectedImage');
                 });
             }
         });

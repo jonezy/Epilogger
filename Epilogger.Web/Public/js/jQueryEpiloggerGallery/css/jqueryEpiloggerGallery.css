@@ -1,6 +1,11 @@
+.unselectedImage {
+    margin: 1px;    
+}
+
 .selectedImage
 {
     border-style: solid;
     border-width: 1px;
     border-color: red;
+    margin: 0px;
 }
