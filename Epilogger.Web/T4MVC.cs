@@ -33957,6 +33957,21 @@ namespace Links {
             public static readonly string jquery_validate_unobtrusive_min_js = Url("jquery.validate.unobtrusive.min.js");
             public static readonly string jquery_zrssfeed_min_js = Url("jquery.zrssfeed.min.js");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class jqueryCookie {
+                private const string URLPATH = "~/Public/js/jqueryCookie";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string jquery_cookie_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.cookie.min.js") ? Url("jquery.cookie.min.js") : Url("jquery.cookie.js");
+                              
+                public static readonly string README_md = Url("README.md");
+                public static readonly string server_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/server.min.js") ? Url("server.min.js") : Url("server.js");
+                              
+                public static readonly string test_html = Url("test.html");
+                public static readonly string test_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/test.min.js") ? Url("test.min.js") : Url("test.js");
+                              
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class jQueryEpiloggerGallery {
                 private const string URLPATH = "~/Public/js/jQueryEpiloggerGallery";
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
@@ -34191,6 +34206,10 @@ namespace Links {
             
             }
         
+            public static readonly string jqueryParseParams_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jqueryParseParams.min.js") ? Url("jqueryParseParams.min.js") : Url("jqueryParseParams.js");
+                          
+            public static readonly string jqueryQueryString_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jqueryQueryString.min.js") ? Url("jqueryQueryString.min.js") : Url("jqueryQueryString.js");
+                          
             public static readonly string load_image_min_js = Url("load-image.min.js");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class msdropdown {
@@ -34210,6 +34229,45 @@ namespace Links {
                                   
                 }
             
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class oAuth {
+                private const string URLPATH = "~/Public/js/oAuth";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class example {
+                    private const string URLPATH = "~/Public/js/oAuth/example";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string accessToken_html = Url("accessToken.html");
+                    public static readonly string AJAX_html = Url("AJAX.html");
+                    public static readonly string authorize_html = Url("authorize.html");
+                    public static readonly string consumer_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/consumer.min.js") ? Url("consumer.min.js") : Url("consumer.js");
+                                  
+                    public static readonly string echo_html = Url("echo.html");
+                    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                    public static class gadget {
+                        private const string URLPATH = "~/Public/js/oAuth/example/gadget";
+                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                        public static readonly string oauth_example_xml = Url("oauth-example.xml");
+                    }
+                
+                    public static readonly string index_html = Url("index.html");
+                    public static readonly string requestToken_html = Url("requestToken.html");
+                    public static readonly string signature_html = Url("signature.html");
+                }
+            
+                public static readonly string oauth_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/oauth.min.js") ? Url("oauth.min.js") : Url("oauth.js");
+                              
+                public static readonly string oauthTest_html = Url("oauthTest.html");
+                public static readonly string oauthTest_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/oauthTest.min.js") ? Url("oauthTest.min.js") : Url("oauthTest.js");
+                              
+                public static readonly string README_txt = Url("README.txt");
+                public static readonly string sha1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/sha1.min.js") ? Url("sha1.min.js") : Url("sha1.js");
+                              
             }
         
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

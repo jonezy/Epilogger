@@ -2652,6 +2652,26 @@
     <Content Include="Public\js\FacebookPhotoPicker\photoPickerConfig.js" />
     <Content Include="Public\js\head.load.min.js" />
     <Content Include="Public\js\html5shiv.js" />
+    <Content Include="Public\js\jqueryCookie\jquery.cookie.js" />
+    <Content Include="Public\js\jqueryCookie\server.js" />
+    <Content Include="Public\js\jqueryCookie\test.html" />
+    <Content Include="Public\js\jqueryCookie\test.js" />
+    <Content Include="Public\js\jqueryParseParams.js" />
+    <Content Include="Public\js\jqueryQueryString.js" />
+    <Content Include="Public\js\oAuth\example\accessToken.html" />
+    <Content Include="Public\js\oAuth\example\AJAX.html" />
+    <Content Include="Public\js\oAuth\example\authorize.html" />
+    <Content Include="Public\js\oAuth\example\consumer.js" />
+    <Content Include="Public\js\oAuth\example\echo.html" />
+    <Content Include="Public\js\oAuth\example\gadget\oauth-example.xml" />
+    <Content Include="Public\js\oAuth\example\index.html" />
+    <Content Include="Public\js\oAuth\example\requestToken.html" />
+    <Content Include="Public\js\oAuth\example\signature.html" />
+    <Content Include="Public\js\oAuth\oauth.js" />
+    <Content Include="Public\js\oAuth\oauthTest.html" />
+    <Content Include="Public\js\oAuth\oauthTest.js" />
+    <Content Include="Public\js\oAuth\README.txt" />
+    <Content Include="Public\js\oAuth\sha1.js" />
     <Content Include="Public\js\jquery-1.6.2.min.js" />
     <Content Include="Public\js\jquery-ui-1.8.16.custom.min.js" />
     <Content Include="Public\js\jquery.blockUI.js" />
@@ -2897,6 +2917,7 @@
     <None Include="Public\js\bootstrap-Image-Gallery\Makefile" />
     <None Include="Public\js\bootstrap-Image-Gallery\package.json" />
     <None Include="Public\js\bootstrap-Image-Gallery\README.md" />
+    <None Include="Public\js\jqueryCookie\README.md" />
     <None Include="Public\js\jQueryFileUpload\package.json" />
     <None Include="Public\js\jQueryFileUpload\README.md" />
     <None Include="Public\js\jQueryFileUpload\server\gae-go\app.yaml" />
@@ -2956,7 +2977,9 @@
     <Content Include="Views\ImageUpload\GetFacebookAlbums.cshtml" />
     <Content Include="Views\ImageUpload\_Layout.cshtml" />
     <Content Include="Views\ImageUpload\UploadFacebookAlbumPhotos.cshtml" />
-    <Content Include="Views\ImageUpload\UploadFlickrPhotos.cshtml" />
+    <Content Include="Views\ImageUpload\AuthenticateFlickr.cshtml" />
+    <Content Include="Views\ImageUpload\UploadFlickrImages.cshtml" />
+    <Content Include="Views\ImageUpload\SuccessfullyAuthenticatedFlickr.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Shared\" />

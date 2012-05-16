@@ -174,6 +174,24 @@ namespace Epilogger.Common
 
             [Serializable]
             [JsonObject(MemberSerialization.OptOut)]
+            public class FlickrImageMSG
+            {
+                public int EventId { get; set; }
+                public Uri ImageUrl { get; set; }
+
+                public FlickrImageMSG()
+                {
+                }
+
+                public FlickrImageMSG(int eventId, Uri imageUrl)
+                {
+                    EventId = eventId;
+                    ImageUrl = imageUrl;
+                }
+            }
+
+            [Serializable]
+            [JsonObject(MemberSerialization.OptOut)]
             public class FileImageMSG
             {
                 public int EventID { get; set; }

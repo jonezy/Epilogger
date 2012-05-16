@@ -9,6 +9,7 @@
         <script type="text/javascript" src="@Links.Public.js.jquery_1_6_2_min_js"></script>
         <script type="text/javascript">
             var FlickrApiKey = '@ConfigurationManager.AppSettings["FlickrApiKey"]';
+            var FlickrApiSecret = '@ConfigurationManager.AppSettings["FlickrApiSecret"]';
             var FacebookAppId = '@(((FacebookConfigurationSection)ConfigurationManager.GetSection("facebookSettings")).AppId)';
 
             $(function() {
@@ -22,7 +23,7 @@
         @*ToDo: remove inline styles*@
         <div style="height: 100%; position: relative;">
             <div style="height: 30px; margin-bottom: 20px;">
-                @RenderSection("Navigation")
+                @RenderSection("Navigation", false)
             </div>
             <div>
                 @RenderBody()

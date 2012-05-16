@@ -77,9 +77,38 @@ namespace Epilogger.Web.Controllers
             return new EmptyResult();
         }
 
-        public virtual ActionResult UploadFlickrPhotos(string id)
+        public virtual ActionResult AuthenticateFlickr(string id)
         {
             return View();
+        }
+
+        public virtual ActionResult SuccessfullyAuthenticatedFlickr(string id)
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public virtual ActionResult UploadFlickrImages(string id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public virtual ActionResult UploadFlickrImages(string id, IEnumerable<string> photosUrls)
+        {
+            var requestedEvent = _es.FindBySlug(id);
+
+            //ToDo: Move queues names into Epilogger.Common
+            using (var messageProducer = new MQ.MSGProducer("Epilogger", "FlickrImage"))
+            {
+                foreach (var photoUrl in photosUrls)
+                {
+                    var flickrImageMsg = new MQ.Messages.FlickrImageMSG(requestedEvent.ID, new Uri(photoUrl));
+                    messageProducer.SendMessage(flickrImageMsg);
+                }
+            }
+
+            return new EmptyResult();
         }
     }
 }

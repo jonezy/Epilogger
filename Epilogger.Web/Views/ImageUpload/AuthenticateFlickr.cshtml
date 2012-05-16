@@ -1,0 +1,61 @@
+﻿@model Epilogger.Web.Models.GetFacebookAlbumsViewModel
+@{
+    Layout = MVC.ImageUpload.Views._Layout;
+}
+@section Head {
+    <link href="@Links.Public.js.jQueryEpiloggerGallery.css.jqueryEpiloggerGallery_css" rel="stylesheet"/>
+    <script type="text/javascript" src="@Links.Public.js.jQueryEpiloggerGallery.js.jqueryEpiloggerGallery_js"></script>
+    <script type="text/javascript" src="@Links.Public.js.oAuth.sha1_js"></script>
+    <script type="text/javascript" src="@Links.Public.js.oAuth.oauth_js"></script>
+    <script type="text/javascript" src="@Links.Public.js.jqueryParseParams_js"></script>
+    <script type="text/javascript" src="@Links.Public.js.jqueryCookie.jquery_cookie_js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var message = {
+                action: 'http://www.flickr.com/services/oauth/request_token',
+                method: 'GET',
+                parameters: []
+            };
+
+            OAuth.setTimestampAndNonce(message);
+
+            message.parameters.push(['oauth_consumer_key', FlickrApiKey]);
+            message.parameters.push(['oauth_signature_method', 'HMAC-SHA1']);
+            message.parameters.push(['oauth_callback', '@Url.Action(MVC.ImageUpload.SuccessfullyAuthenticatedFlickr(), HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Host)']);
+
+            var accessor = { consumerSecret: FlickrApiSecret, tokenSecret: '' };
+            OAuth.SignatureMethod.sign(message, accessor);
+
+            $.get(message.action, OAuth.getParameterMap(message.parameters), function (data) {
+                var token = $.parseParams(data).oauth_token;
+
+                var tokenSecret = $.parseParams(data).oauth_token_secret;
+                $.cookie('flickr_oauth_token_secret', tokenSecret, {expires: 1, path: '/'});
+
+                $('#fakeAnchor').click(function () {
+                    var childWindow = window.open('http://www.flickr.com/services/oauth/authorize?oauth_token=' + token, 'flickrauthenticationwindow', 'width=300,height=600');
+                    $(childWindow).unload(function () {
+//                        location.href = '';
+                    });
+                    return false;
+                });
+            });
+        })
+    </script>
+}
+@section Navigation {
+    <img src="@Links.Public.images.imageupload.source_inactive_png"/>
+    <img src="@Links.Public.images.imageupload.choosealbum_active_png"/>
+}
+@section BottomLeft {
+    <a href="@Url.Action(MVC.ImageUpload.ChooseUploadSource())">
+        <img src="@Links.Public.images.imageupload.oops_flickr_png" />
+    </a>
+}
+
+<a href="#" id="fakeAnchor">Login to Flickr</a>
+<div id="photosContainer" style="display: none">
+    Click photos you want to upload
+    <table id="gallery">
+    </table>
+</div>

@@ -62,8 +62,18 @@ namespace Epilogger.Web.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult UploadFlickrPhotos() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.UploadFlickrPhotos);
+        public System.Web.Mvc.ActionResult AuthenticateFlickr() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.AuthenticateFlickr);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult SuccessfullyAuthenticatedFlickr() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.SuccessfullyAuthenticatedFlickr);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult UploadFlickrImages() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.UploadFlickrImages);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -84,7 +94,9 @@ namespace Epilogger.Web.Controllers {
             public readonly string UploadFromComputer = "UploadFromComputer";
             public readonly string GetFacebookAlbums = "GetFacebookAlbums";
             public readonly string UploadFacebookAlbumPhotos = "UploadFacebookAlbumPhotos";
-            public readonly string UploadFlickrPhotos = "UploadFlickrPhotos";
+            public readonly string AuthenticateFlickr = "AuthenticateFlickr";
+            public readonly string SuccessfullyAuthenticatedFlickr = "SuccessfullyAuthenticatedFlickr";
+            public readonly string UploadFlickrImages = "UploadFlickrImages";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -93,7 +105,9 @@ namespace Epilogger.Web.Controllers {
             public const string UploadFromComputer = "UploadFromComputer";
             public const string GetFacebookAlbums = "GetFacebookAlbums";
             public const string UploadFacebookAlbumPhotos = "UploadFacebookAlbumPhotos";
-            public const string UploadFlickrPhotos = "UploadFlickrPhotos";
+            public const string AuthenticateFlickr = "AuthenticateFlickr";
+            public const string SuccessfullyAuthenticatedFlickr = "SuccessfullyAuthenticatedFlickr";
+            public const string UploadFlickrImages = "UploadFlickrImages";
         }
 
 
@@ -127,11 +141,25 @@ namespace Epilogger.Web.Controllers {
             public readonly string id = "id";
             public readonly string albumId = "albumId";
         }
-        static readonly ActionParamsClass_UploadFlickrPhotos s_params_UploadFlickrPhotos = new ActionParamsClass_UploadFlickrPhotos();
+        static readonly ActionParamsClass_AuthenticateFlickr s_params_AuthenticateFlickr = new ActionParamsClass_AuthenticateFlickr();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_UploadFlickrPhotos UploadFlickrPhotosParams { get { return s_params_UploadFlickrPhotos; } }
+        public ActionParamsClass_AuthenticateFlickr AuthenticateFlickrParams { get { return s_params_AuthenticateFlickr; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_UploadFlickrPhotos {
+        public class ActionParamsClass_AuthenticateFlickr {
+            public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_SuccessfullyAuthenticatedFlickr s_params_SuccessfullyAuthenticatedFlickr = new ActionParamsClass_SuccessfullyAuthenticatedFlickr();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_SuccessfullyAuthenticatedFlickr SuccessfullyAuthenticatedFlickrParams { get { return s_params_SuccessfullyAuthenticatedFlickr; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_SuccessfullyAuthenticatedFlickr {
+            public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_UploadFlickrImages s_params_UploadFlickrImages = new ActionParamsClass_UploadFlickrImages();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_UploadFlickrImages UploadFlickrImagesParams { get { return s_params_UploadFlickrImages; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_UploadFlickrImages {
             public readonly string id = "id";
         }
         static readonly ViewNames s_views = new ViewNames();
@@ -140,10 +168,12 @@ namespace Epilogger.Web.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
             public readonly string _Layout = "~/Views/ImageUpload/_Layout.cshtml";
+            public readonly string AuthenticateFlickr = "~/Views/ImageUpload/AuthenticateFlickr.cshtml";
             public readonly string ChooseUploadSource = "~/Views/ImageUpload/ChooseUploadSource.cshtml";
             public readonly string GetFacebookAlbums = "~/Views/ImageUpload/GetFacebookAlbums.cshtml";
+            public readonly string SuccessfullyAuthenticatedFlickr = "~/Views/ImageUpload/SuccessfullyAuthenticatedFlickr.cshtml";
             public readonly string UploadFacebookAlbumPhotos = "~/Views/ImageUpload/UploadFacebookAlbumPhotos.cshtml";
-            public readonly string UploadFlickrPhotos = "~/Views/ImageUpload/UploadFlickrPhotos.cshtml";
+            public readonly string UploadFlickrImages = "~/Views/ImageUpload/UploadFlickrImages.cshtml";
             public readonly string UploadFromComputer = "~/Views/ImageUpload/UploadFromComputer.cshtml";
         }
     }
@@ -193,8 +223,20 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult UploadFlickrPhotos(string id) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.UploadFlickrPhotos);
+        public override System.Web.Mvc.ActionResult AuthenticateFlickr(string id) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.AuthenticateFlickr);
+            callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult SuccessfullyAuthenticatedFlickr(string id) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.SuccessfullyAuthenticatedFlickr);
+            callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult UploadFlickrImages(string id) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.UploadFlickrImages);
             callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }

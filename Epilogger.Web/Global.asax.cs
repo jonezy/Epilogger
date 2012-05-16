@@ -151,11 +151,13 @@ namespace Epilogger.Web {
                 new { controller = "events", action = "getimagecomments", eventID = UrlParameter.Optional, imageid = UrlParameter.Optional }
             );
 
-            routes.MapRoute("ChooseUploadSourceWithoutStatus", "events/chooseuploadsource/{id}", MVC.ImageUpload.ChooseUploadSource());
-            routes.MapRoute("UploadImageFromFlickr", "events/uploadfromflickr/{id}", MVC.ImageUpload.UploadFlickrPhotos());
-            routes.MapRoute("GetFacebookAlbums", "events/getfacebookalbums/{id}", MVC.ImageUpload.GetFacebookAlbums());
-            routes.MapRoute("UpoadFacebookAlbumPhotos", "events/uploadfacebookalbumphotos/{id}/{albumId}", MVC.ImageUpload.UploadFacebookAlbumPhotos());
-            routes.MapRoute("UploadImageFromComputer", "events/uploadfromcomputer/{id}", MVC.ImageUpload.UploadFromComputer());           
+            routes.MapRoute("ChooseUploadSourceWithoutStatus", "events/imageupload/source/{id}", MVC.ImageUpload.ChooseUploadSource());
+            routes.MapRoute("AuthenticateFlickr", "events/imageupload/flickr/authenticate/{id}", MVC.ImageUpload.AuthenticateFlickr());
+            routes.MapRoute("SuccessfullyAuthenticatedFlickr", "events/imageupload/flickr/successfullyauthenticated/{id}", MVC.ImageUpload.SuccessfullyAuthenticatedFlickr());
+            routes.MapRoute("UploadFlickrImages", "events/imageupload/flickr/upload/{id}", MVC.ImageUpload.UploadFlickrImages());
+            routes.MapRoute("GetFacebookAlbums", "events/imageupload/facebook/albums/{id}", MVC.ImageUpload.GetFacebookAlbums());
+            routes.MapRoute("UpoadFacebookAlbumPhotos", "evAuthenticateFlickrents/imageupload/facebook/upload/{id}/{albumId}", MVC.ImageUpload.UploadFacebookAlbumPhotos());
+            routes.MapRoute("UploadImageFromComputer", "events/imageupload/computer/{id}", MVC.ImageUpload.UploadFromComputer());           
 
             routes.MapRoute(
                 "EventBrowseRoutes",
