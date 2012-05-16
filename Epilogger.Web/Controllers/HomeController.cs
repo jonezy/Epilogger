@@ -179,5 +179,34 @@ namespace Epilogger.Web.Controllers {
         public ActionResult Privacy() {
             return View();
         }
+
+        public ActionResult SocialBar(int eventid, int photoid)
+        {
+            var es = new EventService();
+            var imgs = new ImageService();
+            var ts = new TweetService();
+
+            var model = new PhotoDetailsViewModel();
+            var theEvent = es.FindByID(eventid);
+            if (theEvent != null)
+            {
+                model.EventId = eventid;
+                model.EventSlug = theEvent.EventSlug;
+                model.Image = imgs.FindByID(photoid);
+                model.Tweets = ts.FindByImageID(photoid, eventid);
+                model.Event = theEvent;
+                model.HashTag =
+                    theEvent.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0].Contains("#")
+                        ? theEvent.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0]
+                        : "#" + theEvent.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0];
+            }
+
+            var apiClient = new Epilogr.APISoapClient();
+            model.ShortURL = apiClient.CreateUrl("http://epilogger.com/events/PhotoDetails/" + eventid + "/" + photoid).ShortenedUrl;
+
+
+            return PartialView(model);
+        }
+
     }
 }

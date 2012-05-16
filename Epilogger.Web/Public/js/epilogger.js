@@ -67,6 +67,13 @@ function changeDescription() {
         function (data) {
             $('.pp_TweetBox').html(data);
         }, "html");
+
+    //Load the social media bar
+    $.get('/Home/SocialBar/' + photoID,
+    function (data) {
+        $('.pp_shareBar').html(data);
+    }, "html");
+
 }
 
 function SearchVenues(url) {

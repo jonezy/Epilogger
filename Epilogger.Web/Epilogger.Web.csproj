@@ -2843,6 +2843,7 @@
     <Content Include="Views\Events\TweetBox.cshtml" />
     <Content Include="Views\Events\ImageCommentsPaged.cshtml" />
     <Content Include="Views\Events\ImageCommentControl.cshtml" />
+    <Content Include="Views\Home\SocialBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Shared\" />

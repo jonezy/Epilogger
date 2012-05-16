@@ -140,11 +140,15 @@
 				float: left;
 				/*margin: 10px 0 2px 0;*/
 				margin: 0;
-				display: none;
+				/*display: none;*/
 			}
 				.pp_description {
 					display: none;
 					margin: 0;
+				}
+				
+				.pp_shareBar {
+				    height: 50px;
 				}
 				
 				.pp_social { float: left; margin: 7px 0 0 0; }

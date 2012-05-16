@@ -166,6 +166,12 @@ namespace Epilogger.Web {
                 new { controller = "events", action = "photodetails", eventid = UrlParameter.Optional, photoid = UrlParameter.Optional }
             );
 
+            routes.MapRoute(
+                "SocialBar",
+                "home/socialbar/{eventid}/{photoid}",
+                new { controller = "Home", action = "socialbar", eventid = UrlParameter.Optional, photoid = UrlParameter.Optional },
+                new[] { "Epilogger.Web.Controllers" }
+            );
 
 
             routes.MapRoute(
@@ -251,8 +257,7 @@ namespace Epilogger.Web {
                 "widget/PhotoDetails/{id}/{photoID}",
                 new { controller = "widget", action = "photodetails", id = UrlParameter.Optional, photoID = UrlParameter.Optional }
             );
-
-
+            
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
