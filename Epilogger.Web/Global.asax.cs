@@ -156,7 +156,7 @@ namespace Epilogger.Web {
             routes.MapRoute("SuccessfullyAuthenticatedFlickr", "events/imageupload/flickr/successfullyauthenticated/{id}", MVC.ImageUpload.SuccessfullyAuthenticatedFlickr());
             routes.MapRoute("UploadFlickrImages", "events/imageupload/flickr/upload/{id}", MVC.ImageUpload.UploadFlickrImages());
             routes.MapRoute("GetFacebookAlbums", "events/imageupload/facebook/albums/{id}", MVC.ImageUpload.GetFacebookAlbums());
-            routes.MapRoute("UpoadFacebookAlbumPhotos", "evAuthenticateFlickrents/imageupload/facebook/upload/{id}/{albumId}", MVC.ImageUpload.UploadFacebookAlbumPhotos());
+            routes.MapRoute("UpoadFacebookAlbumPhotos", "events/imageupload/facebook/upload/{id}/{albumId}", MVC.ImageUpload.UploadFacebookAlbumPhotos());
             routes.MapRoute("UploadImageFromComputer", "events/imageupload/computer/{id}", MVC.ImageUpload.UploadFromComputer());           
 
             routes.MapRoute(

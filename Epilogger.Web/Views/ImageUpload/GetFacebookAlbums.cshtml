@@ -24,7 +24,7 @@
         FB.api('/me/albums', function (resp) {
             var galleryImages = $(resp.data).map(function () {
                 var albumCoverUrl = 'https://graph.facebook.com/' + this.cover_photo + '/picture?access_token=' + FB.getAccessToken();
-                var addAlbumPhotosUrl = "/events/uploadfacebookalbumphotos/" + '@Model.EventId' + "/" + this.id;
+                var addAlbumPhotosUrl = "/events/imageupload/facebook/upload/" + '@Model.EventId' + "/" + this.id;
 
                 return { src: albumCoverUrl, url: addAlbumPhotosUrl };
             });
