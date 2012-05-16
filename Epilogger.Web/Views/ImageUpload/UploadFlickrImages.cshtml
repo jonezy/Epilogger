@@ -101,7 +101,8 @@
 }
 @section Navigation {
     <img src="@Links.Public.images.imageupload.source_inactive_png"/>
-    <img src="@Links.Public.images.imageupload.choosealbum_active_png"/>
+    <img src="@Links.Public.images.imageupload.authenticate_inactive_png"/>
+    <img src="@Links.Public.images.imageupload.selectphotos_active_png"/>
 }
 @section BottomLeft {
     <a href="@Url.Action(MVC.ImageUpload.ChooseUploadSource())">
@@ -113,8 +114,14 @@
         <img src="@Links.Public.images.imageupload.upload_png" />
     </a>
 }
+
+<div style="margin-bottom: 20px;">
+    <h2>3) SELECT PHOTOS:</h2>
+    <span>Click photos you want to upload</span>
+</div>
+
 <div id="photosContainer" style="display: none">
-    Click photos you want to upload
+    
     <table id="gallery">
     </table>
 </div>

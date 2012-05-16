@@ -241,6 +241,13 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
+        public override System.Web.Mvc.ActionResult UploadFlickrImages(string id, System.Collections.Generic.IEnumerable<string> photosUrls) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.UploadFlickrImages);
+            callInfo.RouteValueDictionary.Add("id", id);
+            callInfo.RouteValueDictionary.Add("photosUrls", photosUrls);
+            return callInfo;
+        }
+
     }
 }
 

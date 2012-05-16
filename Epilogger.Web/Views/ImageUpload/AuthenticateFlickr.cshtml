@@ -45,15 +45,18 @@
 }
 @section Navigation {
     <img src="@Links.Public.images.imageupload.source_inactive_png"/>
-    <img src="@Links.Public.images.imageupload.choosealbum_active_png"/>
+    <img src="@Links.Public.images.imageupload.authenticate_active_png"/>
 }
 @section BottomLeft {
     <a href="@Url.Action(MVC.ImageUpload.ChooseUploadSource())">
         <img src="@Links.Public.images.imageupload.oops_flickr_png" />
     </a>
 }
-
-<a href="#" id="fakeAnchor">Login to Flickr</a>
+<div style="margin-bottom: 20px;">
+    <h2>2) Authenticate:</h2>
+    <span></span>
+</div>
+<a href="#" id="fakeAnchor">Click</a> to login to Flickr
 <div id="photosContainer" style="display: none">
     Click photos you want to upload
     <table id="gallery">
