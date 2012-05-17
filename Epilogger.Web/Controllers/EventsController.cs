@@ -378,8 +378,23 @@ namespace Epilogger.Web.Controllers {
 
                     _es.Save(epLevent);
 
+                    //Initiate a first collect on the event
+                    var tsmp = new MQ.MSGProducer("Epilogger", "TwitterSearch");
+                    var tsMSG = new MQ.Messages.TwitterSearchMSG
+                    {
+                        EventID = model.ID,
+                        SearchTerms = model.SearchTerms,
+                        SearchFromLatestTweet = false,
+                        SearchSince = null,
+                        SearchUntil = null
+                    };
+                    tsmp.SendMessage(tsMSG);
+                    tsmp.Dispose();
 
-                    //The event has been created and there is no error. Let's tweet out that mother.
+
+
+                    //The event has been created and there is no error. 
+                    //Let's tweet out that mother.
                     try
                     {
                         var apiClient = new Epilogr.APISoapClient();

@@ -2251,7 +2251,8 @@ div#SearchTimeFilter input[type=text] {
 }
 
 .shareBar { list-style-type: none; }
-.shareBar li { display: inline-block; }
+.shareBar li { display: inline-block; margin-top: 6px; padding-top: 10px; }
+
 /*.shareBar li.padABit { margin: 5px 0 0 0; }*/
 
 /*

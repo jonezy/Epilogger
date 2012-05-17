@@ -64,7 +64,6 @@
                                         <p class="pp_description"></p> \
 										<div class="pp_details"> \
 											<div class="pp_shareBar"></div> \
-											<span id="pp_ImageLinkEPL" class="">{pp_social}</span> \
 										</div> \
 									</div> \
                                 </div> \
@@ -94,7 +93,7 @@
             inline_markup: '<div class="pp_inline">{content}</div>',
             custom_markup: '',
             social_tools: '', //
-            share_tools: '<li>TEST the WANG</li>'
+            share_tools: ''
         }, pp_settings);
 
 
@@ -654,7 +653,7 @@
                 'top': -10000
             });
             detailsHeight += $pp_details.height();
-            detailsHeight = (detailsHeight <= 34) ? 36 : detailsHeight; // Min-height for the details
+            detailsHeight = (detailsHeight <= 66) ? 68 : detailsHeight; // Min-height for the details
             if ($.browser.msie && $.browser.version == 7) detailsHeight += 8;
             $pp_details.remove();
 

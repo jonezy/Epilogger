@@ -60,7 +60,7 @@ function changeDescription() {
         }
     });
 
-
+   
 
     //Load the TweetBox
     $.get('/Events/TweetBox/' + photoID,
@@ -68,11 +68,33 @@ function changeDescription() {
             $('.pp_TweetBox').html(data);
         }, "html");
 
+
+    $('.pp_shareBar').hide();
     //Load the social media bar
     $.get('/Home/SocialBar/' + photoID,
     function (data) {
         $('.pp_shareBar').html(data);
     }, "html");
+
+
+    $(document).ajaxComplete(function () {
+        //Make the FB button work
+        try {
+            FB.XFBML.parse();
+        } catch (ex) { }
+        //Make the Twitter button work
+        try {
+            (function () {
+                var twitterScriptTag = document.createElement('script');
+                twitterScriptTag.type = 'text/javascript';
+                twitterScriptTag.async = true;
+                twitterScriptTag.src = 'http://platform.twitter.com/widgets.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(twitterScriptTag, s);
+            })();
+        } catch (ex) { }
+    });
+    $('.pp_shareBar').show();
 
 }
 
