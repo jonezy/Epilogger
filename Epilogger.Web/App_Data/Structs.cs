@@ -95,6 +95,113 @@ namespace Epilogger.Data {
         }
         
         /// <summary>
+        /// Table: UserTwitterActions
+        /// Primary Key: ID
+        /// </summary>
+
+        public class UserTwitterActionsTable: DatabaseTable {
+            
+            public UserTwitterActionsTable(IDataProvider provider):base("UserTwitterActions",provider){
+                ClassName = "UserTwitterAction";
+                SchemaName = "dbo";
+                
+
+                Columns.Add(new DatabaseColumn("ID", this)
+                {
+	                IsPrimaryKey = true,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = true,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("UserId", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Guid,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("TweetId", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int64,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("TwitterAction", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 255
+                });
+                    
+                
+                
+            }
+            
+            public IColumn ID{
+                get{
+                    return this.GetColumn("ID");
+                }
+            }
+            				
+   			public static string IDColumn{
+			      get{
+        			return "ID";
+      			}
+		    }
+           
+            public IColumn UserId{
+                get{
+                    return this.GetColumn("UserId");
+                }
+            }
+            				
+   			public static string UserIdColumn{
+			      get{
+        			return "UserId";
+      			}
+		    }
+           
+            public IColumn TweetId{
+                get{
+                    return this.GetColumn("TweetId");
+                }
+            }
+            				
+   			public static string TweetIdColumn{
+			      get{
+        			return "TweetId";
+      			}
+		    }
+           
+            public IColumn TwitterAction{
+                get{
+                    return this.GetColumn("TwitterAction");
+                }
+            }
+            				
+   			public static string TwitterActionColumn{
+			      get{
+        			return "TwitterAction";
+      			}
+		    }
+           
+                    
+        }
+        
+        /// <summary>
         /// Table: User
         /// Primary Key: ID
         /// </summary>
@@ -808,6 +915,69 @@ namespace Epilogger.Data {
    			public static string DeletedColumn{
 			      get{
         			return "Deleted";
+      			}
+		    }
+           
+                    
+        }
+        
+        /// <summary>
+        /// Table: ScraperURLs
+        /// Primary Key: ID
+        /// </summary>
+
+        public class ScraperURLsTable: DatabaseTable {
+            
+            public ScraperURLsTable(IDataProvider provider):base("ScraperURLs",provider){
+                ClassName = "ScraperURL";
+                SchemaName = "dbo";
+                
+
+                Columns.Add(new DatabaseColumn("ID", this)
+                {
+	                IsPrimaryKey = true,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = true,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("URL", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 1000
+                });
+                    
+                
+                
+            }
+            
+            public IColumn ID{
+                get{
+                    return this.GetColumn("ID");
+                }
+            }
+            				
+   			public static string IDColumn{
+			      get{
+        			return "ID";
+      			}
+		    }
+           
+            public IColumn URL{
+                get{
+                    return this.GetColumn("URL");
+                }
+            }
+            				
+   			public static string URLColumn{
+			      get{
+        			return "URL";
       			}
 		    }
            
@@ -3403,6 +3573,16 @@ namespace Epilogger.Data {
 	                IsForeignKey = false,
 	                MaxLength = 0
                 });
+
+                Columns.Add(new DatabaseColumn("ImageFingerPrint", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
                     
                 
                 
@@ -3513,6 +3693,18 @@ namespace Epilogger.Data {
    			public static string DeletedColumn{
 			      get{
         			return "Deleted";
+      			}
+		    }
+           
+            public IColumn ImageFingerPrint{
+                get{
+                    return this.GetColumn("ImageFingerPrint");
+                }
+            }
+            				
+   			public static string ImageFingerPrintColumn{
+			      get{
+        			return "ImageFingerPrint";
       			}
 		    }
            

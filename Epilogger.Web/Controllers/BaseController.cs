@@ -34,14 +34,19 @@ namespace Epilogger.Web.Controllers {
         }
 
         protected UserAuthenticationProfile CurrentUserTwitterAuthorization {
-            get {
-                return CurrentUser.UserAuthenticationProfiles.Where(ua => ua.Service == AuthenticationServices.TWITTER.ToString()).FirstOrDefault();
+            get
+            {
+                if (CurrentUser==null)
+                {
+                    return null;
+                }
+                return CurrentUser != null && CurrentUser.UserAuthenticationProfiles.FirstOrDefault(ua => ua.Service == AuthenticationServices.TWITTER.ToString()) == null ? null : CurrentUser.UserAuthenticationProfiles.FirstOrDefault(ua => ua.Service == AuthenticationServices.TWITTER.ToString());
             }
         }
 
         protected UserAuthenticationProfile CurrentUserFacebookAuthorization {
             get {
-                return CurrentUser.UserAuthenticationProfiles.Where(ua => ua.Service == AuthenticationServices.FACEBOOK.ToString()).FirstOrDefault();
+                return CurrentUser.UserAuthenticationProfiles.FirstOrDefault(ua => ua.Service == AuthenticationServices.FACEBOOK.ToString());
             }
         }
 

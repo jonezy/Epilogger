@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System;
-using System.Linq;
-using Epilogger.Data;
-using Epilogger.Web.Model;
+﻿using Epilogger.Data;
 
 namespace Epilogger.Web
 {
@@ -17,7 +13,5 @@ namespace Epilogger.Web
         {
             return base.GetRepository<UserClickAction>().Add(entity);
         }
-
-
     }
 }

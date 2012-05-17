@@ -119,6 +119,119 @@ namespace Epilogger.Data
     
     
     /// <summary>
+    /// A class which represents the UserTwitterActions table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.UserTwitterAction 
+    /// </summary>
+
+	public partial class UserTwitterAction: INotifyPropertyChanging, INotifyPropertyChanged
+	{
+        partial void OnLoaded();
+        partial void OnValidate(System.Data.Linq.ChangeAction action);
+        partial void OnCreated();
+	    
+	    public UserTwitterAction(){
+	        OnCreated();
+	    }
+	    
+	    #region Properties
+	    
+        partial void OnIDChanging(int value);
+        partial void OnIDChanged();
+		
+		private int _ID;
+		public int ID { 
+		    get{
+		        return _ID;
+		    } 
+		    set{
+		        this.OnIDChanging(value);
+                this.SendPropertyChanging();
+                this._ID = value;
+                this.SendPropertyChanged("ID");
+                this.OnIDChanged();
+		    }
+		}
+		
+        partial void OnUserIdChanging(Guid? value);
+        partial void OnUserIdChanged();
+		
+		private Guid? _UserId;
+		public Guid? UserId { 
+		    get{
+		        return _UserId;
+		    } 
+		    set{
+		        this.OnUserIdChanging(value);
+                this.SendPropertyChanging();
+                this._UserId = value;
+                this.SendPropertyChanged("UserId");
+                this.OnUserIdChanged();
+		    }
+		}
+		
+        partial void OnTweetIdChanging(long? value);
+        partial void OnTweetIdChanged();
+		
+		private long? _TweetId;
+		public long? TweetId { 
+		    get{
+		        return _TweetId;
+		    } 
+		    set{
+		        this.OnTweetIdChanging(value);
+                this.SendPropertyChanging();
+                this._TweetId = value;
+                this.SendPropertyChanged("TweetId");
+                this.OnTweetIdChanged();
+		    }
+		}
+		
+        partial void OnTwitterActionChanging(string value);
+        partial void OnTwitterActionChanged();
+		
+		private string _TwitterAction;
+		public string TwitterAction { 
+		    get{
+		        return _TwitterAction;
+		    } 
+		    set{
+		        this.OnTwitterActionChanging(value);
+                this.SendPropertyChanging();
+                this._TwitterAction = value;
+                this.SendPropertyChanged("TwitterAction");
+                this.OnTwitterActionChanged();
+		    }
+		}
+		
+
+        #endregion
+
+        #region Foreign Keys
+        #endregion
+
+
+        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+        public event PropertyChangingEventHandler PropertyChanging;
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void SendPropertyChanging()
+        {
+            var handler = PropertyChanging;
+            if (handler != null)
+               handler(this, emptyChangingEventArgs);
+        }
+
+        protected virtual void SendPropertyChanged(String propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+	}
+	
+    
+    
+    /// <summary>
     /// A class which represents the User table in the Epilogger Database.
     /// This class is queryable through EpiloggerDB.User 
     /// </summary>
@@ -962,6 +1075,85 @@ namespace Epilogger.Data
             }
         }
 
+        #endregion
+
+
+        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+        public event PropertyChangingEventHandler PropertyChanging;
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void SendPropertyChanging()
+        {
+            var handler = PropertyChanging;
+            if (handler != null)
+               handler(this, emptyChangingEventArgs);
+        }
+
+        protected virtual void SendPropertyChanged(String propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+	}
+	
+    
+    
+    /// <summary>
+    /// A class which represents the ScraperURLs table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.ScraperURL 
+    /// </summary>
+
+	public partial class ScraperURL: INotifyPropertyChanging, INotifyPropertyChanged
+	{
+        partial void OnLoaded();
+        partial void OnValidate(System.Data.Linq.ChangeAction action);
+        partial void OnCreated();
+	    
+	    public ScraperURL(){
+	        OnCreated();
+	    }
+	    
+	    #region Properties
+	    
+        partial void OnIDChanging(int value);
+        partial void OnIDChanged();
+		
+		private int _ID;
+		public int ID { 
+		    get{
+		        return _ID;
+		    } 
+		    set{
+		        this.OnIDChanging(value);
+                this.SendPropertyChanging();
+                this._ID = value;
+                this.SendPropertyChanged("ID");
+                this.OnIDChanged();
+		    }
+		}
+		
+        partial void OnURLChanging(string value);
+        partial void OnURLChanged();
+		
+		private string _URL;
+		public string URL { 
+		    get{
+		        return _URL;
+		    } 
+		    set{
+		        this.OnURLChanging(value);
+                this.SendPropertyChanging();
+                this._URL = value;
+                this.SendPropertyChanged("URL");
+                this.OnURLChanged();
+		    }
+		}
+		
+
+        #endregion
+
+        #region Foreign Keys
         #endregion
 
 
@@ -3753,6 +3945,23 @@ namespace Epilogger.Data
                 this._Deleted = value;
                 this.SendPropertyChanged("Deleted");
                 this.OnDeletedChanged();
+		    }
+		}
+		
+        partial void OnImageFingerPrintChanging(string value);
+        partial void OnImageFingerPrintChanged();
+		
+		private string _ImageFingerPrint;
+		public string ImageFingerPrint { 
+		    get{
+		        return _ImageFingerPrint;
+		    } 
+		    set{
+		        this.OnImageFingerPrintChanging(value);
+                this.SendPropertyChanging();
+                this._ImageFingerPrint = value;
+                this.SendPropertyChanged("ImageFingerPrint");
+                this.OnImageFingerPrintChanged();
 		    }
 		}
 		

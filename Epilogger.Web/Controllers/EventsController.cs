@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
@@ -17,6 +19,7 @@ using System.Net;
 using System.IO;
 using System.Xml;
 using System.Text.RegularExpressions;
+using Twitterizer;
 
 namespace Epilogger.Web.Controllers {
     public partial class EventsController : BaseController
@@ -35,6 +38,7 @@ namespace Epilogger.Web.Controllers {
         CategoryService _catS = new CategoryService();
         UserService _us = new UserService();
         VenueService _venueService = new VenueService();
+        UserTwitterActionService _userTwitterActionService = new UserTwitterActionService();
 
         DateTime _fromDateTime = DateTime.Parse("2000-01-01 00:00:00");
         private DateTime FromDateTime() {
@@ -74,25 +78,26 @@ namespace Epilogger.Web.Controllers {
             if (_catS == null) _catS = new CategoryService();
             if (_us == null) _us = new UserService();
             if (_venueService == null) _venueService = new VenueService();
+            if (_userTwitterActionService == null) _userTwitterActionService = new UserTwitterActionService();
             base.Initialize(requestContext);
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         [CompressFilter]
-        public virtual ActionResult Category(string CategoryName)
+        public ActionResult Category(string categoryName)
         {
             var model = new BrowseCategoriesDisplayViewModel();
             var events = new List<Event>();
             
             //TODO - Implement paging!
-            if (CategoryName != string.Empty)
+            if (categoryName != string.Empty)
             {
-                events = CategoryName.ToLower() == "all" ? _es.Get50Events() : _es.GetEventsByCategorySlug(CategoryName);
+                events = categoryName.ToLower() == "all" ? _es.Get50Events() : _es.GetEventsByCategorySlug(categoryName);
             }
 
             model.Events = Mapper.Map<List<Event>, List<DashboardEventViewModel>>(events).OrderByDescending(f => f.StartDateTime);
             model.EventCategories = _catS.AllCategories();
-            model.CategoryName = _catS.GetCategoryBySlug(CategoryName).CategoryName;
+            model.CategoryName = _catS.GetCategoryBySlug(categoryName).CategoryName;
 
 
             return View(model);
@@ -123,6 +128,7 @@ namespace Epilogger.Web.Controllers {
                 model.CurrentUserID = CurrentUserID;
                 model.CurrentUserRole = CurrentUserRole;
                 model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
+                model.TheUser = CurrentUser;
 
                 model.CanDelete = false;
                 if ((requestedEvent.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator)
@@ -175,7 +181,7 @@ namespace Epilogger.Web.Controllers {
                                    };
             if (CurrentUserID != Guid.Empty)
             {
-                toolbarModel.HasSubscribed = CurrentUser.UserFollowsEvents.Where(ufe => ufe.EventID == requestedEvent.ID).FirstOrDefault() != null ? true : false;
+                toolbarModel.HasSubscribed = CurrentUser.UserFollowsEvents.FirstOrDefault(ufe => ufe.EventID == requestedEvent.ID) != null ? true : false;
             }
 
             return toolbarModel;
@@ -194,14 +200,11 @@ namespace Epilogger.Web.Controllers {
             }        
             else 
             {
-                DateTime FromDateTime;
-                DateTime ToDateTime;
+                var fromDateTime = DateTime.Parse(collection["FromDateTime"]);
+                var toDateTime = DateTime.Parse(collection["ToDateTime"]);
 
-                FromDateTime = DateTime.Parse(collection["FromDateTime"]);
-                ToDateTime = DateTime.Parse(collection["ToDateTime"]);
-
-                string encodedFrom = Epilogger.Web.Helpers.base64Encode(String.Format("{0:yyyy-MM-dd HH:mm:ss}", FromDateTime));
-                string encodedTo = Epilogger.Web.Helpers.base64Encode(String.Format("{0:yyyy-MM-dd HH:mm:ss}", ToDateTime));
+                string encodedFrom = Helpers.base64Encode(String.Format("{0:yyyy-MM-dd HH:mm:ss}", fromDateTime));
+                string encodedTo = Helpers.base64Encode(String.Format("{0:yyyy-MM-dd HH:mm:ss}", toDateTime));
 
 
                 return RedirectToAction("Details", new { id = id, f = encodedFrom, t = encodedTo });
@@ -263,10 +266,12 @@ namespace Epilogger.Web.Controllers {
                     topTweetersStats.Calculate(_ts.GetTop10TweetersByEventID(requestedEvent.ID, this.FromDateTime(),
                                                                              this.ToDateTime())).ToList();
                 model.ShowTopTweets = false;
-                model.Tweets =
-                    Mapper.Map<IEnumerable<Tweet>, IEnumerable<TweetDisplayViewModel>>(
-                        _ts.GetPagedTweets(requestedEvent.ID, currentPage + 1, 100, this.FromDateTime(),
-                                           this.ToDateTime()));
+                //model.Tweets =
+                //    Mapper.Map<IEnumerable<Tweet>, IEnumerable<TweetDisplayViewModel>>(
+                //        _ts.GetPagedTweets(requestedEvent.ID, currentPage + 1, 100, this.FromDateTime(),
+                //                           this.ToDateTime()));
+                
+                model.Tweets = _ts.GetPagedTweets(requestedEvent.ID, currentPage + 1, 100, FromDateTime(), ToDateTime());
                 model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
 
                 model.CanDelete = false;
@@ -280,10 +285,11 @@ namespace Epilogger.Web.Controllers {
                 if (currentPage + 1 == 1)
                 {
                     model.ShowTopTweets = true;
-                    model.Tweets =
-                        Mapper.Map<IEnumerable<Tweet>, IEnumerable<TweetDisplayViewModel>>(
-                            _ts.GetPagedTweets(requestedEvent.ID, currentPage + 1, 100, this.FromDateTime(),
-                                               this.ToDateTime()));
+                    //model.Tweets =
+                    //    Mapper.Map<IEnumerable<Tweet>, IEnumerable<TweetDisplayViewModel>>(
+                    //        _ts.GetPagedTweets(requestedEvent.ID, currentPage + 1, 100, this.FromDateTime(),
+                    //                           this.ToDateTime()));
+                    model.Tweets = _ts.GetPagedTweets(requestedEvent.ID, currentPage + 1, 100, FromDateTime(), ToDateTime());
                 }
 
                 return View(model);
@@ -495,34 +501,23 @@ namespace Epilogger.Web.Controllers {
                     EpiloggerDB db = _ts.Thedb();
                     IEnumerable<Tweet> TheTweets = _ts.Thedb().Tweets.Where(t => t.EventID == EventID & t.CreatedDate > DateTime.Parse(pageLoadTime)).OrderByDescending(t => t.CreatedDate).Take(Count);
 
-                    StringBuilder HTMLString = new StringBuilder();
-                    string lasttweettime = string.Empty;
-                    bool TheFirst = true;
-                    int RecordCount = 0;
+                    var htmlString = new StringBuilder();
+                    var lasttweettime = string.Empty;
+                    var TheFirst = true;
+                    var RecordCount = 0;
 
-                    foreach (Tweet TheT in TheTweets) {
+                    foreach (var theT in TheTweets) {
                         if (TheFirst) {
-                            lasttweettime = string.Format("{0:yyyy-MM-dd HH:mm:ss}", TheT.CreatedDate);
+                            lasttweettime = string.Format("{0:yyyy-MM-dd HH:mm:ss}", theT.CreatedDate);
                             TheFirst = false;
                         }
 
 
-                        //Instead of hard coding the HTML for the images, let's use the template.
-                        var firstOrDefault = TheT.Events.FirstOrDefault(t => t.ID == EventID);
+                        //Instead of hard coding the HTML for the tweets, let's use the template.
+                        var firstOrDefault = theT.Events.FirstOrDefault(t => t.ID == EventID);
                         var canDelete = firstOrDefault != null && ((firstOrDefault.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator);
 
-                        HTMLString.Append(RenderRazorViewToString("_TweetTemplate", new TweetTemplateViewModel() { CanDelete = canDelete, Tweet = TheT }));
-
-
-                        //StringBuilder tweet = new StringBuilder();
-                        //tweet.AppendFormat("<li id='{0}' class='tweet clearfix'>", TheT.TwitterID);
-                        //tweet.AppendFormat("<img src='{0}' class='fleft' alt='' height='48' width='48'  />", TheT.ProfileImageURL);
-                        //tweet.Append("<div class='tweet-body'><strong>");
-                        //tweet.AppendFormat("<a href='http://www.twitter.com/{0}' target='_blank'>@{1}</a></strong>", TheT.FromUserScreenName, TheT.FromUserScreenName);
-                        //tweet.AppendFormat("<p>{0}</p>", TheT.TextAsHTML);
-                        //tweet.Append("</div>");
-                        //tweet.Append("</li>");
-                        //HTMLString.Append(tweet.ToString());
+                        htmlString.Append(RenderRazorViewToString("TweetTemplate", new TweetTemplateViewModel() { CanDelete = canDelete, Tweet = theT, ShowControls = true, EventId = EventID }));
 
                         RecordCount++;
                     }
@@ -533,8 +528,8 @@ namespace Epilogger.Web.Controllers {
 
                     dict.Add("numberofnewtweets", RecordCount);
                     dict.Add("lasttweettime", lasttweettime);
-                    dict.Add("tweetcount", string.Format("{0:#,###}", db.Tweets.Where(t => t.EventID == EventID).Count()));
-                    dict.Add("html", HTMLString.ToString());
+                    dict.Add("tweetcount", string.Format("{0:#,###}", db.Tweets.Count(t => t.EventID == EventID)));
+                    dict.Add("html", htmlString.ToString());
                 }
             }
 
@@ -571,16 +566,7 @@ namespace Epilogger.Web.Controllers {
                         var canDelete = firstOrDefault != null && ((firstOrDefault.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator);
 
                         HTML.Append(RenderRazorViewToString("_ImageTemplate", new Epilogger.Web.Models.ImageTemplateViewModel { CanDelete = canDelete, Image = TheI }));
-
-                        //string myString = RenderViewToString(this.ControllerContext, "~/Views/Order/OrderResultEmail.aspx", "~/Views/Shared/Site.Master", this.ViewData, this.TempData);
-
-
-
-                        //string TheImage = "<a href='" + TheI.Fullsize + "' rel='prettyPhoto[latestphotos]' title='" + TheI.ID + "' id='" + TheI.ID + "'><img src='" + TheI.Fullsize + "' width='200' border='0' alt='' /></a>";
-                        //string CommentCount = "<a href='#' class='commentbubble'>" + TheI.ImageMetaData.Count() + "</a>";
-                        //HTML.Append("<div class='withcomment newPhotoupdates' style='display:none;' id='photo-" + TheI.ID + "'>" + TheImage + CommentCount + "</div>");
-
-
+                        
                         RecordCount++;
                     }
 
@@ -589,7 +575,7 @@ namespace Epilogger.Web.Controllers {
 
                     dict.Add("numberofnewphotos", RecordCount);
                     dict.Add("lastphototime", lastphototime);
-                    dict.Add("photocount", string.Format("{0:#,###}", db.Images.Where(t => t.EventID == EventID).Count()));
+                    dict.Add("photocount", string.Format("{0:#,###}", db.Images.Count(t => t.EventID == EventID)));
                     dict.Add("html", HTML.ToString());
                 }
             }
@@ -831,7 +817,7 @@ namespace Epilogger.Web.Controllers {
 
                 if (Request.QueryString["f"] != null)
                 {
-                    model.FromDateTime = this.FromDateTime();
+                    model.FromDateTime = FromDateTime();
                 }
                 else
                 {
@@ -839,7 +825,7 @@ namespace Epilogger.Web.Controllers {
                 }
                 if (Request.QueryString["t"] != null)
                 {
-                    model.ToDateTime = this.ToDateTime();
+                    model.ToDateTime = ToDateTime();
                 }
                 else
                 {
@@ -847,17 +833,17 @@ namespace Epilogger.Web.Controllers {
                 }
                 model.MyUTCNow = DateTime.UtcNow;
 
-                model.TweetCount = _ts.FindTweetCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-                model.ImageCount = _is.FindImageCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-                model.ExternalLinkCount = _ls.FindCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-                model.TopImages = model.TopImages = _is.GetTopPhotosAndTweetByEventID(requestedEvent.ID, 10, this.FromDateTime(), this.ToDateTime());
-                model.TopLinks = _ls.GetTopURLsByEventID(requestedEvent.ID, 5, this.FromDateTime(), this.ToDateTime());
+                model.TweetCount = _ts.FindTweetCountByEventID(requestedEvent.ID, FromDateTime(), ToDateTime());
+                model.ImageCount = _is.FindImageCountByEventID(requestedEvent.ID, FromDateTime(), ToDateTime());
+                model.ExternalLinkCount = _ls.FindCountByEventID(requestedEvent.ID, FromDateTime(), ToDateTime());
+                model.TopImages = model.TopImages = _is.GetTopPhotosAndTweetByEventID(requestedEvent.ID, 10, FromDateTime(), ToDateTime());
+                model.TopLinks = _ls.GetTopURLsByEventID(requestedEvent.ID, 5, FromDateTime(), ToDateTime());
 
-                List<CheckinDisplayViewModel> checkins = Mapper.Map<List<CheckIn>, List<CheckinDisplayViewModel>>(_cs.FindByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime()).ToList());
+                var checkins = Mapper.Map<List<CheckIn>, List<CheckinDisplayViewModel>>(_cs.FindByEventID(requestedEvent.ID, FromDateTime(), ToDateTime()).ToList());
                 model.AllCheckIns = checkins;
 
-                TopTweetersStats topTweetersStats = new TopTweetersStats();
-                model.TopTweeters = model.TopTweeters = topTweetersStats.Calculate(_ts.GetTop10TweetersByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime())).ToList();
+                var topTweetersStats = new TopTweetersStats();
+                model.TopTweeters = model.TopTweeters = topTweetersStats.Calculate(_ts.GetTop10TweetersByEventID(requestedEvent.ID, FromDateTime(), ToDateTime())).ToList();
 
                 model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
 
@@ -957,15 +943,17 @@ namespace Epilogger.Web.Controllers {
                             var locationNode = foursquareVenue.response.location;
 
                             // convert it to a Venue
-                            Venue venue = new Venue();
-                            venue.FoursquareVenueID = foursquareVenue.response.id;
-                            venue.Address = locationNode.address;
-                            venue.Name = foursquareVenue.response.name;
-                            venue.City = locationNode.city;
-                            venue.State = locationNode.state;
-                            venue.CrossStreet = locationNode.crossStreet;
-                            venue.Geolat = locationNode.lat;
-                            venue.Geolong = locationNode.lng;
+                            var venue = new Venue
+                                            {
+                                                FoursquareVenueID = foursquareVenue.response.id,
+                                                Address = locationNode.address,
+                                                Name = foursquareVenue.response.name,
+                                                City = locationNode.city,
+                                                State = locationNode.state,
+                                                CrossStreet = locationNode.crossStreet,
+                                                Geolat = locationNode.lat,
+                                                Geolong = locationNode.lng
+                                            };
 
                             // save the venue
                             _venueService.Save(venue);
@@ -974,10 +962,10 @@ namespace Epilogger.Web.Controllers {
                         else
                         {
                             //Need to look up the VenueID of the new FourSquareID
-                            Venue LookupVenue = _venueService.FindByFourSquareVenueID(model.FoursquareVenueID);
-                            if (LookupVenue != null)
+                            var lookupVenue = _venueService.FindByFourSquareVenueID(model.FoursquareVenueID);
+                            if (lookupVenue != null)
                             {
-                                currentEvent.VenueID = LookupVenue.ID;
+                                currentEvent.VenueID = lookupVenue.ID;
                             }
                         }
                     }
@@ -1014,11 +1002,8 @@ namespace Epilogger.Web.Controllers {
         {
 
             //TODO replace with IP geo coded data.
-            VenueSearchModel VSM = new VenueSearchModel();
-            VSM.City = "Toronto";
-            VSM.ProvinceState = "ON";
-
-            return PartialView(VSM);
+            var vsm = new VenueSearchModel { City = "Toronto", ProvinceState = "ON" };
+            return PartialView(vsm);
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1026,30 +1011,30 @@ namespace Epilogger.Web.Controllers {
         [HttpPost]
         public virtual PartialViewResult SearchVenues(FormCollection fc)
         {
-            StringBuilder location = new StringBuilder();
+            var location = new StringBuilder();
             if (fc["address"] != null) {
-                location.AppendFormat("{0},",fc["address"].ToString());
+                location.AppendFormat("{0},",fc["address"]);
             }
             if (fc["state"] != null) {
-                location.AppendFormat("{0},",fc["state"].ToString());
+                location.AppendFormat("{0},",fc["state"]);
             }
             if (fc["city"] != null) {
-                location.AppendFormat("{0},",fc["city"].ToString());
+                location.AppendFormat("{0},",fc["city"]);
             }
             if (fc["zip"] != null) {
-                location.AppendFormat("{0},", fc["zip"].ToString());
+                location.AppendFormat("{0},", fc["zip"]);
             }
             
             string url = string.Format("http://maps.google.com/maps/geo?output=csv&q={0}", Url.Encode(location.ToString().TrimEnd(',')));
             string results = GetResults(url, null, "Get");
             var parts = results.Split(',');
 
-            Double longitude = Convert.ToDouble(parts[2]);
-            Double latitude = Convert.ToDouble(parts[3]);
+            var longitude = Convert.ToDouble(parts[2]);
+            var latitude = Convert.ToDouble(parts[3]);
 
-            var venues = FoursquareVenueSearch(fc["name"] as string ?? "", longitude, latitude);
+            var venues = FoursquareVenueSearch(fc["name"] ?? "", longitude, latitude);
 
-            List<FoursquareVenue> foundVenues = new List<FoursquareVenue>();
+            var foundVenues = new List<FoursquareVenue>();
             foreach (var item in venues.response) {
                 foundVenues.Add(new FoursquareVenue { id = item.id, Name = item.name, Address = item.location.address, City = item.location.city, State = item.location.state, Zip = item.location.postalCode });
             }
@@ -1088,8 +1073,7 @@ namespace Epilogger.Web.Controllers {
         }
 
         string GetResults(string url, string postData, string method) {
-            string returnValue = string.Empty;
-            WebRequest webRequest = WebRequest.Create(url);
+            var webRequest = WebRequest.Create(url);
             webRequest.ContentType = "application/x-www-form-urlencoded";
 
             if (!string.IsNullOrEmpty(method)) {
@@ -1097,17 +1081,17 @@ namespace Epilogger.Web.Controllers {
 
                 if (!string.IsNullOrEmpty(postData)) {
                     // posting data to a url
-                    byte[] byteSend = Encoding.ASCII.GetBytes(postData);
+                    var byteSend = Encoding.ASCII.GetBytes(postData);
                     webRequest.ContentLength = byteSend.Length;
 
-                    using (Stream streamOut = webRequest.GetRequestStream())
+                    using (var streamOut = webRequest.GetRequestStream())
                         streamOut.Write(byteSend, 0, byteSend.Length);
                 }
             } else
                 webRequest.Method = "GET";
 
-            WebResponse webResponse = webRequest.GetResponse();
-            using (StreamReader streamReader = new StreamReader(webResponse.GetResponseStream(), Encoding.UTF8))
+            var webResponse = webRequest.GetResponse();
+            using (var streamReader = new StreamReader(webResponse.GetResponseStream(), encoding: Encoding.UTF8))
                 if (streamReader.Peek() > -1) return streamReader.ReadToEnd();
 
             return "";
@@ -1118,10 +1102,7 @@ namespace Epilogger.Web.Controllers {
         [CompressFilter]
         public virtual ActionResult AddBlogPost(int id)
         {
-            AddBlogPostViewModel model = new AddBlogPostViewModel();
-            model.BlogURL = "http://";
-            model.EventID = id;
-
+            var model = new AddBlogPostViewModel {BlogURL = "http://", EventID = id};
             return PartialView(model);
         }
 
@@ -1130,14 +1111,14 @@ namespace Epilogger.Web.Controllers {
         [HttpPost, ValidateInput(false)]
         public bool AddBlogPost(int id, AddBlogPostViewModel model) {
             try {
-                BlogPost blogPost = Mapper.Map<AddBlogPostViewModel, BlogPost>(model);
+                var blogPost = Mapper.Map<AddBlogPostViewModel, BlogPost>(model);
                 blogPost.EventID = id;
                 blogPost.UserID = CurrentUserID;
                 blogPost.DateTime = DateTime.UtcNow;
                 _bs.Save(blogPost);
 
                 return true;
-            } catch (Exception ex) {
+            } catch (Exception) {
                 return false;
             }
         }
@@ -1168,7 +1149,7 @@ namespace Epilogger.Web.Controllers {
                 //LS.Save(externalLink);
 
                 return true;
-            } catch (Exception ex) {
+            } catch (Exception) {
                 return false;
             }
         }
@@ -1186,10 +1167,10 @@ namespace Epilogger.Web.Controllers {
         public virtual ActionResult StarRatings(FormCollection fc)
         {
             
-            int UserRating;
-            int.TryParse(fc["UserRating"], out UserRating);
+            int userRating;
+            int.TryParse(fc["UserRating"], out userRating);
 
-            Event requestedEvent = _es.FindBySlug(fc["EventSlug"]);
+            var requestedEvent = _es.FindBySlug(fc["EventSlug"]);
             if (requestedEvent != null)
             {
                 if (CurrentUserID == Guid.Empty)
@@ -1204,7 +1185,7 @@ namespace Epilogger.Web.Controllers {
                                     EventID = requestedEvent.ID,
                                     UserID = CurrentUserID,
                                     RatingDateTime = DateTime.UtcNow,
-                                    UserRating = UserRating
+                                    UserRating = userRating
                                 };
 
 
@@ -1220,24 +1201,16 @@ namespace Epilogger.Web.Controllers {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         [HttpPost]
-        public bool Delete(int EventID)
+        public bool Delete(int eventID)
         {
-            try
-            {
-                MQ.MSGProducer MP = new MQ.MSGProducer("Epilogger", "System");
-                MQ.Messages.SystemProcessingMSG DeleteMSG = new MQ.Messages.SystemProcessingMSG();
-                DeleteMSG.EventID = EventID;
-                DeleteMSG.Task = MQ.Messages.SystemMessageType.Delete;
-                MP.SendMessage(DeleteMSG);
-                MP.Dispose();
+            var mp = new MQ.MSGProducer("Epilogger", "System");
+            var deleteMSG = new MQ.Messages.SystemProcessingMSG
+                                {EventID = eventID, Task = MQ.Messages.SystemMessageType.Delete};
+            mp.SendMessage(deleteMSG);
+            mp.Dispose();
 
-                this.StoreSuccess("Your event has been added to the Delete queue! Due to the large volume of data, your event may take a few minutes to be removed from the system.");
-            }
-            catch (Exception)
-            {    
-                throw;
-            }
-            
+            this.StoreSuccess("Your event has been added to the Delete queue! Due to the large volume of data, your event may take a few minutes to be removed from the system.");
+
             return true;
         }
 
@@ -1283,7 +1256,169 @@ namespace Epilogger.Web.Controllers {
             var model = new UploadPhotosViewModel {EventID = id};
             return PartialView(model);
         }
-       
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        public ActionResult TweetTemplate(TweetTemplateViewModel model)
+        {
+            model.Replied = _userTwitterActionService.HasUserRepliedToTweet(CurrentUserID, model.Tweet.TwitterID);
+            model.Retweeted = _userTwitterActionService.HasUserRetweetedTweet(CurrentUserID, model.Tweet.TwitterID);
+            model.Favorited = _userTwitterActionService.HasUserFavoritedTweet(CurrentUserID, model.Tweet.TwitterID);
+
+            return PartialView(model);
+        }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        public ActionResult TweetReply(int eventId, long tweetId)
+        {
+            
+            var model = new TweetReplyViewModel
+                            {
+                                Tweet = _ts.FindByTwitterID(tweetId),
+                                Event = _es.FindByID(eventId),
+                                IsTwitterAuthed = CurrentUserTwitterAuthorization != null
+                            };
+
+            var apiClient = new Epilogr.APISoapClient();
+            model.ShortEventURL = apiClient.CreateUrl("http://epilogger.com/events/" + model.Event.EventSlug).ShortenedUrl;
+
+            return PartialView(model);
+        }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        [HttpPost] //Called by Ajax
+        public bool TweetReply(FormCollection c)
+        {
+            try
+            {
+                var tokens = new OAuthTokens
+                {
+                    ConsumerKey = ConfigurationManager.AppSettings["TwitterConsumerKey"],
+                    ConsumerSecret = ConfigurationManager.AppSettings["TwitterConsumerSecret"],
+                    AccessToken = CurrentUserTwitterAuthorization.Token,
+                    AccessTokenSecret = CurrentUserTwitterAuthorization.TokenSecret
+                };
+
+                var ts = TwitterStatus.Update(tokens, c["ReplyNewTweet"], new StatusUpdateOptions { InReplyToStatusId = decimal.Parse(c["TwitterID"]) });
+                
+                //Record the Reply
+                var uta = new UserTwitterAction
+                              {
+                                  TweetId = (long) ts.ResponseObject.Id,
+                                  TwitterAction = "Reply",
+                                  UserId = CurrentUser.ID
+                              };
+                _userTwitterActionService.Save(uta);
+
+                return ts.Result == RequestResult.Success;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+        
+        public ActionResult TweetRetweet(int eventId, long tweetId)
+        {
+            var model = new TweetReplyViewModel
+                            {
+                Tweet = _ts.FindByTwitterID(tweetId),
+                Event = _es.FindByID(eventId),
+                IsTwitterAuthed = CurrentUserTwitterAuthorization != null
+            };
+
+            var apiClient = new Epilogr.APISoapClient();
+            model.ShortEventURL = apiClient.CreateUrl("http://epilogger.com/events/" + model.Event.EventSlug).ShortenedUrl;
+
+            return PartialView(model);
+        }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        [HttpPost] //Called by Ajax
+        public bool TweetRetweet(FormCollection c)
+        {
+            try
+            {
+                var tokens = new OAuthTokens
+                                 {
+                    ConsumerKey = ConfigurationManager.AppSettings["TwitterConsumerKey"],
+                    ConsumerSecret = ConfigurationManager.AppSettings["TwitterConsumerSecret"],
+                    AccessToken = CurrentUserTwitterAuthorization.Token,
+                    AccessTokenSecret = CurrentUserTwitterAuthorization.TokenSecret
+                };
+
+                var classicRT = bool.Parse(c["ClassicRT"]);
+
+                var ts = classicRT ? TwitterStatus.Update(tokens, c["RetweetText"]) : TwitterStatus.Retweet(tokens, decimal.Parse(c["TwitterID"]));
+
+                //Record the Retweet
+                var uta = new UserTwitterAction
+                {
+                    TweetId = (long)ts.ResponseObject.Id,
+                    TwitterAction = "Retweet",
+                    UserId = CurrentUser.ID
+                };
+                _userTwitterActionService.Save(uta);
+
+                return ts.Result == RequestResult.Success;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        [HttpPost] //Called by Ajax
+        public string TweetFavorite(FormCollection c)
+        {
+            try
+            {
+                
+                if (CurrentUserTwitterAuthorization == null)
+                {
+                    return "Auth";
+                }
+
+                var tokens = new OAuthTokens
+                                 {
+                    ConsumerKey = ConfigurationManager.AppSettings["TwitterConsumerKey"],
+                    ConsumerSecret = ConfigurationManager.AppSettings["TwitterConsumerSecret"],
+                    AccessToken = CurrentUserTwitterAuthorization.Token,
+                    AccessTokenSecret = CurrentUserTwitterAuthorization.TokenSecret
+                };
+
+                var ts = TwitterFavorite.Create(tokens, decimal.Parse(c["TwitterID"]));
+
+                //Record the Reply
+                var uta = new UserTwitterAction
+                {
+                    TweetId = (long)ts.ResponseObject.Id,
+                    TwitterAction = "Favorite",
+                    UserId = CurrentUser.ID
+                };
+                _userTwitterActionService.Save(uta);
+
+                return "True";
+            }
+            catch (Exception)
+            {
+                return "False";
+            }
+        }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        public ActionResult NeedTwitterAuth()
+        {
+            return PartialView();
+        }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 

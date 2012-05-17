@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Configuration;
 using System.Linq;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -18,8 +19,7 @@ using RichmondDay.Helpers;
 using Twitterizer;
 
 namespace Epilogger.Web.Controllers {
-    public partial class AccountController : BaseController
-    {
+    public class AccountController : BaseController {
         UserService service;
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext) {
@@ -29,22 +29,84 @@ namespace Epilogger.Web.Controllers {
         }
 
         [RequiresAuthentication(ValidUserRole=UserRoleType.RegularUser, AccessDeniedMessage="You must be logged in to edit your account")]
-        public virtual ActionResult Index()
-        {
+        public ActionResult Index () {
             AccountModel model = Mapper.Map<User, AccountModel>(CurrentUser);
             model.ConnectedNetworks = Mapper.Map<List<UserAuthenticationProfile>, List<ConnectedNetworksViewModel>>(CurrentUser.UserAuthenticationProfiles.ToList());
             
             return View(model);
         }
 
-        [HttpGet]
-        public virtual ActionResult Create()
+
+        [HttpPost]
+        public ActionResult Index(AccountModel model, FormCollection c)
         {
+            model.ConnectedNetworks = Mapper.Map<List<UserAuthenticationProfile>, List<ConnectedNetworksViewModel>>(CurrentUser.UserAuthenticationProfiles.ToList());
+            var theUser = Mapper.Map<User, AccountModel>(CurrentUser);
+            model.TwitterProfilePicture = theUser.TwitterProfilePicture;
+            model.FacebookProfilePicture = theUser.FacebookProfilePicture;
+            model.ProfilePicture = theUser.ProfilePicture;
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var user = CurrentUser;
+                    user.FirstName = model.FirstName;
+                    user.LastName = model.LastName;
+                    user.EmailAddress = model.EmailAddress;
+                    user.DateOfBirth = DateTime.Parse(model.DateOfBirth);
+                    //user.TimeZoneOffSet = model.TimeZone;
+
+                    string imagePath = string.Empty;
+                    if (c["ProfilePictures"] != null)
+                    {
+                        string pictureProvider = c["ProfilePictures"] as string ?? "";
+
+                        if (pictureProvider.ToLower().Contains("twitter"))
+                        {
+                            imagePath =
+                                TwitterHelper.GetUser(CurrentUserTwitterAuthorization.Token,
+                                                      CurrentUserTwitterAuthorization.TokenSecret,
+                                                      CurrentUserTwitterAuthorization.ServiceUsername).ResponseObject.
+                                    ProfileImageLocation;
+                        }
+                        else if (pictureProvider.ToLower().Contains("facebook"))
+                        {
+                            imagePath = FacebookHelper.GetProfilePicture(CurrentUserFacebookAuthorization.Token);
+                        }
+                    }
+                    user.ProfilePicture = imagePath;
+
+                    service.Save(user);
+
+                    //this.StoreSuccess("Your account was updated successfully");
+                    this.Receive(MessageType.Success, "Your account was updated successfully");
+
+                }
+                catch (Exception ex)
+                {
+                    Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                    this.StoreError("There was a problem updating your account");
+                }
+            }
+            return View(model);
+        }
+
+
+
+
+
+
+
+
+
+        [HttpGet]
+        public ActionResult Create() {
             return View(new CreateAccountModel());
         }
 
         [HttpPost]
-        public virtual ActionResult Create(CreateAccountModel model)
+        public ActionResult Create(CreateAccountModel model)
         {
             if (ModelState.IsValid) {
                 // TEMP: check to make sure the email address provided is in the beta invite table.
@@ -54,7 +116,7 @@ namespace Epilogger.Web.Controllers {
                 //}
 
                 //Check to see if this account already exists
-                User userTest = service.GetUserByUsername(model.Username);
+                var userTest = service.GetUserByUsername(model.Username);
                 if (userTest != null)
                 {
                     ModelState.AddModelError(string.Empty, "The username " + userTest.Username + " is already in use, please try another username");
@@ -118,16 +180,15 @@ namespace Epilogger.Web.Controllers {
 
                 } catch (Exception ex) {
                     this.StoreError("There was a problem creating your account");
-                    service.DeleteUser(user.ID);
+                    if (user != null) service.DeleteUser(user.ID);
                     return View(model);
                 }
-            } else
-                return View(model);
+            }
+            return View(model);
         }
 
         [HttpGet]
-        public virtual ActionResult Validate(string validationCode)
-        {
+        public ActionResult Validate(string validationCode) {
             if (string.IsNullOrEmpty(validationCode)) {
                 this.StoreError("The verification code couldn't be determined, please try clicking the link in your email again.");
                 return View();
@@ -158,45 +219,55 @@ namespace Epilogger.Web.Controllers {
             return RedirectToAction("login", "account");
         }
 
-        [HttpPost]
-        public virtual ActionResult Update(AccountModel model, FormCollection c)
-        {
-            try {
-                User user = CurrentUser;
-                user.FirstName = model.FirstName;
-                user.LastName = model.LastName;
-                user.EmailAddress = model.EmailAddress;
-                user.DateOfBirth = DateTime.Parse(model.DateOfBirth);
-                user.TimeZoneOffSet = model.TimeZone;
+        //[HttpPost]
+        //public ActionResult Update(AccountModel model, FormCollection c) {
+            
+        //    try
+        //    {
+        //        User user = CurrentUser;
+        //        user.FirstName = model.FirstName;
+        //        user.LastName = model.LastName;
+        //        user.EmailAddress = model.EmailAddress;
+        //        user.DateOfBirth = DateTime.Parse(model.DateOfBirth);
+        //        //user.TimeZoneOffSet = model.TimeZone;
 
-                string imagePath = string.Empty;
-                if (c["ProfilePictures"] != null) {
-                    string pictureProvider = c["ProfilePictures"] as string ?? "";
+        //        string imagePath = string.Empty;
+        //        if (c["ProfilePictures"] != null)
+        //        {
+        //            string pictureProvider = c["ProfilePictures"] as string ?? "";
 
-                    if (pictureProvider.ToLower().Contains("twitter")) {
-                        imagePath = TwitterHelper.GetUser(CurrentUserTwitterAuthorization.Token, CurrentUserTwitterAuthorization.TokenSecret, CurrentUserTwitterAuthorization.ServiceUsername).ResponseObject.ProfileImageLocation;
-                    } else if (pictureProvider.ToLower().Contains("facebook")) {
-                        imagePath = FacebookHelper.GetProfilePicture(CurrentUserFacebookAuthorization.Token);
-                    }
-                }
-                user.ProfilePicture = imagePath;
+        //            if (pictureProvider.ToLower().Contains("twitter"))
+        //            {
+        //                imagePath =
+        //                    TwitterHelper.GetUser(CurrentUserTwitterAuthorization.Token,
+        //                                            CurrentUserTwitterAuthorization.TokenSecret,
+        //                                            CurrentUserTwitterAuthorization.ServiceUsername).ResponseObject.
+        //                        ProfileImageLocation;
+        //            }
+        //            else if (pictureProvider.ToLower().Contains("facebook"))
+        //            {
+        //                imagePath = FacebookHelper.GetProfilePicture(CurrentUserFacebookAuthorization.Token);
+        //            }
+        //        }
+        //        user.ProfilePicture = imagePath;
 
-                service.Save(user);
+        //        service.Save(user);
 
-                //this.StoreSuccess("Your account was updated successfully");
-                this.Receive(MessageType.Success, "Your account was updated successfully");
+        //        //this.StoreSuccess("Your account was updated successfully");
+        //        this.Receive(MessageType.Success, "Your account was updated successfully");
 
-            } catch (Exception ex) {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
-                this.StoreError("There was a problem updating your account");
-            }
-
-            return RedirectToAction("Index");
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+        //        this.StoreError("There was a problem updating your account");
+        //    }
+            
+        //    return RedirectToAction("Index");
+        //}
 
         [HttpGet]
-        public virtual ActionResult Login()
-        {
+        public ActionResult Login() {
             CookieHelpers.DestroyCookie("lc");
 
             // store this here so that we can redirect the user back later.
@@ -207,8 +278,7 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpPost]
-        public virtual ActionResult Login(LoginModel model)
-        {
+        public ActionResult Login(LoginModel model) {
             // 1. First we need to check if the person logging in has a blank password, if they do then we need to redirect them 
             // to a page to create a new password.
 
@@ -262,8 +332,101 @@ namespace Epilogger.Web.Controllers {
             return View(model);
         }
 
-        public virtual ActionResult Logout()
+        // GET: Account/TwitterLogon/
+        public ActionResult TwitterLogon(string oauth_token, string oauth_verifier, string ReturnUrl)
         {
+
+            if (string.IsNullOrEmpty(oauth_token) || string.IsNullOrEmpty(oauth_verifier))
+            {
+                var httpRequestBase = Request;
+                if (httpRequestBase != null)
+                {
+                    if (httpRequestBase.Url != null)
+                    {
+                        var builder = new UriBuilder(httpRequestBase.Url);
+                        builder.Query = string.Concat(
+                            builder.Query,
+                            string.IsNullOrEmpty(builder.Query) ? string.Empty : "&",
+                            "ReturnUrl=",
+                            ReturnUrl);
+
+                        var token = OAuthUtility.GetRequestToken(
+                            ConfigurationManager.AppSettings["TwitterConsumerKey"],
+                            ConfigurationManager.AppSettings["TwitterConsumerSecret"],
+                            builder.ToString()).Token;
+
+                        return Redirect(OAuthUtility.BuildAuthorizationUri(token, true).ToString());
+                    }
+                }
+            }
+
+            var tokens = OAuthUtility.GetAccessToken(
+                ConfigurationManager.AppSettings["TwitterConsumerKey"],
+                ConfigurationManager.AppSettings["TwitterConsumerSecret"],
+                oauth_token,
+                oauth_verifier);
+
+
+            var _us = new UserService();
+            var _uaps = new UserAuthenticationProfileService();
+
+            var userAuthByScreenName = _uaps.UserAuthorizationByServiceScreenName(tokens.ScreenName);
+
+            if (userAuthByScreenName == null)
+            {
+                //Get the user details from Twitter
+                //var theTwitterUser = TwitterUser.Show(tokens.UserId);
+
+                //No auth exists. This a new user, create the account and redirect to the profile page.
+                var theNewUser = new User()
+                                     {
+                                         CreatedDate = DateTime.UtcNow,
+                                         IsActive = true,
+                                         RoleID = 2,
+                                         Username = tokens.ScreenName + "twitter",
+                                         Password = " ",
+                                         EmailAddress = " "
+                                     };
+                _us.Save(theNewUser);
+
+                //Put the auth in the auth table.
+                var theAuth = new UserAuthenticationProfile
+                                  {
+                                      UserID = theNewUser.ID,
+                                      Service = "TWITTER",
+                                      ServiceUsername = tokens.ScreenName,
+                                      Token = tokens.Token,
+                                      TokenSecret = tokens.TokenSecret
+                                  };
+                _uaps.Save(theAuth);
+
+                CookieHelpers.WriteCookie("lc", "uid", theNewUser.ID.ToString());
+                CookieHelpers.WriteCookie("lc", "tz", theNewUser.TimeZoneOffSet.ToString());
+
+                return RedirectToAction("Index");
+            }
+
+            //This user already has a token, log them in.
+            var theUser = _us.GetUserByID(userAuthByScreenName.UserID);
+            // write the login cookie, redirect. 
+            CookieHelpers.WriteCookie("lc", "uid", theUser.ID.ToString());
+            CookieHelpers.WriteCookie("lc", "tz", theUser.TimeZoneOffSet.ToString());
+
+            return RedirectToAction("index", "home");
+
+
+
+            //if (string.IsNullOrEmpty(ReturnUrl))
+            //    return Redirect("/");
+            //else
+            //    return Redirect(ReturnUrl);
+        }
+
+
+
+
+
+        public ActionResult Logout() {
             CookieHelpers.DestroyCookie("lc");
             
             this.StoreInfo("You have been logged out of your epilogger account");
@@ -272,14 +435,12 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpGet]
-        public virtual ActionResult ForgotPassword()
-        {
+        public ActionResult ForgotPassword() {
             return View();
         }
 
         [HttpPost, ValidateInput(false)]
-        public virtual ActionResult ForgotPassword(ForgotPasswordViewModel model)
-        {
+        public ActionResult ForgotPassword(ForgotPasswordViewModel model) {
             try {
                 Guid passwordResetHash = Guid.NewGuid();
                 User user = service.GetUserByEmail(model.EmailAddress.Trim());
@@ -324,8 +485,7 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpGet]
-        public virtual ActionResult ResetPassword()
-        {
+        public ActionResult ResetPassword() {
             Guid passwordResetHash = Guid.Parse(Request.QueryString["hash"].ToString());
             User user = service.GetUserByResetHash(passwordResetHash);
             if (user == null) {
@@ -340,8 +500,7 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpPost, ValidateInput(false)]
-        public virtual ActionResult ResetPassword(ResetPasswordViewModel model)
-        {
+        public ActionResult ResetPassword(ResetPasswordViewModel model) {
             try {
                 User user = service.GetUserByID(Guid.Parse(model.UserID));
                 user.Password = PasswordHelpers.EncryptPassword(model.NewPassword);
@@ -360,14 +519,12 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpGet]
-        public virtual ActionResult UpdatePassword()
-        {
+        public ActionResult UpdatePassword() {
             return View(new UpdatePasswordModel());
         }
 
         [HttpPost]
-        public virtual ActionResult UpdatePassword(UpdatePasswordModel model)
-        {
+        public ActionResult UpdatePassword(UpdatePasswordModel model) {
             if (ModelState.IsValid) {
                 // update password.
                 string salt = BCryptHelper.GenerateSalt();
@@ -387,14 +544,14 @@ namespace Epilogger.Web.Controllers {
         }
 
 
-        public virtual ActionResult AccountActivationNeeded()
+        public ActionResult AccountActivationNeeded()
         {
             return View();
         }
 
 
 
-        public virtual ActionResult ActivationSent()
+        public ActionResult ActivationSent()
         {
 
             var userId = new Guid();
@@ -435,7 +592,7 @@ namespace Epilogger.Web.Controllers {
             return View();
         }
 
-        public virtual ActionResult TwitterAuthTest()
+        public ActionResult TwitterAuthTest()
         {
 
             var apiClient = new APISoapClient();
@@ -463,7 +620,7 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpPost]
-        public virtual ActionResult TwitterAuthTest(TwitterAuthTestViewModel model)
+        public ActionResult TwitterAuthTest(TwitterAuthTestViewModel model)
         {
 
             var tokens = new OAuthTokens { ConsumerKey = "qV0GasfpuvDRmXhnaDA", ConsumerSecret = "q3ftmYti8d4ws2iNieidofWYLswdHT3BRwmu813EA", AccessToken = "280687481-XyZq3P6v7qivApsYjES8V3LjTRgcRZIx2XRO755V", AccessTokenSecret = "Z7MG32TDldpx5USDdOUXjzsop1ZtaEbLMm1bzTnuk" };
