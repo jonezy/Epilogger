@@ -6,7 +6,8 @@ using Epilogger.Data;
 using Epilogger.Web.Models;
 
 namespace Epilogger.Web.Controllers {
-    public class NavigationController : BaseController {
+    public partial class NavigationController : BaseController
+    {
         EventService _eventService;
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext) {
@@ -14,7 +15,8 @@ namespace Epilogger.Web.Controllers {
             base.Initialize(requestContext);
         }
         [ChildActionOnly]
-        public ActionResult GlobalNavigation() {
+        public virtual ActionResult GlobalNavigation()
+        {
             var model = new GlobalNavigationModel { UserLoggedIn = CurrentUserID != Guid.Empty ? true : false };
             if (CurrentUser != null) {
                 model.Username = CurrentUser.Username;
@@ -36,7 +38,8 @@ namespace Epilogger.Web.Controllers {
         //    return PartialView("Navigation", model);
         //}
 
-        public ActionResult RenderBreadCrumb() {
+        public virtual ActionResult RenderBreadCrumb()
+        {
             Dictionary<string, string> trail = new Dictionary<string, string> {{"home", App.BaseUrl}};
             if (Request.Url != null && Request.Url.AbsoluteUri != App.BaseUrl) {
                 var count = 1;

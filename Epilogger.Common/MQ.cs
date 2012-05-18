@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using RabbitMQ.Client;
@@ -94,7 +95,8 @@ namespace Epilogger.Common
             public void init()
             {
                 var connectionFactory = new ConnectionFactory();
-                connectionFactory.HostName = "epilogger.com";
+                connectionFactory.HostName = "72.55.188.78";
+                connectionFactory.Port = 5672;
                 connectionFactory.UserName = "epilogger";
                 connectionFactory.Password = "xea,87,21r";
                 Connection = connectionFactory.CreateConnection();
@@ -140,9 +142,9 @@ namespace Epilogger.Common
 
             [Serializable]
             [JsonObject(MemberSerialization.OptOut)]
-            public class ImageMSG
+            public class TwitterImageMSG
             {
-                public long EventID { get; set; }
+                public int EventID { get; set; }
                 public long TweetID { get; set; }
                 public string TwitterName { get; set; }
                 public string ImageSource { get; set; }
@@ -152,9 +154,69 @@ namespace Epilogger.Common
 
             [Serializable]
             [JsonObject(MemberSerialization.OptOut)]
+            public class FacebookImageMSG
+            {
+                public int EventId { get; set; }
+                public string AlbumId { get; set; }
+                public Uri ImageUrl { get; set; }
+
+                public FacebookImageMSG()
+                {
+                }
+
+                public FacebookImageMSG(int eventId, string albumId, Uri imageUrl)
+                {
+                    EventId = eventId;
+                    AlbumId = albumId;
+                    ImageUrl = imageUrl;
+                }
+            }
+
+            [Serializable]
+            [JsonObject(MemberSerialization.OptOut)]
+            public class FlickrImageMSG
+            {
+                public int EventId { get; set; }
+                public Uri ImageUrl { get; set; }
+
+                public FlickrImageMSG()
+                {
+                }
+
+                public FlickrImageMSG(int eventId, Uri imageUrl)
+                {
+                    EventId = eventId;
+                    ImageUrl = imageUrl;
+                }
+            }
+
+            [Serializable]
+            [JsonObject(MemberSerialization.OptOut)]
+            public class FileImageMSG
+            {
+                public int EventID { get; set; }
+                public long? UserID { get; set; }
+                public byte[] Content { get; set; }
+                public string FileName { get; set; }
+
+                public FileImageMSG()
+                {
+                }
+
+                public FileImageMSG(int eventId, long? userId, byte[] content, string fileName)
+                {
+                    EventID = eventId;
+                    UserID = userId;
+                    Content = content;
+                    FileName = fileName;
+                }
+            }
+
+            [Serializable]
+            [JsonObject(MemberSerialization.OptOut)]
             public class LinkMSG
             {
-                public long EventID { get; set; }
+                public int EventID { get; set; }
                 public long TweetID { get; set; }
                 public string LinkSource { get; set; }
                 public Uri Link { get; set; }

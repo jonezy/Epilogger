@@ -1,0 +1,41 @@
+﻿@using System.Configuration
+@using Facebook
+@{
+    Layout = "";
+}
+
+<html>
+    <head>
+        <script type="text/javascript" src="@Links.Public.js.jquery_1_6_2_min_js"></script>
+        <script type="text/javascript">
+            var FlickrApiKey = '@ConfigurationManager.AppSettings["FlickrApiKey"]';
+            var FlickrApiSecret = '@ConfigurationManager.AppSettings["FlickrApiSecret"]';
+            var FacebookAppId = '@(((FacebookConfigurationSection)ConfigurationManager.GetSection("facebookSettings")).AppId)';
+
+            $(function() {
+                jQuery.ajaxSettings.traditional = true; //set traditional parameters serialization which is used by ASP.NET
+            });
+        </script>
+        @RenderSection("Head", false)
+        <link rel="stylesheet" href="@Links.Public.css.sadiehawkins_css">
+    </head>
+    <body style="background-color: white;">
+        @*ToDo: remove inline styles*@
+        <div style="height: 100%; position: relative;">
+            <div style="height: 30px; margin-bottom: 20px;">
+                @RenderSection("Navigation", false)
+            </div>
+            <div>
+                @RenderBody()
+            </div>
+            <div style="position: absolute; left: 0; width: 100%; bottom: 0;">
+                <div style="margin: 0; float: left; text-align: left">
+                    @RenderSection("BottomLeft", false)
+                </div>
+                <div style="margin: 0; float: right; text-align: right">
+                    @RenderSection("BottomRight", false)
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

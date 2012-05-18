@@ -1,0 +1,18 @@
+﻿@model Epilogger.Web.Models.GetFacebookAlbumsViewModel
+@{
+    Layout = MVC.ImageUpload.Views._Layout;
+}
+@section Head {
+    <script type="text/javascript" src="@Links.Public.js.jqueryCookie.jquery_cookie_js"></script>
+        <script type="text/javascript" src="@Links.Public.js.jqueryQueryString_js"></script>   
+
+    <script type="text/javascript">
+        $(function () {
+            $.cookie('flickr_oauth_token', $.getQueryString('oauth_token'), { expires: 1, path: '/' });
+            $.cookie('flickr_oauth_verifier', $.getQueryString('oauth_verifier'), { expires: 1, path: '/' });
+            $.cookie('flickr_oauth_justloggedin', 1, { expires: 1, path: '/' });
+            window.opener.location.href = "@Url.Action(MVC.ImageUpload.UploadFlickrImages())";
+            window.close();
+        });
+    </script>
+}

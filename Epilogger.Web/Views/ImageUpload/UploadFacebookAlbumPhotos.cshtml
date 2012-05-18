@@ -1,0 +1,104 @@
+﻿@model Epilogger.Web.Models.UploadFacebookAlbumPhotosViewModel
+@{
+    Layout = MVC.ImageUpload.Views._Layout;
+}
+@section Head {
+    <link href="@Links.Public.js.jQueryEpiloggerGallery.css.jqueryEpiloggerGallery_css" rel="stylesheet"/>
+    <script type="text/javascript" src="@Links.Public.js.jQueryEpiloggerGallery.js.jqueryEpiloggerGallery_js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#uploadLink').click(function (event) {
+                var photosUrls = $('#gallery').find('img.selectedImage').map(function () { return $(this).attr('src'); });
+                if (!photosUrls)
+                    alert('Please select some photos');
+                else
+                    $.post(window.location,
+                        { photosUrls: $.makeArray(photosUrls) },
+                        function (data) {
+                            window.location = '@Url.Action(MVC.ImageUpload.ChooseUploadSource())' + '?' + '@MVC.ImageUpload.ChooseUploadSourceParams.status' + '=1';
+                            return false;
+                        });
+
+                return false;
+            });
+        });
+    </script>
+}
+@section Navigation {
+    <img src="@Links.Public.images.imageupload.source_inactive_png"/>
+    <img src="@Links.Public.images.imageupload.choosealbum_inactive_png"/>
+    <img src="@Links.Public.images.imageupload.selectphotos_active_png"/>
+}
+@section BottomLeft {
+    <a href="@Url.Action(MVC.ImageUpload.GetFacebookAlbums())">
+        <img src="@Links.Public.images.imageupload.oops_flickr_png" />
+    </a>
+}
+@section BottomRight {
+    <a id="uploadLink" href="#">
+        <img src="@Links.Public.images.imageupload.upload_png" />
+    </a>
+}
+<div id="fb-root">
+</div>
+<script type="text/javascript">
+    window.getAlbumPhotos = function () {
+        FB.api('/' + '@Model.AlbumId' + '/photos', function (resp) {
+            var galleryImages = $(resp.data).map(function () {
+                return { src: this.source };
+            });
+
+            $('#gallery').gallery(galleryImages, true);
+
+            $('#photosContainer').show();
+        });
+    };
+
+    //    ToDo: Remove dpulication Facebook initialization
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: FacebookAppId, // App ID
+            //            channelUrl: '//WWW.YOUR_DOMAIN.COM/channel.html', // Channel File
+            status: true, // check login status
+            cookie: true, // enable cookies to allow the server to access the session
+            xfbml: true  // parse XFBML
+        });
+
+        // Additional initialization code here
+
+        // Check if the current user is logged in and has authorized the app
+        FB.getLoginStatus(checkLoginStatus);
+
+        // Check the result of the user status and display login button if necessary
+        function checkLoginStatus(response) {
+            if (response && response.status == 'connected') {
+                $('#loginContainer').hide();
+                getAlbumPhotos();
+            } else
+                $('#loginContainer').show();
+        }
+    };
+
+    // Load the SDK Asynchronously
+    (function (d) {
+        var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+        if (d.getElementById(id)) { return; }
+        js = d.createElement('script'); js.id = id; js.async = true;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        ref.parentNode.insertBefore(js, ref);
+    } (document));
+</script>
+<div style="margin-bottom: 20px;">
+    <h2>3) SELECT PHOTOS:</h2>
+    <div id="loginContainer" style="display: none;">
+        Login to Facebook
+        <fb:login-button scope="user_photos" onlogin="getAlbumPhotos()">Login</fb:login-button>
+    </div>
+    <div id="photosContainer" style="display: none;">
+        Click picture(s) you'd like to upload:
+    </div>
+</div>
+<div style="height: 130px; overflow: auto;">
+    <table id="gallery">
+    </table>
+</div>

@@ -19,7 +19,7 @@ using RichmondDay.Helpers;
 using Twitterizer;
 
 namespace Epilogger.Web.Controllers {
-    public class AccountController : BaseController {
+    public partial class AccountController : BaseController {
         UserService service;
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext) {
@@ -29,7 +29,7 @@ namespace Epilogger.Web.Controllers {
         }
 
         [RequiresAuthentication(ValidUserRole=UserRoleType.RegularUser, AccessDeniedMessage="You must be logged in to edit your account")]
-        public ActionResult Index () {
+        public virtual ActionResult Index () {
             AccountModel model = Mapper.Map<User, AccountModel>(CurrentUser);
             model.ConnectedNetworks = Mapper.Map<List<UserAuthenticationProfile>, List<ConnectedNetworksViewModel>>(CurrentUser.UserAuthenticationProfiles.ToList());
             
@@ -101,12 +101,12 @@ namespace Epilogger.Web.Controllers {
 
 
         [HttpGet]
-        public ActionResult Create() {
+        public virtual ActionResult Create() {
             return View(new CreateAccountModel());
         }
 
         [HttpPost]
-        public ActionResult Create(CreateAccountModel model)
+        public virtual ActionResult Create(CreateAccountModel model)
         {
             if (ModelState.IsValid) {
                 // TEMP: check to make sure the email address provided is in the beta invite table.
@@ -188,7 +188,7 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpGet]
-        public ActionResult Validate(string validationCode) {
+        public virtual ActionResult Validate(string validationCode) {
             if (string.IsNullOrEmpty(validationCode)) {
                 this.StoreError("The verification code couldn't be determined, please try clicking the link in your email again.");
                 return View();
@@ -267,7 +267,7 @@ namespace Epilogger.Web.Controllers {
         //}
 
         [HttpGet]
-        public ActionResult Login() {
+        public virtual ActionResult Login() {
             CookieHelpers.DestroyCookie("lc");
 
             // store this here so that we can redirect the user back later.
@@ -278,7 +278,7 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpPost]
-        public ActionResult Login(LoginModel model) {
+        public virtual ActionResult Login(LoginModel model) {
             // 1. First we need to check if the person logging in has a blank password, if they do then we need to redirect them 
             // to a page to create a new password.
 
@@ -426,7 +426,7 @@ namespace Epilogger.Web.Controllers {
 
 
 
-        public ActionResult Logout() {
+        public virtual ActionResult Logout() {
             CookieHelpers.DestroyCookie("lc");
             
             this.StoreInfo("You have been logged out of your epilogger account");
@@ -435,12 +435,12 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpGet]
-        public ActionResult ForgotPassword() {
+        public virtual ActionResult ForgotPassword() {
             return View();
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult ForgotPassword(ForgotPasswordViewModel model) {
+        public virtual ActionResult ForgotPassword(ForgotPasswordViewModel model) {
             try {
                 Guid passwordResetHash = Guid.NewGuid();
                 User user = service.GetUserByEmail(model.EmailAddress.Trim());
@@ -485,7 +485,7 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpGet]
-        public ActionResult ResetPassword() {
+        public virtual ActionResult ResetPassword() {
             Guid passwordResetHash = Guid.Parse(Request.QueryString["hash"].ToString());
             User user = service.GetUserByResetHash(passwordResetHash);
             if (user == null) {
@@ -500,7 +500,7 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult ResetPassword(ResetPasswordViewModel model) {
+        public virtual ActionResult ResetPassword(ResetPasswordViewModel model) {
             try {
                 User user = service.GetUserByID(Guid.Parse(model.UserID));
                 user.Password = PasswordHelpers.EncryptPassword(model.NewPassword);
@@ -519,12 +519,12 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpGet]
-        public ActionResult UpdatePassword() {
+        public virtual ActionResult UpdatePassword() {
             return View(new UpdatePasswordModel());
         }
 
         [HttpPost]
-        public ActionResult UpdatePassword(UpdatePasswordModel model) {
+        public virtual ActionResult UpdatePassword(UpdatePasswordModel model) {
             if (ModelState.IsValid) {
                 // update password.
                 string salt = BCryptHelper.GenerateSalt();
@@ -544,14 +544,14 @@ namespace Epilogger.Web.Controllers {
         }
 
 
-        public ActionResult AccountActivationNeeded()
+        public virtual ActionResult AccountActivationNeeded()
         {
             return View();
         }
 
 
 
-        public ActionResult ActivationSent()
+        public virtual ActionResult ActivationSent()
         {
 
             var userId = new Guid();
@@ -592,7 +592,7 @@ namespace Epilogger.Web.Controllers {
             return View();
         }
 
-        public ActionResult TwitterAuthTest()
+        public virtual ActionResult TwitterAuthTest()
         {
 
             var apiClient = new APISoapClient();
@@ -620,7 +620,7 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpPost]
-        public ActionResult TwitterAuthTest(TwitterAuthTestViewModel model)
+        public virtual ActionResult TwitterAuthTest(TwitterAuthTestViewModel model)
         {
 
             var tokens = new OAuthTokens { ConsumerKey = "qV0GasfpuvDRmXhnaDA", ConsumerSecret = "q3ftmYti8d4ws2iNieidofWYLswdHT3BRwmu813EA", AccessToken = "280687481-XyZq3P6v7qivApsYjES8V3LjTRgcRZIx2XRO755V", AccessTokenSecret = "Z7MG32TDldpx5USDdOUXjzsop1ZtaEbLMm1bzTnuk" };

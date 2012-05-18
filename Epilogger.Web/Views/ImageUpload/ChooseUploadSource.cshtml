@@ -1,0 +1,39 @@
+﻿@model int?
+
+@{
+    Layout = MVC.ImageUpload.Views._Layout;
+}
+
+@section Navigation {
+    <img src="@Links.Public.images.imageupload.source_active_png"/>
+}
+
+@*ToDo: Remove inline styles*@
+
+<div style="margin-bottom: 20px;">
+    @if (Model.HasValue && Model.Value == 1)
+    {
+        <h2>ALL DONE!</h2>
+        <span>Upload another?</span>
+    }
+    else
+    {
+        <h2>1) UPLOAD PHOTOS FROM:</h2>
+        <span>You can upload any of your photos on Epilogger. <br /> Choose from Facebook, Flickr, or straight from your hard drive:</span>
+    }
+</div>
+
+<div style="width: 100%">
+    <div style="float: left;">
+        <a href="@Url.Action(MVC.ImageUpload.GetFacebookAlbums())">
+            <img src="@Links.Public.images.imageupload.facebook_png"/></a>
+    </div>
+    <div style="float: right;">
+        <a href="@Url.Action(MVC.ImageUpload.UploadFromComputer())">
+            <img src="@Links.Public.images.imageupload.yourcomputer_png"/></a>
+    </div>
+    <div style="margin: 0 auto; width: 200px;">
+        <a href="@Url.Action(MVC.ImageUpload.AuthenticateFlickr())">
+            <img src="@Links.Public.images.imageupload.flickr_png"/></a>
+    </div>
+</div>

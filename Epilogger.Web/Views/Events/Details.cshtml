@@ -24,6 +24,14 @@
 
 <script type="text/javascript" language="javascript">
     head.js('@Url.Content("~/Public/js/EventDetails.js")');
+
+    $(function() {
+        $("#imageupload-modal").colorbox({
+            iframe: true,
+            width: "800px", height: "370px",
+            href: '@Url.Action(MVC.ImageUpload.ChooseUploadSource())'
+        });
+    });
 </script>
 @*//href: '@Url.Action("TweetReply", "Events", new {eventId = Model.ID, TwitterId = ""})'*@
 @if (Model.Tweets.FirstOrDefault() != null)
@@ -311,30 +319,30 @@ else
             function initialize() {
                 var geocoder = new google.maps.Geocoder({ region: 'CA' });
                 var address = 
-                geocoder.geocode({ 'address': '@Model.Venue.Address, @Model.Venue.City' }, function (results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        userLat = results[0].geometry.location.lat();
-                        userLng = results[0].geometry.location.lng();
-                        var latlng = new google.maps.LatLng(userLat, userLng);
+                    geocoder.geocode({ 'address': '@Model.Venue.Address, @Model.Venue.City' }, function (results, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            userLat = results[0].geometry.location.lat();
+                            userLng = results[0].geometry.location.lng();
+                            var latlng = new google.maps.LatLng(userLat, userLng);
 
-                        var myOptions = {
-                            zoom: 15,
-                            center: latlng,
-                            mapTypeId: google.maps.MapTypeId.ROADMAP
-                        };
+                            var myOptions = {
+                                zoom: 15,
+                                center: latlng,
+                                mapTypeId: google.maps.MapTypeId.ROADMAP
+                            };
 
 
-                        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+                            var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
-                        var marker = new google.maps.Marker({
-                            draggable: false,
-                            animation: google.maps.Animation.DROP,
-                            bouncy: true,
-                            position: latlng,
-                            map: map
-                        });
-                    }
-                });
+                            var marker = new google.maps.Marker({
+                                draggable: false,
+                                animation: google.maps.Animation.DROP,
+                                bouncy: true,
+                                position: latlng,
+                                map: map
+                            });
+                        }
+                    });
 
         
 
@@ -546,10 +554,12 @@ else
 
 
 <!-- PHOTOS & VIDEOS -->
+
 <div class="grid_7 omega">
     <h2>
-        <span class="number" id="photoCount">@string.Format("{0:#,###}", Model.ImageCount)</span>Photos
-        & Videos
+        <span class="number" id="photoCount">@string.Format("{0:#,###}", Model.ImageCount)</span>
+        Photos & Videos
+        <a href="#" id="imageupload-modal">Upload</a>
     </h2>
     <div class="image-grid" id="photosvideos">
         @foreach (Epilogger.Data.Image EPLImage in Model.Images)

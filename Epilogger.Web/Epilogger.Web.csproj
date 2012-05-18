@@ -13,7 +13,7 @@
     <RootNamespace>Epilogger.Web</RootNamespace>
     <AssemblyName>Epilogger.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <MvcBuildViews>false</MvcBuildViews>
+    <MvcBuildViews>true</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -174,6 +174,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Admin.EmailController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Admin.HomeController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Admin.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Data\Classes.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -212,12 +224,28 @@
     <Compile Include="Areas\Authentication\Controllers\FacebookController.cs" />
     <Compile Include="Areas\Authentication\Controllers\IAuthenticationController.cs" />
     <Compile Include="Areas\Authentication\Controllers\TwitterController.cs" />
+    <Compile Include="Authentication.FacebookController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Authentication.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Authentication.TwitterController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BaseController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BrowseController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BrowseController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImageUploadController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Controllers\WidgetController.cs" />
     <Compile Include="Core\AuthenticationServices.cs" />
@@ -265,8 +293,23 @@
     <Compile Include="Core\Stats\HomepageTotals.cs" />
     <Compile Include="Core\Stats\TopTweeters.cs" />
     <Compile Include="Core\UserRole.cs" />
+    <Compile Include="DashboardController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmailsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EventsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="HomeController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ImageUploadController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\AddBlogPostViewModel.cs" />
@@ -288,6 +331,7 @@
     <Compile Include="Models\ImageCommentViewModel.cs" />
     <Compile Include="Models\PhotoDetailsViewModel.cs" />
     <Compile Include="Models\TweetReplyViewModel.cs" />
+    <Compile Include="Models\UploadFacebookAlbumPhotosViewModel.cs" />
     <Compile Include="Models\WidgetCheckinsViewModel.cs" />
     <Compile Include="Models\WidgetCountsViewModel.cs" />
     <Compile Include="Models\WidgetTweetsViewModel.cs" />
@@ -327,16 +371,30 @@
     <Compile Include="Models\VenueSearchModel.cs" />
     <Compile Include="Models\WidgetViewModel.cs" />
     <Compile Include="Models\_EventMenuViewModel.cs" />
+    <Compile Include="NavigationController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\Epilogr\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Views\Emails\AccountEmails.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AccountEmails.resx</DependentUpon>
+    </Compile>
+    <Compile Include="WidgetController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -518,6 +576,18 @@
     <Content Include="Public\images\icons\twitter-everything-spritev2.png" />
     <Content Include="Public\images\icons\twitter.png" />
     <Content Include="Public\images\icons\WhenandWhere.png" />
+    <Content Include="Public\images\imageupload\authenticate_active.png" />
+    <Content Include="Public\images\imageupload\authenticate_inactive.png" />
+    <Content Include="Public\images\imageupload\choosealbum_active.png" />
+    <Content Include="Public\images\imageupload\choosealbum_inactive.png" />
+    <Content Include="Public\images\imageupload\facebook.png" />
+    <Content Include="Public\images\imageupload\flickr.png" />
+    <Content Include="Public\images\imageupload\oops_flickr.png" />
+    <Content Include="Public\images\imageupload\source_active.png" />
+    <Content Include="Public\images\imageupload\source_inactive.png" />
+    <Content Include="Public\images\imageupload\selectphotos_active.png" />
+    <Content Include="Public\images\imageupload\upload.png" />
+    <Content Include="Public\images\imageupload\yourcomputer.png" />
     <Content Include="Public\images\jaggie-icons\event-list-header-media.gif" />
     <Content Include="Public\images\jaggie-icons\event-list-header-twitter.gif" />
     <Content Include="Public\images\jaggie-icons\event-menu-jaggie.gif" />
@@ -561,7 +631,23 @@
     <Content Include="Public\images\widget\top10.png" />
     <Content Include="Public\js\AnyTime\anytimec.css" />
     <Content Include="Public\js\AnyTime\anytimec.js" />
+    <Content Include="Public\js\bootstrap-Image-Gallery\.gitignore" />
+    <Content Include="Public\js\bootstrap-Image-Gallery\css\bootstrap-image-gallery.css" />
+    <Content Include="Public\js\bootstrap-Image-Gallery\css\bootstrap-image-gallery.min.css" />
+    <Content Include="Public\js\bootstrap-Image-Gallery\img\loading.gif" />
+    <Content Include="Public\js\bootstrap-Image-Gallery\index.html" />
+    <Content Include="Public\js\bootstrap-Image-Gallery\js\bootstrap-image-gallery.js" />
+    <Content Include="Public\js\bootstrap-Image-Gallery\js\bootstrap-image-gallery.min.js" />
+    <Content Include="Public\js\bootstrap\css\bootstrap-responsive.css" />
+    <Content Include="Public\js\bootstrap\css\bootstrap-responsive.min.css" />
+    <Content Include="Public\js\bootstrap\css\bootstrap.css" />
+    <Content Include="Public\js\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Public\js\bootstrap\img\glyphicons-halflings-white.png" />
+    <Content Include="Public\js\bootstrap\img\glyphicons-halflings.png" />
+    <Content Include="Public\js\bootstrap\js\bootstrap.js" />
+    <Content Include="Public\js\bootstrap\js\bootstrap.min.js" />
     <Content Include="Public\js\BrowseEvents.js" />
+    <Content Include="Public\js\canvas-to-blob.min.js" />
     <Content Include="Public\js\clickmap.js" />
     <Content Include="Public\js\AllPhotos.js" />
     <Content Include="Public\js\confirm\css\confirm.css" />
@@ -2584,6 +2670,27 @@
     <Content Include="Public\js\FacebookPhotoPicker\dojoroot\dojo\_firebug\warningIcon.png" />
     <Content Include="Public\js\FacebookPhotoPicker\photoPickerConfig.js" />
     <Content Include="Public\js\head.load.min.js" />
+    <Content Include="Public\js\html5shiv.js" />
+    <Content Include="Public\js\jqueryCookie\jquery.cookie.js" />
+    <Content Include="Public\js\jqueryCookie\server.js" />
+    <Content Include="Public\js\jqueryCookie\test.html" />
+    <Content Include="Public\js\jqueryCookie\test.js" />
+    <Content Include="Public\js\jqueryParseParams.js" />
+    <Content Include="Public\js\jqueryQueryString.js" />
+    <Content Include="Public\js\oAuth\example\accessToken.html" />
+    <Content Include="Public\js\oAuth\example\AJAX.html" />
+    <Content Include="Public\js\oAuth\example\authorize.html" />
+    <Content Include="Public\js\oAuth\example\consumer.js" />
+    <Content Include="Public\js\oAuth\example\echo.html" />
+    <Content Include="Public\js\oAuth\example\gadget\oauth-example.xml" />
+    <Content Include="Public\js\oAuth\example\index.html" />
+    <Content Include="Public\js\oAuth\example\requestToken.html" />
+    <Content Include="Public\js\oAuth\example\signature.html" />
+    <Content Include="Public\js\oAuth\oauth.js" />
+    <Content Include="Public\js\oAuth\oauthTest.html" />
+    <Content Include="Public\js\oAuth\oauthTest.js" />
+    <Content Include="Public\js\oAuth\README.txt" />
+    <Content Include="Public\js\oAuth\sha1.js" />
     <Content Include="Public\js\jquery-1.6.2.min.js" />
     <Content Include="Public\js\jquery-ui-1.8.16.custom.min.js" />
     <Content Include="Public\js\jquery.blockUI.js" />
@@ -2759,6 +2866,36 @@
     <Content Include="Public\js\jquery.validate.min.js" />
     <Content Include="Public\js\jquery.validate.unobtrusive.min.js" />
     <Content Include="Public\js\jquery.zrssfeed.min.js" />
+    <Content Include="Public\js\jQueryEpiloggerGallery\css\jqueryEpiloggerGallery.css" />
+    <Content Include="Public\js\jQueryEpiloggerGallery\js\jqueryEpiloggerGallery.js" />
+    <Content Include="Public\js\jQueryFileUpload\.gitignore" />
+    <Content Include="Public\js\jQueryFileUpload\cors\postmessage.html" />
+    <Content Include="Public\js\jQueryFileUpload\cors\result.html" />
+    <Content Include="Public\js\jQueryFileUpload\css\jquery.fileupload-ui.css" />
+    <Content Include="Public\js\jQueryFileUpload\css\style.css" />
+    <Content Include="Public\js\jQueryFileUpload\img\loading.gif" />
+    <Content Include="Public\js\jQueryFileUpload\img\progressbar.gif" />
+    <Content Include="Public\js\jQueryFileUpload\index.html" />
+    <Content Include="Public\js\jQueryFileUpload\js\cors\jquery.postmessage-transport.js" />
+    <Content Include="Public\js\jQueryFileUpload\js\cors\jquery.xdr-transport.js" />
+    <Content Include="Public\js\jQueryFileUpload\js\jquery.fileupload-fp.js" />
+    <Content Include="Public\js\jQueryFileUpload\js\jquery.fileupload-ui.js" />
+    <Content Include="Public\js\jQueryFileUpload\js\jquery.fileupload.js" />
+    <Content Include="Public\js\jQueryFileUpload\js\jquery.iframe-transport.js" />
+    <Content Include="Public\js\jQueryFileUpload\js\locale.js" />
+    <Content Include="Public\js\jQueryFileUpload\js\main.js" />
+    <Content Include="Public\js\jQueryFileUpload\js\vendor\jquery.ui.widget.js" />
+    <Content Include="Public\js\jQueryFileUpload\server\gae-go\static\favicon.ico" />
+    <Content Include="Public\js\jQueryFileUpload\server\gae-go\static\robots.txt" />
+    <Content Include="Public\js\jQueryFileUpload\server\gae-python\static\favicon.ico" />
+    <Content Include="Public\js\jQueryFileUpload\server\gae-python\static\robots.txt" />
+    <Content Include="Public\js\jQueryFileUpload\server\node\.gitignore" />
+    <Content Include="Public\js\jQueryFileUpload\server\node\public\files\thumbnail\.gitignore" />
+    <Content Include="Public\js\jQueryFileUpload\server\node\server.js" />
+    <Content Include="Public\js\jQueryFileUpload\server\node\tmp\.gitignore" />
+    <Content Include="Public\js\jQueryFileUpload\test\index.html" />
+    <Content Include="Public\js\jQueryFileUpload\test\test.js" />
+    <Content Include="Public\js\load-image.min.js" />
     <Content Include="Public\js\msdropdown\dd.css" />
     <Content Include="Public\js\msdropdown\dd_arrow.gif" />
     <Content Include="Public\js\msdropdown\js\jquery.dd.js" />
@@ -2797,7 +2934,22 @@
     <Content Include="Public\js\TimePicker\jquery.timePicker.js" />
     <Content Include="Public\js\TimePicker\jquery.timePicker.min.js" />
     <Content Include="Public\js\TimePicker\timePicker.css" />
-    <Content Include="Areas\Api\Views\Web.config" />
+    <None Include="Public\js\bootstrap-Image-Gallery\Makefile" />
+    <None Include="Public\js\bootstrap-Image-Gallery\package.json" />
+    <None Include="Public\js\bootstrap-Image-Gallery\README.md" />
+    <None Include="Public\js\jqueryCookie\README.md" />
+    <None Include="Public\js\jQueryFileUpload\package.json" />
+    <None Include="Public\js\jQueryFileUpload\README.md" />
+    <None Include="Public\js\jQueryFileUpload\server\gae-go\app.yaml" />
+    <None Include="Public\js\jQueryFileUpload\server\gae-go\app\main.go" />
+    <None Include="Public\js\jQueryFileUpload\server\gae-go\resize\resize.go" />
+    <None Include="Public\js\jQueryFileUpload\server\gae-python\app.yaml" />
+    <None Include="Public\js\jQueryFileUpload\server\gae-python\main.py" />
+    <None Include="Public\js\jQueryFileUpload\server\node\package.json" />
+    <None Include="Public\js\jQueryFileUpload\server\php\files\.htaccess" />
+    <None Include="Public\js\jQueryFileUpload\server\php\index.php" />
+    <None Include="Public\js\jQueryFileUpload\server\php\thumbnails\.htaccess" />
+    <None Include="Public\js\jQueryFileUpload\server\php\upload.class.php" />
     <None Include="Service References\Epilogr\api.disco" />
     <None Include="Service References\Epilogr\configuration91.svcinfo" />
     <None Include="Service References\Epilogr\configuration.svcinfo" />
@@ -2808,6 +2960,7 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Public\js\tmpl.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -2834,9 +2987,22 @@
     <Content Include="Views\Widget\Tweets.cshtml" />
     <Content Include="Views\Widget\Checkins.cshtml" />
     <Content Include="Views\Widget\_EpiloggerCounts.cshtml" />
+    <Content Include="Views\ImageUpload\UploadFromComputer.cshtml" />
+    <None Include="T4MVC.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>T4MVC.cs</LastGenOutput>
+    </None>
+    <None Include="T4MVC.tt.settings.t4" />
+    <Content Include="Views\ImageUpload\ChooseUploadSource.cshtml" />
+    <Content Include="Views\ImageUpload\GetFacebookAlbums.cshtml" />
+    <Content Include="Views\ImageUpload\_Layout.cshtml" />
+    <Content Include="Views\ImageUpload\UploadFacebookAlbumPhotos.cshtml" />
+    <Content Include="Views\ImageUpload\AuthenticateFlickr.cshtml" />
+    <Content Include="Views\ImageUpload\UploadFlickrImages.cshtml" />
+    <Content Include="Views\ImageUpload\SuccessfullyAuthenticatedFlickr.cshtml" />
+    <Content Include="Views\Events\NeedTwitterAuth.cshtml" />
     <Content Include="Views\Events\TweetReply.cshtml" />
     <Content Include="Views\Events\TweetRetweet.cshtml" />
-    <Content Include="Views\Events\NeedTwitterAuth.cshtml" />
     <Content Include="Views\Events\TweetTemplate.cshtml" />
     <Content Include="Views\Events\PhotoDetails.cshtml" />
     <Content Include="Views\Shared\_InteriorLayoutNoBC.cshtml" />

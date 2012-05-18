@@ -10,7 +10,7 @@ using AutoMapper;
 
 namespace Epilogger.Web.Controllers
 {
-    public class BrowseController : BaseController
+    public partial class BrowseController : BaseController
     {
         EpiloggerDB db;
         EventService ES = new EventService();
@@ -45,7 +45,7 @@ namespace Epilogger.Web.Controllers
         //}
         [CompressFilter]
         [CacheFilter(Duration = 60)]
-        public ActionResult Index(string filter, int? page)
+        public virtual ActionResult Index(string filter, int? page)
         {
 
             int currentPage = page.HasValue ? page.Value - 1 : 0;
@@ -150,7 +150,7 @@ namespace Epilogger.Web.Controllers
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         [HttpPost]
-        public ActionResult GetBrowseOverviewTabData(int Tab)
+        public virtual ActionResult GetBrowseOverviewTabData(int Tab)
         {
             List<Event> events = new List<Event>();
 
