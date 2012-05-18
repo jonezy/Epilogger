@@ -156,7 +156,7 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Update(Epilogger.Web.Models.AccountModel model, System.Web.Mvc.FormCollection c) {
+        public System.Web.Mvc.ActionResult Update(Epilogger.Web.Models.AccountModel model, System.Web.Mvc.FormCollection c) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Update);
             callInfo.RouteValueDictionary.Add("model", model);
             callInfo.RouteValueDictionary.Add("c", c);

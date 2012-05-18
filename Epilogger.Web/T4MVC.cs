@@ -33991,7 +33991,6 @@ namespace Links {
                     public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                     public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                     public static readonly string jqueryEpiloggerGallery_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jqueryEpiloggerGallery.min.js") ? Url("jqueryEpiloggerGallery.min.js") : Url("jqueryEpiloggerGallery.js");
-                                  
                 }
             
             }

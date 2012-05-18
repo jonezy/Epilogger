@@ -84,7 +84,7 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         [CompressFilter]
-        public ActionResult Category(string categoryName)
+        public virtual ActionResult Category(string categoryName)
         {
             var model = new BrowseCategoriesDisplayViewModel();
             var events = new List<Event>();

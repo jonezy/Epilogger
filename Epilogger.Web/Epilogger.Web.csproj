@@ -329,6 +329,7 @@
     <Compile Include="Models\AllStatsViewModel.cs" />
     <Compile Include="Models\BetaSignUpViewModel.cs" />
     <Compile Include="Models\GetFacebookAlbumsViewModel.cs" />
+    <Compile Include="Models\TweetReplyViewModel.cs" />
     <Compile Include="Models\UploadFacebookAlbumPhotosViewModel.cs" />
     <Compile Include="Models\WidgetCheckinsViewModel.cs" />
     <Compile Include="Models\WidgetCountsViewModel.cs" />
@@ -2994,6 +2995,10 @@
     <Content Include="Views\ImageUpload\AuthenticateFlickr.cshtml" />
     <Content Include="Views\ImageUpload\UploadFlickrImages.cshtml" />
     <Content Include="Views\ImageUpload\SuccessfullyAuthenticatedFlickr.cshtml" />
+    <Content Include="Views\Events\NeedTwitterAuth.cshtml" />
+    <Content Include="Views\Events\TweetReply.cshtml" />
+    <Content Include="Views\Events\TweetRetweet.cshtml" />
+    <Content Include="Views\Events\TweetTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Shared\" />

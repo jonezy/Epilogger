@@ -5,6 +5,9 @@
 @section Head {
     <link href="@Links.Public.js.jQueryEpiloggerGallery.css.jqueryEpiloggerGallery_css" rel="stylesheet"/>
     <script type="text/javascript" src="@Links.Public.js.jQueryEpiloggerGallery.js.jqueryEpiloggerGallery_js"></script>
+    <script type="text/javascript" src="/Public/js/jquery.colorbox-min.js"></script>
+    @*<script type="text/javascript" src="/Public/js/epilogger.js"></script>*@
+    
 }
 @section Navigation {
     <img src="@Links.Public.images.imageupload.source_inactive_png"/>
@@ -19,8 +22,12 @@
 }
 <div id="fb-root">
 </div>
-<script type="text/javascript">
+<script type="text/javascript" language="javascript">
+        
+
+
     window.getAlbums = function () {
+        $('#loginContainer').hide();
         FB.api('/me/albums', function (resp) {
             var galleryImages = $(resp.data).map(function () {
                 var albumCoverUrl = 'https://graph.facebook.com/' + this.cover_photo + '/picture?access_token=' + FB.getAccessToken();
@@ -32,8 +39,12 @@
             $('#gallery').gallery(galleryImages, false);
 
             $('#albumsContainer').show();
+            //resizePopUp('800px', '70%');
+
+            
         });
     };
+        
 
     window.fbAsyncInit = function () {
         FB.init({
@@ -67,8 +78,19 @@
         js.src = "//connect.facebook.net/en_US/all.js";
         ref.parentNode.insertBefore(js, ref);
     } (document));
+
+    //FUCK THIS FUCKING FUCKER!
+    window.setTimeout(function () { jQuery.colorbox.resize({ width: '800px', height: '70%' }); }, 500);
+
+//    function test() {
+//        jQuery.colorbox.resize({ width: '800px', height: '70%' });
+//        resizePopUp('550px', '320px');
+//        alert('test');
+//    }
+
 </script>
 <div style="margin-bottom: 20px;">
+    <div onclick="test(); return false;">Test</div>
     <h2>
         2) CHOOSE FACEBOOK ALBUM:</h2>
     <div id="loginContainer" style="display: none;">
@@ -79,7 +101,10 @@
         <span>After clicking an album you'll be able to select which pictures to upload.</span>
     </div>
 </div>
-<div style="height: 130px; overflow: auto;">
+<div style="height: 70%; overflow: auto;">
     <table id="gallery">
     </table>
 </div>
+<script type="text/javascript" language="javascript">
+    //window.setTimeout(function () { resizePopUp('800px', '70%'); }, 1000);
+</script>
