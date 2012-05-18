@@ -1,36 +1,32 @@
-﻿@model IEnumerable<Epilogger.Data.Tweet>
+﻿@using System.Diagnostics
+@model IEnumerable<Epilogger.Data.Tweet>
 
+<div id="tweetlist">
 @if (Model != null)
 {
-    bool ShowFirst = true;
-    foreach (Epilogger.Data.Tweet t in Model)
-    {
-        if (ShowFirst)
+    bool showFirst = true;
+    <ul>
+        @foreach (Epilogger.Data.Tweet t in Model)
         {
-            <div class="pp_FirstComment tweet-content">
-                <a href="http://www.twitter.com/@t.FromUserScreenName" target="_blank" class="tweet-content-username-small">@@@t.FromUserScreenName</a>:
-                <div style="">
-                    <span class="sm-spacer"></span>
-                    <h2>@Html.Raw(t.TextAsHTML)
-                        <br /><span class="tweet-date">(@Html.DisplayFor(thing => t.CreatedDate))</span>
-                    </h2>
-                </div>
-            </div>
-            <span class="sm-spacer"></span>
-            <div class="seperator"></div>
-            <span class="sm-spacer"></span>
-            ShowFirst = false;
+            if (showFirst)
+            {
+                Debug.Assert(t.EventID != null, "t.EventID != null");
+                var ttvm = new Epilogger.Web.Models.TweetTemplateViewModel { Tweet = t, CanDelete = false, EventId = (int)t.EventID, ShowControls = false, ModifyDisplayClass = "pp_FirstComment" };
+                @Html.Action("TweetTemplate", "Events", ttvm)
+                
+                <div class="seperator"></div>
+                <div class="sm-spacer"></div>
+                <div class="sm-spacer"></div>
+                showFirst = false;
+            }
+            else
+            {
+                var ttvm = new Epilogger.Web.Models.TweetTemplateViewModel { Tweet = t, CanDelete = false, EventId = (int)t.EventID, ShowControls = false, ModifyDisplayClass = "" };
+                @Html.Action("TweetTemplate", "Events", ttvm)
+            }
         }
-        else
-        {
-            <div class="tweet-content">
-                <a href="http://www.twitter.com/@t.FromUserScreenName" target="_blank" class="tweet-content-username-small">@@@t.FromUserScreenName</a>:
-                <div>
-                    @Html.Raw(t.TextAsHTML)
-                </div>
-                <span class="tweet-date">(@Html.DisplayFor(thing => t.CreatedDate))</span>
-            </div>
-            <span class="sm-spacer"></span>
-        }
-    }       
+        
+    </ul>
+    
 }
+</div>

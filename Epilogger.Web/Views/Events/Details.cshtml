@@ -116,7 +116,10 @@ else
     @if (Model.CurrentUserRole == UserRoleType.Administrator)
     {
         <div class="grid_12 alpha" style="background-color: palegoldenrod">
-            <strong>Event was created by:</strong> @Model.TheUser.FirstName @Model.TheUser.LastName (@Model.TheUser.Username)
+            @if (Model.CreatedEventUser!=null)
+            {
+                <strong>Event was created by:</strong> @Model.CreatedEventUser.FirstName @Model.CreatedEventUser.LastName @string.Format("({0})", Model.CreatedEventUser.Username)
+            }
         </div>
         <span class="spacer"></span>
     }
@@ -674,7 +677,7 @@ else
 </div>*@
 <script type="text/javascript" language="javascript">
     head.ready(function () {
-        $("a[rel^='prettyPhoto']").prettyPhoto({
+        $("a[rel^='EPLPhoto']").prettyPhoto({
             theme: 'light_square',
             animation_speed: 'fast',
             overlay_gallery: false,

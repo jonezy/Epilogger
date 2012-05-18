@@ -1,0 +1,60 @@
+﻿@using System.Diagnostics
+
+@model Epilogger.Web.Models.ImageCommentViewModel
+
+<div id="commentTweetlist@(Model.ImageId)" class="tweetlist">
+    <ul>
+        @Html.Action("GetImageCommentsPage1", "Events", Model)
+    </ul>
+</div>
+
+<div class="moreTweetsLink">(<a href="" onclick="LoadMoreTweets@(Model.ImageId)($(this)); return false;" id="moreTweets@(Model.ImageId)">show @(Model.TotalTweetCount - (Model.page * 4)) more replies</a>)</div>
+
+<script language="javascript" type="text/javascript">
+
+    var page = 2;
+    var tweetCount = @(Model.TotalTweetCount - (Model.page * 4));
+
+    if (tweetCount <= 0) {
+        tweetCount = 0;
+        $(".moreTweetsLink").hide();
+    }
+
+
+    function LoadMoreTweets@(Model.ImageId)(theCaller) {
+        $.ajax({
+            url: '/Events/GetImageCommentsPaged',
+            type: 'GET',
+            data: {
+                CanDelete: 'false',
+                ModifyDisplayClass: '',
+                StyleFirstTweet: 'false',
+                ShowControls: 'false',
+                EventId: '@Model.EventId',
+                ImageId: '@Model.ImageId',
+                page: page
+            },
+            contentType: 'html',
+            success: function (data) {
+                $(data)
+                  .hide()
+                  .insertAfter(theCaller.closest(":has(.tweetlist)").find('.tweetlist li:last'))
+                  .slideDown();
+
+                page++;
+                tweetCount -= 4;
+                if (tweetCount <= 0) {
+                    tweetCount = 0;
+                    theCaller.parent().hide();
+                }
+                else {
+                    theCaller.text("show " + tweetCount + " more replies");
+                }
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+
+</script>

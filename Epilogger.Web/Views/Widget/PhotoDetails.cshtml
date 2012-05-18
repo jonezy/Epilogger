@@ -28,6 +28,9 @@
             heightOffset = 220;
         }
     }
+    
+
+
 
     $(document).ready(function () {
         if (jQuery.browser.safari && document.readyState != "complete"){
@@ -36,7 +39,18 @@
             return;
         } 
         $('.contentContainer img').each(function () {
-            var maxWidth = @(Model.Width - 20); // Max width for the image
+            @{
+                if (Model.Width==100)
+                {
+                    @: var maxWidth =  $(document).width() - 20; // Max width for the image
+                }
+                else
+                {
+                    @: var maxWidth = @(Model.Width - 20); // Max width for the image
+                }
+
+            }
+            //var maxWidth = @(Model.Width - 20); // Max width for the image
             var maxHeight = @(Model.Height - heightOffset);    // Max height for the image
             
             var ratio = 0;  // Used for aspect ratio
@@ -68,7 +82,7 @@
 
     @if (Model.Width==100 && Model.Height==100)
     {
-        @: <div style="@string.Format("height:100%; width: 100%;"); overflow: hidden;">    
+        @: <div style="@string.Format("height:100%; width: 100%;") overflow-x: hidden; overflow-y: auto;">
     }
     else
     {
@@ -103,11 +117,11 @@
                 <img src="/Public/images/widget/BackArrow.png" alt=""/>
                 if (Model.returnto == 1)
                 {
-                    @Html.ActionLink("back to feed", "index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })  
+                    <a href="" onclick="location.href='@Url.Action("index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to feed</a>
                 }
                 else
                 {
-                    @Html.ActionLink("back to photos", "photos", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })    
+                    <a href="" onclick="location.href='@Url.Action("photos", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to photos</a>
                 }
             }
             else
@@ -126,23 +140,15 @@
                 <img src="/Public/images/widget/BackArrow.png" alt=""/>
                 if (Model.returnto == 1)
                 {
-                    @Html.ActionLink("back to feed", "index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })  
+                    <a href="" onclick="location.href='@Url.Action("index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to feed</a>
                 }
                 else
                 {
-                    @Html.ActionLink("back to photos", "photos", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })    
+                    <a href="" onclick="location.href='@Url.Action("photos", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to photos</a>
                 }
             }
-            
-            
-            
 
         </div>
             
-            
-
-            
-
-
     </div>
 </div>

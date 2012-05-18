@@ -9,6 +9,17 @@ $(document).ready(function () {
 });
 */
 
+
+//This is a hack for IE. If the URL has a hash for PhotoDetails, then redirect to the correct URL
+//#/events/PhotoDetails
+url = location.href;
+hashtag = (url.indexOf('#') != -1) ? decodeURI(url.substring(url.indexOf('#') + 1, url.length)) : false;
+if (hashtag != false) {
+    window.location = 'http://epilogger.com/' + hashtag;
+}
+
+
+
 //Code to set the cookie to the current user's timezone.
 head.ready(function () {
     var storedTimeZoneOffset = $.cookie("TimeZoneOffset");
@@ -25,13 +36,66 @@ head.ready(function () {
 
 //This fills in the Comments on the Image popups (tweets)
 function changeDescription() {
+    $(".pp_Comments").html("Loading...");
+    
+    //Loaded the comments
     var photoID = $(".pp_description").html();
     $(".pp_description").html("");
 
-    $.get('/Events/GetImageComments/' + photoID,
-        function (data) {
+//    $.get('/Events/GetImageComments/' + photoID,
+//        function (data) {
+//            $('.pp_Comments').html(data);
+//        }, "html");
+    
+
+    $.ajax({
+        url: '/Events/ImageCommentControl/' + photoID,
+        type: 'GET',
+        contentType: 'html',
+        success: function (data) {
             $('.pp_Comments').html(data);
+        },
+        error: function () {
+            $('.pp_Comments').html("error");
+        }
+    });
+
+   
+
+    //Load the TweetBox
+    $.get('/Events/TweetBox/' + photoID,
+        function (data) {
+            $('.pp_TweetBox').html(data);
         }, "html");
+
+
+    $('.pp_shareBar').hide();
+    //Load the social media bar
+    $.get('/Home/SocialBar/' + photoID,
+    function (data) {
+        $('.pp_shareBar').html(data);
+    }, "html");
+
+
+    $(document).ajaxComplete(function () {
+        //Make the FB button work
+        try {
+            FB.XFBML.parse();
+        } catch (ex) { }
+        //Make the Twitter button work
+        try {
+            (function () {
+                var twitterScriptTag = document.createElement('script');
+                twitterScriptTag.type = 'text/javascript';
+                twitterScriptTag.async = true;
+                twitterScriptTag.src = 'http://platform.twitter.com/widgets.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(twitterScriptTag, s);
+            })();
+        } catch (ex) { }
+    });
+    $('.pp_shareBar').show();
+
 }
 
 function SearchVenues(url) {
@@ -198,6 +262,36 @@ function ActionRetweet(url) {
 }
 
 
+function Tweetbox(url) {
+    $("#submitTweet").attr('disabled', 'disabled');
+    $("#submitTweet").addClass('disabled');
+    $("#twitterLoading").show();
+
+    var twitterBox = {
+        NewTweet: $("#tweetBoxPhoto").val(),
+        TwitterID: $("#TwitterID").val()
+    };
+
+    $.post(url, twitterBox,
+        function (data) {
+            if (data == "True") {
+                //FlashMessage("Your tweet has been sent!", "Message_Success Message_Flash");
+                $("#statusMessage").html("Your tweet has been sent!");
+                //$.colorbox.close();
+            } else {
+                //FlashMessage("There was a problem sending your tweet, please try again.", "Message_Error Message_Flash");
+                $("#statusMessage").html("There was a problem sending your tweet, please try again.");
+                //$.colorbox.close();
+            }
+            $("#twitterLoading").hide();
+            $("#submitTweet").removeAttr("disabled");
+            $("#submitTweet").removeClass('disabled');
+        });
+    return false;
+}
+
+
+
 
 function cancelPopUp() {
     $.colorbox.close();
@@ -284,15 +378,15 @@ head.ready(function () {
         $.ajax({
             url: '/Events/DeleteTweetAjax/' + EventSlug + '/' + this.id,
             type: 'POST',
-            data: { href: e.srcElement.href, PathName: e.srcElement.pathname, UserAgent: navigator.userAgent, Host: e.srcElement.host },
-            success: function (result) {
+            success: function (data) {
                 //Remove the image from the page
-                $(theLink).parent().parent().parent().fadeOut();
+                $(theLink).parent().parent().fadeOut();
                 //Update the total count
-                
+
+            },
+            error: function () {
             }
         });
-
 
     });
 });

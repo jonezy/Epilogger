@@ -1,0 +1,41 @@
+﻿@using Epilogger.Data
+@model Epilogger.Web.Models.PhotoDetailsViewModel
+
+<meta property="og:title" content="Photo from @Model.Event.Name"></meta>
+<meta property="og:type" content="article"></meta>
+<meta property="og:url" content="http://epilogger.com/events/PhotoDetails/@Model.EventId/@Model.Image.ID"></meta>
+<meta property="og:image" content="@Model.Image.Fullsize"></meta>
+<meta property="og:site_name" content="Epilogger"></meta>
+<meta property="fb:admins" content="1620315015"></meta>
+<meta property="og:description" content="@{ Tweet first = null; foreach (Tweet tweet in Model.Tweets) { first = tweet; break; } }@first.Text"></meta>
+
+
+@*/* ----- Facebook ----- */*@
+@*<div id="fb-root"></div>*@
+@*<script type="text/javascript"> (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=429966960354582";
+        fjs.parentNode.insertBefore(js, fjs);
+    } (document, 'script', 'facebook-jssdk'));</script>*@
+        
+@*/* ----- Twitter ----- */*@
+@*<script type="text/javascript">!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = "//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } } (document, "script", "twitter-wjs");</script>*@
+    
+    
+@*/* ----- Google Plus ----- */*@    
+<script type="text/javascript">
+    (function () {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();
+</script>
+
+@*<div class="fb-like" data-href="http://epilogger.com/events/PhotoDetails/@Model.EventId/@Model.Image.ID" data-send="false" data-layout="button_count" data-show-faces="false" data-font="arial"></div>*@
+<ul class="shareBar">
+    <li style="float: left; margin-top: 6px;"><fb:like ref="top_left" layout="button_count"></fb:like></li>
+    <li class="padABit"><a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-related="Epilogger: Epilogger" data-url="@Model.ShortURL" data-text="@Model.HashTag">Tweet</a></li>
+    <li class="padABit"><g:plusone size="medium" annotation="inline" width="200"></g:plusone></li>
+</ul>

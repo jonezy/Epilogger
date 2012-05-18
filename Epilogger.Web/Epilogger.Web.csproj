@@ -328,7 +328,8 @@
     <Compile Include="Models\BrowseCategoriesDisplayViewModel.cs" />
     <Compile Include="Models\AllStatsViewModel.cs" />
     <Compile Include="Models\BetaSignUpViewModel.cs" />
-    <Compile Include="Models\GetFacebookAlbumsViewModel.cs" />
+    <Compile Include="Models\ImageCommentViewModel.cs" />
+    <Compile Include="Models\PhotoDetailsViewModel.cs" />
     <Compile Include="Models\TweetReplyViewModel.cs" />
     <Compile Include="Models\UploadFacebookAlbumPhotosViewModel.cs" />
     <Compile Include="Models\WidgetCheckinsViewModel.cs" />
@@ -397,7 +398,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\combres.xml" />
+    <Content Include="App_Data\combres.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\combres_full_with_annotation.xml" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -537,6 +540,7 @@
     <Content Include="Public\images\icons\blog.png" />
     <Content Include="Public\images\icons\BrowseBullet.png" />
     <Content Include="Public\images\icons\bubble.png" />
+    <Content Include="Public\images\icons\cameraIcon.png" />
     <Content Include="Public\images\icons\Checkmark.png" />
     <Content Include="Public\images\icons\CreateAccountArrow.png" />
     <Content Include="Public\images\icons\Crown.png" />
@@ -2695,6 +2699,7 @@
     <Content Include="Public\js\jquery.cycle.all.js" />
     <Content Include="Public\js\jquery.cycle.lite.js" />
     <Content Include="Public\js\jquery.expander.min.js" />
+    <Content Include="Public\js\jquery.history.js" />
     <Content Include="Public\js\jquery.jtruncate.pack.js" />
     <Content Include="Public\js\jquery.tweet.js" />
     <Content Include="Public\js\jquery.UI.DatePicker\css\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -2999,6 +3004,12 @@
     <Content Include="Views\Events\TweetReply.cshtml" />
     <Content Include="Views\Events\TweetRetweet.cshtml" />
     <Content Include="Views\Events\TweetTemplate.cshtml" />
+    <Content Include="Views\Events\PhotoDetails.cshtml" />
+    <Content Include="Views\Shared\_InteriorLayoutNoBC.cshtml" />
+    <Content Include="Views\Events\TweetBox.cshtml" />
+    <Content Include="Views\Events\ImageCommentsPaged.cshtml" />
+    <Content Include="Views\Events\ImageCommentControl.cshtml" />
+    <Content Include="Views\Home\SocialBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Shared\" />
@@ -5083,7 +5094,6 @@
     <Content Include="Views\Dashboard\Events.cshtml" />
     <Content Include="Views\Dashboard\Account.cshtml" />
     <Content Include="Views\Home\_GetClickMap.cshtml" />
-    <Content Include="Views\Events\_TweetTemplateoLD.cshtml" />
     <Content Include="Views\Events\_EventMenu.cshtml" />
     <Content Include="Views\Events\AllContent.cshtml" />
     <Content Include="Views\Events\Menu.cshtml" />

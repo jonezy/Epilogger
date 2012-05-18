@@ -1,12 +1,13 @@
 ﻿
 
 head.ready(function () {
-    $('.topPhotosBar:first').show();
-    getComments($('.topPhotosListLink:first').attr("id"));
-    $('.topPhotosListLink:first').addClass('active');
+    if ($(".topPhotosBar").length > 0) {
+        $('.topPhotosBar:first').show();
+        getComments($('.topPhotosListLink:first').attr("id"));
+        $('.topPhotosListLink:first').addClass('active');
 
-    start_Int();
-
+        start_Int();
+    }
 });
 
 var intval = "";
@@ -37,13 +38,11 @@ $('.topPhotosListLink').click(function (e) {
 function changePhoto(item, theID, speed) {
 
     $('.topPhotosBar:visible').fadeOut(speed, function () {
+        getComments(theID);
         $('.topPhotosListLink').removeClass('active');
         $(item).addClass('active');
         $('#TopPhoto' + theID).fadeIn(speed);
     });
-    
-
-    getComments(theID);
 
 }
 
@@ -60,11 +59,32 @@ function ChangeToNextPhoto() {
 }
 
 //This fills in the Comments on the Image
-function getComments(photoID) {
-    $(".topPhotoComments").html("");
+function getComments(photoId) {
 
-    $.get('/Events/GetImageComments/' + EventID + '/' + photoID,
-        function (data) {
+    $(".topPhotoComments").html("");
+    $.ajax({
+        url: '/Events/ImageCommentControl',
+        type: 'GET',
+        data: {
+            imageid: photoId,
+            eventid: EventID
+        },
+        contentType: 'html',
+        success: function (data) {
             $('.topPhotoComments').html(data);
-        }, "html");
+        },
+        error: function () {
+            $('.topPhotoComments').html("error");
+        }
+    });
+    //@Html.Action("ImageCommentControl", "Events", new { eventId = Model.EventId, imageid = Model.Image.ID })
+    
+    
+    
+    
+//    $(".topPhotoComments").html("");
+//    $.get('/Events/GetImageComments/' + EventID + '/' + photoId,
+//        function (data) {
+//            $('.topPhotoComments').html(data);
+//        }, "html");
 }

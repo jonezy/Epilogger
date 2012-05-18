@@ -793,7 +793,7 @@ div.profile img {
     overflow:auto; 
     height:302px; 
     padding-left:15px;
-    width:471px}
+    width: 511px; }
 
 .topPhotoComments .tweet-content {
     padding:3px 0}
@@ -1128,7 +1128,7 @@ ul#left-nav li ul li a.current {color:#a44b79;}
     margin-bottom:5px;
     display:block;}
     
-.dashboard-activity-entry strong.title.` {
+.dashboard-activity-entry strong.title.TWEET {
     background-position:0 0;}
     
 .dashboard-activity-entry strong.title.PHOTOS_VIDEOS {
@@ -1363,8 +1363,10 @@ span.tweet-date a:hover { text-decoration: underline; }
 #top-tweeters .toptweeter-item .bar.small {height:10px;background-color:#fb75b7;float:left;margin-right:5px;}
 #top-tweeters .toptweeter-item .count.small {font-size:11px;float:left;padding-top:0px;}
 
-#tweetlist .tweet {
+.tweetlist .tweet {
     margin-bottom:15px;}
+
+.tweetlist ul { list-style-type: none; }
 
 .tweet .tweet-body {
     /*float:left;*/
@@ -1447,12 +1449,34 @@ span.tweet-date a:hover { text-decoration: underline; }
 .tweetBox {
     width: 97%;
     margin-top: 15px;
-} 
+}
+.tweetBoxPhoto {
+    width: 97%;
+    margin-top: 5px;
+    margin-bottom: 5px !important;
+}
  
 #twitterCharCounter {
     font-weight: bold;
     padding-right: 10px;
 } 
+
+#twitterCharCounterPhoto {
+    font-weight: bold;
+    padding-right: 10px;
+    float: right;
+    font-size: 14px;
+    color: #cbcbcb;
+} 
+
+
+.twitterWhatsHappening  
+{
+    color: #7c7c7c;
+    font-weight: bold;
+    font-size: 14px;
+}
+
  
  
  /* --- blog posts */
@@ -2196,8 +2220,46 @@ div#SearchTimeFilter input[type=text] {
 	height:20px;
 	padding:5px 0 5px 5px;
     background-color: #f7f7f7; }
+    
+    
+/* PHOTO DETAILS PAGE */
+#photoleftColumn {
+    width: 303px;
+    float: left;
+}
+#photorightColumn {
+    text-align: left;
+    margin-left: 330px;
+    width: 630px;
+}
+.photoTitle {
+    padding-bottom: 28px;
+}
+.photoTitle a {
+    color: #000;
+    font: bold 24px 'InterstatePlusRegular', arial, sans-serif;
+}
+.photoTitle img
+{
+    margin-top: -13px;
+}
 
+.photoEpiloggerDesc {
+    color: #777;
+    font-size: 14px;
+    font-weight: bold;
+}
 
+.shareBar { list-style-type: none; }
+.shareBar li { display: inline-block; margin-top: 6px; padding-top: 10px; }
+
+/*.shareBar li.padABit { margin: 5px 0 0 0; }*/
+
+/*
+.fb-like  { float: left; margin: 5px 0 0 0; }
+.twitter-share-button { float: left; margin: 4px 0 0 15px; }
+.googlePlus { float: left !important; margin: 4px 0 0 15px !important;  }
+*/
 
 /*THE FEEDBACK TAB*/
 a#fdbk_tab {
