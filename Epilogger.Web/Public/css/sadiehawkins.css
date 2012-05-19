@@ -2253,6 +2253,34 @@ div#SearchTimeFilter input[type=text] {
 .shareBar { list-style-type: none; }
 .shareBar li { display: inline-block; margin-top: 6px; padding-top: 10px; }
 
+
+/*Facebook Upload */
+#facebookGallery {
+    list-style-type: none;  
+    margin: 0;
+    padding: 0; 
+}
+#facebookGallery li {
+    display: block;
+    height: 162px;
+    width: 144px;
+    margin-right: 22px;
+    float: left;
+    
+}
+.facebookGalleryImg {
+    height: 111px;
+    width: 144px;
+    overflow: hidden;
+}
+
+.facebookGalleryAlbumName {
+    padding-top: 5px;
+    height: 35px;
+    overflow: hidden;
+}
+
+
 /*.shareBar li.padABit { margin: 5px 0 0 0; }*/
 
 /*

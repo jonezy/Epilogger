@@ -10,7 +10,8 @@ using Epilogger.Web.Models;
 
 namespace Epilogger.Web.Controllers {
     [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to view your dashboard.")]
-    public class DashboardController : BaseController {
+    public partial class DashboardController : BaseController
+    {
         TweetService tweetService;
         EventService eventService;
         UserService userService;
@@ -23,7 +24,8 @@ namespace Epilogger.Web.Controllers {
             base.Initialize(requestContext);
         }
 
-        public ActionResult Index(int? page) {
+        public virtual ActionResult Index(int? page)
+        {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
             IEnumerable<DashboardActivityModel> activity = userService.GetUserDashboardActivity(CurrentUser.ID);
             DashboardIndexViewModel model = new DashboardIndexViewModel(
@@ -35,7 +37,8 @@ namespace Epilogger.Web.Controllers {
             return View(model);
         }
 
-        public ActionResult Profile() {
+        public virtual ActionResult Profile()
+        {
             List<Event> events = BuildEventsAndSubscriptions();
             DashboardProfileViewModel model = Mapper.Map<User, DashboardProfileViewModel>(CurrentUser);
             model.Events = Mapper.Map<List<Event>, List<DashboardEventViewModel>>(events.Take(12).ToList());
@@ -43,7 +46,8 @@ namespace Epilogger.Web.Controllers {
             return View(model);
         }
 
-        public ActionResult Events(int? page) {
+        public virtual ActionResult Events(int? page)
+        {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
             IEnumerable<DashboardActivityModel> activity = userService.GetUsersEventActivity(CurrentUser.ID);
             DashboardIndexViewModel model = new DashboardIndexViewModel(
@@ -55,7 +59,8 @@ namespace Epilogger.Web.Controllers {
             return View(model);
         }
 
-        public ActionResult AllEvents(int? page) {
+        public virtual ActionResult AllEvents(int? page)
+        {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
             List<Event> events = eventService.FindByUserID(CurrentUserID);
 
@@ -68,7 +73,8 @@ namespace Epilogger.Web.Controllers {
             return View(model);
         }
 
-        public ActionResult Subscriptions(int? page) {
+        public virtual ActionResult Subscriptions(int? page)
+        {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
             List<Event> events = BuildEventSubscriptions();
 
@@ -81,7 +87,8 @@ namespace Epilogger.Web.Controllers {
             return View(model);
         }
 
-        public ActionResult Account() {
+        public virtual ActionResult Account()
+        {
             DashboardAccountViewModel model = new DashboardAccountViewModel() {
                 EmailAddress = CurrentUser.EmailAddress,
                 CreatedDate = CurrentUser.CreatedDate
