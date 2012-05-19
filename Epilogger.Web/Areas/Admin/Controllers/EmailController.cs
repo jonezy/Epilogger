@@ -9,7 +9,8 @@ using Epilogger.Data;
 
 namespace Epilogger.Web.Areas.Admin.Controllers {
     [RequiresAuthentication(ValidUserRole = UserRoleType.Administrator, AccessDeniedMessage = "You must be an administrator to access this part of the site.")]
-    public class EmailController : BaseController {
+    public partial class EmailController : BaseController
+    {
         UserService service;
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext) {
@@ -18,11 +19,13 @@ namespace Epilogger.Web.Areas.Admin.Controllers {
             base.Initialize(requestContext);
         }
 
-        public ActionResult Index() {
+        public virtual ActionResult Index()
+        {
             return View(new InviteUsersViewModel());
         }
         [HttpPost]
-        public ActionResult Index(InviteUsersViewModel model) {
+        public virtual ActionResult Index(InviteUsersViewModel model)
+        {
             if (ModelState.IsValid) {
                 string[] emailAddresses = model.EmailAddresses.Split(',');
                 if (emailAddresses.Length == 0) {

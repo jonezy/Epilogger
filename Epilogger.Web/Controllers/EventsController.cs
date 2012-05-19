@@ -23,7 +23,8 @@ using System.Text.RegularExpressions;
 using Twitterizer;
 
 namespace Epilogger.Web.Controllers {
-    public class EventsController : BaseController {
+    public partial class EventsController : BaseController
+    {
         private const string ClientId = "GRBSH3HPYZYHIACLAL1GHGYHVHVWLJ0GGUUB1OLV41GV5EF1";
         private const string ClientSecret = "FFCUYMPWPVTCP5AVNDS2VCA1JPTTR4FKCE35ZQUV3TKON5MH";
         readonly string _version = DateTime.Today.ToString("yyyyMMdd");
@@ -85,7 +86,7 @@ namespace Epilogger.Web.Controllers {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         
         [CompressFilter]
-        public ActionResult Category(string categoryName)
+        public virtual ActionResult Category(string categoryName)
         {
             var model = new BrowseCategoriesDisplayViewModel();
             var events = new List<Event>();
@@ -108,7 +109,8 @@ namespace Epilogger.Web.Controllers {
 
         //public ActionResult Details(int id) {
         [CompressFilter]
-        public ActionResult Details(string id) {
+        public virtual ActionResult Details(string id)
+        {
 
             var requestedEvent = _es.FindBySlug(id);
 
@@ -192,7 +194,8 @@ namespace Epilogger.Web.Controllers {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         [HttpPost]
-        public ActionResult Details(string id, FormCollection collection) {
+        public virtual ActionResult Details(string id, FormCollection collection)
+        {
 
 
             if (collection["ResetDates"] == "1")
@@ -215,7 +218,8 @@ namespace Epilogger.Web.Controllers {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         
         [CompressFilter]
-        public ActionResult AllPhotos(string id, int? page) {
+        public virtual ActionResult AllPhotos(string id, int? page)
+        {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
             var requestedEvent = _es.FindBySlug(id);
 
@@ -247,7 +251,8 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         [CompressFilter]
-        public ActionResult AllTweets(string id, int? page) {
+        public virtual ActionResult AllTweets(string id, int? page)
+        {
             
             int currentPage = page.HasValue ? page.Value - 1 : 0;
 
@@ -301,7 +306,8 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
-        public ActionResult Create() {
+        public virtual ActionResult Create()
+        {
             CreateEventViewModel Model = Mapper.Map<Event, CreateEventViewModel>(new Event());
             //Model.TimeZoneOffset = Helpers.GetUserTimeZoneOffset();
 
@@ -323,7 +329,8 @@ namespace Epilogger.Web.Controllers {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
         [HttpPost]
-        public ActionResult Create(CreateEventViewModel model) {
+        public virtual ActionResult Create(CreateEventViewModel model)
+        {
 
             DateTime startDate;
             DateTime endDate;
@@ -479,7 +486,8 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        public ActionResult EventBySlug(string eventSlug) {
+        public virtual ActionResult EventBySlug(string eventSlug)
+        {
             Event foundEvent = null;
             foreach (var e in _db.Events) {
                 if (e.Name.CreateUrlSlug() == eventSlug) {
@@ -493,7 +501,7 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        public ActionResult GetImageComments(int eventId, int imageid)
+        public virtual ActionResult GetImageComments(int eventId, int imageid)
         {
             return PartialView("_ImageComments", _ts.FindByImageID(imageid, eventId));
         }
@@ -540,7 +548,8 @@ namespace Epilogger.Web.Controllers {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         [HttpPost]
-        public ActionResult GetLastTweetsJSON(int Count, string pageLoadTime, int EventID) {
+        public virtual ActionResult GetLastTweetsJSON(int Count, string pageLoadTime, int EventID)
+        {
             Dictionary<String, Object> dict = new Dictionary<String, Object>();
 
             if (pageLoadTime.Length > 0) {
@@ -589,7 +598,8 @@ namespace Epilogger.Web.Controllers {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         [HttpPost]
-        public ActionResult GetLastPhotosJSON(int Count, string pageLoadTime, int EventID) {
+        public virtual ActionResult GetLastPhotosJSON(int Count, string pageLoadTime, int EventID)
+        {
             Dictionary<String, Object> dict = new Dictionary<String, Object>();
 
             if (pageLoadTime.Length > 0) {
@@ -649,7 +659,8 @@ namespace Epilogger.Web.Controllers {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         [HttpPost]
-        public ActionResult Subscribe(FormCollection fc) {
+        public virtual ActionResult Subscribe(FormCollection fc)
+        {
 
             Event requestedEvent = _es.FindBySlug(fc["EventSlug"].ToString());
 
@@ -677,7 +688,8 @@ namespace Epilogger.Web.Controllers {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         [HttpPost]
-        public ActionResult UnSubscribe(FormCollection fc) {
+        public virtual ActionResult UnSubscribe(FormCollection fc)
+        {
 
             Event requestedEvent = _es.FindBySlug(fc["EventSlug"].ToString());
 
@@ -706,7 +718,8 @@ namespace Epilogger.Web.Controllers {
         //Depricated
         //See StarRating
         [HttpPost]
-        public ActionResult eventRating(FormCollection fc) {
+        public virtual ActionResult eventRating(FormCollection fc)
+        {
             int id;
             string ThumbsUp;
             int.TryParse(fc["ID"].ToString(), out id);
@@ -741,7 +754,7 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         [CompressFilter]
-        public ActionResult Search(String id, string IEsearchterm)
+        public virtual ActionResult Search(String id, string IEsearchterm)
         {
             var requestedEvent = _es.FindBySlug(id);
 
@@ -766,7 +779,7 @@ namespace Epilogger.Web.Controllers {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         [HttpPost]
-        public ActionResult Search(FormCollection fc)
+        public virtual ActionResult Search(FormCollection fc)
         {
             var searchTerm = fc["SearchTerm"];
 
@@ -775,14 +788,16 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         [CompressFilter]
-        public ActionResult AllContent(int id) {
+        public virtual ActionResult AllContent(int id)
+        {
             AllContentViewModel model = Mapper.Map<Event, AllContentViewModel>(_es.FindByID(id));
             return View(model);
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         [CompressFilter]
-        public ActionResult AllBlogPosts(string id, int? page) {
+        public virtual ActionResult AllBlogPosts(string id, int? page)
+        {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
             Event requestedEvent = _es.FindBySlug(id);
 
@@ -802,7 +817,8 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         [CompressFilter]
-        public ActionResult AllCheckins(string id, int? page) {
+        public virtual ActionResult AllCheckins(string id, int? page)
+        {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
 
             var currentEvent = _es.FindBySlug(id);
@@ -827,7 +843,8 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         [CompressFilter]
-        public ActionResult AllLinks(string id, int? page) {
+        public virtual ActionResult AllLinks(string id, int? page)
+        {
 
             int currentPage = page.HasValue ? page.Value - 1 : 0;
             var requestedEvent = _es.FindBySlug(id);
@@ -847,7 +864,7 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         [CompressFilter]
-        public ActionResult AllStats(String id)
+        public virtual ActionResult AllStats(String id)
         {
 
             //int currentPage = page.HasValue ? page.Value - 1 : 0;
@@ -904,7 +921,8 @@ namespace Epilogger.Web.Controllers {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         [CompressFilter]
         [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to edit an event")]
-        public ActionResult Edit(string id) {
+        public virtual ActionResult Edit(string id)
+        {
             Event currentEvent = _es.FindBySlug(id);
             CreateEventViewModel model = Mapper.Map<Event, CreateEventViewModel>(currentEvent);
             model.ToolbarViewModel = BuildToolbarViewModel(currentEvent);
@@ -920,7 +938,8 @@ namespace Epilogger.Web.Controllers {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to edit an event")]
         [HttpPost]
-        public ActionResult Edit(FormCollection fc, CreateEventViewModel model) {
+        public virtual ActionResult Edit(FormCollection fc, CreateEventViewModel model)
+        {
             Event currentEvent = _es.FindBySlug(model.EventSlug);
             model.ID = currentEvent.ID;
 
@@ -1038,7 +1057,8 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        public ActionResult VenueSearch() {
+        public virtual ActionResult VenueSearch()
+        {
 
             //TODO replace with IP geo coded data.
             var vsm = new VenueSearchModel { City = "Toronto", ProvinceState = "ON" };
@@ -1048,7 +1068,8 @@ namespace Epilogger.Web.Controllers {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         [HttpPost]
-        public PartialViewResult SearchVenues(FormCollection fc) {
+        public virtual PartialViewResult SearchVenues(FormCollection fc)
+        {
             var location = new StringBuilder();
             if (fc["address"] != null) {
                 location.AppendFormat("{0},",fc["address"]);
@@ -1138,7 +1159,8 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         [CompressFilter]
-        public ActionResult AddBlogPost(int id) {
+        public virtual ActionResult AddBlogPost(int id)
+        {
             var model = new AddBlogPostViewModel {BlogURL = "http://", EventID = id};
             return PartialView(model);
         }
@@ -1162,7 +1184,8 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        public ActionResult AddLink() {
+        public virtual ActionResult AddLink()
+        {
             return PartialView();
         }
 
@@ -1192,7 +1215,7 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        public ActionResult StarRatings()
+        public virtual ActionResult StarRatings()
         {
             return PartialView("_StarRatingTemplate");
         }
@@ -1200,7 +1223,7 @@ namespace Epilogger.Web.Controllers {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         [HttpPost]
-        public ActionResult StarRatings(FormCollection fc)
+        public virtual ActionResult StarRatings(FormCollection fc)
         {
             
             int userRating;
@@ -1287,7 +1310,7 @@ namespace Epilogger.Web.Controllers {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-        public ActionResult UploadPhotos(int id)
+        public virtual ActionResult UploadPhotos(int id)
         {
             var model = new UploadPhotosViewModel {EventID = id};
             return PartialView(model);

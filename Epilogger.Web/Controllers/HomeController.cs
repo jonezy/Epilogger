@@ -13,7 +13,8 @@ using Epilogger.Web.Core.Stats;
 
 namespace Epilogger.Web.Controllers {
 
-    public class HomeController : BaseController {
+    public partial class HomeController : BaseController
+    {
         UserLogService LS = new UserLogService();
         ClickLogService CS = new ClickLogService();
         EventService ES = new EventService();
@@ -21,7 +22,8 @@ namespace Epilogger.Web.Controllers {
 
         [CacheFilter(Duration = 10)]
         [CompressFilter]
-        public ActionResult Index() {
+        public virtual ActionResult Index()
+        {
             ViewBag.Message = "Welcome to Epilogger!";
 
             var activity = ES.GetHomepageActivity();
@@ -110,13 +112,15 @@ namespace Epilogger.Web.Controllers {
         //    return View(model);
         //}
 
-        public ActionResult StatusMessages() {
+        public virtual ActionResult StatusMessages()
+        {
             var model = new StatusMessage {MSGDateTime = DateTime.UtcNow};
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult StatusMessages(StatusMessage model) {
+        public virtual ActionResult StatusMessages(StatusMessage model)
+        {
 
             var sc = new StatusMessagesService();
             sc.Save(model);
@@ -125,7 +129,8 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpPost]
-        public ActionResult LogClick(Epilogger.Data.UserClickAction clickactions) {
+        public virtual ActionResult LogClick(Epilogger.Data.UserClickAction clickactions)
+        {
 
             clickactions.ActionDateTime = DateTime.UtcNow;
             clickactions.UserID = CurrentUserID;
@@ -136,7 +141,8 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpPost]
-        public ActionResult ClickMap(Epilogger.Data.userClickTracking clickactions) {
+        public virtual ActionResult ClickMap(Epilogger.Data.userClickTracking clickactions)
+        {
 
             clickactions.UserID = CurrentUserID;
             clickactions.ClickDateTime = DateTime.UtcNow;
@@ -146,16 +152,19 @@ namespace Epilogger.Web.Controllers {
             return Json(new { success = true });
         }
 
-        public ActionResult _GetClickMap(Epilogger.Data.userClickTracking clickactions) {
+        public virtual ActionResult _GetClickMap(Epilogger.Data.userClickTracking clickactions)
+        {
             return PartialView(CS.GetLast200ClicksByLocation(clickactions.location));
         }
 
-        public ActionResult Search() {
+        public virtual ActionResult Search()
+        {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Search(SearchEventViewModel model) {
+        public virtual ActionResult Search(SearchEventViewModel model)
+        {
 
             IEnumerable<Epilogger.Data.Event> evs = ES.GetEventsBySearchTerm(model.SearchTerm);
 
@@ -164,19 +173,23 @@ namespace Epilogger.Web.Controllers {
             return View(model);
         }
 
-        public ActionResult About() {
+        public virtual ActionResult About()
+        {
             return View();
         }
 
-        public ActionResult Contact() {
+        public virtual ActionResult Contact()
+        {
             return View();
         }
 
-        public ActionResult Terms() {
+        public virtual ActionResult Terms()
+        {
             return View();
         }
 
-        public ActionResult Privacy() {
+        public virtual ActionResult Privacy()
+        {
             return View();
         }
 

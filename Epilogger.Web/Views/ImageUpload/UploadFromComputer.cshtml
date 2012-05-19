@@ -1,0 +1,156 @@
+﻿@model string
+@{
+    Layout = MVC.ImageUpload.Views._Layout;
+}
+@section Head {
+    <link rel="stylesheet" href="@Links.Public.js.bootstrap.css.bootstrap_min_css">
+    <link rel="stylesheet" href="@Links.Public.js.bootstrap.css.bootstrap_responsive_min_css">
+    <link rel="stylesheet" href="@Links.Public.js.bootstrap_Image_Gallery.css.bootstrap_image_gallery_min_css">
+    <link rel="stylesheet" href="@Links.Public.js.jQueryFileUpload.css.jquery_fileupload_ui_css">
+    <script type="text/javascript">
+        $(function () {
+            $('#fileupload').fileupload({
+                maxFileSize: 10000000,
+                acceptFileTypes: /(\.|\/)(gif|jpeg|png)$/i,
+                done: function () {
+                    window.location = '@Url.Action(MVC.ImageUpload.ChooseUploadSource())' + '?' + '@MVC.ImageUpload.ChooseUploadSourceParams.status' + '=1';
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $('#uploadLink').click(function () {
+                $('#submitButton').click();
+
+                return false;
+            });
+        });
+    </script>
+}
+@section Navigation {
+    <img src="@Links.Public.images.imageupload.source_inactive_png"/>
+    <img src="@Links.Public.images.imageupload.selectphotos_active_png"/>
+}
+@section BottomLeft {
+    <a href="@Url.Action(MVC.ImageUpload.ChooseUploadSource())">
+        <img src="@Links.Public.images.imageupload.oops_flickr_png" />
+    </a>
+}
+@section BottomRight {
+    <a id="uploadLink" href="#">
+        <img src="@Links.Public.images.imageupload.upload_png" />
+    </a>
+}
+<h2>
+    2) SELECT PHOTOS:</h2>
+@using (Html.BeginForm(MVC.ImageUpload.UploadFromComputer(), FormMethod.Post, new { id = "fileupload", enctype = "multipart/form-data" }))
+{
+    <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+    <div class="row fileupload-buttonbar">
+        <div class="span7">
+            <!-- The fileinput-button span is used to style the file input field as button -->
+            <span class="btn btn-success fileinput-button"><i class="icon-plus icon-white"></i><span>
+                Add files...</span>
+                <input type="file" name="files[]" multiple>
+            </span>@*ToDo: find out how to remove submit button and just call form submit*@
+            <button id="submitButton" type="submit" class="btn btn-primary start" style="display: none;">
+                <i class="icon-upload icon-white"></i><span>Start upload</span>
+            </button>
+            @*<!-- The global progress information -->
+            <div class="span5 fileupload-progress fade">
+                <!-- The global progress bar -->
+                <div class="progress progress-success progress-striped active">
+                    <div class="bar" style="width: 0%;">
+                    </div>
+                </div>
+                <!-- The extended global progress information -->
+                <div class="progress-extended">
+                    &nbsp;</div>
+            </div>*@
+        </div>
+    </div>
+    <!-- The loading indicator is shown during file processing -->
+    <div class="fileupload-loading">
+    </div>
+    <br />
+    <div style="height: 130px; overflow: auto;">
+        <!-- The table listing the files available for upload/download -->
+        <table class="table table-striped">
+            <tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery">
+            </tbody>
+        </table>
+    </div>
+}
+<script id="template-upload" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-upload fade">
+        <td class="preview"><span class="fade"></span></td>
+        <td class="name"><span>{%=file.name%}</span></td>
+        <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+        {% if (file.error) { %}
+            <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
+        {% } else if (o.files.valid && !i) { %}
+            <td>
+                <div class="progress progress-success progress-striped active"><div class="bar" style="width:0%;"></div></div>
+            </td>
+            <td class="start">{% if (!o.options.autoUpload) { %}
+                <button class="btn btn-primary" style="visibility: hidden">
+                    <i class="icon-upload icon-white"></i>
+                    <span>{%=locale.fileupload.start%}</span>
+                </button>
+            {% } %}</td>
+        {% } else { %}
+            <td colspan="2"></td>
+        {% } %}
+        <td class="cancel">{% if (!i) { %}
+            <button class="btn btn-warning">
+                <i class="icon-ban-circle icon-white"></i>
+                <span>{%=locale.fileupload.cancel%}</span>
+            </button>
+        {% } %}</td>
+    </tr>
+{% } %}
+</script>
+<!-- The template to display files available for download -->
+<script id="template-download" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-download fade">
+        {% if (file.error) { %}
+            <td></td>
+            <td class="name"><span>{%=file.name%}</span></td>
+            <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+            <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
+        {% } else { %}
+            <td class="preview">{% if (file.thumbnail_url) { %}
+                <a href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}"></a>
+            {% } %}</td>
+            <td class="name">
+                <a href="{%=file.url%}" title="{%=file.name%}" rel="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
+            </td>
+            <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+            <td colspan="2"></td>
+        {% } %}
+        <td class="delete">
+            <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
+                <i class="icon-trash icon-white"></i>
+                <span>{%=locale.fileupload.destroy%}</span>
+            </button>
+            <input type="checkbox" name="delete" value="1">
+        </td>
+    </tr>
+{% } %}
+</script>
+<!--[if lt IE 9]><script src="@Links.Public.js.html5shiv_js"></script><![endif]-->
+<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+<script src="@Links.Public.js.jQueryFileUpload.js.vendor.jquery_ui_widget_js"></script>
+<script src="@Links.Public.js.tmpl_min_js"></script>
+<script src="@Links.Public.js.load_image_min_js"></script>
+<script src="@Links.Public.js.canvas_to_blob_min_js"></script>
+<script src="@Links.Public.js.bootstrap.js.bootstrap_min_js"></script>
+<script src="@Links.Public.js.bootstrap_Image_Gallery.js.bootstrap_image_gallery_min_js"></script>
+<script src="@Links.Public.js.jQueryFileUpload.js.jquery_iframe_transport_js"></script>
+<script src="@Links.Public.js.jQueryFileUpload.js.jquery_fileupload_js"></script>
+<script src="@Links.Public.js.jQueryFileUpload.js.jquery_fileupload_fp_js"></script>
+<script src="@Links.Public.js.jQueryFileUpload.js.jquery_fileupload_ui_js"></script>
+<script src="@Links.Public.js.jQueryFileUpload.js.locale_js"></script>

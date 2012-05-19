@@ -10,15 +10,18 @@ using Epilogger.Web.Controllers;
 using Facebook;
 
 namespace Epilogger.Web.Areas.Authentication.Controllers {
-    public class FacebookController : BaseController, IAuthenticationController {
+    public partial class FacebookController : BaseController, IAuthenticationController
+    {
         private string logoffUrl = ConfigurationManager.AppSettings["FacebookLogoffURL"] as string ?? "";
         private string returnUrl = ConfigurationManager.AppSettings["FacebookCallbackURL"] as string ?? "";
 
-        public ActionResult ConnectRequest() {
+        public virtual ActionResult ConnectRequest()
+        {
             return Redirect(BuildRequest(returnUrl));
         }
 
-        public ActionResult ConnectAccount() {
+        public virtual ActionResult ConnectAccount()
+        {
             string code = Request.QueryString["code"] as string ?? "";
             string state = Request.QueryString["state"] as string ?? "";
 
@@ -59,7 +62,8 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult Disconnect() {
+        public virtual ActionResult Disconnect()
+        {
             UserAuthenticationProfileService service = new UserAuthenticationProfileService();
             service.DisconnectService(AuthenticationServices.FACEBOOK, CurrentUserID);
 
