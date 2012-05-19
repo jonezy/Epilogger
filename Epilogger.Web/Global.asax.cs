@@ -13,6 +13,8 @@ using Epilogger.Web.Core.Email;
 using Epilogger.Web.Models;
 using Timezone.Framework;
 
+using T4MVC;
+
 namespace Epilogger.Web {
 
     public class App : System.Web.HttpApplication {
@@ -198,6 +200,14 @@ namespace Epilogger.Web {
                 new { controller = "events", action = "getimagecomments", eventID = UrlParameter.Optional, imageid = UrlParameter.Optional }
             );
 
+            routes.MapRoute("ChooseUploadSourceWithoutStatus", "events/imageupload/source/{id}", MVC.ImageUpload.ChooseUploadSource());
+            routes.MapRoute("AuthenticateFlickr", "events/imageupload/flickr/authenticate/{id}", MVC.ImageUpload.AuthenticateFlickr());
+            routes.MapRoute("SuccessfullyAuthenticatedFlickr", "events/imageupload/flickr/successfullyauthenticated/{id}", MVC.ImageUpload.SuccessfullyAuthenticatedFlickr());
+            routes.MapRoute("UploadFlickrImages", "events/imageupload/flickr/upload/{id}", MVC.ImageUpload.UploadFlickrImages());
+            routes.MapRoute("GetFacebookAlbums", "events/imageupload/facebook/albums/{id}", MVC.ImageUpload.GetFacebookAlbums());
+            routes.MapRoute("UpoadFacebookAlbumPhotos", "events/imageupload/facebook/upload/{id}/{albumId}", MVC.ImageUpload.UploadFacebookAlbumPhotos());
+            routes.MapRoute("UploadImageFromComputer", "events/imageupload/computer/{id}", MVC.ImageUpload.UploadFromComputer());           
+
             routes.MapRoute(
                 "GetImageCommentsPaged",
                 "events/getimagecommentspaged/{eventId}/{imageId}/{page}",
@@ -257,7 +267,7 @@ namespace Epilogger.Web {
                 "widget/PhotoDetails/{id}/{photoID}",
                 new { controller = "widget", action = "photodetails", id = UrlParameter.Optional, photoID = UrlParameter.Optional }
             );
-            
+
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters

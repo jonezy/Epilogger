@@ -1,0 +1,111 @@
+﻿@model Epilogger.Web.Models.GetFacebookAlbumsViewModel
+@{
+    Layout = MVC.ImageUpload.Views._Layout;
+}
+@section Head {
+    <link href="@Links.Public.js.jQueryEpiloggerGallery.css.jqueryEpiloggerGallery_css" rel="stylesheet"/>
+    <script type="text/javascript" src="@Links.Public.js.jQueryEpiloggerGallery.js.jqueryEpiloggerGallery_js"></script>
+    @*<script type="text/javascript" src="/Public/js/jquery.colorbox-min.js"></script>*@
+    @*<script type="text/javascript" src="/Public/js/epilogger.js"></script>*@
+    
+}
+@section Navigation {
+    <img src="@Links.Public.images.imageupload.source_inactive_png"/>
+    <img src="@Links.Public.images.imageupload.choosealbum_active_png"/>
+}
+@section BottomLeft {
+    <a href="@Url.Action(MVC.ImageUpload.ChooseUploadSource())">
+        <img src="@Links.Public.images.imageupload.oops_flickr_png" />
+    </a>
+}
+@section BottomRight {
+}
+<div id="fb-root">
+</div>
+<script type="text/javascript" language="javascript">
+    $(document).ready(function () {
+        
+    });
+
+
+    window.getAlbums = function () {
+        $('#loginContainer').hide();
+        $("#loading").show();
+
+        FB.api('/me/albums', function (resp) {
+            var galleryImages = $(resp.data).map(function () {
+                var albumCoverUrl = 'https://graph.facebook.com/' + this.cover_photo + '/picture?access_token=' + FB.getAccessToken();
+                var addAlbumPhotosUrl = "/events/imageupload/facebook/upload/" + '@Model.EventId' + "/" + this.id;
+                var albumName = this.name;
+                var albumPhotoCount = this.count;
+
+                return { src: albumCoverUrl, url: addAlbumPhotosUrl, albumname: albumName, count: albumPhotoCount };
+            });
+
+            $('#facebookGallery').gallery(galleryImages, false);
+
+            parent.resizePopUp('800px', '85%;');
+            $("#facebookGalleryContainer").height($("#uploadPageContainer").height() - 160);
+
+            $("#loading").hide();
+            $('#albumsContainer').show();
+        });
+    };
+        
+
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: FacebookAppId, // App ID
+            //            channelUrl: '//WWW.YOUR_DOMAIN.COM/channel.html', // Channel File
+            status: true, // check login status
+            cookie: true, // enable cookies to allow the server to access the session
+            xfbml: true  // parse XFBML
+        });
+
+        // Additional initialization code here
+
+        // Check if the current user is logged in and has authorized the app
+        FB.getLoginStatus(checkLoginStatus);
+
+        // Check the result of the user status and display login button if necessary
+        function checkLoginStatus(response) {
+            if (response && response.status == 'connected') {
+                $('#loginContainer').hide();
+                getAlbums();
+            } else
+                $('#loginContainer').show();
+        }
+    };
+
+    // Load the SDK Asynchronously
+    (function (d) {
+        var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+        if (d.getElementById(id)) { return; }
+        js = d.createElement('script'); js.id = id; js.async = true;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        ref.parentNode.insertBefore(js, ref);
+    } (document));
+
+
+
+</script>
+<div style="margin-bottom: 20px;">
+    <h2>
+        2) CHOOSE FACEBOOK ALBUM:</h2>
+    <div id="loginContainer" style="display: none;">
+        <span>Login to Facebook</span>
+        <fb:login-button scope="user_photos" onlogin="getAlbums()">Login</fb:login-button>
+    </div>
+    <div id="albumsContainer" style="display: none">
+        <span>After clicking an album you'll be able to select which pictures to upload.</span>
+    </div>
+</div>
+<div id="facebookGalleryContainer" style="overflow: auto;"> @*height: 70%; *@
+    <img src="/Public/images/icons/ajaxWaiting.gif" id="loading" style="display: none;" alt="loading" />
+    
+    <ul id="facebookGallery">
+    </ul>
+    
+    @*<table id="gallery">
+    </table>*@
+</div>
