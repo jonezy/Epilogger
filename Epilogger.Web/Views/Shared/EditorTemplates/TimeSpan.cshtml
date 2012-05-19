@@ -1,2 +1,2 @@
-﻿@model System.TimeSpan?
+﻿@model TimeSpan?
 @Html.TextBox("", Model.HasValue ? new DateTime(Model.Value.Ticks).ToString("h:mm tt") : new DateTime(DateTime.Today.TimeOfDay.Ticks).ToString("h:mm tt"), new { @class = "timedropdown", @maxlength = "8" })
