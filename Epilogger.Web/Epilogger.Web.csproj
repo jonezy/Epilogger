@@ -328,6 +328,7 @@
     <Compile Include="Models\BrowseCategoriesDisplayViewModel.cs" />
     <Compile Include="Models\AllStatsViewModel.cs" />
     <Compile Include="Models\BetaSignUpViewModel.cs" />
+    <Compile Include="Models\GetFacebookAlbumsViewModel.cs" />
     <Compile Include="Models\ImageCommentViewModel.cs" />
     <Compile Include="Models\PhotoDetailsViewModel.cs" />
     <Compile Include="Models\TweetReplyViewModel.cs" />

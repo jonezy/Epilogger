@@ -8,13 +8,15 @@
     <script type="text/javascript">
         $(function () {
             $('#uploadLink').click(function (event) {
-                var photosUrls = $('#gallery').find('img.selectedImage').map(function () { return $(this).attr('src'); });
+                var photosUrls = $('#facebookGallery').find('div.selectedImage img').map(function () { return $(this).attr('src'); });
+                //var photosUrls = $('#facebookGallery').find('img.selectedImage').map(function () { return $(this).attr('src'); });
                 if (!photosUrls)
                     alert('Please select some photos');
                 else
                     $.post(window.location,
                         { photosUrls: $.makeArray(photosUrls) },
                         function (data) {
+                            parent.resizePopUp('800px', '370px;');
                             window.location = '@Url.Action(MVC.ImageUpload.ChooseUploadSource())' + '?' + '@MVC.ImageUpload.ChooseUploadSourceParams.status' + '=1';
                             return false;
                         });
@@ -42,14 +44,19 @@
 <div id="fb-root">
 </div>
 <script type="text/javascript">
+    $("#loading").show();
+
     window.getAlbumPhotos = function () {
         FB.api('/' + '@Model.AlbumId' + '/photos', function (resp) {
             var galleryImages = $(resp.data).map(function () {
-                return { src: this.source };
+
+                return { src: this.source, url: null, albumname: '', count: '' };
             });
 
-            $('#gallery').gallery(galleryImages, true);
+            $('#facebookGallery').gallery(galleryImages, true);
+            $("#facebookGalleryContainer").height($("#uploadPageContainer").height() - 160);
 
+            $("#loading").hide();
             $('#photosContainer').show();
         });
     };
@@ -98,7 +105,14 @@
         Click picture(s) you'd like to upload:
     </div>
 </div>
-<div style="height: 130px; overflow: auto;">
+@*<div style="height: 130px; overflow: auto;">
     <table id="gallery">
     </table>
+</div>*@
+<div id="facebookGalleryContainer" style="overflow: auto;" class=""> @*height: 70%; *@
+    <img src="/Public/images/icons/ajaxWaiting.gif" id="loading" style="display: none;" alt="loading" />
+
+    <ul id="facebookGallery">
+    </ul>
+
 </div>
