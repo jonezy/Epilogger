@@ -2683,7 +2683,6 @@
     <Content Include="Public\js\oAuth\example\authorize.html" />
     <Content Include="Public\js\oAuth\example\consumer.js" />
     <Content Include="Public\js\oAuth\example\echo.html" />
-    <Content Include="Public\js\oAuth\example\gadget\oauth-example.xml" />
     <Content Include="Public\js\oAuth\example\index.html" />
     <Content Include="Public\js\oAuth\example\requestToken.html" />
     <Content Include="Public\js\oAuth\example\signature.html" />
