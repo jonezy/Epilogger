@@ -27,6 +27,7 @@
             OAuth.SignatureMethod.sign(message, accessor);
 
             $.get(message.action, OAuth.getParameterMap(message.parameters), function (data) {
+                
                 var token = $.parseParams(data).oauth_token;
 
                 var tokenSecret = $.parseParams(data).oauth_token_secret;
@@ -35,11 +36,37 @@
                 $('#fakeAnchor').click(function () {
                     var childWindow = window.open('http://www.flickr.com/services/oauth/authorize?oauth_token=' + token, 'flickrauthenticationwindow', 'width=300,height=600');
                     $(childWindow).unload(function () {
-//                        location.href = '';
+                        
                     });
                     return false;
                 });
+                
+
+
             });
+
+
+
+
+
+//            $.get(message.action, OAuth.getParameterMap(message.parameters), function (data) {
+//                var token = $.parseParams(data).oauth_token;
+
+//                var tokenSecret = $.parseParams(data).oauth_token_secret;
+//                $.cookie('flickr_oauth_token_secret', tokenSecret, { expires: 1, path: '/' });
+
+//                $('#fakeAnchor').click(function () {
+//                    var childWindow = window.open('http://www.flickr.com/services/oauth/authorize?oauth_token=' + token, 'flickrauthenticationwindow', 'width=300,height=600');
+//                    $(childWindow).unload(function () {
+//                        //                        location.href = '';
+//                    });
+//                    return false;
+//                });
+//            });
+
+
+
+
         })
     </script>
 }
