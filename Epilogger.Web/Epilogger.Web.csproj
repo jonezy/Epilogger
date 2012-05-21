@@ -242,6 +242,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BrowseController.cs" />
+    <Compile Include="Controllers\CrossDomainProxyController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -260,6 +261,7 @@
     <Compile Include="Core\Framework\DateTimeMedataDataProvider.cs" />
     <Compile Include="Core\Framework\DateTimeModelBinder.cs" />
     <Compile Include="Core\Framework\TimezoneManager.cs" />
+    <Compile Include="Core\Handlers\ReverseProxyHttpHandler.cs" />
     <Compile Include="Core\Helpers\AzureTableHelper.cs" />
     <Compile Include="Core\Helpers\FacebookHelper.cs" />
     <Compile Include="Core\Helpers\FoursquareVenueClient.cs" />
