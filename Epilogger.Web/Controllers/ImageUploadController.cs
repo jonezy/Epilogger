@@ -10,7 +10,7 @@ using Epilogger.Web.Models;
 
 namespace Epilogger.Web.Controllers
 {
-    public partial class ImageUploadController : Controller
+    public partial class ImageUploadController : BaseController
     {
         EventService _es = new EventService();
 
@@ -69,7 +69,7 @@ namespace Epilogger.Web.Controllers
             {
                 foreach (var photoUrl in photosUrls)
                 {
-                    var facebookImageMsg = new MQ.Messages.FacebookImageMSG(requestedEvent.ID, albumId, new Uri(photoUrl));
+                    var facebookImageMsg = new MQ.Messages.FacebookImageMSG(requestedEvent.ID, albumId, new Uri(photoUrl), CurrentUserID);
                     messageProducer.SendMessage(facebookImageMsg);
                 }
             }

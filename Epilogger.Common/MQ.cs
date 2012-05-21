@@ -159,16 +159,18 @@ namespace Epilogger.Common
                 public int EventId { get; set; }
                 public string AlbumId { get; set; }
                 public Uri ImageUrl { get; set; }
+                public Guid UserId { get; set; }
 
                 public FacebookImageMSG()
                 {
                 }
 
-                public FacebookImageMSG(int eventId, string albumId, Uri imageUrl)
+                public FacebookImageMSG(int eventId, string albumId, Uri imageUrl, Guid userid)
                 {
                     EventId = eventId;
                     AlbumId = albumId;
                     ImageUrl = imageUrl;
+                    UserId = userid;
                 }
             }
 
