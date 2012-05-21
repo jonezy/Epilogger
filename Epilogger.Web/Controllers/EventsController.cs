@@ -1540,7 +1540,7 @@ namespace Epilogger.Web.Controllers {
                     AccessTokenSecret = CurrentUserTwitterAuthorization.TokenSecret
                 };
 
-                var ts = TwitterStatus.Update(tokens, c["tweetBoxPhoto"], new StatusUpdateOptions { InReplyToStatusId = decimal.Parse(c["TwitterID"]) });
+                var ts = TwitterStatus.Update(tokens, c[0], new StatusUpdateOptions { InReplyToStatusId = decimal.Parse(c["TwitterID"]) });
 
                 var uta = new UserTwitterAction
                 {
