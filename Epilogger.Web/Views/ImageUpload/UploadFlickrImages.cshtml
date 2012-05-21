@@ -38,6 +38,7 @@
             var oauthToken;
             var userId;
 
+            //add here check whether just logined
             if (true) {
                 var message = {
                     action: 'http://www.flickr.com/services/oauth/access_token',
@@ -45,22 +46,17 @@
                     parameters: []
                 };
 
-                OAuth.setTimestampAndNonce(message);
-
                 message.parameters.push(['oauth_consumer_key', FlickrApiKey]);
+                OAuth.setTimestampAndNonce(message);
                 message.parameters.push(['oauth_signature_method', 'HMAC-SHA1']);
                 message.parameters.push(['oauth_token', $.cookie('flickr_oauth_token')]);
                 message.parameters.push(['oauth_verifier', $.cookie('flickr_oauth_verifier')]);
 
                 OAuth.SignatureMethod.sign(message, accessor);
-//                var signature = message.parameters['oauth_signature'];
-//                delete message.parameters["oauth_signature"];
-//                message.parameters['api_sig'] = signature;
 
-                $.ajax({
-                    url: message.action,
-                    data: OAuth.getParameterMap(message.parameters),
-                    success: function (data) {
+                $.get('/http/www.flickr.com/services/oauth/access_token/reverseproxy.axd',
+                    OAuth.getParameterMap(message.parameters),
+                    function (data) {
                         oauthToken = $.parseParams(data).oauth_token;
                         userId = $.parseParams(data).user_nsid;
 
@@ -92,7 +88,7 @@
                             $('#photosContainer').show();
                         });
                     }
-                });
+                );
             }
 
             

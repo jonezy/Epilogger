@@ -26,46 +26,21 @@
             var accessor = { consumerSecret: FlickrApiSecret, tokenSecret: '' };
             OAuth.SignatureMethod.sign(message, accessor);
 
-            $.get(message.action, OAuth.getParameterMap(message.parameters), function (data) {
-                
+            $.get('/http/www.flickr.com/services/oauth/request_token/reverseproxy.axd', OAuth.getParameterMap(message.parameters), function (data) {
+
                 var token = $.parseParams(data).oauth_token;
 
                 var tokenSecret = $.parseParams(data).oauth_token_secret;
-                $.cookie('flickr_oauth_token_secret', tokenSecret, {expires: 1, path: '/'});
+                $.cookie('flickr_oauth_token_secret', tokenSecret, { expires: 1, path: '/' });
 
                 $('#fakeAnchor').click(function () {
-                    var childWindow = window.open('http://www.flickr.com/services/oauth/authorize?oauth_token=' + token, 'flickrauthenticationwindow', 'width=300,height=600');
-                    $(childWindow).unload(function () {
-                        
-                    });
+                    window.open('http://www.flickr.com/services/oauth/authorize?oauth_token=' + token + '&perms=read', 'flickrauthenticationwindow', 'width=300,height=600');
                     return false;
                 });
-                
+
 
 
             });
-
-
-
-
-
-//            $.get(message.action, OAuth.getParameterMap(message.parameters), function (data) {
-//                var token = $.parseParams(data).oauth_token;
-
-//                var tokenSecret = $.parseParams(data).oauth_token_secret;
-//                $.cookie('flickr_oauth_token_secret', tokenSecret, { expires: 1, path: '/' });
-
-//                $('#fakeAnchor').click(function () {
-//                    var childWindow = window.open('http://www.flickr.com/services/oauth/authorize?oauth_token=' + token, 'flickrauthenticationwindow', 'width=300,height=600');
-//                    $(childWindow).unload(function () {
-//                        //                        location.href = '';
-//                    });
-//                    return false;
-//                });
-//            });
-
-
-
 
         })
     </script>
@@ -83,9 +58,7 @@
     <h2>2) Authenticate:</h2>
     <span></span>
 </div>
-<a href="#" id="fakeAnchor">Click</a> to login to Flickr
-<div id="photosContainer" style="display: none">
-    Click photos you want to upload
-    <table id="gallery">
-    </table>
+<div>
+    
 </div>
+<div></div><a href="#" id="fakeAnchor">Click</a> to login to Flickr
