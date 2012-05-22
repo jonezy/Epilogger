@@ -33,6 +33,11 @@
             @Html.ActionLink("edit", "edit", "events", new { id = Model.EventID }, action.ToLower() == "edit" ? new { @class = "tooltip-trigger edit current", @title = "Edit Event" } : new { @class = "tooltip-trigger edit", @title = "Edit Event" })
         }
         @Html.ActionLink("allstats", "allstats", "events", new { id = Model.EventID }, action.ToLower() == "allstats" ? new { @class = "tooltip-trigger allstats current", @title = "Event Stats" } : new { @class = "tooltip-trigger allstats", @title = "Event Stats" })
+    
+        @if (Model.EventSlug=="c2-mtl")
+        {
+            @Html.ActionLink("NexaLive", "nexalive", "events", new { id = Model.EventID }, action.ToLower() == "nexalive" ? new { @class = "tooltip-trigger nexalive current", @title = "NexaLive" } : new { @class = "tooltip-trigger nexalive", @title = "NexaLive" })    
+        }
     </div>
 }
 else
@@ -45,10 +50,16 @@ else
         @Html.ActionLink("allinks", "alllinks", "events", new { id = Model.EventID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "alllinks" ? new { @class = "alllinks current" } : new { @class = "alllinks" })
         @Html.ActionLink("allcheckins", "allcheckins", "events", new { id = Model.EventID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "allcheckins" ? new { @class = "allcheckins current" } : new { @class = "allcheckins" })
         @Html.ActionLink("search", "search", "events", new { id = Model.EventID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "search" ? new { @class = "search current" } : new { @class = "search" })
-        @if ((Model.CreatedByID == Model.CurrentUserID) || Model.CurrentUserRole == UserRoleType.Administrator) {
+        @if ((Model.CreatedByID == Model.CurrentUserID) || Model.CurrentUserRole == UserRoleType.Administrator)
+        {
             @Html.ActionLink("edit", "edit", "events", new { id = Model.EventID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "edit" ? new { @class = "edit current" } : new { @class = "edit" })
         }
         @Html.ActionLink("allstats", "allstats", "events", new { id = Model.EventID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "allstats" ? new { @class = "allstats current" } : new { @class = "allstats" })
+    
+        @if (Model.EventSlug=="c2-mtl")
+        {
+            @Html.ActionLink("NexaLive", "nexalive", "events", new { id = Model.EventID }, action.ToLower() == "nexalive" ? new { @class = "tooltip-trigger nexalive current", @title = "NexaLive" } : new { @class = "tooltip-trigger nexalive", @title = "NexaLive" })    
+        }
     </div>
 }
 

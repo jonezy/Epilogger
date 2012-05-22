@@ -46,7 +46,14 @@
         <li>@Html.ActionLink("Blog Posts", "allblogposts", null, new { id = @id }, action.ToLower() == "allblogposts" ? new { @class = "current" } : null)</li>
         <li>@Html.ActionLink("Check-ins", "allcheckins", null, new { id = @id }, action.ToLower() == "allcheckins" ? new { @class = "current" } : null)</li>
         <li>@Html.ActionLink("Links", "alllinks", null, new { id = @id }, action.ToLower() == "alllinks" ? new { @class = "current" } : null)</li>
+        
+        @if (Model.EventSlug=="c2-mtl")
+        {
+            <li>@Html.ActionLink("Nexa Live", "nexalive", null, new { id = @id }, action.ToLower() == "nexalive" ? new { @class = "current" } : null)</li>
+        }
+        
         <li>@Html.ActionLink("Stats", "allstats", null, new { id = @id }, action.ToLower() == "allstats" ? new { @class = "current" } : null)</li>
+        
         @if ((Model.CreatedByID == Model.CurrentUserID) || Model.CurrentUserRole == UserRoleType.Administrator)
         { <li>@Html.ActionLink("edit", "edit", "events", new { id = @id }, action.ToLower() == "edit" ? new { @class = "current" } : null)</li>}
         @*<li>@Html.ActionLink("Search/Time Filter", "timefilters", null, new { id = @id }, action.ToLower() == "timefilters" ? new { @class = "current" } : null)</li>*@
