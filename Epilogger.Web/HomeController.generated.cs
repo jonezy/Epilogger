@@ -55,6 +55,11 @@ namespace Epilogger.Web.Controllers {
         public System.Web.Mvc.ActionResult _GetClickMap() {
             return new T4MVC_ActionResult(Area, Name, ActionNames._GetClickMap);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult SocialBar() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.SocialBar);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public HomeController Actions { get { return MVC.Home; } }
@@ -80,6 +85,7 @@ namespace Epilogger.Web.Controllers {
             public readonly string Contact = "Contact";
             public readonly string Terms = "Terms";
             public readonly string Privacy = "Privacy";
+            public readonly string SocialBar = "SocialBar";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -94,6 +100,7 @@ namespace Epilogger.Web.Controllers {
             public const string Contact = "Contact";
             public const string Terms = "Terms";
             public const string Privacy = "Privacy";
+            public const string SocialBar = "SocialBar";
         }
 
 
@@ -118,6 +125,14 @@ namespace Epilogger.Web.Controllers {
         public class ActionParamsClass__GetClickMap {
             public readonly string clickactions = "clickactions";
         }
+        static readonly ActionParamsClass_SocialBar s_params_SocialBar = new ActionParamsClass_SocialBar();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_SocialBar SocialBarParams { get { return s_params_SocialBar; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_SocialBar {
+            public readonly string eventid = "eventid";
+            public readonly string photoid = "photoid";
+        }
         static readonly ViewNames s_views = new ViewNames();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewNames Views { get { return s_views; } }
@@ -130,6 +145,7 @@ namespace Epilogger.Web.Controllers {
             public readonly string Index = "~/Views/Home/Index.cshtml";
             public readonly string Privacy = "~/Views/Home/Privacy.cshtml";
             public readonly string Search = "~/Views/Home/Search.cshtml";
+            public readonly string SocialBar = "~/Views/Home/SocialBar.cshtml";
             public readonly string StatusMessages = "~/Views/Home/StatusMessages.cshtml";
             public readonly string Terms = "~/Views/Home/Terms.cshtml";
         }
@@ -201,6 +217,13 @@ namespace Epilogger.Web.Controllers {
 
         public override System.Web.Mvc.ActionResult Privacy() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Privacy);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult SocialBar(int eventid, int photoid) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.SocialBar);
+            callInfo.RouteValueDictionary.Add("eventid", eventid);
+            callInfo.RouteValueDictionary.Add("photoid", photoid);
             return callInfo;
         }
 

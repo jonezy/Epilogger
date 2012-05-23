@@ -25,6 +25,8 @@ using T4MVC;
 public static class MVC {
     static readonly AdminClass s_Admin = new AdminClass();
     public static AdminClass Admin { get { return s_Admin; } }
+    static readonly ApiClass s_Api = new ApiClass();
+    public static ApiClass Api { get { return s_Api; } }
     static readonly AuthenticationClass s_Authentication = new AuthenticationClass();
     public static AuthenticationClass Authentication { get { return s_Authentication; } }
     public static Epilogger.Web.Controllers.AccountController Account = new Epilogger.Web.Controllers.T4MVC_AccountController();
@@ -47,6 +49,12 @@ namespace T4MVC {
         public Epilogger.Web.Areas.Admin.Controllers.EmailController Email = new Epilogger.Web.Areas.Admin.Controllers.T4MVC_EmailController();
         public Epilogger.Web.Areas.Admin.Controllers.HomeController Home = new Epilogger.Web.Areas.Admin.Controllers.T4MVC_HomeController();
         public T4MVC.Admin.SharedController Shared = new T4MVC.Admin.SharedController();
+    }
+    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+    public class ApiClass {
+        public readonly string Name = "Api";
+        public Epilogger.Web.Areas.Api.Controllers.ApiEventsController ApiEvents = new Epilogger.Web.Areas.Api.Controllers.T4MVC_ApiEventsController();
+        public T4MVC.Api.SharedController Shared = new T4MVC.Api.SharedController();
     }
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
     public class AuthenticationClass {
@@ -333,6 +341,17 @@ public class T4MVC_PartialViewResult : System.Web.Mvc.PartialViewResult, IT4MVCA
     public string Protocol { get; set; }
     public RouteValueDictionary RouteValueDictionary { get; set; }
 }
+[GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+public class T4MVC_JsonResult : System.Web.Mvc.JsonResult, IT4MVCActionResult {
+    public T4MVC_JsonResult(string area, string controller, string action, string protocol = null): base()  {
+        this.InitMVCT4Result(area, controller, action, protocol);
+    }
+    
+    public string Controller { get; set; }
+    public string Action { get; set; }
+    public string Protocol { get; set; }
+    public RouteValueDictionary RouteValueDictionary { get; set; }
+}
 
 
 
@@ -563,10 +582,13 @@ namespace Links {
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                 public static readonly string addMoreArrow_png = Url("addMoreArrow.png");
+                public static readonly string ajaxWaiting_gif = Url("ajaxWaiting.gif");
                 public static readonly string and_png = Url("and.png");
+                public static readonly string bird_16_blue_png = Url("bird_16_blue.png");
                 public static readonly string blog_png = Url("blog.png");
                 public static readonly string BrowseBullet_png = Url("BrowseBullet.png");
                 public static readonly string bubble_png = Url("bubble.png");
+                public static readonly string cameraIcon_png = Url("cameraIcon.png");
                 public static readonly string Checkmark_png = Url("Checkmark.png");
                 public static readonly string CreateAccountArrow_png = Url("CreateAccountArrow.png");
                 public static readonly string Crown_png = Url("Crown.png");
@@ -601,10 +623,12 @@ namespace Links {
                 public static readonly string popUpNub_png = Url("popUpNub.png");
                 public static readonly string profile_eventlist_png = Url("profile-eventlist.png");
                 public static readonly string SearchPlainText_png = Url("SearchPlainText.png");
+                public static readonly string sign_in_with_twitter_d_png = Url("sign-in-with-twitter-d.png");
                 public static readonly string star_png = Url("star.png");
                 public static readonly string SubscribedCheck_png = Url("SubscribedCheck.png");
                 public static readonly string Tab_EventInfo_png = Url("Tab-EventInfo.png");
                 public static readonly string tweet_black_png = Url("tweet-black.png");
+                public static readonly string twitter_everything_spritev2_png = Url("twitter-everything-spritev2.png");
                 public static readonly string twitter_png = Url("twitter.png");
                 public static readonly string WhenandWhere_png = Url("WhenandWhere.png");
             }
@@ -33575,6 +33599,8 @@ namespace Links {
             public static readonly string jquery_cycle_lite_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.cycle.lite.min.js") ? Url("jquery.cycle.lite.min.js") : Url("jquery.cycle.lite.js");
                           
             public static readonly string jquery_expander_min_js = Url("jquery.expander.min.js");
+            public static readonly string jquery_history_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.history.min.js") ? Url("jquery.history.min.js") : Url("jquery.history.js");
+                          
             public static readonly string jquery_jtruncate_pack_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.jtruncate.pack.min.js") ? Url("jquery.jtruncate.pack.min.js") : Url("jquery.jtruncate.pack.js");
                           
             public static readonly string jquery_tweet_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.tweet.min.js") ? Url("jquery.tweet.min.js") : Url("jquery.tweet.js");
@@ -33991,6 +34017,7 @@ namespace Links {
                     public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                     public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                     public static readonly string jqueryEpiloggerGallery_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jqueryEpiloggerGallery.min.js") ? Url("jqueryEpiloggerGallery.min.js") : Url("jqueryEpiloggerGallery.js");
+                                  
                 }
             
             }
@@ -34247,14 +34274,6 @@ namespace Links {
                     public static readonly string consumer_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/consumer.min.js") ? Url("consumer.min.js") : Url("consumer.js");
                                   
                     public static readonly string echo_html = Url("echo.html");
-                    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-                    public static class gadget {
-                        private const string URLPATH = "~/Public/js/oAuth/example/gadget";
-                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                        public static readonly string oauth_example_xml = Url("oauth-example.xml");
-                    }
-                
                     public static readonly string index_html = Url("index.html");
                     public static readonly string requestToken_html = Url("requestToken.html");
                     public static readonly string signature_html = Url("signature.html");

@@ -49,7 +49,7 @@
         
         @if (Model.EventSlug=="c2-mtl")
         {
-            <li>@Html.ActionLink("Nexa Live", "nexalive", null, new { id = @id }, action.ToLower() == "nexalive" ? new { @class = "current" } : null)</li>
+            <li>@Html.ActionLink("Concept Map", "ConceptMap", null, new { id = @id }, action.ToLower() == "conceptmap" ? new { @class = "current" } : null)</li>
         }
         
         <li>@Html.ActionLink("Stats", "allstats", null, new { id = @id }, action.ToLower() == "allstats" ? new { @class = "current" } : null)</li>

@@ -193,7 +193,7 @@ namespace Epilogger.Web.Controllers {
             return View();
         }
 
-        public ActionResult SocialBar(int eventid, int photoid)
+        public virtual ActionResult SocialBar(int eventid, int photoid)
         {
             var es = new EventService();
             var imgs = new ImageService();

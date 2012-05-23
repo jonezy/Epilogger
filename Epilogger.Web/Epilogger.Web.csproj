@@ -186,6 +186,12 @@
     <Compile Include="Admin.SharedController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Api.ApiEventsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Api.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Data\Classes.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -3011,7 +3017,7 @@
     <Content Include="Views\Events\ImageCommentsPaged.cshtml" />
     <Content Include="Views\Events\ImageCommentControl.cshtml" />
     <Content Include="Views\Home\SocialBar.cshtml" />
-    <Content Include="Views\Events\NexaLive.cshtml" />
+    <Content Include="Views\Events\ConceptMap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Shared\" />

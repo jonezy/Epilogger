@@ -32,6 +32,7 @@ namespace T4MVC {
             public readonly string _HomepageLayout = "~/Views/Shared/_HomepageLayout.cshtml";
             public readonly string _ImageComments = "~/Views/Shared/_ImageComments.cshtml";
             public readonly string _InteriorLayout = "~/Views/Shared/_InteriorLayout.cshtml";
+            public readonly string _InteriorLayoutNoBC = "~/Views/Shared/_InteriorLayoutNoBC.cshtml";
             public readonly string _Layout = "~/Views/Shared/_Layout.cshtml";
             public readonly string _LayoutOldGood = "~/Views/Shared/_LayoutOldGood.cshtml";
             public readonly string _ModalLayout = "~/Views/Shared/_ModalLayout.cshtml";

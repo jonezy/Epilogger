@@ -38,7 +38,7 @@ namespace Epilogger.Web.Controllers {
 
 
         [HttpPost]
-        public ActionResult Index(AccountModel model, FormCollection c)
+        public virtual ActionResult Index(AccountModel model, FormCollection c)
         {
             model.ConnectedNetworks = Mapper.Map<List<UserAuthenticationProfile>, List<ConnectedNetworksViewModel>>(CurrentUser.UserAuthenticationProfiles.ToList());
             var theUser = Mapper.Map<User, AccountModel>(CurrentUser);
@@ -333,7 +333,7 @@ namespace Epilogger.Web.Controllers {
         }
 
         // GET: Account/TwitterLogon/
-        public ActionResult TwitterLogon(string oauth_token, string oauth_verifier, string ReturnUrl)
+        public virtual ActionResult TwitterLogon(string oauth_token, string oauth_verifier, string ReturnUrl)
         {
 
             if (string.IsNullOrEmpty(oauth_token) || string.IsNullOrEmpty(oauth_verifier))

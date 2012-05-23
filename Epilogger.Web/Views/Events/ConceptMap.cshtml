@@ -1,0 +1,105 @@
+﻿@model Epilogger.Web.Models.AllLinksViewModel
+
+@{
+    ViewBag.Title = "C2-MTL Concept Map";
+    Layout = "~/Views/Shared/_InteriorLayout.cshtml";
+}
+
+<div class="grid_11 alpha">
+	<h1>CONCEPT MAP</h1>
+	<h2>FROM @Model.Name</h2>
+</div>
+
+<div class="clear"></div>
+
+@*New event menu*@
+@Html.Partial("Menu", Model.ToolbarViewModel)
+<div class="spacer"></div>
+
+<h3>English</h3>
+<div id='nexalogy'></div>
+<br /><br />
+<h3>French</h3>
+<div id='nexalogyfr'></div>
+<br /><br />
+<small class="fright">The Concept map is powered by Nexology<br />
+    Unearth your social media trends at <a href="http://nexame.com" target="_blank">Nexa.me</a>. See the connections... Explore your Twittersphere</small>
+
+<script type='text/javascript'>
+
+    /* Change width and height as wishes to adapt your website */
+
+    var fwidth = "930";
+    var fheight = "470";
+
+
+
+    /* Don't change the following */
+    var micrositeName = "c2mtl-en";
+    var micrositeBaseUrl = micrositeName + ".nexalive.com";
+    var txt = '';
+    var browser = navigator.userAgent;
+    if (browser.indexOf("MSIE") != -1) {
+        txt += '<object width="' + fwidth + '" height ="' + fheight + '"';
+        txt += ' classid="CLSID:E0A900DF-9611-4446-86BD-4B1D47E7DB2A">';
+        txt += ' <param name="src" value="http://' + micrositeBaseUrl + '/lexical_map_outside_widget.php?ms_name=' + micrositeName + '">';
+        txt += ' <embed ';
+        txt += ' width="' + fwidth + '" height="' + fheight + '"';
+        txt += ' src="http://' + micrositeBaseUrl + '/lexical_map_outside_widget.php?ms_name=' + micrositeName + '"';
+        txt += ' type="application/chromeframe">';
+        txt += ' </embed>';
+        txt += '</object>';
+
+    }
+    else {
+        txt += '<iframe src="http://' + micrositeBaseUrl + '/lexical_map_outside_widget.php?ms_name=' + micrositeName + '" width="' + fwidth + '" height="' + fheight + '" frameborder="0">';
+        txt += ' &lt;p&gt;Your browser does not support iframes.&lt;/p&gt;';
+        txt += '</iframe>';
+
+
+
+
+
+    }
+    document.getElementById("nexalogy").innerHTML = txt;
+
+</script>
+
+
+
+
+<script type='text/javascript'>
+
+    /* Change width and height as wishes to adapt your website */
+
+    var fwidth = "960";
+    var fheight = "470";
+
+
+
+    /* Don't change the following */
+    var micrositeName = "c2-mtl-fr";
+    var micrositeBaseUrl = micrositeName + ".nexalive.com";
+    var txt = '';
+    var browser = navigator.userAgent;
+    if (browser.indexOf("MSIE") != -1) {
+        txt += '<object width="' + fwidth + '" height ="' + fheight + '"';
+        txt += ' classid="CLSID:E0A900DF-9611-4446-86BD-4B1D47E7DB2A">';
+        txt += ' <param name="src" value="http://' + micrositeBaseUrl + '/lexical_map_outside_widget.php?ms_name=' + micrositeName + '">';
+        txt += ' <embed ';
+        txt += ' width="' + fwidth + '" height="' + fheight + '"';
+        txt += ' src="http://' + micrositeBaseUrl + '/lexical_map_outside_widget.php?ms_name=' + micrositeName + '"';
+        txt += ' type="application/chromeframe">';
+        txt += ' </embed>';
+        txt += '</object>';
+
+    }
+    else {
+        txt += '<iframe src="http://' + micrositeBaseUrl + '/lexical_map_outside_widget.php?ms_name=' + micrositeName + '" width="' + fwidth + '" height="' + fheight + '" frameborder="0">';
+        txt += ' &lt;p&gt;Your browser does not support iframes.&lt;/p&gt;';
+        txt += '</iframe>';
+
+    }
+    document.getElementById("nexalogyfr").innerHTML = txt;
+
+</script>
