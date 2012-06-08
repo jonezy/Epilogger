@@ -1367,7 +1367,8 @@ namespace Epilogger.Web.Controllers {
                               {
                                   TweetId = (long) ts.ResponseObject.Id,
                                   TwitterAction = "Reply",
-                                  UserId = CurrentUser.ID
+                                  UserId = CurrentUser.ID,
+                                  DateTime = DateTime.UtcNow
                               };
                 _userTwitterActionService.Save(uta);
 
@@ -1420,7 +1421,8 @@ namespace Epilogger.Web.Controllers {
                 {
                     TweetId = (long)ts.ResponseObject.Id,
                     TwitterAction = "Retweet",
-                    UserId = CurrentUser.ID
+                    UserId = CurrentUser.ID,
+                    DateTime = DateTime.UtcNow
                 };
                 _userTwitterActionService.Save(uta);
 
@@ -1460,7 +1462,8 @@ namespace Epilogger.Web.Controllers {
                 {
                     TweetId = (long)ts.ResponseObject.Id,
                     TwitterAction = "Favorite",
-                    UserId = CurrentUser.ID
+                    UserId = CurrentUser.ID,
+                    DateTime = DateTime.UtcNow
                 };
                 _userTwitterActionService.Save(uta);
 

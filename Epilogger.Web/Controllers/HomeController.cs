@@ -134,6 +134,7 @@ namespace Epilogger.Web.Controllers {
 
             clickactions.ActionDateTime = DateTime.UtcNow;
             clickactions.UserID = CurrentUserID;
+            clickactions.IPAddress = HttpContext.Request.UserHostAddress;
 
             LS.Save(clickactions);
 

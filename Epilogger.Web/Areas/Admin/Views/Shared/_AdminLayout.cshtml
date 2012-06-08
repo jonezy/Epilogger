@@ -7,6 +7,7 @@
                 var action = ViewContext.RouteData.Values["action"] as string ?? "";
             }
             <ul id="left-nav">
+                <li>@Html.ActionLink("Admin Dashboard", "index","home")</li>
                 <li>@Html.ActionLink("Invite Users", "index","email")</li>
             </ul>
         </div>

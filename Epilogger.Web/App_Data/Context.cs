@@ -122,7 +122,6 @@ namespace Epilogger.Data
         }
 			
         public Query<EventCategory> EventCategories { get; set; }
-        public Query<UserTwitterAction> UserTwitterActions { get; set; }
         public Query<User> Users { get; set; }
         public Query<Tweet> Tweets { get; set; }
         public Query<ScraperURL> ScraperURLs { get; set; }
@@ -141,6 +140,7 @@ namespace Epilogger.Data
         public Query<UserInRole> UserInRoles { get; set; }
         public Query<ImageMetaDatum> ImageMetaData { get; set; }
         public Query<Image> Images { get; set; }
+        public Query<UserTwitterAction> UserTwitterActions { get; set; }
         public Query<ActiveVisitorsQueueOLD> ActiveVisitorsQueueOLDs { get; set; }
         public Query<BlogPost> BlogPosts { get; set; }
         public Query<AggregateVisitHistoryOLD> AggregateVisitHistoryOLDs { get; set; }
@@ -253,7 +253,6 @@ namespace Epilogger.Data
 
             #region ' Query Defs '
             EventCategories = new Query<EventCategory>(provider);
-            UserTwitterActions = new Query<UserTwitterAction>(provider);
             Users = new Query<User>(provider);
             Tweets = new Query<Tweet>(provider);
             ScraperURLs = new Query<ScraperURL>(provider);
@@ -272,6 +271,7 @@ namespace Epilogger.Data
             UserInRoles = new Query<UserInRole>(provider);
             ImageMetaData = new Query<ImageMetaDatum>(provider);
             Images = new Query<Image>(provider);
+            UserTwitterActions = new Query<UserTwitterAction>(provider);
             ActiveVisitorsQueueOLDs = new Query<ActiveVisitorsQueueOLD>(provider);
             BlogPosts = new Query<BlogPost>(provider);
             AggregateVisitHistoryOLDs = new Query<AggregateVisitHistoryOLD>(provider);
@@ -287,7 +287,6 @@ namespace Epilogger.Data
         	if(DataProvider.Schema.Tables.Count == 0)
 			{
             	DataProvider.Schema.Tables.Add(new EventCategoriesTable(DataProvider));
-            	DataProvider.Schema.Tables.Add(new UserTwitterActionsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new TweetsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ScraperURLsTable(DataProvider));
@@ -306,6 +305,7 @@ namespace Epilogger.Data
             	DataProvider.Schema.Tables.Add(new UserInRolesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ImageMetaDataTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ImagesTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new UserTwitterActionsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ActiveVisitorsQueueOLDTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new BlogPostsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new AggregateVisitHistoryOLDTable(DataProvider));

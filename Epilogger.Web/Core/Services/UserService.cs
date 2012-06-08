@@ -124,5 +124,11 @@ namespace Epilogger.Web {
         public object SaveBetaSignup(BetaSignup entity) {
             return base.GetRepository<BetaSignup>().Add(entity);
         }
+
+        public int GetActiveUserCount()
+        {
+            return base.db.Users.Count(u => u.IsActive);
+        }
+
     }
 }

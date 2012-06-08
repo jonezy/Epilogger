@@ -95,113 +95,6 @@ namespace Epilogger.Data {
         }
         
         /// <summary>
-        /// Table: UserTwitterActions
-        /// Primary Key: ID
-        /// </summary>
-
-        public class UserTwitterActionsTable: DatabaseTable {
-            
-            public UserTwitterActionsTable(IDataProvider provider):base("UserTwitterActions",provider){
-                ClassName = "UserTwitterAction";
-                SchemaName = "dbo";
-                
-
-                Columns.Add(new DatabaseColumn("ID", this)
-                {
-	                IsPrimaryKey = true,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = true,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("UserId", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Guid,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("TweetId", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int64,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("TwitterAction", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 255
-                });
-                    
-                
-                
-            }
-            
-            public IColumn ID{
-                get{
-                    return this.GetColumn("ID");
-                }
-            }
-            				
-   			public static string IDColumn{
-			      get{
-        			return "ID";
-      			}
-		    }
-           
-            public IColumn UserId{
-                get{
-                    return this.GetColumn("UserId");
-                }
-            }
-            				
-   			public static string UserIdColumn{
-			      get{
-        			return "UserId";
-      			}
-		    }
-           
-            public IColumn TweetId{
-                get{
-                    return this.GetColumn("TweetId");
-                }
-            }
-            				
-   			public static string TweetIdColumn{
-			      get{
-        			return "TweetId";
-      			}
-		    }
-           
-            public IColumn TwitterAction{
-                get{
-                    return this.GetColumn("TwitterAction");
-                }
-            }
-            				
-   			public static string TwitterActionColumn{
-			      get{
-        			return "TwitterAction";
-      			}
-		    }
-           
-                    
-        }
-        
-        /// <summary>
         /// Table: User
         /// Primary Key: ID
         /// </summary>
@@ -2462,6 +2355,16 @@ namespace Epilogger.Data {
 	                IsForeignKey = false,
 	                MaxLength = 255
                 });
+
+                Columns.Add(new DatabaseColumn("IPAddress", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 50
+                });
                     
                 
                 
@@ -2560,6 +2463,18 @@ namespace Epilogger.Data {
    			public static string UserAgentColumn{
 			      get{
         			return "UserAgent";
+      			}
+		    }
+           
+            public IColumn IPAddress{
+                get{
+                    return this.GetColumn("IPAddress");
+                }
+            }
+            				
+   			public static string IPAddressColumn{
+			      get{
+        			return "IPAddress";
       			}
 		    }
            
@@ -3705,6 +3620,135 @@ namespace Epilogger.Data {
    			public static string ImageFingerPrintColumn{
 			      get{
         			return "ImageFingerPrint";
+      			}
+		    }
+           
+                    
+        }
+        
+        /// <summary>
+        /// Table: UserTwitterActions
+        /// Primary Key: ID
+        /// </summary>
+
+        public class UserTwitterActionsTable: DatabaseTable {
+            
+            public UserTwitterActionsTable(IDataProvider provider):base("UserTwitterActions",provider){
+                ClassName = "UserTwitterAction";
+                SchemaName = "dbo";
+                
+
+                Columns.Add(new DatabaseColumn("ID", this)
+                {
+	                IsPrimaryKey = true,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = true,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("UserId", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Guid,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("TweetId", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int64,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("TwitterAction", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 255
+                });
+
+                Columns.Add(new DatabaseColumn("DateTime", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.DateTime,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+                    
+                
+                
+            }
+            
+            public IColumn ID{
+                get{
+                    return this.GetColumn("ID");
+                }
+            }
+            				
+   			public static string IDColumn{
+			      get{
+        			return "ID";
+      			}
+		    }
+           
+            public IColumn UserId{
+                get{
+                    return this.GetColumn("UserId");
+                }
+            }
+            				
+   			public static string UserIdColumn{
+			      get{
+        			return "UserId";
+      			}
+		    }
+           
+            public IColumn TweetId{
+                get{
+                    return this.GetColumn("TweetId");
+                }
+            }
+            				
+   			public static string TweetIdColumn{
+			      get{
+        			return "TweetId";
+      			}
+		    }
+           
+            public IColumn TwitterAction{
+                get{
+                    return this.GetColumn("TwitterAction");
+                }
+            }
+            				
+   			public static string TwitterActionColumn{
+			      get{
+        			return "TwitterAction";
+      			}
+		    }
+           
+            public IColumn DateTime{
+                get{
+                    return this.GetColumn("DateTime");
+                }
+            }
+            				
+   			public static string DateTimeColumn{
+			      get{
+        			return "DateTime";
       			}
 		    }
            

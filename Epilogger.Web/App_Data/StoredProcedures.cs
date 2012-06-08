@@ -472,6 +472,10 @@ namespace Epilogger.Data{
             sp.Command.AddParameter("EventID",EventID,DbType.Int32);
             return sp;
         }
+        public StoredProcedure GetCurrentActiveUsers(){
+            StoredProcedure sp=new StoredProcedure("GetCurrentActiveUsers",this.Provider);
+            return sp;
+        }
         public StoredProcedure GetHomePageActivity(){
             StoredProcedure sp=new StoredProcedure("GetHomePageActivity",this.Provider);
             return sp;
