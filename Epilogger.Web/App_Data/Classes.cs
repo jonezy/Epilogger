@@ -473,6 +473,187 @@ namespace Epilogger.Data
     
     
     /// <summary>
+    /// A class which represents the APIApplication table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.APIApplication 
+    /// </summary>
+
+	public partial class APIApplication: INotifyPropertyChanging, INotifyPropertyChanged
+	{
+        partial void OnLoaded();
+        partial void OnValidate(System.Data.Linq.ChangeAction action);
+        partial void OnCreated();
+	    
+	    public APIApplication(){
+	        OnCreated();
+	    }
+	    
+	    #region Properties
+	    
+        partial void OnIDChanging(int value);
+        partial void OnIDChanged();
+		
+		private int _ID;
+		public int ID { 
+		    get{
+		        return _ID;
+		    } 
+		    set{
+		        this.OnIDChanging(value);
+                this.SendPropertyChanging();
+                this._ID = value;
+                this.SendPropertyChanged("ID");
+                this.OnIDChanged();
+		    }
+		}
+		
+        partial void OnUserIDChanging(Guid value);
+        partial void OnUserIDChanged();
+		
+		private Guid _UserID;
+		public Guid UserID { 
+		    get{
+		        return _UserID;
+		    } 
+		    set{
+		        this.OnUserIDChanging(value);
+                this.SendPropertyChanging();
+                this._UserID = value;
+                this.SendPropertyChanged("UserID");
+                this.OnUserIDChanged();
+		    }
+		}
+		
+        partial void OnClientIDChanging(string value);
+        partial void OnClientIDChanged();
+		
+		private string _ClientID;
+		public string ClientID { 
+		    get{
+		        return _ClientID;
+		    } 
+		    set{
+		        this.OnClientIDChanging(value);
+                this.SendPropertyChanging();
+                this._ClientID = value;
+                this.SendPropertyChanged("ClientID");
+                this.OnClientIDChanged();
+		    }
+		}
+		
+        partial void OnClientSecretChanging(string value);
+        partial void OnClientSecretChanged();
+		
+		private string _ClientSecret;
+		public string ClientSecret { 
+		    get{
+		        return _ClientSecret;
+		    } 
+		    set{
+		        this.OnClientSecretChanging(value);
+                this.SendPropertyChanging();
+                this._ClientSecret = value;
+                this.SendPropertyChanged("ClientSecret");
+                this.OnClientSecretChanged();
+		    }
+		}
+		
+        partial void OnNameChanging(string value);
+        partial void OnNameChanged();
+		
+		private string _Name;
+		public string Name { 
+		    get{
+		        return _Name;
+		    } 
+		    set{
+		        this.OnNameChanging(value);
+                this.SendPropertyChanging();
+                this._Name = value;
+                this.SendPropertyChanged("Name");
+                this.OnNameChanged();
+		    }
+		}
+		
+        partial void OnDescriptionChanging(string value);
+        partial void OnDescriptionChanged();
+		
+		private string _Description;
+		public string Description { 
+		    get{
+		        return _Description;
+		    } 
+		    set{
+		        this.OnDescriptionChanging(value);
+                this.SendPropertyChanging();
+                this._Description = value;
+                this.SendPropertyChanged("Description");
+                this.OnDescriptionChanged();
+		    }
+		}
+		
+        partial void OnWebsiteChanging(string value);
+        partial void OnWebsiteChanged();
+		
+		private string _Website;
+		public string Website { 
+		    get{
+		        return _Website;
+		    } 
+		    set{
+		        this.OnWebsiteChanging(value);
+                this.SendPropertyChanging();
+                this._Website = value;
+                this.SendPropertyChanged("Website");
+                this.OnWebsiteChanged();
+		    }
+		}
+		
+        partial void OnIsActiveChanging(bool value);
+        partial void OnIsActiveChanged();
+		
+		private bool _IsActive;
+		public bool IsActive { 
+		    get{
+		        return _IsActive;
+		    } 
+		    set{
+		        this.OnIsActiveChanging(value);
+                this.SendPropertyChanging();
+                this._IsActive = value;
+                this.SendPropertyChanged("IsActive");
+                this.OnIsActiveChanged();
+		    }
+		}
+		
+
+        #endregion
+
+        #region Foreign Keys
+        #endregion
+
+
+        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+        public event PropertyChangingEventHandler PropertyChanging;
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void SendPropertyChanging()
+        {
+            var handler = PropertyChanging;
+            if (handler != null)
+               handler(this, emptyChangingEventArgs);
+        }
+
+        protected virtual void SendPropertyChanged(String propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+	}
+	
+    
+    
+    /// <summary>
     /// A class which represents the sysdiagrams table in the Epilogger Database.
     /// This class is queryable through EpiloggerDB.sysdiagram 
     /// </summary>

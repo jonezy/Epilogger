@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Epilogger.Data.User>
+@{
+    ViewBag.Title = "index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Select API User</h2>
+
+<ul>
+    @foreach (var theUser in Model)
+    {
+        <li>@Html.ActionLink(theUser.Username, "edit", new { id = theUser.ID})</li>
+    }
+</ul>

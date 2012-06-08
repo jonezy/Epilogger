@@ -123,6 +123,7 @@ namespace Epilogger.Data
 			
         public Query<EventCategory> EventCategories { get; set; }
         public Query<User> Users { get; set; }
+        public Query<APIApplication> APIApplications { get; set; }
         public Query<Tweet> Tweets { get; set; }
         public Query<ScraperURL> ScraperURLs { get; set; }
         public Query<URL> URLS { get; set; }
@@ -254,6 +255,7 @@ namespace Epilogger.Data
             #region ' Query Defs '
             EventCategories = new Query<EventCategory>(provider);
             Users = new Query<User>(provider);
+            APIApplications = new Query<APIApplication>(provider);
             Tweets = new Query<Tweet>(provider);
             ScraperURLs = new Query<ScraperURL>(provider);
             URLS = new Query<URL>(provider);
@@ -288,6 +290,7 @@ namespace Epilogger.Data
 			{
             	DataProvider.Schema.Tables.Add(new EventCategoriesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new APIApplicationTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new TweetsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ScraperURLsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new URLsTable(DataProvider));

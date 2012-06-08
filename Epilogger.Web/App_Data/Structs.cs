@@ -400,6 +400,201 @@ namespace Epilogger.Data {
         }
         
         /// <summary>
+        /// Table: APIApplication
+        /// Primary Key: ID
+        /// </summary>
+
+        public class APIApplicationTable: DatabaseTable {
+            
+            public APIApplicationTable(IDataProvider provider):base("APIApplication",provider){
+                ClassName = "APIApplication";
+                SchemaName = "dbo";
+                
+
+                Columns.Add(new DatabaseColumn("ID", this)
+                {
+	                IsPrimaryKey = true,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = true,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("UserID", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Guid,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("ClientID", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 50
+                });
+
+                Columns.Add(new DatabaseColumn("ClientSecret", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 50
+                });
+
+                Columns.Add(new DatabaseColumn("Name", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("Description", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 50
+                });
+
+                Columns.Add(new DatabaseColumn("Website", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("IsActive", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Boolean,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+                    
+                
+                
+            }
+            
+            public IColumn ID{
+                get{
+                    return this.GetColumn("ID");
+                }
+            }
+            				
+   			public static string IDColumn{
+			      get{
+        			return "ID";
+      			}
+		    }
+           
+            public IColumn UserID{
+                get{
+                    return this.GetColumn("UserID");
+                }
+            }
+            				
+   			public static string UserIDColumn{
+			      get{
+        			return "UserID";
+      			}
+		    }
+           
+            public IColumn ClientID{
+                get{
+                    return this.GetColumn("ClientID");
+                }
+            }
+            				
+   			public static string ClientIDColumn{
+			      get{
+        			return "ClientID";
+      			}
+		    }
+           
+            public IColumn ClientSecret{
+                get{
+                    return this.GetColumn("ClientSecret");
+                }
+            }
+            				
+   			public static string ClientSecretColumn{
+			      get{
+        			return "ClientSecret";
+      			}
+		    }
+           
+            public IColumn Name{
+                get{
+                    return this.GetColumn("Name");
+                }
+            }
+            				
+   			public static string NameColumn{
+			      get{
+        			return "Name";
+      			}
+		    }
+           
+            public IColumn Description{
+                get{
+                    return this.GetColumn("Description");
+                }
+            }
+            				
+   			public static string DescriptionColumn{
+			      get{
+        			return "Description";
+      			}
+		    }
+           
+            public IColumn Website{
+                get{
+                    return this.GetColumn("Website");
+                }
+            }
+            				
+   			public static string WebsiteColumn{
+			      get{
+        			return "Website";
+      			}
+		    }
+           
+            public IColumn IsActive{
+                get{
+                    return this.GetColumn("IsActive");
+                }
+            }
+            				
+   			public static string IsActiveColumn{
+			      get{
+        			return "IsActive";
+      			}
+		    }
+           
+                    
+        }
+        
+        /// <summary>
         /// Table: Tweets
         /// Primary Key: ID
         /// </summary>

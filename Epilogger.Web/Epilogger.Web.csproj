@@ -41,6 +41,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AutoMapper.2.1.265\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="BouncyCastle.Crypto">
+      <HintPath>..\packages\BouncyCastle.1.7.0\lib\Net40-Client\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="Combres">
       <HintPath>..\packages\combres.2.2.2.5\lib\net40\Combres.dll</HintPath>
     </Reference>
@@ -217,6 +220,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\EmailController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManageApiController.cs" />
     <Compile Include="Areas\Admin\Models\AdminDashboardViewModel.cs" />
     <Compile Include="Areas\Admin\Models\InviteUsersViewModel.cs" />
     <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
@@ -2942,6 +2946,8 @@
     <Content Include="Public\js\TimePicker\jquery.timePicker.js" />
     <Content Include="Public\js\TimePicker\jquery.timePicker.min.js" />
     <Content Include="Public\js\TimePicker\timePicker.css" />
+    <Content Include="Areas\Admin\Views\ManageApi\index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageApi\edit.cshtml" />
     <None Include="Public\js\bootstrap-Image-Gallery\Makefile" />
     <None Include="Public\js\bootstrap-Image-Gallery\package.json" />
     <None Include="Public\js\bootstrap-Image-Gallery\README.md" />
