@@ -47,8 +47,8 @@ namespace Epilogger.Web.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult Update() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.Update);
+        public System.Web.Mvc.ActionResult TwitterLogon() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.TwitterLogon);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -68,8 +68,8 @@ namespace Epilogger.Web.Controllers {
             public readonly string Index = "Index";
             public readonly string Create = "Create";
             public readonly string Validate = "Validate";
-            public readonly string Update = "Update";
             public readonly string Login = "Login";
+            public readonly string TwitterLogon = "TwitterLogon";
             public readonly string Logout = "Logout";
             public readonly string ForgotPassword = "ForgotPassword";
             public readonly string ResetPassword = "ResetPassword";
@@ -84,8 +84,8 @@ namespace Epilogger.Web.Controllers {
             public const string Index = "Index";
             public const string Create = "Create";
             public const string Validate = "Validate";
-            public const string Update = "Update";
             public const string Login = "Login";
+            public const string TwitterLogon = "TwitterLogon";
             public const string Logout = "Logout";
             public const string ForgotPassword = "ForgotPassword";
             public const string ResetPassword = "ResetPassword";
@@ -103,13 +103,14 @@ namespace Epilogger.Web.Controllers {
         public class ActionParamsClass_Validate {
             public readonly string validationCode = "validationCode";
         }
-        static readonly ActionParamsClass_Update s_params_Update = new ActionParamsClass_Update();
+        static readonly ActionParamsClass_TwitterLogon s_params_TwitterLogon = new ActionParamsClass_TwitterLogon();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Update UpdateParams { get { return s_params_Update; } }
+        public ActionParamsClass_TwitterLogon TwitterLogonParams { get { return s_params_TwitterLogon; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Update {
-            public readonly string model = "model";
-            public readonly string c = "c";
+        public class ActionParamsClass_TwitterLogon {
+            public readonly string oauth_token = "oauth_token";
+            public readonly string oauth_verifier = "oauth_verifier";
+            public readonly string ReturnUrl = "ReturnUrl";
         }
         static readonly ViewNames s_views = new ViewNames();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -139,6 +140,13 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
+        public override System.Web.Mvc.ActionResult Index(Epilogger.Web.Models.AccountModel model, System.Web.Mvc.FormCollection c) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
+            callInfo.RouteValueDictionary.Add("model", model);
+            callInfo.RouteValueDictionary.Add("c", c);
+            return callInfo;
+        }
+
         public override System.Web.Mvc.ActionResult Create() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Create);
             return callInfo;
@@ -156,13 +164,6 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
-        public System.Web.Mvc.ActionResult Update(Epilogger.Web.Models.AccountModel model, System.Web.Mvc.FormCollection c) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Update);
-            callInfo.RouteValueDictionary.Add("model", model);
-            callInfo.RouteValueDictionary.Add("c", c);
-            return callInfo;
-        }
-
         public override System.Web.Mvc.ActionResult Login() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Login);
             return callInfo;
@@ -171,6 +172,14 @@ namespace Epilogger.Web.Controllers {
         public override System.Web.Mvc.ActionResult Login(Epilogger.Web.Models.LoginModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Login);
             callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult TwitterLogon(string oauth_token, string oauth_verifier, string ReturnUrl) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.TwitterLogon);
+            callInfo.RouteValueDictionary.Add("oauth_token", oauth_token);
+            callInfo.RouteValueDictionary.Add("oauth_verifier", oauth_verifier);
+            callInfo.RouteValueDictionary.Add("ReturnUrl", ReturnUrl);
             return callInfo;
         }
 

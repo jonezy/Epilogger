@@ -10,7 +10,7 @@ using dotless.Core.Parser.Tree;
 
 namespace Epilogger.Web.Areas.Api.Controllers
 {
-    public class ApiEventsController : Controller
+    public partial class ApiEventsController : Controller
     {
         readonly IEventManager _eventManager;
         ICategoryManager _categoryManager;
@@ -22,14 +22,14 @@ namespace Epilogger.Web.Areas.Api.Controllers
         }
 
         [HttpGet]
-        public JsonResult EventList(int? page, int? count)
+        public virtual JsonResult EventList(int? page, int? count)
         {
             var model = this._eventManager.GetEvents(page, count);
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         [RestHttpVerbFilter]
-        public JsonResult Event(int? id, Event item, string httpVerb)
+        public virtual JsonResult Event(int? id, Event item, string httpVerb)
         {
             switch(httpVerb)
             {
@@ -48,7 +48,7 @@ namespace Epilogger.Web.Areas.Api.Controllers
 
 
         [HttpGet]
-        public JsonResult Categories()
+        public virtual JsonResult Categories()
         {
             var model = _categoryManager.GetCategories();
             return Json(model, JsonRequestBehavior.AllowGet);
@@ -62,7 +62,7 @@ namespace Epilogger.Web.Areas.Api.Controllers
         //NOT IMPLIMENTED
         //Creates a bunch of events. (Not Implemented)
         [HttpPost]
-        public JsonResult EventList(List<Event> items)
+        public virtual JsonResult EventList(List<Event> items)
         {
             var model = this._eventManager.CreateEvents(items);
             return Json(model);
