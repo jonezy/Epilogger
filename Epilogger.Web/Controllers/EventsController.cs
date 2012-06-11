@@ -508,14 +508,14 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        public ActionResult GetImageCommentsPage1(ImageCommentViewModel model)
+        public virtual ActionResult GetImageCommentsPage1(ImageCommentViewModel model)
         {
             return PartialView("ImageCommentsPaged", model);
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-        
-        public ActionResult GetImageCommentsPaged(ImageCommentViewModel model)
+
+        public virtual ActionResult GetImageCommentsPaged(ImageCommentViewModel model)
         {
             
             model.Tweets = _ts.FindByImageIDPaged(model.ImageId, model.EventId, model.page, 4);
@@ -526,7 +526,7 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        public ActionResult ImageCommentControl(int eventId, int imageId, int? page, string commentLocation)
+        public virtual ActionResult ImageCommentControl(int eventId, int imageId, int? page, string commentLocation)
         {
 
             var model = new ImageCommentViewModel()
@@ -1318,7 +1318,7 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        public ActionResult TweetTemplate(TweetTemplateViewModel model)
+        public virtual ActionResult TweetTemplate(TweetTemplateViewModel model)
         {
             model.Replied = _userTwitterActionService.HasUserRepliedToTweet(CurrentUserID, model.Tweet.TwitterID);
             model.Retweeted = _userTwitterActionService.HasUserRetweetedTweet(CurrentUserID, model.Tweet.TwitterID);
@@ -1329,7 +1329,7 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        public ActionResult TweetReply(int eventId, long tweetId)
+        public virtual ActionResult TweetReply(int eventId, long tweetId)
         {
             
             var model = new TweetReplyViewModel
@@ -1380,8 +1380,8 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-        
-        public ActionResult TweetRetweet(int eventId, long tweetId)
+
+        public virtual ActionResult TweetRetweet(int eventId, long tweetId)
         {
             var model = new TweetReplyViewModel
                             {
@@ -1474,14 +1474,14 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        public ActionResult NeedTwitterAuth()
+        public virtual ActionResult NeedTwitterAuth()
         {
             return PartialView();
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        public ActionResult PhotoDetails(int eventid, int photoid)
+        public virtual ActionResult PhotoDetails(int eventid, int photoid)
         {
             var model = new PhotoDetailsViewModel();
             var theEvent = _es.FindByID(eventid);
@@ -1506,7 +1506,7 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        public ActionResult TweetBox(int eventid, int photoid)
+        public virtual ActionResult TweetBox(int eventid, int photoid)
         {
             var imageComment = _ts.FindByImageID(photoid, eventid).FirstOrDefault();
 

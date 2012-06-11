@@ -186,6 +186,12 @@
     <Compile Include="Admin.SharedController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Api.ApiEventsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Api.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Data\Classes.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
