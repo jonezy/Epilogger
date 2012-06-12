@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using System.Web.Security;
 using Epilogger.Data;
 using Epilogger.Web.Areas.Api.Models;
@@ -127,50 +128,59 @@ namespace Epilogger.Web.Areas.Api.Controllers
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            //Verify we have been provided with the required ClientID and HMAC Hash (data)
-            var clientId = filterContext.HttpContext.Request.QueryString["clientid"];
-            if (String.IsNullOrEmpty(clientId))
+            try
             {
-                throw new MissingFieldException(String.Format("The required parameter clientid was missing, please include clientid when making API requests."));
-            }
+                //Verify we have been provided with the required ClientID and HMAC Hash (data)
+                var clientId = filterContext.HttpContext.Request.QueryString["clientid"];
+                if (String.IsNullOrEmpty(clientId))
+                {
+                    throw new MissingFieldException(String.Format("The required parameter clientid was missing, please include clientid when making API requests."));
+                }
 
-            var signature = filterContext.HttpContext.Request.QueryString["signature"];
-            if (String.IsNullOrEmpty(signature))
-            {
-                throw new MissingFieldException(String.Format("The required parameter signature was missing, please include signature when making API requests."));
-            }
+                var signature = filterContext.HttpContext.Request.QueryString["signature"];
+                if (String.IsNullOrEmpty(signature))
+                {
+                    throw new MissingFieldException(String.Format("The required parameter signature was missing, please include signature when making API requests."));
+                }
 
-            var timeStampString = filterContext.HttpContext.Request.QueryString["timestamp"];
-            if (String.IsNullOrEmpty(timeStampString))
+                var timeStampString = filterContext.HttpContext.Request.QueryString["timestamp"];
+                if (String.IsNullOrEmpty(timeStampString))
+                {
+                    throw new MissingFieldException(String.Format("The required parameter timeStamp was missing, please include timeStamp when making API requests."));
+                }
+
+                //Check time Stamp to ensure this request is fresh.
+                if (long.Parse(timeStampString) - DateTime.UtcNow.Ticks > 300000)
+                {
+                    throw new AccessViolationException(String.Format("The timeStamp on this request is too old, please generate a fresh request."));
+                }
+
+
+                //Get the API application record from the DB.
+                var apiApplication = _as.FindByClientId(clientId);
+                if (apiApplication == null)
+                {
+                    throw new AccessViolationException(String.Format("This Client is not registered for API Access, please contact Epilogger if you would like access."));
+                }
+
+                //All parameters have are here, let's make sure they match.
+                var hmacValidationString = getHMACMD5Signature(filterContext.HttpContext.Request.Url.LocalPath, "", timeStampString, clientId, apiApplication.ClientSecret);
+                
+                if (hmacValidationString != signature)
+                {
+                    throw new AccessViolationException(String.Format("The signature in this request does not match the correct signature."));
+                }
+
+                filterContext.HttpContext.Trace.Write("(Logging Filter)Action Executing: " + filterContext.ActionDescriptor.ActionName);
+
+                base.OnActionExecuting(filterContext);
+            }
+            catch (Exception ex)
             {
-                throw new MissingFieldException(String.Format("The required parameter timeStamp was missing, please include timeStamp when making API requests."));
+                filterContext.Result = new EmptyResult();
+                filterContext.HttpContext.Response.Write(ex.Message);
             }
             
-            //Check time Stamp to ensure this request is fresh.
-            if (long.Parse(timeStampString) - DateTime.UtcNow.Ticks > 300000)
-            {
-                throw new AccessViolationException(String.Format("The timeStamp on this request is too old, please generate a fresh request."));
-            }
-
-
-            //Get the API application record from the DB.
-            var apiApplication = _as.FindByClientId(clientId);
-            if (apiApplication == null)
-            {
-                throw new AccessViolationException(String.Format("This Client is not registered for API Access, please contact Epilogger if you would like access."));
-            }
-
-            //All parameters have are here, let's make sure they match.
-            var hmacValidationString = getHMACMD5Signature("", "", timeStampString, clientId, apiApplication.ClientSecret);
-
-            if (hmacValidationString != signature)
-            {
-                throw new AccessViolationException(String.Format("The signature in this request does not match the correct signature."));
-            }
-
-            filterContext.HttpContext.Trace.Write("(Logging Filter)Action Executing: " + filterContext.ActionDescriptor.ActionName);
-
-            base.OnActionExecuting(filterContext);
         }
 
         //This is used to verify the request
