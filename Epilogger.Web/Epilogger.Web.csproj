@@ -289,6 +289,7 @@
     <Compile Include="Core\Services\clickLogService.cs" />
     <Compile Include="Core\Services\CategoryService.cs" />
     <Compile Include="Core\Services\BetaService.cs" />
+    <Compile Include="Core\Services\APIApplicationService.cs" />
     <Compile Include="Core\Services\StatusMessagesService.cs" />
     <Compile Include="Core\Services\UserLogService.cs" />
     <Compile Include="Core\Services\ExternalLinksService.cs" />

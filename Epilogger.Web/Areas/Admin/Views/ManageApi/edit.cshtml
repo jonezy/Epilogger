@@ -60,6 +60,9 @@
             @Html.EditorFor(model => model.IsActive)
             @Html.ValidationMessageFor(model => model.IsActive)
         </div>
+        
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.UserID)
 
         <p>
             <input type="submit" value="Save" />

@@ -17,6 +17,8 @@ namespace Epilogger.Web.Areas.Api.Controllers
     public partial class ApiEventsController : Controller
     {
 
+        
+
         #region Initialize Managers
 
         readonly IEventManager _eventManager;
@@ -121,6 +123,8 @@ namespace Epilogger.Web.Areas.Api.Controllers
     [AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = false)]
     public class HmacAuthorizationAttribute : ActionFilterAttribute
     {
+        APIApplicationService _as = new APIApplicationService();
+
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             //Verify we have been provided with the required ClientID and HMAC Hash (data)
@@ -130,34 +134,39 @@ namespace Epilogger.Web.Areas.Api.Controllers
                 throw new MissingFieldException(String.Format("The required parameter clientid was missing, please include clientid when making API requests."));
             }
 
-            var hmacValue = filterContext.HttpContext.Request.QueryString["signature"];
-            if (String.IsNullOrEmpty(hmacValue))
+            var signature = filterContext.HttpContext.Request.QueryString["signature"];
+            if (String.IsNullOrEmpty(signature))
             {
                 throw new MissingFieldException(String.Format("The required parameter signature was missing, please include signature when making API requests."));
             }
 
-            var timeStamp = filterContext.HttpContext.Request.QueryString["timestamp"];
-            if (String.IsNullOrEmpty(timeStamp))
+            var timeStampString = filterContext.HttpContext.Request.QueryString["timestamp"];
+            if (String.IsNullOrEmpty(timeStampString))
             {
                 throw new MissingFieldException(String.Format("The required parameter timeStamp was missing, please include timeStamp when making API requests."));
             }
             
+            //Check time Stamp to ensure this request is fresh.
+            if (long.Parse(timeStampString) - DateTime.UtcNow.Ticks > 300000)
+            {
+                throw new AccessViolationException(String.Format("The timeStamp on this request is too old, please generate a fresh request."));
+            }
+
+
+            //Get the API application record from the DB.
+            var apiApplication = _as.FindByClientId(clientId);
+            if (apiApplication == null)
+            {
+                throw new AccessViolationException(String.Format("This Client is not registered for API Access, please contact Epilogger if you would like access."));
+            }
+
             //All parameters have are here, let's make sure they match.
-            
+            var hmacValidationString = getHMACMD5Signature("", "", timeStampString, clientId, apiApplication.ClientSecret);
 
-
-
-            //if (string.IsNullOrEmpty(hashToken))
-            //{
-            //    throw new MissingFieldException(string.Format("The hidden form field named value {0} was missing. This is created by the Html.AntiModelInjection methods. Ensure the name used on your [ValidateAntiModelInjectionAttribute(\"!HERE!\")] matches the field name used in Html.AntiModelInjection method. If this attribute is used on a controller method that is meant for HttpGet, then the form value would not yet exist. This attribute is meant to be used on controller methods accessed via HttpPost.", encryptedPropertyName));
-            //}
-
-
-            ////Plain text must be available to compare.
-            //if (string.IsNullOrEmpty(formValue))
-            //{
-            //    throw new MissingFieldException(string.Format("The form value {0} was missing. If this attribute is used on a controller method that is meant for HttpGet, then the form value would not yet exist. This attribute is meant to be used on controller methods accessed via HttpPost.", _propertyName));
-            //}
+            if (hmacValidationString != signature)
+            {
+                throw new AccessViolationException(String.Format("The signature in this request does not match the correct signature."));
+            }
 
             filterContext.HttpContext.Trace.Write("(Logging Filter)Action Executing: " + filterContext.ActionDescriptor.ActionName);
 
@@ -166,25 +175,25 @@ namespace Epilogger.Web.Areas.Api.Controllers
 
         //This is used to verify the request
 
-        //private static string getHMACMD5Signature(string methodPath, string additionalParameters, string expires)
-        //{
-        //    //build the uri to sign, exclude the domain part, start with '/'
-        //    StringBuilder uristring = new StringBuilder(); //will hold the final uri
-        //    uristring.Append(methodPath.StartsWith("/") ? "" : "/"); //start with a slash
-        //    uristring.Append(methodPath); //this is the address of the resource
-        //    uristring.Append("?AccessKey=" + HttpUtility.UrlEncode(accessKey)); //url encoded parameters
-        //    uristring.Append("&Expires=" + HttpUtility.UrlEncode(expires));
-        //    uristring.Append(additionalParameters);
+        private static string getHMACMD5Signature(string methodPath, string additionalParameters, string expires, string accessKey, string secretKey)
+        {
+            //build the uri to sign, exclude the domain part, start with '/'
+            var uristring = new StringBuilder(); //will hold the final uri
+            uristring.Append(methodPath.StartsWith("/") ? "" : "/"); //start with a slash
+            uristring.Append(methodPath); //this is the address of the resource
+            uristring.Append("?clientid=" + HttpUtility.UrlEncode(accessKey)); //url encoded parameters
+            uristring.Append("&timestamp=" + HttpUtility.UrlEncode(expires));
+            uristring.Append(additionalParameters);
 
-        //    //calculate hmac signature
-        //    byte[] secretBytes = Encoding.ASCII.GetBytes(secretKey);
-        //    HMACMD5 hmac = new HMACMD5(secretBytes);
-        //    byte[] dataBytes = Encoding.ASCII.GetBytes(uristring.ToString());
-        //    byte[] computedHash = hmac.ComputeHash(dataBytes);
-        //    string computedHashString = Convert.ToBase64String(computedHash);
+            //calculate hmac signature
+            byte[] secretBytes = Encoding.ASCII.GetBytes(secretKey);
+            var hmac = new HMACMD5(secretBytes);
+            byte[] dataBytes = Encoding.ASCII.GetBytes(uristring.ToString());
+            byte[] computedHash = hmac.ComputeHash(dataBytes);
+            string computedHashString = Convert.ToBase64String(computedHash);
 
-        //    return computedHashString;
-        //}
+            return computedHashString;
+        }
     }
 
 

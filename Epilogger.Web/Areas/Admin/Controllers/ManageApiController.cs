@@ -6,7 +6,9 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml;
+using AutoMapper;
 using Epilogger.Data;
+using Epilogger.Web.Models;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Security;
@@ -17,6 +19,7 @@ namespace Epilogger.Web.Areas.Admin.Controllers
     public class ManageApiController : Controller
     {
         EpiloggerDB _db = new EpiloggerDB();
+        APIApplicationService _as = new APIApplicationService();
 
         private struct CipherPrivateKey
         {
@@ -49,9 +52,9 @@ namespace Epilogger.Web.Areas.Admin.Controllers
         //
         // GET: /Admin/ManageAPI/Edit/5
  
-        public ActionResult Edit(Guid id)
+        public ActionResult Edit(Guid userId)
         {
-            var theApiApplication = _db.APIApplications.FirstOrDefault(e => e.UserID == id) ?? new APIApplication();
+            var theApiApplication = _as.FindByUserId(userId);
 
             //If the clientID and secret are blank, generate them.
             if (String.IsNullOrEmpty(theApiApplication.ClientID))
@@ -95,16 +98,13 @@ namespace Epilogger.Web.Areas.Admin.Controllers
         // POST: /Admin/ManageAPI/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Guid id, APIApplication model)
+        public ActionResult Edit(APIApplication model)
         {
             try
             {
-                if (model.ID > 0)
-                    base.GetRepository<Event>().Update(model);
-                else
-                    base.GetRepository<Event>().Add(model);
- 
-
+                
+                _as.Save(model);
+                
                 return RedirectToAction("Index");
             }
             catch

@@ -9,6 +9,6 @@
 <ul>
     @foreach (var theUser in Model)
     {
-        <li>@Html.ActionLink(theUser.Username, "edit", new { id = theUser.ID})</li>
+        <li>@Html.ActionLink(theUser.Username, "edit", new { userId = theUser.ID })</li>
     }
 </ul>
