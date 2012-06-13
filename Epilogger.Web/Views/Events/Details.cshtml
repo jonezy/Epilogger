@@ -570,6 +570,10 @@ else
             {
                 mediaTemplate = "_YoutubeTemplate";
             }
+            else if (EPLImage.OriginalImageLink.StartsWith("http://www.vimeo.com") || EPLImage.OriginalImageLink.StartsWith("http://vimeo.com"))
+            {
+                mediaTemplate = "_VimeoTemplate";
+            }
             @Html.Partial(mediaTemplate, itvm)
         }
     </div>

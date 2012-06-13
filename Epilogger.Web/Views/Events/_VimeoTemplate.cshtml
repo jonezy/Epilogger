@@ -2,8 +2,8 @@
 
 @{
     var uri = new Uri(Model.Image.OriginalImageLink);
-    var videoId = HttpUtility.ParseQueryString(uri.Query)["v"];
+    var videoId = uri.Segments[1];
 }
 <div class="withcomment newPhotoupdates" id="photo-@Model.Image.ID">
-    <iframe width="250" src="http://www.youtube.com/embed/@(videoId)" frameborder="0" allowfullscreen></iframe>
+    <iframe src="http://player.vimeo.com/video/@(videoId)" width="250" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 </div>
