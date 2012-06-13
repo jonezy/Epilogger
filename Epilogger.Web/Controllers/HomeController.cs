@@ -28,7 +28,7 @@ namespace Epilogger.Web.Controllers {
 
             var activity = ES.GetHomepageActivity();
             var model = new HomepageViewModel(
-                activity.Take(12).ToList(),
+                activity.Take(8).ToList(),
                 0,
                 activity.Count()
                 ) {HomepageTotal = new HomepageTotal()};
@@ -55,6 +55,23 @@ namespace Epilogger.Web.Controllers {
             {
                 item.Image = IS.FindByID(Convert.ToInt32(item.ActivityContent));
             }
+
+            //This is for the featured Events
+
+            //Get all the Events that are currently features
+            var featured = new List<HomepageFeaturedEventsViewModel>();
+            foreach (var evt in ES.GetFeaturedEvents())
+            {
+                var fViewModel = new HomepageFeaturedEventsViewModel
+                                     {
+                                         Event = evt,
+                                         TopImages = IS.GetNewestPhotosByEventID(evt.ID, 5)
+                                     };
+                featured.Add(fViewModel);
+            }
+
+            model.FeaturedEvents = featured;
+            
 
             var sc = new StatusMessagesService();
             model.StatusMessages = sc.GetLast10Messages();

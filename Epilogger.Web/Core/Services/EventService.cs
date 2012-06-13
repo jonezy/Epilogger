@@ -58,6 +58,13 @@ namespace Epilogger.Web {
             //} while (true);
         }
 
+        /*Featured Events*/
+        public IEnumerable<Event> GetFeaturedEvents()
+        {
+            return db.Events.Where(e => e.IsFeatured == true && DateTime.UtcNow >= e.FeaturedStartDateTime && DateTime.UtcNow <= e.FeaturedEndDateTime);
+        }
+
+
         /* Upcoming events */
         public List<Event> UpcomingEvents()
         {

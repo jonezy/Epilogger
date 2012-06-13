@@ -1,4 +1,5 @@
-﻿@model Epilogger.Web.Models.HomepageViewModel
+﻿@using Epilogger
+@model Epilogger.Web.Models.HomepageViewModel
 
 
 @{
@@ -6,6 +7,12 @@
     ViewBag.Title = "Epilogger | We'll remember";
 
 }
+
+
+<script type="text/javascript" language="javascript">
+    head.js('@Url.Content("~/Public/js/HomePage.js")');
+</script>
+
 
 @*<div id="StatusMessages">
     @foreach (Epilogger.Data.StatusMessage SM in Model.StatusMessages)
@@ -55,18 +62,20 @@
 
     <div id="homepage-intro">
         <span class="clear spacer"></span>
+        <h1>All your event's social media <br/>collected in a snap of your fingers.</h1>
         @using (Html.BeginForm("Search", "Home", FormMethod.Post, null))
         {
-            <input type="submit" class="blue-action-button" id="homepageSearchOK" value="OK" />
-            @Html.TextBox("SearchTerm", null, new { @class = "remove-bottom", @title = "FIND YOUR EVENT..." })
+            @*<input type="submit" class="blue-action-button" id="homepageSearchOK" value="OK" />*@
+            //ToDo Replace with image button
+            @Html.TextBox("SearchTerm", null, new { @class = "remove-bottom", @title = "Find your event..." })
         }
         
-        @*<h1 style="color:#f51282; font-size: 16pt;"><img src="@Url.Content("~/Public/images/homepage/RightArrow.png")" alt="" class="homepage-arrow" />WHAT IS EPILOGGER?</h1>*@
-        <p>We found that after attending an event, online or offline, its a feat trying to track down all the great content shared by all those who tweeted, blogged, or checked-in. It’s even harder when you check back a few weeks later and some of the content has disappeared with age!<br /> @Html.ActionLink("Want to know more?", "about", null, new { @style = "font-weight: bold; text-decoration: none;" }) </p>
+        
+        
     
     
         <div class="homepage-trending">
-            <h2 style="font-size: 16pt;"><img src="@Url.Content("~/Public/images/homepage/PinkHeart.png")" alt="" class="homepage-heart" />Trending Events</h2>
+            <h2 style="font-size: 15pt;"><img src="@Url.Content("~/Public/images/icons/icon-trending.png")" alt="" class="homepage-heart" />What's Trending:</h2>
             <ul id="homepage-trendinglist">
                 @foreach (Epilogger.Data.Event ev in Model.TrendingEvents)
                 {
@@ -77,73 +86,126 @@
     </div>
     
     <div id="homepage-video">
-        <div id="s3" class="pics" style="position: relative; ">
-            <img src="/Public/images/slideshow/1.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 462px; height: 310px; z-index: 3; opacity: 0; display: none; " />
-            <img src="/Public/images/slideshow/2.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 462px; height: 310px; z-index: 3; opacity: 0; display: none; " />
-            <img src="/Public/images/slideshow/3.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 462px; height: 310px; z-index: 3; opacity: 0; display: none; " />
-            <img src="/Public/images/slideshow/4.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 462px; height: 310px; z-index: 3; opacity: 0; display: none; " />
-            <img src="/Public/images/slideshow/6.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 462px; height: 310px; z-index: 3; opacity: 0; display: none; " />
-            <img src="/Public/images/slideshow/7a.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 462px; height: 310px; z-index: 3; opacity: 0; display: none; " />
-            <img src="/Public/images/slideshow/7b.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 462px; height: 310px; z-index: 3; opacity: 0; display: none; " />
-            <img src="/Public/images/slideshow/7c.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 462px; height: 310px; z-index: 3; opacity: 0; display: none; " />
-            <img src="/Public/images/slideshow/8.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 462px; height: 310px; z-index: 3; opacity: 0; display: none; " />
-        </div>
+        @if (Model.FeaturedEvents != null)
+        {
+            foreach (var theE in Model.FeaturedEvents)
+            {
+                <div class="featuredEvent">
+                    <div class="featuredEventName">@Html.ActionLink(theE.Event.Name, "details", "events", new { @id = theE.Event.EventSlug }, null)</div>
+                    <div class="featuredBanner"></div>
+                    @foreach (var theImg in theE.TopImages)
+                    {
+                        var thePath = theImg.EventID + "/" + theImg.ID;
+                        <div class="featurePhotoBar" id="FeaturedPhoto@(theImg.ID)">
+                            <a href="@theImg.Fullsize" rel="EPLPhoto[latestfeaturedphotos]" photoid="@thePath" title="" id="@theImg.ID">
+                                <img src="@theImg.Fullsize" alt="" />
+                            </a>
+                        </div>
+                    }
+                </div>
+                //Elipses go here
+                @*Links*@
+                <div id="">
+                    <ul class="featuredPhotosList">
+                        @foreach (var image in theE.TopImages)
+                        {
+                            <li><a href="" onclick="return false;" class="featuredPhotosListLink" id="@(image.ID)"></a></li>
+                        }
+                    </ul>
+                </div>   
+                <br />
+
+            }
+        }
+        else
+        {
+            <div id="s3" class="pics" style="position: relative; ">
+                <img src="/Public/images/slideshow/1.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 462px; height: 310px; z-index: 3; opacity: 0; display: none; " />
+                <img src="/Public/images/slideshow/2.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 462px; height: 310px; z-index: 3; opacity: 0; display: none; " />
+                <img src="/Public/images/slideshow/3.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 462px; height: 310px; z-index: 3; opacity: 0; display: none; " />
+                <img src="/Public/images/slideshow/4.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 462px; height: 310px; z-index: 3; opacity: 0; display: none; " />
+                <img src="/Public/images/slideshow/6.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 462px; height: 310px; z-index: 3; opacity: 0; display: none; " />
+                <img src="/Public/images/slideshow/7a.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 462px; height: 310px; z-index: 3; opacity: 0; display: none; " />
+                <img src="/Public/images/slideshow/7b.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 462px; height: 310px; z-index: 3; opacity: 0; display: none; " />
+                <img src="/Public/images/slideshow/7c.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 462px; height: 310px; z-index: 3; opacity: 0; display: none; " />
+                <img src="/Public/images/slideshow/8.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 462px; height: 310px; z-index: 3; opacity: 0; display: none; " />
+            </div>    
+        }
+        
     </div>
     
     <div class="clear spacer"></div>
     
-    @foreach (var item in Model.Activity)
-    {
-        <div class="homepage-activity-entry">
-
-            @if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION || item.ActivityType == Epilogger.Web.Models.ActivityType.FOLLOW_EVENT)
+    <div id="galleryContainer">
+        <ul id="activityGallery">
+        @foreach (var item in Model.Activity)
+        {
+            string rowClass = string.Empty;
+            if (Model.Activity.IndexOf(item) >= 0 && Model.Activity.IndexOf(item) <= 3)
             {
-                <h2><br />@Html.ActionLink(item.EventName, "details", "events", new { @id = item.EventSlug }, null)</h2>
+                rowClass = "top";
+            }
+            else if (Model.Activity.IndexOf(item) >= 4 && Model.Activity.IndexOf(item) <= 7)
+            {
+                rowClass = "bottom";
+            }
+
+            if (item.ActivityType == Epilogger.Web.Models.ActivityType.PHOTOS_VIDEOS)
+            {
+            <li>
+                @{ var thePath = item.Image.EventID + "/" + item.Image.ID; }
+                
+                <div class="title @item.ActivityType @rowClass">
+                    @Html.ActionLink(item.EventName.TruncateAtWord(30), "details", "events", new { @id = item.EventSlug }, null)    
+                </div>
+
+                <div class="galleryImage"  id="photo-@item.Image.ID">
+                    <a href="@item.Image.Fullsize" rel="EPLPhoto[latestphotos]" photoid="@thePath" title="" id="@item.Image.ID">
+                        <img src="@item.Image.Fullsize" width="350" border="0" alt="" />
+                    </a>
+                </div>
+            </li>   
+            }
+            else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION)
+            {
+                <li>
+                    <div class="title @item.ActivityType">
+                        @Html.ActionLink(item.EventName.TruncateAtWord(30), "details", "events", new { @id = item.EventSlug }, null)    
+                    </div>
+                    <div class="galleryItem">
+                        <h2><br /><br /><br /><br />New event added</h2>
+                    </div>
+                </li>
             }
             else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_RATING)
             {
-                <h2>@Html.ActionLink(item.EventName, "details", "events", new { @id = item.EventSlug }, null) was just rated @MvcHtmlString.Create(item.ActivityContent) out of 5 stars</h2>
+                <li>
+                    <div class="title @item.ActivityType">
+                        @Html.ActionLink(item.EventName.TruncateAtWord(30), "details", "events", new { @id = item.EventSlug }, null)    
+                    </div>
+                    <div class="galleryItem">
+                        <h2><br /><br /><br /><br />Event rated</h2>
+                    </div>
+                </li>
             }
-            else if (item.ActivityType == Epilogger.Web.Models.ActivityType.PHOTOS_VIDEOS)
-            {
-                var thePath = item.Image.EventID + "/" + item.Image.ID;
-                <div class="withcomment newPhotoupdates" id="photo-@item.Image.ID">
-                    <a href="@item.Image.Fullsize" rel="EPLPhoto[latestphotos]" photoid="@thePath" title="" id="@item.Image.ID">
-                        <img src="@item.Image.Fullsize" width="250" border="0" alt="" />
-                    </a>
-                </div>
-                <div class="clear"></div>
-            }
-            else
-            {
-                <p>@MvcHtmlString.Create(item.ActivityContent)</p>
-            }
-            <strong class="title @item.ActivityType">
-                @if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION)
-                {
-                    @:NEW EVENT ADDED
-                }
-                else if (item.ActivityType == Epilogger.Web.Models.ActivityType.FOLLOW_EVENT)
-                {
-                    @:SUBSCRIBED TO EVENT
-                }
-                else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_RATING)
-                {
-                    @:RATED AN EVENT
-                }
-                else
-                {
-                    
-                    @Html.ActionLink(item.EventName, "details", "events", new { @id = item.EventSlug }, null)
-                }
-            </strong>
-        </div>
-                if (Model.Activity.IndexOf(item) < 3 || Model.Activity.IndexOf(item) > 3 && Model.Activity.IndexOf(item) < 7 || Model.Activity.IndexOf(item) > 7 && Model.Activity.IndexOf(item) < 11)
-                { 
-            <div class="homepage-activity-entry-spacer">&nbsp;</div>
-        } 
+        }
+        </ul>
+    </div>
+    
+
+        
+        
+        
        
-    }
+        
+        
+        
+        @*if (Model.Activity.IndexOf(item) < 3 || Model.Activity.IndexOf(item) > 3 && Model.Activity.IndexOf(item) < 7 || Model.Activity.IndexOf(item) > 7 && Model.Activity.IndexOf(item) < 11)
+        { 
+            <div class="homepage-activity-entry-spacer">&nbsp;</div>
+        } *@
+       
+    
 
 
     <script type="text/javascript" charset="utf-8">

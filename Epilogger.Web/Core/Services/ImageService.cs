@@ -57,6 +57,13 @@ namespace Epilogger.Web
             return theTopPhotos;
         }
 
+        public List<Image> GetNewestPhotosByEventID(int eventID, int numberToGet)
+        {
+            return db.Images.Where(e => e.EventID == eventID).OrderByDescending(e => e.DateTime).Take(numberToGet).ToList();
+        }
+
+
+
         public List<TopImageAndTweet> GetTopPhotosAndTweetByEventID(int eventID, int recordsToReturn, DateTime fromDateTime, DateTime toDateTime)
         {
             List<TopPhotos> ps = db.GetTopPhotosByEventID(eventID, recordsToReturn, fromDateTime, toDateTime).ExecuteTypedList<TopPhotos>();

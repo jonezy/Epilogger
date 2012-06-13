@@ -438,7 +438,7 @@ namespace Epilogger.Data {
 	                IsNullable = false,
 	                AutoIncrement = false,
 	                IsForeignKey = false,
-	                MaxLength = 50
+	                MaxLength = -1
                 });
 
                 Columns.Add(new DatabaseColumn("ClientSecret", this)
@@ -448,7 +448,7 @@ namespace Epilogger.Data {
 	                IsNullable = false,
 	                AutoIncrement = false,
 	                IsForeignKey = false,
-	                MaxLength = 50
+	                MaxLength = -1
                 });
 
                 Columns.Add(new DatabaseColumn("Name", this)
@@ -1701,6 +1701,36 @@ namespace Epilogger.Data {
 	                IsForeignKey = false,
 	                MaxLength = 0
                 });
+
+                Columns.Add(new DatabaseColumn("IsFeatured", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Boolean,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("FeaturedStartDateTime", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.DateTime,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("FeaturedEndDateTime", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.DateTime,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
                     
                 
                 
@@ -2003,6 +2033,42 @@ namespace Epilogger.Data {
    			public static string IsActiveColumn{
 			      get{
         			return "IsActive";
+      			}
+		    }
+           
+            public IColumn IsFeatured{
+                get{
+                    return this.GetColumn("IsFeatured");
+                }
+            }
+            				
+   			public static string IsFeaturedColumn{
+			      get{
+        			return "IsFeatured";
+      			}
+		    }
+           
+            public IColumn FeaturedStartDateTime{
+                get{
+                    return this.GetColumn("FeaturedStartDateTime");
+                }
+            }
+            				
+   			public static string FeaturedStartDateTimeColumn{
+			      get{
+        			return "FeaturedStartDateTime";
+      			}
+		    }
+           
+            public IColumn FeaturedEndDateTime{
+                get{
+                    return this.GetColumn("FeaturedEndDateTime");
+                }
+            }
+            				
+   			public static string FeaturedEndDateTimeColumn{
+			      get{
+        			return "FeaturedEndDateTime";
       			}
 		    }
            

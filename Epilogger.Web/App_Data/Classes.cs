@@ -2055,6 +2055,57 @@ namespace Epilogger.Data
 		    }
 		}
 		
+        partial void OnIsFeaturedChanging(bool? value);
+        partial void OnIsFeaturedChanged();
+		
+		private bool? _IsFeatured;
+		public bool? IsFeatured { 
+		    get{
+		        return _IsFeatured;
+		    } 
+		    set{
+		        this.OnIsFeaturedChanging(value);
+                this.SendPropertyChanging();
+                this._IsFeatured = value;
+                this.SendPropertyChanged("IsFeatured");
+                this.OnIsFeaturedChanged();
+		    }
+		}
+		
+        partial void OnFeaturedStartDateTimeChanging(DateTime? value);
+        partial void OnFeaturedStartDateTimeChanged();
+		
+		private DateTime? _FeaturedStartDateTime;
+		public DateTime? FeaturedStartDateTime { 
+		    get{
+		        return _FeaturedStartDateTime;
+		    } 
+		    set{
+		        this.OnFeaturedStartDateTimeChanging(value);
+                this.SendPropertyChanging();
+                this._FeaturedStartDateTime = value;
+                this.SendPropertyChanged("FeaturedStartDateTime");
+                this.OnFeaturedStartDateTimeChanged();
+		    }
+		}
+		
+        partial void OnFeaturedEndDateTimeChanging(DateTime? value);
+        partial void OnFeaturedEndDateTimeChanged();
+		
+		private DateTime? _FeaturedEndDateTime;
+		public DateTime? FeaturedEndDateTime { 
+		    get{
+		        return _FeaturedEndDateTime;
+		    } 
+		    set{
+		        this.OnFeaturedEndDateTimeChanging(value);
+                this.SendPropertyChanging();
+                this._FeaturedEndDateTime = value;
+                this.SendPropertyChanged("FeaturedEndDateTime");
+                this.OnFeaturedEndDateTimeChanged();
+		    }
+		}
+		
 
         #endregion
 

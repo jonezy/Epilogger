@@ -342,6 +342,7 @@
     <Compile Include="Models\AllStatsViewModel.cs" />
     <Compile Include="Models\BetaSignUpViewModel.cs" />
     <Compile Include="Models\GetFacebookAlbumsViewModel.cs" />
+    <Compile Include="Models\HomepageFeaturedEventsViewModel.cs" />
     <Compile Include="Models\ImageCommentViewModel.cs" />
     <Compile Include="Models\PhotoDetailsViewModel.cs" />
     <Compile Include="Models\TweetReplyViewModel.cs" />
@@ -553,6 +554,7 @@
     <Content Include="Public\images\icons\bird_16_blue.png" />
     <Content Include="Public\images\icons\blog.png" />
     <Content Include="Public\images\icons\BrowseBullet.png" />
+    <Content Include="Public\images\icons\btn-search-home.png" />
     <Content Include="Public\images\icons\bubble.png" />
     <Content Include="Public\images\icons\cameraIcon.png" />
     <Content Include="Public\images\icons\Checkmark.png" />
@@ -566,6 +568,8 @@
     <Content Include="Public\images\icons\event-toolbar-ov.png" />
     <Content Include="Public\images\icons\event-toolbar.png" />
     <Content Include="Public\images\icons\facebook.png" />
+    <Content Include="Public\images\icons\feature-bg.png" />
+    <Content Include="Public\images\icons\featuredPhotoSlider.png" />
     <Content Include="Public\images\icons\for-buttons\add.png" />
     <Content Include="Public\images\icons\for-buttons\edit.png" />
     <Content Include="Public\images\icons\for-buttons\login.png" />
@@ -574,6 +578,7 @@
     <Content Include="Public\images\icons\for-buttons\submit.png" />
     <Content Include="Public\images\icons\header-person.png" />
     <Content Include="Public\images\icons\hovernub.png" />
+    <Content Include="Public\images\icons\icon-trending.png" />
     <Content Include="Public\images\icons\less.png" />
     <Content Include="Public\images\icons\more.png" />
     <Content Include="Public\images\icons\not.png" />
@@ -581,8 +586,11 @@
     <Content Include="Public\images\icons\pencil.png" />
     <Content Include="Public\images\icons\popUpNub.png" />
     <Content Include="Public\images\icons\profile-eventlist.png" />
+    <Content Include="Public\images\icons\ribbon-featured.png" />
     <Content Include="Public\images\icons\SearchPlainText.png" />
     <Content Include="Public\images\icons\sign-in-with-twitter-d.png" />
+    <Content Include="Public\images\icons\slider-active.png" />
+    <Content Include="Public\images\icons\slider-inactive.png" />
     <Content Include="Public\images\icons\star.png" />
     <Content Include="Public\images\icons\SubscribedCheck.png" />
     <Content Include="Public\images\icons\Tab-EventInfo.png" />
@@ -2684,6 +2692,7 @@
     <Content Include="Public\js\FacebookPhotoPicker\dojoroot\dojo\_firebug\warningIcon.png" />
     <Content Include="Public\js\FacebookPhotoPicker\photoPickerConfig.js" />
     <Content Include="Public\js\head.load.min.js" />
+    <Content Include="Public\js\HomePage.js" />
     <Content Include="Public\js\html5shiv.js" />
     <Content Include="Public\js\jqueryCookie\jquery.cookie.js" />
     <Content Include="Public\js\jqueryCookie\server.js" />
@@ -3026,6 +3035,7 @@
     <Content Include="Views\Events\ImageCommentControl.cshtml" />
     <Content Include="Views\Home\SocialBar.cshtml" />
     <Content Include="Views\Events\ConceptMap.cshtml" />
+    <Content Include="Views\Home\Copy of Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />
