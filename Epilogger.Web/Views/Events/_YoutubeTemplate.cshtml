@@ -1,0 +1,9 @@
+﻿@model Epilogger.Web.Models.ImageTemplateViewModel
+
+@{
+    var uri = new Uri(Model.Image.OriginalImageLink);
+    var videoId = HttpUtility.ParseQueryString(uri.Query)["v"];
+}
+<div class="withcomment newPhotoupdates" id="photo-@Model.Image.ID">
+    <iframe width="250" height="141" src="http://www.youtube.com/embed/@(videoId)" frameborder="0" allowfullscreen></iframe>
+</div>

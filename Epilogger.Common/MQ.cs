@@ -95,7 +95,7 @@ namespace Epilogger.Common
             public void init()
             {
                 var connectionFactory = new ConnectionFactory();
-                connectionFactory.HostName = "72.55.188.78";
+                connectionFactory.HostName = "192.168.101.132";
                 connectionFactory.Port = 5672;
                 connectionFactory.UserName = "epilogger";
                 connectionFactory.Password = "xea,87,21r";
@@ -142,14 +142,21 @@ namespace Epilogger.Common
 
             [Serializable]
             [JsonObject(MemberSerialization.OptOut)]
-            public class TwitterImageMSG
+            public class TwitterMediaMSG
             {
-                public int EventID { get; set; }
-                public long TweetID { get; set; }
+                public int EventId { get; set; }
+                public long TweetId { get; set; }
                 public string TwitterName { get; set; }
-                public string ImageSource { get; set; }
-                public Uri ImageURL { get; set; }
-                public string DisplayURL { get; set; }
+                public string Source { get; set; }
+                public Uri Url { get; set; }
+                public string DisplayUrl { get; set; }
+                public TwitterMediaType MediaType { get; set; }
+            }
+
+            public enum TwitterMediaType
+            {
+                Photo = 1,
+                Video = 2
             }
 
             [Serializable]
