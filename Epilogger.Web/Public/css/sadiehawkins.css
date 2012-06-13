@@ -1771,13 +1771,15 @@ div#search-container input[type=image] {
     width: 500px;
     height: 21px;
     font: bold 14px Helvetica, Arial, Sans-Serif;
-	height:20px;
+	height:24px;
 	
     
 }
 #homepageSearchOK {
     position: absolute;
-    left: 434px;
+    left: 442px;
+    margin-top: 2px;
+    cursor: pointer;
 }
 
 #breadcrumb a {text-transform: lowercase; font-size:10px; color: #5e5e5e; }

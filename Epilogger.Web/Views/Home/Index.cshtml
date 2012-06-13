@@ -67,6 +67,7 @@
         {
             @*<input type="submit" class="blue-action-button" id="homepageSearchOK" value="OK" />*@
             //ToDo Replace with image button
+            <img src="/Public/images/icons/btn-search-home.png" alt="search" id="homepageSearchOK" onclick="$('form').submit();" />
             @Html.TextBox("SearchTerm", null, new { @class = "remove-bottom", @title = "Find your event..." })
         }
         

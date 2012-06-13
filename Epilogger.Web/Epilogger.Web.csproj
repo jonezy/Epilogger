@@ -610,6 +610,8 @@
     <Content Include="Public\images\imageupload\selectphotos_active.png" />
     <Content Include="Public\images\imageupload\upload.png" />
     <Content Include="Public\images\imageupload\yourcomputer.png" />
+    <Content Include="Public\images\iWeb\powered_by_iweb_dark_bkgnd.png" />
+    <Content Include="Public\images\iWeb\powered_by_iweb_light_bkgnd.png" />
     <Content Include="Public\images\jaggie-icons\event-list-header-media.gif" />
     <Content Include="Public\images\jaggie-icons\event-list-header-twitter.gif" />
     <Content Include="Public\images\jaggie-icons\event-menu-jaggie.gif" />
