@@ -565,16 +565,7 @@ else
         @foreach (Epilogger.Data.Image EPLImage in Model.Images)
         {
             var itvm = new Epilogger.Web.Models.ImageTemplateViewModel { Image = EPLImage, CanDelete = Model.CanDelete};
-            string mediaTemplate = "_ImageTemplate";
-            if (EPLImage.OriginalImageLink.StartsWith("http://www.youtube.com") || EPLImage.OriginalImageLink.StartsWith("http://youtube.com"))
-            {
-                mediaTemplate = "_YoutubeTemplate";
-            }
-            else if (EPLImage.OriginalImageLink.StartsWith("http://www.vimeo.com") || EPLImage.OriginalImageLink.StartsWith("http://vimeo.com"))
-            {
-                mediaTemplate = "_VimeoTemplate";
-            }
-            @Html.Partial(mediaTemplate, itvm)
+            @Html.Partial("_ImageTemplate", itvm)
         }
     </div>
 

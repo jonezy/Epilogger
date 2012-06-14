@@ -4,9 +4,6 @@
 @{ var thePath = Model.Image.EventID + "/" + Model.Image.ID;}
 
 <div class="withcomment newPhotoupdates" id="photo-@Model.Image.ID">
-    @{
-        //ToDo: Move this logic to ViewModel generation    
-    }
     <a href="@Model.Image.Fullsize" rel="EPLPhoto[latestphotos]" photoid="@thePath" title="" id="">
         <img src="@Model.Image.Fullsize" width="250" border="0" alt="" />
     </a>

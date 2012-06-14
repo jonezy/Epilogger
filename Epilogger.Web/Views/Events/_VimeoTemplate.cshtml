@@ -1,9 +1,0 @@
-﻿@model Epilogger.Web.Models.ImageTemplateViewModel
-
-@{
-    var uri = new Uri(Model.Image.OriginalImageLink);
-    var videoId = uri.Segments[1];
-}
-<div class="withcomment newPhotoupdates" id="photo-@Model.Image.ID">
-    <iframe src="http://player.vimeo.com/video/@(videoId)" width="250" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-</div>
