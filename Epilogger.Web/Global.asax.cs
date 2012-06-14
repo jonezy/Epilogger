@@ -9,6 +9,7 @@ using AutoMapper;
 
 using Epilogger.Data;
 using Epilogger.Web.Areas.Api.Models;
+using Epilogger.Web.Areas.Api.Models.Classes;
 using Epilogger.Web.Core.Email;
 using Epilogger.Web.Models;
 using Timezone.Framework;
@@ -528,6 +529,7 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.CheckInCount, opt => opt.MapFrom(src => src.CheckIns.Count()));
 
             Mapper.CreateMap<EventCategory, ApiCategory>();
+            Mapper.CreateMap<Tweet, ApiTweet>();
 
             //List<Event>, List<ApiEvent>
 

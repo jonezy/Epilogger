@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using AutoMapper;
 using Epilogger.Data;
@@ -78,7 +79,7 @@ namespace Epilogger.Web.Areas.Api.Models
         public List<ApiEvent> SearchInEvent(int eventId, string searchTerm)
         {
 
-            return Mapper.Map<List<SearchInEventModel>, List<ApiEvent>>(_es.SearchInEvent(eventId, searchTerm, DateTime.MinValue, DateTime.MaxValue));
+            return Mapper.Map<List<SearchInEventModel>, List<ApiEvent>>(_es.SearchInEvent(eventId, searchTerm, (DateTime)SqlDateTime.MinValue, (DateTime)SqlDateTime.MaxValue));
         }
         //SearchInEvent(int EventID, string SearchTerm, DateTime FromDateTime, DateTime ToDateTime)
 

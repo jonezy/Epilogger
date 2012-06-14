@@ -231,6 +231,8 @@
     <Compile Include="Areas\Api\Models\Classes\ApiSearchInEvent.cs" />
     <Compile Include="Areas\Api\Models\CategoryManager.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiTweet.cs" />
+    <Compile Include="Areas\Api\Models\ITweetManager.cs" />
+    <Compile Include="Areas\Api\Models\TweetManager.cs" />
     <Compile Include="Areas\Api\Models\EventManager.cs" />
     <Compile Include="Areas\Api\Models\ICategoryManager.cs" />
     <Compile Include="Areas\Api\Models\IEventManager.cs" />

@@ -318,8 +318,8 @@ else
 
             function initialize() {
                 var geocoder = new google.maps.Geocoder({ region: 'CA' });
-                var address = 
-                    geocoder.geocode({ 'address': '@Model.Venue.Address, @Model.Venue.City' }, function (results, status) {
+                var address =
+                    geocoder.geocode({ 'address': '@Model.Venue.Name @Model.Venue.Address @Model.Venue.City @Model.Venue.State @Model.Venue.Zip' }, function (results, status) {
                         if (status == google.maps.GeocoderStatus.OK) {
                             userLat = results[0].geometry.location.lat();
                             userLng = results[0].geometry.location.lng();
@@ -559,7 +559,7 @@ else
     <h2>
         <span class="number" id="photoCount">@string.Format("{0:#,###}", Model.ImageCount)</span>
         Photos & Videos
-        <a href="#" id="imageupload-modal">Upload</a>
+        @*<a href="#" id="imageupload-modal">Upload</a>*@
     </h2>
     <div class="image-grid" id="photosvideos">
         @foreach (Epilogger.Data.Image EPLImage in Model.Images)

@@ -7,23 +7,23 @@ namespace Epilogger.Web.Areas.Api.Models.Classes
 {
     public class ApiTweet
     {
-        long ID { get; set; }
-        long TwitterID { get; set; }
-        int? EventID { get; set; }
-        string Text { get; set; }
-        string TextAsHTML { get; set; }
-        string Source { get; set; }
-        DateTime? CreatedDate { get; set; }
-        long? ToUserID { get; set; }
-        long? FromUserID { get; set; }
-        string FromUserScreenName { get; set; }
-        string ToUserScreenName { get; set; }
-        string IsoLanguageCode { get; set; }
-        string ProfileImageURL { get; set; }
-        long? SinceID { get; set; }
-        string Location { get; set; }
-        string RawSource { get; set; }
-        int? DeleteVoteCount { get; set; }
-        bool? Deleted { get; set; }
+        public long ID { get; set; }
+        public long TwitterID { get; set; }
+        public int? EventID { get; set; }
+        public string Text { get; set; }
+        public string TextAsHTML { get; set; }
+        public string Source { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public long? ToUserID { get; set; }
+        public long? FromUserID { get; set; }
+        public string FromUserScreenName { get; set; }
+        public string ToUserScreenName { get; set; }
+        public string IsoLanguageCode { get; set; }
+        public string ProfileImageURL { get; set; }
+        public long? SinceID { get; set; }
+        public string Location { get; set; }
+        public string RawSource { get; set; }
+        public int? DeleteVoteCount { get; set; }
+        public bool? Deleted { get; set; }
     }
 }

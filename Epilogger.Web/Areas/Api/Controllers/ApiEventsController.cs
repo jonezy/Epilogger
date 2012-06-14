@@ -25,11 +25,13 @@ namespace Epilogger.Web.Areas.Api.Controllers
 
         readonly IEventManager _eventManager;
         readonly ICategoryManager _categoryManager;
+        readonly ITweetManager _tweetManager;
 
         public ApiEventsController()
         {
             _eventManager = new EventManager();
             _categoryManager = new CategoryManager();
+            _tweetManager = new TweetManager();
         }
         #endregion
 
@@ -108,9 +110,22 @@ namespace Epilogger.Web.Areas.Api.Controllers
 
         #endregion
 
+        #region TheFeed
+        #endregion
+
+    #region Tweets
+
+        [HttpGet, HmacAuthorization]
+        public virtual JsonResult Tweets(int eventId, int page, int count)
+        {
+            return Json(_tweetManager.GetTweetsByEventPages(eventId, page, count), JsonRequestBehavior.AllowGet);
+        }
+
+    #endregion
+
 
         #region Photos
-            
+
 
         #endregion
 
@@ -212,8 +227,8 @@ namespace Epilogger.Web.Areas.Api.Controllers
                     throw new MissingFieldException(String.Format("The required parameter timeStamp was missing, please include timeStamp when making API requests."));
                 }
 
-                //Check time Stamp to ensure this request is fresh.
-                if (long.Parse(timeStampString) - DateTime.UtcNow.Ticks > 300000)
+                //Check time Stamp to ensure this request is fresh. 15secs
+                if (DateTime.UtcNow.Ticks - long.Parse(timeStampString) > 150000000)
                 {
                     throw new AccessViolationException(String.Format("The timeStamp on this request is too old, please generate a fresh request."));
                 }

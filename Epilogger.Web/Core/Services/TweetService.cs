@@ -165,7 +165,6 @@ namespace Epilogger.Web
 
 
             return tweets;
-
         }
 
         public Tweet FindByTwitterID(long? twitterID)
