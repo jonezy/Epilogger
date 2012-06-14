@@ -456,8 +456,8 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.IsActive, opt => opt.UseValue(true))
                 .ForMember(dest => dest.CollectionMode, opt => opt.UseValue(2))
                 .ForMember(dest => dest.IsFeatured, opt => opt.UseValue(false))
-                .ForMember(dest => dest.FeaturedStartDateTime, opt => opt.UseValue(DateTime.MinValue))
-                .ForMember(dest => dest.FeaturedEndDateTime, opt => opt.UseValue(DateTime.MinValue));
+                .ForMember(dest => dest.FeaturedStartDateTime, opt => opt.UseValue(DateTime.Parse("01/01/1800")))
+                .ForMember(dest => dest.FeaturedEndDateTime, opt => opt.UseValue(DateTime.Parse("01/01/1800")));
 
             Mapper.CreateMap<User, DashboardProfileViewModel>()
                 .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => string.Format("{0} {1}", src.FirstName, src.LastName)))
@@ -529,7 +529,7 @@ namespace Epilogger.Web {
 
             Mapper.CreateMap<EventCategory, ApiCategory>();
 
-
+            //List<Event>, List<ApiEvent>
 
 
 

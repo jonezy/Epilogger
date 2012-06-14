@@ -10,6 +10,7 @@ using System.Web.Routing;
 using System.Web.Security;
 using Epilogger.Data;
 using Epilogger.Web.Areas.Api.Models;
+using Epilogger.Web.Core.Filters;
 using Newtonsoft.Json;
 using dotless.Core.Parser.Tree;
 
@@ -23,7 +24,7 @@ namespace Epilogger.Web.Areas.Api.Controllers
         #region Initialize Managers
 
         readonly IEventManager _eventManager;
-        ICategoryManager _categoryManager;
+        readonly ICategoryManager _categoryManager;
 
         public ApiEventsController()
         {
@@ -32,10 +33,7 @@ namespace Epilogger.Web.Areas.Api.Controllers
         }
         #endregion
 
-        #region User Authentication
-        //User Authentication
 
-#endregion
 
         #region Events
         
@@ -43,16 +41,16 @@ namespace Epilogger.Web.Areas.Api.Controllers
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         //Events
 
-        [HttpGet]
+        [HttpGet, HmacAuthorization]
         public virtual JsonResult EventList(int? page, int? count)
         {
             var model = this._eventManager.GetEvents(page, count);
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        [RestHttpVerbFilter]
+        [RestHttpVerbFilter, HmacAuthorization]
         public virtual JsonResult Event(int? id, Event item, string httpVerb)
         {
             switch(httpVerb)
@@ -70,6 +68,61 @@ namespace Epilogger.Web.Areas.Api.Controllers
             return Json(new { Error = true, Message = "Unknown HTTP verb" });
         }
 
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        [HttpGet, HmacAuthorization]
+        [CacheFilter(Duration = 10)]
+        public virtual JsonResult TrendingEvents()
+        {
+            var model = _eventManager.GetTrendingEvents();
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        [HttpGet, HmacAuthorization]
+        public virtual JsonResult SearchEvents(string searchTerm)
+        {
+            var model = _eventManager.SearchEvents(searchTerm);
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet, HmacAuthorization]
+        public virtual JsonResult FeaturedEvents()
+        {
+            var model = _eventManager.GetFeaturedEvents();
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet, HmacAuthorization]
+        public virtual JsonResult SearchInEvent(int eventId, string searchTerm)
+        {
+            var model = _eventManager.GetFeaturedEvents();
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+
+        //SearchInEvent(int EventID, string SearchTerm, DateTime FromDateTime, DateTime ToDateTime)
+        
+
+
+        #endregion
+
+
+        #region Photos
+            
+
+        #endregion
+
+        #region CheckIns
+
+
+        #endregion
+
+        #region User
+        //My Events
+
+            //Login
 
         #endregion
 
@@ -77,8 +130,7 @@ namespace Epilogger.Web.Areas.Api.Controllers
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        [HttpGet]
-        [HmacAuthorization]
+        [HttpGet, HmacAuthorization]
         public virtual JsonResult Categories()
         {
             var model = _categoryManager.GetCategories();
@@ -87,7 +139,18 @@ namespace Epilogger.Web.Areas.Api.Controllers
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
+        [HttpGet, HmacAuthorization]
+        public virtual JsonResult EventsByCategoryID(int categoryId, int page, int count)
+        {
+            var model = _eventManager.EventsByCategoyIdPaged(categoryId, page, count);
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+
         #endregion
+
+
+
 
         //NOT IMPLIMENTED
         //Creates a bunch of events. (Not Implemented)

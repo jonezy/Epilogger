@@ -225,9 +225,12 @@
     <Compile Include="Areas\Admin\Models\InviteUsersViewModel.cs" />
     <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
     <Compile Include="Areas\Api\Controllers\ApiEventsController.cs" />
-    <Compile Include="Areas\Api\Models\ApiCategory.cs" />
-    <Compile Include="Areas\Api\Models\ApiEvent.cs" />
+    <Compile Include="Areas\Api\Models\Classes\ApiCategory.cs" />
+    <Compile Include="Areas\Api\Models\Classes\ApiEvent.cs" />
+    <Compile Include="Areas\Api\Models\Classes\ApiImage.cs" />
+    <Compile Include="Areas\Api\Models\Classes\ApiSearchInEvent.cs" />
     <Compile Include="Areas\Api\Models\CategoryManager.cs" />
+    <Compile Include="Areas\Api\Models\Classes\ApiTweet.cs" />
     <Compile Include="Areas\Api\Models\EventManager.cs" />
     <Compile Include="Areas\Api\Models\ICategoryManager.cs" />
     <Compile Include="Areas\Api\Models\IEventManager.cs" />
@@ -2960,6 +2963,7 @@
     <Content Include="Public\js\TimePicker\timePicker.css" />
     <Content Include="Areas\Admin\Views\ManageApi\index.cshtml" />
     <Content Include="Areas\Admin\Views\ManageApi\edit.cshtml" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="Public\js\bootstrap-Image-Gallery\Makefile" />
     <None Include="Public\js\bootstrap-Image-Gallery\package.json" />
     <None Include="Public\js\bootstrap-Image-Gallery\README.md" />

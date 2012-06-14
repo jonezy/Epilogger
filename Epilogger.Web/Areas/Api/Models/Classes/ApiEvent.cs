@@ -46,7 +46,7 @@ namespace Epilogger.Web.Areas.Api.Models
         public int TweetCount { get; set; }
         public int ImageCount { get; set; }
         public int CheckInCount { get; set; }
-
+        
         //public bool HasSubscribed { get; set; }
         //public bool HasUserRated { get; set; }
         public DateTime? FromDateTime { get; set; }

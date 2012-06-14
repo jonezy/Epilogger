@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Epilogger.Data;
@@ -40,6 +41,46 @@ namespace Epilogger.Web.Areas.Api.Models
         {
             return Mapper.Map<List<Event>, List<ApiEvent>>(_es.AllEventsDescPaged((int)page, (int)count));
         }
+
+        public List<ApiEvent> GetTrendingEvents()
+        {
+            var eplRedis = new Common.Redis();
+            var trendingEventId = eplRedis.GetTrendingEvents();
+            var trendingEvents = new List<Event>();
+            foreach (var e in trendingEventId.Take(10).Select(eventId => _es.FindByID((int.Parse(eventId)))))
+            {
+                if (e != null)
+                {
+                    e.Name = e.Name;
+                    trendingEvents.Add(e);
+                }
+            }
+
+            return Mapper.Map<List<Event>, List<ApiEvent>>(trendingEvents);
+        }
+
+
+        public List<ApiEvent> SearchEvents(string searchTerm)
+        {
+            return Mapper.Map<List<Event>, List<ApiEvent>>(_es.GetEventsBySearchTerm(searchTerm).ToList());
+        }
+
+        public List<ApiEvent> GetFeaturedEvents()
+        {
+            return Mapper.Map<List<Event>, List<ApiEvent>>(_es.GetFeaturedEvents().ToList());
+        }
+
+        public List<ApiEvent> EventsByCategoyIdPaged(int categoryId, int page, int count)
+        {
+            return Mapper.Map<List<Event>, List<ApiEvent>>(_es.GetEventsByCategoryIDDescPaged(categoryId, page, count));
+        }
+
+        public List<ApiEvent> SearchInEvent(int eventId, string searchTerm)
+        {
+
+            return Mapper.Map<List<SearchInEventModel>, List<ApiEvent>>(_es.SearchInEvent(eventId, searchTerm, DateTime.MinValue, DateTime.MaxValue));
+        }
+        //SearchInEvent(int EventID, string SearchTerm, DateTime FromDateTime, DateTime ToDateTime)
 
         
     }

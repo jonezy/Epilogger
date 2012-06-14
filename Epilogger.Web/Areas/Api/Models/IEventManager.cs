@@ -10,6 +10,10 @@ namespace Epilogger.Web.Areas.Api.Models
         Event Update(Event item);
         ApiEvent GetById(int id);
         List<ApiEvent> GetEvents(int? page, int? count);
+        List<ApiEvent> GetTrendingEvents();
+        List<ApiEvent> SearchEvents(string searchTerm);
+        List<ApiEvent> GetFeaturedEvents();
+        List<ApiEvent> EventsByCategoyIdPaged(int categoryId, int page, int count);
         bool Delete(int id);
     }
 }

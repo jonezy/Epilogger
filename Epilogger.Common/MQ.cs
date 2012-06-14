@@ -94,11 +94,13 @@ namespace Epilogger.Common
 
             public void init()
             {
-                var connectionFactory = new ConnectionFactory();
-                connectionFactory.HostName = "72.55.188.78";
-                connectionFactory.Port = 5672;
-                connectionFactory.UserName = "epilogger";
-                connectionFactory.Password = "xea,87,21r";
+                var connectionFactory = new ConnectionFactory
+                                            {
+                                                HostName = "epilogger.com",
+                                                Port = 5672,
+                                                UserName = "epilogger",
+                                                Password = "xea,87,21r"
+                                            };
                 Connection = connectionFactory.CreateConnection();
                 Model = Connection.CreateModel();
             }

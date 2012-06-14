@@ -211,6 +211,14 @@ namespace Epilogger.Web {
             return GetData(e => e.CategoryID == categoryID);
         }
 
+
+        public List<Event> GetEventsByCategoryIDDescPaged(int categoryID, int currentPage, int recordsPerPage)
+        {
+            var ec = db.Events.Where(e => e.CategoryID == categoryID).OrderByDescending(e => e.StartDateTime);
+            return ec.Skip(currentPage * recordsPerPage).Take(recordsPerPage).ToList();
+        }
+
+
         public List<Event> GetEventsByCategorySlug(string categorySlug)
         {
             CategoryService CS = new CategoryService();
