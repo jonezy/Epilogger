@@ -1,7 +1,21 @@
-﻿
+﻿@using Epilogger.Common
 @model Epilogger.Web.Models.ImageTemplateViewModel
 
-@{ var thePath = Model.Image.EventID + "/" + Model.Image.ID;}
+@{ //ToDo: Move this logic out of view
+    
+    var thePath = Model.Image.EventID + "/" + Model.Image.ID;
+
+    var fullSizeUrl = Model.Image.Fullsize;
+    if (Model.Image.MediaType == (short)MQ.Messages.EventMediaType.YoutubeVideo)
+    {
+        fullSizeUrl = "http://youtube.com/watch?v=" + Model.Image.Thumb;
+    }
+    else if (Model.Image.MediaType == (short)MQ.Messages.EventMediaType.VimeoVideo)
+    {
+        fullSizeUrl = "http://vimeo.com/" + Model.Image.Thumb;
+    }
+        
+   }
 
 <div class="withcomment newPhotoupdates" id="photo-@Model.Image.ID">
     <a href="@Model.Image.Fullsize" rel="EPLPhoto[latestphotos]" photoid="@thePath" title="" id="">

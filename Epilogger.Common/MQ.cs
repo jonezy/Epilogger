@@ -150,13 +150,15 @@ namespace Epilogger.Common
                 public string Source { get; set; }
                 public Uri Url { get; set; }
                 public string DisplayUrl { get; set; }
-                public TwitterMediaType MediaType { get; set; }
+                public EventMediaType MediaType { get; set; }
             }
 
-            public enum TwitterMediaType
+            public enum EventMediaType
             {
+                None = 0,
                 Photo = 1,
-                Video = 2
+                YoutubeVideo = 2,
+                VimeoVideo = 3
             }
 
             [Serializable]

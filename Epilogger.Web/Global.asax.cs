@@ -321,7 +321,6 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.CurrentUserRole, opt => opt.Ignore())
                 .ForMember(dest => dest.CreatedEventUser, opt => opt.Ignore());
 
-
             Mapper.CreateMap<Event, WidgetViewModel>()
                 .ForMember(dest => dest.Images, opt => opt.Ignore())
                 .ForMember(dest => dest.CheckIns, opt => opt.Ignore())
@@ -454,7 +453,11 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.IsPrivate, opt => opt.UseValue(false))
                 .ForMember(dest => dest.IsAdult, opt => opt.UseValue(false))
                 .ForMember(dest => dest.IsActive, opt => opt.UseValue(true))
-                .ForMember(dest => dest.CollectionMode, opt => opt.UseValue(2));
+                .ForMember(dest => dest.CollectionMode, opt => opt.UseValue(2))
+                .ForMember(dest => dest.IsFeatured, opt=> opt.UseValue(false))
+                .ForMember(dest => dest.FeaturedStartDateTime, opt => opt.UseValue(DateTime.UtcNow))
+                .ForMember(dest => dest.FeaturedEndDateTime, opt => opt.UseValue(DateTime.UtcNow));
+            //ToDo: Remove 3 featured properties during merge
 
             Mapper.CreateMap<User, DashboardProfileViewModel>()
                 .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => string.Format("{0} {1}", src.FirstName, src.LastName)))
