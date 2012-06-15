@@ -205,6 +205,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="App_Data\IImage.cs" />
     <Compile Include="App_Data\StoredProcedures.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -231,6 +232,10 @@
     <Compile Include="Areas\Api\Models\Classes\ApiSearchInEvent.cs" />
     <Compile Include="Areas\Api\Models\CategoryManager.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiTweet.cs" />
+    <Compile Include="Areas\Api\Models\Classes\ApiTweeter.cs" />
+    <Compile Include="Areas\Api\Models\Classes\ApiTopImageAndTweet.cs" />
+    <Compile Include="Areas\Api\Models\IImageManager.cs" />
+    <Compile Include="Areas\Api\Models\ImageManager.cs" />
     <Compile Include="Areas\Api\Models\ITweetManager.cs" />
     <Compile Include="Areas\Api\Models\TweetManager.cs" />
     <Compile Include="Areas\Api\Models\EventManager.cs" />

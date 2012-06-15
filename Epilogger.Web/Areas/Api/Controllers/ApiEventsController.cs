@@ -26,12 +26,14 @@ namespace Epilogger.Web.Areas.Api.Controllers
         readonly IEventManager _eventManager;
         readonly ICategoryManager _categoryManager;
         readonly ITweetManager _tweetManager;
+        readonly IImageManager _imageManager;
 
         public ApiEventsController()
         {
             _eventManager = new EventManager();
             _categoryManager = new CategoryManager();
             _tweetManager = new TweetManager();
+            _imageManager = new ImageManager();
         }
         #endregion
 
@@ -113,19 +115,63 @@ namespace Epilogger.Web.Areas.Api.Controllers
         #region TheFeed
         #endregion
 
-    #region Tweets
+        #region Tweets
 
-        [HttpGet, HmacAuthorization]
-        public virtual JsonResult Tweets(int eventId, int page, int count)
-        {
-            return Json(_tweetManager.GetTweetsByEventPages(eventId, page, count), JsonRequestBehavior.AllowGet);
-        }
+            [HttpGet, HmacAuthorization]
+            public virtual JsonResult Tweets(int eventId, int page, int count)
+            {
+                return Json(_tweetManager.GetTweetsByEventPages(eventId, page, count), JsonRequestBehavior.AllowGet);
+            }
 
-    #endregion
+            [HttpGet, HmacAuthorization]
+            public virtual JsonResult Top10Tweeters(int eventId)
+            {
+                return Json(_tweetManager.GetTop10Tweeters(eventId), JsonRequestBehavior.AllowGet);
+            }
 
+            [HttpGet, HmacAuthorization]
+            public virtual JsonResult TweetsByImageID(int imageId, int eventId, int page, int count)
+            {
+                return Json(_tweetManager.GetTweetsByImageID(imageId, eventId, page, count), JsonRequestBehavior.AllowGet);
+            }
+
+            [HttpGet, HmacAuthorization]
+            public virtual JsonResult TweetCountByImageID(int imageId, int eventId)
+            {
+                return Json(_tweetManager.GetTweetCountByImageID(imageId, eventId), JsonRequestBehavior.AllowGet);
+            }
+
+
+        #endregion
 
         #region Photos
-
+            [HttpGet, HmacAuthorization]
+            public virtual JsonResult ImageCountByEventID(int eventId)
+            {
+                return Json(_imageManager.FindImageCountByEventID(eventId), JsonRequestBehavior.AllowGet);
+            }
+            [HttpGet, HmacAuthorization]
+            public virtual JsonResult ImagesByEventIDOrderDescTakeX(int eventID, int numberToReturn)
+            {
+                return Json(_imageManager.FindByEventIDOrderDescTakeX(eventID, numberToReturn), JsonRequestBehavior.AllowGet);
+            }
+            public virtual JsonResult TopImagesByEventID(int eventID, int numberToReturn)
+            {
+                return Json(_imageManager.GetTopPhotosByEventID(eventID, numberToReturn), JsonRequestBehavior.AllowGet);
+            }
+            public virtual JsonResult NewestPhotosByEventID(int eventID, int numberToReturn)
+            {
+                var model = _imageManager.GetNewestPhotosByEventID(eventID, numberToReturn);
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            public virtual JsonResult TopPhotosAndTweetByEventID(int eventID, int numberToReturn)
+            {
+                return Json(_imageManager.GetTopPhotosAndTweetByEventID(eventID, numberToReturn), JsonRequestBehavior.AllowGet);
+            }
+            public virtual JsonResult ImagesByEventPaged(int eventID, int page, int count)
+            {
+                return Json(_imageManager.GetPagedPhotos(eventID, page, count), JsonRequestBehavior.AllowGet);
+            }
 
         #endregion
 

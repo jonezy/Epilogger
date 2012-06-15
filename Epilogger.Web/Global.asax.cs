@@ -11,6 +11,7 @@ using Epilogger.Data;
 using Epilogger.Web.Areas.Api.Models;
 using Epilogger.Web.Areas.Api.Models.Classes;
 using Epilogger.Web.Core.Email;
+using Epilogger.Web.Core.Stats;
 using Epilogger.Web.Models;
 using Timezone.Framework;
 
@@ -530,9 +531,11 @@ namespace Epilogger.Web {
 
             Mapper.CreateMap<EventCategory, ApiCategory>();
             Mapper.CreateMap<Tweet, ApiTweet>();
-
-            //List<Event>, List<ApiEvent>
-
+            Mapper.CreateMap<Tweeter, ApiTweeter>();
+            Mapper.CreateMap<Image, ApiImage>();
+            Mapper.CreateMap<TopImageAndTweet, ApiTopImageAndTweet>();
+            
+            
 
 
             Mapper.AssertConfigurationIsValid();
