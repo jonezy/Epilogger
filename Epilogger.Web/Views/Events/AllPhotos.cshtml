@@ -1,4 +1,5 @@
 ﻿
+@using Epilogger.Common
 @using Epilogger.Web;
 
 @model Epilogger.Web.Models.AllPhotosDisplayViewModel
@@ -38,10 +39,23 @@
 {
     foreach (Epilogger.Data.Image image in Model.TopImages)
     {
+        //ToDo: Move this logic out of view
+        
         var thePath = image.EventID + "/" + image.ID;
+        
+        var fullSizeUrl = image.Fullsize;
+        if (image.MediaType == (short)MQ.Messages.EventMediaType.YoutubeVideo)
+        {
+            fullSizeUrl = "http://youtube.com/watch?v=" + image.Thumb;
+        }
+        else if (image.MediaType == (short)MQ.Messages.EventMediaType.VimeoVideo)
+        {
+            fullSizeUrl = "http://vimeo.com/" + image.Thumb;
+        }
+        
         <div id="TopPhoto@(image.ID)" class="topPhotosBar">
             <div class="topPhoto">
-                <a href="@image.Fullsize" rel="EPLPhoto[topphotos]" photoid="@thePath" title="" id="@image.ID">
+                <a href="@fullSizeUrl" rel="EPLPhoto[topphotos]" photoid="@thePath" title="" id="@image.ID">
                     <img src="@image.Fullsize" width="415" border="0" alt="" />
                 </a>
             </div>
