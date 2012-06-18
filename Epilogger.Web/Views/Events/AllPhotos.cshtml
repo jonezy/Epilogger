@@ -52,6 +52,10 @@
         {
             fullSizeUrl = "http://vimeo.com/" + image.Thumb;
         }
+        else if (image.MediaType == (short)MQ.Messages.EventMediaType.KeekVideo)
+        {
+            fullSizeUrl = string.Format("http://www.keek.com/embed/{0}?iframe=true", image.Thumb);
+        }
         
         <div id="TopPhoto@(image.ID)" class="topPhotosBar">
             <div class="topPhoto">

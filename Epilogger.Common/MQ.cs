@@ -158,7 +158,8 @@ namespace Epilogger.Common
                 None = 0,
                 Photo = 1,
                 YoutubeVideo = 2,
-                VimeoVideo = 3
+                VimeoVideo = 3,
+                KeekVideo = 4
             }
 
             [Serializable]

@@ -8,11 +8,15 @@
     var fullSizeUrl = Model.Image.Fullsize;
     if (Model.Image.MediaType == (short)MQ.Messages.EventMediaType.YoutubeVideo)
     {
-        fullSizeUrl = "http://youtube.com/watch?v=" + Model.Image.Thumb;
+        fullSizeUrl = string.Format("http://youtube.com/watch?v={0}", Model.Image.Thumb);
     }
     else if (Model.Image.MediaType == (short)MQ.Messages.EventMediaType.VimeoVideo)
     {
-        fullSizeUrl = "http://vimeo.com/" + Model.Image.Thumb;
+        fullSizeUrl = string.Format("http://vimeo.com/{0}", Model.Image.Thumb);
+    }
+    else if (Model.Image.MediaType == (short)MQ.Messages.EventMediaType.KeekVideo)
+    {
+        fullSizeUrl = string.Format("http://www.keek.com/embed/{0}?iframe=true", Model.Image.Thumb);
     }
         
    }
