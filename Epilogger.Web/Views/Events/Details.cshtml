@@ -553,12 +553,12 @@ else
 </div>
 
 
-<!-- PHOTOS & VIDEOS -->
+<!-- Media -->
 
 <div class="grid_7 omega">
     <h2>
         <span class="number" id="photoCount">@string.Format("{0:#,###}", Model.ImageCount)</span>
-        Photos & Videos
+        Media
         <a href="#" id="imageupload-modal">Upload</a>
     </h2>
     <div class="image-grid" id="photosvideos">
@@ -574,11 +574,11 @@ else
     <p>
         @if (!IncludeDateRange)
         { 
-            @: (@Html.ActionLink("See all photos and videos", "AllPhotos", "events", new { id = Model.ID }))
+            @: (@Html.ActionLink("See all media", "AllPhotos", "events", new { id = Model.ID }))
            }
         else
         { 
-            @: (@Html.ActionLink("See all photos and videos", "AllPhotos", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { }))
+            @: (@Html.ActionLink("See all media", "AllPhotos", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { }))
         }
         @*(<a href="" class="uploadPhotos" alt="">Have something to contribute? Upload your photos</a>)*@
     </p>
