@@ -120,7 +120,7 @@ big {
 #header {
     background-color: #efefef;
     height: 41px;
-    margin-top: 44px;
+    /*margin-top: 44px;*/
 }
 #epiloggerLogo {
     margin: 4px 0 0 5px;

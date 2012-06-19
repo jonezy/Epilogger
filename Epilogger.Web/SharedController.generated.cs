@@ -28,7 +28,6 @@ namespace T4MVC {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string _AdminLayout = "~/Views/Shared/_AdminLayout.cshtml";
             public readonly string _HomepageLayout = "~/Views/Shared/_HomepageLayout.cshtml";
             public readonly string _ImageComments = "~/Views/Shared/_ImageComments.cshtml";
             public readonly string _InteriorLayout = "~/Views/Shared/_InteriorLayout.cshtml";

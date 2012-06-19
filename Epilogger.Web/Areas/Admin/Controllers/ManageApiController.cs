@@ -16,7 +16,7 @@ using Org.BouncyCastle.Security;
 namespace Epilogger.Web.Areas.Admin.Controllers
 {
 
-    public class ManageApiController : Controller
+    public partial class ManageApiController : Controller
     {
         EpiloggerDB _db = new EpiloggerDB();
         APIApplicationService _as = new APIApplicationService();
@@ -43,7 +43,7 @@ namespace Epilogger.Web.Areas.Admin.Controllers
         //
         // GET: /Admin/ManageAPI/
 
-        public ActionResult Index()
+        public virtual ActionResult Index()
         {
             var theUsers = _db.Users.Where(e => e.RoleID == 3);
             return View(theUsers);
@@ -51,8 +51,8 @@ namespace Epilogger.Web.Areas.Admin.Controllers
 
         //
         // GET: /Admin/ManageAPI/Edit/5
- 
-        public ActionResult Edit(Guid userId)
+
+        public virtual ActionResult Edit(Guid userId)
         {
             var theApiApplication = _as.FindByUserId(userId);
 
@@ -98,7 +98,7 @@ namespace Epilogger.Web.Areas.Admin.Controllers
         // POST: /Admin/ManageAPI/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(APIApplication model)
+        public virtual ActionResult Edit(APIApplication model)
         {
             try
             {

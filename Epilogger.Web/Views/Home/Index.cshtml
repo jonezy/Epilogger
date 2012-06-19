@@ -87,7 +87,7 @@
     </div>
     
     <div id="homepage-video">
-        @if (Model.FeaturedEvents != null)
+        @if (Model.FeaturedEvents.Count > 0)
         {
             foreach (var theE in Model.FeaturedEvents)
             {

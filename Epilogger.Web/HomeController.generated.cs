@@ -142,6 +142,7 @@ namespace Epilogger.Web.Controllers {
             public readonly string About = "~/Views/Home/About.cshtml";
             public readonly string BetaSignUp = "~/Views/Home/BetaSignUp.cshtml";
             public readonly string Contact = "~/Views/Home/Contact.cshtml";
+            public readonly string Copy_of_Index = "~/Views/Home/Copy of Index.cshtml";
             public readonly string Index = "~/Views/Home/Index.cshtml";
             public readonly string Privacy = "~/Views/Home/Privacy.cshtml";
             public readonly string Search = "~/Views/Home/Search.cshtml";

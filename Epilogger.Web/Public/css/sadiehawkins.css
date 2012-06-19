@@ -1080,6 +1080,8 @@ fieldset.create p#confirmPW label {position:relative; top:-4px; line-height:13px
 .createAccountButton:hover { top: 156px;}
 
 
+
+
 /* ------------------------------ DASHBOARD */
 #dashboard-nav {
     float:left;
@@ -1700,6 +1702,13 @@ span.tweet-date a:hover { text-decoration: underline; }
     
 #admin-area a, #user-status a {
     color:#fff;}*/
+    
+    
+#admin-nav {
+    float:left;
+    width:140px;
+    margin-right:17px;}
+    
     
 /* New Admin Menu - CB Mar 29, 2012 */    
 #god-menu {

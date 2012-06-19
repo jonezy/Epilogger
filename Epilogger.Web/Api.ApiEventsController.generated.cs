@@ -47,6 +47,71 @@ namespace Epilogger.Web.Areas.Api.Controllers {
         public System.Web.Mvc.JsonResult Event() {
             return new T4MVC_JsonResult(Area, Name, ActionNames.Event);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult SearchEvents() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.SearchEvents);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult SearchInEvent() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.SearchInEvent);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult Tweets() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.Tweets);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult Top10Tweeters() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.Top10Tweeters);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult TweetsByImageID() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.TweetsByImageID);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult TweetCountByImageID() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.TweetCountByImageID);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult ImageCountByEventID() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.ImageCountByEventID);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult ImagesByEventIDOrderDescTakeX() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.ImagesByEventIDOrderDescTakeX);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult TopImagesByEventID() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.TopImagesByEventID);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult NewestPhotosByEventID() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.NewestPhotosByEventID);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult TopPhotosAndTweetByEventID() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.TopPhotosAndTweetByEventID);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult ImagesByEventPaged() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.ImagesByEventPaged);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult EventsByCategoryID() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.EventsByCategoryID);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ApiEventsController Actions { get { return MVC.Api.ApiEvents; } }
@@ -64,14 +129,44 @@ namespace Epilogger.Web.Areas.Api.Controllers {
         public class ActionNamesClass {
             public readonly string EventList = "EventList";
             public readonly string Event = "Event";
+            public readonly string TrendingEvents = "TrendingEvents";
+            public readonly string SearchEvents = "SearchEvents";
+            public readonly string FeaturedEvents = "FeaturedEvents";
+            public readonly string SearchInEvent = "SearchInEvent";
+            public readonly string Tweets = "Tweets";
+            public readonly string Top10Tweeters = "Top10Tweeters";
+            public readonly string TweetsByImageID = "TweetsByImageID";
+            public readonly string TweetCountByImageID = "TweetCountByImageID";
+            public readonly string ImageCountByEventID = "ImageCountByEventID";
+            public readonly string ImagesByEventIDOrderDescTakeX = "ImagesByEventIDOrderDescTakeX";
+            public readonly string TopImagesByEventID = "TopImagesByEventID";
+            public readonly string NewestPhotosByEventID = "NewestPhotosByEventID";
+            public readonly string TopPhotosAndTweetByEventID = "TopPhotosAndTweetByEventID";
+            public readonly string ImagesByEventPaged = "ImagesByEventPaged";
             public readonly string Categories = "Categories";
+            public readonly string EventsByCategoryID = "EventsByCategoryID";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants {
             public const string EventList = "EventList";
             public const string Event = "Event";
+            public const string TrendingEvents = "TrendingEvents";
+            public const string SearchEvents = "SearchEvents";
+            public const string FeaturedEvents = "FeaturedEvents";
+            public const string SearchInEvent = "SearchInEvent";
+            public const string Tweets = "Tweets";
+            public const string Top10Tweeters = "Top10Tweeters";
+            public const string TweetsByImageID = "TweetsByImageID";
+            public const string TweetCountByImageID = "TweetCountByImageID";
+            public const string ImageCountByEventID = "ImageCountByEventID";
+            public const string ImagesByEventIDOrderDescTakeX = "ImagesByEventIDOrderDescTakeX";
+            public const string TopImagesByEventID = "TopImagesByEventID";
+            public const string NewestPhotosByEventID = "NewestPhotosByEventID";
+            public const string TopPhotosAndTweetByEventID = "TopPhotosAndTweetByEventID";
+            public const string ImagesByEventPaged = "ImagesByEventPaged";
             public const string Categories = "Categories";
+            public const string EventsByCategoryID = "EventsByCategoryID";
         }
 
 
@@ -91,6 +186,112 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             public readonly string id = "id";
             public readonly string item = "item";
             public readonly string httpVerb = "httpVerb";
+        }
+        static readonly ActionParamsClass_SearchEvents s_params_SearchEvents = new ActionParamsClass_SearchEvents();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_SearchEvents SearchEventsParams { get { return s_params_SearchEvents; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_SearchEvents {
+            public readonly string searchTerm = "searchTerm";
+        }
+        static readonly ActionParamsClass_SearchInEvent s_params_SearchInEvent = new ActionParamsClass_SearchInEvent();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_SearchInEvent SearchInEventParams { get { return s_params_SearchInEvent; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_SearchInEvent {
+            public readonly string eventId = "eventId";
+            public readonly string searchTerm = "searchTerm";
+        }
+        static readonly ActionParamsClass_Tweets s_params_Tweets = new ActionParamsClass_Tweets();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Tweets TweetsParams { get { return s_params_Tweets; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Tweets {
+            public readonly string eventId = "eventId";
+            public readonly string page = "page";
+            public readonly string count = "count";
+        }
+        static readonly ActionParamsClass_Top10Tweeters s_params_Top10Tweeters = new ActionParamsClass_Top10Tweeters();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Top10Tweeters Top10TweetersParams { get { return s_params_Top10Tweeters; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Top10Tweeters {
+            public readonly string eventId = "eventId";
+        }
+        static readonly ActionParamsClass_TweetsByImageID s_params_TweetsByImageID = new ActionParamsClass_TweetsByImageID();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_TweetsByImageID TweetsByImageIDParams { get { return s_params_TweetsByImageID; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_TweetsByImageID {
+            public readonly string imageId = "imageId";
+            public readonly string eventId = "eventId";
+            public readonly string page = "page";
+            public readonly string count = "count";
+        }
+        static readonly ActionParamsClass_TweetCountByImageID s_params_TweetCountByImageID = new ActionParamsClass_TweetCountByImageID();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_TweetCountByImageID TweetCountByImageIDParams { get { return s_params_TweetCountByImageID; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_TweetCountByImageID {
+            public readonly string imageId = "imageId";
+            public readonly string eventId = "eventId";
+        }
+        static readonly ActionParamsClass_ImageCountByEventID s_params_ImageCountByEventID = new ActionParamsClass_ImageCountByEventID();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ImageCountByEventID ImageCountByEventIDParams { get { return s_params_ImageCountByEventID; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ImageCountByEventID {
+            public readonly string eventId = "eventId";
+        }
+        static readonly ActionParamsClass_ImagesByEventIDOrderDescTakeX s_params_ImagesByEventIDOrderDescTakeX = new ActionParamsClass_ImagesByEventIDOrderDescTakeX();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ImagesByEventIDOrderDescTakeX ImagesByEventIDOrderDescTakeXParams { get { return s_params_ImagesByEventIDOrderDescTakeX; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ImagesByEventIDOrderDescTakeX {
+            public readonly string eventID = "eventID";
+            public readonly string numberToReturn = "numberToReturn";
+        }
+        static readonly ActionParamsClass_TopImagesByEventID s_params_TopImagesByEventID = new ActionParamsClass_TopImagesByEventID();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_TopImagesByEventID TopImagesByEventIDParams { get { return s_params_TopImagesByEventID; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_TopImagesByEventID {
+            public readonly string eventID = "eventID";
+            public readonly string numberToReturn = "numberToReturn";
+        }
+        static readonly ActionParamsClass_NewestPhotosByEventID s_params_NewestPhotosByEventID = new ActionParamsClass_NewestPhotosByEventID();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_NewestPhotosByEventID NewestPhotosByEventIDParams { get { return s_params_NewestPhotosByEventID; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_NewestPhotosByEventID {
+            public readonly string eventID = "eventID";
+            public readonly string numberToReturn = "numberToReturn";
+        }
+        static readonly ActionParamsClass_TopPhotosAndTweetByEventID s_params_TopPhotosAndTweetByEventID = new ActionParamsClass_TopPhotosAndTweetByEventID();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_TopPhotosAndTweetByEventID TopPhotosAndTweetByEventIDParams { get { return s_params_TopPhotosAndTweetByEventID; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_TopPhotosAndTweetByEventID {
+            public readonly string eventID = "eventID";
+            public readonly string numberToReturn = "numberToReturn";
+        }
+        static readonly ActionParamsClass_ImagesByEventPaged s_params_ImagesByEventPaged = new ActionParamsClass_ImagesByEventPaged();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ImagesByEventPaged ImagesByEventPagedParams { get { return s_params_ImagesByEventPaged; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ImagesByEventPaged {
+            public readonly string eventID = "eventID";
+            public readonly string page = "page";
+            public readonly string count = "count";
+        }
+        static readonly ActionParamsClass_EventsByCategoryID s_params_EventsByCategoryID = new ActionParamsClass_EventsByCategoryID();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_EventsByCategoryID EventsByCategoryIDParams { get { return s_params_EventsByCategoryID; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_EventsByCategoryID {
+            public readonly string categoryId = "categoryId";
+            public readonly string page = "page";
+            public readonly string count = "count";
         }
         static readonly ViewNames s_views = new ViewNames();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -119,8 +320,111 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             return callInfo;
         }
 
+        public override System.Web.Mvc.JsonResult TrendingEvents() {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.TrendingEvents);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult SearchEvents(string searchTerm) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.SearchEvents);
+            callInfo.RouteValueDictionary.Add("searchTerm", searchTerm);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult FeaturedEvents() {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.FeaturedEvents);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult SearchInEvent(int eventId, string searchTerm) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.SearchInEvent);
+            callInfo.RouteValueDictionary.Add("eventId", eventId);
+            callInfo.RouteValueDictionary.Add("searchTerm", searchTerm);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult Tweets(int eventId, int page, int count) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.Tweets);
+            callInfo.RouteValueDictionary.Add("eventId", eventId);
+            callInfo.RouteValueDictionary.Add("page", page);
+            callInfo.RouteValueDictionary.Add("count", count);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult Top10Tweeters(int eventId) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.Top10Tweeters);
+            callInfo.RouteValueDictionary.Add("eventId", eventId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult TweetsByImageID(int imageId, int eventId, int page, int count) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.TweetsByImageID);
+            callInfo.RouteValueDictionary.Add("imageId", imageId);
+            callInfo.RouteValueDictionary.Add("eventId", eventId);
+            callInfo.RouteValueDictionary.Add("page", page);
+            callInfo.RouteValueDictionary.Add("count", count);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult TweetCountByImageID(int imageId, int eventId) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.TweetCountByImageID);
+            callInfo.RouteValueDictionary.Add("imageId", imageId);
+            callInfo.RouteValueDictionary.Add("eventId", eventId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult ImageCountByEventID(int eventId) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.ImageCountByEventID);
+            callInfo.RouteValueDictionary.Add("eventId", eventId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult ImagesByEventIDOrderDescTakeX(int eventID, int numberToReturn) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.ImagesByEventIDOrderDescTakeX);
+            callInfo.RouteValueDictionary.Add("eventID", eventID);
+            callInfo.RouteValueDictionary.Add("numberToReturn", numberToReturn);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult TopImagesByEventID(int eventID, int numberToReturn) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.TopImagesByEventID);
+            callInfo.RouteValueDictionary.Add("eventID", eventID);
+            callInfo.RouteValueDictionary.Add("numberToReturn", numberToReturn);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult NewestPhotosByEventID(int eventID, int numberToReturn) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.NewestPhotosByEventID);
+            callInfo.RouteValueDictionary.Add("eventID", eventID);
+            callInfo.RouteValueDictionary.Add("numberToReturn", numberToReturn);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult TopPhotosAndTweetByEventID(int eventID, int numberToReturn) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.TopPhotosAndTweetByEventID);
+            callInfo.RouteValueDictionary.Add("eventID", eventID);
+            callInfo.RouteValueDictionary.Add("numberToReturn", numberToReturn);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult ImagesByEventPaged(int eventID, int page, int count) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.ImagesByEventPaged);
+            callInfo.RouteValueDictionary.Add("eventID", eventID);
+            callInfo.RouteValueDictionary.Add("page", page);
+            callInfo.RouteValueDictionary.Add("count", count);
+            return callInfo;
+        }
+
         public override System.Web.Mvc.JsonResult Categories() {
             var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.Categories);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult EventsByCategoryID(int categoryId, int page, int count) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.EventsByCategoryID);
+            callInfo.RouteValueDictionary.Add("categoryId", categoryId);
+            callInfo.RouteValueDictionary.Add("page", page);
+            callInfo.RouteValueDictionary.Add("count", count);
             return callInfo;
         }
 

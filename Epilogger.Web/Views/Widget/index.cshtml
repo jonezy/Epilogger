@@ -6,6 +6,17 @@
     
 }
 
+<style>
+    #widgetMenu .current a, #widgetMenu li:hover > a {
+        background: #@Model.ButtonBackgroundColor !important;
+        color: #@Model.ButtonTextColor !important;
+    }
+
+    #widgetMenu a {
+        color: #@Model.ButtonBackgroundColor !important;
+    }
+</style>
+
 @*<div style="@string.Format("height:{0}px; width: {1}px;", @Model.height, @Model.width); overflow: hidden;">*@
 @if (Model.width==100 && Model.height==100)
 {
@@ -60,6 +71,6 @@ else
 
 
     </div>
-</div>
+
 
 

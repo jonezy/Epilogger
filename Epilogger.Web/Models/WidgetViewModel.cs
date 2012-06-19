@@ -22,5 +22,8 @@ namespace Epilogger.Web.Models
         public IEnumerable<Epilogger.Data.Image> Images { get; set; }
         public IEnumerable<Epilogger.Data.CheckIn> CheckIns { get; set; }
 
+        public string ButtonBackgroundColor { get; set; }
+        public string ButtonTextColor { get; set; }
+
     }
 }

@@ -52,5 +52,16 @@ namespace Epilogger.Web.Areas.Admin.Controllers {
             return View(model);
         }
 
+        //public ActionResult DrawChart()
+        //{
+        //    var chart = new Chart(width: 300, height: 200)
+        //        .AddSeries(
+        //                    chartType: "bar",
+        //                    xValue: new[] { "10 Records", "20 Records", "30 Records", "40 Records" },
+        //                    yValues: new[] { "50", "60", "78", "80" })
+        //                    .GetBytes("png");
+        //    return File(chart, "image/bytes");
+        //}
+
     }
 }

@@ -70,7 +70,7 @@ namespace Epilogger.Web.Controllers
         // GET: /Widget/
         [CacheFilter]
         [CompressFilter]
-        public virtual ActionResult Index(string id, string width, string height)
+        public virtual ActionResult Index(string id, string width, string height, string btnbc, string btntc)
         {
             var requestedEvent = _es.FindBySlug(id);
             var model = Mapper.Map<Event, WidgetViewModel>(requestedEvent);
@@ -100,6 +100,11 @@ namespace Epilogger.Web.Controllers
                 model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, 22, FromDateTime(),
                                                                ToDateTime());
 
+
+            //Pull out some customization settings from the qs
+            model.ButtonBackgroundColor = btnbc;
+            model.ButtonTextColor = btntc;
+            
             return View(model);
         }
 

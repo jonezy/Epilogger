@@ -48,6 +48,7 @@ namespace T4MVC {
         public readonly string Name = "Admin";
         public Epilogger.Web.Areas.Admin.Controllers.EmailController Email = new Epilogger.Web.Areas.Admin.Controllers.T4MVC_EmailController();
         public Epilogger.Web.Areas.Admin.Controllers.HomeController Home = new Epilogger.Web.Areas.Admin.Controllers.T4MVC_HomeController();
+        public Epilogger.Web.Areas.Admin.Controllers.ManageApiController ManageApi = new Epilogger.Web.Areas.Admin.Controllers.T4MVC_ManageApiController();
         public T4MVC.Admin.SharedController Shared = new T4MVC.Admin.SharedController();
     }
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -587,6 +588,7 @@ namespace Links {
                 public static readonly string bird_16_blue_png = Url("bird_16_blue.png");
                 public static readonly string blog_png = Url("blog.png");
                 public static readonly string BrowseBullet_png = Url("BrowseBullet.png");
+                public static readonly string btn_search_home_png = Url("btn-search-home.png");
                 public static readonly string bubble_png = Url("bubble.png");
                 public static readonly string cameraIcon_png = Url("cameraIcon.png");
                 public static readonly string Checkmark_png = Url("Checkmark.png");
@@ -600,6 +602,8 @@ namespace Links {
                 public static readonly string event_toolbar_ov_png = Url("event-toolbar-ov.png");
                 public static readonly string event_toolbar_png = Url("event-toolbar.png");
                 public static readonly string facebook_png = Url("facebook.png");
+                public static readonly string feature_bg_png = Url("feature-bg.png");
+                public static readonly string featuredPhotoSlider_png = Url("featuredPhotoSlider.png");
                 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
                 public static class for_buttons {
                     private const string URLPATH = "~/Public/images/icons/for-buttons";
@@ -615,6 +619,7 @@ namespace Links {
             
                 public static readonly string header_person_png = Url("header-person.png");
                 public static readonly string hovernub_png = Url("hovernub.png");
+                public static readonly string icon_trending_png = Url("icon-trending.png");
                 public static readonly string less_png = Url("less.png");
                 public static readonly string more_png = Url("more.png");
                 public static readonly string not_png = Url("not.png");
@@ -622,8 +627,11 @@ namespace Links {
                 public static readonly string pencil_png = Url("pencil.png");
                 public static readonly string popUpNub_png = Url("popUpNub.png");
                 public static readonly string profile_eventlist_png = Url("profile-eventlist.png");
+                public static readonly string ribbon_featured_png = Url("ribbon-featured.png");
                 public static readonly string SearchPlainText_png = Url("SearchPlainText.png");
                 public static readonly string sign_in_with_twitter_d_png = Url("sign-in-with-twitter-d.png");
+                public static readonly string slider_active_png = Url("slider-active.png");
+                public static readonly string slider_inactive_png = Url("slider-inactive.png");
                 public static readonly string star_png = Url("star.png");
                 public static readonly string SubscribedCheck_png = Url("SubscribedCheck.png");
                 public static readonly string Tab_EventInfo_png = Url("Tab-EventInfo.png");
@@ -650,6 +658,15 @@ namespace Links {
                 public static readonly string source_inactive_png = Url("source_inactive.png");
                 public static readonly string upload_png = Url("upload.png");
                 public static readonly string yourcomputer_png = Url("yourcomputer.png");
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class iWeb {
+                private const string URLPATH = "~/Public/images/iWeb";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string powered_by_iweb_dark_bkgnd_png = Url("powered_by_iweb_dark_bkgnd.png");
+                public static readonly string powered_by_iweb_light_bkgnd_png = Url("powered_by_iweb_light_bkgnd.png");
             }
         
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -33584,6 +33601,8 @@ namespace Links {
             }
         
             public static readonly string head_load_min_js = Url("head.load.min.js");
+            public static readonly string HomePage_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/HomePage.min.js") ? Url("HomePage.min.js") : Url("HomePage.js");
+                          
             public static readonly string html5shiv_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/html5shiv.min.js") ? Url("html5shiv.min.js") : Url("html5shiv.js");
                           
             public static readonly string jquery_1_6_2_min_js = Url("jquery-1.6.2.min.js");
