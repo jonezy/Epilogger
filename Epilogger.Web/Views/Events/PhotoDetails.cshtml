@@ -1,4 +1,5 @@
-﻿@using Epilogger.Data
+﻿@using Epilogger.Common
+@using Epilogger.Data
 @model Epilogger.Web.Models.PhotoDetailsViewModel
 
 @{
@@ -77,7 +78,22 @@
     </div>
     
     <div id="photorightColumn">
-        <img src="@Model.Image.Fullsize" alt="" />
+        @if (Model.Image.MediaType == (short)MQ.Messages.EventMediaType.Photo)
+        {
+            <img src="@Model.Image.Fullsize" alt="" />
+        }
+        else if (Model.Image.MediaType == (short)MQ.Messages.EventMediaType.YoutubeVideo)
+        {
+            <iframe width="420" height="315" src="http://youtube.com/embed/@Model.Image.Thumb"></iframe>
+        }
+        else if (Model.Image.MediaType == (short)MQ.Messages.EventMediaType.VimeoVideo)
+        {
+            <iframe width="500" height="281" src="http://player.vimeo.com/video/@Model.Image.Thumb"></iframe>
+        }
+        else if (Model.Image.MediaType == (short)MQ.Messages.EventMediaType.KeekVideo)
+        {
+            <iframe width="480" height="390" src="http://www.keek.com/embed/@Model.Image.Thumb"></iframe>
+        }
         
         <div class="spacer"></div>
         
