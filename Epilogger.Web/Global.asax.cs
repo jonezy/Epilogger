@@ -536,6 +536,8 @@ namespace Epilogger.Web {
             Mapper.CreateMap<Tweeter, ApiTweeter>();
             Mapper.CreateMap<Image, ApiImage>();
             Mapper.CreateMap<TopImageAndTweet, ApiTopImageAndTweet>();
+            Mapper.CreateMap<CheckIn, ApiCheckIn>();
+            Mapper.CreateMap<User, ApiUser>();
             
             
 

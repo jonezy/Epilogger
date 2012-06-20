@@ -27,6 +27,8 @@ namespace Epilogger.Web.Areas.Api.Controllers
         readonly ICategoryManager _categoryManager;
         readonly ITweetManager _tweetManager;
         readonly IImageManager _imageManager;
+        readonly ICheckInManager _checkinManager;
+        readonly IUserManager _userManager;
 
         public ApiEventsController()
         {
@@ -34,6 +36,8 @@ namespace Epilogger.Web.Areas.Api.Controllers
             _categoryManager = new CategoryManager();
             _tweetManager = new TweetManager();
             _imageManager = new ImageManager();
+            _checkinManager = new CheckInManager();
+            _userManager = new UserManager();
         }
         #endregion
 
@@ -177,6 +181,16 @@ namespace Epilogger.Web.Areas.Api.Controllers
 
         #region CheckIns
 
+            public virtual JsonResult FindCheckInCountByEventID(int eventID)
+            {
+                return Json(_checkinManager.FindCheckInCountByEventID(eventID), JsonRequestBehavior.AllowGet);
+            }
+
+            public virtual JsonResult FindByEventIDPaged(int eventID, int page, int count)
+            {
+                return Json(_checkinManager.FindCheckInsByEventIDPaged(eventID, page, count), JsonRequestBehavior.AllowGet);
+            }
+        
 
         #endregion
 
@@ -184,6 +198,22 @@ namespace Epilogger.Web.Areas.Api.Controllers
         //My Events
 
             //Login
+
+
+            public virtual JsonResult GetUserByID(Guid userId)
+            {
+                return Json(_userManager.GetUserByID(userId), JsonRequestBehavior.AllowGet);
+            }
+
+            public virtual JsonResult GetUserByUsername(string userName)
+            {
+                return Json(_userManager.GetUserByUsername(userName), JsonRequestBehavior.AllowGet);
+            }
+
+            public virtual JsonResult GetUserByEmail(string email)
+            {
+                return Json(_userManager.GetUserByEmail(email), JsonRequestBehavior.AllowGet);
+            }
 
         #endregion
 

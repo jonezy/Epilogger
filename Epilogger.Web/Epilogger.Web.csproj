@@ -207,7 +207,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Data\IImage.cs" />
     <Compile Include="App_Data\StoredProcedures.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -229,6 +228,7 @@
     <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
     <Compile Include="Areas\Api\Controllers\ApiEventsController.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiCategory.cs" />
+    <Compile Include="Areas\Api\Models\Classes\ApiCheckIn.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiEvent.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiImage.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiSearchInEvent.cs" />
@@ -236,6 +236,11 @@
     <Compile Include="Areas\Api\Models\Classes\ApiTweet.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiTweeter.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiTopImageAndTweet.cs" />
+    <Compile Include="Areas\Api\Models\Classes\ApiUser.cs" />
+    <Compile Include="Areas\Api\Models\IUserManager.cs" />
+    <Compile Include="Areas\Api\Models\UserManager.cs" />
+    <Compile Include="Areas\Api\Models\ICheckInManager.cs" />
+    <Compile Include="Areas\Api\Models\CheckInManager.cs" />
     <Compile Include="Areas\Api\Models\IImageManager.cs" />
     <Compile Include="Areas\Api\Models\ImageManager.cs" />
     <Compile Include="Areas\Api\Models\ITweetManager.cs" />

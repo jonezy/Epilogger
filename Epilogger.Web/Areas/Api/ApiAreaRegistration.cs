@@ -130,6 +130,40 @@ namespace Epilogger.Web.Areas.Api
             );
             
 
+            //* CheckIns *
+            context.MapRoute(
+                "FindCheckInCountByEventID",
+                "Api/CheckIns/{eventid}/count",
+                new { controller = "ApiEvents", action = "FindCheckInCountByEventID", eventid = UrlParameter.Optional }
+            );
+
+            context.MapRoute(
+                "FindByEventIDPaged",
+                "Api/CheckIns/{eventid}/{page}/{count}",
+                new { controller = "ApiEvents", action = "FindByEventIDPaged", eventid = UrlParameter.Optional, page = UrlParameter.Optional, count = UrlParameter.Optional }
+            );
+
+            /* User */
+            context.MapRoute(
+                "GetUserByID",
+                "Api/users/user/{userid}",
+                new { controller = "ApiEvents", action = "GetUserByID", userid = UrlParameter.Optional }
+            );
+
+            context.MapRoute(
+                "GetUserByUsername",
+                "Api/users/user/byname/{userName}",
+                new { controller = "ApiEvents", action = "GetUserByUsername", userName = UrlParameter.Optional }
+            );
+
+            context.MapRoute(
+                "GetUserByEmail",
+                "Api/users/user/byemail/{email}",
+                new { controller = "ApiEvents", action = "GetUserByEmail", email = UrlParameter.Optional }
+            );
+
+
+
             /*
              * 
              * 
