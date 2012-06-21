@@ -418,6 +418,7 @@
     <Content Include="Public\css\cbimages\controls.png" />
     <Content Include="Public\css\cbimages\loading.gif" />
     <Content Include="Public\css\colorbox.css" />
+    <Content Include="Public\css\video.css" />
     <Content Include="Public\css\widget.css" />
     <Content Include="Public\css\sadiehawkins.css" />
     <Content Include="Public\css\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -637,6 +638,7 @@
     <Content Include="Public\images\widget\epl-logo.png" />
     <Content Include="Public\images\widget\refresh.png" />
     <Content Include="Public\images\widget\top10.png" />
+    <Content Include="Public\images\video-play.jpg" />
     <Content Include="Public\js\AnyTime\anytimec.css" />
     <Content Include="Public\js\AnyTime\anytimec.js" />
     <Content Include="Public\js\bootstrap-Image-Gallery\.gitignore" />

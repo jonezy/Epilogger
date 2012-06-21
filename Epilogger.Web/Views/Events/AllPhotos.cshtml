@@ -44,24 +44,34 @@
         var thePath = image.EventID + "/" + image.ID;
         
         var fullSizeUrl = image.Fullsize;
+        var isVideo = false;
         if (image.MediaType == (short)MQ.Messages.EventMediaType.YoutubeVideo)
         {
             fullSizeUrl = "http://youtube.com/watch?v=" + image.Thumb;
+            isVideo = true;
         }
         else if (image.MediaType == (short)MQ.Messages.EventMediaType.VimeoVideo)
         {
             fullSizeUrl = "http://vimeo.com/" + image.Thumb;
+            isVideo = true;
         }
         else if (image.MediaType == (short)MQ.Messages.EventMediaType.KeekVideo)
         {
             fullSizeUrl = string.Format("http://www.keek.com/embed/{0}?iframe=true", image.Thumb);
+            isVideo = true;
         }
         
         <div id="TopPhoto@(image.ID)" class="topPhotosBar">
             <div class="topPhoto">
-                <a href="@fullSizeUrl" rel="EPLPhoto[topphotos]" photoid="@thePath" title="" id="@image.ID">
-                    <img src="@image.Fullsize" width="415" border="0" alt="" />
-                </a>
+                <div class="videothumbnailcontainer">
+                    <a href="@fullSizeUrl" rel="EPLPhoto[topphotos]" photoid="@thePath" title="" id="@image.ID">
+                        <img src="@image.Fullsize" width="415" border="0" alt="" />
+                        @if (isVideo)
+                        {
+                            <img src="@Links.Public.images.video_play_jpg" class="videothumbnail2"/>
+                        }
+                    </a>
+                </div>
             </div>
             <div class="topPhotoComments">
             </div>

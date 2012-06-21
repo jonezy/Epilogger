@@ -111,23 +111,33 @@
                 var thePath = item.Image.EventID + "/" + item.Image.ID;
 
                 var fullSizeUrl = item.Image.Fullsize;
+                var isVideo = false;
                 if (item.Image.MediaType == (short)MQ.Messages.EventMediaType.YoutubeVideo)
                 {
                     fullSizeUrl = string.Format("http://youtube.com/watch?v={0}", item.Image.Thumb);
+                    isVideo = true;
                 }
                 else if (item.Image.MediaType == (short)MQ.Messages.EventMediaType.VimeoVideo)
                 {
                     fullSizeUrl = string.Format("http://vimeo.com/{0}", item.Image.Thumb);
+                    isVideo = true;
                 }
                 else if (item.Image.MediaType == (short)MQ.Messages.EventMediaType.KeekVideo)
                 {
                     fullSizeUrl = string.Format("http://www.keek.com/embed/{0}?iframe=true", item.Image.Thumb);
+                    isVideo = true;
                 }
                 
                 <div class="withcomment newPhotoupdates" id="photo-@item.Image.ID">
-                    <a href="@fullSizeUrl" rel="EPLPhoto[latestphotos]" photoid="@thePath" title="" id="@item.Image.ID">
-                        <img src="@item.Image.Fullsize" width="250" border="0" alt="" />
-                    </a>
+                    <div class="videothumbnailcontainer">
+                        <a href="@fullSizeUrl" rel="EPLPhoto[latestphotos]" photoid="@thePath" title="" id="@item.Image.ID">
+                            <img src="@item.Image.Fullsize" width="250" border="0" alt="" />
+                            @if (isVideo)
+                            {
+                                <img src="@Links.Public.images.video_play_jpg" class="videothumbnail3"/>
+                            }
+                        </a>
+                    </div>
                 </div>
                 <div class="clear"></div>
             }

@@ -29,6 +29,7 @@
       <resource path="~/Public/js/TimePicker/timePicker.css" />
       <resource path="~/Public/js/jquery.UI.DatePicker/css/smoothness/jquery-ui-1.8.17.custom.css" />
       <resource path="~/Public/js/msdropdown/dd.css" />
+      <resource path="~/Public/css/video.css" />
     </resourceSet>
 
     <resourceSet name="siteJs" type="js">
