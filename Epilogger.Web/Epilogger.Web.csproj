@@ -237,6 +237,9 @@
     <Compile Include="Areas\Api\Models\Classes\ApiTweeter.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiTopImageAndTweet.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiUser.cs" />
+    <Compile Include="Areas\Api\Models\Classes\ApiVenue.cs" />
+    <Compile Include="Areas\Api\Models\VenueManager.cs" />
+    <Compile Include="Areas\Api\Models\IVenueManager.cs" />
     <Compile Include="Areas\Api\Models\IUserManager.cs" />
     <Compile Include="Areas\Api\Models\UserManager.cs" />
     <Compile Include="Areas\Api\Models\ICheckInManager.cs" />
@@ -296,6 +299,7 @@
     <Compile Include="Core\Helpers\HtmlHelpers.cs" />
     <Compile Include="Core\Helpers\PasswordHelpers.cs" />
     <Compile Include="Core\Helpers\TwitterHelper.cs" />
+    <Compile Include="Core\Resolvers\UserProfilePictureResolver.cs" />
     <Compile Include="Core\Resolvers\UserTimezonesResolver.cs" />
     <Compile Include="Core\Resolvers\TimezonesResolver.cs" />
     <Compile Include="Core\Resolvers\IsUserSubscribedToEventResolver.cs" />

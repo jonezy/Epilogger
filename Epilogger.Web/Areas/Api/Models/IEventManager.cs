@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Epilogger.Data;
+using Epilogger.Web.Areas.Api.Models.Classes;
 
 namespace Epilogger.Web.Areas.Api.Models
 {
@@ -14,6 +15,7 @@ namespace Epilogger.Web.Areas.Api.Models
         List<ApiEvent> SearchEvents(string searchTerm);
         List<ApiEvent> GetFeaturedEvents();
         List<ApiEvent> EventsByCategoyIdPaged(int categoryId, int page, int count);
+        List<ApiSearchInEvent> SearchInEvent(int eventId, string searchTerm);
         bool Delete(int id);
     }
 }

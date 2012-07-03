@@ -4,6 +4,7 @@ using System.Data.SqlTypes;
 using System.Linq;
 using AutoMapper;
 using Epilogger.Data;
+using Epilogger.Web.Areas.Api.Models.Classes;
 using Epilogger.Web.Models;
 
 namespace Epilogger.Web.Areas.Api.Models
@@ -76,10 +77,10 @@ namespace Epilogger.Web.Areas.Api.Models
             return Mapper.Map<List<Event>, List<ApiEvent>>(_es.GetEventsByCategoryIDDescPaged(categoryId, page, count));
         }
 
-        public List<ApiEvent> SearchInEvent(int eventId, string searchTerm)
+        public List<ApiSearchInEvent> SearchInEvent(int eventId, string searchTerm)
         {
 
-            return Mapper.Map<List<SearchInEventModel>, List<ApiEvent>>(_es.SearchInEvent(eventId, searchTerm, (DateTime)SqlDateTime.MinValue, (DateTime)SqlDateTime.MaxValue));
+            return Mapper.Map<List<SearchInEventModel>, List<ApiSearchInEvent>>(_es.SearchInEvent(eventId, searchTerm, (DateTime)SqlDateTime.MinValue, (DateTime)SqlDateTime.MaxValue));
         }
         //SearchInEvent(int EventID, string SearchTerm, DateTime FromDateTime, DateTime ToDateTime)
 

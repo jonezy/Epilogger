@@ -13,5 +13,6 @@ namespace Epilogger.Web.Areas.Api.Models.Classes
         public int? UserID { get; set; }
         public DateTime CheckInDateTime { get; set; }
         public string FourSquareCheckInURL { get; set; }
+        public string ProfilePicture { get; set; }
     }
 }

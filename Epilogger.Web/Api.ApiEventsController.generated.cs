@@ -109,6 +109,31 @@ namespace Epilogger.Web.Areas.Api.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult FindCheckInCountByEventID() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.FindCheckInCountByEventID);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult FindByEventIDPaged() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.FindByEventIDPaged);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult GetUserByID() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.GetUserByID);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult GetUserByUsername() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.GetUserByUsername);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult GetUserByEmail() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.GetUserByEmail);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.JsonResult EventsByCategoryID() {
             return new T4MVC_JsonResult(Area, Name, ActionNames.EventsByCategoryID);
         }
@@ -143,6 +168,11 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             public readonly string NewestPhotosByEventID = "NewestPhotosByEventID";
             public readonly string TopPhotosAndTweetByEventID = "TopPhotosAndTweetByEventID";
             public readonly string ImagesByEventPaged = "ImagesByEventPaged";
+            public readonly string FindCheckInCountByEventID = "FindCheckInCountByEventID";
+            public readonly string FindByEventIDPaged = "FindByEventIDPaged";
+            public readonly string GetUserByID = "GetUserByID";
+            public readonly string GetUserByUsername = "GetUserByUsername";
+            public readonly string GetUserByEmail = "GetUserByEmail";
             public readonly string Categories = "Categories";
             public readonly string EventsByCategoryID = "EventsByCategoryID";
         }
@@ -165,6 +195,11 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             public const string NewestPhotosByEventID = "NewestPhotosByEventID";
             public const string TopPhotosAndTweetByEventID = "TopPhotosAndTweetByEventID";
             public const string ImagesByEventPaged = "ImagesByEventPaged";
+            public const string FindCheckInCountByEventID = "FindCheckInCountByEventID";
+            public const string FindByEventIDPaged = "FindByEventIDPaged";
+            public const string GetUserByID = "GetUserByID";
+            public const string GetUserByUsername = "GetUserByUsername";
+            public const string GetUserByEmail = "GetUserByEmail";
             public const string Categories = "Categories";
             public const string EventsByCategoryID = "EventsByCategoryID";
         }
@@ -283,6 +318,43 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             public readonly string eventID = "eventID";
             public readonly string page = "page";
             public readonly string count = "count";
+        }
+        static readonly ActionParamsClass_FindCheckInCountByEventID s_params_FindCheckInCountByEventID = new ActionParamsClass_FindCheckInCountByEventID();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_FindCheckInCountByEventID FindCheckInCountByEventIDParams { get { return s_params_FindCheckInCountByEventID; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_FindCheckInCountByEventID {
+            public readonly string eventID = "eventID";
+        }
+        static readonly ActionParamsClass_FindByEventIDPaged s_params_FindByEventIDPaged = new ActionParamsClass_FindByEventIDPaged();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_FindByEventIDPaged FindByEventIDPagedParams { get { return s_params_FindByEventIDPaged; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_FindByEventIDPaged {
+            public readonly string eventID = "eventID";
+            public readonly string page = "page";
+            public readonly string count = "count";
+        }
+        static readonly ActionParamsClass_GetUserByID s_params_GetUserByID = new ActionParamsClass_GetUserByID();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_GetUserByID GetUserByIDParams { get { return s_params_GetUserByID; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_GetUserByID {
+            public readonly string userId = "userId";
+        }
+        static readonly ActionParamsClass_GetUserByUsername s_params_GetUserByUsername = new ActionParamsClass_GetUserByUsername();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_GetUserByUsername GetUserByUsernameParams { get { return s_params_GetUserByUsername; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_GetUserByUsername {
+            public readonly string userName = "userName";
+        }
+        static readonly ActionParamsClass_GetUserByEmail s_params_GetUserByEmail = new ActionParamsClass_GetUserByEmail();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_GetUserByEmail GetUserByEmailParams { get { return s_params_GetUserByEmail; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_GetUserByEmail {
+            public readonly string email = "email";
         }
         static readonly ActionParamsClass_EventsByCategoryID s_params_EventsByCategoryID = new ActionParamsClass_EventsByCategoryID();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -412,6 +484,38 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             callInfo.RouteValueDictionary.Add("eventID", eventID);
             callInfo.RouteValueDictionary.Add("page", page);
             callInfo.RouteValueDictionary.Add("count", count);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult FindCheckInCountByEventID(int eventID) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.FindCheckInCountByEventID);
+            callInfo.RouteValueDictionary.Add("eventID", eventID);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult FindByEventIDPaged(int eventID, int page, int count) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.FindByEventIDPaged);
+            callInfo.RouteValueDictionary.Add("eventID", eventID);
+            callInfo.RouteValueDictionary.Add("page", page);
+            callInfo.RouteValueDictionary.Add("count", count);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GetUserByID(System.Guid userId) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GetUserByID);
+            callInfo.RouteValueDictionary.Add("userId", userId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GetUserByUsername(string userName) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GetUserByUsername);
+            callInfo.RouteValueDictionary.Add("userName", userName);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GetUserByEmail(string email) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GetUserByEmail);
+            callInfo.RouteValueDictionary.Add("email", email);
             return callInfo;
         }
 

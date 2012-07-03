@@ -29,10 +29,7 @@ namespace Epilogger.Web.Areas.Api.Models
 
         public List<ApiCheckIn> FindCheckInsByEventIDPaged(int eventId, int page, int count)
         {
-            return
-                Mapper.Map<List<CheckIn>, List<ApiCheckIn>>(
-                    _cs.FindByEventIDPaged(eventId, page, count, (DateTime)SqlDateTime.MinValue,
-                                          (DateTime)SqlDateTime.MaxValue).ToList());
+            return Mapper.Map<List<CheckIn>, List<ApiCheckIn>>(_cs.FindByEventIDPaged(eventId, page, count, (DateTime)SqlDateTime.MinValue, (DateTime)SqlDateTime.MaxValue).ToList());
         }
 
     }

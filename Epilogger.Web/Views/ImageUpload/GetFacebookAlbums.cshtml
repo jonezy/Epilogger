@@ -38,10 +38,10 @@
                 return { src: albumCoverUrl, url: addAlbumPhotosUrl, albumname: albumName, count: albumPhotoCount };
             });
 
-            $('#facebookGallery').gallery(galleryImages, false);
+            $('#EPLphotoGallery').gallery(galleryImages, false, true);
 
             parent.resizePopUp('800px', '85%;');
-            $("#facebookGalleryContainer").height($("#uploadPageContainer").height() - 160);
+            $("#EPLphotoGalleryContainer").height($("#uploadPageContainer").height() - 160);
 
             $("#loading").hide();
             $('#albumsContainer').show();
@@ -96,10 +96,10 @@
         <span>After clicking an album you'll be able to select which pictures to upload.</span>
     </div>
 </div>
-<div id="facebookGalleryContainer" style="overflow: auto;"> @*height: 70%; *@
+<div id="EPLphotoGalleryContainer" style="overflow: auto;"> @*height: 70%; *@
     <img src="/Public/images/icons/ajaxWaiting.gif" id="loading" style="display: none;" alt="loading" />
     
-    <ul id="facebookGallery">
+    <ul id="EPLphotoGallery">
     </ul>
     
     @*<table id="gallery">

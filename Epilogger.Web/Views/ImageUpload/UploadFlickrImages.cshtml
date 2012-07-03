@@ -15,13 +15,15 @@
      <script type="text/javascript">
          $(function () {
              $('#uploadLink').click(function (event) {
-                 var photosUrls = $('#gallery').find('img.selectedImage').map(function () { return $(this).attr('src'); });
+                 var photosUrls = $('#EPLphotoGallery').find('div.selectedImage img').map(function () { return $(this).attr('src'); });
+                 //var photosUrls = $('#EPLphotoGallery').find('img.selectedImage').map(function () { return $(this).attr('src'); });
                  if (!photosUrls)
                      alert('Please select some photos');
                  else
                      $.post(window.location,
                         { photosUrls: $.makeArray(photosUrls) },
                         function (data) {
+                            parent.resizePopUp('800px', '370px;');
                             window.location = '@Url.Action(MVC.ImageUpload.ChooseUploadSource())' + '?' + '@MVC.ImageUpload.ChooseUploadSourceParams.status' + '=1';
                             return false;
                         });
@@ -78,20 +80,28 @@
 
                         OAuth.SignatureMethod.sign(message, accessor);
 
+                        $("#loading").show();
                         $.getJSON(message.action, OAuth.getParameterMap(message.parameters), function (data) {
                             var galleryImages = $(data.photos.photo).map(function () {
                                 return { src: this.url_l };
                             });
 
-                            $('#gallery').gallery(galleryImages, true);
+                            $('#EPLphotoGallery').gallery(galleryImages, true, false);
 
-                            $('#photosContainer').show();
+                            parent.resizePopUp('800px', '85%;');
+                            $("#EPLphotoGalleryContainer").height($("#uploadPageContainer").height() - 160);
+
+                            $("#loading").hide();
+                            $('#EPLphotoGallery').show();
+
+
+                            //$('#photosContainer').show();
                         });
                     }
                 );
             }
 
-            
+
         })
     </script>
 }
@@ -116,8 +126,17 @@
     <span>Click photos you want to upload</span>
 </div>
 
-<div id="photosContainer" style="display: none">
+
+<div id="EPLphotoGalleryContainer" style="overflow: auto;"> @*height: 70%; *@
+    <img src="/Public/images/icons/ajaxWaiting.gif" id="loading" style="display: none;" alt="loading" />
+    
+    <ul id="EPLphotoGallery">
+    </ul>
+</div>
+
+
+@*<div id="photosContainer" style="display: none">
     
     <table id="gallery">
     </table>
-</div>
+</div>*@

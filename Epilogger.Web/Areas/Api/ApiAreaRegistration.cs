@@ -39,6 +39,14 @@ namespace Epilogger.Web.Areas.Api
                 new { controller="ApiEvents", action = "Event", id = UrlParameter.Optional }
             );
 
+
+            context.MapRoute(
+                "SearchInEvent",
+                "Api/Events/Event/{eventId}/SearchInEvent/{searchTerm}",
+                new { controller = "ApiEvents", action = "SearchInEvent", eventId = UrlParameter.Optional, searchTerm = UrlParameter.Optional }
+            );
+
+
             context.MapRoute(
                 "ListEvents",
                 "Api/Events/{page}/{count}",
@@ -142,6 +150,20 @@ namespace Epilogger.Web.Areas.Api
                 "Api/CheckIns/{eventid}/{page}/{count}",
                 new { controller = "ApiEvents", action = "FindByEventIDPaged", eventid = UrlParameter.Optional, page = UrlParameter.Optional, count = UrlParameter.Optional }
             );
+
+            //* Venues *
+            context.MapRoute(
+                "FindByVenueID",
+                "Api/Venues/{id}",
+                new { controller = "ApiEvents", action = "GetVenueByID", venueid = UrlParameter.Optional }
+            );
+
+            context.MapRoute(
+                "FindByFoursquareVenueID",
+                "Api/Venues/foursquarevenueid/{foursquareVenueId}", defaults: new { controller = "ApiEvents", action = "GetVenueByFoursquareVenueID", foursquareVenueId = UrlParameter.Optional }
+            );
+
+
 
             /* User */
             context.MapRoute(

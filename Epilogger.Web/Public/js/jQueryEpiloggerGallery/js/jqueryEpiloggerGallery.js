@@ -1,19 +1,21 @@
 ﻿(function ($) {
-    $.fn.gallery = function (images, selectOnClick) {
+    $.fn.gallery = function (images, selectOnClick, showTitles) {
         return this.each(function () {
             var imagesPerColumn = 5; //6
 
             var html = '';
             $(images).each(function () {
                 html += '<li>';
-                html += '<div class="facebookGalleryImg unselectedImage">';
+                html += '<div class="EPLphotoGalleryImg unselectedImage">';
                         if (!selectOnClick)
                             html += '<a href=' + this.url + '>';
 
                         html += '<img width="180" src="' + this.src + '" />';
                     html += '</div>';
 
-                    html += '<div class="facebookGalleryAlbumName">' + this.albumname + '</div>';
+                    if (showTitles)
+                        html += '<div class="EPLphotoGalleryAlbumName">' + this.albumname + '</div>';
+                    
                     if (!selectOnClick)
                         html += '</a>';
 

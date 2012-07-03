@@ -600,42 +600,43 @@ namespace Epilogger.Web.Controllers {
         [HttpPost]
         public virtual ActionResult GetLastPhotosJSON(int Count, string pageLoadTime, int EventID)
         {
-            Dictionary<String, Object> dict = new Dictionary<String, Object>();
+            var dict = new Dictionary<String, Object>();
 
             if (pageLoadTime.Length > 0) {
                 if (pageLoadTime != "undefined") {
                     pageLoadTime = string.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.Parse(pageLoadTime));
 
-                    EpiloggerDB db = _ts.Thedb();
-                    IEnumerable<Image> TheImages = db.Images.Where(t => t.EventID == EventID & t.DateTime > DateTime.Parse(pageLoadTime)).OrderByDescending(t => t.DateTime).Take(Count);
+                    var db = _ts.Thedb();
+                    var theImages = db.Images.Where(t => t.EventID == EventID && t.DateTime > DateTime.Parse(pageLoadTime).AddSeconds(1)).OrderByDescending(t => t.DateTime).Take(Count);
 
-                    StringBuilder HTML = new StringBuilder();
-                    string lastphototime = string.Empty;
-                    bool TheFirst = true;
-                    int RecordCount = 0;
+                    var html = new StringBuilder();
+                    var lastphototime = string.Empty;
+                    var theFirst = true;
+                    var recordCount = 0;
 
-                    foreach (Image TheI in TheImages) {
-                        if (TheFirst) {
-                            lastphototime = string.Format("{0:yyyy-MM-dd HH:mm:ss}", TheI.DateTime);
-                            TheFirst = false;
+                    foreach (var theI in theImages) {
+                        if (theFirst) {
+                            lastphototime = string.Format("{0:yyyy-MM-dd HH:mm:ss}", theI.DateTime);
+                            theFirst = false;
                         }
 
                         //Instead of hard coding the HTML for the images, let's use the template.
-                        var firstOrDefault = TheI.Events.FirstOrDefault(t => t.ID == EventID);
+                        var firstOrDefault = theI.Events.FirstOrDefault(t => t.ID == EventID);
                         var canDelete = firstOrDefault != null && ((firstOrDefault.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator);
 
-                        HTML.Append(RenderRazorViewToString("_ImageTemplate", new Epilogger.Web.Models.ImageTemplateViewModel { CanDelete = canDelete, Image = TheI }));
+                        html.Append(RenderRazorViewToString("_ImageTemplate", new ImageTemplateViewModel { CanDelete = canDelete, Image = theI }));
                         
-                        RecordCount++;
+                        recordCount++;
                     }
 
                     //Return the Dictionary as it's IEnumerable and it creates the correct JSON doc.
-                    dict = new Dictionary<String, Object>();
-
-                    dict.Add("numberofnewphotos", RecordCount);
-                    dict.Add("lastphototime", lastphototime);
-                    dict.Add("photocount", string.Format("{0:#,###}", db.Images.Count(t => t.EventID == EventID)));
-                    dict.Add("html", HTML.ToString());
+                    dict = new Dictionary<String, Object>
+                               {
+                                   {"numberofnewphotos", recordCount},
+                                   {"lastphototime", lastphototime},
+                                   {"photocount", string.Format("{0:#,###}", db.Images.Count(t => t.EventID == EventID))},
+                                   {"html", html.ToString()}
+                               };
                 }
             }
 

@@ -7,7 +7,7 @@ namespace Epilogger.Web.Areas.Api.Models.Classes
 {
     public class ApiSearchInEvent
     {
-        public Epilogger.Data.Tweet Tweet { get; set; }
-        public Epilogger.Data.Image Image { get; set; }
+        public ApiTweet Tweet { get; set; }
+        public ApiImage Image { get; set; }
     }
 }

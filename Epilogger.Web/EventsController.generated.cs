@@ -365,9 +365,9 @@ namespace Epilogger.Web.Controllers {
         public ActionParamsClass_GetLastPhotosJSON GetLastPhotosJSONParams { get { return s_params_GetLastPhotosJSON; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_GetLastPhotosJSON {
-            public readonly string Count = "Count";
+            public readonly string count = "count";
             public readonly string pageLoadTime = "pageLoadTime";
-            public readonly string EventID = "EventID";
+            public readonly string eventID = "eventID";
         }
         static readonly ActionParamsClass_Subscribe s_params_Subscribe = new ActionParamsClass_Subscribe();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -639,11 +639,11 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult GetLastPhotosJSON(int Count, string pageLoadTime, int EventID) {
+        public override System.Web.Mvc.ActionResult GetLastPhotosJSON(int count, string pageLoadTime, int eventID) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.GetLastPhotosJSON);
-            callInfo.RouteValueDictionary.Add("Count", Count);
+            callInfo.RouteValueDictionary.Add("count", count);
             callInfo.RouteValueDictionary.Add("pageLoadTime", pageLoadTime);
-            callInfo.RouteValueDictionary.Add("EventID", EventID);
+            callInfo.RouteValueDictionary.Add("eventID", eventID);
             return callInfo;
         }
 

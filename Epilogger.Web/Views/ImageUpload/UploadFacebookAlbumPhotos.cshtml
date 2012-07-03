@@ -8,7 +8,7 @@
     <script type="text/javascript">
         $(function () {
             $('#uploadLink').click(function (event) {
-                var photosUrls = $('#facebookGallery').find('div.selectedImage img').map(function () { return $(this).attr('src'); });
+                var photosUrls = $('#EPLphotoGallery').find('div.selectedImage img').map(function () { return $(this).attr('src'); });
                 //var photosUrls = $('#facebookGallery').find('img.selectedImage').map(function () { return $(this).attr('src'); });
                 if (!photosUrls)
                     alert('Please select some photos');
@@ -53,10 +53,11 @@
                 return { src: this.source, url: null, albumname: '', count: '' };
             });
 
-            $('#facebookGallery').gallery(galleryImages, true);
-            $("#facebookGalleryContainer").height($("#uploadPageContainer").height() - 160);
+            $('#EPLphotoGallery').gallery(galleryImages, true, true);
+            $("#EPLphotoGalleryContainer").height($("#uploadPageContainer").height() - 160);
 
             $("#loading").hide();
+            $(".EPLphotoGalleryAlbumName").hide();
             $('#photosContainer').show();
         });
     };
@@ -109,10 +110,10 @@
     <table id="gallery">
     </table>
 </div>*@
-<div id="facebookGalleryContainer" style="overflow: auto;" class=""> @*height: 70%; *@
+<div id="EPLphotoGalleryContainer" style="overflow: auto;" class=""> @*height: 70%; *@
     <img src="/Public/images/icons/ajaxWaiting.gif" id="loading" style="display: none;" alt="loading" />
 
-    <ul id="facebookGallery">
+    <ul id="EPLphotoGallery">
     </ul>
 
 </div>

@@ -29,6 +29,7 @@ namespace Epilogger.Web.Areas.Api.Controllers
         readonly IImageManager _imageManager;
         readonly ICheckInManager _checkinManager;
         readonly IUserManager _userManager;
+        readonly IVenueManager _venueManager;
 
         public ApiEventsController()
         {
@@ -38,6 +39,7 @@ namespace Epilogger.Web.Areas.Api.Controllers
             _imageManager = new ImageManager();
             _checkinManager = new CheckInManager();
             _userManager = new UserManager();
+            _venueManager = new VenueManager();
         }
         #endregion
 
@@ -105,7 +107,7 @@ namespace Epilogger.Web.Areas.Api.Controllers
         [HttpGet, HmacAuthorization]
         public virtual JsonResult SearchInEvent(int eventId, string searchTerm)
         {
-            var model = _eventManager.GetFeaturedEvents();
+            var model = _eventManager.SearchInEvent(eventId, searchTerm);
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
@@ -240,7 +242,20 @@ namespace Epilogger.Web.Areas.Api.Controllers
 
         #endregion
 
+        #region Venue
 
+            public virtual JsonResult GetVenueByID(int id)
+            {
+                return Json(_venueManager.FindByID(id), JsonRequestBehavior.AllowGet);
+            }
+
+            public virtual JsonResult GetVenueByFoursquareVenueID(string foursquareVenueId)
+            {
+                return Json(_venueManager.FindByFourSquareVenueID(foursquareVenueId), JsonRequestBehavior.AllowGet);
+            }
+
+
+        #endregion
 
 
         //NOT IMPLIMENTED

@@ -75,7 +75,7 @@ jQuery(function ($) {
 
                 if (newPhotos.lastphototime != '') {
                     photoPageLoadTime = newPhotos.lastphototime;
-
+                    
                     if (photoIsFirstFrontPage && (typeof newPhotos.html != "undefined")) {
                         $("#photosvideos div.withcomment:first").before(newPhotos.html);
                         var PhotosnewUpdatesLi = $("#photosvideos div.newPhotoupdates");
@@ -118,7 +118,11 @@ jQuery(function ($) {
                 //Turns the Timer back on after the new Posts have been loaded.
                 toggleUpdates('unewphotos', 'on');
 
-            }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+//                alert(xhr.status);
+//                alert(thrownError);
+            }  
         });
     }
 
@@ -132,7 +136,7 @@ jQuery(function ($) {
             case "unewposts": if (newStatus == 'on') { getPostsUpdate = setInterval(getPosts, updateRate); }
                 else { clearInterval(getPostsUpdate); getPostsUpdate = '0'; }
                 break;
-            case "unewphotos": if (newStatus == 'on') { getPhotosUpdate = setInterval(getPhotos, updateRate); }
+            case "unewphotos": if (newStatus == 'on') { getPhotosUpdate = setInterval(getPhotos, photoUpdateRate); }
                 else { clearInterval(getPhotosUpdate); getPhotosUpdate = '0'; }
                 break;
         }

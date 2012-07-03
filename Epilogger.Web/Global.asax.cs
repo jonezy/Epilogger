@@ -536,8 +536,12 @@ namespace Epilogger.Web {
             Mapper.CreateMap<Tweeter, ApiTweeter>();
             Mapper.CreateMap<Image, ApiImage>();
             Mapper.CreateMap<TopImageAndTweet, ApiTopImageAndTweet>();
-            Mapper.CreateMap<CheckIn, ApiCheckIn>();
+            Mapper.CreateMap<CheckIn, ApiCheckIn>()
+                .ForMember(dest => dest.ProfilePicture, opt => opt.MapFrom(src => src.Tweets.FirstOrDefault().ProfileImageURL));
+
             Mapper.CreateMap<User, ApiUser>();
+            Mapper.CreateMap<Venue, ApiVenue>();
+            Mapper.CreateMap<SearchInEventModel, ApiSearchInEvent>();
             
             
 
