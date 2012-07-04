@@ -365,6 +365,7 @@
     <Compile Include="Models\GetFacebookAlbumsViewModel.cs" />
     <Compile Include="Models\HomepageFeaturedEventsViewModel.cs" />
     <Compile Include="Models\ImageCommentViewModel.cs" />
+    <Compile Include="Models\LiveModeViewModel.cs" />
     <Compile Include="Models\PhotoDetailsViewModel.cs" />
     <Compile Include="Models\TweetReplyViewModel.cs" />
     <Compile Include="Models\UploadFacebookAlbumPhotosViewModel.cs" />
@@ -446,6 +447,7 @@
     <Content Include="Public\css\cbimages\controls.png" />
     <Content Include="Public\css\cbimages\loading.gif" />
     <Content Include="Public\css\colorbox.css" />
+    <Content Include="Public\css\livemode-4x3.css" />
     <Content Include="Public\css\widget.css" />
     <Content Include="Public\css\sadiehawkins.css" />
     <Content Include="Public\css\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -639,6 +641,20 @@
     <Content Include="Public\images\jaggie-icons\hottest-events-media.gif" />
     <Content Include="Public\images\jaggie-icons\hottest-events-twitter.gif" />
     <Content Include="Public\images\linebg.png" />
+    <Content Include="Public\images\livemode\bg-noise.png" />
+    <Content Include="Public\images\livemode\client\logo.png" />
+    <Content Include="Public\images\livemode\client\photobig1.png" />
+    <Content Include="Public\images\livemode\client\photosmall1.png" />
+    <Content Include="Public\images\livemode\client\sponsor1.png" />
+    <Content Include="Public\images\livemode\client\sponsor2.png" />
+    <Content Include="Public\images\livemode\client\tweeter1.png" />
+    <Content Include="Public\images\livemode\client\tweeter2.png" />
+    <Content Include="Public\images\livemode\icon-numpeople.png" />
+    <Content Include="Public\images\livemode\icon-numphotos.png" />
+    <Content Include="Public\images\livemode\icon-numtweets.png" />
+    <Content Include="Public\images\livemode\icon-retweet.png" />
+    <Content Include="Public\images\livemode\logo-epl.png" />
+    <Content Include="Public\images\livemode\noisebg.png" />
     <Content Include="Public\images\loading.gif" />
     <Content Include="Public\images\logo.png" />
     <Content Include="Public\images\logo2.png" />
@@ -3060,6 +3076,8 @@
     <Content Include="Views\Home\SocialBar.cshtml" />
     <Content Include="Views\Events\ConceptMap.cshtml" />
     <Content Include="Views\Home\Copy of Index.cshtml" />
+    <Content Include="Views\Events\Live4x3.cshtml" />
+    <Content Include="Views\Events\_LiveTweetTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />

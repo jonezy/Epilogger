@@ -1,0 +1,118 @@
+﻿@model Epilogger.Web.Models.LiveModeViewModel
+
+@{
+    Layout = null;
+}
+
+@using Combres.Mvc
+@using Epilogger.Web.Models
+
+
+<!doctype html>
+
+<html>
+    <head>
+	    <meta charset="utf-8" />
+        <meta name="google-site-verification" content="CuQwuSsvoWQapx1142El31mqbNSB6Dq0RBzTjzV0lXQ" />   
+
+        <title>@ViewBag.Title</title>
+
+        @Html.CombresLink("LiveModeCss")
+        @*@Html.CombresLink("siteJs")*@
+
+    </head>
+
+
+    <body>
+        <div id="content">
+            <div id="tweets">
+                @{
+                    var tCount = 1;
+                }    
+
+                @foreach(var tweet in Model.Tweets)
+                {
+                    if (tCount == 1 || tCount == 3 || tCount == 5)
+                    {
+                         @Html.Raw("<div class='tweet-column'>")
+                    }
+
+                    @Html.Partial("_LiveTweetTemplate", new TweetTemplateViewModel() { CanDelete = false, Tweet = tweet, ShowControls = false, EventId = (int) tweet.EventID })
+
+                    if (tCount == 2 || tCount == 4 || tCount == 6)
+                    {
+                         @Html.Raw("</div>")
+                    }
+                    tCount++;
+                }
+            </div>
+		
+            <div id="photos">
+                @{
+                    var imgCount = 1;
+                }
+                @foreach(var img in Model.Images)
+                {
+                    if (imgCount < 3)
+                    {
+                        <div class="imgLarge">
+                            <img src="@img.Fullsize" width="300" alt="" />
+                        </div>
+                    }
+                    else
+                    {
+                        if (imgCount == 3) { <br style="clear:both"/> }
+                        <div class="imgSmall">
+                            <img src="@img.Fullsize" alt="" width="150" />
+                        </div>
+                    }
+                    imgCount++;
+                }
+
+            </div>
+	</div>
+	
+	
+	<div id="footer">
+		<div id="logo">
+			<img src="/Public/images/livemode/client/logo.png"/>
+		</div>
+		
+		<div id="hashtag-sponsors">
+			<big class="colour1">
+				Tweet! Take a photo!<br/>
+				Hashtag: <span class="colour2">@Model.Hashtag</span>
+			</big>
+			
+			<h1 class="colour1"	>Our sponsors</h1>
+			<img src="/Public/images/livemode/client/sponsor1.png"/>
+			<img src="/Public/images/livemode/client/sponsor2.png"/>
+		</div>
+		
+		<div id="top-tweeters">
+			<h1 class="colour1">Top Tweeters</h1>
+            <ul>
+                @foreach (var tt in Model.TopTweeters.Take(3))
+                {
+                    <li>
+                        <img src="@tt.Picture" height="35" alt=""/>
+                        <strong class="colour3">@@@tt.Name</strong><br/>
+                        @tt.Total tweets
+                    </li>
+                }
+            </ul>			
+		</div>
+		
+		<div id="stats-credits">
+			<h1 class="colour1">Statistics</h1>
+			<img src="/Public/images/livemode/icon-numtweets.png" alt="" /> @Model.EpiloggerCounts.TweetCount &nbsp;&nbsp;&nbsp;
+			<img src="/Public/images/livemode/icon-numphotos.png" alt=""/> @Model.EpiloggerCounts.PhotoCount &nbsp;&nbsp;&nbsp;
+			<img src="/Public/images/livemode/icon-numpeople.png" alt="" /> @Model.EpiloggerCounts.UniqueTweeterCount
+			
+			<br/><br/>
+			
+			<h1 class="colour1">Powered by: <img src="/Public/images/livemode/logo-epl.png" alt="Epilogger" /></h1>
+		</div>
+	</div>
+    </body>
+</html>

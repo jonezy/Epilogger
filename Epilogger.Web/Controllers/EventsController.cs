@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.SqlTypes;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -1581,8 +1582,89 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+        
+        public virtual ActionResult Live4X3(string id)
+        {
+
+            var requestedEvent = _es.FindBySlug(id);
+            if (requestedEvent != null)
+            {
+                var topTweetersStats = new TopTweetersStats();
+                var model = new LiveModeViewModel
+                                {
+                                    Tweets = _ts.FindForLiveModeFirstLoad(requestedEvent.ID, 6),
+                                    Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, 5, FromDateTime(), ToDateTime()).ToList(),
+                                    EpiloggerCounts = new Core.Stats.WidgetTotals().GetWidgetTotals(requestedEvent.ID, FromDateTime(), ToDateTime()),
+                                    TopTweeters = topTweetersStats.Calculate(_ts.GetTop10TweetersByEventID(requestedEvent.ID, FromDateTime(), ToDateTime())).ToList(),
+                                    Hashtag = requestedEvent.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0].Contains("#")
+                                                ? requestedEvent.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0]
+                                                : "#" + requestedEvent.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0]
+                                };
+
+                return View(model);
+            }
+            ModelState.AddModelError(string.Empty, "The event you're trying to visit doesn't exist.");
+            return RedirectToAction("index", "Browse");
+
+        }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+        [HttpPost]
+        public virtual ActionResult LiveGetLastTweetsJson(int count, string pageLoadTime, int eventID)
+        {
+            var dict = new Dictionary<String, Object>();
+
+            if (pageLoadTime.Length > 0)
+            {
+                if (pageLoadTime != "undefined")
+                {
+
+                    pageLoadTime = string.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.Parse(pageLoadTime));
+
+                    var db = _ts.Thedb();
+                    //var theTweets = _ts.Thedb().Tweets.Where(t => t.EventID == eventID && t.CreatedDate > DateTime.Parse(pageLoadTime)).OrderBy(t => t.CreatedDate).Take(count);
+                    var theTweets = _ts.FindForLiveModeAjax(eventID, DateTime.Parse(pageLoadTime), count);
+
+                    var htmlString = new StringBuilder();
+                    var lasttweettime = string.Empty;
+                    var theFirst = true;
+                    //var recordCount = 0;
+
+                    var tweets = new List<String>();
+                    foreach (var theT in theTweets)
+                    {
+                        if (theFirst)
+                        {
+                            lasttweettime = string.Format("{0:yyyy-MM-dd HH:mm:ss}", theT.CreatedDate);
+                            theFirst = false;
+                        }
 
 
+                        //Instead of hard coding the HTML for the tweets, let's use the template.
+                        var firstOrDefault = theT.Events.FirstOrDefault(t => t.ID == eventID);
+                        var canDelete = firstOrDefault != null && ((firstOrDefault.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator);
+
+                        //htmlString.Append(RenderRazorViewToString("TweetTemplate", new TweetTemplateViewModel() { CanDelete = canDelete, Tweet = theT, ShowControls = true, EventId = eventID }));
+                        tweets.Add(RenderRazorViewToString("_LiveTweetTemplate", new TweetTemplateViewModel() { CanDelete = canDelete, Tweet = theT, ShowControls = true, EventId = eventID }));
+
+                        //recordCount++;
+                    }
+
+
+                    //Return the Dictionary as it's IEnumerable and it creates the correct JSON doc.
+                    //dict = new Dictionary<String, Object>();
+
+                    dict.Add("numberofnewtweets", tweets.Count);
+                    dict.Add("lasttweettime", lasttweettime);
+                    dict.Add("tweetcount", string.Format("{0:#,###}", db.Tweets.Count(t => t.EventID == eventID)));
+                    dict.Add("tweetsInhtml", tweets);
+                }
+            }
+
+            return Json(dict);
+        }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
     }
 
 }

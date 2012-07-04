@@ -24,9 +24,11 @@ namespace Epilogger.Web.Core.Stats {
 
                 var tweetCount = ts.FindTweetCountByEventID(eventId, fromDateTime, toDateTime);
                 var photoCount = imgs.FindImageCountByEventID(eventId, fromDateTime, toDateTime);
+                var uniqueTweeterCount = ts.FindUniqueTweetCountByEventID(eventId, fromDateTime, toDateTime);
 
                 data.TweetCount = ConvertNumberToKorM(tweetCount);
                 data.PhotoCount = ConvertNumberToKorM(photoCount);
+                data.UniqueTweeterCount = ConvertNumberToKorM(uniqueTweeterCount);
 
                 cacheHelper.Add(CacheKey + eventId.ToString(CultureInfo.InvariantCulture), data, DateTime.Now.AddMinutes(CacheExpiry));
             }
@@ -59,6 +61,7 @@ namespace Epilogger.Web.Core.Stats {
     {
         public String TweetCount { get; set; }
         public String PhotoCount { get; set; }
+        public String UniqueTweeterCount { get; set; }
     }
 
 }

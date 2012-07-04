@@ -195,6 +195,18 @@ namespace Epilogger.Web
             
         }
 
+
+        public List<Tweet> FindForLiveModeAjax(int eventId, DateTime pageLoadTime, int numberToReturn)
+        {
+            return db.Tweets.Where(t => t.EventID == eventId && t.CreatedDate > pageLoadTime).OrderBy(t => t.CreatedDate).Take(numberToReturn).ToList();
+        }
+
+        public List<Tweet> FindForLiveModeFirstLoad(int eventId, int numberToReturn)
+        {
+            return db.Tweets.Where(t => t.EventID == eventId).OrderByDescending(t => t.CreatedDate).Take(numberToReturn).ToList();
+        }
+
+
         public object Save(Tweet entity)
         {
             if (entity.ID > 0)

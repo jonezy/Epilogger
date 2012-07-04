@@ -1,0 +1,12 @@
+﻿@model Epilogger.Web.Models.TweetTemplateViewModel
+
+<div class="single-tweet">				
+	<span class="author">
+		<img src="@Model.Tweet.ProfileImageURL" width="48" heigh="48" alt="@Model.Tweet.ToUserScreenName" />					
+		<strong class="colour3">@Model.Tweet.FromUserScreenName</strong>
+		@@@Model.Tweet.FromUserScreenName
+	</span>
+									
+	<p>@Html.Raw(Model.Tweet.TextAsHTML)</p>
+</div>
+<div class="single-tweet-arrow"></div>

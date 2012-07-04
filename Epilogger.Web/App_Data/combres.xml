@@ -79,6 +79,9 @@
       <resource path="~/Public/js/jquery.cookie.js" />
     </resourceSet>
 
+    <resourceSet name="LiveModeCss" type="css">
+      <resource path="~/Public/css/livemode-4x3.css" />
+    </resourceSet>
 
   </resourceSets>
 </combres>

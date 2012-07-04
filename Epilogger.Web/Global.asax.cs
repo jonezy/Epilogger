@@ -118,6 +118,13 @@ namespace Epilogger.Web {
             );
 
             routes.MapRoute(
+                "LiveGetLastTweets",
+                "Events/LiveGetLastTweetsJson",
+                new { controller = "events", action = "LiveGetLastTweetsJson" }
+            );
+
+
+            routes.MapRoute(
                 "GetBrowseOverviewTabData",
                 "Events/GetBrowseOverviewTabData",
                 new { controller = "events", action = "GetBrowseOverviewTabData" }
@@ -520,6 +527,16 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.Type, opt => opt.Ignore())
                 .ForMember(dest => dest.ID, opt => opt.Ignore())
                 .ForMember(dest => dest.EventID, opt => opt.Ignore());
+
+
+            //Mapper.CreateMap<Tweet, TweetTemplateViewModel>()
+            //    .ForMember(dest => dest.EventId, opt => opt.MapFrom(src => src.EventID))
+            //    .ForMember(dest => dest.Favorited, opt => opt.UseValue(false))
+            //    .ForMember(dest => dest.ModifyDisplayClass, opt => opt.Ignore())
+            //    .ForMember(dest => dest.Replied, opt => opt.UseValue(false))
+            //    .ForMember(dest => dest.Retweeted, opt => opt.UseValue(false))
+            //    .ForMember(dest => dest.ShowControls, opt => opt.UseValue(false))
+            //    .ForMember(dest => dest.Tweet, opt => opt.MapFrom(src => src));
 
 
             //API Mappers
