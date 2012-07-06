@@ -2739,6 +2739,7 @@
     <Content Include="Public\js\jqueryCookie\test.js" />
     <Content Include="Public\js\jqueryParseParams.js" />
     <Content Include="Public\js\jqueryQueryString.js" />
+    <Content Include="Public\js\LiveMode.js" />
     <Content Include="Public\js\oAuth\example\accessToken.html" />
     <Content Include="Public\js\oAuth\example\AJAX.html" />
     <Content Include="Public\js\oAuth\example\authorize.html" />

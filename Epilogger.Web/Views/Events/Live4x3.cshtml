@@ -18,7 +18,41 @@
         <title>@ViewBag.Title</title>
 
         @Html.CombresLink("LiveModeCss")
-        @*@Html.CombresLink("siteJs")*@
+        @Html.CombresLink("LiveModeJs")
+        
+        
+        <script language="javascript" type="text/javascript">
+            var EventID = @Model.EventId;
+            
+            var disableAutoupdate = false;
+
+            //Parameters to control the Tweet list
+            var pageLoadTime = '@string.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.UtcNow)';
+            
+            //var updateTimeout = 5000;
+            //var updateRate = 10000;
+            var updateTimeout = 10000;
+            var updateRate = 5000;
+            
+            
+            //var prologuePostsUpdates = 1;
+            //var isFirstFrontPage = 1;   
+            var postsOnPage = new Array;
+            var postsOnPageQS = '';
+            var maxItemsOnPage = 6;
+
+            //Parameters to control the Image List
+            var photoUpdateTimeout = 5000;
+            var photoUpdateRate = 15000;
+            var photoProloguePostsUpdates = 1;
+            var photoIsFirstFrontPage = 1;
+            //var photoPageLoadTime = pageLoadTime;
+    
+            var photoPostsOnPage = new Array;
+            var photoPostsOnPageQS = '';
+            var photoMaxItemsOnPage = 9;
+
+        </script>
 
     </head>
 
@@ -28,13 +62,15 @@
             <div id="tweets">
                 @{
                     var tCount = 1;
+                    var colCount = 1;
                 }    
 
                 @foreach(var tweet in Model.Tweets)
                 {
                     if (tCount == 1 || tCount == 3 || tCount == 5)
                     {
-                         @Html.Raw("<div class='tweet-column'>")
+                        @Html.Raw("<div class='tweet-column' id='tweetColumn" + colCount + "'>")
+                        colCount++;
                     }
 
                     @Html.Partial("_LiveTweetTemplate", new TweetTemplateViewModel() { CanDelete = false, Tweet = tweet, ShowControls = false, EventId = (int) tweet.EventID })
@@ -111,7 +147,8 @@
 			
 			<br/><br/>
 			
-			<h1 class="colour1">Powered by: <img src="/Public/images/livemode/logo-epl.png" alt="Epilogger" /></h1>
+            <h1 class="colour1">Powered by: <img src="/Public/images/livemode/logo-epl.png" alt="Epilogger" /></h1>
+            <a href="" id="updateLink">Update</a>
 		</div>
 	</div>
     </body>
