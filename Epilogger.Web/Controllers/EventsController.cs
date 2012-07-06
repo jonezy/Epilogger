@@ -1623,8 +1623,12 @@ namespace Epilogger.Web.Controllers {
                     pageLoadTime = string.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.Parse(pageLoadTime));
 
                     var db = _ts.Thedb();
-                    //var theTweets = _ts.Thedb().Tweets.Where(t => t.EventID == eventID && t.CreatedDate > DateTime.Parse(pageLoadTime)).OrderBy(t => t.CreatedDate).Take(count);
-                    var theTweets = _ts.FindForLiveModeAjax(eventID, DateTime.Parse(pageLoadTime), count);
+                    
+                    //var theTweets = _ts.FindForLiveModeAjax(eventID, DateTime.Parse(pageLoadTime), count);
+                    
+                    var theTweets = _ts.FindForLiveModeAjaxDesc(eventID, count);
+                    theTweets.Sort((x, y) => y.CreatedDate.Value.CompareTo(x.CreatedDate.Value));
+                    
 
                     var lasttweettime = string.Empty;
 

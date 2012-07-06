@@ -5,7 +5,6 @@ var prologuePostsUpdates = true;
 jQuery(function ($) {
     var column = 1;
 
-
     //For Testing
     $("#updateLink").bind('click', function (e) {
         e.preventDefault();
@@ -21,7 +20,7 @@ jQuery(function ($) {
         $.ajax({
             type: "POST",
             url: "/events/LiveGetLastTweetsJson/",
-            data: "{count:2,pageLoadTime:'" + pageLoadTime + "',eventID:" + EventID + "}",
+            data: "{count:18,pageLoadTime:'" + pageLoadTime + "',eventID:" + EventID + "}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (newTweets) {
@@ -37,206 +36,8 @@ jQuery(function ($) {
                     if (typeof newTweets.tweetsInhtml != "undefined") {
 
 
+                        animateTweets(newTweets.tweetsInhtml);
 
-
-
-
-
-
-
-                        //                        var column = 1;
-                        //                        for (var item in newTweets.tweetsInhtml) {
-                        //                            var colName = "#tweetColumn" + column;
-                        //                            $(colName).find(".tweet:first").before(newTweets.tweetsInhtml[item]);
-                        //                            column++;
-                        //                            if (column == 4) column = 1;
-                        //                            break;
-                        //                        }
-
-                        //                        var i = -1;
-                        //                        var tweetList = $(".newupdates");
-
-
-                        var i = -1;
-                        
-                        var tweetList = newTweets.tweetsInhtml;
-
-                        var animationCallback = function () {
-                            if (++i < tweetList.length) {
-
-                                var colName = "#tweetColumn" + column;
-                                $(colName).find(".tweet:first").before(tweetList[i]);
-                                var newElement = $(".newupdates");
-                                column++;
-                                if (column == 4) column = 1;
-
-                                var itemHeight = $(newElement).height();
-                                var itemHeight2 = $(newElement).height() - 80; //-80; // -40;
-
-
-                                $(newElement).css("margin-top", "-" + itemHeight2 + "px");
-
-                                $(newElement).animate({ 'margin-top': '0px' },  'slow');
-                                //$(newElement).fadeIn('slow');
-                                $(newElement).removeClass('newupdates');
-                                $(newElement).parent().find(".tweet:last").fadeOut('slow', function () {
-                                    $(newElement).parent().find(".tweet:last").remove();
-                                    animationCallback();
-                                });
-
-                                //, 
-
-
-
-
-                                //                                $(newElement).css("margin-top", "-" + itemHeight2 + "px");
-                                //                                $(newElement).fadeIn('slow');
-                                //                                $(newElement).animate({ 'margin-top': '0px' }, 'slow', function () {
-                                //                                });
-                                //                                $(".newupdates").removeClass('newupdates');
-                                //                                $(newElement).parent().find(".tweet:last").fadeOut('slow', animationCallback);
-
-
-                                //                                //                                $(tweetList[i]).css("margin-top", "-" + itemHeight2 + "px");
-                                //                                //                                $(tweetList[i]).fadeIn('slow');
-                                //                                //                                $(tweetList[i]).animate({ 'margin-top': '0px', opacity: 1 }, 'slow', function () {
-                                //                                //                                    $(tweetList[i]).parent().find(".tweet:last").fadeOut('slow', animationCallback);
-                                //                                //                                });
-
-
-
-                                //                                //$(tweetList[i]).slideDown('slow', animationCallback);
-                                //                                //$(tweetList[i]).parent().find(".tweet").css("top", "-" + itemHeight2 + "px");
-
-                                //                                //                                $(tweetList[i]).parent().find(".tweet").animate({ 'top': '+=' + itemHeight2 + 'px', opacity: 1 }, 1500, function () {
-
-                                //                                //                                });
-                                //                                //$(tweetList[i]).parent().find(".tweet:last").fadeOut('slow', animationCallback);
-
-                                //                                //                                $(tweetList[i]).parent().find(".tweet:last").animate({ 'top': '+=500px', opacity: 0 }, function () {
-                                //                                //                                                                    $(this).remove();
-                                //                                //                                                                });
-
-                                //                                //                                                                $(tweetList[i]).css("margin-top", "-200px");
-                                //                                //                                                                $(tweetList[i]).fadeIn(1000).animate({ marginTop: 0 }, 1000);
-                                //                                //                                                                $(tweetList[i]).parent().find(".tweet:last").fadeOut(1000, animationCallback);
-
-
-
-                                //                                //                                $(tweetList[i]).css("top", "-300px");
-                                //                                //                                $(tweetList[i]).fadeIn(1000);
-                                //                                //                                $(tweetList[i]).animate({ top: 0 }, 1000);
-                                //                                //                                $(tweetList[i]).parent().find(".tweet:last").fadeOut();
-
-                                //                                //$(tweetList[i]).slideDown('slow', animationCallback);
-
-                                //                                //$(tweetList[i]).css("top", "-200px");
-                                //                                //                                $(tweetList[i]).fadeIn();
-
-
-
-
-                                //                                //                                $(tweetList[i]).parent().find(".tweet:last").animate({ 'top': '+=500px', opacity: 0 }, function () {
-                                //                                //                                    $(this).remove();
-                                //                                //                                });
-
-                            }
-                            else {
-                                $(".newupdates").removeClass('newupdates');
-                            }
-                        };
-                        animationCallback();
-
-
-
-
-
-
-
-                        //This works but it's not right
-                        //                        var column = 1;
-                        //                        for (var item in newTweets.tweetsInhtml) {
-                        //                            var colName = "#tweetColumn" + column;
-                        //                            $(colName).find(".tweet:first").before(newTweets.tweetsInhtml[item]);
-                        //                            column++;
-                        //                            if (column == 4) column = 1;
-                        //                        }
-
-                        //                        var i = -1;
-                        //                        var tweetList = $(".newupdates");
-                        //                        var animationCallback = function () {
-                        //                            if (++i < tweetList.length) {
-                        //                                $(tweetList[i]).slideDown('slow', animationCallback);
-                        //                            }
-                        //                            else {
-                        //                                $(".newupdates").removeClass('newupdates');
-                        //                            }
-                        //                        };
-                        //                        animationCallback();
-
-
-
-
-
-
-
-
-                        //                        for (var item in newTweets.tweetsInhtml) {
-                        //                            var colName = "#tweetColumn" + column;
-
-
-
-                        //                            $(colName).find(".single-tweet:first").before(newTweets.tweetsInhtml[item]);
-                        //                            $(".newupdates").slideDown(1000);
-                        //                            $(".newupdates").removeClass('newupdates');
-
-                        //                            setTimeout(function () {
-
-                        //                            }, initialTimeout);
-                        //                            initialTimeout += 1000;
-
-                        //                            column++;
-                        //                            if (column == 4) column = 1;
-                        //                        }
-
-
-                        //                            $(".newupdates").animate({
-                        //                                 backgroundColor: '#fff'
-                        //                            }, 2500, function () {
-                        //                                 $(this).removeClass('newupdates');
-                        //                            });
-
-
-
-
-                        //                        var i = 0;
-                        //                        $(".tweet-column").each(function () {
-                        //                            $(this).find(".single-tweet:first").before(newTweets.tweetsInhtml[i]);
-                        //                            i++;
-                        //                        });
-
-                        //$("#tweetlist li.tweet:first").before(newTweets.html);
-
-                        //                        var newUpdatesLi = $("#tweetlist li.newupdates");
-                        //                        newUpdatesLi.slideDown();
-                        //                        var counter = 0;
-                        //                        //$('#posttext_error, #commenttext_error').hide();
-                        //                        newUpdatesLi.each(function (index) {
-                        //                            var thisId = $(this).attr("id");
-                        //                            vpostId = thisId.substring(thisId.indexOf('-') + 1);
-                        //                            postsOnPageQS += "&vp[]=" + vpostId;
-                        //                            if (!(thisId in postsOnPage)) postsOnPage.unshift(thisId);
-                        //                            if (isElementVisible(this)) { $(this).animate({ backgroundColor: '#fff' }, 2500, function () { $(this).removeClass('newupdates'); titleCount(); }); }
-                        //                            counter++;
-                        //                        });
-                        //                        $("#tweetlist li.tweet").each(function (index) {
-                        //                            if (index >= maxItemsOnPage) {
-                        //                                $(this).slideUp();
-                        //                                $(this).remove();
-                        //                            }
-                        //                        });
-
-                        //setupTwitterAction();
 
                         //There are new tweets, update the count
                         $("#tweetCount").text(newTweets.tweetcount);
@@ -249,6 +50,78 @@ jQuery(function ($) {
 
             }
         });
+    }
+
+
+   
+
+
+    function animateTweets(tweetList) {
+
+        var i = -1;
+        var d = 1;
+        //var tweetList = newTweets.tweetsInhtml;
+
+        var animationCallback = function () {
+            if (++i < tweetList.length) {
+
+                var colName = "#tweetColumn" + column;
+                $(colName).find(".tweet:first").before(tweetList[i]);
+                var newElement = $(".newupdates");
+                column++;
+                if (column == 4) column = 1;
+
+                var itemHeight2 = $(newElement).height() - 80; //-80; // -40;
+
+
+                $(newElement).css("margin-top", "-" + itemHeight2 + "px");
+
+                $(newElement).animate({ 'margin-top': '0px' }, 'slow');
+
+                $(newElement).removeClass('newupdates');
+                $(newElement).parent().find(".tweet:last").fadeOut('slow', function () {
+                    $(newElement).parent().find(".tweet:last").remove();
+
+                    $(newElement).delay(2000).fadeIn(0, function () {
+                        animationCallback();
+                    });
+
+                });
+
+
+            }
+            else {
+                $(".newupdates").removeClass('newupdates');
+                i = 0;
+            }
+        };
+        animationCallback();
+    }
+
+
+
+
+    function animateXTweets(tweetList) {
+
+        for (var i = 1; i < tweetList.length; i + 2) {
+
+            //            setTimeout(function() {
+            //                //var newList = [tweetList[i - 1], tweetList[i]];
+            //                animateTweets(tweetList);
+            //            }, (i*5000));
+
+            //            window.setInterval(function () {
+            //                var newList = [tweetList[i - 1], tweetList[i]];
+            //                animateTweets(newList);
+            //            }, i * 5000);
+
+
+            //            $.doTimeout(i * 5000, function () {
+            //                var newList=[tweetList[i-1], tweetList[i]];
+            //                animateTweets(newList);
+            //            });
+        }
+
     }
 
 
@@ -345,6 +218,7 @@ jQuery(function ($) {
                 break;
         }
     }
+
 
 
     function titleCount() {
