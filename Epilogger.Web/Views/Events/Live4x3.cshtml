@@ -32,7 +32,7 @@
             //var updateTimeout = 5000;
             //var updateRate = 10000;
             var updateTimeout = 10000;
-            var updateRate = 60000;
+            var updateRate = 40000;
             
             
             //var prologuePostsUpdates = 1;
@@ -60,28 +60,33 @@
     <body>
         <div id="content">
             <div id="tweets">
-                @{
-                    var tCount = 1;
-                    var colCount = 1;
-                }    
-
-                @foreach(var tweet in Model.Tweets)
-                {
-                    if (tCount == 1 || tCount == 3 || tCount == 5)
+                <div class="tweet-column" id="tweetColumn1"><div class="tweet"></div><div class="tweet"></div></div>
+                <div class="tweet-column" id="tweetColumn2"><div class="tweet"></div><div class="tweet"></div></div>
+                <div class="tweet-column" id="tweetColumn3"><div class="tweet"></div><div class="tweet"></div></div>
+    
+                
+                   @* @{
+                        var tCount = 1;
+                        var colCount = 1;
+                    }    
+                
+                    @foreach(var tweet in Model.Tweets)
                     {
-                        @Html.Raw("<div class='tweet-column' id='tweetColumn" + colCount + "'>")
-                        colCount++;
-                    }
+                        if (tCount == 1 || tCount == 3 || tCount == 5)
+                        {
+                            @Html.Raw("<div class='tweet-column' id='tweetColumn" + colCount + "'>")
+                            colCount++;
+                        }
 
-                    @Html.Partial("_LiveTweetTemplate", new TweetTemplateViewModel() { CanDelete = false, Tweet = tweet, ShowControls = false, EventId = (int) tweet.EventID })
+                        @Html.Partial("_LiveTweetTemplate", new TweetTemplateViewModel() { CanDelete = false, Tweet = tweet, ShowControls = false, EventId = (int) tweet.EventID })
 
-                    if (tCount == 2 || tCount == 4 || tCount == 6)
-                    {
-                         @Html.Raw("</div>")
-                    }
-                    tCount++;
-                }
-            </div>
+                        if (tCount == 2 || tCount == 4 || tCount == 6)
+                        {
+                            @Html.Raw("</div>")
+                        }
+                        tCount++;
+                    }*@
+                </div>
 		
             <div id="photos">
                 @{
@@ -148,7 +153,8 @@
 			<br/><br/>
 			
             <h1 class="colour1">Powered by: <img src="/Public/images/livemode/logo-epl.png" alt="Epilogger" /></h1>
-            <a href="" id="updateLink">Update</a>
+            <a href="" id="updateLink">Update</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="" id="stopLink">Stop</a>
+            <div id="ajaxBusy">Loading...</div>
 		</div>
 	</div>
     </body>

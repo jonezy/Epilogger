@@ -1593,7 +1593,7 @@ namespace Epilogger.Web.Controllers {
                 var model = new LiveModeViewModel
                                 {
                                     EventId = requestedEvent.ID,
-                                    Tweets = _ts.FindForLiveModeFirstLoad(requestedEvent.ID, 6),
+                                    //Tweets = _ts.FindForLiveModeFirstLoad(requestedEvent.ID, 6),
                                     Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, 5, FromDateTime(), ToDateTime()).ToList(),
                                     EpiloggerCounts = new Core.Stats.WidgetTotals().GetWidgetTotals(requestedEvent.ID, FromDateTime(), ToDateTime()),
                                     TopTweeters = topTweetersStats.Calculate(_ts.GetTop10TweetersByEventID(requestedEvent.ID, FromDateTime(), ToDateTime())).ToList(),

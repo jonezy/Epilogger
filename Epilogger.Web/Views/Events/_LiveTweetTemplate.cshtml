@@ -1,6 +1,6 @@
 ﻿@model Epilogger.Web.Models.TweetTemplateViewModel
 
-<div class="tweet @Model.ModifyDisplayClass">
+<div class="tweet @Model.ModifyDisplayClass" id="@string.Format("t{0}", Model.Tweet.TwitterID)">
     <div class="single-tweet">
 	    <span class="author">
 		    <img src="@Model.Tweet.ProfileImageURL" width="48" height="48" alt="@Model.Tweet.ToUserScreenName" />					

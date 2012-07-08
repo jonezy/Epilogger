@@ -2,14 +2,6 @@
 
 var prologuePostsUpdates = true;
 
-// Ajax activity indicator bound to ajax start/stop document events
-$(document).ajaxStart(function () {
-    $('#ajaxBusy').show();
-}).ajaxStop(function () {
-    $('#ajaxBusy').hide();
-});
-
-
 jQuery(function ($) {
     var column = 1;
     var stopAnimation = false;
@@ -52,17 +44,7 @@ jQuery(function ($) {
 
 
                         stopAnimation = false;
-
-                        //                        $("#divStaging").html("");
-                        //                        $(newTweets.tweetsInhtml).each(function (e) {
-                        //                            $("#divStaging").append(newTweets.tweetsInhtml[e]);
-                        //                        });
                         animateTweets(newTweets.tweetsInhtml);
-
-                        //$("#divStaging").html(newTweets.tweetsInhtml);
-
-
-                        //animateTweets(newTweets.tweetsInhtml);
 
 
 
@@ -83,24 +65,17 @@ jQuery(function ($) {
     getTweets();
 
 
-    function animateTweets(tweetList) {
+    function animateTweets(tweetList2) {
+
 
         var d = 1;
         //var tweetList = newTweets.tweetsInhtml;
-        //var tweetList = $("#divStaging .tweet");
         var i = -1;
         var animationCallback = null;
-        animationCallback = function () {
-            //tweetList = $("#divStaging .tweet");
+        animationCallback = function (tweetList) {
+
             if (++i < tweetList.length) {
                 if (stopAnimation) return false;
-
-//                if ($('#' + $(tweetList[i]).attr("id")).length) {
-//                    i++;
-//                    $('#' + $(tweetList[i]).attr("id")).delay(2000).fadeIn(0, function () {
-//                        animationCallback();
-//                    });
-//                }
 
                 var colName = "#tweetColumn" + column;
                 $(colName).find(".tweet:first").before(tweetList[i]);
@@ -120,22 +95,21 @@ jQuery(function ($) {
                     $(newElement).parent().find(".tweet:last").remove();
 
                     $(newElement).delay(2000).fadeIn(0, function () {
-                        animationCallback();
+                        if (!stopAnimation) animationCallback(tweetList);
                     });
                 });
             }
             else {
                 i = -1;
-                //if (stopAnimation) return false;
-                //tweetList = $("#divStaging .tweet");
-                animationCallback();
+                if (stopAnimation) return false;
+                animationCallback(tweetList);
             }
         };
 
-        animationCallback();
+        animationCallback(tweetList2);
     }
 
-    animateTweets();
+
 
 
     function animateXTweets(tweetList) {

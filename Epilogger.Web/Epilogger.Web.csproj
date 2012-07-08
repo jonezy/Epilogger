@@ -716,6 +716,7 @@
     <Content Include="Public\js\confirm\img\confirm\header.gif" />
     <Content Include="Public\js\confirm\js\confirm.js" />
     <Content Include="Public\js\confirm\js\jquery.simplemodal.js" />
+    <Content Include="Public\js\LiveModeBackUp.js" />
     <Content Include="Public\js\CreateEditEvent.js" />
     <Content Include="Public\js\DateSpanPicker\datespan.css" />
     <Content Include="Public\js\DateSpanPicker\example.html" />

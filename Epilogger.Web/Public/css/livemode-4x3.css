@@ -165,6 +165,11 @@ h1 {
     /*top: -200px;*/
 }
 
+#divStaging {
+    display: none;
+}
+
+
 /* ------------------------------------- [ CUSTOM COLOURS ] --- */
 .colour1 	{ color:#ce0088 !important}
 .colour2	{ color:#46ca00 !important}
