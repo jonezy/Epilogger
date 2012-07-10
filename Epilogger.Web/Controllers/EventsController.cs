@@ -1621,10 +1621,6 @@ namespace Epilogger.Web.Controllers {
                 {
 
                     pageLoadTime = string.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.Parse(pageLoadTime));
-
-                    var db = _ts.Thedb();
-                    
-                    //var theTweets = _ts.FindForLiveModeAjax(eventID, DateTime.Parse(pageLoadTime), count);
                     
                     var theTweets = _ts.FindForLiveModeAjaxDesc(eventID, count);
                     theTweets.Sort((x, y) => y.CreatedDate.Value.CompareTo(x.CreatedDate.Value));
@@ -1645,18 +1641,13 @@ namespace Epilogger.Web.Controllers {
                         var firstOrDefault = theT.Events.FirstOrDefault(t => t.ID == eventID);
                         var canDelete = firstOrDefault != null && ((firstOrDefault.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator);
 
-                        //htmlString.Append(RenderRazorViewToString("TweetTemplate", new TweetTemplateViewModel() { CanDelete = canDelete, Tweet = theT, ShowControls = true, EventId = eventID }));
                         tweets.Add(RenderRazorViewToString("_LiveTweetTemplate", new TweetTemplateViewModel() { ModifyDisplayClass = "newupdates", CanDelete = canDelete, Tweet = theT, ShowControls = true, EventId = eventID }));
-
                     }
 
-
                     //Return the Dictionary as it's IEnumerable and it creates the correct JSON doc.
-                    //dict = new Dictionary<String, Object>();
-
                     dict.Add("numberofnewtweets", tweets.Count);
                     dict.Add("lasttweettime", lasttweettime);
-                    dict.Add("tweetcount", string.Format("{0:#,###}", db.Tweets.Count(t => t.EventID == eventID)));
+                    dict.Add("epiloggerCounts", new Core.Stats.WidgetTotals().GetWidgetTotals(eventID, FromDateTime(), ToDateTime()));
                     dict.Add("tweetsInhtml", tweets);
                 }
             }
@@ -1665,6 +1656,72 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        [HttpPost]
+        public virtual ActionResult LiveGetLastPhotosJson(int count, string pageLoadTime, int eventID)
+        {
+            var dict = new Dictionary<String, Object>();
+
+            if (pageLoadTime.Length > 0)
+            {
+                if (pageLoadTime != "undefined")
+                {
+                    pageLoadTime = string.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.Parse(pageLoadTime));
+                    
+                    var theImages = _is.FindForLiveModeAjax(eventID, DateTime.Parse(pageLoadTime), count);
+
+                    var lastphototime = string.Empty;
+                    var theFirst = true;
+                    var recordCount = 1;
+                    var html = new StringBuilder();
+
+                    var newImages = new List<String>();
+                    foreach (var theI in theImages)
+                    {
+                        if (theFirst)
+                        {
+                            lastphototime = string.Format("{0:yyyy-MM-dd HH:mm:ss}", theI.DateTime);
+                            theFirst = false;
+                        }
+
+                        html.Append(string.Format("<div class='newImage images'><img src='{0}' width='150' alt='' /></div>", theI.Fullsize));    
+                        
+                        recordCount++;
+                    }
+
+                    //Generate the Top Tweeters
+                    var topTweetersHtml = new StringBuilder();
+                    var topTweetersStats = new TopTweetersStats();
+                    var topTweets = topTweetersStats.Calculate(_ts.GetTop10TweetersByEventID(eventID, FromDateTime(), ToDateTime())).ToList();
+                    foreach (var tt in topTweets.Take(3))
+                    {
+                        topTweetersHtml.Append("<li>");
+                        topTweetersHtml.Append("<img src='" + tt.Picture + "' height='35' alt=''/>");
+                        topTweetersHtml.Append("<strong class='colour3'>@" + tt.Name + "</strong><br/>");
+                        topTweetersHtml.Append(tt.Total + " tweets");
+                        topTweetersHtml.Append("</li>");
+
+                    }
+
+                    //Return the Dictionary as it's IEnumerable and it creates the correct JSON doc.
+                    dict = new Dictionary<String, Object>
+                               {
+                                   {"numberofnewphotos", recordCount},
+                                   {"lastphototime", lastphototime},
+                                   {"topTweeters", topTweetersHtml.ToString() },
+                                   {"html", html.ToString() }
+                               };
+                }
+            }
+
+            return Json(dict);
+        }
+
+
+
+
+
+
     }
 
 }

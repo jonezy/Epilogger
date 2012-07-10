@@ -17,11 +17,14 @@ jQuery(function ($) {
     //For Testing
     $("#updateLink").bind('click', function (e) {
         e.preventDefault();
-        getTweets();
+        //getTweets();
+
+        toggleUpdates('newphotos', 'on');
+        getPhotos();
     });
     $("#stopLink").bind('click', function (e) {
         e.preventDefault();
-        //stopAnimation = true;
+        stopAnimation = true;
     });
 
 
@@ -50,31 +53,21 @@ jQuery(function ($) {
 
                     if (typeof newTweets.tweetsInhtml != "undefined") {
 
-
                         stopAnimation = false;
-
-                        //                        $("#divStaging").html("");
-                        //                        $(newTweets.tweetsInhtml).each(function (e) {
-                        //                            $("#divStaging").append(newTweets.tweetsInhtml[e]);
-                        //                        });
                         animateTweets(newTweets.tweetsInhtml);
 
-                        //$("#divStaging").html(newTweets.tweetsInhtml);
-
-
-                        //animateTweets(newTweets.tweetsInhtml);
-
-
-
-                        //There are new tweets, update the count
-                        $("#tweetCount").text(newTweets.tweetcount);
-
+                        //Update the page Totals
+                        $("#tweetCount").html(newTweets.epiloggerCounts.TweetCount);
+                        $("#photoCount").html(newTweets.epiloggerCounts.PhotoCount);
+                        $("#uniqueCount").html(newTweets.epiloggerCounts.UniqueTweeterCount);
                     }
                 }
 
                 //Turns the Timer back on after the new Posts have been loaded.
                 toggleUpdates('newtweets', 'on');
 
+
+                //toggleUpdates('newphotos', 'on');
             }
         });
     }
@@ -85,7 +78,7 @@ jQuery(function ($) {
 
     function animateTweets(tweetList) {
 
-        var d = 1;
+        //var d = 1;
         //var tweetList = newTweets.tweetsInhtml;
         //var tweetList = $("#divStaging .tweet");
         var i = -1;
@@ -94,13 +87,6 @@ jQuery(function ($) {
             //tweetList = $("#divStaging .tweet");
             if (++i < tweetList.length) {
                 if (stopAnimation) return false;
-
-//                if ($('#' + $(tweetList[i]).attr("id")).length) {
-//                    i++;
-//                    $('#' + $(tweetList[i]).attr("id")).delay(2000).fadeIn(0, function () {
-//                        animationCallback();
-//                    });
-//                }
 
                 var colName = "#tweetColumn" + column;
                 $(colName).find(".tweet:first").before(tweetList[i]);
@@ -126,8 +112,6 @@ jQuery(function ($) {
             }
             else {
                 i = -1;
-                //if (stopAnimation) return false;
-                //tweetList = $("#divStaging .tweet");
                 animationCallback();
             }
         };
@@ -138,103 +122,90 @@ jQuery(function ($) {
     animateTweets();
 
 
-    function animateXTweets(tweetList) {
-
-        for (var i = 1; i < tweetList.length; i + 2) {
-
-            //            setTimeout(function() {
-            //                //var newList = [tweetList[i - 1], tweetList[i]];
-            //                animateTweets(tweetList);
-            //            }, (i*5000));
-
-            //            window.setInterval(function () {
-            //                var newList = [tweetList[i - 1], tweetList[i]];
-            //                animateTweets(newList);
-            //            }, i * 5000);
 
 
-            //            $.doTimeout(i * 5000, function () {
-            //                var newList=[tweetList[i-1], tweetList[i]];
-            //                animateTweets(newList);
-            //            });
-        }
 
+    //AUTO refreshing Photos on Event Page
+    function getPhotos() {
+        //Turns the Timer off while the page is updating
+        toggleUpdates('newphotos', 'off');
+
+        //Make the call get the JSON of new photos.
+        $.ajax({
+            type: "POST",
+            url: "/Events/LiveGetLastPhotosJson/",
+            data: "{Count:5,pageLoadTime:'" + photoPageLoadTime + "',EventID:" + EventID + "}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (newPhotos) {
+                //Got new Photos JSON object
+
+                if (newPhotos.lastphototime != '') {
+
+                    //Top Tweeters
+                    $("#topTweets").html(newPhotos.topTweeters);
+
+                    photoPageLoadTime = newPhotos.lastphototime;
+
+                    if (typeof newPhotos.html != "undefined") {
+
+                        $("#photos div.images:first").before(newPhotos.html);
+
+                        $("#photos br").remove();
+
+                        var allPhotos = $(".images");
+
+                        allPhotos.removeClass('imgLarge');
+                        allPhotos.removeClass('imgSmall');
+
+
+                        allPhotos.each(function (index) {
+
+                            if (index <= 1) {
+                                $(this).addClass("imgLarge");
+                                $(this).find("img").width(350);
+                            } else {
+                                if (index == 2) { $(this).before('<br style="clear:both"" />'); }
+                                $(this).addClass("imgSmall");
+                                $(this).find("img").width(150);
+                            }
+
+                            if (index <= 4) {
+                                $(this).fadeIn(2500, function () { $(this).removeClass('newImage'); });
+                            } else {
+                                $(this).hide();
+                                $(this).remove();
+                            }
+
+
+                        });
+
+
+                    }
+                }
+
+                //Turns the Timer back on after the new Posts have been loaded.
+                toggleUpdates('newphotos', 'on');
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //                alert(xhr.status);
+                //                alert(thrownError);
+            }
+        });
     }
 
-
-    //    //AUTO refreshing Photos on Event Page
-    //    function getPhotos() {
-    //        //Turns the Timer off while the page is updating
-    //        toggleUpdates('unewphotos', 'off');
-
-    //        //Make the call get the JSON of new Tweets.
-    //        $.ajax({
-    //            type: "POST",
-    //            url: "/Events/GetLastPhotosJSON/",
-    //            data: "{Count:9,pageLoadTime:'" + photoPageLoadTime + "',EventID:" + EventID + "}",
-    //            contentType: "application/json; charset=utf-8",
-    //            dataType: "json",
-    //            success: function (newPhotos) {
-    //                //Got new Photos JSON object
-
-    //                if (newPhotos.lastphototime != '') {
-    //                    photoPageLoadTime = newPhotos.lastphototime;
-
-    //                    if (photoIsFirstFrontPage && (typeof newPhotos.html != "undefined")) {
-    //                        $("#photosvideos div.withcomment:first").before(newPhotos.html);
-    //                        var PhotosnewUpdatesLi = $("#photosvideos div.newPhotoupdates");
-    //                        //PhotosnewUpdatesLi.slideDown();
-    //                        var counter = 0;
-
-    //                        //After the new HTML is added to the Page, go through the new items and animate them
-    //                        PhotosnewUpdatesLi.each(function (index) {
-    //                            var pthisId = $(this).attr("id");
-    //                            vpostId = pthisId.substring(pthisId.indexOf('-') + 1);
-    //                            photoPostsOnPageQS += "&vp[]=" + vpostId;
-    //                            if (!(pthisId in photoPostsOnPage)) photoPostsOnPage.unshift(pthisId);
-    //                            if (isElementVisible(this)) { $(this).fadeIn(2500, function () { $(this).removeClass('newPhotoupdates'); }); }
-    //                            counter++;
-    //                        });
+    toggleUpdates('newphotos', 'on');
+    getPhotos();
 
 
-    //                        //This removes items that move off the end of the visible area
-    //                        $("#photosvideos div.withcomment").each(function (index) {
-    //                            if (index >= photoMaxItemsOnPage) {
-    //                                $(this).hide();
-    //                                $(this).remove();
-    //                            }
-    //                        });
 
-    //                        //Add the Pretty photo stuff to the photos
-    //                        $("a[rel^='EPLPhoto']").prettyPhoto({
-    //                            theme: 'light_square',
-    //                            animation_speed: 'fast',
-    //                            overlay_gallery: false,
-    //                            changepicturecallback: function () { changeDescription(); }
-    //                        });
-
-    //                        //There are new photos, update the count
-    //                        $("#photoCount").text(newPhotos.photocount);
-
-    //                    }
-    //                }
-
-    //                //Turns the Timer back on after the new Posts have been loaded.
-    //                toggleUpdates('unewphotos', 'on');
-
-    //            },
-    //            error: function (xhr, ajaxOptions, thrownError) {
-    //                //                alert(xhr.status);
-    //                //                alert(thrownError);
-    //            }
-    //        });
+    //    function isElementVisible(elem) {
+    //        elem = $(elem); if (!elem.length) { return false; }
+    //        var docViewTop = $(window).scrollTop(); var docViewBottom = docViewTop + $(window).height(); var elemTop = elem.offset().top; var elemBottom = elemTop + elem.height(); var isVisible = ((elemBottom >= docViewTop) && (elemTop <= docViewBottom) && (elemBottom <= docViewBottom) && (elemTop >= docViewTop)); return isVisible;
     //    }
-
-    function isElementVisible(elem) {
-        elem = $(elem); if (!elem.length) { return false; }
-        var docViewTop = $(window).scrollTop(); var docViewBottom = docViewTop + $(window).height(); var elemTop = elem.offset().top; var elemBottom = elemTop + elem.height(); var isVisible = ((elemBottom >= docViewTop) && (elemTop <= docViewBottom) && (elemBottom <= docViewBottom) && (elemTop >= docViewTop)); return isVisible;
-    }
-
+    var getNewTweets = '0';
+    var getPhotosUpdate = '0';
     function toggleUpdates(updater, newStatus) {
         switch (updater) {
             case "newtweets":
@@ -245,7 +216,7 @@ jQuery(function ($) {
                     clearInterval(getNewTweets); getNewTweets = '0';
                 }
                 break;
-            case "unewphotos":
+            case "newphotos":
                 if (newStatus == 'on') {
                     getPhotosUpdate = setInterval(getPhotos, photoUpdateRate);
                 }
@@ -258,54 +229,64 @@ jQuery(function ($) {
 
 
 
-    function titleCount() {
-        if (isFirstFrontPage) { var n = $('li.newupdates').length; } else { var n = newUnseenUpdates; }
-        if (n <= 0) { if (document.title.match(/\([\d+]\)/)) { document.title = document.title.replace(/(.*)\([\d]+\)(.*)/, "$1$2"); } } else { if (document.title.match(/\((\d+)\)/)) { document.title = document.title.replace(/\((\d+)\)/, "(" + n + ")"); } else { document.title = '(1) ' + document.title; } }
-    }
+    //    function titleCount() {
+    //        if (isFirstFrontPage) { var n = $('li.newupdates').length; } else { var n = newUnseenUpdates; }
+    //        if (n <= 0) { if (document.title.match(/\([\d+]\)/)) { document.title = document.title.replace(/(.*)\([\d]+\)(.*)/, "$1$2"); } } else { if (document.title.match(/\((\d+)\)/)) { document.title = document.title.replace(/\((\d+)\)/, "(" + n + ")"); } else { document.title = '(1) ' + document.title; } }
+    //    }
 
-    function autgrow(textarea, min) {
-        var linebreaks = textarea.value.match(/\n/g); if (linebreaks != null && linebreaks.length + 1 >= min) { textarea.rows = (linebreaks.length + 1); }
-        else { textarea.rows = min; }
-    }
-
-    //Tweets
+    //    function autgrow(textarea, min) {
+    //        var linebreaks = textarea.value.match(/\n/g); if (linebreaks != null && linebreaks.length + 1 >= min) { textarea.rows = (linebreaks.length + 1); }
+    //        else { textarea.rows = min; }
+    //    }
 
 
     $.ajaxSetup({
         timeout: updateTimeout,
         cache: false,
         error: function ()
-        { toggleUpdates('newtweets', 'on'); }
+        { toggleUpdates('newtweets', 'on'); toggleUpdates('newphotos', 'on'); }
     });
 
-    if (prologuePostsUpdates) { toggleUpdates('newtweets', 'on'); }
+    //    //Photos
+    //    $.ajaxSetup({
+    //        timeout: updateTimeout,
+    //        cache: false,
+    //        error: function ()
+    //        { toggleUpdates('newphotos', 'on'); }
+    //    });
 
-    if (disableAutoupdate) {
-        toggleUpdates('newtweets', 'off');
-    }
-    else {
-        toggleUpdates('newtweets', 'on');
-    }
 
-    $("#tweetlist li.tweet").each(function () {
-        var thisId = $(this).attr("id");
-        vpostId = thisId.substring(thisId.indexOf('-') + 1);
-        postsOnPage.push(thisId);
-        postsOnPageQS += "&vp[]=" + vpostId;
-    });
 
-    function removeYellow() {
-        if (isFirstFrontPage) {
-            $('#tweetlist li.newupdates').each(function () {
-                if (isElementVisible(this)) {
-                    $(this).animate({ backgroundColor: '#FFF' }, { duration: 2500 });
-                    $(this).removeClass('newupdates');
-                }
-            });
-        }
-    }
 
-    $(window).scroll(function () { removeYellow(); });
+
+    //    if (prologuePostsUpdates) { toggleUpdates('newtweets', 'on'); }
+
+    //    if (disableAutoupdate) {
+    //        toggleUpdates('newtweets', 'off');
+    //    }
+    //    else {
+    //        toggleUpdates('newtweets', 'on');
+    //    }
+
+    //    $("#tweetlist li.tweet").each(function () {
+    //        var thisId = $(this).attr("id");
+    //        vpostId = thisId.substring(thisId.indexOf('-') + 1);
+    //        postsOnPage.push(thisId);
+    //        postsOnPageQS += "&vp[]=" + vpostId;
+    //    });
+
+    //    function removeYellow() {
+    //        if (isFirstFrontPage) {
+    //            $('#tweetlist li.newupdates').each(function () {
+    //                if (isElementVisible(this)) {
+    //                    $(this).animate({ backgroundColor: '#FFF' }, { duration: 2500 });
+    //                    $(this).removeClass('newupdates');
+    //                }
+    //            });
+    //        }
+    //    }
+
+    //    $(window).scroll(function () { removeYellow(); });
 
 });
 

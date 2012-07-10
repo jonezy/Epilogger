@@ -123,6 +123,12 @@ namespace Epilogger.Web {
                 new { controller = "events", action = "LiveGetLastTweetsJson" }
             );
 
+            routes.MapRoute(
+                "LiveGetLastPhotosJson",
+                "Events/LiveGetLastPhotosJson",
+                new { controller = "events", action = "LiveGetLastPhotosJson" }
+            );
+
 
             routes.MapRoute(
                 "GetBrowseOverviewTabData",

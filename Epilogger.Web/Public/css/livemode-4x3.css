@@ -169,6 +169,10 @@ h1 {
     display: none;
 }
 
+.newImage {
+    display: none;
+}
+
 
 /* ------------------------------------- [ CUSTOM COLOURS ] --- */
 .colour1 	{ color:#ce0088 !important}

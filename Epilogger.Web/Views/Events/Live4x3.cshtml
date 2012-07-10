@@ -28,29 +28,32 @@
 
             //Parameters to control the Tweet list
             var pageLoadTime = '@string.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.UtcNow)';
+            var photoPageLoadTime = '@string.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.UtcNow.AddMinutes(-120))';
             
+            var updateTimeout = 10000;
+            
+            var updateRate = 40000;
+            var photoUpdateRate = 15000;
+
+
+
             //var updateTimeout = 5000;
             //var updateRate = 10000;
-            var updateTimeout = 10000;
-            var updateRate = 40000;
-            
-            
+            //var photoUpdateTimeout = 10000;
             //var prologuePostsUpdates = 1;
             //var isFirstFrontPage = 1;   
-            var postsOnPage = new Array;
-            var postsOnPageQS = '';
-            var maxItemsOnPage = 6;
-
+            //var postsOnPage = new Array;
+            //var postsOnPageQS = '';
+            //var maxItemsOnPage = 6;
             //Parameters to control the Image List
-            var photoUpdateTimeout = 5000;
-            var photoUpdateRate = 15000;
-            var photoProloguePostsUpdates = 1;
-            var photoIsFirstFrontPage = 1;
+            
+            //var photoProloguePostsUpdates = 1;
+            //var photoIsFirstFrontPage = 1;
             //var photoPageLoadTime = pageLoadTime;
     
-            var photoPostsOnPage = new Array;
-            var photoPostsOnPageQS = '';
-            var photoMaxItemsOnPage = 9;
+            //var photoPostsOnPage = new Array;
+            //var photoPostsOnPageQS = '';
+            //var photoMaxItemsOnPage = 9;
 
         </script>
 
@@ -96,14 +99,14 @@
                 {
                     if (imgCount < 3)
                     {
-                        <div class="imgLarge">
+                        <div class="imgLarge images">
                             <img src="@img.Fullsize" width="300" alt="" />
                         </div>
                     }
                     else
                     {
                         if (imgCount == 3) { <br style="clear:both"/> }
-                        <div class="imgSmall">
+                        <div class="imgSmall images">
                             <img src="@img.Fullsize" alt="" width="150" />
                         </div>
                     }
@@ -132,7 +135,7 @@
 		
 		<div id="top-tweeters">
 			<h1 class="colour1">Top Tweeters</h1>
-            <ul>
+            <ul id="topTweets">
                 @foreach (var tt in Model.TopTweeters.Take(3))
                 {
                     <li>
@@ -146,9 +149,9 @@
 		
 		<div id="stats-credits">
 			<h1 class="colour1">Statistics</h1>
-			<img src="/Public/images/livemode/icon-numtweets.png" alt="" /> @Model.EpiloggerCounts.TweetCount &nbsp;&nbsp;&nbsp;
-			<img src="/Public/images/livemode/icon-numphotos.png" alt=""/> @Model.EpiloggerCounts.PhotoCount &nbsp;&nbsp;&nbsp;
-			<img src="/Public/images/livemode/icon-numpeople.png" alt="" /> @Model.EpiloggerCounts.UniqueTweeterCount
+			<img src="/Public/images/livemode/icon-numtweets.png" alt="" /><span id="tweetCount"> @Model.EpiloggerCounts.TweetCount</span> &nbsp;&nbsp;&nbsp;
+			<img src="/Public/images/livemode/icon-numphotos.png" alt="" /><span id="photoCount"> @Model.EpiloggerCounts.PhotoCount</span> &nbsp;&nbsp;&nbsp;
+			<img src="/Public/images/livemode/icon-numpeople.png" alt="" /><span id="uniqueCount"> @Model.EpiloggerCounts.UniqueTweeterCount</span>
 			
 			<br/><br/>
 			
