@@ -33,7 +33,8 @@ div.single-tweet {
 	border-radius:2%;
 	padding:5%;
 	box-shadow:0 0 0.25em #ccc;
-	text-wrap:unrestricted}
+	text-wrap:unrestricted;
+	line-height:1.35em; }
 
 div.single-tweet.retweet {
 	background:#fff url('img/icon-retweet.png') top right no-repeat;}
@@ -123,7 +124,8 @@ div#logo img {
 	top:-15%}
 
 div#stats-credits img {
-	vertical-align:middle}
+	vertical-align:middle;
+	padding-right:2.5%;}
 
 div#top-tweeters {
 	width:20%;}
