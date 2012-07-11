@@ -85,6 +85,7 @@ jQuery(function ($) {
         var animationCallback = null;
         animationCallback = function () {
             //tweetList = $("#divStaging .tweet");
+            if (tweetList == null) { return false; }
             if (++i < tweetList.length) {
                 if (stopAnimation) return false;
 
@@ -195,8 +196,7 @@ jQuery(function ($) {
         });
     }
 
-    toggleUpdates('newphotos', 'on');
-    getPhotos();
+
 
 
 
@@ -246,6 +246,8 @@ jQuery(function ($) {
         error: function ()
         { toggleUpdates('newtweets', 'on'); toggleUpdates('newphotos', 'on'); }
     });
+
+    //  getPhotos();
 
     //    //Photos
     //    $.ajaxSetup({
