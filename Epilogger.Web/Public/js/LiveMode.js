@@ -196,8 +196,8 @@ jQuery(function ($) {
         });
     }
 
-
-
+    toggleUpdates('newphotos', 'on');
+    getPhotos();
 
 
     //    function isElementVisible(elem) {
