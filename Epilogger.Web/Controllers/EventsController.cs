@@ -1672,7 +1672,7 @@ namespace Epilogger.Web.Controllers {
 
                     var lastphototime = string.Empty;
                     var theFirst = true;
-                    var recordCount = 1;
+                    var recordCount = 0;
                     var html = new StringBuilder();
 
                     var newImages = new List<String>();

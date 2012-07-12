@@ -152,6 +152,7 @@ namespace Epilogger.Web
         public List<Image> FindForLiveModeAjax(int eventId, DateTime pageLoadTime, int numberToReturn)
         {
             return db.Images.Where(t => t.EventID == eventId && t.DateTime > pageLoadTime.AddSeconds(1)).OrderByDescending(t => t.DateTime).Take(numberToReturn).ToList();
+            //return db.Images.Where(t => t.EventID == eventId && t.DateTime > pageLoadTime).OrderByDescending(t => t.DateTime).Take(numberToReturn).ToList();
         }
 
     }
