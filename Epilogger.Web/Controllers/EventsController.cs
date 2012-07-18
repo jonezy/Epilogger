@@ -1515,13 +1515,25 @@ namespace Epilogger.Web.Controllers {
         {
             var imageComment = _ts.FindByImageID(photoid, eventid).FirstOrDefault();
 
-            Debug.Assert(imageComment != null, "imageComment != null");
-            var model = new TweetReplyViewModel
+            TweetReplyViewModel model;
+            if (imageComment != null)
             {
-                Tweet = _ts.FindByTwitterID(imageComment.TwitterID),
-                Event = _es.FindByID(eventid),
-                IsTwitterAuthed = CurrentUserTwitterAuthorization != null
-            };
+                model = new TweetReplyViewModel
+                {
+                    Tweet = _ts.FindByTwitterID(imageComment.TwitterID),
+                    Event = _es.FindByID(eventid),
+                    IsTwitterAuthed = CurrentUserTwitterAuthorization != null
+                };    
+            }
+            else
+            {
+                model = new TweetReplyViewModel
+                {
+                    Tweet = new Tweet(),
+                    Event = _es.FindByID(eventid),
+                    IsTwitterAuthed = CurrentUserTwitterAuthorization != null
+                }; 
+            }
             
             var apiClient = new Epilogr.APISoapClient();
             model.ShortEventURL = apiClient.CreateUrl("http://epilogger.com/events/PhotoDetails/" + eventid + "/" + photoid).ShortenedUrl;

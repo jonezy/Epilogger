@@ -31,6 +31,11 @@ namespace Epilogger.Web.Areas.Api.Models
         {
             return Mapper.Map<User, ApiUser>(_us.GetUserByUsername(userName));
         }
+
+        public User GetFullUserByUsername(string userName)
+        {
+            return _us.GetUserByUsername(userName);
+        }
         
         public ApiUser GetUserByEmail(string email)
         {

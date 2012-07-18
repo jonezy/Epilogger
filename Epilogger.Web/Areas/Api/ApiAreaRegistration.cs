@@ -17,6 +17,14 @@ namespace Epilogger.Web.Areas.Api
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
+
+            
+            context.MapRoute(
+                "AuthEPLUser",
+                "Api/Users/Authenticate",
+                new { controller = "ApiEvents", action = "AuthEPLUser" }
+            );
+
             context.MapRoute(
                 "ListTrendingEvents",
                 "Api/Events/Trending",
@@ -184,16 +192,22 @@ namespace Epilogger.Web.Areas.Api
                 new { controller = "ApiEvents", action = "GetUserByEmail", email = UrlParameter.Optional }
             );
 
-
-
-            /*
-             * 
-             * 
-             * 
-             *
-             * TopPhotosAndTweetByEventID
-             *
-             */
+            /* Stats */
+            context.MapRoute(
+                "GeckoGetUserGrowthDayOverDay",
+                "Api/Stats/Gecko/UserGrowth",
+                new { controller = "ApiEvents", action = "GeckoGetUserGrowthDayOverDay" }
+            );
+            context.MapRoute(
+                "GeckoGetUserGrowthLastWeek",
+                "Api/Stats/Gecko/UserGrowthLastWeek",
+                new { controller = "ApiEvents", action = "GeckoGetUserGrowthLastWeek" }
+            );
+            context.MapRoute(
+                "GeckoGetUserGrowthLastMonth",
+                "Api/Stats/Gecko/UserGrowthLastMonth",
+                new { controller = "ApiEvents", action = "GeckoGetUserGrowthLastMonth" }
+            );
 
 
 

@@ -467,6 +467,11 @@ namespace Epilogger.Data{
             sp.Command.AddParameter("EventID",EventID,DbType.Int32);
             return sp;
         }
+        public StoredProcedure DeleteEventTweetsBatch2(int EventID){
+            StoredProcedure sp=new StoredProcedure("DeleteEventTweetsBatch2",this.Provider);
+            sp.Command.AddParameter("EventID",EventID,DbType.Int32);
+            return sp;
+        }
         public StoredProcedure DeleteEventURLsBatch(int EventID){
             StoredProcedure sp=new StoredProcedure("DeleteEventURLsBatch",this.Provider);
             sp.Command.AddParameter("EventID",EventID,DbType.Int32);
@@ -528,6 +533,12 @@ namespace Epilogger.Data{
         public StoredProcedure GetUserDashboardActivity(string UserID){
             StoredProcedure sp=new StoredProcedure("GetUserDashboardActivity",this.Provider);
             sp.Command.AddParameter("UserID",UserID,DbType.AnsiString);
+            return sp;
+        }
+        public StoredProcedure GetUserGrowthStats(DateTime FromDate,DateTime ToDate){
+            StoredProcedure sp=new StoredProcedure("GetUserGrowthStats",this.Provider);
+            sp.Command.AddParameter("FromDate",FromDate,DbType.DateTime);
+            sp.Command.AddParameter("ToDate",ToDate,DbType.DateTime);
             return sp;
         }
         public StoredProcedure GetUsersEventActivity(string UserID){

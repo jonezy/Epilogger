@@ -238,6 +238,9 @@
     <Compile Include="Areas\Api\Models\Classes\ApiTopImageAndTweet.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiUser.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiVenue.cs" />
+    <Compile Include="Areas\Api\Models\GeckoClasses\GeckoUserGrowth.cs" />
+    <Compile Include="Areas\Api\Models\IStatManager.cs" />
+    <Compile Include="Areas\Api\Models\StatManager.cs" />
     <Compile Include="Areas\Api\Models\VenueManager.cs" />
     <Compile Include="Areas\Api\Models\IVenueManager.cs" />
     <Compile Include="Areas\Api\Models\IUserManager.cs" />
@@ -311,6 +314,7 @@
     <Compile Include="Core\Services\CategoryService.cs" />
     <Compile Include="Core\Services\BetaService.cs" />
     <Compile Include="Core\Services\APIApplicationService.cs" />
+    <Compile Include="Core\Services\StatsService.cs" />
     <Compile Include="Core\Services\StatusMessagesService.cs" />
     <Compile Include="Core\Services\UserLogService.cs" />
     <Compile Include="Core\Services\ExternalLinksService.cs" />
@@ -323,6 +327,7 @@
     <Compile Include="Core\Services\UserService.cs" />
     <Compile Include="Core\Services\UserTwitterActionService.cs" />
     <Compile Include="Core\Services\VenueService.cs" />
+    <Compile Include="Core\Stats\UserGrowth.cs" />
     <Compile Include="Core\Stats\WidgetTotals.cs" />
     <Compile Include="Core\Stats\HomepageTotals.cs" />
     <Compile Include="Core\Stats\TopTweeters.cs" />

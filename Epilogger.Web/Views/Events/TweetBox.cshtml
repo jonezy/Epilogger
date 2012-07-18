@@ -48,6 +48,7 @@
         whenkeydown(maxLength);
 
         var replyTo = '@@@Model.Tweet.FromUserScreenName';
+        if (replyTo == '@@') { replyTo = ''; };
         var hashTag = '@(Model.Event.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0].Contains("#") ? Model.Event.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0] : "#" + Model.Event.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0])';
         var eventUrl = '@Model.ShortEventURL';
 

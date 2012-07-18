@@ -28,7 +28,8 @@
 
             //Parameters to control the Tweet list
             var pageLoadTime = '@string.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.UtcNow)';
-            var photoPageLoadTime = '@string.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.Now)';
+            var photoPageLoadTime = '@string.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.UtcNow)';
+
             
             var updateTimeout = 10000;
             
@@ -145,7 +146,7 @@
                         @tt.Total tweets
                     </li>
                 }
-            </ul>			
+            </ul>
 		</div>
 		
 		<div id="stats-credits">

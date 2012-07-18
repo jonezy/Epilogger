@@ -88,7 +88,7 @@ namespace Epilogger.Web {
         }
         public int PastEventCount()
         {
-            return db.Events.Where(e => e.EndDateTime < DateTime.UtcNow).Count();
+            return db.Events.Count(e => e.EndDateTime < DateTime.UtcNow);
         }
         public List<Event> PastEventsPaged(int currentPage, int recordsPerPage)
         {
