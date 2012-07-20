@@ -371,6 +371,17 @@ namespace Epilogger.Data
             }
         }
 
+        public IQueryable<MemoryBox> MemoryBoxes
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.MemoryBoxes
+                       where items.UserId == _ID
+                       select items;
+            }
+        }
+
         public IQueryable<UserRole> UserRoles
         {
             get
@@ -415,7 +426,7 @@ namespace Epilogger.Data
             }
         }
 
-        public IQueryable<UserFollowsUser> UserFollowsUsers5
+        public IQueryable<UserFollowsUser> UserFollowsUsers6
         {
             get
             {
@@ -759,6 +770,175 @@ namespace Epilogger.Data
         #endregion
 
         #region Foreign Keys
+        #endregion
+
+
+        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+        public event PropertyChangingEventHandler PropertyChanging;
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void SendPropertyChanging()
+        {
+            var handler = PropertyChanging;
+            if (handler != null)
+               handler(this, emptyChangingEventArgs);
+        }
+
+        protected virtual void SendPropertyChanged(String propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+	}
+	
+    
+    
+    /// <summary>
+    /// A class which represents the MemoryBoxes table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.MemoryBox 
+    /// </summary>
+
+	public partial class MemoryBox: INotifyPropertyChanging, INotifyPropertyChanged
+	{
+        partial void OnLoaded();
+        partial void OnValidate(System.Data.Linq.ChangeAction action);
+        partial void OnCreated();
+	    
+	    public MemoryBox(){
+	        OnCreated();
+	    }
+	    
+	    #region Properties
+	    
+        partial void OnIDChanging(int value);
+        partial void OnIDChanged();
+		
+		private int _ID;
+		public int ID { 
+		    get{
+		        return _ID;
+		    } 
+		    set{
+		        this.OnIDChanging(value);
+                this.SendPropertyChanging();
+                this._ID = value;
+                this.SendPropertyChanged("ID");
+                this.OnIDChanged();
+		    }
+		}
+		
+        partial void OnUserIdChanging(Guid value);
+        partial void OnUserIdChanged();
+		
+		private Guid _UserId;
+		public Guid UserId { 
+		    get{
+		        return _UserId;
+		    } 
+		    set{
+		        this.OnUserIdChanging(value);
+                this.SendPropertyChanging();
+                this._UserId = value;
+                this.SendPropertyChanged("UserId");
+                this.OnUserIdChanged();
+		    }
+		}
+		
+        partial void OnNameChanging(string value);
+        partial void OnNameChanged();
+		
+		private string _Name;
+		public string Name { 
+		    get{
+		        return _Name;
+		    } 
+		    set{
+		        this.OnNameChanging(value);
+                this.SendPropertyChanging();
+                this._Name = value;
+                this.SendPropertyChanged("Name");
+                this.OnNameChanged();
+		    }
+		}
+		
+        partial void OnTypeChanging(string value);
+        partial void OnTypeChanged();
+		
+		private string _Type;
+		public string Type { 
+		    get{
+		        return _Type;
+		    } 
+		    set{
+		        this.OnTypeChanging(value);
+                this.SendPropertyChanging();
+                this._Type = value;
+                this.SendPropertyChanged("Type");
+                this.OnTypeChanged();
+		    }
+		}
+		
+        partial void OnCreatedDateTimeChanging(DateTime value);
+        partial void OnCreatedDateTimeChanged();
+		
+		private DateTime _CreatedDateTime;
+		public DateTime CreatedDateTime { 
+		    get{
+		        return _CreatedDateTime;
+		    } 
+		    set{
+		        this.OnCreatedDateTimeChanging(value);
+                this.SendPropertyChanging();
+                this._CreatedDateTime = value;
+                this.SendPropertyChanged("CreatedDateTime");
+                this.OnCreatedDateTimeChanged();
+		    }
+		}
+		
+        partial void OnIsActiveChanging(bool value);
+        partial void OnIsActiveChanged();
+		
+		private bool _IsActive;
+		public bool IsActive { 
+		    get{
+		        return _IsActive;
+		    } 
+		    set{
+		        this.OnIsActiveChanging(value);
+                this.SendPropertyChanging();
+                this._IsActive = value;
+                this.SendPropertyChanged("IsActive");
+                this.OnIsActiveChanged();
+		    }
+		}
+		
+
+        #endregion
+
+        #region Foreign Keys
+        public IQueryable<User> Users
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Users
+                       where items.ID == _UserId
+                       select items;
+            }
+        }
+
+        public IQueryable<MemoryBoxItem> MemoryBoxItems
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.MemoryBoxItems
+                       where items.MemboxId == _ID
+                       select items;
+            }
+        }
+
         #endregion
 
 
@@ -3886,6 +4066,147 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.Images
                        where items.ID == _ImageID
+                       select items;
+            }
+        }
+
+        #endregion
+
+
+        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+        public event PropertyChangingEventHandler PropertyChanging;
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void SendPropertyChanging()
+        {
+            var handler = PropertyChanging;
+            if (handler != null)
+               handler(this, emptyChangingEventArgs);
+        }
+
+        protected virtual void SendPropertyChanged(String propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+	}
+	
+    
+    
+    /// <summary>
+    /// A class which represents the MemoryBoxItems table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.MemoryBoxItem 
+    /// </summary>
+
+	public partial class MemoryBoxItem: INotifyPropertyChanging, INotifyPropertyChanged
+	{
+        partial void OnLoaded();
+        partial void OnValidate(System.Data.Linq.ChangeAction action);
+        partial void OnCreated();
+	    
+	    public MemoryBoxItem(){
+	        OnCreated();
+	    }
+	    
+	    #region Properties
+	    
+        partial void OnIDChanging(int value);
+        partial void OnIDChanged();
+		
+		private int _ID;
+		public int ID { 
+		    get{
+		        return _ID;
+		    } 
+		    set{
+		        this.OnIDChanging(value);
+                this.SendPropertyChanging();
+                this._ID = value;
+                this.SendPropertyChanged("ID");
+                this.OnIDChanged();
+		    }
+		}
+		
+        partial void OnMemboxIdChanging(int value);
+        partial void OnMemboxIdChanged();
+		
+		private int _MemboxId;
+		public int MemboxId { 
+		    get{
+		        return _MemboxId;
+		    } 
+		    set{
+		        this.OnMemboxIdChanging(value);
+                this.SendPropertyChanging();
+                this._MemboxId = value;
+                this.SendPropertyChanged("MemboxId");
+                this.OnMemboxIdChanged();
+		    }
+		}
+		
+        partial void OnItemTypeChanging(string value);
+        partial void OnItemTypeChanged();
+		
+		private string _ItemType;
+		public string ItemType { 
+		    get{
+		        return _ItemType;
+		    } 
+		    set{
+		        this.OnItemTypeChanging(value);
+                this.SendPropertyChanging();
+                this._ItemType = value;
+                this.SendPropertyChanged("ItemType");
+                this.OnItemTypeChanged();
+		    }
+		}
+		
+        partial void OnItemIdChanging(int? value);
+        partial void OnItemIdChanged();
+		
+		private int? _ItemId;
+		public int? ItemId { 
+		    get{
+		        return _ItemId;
+		    } 
+		    set{
+		        this.OnItemIdChanging(value);
+                this.SendPropertyChanging();
+                this._ItemId = value;
+                this.SendPropertyChanged("ItemId");
+                this.OnItemIdChanged();
+		    }
+		}
+		
+        partial void OnAddedDateTimeChanging(DateTime? value);
+        partial void OnAddedDateTimeChanged();
+		
+		private DateTime? _AddedDateTime;
+		public DateTime? AddedDateTime { 
+		    get{
+		        return _AddedDateTime;
+		    } 
+		    set{
+		        this.OnAddedDateTimeChanging(value);
+                this.SendPropertyChanging();
+                this._AddedDateTime = value;
+                this.SendPropertyChanged("AddedDateTime");
+                this.OnAddedDateTimeChanged();
+		    }
+		}
+		
+
+        #endregion
+
+        #region Foreign Keys
+        public IQueryable<MemoryBox> MemoryBoxes
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.MemoryBoxes
+                       where items.ID == _MemboxId
                        select items;
             }
         }

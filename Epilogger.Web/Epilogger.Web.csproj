@@ -207,6 +207,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="App_Data\IMemoryBox.cs" />
+    <Compile Include="App_Data\IMemoryBoxItem.cs" />
     <Compile Include="App_Data\StoredProcedures.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -231,13 +233,18 @@
     <Compile Include="Areas\Api\Models\Classes\ApiCheckIn.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiEvent.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiImage.cs" />
+    <Compile Include="Areas\Api\Models\Classes\ApiMemoryBox.cs" />
+    <Compile Include="Areas\Api\Models\Classes\ApiMemoryBoxItem.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiSearchInEvent.cs" />
     <Compile Include="Areas\Api\Models\CategoryManager.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiTweet.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiTweeter.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiTopImageAndTweet.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiUser.cs" />
+    <Compile Include="Areas\Api\Models\Classes\ApiUserFollowsEvent.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiVenue.cs" />
+    <Compile Include="Areas\Api\Models\IMemoryBoxManager.cs" />
+    <Compile Include="Areas\Api\Models\MemoryBoxManager.cs" />
     <Compile Include="Areas\Api\Models\GeckoClasses\GeckoUserGrowth.cs" />
     <Compile Include="Areas\Api\Models\IStatManager.cs" />
     <Compile Include="Areas\Api\Models\StatManager.cs" />
@@ -314,6 +321,8 @@
     <Compile Include="Core\Services\CategoryService.cs" />
     <Compile Include="Core\Services\BetaService.cs" />
     <Compile Include="Core\Services\APIApplicationService.cs" />
+    <Compile Include="Core\Services\MemoryBoxItemService.cs" />
+    <Compile Include="Core\Services\MemoryBoxService.cs" />
     <Compile Include="Core\Services\StatsService.cs" />
     <Compile Include="Core\Services\StatusMessagesService.cs" />
     <Compile Include="Core\Services\UserLogService.cs" />

@@ -43,6 +43,27 @@ namespace Epilogger.Web.Areas.Api.Models
         }
 
 
+        public ApiUserFollowsEvent SaveUserFollowsEvent(ApiUserFollowsEvent model)
+        {
+            var newmodel = Mapper.Map<ApiUserFollowsEvent, UserFollowsEvent>(model);
+            return Mapper.Map<UserFollowsEvent, ApiUserFollowsEvent>(_us.SaveUserFollowsEvent(newmodel));
+        }
+
+        public bool DeleteEventSubscription(Guid userId, int eventId)
+        {
+            try
+            {
+                _us.DeleteEventSubscription(userId, eventId);
+                return true;
+            }
+            catch (Exception)
+            {
+                return true;
+            }
+            
+            
+        }
+
     }
  
 }

@@ -27,13 +27,18 @@ namespace Epilogger.Web {
             return base.GetRepository<User>().Delete(userId);
         }
 
-        public object SaveUserFollowsEvent(UserFollowsEvent entity) {
-            return base.GetRepository<UserFollowsEvent>().Add(entity);
+        public UserFollowsEvent SaveUserFollowsEvent(UserFollowsEvent entity)
+        {
+            var thereturn = GetRepository<UserFollowsEvent>().Add(entity);
+            entity.ID = int.Parse(thereturn.ToString());
+            return entity;
         }
 
-        public object SaveUserRatesEvent(UserRatesEvent entity)
+        public UserRatesEvent SaveUserRatesEvent(UserRatesEvent entity)
         {
-            return base.GetRepository<UserRatesEvent>().Add(entity);
+            var theresult = GetRepository<UserRatesEvent>().Add(entity);
+            entity.ID = int.Parse(theresult.ToString());
+            return entity;
         }
 
         public List<UserRatesEvent> GetUserEventRatings(Guid id)

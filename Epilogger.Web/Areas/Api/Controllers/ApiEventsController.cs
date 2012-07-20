@@ -37,6 +37,7 @@ namespace Epilogger.Web.Areas.Api.Controllers
         readonly IUserManager _userManager;
         readonly IVenueManager _venueManager;
         readonly IStatManager _statManager;
+        readonly IMemoryBoxManager _memBoxManager;
 
         public ApiEventsController()
         {
@@ -48,6 +49,7 @@ namespace Epilogger.Web.Areas.Api.Controllers
             _userManager = new UserManager();
             _venueManager = new VenueManager();
             _statManager = new StatManager();
+            _memBoxManager = new MemoryBoxManager();
         }
         #endregion
 
@@ -205,47 +207,58 @@ namespace Epilogger.Web.Areas.Api.Controllers
         #endregion
 
         #region User
-        //My Events
-
-            //Login
-
-
+        
+            [HmacAuthorization]
             public virtual JsonResult GetUserByID(Guid userId)
             {
                 return Json(_userManager.GetUserByID(userId), JsonRequestBehavior.AllowGet);
             }
 
+            [HmacAuthorization]
             public virtual JsonResult GetUserByUsername(string userName)
             {
                 return Json(_userManager.GetUserByUsername(userName), JsonRequestBehavior.AllowGet);
             }
 
+            [HmacAuthorization]
             public virtual JsonResult GetUserByEmail(string email)
             {
                 return Json(_userManager.GetUserByEmail(email), JsonRequestBehavior.AllowGet);
             }
 
+            [HttpPost]
+            public virtual JsonResult SaveUserFollowsEvent(ApiUserFollowsEvent ufe)
+            {
+                return Json(_userManager.SaveUserFollowsEvent(ufe), JsonRequestBehavior.AllowGet);
+            }
+
+            [HmacAuthorization]
+            public virtual JsonResult DeleteUserEventSubscription(Guid userId, int eventId)
+            {
+                return Json(_userManager.DeleteEventSubscription(userId, eventId), JsonRequestBehavior.AllowGet);
+            }
+
+
         #endregion
 
         #region User Authorization
 
-        [GetHeadersFilterAttribute, HmacAuthorization]
-            public virtual JsonResult AuthEPLUser(NameValueCollection headers)
-        {
-
-            var userNamePass = Encoding.UTF8.GetString(Convert.FromBase64String(headers["Authorization"].Substring(6)));
-            var splitUserPass = userNamePass.Split(new string[] { ":" }, StringSplitOptions.None);
-
-            var user = _userManager.GetFullUserByUsername(splitUserPass[0]);
-            if (!BCryptHelper.CheckPassword(splitUserPass[1], user.Password))
+            [GetHeadersFilterAttribute, HmacAuthorization]
+                public virtual JsonResult AuthEPLUser(NameValueCollection headers)
             {
-                return Json(new { Error = true, Message = "There was a problem with either the username or password. Please correct and try again." }, JsonRequestBehavior.AllowGet);
-            }
 
-            return Json(Mapper.Map<User, ApiUser>(user), JsonRequestBehavior.AllowGet);
+                var userNamePass = Encoding.UTF8.GetString(Convert.FromBase64String(headers["Authorization"].Substring(6)));
+                var splitUserPass = userNamePass.Split(new string[] { ":" }, StringSplitOptions.None);
+
+                var user = _userManager.GetFullUserByUsername(splitUserPass[0]);
+                if (!BCryptHelper.CheckPassword(splitUserPass[1], user.Password))
+                {
+                    return Json(new { Error = true, Message = "There was a problem with either the username or password. Please correct and try again." }, JsonRequestBehavior.AllowGet);
+                }
+
+                return Json(Mapper.Map<User, ApiUser>(user), JsonRequestBehavior.AllowGet);
          
-        }
-
+            }
 
         #endregion
 
@@ -287,80 +300,97 @@ namespace Epilogger.Web.Areas.Api.Controllers
 
         #endregion
 
+        #region MemoryBoxes
+
+            [HmacAuthorization, HttpPost]
+            public virtual JsonResult AddItemToMemBox(ApiMemoryBoxItem memBoxItem)
+            {
+                return Json(_memBoxManager.Save(memBoxItem), JsonRequestBehavior.AllowGet);
+            }
+
+            [HmacAuthorization]
+            public virtual JsonResult RemoveItemFromMemBox(int memBoxItemId)
+            {
+                return Json(_memBoxManager.RemoveMemBoxItem(memBoxItemId), JsonRequestBehavior.AllowGet);
+            }
+
+            [HmacAuthorization]
+            public virtual JsonResult GetAllItemsInMemBoxPaged(int memBoxId, int page, int count)
+            {
+                return Json(_memBoxManager.MemoryBoxItemsByMemBoxIdPaged(memBoxId, page, count), JsonRequestBehavior.AllowGet);
+            }
+
+        #endregion
+
+
         #region Stats
 
             public virtual JsonResult GeckoGetUserGrowthDayOverDay()
             {
                 var growth = _statManager.GetUserGrowth();
-                var GeckoGrowth = new GeckoUserGrowth();
-                var GeckoSettings = new GeckoSettings();
-                GeckoSettings.axisy = new List<string>();
-                GeckoSettings.axisx = new List<string>();
-                GeckoGrowth.item = new List<string>();
+                var geckoGrowth = new GeckoUserGrowth();
+                var geckoSettings = new GeckoSettings {axisy = new List<string>(), axisx = new List<string>()};
+                geckoGrowth.item = new List<string>();
 
-                GeckoSettings.colour = "ee4490";
-                GeckoSettings.axisy.Add(growth.Min(t => t.NumberOfUsers).ToString(CultureInfo.InvariantCulture));
-                GeckoSettings.axisy.Add(growth.Max(t => t.NumberOfUsers).ToString(CultureInfo.InvariantCulture));
+                geckoSettings.colour = "ee4490";
+                geckoSettings.axisy.Add(growth.Min(t => t.NumberOfUsers).ToString(CultureInfo.InvariantCulture));
+                geckoSettings.axisy.Add(growth.Max(t => t.NumberOfUsers).ToString(CultureInfo.InvariantCulture));
 
-                foreach(UserGrowthStats i in growth)
+                foreach (var i in growth)
                 {
-                    GeckoGrowth.item.Add(i.NumberOfUsers.ToString(CultureInfo.InvariantCulture));
+                    geckoGrowth.item.Add(i.NumberOfUsers.ToString(CultureInfo.InvariantCulture));
                 }
 
-                GeckoGrowth.settings = GeckoSettings;
+                geckoGrowth.settings = geckoSettings;
 
-                return Json(GeckoGrowth, JsonRequestBehavior.AllowGet);
+                return Json(geckoGrowth, JsonRequestBehavior.AllowGet);
             }
 
             public virtual JsonResult GeckoGetUserGrowthLastWeek()
             {
                 var growth = _statManager.GetUserGrowth(DateTime.UtcNow.AddDays(-7), DateTime.UtcNow);
-                var GeckoGrowth = new GeckoUserGrowth();
-                var GeckoSettings = new GeckoSettings();
-                GeckoSettings.axisy = new List<string>();
-                GeckoSettings.axisx = new List<string>();
-                GeckoGrowth.item = new List<string>();
+                var geckoGrowth = new GeckoUserGrowth();
+                var geckoSettings = new GeckoSettings {axisy = new List<string>(), axisx = new List<string>()};
+                geckoGrowth.item = new List<string>();
 
-                GeckoSettings.colour = "ee4490";
-                GeckoSettings.axisy.Add(growth.Min(t => t.NumberOfUsers).ToString(CultureInfo.InvariantCulture));
-                GeckoSettings.axisy.Add(growth.Max(t => t.NumberOfUsers).ToString(CultureInfo.InvariantCulture));
-                GeckoSettings.axisx.Add(DateTime.UtcNow.AddDays(-7).ToString("MMMM d"));
-                GeckoSettings.axisx.Add(DateTime.UtcNow.ToString("MMMM d"));
+                geckoSettings.colour = "ee4490";
+                geckoSettings.axisy.Add(growth.Min(t => t.NumberOfUsers).ToString(CultureInfo.InvariantCulture));
+                geckoSettings.axisy.Add(growth.Max(t => t.NumberOfUsers).ToString(CultureInfo.InvariantCulture));
+                geckoSettings.axisx.Add(DateTime.UtcNow.AddDays(-7).ToString("MMMM d"));
+                geckoSettings.axisx.Add(DateTime.UtcNow.ToString("MMMM d"));
 
 
-                foreach (UserGrowthStats i in growth)
+                foreach (var i in growth)
                 {
-                    GeckoGrowth.item.Add(i.NumberOfUsers.ToString(CultureInfo.InvariantCulture));
+                    geckoGrowth.item.Add(i.NumberOfUsers.ToString(CultureInfo.InvariantCulture));
                 }
 
-                GeckoGrowth.settings = GeckoSettings;
+                geckoGrowth.settings = geckoSettings;
 
-                return Json(GeckoGrowth, JsonRequestBehavior.AllowGet);
+                return Json(geckoGrowth, JsonRequestBehavior.AllowGet);
             }
 
             public virtual JsonResult GeckoGetUserGrowthLastMonth()
             {
                 var growth = _statManager.GetUserGrowth(DateTime.UtcNow.AddMonths(-1), DateTime.UtcNow);
-                var GeckoGrowth = new GeckoUserGrowth();
-                var GeckoSettings = new GeckoSettings();
-                GeckoSettings.axisy = new List<string>();
-                GeckoSettings.axisx = new List<string>();
-                GeckoGrowth.item = new List<string>();
+                var geckoGrowth = new GeckoUserGrowth();
+                var geckoSettings = new GeckoSettings {axisy = new List<string>(), axisx = new List<string>()};
+                geckoGrowth.item = new List<string>();
 
-                GeckoSettings.colour = "ee4490";
-                GeckoSettings.axisy.Add(growth.Min(t => t.NumberOfUsers).ToString(CultureInfo.InvariantCulture));
-                GeckoSettings.axisy.Add(growth.Max(t => t.NumberOfUsers).ToString(CultureInfo.InvariantCulture));
-                GeckoSettings.axisx.Add(DateTime.UtcNow.AddMonths(-1).ToString("MMMM d"));
-                GeckoSettings.axisx.Add(DateTime.UtcNow.ToString("MMMM d"));
+                geckoSettings.colour = "ee4490";
+                geckoSettings.axisy.Add(growth.Min(t => t.NumberOfUsers).ToString(CultureInfo.InvariantCulture));
+                geckoSettings.axisy.Add(growth.Max(t => t.NumberOfUsers).ToString(CultureInfo.InvariantCulture));
+                geckoSettings.axisx.Add(DateTime.UtcNow.AddMonths(-1).ToString("MMMM d"));
+                geckoSettings.axisx.Add(DateTime.UtcNow.ToString("MMMM d"));
 
-                foreach (UserGrowthStats i in growth)
+                foreach (var i in growth)
                 {
-                    GeckoGrowth.item.Add(i.NumberOfUsers.ToString(CultureInfo.InvariantCulture));
+                    geckoGrowth.item.Add(i.NumberOfUsers.ToString(CultureInfo.InvariantCulture));
                 }
 
-                GeckoGrowth.settings = GeckoSettings;
+                geckoGrowth.settings = geckoSettings;
 
-                return Json(GeckoGrowth, JsonRequestBehavior.AllowGet);
+                return Json(geckoGrowth, JsonRequestBehavior.AllowGet);
             }
 
 
@@ -368,7 +398,7 @@ namespace Epilogger.Web.Areas.Api.Controllers
 
 
 
-            //NOT IMPLIMENTED
+        //NOT IMPLIMENTED
         //Creates a bunch of events. (Not Implemented)
         [HttpPost]
         public virtual JsonResult EventList(List<Event> items)

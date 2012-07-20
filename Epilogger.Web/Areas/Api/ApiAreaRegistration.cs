@@ -175,6 +175,18 @@ namespace Epilogger.Web.Areas.Api
 
             /* User */
             context.MapRoute(
+                "SaveUserFollowsEvent",
+                "Api/users/user/SaveUserFollowsEvent",
+                new { controller = "ApiEvents", action = "SaveUserFollowsEvent" }
+            );
+
+            context.MapRoute(
+                "DeleteUserEventSubscription",
+                "Api/users/user/DeleteUserEventSubscription/{userId}/{eventId}",
+                new { controller = "ApiEvents", action = "DeleteUserEventSubscription", userId = UrlParameter.Optional, eventId = UrlParameter.Optional }
+            );
+
+            context.MapRoute(
                 "GetUserByID",
                 "Api/users/user/{userid}",
                 new { controller = "ApiEvents", action = "GetUserByID", userid = UrlParameter.Optional }
@@ -191,6 +203,9 @@ namespace Epilogger.Web.Areas.Api
                 "Api/users/user/byemail/{email}",
                 new { controller = "ApiEvents", action = "GetUserByEmail", email = UrlParameter.Optional }
             );
+
+            
+            
 
             /* Stats */
             context.MapRoute(

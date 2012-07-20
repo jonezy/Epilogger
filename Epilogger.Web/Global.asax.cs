@@ -565,8 +565,8 @@ namespace Epilogger.Web {
             Mapper.CreateMap<User, ApiUser>();
             Mapper.CreateMap<Venue, ApiVenue>();
             Mapper.CreateMap<SearchInEventModel, ApiSearchInEvent>();
-            
-            
+            Mapper.CreateMap<ApiUserFollowsEvent, UserFollowsEvent>();
+            Mapper.CreateMap<UserFollowsEvent, ApiUserFollowsEvent>();
 
 
             Mapper.AssertConfigurationIsValid();

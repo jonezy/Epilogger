@@ -10,5 +10,7 @@ namespace Epilogger.Web.Areas.Api.Models
         ApiUser GetUserByUsername(string userName);
         ApiUser GetUserByEmail(string email);
         User GetFullUserByUsername(string userName);
+        ApiUserFollowsEvent SaveUserFollowsEvent(ApiUserFollowsEvent model);
+        bool DeleteEventSubscription(Guid userId, int eventId);
     }
 }

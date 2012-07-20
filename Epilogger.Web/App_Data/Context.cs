@@ -124,6 +124,7 @@ namespace Epilogger.Data
         public Query<EventCategory> EventCategories { get; set; }
         public Query<User> Users { get; set; }
         public Query<APIApplication> APIApplications { get; set; }
+        public Query<MemoryBox> MemoryBoxes { get; set; }
         public Query<Tweet> Tweets { get; set; }
         public Query<ScraperURL> ScraperURLs { get; set; }
         public Query<URL> URLS { get; set; }
@@ -140,6 +141,7 @@ namespace Epilogger.Data
         public Query<Venue> Venues { get; set; }
         public Query<UserInRole> UserInRoles { get; set; }
         public Query<ImageMetaDatum> ImageMetaData { get; set; }
+        public Query<MemoryBoxItem> MemoryBoxItems { get; set; }
         public Query<Image> Images { get; set; }
         public Query<UserTwitterAction> UserTwitterActions { get; set; }
         public Query<ActiveVisitorsQueueOLD> ActiveVisitorsQueueOLDs { get; set; }
@@ -256,6 +258,7 @@ namespace Epilogger.Data
             EventCategories = new Query<EventCategory>(provider);
             Users = new Query<User>(provider);
             APIApplications = new Query<APIApplication>(provider);
+            MemoryBoxes = new Query<MemoryBox>(provider);
             Tweets = new Query<Tweet>(provider);
             ScraperURLs = new Query<ScraperURL>(provider);
             URLS = new Query<URL>(provider);
@@ -272,6 +275,7 @@ namespace Epilogger.Data
             Venues = new Query<Venue>(provider);
             UserInRoles = new Query<UserInRole>(provider);
             ImageMetaData = new Query<ImageMetaDatum>(provider);
+            MemoryBoxItems = new Query<MemoryBoxItem>(provider);
             Images = new Query<Image>(provider);
             UserTwitterActions = new Query<UserTwitterAction>(provider);
             ActiveVisitorsQueueOLDs = new Query<ActiveVisitorsQueueOLD>(provider);
@@ -291,6 +295,7 @@ namespace Epilogger.Data
             	DataProvider.Schema.Tables.Add(new EventCategoriesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new APIApplicationTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new MemoryBoxesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new TweetsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ScraperURLsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new URLsTable(DataProvider));
@@ -307,6 +312,7 @@ namespace Epilogger.Data
             	DataProvider.Schema.Tables.Add(new VenuesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserInRolesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ImageMetaDataTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new MemoryBoxItemsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ImagesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserTwitterActionsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ActiveVisitorsQueueOLDTable(DataProvider));
