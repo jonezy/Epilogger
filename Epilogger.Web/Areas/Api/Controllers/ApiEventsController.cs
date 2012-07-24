@@ -320,6 +320,20 @@ namespace Epilogger.Web.Areas.Api.Controllers
                 return Json(_memBoxManager.MemoryBoxItemsByMemBoxIdPaged(memBoxId, page, count), JsonRequestBehavior.AllowGet);
             }
 
+            [HmacAuthorization]
+            public virtual JsonResult GetAllMemoryBoxesByUserId(Guid userId)
+            {
+                return Json(_memBoxManager.MemoryBoxByUserId(userId), JsonRequestBehavior.AllowGet);
+            }
+
+            [HmacAuthorization]
+            public virtual JsonResult GetAllMemoryBoxesByUserIdandEventId(Guid userId, int eventId)
+            {
+                return Json(_memBoxManager.MemoryBoxByUserIdandEventId(userId, eventId), JsonRequestBehavior.AllowGet);
+            }
+
+
+
         #endregion
 
 

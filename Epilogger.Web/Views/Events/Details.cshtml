@@ -38,7 +38,7 @@
 {
     <script language="javascript" type="text/javascript">
         var pageLoadTime = '@string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.Tweets.FirstOrDefault().CreatedDate)';
-        var photoPageLoadTime = '@string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.Images.FirstOrDefault().DateTime)';
+        var photoPageLoadTime = '@string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.Images.FirstOrDefault() == null ? DateTime.UtcNow : Model.Images.FirstOrDefault().DateTime)';
     </script>
 }
 else

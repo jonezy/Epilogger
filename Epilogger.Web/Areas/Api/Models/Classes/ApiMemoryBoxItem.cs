@@ -10,8 +10,9 @@ namespace Epilogger.Web.Areas.Api.Models.Classes
         public int ID { get; set; }
         public int MemboxId { get; set; }
         public Guid UserId { get; set; }
+        public int EventId { get; set; }
         public string ItemType { get; set; }
-        public int? ItemId { get; set; }
+        public string ItemId { get; set; }
         public DateTime? AddedDateTime { get; set; }
     }
 }

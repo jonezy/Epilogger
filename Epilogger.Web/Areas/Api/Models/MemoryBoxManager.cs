@@ -40,18 +40,27 @@ namespace Epilogger.Web.Areas.Api.Models
         {
             if (box.MemboxId == 0)
             {
-                //Create the Mobile Membox
-                var memBox = new MemoryBox
-                                 {
-                                     CreatedDateTime = DateTime.UtcNow,
-                                     Name = "Mobile Memory Box",
-                                     UserId = box.UserId,
-                                     Type = "",
-                                     IsActive = true
-                                 };
+                //Check to see if there is already a box for this User and this event.
+                var memBox = _ms.FindByUserIdandEventId(box.UserId, box.EventId);
+                if (memBox == null)
+                {
+                    //Create the Mobile Membox
+                    memBox = new MemoryBox
+                    {
+                        CreatedDateTime = DateTime.UtcNow,
+                        Name = "Mobile Memory Box",
+                        UserId = box.UserId,
+                        EventId = box.EventId,
+                        Type = "",
+                        IsActive = true
+                    };    
+                }
+                
                 memBox = _ms.Save(memBox);
                 box.MemboxId = memBox.ID;
             }
+
+            box.AddedDateTime = DateTime.UtcNow;
 
             return Mapper.Map<MemoryBoxItem, ApiMemoryBoxItem>(_msi.Save(Mapper.Map<ApiMemoryBoxItem, MemoryBoxItem>(box)));
         }
@@ -75,6 +84,15 @@ namespace Epilogger.Web.Areas.Api.Models
             return Mapper.Map<List<MemoryBoxItem>, List<ApiMemoryBoxItem>>(_msi.MemoryBoxItemsByMemBoxIdPaged(memBoxId, page, count));
         }
 
+        public List<ApiMemoryBox> MemoryBoxByUserId(Guid userId)
+        {
+            return Mapper.Map<List<MemoryBox>, List<ApiMemoryBox>>(_msi.MemoryBoxByUserId(userId));
+        }
+
+        public List<ApiMemoryBox> MemoryBoxByUserIdandEventId(Guid userId, int eventId)
+        {
+            return Mapper.Map<List<MemoryBox>, List<ApiMemoryBox>>(_msi.MemoryBoxByUserIdandEventId(userId, eventId));
+        }
 
 
     }

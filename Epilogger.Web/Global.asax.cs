@@ -568,6 +568,10 @@ namespace Epilogger.Web {
             Mapper.CreateMap<ApiUserFollowsEvent, UserFollowsEvent>();
             Mapper.CreateMap<UserFollowsEvent, ApiUserFollowsEvent>();
 
+            Mapper.CreateMap<MemoryBoxItem, ApiMemoryBoxItem>();
+            Mapper.CreateMap<ApiMemoryBoxItem, MemoryBoxItem>();
+            Mapper.CreateMap<MemoryBox, ApiMemoryBox>();
+
 
             Mapper.AssertConfigurationIsValid();
         }

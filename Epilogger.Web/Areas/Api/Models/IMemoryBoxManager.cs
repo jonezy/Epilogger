@@ -11,5 +11,7 @@ namespace Epilogger.Web.Areas.Api.Models
         ApiMemoryBoxItem Save(ApiMemoryBoxItem box);
         bool RemoveMemBoxItem(int id);
         List<ApiMemoryBoxItem> MemoryBoxItemsByMemBoxIdPaged(int memBoxId, int page, int count);
+        List<ApiMemoryBox> MemoryBoxByUserId(Guid userId);
+        List<ApiMemoryBox> MemoryBoxByUserIdandEventId(Guid userId, int eventId);
     }
 }

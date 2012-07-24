@@ -34,5 +34,11 @@ namespace Epilogger.Web {
             return GetData(v => v.UserId == userId).FirstOrDefault();
         }
 
+        public MemoryBox FindByUserIdandEventId(Guid userId, int eventId)
+        {
+            return GetData(v => v.UserId == userId && v.EventId == eventId).FirstOrDefault();
+        }
+
+
     }
 }

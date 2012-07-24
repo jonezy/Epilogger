@@ -144,7 +144,7 @@ big {
 .fullImage { text-align: center; }
 
 .leftCol {
-    width: 58%;
+    width: 60%;
     line-height: 15px;
     overflow-y: auto;
     overflow-x: none;
@@ -152,7 +152,7 @@ big {
 
 .rightCol {
     float: right;
-    width: 42%;
+    width: 40%;
 }
 
 
@@ -248,7 +248,7 @@ big {
     margin-top: 4px;
 }
 #widgetMenu li {
-  margin: 0px 5px 0px 5px;
+  margin: 0px 5px 0px 3px;
   padding: 0px 0px 6px 0px;
   float: left;
   position: relative;

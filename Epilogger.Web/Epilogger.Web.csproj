@@ -207,8 +207,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Data\IMemoryBox.cs" />
-    <Compile Include="App_Data\IMemoryBoxItem.cs" />
     <Compile Include="App_Data\StoredProcedures.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

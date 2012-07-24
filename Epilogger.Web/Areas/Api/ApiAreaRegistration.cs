@@ -204,9 +204,39 @@ namespace Epilogger.Web.Areas.Api
                 new { controller = "ApiEvents", action = "GetUserByEmail", email = UrlParameter.Optional }
             );
 
-            
-            
+            /* Memory Boxes */
+            context.MapRoute(
+                "GetAllItemsInMemBoxPaged",
+                "Api/MemoryBoxes/MemoryBox/{memBoxId}/{page}/{count}",
+                new { controller = "ApiEvents", action = "GetAllItemsInMemBoxPaged", memBoxId = UrlParameter.Optional, page = UrlParameter.Optional, count = UrlParameter.Optional }
+            );
 
+            context.MapRoute(
+                "GetAllMemoryBoxesByUserId",
+                "Api/MemoryBoxes/{userid}",
+                new { controller = "ApiEvents", action = "GetAllMemoryBoxesByUserId", userid = UrlParameter.Optional }
+            );
+
+            context.MapRoute(
+                "GetAllMemoryBoxesByUserIdandEventId",
+                "Api/MemoryBoxes/{userid}/{eventid}",
+                new { controller = "ApiEvents", action = "GetAllMemoryBoxesByUserIdandEventId", userid = UrlParameter.Optional, eventid = UrlParameter.Optional }
+            );
+
+            
+            context.MapRoute(
+                "AddItemToMemBox",
+                "Api/MemoryBoxes/MemoryBox/AddItem",
+                new { controller = "ApiEvents", action = "AddItemToMemBox" }
+            );
+
+            context.MapRoute(
+                "RemoveItemFromMemBox",
+                "Api/MemoryBoxes/MemoryBox/RemoveItem/{memBoxItemId}",
+                new { controller = "ApiEvents", action = "RemoveItemFromMemBox", memBoxItemId = UrlParameter.Optional }
+            );
+
+            
             /* Stats */
             context.MapRoute(
                 "GeckoGetUserGrowthDayOverDay",

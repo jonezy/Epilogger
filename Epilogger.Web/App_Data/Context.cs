@@ -124,13 +124,13 @@ namespace Epilogger.Data
         public Query<EventCategory> EventCategories { get; set; }
         public Query<User> Users { get; set; }
         public Query<APIApplication> APIApplications { get; set; }
-        public Query<MemoryBox> MemoryBoxes { get; set; }
         public Query<Tweet> Tweets { get; set; }
         public Query<ScraperURL> ScraperURLs { get; set; }
         public Query<URL> URLS { get; set; }
         public Query<aspnet_User> aspnet_Users { get; set; }
         public Query<Event> Events { get; set; }
         public Query<BetaSignup> BetaSignups { get; set; }
+        public Query<MemoryBoxItem> MemoryBoxItems { get; set; }
         public Query<UserFollowsEvent> UserFollowsEvents { get; set; }
         public Query<StatusMessage> StatusMessages { get; set; }
         public Query<UserAuthenticationProfile> UserAuthenticationProfiles { get; set; }
@@ -141,7 +141,6 @@ namespace Epilogger.Data
         public Query<Venue> Venues { get; set; }
         public Query<UserInRole> UserInRoles { get; set; }
         public Query<ImageMetaDatum> ImageMetaData { get; set; }
-        public Query<MemoryBoxItem> MemoryBoxItems { get; set; }
         public Query<Image> Images { get; set; }
         public Query<UserTwitterAction> UserTwitterActions { get; set; }
         public Query<ActiveVisitorsQueueOLD> ActiveVisitorsQueueOLDs { get; set; }
@@ -150,6 +149,7 @@ namespace Epilogger.Data
         public Query<VisitHistoryOLD> VisitHistoryOLDs { get; set; }
         public Query<CollectionQueueSetting> CollectionQueueSettings { get; set; }
         public Query<UserRatesEvent> UserRatesEvents { get; set; }
+        public Query<MemoryBox> MemoryBoxes { get; set; }
         public Query<UserRole> UserRoles { get; set; }
         public Query<UserFollowsUser> UserFollowsUsers { get; set; }
 
@@ -258,13 +258,13 @@ namespace Epilogger.Data
             EventCategories = new Query<EventCategory>(provider);
             Users = new Query<User>(provider);
             APIApplications = new Query<APIApplication>(provider);
-            MemoryBoxes = new Query<MemoryBox>(provider);
             Tweets = new Query<Tweet>(provider);
             ScraperURLs = new Query<ScraperURL>(provider);
             URLS = new Query<URL>(provider);
             aspnet_Users = new Query<aspnet_User>(provider);
             Events = new Query<Event>(provider);
             BetaSignups = new Query<BetaSignup>(provider);
+            MemoryBoxItems = new Query<MemoryBoxItem>(provider);
             UserFollowsEvents = new Query<UserFollowsEvent>(provider);
             StatusMessages = new Query<StatusMessage>(provider);
             UserAuthenticationProfiles = new Query<UserAuthenticationProfile>(provider);
@@ -275,7 +275,6 @@ namespace Epilogger.Data
             Venues = new Query<Venue>(provider);
             UserInRoles = new Query<UserInRole>(provider);
             ImageMetaData = new Query<ImageMetaDatum>(provider);
-            MemoryBoxItems = new Query<MemoryBoxItem>(provider);
             Images = new Query<Image>(provider);
             UserTwitterActions = new Query<UserTwitterAction>(provider);
             ActiveVisitorsQueueOLDs = new Query<ActiveVisitorsQueueOLD>(provider);
@@ -284,6 +283,7 @@ namespace Epilogger.Data
             VisitHistoryOLDs = new Query<VisitHistoryOLD>(provider);
             CollectionQueueSettings = new Query<CollectionQueueSetting>(provider);
             UserRatesEvents = new Query<UserRatesEvent>(provider);
+            MemoryBoxes = new Query<MemoryBox>(provider);
             UserRoles = new Query<UserRole>(provider);
             UserFollowsUsers = new Query<UserFollowsUser>(provider);
             #endregion
@@ -295,13 +295,13 @@ namespace Epilogger.Data
             	DataProvider.Schema.Tables.Add(new EventCategoriesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new APIApplicationTable(DataProvider));
-            	DataProvider.Schema.Tables.Add(new MemoryBoxesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new TweetsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ScraperURLsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new URLsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new aspnet_UsersTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new EventsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new BetaSignupsTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new MemoryBoxItemsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserFollowsEventTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new StatusMessagesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserAuthenticationProfileTable(DataProvider));
@@ -312,7 +312,6 @@ namespace Epilogger.Data
             	DataProvider.Schema.Tables.Add(new VenuesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserInRolesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ImageMetaDataTable(DataProvider));
-            	DataProvider.Schema.Tables.Add(new MemoryBoxItemsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ImagesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserTwitterActionsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ActiveVisitorsQueueOLDTable(DataProvider));
@@ -321,6 +320,7 @@ namespace Epilogger.Data
             	DataProvider.Schema.Tables.Add(new VisitHistoryOLDTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new CollectionQueueSettingsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserRatesEventTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new MemoryBoxesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserRoleTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserFollowsUserTable(DataProvider));
             }

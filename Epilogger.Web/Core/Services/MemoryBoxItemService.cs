@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Epilogger.Data;
@@ -43,8 +44,19 @@ namespace Epilogger.Web {
 
         public List<MemoryBoxItem> MemoryBoxItemsByMemBoxIdPaged(int memBoxId, int currentPage, int recordsPerPage)
         {
+            currentPage = currentPage - 1;
             var mi = db.MemoryBoxItems.Where(e => e.MemboxId == memBoxId).OrderByDescending(e => e.ID);
             return mi.Skip(currentPage * recordsPerPage).Take(recordsPerPage).ToList();
+        }
+
+        public List<MemoryBox> MemoryBoxByUserId(Guid userId)
+        {
+            return db.MemoryBoxes.Where(e => e.UserId == userId).ToList();
+        }
+
+        public List<MemoryBox> MemoryBoxByUserIdandEventId(Guid userId, int eventId)
+        {
+            return db.MemoryBoxes.Where(e => e.UserId == userId && e.EventId == eventId).ToList();
         }
 
 
