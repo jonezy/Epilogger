@@ -34,7 +34,7 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
                 
                 // check to see if we already have the screen name in the userauth table.
                 var userAuthService = new UserAuthenticationProfileService();
-                var userAuth = userAuthService.UserAuthorizationByServiceScreenNameAndPlatform(accessTokenResponse.ScreenName, "Web");
+                var userAuth = userAuthService.UserAuthorizationByServiceScreenNameAndPlatform(accessTokenResponse.ScreenName, "Web", AuthenticationServices.TWITTER);
 
                 //Yes, there is a Web Auth record
                 if (userAuth != null) {
@@ -59,7 +59,7 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
                     //There is no auth record, this must be a login from Twitter or a new twitter connection to an existing user or an existing mobile user with no Web account.
                     
                     //Before we create a new user, make sure there isn't a mobile token.
-                    userAuth = userAuthService.UserAuthorizationByServiceScreenNameAndPlatform(accessTokenResponse.ScreenName, "Mobile");
+                    userAuth = userAuthService.UserAuthorizationByServiceScreenNameAndPlatform(accessTokenResponse.ScreenName, "Mobile", AuthenticationServices.TWITTER);
                     if (userAuth == null)
                     {
                         //This is a new user, create an account.

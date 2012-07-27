@@ -34,7 +34,7 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
                 dynamic me = fbClient.Get("me");
 
                 UserAuthenticationProfileService authorizationService = new UserAuthenticationProfileService();
-                UserAuthenticationProfile userAuth = authorizationService.UserAuthorizationByServiceScreenNameAndPlatform(me.username, "Web");
+                UserAuthenticationProfile userAuth = authorizationService.UserAuthorizationByServiceScreenNameAndPlatform(me.username, "Web", AuthenticationServices.FACEBOOK);
 
                 if (userAuth != null) {
                     userAuth.Service = AuthenticationServices.FACEBOOK.ToString();

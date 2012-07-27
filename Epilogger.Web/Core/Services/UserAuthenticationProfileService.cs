@@ -30,9 +30,9 @@ namespace Epilogger.Web {
             return GetData().Where(ua => ua.ServiceUsername == screenName);
         }
 
-        public UserAuthenticationProfile UserAuthorizationByServiceScreenNameAndPlatform(string screenName, string platform)
+        public UserAuthenticationProfile UserAuthorizationByServiceScreenNameAndPlatform(string screenName, string platform, AuthenticationServices service)
         {
-            return GetData().FirstOrDefault(ua => ua.ServiceUsername == screenName && ua.Platform == platform);
+            return GetData().FirstOrDefault(ua => ua.ServiceUsername == screenName && ua.Platform == platform && ua.ServiceUsername == service.ToString());
         }
 
     }
