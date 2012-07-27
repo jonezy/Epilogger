@@ -82,73 +82,111 @@
 
     @if (Model.Width==100 && Model.Height==100)
     {
-        @: <div style="@string.Format("height:100%; width: 100%;") overflow-x: hidden; overflow-y: auto;">
+        @: <div style="@string.Format("height:100%; width: 100%;") overflow-x: hidden; overflow-y: auto;" class="bbackground" id="wrapper">
     }
     else
     {
-        @: <div style="@string.Format("height:{0}px; width: {1}px;", @Model.Height, @Model.Width); overflow: hidden;">
+        @: <div style="@string.Format("height:{0}px; width: {1}px;", @Model.Height, @Model.Width); overflow: hidden;" class="bbackground" id="wrapper">
     }
-    <div id="header">
-        @Html.Partial("_EpiloggerCounts", @Model.EpiloggerCounts)
-        <a href="http://epilogger.com" target="_blank" border="0"><img id="epiloggerLogo" src="/Public/images/widget/epl-logo.png" alt="Epilogger" /></a>
-    </div>
-    <div id="jaggies"></div>
-    <div class="clearfix" id="outer-container">
 
-        @Html.Partial("_widgetMenu", new Epilogger.Web.Models.WidgetMenuViewModel() { EventSlug = Model.EventSlug, width = Model.Width, height = Model.Height, returnto = Model.returnto })
-
-        <div class="contentContainer">
-            
-            @if (Model.Width >= 550 && Model.Height >= 330)
+    <header class="hbackground htext hlink">
+		<img src="http://a0.twimg.com/profile_images/2355397327/image_normal.jpg" width="42" height="42" />  
+		<span id="subtitle">What's going on at</span>
+		<h1 id="title"><a href="">International Startup Fest</a></h1>
+		
+		<hr></hr>
+		
+		<nav>
+			@Html.Partial("_widgetMenu", new Epilogger.Web.Models.WidgetMenuViewModel() { EventSlug = Model.EventSlug, width = Model.Width, height = Model.Height, returnto = 1 })
+		</nav>
+	</header>
+       
+    <section class="contentContainer btext blink" id="single-photo">     
+        @if (Model.Width >= 500 && Model.Height >= 300)
+        {       
+            <img src="/Public/images/widget/_old/BackArrow.png" alt=""/>
+            if (Model.returnto == 1)
             {
-                <div class="tweetWide">
-                    <a class="twitterName" href="http://www.twitter.com/@Model.Tweet.FromUserScreenName">@@@Model.Tweet.FromUserScreenName:</a>
-                    <div class="tweet">
-                        @Html.Raw(Model.Tweet.TextAsHTML)
-                    </div>
-                </div>
-                
-                <div class="fullImage">
-                    <img src="@Model.Image.Fullsize" style="display: none;" alt="" />
-                </div>
-                <span class="m-spacer"></span>
-
-                <span class="m-spacer dotted"></span>
-                <img src="/Public/images/widget/BackArrow.png" alt=""/>
-                if (Model.returnto == 1)
-                {
-                    <a href="" onclick="location.href='@Url.Action("index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to feed</a>
-                }
-                else
-                {
-                    <a href="" onclick="location.href='@Url.Action("photos", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to photos</a>
-                }
+                <a href="" class="more" onclick="location.href='@Url.Action("index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to feed</a>
             }
             else
             {
-                <div class="fullImage">
-                    <img src="@Model.Image.Fullsize" style="display: none;" alt="" />
-                </div>
-                <span class="m-spacer"></span>
-
-                <a class="twitterName" href="http://www.twitter.com/@Model.Tweet.FromUserScreenName">@@@Model.Tweet.FromUserScreenName:</a>
-                <div class="tweet">
-                    @Html.Raw(Model.Tweet.TextAsHTML)
-                </div>
-            
-                <span class="m-spacer dotted"></span>
-                <img src="/Public/images/widget/BackArrow.png" alt=""/>
-                if (Model.returnto == 1)
-                {
-                    <a href="" onclick="location.href='@Url.Action("index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to feed</a>
-                }
-                else
-                {
-                    <a href="" onclick="location.href='@Url.Action("photos", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to photos</a>
-                }
+                <a href="" class="more" onclick="location.href='@Url.Action("photos", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to photos</a>
             }
-
-        </div>
             
-    </div>
+            <span class="m-spacer"></span>
+            
+            <img src="@Model.Image.Fullsize" style="display: none;" alt="" id="horizontal-full-photo" />
+            
+            <article class="tweet horizontal">
+                <img src="@Model.Tweet.ProfileImageURL" height="48" width="48"  class="twit-avatar" />
+                   
+                <div>
+                    <p>
+                        <a class="twitterName" href="http://www.twitter.com/@Model.Tweet.FromUserScreenName">@Model.Tweet.FromUserScreenName:</a>
+                        @Html.Raw(Model.Tweet.TextAsHTML)
+                    </p>
+                </div>
+            </article>
+            
+            <span class="m-spacer"></span>
+            
+            <img src="/Public/images/widget/_old/BackArrow.png" alt=""/>
+            if (Model.returnto == 1)
+            {
+                <a href="" class="more" onclick="location.href='@Url.Action("index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to feed</a>
+            }
+            else
+            {
+                <a href="" class="more" onclick="location.href='@Url.Action("photos", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to photos</a>
+            }
+        }
+        else
+        {
+            <img src="/Public/images/widget/_old/BackArrow.png" alt=""/>
+            if (Model.returnto == 1)
+            {
+                <a href="" class="more" onclick="location.href='@Url.Action("index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to feed</a>
+            }
+            else
+            {
+                <a href="" class="more" onclick="location.href='@Url.Action("photos", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to photos</a>
+            }
+            
+            <span class="m-spacer"></span>
+            
+            <div align="center"><img src="@Model.Image.Fullsize" style="display: none;" alt="" id="vertical-full-photo" /></div>
+            
+            <span class="b-spacer"></span>
+            
+            <article class="tweet"> 
+                <img src="@Model.Tweet.ProfileImageURL" height="48" width="48"  class="twit-avatar" />
+                   
+                <div>
+                    <p>
+                        <a class="twitterName" href="http://www.twitter.com/@Model.Tweet.FromUserScreenName">@Model.Tweet.FromUserScreenName:</a>
+                        @Html.Raw(Model.Tweet.TextAsHTML)
+                    </p>
+                </div>
+            </article>
+            
+            <span class="m-spacer"></span>
+            
+            <img src="/Public/images/widget/_old/BackArrow.png" alt=""/>
+            if (Model.returnto == 1)
+            {
+                <a href="" class="more" onclick="location.href='@Url.Action("index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to feed</a>
+            }
+            else
+            {
+                <a href="" class="more" onclick="location.href='@Url.Action("photos", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to photos</a>
+            }
+        }
+    </section>  
+	
+	<footer>
+		<a href="http://epilogger.com" target="_blank"><img src="/Public/images/widget/epilogger.png" alt="Epilogger logo"/></a>
+		
+        @Html.Partial("_EpiloggerCounts", @Model.EpiloggerCounts)
+	</footer>
 </div>

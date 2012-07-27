@@ -9,49 +9,38 @@
 
 @if (Model.Width==100 && Model.Height==100)
 {
-    @: <div style="@string.Format("height:100%; width: 100%;") overflow-x: hidden; overflow-y: auto;">
+    @: <div style="@string.Format("height:100%; width: 100%;") overflow-x: hidden; overflow-y: auto;" class="bbackground" id="wrapper">
 }
 else
 {
-    @: <div style="@string.Format("height:{0}px; width: {1}px;", @Model.Height, @Model.Width); overflow: hidden;">
+    @: <div style="@string.Format("height:{0}px; width: {1}px;", @Model.Height, @Model.Width); overflow: hidden;" class="bbackground" id="wrapper">
 }
+    <header class="hbackground htext hlink">
+		<img src="http://a0.twimg.com/profile_images/2355397327/image_normal.jpg" width="42 height="42" /> 
+		<span id="subtitle">What's going on at</span>
+		<h1 id="title"><a href="">International Startup Fest</a></h1>
+		
+		<hr></hr>
+		
+		<nav>
+			@Html.Partial("_widgetMenu", new Epilogger.Web.Models.WidgetMenuViewModel() { EventSlug = Model.EventSlug, width = Model.Width, height = Model.Height, returnto = 1 })
+		</nav>
+	</header>
 
-    <div id="header">
+    <section id="all-photos" class="contentContainer  @(Model.Width >= 500 ? "horizontal" : "")">
+        <ul class="imageListLarge">
+            @foreach (var theImage in Model.Images)
+            {
+                <li>
+                    <a href="" onclick="location.href='/widget/photoDetails/@Model.EventSlug/@theImage.ID?width=@Model.Width&height=@Model.Height&returnto=2'; return false;"><img src="@theImage.Fullsize" width="200" alt="" /></a>
+                </li>
+            }
+        </ul>
+    </section>
+	
+	<footer>
+		<a href="http://epilogger.com" target="_blank"><img src="/Public/images/widget/epilogger.png" alt="Epilogger logo"/></a>
+		
         @Html.Partial("_EpiloggerCounts", @Model.EpiloggerCounts)
-        <a href="http://epilogger.com" target="_blank" border="0"><img id="epiloggerLogo" src="/Public/images/widget/epl-logo.png" alt="Epilogger" /></a>
-    </div>
-    <div id="jaggies"></div>
-    <div class="clearfix" id="outer-container">
-
-        @Html.Partial("_widgetMenu", new Epilogger.Web.Models.WidgetMenuViewModel() { EventSlug = Model.EventSlug, width = Model.Width, height = Model.Height, returnto = 2})
-
-        <div class="contentContainer">
-            <ul class="imageListLarge">
-                @foreach (var theImage in Model.Images)
-                {
-                    <li @(Model.Width >= 550 ? "style=width:85px" : "")>
-                        <a href="" onclick="location.href='/widget/photoDetails/@Model.EventSlug/@theImage.ID?width=@Model.Width&height=@Model.Height&returnto=2'; return false;"><img src="@theImage.Fullsize" width="200" alt="" /></a>
-                    </li>
-                }
-            </ul>
-
-        </div>
-        
-        @if (Model.Width==100 && Model.Height==100)
-        {
-            @: <div id="topTenTab" style="@string.Format("bottom: 0; right: 50px;")">
-        }
-        else
-        {
-            @: <div id="topTenTab" style="@string.Format("top: {0}px; left: {1}px;", Model.Height - 25, (Model.Width>=550) ? (Model.Width / 2) + 180 : (Model.Width / 2) - 37)">    
-        }
-        
-            <a href="http://epilogger.com/events/@Model.EventSlug/allphotos" target="_blank"><img src="/Public/images/widget/top10.png" alt="" /></a>
-        </div>
-            
-
-
-    </div>
+	</footer>
 </div>
-
-
