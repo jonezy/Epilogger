@@ -25,8 +25,6 @@ namespace Epilogger.Web.Areas.Api.Controllers
     public partial class ApiEventsController : Controller
     {
 
-        
-
         #region Initialize Managers
 
         readonly IEventManager _eventManager;
@@ -247,14 +245,62 @@ namespace Epilogger.Web.Areas.Api.Controllers
                 public virtual JsonResult AuthEPLUser(NameValueCollection headers)
             {
 
-                var userNamePass = Encoding.UTF8.GetString(Convert.FromBase64String(headers["Authorization"].Substring(6)));
-                var splitUserPass = userNamePass.Split(new string[] { ":" }, StringSplitOptions.None);
+                User user = null;
 
-                var user = _userManager.GetFullUserByUsername(splitUserPass[0]);
-                if (!BCryptHelper.CheckPassword(splitUserPass[1], user.Password))
+                //Determine what tpye of Auth this is
+                var headerValue = headers["Authorization"];
+
+                //Epilogger User Auth
+                if (headerValue.Contains("Basic"))
                 {
-                    return Json(new { Error = true, Message = "There was a problem with either the username or password. Please correct and try again." }, JsonRequestBehavior.AllowGet);
+                    var userNamePass = Encoding.UTF8.GetString(Convert.FromBase64String(headers["Authorization"].Substring(6)));
+                    var splitUserPass = userNamePass.Split(new string[] { ":" }, StringSplitOptions.None);
+
+                    user = _userManager.GetFullUserByUsername(splitUserPass[0]);
+                    if (!BCryptHelper.CheckPassword(splitUserPass[1], user.Password))
+                    {
+                        return Json(new { Error = true, Message = "There was a problem with either the username or password. Please correct and try again." }, JsonRequestBehavior.AllowGet);
+                    }
                 }
+                //Twitter User Auth
+                else if (headerValue.Contains("Twitter"))
+                {
+                    var userNamePass = Encoding.UTF8.GetString(Convert.FromBase64String(headers["Authorization"].Substring(8)));
+                    var splitUserPass = userNamePass.Split(new string[] { ":" }, StringSplitOptions.None);
+
+                    var twitterUserName = splitUserPass[0];
+                    var twitterToken = splitUserPass[1];
+                    var twitterTokenSecret = splitUserPass[2];
+
+                    user = _userManager.LoginWithTwitter(twitterUserName, twitterToken, twitterTokenSecret);
+                   
+                    if (user == null)
+                    {
+                        return Json(new { Error = true, Message = "There was a problem with either the username or password. Please correct and try again." }, JsonRequestBehavior.AllowGet);    
+                    }
+                    
+                }
+
+                //Facebook Auth
+                else if (headerValue.Contains("Facebook"))
+                {
+                    var userNamePass = Encoding.UTF8.GetString(Convert.FromBase64String(headers["Authorization"].Substring(9)));
+                    var splitUserPass = userNamePass.Split(new string[] { ":" }, StringSplitOptions.None);
+
+                    var fbUserName = splitUserPass[0];
+                    var fbToken = splitUserPass[1];
+                    var fbTokenSecret = splitUserPass[2];
+
+                    //user = _userManager.LoginWithTwitter(twitterUserName, twitterToken, twitterTokenSecret);
+
+                    if (user == null)
+                    {
+                        return Json(new { Error = true, Message = "There was a problem with either the username or password. Please correct and try again." }, JsonRequestBehavior.AllowGet);
+                    }
+
+                }
+
+
 
                 return Json(Mapper.Map<User, ApiUser>(user), JsonRequestBehavior.AllowGet);
          

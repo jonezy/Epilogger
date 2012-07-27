@@ -2289,6 +2289,181 @@ namespace Epilogger.Data
     
     
     /// <summary>
+    /// A class which represents the UserAuthenticationProfile table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.UserAuthenticationProfile 
+    /// </summary>
+
+	public partial class UserAuthenticationProfile: INotifyPropertyChanging, INotifyPropertyChanged
+	{
+        partial void OnLoaded();
+        partial void OnValidate(System.Data.Linq.ChangeAction action);
+        partial void OnCreated();
+	    
+	    public UserAuthenticationProfile(){
+	        OnCreated();
+	    }
+	    
+	    #region Properties
+	    
+        partial void OnIDChanging(int value);
+        partial void OnIDChanged();
+		
+		private int _ID;
+		public int ID { 
+		    get{
+		        return _ID;
+		    } 
+		    set{
+		        this.OnIDChanging(value);
+                this.SendPropertyChanging();
+                this._ID = value;
+                this.SendPropertyChanged("ID");
+                this.OnIDChanged();
+		    }
+		}
+		
+        partial void OnUserIDChanging(Guid value);
+        partial void OnUserIDChanged();
+		
+		private Guid _UserID;
+		public Guid UserID { 
+		    get{
+		        return _UserID;
+		    } 
+		    set{
+		        this.OnUserIDChanging(value);
+                this.SendPropertyChanging();
+                this._UserID = value;
+                this.SendPropertyChanged("UserID");
+                this.OnUserIDChanged();
+		    }
+		}
+		
+        partial void OnServiceChanging(string value);
+        partial void OnServiceChanged();
+		
+		private string _Service;
+		public string Service { 
+		    get{
+		        return _Service;
+		    } 
+		    set{
+		        this.OnServiceChanging(value);
+                this.SendPropertyChanging();
+                this._Service = value;
+                this.SendPropertyChanged("Service");
+                this.OnServiceChanged();
+		    }
+		}
+		
+        partial void OnPlatformChanging(string value);
+        partial void OnPlatformChanged();
+		
+		private string _Platform;
+		public string Platform { 
+		    get{
+		        return _Platform;
+		    } 
+		    set{
+		        this.OnPlatformChanging(value);
+                this.SendPropertyChanging();
+                this._Platform = value;
+                this.SendPropertyChanged("Platform");
+                this.OnPlatformChanged();
+		    }
+		}
+		
+        partial void OnServiceUsernameChanging(string value);
+        partial void OnServiceUsernameChanged();
+		
+		private string _ServiceUsername;
+		public string ServiceUsername { 
+		    get{
+		        return _ServiceUsername;
+		    } 
+		    set{
+		        this.OnServiceUsernameChanging(value);
+                this.SendPropertyChanging();
+                this._ServiceUsername = value;
+                this.SendPropertyChanged("ServiceUsername");
+                this.OnServiceUsernameChanged();
+		    }
+		}
+		
+        partial void OnTokenChanging(string value);
+        partial void OnTokenChanged();
+		
+		private string _Token;
+		public string Token { 
+		    get{
+		        return _Token;
+		    } 
+		    set{
+		        this.OnTokenChanging(value);
+                this.SendPropertyChanging();
+                this._Token = value;
+                this.SendPropertyChanged("Token");
+                this.OnTokenChanged();
+		    }
+		}
+		
+        partial void OnTokenSecretChanging(string value);
+        partial void OnTokenSecretChanged();
+		
+		private string _TokenSecret;
+		public string TokenSecret { 
+		    get{
+		        return _TokenSecret;
+		    } 
+		    set{
+		        this.OnTokenSecretChanging(value);
+                this.SendPropertyChanging();
+                this._TokenSecret = value;
+                this.SendPropertyChanged("TokenSecret");
+                this.OnTokenSecretChanged();
+		    }
+		}
+		
+
+        #endregion
+
+        #region Foreign Keys
+        public IQueryable<User> Users
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Users
+                       where items.ID == _UserID
+                       select items;
+            }
+        }
+
+        #endregion
+
+
+        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+        public event PropertyChangingEventHandler PropertyChanging;
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void SendPropertyChanging()
+        {
+            var handler = PropertyChanging;
+            if (handler != null)
+               handler(this, emptyChangingEventArgs);
+        }
+
+        protected virtual void SendPropertyChanged(String propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+	}
+	
+    
+    
+    /// <summary>
     /// A class which represents the BetaSignups table in the Epilogger Database.
     /// This class is queryable through EpiloggerDB.BetaSignup 
     /// </summary>
@@ -2805,164 +2980,6 @@ namespace Epilogger.Data
         #endregion
 
         #region Foreign Keys
-        #endregion
-
-
-        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-        public event PropertyChangingEventHandler PropertyChanging;
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void SendPropertyChanging()
-        {
-            var handler = PropertyChanging;
-            if (handler != null)
-               handler(this, emptyChangingEventArgs);
-        }
-
-        protected virtual void SendPropertyChanged(String propertyName)
-        {
-            var handler = PropertyChanged;
-            if (handler != null)
-                handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-	}
-	
-    
-    
-    /// <summary>
-    /// A class which represents the UserAuthenticationProfile table in the Epilogger Database.
-    /// This class is queryable through EpiloggerDB.UserAuthenticationProfile 
-    /// </summary>
-
-	public partial class UserAuthenticationProfile: INotifyPropertyChanging, INotifyPropertyChanged
-	{
-        partial void OnLoaded();
-        partial void OnValidate(System.Data.Linq.ChangeAction action);
-        partial void OnCreated();
-	    
-	    public UserAuthenticationProfile(){
-	        OnCreated();
-	    }
-	    
-	    #region Properties
-	    
-        partial void OnIDChanging(int value);
-        partial void OnIDChanged();
-		
-		private int _ID;
-		public int ID { 
-		    get{
-		        return _ID;
-		    } 
-		    set{
-		        this.OnIDChanging(value);
-                this.SendPropertyChanging();
-                this._ID = value;
-                this.SendPropertyChanged("ID");
-                this.OnIDChanged();
-		    }
-		}
-		
-        partial void OnUserIDChanging(Guid value);
-        partial void OnUserIDChanged();
-		
-		private Guid _UserID;
-		public Guid UserID { 
-		    get{
-		        return _UserID;
-		    } 
-		    set{
-		        this.OnUserIDChanging(value);
-                this.SendPropertyChanging();
-                this._UserID = value;
-                this.SendPropertyChanged("UserID");
-                this.OnUserIDChanged();
-		    }
-		}
-		
-        partial void OnServiceChanging(string value);
-        partial void OnServiceChanged();
-		
-		private string _Service;
-		public string Service { 
-		    get{
-		        return _Service;
-		    } 
-		    set{
-		        this.OnServiceChanging(value);
-                this.SendPropertyChanging();
-                this._Service = value;
-                this.SendPropertyChanged("Service");
-                this.OnServiceChanged();
-		    }
-		}
-		
-        partial void OnServiceUsernameChanging(string value);
-        partial void OnServiceUsernameChanged();
-		
-		private string _ServiceUsername;
-		public string ServiceUsername { 
-		    get{
-		        return _ServiceUsername;
-		    } 
-		    set{
-		        this.OnServiceUsernameChanging(value);
-                this.SendPropertyChanging();
-                this._ServiceUsername = value;
-                this.SendPropertyChanged("ServiceUsername");
-                this.OnServiceUsernameChanged();
-		    }
-		}
-		
-        partial void OnTokenChanging(string value);
-        partial void OnTokenChanged();
-		
-		private string _Token;
-		public string Token { 
-		    get{
-		        return _Token;
-		    } 
-		    set{
-		        this.OnTokenChanging(value);
-                this.SendPropertyChanging();
-                this._Token = value;
-                this.SendPropertyChanged("Token");
-                this.OnTokenChanged();
-		    }
-		}
-		
-        partial void OnTokenSecretChanging(string value);
-        partial void OnTokenSecretChanged();
-		
-		private string _TokenSecret;
-		public string TokenSecret { 
-		    get{
-		        return _TokenSecret;
-		    } 
-		    set{
-		        this.OnTokenSecretChanging(value);
-                this.SendPropertyChanging();
-                this._TokenSecret = value;
-                this.SendPropertyChanged("TokenSecret");
-                this.OnTokenSecretChanged();
-		    }
-		}
-		
-
-        #endregion
-
-        #region Foreign Keys
-        public IQueryable<User> Users
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Users
-                       where items.ID == _UserID
-                       select items;
-            }
-        }
-
         #endregion
 
 

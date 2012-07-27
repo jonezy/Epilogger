@@ -12,5 +12,6 @@ namespace Epilogger.Web.Areas.Api.Models
         User GetFullUserByUsername(string userName);
         ApiUserFollowsEvent SaveUserFollowsEvent(ApiUserFollowsEvent model);
         bool DeleteEventSubscription(Guid userId, int eventId);
+        User LoginWithTwitter(string userName, string token, string tokenSecret);
     }
 }

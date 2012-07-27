@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -370,12 +371,11 @@ namespace Epilogger.Web.Controllers {
             var _us = new UserService();
             var _uaps = new UserAuthenticationProfileService();
 
-            var userAuthByScreenName = _uaps.UserAuthorizationByServiceScreenName(tokens.ScreenName);
+            var userAuthByScreenName = _uaps.UserAuthorizationByServiceScreenName(tokens.ScreenName).ToList();
 
-            if (userAuthByScreenName == null)
+            if (userAuthByScreenName.Count > 0)
             {
-                //Get the user details from Twitter
-                //var theTwitterUser = TwitterUser.Show(tokens.UserId);
+                //This person has never logged in before. Not on the web or on Mobile.
 
                 //No auth exists. This a new user, create the account and redirect to the profile page.
                 var theNewUser = new User()
@@ -393,6 +393,7 @@ namespace Epilogger.Web.Controllers {
                 var theAuth = new UserAuthenticationProfile
                                   {
                                       UserID = theNewUser.ID,
+                                      Platform = "Web",
                                       Service = "TWITTER",
                                       ServiceUsername = tokens.ScreenName,
                                       Token = tokens.Token,
@@ -401,16 +402,54 @@ namespace Epilogger.Web.Controllers {
                 _uaps.Save(theAuth);
 
                 CookieHelpers.WriteCookie("lc", "uid", theNewUser.ID.ToString());
-                CookieHelpers.WriteCookie("lc", "tz", theNewUser.TimeZoneOffSet.ToString());
+                CookieHelpers.WriteCookie("lc", "tz", theNewUser.TimeZoneOffSet.ToString(CultureInfo.InvariantCulture));
 
                 return RedirectToAction("Index");
             }
 
+
             //This user already has a token, log them in.
-            var theUser = _us.GetUserByID(userAuthByScreenName.UserID);
-            // write the login cookie, redirect. 
-            CookieHelpers.WriteCookie("lc", "uid", theUser.ID.ToString());
-            CookieHelpers.WriteCookie("lc", "tz", theUser.TimeZoneOffSet.ToString());
+            var userAuthenticationProfile = userAuthByScreenName.FirstOrDefault(u => u.Platform == "Web");
+            if (userAuthenticationProfile != null)
+            {
+                var theUser = _us.GetUserByID(userAuthenticationProfile.UserID);
+                // write the login cookie, redirect. 
+                CookieHelpers.WriteCookie("lc", "uid", theUser.ID.ToString());
+                CookieHelpers.WriteCookie("lc", "tz", theUser.TimeZoneOffSet.ToString(CultureInfo.InvariantCulture));
+            }
+
+
+
+            //var web = false;
+            //var mobile = false;
+            //foreach (var item in userAuthByScreenName)
+            //{
+            //    if (item.Platform == "Web") web = true;
+            //    if (item.Platform == "Mobile") mobile = true;
+                
+            //}
+
+            //if (mobile && !web)
+            //{
+            //    //Only mobile, no web.
+
+            //}
+
+
+
+            //if (web)
+            //{
+            //    ////This user already has a token, log them in.
+            //    //var userAuthenticationProfile = userAuthByScreenName.FirstOrDefault(u => u.Platform == "Web");
+            //    //if (userAuthenticationProfile != null)
+            //    //{
+            //    //    var theUser = _us.GetUserByID(userAuthenticationProfile.UserID);
+            //    //    // write the login cookie, redirect. 
+            //    //    CookieHelpers.WriteCookie("lc", "uid", theUser.ID.ToString());
+            //    //    CookieHelpers.WriteCookie("lc", "tz", theUser.TimeZoneOffSet.ToString(CultureInfo.InvariantCulture));
+            //    //}
+            //}
+
 
             return RedirectToAction("index", "home");
 
