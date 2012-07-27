@@ -1,248 +1,193 @@
+* {
+	margin:0;
+	padding:0;
+	border:0}
+	
 body {
-    padding:0px;
-	color:#606060;
-	font: normal 12px/18px Helvetica, Arial, Sans-Serif; }
+	font:0.875em helvetica, tahoma, arial, sans-serif}
 
 a {
-   color:#287cbe;
-   text-decoration:none}
+	text-decoration:none}
 
 a:hover {
-    color:#31a5f8}
+	opacity:0.5;}
 
-p a {
-    text-decoration:underline}
+div#wrapper {
+	/*overflow:auto; */
+	position:relative;}
+	
+	
+
+/* ---------------------------------------- [ HEADER, TITLE, NAV ] ---- */
+header {
+	padding:7px 10px;
+	margin:0 0 10px 0}
+
+header img {
+	float:left;
+	margin:0 8px 10px 0}
+	
+h1#title {
+	font-size:1.17em;}
+
+span#subtitle {
+	font-size:0.929em}
+
+hr {
+	clear:left;
+	height:0px;
+	border-top:1px solid black;
+	border-bottom:1px solid white;
+	opacity:0.25;
+	margin:5px 0}
+
+nav li {
+	list-style:none;
+	display:inline;}
+
+nav li a {
+	opacity:0.7;
+	padding:0 6px}
+
+nav li.current a {
+	font-weight:bold;
+	opacity:1 !important}
+
+
+/* ---------------------------------------- [ CONTENT SECTIONS ] ------ */
+section#feed-photos, section#feed-tweets, section#single-photo, section#all-tweets {
+	padding:0 10px;
+	margin:0 0 15px 0}
+
+p.section-title {
+	margin:0 0 5px 0}
+
+p.section-title span {
+	font-size:0.846em}
+
+/* --- feed */
+section#feed-tweets {
+    height:40%;
+    overflow:auto}	
+
+article.tweet img {
+	float:left;
+	margin:0 8px 15px 0;
+	clear:left;}
+
+article.tweet div {
+	width:78%;
+	float:left;
+	margin:0 0 15px 0}
+
+article.tweet ul.tweet-nav li {
+	list-style:none;
+	display:inline;
+	font-size:0.846em;
+	opacity:0.65;}
+
+section#single-photo, section#all-tweets, section#all-photos, section#all-checkins {
+    height:70%;
+    overflow:auto;
+    overflow-x:hidden}
+
+section#all-photos.horizontal, section#all-tweets.horizontal, section#all-checkins.horizontal {
+    height:53%}
    
-p a:hover {
-    text-decoration:none}
-    
-big {
-    padding-top:8px;
-    font-size:18pt;
-    color:#000;
-    display:block;
-    letter-spacing:-1px}
+section#feed-photos.horizontal, section#feed-tweets.horizontal {
+    float:left;
+    width:50%}
     
 
-.blue-action-button.disabled {
-    border:1px solid #B0B0B0;
-    border-radius:3px;
-    -moz-border-radius:3px;
-    -webkit-border-radius:3px;
-    background:#d3d3d3; /* no css3 */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d3d3d3', endColorstr='#d3d3d3'); /*IE */
-    background:-webkit-gradient(linear, left top, left bottom, from (#d3d3d3) to (#d3d3d3)); /* webkit */
-    background:-moz-linear-gradient(top, #d3d3d3, #d3d3d3); /* ff */
-    box-shadow:0 0 1px #a1b9c8;
-    color:#e6f5fa;
-    font:bold 15px 'InterstatePlusRegular';
-    padding:5px 10px;
-    text-transform:uppercase;
-    cursor: default;
-    box-shadow:0 0 1px #777;}    
-
-.blue-action-button.disabled:hover
-{
-    opacity:1;
-    position:relative;
-    top:0px;
-    color:#e6f5fa;
-}
-
-
-.blue-action-button {
-    border:1px solid #3485b7;
-    border-radius:3px;
-    -moz-border-radius:3px;
-    -webkit-border-radius:3px;
-    background:#418fbf; /* no css3 */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4aa0d7', endColorstr='#3486b7'); /*IE */
-    background:-webkit-gradient(linear, left top, left bottom, from (#4aa0d7) to (#3486b7)); /* webkit */
-    background:-moz-linear-gradient(top, #4aa0d7, #3486b7); /* ff */
-    box-shadow:0 0 1px #a1b9c8;
-    color:#e6f5fa;
-    font:bold 15px 'InterstatePlusRegular';
-    padding:5px 10px;
-    text-transform:uppercase;
-    cursor:pointer;
-    box-shadow:0 0 1px #777;}
-
-.blue-action-button:hover {
-    opacity:0.85;
-    position:relative;
-    top:1px;
-    color:#fff}
-    
-    
-.red-action-button {
-    border:1px solid #b83852;
-    border-radius:3px;
-    -moz-border-radius:3px;
-    -webkit-border-radius:3px;
-    background:#ce4a64; /* no css3 */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d84e69', endColorstr='#ce4a64'); /*IE */
-    background:-webkit-gradient(linear, left top, left bottom, from (#d84e69) to (#ce4a64)); /* webkit */
-    background:-moz-linear-gradient(top, #d84e69, #ce4a64); /* ff */
-    box-shadow:0 0 1px #a1b9c8;
-    color:#fefefe;
-    font:bold 15px 'InterstatePlusRegular';
-    padding:5px 10px;
-    text-transform:uppercase;
-    cursor:pointer;
-    box-shadow: 0 0 1px #777;
- }
-
-.red-action-button:hover {
-    opacity:0.85;
-    position:relative;
-    top:1px;
-    color: #fff;
-}
-
-
-.spacer.dotted {border-top:dotted 1px #b5b5b5; }
-.spacer.dotted.light {border-top:dotted 1px #e8e8e8; } 
-.dotted {border-top:dotted 1px #b5b5b5; }
-.spacer 	{ height:25px;display: block; }
-.sm-spacer  { height:5px;display: block; }
-.m-spacer  { height:10px;display: block; }
-.big-spacer { height:50px;display: block; }
-.valign		{ vertical-align: middle; }
-.fleft		{ float: left; }
-.fright		{ float: right; }
-.overflowhide{ overflow: hidden; }
-.hidden { display: none; }
-.required  { color: #fe60b1; }
-.seperator { border-bottom: 1px dotted #CCC; }
-
-    
-/* ------------------------------ CONTAINERS */
-#header {
-    background-color: #efefef;
-    height: 41px;
-    /*margin-top: 44px;*/
-}
-#epiloggerLogo {
-    margin: 4px 0 0 5px;
-}
-#jaggies
-{
-    width: 100%;
-    height: 7px;
-    background: url(../images/widget/bg-teeth.png) repeat-x bottom;
-    
-}
-#outer-container {
-    padding: 5px;
-}
-
-
-.contentContainer {
-    
-}
-
-.fullImage { text-align: center; }
-
-.leftCol {
-    width: 60%;
-    line-height: 15px;
-    overflow-y: auto;
-    overflow-x: none;
-}
-
-.rightCol {
-    float: right;
-    width: 40%;
-}
-
-
-.twitterName {
-    color: #02a4ed;
-    font-size: 10px;
-    top: -4px;
-    position: relative;
-    font-weight: bold;
-}
-
-.twitterNameWide {
-    color: #02a4ed;
-    font-size: 10px;
-    top: -4px;
-    position: relative;
-    font-weight: bold;
-}
-
-
-.tweet {
-    color: #6b696a;
-    font-size: 12px;
-    margin-bottom: 16px;
-    margin-top: -4px;
-}
-
-.tweetWide {
-    float: right;
-    width: 245px;
-}
-
-
-.boldLinks a { color: #6b696a;font-weight: bold; }
-.boldLinks a:hover { text-decoration: underline; }
-
-.imageList {}
-.imageList li {
-    margin: 0 0 9px 8px;
-    float: left;
-    position: relative;
-    list-style: none;
-    width: 48px;
-    height: 48px;
-    overflow: hidden;
-}
-.imageList li img {
-     left: -24px; 
-     position: relative;
-}
-
-.imageListLarge {}
-.imageListLarge li {
+/* --- all photos view */
+section#all-photos ul.imageListLarge li {
     margin: 0px 0px 6px 5px;
     float: left;
     position: relative;
     list-style: none;
-    width: 89px;
-    height: 74px;
-    overflow: hidden;
-}
-.imageListLarge li img {
+    width: 88px;
+    height: 88px;
+    overflow: hidden;}
+
+section#all-photos .imageListLarge li img {
      left: -44px; 
-     position: relative;
-}
+     position: relative;}
+     
+ 
+/* --- single photo view */
+/*section#single-photo article.horizontal {
+    float:left;
+    width:45%}
 
-.checkinList {}
-.checkinList li {
+section#single-photo img#horizontal-full-photo {
+    float:left;
+    padding:0 8px 0 0;
+    widdth:50%} */
+    
+ 
+/* --- all check-ins view */
+section#all-checkins {
+    padding:0 5px 0 0}
+    
+section#all-checkins .checkinList li {
     margin: 0px 0px 6px 5px;
     float: left;
     position: relative;
     list-style: none;
-    overflow: hidden;
-}
+    overflow: hidden;}
 
 
+/* ---------------------------------------- [ FOOTER: CREDIT, TOTALS ]  */
+footer {
+    clear:left;
+	border-top:1px solid #ccc;
+	padding:5px 0 0 0;
+	width:93.5%;
+	position:absolute;
+	bottom:0;
+	left:10px;}
 
-.tweetli {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-.tweetsTweet {
-    margin-left: 55px;
-}
+span#epiloggerCounts {
+	padding:3px 0;
+	float:right;}
 
-.refreshButton {
-    float: right;
-    margin-top: 7px;
-}
+span#epiloggerCounts span {
+	/*position:relative;
+	top:4px;*/
+	display:inline-block;
+	width:16px;
+	overflow:hidden;
+	padding:0 2px 0 4px}
+
+span#epiloggerCounts span img#camera {
+	position:relative;
+	left:-42px}
+
+span#epiloggerCounts span img#bird {
+	position:relative;
+	left:-5px}
+
+span#epiloggerCounts img {
+	margin:0 0 0 8px}
+
+
+/* ---------------------------------------- [ MISCELLANEOUS ] --------- */
+
+.m-spacer { display:block; height:10px}
+.b-spacer { display:block; height:20px}
+.more { font-size:0.8em; clear:left}
+.clear { clear:both}
+
+/* ---------------------------------------- [ USER DEFINED COLORS ] --- */
+.hbackground { background:#5ec008}
+.htext { color:#fff}
+.hlink a { color:#fff}
+
+.bbackground { background:#f0eed8;}
+.blink a, ul.tweet-nav { color:#cf008a}
+.btext { color:#666}
+
+/*
 #widgetMenu 
 {
     margin-top: 4px;
@@ -290,19 +235,8 @@ big {
 * html #menu-bar {
   height: 1%;
 }
-
-
-span.tweet-date {font-size:11px;color:#c2c2c2}
-
-#topTenTab {
-    position: absolute;
-}
-#epiloggerCounts {
-    float: right;
-    margin: 14px 10px 0 0;
-    font-weight: bold;
-    font-size: 14px;
-}
+*/
+    
 
 /* Makes the nice scroll bars */
 ::-webkit-scrollbar{height:16px;overflow:visible;width:12px}
