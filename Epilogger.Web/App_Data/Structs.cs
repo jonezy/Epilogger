@@ -2076,6 +2076,179 @@ namespace Epilogger.Data {
         }
         
         /// <summary>
+        /// Table: UserAuthenticationProfile
+        /// Primary Key: ID
+        /// </summary>
+
+        public class UserAuthenticationProfileTable: DatabaseTable {
+            
+            public UserAuthenticationProfileTable(IDataProvider provider):base("UserAuthenticationProfile",provider){
+                ClassName = "UserAuthenticationProfile";
+                SchemaName = "dbo";
+                
+
+                Columns.Add(new DatabaseColumn("ID", this)
+                {
+	                IsPrimaryKey = true,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = true,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("UserID", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Guid,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = true,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("Service", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("Platform", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 20
+                });
+
+                Columns.Add(new DatabaseColumn("ServiceUsername", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 250
+                });
+
+                Columns.Add(new DatabaseColumn("Token", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 500
+                });
+
+                Columns.Add(new DatabaseColumn("TokenSecret", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 500
+                });
+                    
+                
+                
+            }
+            
+            public IColumn ID{
+                get{
+                    return this.GetColumn("ID");
+                }
+            }
+            				
+   			public static string IDColumn{
+			      get{
+        			return "ID";
+      			}
+		    }
+           
+            public IColumn UserID{
+                get{
+                    return this.GetColumn("UserID");
+                }
+            }
+            				
+   			public static string UserIDColumn{
+			      get{
+        			return "UserID";
+      			}
+		    }
+           
+            public IColumn Service{
+                get{
+                    return this.GetColumn("Service");
+                }
+            }
+            				
+   			public static string ServiceColumn{
+			      get{
+        			return "Service";
+      			}
+		    }
+           
+            public IColumn Platform{
+                get{
+                    return this.GetColumn("Platform");
+                }
+            }
+            				
+   			public static string PlatformColumn{
+			      get{
+        			return "Platform";
+      			}
+		    }
+           
+            public IColumn ServiceUsername{
+                get{
+                    return this.GetColumn("ServiceUsername");
+                }
+            }
+            				
+   			public static string ServiceUsernameColumn{
+			      get{
+        			return "ServiceUsername";
+      			}
+		    }
+           
+            public IColumn Token{
+                get{
+                    return this.GetColumn("Token");
+                }
+            }
+            				
+   			public static string TokenColumn{
+			      get{
+        			return "Token";
+      			}
+		    }
+           
+            public IColumn TokenSecret{
+                get{
+                    return this.GetColumn("TokenSecret");
+                }
+            }
+            				
+   			public static string TokenSecretColumn{
+			      get{
+        			return "TokenSecret";
+      			}
+		    }
+           
+                    
+        }
+        
+        /// <summary>
         /// Table: BetaSignups
         /// Primary Key: ID
         /// </summary>
@@ -2541,157 +2714,6 @@ namespace Epilogger.Data {
    			public static string MSGColumn{
 			      get{
         			return "MSG";
-      			}
-		    }
-           
-                    
-        }
-        
-        /// <summary>
-        /// Table: UserAuthenticationProfile
-        /// Primary Key: ID
-        /// </summary>
-
-        public class UserAuthenticationProfileTable: DatabaseTable {
-            
-            public UserAuthenticationProfileTable(IDataProvider provider):base("UserAuthenticationProfile",provider){
-                ClassName = "UserAuthenticationProfile";
-                SchemaName = "dbo";
-                
-
-                Columns.Add(new DatabaseColumn("ID", this)
-                {
-	                IsPrimaryKey = true,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = true,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("UserID", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Guid,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = true,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("Service", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 100
-                });
-
-                Columns.Add(new DatabaseColumn("ServiceUsername", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 250
-                });
-
-                Columns.Add(new DatabaseColumn("Token", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 500
-                });
-
-                Columns.Add(new DatabaseColumn("TokenSecret", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 500
-                });
-                    
-                
-                
-            }
-            
-            public IColumn ID{
-                get{
-                    return this.GetColumn("ID");
-                }
-            }
-            				
-   			public static string IDColumn{
-			      get{
-        			return "ID";
-      			}
-		    }
-           
-            public IColumn UserID{
-                get{
-                    return this.GetColumn("UserID");
-                }
-            }
-            				
-   			public static string UserIDColumn{
-			      get{
-        			return "UserID";
-      			}
-		    }
-           
-            public IColumn Service{
-                get{
-                    return this.GetColumn("Service");
-                }
-            }
-            				
-   			public static string ServiceColumn{
-			      get{
-        			return "Service";
-      			}
-		    }
-           
-            public IColumn ServiceUsername{
-                get{
-                    return this.GetColumn("ServiceUsername");
-                }
-            }
-            				
-   			public static string ServiceUsernameColumn{
-			      get{
-        			return "ServiceUsername";
-      			}
-		    }
-           
-            public IColumn Token{
-                get{
-                    return this.GetColumn("Token");
-                }
-            }
-            				
-   			public static string TokenColumn{
-			      get{
-        			return "Token";
-      			}
-		    }
-           
-            public IColumn TokenSecret{
-                get{
-                    return this.GetColumn("TokenSecret");
-                }
-            }
-            				
-   			public static string TokenSecretColumn{
-			      get{
-        			return "TokenSecret";
       			}
 		    }
            

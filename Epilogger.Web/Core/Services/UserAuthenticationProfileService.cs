@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using Epilogger.Data;
@@ -21,15 +22,18 @@ namespace Epilogger.Web {
             GetRepository<UserAuthenticationProfile>().Delete(profile);
         }
 
-        public UserAuthenticationProfile UserAuthorizationByService(AuthenticationServices serviceType) {
-            return GetData().FirstOrDefault(ua => ua.Service == serviceType.ToString());
+        public UserAuthenticationProfile UserAuthorizationByService(AuthenticationServices serviceType, string platform) {
+            return GetData().FirstOrDefault(ua => ua.Service == serviceType.ToString() && ua.Platform == platform);
         }
 
-        public UserAuthenticationProfile UserAuthorizationByServiceScreenName(string screenName) {
-            return GetData().FirstOrDefault(ua => ua.ServiceUsername == screenName);
+        public IEnumerable<UserAuthenticationProfile> UserAuthorizationByServiceScreenName(string screenName) {
+            return GetData().Where(ua => ua.ServiceUsername == screenName);
         }
 
-
+        public UserAuthenticationProfile UserAuthorizationByServiceScreenNameAndPlatform(string screenName, string platform, AuthenticationServices service)
+        {
+            return GetData().FirstOrDefault(ua => ua.ServiceUsername == screenName && ua.Platform == platform && ua.ServiceUsername == service.ToString());
+        }
 
     }
 }
