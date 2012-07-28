@@ -101,10 +101,10 @@
 		</nav>
 	</header>
        
-    <section class="contentContainer btext blink" id="single-photo">     
+    <section class="contentContainer btext blink @(Model.Width >= 500 ? "horizontal" : "")" id="single-photo">     
         @if (Model.Width >= 500 && Model.Height >= 300)
         {       
-            <img src="/Public/images/widget/_old/BackArrow.png" alt=""/>
+            <img src="/Public/images/widget/arrow-back.png" alt=""/>
             if (Model.returnto == 1)
             {
                 <a href="" class="more" onclick="location.href='@Url.Action("index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to feed</a>
@@ -116,22 +116,26 @@
             
             <span class="m-spacer"></span>
             
-            <img src="@Model.Image.Fullsize" style="display: none;" alt="" id="horizontal-full-photo" />
+            <img src="@Model.Image.Fullsize" style="display: none;" id="horizontal-full-photo" alt="" />
             
             <article class="tweet horizontal">
                 <img src="@Model.Tweet.ProfileImageURL" height="48" width="48"  class="twit-avatar" />
-                   
-                <div>
-                    <p>
-                        <a class="twitterName" href="http://www.twitter.com/@Model.Tweet.FromUserScreenName">@Model.Tweet.FromUserScreenName:</a>
-                        @Html.Raw(Model.Tweet.TextAsHTML)
-                    </p>
-                </div>
+
+                <p>
+                    <a class="twitterName" href="http://www.twitter.com/@Model.Tweet.FromUserScreenName">@Model.Tweet.FromUserScreenName:</a>
+                    @Html.Raw(Model.Tweet.TextAsHTML)
+                </p>
+				
+			    <ul class="tweet-nav">
+					<li> <a href="#">reply</a> &bullet;</li>
+					<li> <a href="#">retweet</a> &bullet;</li>
+					<li> 9 hours ago &bullet;</li>
+			    </ul>
             </article>
             
-            <span class="m-spacer"></span>
+            <span class="m-spacer" style="clear:left"></span>
             
-            <img src="/Public/images/widget/_old/BackArrow.png" alt=""/>
+            <img src="/Public/images/widget/arrow-back.png" alt=""/>
             if (Model.returnto == 1)
             {
                 <a href="" class="more" onclick="location.href='@Url.Action("index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to feed</a>
@@ -143,7 +147,7 @@
         }
         else
         {
-            <img src="/Public/images/widget/_old/BackArrow.png" alt=""/>
+            <img src="/Public/images/widget/arrow-back.png" alt=""/>
             if (Model.returnto == 1)
             {
                 <a href="" class="more" onclick="location.href='@Url.Action("index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to feed</a>
@@ -167,6 +171,12 @@
                         <a class="twitterName" href="http://www.twitter.com/@Model.Tweet.FromUserScreenName">@Model.Tweet.FromUserScreenName:</a>
                         @Html.Raw(Model.Tweet.TextAsHTML)
                     </p>
+				
+			        <ul class="tweet-nav">
+					    <li> <a href="#">reply</a> &bullet;</li>
+					    <li> <a href="#">retweet</a> &bullet;</li>
+					    <li> 9 hours ago &bullet;</li>
+			        </ul>
                 </div>
             </article>
             
