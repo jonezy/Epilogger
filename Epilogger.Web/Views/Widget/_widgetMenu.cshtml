@@ -6,7 +6,7 @@
 
 <ul id="widgetMenu">
     <li class="@(action.ToLower() == "index" ? "current " : string.Empty)@(Model.returnto == 1 ? "current " : string.Empty)">
-        <a href="" onclick="location.href='@Url.Action("index", new { id = Model.EventSlug, Model.width, Model.height })'; return false;">full feed</a>
+        <a href="" onclick="location.href='@Url.Action("index", new { id = Model.EventSlug, Model.width, Model.height })'; return false;">right now</a>
     </li>
     
     <li class="@(action.ToLower() == "photos" ? "current " : string.Empty)@(Model.returnto == 2 ? "current " : string.Empty)">
