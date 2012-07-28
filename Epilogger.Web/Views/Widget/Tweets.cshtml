@@ -46,6 +46,12 @@ else
                         @Html.Raw(theTweet.TextAsHTML)
                         <!-- <span class="tweet-date">(@Html.DisplayFor(thing => theTweet.CreatedDate))</span> -->
                     <p>
+				
+				    <ul class="tweet-nav">
+					    <li> <a href="#">reply</a> &bullet;</li>
+					    <li> <a href="#">retweet</a> &bullet;</li>
+					    <li> @Html.DisplayFor(thing => theTweet.CreatedDate) &bullet;</li>
+				    </ul>
                 </div>
             </article>
         }
