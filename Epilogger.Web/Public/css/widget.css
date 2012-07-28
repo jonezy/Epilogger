@@ -4,7 +4,7 @@
 	border:0}
 	
 body {
-	font:0.875em helvetica, tahoma, arial, sans-serif}
+	font:0.813em helvetica, tahoma, arial, sans-serif}
 
 a {
 	text-decoration:none}
@@ -65,7 +65,17 @@ p.section-title {
 p.section-title span {
 	font-size:0.846em}
 
-/* --- feed */
+section#single-photo, section#all-tweets, section#all-photos, section#all-checkins {
+    height:70%;
+    overflow:auto;
+    overflow-x:hidden}
+
+section#all-photos.horizontal, section#all-tweets.horizontal, section#all-checkins.horizontal, 
+section#feed-tweets.horizontal, section#single-photo.horizontal {
+    height:53%}
+    
+
+/* --- feed view */
 section#feed-tweets {
     height:40%;
     overflow:auto}	
@@ -84,19 +94,16 @@ article.tweet ul.tweet-nav li {
 	list-style:none;
 	display:inline;
 	font-size:0.846em;
-	opacity:0.65;}
-
-section#single-photo, section#all-tweets, section#all-photos, section#all-checkins {
-    height:70%;
+	opacity:0.65} 
+    
+section#feed-tweets.horizontal {
     overflow:auto;
-    overflow-x:hidden}
-
-section#all-photos.horizontal, section#all-tweets.horizontal, section#all-checkins.horizontal {
-    height:53%}
-   
-section#feed-photos.horizontal, section#feed-tweets.horizontal {
     float:left;
-    width:50%}
+    width:57%}
+
+section#feed-photos.horizontal {
+    float:right;
+    width:35%}
     
 
 /* --- all photos view */
@@ -115,14 +122,18 @@ section#all-photos .imageListLarge li img {
      
  
 /* --- single photo view */
-/*section#single-photo article.horizontal {
+section#single-photo article.tweet.horizontal {
     float:left;
-    width:45%}
+    width:50%;
+    background:blu}
+ 
+section#single-photo article.tweet div {
+    width:auto}
 
 section#single-photo img#horizontal-full-photo {
     float:left;
     padding:0 8px 0 0;
-    widdth:50%} */
+    width:48%;} 
     
  
 /* --- all check-ins view */
