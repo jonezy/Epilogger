@@ -11,13 +11,15 @@
 @if (Model.width==100 && Model.height==100)
 {
     @: <div style="@string.Format("height:100%; width: 100%;") overflow-x: hidden; overflow-y: auto;" class="bbackground" id="wrapper">
-} else {
+} 
+else 
+{
     @: <div style="@string.Format("height:{0}px; width: {1}px;", @Model.height, @Model.width) overflow: hidden;" class="bbackground" id="wrapper">
 }
 
 
     <header class="hbackground htext hlink">
-		<img src="http://a0.twimg.com/profile_images/2355397327/image_normal.jpg" width="42" height="42" /> 
+		<img src="http://a0.twimg.com/profile_images/2355397327/image_normal.jpg" width="42" height="42" alt="" /> 
 		<span id="subtitle">What's going on at</span>
 		<h1 id="title"><a href="">International Startup Fest</a></h1>
 		
@@ -27,16 +29,18 @@
 			@Html.Partial("_widgetMenu", new Epilogger.Web.Models.WidgetMenuViewModel() { EventSlug = Model.EventSlug, width = Model.width, height = Model.height, returnto = 1 })
 		</nav>
 	</header>
+    
+    
 
-    @if (Model.width >= 500 && Model.height >= 300)
+@if (Model.width >= 500 && Model.height >= 300)
     {
 	    <section id="feed-photos" class="horizontal btext blink">
-		    <p class="section-title"><strong>Recent Photos</strong> <span>(<a href="" onclick="location.href='@Url.Action("Photos", new { id = Model.EventSlug, Model.width, Model.height })'; return false;"">all photos</a>)</span></p>
+		    <p class="section-title"><strong>Recent Photos</strong> <span>(<a href="" onclick="location.href='@Url.Action("Photos", new { id = Model.EventSlug, Model.width, Model.height })'; return false;">all photos</a>)</span></p>
 		
             <div style="height:170px; overflow:hidden">
 		        @foreach(var theImage in Model.Images)
                 {
-                    <a href="" onclick="location.href='photoDetails/@Model.EventSlug/@theImage.ID?width=@Model.width&height=@Model.height&returnto=1'; return false;"><img src="@theImage.Fullsize" width="85" height="85" alt="" /></a>
+                    <a href="" onclick="@string.Format("location.href='photoDetails/{0}/{1}?width={2}&height={3}&returnto=1", Model.EventSlug, theImage.ID, Model.width, Model.width)'; return false;"><img src="@theImage.Fullsize" width="85" height="85" alt="" /></a>
                 }
             </div>
 	    </section>
@@ -47,7 +51,7 @@
             @foreach (var theTweet in Model.Tweets)
             {
                 <article class="tweet">                
-                    <img src="@theTweet.ProfileImageURL" height="48" width="48" class="twit-avatar" />
+                    <img src="@theTweet.ProfileImageURL" height="48" width="48" class="twit-avatar" alt="" />
 
                     <div>
                         <p>
@@ -58,11 +62,11 @@
                 </article>
             }
 	    </section>
-    }
-    else 
+    } 
+    else
     {
 	    <section id="feed-photos" class="btext blink">
-		    <p class="section-title"><strong>Recent Photos</strong> <span>(<a href="" onclick="location.href='@Url.Action("Photos", new { id = Model.EventSlug, Model.width, Model.height })'; return false;"">all photos</a>)</span></p>
+		    <p class="section-title"><strong>Recent Photos</strong> <span>(<a href="" onclick="location.href='@Url.Action("Photos", new { id = Model.EventSlug, Model.width, Model.height })'; return false;">all photos</a>)</span></p>
 		
             <div style="height:80px; overflow:hidden">
 		    @foreach(var theImage in Model.Images)
