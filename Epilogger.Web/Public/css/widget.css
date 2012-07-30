@@ -4,7 +4,7 @@
 	border:0}
 	
 body {
-	font:0.813em helvetica, tahoma, arial, sans-serif}
+	font:0.813em helvetica, arial, sans-serif}
 
 a {
 	text-decoration:none}
@@ -28,7 +28,7 @@ header img {
 	margin:0 8px 10px 0}
 	
 h1#title {
-	font-size:1.17em;}
+	font-size:1.25em;}
 
 span#subtitle {
 	font-size:0.929em}
@@ -183,20 +183,20 @@ span#epiloggerCounts img {
 
 
 /* ---------------------------------------- [ MISCELLANEOUS ] --------- */
-
 .m-spacer { display:block; height:10px}
 .b-spacer { display:block; height:20px}
 .more { font-size:0.8em; clear:left}
 .clear { clear:both}
 
-/* ---------------------------------------- [ USER DEFINED COLORS ] --- */
-.hbackground { background:#5ec008}
-.htext { color:#fff}
-.hlink a { color:#fff}
 
-.bbackground { background:#f0eed8;}
-.blink a, ul.tweet-nav { color:#cf008a}
-.btext { color:#666}
+/* ---------------------------------------- [ USER DEFINED COLORS ] --- */
+.hbackground { background:transparent}
+.htext, .htext a { color:#333}
+/*. a { color:#333} same as htext */
+
+.bbackground { background:transparent;}
+.blink a, ul.tweet-nav { color:#3b5998}
+.btext { color:#000}
 
 /*
 #widgetMenu 
