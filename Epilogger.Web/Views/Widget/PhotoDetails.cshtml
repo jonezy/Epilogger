@@ -92,7 +92,7 @@
     <header class="hbackground htext hlink">
 		<img src="http://a0.twimg.com/profile_images/2355397327/image_normal.jpg" width="42" height="42" />  
 		<span id="subtitle">What's going on at</span>
-		<h1 id="title"><a href="">International Startup Fest</a></h1>
+		<h1 id="title">@Html.ActionLink(Model.Name, "Details", "Events", new { @id = Model.EventSlug }, new { target="_blank" })</h1>
 		
 		<hr></hr>
 		

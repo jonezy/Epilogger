@@ -128,7 +128,7 @@ namespace Epilogger.Data
         public Query<ScraperURL> ScraperURLs { get; set; }
         public Query<URL> URLS { get; set; }
         public Query<aspnet_User> aspnet_Users { get; set; }
-        public Query<Event> Events { get; set; }
+        public Query<WidgetCustomSetting> WidgetCustomSettings { get; set; }
         public Query<UserAuthenticationProfile> UserAuthenticationProfiles { get; set; }
         public Query<BetaSignup> BetaSignups { get; set; }
         public Query<MemoryBoxItem> MemoryBoxItems { get; set; }
@@ -140,6 +140,7 @@ namespace Epilogger.Data
         public Query<userClickTracking> userClickTrackings { get; set; }
         public Query<Venue> Venues { get; set; }
         public Query<UserInRole> UserInRoles { get; set; }
+        public Query<Event> Events { get; set; }
         public Query<ImageMetaDatum> ImageMetaData { get; set; }
         public Query<Image> Images { get; set; }
         public Query<UserTwitterAction> UserTwitterActions { get; set; }
@@ -262,7 +263,7 @@ namespace Epilogger.Data
             ScraperURLs = new Query<ScraperURL>(provider);
             URLS = new Query<URL>(provider);
             aspnet_Users = new Query<aspnet_User>(provider);
-            Events = new Query<Event>(provider);
+            WidgetCustomSettings = new Query<WidgetCustomSetting>(provider);
             UserAuthenticationProfiles = new Query<UserAuthenticationProfile>(provider);
             BetaSignups = new Query<BetaSignup>(provider);
             MemoryBoxItems = new Query<MemoryBoxItem>(provider);
@@ -274,6 +275,7 @@ namespace Epilogger.Data
             userClickTrackings = new Query<userClickTracking>(provider);
             Venues = new Query<Venue>(provider);
             UserInRoles = new Query<UserInRole>(provider);
+            Events = new Query<Event>(provider);
             ImageMetaData = new Query<ImageMetaDatum>(provider);
             Images = new Query<Image>(provider);
             UserTwitterActions = new Query<UserTwitterAction>(provider);
@@ -299,7 +301,7 @@ namespace Epilogger.Data
             	DataProvider.Schema.Tables.Add(new ScraperURLsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new URLsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new aspnet_UsersTable(DataProvider));
-            	DataProvider.Schema.Tables.Add(new EventsTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new WidgetCustomSettingsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserAuthenticationProfileTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new BetaSignupsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new MemoryBoxItemsTable(DataProvider));
@@ -311,6 +313,7 @@ namespace Epilogger.Data
             	DataProvider.Schema.Tables.Add(new userClickTrackingTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new VenuesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserInRolesTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new EventsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ImageMetaDataTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ImagesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserTwitterActionsTable(DataProvider));

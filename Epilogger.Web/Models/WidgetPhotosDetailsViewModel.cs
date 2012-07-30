@@ -9,6 +9,7 @@ namespace Epilogger.Web.Models
 
         public Core.Stats.WidgetTotal EpiloggerCounts { get; set; }
         public string EventSlug { get; set; }
+        public string Name { get; set; }
         public int PhotoID { get; set; }
         public Epilogger.Data.Image Image { get; set; }
         public Data.Tweet Tweet { get; set; }

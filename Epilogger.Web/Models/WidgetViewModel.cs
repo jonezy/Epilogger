@@ -12,6 +12,7 @@ namespace Epilogger.Web.Models
 
         public int ID { get; set; }
         public string EventSlug { get; set; }
+        public string Name { get; set; }
 
         public int TweetCount { get; set; }
         public int ImageCount { get; set; }
