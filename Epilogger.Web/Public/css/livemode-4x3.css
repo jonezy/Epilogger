@@ -47,13 +47,11 @@ div.single-tweet-arrow {
 	border-right:2.5em solid transparent; 
 	border-top:1.25em solid #fff;
 	position:relative;
-    left: 68%;
-    }
+    left: 68%;    }
 
 div.single-tweet img {
 	float:left;
-    margin: 0 5% 5% 0; 
-    }
+    margin: 0 5% 5% 0;}
 
 div.single-tweet p {
 	border-top:0.1em dotted #e0e0e0;
@@ -63,10 +61,7 @@ div.single-tweet p {
 
 div.single-tweet p a {
     font-weight: bold;
-    color: #46ca00 !important;
-    text-decoration: none;
-}
-
+    text-decoration: none;}
 
 div.single-tweet span.author strong {
 	display:block;
@@ -82,8 +77,7 @@ div#photos .imgLarge {
     overflow: hidden;
     float:left;
 	margin:0 1px 1px 0;
-	box-shadow:0 0 0.25em #ccc;
-}
+	box-shadow:0 0 0.25em #ccc;}
 
 div#photos .imgSmall {
     width: 94px;
@@ -91,11 +85,9 @@ div#photos .imgSmall {
     overflow: hidden;
     float: left;
 	margin:0 1px 1px 0;
-	box-shadow:0 0 0.25em #ccc;
-}
+	box-shadow:0 0 0.25em #ccc;}
 	
-div#photos img {
-	 }
+div#photos img {}
 	
 
 /* ------------------------------------- [ FOOTER ] --- */
@@ -107,7 +99,8 @@ div#footer {
 	position:absolute;
 	bottom:0;
 	border-top:0.5em solid #fff;
-	box-shadow:0 0 0.25em #ccc;}
+	box-shadow:0 0 0.25em #ccc;
+	opacity:0.9}
 	
 div#hashtag-sponsors, div#logo, div#top-tweeters, div#stats-credits {
 	float:left;
@@ -158,25 +151,25 @@ h1 {
 	margin:0 0 1em 0}
 
 .tweet {
-    /*position: relative;*/
-}
+    /*position: relative;*/}
+    
 .newupdates {
     display: none;
     opacity: 0;
     /*position: relative;*/
-    /*top: -200px;*/
-}
+    /*top: -200px;*/}
 
 #divStaging {
-    display: none;
-}
+    display: none;}
 
 .newImage {
-    display: none;
-}
+    display: none;}
 
 
 /* ------------------------------------- [ CUSTOM COLOURS ] --- */
-.colour1 	{ color:#ce0088 !important}
-.colour2	{ color:#46ca00 !important}
-.colour3	{ color:#000 !important}
+.colour1 	{ color:#333 !important} /* footer text */
+.colour2, div.single-tweet p a { color:#3b5998 !important} /* links */
+.colour3	{ color:#000 !important} /* twitter usernames */
+
+/* background image test */
+body { background:#587b27 url('http://sparkentreenscene.com/s/spark/themes/bg-spark-reporter-jpg-mkyg.jpg');
