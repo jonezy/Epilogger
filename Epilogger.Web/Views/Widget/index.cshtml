@@ -58,6 +58,12 @@ else
                             <a class="twitterName" href="http://www.twitter.com/@theTweet.FromUserScreenName"><strong>@theTweet.FromUserScreenName:</strong></a>                        
                             @Html.Raw(theTweet.TextAsHTML)
                         </p>
+				
+				        <ul class="tweet-nav">
+					        <li> <a href="#">reply</a> &bullet;</li>
+					        <li> <a href="#">retweet</a> &bullet;</li>
+					        <li> @Html.DisplayFor(thing => theTweet.CreatedDate) &bullet;</li>
+				        </ul>
                     </div>
                 </article>
             }
@@ -89,6 +95,12 @@ else
                             <a class="twitterName" href="http://www.twitter.com/@theTweet.FromUserScreenName"><strong>@theTweet.FromUserScreenName:</strong></a>                        
                             @Html.Raw(theTweet.TextAsHTML)
                         </p>
+				
+				        <ul class="tweet-nav">
+					        <li> 9 hours ago &bullet;</li>
+					        <li> <a href="#">reply</a> &bullet;</li>
+					        <li> <a href="#">retweet</a></li>
+				        </ul>
                     </div>
                 </article>
             }
