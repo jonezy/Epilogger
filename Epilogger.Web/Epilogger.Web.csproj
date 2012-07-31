@@ -453,6 +453,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\combres_full_with_annotation.xml" />
+    <Content Include="Public\images\widget\logo\chevywidget.png" />
     <Content Include="Public\js\widget.js" />
     <Content Include="WidgetSample.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -3115,7 +3116,6 @@
     <Folder Include="Areas\Api\Views\Shared\" />
     <Folder Include="Areas\Authentication\Models\" />
     <Folder Include="Areas\Authentication\Views\Shared\" />
-    <Folder Include="Public\images\widget\logo\" />
     <Folder Include="Public\js\FacebookPhotoPicker\crossdomain\.svn\prop-base\" />
     <Folder Include="Public\js\FacebookPhotoPicker\crossdomain\.svn\props\" />
     <Folder Include="Public\js\FacebookPhotoPicker\crossdomain\.svn\tmp\prop-base\" />
