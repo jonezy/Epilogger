@@ -80,7 +80,7 @@ namespace Epilogger.Web.Controllers
 
             model.CustomSettings = _ws.FindByEventID(requestedEvent.ID);
             model.TweetCount = _ts.FindTweetCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
-            model.Tweets = _ts.FindByEventIDOrderDescTake6(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
+            model.Tweets = _ts.FindByEventIDOrderDescTakeX(requestedEvent.ID, 12, this.FromDateTime(), this.ToDateTime());
             model.ImageCount = _is.FindImageCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
             model.CheckInCount = _cs.FindCheckInCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
             model.CheckIns = _cs.FindByEventIDOrderDescTake16(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
@@ -93,22 +93,33 @@ namespace Epilogger.Web.Controllers
 
             model.EpiloggerCounts = new Core.Stats.WidgetTotals().GetWidgetTotals(requestedEvent.ID, FromDateTime(), ToDateTime());
 
-            if (model.Height == 500 && model.Width == 300)
+
+            //Return a different number of photos depending on the size of the widget.
+            if (model.Width < model.Height)
             {
-                model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, 14, FromDateTime(), ToDateTime());
-            }
-            else if (model.Height == 330 && model.Width == 550)
-            {
-                model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, 16, FromDateTime(), ToDateTime());
+                //Portrait
+                model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, model.Width <= 300 ? 3 : 6, FromDateTime(), ToDateTime());
             }
             else
-                model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, 22, FromDateTime(),
-                                                               ToDateTime());
+            {
+                //Landscape
+                if (model.Width >= 500 && model.Height >= 300)
+                {
+                    model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, (int)((model.Height - 125) / 85)*2, FromDateTime(), ToDateTime());
 
+                    if (model.Width >= 600)
+                    {
+                        model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, (int)((model.Height-125) / 85)*3, FromDateTime(), ToDateTime());
+                    }
+                }
+            }
 
-            ////Pull out some customization settings from the qs
-            //model.ButtonBackgroundColor = btnbc;
-            //model.ButtonTextColor = btntc;
+            if ( model.Width==100 && model.Height==100)
+            {
+                //Floating layout, load lots.
+                model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, 25, FromDateTime(), ToDateTime());
+            }
+
             
             return View(model);
         }

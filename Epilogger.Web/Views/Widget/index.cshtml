@@ -9,7 +9,7 @@
     var tweetHeightOffset    = 0;
     if (Model.Width < 300)
     {
-        tweetHeightOffset = 220;
+        tweetHeightOffset = 224;
     }
     else
     {
@@ -21,6 +21,13 @@
         tweetHeightOffset = 206;
     }
     
+    if (Model.Height < Model.Width)
+    {
+        //Offsets for Landscape layout
+        tweetHeightOffset = 125;
+    }
+    
+    
 }
 
 @if (Model.Width==100 && Model.Height==100)
@@ -31,16 +38,19 @@ else
 {
     @: <div style="@string.Format("height: {0}px; width: {1}px;", Model.Height, Model.Width) overflow: hidden;" class="bbackground" id="wrapper">
 }
-    <div class="container">
 
+
+    <div class="container">
+        
         @Html.Partial("_header", new WidgetHeaderViewModel() { Name = Model.Name, EventSlug = Model.EventSlug, CustomSettings = Model.CustomSettings, Width = Model.Width, Height = Model.Height } )
 
         @if (Model.Width >= 500 && Model.Height >= 300)
         {
+                /* Landscape */
 	            <section id="feed-photos" class="horizontal btext blink">
 		            <p class="section-title"><strong>Recent Photos</strong> <span>(<a href="" onclick="location.href='@Url.Action("Photos", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">all photos</a>)</span></p>
 		
-                    <div style="overflow:hidden" class="feed-photos-container horizontal">
+                    <div class="feed-photos-container horizontal" style="height: @Html.Raw((Model.Height - tweetHeightOffset).ToString(CultureInfo.InvariantCulture))px; overflow:hidden">
 		                @foreach (var theImage in Model.Images)
                         {
                             <a href="" onclick="@string.Format("location.href='photoDetails/{0}/{1}?width={2}&height={3}&returnto=1", Model.EventSlug, theImage.ID, Model.Width, Model.Width)'; return false;"><img src="@theImage.Fullsize" width="200" alt="" /></a>
@@ -48,7 +58,7 @@ else
                     </div>
 	            </section>
 	
-	            <section id="feed-tweets" class="horizontal btext blink">
+	            <section id="feed-tweets" class="horizontal btext blink" style="height: @Html.Raw((Model.Height - tweetHeightOffset).ToString(CultureInfo.InvariantCulture))px">
 		            <p class="section-title"><strong>Latest Tweets</strong> <span>(<a href="#">all tweets</a>)</span></p>
         
                     @foreach (var theTweet in Model.Tweets)

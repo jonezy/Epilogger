@@ -141,8 +141,7 @@ section#single-photo, section#all-tweets, section#all-photos, section#all-checki
     overflow-x:hidden}
 
 section#all-photos.horizontal, section#all-tweets.horizontal, section#all-checkins.horizontal, 
-section#feed-tweets.horizontal, section#single-photo.horizontal {
-    height:53%}
+section#feed-tweets.horizontal, section#single-photo.horizontal { height: 53%; }
     
 
 /* --- feed view */
@@ -173,7 +172,7 @@ section#feed-tweets.horizontal {
 
 section#feed-photos.horizontal {
     float:right;
-    width:35%
+    width: 35%;
 }
 
 .feed-photos-container a {
@@ -186,14 +185,23 @@ section#feed-photos.horizontal {
     overflow: hidden;
 }
 
+.feed-photos-container.horizontal a {
+    margin: 0 2px 2px 0px;
+}
+    
+    
+
+
+
 .feed-photos-container img {
     left: -44px;
     position: relative;
 }
 
+/*
 .feed-photos-container.horizontal {
     height:170px;
-}
+}*/
 .feed-photos-container {
     height:80px; 
 }
