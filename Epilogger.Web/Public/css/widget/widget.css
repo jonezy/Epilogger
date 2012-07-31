@@ -17,21 +17,90 @@ div#wrapper {
 	position:relative;}
 	
 	
+/* Variable sized font for when the widget is tiny */
+
+/* Narrower than 299px */
+@media only screen and (min-width: 0px) and (max-width: 249px) 
+{
+    header { height: 63px !important; }
+    
+    h1#title { font-size: 1em; width: 249px; }
+    h1#title a { width: 195px !important; }
+    
+    span#subtitle { font-size: 0.9em}
+    
+    p.section-title { font-size: 0.8em !important; }
+    nav li a { font-size: 0.6em !important; }
+    
+    .twit-avatar { height: 30px !important; width: 30px !important; }
+    .feed-photos-container a {width: 55px !important; height: 70px !important; }
+    
+    .feed-photos-container { height: 57px !important; }
+    
+    hr { margin: 0 !important; }
+    
+    .hbackground img { width: 38px; height: 38px; }
+    
+    article.tweet div { width: 76% !important; }
+    
+    .tweet { font-size: 0.8em !important; }
+    
+}
+
+
+/* Narrower than 300px */
+@media only screen and (min-width: 250px) and (max-width: 299px) 
+{
+    header { height: 63px !important; }
+    
+    h1#title { font-size: 1em; width: 250px; }
+    h1#title a { width: 195px !important; }
+    
+    
+    nav li a { font-size: 0.8em !important; }
+    
+    .twit-avatar { height: 38px !important; width: 38px !important; }
+    .feed-photos-container a {width: 70px !important; height: 70px !important; }
+    
+    .feed-photos-container { height: 72px !important; }
+    
+    hr { margin: 0 !important; }
+    
+    .hbackground img { width: 38px; height: 38px; }
+}
+
+/* Over 300px */
+@media only screen and (min-width: 300px) and (max-width: 969px) 
+{
+    
+}
+
+
+	
+	
 
 /* ---------------------------------------- [ HEADER, TITLE, NAV ] ---- */
+h1#title { font-size: 1.25em; }
+span#subtitle { font-size: 0.929em }
+p.section-title span { font-size:0.846em }
+
+
 header {
 	padding:7px 10px;
-	margin:0 0 10px 0}
+    margin: 0 0 10px 0;
+    height: 72px;
+	}
 
 header img {
 	float:left;
-	margin:0 8px 10px 0}
+	margin:0 8px 4px 0}
 	
-h1#title {
-	font-size:1.25em;}
 
-span#subtitle {
-	font-size:0.929em}
+h1#title a { display: block;
+width: 229px;
+overflow: hidden;
+height: 22px;
+}
 
 hr {
 	clear:left;
@@ -56,14 +125,15 @@ nav li.current a {
 
 /* ---------------------------------------- [ CONTENT SECTIONS ] ------ */
 section#feed-photos, section#feed-tweets, section#single-photo, section#all-tweets {
-	padding:0 10px;
-	margin:0 0 15px 0}
+	    padding:0 10px;
+        margin: 0 0 15px 0;
+	    /*margin-top: 89px;*/
+	}
 
 p.section-title {
 	margin:0 0 5px 0}
 
-p.section-title span {
-	font-size:0.846em}
+
 
 section#single-photo, section#all-tweets, section#all-photos, section#all-checkins {
     height:70%;
@@ -103,8 +173,34 @@ section#feed-tweets.horizontal {
 
 section#feed-photos.horizontal {
     float:right;
-    width:35%}
-    
+    width:35%
+}
+
+.feed-photos-container a {
+    margin: 0 5px 6px 0px;
+    float: left;
+    position: relative;
+    list-style: none;
+    width: 85px;
+    height: 85px;
+    overflow: hidden;
+}
+
+.feed-photos-container img {
+    left: -44px;
+    position: relative;
+}
+
+.feed-photos-container.horizontal {
+    height:170px;
+}
+.feed-photos-container {
+    height:80px; 
+}
+
+.twit-avatar { height: 48px;width: 48px; }
+
+
 
 /* --- all photos view */
 section#all-photos ul.imageListLarge li {
@@ -125,7 +221,7 @@ section#all-photos .imageListLarge li img {
 section#single-photo article.tweet.horizontal {
     float:left;
     width:50%;
-    background:blu}
+    background: blue; }
  
 section#single-photo article.tweet div {
     width:auto}
@@ -133,7 +229,7 @@ section#single-photo article.tweet div {
 section#single-photo img#horizontal-full-photo {
     float:left;
     padding:0 8px 0 0;
-    width:48%;} 
+    width:48%; } 
     
  
 /* --- all check-ins view */
@@ -154,7 +250,7 @@ footer {
 	border-top:1px solid #ccc;
 	padding:5px 0 0 0;
 	width:93.5%;
-	position:absolute;
+	position: fixed;
 	bottom:0;
 	left:10px;}
 
@@ -189,14 +285,14 @@ span#epiloggerCounts img {
 .clear { clear:both}
 
 
-/* ---------------------------------------- [ USER DEFINED COLORS ] --- */
-.hbackground { background:transparent}
-.htext, .htext a { color:#333}
+/* ---------------------------------------- [ USER DEFINED COLORS - Set to Defaults ] --- */
+.hbackground { background-color: #636161; }
+.htext, .htext a { color:#fff}
 /*. a { color:#333} same as htext */
 
-.bbackground { background:transparent;}
-.blink a, ul.tweet-nav { color:#3b5998}
-.btext { color:#000}
+.bbackground { background:#fff;}
+.blink a, ul.tweet-nav { color:#0099cc}
+.btext { color:#6e6e6e}
 
 /*
 #widgetMenu 

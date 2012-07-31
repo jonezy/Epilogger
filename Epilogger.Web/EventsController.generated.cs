@@ -190,6 +190,21 @@ namespace Epilogger.Web.Controllers {
         public System.Web.Mvc.ActionResult ConceptMap() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.ConceptMap);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Live4X3() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Live4X3);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult LiveGetLastTweetsJson() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.LiveGetLastTweetsJson);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult LiveGetLastPhotosJson() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.LiveGetLastPhotosJson);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public EventsController Actions { get { return MVC.Events; } }
@@ -240,6 +255,9 @@ namespace Epilogger.Web.Controllers {
             public readonly string PhotoDetails = "PhotoDetails";
             public readonly string TweetBox = "TweetBox";
             public readonly string ConceptMap = "ConceptMap";
+            public readonly string Live4X3 = "Live4X3";
+            public readonly string LiveGetLastTweetsJson = "LiveGetLastTweetsJson";
+            public readonly string LiveGetLastPhotosJson = "LiveGetLastPhotosJson";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -279,6 +297,9 @@ namespace Epilogger.Web.Controllers {
             public const string PhotoDetails = "PhotoDetails";
             public const string TweetBox = "TweetBox";
             public const string ConceptMap = "ConceptMap";
+            public const string Live4X3 = "Live4X3";
+            public const string LiveGetLastTweetsJson = "LiveGetLastTweetsJson";
+            public const string LiveGetLastPhotosJson = "LiveGetLastPhotosJson";
         }
 
 
@@ -365,9 +386,9 @@ namespace Epilogger.Web.Controllers {
         public ActionParamsClass_GetLastPhotosJSON GetLastPhotosJSONParams { get { return s_params_GetLastPhotosJSON; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_GetLastPhotosJSON {
-            public readonly string count = "count";
+            public readonly string Count = "Count";
             public readonly string pageLoadTime = "pageLoadTime";
-            public readonly string eventID = "eventID";
+            public readonly string EventID = "EventID";
         }
         static readonly ActionParamsClass_Subscribe s_params_Subscribe = new ActionParamsClass_Subscribe();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -510,6 +531,31 @@ namespace Epilogger.Web.Controllers {
         public class ActionParamsClass_ConceptMap {
             public readonly string id = "id";
         }
+        static readonly ActionParamsClass_Live4X3 s_params_Live4X3 = new ActionParamsClass_Live4X3();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Live4X3 Live4X3Params { get { return s_params_Live4X3; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Live4X3 {
+            public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_LiveGetLastTweetsJson s_params_LiveGetLastTweetsJson = new ActionParamsClass_LiveGetLastTweetsJson();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_LiveGetLastTweetsJson LiveGetLastTweetsJsonParams { get { return s_params_LiveGetLastTweetsJson; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_LiveGetLastTweetsJson {
+            public readonly string count = "count";
+            public readonly string pageLoadTime = "pageLoadTime";
+            public readonly string eventID = "eventID";
+        }
+        static readonly ActionParamsClass_LiveGetLastPhotosJson s_params_LiveGetLastPhotosJson = new ActionParamsClass_LiveGetLastPhotosJson();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_LiveGetLastPhotosJson LiveGetLastPhotosJsonParams { get { return s_params_LiveGetLastPhotosJson; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_LiveGetLastPhotosJson {
+            public readonly string count = "count";
+            public readonly string pageLoadTime = "pageLoadTime";
+            public readonly string eventID = "eventID";
+        }
         static readonly ViewNames s_views = new ViewNames();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewNames Views { get { return s_views; } }
@@ -517,6 +563,7 @@ namespace Epilogger.Web.Controllers {
         public class ViewNames {
             public readonly string _EventMenu = "~/Views/Events/_EventMenu.cshtml";
             public readonly string _ImageTemplate = "~/Views/Events/_ImageTemplate.cshtml";
+            public readonly string _LiveTweetTemplate = "~/Views/Events/_LiveTweetTemplate.cshtml";
             public readonly string _StarRatingTemplate = "~/Views/Events/_StarRatingTemplate.cshtml";
             public readonly string _VenueSearchResults = "~/Views/Events/_VenueSearchResults.cshtml";
             public readonly string AddBlogPost = "~/Views/Events/AddBlogPost.cshtml";
@@ -536,6 +583,7 @@ namespace Epilogger.Web.Controllers {
             public readonly string EventToolbar = "~/Views/Events/EventToolbar.cshtml";
             public readonly string ImageCommentControl = "~/Views/Events/ImageCommentControl.cshtml";
             public readonly string ImageCommentsPaged = "~/Views/Events/ImageCommentsPaged.cshtml";
+            public readonly string Live4x3 = "~/Views/Events/Live4x3.cshtml";
             public readonly string Menu = "~/Views/Events/Menu.cshtml";
             public readonly string NeedTwitterAuth = "~/Views/Events/NeedTwitterAuth.cshtml";
             public readonly string PhotoDetails = "~/Views/Events/PhotoDetails.cshtml";
@@ -639,11 +687,11 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult GetLastPhotosJSON(int count, string pageLoadTime, int eventID) {
+        public override System.Web.Mvc.ActionResult GetLastPhotosJSON(int Count, string pageLoadTime, int EventID) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.GetLastPhotosJSON);
-            callInfo.RouteValueDictionary.Add("count", count);
+            callInfo.RouteValueDictionary.Add("Count", Count);
             callInfo.RouteValueDictionary.Add("pageLoadTime", pageLoadTime);
-            callInfo.RouteValueDictionary.Add("eventID", eventID);
+            callInfo.RouteValueDictionary.Add("EventID", EventID);
             return callInfo;
         }
 
@@ -805,6 +853,28 @@ namespace Epilogger.Web.Controllers {
         public override System.Web.Mvc.ActionResult ConceptMap(string id) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ConceptMap);
             callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Live4X3(string id) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Live4X3);
+            callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult LiveGetLastTweetsJson(int count, string pageLoadTime, int eventID) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.LiveGetLastTweetsJson);
+            callInfo.RouteValueDictionary.Add("count", count);
+            callInfo.RouteValueDictionary.Add("pageLoadTime", pageLoadTime);
+            callInfo.RouteValueDictionary.Add("eventID", eventID);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult LiveGetLastPhotosJson(int count, string pageLoadTime, int eventID) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.LiveGetLastPhotosJson);
+            callInfo.RouteValueDictionary.Add("count", count);
+            callInfo.RouteValueDictionary.Add("pageLoadTime", pageLoadTime);
+            callInfo.RouteValueDictionary.Add("eventID", eventID);
             return callInfo;
         }
 

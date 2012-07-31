@@ -1,0 +1,37 @@
+﻿@model Epilogger.Web.Models.WidgetHeaderViewModel
+
+@if (Model.CustomSettings.Id != Guid.Empty)
+{
+    /* Custom CSS */
+    <style>
+        .hbackground {
+            background-color: @Model.CustomSettings.HeaderBGColor !important;
+            color: @Model.CustomSettings.HeaderTextColor !important;
+        }
+        .hbackground a {
+            color: @Model.CustomSettings.HeaderLinkColor !important;
+        }
+
+        .bbackground { background:@Model.CustomSettings.ContentBGColor !important; }
+        .blink a, ul.tweet-nav { color: @Model.CustomSettings.ContentLinkColor !important; }
+        .btext { color: @Model.CustomSettings.ContentTextColor !important; }
+    </style>
+    
+}
+
+
+<header class="hbackground htext hlink">
+    @if (Model.CustomSettings.Logo != string.Empty)
+    {
+        @Html.Raw(Html.Image(Model.CustomSettings.Logo, "Width=42 Height=42"))
+    }
+
+    <span id="subtitle">What's going on at</span>
+    <h1 id="title">@Html.ActionLink(Model.Name, "Details", "Events", new { @id = Model.EventSlug }, new { target = "_blank" })</h1>
+		
+    <hr/>
+		
+    <nav>
+        @Html.Partial("_widgetMenu", new Epilogger.Web.Models.WidgetMenuViewModel() { EventSlug = Model.EventSlug, width = Model.Width, height = Model.Height, returnto = 1 })
+    </nav>
+</header>

@@ -11,7 +11,7 @@
   <resourceSets url="~/combres.axd"
                 defaultDuration="30"
                 defaultVersion="auto"
-                defaultDebugEnabled="false"
+                defaultDebugEnabled="true"
                 defaultIgnorePipelineWhenDebug="true"
                 localChangeMonitorInterval="30"
                 remoteChangeMonitorInterval="60"
@@ -63,9 +63,13 @@
     </resourceSet>
 
     <resourceSet name="EmbedCss" type="css">
+
+      <!--<resource path="~/Public/css/widget/base.css" />-->
+      <resource path="~/Public/css/widget/skeleton.css" />
+      <resource path="~/Public/css/widget/layout.css" />
       <resource path="~/Public/css/reset.css" />
+      <resource path="~/Public/css/widget/widget.css" />
       <resource path="~/Public/css/messages.css" />
-      <resource path="~/Public/css/widget.css" />
     </resourceSet>
     
     <resourceSet name="EmbedJs" type="js">
@@ -77,6 +81,7 @@
       <resource path="~/Public/js/epilogger.js" />
       <resource path="~/Public/js/clickmap.js" />
       <resource path="~/Public/js/jquery.cookie.js" />
+      <resource path="~/Public/js/widget.js" />
     </resourceSet>
 
     <resourceSet name="LiveModeCss" type="css">

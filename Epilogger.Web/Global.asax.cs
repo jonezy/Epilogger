@@ -344,11 +344,10 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.TweetCount, opt => opt.Ignore())
                 .ForMember(dest => dest.ImageCount, opt => opt.Ignore())
                 .ForMember(dest => dest.CheckInCount, opt => opt.Ignore())
-                .ForMember(dest => dest.width, opt => opt.Ignore())
-                .ForMember(dest => dest.height, opt => opt.Ignore())
+                .ForMember(dest => dest.Width, opt => opt.Ignore())
+                .ForMember(dest => dest.Height, opt => opt.Ignore())
                 .ForMember(dest => dest.EpiloggerCounts, opt => opt.Ignore())
-                .ForMember(dest => dest.ButtonBackgroundColor, opt => opt.Ignore())
-                .ForMember(dest => dest.ButtonTextColor, opt => opt.Ignore());
+                .ForMember(dest => dest.CustomSettings, opt => opt.Ignore());
 
             Mapper.CreateMap<Event, WidgetPhotosDetailsViewModel>()
                 .ForMember(dest => dest.Width, opt => opt.Ignore())

@@ -319,6 +319,7 @@
     <Compile Include="Core\Services\CategoryService.cs" />
     <Compile Include="Core\Services\BetaService.cs" />
     <Compile Include="Core\Services\APIApplicationService.cs" />
+    <Compile Include="Core\Services\WidgetCustomSettingsService.cs" />
     <Compile Include="Core\Services\MemoryBoxItemService.cs" />
     <Compile Include="Core\Services\MemoryBoxService.cs" />
     <Compile Include="Core\Services\StatsService.cs" />
@@ -383,6 +384,7 @@
     <Compile Include="Models\UploadFacebookAlbumPhotosViewModel.cs" />
     <Compile Include="Models\WidgetCheckinsViewModel.cs" />
     <Compile Include="Models\WidgetCountsViewModel.cs" />
+    <Compile Include="Models\WidgetHeaderViewModel.cs" />
     <Compile Include="Models\WidgetTweetsViewModel.cs" />
     <Compile Include="Models\WidgetPhotosViewModel.cs" />
     <Compile Include="Models\WidgetPhotosDetailsViewModel.cs" />
@@ -460,7 +462,10 @@
     <Content Include="Public\css\cbimages\loading.gif" />
     <Content Include="Public\css\colorbox.css" />
     <Content Include="Public\css\livemode-4x3.css" />
-    <Content Include="Public\css\widget.css" />
+    <Content Include="Public\css\widget\base.css" />
+    <Content Include="Public\css\widget\layout.css" />
+    <Content Include="Public\css\widget\skeleton.css" />
+    <Content Include="Public\css\widget\widget.css" />
     <Content Include="Public\css\sadiehawkins.css" />
     <Content Include="Public\css\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Public\css\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -3098,11 +3103,14 @@
     <Content Include="Views\Home\Copy of Index.cshtml" />
     <Content Include="Views\Events\Live4x3.cshtml" />
     <Content Include="Views\Events\_LiveTweetTemplate.cshtml" />
+    <Content Include="Views\Widget\_header.cshtml" />
+    <Content Include="Views\Widget\Copy of index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />
     <Folder Include="Areas\Authentication\Models\" />
     <Folder Include="Areas\Authentication\Views\Shared\" />
+    <Folder Include="Public\images\widget\logo\" />
     <Folder Include="Public\js\FacebookPhotoPicker\crossdomain\.svn\prop-base\" />
     <Folder Include="Public\js\FacebookPhotoPicker\crossdomain\.svn\props\" />
     <Folder Include="Public\js\FacebookPhotoPicker\crossdomain\.svn\tmp\prop-base\" />

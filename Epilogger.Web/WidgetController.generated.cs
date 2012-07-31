@@ -105,8 +105,6 @@ namespace Epilogger.Web.Controllers {
             public readonly string id = "id";
             public readonly string width = "width";
             public readonly string height = "height";
-            public readonly string btnbc = "btnbc";
-            public readonly string btntc = "btntc";
         }
         static readonly ActionParamsClass_PhotoDetails s_params_PhotoDetails = new ActionParamsClass_PhotoDetails();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -166,13 +164,11 @@ namespace Epilogger.Web.Controllers {
     public class T4MVC_WidgetController: Epilogger.Web.Controllers.WidgetController {
         public T4MVC_WidgetController() : base(Dummy.Instance) { }
 
-        public override System.Web.Mvc.ActionResult Index(string id, string width, string height, string btnbc, string btntc) {
+        public override System.Web.Mvc.ActionResult Index(string id, string width, string height) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
             callInfo.RouteValueDictionary.Add("id", id);
             callInfo.RouteValueDictionary.Add("width", width);
             callInfo.RouteValueDictionary.Add("height", height);
-            callInfo.RouteValueDictionary.Add("btnbc", btnbc);
-            callInfo.RouteValueDictionary.Add("btntc", btntc);
             return callInfo;
         }
 

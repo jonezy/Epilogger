@@ -18,6 +18,8 @@ namespace Epilogger.Web.Controllers
         TweetService _ts = new TweetService();
         ImageService _is = new ImageService();
         CheckInService _cs = new CheckInService();
+        WidgetCustomSettingsService _ws = new WidgetCustomSettingsService();
+        
 
         DateTime _fromDateTime = DateTime.Parse("2000-01-01 00:00:00");
         private DateTime FromDateTime()
@@ -62,6 +64,7 @@ namespace Epilogger.Web.Controllers
             if (_ts == null) _ts = new TweetService();
             if (_is == null) _is = new ImageService();
             if (_cs == null) _cs = new CheckInService();
+            if (_ws == null) _ws = new WidgetCustomSettingsService();
             base.Initialize(requestContext);
         }
 
@@ -70,10 +73,12 @@ namespace Epilogger.Web.Controllers
         // GET: /Widget/
         [CacheFilter]
         [CompressFilter]
-        public virtual ActionResult Index(string id, string width, string height, string btnbc, string btntc)
+        public virtual ActionResult Index(string id, string width, string height)
         {
             var requestedEvent = _es.FindBySlug(id);
             var model = Mapper.Map<Event, WidgetViewModel>(requestedEvent);
+
+            model.CustomSettings = _ws.FindByEventID(requestedEvent.ID);
             model.TweetCount = _ts.FindTweetCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
             model.Tweets = _ts.FindByEventIDOrderDescTake6(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
             model.ImageCount = _is.FindImageCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
@@ -83,16 +88,16 @@ namespace Epilogger.Web.Controllers
             //model.width = width==null ? 300 : int.Parse(width);
             //model.height = height == null ? 500 : int.Parse(height);
             
-            model.width = width==null ? 100 : int.Parse(width);
-            model.height = height == null ? 100 : int.Parse(height);
+            model.Width = width==null ? 100 : int.Parse(width);
+            model.Height = height == null ? 100 : int.Parse(height);
 
             model.EpiloggerCounts = new Core.Stats.WidgetTotals().GetWidgetTotals(requestedEvent.ID, FromDateTime(), ToDateTime());
 
-            if (model.height == 500 && model.width == 300)
+            if (model.Height == 500 && model.Width == 300)
             {
                 model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, 14, FromDateTime(), ToDateTime());
             }
-            else if (model.height == 330 && model.width == 550)
+            else if (model.Height == 330 && model.Width == 550)
             {
                 model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, 16, FromDateTime(), ToDateTime());
             }
@@ -101,9 +106,9 @@ namespace Epilogger.Web.Controllers
                                                                ToDateTime());
 
 
-            //Pull out some customization settings from the qs
-            model.ButtonBackgroundColor = btnbc;
-            model.ButtonTextColor = btntc;
+            ////Pull out some customization settings from the qs
+            //model.ButtonBackgroundColor = btnbc;
+            //model.ButtonTextColor = btntc;
             
             return View(model);
         }

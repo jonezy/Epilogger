@@ -1636,204 +1636,6 @@ namespace Epilogger.Data
     
     
     /// <summary>
-    /// A class which represents the WidgetCustomSettings table in the Epilogger Database.
-    /// This class is queryable through EpiloggerDB.WidgetCustomSetting 
-    /// </summary>
-
-	public partial class WidgetCustomSetting: INotifyPropertyChanging, INotifyPropertyChanged
-	{
-        partial void OnLoaded();
-        partial void OnValidate(System.Data.Linq.ChangeAction action);
-        partial void OnCreated();
-	    
-	    public WidgetCustomSetting(){
-	        OnCreated();
-	    }
-	    
-	    #region Properties
-	    
-        partial void OnIdChanging(Guid value);
-        partial void OnIdChanged();
-		
-		private Guid _Id;
-		public Guid Id { 
-		    get{
-		        return _Id;
-		    } 
-		    set{
-		        this.OnIdChanging(value);
-                this.SendPropertyChanging();
-                this._Id = value;
-                this.SendPropertyChanged("Id");
-                this.OnIdChanged();
-		    }
-		}
-		
-        partial void OnLogoChanging(string value);
-        partial void OnLogoChanged();
-		
-		private string _Logo;
-		public string Logo { 
-		    get{
-		        return _Logo;
-		    } 
-		    set{
-		        this.OnLogoChanging(value);
-                this.SendPropertyChanging();
-                this._Logo = value;
-                this.SendPropertyChanged("Logo");
-                this.OnLogoChanged();
-		    }
-		}
-		
-        partial void OnHeaderBGColorChanging(string value);
-        partial void OnHeaderBGColorChanged();
-		
-		private string _HeaderBGColor;
-		public string HeaderBGColor { 
-		    get{
-		        return _HeaderBGColor;
-		    } 
-		    set{
-		        this.OnHeaderBGColorChanging(value);
-                this.SendPropertyChanging();
-                this._HeaderBGColor = value;
-                this.SendPropertyChanged("HeaderBGColor");
-                this.OnHeaderBGColorChanged();
-		    }
-		}
-		
-        partial void OnHeaderTextColorChanging(string value);
-        partial void OnHeaderTextColorChanged();
-		
-		private string _HeaderTextColor;
-		public string HeaderTextColor { 
-		    get{
-		        return _HeaderTextColor;
-		    } 
-		    set{
-		        this.OnHeaderTextColorChanging(value);
-                this.SendPropertyChanging();
-                this._HeaderTextColor = value;
-                this.SendPropertyChanged("HeaderTextColor");
-                this.OnHeaderTextColorChanged();
-		    }
-		}
-		
-        partial void OnHeaderLinkColorChanging(string value);
-        partial void OnHeaderLinkColorChanged();
-		
-		private string _HeaderLinkColor;
-		public string HeaderLinkColor { 
-		    get{
-		        return _HeaderLinkColor;
-		    } 
-		    set{
-		        this.OnHeaderLinkColorChanging(value);
-                this.SendPropertyChanging();
-                this._HeaderLinkColor = value;
-                this.SendPropertyChanged("HeaderLinkColor");
-                this.OnHeaderLinkColorChanged();
-		    }
-		}
-		
-        partial void OnContentBGColorChanging(string value);
-        partial void OnContentBGColorChanged();
-		
-		private string _ContentBGColor;
-		public string ContentBGColor { 
-		    get{
-		        return _ContentBGColor;
-		    } 
-		    set{
-		        this.OnContentBGColorChanging(value);
-                this.SendPropertyChanging();
-                this._ContentBGColor = value;
-                this.SendPropertyChanged("ContentBGColor");
-                this.OnContentBGColorChanged();
-		    }
-		}
-		
-        partial void OnContentTextColorChanging(string value);
-        partial void OnContentTextColorChanged();
-		
-		private string _ContentTextColor;
-		public string ContentTextColor { 
-		    get{
-		        return _ContentTextColor;
-		    } 
-		    set{
-		        this.OnContentTextColorChanging(value);
-                this.SendPropertyChanging();
-                this._ContentTextColor = value;
-                this.SendPropertyChanged("ContentTextColor");
-                this.OnContentTextColorChanged();
-		    }
-		}
-		
-        partial void OnContentLinkColorChanging(string value);
-        partial void OnContentLinkColorChanged();
-		
-		private string _ContentLinkColor;
-		public string ContentLinkColor { 
-		    get{
-		        return _ContentLinkColor;
-		    } 
-		    set{
-		        this.OnContentLinkColorChanging(value);
-                this.SendPropertyChanging();
-                this._ContentLinkColor = value;
-                this.SendPropertyChanged("ContentLinkColor");
-                this.OnContentLinkColorChanged();
-		    }
-		}
-		
-        partial void OnSpriteColorChanging(string value);
-        partial void OnSpriteColorChanged();
-		
-		private string _SpriteColor;
-		public string SpriteColor { 
-		    get{
-		        return _SpriteColor;
-		    } 
-		    set{
-		        this.OnSpriteColorChanging(value);
-                this.SendPropertyChanging();
-                this._SpriteColor = value;
-                this.SendPropertyChanged("SpriteColor");
-                this.OnSpriteColorChanged();
-		    }
-		}
-		
-
-        #endregion
-
-        #region Foreign Keys
-        #endregion
-
-
-        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-        public event PropertyChangingEventHandler PropertyChanging;
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void SendPropertyChanging()
-        {
-            var handler = PropertyChanging;
-            if (handler != null)
-               handler(this, emptyChangingEventArgs);
-        }
-
-        protected virtual void SendPropertyChanged(String propertyName)
-        {
-            var handler = PropertyChanged;
-            if (handler != null)
-                handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-	}
-	
-    
-    
-    /// <summary>
     /// A class which represents the UserAuthenticationProfile table in the Epilogger Database.
     /// This class is queryable through EpiloggerDB.UserAuthenticationProfile 
     /// </summary>
@@ -4143,6 +3945,17 @@ namespace Epilogger.Data
             }
         }
 
+        public IQueryable<WidgetCustomSetting> WidgetCustomSettings
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.WidgetCustomSettings
+                       where items.EventId == _ID
+                       select items;
+            }
+        }
+
         #endregion
 
 
@@ -4713,6 +4526,232 @@ namespace Epilogger.Data
         #endregion
 
         #region Foreign Keys
+        #endregion
+
+
+        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+        public event PropertyChangingEventHandler PropertyChanging;
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void SendPropertyChanging()
+        {
+            var handler = PropertyChanging;
+            if (handler != null)
+               handler(this, emptyChangingEventArgs);
+        }
+
+        protected virtual void SendPropertyChanged(String propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+	}
+	
+    
+    
+    /// <summary>
+    /// A class which represents the WidgetCustomSettings table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.WidgetCustomSetting 
+    /// </summary>
+
+	public partial class WidgetCustomSetting: INotifyPropertyChanging, INotifyPropertyChanged
+	{
+        partial void OnLoaded();
+        partial void OnValidate(System.Data.Linq.ChangeAction action);
+        partial void OnCreated();
+	    
+	    public WidgetCustomSetting(){
+	        OnCreated();
+	    }
+	    
+	    #region Properties
+	    
+        partial void OnIdChanging(Guid value);
+        partial void OnIdChanged();
+		
+		private Guid _Id;
+		public Guid Id { 
+		    get{
+		        return _Id;
+		    } 
+		    set{
+		        this.OnIdChanging(value);
+                this.SendPropertyChanging();
+                this._Id = value;
+                this.SendPropertyChanged("Id");
+                this.OnIdChanged();
+		    }
+		}
+		
+        partial void OnEventIdChanging(int value);
+        partial void OnEventIdChanged();
+		
+		private int _EventId;
+		public int EventId { 
+		    get{
+		        return _EventId;
+		    } 
+		    set{
+		        this.OnEventIdChanging(value);
+                this.SendPropertyChanging();
+                this._EventId = value;
+                this.SendPropertyChanged("EventId");
+                this.OnEventIdChanged();
+		    }
+		}
+		
+        partial void OnLogoChanging(string value);
+        partial void OnLogoChanged();
+		
+		private string _Logo;
+		public string Logo { 
+		    get{
+		        return _Logo;
+		    } 
+		    set{
+		        this.OnLogoChanging(value);
+                this.SendPropertyChanging();
+                this._Logo = value;
+                this.SendPropertyChanged("Logo");
+                this.OnLogoChanged();
+		    }
+		}
+		
+        partial void OnHeaderBGColorChanging(string value);
+        partial void OnHeaderBGColorChanged();
+		
+		private string _HeaderBGColor;
+		public string HeaderBGColor { 
+		    get{
+		        return _HeaderBGColor;
+		    } 
+		    set{
+		        this.OnHeaderBGColorChanging(value);
+                this.SendPropertyChanging();
+                this._HeaderBGColor = value;
+                this.SendPropertyChanged("HeaderBGColor");
+                this.OnHeaderBGColorChanged();
+		    }
+		}
+		
+        partial void OnHeaderTextColorChanging(string value);
+        partial void OnHeaderTextColorChanged();
+		
+		private string _HeaderTextColor;
+		public string HeaderTextColor { 
+		    get{
+		        return _HeaderTextColor;
+		    } 
+		    set{
+		        this.OnHeaderTextColorChanging(value);
+                this.SendPropertyChanging();
+                this._HeaderTextColor = value;
+                this.SendPropertyChanged("HeaderTextColor");
+                this.OnHeaderTextColorChanged();
+		    }
+		}
+		
+        partial void OnHeaderLinkColorChanging(string value);
+        partial void OnHeaderLinkColorChanged();
+		
+		private string _HeaderLinkColor;
+		public string HeaderLinkColor { 
+		    get{
+		        return _HeaderLinkColor;
+		    } 
+		    set{
+		        this.OnHeaderLinkColorChanging(value);
+                this.SendPropertyChanging();
+                this._HeaderLinkColor = value;
+                this.SendPropertyChanged("HeaderLinkColor");
+                this.OnHeaderLinkColorChanged();
+		    }
+		}
+		
+        partial void OnContentBGColorChanging(string value);
+        partial void OnContentBGColorChanged();
+		
+		private string _ContentBGColor;
+		public string ContentBGColor { 
+		    get{
+		        return _ContentBGColor;
+		    } 
+		    set{
+		        this.OnContentBGColorChanging(value);
+                this.SendPropertyChanging();
+                this._ContentBGColor = value;
+                this.SendPropertyChanged("ContentBGColor");
+                this.OnContentBGColorChanged();
+		    }
+		}
+		
+        partial void OnContentTextColorChanging(string value);
+        partial void OnContentTextColorChanged();
+		
+		private string _ContentTextColor;
+		public string ContentTextColor { 
+		    get{
+		        return _ContentTextColor;
+		    } 
+		    set{
+		        this.OnContentTextColorChanging(value);
+                this.SendPropertyChanging();
+                this._ContentTextColor = value;
+                this.SendPropertyChanged("ContentTextColor");
+                this.OnContentTextColorChanged();
+		    }
+		}
+		
+        partial void OnContentLinkColorChanging(string value);
+        partial void OnContentLinkColorChanged();
+		
+		private string _ContentLinkColor;
+		public string ContentLinkColor { 
+		    get{
+		        return _ContentLinkColor;
+		    } 
+		    set{
+		        this.OnContentLinkColorChanging(value);
+                this.SendPropertyChanging();
+                this._ContentLinkColor = value;
+                this.SendPropertyChanged("ContentLinkColor");
+                this.OnContentLinkColorChanged();
+		    }
+		}
+		
+        partial void OnSpriteColorChanging(string value);
+        partial void OnSpriteColorChanged();
+		
+		private string _SpriteColor;
+		public string SpriteColor { 
+		    get{
+		        return _SpriteColor;
+		    } 
+		    set{
+		        this.OnSpriteColorChanging(value);
+                this.SendPropertyChanging();
+                this._SpriteColor = value;
+                this.SendPropertyChanged("SpriteColor");
+                this.OnSpriteColorChanged();
+		    }
+		}
+		
+
+        #endregion
+
+        #region Foreign Keys
+        public IQueryable<Event> Events
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Events
+                       where items.ID == _EventId
+                       select items;
+            }
+        }
+
         #endregion
 
 

@@ -402,6 +402,7 @@ namespace Links {
         
             public static readonly string jquery_ui_1_8_16_custom_css = Url("jquery-ui-1.8.16.custom.css");
             public static readonly string layout_css = Url("layout.css");
+            public static readonly string livemode_4x3_css = Url("livemode-4x3.css");
             public static readonly string messages_css = Url("messages.css");
             public static readonly string modal_css = Url("modal.css");
             public static readonly string reset_css = Url("reset.css");
@@ -682,6 +683,34 @@ namespace Links {
             }
         
             public static readonly string linebg_png = Url("linebg.png");
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class livemode {
+                private const string URLPATH = "~/Public/images/livemode";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string bg_noise_png = Url("bg-noise.png");
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class client {
+                    private const string URLPATH = "~/Public/images/livemode/client";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string logo_png = Url("logo.png");
+                    public static readonly string photobig1_png = Url("photobig1.png");
+                    public static readonly string photosmall1_png = Url("photosmall1.png");
+                    public static readonly string sponsor1_png = Url("sponsor1.png");
+                    public static readonly string sponsor2_png = Url("sponsor2.png");
+                    public static readonly string tweeter1_png = Url("tweeter1.png");
+                    public static readonly string tweeter2_png = Url("tweeter2.png");
+                }
+            
+                public static readonly string icon_numpeople_png = Url("icon-numpeople.png");
+                public static readonly string icon_numphotos_png = Url("icon-numphotos.png");
+                public static readonly string icon_numtweets_png = Url("icon-numtweets.png");
+                public static readonly string icon_retweet_png = Url("icon-retweet.png");
+                public static readonly string logo_epl_png = Url("logo-epl.png");
+                public static readonly string noisebg_png = Url("noisebg.png");
+            }
+        
             public static readonly string loading_gif = Url("loading.gif");
             public static readonly string logo_png = Url("logo.png");
             public static readonly string logo2_png = Url("logo2.png");
@@ -750,13 +779,33 @@ namespace Links {
                 private const string URLPATH = "~/Public/images/widget";
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                public static readonly string BackArrow_png = Url("BackArrow.png");
-                public static readonly string bg_teeth_png = Url("bg-teeth.png");
-                public static readonly string count_pics_png = Url("count-pics.png");
-                public static readonly string count_tweets_png = Url("count-tweets.png");
-                public static readonly string epl_logo_png = Url("epl-logo.png");
-                public static readonly string refresh_png = Url("refresh.png");
-                public static readonly string top10_png = Url("top10.png");
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class _old {
+                    private const string URLPATH = "~/Public/images/widget/_old";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string BackArrow_png = Url("BackArrow.png");
+                    public static readonly string bg_teeth_png = Url("bg-teeth.png");
+                    public static readonly string count_pics_png = Url("count-pics.png");
+                    public static readonly string count_tweets_png = Url("count-tweets.png");
+                    public static readonly string epl_logo_png = Url("epl-logo.png");
+                    public static readonly string refresh_png = Url("refresh.png");
+                    public static readonly string top10_png = Url("top10.png");
+                }
+            
+                public static readonly string epilogger_png = Url("epilogger.png");
+                public static readonly string icon_bird_jpg = Url("icon-bird.jpg");
+                public static readonly string icon_bird_png = Url("icon-bird.png");
+                public static readonly string icon_camera_jpg = Url("icon-camera.jpg");
+                public static readonly string icon_camera_png_png = Url("icon-camera.png.png");
+                public static readonly string icon_totals_png = Url("icon-totals.png");
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class logo {
+                    private const string URLPATH = "~/Public/images/widget/logo";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                }
+            
             }
         
         }
@@ -34255,6 +34304,10 @@ namespace Links {
             public static readonly string jqueryParseParams_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jqueryParseParams.min.js") ? Url("jqueryParseParams.min.js") : Url("jqueryParseParams.js");
                           
             public static readonly string jqueryQueryString_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jqueryQueryString.min.js") ? Url("jqueryQueryString.min.js") : Url("jqueryQueryString.js");
+                          
+            public static readonly string LiveMode_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/LiveMode.min.js") ? Url("LiveMode.min.js") : Url("LiveMode.js");
+                          
+            public static readonly string LiveModeBackUp_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/LiveModeBackUp.min.js") ? Url("LiveModeBackUp.min.js") : Url("LiveModeBackUp.js");
                           
             public static readonly string load_image_min_js = Url("load-image.min.js");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

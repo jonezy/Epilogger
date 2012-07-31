@@ -134,8 +134,58 @@ namespace Epilogger.Web.Areas.Api.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult SaveUserFollowsEvent() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.SaveUserFollowsEvent);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult DeleteUserEventSubscription() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.DeleteUserEventSubscription);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult AuthEPLUser() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.AuthEPLUser);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.JsonResult EventsByCategoryID() {
             return new T4MVC_JsonResult(Area, Name, ActionNames.EventsByCategoryID);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult GetVenueByID() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.GetVenueByID);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult GetVenueByFoursquareVenueID() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.GetVenueByFoursquareVenueID);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult AddItemToMemBox() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.AddItemToMemBox);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult RemoveItemFromMemBox() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.RemoveItemFromMemBox);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult GetAllItemsInMemBoxPaged() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.GetAllItemsInMemBoxPaged);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult GetAllMemoryBoxesByUserId() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.GetAllMemoryBoxesByUserId);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult GetAllMemoryBoxesByUserIdandEventId() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.GetAllMemoryBoxesByUserIdandEventId);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -173,8 +223,21 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             public readonly string GetUserByID = "GetUserByID";
             public readonly string GetUserByUsername = "GetUserByUsername";
             public readonly string GetUserByEmail = "GetUserByEmail";
+            public readonly string SaveUserFollowsEvent = "SaveUserFollowsEvent";
+            public readonly string DeleteUserEventSubscription = "DeleteUserEventSubscription";
+            public readonly string AuthEPLUser = "AuthEPLUser";
             public readonly string Categories = "Categories";
             public readonly string EventsByCategoryID = "EventsByCategoryID";
+            public readonly string GetVenueByID = "GetVenueByID";
+            public readonly string GetVenueByFoursquareVenueID = "GetVenueByFoursquareVenueID";
+            public readonly string AddItemToMemBox = "AddItemToMemBox";
+            public readonly string RemoveItemFromMemBox = "RemoveItemFromMemBox";
+            public readonly string GetAllItemsInMemBoxPaged = "GetAllItemsInMemBoxPaged";
+            public readonly string GetAllMemoryBoxesByUserId = "GetAllMemoryBoxesByUserId";
+            public readonly string GetAllMemoryBoxesByUserIdandEventId = "GetAllMemoryBoxesByUserIdandEventId";
+            public readonly string GeckoGetUserGrowthDayOverDay = "GeckoGetUserGrowthDayOverDay";
+            public readonly string GeckoGetUserGrowthLastWeek = "GeckoGetUserGrowthLastWeek";
+            public readonly string GeckoGetUserGrowthLastMonth = "GeckoGetUserGrowthLastMonth";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -200,8 +263,21 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             public const string GetUserByID = "GetUserByID";
             public const string GetUserByUsername = "GetUserByUsername";
             public const string GetUserByEmail = "GetUserByEmail";
+            public const string SaveUserFollowsEvent = "SaveUserFollowsEvent";
+            public const string DeleteUserEventSubscription = "DeleteUserEventSubscription";
+            public const string AuthEPLUser = "AuthEPLUser";
             public const string Categories = "Categories";
             public const string EventsByCategoryID = "EventsByCategoryID";
+            public const string GetVenueByID = "GetVenueByID";
+            public const string GetVenueByFoursquareVenueID = "GetVenueByFoursquareVenueID";
+            public const string AddItemToMemBox = "AddItemToMemBox";
+            public const string RemoveItemFromMemBox = "RemoveItemFromMemBox";
+            public const string GetAllItemsInMemBoxPaged = "GetAllItemsInMemBoxPaged";
+            public const string GetAllMemoryBoxesByUserId = "GetAllMemoryBoxesByUserId";
+            public const string GetAllMemoryBoxesByUserIdandEventId = "GetAllMemoryBoxesByUserIdandEventId";
+            public const string GeckoGetUserGrowthDayOverDay = "GeckoGetUserGrowthDayOverDay";
+            public const string GeckoGetUserGrowthLastWeek = "GeckoGetUserGrowthLastWeek";
+            public const string GeckoGetUserGrowthLastMonth = "GeckoGetUserGrowthLastMonth";
         }
 
 
@@ -356,6 +432,28 @@ namespace Epilogger.Web.Areas.Api.Controllers {
         public class ActionParamsClass_GetUserByEmail {
             public readonly string email = "email";
         }
+        static readonly ActionParamsClass_SaveUserFollowsEvent s_params_SaveUserFollowsEvent = new ActionParamsClass_SaveUserFollowsEvent();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_SaveUserFollowsEvent SaveUserFollowsEventParams { get { return s_params_SaveUserFollowsEvent; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_SaveUserFollowsEvent {
+            public readonly string ufe = "ufe";
+        }
+        static readonly ActionParamsClass_DeleteUserEventSubscription s_params_DeleteUserEventSubscription = new ActionParamsClass_DeleteUserEventSubscription();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_DeleteUserEventSubscription DeleteUserEventSubscriptionParams { get { return s_params_DeleteUserEventSubscription; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_DeleteUserEventSubscription {
+            public readonly string userId = "userId";
+            public readonly string eventId = "eventId";
+        }
+        static readonly ActionParamsClass_AuthEPLUser s_params_AuthEPLUser = new ActionParamsClass_AuthEPLUser();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_AuthEPLUser AuthEPLUserParams { get { return s_params_AuthEPLUser; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_AuthEPLUser {
+            public readonly string headers = "headers";
+        }
         static readonly ActionParamsClass_EventsByCategoryID s_params_EventsByCategoryID = new ActionParamsClass_EventsByCategoryID();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_EventsByCategoryID EventsByCategoryIDParams { get { return s_params_EventsByCategoryID; } }
@@ -364,6 +462,58 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             public readonly string categoryId = "categoryId";
             public readonly string page = "page";
             public readonly string count = "count";
+        }
+        static readonly ActionParamsClass_GetVenueByID s_params_GetVenueByID = new ActionParamsClass_GetVenueByID();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_GetVenueByID GetVenueByIDParams { get { return s_params_GetVenueByID; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_GetVenueByID {
+            public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_GetVenueByFoursquareVenueID s_params_GetVenueByFoursquareVenueID = new ActionParamsClass_GetVenueByFoursquareVenueID();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_GetVenueByFoursquareVenueID GetVenueByFoursquareVenueIDParams { get { return s_params_GetVenueByFoursquareVenueID; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_GetVenueByFoursquareVenueID {
+            public readonly string foursquareVenueId = "foursquareVenueId";
+        }
+        static readonly ActionParamsClass_AddItemToMemBox s_params_AddItemToMemBox = new ActionParamsClass_AddItemToMemBox();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_AddItemToMemBox AddItemToMemBoxParams { get { return s_params_AddItemToMemBox; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_AddItemToMemBox {
+            public readonly string memBoxItem = "memBoxItem";
+        }
+        static readonly ActionParamsClass_RemoveItemFromMemBox s_params_RemoveItemFromMemBox = new ActionParamsClass_RemoveItemFromMemBox();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_RemoveItemFromMemBox RemoveItemFromMemBoxParams { get { return s_params_RemoveItemFromMemBox; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_RemoveItemFromMemBox {
+            public readonly string memBoxItemId = "memBoxItemId";
+        }
+        static readonly ActionParamsClass_GetAllItemsInMemBoxPaged s_params_GetAllItemsInMemBoxPaged = new ActionParamsClass_GetAllItemsInMemBoxPaged();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_GetAllItemsInMemBoxPaged GetAllItemsInMemBoxPagedParams { get { return s_params_GetAllItemsInMemBoxPaged; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_GetAllItemsInMemBoxPaged {
+            public readonly string memBoxId = "memBoxId";
+            public readonly string page = "page";
+            public readonly string count = "count";
+        }
+        static readonly ActionParamsClass_GetAllMemoryBoxesByUserId s_params_GetAllMemoryBoxesByUserId = new ActionParamsClass_GetAllMemoryBoxesByUserId();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_GetAllMemoryBoxesByUserId GetAllMemoryBoxesByUserIdParams { get { return s_params_GetAllMemoryBoxesByUserId; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_GetAllMemoryBoxesByUserId {
+            public readonly string userId = "userId";
+        }
+        static readonly ActionParamsClass_GetAllMemoryBoxesByUserIdandEventId s_params_GetAllMemoryBoxesByUserIdandEventId = new ActionParamsClass_GetAllMemoryBoxesByUserIdandEventId();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_GetAllMemoryBoxesByUserIdandEventId GetAllMemoryBoxesByUserIdandEventIdParams { get { return s_params_GetAllMemoryBoxesByUserIdandEventId; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_GetAllMemoryBoxesByUserIdandEventId {
+            public readonly string userId = "userId";
+            public readonly string eventId = "eventId";
         }
         static readonly ViewNames s_views = new ViewNames();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -519,6 +669,25 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             return callInfo;
         }
 
+        public override System.Web.Mvc.JsonResult SaveUserFollowsEvent(Epilogger.Web.Areas.Api.Models.Classes.ApiUserFollowsEvent ufe) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.SaveUserFollowsEvent);
+            callInfo.RouteValueDictionary.Add("ufe", ufe);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult DeleteUserEventSubscription(System.Guid userId, int eventId) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.DeleteUserEventSubscription);
+            callInfo.RouteValueDictionary.Add("userId", userId);
+            callInfo.RouteValueDictionary.Add("eventId", eventId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult AuthEPLUser(System.Collections.Specialized.NameValueCollection headers) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.AuthEPLUser);
+            callInfo.RouteValueDictionary.Add("headers", headers);
+            return callInfo;
+        }
+
         public override System.Web.Mvc.JsonResult Categories() {
             var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.Categories);
             return callInfo;
@@ -529,6 +698,66 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             callInfo.RouteValueDictionary.Add("categoryId", categoryId);
             callInfo.RouteValueDictionary.Add("page", page);
             callInfo.RouteValueDictionary.Add("count", count);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GetVenueByID(int id) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GetVenueByID);
+            callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GetVenueByFoursquareVenueID(string foursquareVenueId) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GetVenueByFoursquareVenueID);
+            callInfo.RouteValueDictionary.Add("foursquareVenueId", foursquareVenueId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult AddItemToMemBox(Epilogger.Web.Areas.Api.Models.Classes.ApiMemoryBoxItem memBoxItem) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.AddItemToMemBox);
+            callInfo.RouteValueDictionary.Add("memBoxItem", memBoxItem);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult RemoveItemFromMemBox(int memBoxItemId) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.RemoveItemFromMemBox);
+            callInfo.RouteValueDictionary.Add("memBoxItemId", memBoxItemId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GetAllItemsInMemBoxPaged(int memBoxId, int page, int count) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GetAllItemsInMemBoxPaged);
+            callInfo.RouteValueDictionary.Add("memBoxId", memBoxId);
+            callInfo.RouteValueDictionary.Add("page", page);
+            callInfo.RouteValueDictionary.Add("count", count);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GetAllMemoryBoxesByUserId(System.Guid userId) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GetAllMemoryBoxesByUserId);
+            callInfo.RouteValueDictionary.Add("userId", userId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GetAllMemoryBoxesByUserIdandEventId(System.Guid userId, int eventId) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GetAllMemoryBoxesByUserIdandEventId);
+            callInfo.RouteValueDictionary.Add("userId", userId);
+            callInfo.RouteValueDictionary.Add("eventId", eventId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GeckoGetUserGrowthDayOverDay() {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GeckoGetUserGrowthDayOverDay);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GeckoGetUserGrowthLastWeek() {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GeckoGetUserGrowthLastWeek);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GeckoGetUserGrowthLastMonth() {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GeckoGetUserGrowthLastMonth);
             return callInfo;
         }
 

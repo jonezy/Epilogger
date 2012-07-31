@@ -1,6 +1,6 @@
 ﻿@using Combres.Mvc
 
-<!doctype html>
+<!DOCTYPE html>
 <!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
 <!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
@@ -10,12 +10,12 @@
     <title>@ViewBag.Title</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
-    <meta name="google-site-verification" content="CuQwuSsvoWQapx1142El31mqbNSB6Dq0RBzTjzV0lXQ" />
-	<!--[if lt IE 9]>
+    <meta name="google-site-verification" content="CuQwuSsvoWQapx1142El31mqbNSB6Dq0RBzTjzV0lXQ" />    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    
-    <meta name="viewport" content="width=640" />
 	
     @Html.CombresLink("EmbedCss")
     @Html.CombresLink("EmbedJs")
@@ -25,9 +25,9 @@
    @RenderBody()
 
     <script language="javascript" type="text/javascript">
-        setTimeout(function () {
-            window.location.reload(1);
-        }, 60000);
+//        setTimeout(function () {
+//            window.location.reload(1);
+//        }, 60000);
 
 
         //Store all clicks, for interface tweaking.

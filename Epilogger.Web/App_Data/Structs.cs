@@ -1441,223 +1441,6 @@ namespace Epilogger.Data {
         }
         
         /// <summary>
-        /// Table: WidgetCustomSettings
-        /// Primary Key: Id
-        /// </summary>
-
-        public class WidgetCustomSettingsTable: DatabaseTable {
-            
-            public WidgetCustomSettingsTable(IDataProvider provider):base("WidgetCustomSettings",provider){
-                ClassName = "WidgetCustomSetting";
-                SchemaName = "dbo";
-                
-
-                Columns.Add(new DatabaseColumn("Id", this)
-                {
-	                IsPrimaryKey = true,
-	                DataType = DbType.Guid,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("Logo", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 255
-                });
-
-                Columns.Add(new DatabaseColumn("HeaderBGColor", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 50
-                });
-
-                Columns.Add(new DatabaseColumn("HeaderTextColor", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 50
-                });
-
-                Columns.Add(new DatabaseColumn("HeaderLinkColor", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 50
-                });
-
-                Columns.Add(new DatabaseColumn("ContentBGColor", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 50
-                });
-
-                Columns.Add(new DatabaseColumn("ContentTextColor", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 50
-                });
-
-                Columns.Add(new DatabaseColumn("ContentLinkColor", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 50
-                });
-
-                Columns.Add(new DatabaseColumn("SpriteColor", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 50
-                });
-                    
-                
-                
-            }
-            
-            public IColumn Id{
-                get{
-                    return this.GetColumn("Id");
-                }
-            }
-            				
-   			public static string IdColumn{
-			      get{
-        			return "Id";
-      			}
-		    }
-           
-            public IColumn Logo{
-                get{
-                    return this.GetColumn("Logo");
-                }
-            }
-            				
-   			public static string LogoColumn{
-			      get{
-        			return "Logo";
-      			}
-		    }
-           
-            public IColumn HeaderBGColor{
-                get{
-                    return this.GetColumn("HeaderBGColor");
-                }
-            }
-            				
-   			public static string HeaderBGColorColumn{
-			      get{
-        			return "HeaderBGColor";
-      			}
-		    }
-           
-            public IColumn HeaderTextColor{
-                get{
-                    return this.GetColumn("HeaderTextColor");
-                }
-            }
-            				
-   			public static string HeaderTextColorColumn{
-			      get{
-        			return "HeaderTextColor";
-      			}
-		    }
-           
-            public IColumn HeaderLinkColor{
-                get{
-                    return this.GetColumn("HeaderLinkColor");
-                }
-            }
-            				
-   			public static string HeaderLinkColorColumn{
-			      get{
-        			return "HeaderLinkColor";
-      			}
-		    }
-           
-            public IColumn ContentBGColor{
-                get{
-                    return this.GetColumn("ContentBGColor");
-                }
-            }
-            				
-   			public static string ContentBGColorColumn{
-			      get{
-        			return "ContentBGColor";
-      			}
-		    }
-           
-            public IColumn ContentTextColor{
-                get{
-                    return this.GetColumn("ContentTextColor");
-                }
-            }
-            				
-   			public static string ContentTextColorColumn{
-			      get{
-        			return "ContentTextColor";
-      			}
-		    }
-           
-            public IColumn ContentLinkColor{
-                get{
-                    return this.GetColumn("ContentLinkColor");
-                }
-            }
-            				
-   			public static string ContentLinkColorColumn{
-			      get{
-        			return "ContentLinkColor";
-      			}
-		    }
-           
-            public IColumn SpriteColor{
-                get{
-                    return this.GetColumn("SpriteColor");
-                }
-            }
-            				
-   			public static string SpriteColorColumn{
-			      get{
-        			return "SpriteColor";
-      			}
-		    }
-           
-                    
-        }
-        
-        /// <summary>
         /// Table: UserAuthenticationProfile
         /// Primary Key: ID
         /// </summary>
@@ -4422,6 +4205,245 @@ namespace Epilogger.Data {
    			public static string DateTimeColumn{
 			      get{
         			return "DateTime";
+      			}
+		    }
+           
+                    
+        }
+        
+        /// <summary>
+        /// Table: WidgetCustomSettings
+        /// Primary Key: Id
+        /// </summary>
+
+        public class WidgetCustomSettingsTable: DatabaseTable {
+            
+            public WidgetCustomSettingsTable(IDataProvider provider):base("WidgetCustomSettings",provider){
+                ClassName = "WidgetCustomSetting";
+                SchemaName = "dbo";
+                
+
+                Columns.Add(new DatabaseColumn("Id", this)
+                {
+	                IsPrimaryKey = true,
+	                DataType = DbType.Guid,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("EventId", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = true,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("Logo", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 255
+                });
+
+                Columns.Add(new DatabaseColumn("HeaderBGColor", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 50
+                });
+
+                Columns.Add(new DatabaseColumn("HeaderTextColor", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 50
+                });
+
+                Columns.Add(new DatabaseColumn("HeaderLinkColor", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 50
+                });
+
+                Columns.Add(new DatabaseColumn("ContentBGColor", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 50
+                });
+
+                Columns.Add(new DatabaseColumn("ContentTextColor", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 50
+                });
+
+                Columns.Add(new DatabaseColumn("ContentLinkColor", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 50
+                });
+
+                Columns.Add(new DatabaseColumn("SpriteColor", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 50
+                });
+                    
+                
+                
+            }
+            
+            public IColumn Id{
+                get{
+                    return this.GetColumn("Id");
+                }
+            }
+            				
+   			public static string IdColumn{
+			      get{
+        			return "Id";
+      			}
+		    }
+           
+            public IColumn EventId{
+                get{
+                    return this.GetColumn("EventId");
+                }
+            }
+            				
+   			public static string EventIdColumn{
+			      get{
+        			return "EventId";
+      			}
+		    }
+           
+            public IColumn Logo{
+                get{
+                    return this.GetColumn("Logo");
+                }
+            }
+            				
+   			public static string LogoColumn{
+			      get{
+        			return "Logo";
+      			}
+		    }
+           
+            public IColumn HeaderBGColor{
+                get{
+                    return this.GetColumn("HeaderBGColor");
+                }
+            }
+            				
+   			public static string HeaderBGColorColumn{
+			      get{
+        			return "HeaderBGColor";
+      			}
+		    }
+           
+            public IColumn HeaderTextColor{
+                get{
+                    return this.GetColumn("HeaderTextColor");
+                }
+            }
+            				
+   			public static string HeaderTextColorColumn{
+			      get{
+        			return "HeaderTextColor";
+      			}
+		    }
+           
+            public IColumn HeaderLinkColor{
+                get{
+                    return this.GetColumn("HeaderLinkColor");
+                }
+            }
+            				
+   			public static string HeaderLinkColorColumn{
+			      get{
+        			return "HeaderLinkColor";
+      			}
+		    }
+           
+            public IColumn ContentBGColor{
+                get{
+                    return this.GetColumn("ContentBGColor");
+                }
+            }
+            				
+   			public static string ContentBGColorColumn{
+			      get{
+        			return "ContentBGColor";
+      			}
+		    }
+           
+            public IColumn ContentTextColor{
+                get{
+                    return this.GetColumn("ContentTextColor");
+                }
+            }
+            				
+   			public static string ContentTextColorColumn{
+			      get{
+        			return "ContentTextColor";
+      			}
+		    }
+           
+            public IColumn ContentLinkColor{
+                get{
+                    return this.GetColumn("ContentLinkColor");
+                }
+            }
+            				
+   			public static string ContentLinkColorColumn{
+			      get{
+        			return "ContentLinkColor";
+      			}
+		    }
+           
+            public IColumn SpriteColor{
+                get{
+                    return this.GetColumn("SpriteColor");
+                }
+            }
+            				
+   			public static string SpriteColorColumn{
+			      get{
+        			return "SpriteColor";
       			}
 		    }
            

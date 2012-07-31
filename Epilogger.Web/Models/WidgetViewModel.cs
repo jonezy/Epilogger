@@ -7,8 +7,8 @@ namespace Epilogger.Web.Models
 {
     public class WidgetViewModel
     {
-        public int width { get; set; }
-        public int height { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
 
         public int ID { get; set; }
         public string EventSlug { get; set; }
@@ -23,8 +23,7 @@ namespace Epilogger.Web.Models
         public IEnumerable<Epilogger.Data.Image> Images { get; set; }
         public IEnumerable<Epilogger.Data.CheckIn> CheckIns { get; set; }
 
-        public string ButtonBackgroundColor { get; set; }
-        public string ButtonTextColor { get; set; }
-
+        public Data.WidgetCustomSetting CustomSettings { get; set; }
+        
     }
 }
