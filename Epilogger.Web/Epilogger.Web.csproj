@@ -453,6 +453,10 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\combres_full_with_annotation.xml" />
+    <Content Include="Public\js\widget.js" />
+    <Content Include="WidgetSample.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Public\css\960_12_col.css" />
@@ -3050,6 +3054,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Public\js\tmpl.min.js" />
+    <Content Include="testWidget.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
