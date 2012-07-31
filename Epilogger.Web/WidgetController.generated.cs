@@ -151,8 +151,10 @@ namespace Epilogger.Web.Controllers {
         public class ViewNames {
             public readonly string _EmbedLayout = "~/Views/Widget/_EmbedLayout.cshtml";
             public readonly string _EpiloggerCounts = "~/Views/Widget/_EpiloggerCounts.cshtml";
+            public readonly string _header = "~/Views/Widget/_header.cshtml";
             public readonly string _widgetMenu = "~/Views/Widget/_widgetMenu.cshtml";
             public readonly string Checkins = "~/Views/Widget/Checkins.cshtml";
+            public readonly string Copy_of_index = "~/Views/Widget/Copy of index.cshtml";
             public readonly string index = "~/Views/Widget/index.cshtml";
             public readonly string PhotoDetails = "~/Views/Widget/PhotoDetails.cshtml";
             public readonly string Photos = "~/Views/Widget/Photos.cshtml";

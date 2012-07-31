@@ -347,7 +347,8 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.Width, opt => opt.Ignore())
                 .ForMember(dest => dest.Height, opt => opt.Ignore())
                 .ForMember(dest => dest.EpiloggerCounts, opt => opt.Ignore())
-                .ForMember(dest => dest.CustomSettings, opt => opt.Ignore());
+                .ForMember(dest => dest.CustomSettings, opt => opt.Ignore())
+                .ForMember(dest => dest.HeightOffset, opt => opt.Ignore());
 
             Mapper.CreateMap<Event, WidgetPhotosDetailsViewModel>()
                 .ForMember(dest => dest.Width, opt => opt.Ignore())

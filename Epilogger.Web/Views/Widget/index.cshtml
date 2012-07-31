@@ -2,33 +2,13 @@
 @using Combres.Mvc
 @using Epilogger.Web.Models
 @model Epilogger.Web.Models.WidgetViewModel
+
 @{
     Layout = "_EmbedLayout.cshtml";
     ViewBag.Title = "";
-
-    var tweetHeightOffset    = 0;
-    if (Model.Width < 300)
-    {
-        tweetHeightOffset = 224;
-    }
-    else
-    {
-        tweetHeightOffset = 241;
-    }
-    
-    if (Model.Width < 250)
-    {
-        tweetHeightOffset = 206;
-    }
-    
-    if (Model.Height < Model.Width)
-    {
-        //Offsets for Landscape layout
-        tweetHeightOffset = 125;
-    }
-    
-    
 }
+
+
 
 @if (Model.Width==100 && Model.Height==100)
 {
@@ -50,7 +30,7 @@ else
 	            <section id="feed-photos" class="horizontal btext blink">
 		            <p class="section-title"><strong>Recent Photos</strong> <span>(<a href="" onclick="location.href='@Url.Action("Photos", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">all photos</a>)</span></p>
 		
-                    <div class="feed-photos-container horizontal" style="height: @Html.Raw((Model.Height - tweetHeightOffset).ToString(CultureInfo.InvariantCulture))px; overflow:hidden">
+                    <div class="feed-photos-container horizontal" style="height: @Html.Raw((Model.Height - Model.HeightOffset).ToString(CultureInfo.InvariantCulture))px; overflow:hidden">
 		                @foreach (var theImage in Model.Images)
                         {
                             <a href="" onclick="@string.Format("location.href='photoDetails/{0}/{1}?width={2}&height={3}&returnto=1", Model.EventSlug, theImage.ID, Model.Width, Model.Width)'; return false;"><img src="@theImage.Fullsize" width="200" alt="" /></a>
@@ -58,7 +38,7 @@ else
                     </div>
 	            </section>
 	
-	            <section id="feed-tweets" class="horizontal btext blink" style="height: @Html.Raw((Model.Height - tweetHeightOffset).ToString(CultureInfo.InvariantCulture))px">
+	            <section id="feed-tweets" class="horizontal btext blink" style="height: @Html.Raw((Model.Height - Model.HeightOffset).ToString(CultureInfo.InvariantCulture))px">
 		            <p class="section-title"><strong>Latest Tweets</strong> <span>(<a href="#">all tweets</a>)</span></p>
         
                     @foreach (var theTweet in Model.Tweets)
@@ -73,9 +53,9 @@ else
                                 </p>
 				
 				                <ul class="tweet-nav">
-					                <li> <a href="#">reply</a> &bullet;</li>
+                                    <li> @Html.DisplayFor(thing => theTweet.CreatedDate) &bullet;</li>
+                                    <li> <a href="#">reply</a> &bullet;</li>
 					                <li> <a href="#">retweet</a> &bullet;</li>
-					                <li> @Html.DisplayFor(thing => theTweet.CreatedDate) &bullet;</li>
 				                </ul>
                             </div>
                         </article>
@@ -96,7 +76,7 @@ else
                 </div>
 	        </section>
 	
-	        <section id="feed-tweets" class="btext blink" style="height: @Html.Raw((Model.Height - tweetHeightOffset).ToString(CultureInfo.InvariantCulture))px">
+	        <section id="feed-tweets" class="btext blink" style="height: @Html.Raw((Model.Height - Model.HeightOffset).ToString(CultureInfo.InvariantCulture))px">
 		        <p class="section-title"><strong>Latest Tweets</strong> <span>(<a href="#">all tweets</a>)</span></p>
         
                 @foreach (var theTweet in Model.Tweets)
@@ -111,7 +91,7 @@ else
                             </p>
 				
 				            <ul class="tweet-nav">
-					            <li> 9 hours ago &bullet;</li>
+					            <li> @Html.DisplayFor(thing => theTweet.CreatedDate) &bullet;</li>
 					            <li> <a href="#">reply</a> &bullet;</li>
 					            <li> <a href="#">retweet</a></li>
 				            </ul>

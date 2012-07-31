@@ -58,6 +58,33 @@ namespace Epilogger.Web.Controllers
 
         }
 
+        private int GetHeightOffset(int height, int width)
+        {
+            var heightOffset = 0;
+            if (width < 300)
+            {
+                heightOffset = 224;
+            }
+            else
+            {
+                heightOffset = 241;
+            }
+
+            if (width < 250)
+            {
+                heightOffset = 206;
+            }
+
+            if (height < width)
+            {
+                //Offsets for Landscape layout
+                heightOffset = 125;
+            }
+
+            return heightOffset;
+
+        }
+
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {
             if (_es == null) _es = new EventService();
@@ -120,6 +147,7 @@ namespace Epilogger.Web.Controllers
                 model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, 25, FromDateTime(), ToDateTime());
             }
 
+            model.HeightOffset = GetHeightOffset(model.Height, model.Width);
             
             return View(model);
         }

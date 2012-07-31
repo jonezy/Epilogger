@@ -454,6 +454,7 @@
     </Content>
     <Content Include="App_Data\combres_full_with_annotation.xml" />
     <Content Include="Public\images\widget\logo\chevywidget.png" />
+    <Content Include="Public\images\widget\menu-active.png" />
     <Content Include="Public\js\widget.js" />
     <Content Include="WidgetSample.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

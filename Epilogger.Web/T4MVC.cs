@@ -410,7 +410,17 @@ namespace Links {
             public static readonly string sadiehawkinsOldGood_css = Url("sadiehawkinsOldGood.css");
             public static readonly string Site_css = Url("Site.css");
             public static readonly string skeleton_css = Url("skeleton.css");
-            public static readonly string widget_css = Url("widget.css");
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class widget {
+                private const string URLPATH = "~/Public/css/widget";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string base_css = Url("base.css");
+                public static readonly string layout_css = Url("layout.css");
+                public static readonly string skeleton_css = Url("skeleton.css");
+                public static readonly string widget_css = Url("widget.css");
+            }
+        
         }
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -804,6 +814,7 @@ namespace Links {
                     private const string URLPATH = "~/Public/images/widget/logo";
                     public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                     public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string chevywidget_png = Url("chevywidget.png");
                 }
             
             }
@@ -34468,6 +34479,8 @@ namespace Links {
             }
         
             public static readonly string tmpl_min_js = Url("tmpl.min.js");
+            public static readonly string widget_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/widget.min.js") ? Url("widget.min.js") : Url("widget.js");
+                          
         }
     
     }

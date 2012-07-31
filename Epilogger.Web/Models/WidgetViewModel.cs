@@ -24,6 +24,10 @@ namespace Epilogger.Web.Models
         public IEnumerable<Epilogger.Data.CheckIn> CheckIns { get; set; }
 
         public Data.WidgetCustomSetting CustomSettings { get; set; }
-        
+
+        public int HeightOffset { get; set; }
+
     }
+
+
 }
