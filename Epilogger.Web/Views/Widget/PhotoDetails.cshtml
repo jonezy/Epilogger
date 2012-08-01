@@ -1,13 +1,89 @@
 ﻿@using Combres.Mvc
-@model Epilogger.Web.Models.WidgetPhotosViewModel
+@using Epilogger.Web.Models
+@model Epilogger.Web.Models.WidgetPhotosDetailsViewModel
 @{
     Layout = "_EmbedLayout.cshtml";
     ViewBag.Title = "";
 
     }
+    
+    
+<script language="javascript" type="text/javascript">
+    function getOriginalWidthOfImg  (imgElement) {
+        var t = new Image();
+        t.src = (imgElement.getAttribute ? imgElement.getAttribute("src") : false) || imgElement.src;
+        return t.width;
+    }
+    function getOriginalHeightOfImg(imgElement) {
+        var t = new Image();
+        t.src = (imgElement.getAttribute ? imgElement.getAttribute("src") : false) || imgElement.src;
+        return t.height;
+    }
+
+    @{
+        int heightOffset;
+        if (Model.Width >= 550 && Model.Height >= 330)
+        {
+            heightOffset = 150;
+        }
+        else
+        {
+            heightOffset = 220;
+        }
+    }
+    
+
+
+
+    $(document).ready(function () {
+        if (jQuery.browser.safari && document.readyState != "complete"){
+            //console.info('ready...');
+            setTimeout( arguments.callee, 100 );
+            return;
+        } 
+        $('.container img').each(function () {
+            @{
+                if (Model.Width==100)
+                {
+                    @: var maxWidth =  $(document).width() - 20; // Max width for the image
+                }
+                else
+                {
+                    @: var maxWidth = @(Model.Width - 20); // Max width for the image
+                }
+
+            }
+            //var maxWidth = @(Model.Width - 20); // Max width for the image
+            var maxHeight = @(Model.Height - heightOffset);    // Max height for the image
+            
+            var ratio = 0;  // Used for aspect ratio
+            var width = getOriginalWidthOfImg(this);
+            var height = getOriginalHeightOfImg(this);
+            
+
+            // Check if the current width is larger than the max
+            if (width > maxWidth) {
+                ratio = maxWidth / width;   // get ratio for scaling image
+                $(this).css("width", maxWidth); // Set new width
+                $(this).css("height", height * ratio);  // Scale height based on ratio
+                height = height * ratio;    // Reset height to match scaled image
+                width = width * ratio;    // Reset width to match scaled image
+            }
+
+            // Check if current height is larger than max
+            if (height > maxHeight) {
+                ratio = maxHeight / height; // get ratio for scaling image
+                $(this).css("height", maxHeight);   // Set new height
+                $(this).css("width", width * ratio);    // Scale width based on ratio
+                //width = width * ratio;    // Reset width to match scaled image
+            }
+            $(this).css("display", "inline");
+        });
+    });
+</script>
 
     
-    @if (Model.Width==100 && Model.Height==100)
+@if (Model.Width==100 && Model.Height==100)
     {
         @: <div style="@string.Format("height:100%; width: 100%;") overflow-x: hidden; overflow-y: auto;" class="bbackground" id="wrapper">
     }
@@ -15,32 +91,111 @@
     {
         @: <div style="@string.Format("height:{0}px; width: {1}px;", Model.Height, Model.Width); overflow: hidden;" class="bbackground" id="wrapper">
     }
-    <header class="hbackground htext ">
-		<img src="http://a0.twimg.com/profile_images/2355397327/image_normal.jpg" width="42" height="42" /> 
-		<span id="subtitle">What's going on at</span>
-		<h1 id="title">@Html.ActionLink(Model.Name, "Details", "Events", new { @id = Model.EventSlug }, new { target="_blank" })</h1>
-		
-		<hr></hr>
-		
-		<nav>
-			@Html.Partial("_widgetMenu", new Epilogger.Web.Models.WidgetMenuViewModel() { EventSlug = Model.EventSlug, width = Model.Width, height = Model.Height, returnto = 1 })
-		</nav>
-	</header>
+    
+    <div class="container">
+    
+        @Html.Partial("_header", new WidgetHeaderViewModel() { Name = Model.Name, EventSlug = Model.EventSlug, CustomSettings = Model.CustomSettings, Width = Model.Width, Height = Model.Height, ReturnTo = 0 } )
        
-    <section id="all-photos" class="contentContainer  @(Model.Width >= 500 ? "horizontal" : "")">
-        <ul class="imageListLarge">
-            @foreach (var theImage in Model.Images)
-            {
-                <li>
-                    <a href="" onclick="location.href='/widget/photoDetails/@Model.EventSlug/@theImage.ID?width=@Model.Width&height=@Model.Height&returnto=2'; return false;"><img src="@theImage.Fullsize" width="200" alt="" /></a>
-                </li>
-            }
-        </ul>
-    </section>
+        @*<section id="all-photos" class="contentContainer  @(Model.Width >= 500 ? "horizontal" : "")">
+            <ul class="imageListLarge">
+                @foreach (var theImage in Model.Images)
+                {
+                    <li>
+                        <a href="" onclick="location.href='/widget/photoDetails/@Model.EventSlug/@theImage.ID?width=@Model.Width&height=@Model.Height&returnto=2'; return false;"><img src="@theImage.Fullsize" width="200" alt="" /></a>
+                    </li>
+                }
+            </ul>
+        </section>*@
+        
+        
+
+        @*<section id="single-photo">*@
+            @if (Model.Width >= 500 || Model.Width > Model.Height)
+                {
+                    <div class="tweetWide">
+                        <section id="all-tweets" class="contentContainer btext blink   @(Model.Width >= 500 ? "horizontal" : "")">
+                            <article id="Tweet-@Model.Tweet.TwitterID" class="tweet">
+                                <img src="@Model.Tweet.ProfileImageURL" height="42" width="42"  class="twit-avatar" />
+                                <div>
+                                    <p>
+                                        <a class="twitterName" href="http://www.twitter.com/@Model.Tweet.FromUserScreenName"><strong>@Model.Tweet.FromUserScreenName:</strong></a>
+                                        @Html.Raw(Model.Tweet.TextAsHTML)
+                                    </p>
+                                    <ul class="tweet-nav">
+                                        <li> @Html.DisplayFor(thing => Model.Tweet.CreatedDate) &bullet;</li>
+                                        <li> <a href="#">reply</a> &bullet;</li>
+                                        <li> <a href="#">retweet</a> &bullet;</li>
+                                    </ul>
+                                </div>
+                            </article>
+                        </section>
+                    </div>
+                
+                    <section id="single-photo">
+                        <div class="fullImage">
+                            <img src="@Model.Image.Fullsize" style="display: none;" alt="" />
+                        </div>
+                    </section>
+                    <span class="m-spacer"></span>
+
+                    <span class="m-spacer dotted"></span>
+                    <img src="/Public/images/widget/BackArrow.png" alt=""/>
+                    if (Model.Returnto == 1)
+                    {
+                        <a href="" onclick="location.href='@Url.Action("index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to feed</a>
+                    }
+                    else
+                    {
+                        <a href="" onclick="location.href='@Url.Action("photos", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to photos</a>
+                    }
+                }
+                else
+                {
+                    <section id="single-photo">
+                        <div class="fullImage">
+                            <img src="@Model.Image.Fullsize" style="display: none;" alt="" />
+                        </div>
+                    </section>
+                    <span class="m-spacer"></span>
+
+                    <section id="all-tweets" class="contentContainer btext blink   @(Model.Width >= 500 ? "horizontal" : "")">
+                        <article id="Tweet-@Model.Tweet.TwitterID" class="tweet">
+                            <img src="@Model.Tweet.ProfileImageURL" height="42" width="42"  class="twit-avatar" />
+
+                            <div>
+                                <p>
+                                    <a class="twitterName" href="http://www.twitter.com/@Model.Tweet.FromUserScreenName"><strong>@Model.Tweet.FromUserScreenName:</strong></a>
+                                    @Html.Raw(Model.Tweet.TextAsHTML)
+                                </p>
+                                <ul class="tweet-nav">
+                                    <li> @Html.DisplayFor(thing => Model.Tweet.CreatedDate) &bullet;</li>
+                                    <li> <a href="#">reply</a> &bullet;</li>
+                                    <li> <a href="#">retweet</a> &bullet;</li>
+                                </ul>
+                            </div>
+                        </article>  
+                    </section>
+                
+                    <span class="m-spacer dotted"></span>
+                    <img src="/Public/images/widget/BackArrow.png" alt=""/>
+                    if (Model.Returnto == 1)
+                    {
+                        <a href="" onclick="location.href='@Url.Action("index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to feed</a>
+                    }
+                    else
+                    {
+                        <a href="" onclick="location.href='@Url.Action("photos", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to photos</a>
+                    }
+                }
+        @*</section>*@
+
             
-	<footer>
-		<a href="http://epilogger.com" target="_blank"><img src="/Public/images/widget/epilogger.png" alt="Epilogger logo"/></a>
+        <footer>
+            <a href="http://epilogger.com" target="_blank"><img src="/Public/images/widget/epilogger.png" alt="Epilogger logo"/></a>
 		
-        @Html.Partial("_EpiloggerCounts", @Model.EpiloggerCounts)
-	</footer>
+            @Html.Partial("_EpiloggerCounts", @Model.EpiloggerCounts)
+        </footer>
+    </div>
 </div>
+@Html.HiddenFor(e => e.CustomSettings.SpriteColor)
+<script type="text/javascript" src="/Public/js/widget.js"></script>

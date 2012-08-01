@@ -47,6 +47,13 @@ div#wrapper {
     
     nav li.current a { height: 21px !important; }
     
+    
+    /* All Photos */
+    #all-photos .imageListLarge li { width: 57px !important; height: 57px !important; }
+    
+    
+    /* Check Ins */
+    .checkinList li img { width: 31px !important; height: 31px !important; }
 }
 
 
@@ -71,6 +78,12 @@ div#wrapper {
     .hbackground img { width: 38px; height: 38px; }
     
     nav li.current a { height: 23px !important; }
+    
+    /* All Photos */
+    #all-photos .imageListLarge li { width: 74px !important; height: 74px !important; }
+    
+    /* Check Ins */
+    .checkinList li img { width: 41px !important; height: 41px !important; }
 }
 
 /* Over 300px */
@@ -249,6 +262,10 @@ section#single-photo img#horizontal-full-photo {
     padding:0 8px 0 0;
     width:48%; } 
     
+.tweetWide {
+    float: right;
+    width: 286px;
+}    
  
 /* --- all check-ins view */
 section#all-checkins {

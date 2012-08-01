@@ -11,5 +11,8 @@ namespace Epilogger.Web.Models
         public string Name { get; set; }
         public Core.Stats.WidgetTotal EpiloggerCounts { get; set; }
         public IEnumerable<Data.Image> Images { get; set; }
+
+        public Data.WidgetCustomSetting CustomSettings { get; set; }
+        public int HeightOffset { get; set; }
     }
 }

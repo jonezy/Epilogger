@@ -1,6 +1,9 @@
 ﻿var camera = document.getElementById("camera");
 var bird = document.getElementById("bird");
 var canvas = document.createElement("canvas");
+var camera = document.getElementById("camera");
+var bird = document.getElementById("bird");
+var canvas = document.createElement("canvas");
 var ctx = canvas.getContext("2d");
 var originalPixels = null;
 var currentPixels = null;
@@ -27,7 +30,7 @@ function HexToRGB(Hex) {
 
 function changeColor() {
     if (!originalPixels) return; // Check if image has loaded
-    var newColor = HexToRGB(document.getElementById("color").value);
+    var newColor = HexToRGB(document.getElementById("CustomSettings_SpriteColor").value);
 
     for (var I = 0, L = originalPixels.data.length; I < L; I += 4) {
         if (currentPixels.data[I + 3] > 0) // If it's not a transparent pixel
@@ -42,7 +45,3 @@ function changeColor() {
     bird.src = canvas.toDataURL("image/png");
     camera.src = canvas.toDataURL("img/png");
 }
-
-head.ready(function () {
-    changeColor();
-});

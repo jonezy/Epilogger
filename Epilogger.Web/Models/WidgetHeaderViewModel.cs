@@ -13,5 +13,7 @@ namespace Epilogger.Web.Models
         public int Width { get; set; }
         public int Height { get; set; }
 
+        public int ReturnTo { get; set; }
+
     }
 }

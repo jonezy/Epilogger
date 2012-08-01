@@ -1,4 +1,6 @@
-﻿@using Combres.Mvc
+﻿@using System.Globalization
+@using Combres.Mvc
+@using Epilogger.Web.Models
 @model Epilogger.Web.Models.WidgetTweetsViewModel
 @{
     Layout = "_EmbedLayout.cshtml";
@@ -14,7 +16,13 @@ else
 {
     @: <div style="@string.Format("height:{0}px; width: {1}px;", @Model.Height, @Model.Width); overflow: hidden;" class="bbackground" id="wrapper">
 }
-<header class="hbackground htext ">
+
+<div class="container">
+    
+    @Html.Partial("_header", new WidgetHeaderViewModel() { Name = Model.Name, EventSlug = Model.EventSlug, CustomSettings = Model.CustomSettings, Width = Model.Width, Height = Model.Height, ReturnTo = 0 } )
+    
+
+    @*<header class="hbackground htext ">
     <img src="http://a0.twimg.com/profile_images/2355397327/image_normal.jpg" width="42" height="42" />  
     <span id="subtitle">What's going on at</span>
     <h1 id="title">@Html.ActionLink(Model.Name, "Details", "Events", new { @id = Model.EventSlug }, new { target="_blank" })</h1>
@@ -24,17 +32,21 @@ else
     <nav>
         @Html.Partial("_widgetMenu", new Epilogger.Web.Models.WidgetMenuViewModel() { EventSlug = Model.EventSlug, width = Model.Width, height = Model.Height })
     </nav>
-</header>
+</header>*@
        
-    @if (Model.Width==100 && Model.Height==100)
+    @*@if (Model.Width==100 && Model.Height==100)
     {
         @: <section id="all-tweets" class="contentContainer btext blink  @(Model.Width >= 500 ? "horizontal" : "")"> <!--style="@string.Format("height:100%;"); overflow-y: auto; overflow-x: hidden;"-->
     }
     else 
-    {
-        @: <section id="all-tweets" class="contentContainer btext blink   @(Model.Width >= 500 ? "horizontal" : "")"> <!--style="@string.Format("height:{0}px;", Model.Height - 92); overflow-y: auto; overflow-x: hidden;"-->
-    }
-
+    {*@
+    
+    
+    @*}*@
+    
+    
+    <section id="all-tweets" class="contentContainer btext blink   @(Model.Width >= 500 ? "horizontal" : "")" style="height: @Html.Raw((Model.Height - Model.HeightOffset).ToString(CultureInfo.InvariantCulture))px;"> <!--style="@string.Format("height:{0}px;", Model.Height - 92); overflow-y: auto; overflow-x: hidden;"-->
+    
         @foreach (var theTweet in Model.Tweets)
         {
             <article id="Tweet-@theTweet.TwitterID" class="tweet">
@@ -42,26 +54,29 @@ else
 
                 <div>
                     <p>
-                        <a class="twitterName" href="http://www.twitter.com/@theTweet.FromUserScreenName"><strong>@theTweet.FromUserScreenName:</strong></a>
-                        @Html.Raw(theTweet.TextAsHTML)
-                        <!-- <span class="tweet-date">(@Html.DisplayFor(thing => theTweet.CreatedDate))</span> -->
+                    <a class="twitterName" href="http://www.twitter.com/@theTweet.FromUserScreenName"><strong>@theTweet.FromUserScreenName:</strong></a>
+                    @Html.Raw(theTweet.TextAsHTML)
+                    <!-- <span class="tweet-date">(@Html.DisplayFor(thing => theTweet.CreatedDate))</span> -->
                     <p>
 				
-				    <ul class="tweet-nav">
-					    <li> <a href="#">reply</a> &bullet;</li>
-					    <li> <a href="#">retweet</a> &bullet;</li>
-					    <li> @Html.DisplayFor(thing => theTweet.CreatedDate) &bullet;</li>
-				    </ul>
+                    <ul class="tweet-nav">
+                        <li> @Html.DisplayFor(thing => theTweet.CreatedDate) &bullet;</li>
+                        <li> <a href="#">reply</a> &bullet;</li>
+                        <li> <a href="#">retweet</a> &bullet;</li>
+                    </ul>
                 </div>
             </article>
         }
     </section>
 
     <footer>
-		<a href="http://epilogger.com" target="_blank"><img src="/Public/images/widget/epilogger.png" alt="Epilogger logo"/></a>
+        <a href="http://epilogger.com" target="_blank"><img src="/Public/images/widget/epilogger.png" alt="Epilogger logo"/></a>
 		
         @Html.Partial("_EpiloggerCounts", @Model.EpiloggerCounts)
-	</footer>
-</div>
+    </footer>
 
+</div>
+</div>
+@Html.HiddenFor(e => e.CustomSettings.SpriteColor)
+<script type="text/javascript" src="/Public/js/widget.js"></script>
 

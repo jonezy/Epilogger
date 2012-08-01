@@ -58,23 +58,31 @@ namespace Epilogger.Web.Controllers
 
         }
 
-        private int GetHeightOffset(int height, int width)
+        private int GetHeightOffset(int height, int width, bool fullLayout)
         {
             var heightOffset = 0;
+            
+            //Portrait
             if (width < 300)
             {
-                heightOffset = 224;
+                //251px-299px
+                heightOffset = fullLayout ? 116 : 224;
             }
             else
             {
-                heightOffset = 241;
+                //Over 300px
+                heightOffset = fullLayout ? 125 : 241;
             }
 
             if (width < 250)
             {
-                heightOffset = 206;
+                //Under 250px
+                heightOffset = fullLayout ? 116 : 206;
+                
             }
 
+
+            //Landscape
             if (height < width)
             {
                 //Offsets for Landscape layout
@@ -147,7 +155,7 @@ namespace Epilogger.Web.Controllers
                 model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, 25, FromDateTime(), ToDateTime());
             }
 
-            model.HeightOffset = GetHeightOffset(model.Height, model.Width);
+            model.HeightOffset = GetHeightOffset(model.Height, model.Width, false);
             
             return View(model);
         }
@@ -163,12 +171,10 @@ namespace Epilogger.Web.Controllers
 
             model.PhotoID = PhotoID;
 
-            //model.Width = width == null ? 300 : int.Parse(width);
-            //model.Height = height == null ? 500 : int.Parse(height);
             model.Width = width == null ? 100 : int.Parse(width);
             model.Height = height == null ? 100 : int.Parse(height);
 
-            model.returnto = returnto;
+            model.Returnto = returnto;
             model.EpiloggerCounts = new Core.Stats.WidgetTotals().GetWidgetTotals(requestedEvent.ID, FromDateTime(), ToDateTime());
 
             //Get the photos
@@ -177,6 +183,9 @@ namespace Epilogger.Web.Controllers
 
             //Get the Comments
             model.Tweet = _ts.FindByImageID(model.PhotoID, requestedEvent.ID).First();
+
+            model.CustomSettings = _ws.FindByEventID(requestedEvent.ID);
+            model.HeightOffset = GetHeightOffset(model.Height, model.Width, true);
 
             return View(model);
         }
@@ -191,23 +200,41 @@ namespace Epilogger.Web.Controllers
             var requestedEvent = _es.FindBySlug(id);
             var model = Mapper.Map<Event, WidgetPhotosViewModel>(requestedEvent);
 
-            //model.Width = width == null ? 300 : int.Parse(width);
-            //model.Height = height == null ? 500 : int.Parse(height);
             model.Width = width == null ? 100 : int.Parse(width);
             model.Height = height == null ? 100 : int.Parse(height);
 
+            model.CustomSettings = _ws.FindByEventID(requestedEvent.ID);
             model.EpiloggerCounts = new Core.Stats.WidgetTotals().GetWidgetTotals(requestedEvent.ID, FromDateTime(), ToDateTime());
 
-            //Get the photos
-            if (model.Height==500 && model.Width==300)
+
+            //Return a different number of photos depending on the size of the widget.
+            if (model.Width < model.Height)
             {
-                model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, 15, this.FromDateTime(), this.ToDateTime());    
+                //Portrait
+                model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, 24, FromDateTime(), ToDateTime());
             }
             else
             {
-                model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, 22, this.FromDateTime(), this.ToDateTime());
+                //Landscape
+                if (model.Width >= 500 && model.Height >= 300)
+                {
+                    model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, (int)((model.Height * 2 - 125) / 85) * 5, FromDateTime(), ToDateTime());
+
+                    if (model.Width >= 600)
+                    {
+                        model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, (int)((model.Height * 2 - 125) / 85) * 8, FromDateTime(), ToDateTime());
+                    }
+                }
             }
-            
+
+            if (model.Width == 100 && model.Height == 100)
+            {
+                //Floating layout, load lots.
+                model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, 25, FromDateTime(), ToDateTime());
+            }
+
+
+            model.HeightOffset = GetHeightOffset(model.Height, model.Width, true);
             
             return View(model);
         }
@@ -231,6 +258,9 @@ namespace Epilogger.Web.Controllers
             //Get the tweets
             model.Tweets = _ts.FindByEventIDOrderDescTakeX(requestedEvent.ID, 20, this.FromDateTime(), this.ToDateTime());
 
+            model.CustomSettings = _ws.FindByEventID(requestedEvent.ID);
+            model.HeightOffset = GetHeightOffset(model.Height, model.Width, true);
+
             return View(model);
         }
 
@@ -242,9 +272,7 @@ namespace Epilogger.Web.Controllers
         {
             var requestedEvent = _es.FindBySlug(id);
             var model = Mapper.Map<Event, WidgetCheckinsViewModel>(requestedEvent);
-
-            //model.Width = width == null ? 300 : int.Parse(width);
-            //model.Height = height == null ? 500 : int.Parse(height);
+            
             model.Width = width == null ? 100 : int.Parse(width);
             model.Height = height == null ? 100 : int.Parse(height);
 
@@ -252,6 +280,9 @@ namespace Epilogger.Web.Controllers
 
             //Get the tweets
             model.Checkins = _cs.FindByEventID(requestedEvent.ID);
+
+            model.CustomSettings = _ws.FindByEventID(requestedEvent.ID);
+            model.HeightOffset = GetHeightOffset(model.Height, model.Width, true);
 
             return View(model);
         }
