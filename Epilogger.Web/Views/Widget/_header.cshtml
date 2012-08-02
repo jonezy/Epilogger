@@ -25,6 +25,10 @@
     {
         @Html.Raw(Html.Image(Model.CustomSettings.Logo, "Width=42 Height=42"))
     }
+    else
+    {
+        <div class="noImageSpacer">&nbsp;</div>
+    }
 
     <span id="subtitle">What's going on at</span>
     <h1 id="title">@Html.ActionLink(Model.Name, "Details", "Events", new { @id = Model.EventSlug }, new { target = "_blank" })</h1>

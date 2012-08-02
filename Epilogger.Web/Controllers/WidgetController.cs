@@ -66,18 +66,26 @@ namespace Epilogger.Web.Controllers
             if (width < 300)
             {
                 //251px-299px
-                heightOffset = fullLayout ? 116 : 224;
+                heightOffset = fullLayout ? 118 : 226;
+                //Chrome
+                //heightOffset = fullLayout ? 116 : 224;
             }
             else
             {
                 //Over 300px
-                heightOffset = fullLayout ? 125 : 241;
+                heightOffset = fullLayout ? 127 : 243;
+
+                //Chrome
+                //heightOffset = fullLayout ? 125 : 241;
             }
 
             if (width < 250)
             {
                 //Under 250px
-                heightOffset = fullLayout ? 116 : 206;
+                heightOffset = fullLayout ? 118 : 208;
+                
+                //Chrome
+                //heightOffset = fullLayout ? 116 : 206;
                 
             }
 
@@ -86,7 +94,9 @@ namespace Epilogger.Web.Controllers
             if (height < width)
             {
                 //Offsets for Landscape layout
-                heightOffset = 125;
+                heightOffset = 127;
+                //Chrome
+                //heightOffset = 125;
             }
 
             return heightOffset;

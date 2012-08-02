@@ -96,146 +96,112 @@
     <div class="container">
     
         @Html.Partial("_header", new WidgetHeaderViewModel() { Name = Model.Name, EventSlug = Model.EventSlug, CustomSettings = Model.CustomSettings, Width = Model.Width, Height = Model.Height, ReturnTo = Model.Returnto } )
-       
-        @*<section id="all-photos" class="contentContainer  @(Model.Width >= 500 ? "horizontal" : "")">
-            <ul class="imageListLarge">
-                @foreach (var theImage in Model.Images)
-                {
-                    <li>
-                        <a href="" onclick="location.href='/widget/photoDetails/@Model.EventSlug/@theImage.ID?width=@Model.Width&height=@Model.Height&returnto=2'; return false;"><img src="@theImage.Fullsize" width="200" alt="" /></a>
-                    </li>
-                }
-            </ul>
-        </section>*@
-        
-        
 
         
-    @if (Model.Width >= 500 || Model.Width > Model.Height)
-        {
-            /* Landscape */
-            <section id="single-photo" class="horizontal" style="height: @Html.Raw((Model.Height - Model.HeightOffset).ToString(CultureInfo.InvariantCulture))px !important;">
-                <section class="single-photo-return">
-                    <img src="/Public/images/widget/icon-arrow.png" alt="" />
-                    @if (Model.Returnto == 1)
-                    {
-                        <a href="" onclick="location.href='@Url.Action("index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to feed</a>
-                    }
-                    else
-                    {
-                        <a href="" onclick="location.href='@Url.Action("photos", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to photos</a>
-                    }
-                </section>
+        @if (Model.Width >= 500 || Model.Width > Model.Height)
+            {
+                /* Landscape */
+                <section id="single-photo" class="horizontal" style="height: @Html.Raw((Model.Height - Model.HeightOffset).ToString(CultureInfo.InvariantCulture))px !important;">
+                    <section class="single-photo-return">
+                        <img src="/Public/images/widget/icon-arrow.png" alt="" />
+                        @if (Model.Returnto == 1)
+                        {
+                            <a href="" onclick="location.href='@Url.Action("index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to feed</a>
+                        }
+                        else
+                        {
+                            <a href="" onclick="location.href='@Url.Action("photos", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to photos</a>
+                        }
+                    </section>
                 
                 
-                <article id="Tweet-@Model.Tweet.TwitterID" class="tweet horizontal">
-                    <img src="@Model.Tweet.ProfileImageURL" height="42" width="42"  class="twit-avatar" alt="@Model.Tweet.FromUserScreenName" />
-                    <div>
-                        <p>
-                            <a class="twitterName" href="http://www.twitter.com/@Model.Tweet.FromUserScreenName"><strong>@Model.Tweet.FromUserScreenName:</strong></a>
-                            @Html.Raw(Model.Tweet.TextAsHTML)
-                        </p>
-                        <ul class="tweet-nav">
-                            <li> @Html.DisplayFor(thing => Model.Tweet.CreatedDate) &bullet;</li>
-                            <li> <a href="#">reply</a> &bullet;</li>
-                            <li> <a href="#">retweet</a> &bullet;</li>
-                        </ul>
-                    </div>
-                </article>
+                    <article id="Tweet-@Model.Tweet.TwitterID" class="tweet blink horizontal">
+                        <img src="@Model.Tweet.ProfileImageURL" height="42" width="42"  class="twit-avatar" alt="@Model.Tweet.FromUserScreenName" />
+                        <div>
+                            <p>
+                                <a class="twitterName" href="http://www.twitter.com/@Model.Tweet.FromUserScreenName"><strong>@Model.Tweet.FromUserScreenName:</strong></a>
+                                @Html.Raw(Model.Tweet.TextAsHTML)
+                            </p>
+                            <ul class="tweet-nav">
+                                <li> @Html.DisplayFor(thing => Model.Tweet.CreatedDate) &bullet;</li>
+                                <li> <a href="#">reply</a> &bullet;</li>
+                                <li> <a href="#">retweet</a> &bullet;</li>
+                            </ul>
+                        </div>
+                    </article>
 
-                <img src="@Model.Image.Fullsize" id="horizontal-full-photo" alt="" />
+                    <img src="@Model.Image.Fullsize" id="horizontal-full-photo" alt="" />
                         
-                <section class="single-photo-return">
-                    <img src="/Public/images/widget/icon-arrow.png" alt="" />
-                    @if (Model.Returnto == 1)
-                    {
-                        <a href="" onclick="location.href='@Url.Action("index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to feed</a>
-                    }
-                    else
-                    {
-                        <a href="" onclick="location.href='@Url.Action("photos", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to photos</a>
-                    }
+                    <section class="single-photo-return">
+                        <img src="/Public/images/widget/icon-arrow.png" alt="" />
+                        @if (Model.Returnto == 1)
+                        {
+                            <a href="" onclick="location.href='@Url.Action("index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to feed</a>
+                        }
+                        else
+                        {
+                            <a href="" onclick="location.href='@Url.Action("photos", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to photos</a>
+                        }
+                    </section>
                 </section>
-            </section>
                     
 
                     
                     
-        }
-        else
-        {
-            /* Portrait */
+            }
+            else
+            {
+                /* Portrait */
                 
-            <section id="single-photo" style="height: @Html.Raw((Model.Height - Model.HeightOffset).ToString(CultureInfo.InvariantCulture))px !important;">
+                <section id="single-photo" style="height: @Html.Raw((Model.Height - Model.HeightOffset).ToString(CultureInfo.InvariantCulture))px !important;">
 
-                <section class="single-photo-return">
-                    <img src="/Public/images/widget/icon-arrow.png" alt="" />
-                    @if (Model.Returnto == 1)
-                    {
-                        <a href="" onclick="location.href='@Url.Action("index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to feed</a>
-                    }
-                    else
-                    {
-                        <a href="" onclick="location.href='@Url.Action("photos", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to photos</a>
-                    }
-                </section>
+                    <section class="single-photo-return">
+                        <img src="/Public/images/widget/icon-arrow.png" alt="" />
+                        @if (Model.Returnto == 1)
+                        {
+                            <a href="" onclick="location.href='@Url.Action("index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to feed</a>
+                        }
+                        else
+                        {
+                            <a href="" onclick="location.href='@Url.Action("photos", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to photos</a>
+                        }
+                    </section>
 
-                <img src="@Model.Image.Fullsize" alt="" id="full-photo"  />
+                    <img src="@Model.Image.Fullsize" alt="" id="full-photo"  />
                         
                 
-                <article id="Tweet-@Model.Tweet.TwitterID" class="tweet">
-                    <img src="@Model.Tweet.ProfileImageURL" height="42" width="42"  class="twit-avatar" alt="" />
-
-                    <div>
-                        <p>
-                            <a class="twitterName" href="http://www.twitter.com/@Model.Tweet.FromUserScreenName"><strong>@Model.Tweet.FromUserScreenName:</strong></a>
-                            @Html.Raw(Model.Tweet.TextAsHTML)
-                        </p>
-                        <ul class="tweet-nav">
-                            <li> @Html.DisplayFor(thing => Model.Tweet.CreatedDate) &bullet;</li>
-                            <li> <a href="#">reply</a> &bullet;</li>
-                            <li> <a href="#">retweet</a> &bullet;</li>
-                        </ul>
-                    </div>
-                </article>  
-                
-                
-                @*<section id="feed-tweets" class="btext blink">
-		            <article class="tweet">                
-                        <img src="@Model.Tweet.ProfileImageURL" height="48" width="48" class="twit-avatar" alt="" />
+                    <article id="Tweet-@Model.Tweet.TwitterID" class="tweet blink">
+                        <img src="@Model.Tweet.ProfileImageURL" height="42" width="42"  class="twit-avatar" alt="" />
 
                         <div>
                             <p>
-                                <a class="twitterName" href="http://www.twitter.com/@Model.Tweet.FromUserScreenName"><strong>@Model.Tweet.FromUserScreenName:</strong></a>                        
+                                <a class="twitterName" href="http://www.twitter.com/@Model.Tweet.FromUserScreenName"><strong>@Model.Tweet.FromUserScreenName:</strong></a>
                                 @Html.Raw(Model.Tweet.TextAsHTML)
                             </p>
-				
-				            <ul class="tweet-nav">
-					            <li> @Html.DisplayFor(thing => Model.Tweet.CreatedDate) &bullet;</li>
-					            <li> <a href="#">reply</a> &bullet;</li>
-					            <li> <a href="#">retweet</a></li>
-				            </ul>
+                            <ul class="tweet-nav">
+                                <li> @Html.DisplayFor(thing => Model.Tweet.CreatedDate) &bullet;</li>
+                                <li> <a href="#">reply</a> &bullet;</li>
+                                <li> <a href="#">retweet</a> &bullet;</li>
+                            </ul>
                         </div>
-                    </article>
-	            </section>*@
+                    </article>  
                 
-                <section class="single-photo-return">
-                    <img src="/Public/images/widget/icon-arrow.png" alt="" />
-                    @if (Model.Returnto == 1)
-                    {
-                        <a href="" onclick="location.href='@Url.Action("index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to feed</a>
-                    }
-                    else
-                    {
-                        <a href="" onclick="location.href='@Url.Action("photos", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to photos</a>
-                    }
+                
+                    <section class="single-photo-return">
+                        <img src="/Public/images/widget/icon-arrow.png" alt="" />
+                        @if (Model.Returnto == 1)
+                        {
+                            <a href="" onclick="location.href='@Url.Action("index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to feed</a>
+                        }
+                        else
+                        {
+                            <a href="" onclick="location.href='@Url.Action("photos", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to photos</a>
+                        }
+                    </section>
                 </section>
-            </section>
 
-        }
+            }
 
-
-            
         <footer>
             <a href="http://epilogger.com" target="_blank"><img src="/Public/images/widget/epilogger.png" alt="Epilogger logo"/></a>
 		

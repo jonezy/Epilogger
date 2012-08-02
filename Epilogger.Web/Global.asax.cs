@@ -571,7 +571,12 @@ namespace Epilogger.Web {
             Mapper.CreateMap<CheckIn, ApiCheckIn>()
                 .ForMember(dest => dest.ProfilePicture, opt => opt.MapFrom(src => src.Tweets.FirstOrDefault().ProfileImageURL));
 
-            Mapper.CreateMap<User, ApiUser>();
+            Mapper.CreateMap<User, ApiUser>()
+                .ForMember(dest => dest.MobileServiceUsername, opt => opt.Ignore())
+                .ForMember(dest => dest.MobileToken, opt => opt.Ignore())
+                .ForMember(dest => dest.MobileTokenSecret, opt => opt.Ignore());
+
+
             Mapper.CreateMap<Venue, ApiVenue>();
             Mapper.CreateMap<SearchInEventModel, ApiSearchInEvent>();
             Mapper.CreateMap<ApiUserFollowsEvent, UserFollowsEvent>();
