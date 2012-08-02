@@ -455,6 +455,7 @@
     <Content Include="App_Data\combres_full_with_annotation.xml" />
     <Content Include="Public\images\livemode\client\bg.png" />
     <Content Include="Public\images\livemode\client\sponsor-osheaga.png" />
+    <Content Include="Public\images\widget\icon-arrow.png" />
     <Content Include="Public\images\widget\logo\chevywidget.png" />
     <Content Include="Public\images\widget\menu-active.png" />
     <Content Include="Public\js\widget.js" />
@@ -3114,6 +3115,7 @@
     <Content Include="Views\Events\_LiveTweetTemplate.cshtml" />
     <Content Include="Views\Widget\_header.cshtml" />
     <Content Include="Views\Widget\Copy of index.cshtml" />
+    <Content Include="Views\Widget\Copy of PhotoDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />

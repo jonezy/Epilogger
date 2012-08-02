@@ -33,7 +33,7 @@ else
                     <div class="feed-photos-container horizontal" style="height: @Html.Raw((Model.Height - Model.HeightOffset).ToString(CultureInfo.InvariantCulture))px; overflow:hidden">
 		                @foreach (var theImage in Model.Images)
                         {
-                            <a href="" onclick="@string.Format("location.href='photoDetails/{0}/{1}?width={2}&height={3}&returnto=1", Model.EventSlug, theImage.ID, Model.Width, Model.Width)'; return false;"><img src="@theImage.Fullsize" width="200" alt="" /></a>
+                            <a href="" onclick="@string.Format("location.href='photoDetails/{0}/{1}?width={2}&height={3}&returnto=1", Model.EventSlug, theImage.ID, Model.Width, Model.Height)'; return false;"><img src="@theImage.Fullsize" width="200" alt="" /></a>
                         }
                     </div>
 	            </section>

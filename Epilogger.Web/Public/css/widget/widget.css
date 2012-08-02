@@ -17,7 +17,7 @@ div#wrapper {
 	position:relative;}
 	
 	
-/* Variable sized font for when the widget is tiny */
+/* Media Queries for different sized widgets */
 
 /* Narrower than 249px */
 @media only screen and (min-width: 0px) and (max-width: 249px) 
@@ -57,7 +57,7 @@ div#wrapper {
 }
 
 
-/* Narrower than 300px */
+/* Narrower than 300px (250px - 299px) */
 @media only screen and (min-width: 250px) and (max-width: 299px) 
 {
     header { height: 63px !important; }
@@ -150,18 +150,19 @@ nav li.current a {
 section#feed-photos, section#feed-tweets, section#single-photo, section#all-tweets {
 	    padding:0 10px;
         margin: 0 0 15px 0;
-	    /*margin-top: 89px;*/
 	}
 
 p.section-title {
-	margin:0 0 5px 0}
+    margin: 0 0 5px 0;
+}
 
 
 
 section#single-photo, section#all-tweets, section#all-photos, section#all-checkins {
     height:70%;
     overflow:auto;
-    overflow-x:hidden}
+    overflow-x: hidden;
+}
 
 section#all-photos.horizontal, section#all-tweets.horizontal, section#all-checkins.horizontal, 
 section#feed-tweets.horizontal, section#single-photo.horizontal { height: 53%; }
@@ -175,12 +176,14 @@ section#feed-tweets {
 article.tweet img {
 	float:left;
 	margin:0 8px 15px 0;
-	clear:left;}
+	clear:left;
+}
 
 article.tweet div {
 	width:78%;
 	float:left;
-	margin:0 0 15px 0}
+    margin: 0 0 15px 0;
+}
 
 article.tweet ul.tweet-nav li {
 	list-style:none;
@@ -212,10 +215,6 @@ section#feed-photos.horizontal {
     margin: 0 2px 2px 0px;
 }
     
-    
-
-
-
 .feed-photos-container img {
     left: -44px;
     position: relative;
@@ -229,7 +228,8 @@ section#feed-photos.horizontal {
     height:80px; 
 }
 
-.twit-avatar { height: 48px;width: 48px; }
+.twit-avatar { height: 48px;width: 48px; 
+}
 
 
 
@@ -241,43 +241,56 @@ section#all-photos ul.imageListLarge li {
     list-style: none;
     width: 88px;
     height: 88px;
-    overflow: hidden;}
+    overflow: hidden;
+}
 
 section#all-photos .imageListLarge li img {
      left: -44px; 
-     position: relative;}
+     position: relative;
+}
      
  
 /* --- single photo view */
 section#single-photo article.tweet.horizontal {
-    float:left;
+    float:right;
     width:50%;
-    background: blue; }
- 
-section#single-photo article.tweet div {
-    width:auto}
+    margin-top: 0px;
+}
 
 section#single-photo img#horizontal-full-photo {
     float:left;
     padding:0 8px 0 0;
-    width:48%; } 
-    
-.tweetWide {
-    float: right;
-    width: 286px;
-}    
+    width:48%; 
+    margin-bottom: 10px;
+} 
+
+section#single-photo img#full-photo {
+    width: 100%;
+    margin-bottom: 10px;
+} 
+
+section#single-photo section.single-photo-return {
+    display: block;
+    clear: both;
+    width: auto;
+    margin: 0 0 10px 0;
+}
+
+
+
  
 /* --- all check-ins view */
 section#all-checkins {
-    padding:0 5px 0 0}
+    padding: 0 5px 0 0;
+}
     
 section#all-checkins .checkinList li {
     margin: 0px 0px 6px 5px;
     float: left;
     position: relative;
     list-style: none;
-    overflow: hidden;}
-
+    overflow: hidden;
+}
 
 /* ---------------------------------------- [ FOOTER: CREDIT, TOTALS ]  */
 footer {
@@ -287,30 +300,34 @@ footer {
 	width:93.5%;
 	position: fixed;
 	bottom:0;
-	left:10px;}
+	left:10px;
+}
 
 span#epiloggerCounts {
 	padding:3px 0;
-	float:right;}
+	float:right;
+}
 
 span#epiloggerCounts span {
-	/*position:relative;
-	top:4px;*/
 	display:inline-block;
 	width:16px;
 	overflow:hidden;
-	padding:0 2px 0 4px}
+    padding: 0 2px 0 4px;
+}
 
 span#epiloggerCounts span img#camera {
 	position:relative;
-	left:-42px}
+    left: -42px;
+}
 
 span#epiloggerCounts span img#bird {
 	position:relative;
-	left:-5px}
+    left: -5px;
+}
 
 span#epiloggerCounts img {
-	margin:0 0 0 8px}
+    margin: 0 0 0 8px;
+}
 
 
 /* ---------------------------------------- [ MISCELLANEOUS ] --------- */
@@ -329,56 +346,6 @@ span#epiloggerCounts img {
 .blink a, ul.tweet-nav { color:#0099cc}
 .btext { color:#6e6e6e}
 
-/*
-#widgetMenu 
-{
-    margin-top: 4px;
-}
-#widgetMenu li {
-  margin: 0px 5px 0px 3px;
-  padding: 0px 0px 6px 0px;
-  float: left;
-  position: relative;
-  list-style: none;
-}
-#widgetMenu a {
-  font-weight: bold;
-  font-family: helvetica;
-  font-style: normal;
-  font-size: 12px;
-  color: #01A5ED;
-  text-decoration: none;
-  display: block;
-  padding: 3px 7px;
-  margin: 0;
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-}
-#widgetMenu .current a, #widgetMenu li:hover > a {
-  background: #01A5ED;
-  color: #FFFFFF;
-}
-
-#widgetMenu:after {
-  content: ".";
-  display: block;
-  clear: both;
-  visibility: hidden;
-  line-height: 0;
-  height: 0;
-}
-#widgetMenu {
-  display: inline-block;
-}
-  html[xmlns] #menu-bar {
-  display: block;
-}
-* html #menu-bar {
-  height: 1%;
-}
-*/
-    
 
 /* Makes the nice scroll bars */
 ::-webkit-scrollbar{height:16px;overflow:visible;width:12px}
