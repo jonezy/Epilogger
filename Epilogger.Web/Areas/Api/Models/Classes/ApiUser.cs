@@ -20,5 +20,10 @@ namespace Epilogger.Web.Areas.Api.Models.Classes
         public string ProfilePicture { get; set; }
         public int TimeZoneOffSet { get; set; }
         public bool IsActive { get; set; }
+
+        public string MobileServiceUsername { get; set; }
+        public string MobileToken { get; set; }
+        public string MobileTokenSecret { get; set; }
+
     }
 }

@@ -55,5 +55,7 @@ namespace Epilogger.Web.Areas.Api.Models
         //public List<Epilogger.Data.UserRatesEvent> EventRatings { get; set; }
         //public Epilogger.Data.Venue Venue { get; set; }
 
+        public int VenueId { get; set; }
+
     }
 }

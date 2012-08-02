@@ -560,7 +560,8 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.ToDateTime, opt => opt.Ignore())
                 .ForMember(dest => dest.TweetCount, opt => opt.MapFrom(src => src.Tweets.Count()))
                 .ForMember(dest => dest.ImageCount, opt => opt.MapFrom(src => src.Images.Count()))
-                .ForMember(dest => dest.CheckInCount, opt => opt.MapFrom(src => src.CheckIns.Count()));
+                .ForMember(dest => dest.CheckInCount, opt => opt.MapFrom(src => src.CheckIns.Count()))
+                .ForMember(dest => dest.VenueId, opt => opt.MapFrom(src => src.VenueID));
 
             Mapper.CreateMap<EventCategory, ApiCategory>();
             Mapper.CreateMap<Tweet, ApiTweet>();

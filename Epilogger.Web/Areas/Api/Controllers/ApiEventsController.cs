@@ -557,7 +557,7 @@ namespace Epilogger.Web.Areas.Api.Controllers
             }
             catch (Exception ex)
             {
-                filterContext.Result = new EmptyResult();
+                filterContext.Result = new HttpStatusCodeResult(403);
                 filterContext.HttpContext.Response.Write(ex.Message);
             }
             
