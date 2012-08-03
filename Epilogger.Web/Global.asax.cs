@@ -284,6 +284,12 @@ namespace Epilogger.Web {
             );
 
             routes.MapRoute(
+                "WidgetTweetReplyRoute",
+                "widget/TwitterReply/{id}/{twitterid}",
+                new { controller = "widget", action = "TwitterReply", id = UrlParameter.Optional, twitterid = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional },
@@ -386,6 +392,20 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.EpiloggerCounts, opt => opt.Ignore())
                 .ForMember(dest => dest.CustomSettings, opt => opt.Ignore())
                 .ForMember(dest => dest.HeightOffset, opt => opt.Ignore());
+
+            Mapper.CreateMap<Event, WidgetTweetReplyViewModel>()
+                .ForMember(dest => dest.Width, opt => opt.Ignore())
+                .ForMember(dest => dest.Height, opt => opt.Ignore())
+                .ForMember(dest => dest.EpiloggerCounts, opt => opt.Ignore())
+                .ForMember(dest => dest.CustomSettings, opt => opt.Ignore())
+                .ForMember(dest => dest.HeightOffset, opt => opt.Ignore())
+                .ForMember(dest => dest.IsTwitterAuthed, opt => opt.Ignore())
+                .ForMember(dest => dest.ReplyNewTweet, opt => opt.Ignore())
+                .ForMember(dest => dest.ShortEventURL, opt => opt.Ignore())
+                .ForMember(dest => dest.Tweet, opt => opt.Ignore())
+                .ForMember(dest => dest.EventId, opt => opt.MapFrom(src => src.ID))
+                .ForMember(dest => dest.ReturnUrl, opt => opt.Ignore());
+
 
             Mapper.CreateMap<Event, AllStatsViewModel>()
                 .ForMember(dest => dest.CurrentPageIndex, opt => opt.Ignore())

@@ -151,7 +151,7 @@ nav li.current a {
 
 
 /* ---------------------------------------- [ CONTENT SECTIONS ] ------ */
-section#feed-photos, section#feed-tweets, section#single-photo, section#all-tweets {
+section#feed-photos, section#feed-tweets, section#single-photo, section#all-tweets, section#twitter-reply {
 	    padding:0 10px;
         margin: 0 0 15px 0;
 	}
@@ -162,7 +162,7 @@ p.section-title {
 
 
 
-section#single-photo, section#all-tweets, section#all-photos, section#all-checkins {
+section#single-photo, section#all-tweets, section#all-photos, section#all-checkins, section#twitter-reply {
     height:70%;
     overflow:auto;
     overflow-x: hidden;
@@ -296,6 +296,88 @@ section#all-checkins .checkinList li {
     overflow: hidden;
 }
 
+/* --- twitter reply view */
+section#twitter-reply .tweetBox { width: 95%; }
+
+#twitterCharCounter {
+    font-weight: bold;
+    padding-right: 10px;
+} 
+
+.blue-action-button.disabled {
+    border:1px solid #B0B0B0;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    background:#d3d3d3; /* no css3 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d3d3d3', endColorstr='#d3d3d3'); /*IE */
+    background:-webkit-gradient(linear, left top, left bottom, from (#d3d3d3) to (#d3d3d3)); /* webkit */
+    background:-moz-linear-gradient(top, #d3d3d3, #d3d3d3); /* ff */
+    box-shadow:0 0 1px #a1b9c8;
+    color:#e6f5fa;
+    font:bold 15px 'InterstatePlusRegular';
+    padding:5px 10px;
+    text-transform:uppercase;
+    cursor: default;
+    box-shadow:0 0 1px #777;}    
+
+.blue-action-button.disabled:hover
+{
+    opacity:1;
+    position:relative;
+    top:0px;
+    color:#e6f5fa;
+}
+
+
+.blue-action-button {
+    border:1px solid #3485b7;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    background:#418fbf; /* no css3 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4aa0d7', endColorstr='#3486b7'); /*IE */
+    background:-webkit-gradient(linear, left top, left bottom, from (#4aa0d7) to (#3486b7)); /* webkit */
+    background:-moz-linear-gradient(top, #4aa0d7, #3486b7); /* ff */
+    box-shadow:0 0 1px #a1b9c8;
+    color:#e6f5fa;
+    font: bold 15px 'InterstatePlusRegular';
+    padding:5px 10px;
+    text-transform:uppercase;
+    cursor:pointer;
+    box-shadow:0 0 1px #777;}
+
+.blue-action-button:hover {
+    opacity:0.85;
+    position:relative;
+    top:1px;
+    color: #fff;}
+    
+.white-action-button {
+    border:1px solid #aaa;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    background:#DDD; /* no css3 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d84e69', endColorstr='#ce4a64'); /*IE */
+    background:-webkit-gradient(linear, left top, left bottom, from (#d84e69) to (#ce4a64)); /* webkit */
+    background:-moz-linear-gradient(top, #d84e69, #ce4a64); /* ff */
+    box-shadow:0 0 1px #a1b9c8;
+    color:#333;
+    font:bold 15px 'InterstatePlusRegular';
+    padding:5px 10px;
+    text-transform:uppercase;
+    cursor:pointer;
+    box-shadow:0 0 1px #777;}
+
+.white-action-button:hover {
+    opacity:0.85;
+    position:relative;
+    top:1px;
+    color:#333}
+    
+    
+
 /* ---------------------------------------- [ FOOTER: CREDIT, TOTALS ]  */
 footer {
     clear:left;
@@ -334,11 +416,37 @@ span#epiloggerCounts img {
 }
 
 
+
+
+
 /* ---------------------------------------- [ MISCELLANEOUS ] --------- */
 .m-spacer { display:block; height:10px}
 .b-spacer { display:block; height:20px}
 .more { font-size:0.8em; clear:left}
 .clear { clear:both}
+.fright		{ float:right}
+
+/* ------------------------------ FONTS */	
+
+@font-face {
+    font-family: 'InterstatePlusRegular';
+    src: url('../../fonts/interstateplus_regular_cond-webfont.eot');
+    src: url('../../fonts/interstateplus_regular_cond-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../../fonts/interstateplus_regular_cond-webfont.woff') format('woff'),
+         url('../../fonts/interstateplus_regular_cond-webfont.ttf') format('truetype'),
+         url('../../fonts/interstateplus_regular_cond-webfont.svg#InterstatePlusRegular') format('svg');
+    font-weight: normal;
+    font-style: normal}
+ 
+ @font-face {
+    font-family: 'InterstatePlusRegular';
+    src: url('../../fonts/interstateplus_bold_cond-webfont.eot');
+    src: url('../../fonts/interstateplus_bold_cond-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../../fonts/interstateplus_bold_cond-webfont.woff') format('woff'),
+         url('../../fonts/interstateplus_bold_cond-webfont.ttf') format('truetype'),
+         url('../../fonts/interstateplus_bold_cond-webfont.svg#InterstatePlusRegular') format('svg');
+    font-weight: bold;
+    font-style: normal;}
 
 
 /* ---------------------------------------- [ USER DEFINED COLORS - Set to Defaults ] --- */

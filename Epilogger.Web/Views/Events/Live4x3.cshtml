@@ -125,17 +125,19 @@
 		
 		<div id="hashtag-sponsors">
 			<big class="colour1">
-				Tweet! Take a photo!<br/>
+                @*Tweet! Take a photo!*@
+                Tweetez ! Partagez vos photos!
+                <br/>
 				Hashtag: <span class="colour2">@Model.Hashtag</span>
 			</big>
 			
             
-            <h1 class="colour1"	>Our partners</h1>
+            <h1 class="colour1"	>Notre partenaire @*Our partners*@</h1>
 			<img src="/Public/images/livemode/client/sponsor-osheaga.png"/>
 		</div>
 		
 		<div id="top-tweeters">
-			<h1 class="colour1">Top Tweeters</h1>
+			<h1 class="colour1">Top utilisateurs @*Top Tweeters*@</h1>
             <ul id="topTweets">
                 @foreach (var tt in Model.TopTweeters.Take(3))
                 {
@@ -149,14 +151,14 @@
 		</div>
 		
 		<div id="stats-credits">
-			<h1 class="colour1">Statistics</h1>
+			<h1 class="colour1">Statistiques @*Statistics*@</h1>
 			<img src="/Public/images/livemode/icon-numtweets.png" alt="" /><span id="tweetCount"> @Model.EpiloggerCounts.TweetCount</span> &nbsp;&nbsp;&nbsp;
 			<img src="/Public/images/livemode/icon-numphotos.png" alt="" /><span id="photoCount"> @Model.EpiloggerCounts.PhotoCount</span> &nbsp;&nbsp;&nbsp;
 			<img src="/Public/images/livemode/icon-numpeople.png" alt="" /><span id="uniqueCount"> @Model.EpiloggerCounts.UniqueTweeterCount</span>
 			
 			<br/><br/>
 			
-            <h1 class="colour1">Powered by: <img src="/Public/images/livemode/logo-epl.png" alt="Epilogger" /></h1>
+            <h1 class="colour1">Généré par: @*Powered by:*@ <img src="/Public/images/livemode/logo-epl.png" alt="Epilogger" /></h1>
             @*<a href="" id="updateLink">Update</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="" id="stopLink">Stop</a>*@
             <div id="ajaxBusy">Loading...</div>
 		</div>

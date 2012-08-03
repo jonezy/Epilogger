@@ -704,9 +704,11 @@ namespace Links {
                     private const string URLPATH = "~/Public/images/livemode/client";
                     public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                     public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string bg_png = Url("bg.png");
                     public static readonly string logo_png = Url("logo.png");
                     public static readonly string photobig1_png = Url("photobig1.png");
                     public static readonly string photosmall1_png = Url("photosmall1.png");
+                    public static readonly string sponsor_osheaga_png = Url("sponsor-osheaga.png");
                     public static readonly string sponsor1_png = Url("sponsor1.png");
                     public static readonly string sponsor2_png = Url("sponsor2.png");
                     public static readonly string tweeter1_png = Url("tweeter1.png");
@@ -804,6 +806,7 @@ namespace Links {
                 }
             
                 public static readonly string epilogger_png = Url("epilogger.png");
+                public static readonly string icon_arrow_png = Url("icon-arrow.png");
                 public static readonly string icon_bird_jpg = Url("icon-bird.jpg");
                 public static readonly string icon_bird_png = Url("icon-bird.png");
                 public static readonly string icon_camera_jpg = Url("icon-camera.jpg");
@@ -817,6 +820,7 @@ namespace Links {
                     public static readonly string chevywidget_png = Url("chevywidget.png");
                 }
             
+                public static readonly string menu_active_png = Url("menu-active.png");
             }
         
         }

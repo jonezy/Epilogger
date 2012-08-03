@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Web;
@@ -8,18 +9,19 @@ using AutoMapper;
 using Epilogger.Data;
 using Epilogger.Web.Core.Filters;
 using Epilogger.Web.Models;
+using Twitterizer;
 
 
 namespace Epilogger.Web.Controllers
 {
-    public partial class WidgetController : Controller
+    public partial class WidgetController : BaseController
     {
         EventService _es = new EventService();
         TweetService _ts = new TweetService();
         ImageService _is = new ImageService();
         CheckInService _cs = new CheckInService();
         WidgetCustomSettingsService _ws = new WidgetCustomSettingsService();
-        
+        UserTwitterActionService _userTwitterActionService = new UserTwitterActionService();
 
         DateTime _fromDateTime = DateTime.Parse("2000-01-01 00:00:00");
         private DateTime FromDateTime()
@@ -296,6 +298,69 @@ namespace Epilogger.Web.Controllers
 
             return View(model);
         }
+
+
+        //
+        // GET: /Widget/
+        [CacheFilter]
+        [CompressFilter]
+        public virtual ActionResult TwitterReply(string id, long twitterid, string width, string height, string returnurl)
+        {
+            var requestedEvent = _es.FindBySlug(id);
+            var model = Mapper.Map<Event, WidgetTweetReplyViewModel>(requestedEvent);
+
+            model.Width = width == null ? 100 : int.Parse(width);
+            model.Height = height == null ? 100 : int.Parse(height);
+            model.CustomSettings = _ws.FindByEventID(requestedEvent.ID);
+            model.EpiloggerCounts = new Core.Stats.WidgetTotals().GetWidgetTotals(requestedEvent.ID, FromDateTime(), ToDateTime());
+            model.HeightOffset = GetHeightOffset(model.Height, model.Width, true);
+            model.ReturnUrl = returnurl;
+
+            model.Tweet = _ts.FindByTwitterID(twitterid);
+
+            model.IsTwitterAuthed = CurrentUserTwitterAuthorization != null;
+
+            var apiClient = new Epilogr.APISoapClient();
+            model.ShortEventURL = apiClient.CreateUrl("http://epilogger.com/events/" + model.EventSlug).ShortenedUrl;
+
+            return View(model);
+        }
+
+        [HttpPost] //Called by Ajax
+        public bool TweetReply(FormCollection c)
+        {
+            try
+            {
+                var tokens = new OAuthTokens
+                {
+                    ConsumerKey = ConfigurationManager.AppSettings["TwitterConsumerKey"],
+                    ConsumerSecret = ConfigurationManager.AppSettings["TwitterConsumerSecret"],
+                    AccessToken = CurrentUserTwitterAuthorization.Token,
+                    AccessTokenSecret = CurrentUserTwitterAuthorization.TokenSecret
+                };
+
+                //var ts = TwitterStatus.Update(tokens, c["ReplyNewTweet"], new StatusUpdateOptions { InReplyToStatusId = decimal.Parse(c["TwitterID"]) });
+
+                ////Record the Reply
+                //var uta = new UserTwitterAction
+                //{
+                //    TweetId = (long)ts.ResponseObject.Id,
+                //    TwitterAction = "Reply",
+                //    UserId = CurrentUser.ID,
+                //    DateTime = DateTime.UtcNow
+                //};
+                //_userTwitterActionService.Save(uta);
+
+                //return ts.Result == RequestResult.Success;
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
 
     }
 }

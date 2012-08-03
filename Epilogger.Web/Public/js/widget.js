@@ -45,3 +45,31 @@ function changeColor() {
     bird.src = canvas.toDataURL("image/png");
     camera.src = canvas.toDataURL("img/png");
 }
+
+
+
+function WidgetReplyToTweet(url, returnurl) {
+    $("#submitTweet").attr('disabled', 'disabled');
+    $("#submitTweet").addClass('disabled');
+    $("#twitterLoading").show();
+
+    var twitterReply = {
+        ReplyNewTweet: $("#ReplyNewTweet").val(),
+        TwitterID: $("#TwitterID").val()
+    };
+
+    $.post(url, twitterReply,
+        function (data) {
+            if (data == "True") {
+                $("#twitterLoading").hide();
+                location.href = returnurl;
+            } else {
+                $("#submitTweet").attr('disabled', '');
+                $("#submitTweet").removeClass('disabled');
+                $("#twitterLoading").hide();
+
+                //FlashMessage("There was a problem sending your tweet, please try again.", "Message_Error Message_Flash");
+            }
+        });
+    return false;
+}

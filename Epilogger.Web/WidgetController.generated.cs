@@ -65,6 +65,11 @@ namespace Epilogger.Web.Controllers {
         public System.Web.Mvc.ActionResult Checkins() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Checkins);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult TwitterReply() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.TwitterReply);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public WidgetController Actions { get { return MVC.Widget; } }
@@ -85,6 +90,7 @@ namespace Epilogger.Web.Controllers {
             public readonly string Photos = "Photos";
             public readonly string Tweets = "Tweets";
             public readonly string Checkins = "Checkins";
+            public readonly string TwitterReply = "TwitterReply";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -94,6 +100,7 @@ namespace Epilogger.Web.Controllers {
             public const string Photos = "Photos";
             public const string Tweets = "Tweets";
             public const string Checkins = "Checkins";
+            public const string TwitterReply = "TwitterReply";
         }
 
 
@@ -144,6 +151,17 @@ namespace Epilogger.Web.Controllers {
             public readonly string width = "width";
             public readonly string height = "height";
         }
+        static readonly ActionParamsClass_TwitterReply s_params_TwitterReply = new ActionParamsClass_TwitterReply();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_TwitterReply TwitterReplyParams { get { return s_params_TwitterReply; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_TwitterReply {
+            public readonly string id = "id";
+            public readonly string twitterid = "twitterid";
+            public readonly string width = "width";
+            public readonly string height = "height";
+            public readonly string returnurl = "returnurl";
+        }
         static readonly ViewNames s_views = new ViewNames();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewNames Views { get { return s_views; } }
@@ -155,10 +173,12 @@ namespace Epilogger.Web.Controllers {
             public readonly string _widgetMenu = "~/Views/Widget/_widgetMenu.cshtml";
             public readonly string Checkins = "~/Views/Widget/Checkins.cshtml";
             public readonly string Copy_of_index = "~/Views/Widget/Copy of index.cshtml";
+            public readonly string Copy_of_PhotoDetails = "~/Views/Widget/Copy of PhotoDetails.cshtml";
             public readonly string index = "~/Views/Widget/index.cshtml";
             public readonly string PhotoDetails = "~/Views/Widget/PhotoDetails.cshtml";
             public readonly string Photos = "~/Views/Widget/Photos.cshtml";
             public readonly string Tweets = "~/Views/Widget/Tweets.cshtml";
+            public readonly string TwitterReply = "~/Views/Widget/TwitterReply.cshtml";
         }
     }
 
@@ -205,6 +225,16 @@ namespace Epilogger.Web.Controllers {
             callInfo.RouteValueDictionary.Add("id", id);
             callInfo.RouteValueDictionary.Add("width", width);
             callInfo.RouteValueDictionary.Add("height", height);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult TwitterReply(string id, long twitterid, string width, string height, string returnurl) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.TwitterReply);
+            callInfo.RouteValueDictionary.Add("id", id);
+            callInfo.RouteValueDictionary.Add("twitterid", twitterid);
+            callInfo.RouteValueDictionary.Add("width", width);
+            callInfo.RouteValueDictionary.Add("height", height);
+            callInfo.RouteValueDictionary.Add("returnurl", returnurl);
             return callInfo;
         }
 

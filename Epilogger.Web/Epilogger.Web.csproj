@@ -375,6 +375,7 @@
     <Compile Include="Models\BrowseCategoriesDisplayViewModel.cs" />
     <Compile Include="Models\AllStatsViewModel.cs" />
     <Compile Include="Models\BetaSignUpViewModel.cs" />
+    <Compile Include="Models\WidgetTweetReplyViewModel.cs" />
     <Compile Include="Models\GetFacebookAlbumsViewModel.cs" />
     <Compile Include="Models\HomepageFeaturedEventsViewModel.cs" />
     <Compile Include="Models\ImageCommentViewModel.cs" />
@@ -3116,6 +3117,7 @@
     <Content Include="Views\Widget\_header.cshtml" />
     <Content Include="Views\Widget\Copy of index.cshtml" />
     <Content Include="Views\Widget\Copy of PhotoDetails.cshtml" />
+    <Content Include="Views\Widget\TwitterReply.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />
