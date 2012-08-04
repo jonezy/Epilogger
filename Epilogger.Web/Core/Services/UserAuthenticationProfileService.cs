@@ -32,7 +32,7 @@ namespace Epilogger.Web {
 
         public UserAuthenticationProfile UserAuthorizationByServiceScreenNameAndPlatform(string screenName, string platform, AuthenticationServices service)
         {
-            return GetData().FirstOrDefault(ua => ua.ServiceUsername == screenName && ua.Platform == platform && ua.ServiceUsername == service.ToString());
+            return GetData().FirstOrDefault(ua => ua.ServiceUsername == screenName && ua.Platform == platform && ua.Service == service.ToString());
         }
 
     }

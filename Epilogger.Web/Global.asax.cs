@@ -272,6 +272,12 @@ namespace Epilogger.Web {
 
 
             routes.MapRoute(
+                "WidgetAuthRoute",
+                "widget/TwitterAuth",
+                new { controller = "widget", action = "TwitterAuth" }
+            );
+
+            routes.MapRoute(
                 "WidgetRoute",
                 "widget/{id}",
                 new { controller = "widget", action = "index", id = UrlParameter.Optional }
@@ -404,7 +410,8 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.ShortEventURL, opt => opt.Ignore())
                 .ForMember(dest => dest.Tweet, opt => opt.Ignore())
                 .ForMember(dest => dest.EventId, opt => opt.MapFrom(src => src.ID))
-                .ForMember(dest => dest.ReturnUrl, opt => opt.Ignore());
+                .ForMember(dest => dest.ReturnUrl, opt => opt.Ignore())
+                .ForMember(dest => dest.Returnto, opt => opt.Ignore());
 
 
             Mapper.CreateMap<Event, AllStatsViewModel>()

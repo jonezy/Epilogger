@@ -76,6 +76,10 @@ namespace Epilogger.Web.Controllers
             {
                 //Over 300px
                 heightOffset = fullLayout ? 127 : 243;
+                if (width >= 500)
+                {
+                    heightOffset = 127;
+                }
 
                 //Chrome
                 //heightOffset = fullLayout ? 125 : 241;
@@ -304,7 +308,7 @@ namespace Epilogger.Web.Controllers
         // GET: /Widget/
         [CacheFilter]
         [CompressFilter]
-        public virtual ActionResult TwitterReply(string id, long twitterid, string width, string height, string returnurl)
+        public virtual ActionResult TwitterReply(string id, long twitterid, string width, string height, string returnurl, int returnto)
         {
             var requestedEvent = _es.FindBySlug(id);
             var model = Mapper.Map<Event, WidgetTweetReplyViewModel>(requestedEvent);
@@ -315,6 +319,7 @@ namespace Epilogger.Web.Controllers
             model.EpiloggerCounts = new Core.Stats.WidgetTotals().GetWidgetTotals(requestedEvent.ID, FromDateTime(), ToDateTime());
             model.HeightOffset = GetHeightOffset(model.Height, model.Width, true);
             model.ReturnUrl = returnurl;
+            model.Returnto = returnto;
 
             model.Tweet = _ts.FindByTwitterID(twitterid);
 
@@ -339,21 +344,20 @@ namespace Epilogger.Web.Controllers
                     AccessTokenSecret = CurrentUserTwitterAuthorization.TokenSecret
                 };
 
-                //var ts = TwitterStatus.Update(tokens, c["ReplyNewTweet"], new StatusUpdateOptions { InReplyToStatusId = decimal.Parse(c["TwitterID"]) });
+                var ts = TwitterStatus.Update(tokens, c["ReplyNewTweet"], new StatusUpdateOptions { InReplyToStatusId = decimal.Parse(c["TwitterID"]) });
 
-                ////Record the Reply
-                //var uta = new UserTwitterAction
-                //{
-                //    TweetId = (long)ts.ResponseObject.Id,
-                //    TwitterAction = "Reply",
-                //    UserId = CurrentUser.ID,
-                //    DateTime = DateTime.UtcNow
-                //};
-                //_userTwitterActionService.Save(uta);
+                //Record the Reply
+                var uta = new UserTwitterAction
+                {
+                    TweetId = (long)ts.ResponseObject.Id,
+                    TwitterAction = "Reply",
+                    UserId = CurrentUser.ID,
+                    DateTime = DateTime.UtcNow
+                };
+                _userTwitterActionService.Save(uta);
 
-                //return ts.Result == RequestResult.Success;
+                return ts.Result == RequestResult.Success;
 
-                return true;
             }
             catch (Exception)
             {
@@ -361,6 +365,17 @@ namespace Epilogger.Web.Controllers
             }
         }
 
+
+
+        public virtual ActionResult TwitterAuth()
+        {
+            //Twitter OAuth has returned here. Log the user tokens, log the user in, and load this page which closed the window and refreshes the parent.
+
+            var test = new Areas.Authentication.Controllers.TwitterController();
+            test.ConnectAccountNoRedirect(Request.QueryString["oauth_token"]);
+            
+            return PartialView();
+        }
 
     }
 }

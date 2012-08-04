@@ -79,6 +79,18 @@
 
     };
 
+
+    function popTheWindow(url) {
+        window.open(url, 'twitterAuth', "width=400,height=300,scrollbars=no");
+//        var timer = setInterval(function () {
+//            if (win.closed) {
+//                clearInterval(timer);
+//                alert('closed');
+//            }
+//        }, 1000);     
+    }
+    
+
 </script>
 
 
@@ -97,7 +109,7 @@ else
 
 <div class="container">
     
-    @Html.Partial("_header", new WidgetHeaderViewModel() { Name = Model.Name, EventSlug = Model.EventSlug, CustomSettings = Model.CustomSettings, Width = Model.Width, Height = Model.Height, ReturnTo = 0 } )
+    @Html.Partial("_header", new WidgetHeaderViewModel() { Name = Model.Name, EventSlug = Model.EventSlug, CustomSettings = Model.CustomSettings, Width = Model.Width, Height = Model.Height, ReturnTo = Model.Returnto } )
 
     <section id="twitter-reply" style="height: @Html.Raw((Model.Height - Model.HeightOffset).ToString(CultureInfo.InvariantCulture))px;">
         
@@ -137,9 +149,8 @@ else
                 <div style="text-align: center;">
                     <br class="spacer"/><br class="spacer"/>
                     <textarea class="tweetBox" cols="20" id="ReplyNewTweet" name="ReplyNewTweet" style="display: none;" rows="2"></textarea>
-                    <h3>You need to be authorized with Twitter to reply to a tweet. Please login with or authenticate your account with Twitter. </h3>
-                    <br />
-                    @Html.ActionImage("ConnectRequest", "twitter", new { area = "Authentication" }, "/Public/images/icons/sign-in-with-twitter-d.png", "Sign in with twitter")
+                    <br /><br /><br /><br />
+                    <a href="" onclick="popTheWindow('@Url.Action("ConnectRequestWithCallback", "twitter", new { area = "Authentication", callBackUrl = @Url.Action("TwitterAuth", null, null, "http") })')"><img src="/Public/images/icons/sign-in-with-twitter-d.png" alt="Sign in with twitter" /></a>
                 </div>
             }
     

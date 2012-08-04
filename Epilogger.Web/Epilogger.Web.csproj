@@ -3115,9 +3115,9 @@
     <Content Include="Views\Events\Live4x3.cshtml" />
     <Content Include="Views\Events\_LiveTweetTemplate.cshtml" />
     <Content Include="Views\Widget\_header.cshtml" />
-    <Content Include="Views\Widget\Copy of index.cshtml" />
-    <Content Include="Views\Widget\Copy of PhotoDetails.cshtml" />
     <Content Include="Views\Widget\TwitterReply.cshtml" />
+    <Content Include="Views\Widget\TwitterAuth.cshtml" />
+    <Content Include="Views\Widget\test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />
@@ -8657,7 +8657,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>16007</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

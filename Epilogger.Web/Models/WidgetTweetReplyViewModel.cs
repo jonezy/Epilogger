@@ -19,6 +19,7 @@ namespace Epilogger.Web.Models
         public Core.Stats.WidgetTotal EpiloggerCounts { get; set; }
 
         public string ReturnUrl { get; set; }
+        public int Returnto { get; set; }
 
         public Data.WidgetCustomSetting CustomSettings { get; set; }
         public int HeightOffset { get; set; }

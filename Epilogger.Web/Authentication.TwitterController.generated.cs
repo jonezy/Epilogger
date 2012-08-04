@@ -40,6 +40,11 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
             return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult ConnectRequestWithCallback() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.ConnectRequestWithCallback);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public TwitterController Actions { get { return MVC.Authentication.Twitter; } }
@@ -56,6 +61,7 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly string ConnectRequest = "ConnectRequest";
+            public readonly string ConnectRequestWithCallback = "ConnectRequestWithCallback";
             public readonly string ConnectAccount = "ConnectAccount";
             public readonly string Disconnect = "Disconnect";
         }
@@ -63,11 +69,19 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants {
             public const string ConnectRequest = "ConnectRequest";
+            public const string ConnectRequestWithCallback = "ConnectRequestWithCallback";
             public const string ConnectAccount = "ConnectAccount";
             public const string Disconnect = "Disconnect";
         }
 
 
+        static readonly ActionParamsClass_ConnectRequestWithCallback s_params_ConnectRequestWithCallback = new ActionParamsClass_ConnectRequestWithCallback();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ConnectRequestWithCallback ConnectRequestWithCallbackParams { get { return s_params_ConnectRequestWithCallback; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ConnectRequestWithCallback {
+            public readonly string callBackUrl = "callBackUrl";
+        }
         static readonly ViewNames s_views = new ViewNames();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewNames Views { get { return s_views; } }
@@ -82,6 +96,12 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
 
         public override System.Web.Mvc.ActionResult ConnectRequest() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ConnectRequest);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ConnectRequestWithCallback(string callBackUrl) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ConnectRequestWithCallback);
+            callInfo.RouteValueDictionary.Add("callBackUrl", callBackUrl);
             return callInfo;
         }
 

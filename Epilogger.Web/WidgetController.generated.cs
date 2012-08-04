@@ -91,6 +91,7 @@ namespace Epilogger.Web.Controllers {
             public readonly string Tweets = "Tweets";
             public readonly string Checkins = "Checkins";
             public readonly string TwitterReply = "TwitterReply";
+            public readonly string TwitterAuth = "TwitterAuth";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -101,6 +102,7 @@ namespace Epilogger.Web.Controllers {
             public const string Tweets = "Tweets";
             public const string Checkins = "Checkins";
             public const string TwitterReply = "TwitterReply";
+            public const string TwitterAuth = "TwitterAuth";
         }
 
 
@@ -161,6 +163,7 @@ namespace Epilogger.Web.Controllers {
             public readonly string width = "width";
             public readonly string height = "height";
             public readonly string returnurl = "returnurl";
+            public readonly string returnto = "returnto";
         }
         static readonly ViewNames s_views = new ViewNames();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -177,7 +180,9 @@ namespace Epilogger.Web.Controllers {
             public readonly string index = "~/Views/Widget/index.cshtml";
             public readonly string PhotoDetails = "~/Views/Widget/PhotoDetails.cshtml";
             public readonly string Photos = "~/Views/Widget/Photos.cshtml";
+            public readonly string test = "~/Views/Widget/test.cshtml";
             public readonly string Tweets = "~/Views/Widget/Tweets.cshtml";
+            public readonly string TwitterAuth = "~/Views/Widget/TwitterAuth.cshtml";
             public readonly string TwitterReply = "~/Views/Widget/TwitterReply.cshtml";
         }
     }
@@ -228,13 +233,19 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult TwitterReply(string id, long twitterid, string width, string height, string returnurl) {
+        public override System.Web.Mvc.ActionResult TwitterReply(string id, long twitterid, string width, string height, string returnurl, int returnto) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.TwitterReply);
             callInfo.RouteValueDictionary.Add("id", id);
             callInfo.RouteValueDictionary.Add("twitterid", twitterid);
             callInfo.RouteValueDictionary.Add("width", width);
             callInfo.RouteValueDictionary.Add("height", height);
             callInfo.RouteValueDictionary.Add("returnurl", returnurl);
+            callInfo.RouteValueDictionary.Add("returnto", returnto);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult TwitterAuth() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.TwitterAuth);
             return callInfo;
         }
 

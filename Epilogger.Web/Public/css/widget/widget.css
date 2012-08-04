@@ -118,7 +118,7 @@ header img {
 .noImageSpacer { height: 42px; float:left; margin: 0 0 4px 0; }
 
 h1#title a { display: block;
-width: 229px;
+/*width: 229px;*/
 overflow: hidden;
 height: 22px;
 }

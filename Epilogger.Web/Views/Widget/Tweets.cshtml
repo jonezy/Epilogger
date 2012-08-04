@@ -61,8 +61,8 @@ else
 				
                     <ul class="tweet-nav">
                         <li> @Html.DisplayFor(thing => theTweet.CreatedDate) &bullet;</li>
-                        <li> <a href="#">reply</a> &bullet;</li>
-                        <li> <a href="#">retweet</a> &bullet;</li>
+                        <li> @Html.ActionLink("reply", "TwitterReply", new { id = Model.EventSlug, twitterid = theTweet.TwitterID, height = Model.Height, width = Model.Width, returnurl = string.Format("/widget/tweets/{0}?width={1}&height={2}&returnto=3", Model.EventSlug, Model.Width, Model.Height), returnto = 3 }) &bullet;</li>
+                        @*<li> <a href="#">retweet</a> </li>*@
                     </ul>
                 </div>
             </article>

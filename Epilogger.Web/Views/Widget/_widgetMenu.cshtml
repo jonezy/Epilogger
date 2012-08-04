@@ -12,7 +12,7 @@
     <li class="@(action.ToLower() == "photos" ? "current " : string.Empty)@(Model.returnto == 2 ? "current " : string.Empty)">
         <a href="" onclick="location.href='@Url.Action("Photos", new { id = Model.EventSlug, Model.width, Model.height })'; return false;">photos</a>
     </li>
-    <li class="@(action.ToLower() == "tweets" ? "current " : string.Empty)">
+    <li class="@(action.ToLower() == "tweets" ? "current " : string.Empty)@(Model.returnto == 3 ? "current " : string.Empty)">
         <a href="" onclick="location.href='@Url.Action("Tweets", new { id = Model.EventSlug, Model.width, Model.height })'; return false;">tweets</a>
     </li>
     <li class="@(action.ToLower() == "checkins" ? "current " : string.Empty)">
