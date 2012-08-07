@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using AutoMapper;
 using Epilogger.Data;
@@ -198,13 +201,14 @@ namespace Epilogger.Web.Controllers
             
 
             //Get the Comments
-            model.Tweet = _ts.FindByImageID(model.PhotoID, requestedEvent.ID).First();
+            model.Tweet = _ts.FindByImageID(model.PhotoID, requestedEvent.ID).FirstOrDefault() ?? new Tweet();
 
             model.CustomSettings = _ws.FindByEventID(requestedEvent.ID);
             model.HeightOffset = GetHeightOffset(model.Height, model.Width, true);
 
             return View(model);
         }
+
 
 
         //
@@ -376,6 +380,17 @@ namespace Epilogger.Web.Controllers
             
             return PartialView();
         }
+
+        public void GetPhotoThumbnail(string photoUrl, int width, int height)
+        {
+            new WebImage(new System.Net.WebClient().DownloadData(photoUrl))
+                    .Resize(width, height, true, true) // Resizing the image to 100x100 px on the fly...
+                    .Crop(1, 1) // Cropping it to remove 1px border at top and left sides (bug in WebImage)
+                    .Write();
+        }
+
+        
+       
 
     }
 }

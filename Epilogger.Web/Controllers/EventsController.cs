@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Web.Helpers;
 using System.Web.Mvc;
 
 using AutoMapper;
@@ -1730,6 +1731,13 @@ namespace Epilogger.Web.Controllers {
         }
 
 
+        public void GetPhotoThumbnail(string photoUrl, int width, int height)
+        {
+            new WebImage(new WebClient().DownloadData(photoUrl))
+                    .Resize(width, height, true, true) // Resizing the image to 100x100 px on the fly...
+                    .Crop(1, 1) // Cropping it to remove 1px border at top and left sides (bug in WebImage)
+                    .Write();
+        }
 
 
 

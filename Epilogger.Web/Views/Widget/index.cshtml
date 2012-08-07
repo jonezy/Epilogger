@@ -10,11 +10,11 @@
 
 
 
-@if (Model.Width==100 && Model.Height==100)
+@if (Model.Width == 100 && Model.Height == 100)
 {
     @: <div style="@string.Format("height:100%; width: 100%;") overflow-x: hidden; overflow-y: auto;" class="bbackground" id="wrapper">
-} 
-else 
+}
+else
 {
     @: <div style="@string.Format("height: {0}px; width: {1}px;", Model.Height, Model.Width) overflow: hidden;" class="bbackground" id="wrapper">
 }
@@ -22,19 +22,20 @@ else
 
     <div class="container">
         
-        @Html.Partial("_header", new WidgetHeaderViewModel() { Name = Model.Name, EventSlug = Model.EventSlug, CustomSettings = Model.CustomSettings, Width = Model.Width, Height = Model.Height, ReturnTo = 1} )
+        @Html.Partial("_header", new WidgetHeaderViewModel() { Name = Model.Name, EventSlug = Model.EventSlug, CustomSettings = Model.CustomSettings, Width = Model.Width, Height = Model.Height, ReturnTo = 1 })
 
         @if (Model.Width >= 500 && Model.Height >= 300)
         {
-                /* Landscape */
+            /* Landscape */
 	            <section id="feed-photos" class="horizontal btext blink">
 		            <p class="section-title"><strong>Recent Photos</strong> <span>(<a href="" onclick="location.href='@Url.Action("Photos", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">all photos</a>)</span></p>
 		
                     <div class="feed-photos-container horizontal" style="height: @Html.Raw((Model.Height - Model.HeightOffset).ToString(CultureInfo.InvariantCulture))px; overflow:hidden">
 		                @foreach (var theImage in Model.Images)
-                        {
-                            <a href="" onclick="@string.Format("location.href='photoDetails/{0}/{1}?width={2}&height={3}&returnto=1", Model.EventSlug, theImage.ID, Model.Width, Model.Height)'; return false;"><img src="@theImage.Fullsize" width="200" alt="" /></a>
-                        }
+                  {
+                      @*<a href="" onclick="@string.Format("location.href='photoDetails/{0}/{1}?width={2}&height={3}&returnto=1", Model.EventSlug, theImage.ID, Model.Width, Model.Height)'; return false;"><img src="@theImage.Fullsize" width="200" alt="" /></a>*@
+                      <a href="" onclick="location.href='photoDetails/@Model.EventSlug/@theImage.ID?width=@Model.Width&height=@Model.Height&returnto=1'; return false;"><img src="@Url.Action("GetPhotoThumbnail", new { photoUrl = theImage.Fullsize, width = 200, height = 200 })" width="200" alt="" /></a>
+                  }
                     </div>
 	            </section>
 	
@@ -70,9 +71,11 @@ else
 		
                 <div style="overflow:hidden" class="feed-photos-container">
 		        @foreach (var theImage in Model.Images)
-                {
-                    <a href="" onclick="location.href='photoDetails/@Model.EventSlug/@theImage.ID?width=@Model.Width&height=@Model.Height&returnto=1'; return false;"><img src="@theImage.Fullsize" width="200" alt="" /></a>
-                }
+          {
+                    @*<a href="" onclick="location.href='photoDetails/@Model.EventSlug/@theImage.ID?width=@Model.Width&height=@Model.Height&returnto=1'; return false;"><img src="@theImage.Fullsize" width="200" alt="" /></a>*@
+              <a href="" onclick="location.href='photoDetails/@Model.EventSlug/@theImage.ID?width=@Model.Width&height=@Model.Height&returnto=1'; return false;"><img src="@Url.Action("GetPhotoThumbnail", new { photoUrl = theImage.Fullsize, width = 200, height = 200 })" width="200" alt="" /></a>
+              
+          }
                 </div>
 	        </section>
 	

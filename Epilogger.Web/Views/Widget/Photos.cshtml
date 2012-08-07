@@ -28,7 +28,12 @@ else
             @foreach (var theImage in Model.Images)
             {
                 <li>
-                    <a href="" onclick="location.href='/widget/photoDetails/@Model.EventSlug/@theImage.ID?width=@Model.Width&height=@Model.Height&returnto=2'; return false;"><img src="@theImage.Fullsize" width="200" alt="" /></a>
+     
+                    <a href="" onclick="location.href='/widget/photoDetails/@Model.EventSlug/@theImage.ID?width=@Model.Width&height=@Model.Height&returnto=2'; return false;">
+                            <img src="@Url.Action("GetPhotoThumbnail", new { photoUrl = theImage.Fullsize, width = 200, height = 200 })" width="200" alt="" />
+                    </a>
+
+                    @*<a href="" onclick="location.href='/widget/photoDetails/@Model.EventSlug/@theImage.ID?width=@Model.Width&height=@Model.Height&returnto=2'; return false;"><img src="@theImage.Fullsize" width="200" alt="" /></a>*@
                 </li>
             }
         </ul>

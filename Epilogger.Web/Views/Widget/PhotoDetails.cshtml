@@ -116,18 +116,27 @@
                 
                 
                     <article id="Tweet-@Model.Tweet.TwitterID" class="tweet blink horizontal">
-                        <img src="@Model.Tweet.ProfileImageURL" height="42" width="42"  class="twit-avatar" alt="@Model.Tweet.FromUserScreenName" />
-                        <div>
-                            <p>
-                                <a class="twitterName" href="http://www.twitter.com/@Model.Tweet.FromUserScreenName"><strong>@Model.Tweet.FromUserScreenName:</strong></a>
-                                @Html.Raw(Model.Tweet.TextAsHTML)
-                            </p>
-                            <ul class="tweet-nav">
-                                <li> @Html.DisplayFor(thing => Model.Tweet.CreatedDate) &bullet;</li>
-                                <li> @Html.ActionLink("reply", "TwitterReply", new { id = Model.EventSlug, twitterid = Model.Tweet.TwitterID, height = Model.Height, width = Model.Width, returnurl = string.Format("/widget/photoDetails/{0}/{1}?width={2}&height={3}&returnto=2", Model.EventSlug, Model.PhotoID, Model.Width, Model.Height), returnto = 2 }) &bullet;</li>
-                                @*<li> <a href="#">retweet</a></li>*@
-                            </ul>
-                        </div>
+                        @if (Model.Tweet.ID>0)
+                        {
+                            <img src="@Model.Tweet.ProfileImageURL" height="42" width="42"  class="twit-avatar" alt="@Model.Tweet.FromUserScreenName" />
+                            <div>
+                                <p>
+                                    <a class="twitterName" href="http://www.twitter.com/@Model.Tweet.FromUserScreenName"><strong>@Model.Tweet.FromUserScreenName:</strong></a>
+                                    @Html.Raw(Model.Tweet.TextAsHTML)
+                                </p>
+                                <ul class="tweet-nav">
+                                    <li> @Html.DisplayFor(thing => Model.Tweet.CreatedDate) &bullet;</li>
+                                    <li> @Html.ActionLink("reply", "TwitterReply", new { id = Model.EventSlug, twitterid = Model.Tweet.TwitterID, height = Model.Height, width = Model.Width, returnurl = string.Format("/widget/photoDetails/{0}/{1}?width={2}&height={3}&returnto=2", Model.EventSlug, Model.PhotoID, Model.Width, Model.Height), returnto = 2 }) &bullet;</li>
+                                    @*<li> <a href="#">retweet</a></li>*@
+                                </ul>
+                            </div>
+                        }
+                        else
+                        {
+                            <div>
+                                <p>Photo submitted by an Epilogger User</p>
+                            </div>
+                        }
                     </article>
 
                     <img src="@Model.Image.Fullsize" id="horizontal-full-photo" alt="" />

@@ -264,6 +264,13 @@ namespace Epilogger.Web {
                 "events/{slug}",
                 new { controller = "events", action = "details", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                "ImageResize",
+                "events/GetPhotoThumbnail",
+                new { controller = "events", action = "GetPhotoThumbnail" }
+            );
+
             routes.MapRoute(
                 "EventsRoutes",
                 "events/{slug}/{action}",
@@ -276,6 +283,13 @@ namespace Epilogger.Web {
                 "widget/TwitterAuth",
                 new { controller = "widget", action = "TwitterAuth" }
             );
+
+            routes.MapRoute(
+                "WidgetImageResize",
+                "widget/GetPhotoThumbnail",
+                new { controller = "widget", action = "GetPhotoThumbnail" }
+            );
+
 
             routes.MapRoute(
                 "WidgetRoute",
