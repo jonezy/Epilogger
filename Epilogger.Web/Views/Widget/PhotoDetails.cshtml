@@ -127,7 +127,7 @@
                                 <ul class="tweet-nav">
                                     <li> @Html.DisplayFor(thing => Model.Tweet.CreatedDate) &bullet;</li>
                                     <li> @Html.ActionLink("reply", "TwitterReply", new { id = Model.EventSlug, twitterid = Model.Tweet.TwitterID, height = Model.Height, width = Model.Width, returnurl = string.Format("/widget/photoDetails/{0}/{1}?width={2}&height={3}&returnto=2", Model.EventSlug, Model.PhotoID, Model.Width, Model.Height), returnto = 2 }) &bullet;</li>
-                                    @*<li> <a href="#">retweet</a></li>*@
+                                    <li> @Html.ActionLink("retweet", "TwitterRetweet", new { id = Model.EventSlug, twitterid = Model.Tweet.TwitterID, height = Model.Height, width = Model.Width, returnurl = string.Format("/widget/{0}?width={1}&height={2}&returnto=1", Model.EventSlug, Model.Width, Model.Height), returnto = 1 }) &bullet;</li>
                                 </ul>
                             </div>
                         }
@@ -190,7 +190,7 @@
                             <ul class="tweet-nav">
                                 <li> @Html.DisplayFor(thing => Model.Tweet.CreatedDate) &bullet;</li>
                                 <li> @Html.ActionLink("reply", "TwitterReply", new { id = Model.EventSlug, twitterid = Model.Tweet.TwitterID, height = Model.Height, width = Model.Width, returnurl = string.Format("/widget/photoDetails/{0}/{1}?width={2}&height={3}&returnto=2", Model.EventSlug, Model.PhotoID, Model.Width, Model.Height), returnto=2 }) &bullet;</li>
-                                @*<li> <a href="#">retweet</a> </li>*@
+                                <li> @Html.ActionLink("retweet", "TwitterRetweet", new { id = Model.EventSlug, twitterid = Model.Tweet.TwitterID, height = Model.Height, width = Model.Width, returnurl = string.Format("/widget/{0}?width={1}&height={2}&returnto=1", Model.EventSlug, Model.Width, Model.Height), returnto = 1 }) &bullet;</li>
                             </ul>
                         </div>
                     </article>  

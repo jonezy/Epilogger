@@ -371,6 +371,70 @@ namespace Epilogger.Web.Controllers
 
 
 
+
+
+        [CacheFilter]
+        [CompressFilter]
+        public virtual ActionResult TwitterRetweet(string id, long twitterid, string width, string height, string returnurl, int returnto)
+        {
+            var requestedEvent = _es.FindBySlug(id);
+            var model = Mapper.Map<Event, WidgetTweetReplyViewModel>(requestedEvent);
+
+            model.Width = width == null ? 100 : int.Parse(width);
+            model.Height = height == null ? 100 : int.Parse(height);
+            model.CustomSettings = _ws.FindByEventID(requestedEvent.ID);
+            model.EpiloggerCounts = new Core.Stats.WidgetTotals().GetWidgetTotals(requestedEvent.ID, FromDateTime(), ToDateTime());
+            model.HeightOffset = GetHeightOffset(model.Height, model.Width, true);
+            model.ReturnUrl = returnurl;
+            model.Returnto = returnto;
+
+            model.Tweet = _ts.FindByTwitterID(twitterid);
+
+            model.IsTwitterAuthed = CurrentUserTwitterAuthorization != null;
+
+            var apiClient = new Epilogr.APISoapClient();
+            model.ShortEventURL = apiClient.CreateUrl("http://epilogger.com/events/" + model.EventSlug).ShortenedUrl;
+
+            return View(model);
+        }
+
+
+        [HttpPost] //Called by Ajax
+        public bool TweetRetweet(FormCollection c)
+        {
+            try
+            {
+                var tokens = new OAuthTokens
+                {
+                    ConsumerKey = ConfigurationManager.AppSettings["TwitterConsumerKey"],
+                    ConsumerSecret = ConfigurationManager.AppSettings["TwitterConsumerSecret"],
+                    AccessToken = CurrentUserTwitterAuthorization.Token,
+                    AccessTokenSecret = CurrentUserTwitterAuthorization.TokenSecret
+                };
+
+                var classicRT = bool.Parse(c["ClassicRT"]);
+
+                var ts = classicRT ? TwitterStatus.Update(tokens, c["RetweetText"]) : TwitterStatus.Retweet(tokens, decimal.Parse(c["TwitterID"]));
+
+                //Record the Retweet
+                var uta = new UserTwitterAction
+                {
+                    TweetId = (long)ts.ResponseObject.Id,
+                    TwitterAction = "Retweet",
+                    UserId = CurrentUser.ID,
+                    DateTime = DateTime.UtcNow
+                };
+                _userTwitterActionService.Save(uta);
+
+                return ts.Result == RequestResult.Success;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+
         public virtual ActionResult TwitterAuth()
         {
             //Twitter OAuth has returned here. Log the user tokens, log the user in, and load this page which closed the window and refreshes the parent.
@@ -390,7 +454,5 @@ namespace Epilogger.Web.Controllers
         }
 
         
-       
-
     }
 }

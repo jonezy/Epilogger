@@ -73,3 +73,31 @@ function WidgetReplyToTweet(url, returnurl) {
         });
     return false;
 }
+
+
+function WidgetRetweet(url, returnurl) {
+    $("#submitTweet").attr('disabled', 'disabled');
+    $("#submitTweet").addClass('disabled');
+    $("#twitterLoading").show();
+
+    var twitterReply = {
+        ClassicRT: $("#ClassicRT").val(),
+        RetweetText: $("#RetweetText").val(),
+        TwitterID: $("#TwitterID").val()
+    };
+
+    $.post(url, twitterReply,
+        function (data) {
+            if (data == "True") {
+                $("#twitterLoading").hide();
+                location.href = returnurl;
+            } else {
+                $("#submitTweet").attr('disabled', '');
+                $("#submitTweet").removeClass('disabled');
+                $("#twitterLoading").hide();
+
+                //FlashMessage("There was a problem sending your tweet, please try again.", "Message_Error Message_Flash");
+            }
+        });
+    return false;
+}

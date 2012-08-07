@@ -376,6 +376,7 @@
     <Compile Include="Models\BrowseCategoriesDisplayViewModel.cs" />
     <Compile Include="Models\AllStatsViewModel.cs" />
     <Compile Include="Models\BetaSignUpViewModel.cs" />
+    <Compile Include="Models\WidgetTweetRetweetViewModel.cs" />
     <Compile Include="Models\WidgetTweetReplyViewModel.cs" />
     <Compile Include="Models\GetFacebookAlbumsViewModel.cs" />
     <Compile Include="Models\HomepageFeaturedEventsViewModel.cs" />
@@ -3118,7 +3119,7 @@
     <Content Include="Views\Widget\_header.cshtml" />
     <Content Include="Views\Widget\TwitterReply.cshtml" />
     <Content Include="Views\Widget\TwitterAuth.cshtml" />
-    <Content Include="Views\Widget\test.cshtml" />
+    <Content Include="Views\Widget\TwitterRetweet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />

@@ -1,0 +1,187 @@
+﻿@using System.Globalization
+@using Combres.Mvc
+@using Epilogger.Web.Models
+@model Epilogger.Web.Models.WidgetTweetReplyViewModel
+@{
+    Layout = "_EmbedLayout.cshtml";
+    ViewBag.Title = "";
+    
+}
+
+<script type="text/javascript">
+    head.js('@Url.Content("~/Public/js/jquery.blockUI.js")');
+</script>
+
+@*<script src="@Url.Content("~/Public/js/jquery-1.6.2.min.js")" type="text/javascript" language="javascript"></script>*@
+<script language="javascript" type="text/javascript">
+
+    whenkeydown = function (maxLength) {
+        $("#RetweetText").unbind().keyup(function () {
+            //check if the appropriate text area is being typed into
+            if (document.activeElement.id === "RetweetText") {
+                //get the data in the field
+                var text = $(this).val();
+
+                //set number of characters
+                var numofchars = text.length;
+
+                //set the chars left
+                var charsLeft = maxLength - numofchars;
+
+                //check if we are still within our maximum number of characters or not
+                if (numofchars <= maxLength) {
+                    //set the length of the text into the counter span
+                    $("#twitterCharCounter").html("").html(charsLeft).css("color", "#000000");
+                    $("#submitTweet").removeAttr("disabled");
+                    $("#submitTweet").removeClass('disabled');
+                } else {
+                    //style numbers in red
+                    $("#twitterCharCounter").html("").html(charsLeft).css("color", "#FF0000");
+                    $("#submitTweet").attr('disabled', 'disabled');
+                    $("#submitTweet").addClass('disabled');
+                }
+            }
+        });
+    };
+
+    function initCharCount() {
+        //set max length
+        var maxLength = 140;
+
+        //load in max characters when page loads
+        $("#twitterCharCounter").html(maxLength);
+
+        //run listen key press
+        whenkeydown(maxLength);
+
+        //check if we are still within our maximum number of characters or not
+        var numofchars = $("#RetweetText").val().length;
+        var charsLeft = maxLength - numofchars;
+        if (numofchars <= maxLength) {
+            //set the length of the text into the counter span
+            $("#twitterCharCounter").html("").html(charsLeft).css("color", "#000000");
+            $("#submitTweet").removeAttr("disabled");
+            $("#submitTweet").removeClass('disabled');
+        } else {
+            //style numbers in red
+            $("#twitterCharCounter").html("").html(charsLeft).css("color", "#FF0000");
+            $("#submitTweet").attr('disabled', 'disabled');
+            $("#submitTweet").addClass('disabled');
+        }
+    };
+
+
+    function editTweet() {
+        $("#editRetweet").slideDown();
+        $("#twitterCharCounter").show();
+        initCharCount();
+        $("#ClassicRT").val("true");
+        $("#RetweetText").focus();
+    }
+
+    var IsAuth = '@Model.IsTwitterAuthed';
+    if (IsAuth == 'False') {
+        window.setTimeout(function () { resizePopUp('550px', '320px'); }, 500);
+    }
+
+
+    function popTheWindow(url) {
+        window.open(url, 'twitterAuth', "width=400,height=300,scrollbars=no");
+    }
+    
+
+</script>
+
+
+
+
+@if (Model.Width==100 && Model.Height==100)
+{
+    @: <div style="@string.Format("height:100%; width: 100%;") overflow-x: hidden; overflow-y: auto;" class="bbackground" id="wrapper">
+}
+else
+{
+    @: <div style="@string.Format("height:{0}px; width: {1}px;", @Model.Height, @Model.Width); overflow: hidden;" class="bbackground" id="wrapper">
+}
+
+    
+
+<div class="container">
+    
+    @Html.Partial("_header", new WidgetHeaderViewModel() { Name = Model.Name, EventSlug = Model.EventSlug, CustomSettings = Model.CustomSettings, Width = Model.Width, Height = Model.Height, ReturnTo = Model.Returnto } )
+
+    <section id="twitter-reply" style="height: @Html.Raw((Model.Height - Model.HeightOffset).ToString(CultureInfo.InvariantCulture))px;">
+        
+        <p class="section-title"><strong>Reply to @@@Model.Tweet.FromUserScreenName</strong> </p>
+        
+           
+        <article id="Tweet-@Model.Tweet.TwitterID" class="tweet blink">
+            <img src="@Model.Tweet.ProfileImageURL" height="42" width="42"  class="twit-avatar" alt="" />
+
+            <div>
+                <p>
+                    <a class="twitterName" href="http://www.twitter.com/@Model.Tweet.FromUserScreenName"><strong>@Model.Tweet.FromUserScreenName:</strong></a>
+                    @Html.Raw(Model.Tweet.TextAsHTML)
+                </p>
+                <ul class="tweet-nav">
+                    <li> @Html.DisplayFor(thing => Model.Tweet.CreatedDate)</li>
+                </ul>
+            </div>
+        </article>
+        
+        
+        
+        <form action="" method="post" onsubmit="return WidgetRetweet('@Url.Action("TweetRetweet", "Widget", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })', '@Model.ReturnUrl')">
+    
+            @if (Model.IsTwitterAuthed)
+            {
+                <div id="editRetweet" style="display: none;">
+                    <textarea class="tweetBox" cols="20" id="RetweetText" name="RetweetText" rows="2">@("RT @" + Model.Tweet.FromUserScreenName + " \"" + Model.Tweet.Text + "\" " + Model.ShortEventURL)</textarea>
+                </div>
+        
+                <div class="fleft blink" style="padding-top: 9px;">
+                    <a href="" onclick="editTweet(); return false;">Edit before Retweet</a>
+                </div>
+                <div class="fright">
+                    <img src="/Public/images/icons/ajaxWaiting.gif" id="twitterLoading" style="display: none;" alt="loading" />
+                    <span id="twitterCharCounter" style="display: none;">140</span>
+                    <input type="button" value="Cancel" id="cancelTweet" onclick="location.href='@Model.ReturnUrl';" class="white-action-button" />
+                    <input type="submit" value="Retweet" id="submitTweet" class="blue-action-button" />
+                </div>
+                
+                @*<textarea class="tweetBox" cols="20" id="ReplyNewTweet" name="ReplyNewTweet" rows="2"></textarea>
+                <div class="fright">
+                    <img src="/Public/images/icons/ajaxWaiting.gif" id="twitterLoading" style="display: none;" alt="loading" />
+                    <span id="twitterCharCounter">140</span>
+                    <input type="button" value="Cancel" id="cancelTweet" onclick="location.href='@Model.ReturnUrl';" class="white-action-button" />
+                    <input type="submit" value="Tweet" id="submitTweet" class="blue-action-button" />
+                </div>*@
+            }
+            else
+            {
+                <div style="text-align: center;">
+                    <br class="spacer"/><br class="spacer"/>
+                    <textarea class="tweetBox" cols="20" id="ReplyNewTweet" name="ReplyNewTweet" style="display: none;" rows="2"></textarea>
+                    <br /><br /><br /><br />
+                    <a href="" onclick="popTheWindow('@Url.Action("ConnectRequestWithCallback", "twitter", new { area = "Authentication", callBackUrl = @Url.Action("TwitterAuth", null, null, "http") })')"><img src="/Public/images/icons/sign-in-with-twitter-d.png" alt="Sign in with twitter" /></a>
+                </div>
+            }
+    
+            @Html.Hidden("ClassicRT", false)
+            @Html.Hidden("TwitterID", Model.Tweet.TwitterID)
+        </form>
+        
+        
+
+    </section>
+	
+    <footer>
+        <a href="http://epilogger.com" target="_blank"><img src="/Public/images/widget/epilogger.png" alt="Epilogger logo"/></a>
+		
+        @Html.Partial("_EpiloggerCounts", @Model.EpiloggerCounts)
+    </footer>
+</div>
+</div>
+@Html.HiddenFor(e => e.CustomSettings.SpriteColor)
+<script type="text/javascript" src="/Public/js/widget.js"></script>
+<script type="text/javascript">init();</script>
