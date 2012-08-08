@@ -38,7 +38,17 @@ namespace Epilogger.Web {
         }
 
 
+        public List<EventGrowthStats> FindEventGrowthStats(DateTime from, DateTime to)
+        {
+            var sp = db.GetEventGrowthStats(from, to);
+            return sp.ExecuteTypedList<EventGrowthStats>();
+        }
 
+        public List<EventGrowthStats> FindEventGrowthStats()
+        {
+            var sp = db.GetEventGrowthStats((DateTime)SqlDateTime.MinValue, (DateTime)SqlDateTime.MaxValue);
+            return sp.ExecuteTypedList<EventGrowthStats>();
+        }
         
 
 
@@ -49,6 +59,12 @@ namespace Epilogger.Web {
     {
         public DateTime Date { get; set; }
         public int NumberOfUsers { get; set; }
+    }
+
+    public class EventGrowthStats
+    {
+        public DateTime Date { get; set; }
+        public int NumberOfEvents { get; set; }
     }
 
 }

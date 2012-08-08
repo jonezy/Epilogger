@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Epilogger.Web.Areas.Api.Models.GeckoClasses
 {
-    public class GeckoUserGrowth
+    public class GeckoLineChart
     {
 
         public List<string> item { get; set; }

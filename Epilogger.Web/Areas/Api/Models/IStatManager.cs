@@ -7,5 +7,10 @@ namespace Epilogger.Web.Areas.Api.Models
     {
         List<UserGrowthStats> GetUserGrowth();
         List<UserGrowthStats> GetUserGrowth(DateTime f, DateTime t);
+        List<EventGrowthStats> GetEventGrowth();
+        List<EventGrowthStats> GetEventGrowth(DateTime f, DateTime t);
+        int GetEventCount();
+        int GetActiveEventCount();
+        int CollectingEventCount();
     }
 }

@@ -116,11 +116,22 @@ namespace Epilogger.Web {
                                                    select e;
 
             IEnumerable<Event> happeningNow = from e in GetData()
-                                              where (e.StartDateTime <= DateTime.UtcNow && (e.EndDateTime != null && e.EndDateTime >= DateTime.UtcNow))
+                                              where (e.StartDateTime <= DateTime.UtcNow && (e.EndDateTime != null && e.EndDateTime >= DateTime.UtcNow) && e.IsActive)
                                               select e;
 
             return neverEndingEvents.Concat(happeningNow).Count();
         }
+
+        public int GetNumberOfCollectingEvents()
+        {
+
+            IEnumerable<Event> collecting = from e in GetData()
+                                            where (e.CollectionStartDateTime <= DateTime.UtcNow && e.CollectionEndDateTime >= DateTime.UtcNow && e.IsActive)
+                                              select e;
+
+            return collecting.Count();
+        }
+
         public List<Event> GoingOnNowEventsPaged(int currentPage, int recordsPerPage)
         {
             IEnumerable<Event> neverEndingEvents = from e in GetData()

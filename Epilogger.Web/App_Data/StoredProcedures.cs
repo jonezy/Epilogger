@@ -477,8 +477,19 @@ namespace Epilogger.Data{
             sp.Command.AddParameter("EventID",EventID,DbType.Int32);
             return sp;
         }
+        public StoredProcedure DeleteTweet(int ID){
+            StoredProcedure sp=new StoredProcedure("DeleteTweet",this.Provider);
+            sp.Command.AddParameter("ID",ID,DbType.Int32);
+            return sp;
+        }
         public StoredProcedure GetCurrentActiveUsers(){
             StoredProcedure sp=new StoredProcedure("GetCurrentActiveUsers",this.Provider);
+            return sp;
+        }
+        public StoredProcedure GetEventGrowthStats(DateTime FromDate,DateTime ToDate){
+            StoredProcedure sp=new StoredProcedure("GetEventGrowthStats",this.Provider);
+            sp.Command.AddParameter("FromDate",FromDate,DbType.DateTime);
+            sp.Command.AddParameter("ToDate",ToDate,DbType.DateTime);
             return sp;
         }
         public StoredProcedure GetHomePageActivity(){

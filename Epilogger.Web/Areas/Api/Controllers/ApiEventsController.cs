@@ -388,7 +388,7 @@ namespace Epilogger.Web.Areas.Api.Controllers
             public virtual JsonResult GeckoGetUserGrowthDayOverDay()
             {
                 var growth = _statManager.GetUserGrowth();
-                var geckoGrowth = new GeckoUserGrowth();
+                var geckoGrowth = new GeckoLineChart();
                 var geckoSettings = new GeckoSettings {axisy = new List<string>(), axisx = new List<string>()};
                 geckoGrowth.item = new List<string>();
 
@@ -409,7 +409,7 @@ namespace Epilogger.Web.Areas.Api.Controllers
             public virtual JsonResult GeckoGetUserGrowthLastWeek()
             {
                 var growth = _statManager.GetUserGrowth(DateTime.UtcNow.AddDays(-7), DateTime.UtcNow);
-                var geckoGrowth = new GeckoUserGrowth();
+                var geckoGrowth = new GeckoLineChart();
                 var geckoSettings = new GeckoSettings {axisy = new List<string>(), axisx = new List<string>()};
                 geckoGrowth.item = new List<string>();
 
@@ -433,7 +433,7 @@ namespace Epilogger.Web.Areas.Api.Controllers
             public virtual JsonResult GeckoGetUserGrowthLastMonth()
             {
                 var growth = _statManager.GetUserGrowth(DateTime.UtcNow.AddMonths(-1), DateTime.UtcNow);
-                var geckoGrowth = new GeckoUserGrowth();
+                var geckoGrowth = new GeckoLineChart();
                 var geckoSettings = new GeckoSettings {axisy = new List<string>(), axisx = new List<string>()};
                 geckoGrowth.item = new List<string>();
 
@@ -453,7 +453,106 @@ namespace Epilogger.Web.Areas.Api.Controllers
                 return Json(geckoGrowth, JsonRequestBehavior.AllowGet);
             }
 
+            public virtual JsonResult GeckoEventCount()
+            {
+                return Json(new GeckoNumberAndSecondaryStat() { item = new List<GeckoItem>() { new GeckoItem() { text = "", value = _statManager.GetEventCount() } } }, JsonRequestBehavior.AllowGet);
+            }
 
+            public virtual JsonResult GeckoActiveEventCount()
+            {
+                return Json(new GeckoNumberAndSecondaryStat() { item = new List<GeckoItem>() { new GeckoItem() { text = "", value = _statManager.GetActiveEventCount() } } }, JsonRequestBehavior.AllowGet);
+            }
+
+            public virtual JsonResult GeckoCollectingEventCount()
+            {
+                return Json(new GeckoNumberAndSecondaryStat() { item = new List<GeckoItem>() { new GeckoItem() { text = "", value = _statManager.CollectingEventCount() } } }, JsonRequestBehavior.AllowGet);
+            }
+
+            public virtual JsonResult GeckoEventCountRAG()
+            {
+                var geckoItems = new List<GeckoItem>
+                                     {
+                                         new GeckoItem() {text = "Live Events", value = _statManager.GetActiveEventCount()},
+                                         new GeckoItem() {text = "Collecting Events", value = _statManager.CollectingEventCount()},
+                                         new GeckoItem() {text = "Total Events", value = _statManager.GetEventCount()}
+                                     };
+
+                return Json(new GeckoNumberAndSecondaryStat() { item = geckoItems }, JsonRequestBehavior.AllowGet);
+            }
+
+
+            public virtual JsonResult GeckoGetEventGrowthDayOverDay()
+            {
+                var growth = _statManager.GetEventGrowth();
+                var geckoGrowth = new GeckoLineChart();
+                var geckoSettings = new GeckoSettings { axisy = new List<string>(), axisx = new List<string>() };
+                geckoGrowth.item = new List<string>();
+
+                geckoSettings.colour = "ee4490";
+                geckoSettings.axisy.Add(growth.Min(t => t.NumberOfEvents).ToString(CultureInfo.InvariantCulture));
+                geckoSettings.axisy.Add(growth.Max(t => t.NumberOfEvents).ToString(CultureInfo.InvariantCulture));
+
+                foreach (var i in growth)
+                {
+                    geckoGrowth.item.Add(i.NumberOfEvents.ToString(CultureInfo.InvariantCulture));
+                }
+
+                geckoGrowth.settings = geckoSettings;
+
+                return Json(geckoGrowth, JsonRequestBehavior.AllowGet);
+            }
+
+            public virtual JsonResult GeckoGetEventGrowthLastWeek()
+            {
+                var growth = _statManager.GetEventGrowth(DateTime.UtcNow.AddDays(-7), DateTime.UtcNow);
+                var geckoGrowth = new GeckoLineChart();
+                var geckoSettings = new GeckoSettings { axisy = new List<string>(), axisx = new List<string>() };
+                geckoGrowth.item = new List<string>();
+
+                geckoSettings.colour = "ee4490";
+                geckoSettings.axisy.Add(growth.Min(t => t.NumberOfEvents).ToString(CultureInfo.InvariantCulture));
+                geckoSettings.axisy.Add(growth.Max(t => t.NumberOfEvents).ToString(CultureInfo.InvariantCulture));
+                geckoSettings.axisx.Add(DateTime.UtcNow.AddDays(-7).ToString("MMMM d"));
+                geckoSettings.axisx.Add(DateTime.UtcNow.ToString("MMMM d"));
+
+
+                foreach (var i in growth)
+                {
+                    geckoGrowth.item.Add(i.NumberOfEvents.ToString(CultureInfo.InvariantCulture));
+                }
+
+                geckoGrowth.settings = geckoSettings;
+
+                return Json(geckoGrowth, JsonRequestBehavior.AllowGet);
+            }
+
+            public virtual JsonResult GeckoGetEventGrowthLastMonth()
+            {
+                var growth = _statManager.GetEventGrowth(DateTime.UtcNow.AddMonths(-1), DateTime.UtcNow);
+                var geckoGrowth = new GeckoLineChart();
+                var geckoSettings = new GeckoSettings { axisy = new List<string>(), axisx = new List<string>() };
+                geckoGrowth.item = new List<string>();
+
+                geckoSettings.colour = "ee4490";
+                geckoSettings.axisy.Add(growth.Min(t => t.NumberOfEvents).ToString(CultureInfo.InvariantCulture));
+                geckoSettings.axisy.Add(growth.Max(t => t.NumberOfEvents).ToString(CultureInfo.InvariantCulture));
+                geckoSettings.axisx.Add(DateTime.UtcNow.AddMonths(-1).ToString("MMMM d"));
+                geckoSettings.axisx.Add(DateTime.UtcNow.ToString("MMMM d"));
+
+                foreach (var i in growth)
+                {
+                    geckoGrowth.item.Add(i.NumberOfEvents.ToString(CultureInfo.InvariantCulture));
+                }
+
+                geckoGrowth.settings = geckoSettings;
+
+                return Json(geckoGrowth, JsonRequestBehavior.AllowGet);
+            }
+
+
+
+        
+        
         #endregion
 
 

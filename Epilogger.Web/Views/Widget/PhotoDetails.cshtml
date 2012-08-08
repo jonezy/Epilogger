@@ -103,7 +103,7 @@
                 /* Landscape */
                 <section id="single-photo" class="horizontal" style="height: @Html.Raw((Model.Height - Model.HeightOffset).ToString(CultureInfo.InvariantCulture))px !important;">
                     <section class="single-photo-return">
-                        <img src="/Public/images/widget/icon-arrow.png" alt="" />
+                        <img src="/Public/images/widget/icon-arrow.png" id="backArrow" alt="" />
                         @if (Model.Returnto == 1)
                         {
                             <a href="" onclick="location.href='@Url.Action("index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to feed</a>
@@ -142,7 +142,7 @@
                     <img src="@Model.Image.Fullsize" id="horizontal-full-photo" alt="" />
                         
                     <section class="single-photo-return">
-                        <img src="/Public/images/widget/icon-arrow.png" alt="" />
+                        <img src="/Public/images/widget/icon-arrow.png" id="backArrow" alt="" />
                         @if (Model.Returnto == 1)
                         {
                             <a href="" onclick="location.href='@Url.Action("index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to feed</a>
@@ -165,7 +165,7 @@
                 <section id="single-photo" style="height: @Html.Raw((Model.Height - Model.HeightOffset).ToString(CultureInfo.InvariantCulture))px !important;">
 
                     <section class="single-photo-return">
-                        <img src="/Public/images/widget/icon-arrow.png" alt="" />
+                        <img src="/Public/images/widget/icon-arrow.png" id="backArrow" alt="" />
                         @if (Model.Returnto == 1)
                         {
                             <a href="" onclick="location.href='@Url.Action("index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to feed</a>
@@ -197,7 +197,7 @@
                 
                 
                     <section class="single-photo-return">
-                        <img src="/Public/images/widget/icon-arrow.png" alt="" />
+                        <img src="/Public/images/widget/icon-arrow.png" id="backArrow" alt="" />
                         @if (Model.Returnto == 1)
                         {
                             <a href="" onclick="location.href='@Url.Action("index", new { id = Model.EventSlug, width = Model.Width, height = Model.Height })'; return false;">back to feed</a>
