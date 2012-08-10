@@ -1441,6 +1441,135 @@ namespace Epilogger.Data {
         }
         
         /// <summary>
+        /// Table: UserLoginTracking
+        /// Primary Key: ID
+        /// </summary>
+
+        public class UserLoginTrackingTable: DatabaseTable {
+            
+            public UserLoginTrackingTable(IDataProvider provider):base("UserLoginTracking",provider){
+                ClassName = "UserLoginTracking";
+                SchemaName = "dbo";
+                
+
+                Columns.Add(new DatabaseColumn("ID", this)
+                {
+	                IsPrimaryKey = true,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = true,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("UserId", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Guid,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = true,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("LoginMethod", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("DateTime", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.DateTime,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("IPAddress", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 50
+                });
+                    
+                
+                
+            }
+            
+            public IColumn ID{
+                get{
+                    return this.GetColumn("ID");
+                }
+            }
+            				
+   			public static string IDColumn{
+			      get{
+        			return "ID";
+      			}
+		    }
+           
+            public IColumn UserId{
+                get{
+                    return this.GetColumn("UserId");
+                }
+            }
+            				
+   			public static string UserIdColumn{
+			      get{
+        			return "UserId";
+      			}
+		    }
+           
+            public IColumn LoginMethod{
+                get{
+                    return this.GetColumn("LoginMethod");
+                }
+            }
+            				
+   			public static string LoginMethodColumn{
+			      get{
+        			return "LoginMethod";
+      			}
+		    }
+           
+            public IColumn DateTime{
+                get{
+                    return this.GetColumn("DateTime");
+                }
+            }
+            				
+   			public static string DateTimeColumn{
+			      get{
+        			return "DateTime";
+      			}
+		    }
+           
+            public IColumn IPAddress{
+                get{
+                    return this.GetColumn("IPAddress");
+                }
+            }
+            				
+   			public static string IPAddressColumn{
+			      get{
+        			return "IPAddress";
+      			}
+		    }
+           
+                    
+        }
+        
+        /// <summary>
         /// Table: UserAuthenticationProfile
         /// Primary Key: ID
         /// </summary>

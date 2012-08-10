@@ -294,6 +294,32 @@ namespace Epilogger.Web.Areas.Api
                 new { controller = "ApiEvents", action = "GeckoEventCountRAG" }
             );
 
+            context.MapRoute(
+                "GeckoDailyActiveUsers",
+                "Api/Stats/Gecko/DailyActiveUsers",
+                new { controller = "ApiEvents", action = "GeckoDailyUniqueActiveUsers" }
+            );
+
+            context.MapRoute(
+                "GeckoMonthlyActiveUsers",
+                "Api/Stats/Gecko/MonthlyActiveUsers",
+                new { controller = "ApiEvents", action = "GeckoMonthlyActiveUsers" }
+            );
+
+            context.MapRoute(
+                "GeckoTweetCount",
+                "Api/Stats/Gecko/TweetCount",
+                new { controller = "ApiEvents", action = "GeckoTweetCount" }
+            );
+
+            context.MapRoute(
+                "GeckoPhotoCount",
+                "Api/Stats/Gecko/PhotoCount",
+                new { controller = "ApiEvents", action = "GeckoPhotoCount" }
+            );
+
+
+
 
 
 

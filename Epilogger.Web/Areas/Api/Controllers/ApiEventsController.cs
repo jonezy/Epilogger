@@ -550,7 +550,55 @@ namespace Epilogger.Web.Areas.Api.Controllers
             }
 
 
+            public virtual JsonResult GeckoDailyUniqueActiveUsers()
+            {
+                return Json(new GeckoNumberAndSecondaryStat()
+                                {
+                                    item = new List<GeckoItem>()
+                                               {
+                                                   new GeckoItem() { text = "", value = _statManager.GetActiveUsers(DateTime.UtcNow.AddDays(-1), DateTime.UtcNow) }, 
+                                                   new GeckoItem() { text = "", value = _statManager.GetActiveUsers(DateTime.UtcNow.AddDays(-2), DateTime.UtcNow.AddDays(-1)) }
+                                               }
+                                }, JsonRequestBehavior.AllowGet);
+            }
 
+
+            public virtual JsonResult GeckoMonthlyActiveUsers()
+            {
+                return Json(new GeckoNumberAndSecondaryStat()
+                                {
+                                    item = new List<GeckoItem>()
+                                               {
+                                                   new GeckoItem() { text = "", value = _statManager.GetActiveUsers(DateTime.UtcNow.AddMonths(-1), DateTime.UtcNow) }, 
+                                                   new GeckoItem() { text = "", value = _statManager.GetActiveUsers(DateTime.UtcNow.AddMonths(-2), DateTime.UtcNow.AddMonths(-1)) }
+                                               }
+                                }, JsonRequestBehavior.AllowGet);
+            }
+
+
+            public virtual JsonResult GeckoTweetCount()
+            {
+                return Json(new GeckoNumberAndSecondaryStat()
+                {
+                    item = new List<GeckoItem>()
+                                               {
+                                                   new GeckoItem() { text = "", value = _statManager.GetTweetCount() }
+                                                   
+                                               }
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+            public virtual JsonResult GeckoPhotoCount()
+            {
+                return Json(new GeckoNumberAndSecondaryStat()
+                {
+                    item = new List<GeckoItem>()
+                                               {
+                                                   new GeckoItem() { text = "", value = _statManager.GetPhotoCount() }
+                                                   
+                                               }
+                }, JsonRequestBehavior.AllowGet);
+            }
         
         
         #endregion

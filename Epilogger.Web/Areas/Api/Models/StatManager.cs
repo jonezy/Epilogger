@@ -64,8 +64,20 @@ namespace Epilogger.Web.Areas.Api.Models
             return new EventStats().CollectingEventCount();
         }
         
+        public int GetActiveUsers(DateTime f, DateTime t)
+        {
+            return new UserLogService().GetUniqueUsersForDateRange(f, t);
+        }
 
+        public int GetTweetCount()
+        {
+            return new TweetService().Count();
+        }
 
+        public int GetPhotoCount()
+        {
+            return new ImageService().Count();
+        }
 
     }
  

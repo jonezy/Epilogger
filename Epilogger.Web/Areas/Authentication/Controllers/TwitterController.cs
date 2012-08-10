@@ -56,7 +56,16 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
 
                         //This user already has an account, authed them, redirect back to where they were.
                         this.StoreSuccess("You've been logged into your Epilogger account through twitter.");
-                        
+
+                        //Record the Login
+                        var ut = new UserLoginTracking()
+                        {
+                            UserId = user.ID,
+                            LoginMethod = "Twitter",
+                            DateTime = DateTime.UtcNow,
+                            IPAddress = HttpContext.Request.UserHostAddress
+                        };
+                        new UserLoginTrackingService().Save(ut);
 
                     }
                 } 
@@ -97,6 +106,17 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
                             CookieHelpers.WriteCookie("lc", "uid", theNewUser.ID.ToString());
                             CookieHelpers.WriteCookie("lc", "tz", theNewUser.TimeZoneOffSet.ToString(CultureInfo.InvariantCulture));
 
+                            //Record the Login
+                            var ut = new UserLoginTracking()
+                            {
+                                UserId = theNewUser.ID,
+                                LoginMethod = "Twitter",
+                                DateTime = DateTime.UtcNow,
+                                IPAddress = HttpContext.Request.UserHostAddress
+                            };
+                            new UserLoginTrackingService().Save(ut);
+
+
                             //This is a new User so goto the profile page
                             this.StoreSuccess("You have logged into Epilogger with your twitter account.");
                             return RedirectToAction("Index", "Account", new { area = "" });
@@ -135,6 +155,16 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
                         var user = userAuth.Users.FirstOrDefault();
                         CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString());
                         CookieHelpers.WriteCookie("lc", "tz", user.TimeZoneOffSet.ToString(CultureInfo.InvariantCulture));
+
+                        //Record the Login
+                        var ut = new UserLoginTracking()
+                        {
+                            UserId = user.ID,
+                            LoginMethod = "Twitter",
+                            DateTime = DateTime.UtcNow,
+                            IPAddress = HttpContext.Request.UserHostAddress
+                        };
+                        new UserLoginTrackingService().Save(ut);
 
                         //This is a new User so goto the profile page
                         this.StoreSuccess("You have logged into Epilogger with your twitter account.");
@@ -181,6 +211,16 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
                         CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString());
                         CookieHelpers.WriteCookie("lc", "tz", user.TimeZoneOffSet.ToString(CultureInfo.InvariantCulture));
 
+                        //Record the Login
+                        var ut = new UserLoginTracking()
+                        {
+                            UserId = user.ID,
+                            LoginMethod = "Twitter",
+                            DateTime = DateTime.UtcNow,
+                            IPAddress = HttpContext.Request.UserHostAddress
+                        };
+                        new UserLoginTrackingService().Save(ut);
+
                         //This user already has an account, authed them, redirect back to where they were.
                         //this.StoreSuccess("You've been logged into your Epilogger account through twitter.");
                         return true;
@@ -224,6 +264,16 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
                             CookieHelpers.WriteCookie("lc", "uid", theNewUser.ID.ToString());
                             CookieHelpers.WriteCookie("lc", "tz", theNewUser.TimeZoneOffSet.ToString(CultureInfo.InvariantCulture));
 
+                            //Record the Login
+                            var ut = new UserLoginTracking()
+                            {
+                                UserId = theNewUser.ID,
+                                LoginMethod = "Twitter",
+                                DateTime = DateTime.UtcNow,
+                                IPAddress = HttpContext.Request.UserHostAddress
+                            };
+                            new UserLoginTrackingService().Save(ut);
+
                             //This is a new User so goto the profile page
                             //this.StoreSuccess("You have logged into Epilogger with your twitter account.");
                             return true;
@@ -262,6 +312,16 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
                         var user = userAuth.Users.FirstOrDefault();
                         CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString());
                         CookieHelpers.WriteCookie("lc", "tz", user.TimeZoneOffSet.ToString(CultureInfo.InvariantCulture));
+
+                        //Record the Login
+                        var ut = new UserLoginTracking()
+                        {
+                            UserId = user.ID,
+                            LoginMethod = "Twitter",
+                            DateTime = DateTime.UtcNow,
+                            IPAddress = HttpContext.Request.UserHostAddress
+                        };
+                        new UserLoginTrackingService().Save(ut);
 
                         //This is a new User so goto the profile page
                         //this.StoreSuccess("You have logged into Epilogger with your twitter account.");

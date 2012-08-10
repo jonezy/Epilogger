@@ -12,5 +12,8 @@ namespace Epilogger.Web.Areas.Api.Models
         int GetEventCount();
         int GetActiveEventCount();
         int CollectingEventCount();
+        int GetActiveUsers(DateTime f, DateTime t);
+        int GetTweetCount();
+        int GetPhotoCount();
     }
 }

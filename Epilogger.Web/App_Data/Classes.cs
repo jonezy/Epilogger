@@ -448,6 +448,17 @@ namespace Epilogger.Data
             }
         }
 
+        public IQueryable<UserLoginTracking> UserLoginTrackings
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.UserLoginTrackings
+                       where items.UserId == _ID
+                       select items;
+            }
+        }
+
         public IQueryable<UserRatesEvent> UserRatesEvents
         {
             get
@@ -1611,6 +1622,147 @@ namespace Epilogger.Data
         #endregion
 
         #region Foreign Keys
+        #endregion
+
+
+        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+        public event PropertyChangingEventHandler PropertyChanging;
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void SendPropertyChanging()
+        {
+            var handler = PropertyChanging;
+            if (handler != null)
+               handler(this, emptyChangingEventArgs);
+        }
+
+        protected virtual void SendPropertyChanged(String propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+	}
+	
+    
+    
+    /// <summary>
+    /// A class which represents the UserLoginTracking table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.UserLoginTracking 
+    /// </summary>
+
+	public partial class UserLoginTracking: INotifyPropertyChanging, INotifyPropertyChanged
+	{
+        partial void OnLoaded();
+        partial void OnValidate(System.Data.Linq.ChangeAction action);
+        partial void OnCreated();
+	    
+	    public UserLoginTracking(){
+	        OnCreated();
+	    }
+	    
+	    #region Properties
+	    
+        partial void OnIDChanging(int value);
+        partial void OnIDChanged();
+		
+		private int _ID;
+		public int ID { 
+		    get{
+		        return _ID;
+		    } 
+		    set{
+		        this.OnIDChanging(value);
+                this.SendPropertyChanging();
+                this._ID = value;
+                this.SendPropertyChanged("ID");
+                this.OnIDChanged();
+		    }
+		}
+		
+        partial void OnUserIdChanging(Guid value);
+        partial void OnUserIdChanged();
+		
+		private Guid _UserId;
+		public Guid UserId { 
+		    get{
+		        return _UserId;
+		    } 
+		    set{
+		        this.OnUserIdChanging(value);
+                this.SendPropertyChanging();
+                this._UserId = value;
+                this.SendPropertyChanged("UserId");
+                this.OnUserIdChanged();
+		    }
+		}
+		
+        partial void OnLoginMethodChanging(string value);
+        partial void OnLoginMethodChanged();
+		
+		private string _LoginMethod;
+		public string LoginMethod { 
+		    get{
+		        return _LoginMethod;
+		    } 
+		    set{
+		        this.OnLoginMethodChanging(value);
+                this.SendPropertyChanging();
+                this._LoginMethod = value;
+                this.SendPropertyChanged("LoginMethod");
+                this.OnLoginMethodChanged();
+		    }
+		}
+		
+        partial void OnDateTimeChanging(DateTime? value);
+        partial void OnDateTimeChanged();
+		
+		private DateTime? _DateTime;
+		public DateTime? DateTime { 
+		    get{
+		        return _DateTime;
+		    } 
+		    set{
+		        this.OnDateTimeChanging(value);
+                this.SendPropertyChanging();
+                this._DateTime = value;
+                this.SendPropertyChanged("DateTime");
+                this.OnDateTimeChanged();
+		    }
+		}
+		
+        partial void OnIPAddressChanging(string value);
+        partial void OnIPAddressChanged();
+		
+		private string _IPAddress;
+		public string IPAddress { 
+		    get{
+		        return _IPAddress;
+		    } 
+		    set{
+		        this.OnIPAddressChanging(value);
+                this.SendPropertyChanging();
+                this._IPAddress = value;
+                this.SendPropertyChanged("IPAddress");
+                this.OnIPAddressChanged();
+		    }
+		}
+		
+
+        #endregion
+
+        #region Foreign Keys
+        public IQueryable<User> Users
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Users
+                       where items.ID == _UserId
+                       select items;
+            }
+        }
+
         #endregion
 
 

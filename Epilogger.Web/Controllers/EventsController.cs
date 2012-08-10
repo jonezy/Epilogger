@@ -12,11 +12,12 @@ using System.Web.Mvc;
 using AutoMapper;
 
 using Epilogger.Data;
+using Epilogger.Web.Core.Email;
 using Epilogger.Web.Core.Filters;
 using Epilogger.Web.Core.Stats;
 using Epilogger.Web.Models;
 using Epilogger.Common;
-
+using Epilogger.Web.Views.Emails;
 using RichmondDay.Helpers;
 using System.Net;
 using System.IO;
@@ -384,6 +385,7 @@ namespace Epilogger.Web.Controllers {
                     model.CreatedDateTime = DateTime.UtcNow;
                                         
                     var epLevent = Mapper.Map<CreateEventViewModel, Event>(model);
+                    if (model.WebsiteURL == "http://") { model.WebsiteURL = string.Empty; }
 
                     _es.Save(epLevent);
 
@@ -394,8 +396,8 @@ namespace Epilogger.Web.Controllers {
                         EventID = model.ID,
                         SearchTerms = model.SearchTerms,
                         SearchFromLatestTweet = false,
-                        SearchSince = null,
-                        SearchUntil = null
+                        SearchSince = model.CollectionStartDateTime,
+                        SearchUntil = model.CollectionEndDateTime
                     };
                     tsmp.SendMessage(tsMSG);
                     tsmp.Dispose();
@@ -469,6 +471,41 @@ namespace Epilogger.Web.Controllers {
                     catch (Exception)
                     {
                     }
+
+
+
+                    try
+                    {
+                        var theUser = _us.GetUserByID(model.UserID);
+
+                        var parser = new TemplateParser();
+                        var replacements = new Dictionary<string, string>
+                                               {
+                                                   {"[BASE_URL]", App.BaseUrl},
+                                                   {"[EVENT_NAME]", model.Name},
+                                                   {"[EVENT_CREATOR]", string.Format("{0} {1} ({2})", theUser.FirstName, theUser.LastName, theUser.Username)},
+                                                   {"[SEARCH_TERMS]", model.SearchTerms},
+                                                   {"[EVENT_TIME]", model.StartDateTime.ToLocalTime() + " - " + (DateTime)model.EndDateTime.GetValueOrDefault().ToLocalTime() },
+                                                   {"[COLLECTION_TIME]", model.CollectionStartDateTime.ToLocalTime() + " - " + (DateTime)model.CollectionEndDateTime.GetValueOrDefault().ToLocalTime()},
+                                                   {"[EVENT_URL]", "http://epilogger.com/events/" + model.EventSlug }
+                                               };
+
+                        var message = parser.Replace(AccountEmails.AdminEventCreated, replacements);
+
+                        var sfEmail = new SpamSafeMail
+                        {
+                            EmailSubject = model.Name + " has just been created.",
+                            HtmlEmail = message,
+                            TextEmail = message
+                        };
+                        sfEmail.ToEmailAddresses.Add("system@epilogger.com");
+
+                        sfEmail.SendMail();
+                    }
+                    catch (Exception)
+                    {
+                    }
+
                     
                     this.StoreSuccess("Your Event was created successfully!  Dont forget to share it with your friends and attendees!");
 
@@ -1564,7 +1601,8 @@ namespace Epilogger.Web.Controllers {
                 {
                     TweetId = (long)ts.ResponseObject.Id,
                     TwitterAction = "Reply",
-                    UserId = CurrentUser.ID
+                    UserId = CurrentUser.ID,
+                    DateTime = DateTime.UtcNow
                 };
                 _userTwitterActionService.Save(uta);
 
@@ -1739,6 +1777,36 @@ namespace Epilogger.Web.Controllers {
                     .Write();
         }
 
+
+
+        public ActionResult PullTweets(int eventId)
+        {
+
+            var evt = _es.FindByID(eventId);
+
+            var mp = new MQ.MSGProducer("Epilogger", "TwitterSearch");
+            
+            var startDate = evt.CollectionStartDateTime;
+            var endDate = evt.CollectionEndDateTime;
+
+            var myMSG = new MQ.Messages.TwitterSearchMSG
+            {
+                EventID = evt.ID,
+                SearchTerms = evt.SearchTerms,
+                SearchFromLatestTweet = false,
+                SearchSince = startDate,
+                SearchUntil = endDate
+            };
+
+            mp.SendMessage(myMSG);
+
+            mp.Dispose();
+
+            this.StoreSuccess("A request has been made to populate this event. This typically happends very quickly however, it also depends on if the system is back logged.");
+
+            return RedirectToAction("details");
+
+        }
 
 
 

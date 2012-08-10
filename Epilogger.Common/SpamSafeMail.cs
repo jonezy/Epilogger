@@ -10,6 +10,7 @@ namespace Epilogger.Common
         public MailAddressCollection BCCEmailAddresses = new MailAddressCollection();
         private string _htmlEmail;
         private string _textEmail;
+        private string _fromEmailAddress;
 
         private string _emailSubject;
         public string HtmlEmail
@@ -28,6 +29,16 @@ namespace Epilogger.Common
             set { _emailSubject = value; }
         }
 
+        public string FromEmailAddress
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_fromEmailAddress)) return ConfigurationManager.AppSettings["SiteSettings.Mail.DefaultFromAddress"];
+                return _fromEmailAddress;
+            }
+            set { _fromEmailAddress = value; }
+        }
+
         public void SendMail()
         {
             //*************************************************
@@ -36,8 +47,10 @@ namespace Epilogger.Common
 
             var objEMail = new MailMessage();
 
-            var defaultFromAddress =
-                ConfigurationManager.AppSettings["SiteSettings.Mail.DefaultFromAddress"] as string ?? "";
+            //var defaultFromAddress =
+            //    ConfigurationManager.AppSettings["SiteSettings.Mail.DefaultFromAddress"] as string ?? "";
+            var defaultFromAddress = FromEmailAddress;
+
 
             //
             //From

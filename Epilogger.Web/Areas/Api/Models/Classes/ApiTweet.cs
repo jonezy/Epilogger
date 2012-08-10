@@ -25,5 +25,6 @@ namespace Epilogger.Web.Areas.Api.Models.Classes
         public string RawSource { get; set; }
         public int? DeleteVoteCount { get; set; }
         public bool? Deleted { get; set; }
+        public List<ApiImage> Images { get; set; }
     }
 }

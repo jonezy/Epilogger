@@ -128,6 +128,7 @@ namespace Epilogger.Data
         public Query<ScraperURL> ScraperURLs { get; set; }
         public Query<URL> URLS { get; set; }
         public Query<aspnet_User> aspnet_Users { get; set; }
+        public Query<UserLoginTracking> UserLoginTrackings { get; set; }
         public Query<UserAuthenticationProfile> UserAuthenticationProfiles { get; set; }
         public Query<BetaSignup> BetaSignups { get; set; }
         public Query<MemoryBoxItem> MemoryBoxItems { get; set; }
@@ -263,6 +264,7 @@ namespace Epilogger.Data
             ScraperURLs = new Query<ScraperURL>(provider);
             URLS = new Query<URL>(provider);
             aspnet_Users = new Query<aspnet_User>(provider);
+            UserLoginTrackings = new Query<UserLoginTracking>(provider);
             UserAuthenticationProfiles = new Query<UserAuthenticationProfile>(provider);
             BetaSignups = new Query<BetaSignup>(provider);
             MemoryBoxItems = new Query<MemoryBoxItem>(provider);
@@ -301,6 +303,7 @@ namespace Epilogger.Data
             	DataProvider.Schema.Tables.Add(new ScraperURLsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new URLsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new aspnet_UsersTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new UserLoginTrackingTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserAuthenticationProfileTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new BetaSignupsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new MemoryBoxItemsTable(DataProvider));

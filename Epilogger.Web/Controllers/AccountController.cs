@@ -326,6 +326,17 @@ namespace Epilogger.Web.Controllers {
                 //if (TempData["returnUrl"] != null)
                 //    return Redirect(TempData["returnUrl"].ToString());
 
+                //Record the Login
+                var ut = new UserLoginTracking()
+                             {
+                                 UserId = user.ID,
+                                 LoginMethod = "Epilogger Account",
+                                 DateTime = DateTime.UtcNow,
+                                 IPAddress = HttpContext.Request.UserHostAddress
+                             };
+                new UserLoginTrackingService().Save(ut);
+
+
                 return RedirectToAction("index","home");
 
             }

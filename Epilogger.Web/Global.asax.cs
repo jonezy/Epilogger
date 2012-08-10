@@ -608,10 +608,14 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.TweetCount, opt => opt.MapFrom(src => src.Tweets.Count()))
                 .ForMember(dest => dest.ImageCount, opt => opt.MapFrom(src => src.Images.Count()))
                 .ForMember(dest => dest.CheckInCount, opt => opt.MapFrom(src => src.CheckIns.Count()))
-                .ForMember(dest => dest.VenueId, opt => opt.MapFrom(src => src.VenueID));
+                .ForMember(dest => dest.VenueId, opt => opt.MapFrom(src => src.VenueID))
+                .ForMember(dest => dest.WebsiteURL, opt => opt.MapFrom(f => f.WebsiteURL == "http://" ? null : f.WebsiteURL));
 
             Mapper.CreateMap<EventCategory, ApiCategory>();
-            Mapper.CreateMap<Tweet, ApiTweet>();
+            
+            Mapper.CreateMap<Tweet, ApiTweet>()
+                .ForMember(dest => dest.Images, opt => opt.Ignore());
+
             Mapper.CreateMap<Tweeter, ApiTweeter>();
             Mapper.CreateMap<Image, ApiImage>();
             Mapper.CreateMap<TopImageAndTweet, ApiTopImageAndTweet>();

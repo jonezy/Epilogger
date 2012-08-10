@@ -121,6 +121,10 @@ else
             {
                 <strong>Event was created by:</strong> @Model.CreatedEventUser.FirstName @Model.CreatedEventUser.LastName @string.Format("({0})", Model.CreatedEventUser.Username)
             }
+            
+            <div class="fright">
+                @Html.ActionLink("Pull tweets (fill/back fill)", "PullTweets", new { eventId = Model.ID })
+            </div>
         </div>
         <span class="spacer"></span>
     }
