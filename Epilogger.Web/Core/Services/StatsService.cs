@@ -49,7 +49,20 @@ namespace Epilogger.Web {
             var sp = db.GetEventGrowthStats((DateTime)SqlDateTime.MinValue, (DateTime)SqlDateTime.MaxValue);
             return sp.ExecuteTypedList<EventGrowthStats>();
         }
-        
+
+        public List<TweetGrowthStats> FindTweetGrowthStats(DateTime f, DateTime t)
+        {
+            var sp = db.GetTweetsPerHourStats(f, t);
+            return sp.ExecuteTypedList<TweetGrowthStats>();
+        }
+
+        public List<TopEventsByUserActivityStats> FindTopEventsByUserActivityStats(DateTime f, DateTime t)
+        {
+            var sp = db.GetTopEventByUserActivity(f, t);
+            return sp.ExecuteTypedList<TopEventsByUserActivityStats>();
+        }
+
+
 
 
     }
@@ -66,5 +79,19 @@ namespace Epilogger.Web {
         public DateTime Date { get; set; }
         public int NumberOfEvents { get; set; }
     }
+
+    public class TweetGrowthStats
+    {
+        public DateTime Date { get; set; }
+        public int NumberOfTweets { get; set; }
+    }
+
+    public class TopEventsByUserActivityStats
+    {
+        public int EventId { get; set; }
+        public int HitCount { get; set; }
+        public string EventName { get; set; }
+    }
+
 
 }

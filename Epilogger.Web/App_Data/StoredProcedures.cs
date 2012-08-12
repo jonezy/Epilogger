@@ -525,6 +525,12 @@ namespace Epilogger.Data{
             sp.Command.AddParameter("ToDate",ToDate,DbType.DateTime);
             return sp;
         }
+        public StoredProcedure GetTopEventByUserActivity(DateTime FromDate,DateTime ToDate){
+            StoredProcedure sp=new StoredProcedure("GetTopEventByUserActivity",this.Provider);
+            sp.Command.AddParameter("FromDate",FromDate,DbType.DateTime);
+            sp.Command.AddParameter("ToDate",ToDate,DbType.DateTime);
+            return sp;
+        }
         public StoredProcedure GetTopPhotosByEventID(int EventID,int ItemToReturn,DateTime FromDate,DateTime ToDate){
             StoredProcedure sp=new StoredProcedure("GetTopPhotosByEventID",this.Provider);
             sp.Command.AddParameter("EventID",EventID,DbType.Int32);
@@ -537,6 +543,12 @@ namespace Epilogger.Data{
             StoredProcedure sp=new StoredProcedure("GetTopURLsByEventID",this.Provider);
             sp.Command.AddParameter("EventID",EventID,DbType.Int32);
             sp.Command.AddParameter("ItemToReturn",ItemToReturn,DbType.Int32);
+            sp.Command.AddParameter("FromDate",FromDate,DbType.DateTime);
+            sp.Command.AddParameter("ToDate",ToDate,DbType.DateTime);
+            return sp;
+        }
+        public StoredProcedure GetTweetsPerHourStats(DateTime FromDate,DateTime ToDate){
+            StoredProcedure sp=new StoredProcedure("GetTweetsPerHourStats",this.Provider);
             sp.Command.AddParameter("FromDate",FromDate,DbType.DateTime);
             sp.Command.AddParameter("ToDate",ToDate,DbType.DateTime);
             return sp;

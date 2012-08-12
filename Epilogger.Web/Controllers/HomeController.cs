@@ -239,5 +239,11 @@ namespace Epilogger.Web.Controllers {
             return PartialView(model);
         }
 
+        public virtual ActionResult WebStatus()
+        {
+            return View();
+        }
+
+
     }
 }

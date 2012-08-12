@@ -1,0 +1,982 @@
+﻿@charset "utf-8";
+/**
+* @package GeckoBoard 
+* @subpackage DashBoard Stylesheet
+* @version 0.4
+* @lastmodified May 06, 2010
+* @author Kuzzy <kuzzzy@gmail.com>
+*/
+
+@import "reset.css";
+@import "buttons.css";
+@import "top-bar.css";
+@import "jhce.css";
+
+html {background:#111314; height:100%;}
+body {font:normal 12px/1.4 Arial, Helvetica, sans-serif; color:#343738; height:100%; min-height:100%;}
+
+/**
+* @section Links
+*/
+
+.mixpanel-section{display:none;}
+
+a:link{text-decoration:none; outline: none; color:#9e9fa0;}
+a:visited{text-decoration:none; outline: none; color:#9e9fa0;}
+a:hover{text-decoration:underline; outline: none; color:#9e9fa0; }
+a:active{text-decoration:none; outline: none; color:#9e9fa0;}
+
+/**
+* @subsection Custom Links
+*/
+a.lnk-edit {display:inline-block; vertical-align: middle; width:14px; height:14px; background:url(/images/widgets/ico_edit.png) no-repeat 0 0;}
+a.lnk-edit:hover {background-position:0 -14px;}
+/**
+ * Close link
+ */
+a.lnk-close {display:inline-block; width:8px; height:9px; background:url(/images/widgets/ico_close.gif) no-repeat 0 0;}
+a.lnk-close:hover {background-position:0 -9px;}
+/**
+ * Copy link
+ */
+a.lnk-copy {display:inline-block; width:14px; height:14px; background:url(/images/widgets/ico_copy.png) no-repeat 0 0;}
+a.lnk-copy:hover {background-position:0 -14px;}
+
+a.lnk-ext:before {content:url(/images/widgets/ico_ext_lnk.gif); margin-right:5px; vertical-align:sub;}
+
+
+/**
+* @section Container Layouts
+*/
+#dashboard-container {margin:0 auto;}
+#dashboard-wrapper {display:inline-block; position:relative;}
+.config-conteiner-section{display:none !important;}
+
+/**
+* @section Header
+*/
+.l-header-inner {margin:0 auto; padding: 0px 10px 0px 10px}
+.b-head-expand {position:absolute; bottom:-13px; left:50%; z-index:103; margin-left:-44px;}
+
+.b-top-bar {background:url(/images/bg_head.gif) repeat-x 0 0;}
+    .b-top-bar nav {margin-right: 0px}
+    .b-top-bar nav li.last {padding-right: 0px}
+.b-bottom-bar {background:#1e2021 url(/images/bg_bootom_bar.gif) repeat-x 0 0; height:44px; margin-bottom:25px; position:relative;}
+    .b-bottom-bar nav {float:left;}
+	.b-bottom-bar nav input {margin-right:2px;}
+	.b-bottom-bar nav a {font-size:11px; margin-left:4px;}
+    .b-bottom-bar aside {float:right;}
+    .b-bottom-bar.m-expand { height:0; padding:0;}
+    .b-bottom-bar.m-expand nav, .b-bottom-bar.m-expand aside, .b-bottom-bar.m-expand .l-header-tabs, .b-bottom-bar.m-expand .l-header-options {display:none;}
+
+.l-header-tabs {color: #707275; padding:7px 0 12px;}
+.b-header-tab {line-height:28px; float:left; margin-right:5px;}
+    .b-header-tab .btn-plain {padding: 0px 5px 4px; height: 30px; line-height: 30px}
+.ico-header-tab {float:left; margin-right:5px;}
+
+.b-switch-dash {padding: 0; display: inline; float: left; position: relative; border:1px solid #0f1011; background: url('/images/bg-head-sel.gif'); margin-right: 7px; cursor: pointer}
+    .b-switch-dash > .active {height:28px; line-height: 28px; color:#77ab13; margin-left:7px; width: 200px;  background: url('/images/btn-head-sel.png') no-repeat right top;}
+    .b-switch-dash.open > .active{background-position: 100% -28px}
+    .b-switch-dash .list {position: absolute; top: 29px; width: 100%; background:#262829;border:1px solid #0f1011; border-top:none; left: -1px; z-index: 1000;  display: none}
+    .b-switch-dash .list.open {display: block; max-height: 280px; overflow-y: auto;}
+        .b-switch-dash .list > div {color:#9e9fa0; border-top:1px dotted #303334; padding:5px 8px; color: #9E9FA0}
+        .b-switch-dash .list > div:first-child {border-top:1px solid #3F4142;}
+        .b-switch-dash .list > div:hover {color: #ffffff}
+        .b-switch-dash .list > .btn-upgrade-plan a {color: #77ab13; font-weight: bolder;}
+        .b-switch-dash .list > .btn-upgrade-plan a:hover{text-decoration: none;}
+.b-sel-dash {float:left;}
+    .b-sel-dash > * {float:left;}
+    .b-sel-dash label {float:left; padding-top:7px; margin-right:7px;}
+.b-conf-dash {float:right; padding-top:3px;  padding-left:10px;}
+	.b-conf-dash a, .b-conf-dash a:visited {background:url(/images/ico-conf.png) no-repeat 10px 0; padding-left:40px; display:inline-block; line-height:24px; border-left:1px dotted #3f4243;}
+        .b-conf-dash a:hover {color: #ffffff}
+.b-add-dash {float:right; padding-top:3px;  padding-left:10px;}
+        .b-add-dash a, .b-add-dash a:visited {background:url(/images/ico-add.png) no-repeat 10px 0; padding-left:40px; display:inline-block; line-height:24px;}
+        .b-add-dash a:hover {color: #ffffff}
+
+.b-add-dash.disable a, .b-add-dash.disable a:visited {background-position: 10px -24px; color: #9E9FA0}
+.b-conf-dash.disable a, .b-conf-dash.disable a:visited {background-position: 10px -24px; color: #9E9FA0}
+
+/**
+* Layout Grid
+*
+* @section Grid
+* @subsection Top Widget
+*/
+.l-grid-top {position:relative; height:55px; margin-bottom:10px; padding:0 20px;}
+	.l-grid-top .b-widget {width:100%;}
+		.l-grid-top .b-widget .b-widget-body aside {float:right;}
+
+/**
+* Grid Cols
+*
+* @section Grid
+* @subsection Main Grid
+*/
+.l-grid {padding:0 20px 20px;}	
+	.l-grid-col, .l-grid-sep {float:left; min-height:1px;}
+	.l-grid-col {width:230px; position:relative;}
+	.l-grid-sep {width:10px; height:1px;}
+
+/**
+* Grid Vertical Position
+*
+* @section Grid
+* @subsection Rows
+*/
+.l-row-01 {top:0;}
+.l-row-02 {top:240px;}
+.l-row-03 {top:480px;}
+.l-row-04 {top:720px;}
+.l-row-05 {top:960px;}
+
+/**
+* Widget General Styles
+*
+* @section Widgets
+* @subsection Styling
+*/
+.b-widget {background:#232526 url(/images/widgets/widget_grad.png) no-repeat 100% 0; position:absolute; left:0; z-index:100; font-family: Arial,Tahoma, Geneva, sans-serif;} 
+.b-widget {
+	box-shadow: 2px 0 3px #0d0d0d, -2px 0 3px #0d0d0d, 0 3px 3px #0d0d0d, 0 -2px 3px #0d0d0d;
+	-moz-box-shadow: 2px 0 3px #0d0d0d, -2px 0 3px #0d0d0d, 0 3px 3px #0d0d0d, 0 -2px 3px #0d0d0d;
+	-webkit-box-shadow: 2px 0 3px #0d0d0d, -2px 0 3px #0d0d0d, 0 3px 3px #0d0d0d, 0 -2px 3px #0d0d0d;}
+.l-grid-col .b-widget:after {content:"."; height:20px; display:block; visibility:hidden;} /*** Make margin at the bottom of page ***/
+
+/**
+* @section Widgets
+* @subsection Size
+*/
+.b-widget-x {width:230px; height:230px;}
+.b-widget-xx {width:470px; height:230px;}
+.b-widget-xxx {width:470px; height:470px;}
+.b-widget-xxxxx {width:1190px; height:470px;}
+.b-widget-xxxxxx {width:230px; height:470px;}
+/**
+ * Sizes for mapping
+ * (3x2, 3x3, 4x2, 4x3 and 4x4)
+ * xxxxxxx - 3x2
+ * xxxxxxxx - 3x3
+ * xxxxxxxxx - 4x2
+ * xxxxxxxxxx - 4x3
+ * xxxxxxxxxxx - 4x4
+ */
+.b-widget-xxxxxxx {width:710px; height:470px;}
+.b-widget-xxxxxxxx {width:710px; height:710px;}
+.b-widget-xxxxxxxxx {width:950px; height:470px;}
+.b-widget-xxxxxxxxxx {width:950px; height:710px;}
+.b-widget-xxxxxxxxxxx {width:950px; height:950px;}
+
+/**
+* @section Widgets
+* @subsection preloader text
+*/
+.b-widget-x .preloader {padding-top: 23px}
+.b-widget-xx .preloader {padding-top: 23px}
+.b-widget-xxx .preloader {padding-top: 23px; font-size: 24px; line-height: 1.2em;}
+.b-widget-xxxx .preloader {padding-top: 15px;}
+.b-widget-xxxxx .preloader {padding-top: 23px}
+.b-widget-xxxxxx .preloader {padding-top: 23px}
+/**
+ * Sizes for mapping
+ * (3x2, 3x3, 4x2, 4x3 and 4x4)
+ * xxxxxxx - 3x2
+ * xxxxxxxx - 3x3
+ * xxxxxxxxx - 4x2
+ * xxxxxxxxxx - 4x3
+ * xxxxxxxxxxx - 4x4
+ */
+.b-widget-xxxxxxx .preloader {padding-top: 23px}
+.b-widget-xxxxxxxx .preloader {padding-top: 23px}
+.b-widget-xxxxxxxxx .preloader {padding-top: 23px}
+.b-widget-xxxxxxxxxx .preloader {padding-top: 23px}
+.b-widget-xxxxxxxxxxx .preloader {padding-top: 23px}
+
+/**
+* Standard Widget's Parts
+*
+* @section Widgets
+* @subsection Parts
+*/
+.b-widget > header {border-bottom:1px solid #151617; border-top:1px solid #323434; height:17px; overflow:hidden; padding:10px 15px 11px; line-height:100%;}
+	.b-widget > header > section {float:left; color:#707275; font-size:11px; text-transform:uppercase; padding-top:3px; text-shadow:0 -1px 1px #000;}
+	.b-widget > header > aside {float:right; padding-top:1px;}
+.b-widget > section {border-top:1px solid #303334; border-bottom:1px solid #151617; padding: 0 15px; color:#707275; font-size:12px;}
+.b-widget > footer {background:#1e2021; border-top:1px solid #303334; height:29px; font:normal 11px/100% Arial, Tahoma, Geneva, sans-serif; color:#444749;}
+	.b-widget > footer section {float:left; height:22px; line-height:22px; overflow:hidden;}
+	.b-widget > footer section:first-child {border-right:1px solid #0f1011; padding:2px 5px 5px 10px;}
+	.b-widget > footer section + section {border-left:1px solid #303334; border-right:1px solid #0f1011; padding:3px 10px 4px 9px; width:122px;}
+		.b-widget.b-widget-x > footer section + section {width:122px;}
+		.b-widget.b-widget-xx > footer section + section, .b-widget.b-widget-xxx > footer section + section {width:362px;}
+                
+                .b-widget.b-widget-xxxxxxxx > footer section + section {width: 602px}
+                .b-widget.b-widget-xxxxxxxxx > footer section + section,
+                .b-widget.b-widget-xxxxxxxxxx > footer section + section,
+                .b-widget.b-widget-xxxxxxxxxxx > footer section + section {width: 842px}
+                
+	.b-widget > footer a, .b-widget > footer a:visited {color:#444749; font-family:Arial, Helvetica, sans-serif;}	
+	.b-widget > footer a:hover {text-decoration:none; color:#707275;}
+	.b-widget > footer > aside {float:right; width:27px; border-left:1px solid #303334; padding-top:9px; height:20px; text-align:center;}
+        .b-widget > footer > aside + aside {padding-top: 8px; height: 21px; border-right: 1px solid #0F1011}
+.b-widget > footer.b-public {padding:3px 10px 4px 15px; line-height: 22px; height: 22px}
+/**
+* Standard Widget's Content Area Size
+*
+* @section Widgets
+* @subsection Widget Content
+*/
+.b-widget-body {overflow:hidden;}
+.b-widget-x .b-widget-body, .b-widget-xx .b-widget-body {height:158px;}
+.b-widget-xxx .b-widget-body, .b-widget-xxxxxx .b-widget-body {height:398px;}
+.b-widget-xxxx .b-widget-body {height:49px; border-bottom:0;}
+.b-widget-xxxxx .b-widget-body {height:398px;}
+
+/**
+ * Sizes for mapping
+ * (3x2, 3x3, 4x2, 4x3 and 4x4)
+ * xxxxxxx - 3x2
+ * xxxxxxxx - 3x3
+ * xxxxxxxxx - 4x2
+ * xxxxxxxxxx - 4x3
+ * xxxxxxxxxxx - 4x4
+ */
+.b-widget-xxxxxxx .b-widget-body, .b-widget-xxxxxxxxx .b-widget-body  {height:398px;}
+.b-widget-xxxxxxxx .b-widget-body, .b-widget-xxxxxxxxxx .b-widget-body {height:638px;}
+.b-widget-xxxxxxxxxxx .b-widget-body {height:878px;}
+
+/**
+ *  No header widgets
+ */
+.b-widget-x .b-widget-body.b-no-title, .b-widget-xx .b-widget-body.b-no-title {height:191px; padding-top:10px;}
+.b-widget-xxx .b-widget-body.b-no-title, .b-widget-xxxxxx .b-widget-body.b-no-title {height:431px; padding-top:10px;}
+.b-widget-xxxxx .b-widget-body.b-no-title {height:431px; padding-top:10px;}
+.b-widget-xxxxxxx .b-widget-body.b-no-title, .b-widget-xxxxxxxxx .b-widget-body.b-no-title  {height:431px; padding-top:10px;}
+.b-widget-xxxxxxxx .b-widget-body.b-no-title, .b-widget-xxxxxxxxxx .b-widget-body.b-no-title {height:671px; padding-top:10px;}
+.b-widget-xxxxxxxxxxx .b-widget-body.b-no-title {height:911px; padding-top:10px;}
+
+/**
+* Fonts Styling
+*
+* @section Widget Fonts
+* @subsection Widget Text Size
+*/
+.t-size-x11, .t-size-x14, .t-size-x18, .t-size-x24,  .t-size-x28, .t-size-x30, .t-size-x36, .t-size-x40, .t-size-x44, .t-size-x48, .t-size-x60, .t-size-x72, .t-size-x100, .t-size-x108 {line-height:1em;}
+.t-size-x11 {font-size:11px;}
+.t-size-x14 {font-size:14px;}
+.t-size-x18 {font-size:18px;}
+.t-size-x24 {font-size:24px;}
+.t-size-x28 {font-size:28px;}
+.t-size-x30 {font-size:30px;}
+.t-size-x36 {font-size:36px;}
+.t-size-x40 {font-size:40px;}
+.t-size-x44 {font-size:44px;}
+.t-size-x48 {font-size:48px;}
+.t-size-x60 {font-size:60px;}
+.t-size-x72 {font-size:72px;}
+.t-size-x100 {font-size:100px;}
+.t-size-x108 {font-size:108px;}
+
+
+/**
+* Fonts Styling
+*
+* @section Widget Fonts
+* @subsection Widget Text Color
+*/
+.t-main {color:#d3d4d4; text-shadow:1px 1px 1px #3f3f3f, -1px -1px 1px #3f3f3f;}
+.t-positive, .t-positive-down {color:#77ab13;}
+.t-negative, .t-negative-up {color:#ae432e;}
+.t-zero{color:#b5712e}
+.t-extra {color:#b5712e;}
+.t-small {color:#444749;}
+.t-muted {color:#707275;}
+.t-left-block {float: left; display: block}
+
+/**
+ * Format Number section
+ */
+sup {font-size: 0.6em; vertical-align: top}
+span.comma {letter-spacing:-0.03em}
+
+
+
+/**
+* Statistic Up & Down Arrows 
+*
+* @section Arrows
+*/
+.t-size-x30.t-positive.e-arrow:before {content:url(/images/widgets/ico_up_x.png); margin-right:6px;}
+.t-size-x30.t-zero.e-arrow:before {content:url(/images/widgets/ico_right_x.png); margin-right:6px;}
+.t-size-x30.t-negative.e-arrow:before {content:url(/images/widgets/ico_down_x.png); margin-right:6px;}
+.t-size-x48.t-positive.e-arrow:before {content:url(/images/widgets/ico_up_xx.png); margin-right:6px;}
+.t-size-x48.t-zero.e-arrow:before {content:url(/images/widgets/ico_right_xx.png); margin-right:6px;}
+.t-size-x48.t-negative.e-arrow:before {content:url(/images/widgets/ico_down_xx.png); margin-right:6px;}
+.t-size-x60.t-positive.e-arrow:before {content:url(/images/widgets/ico_up_xxx.png); margin-right:10px;}
+.t-size-x60.t-zero.e-arrow:before {content:url(/images/widgets/ico_right_xxx.png); margin-right:10px;}
+.t-size-x60.t-negative.e-arrow:before {content:url(/images/widgets/ico_down_xxx.png); margin-right:10px;}
+.t-size-x100.t-positive.e-arrow:before {content:url(/images/widgets/ico_up_xxxx.png); margin-right:10px;}
+.t-size-x100.t-zero.e-arrow:before {content:url(/images/widgets/ico_right_x.png); margin-right:10px;}
+.t-size-x100.t-negative.e-arrow:before {content:url(/images/widgets/ico_down_xxxx.png); margin-right:10px;}
+
+.t-size-x30.t-positive-down.e-arrow:before {content:url(/images/widgets/ico_green_down_x.png); margin-right:6px;}
+.t-size-x30.t-negative-up.e-arrow:before {content:url(/images/widgets/ico_red_up_x.png); margin-right:6px;}
+.t-size-x48.t-positive-down.e-arrow:before {content:url(/images/widgets/ico_green_down_xx.png); margin-right:6px;}
+.t-size-x48.t-negative-up.e-arrow:before {content:url(/images/widgets/ico_red_up_xx.png); margin-right:6px;}
+.t-size-x60.t-positive-down.e-arrow:before {content:url(/images/widgets/ico_green_down_xxx.png); margin-right:10px;}
+.t-size-x60.t-negative-up.e-arrow:before {content:url(/images/widgets/ico_red_up_xxx.png); margin-right:10px;}
+.t-size-x100.t-positive-down.e-arrow:before {content:url(/images/widgets/ico_green_down_xxxx.png); margin-right:10px;}
+.t-size-x100.t-negative-up.e-arrow:before {content:url(/images/widgets/ico_red_up_xxxx.png); margin-right:10px;}
+
+/**
+* Custom Widgets Styling
+*
+* @section Custom Widgets
+* @subsection Top Tweets widget
+*/
+.b-tweets-main {float:left; width:100%; margin-right:-96px;}
+	.b-tweets-inner {margin-right:105px; padding:6px 0 0 0;}
+		.b-plain-l {background:url(/images/widgets/crnr_plain_l.gif) no-repeat 0 0; margin-left:-5px;}
+			.b-plain-r {background:url(/images/widgets/crnr_plain_r.gif) no-repeat 100% 0; padding:0 4px;}
+				.b-plain {background:url(/images/widgets/bg_plain.gif) repeat-x 0 0; height:20px; overflow:hidden; white-space:nowrap; padding:9px 0 7px 5px;}
+                                .b-plain > div {height: 20px; line-height: 20px; padding:9px 0 7px 5px;}
+        .b-tweets-inner.large {margin-right:0px; padding-top:5px}
+.b-tweets-aside {float:right; width:95px; border-left:1px solid #151617;}	
+	.b-tweets-aside a, .b-tweets-aside a:visited {color:#444749; font-size:11px;}
+	.b-tweets-aside a:hover {text-decoration:none;}
+	.b-tweets-aside .lnk-ext, .b-tweets-aside .lnk-edit, .b-tweets-aside .lnk-copy {margin-top:8px; display:inline-block;}
+	.b-tweets-edit {float:left; width:25px; border-left:1px solid #2f3131; border-right:1px solid #101012; height:41px; padding:8px 0 0 9px;}
+	.b-tweets-tweet {float:left; width:21px; border-left:1px solid #303434;height:36px; padding:13px 0 0 0; text-align:right;} 
+		.b-tweets-tweet .lnk-close {}
+	
+
+/**
+* @section Custom Widgets
+* @subsection Yesterday's visitors widget
+*/
+.w-yestd-visitors .b-widget-inner {padding-top:23px;}
+.w-yestd-visitors .e-arrow {margin-top:5px;}
+.w-yestd-visitors.b-widget-xxx .b-widget-inner {padding-top:63px;}
+.w-yestd-visitors.b-widget-xxx .e-arrow {margin-top:26px;}
+
+/**
+* @section Custom Widgets
+* @subsection Current visitors widget
+*/
+.w-current-visitors .b-widget-inner {padding-top:13px;}
+	.b-curr-visitors {text-align:center; margin-bottom:7px;}
+	.b-curr-counter {text-align:center;}
+	.b-curr-values {}
+		.b-curr-min {float:left;}
+		.b-curr-max {float:right; text-align:right;}
+		.b-curr-min div:first-child, .b-curr-max div:first-child {margin-bottom:4px;}
+
+/**
+* @section Custom Widgets
+* @subsection Avg time on site today widget
+*/
+.w-avg-time .b-widget-inner {padding-top:32px;}
+.w-avg-time .e-arrow {margin-top:7px;}
+.w-avg-time.b-widget-xxx .b-widget-inner {padding-top:63px;}
+.w-avg-time.b-widget-xxx .e-arrow {margin-top:26px;}
+
+/**
+* @section Custom Widgets
+* @subsection Number of beta sign-ups widget
+*/
+.w-beta-sign .b-widget-inner {padding-top:23px;}
+
+/**
+* @section Custom Widgets
+* @subsection Current time widget
+*/
+.w-time > header { background:url(/images/widgets/bg_time_head.gif); border:0; height:96px;}
+.w-time > header > section {padding-top:25px;}
+.w-time > header > .h-12 {padding-top:25px;}
+.w-time .prefix {padding-top: 26px}
+.w-time .b-widget-body {height:80px;}
+.w-time .b-widget-inner {padding-top:16px;}
+.w-time .date {width: 206px}
+
+/**
+* @section Custom Widgets
+* @subsection Current time widget with title in header
+*/
+
+.w-time-with-title .b-widget-time {background:url(/images/widgets/bg_time_head.gif); border:0; height:90px;}
+.w-time-with-title .b-widget-body {height:68px;}
+.w-time-with-title .b-widget-inner {padding-top:10px;}
+.w-time-with-title .time {line-height: 1.25em;}
+.w-time-with-title .h-12 .time {padding-top: 7px}
+.w-time-with-title .prefix {padding-top: 41px}
+.w-time-with-title .date {width: 206px}
+
+
+/**
+* @section Custom Widgets
+* @subsection  Project Name widget
+*/
+.w-projects > header > aside nav {float:left;}
+.w-projects > header > aside nav a, .w-projects > header > aside nav:visited {background:url(/images/widgets/bull_pager.png) no-repeat 0 0; display:inline-block; width:8px; height:8px; margin-right:2px;}
+.w-projects > header > aside nav a:hover, .w-projects > header > aside nav a.active {background-position:0 -24px;}
+.w-projects .b-widget-body {padding:0;}
+.b-project-tabs {}
+	.b-project-tabs-head {float:left; font-size:11px;}
+		.b-project-tabs-head ul {list-style:none;min-height:398px;background:url(/images/widgets/devider_duobe_v.gif) repeat-y 100% 0;}
+			.b-project-tabs-head ul li {width:104px; background:#202223 url(/images/widgets/devider_duobe_h.gif) repeat-x 0 100%; padding:0 0 0 10px; cursor:pointer; min-height:30px; border-left:1px solid #202223; border-right:1px solid #303334;}
+				.b-project-tabs-head ul li a {display:block; overflow:hidden; padding:6px 0 8px; border-right:1px solid #151617; min-height:26px;}
+				.b-project-tabs-head ul li a:hover {text-decoration:none;}
+					.b-project-tabs-head ul li a span {text-align:right; float:left; width:15px;}
+					.b-project-tabs-head ul li a b {font-weight:normal; float:left; margin-left:10px; width:70px; overflow:hidden;}
+			.b-project-tabs-head ul li.active {border-left:1px solid #77ab13; background-color:#232526; border-right:1px solid #232526;}	
+				.b-project-tabs-head ul li.active a { color:#707275; border-right:0;}				
+	.b-project-tabs-content {min-height:398px; display:block; float:left; width:325px; padding-right:15px; padding-left:14px;}
+		.b-project-tabs-content .b-widget-inner {height:398px;}
+		.b-project-list {}			
+			.b-project-list dt {background:url(/images/widgets/dots_devider.gif) repeat-x 0 0; padding:13px 0 0 0; margin-bottom:4px;}
+			.b-project-list dt:first-child {background:none; padding-top:10px;}
+			.b-project-list dd { font-size:11px; color:#444749; padding:0 0 12px;}
+
+/**
+* @section Custom Widgets
+* @subsection Recent tweets mentioning you widget
+*/
+.w-recent-tweets .t-main {margin:13px 0 7px;}
+.w-recent-tweets p {line-height:160%;}
+
+/**
+* @section Custom Widgets
+* @subsection Questions widget
+*/
+.w-questions .b-widget-inner {padding-top:23px;}
+
+/**
+* @section Custom Widgets
+* @subsection Calendar widget
+*/
+.w-calendar dt {background:url(/images/widgets/dots_devider.gif) repeat-x 0 0; padding:12px 0 3px;}
+.w-calendar dt:first-child {background:none; padding-top:19px;}
+.w-calendar dt.t-size-x18 {padding-top:16px;}
+.w-calendar dd {padding:0 0 10px;}
+
+/**
+* @section Custom Widgets
+* @subsection Unread emails widget
+*/
+.w-unread-emails table {width: 100%}
+.w-unread-emails td {background:url(/images/widgets/dots_devider.gif) repeat-x 0 0; padding:9px 0 7px; vertical-align: middle;}
+.w-unread-emails td.number {padding-right: 10px; width: 10%; white-space: nowrap}
+.w-unread-emails tr:first-child > td {background:none; padding-top:12px;}
+
+/**
+* @section Custom Widgets
+* @subsection  Zendesk Widget
+*/
+.w-zendesk {}
+.w-zendesk table {width: 100%}
+.w-zendesk td {border-top:3px dotted #292b2c; padding:30px 15px; vertical-align: middle;}
+.w-zendesk td.number {padding-right: 10px; width: 10%; white-space: nowrap}
+.w-zendesk tr:first-child > td {border-top:0; padding-top:55px;}
+
+/**
+* @section Project Managment
+* @subsection  Uservoice Widget
+*/
+.w-uservoice-xxx-rag-cn {}
+    .w-uservoice-xxx-rag-cn table {width: 100%}
+    .w-uservoice-xxx-rag-cn td { padding:30px 15px; vertical-align: middle;}
+    .w-uservoice-xxx-rag-cn td.number {padding-right: 10px; width: 10%; white-space: nowrap}
+    .w-uservoice-xxx-rag-cn tr:first-child > td {border-top:0; padding-top:55px;}
+
+    .w-uservoice-xxx-rag-cn .color-1 {background: #ae432e}
+    .w-uservoice-xxx-rag-cn .color-2 {background: #b5712e}
+    .w-uservoice-xxx-rag-cn .color-3 {background: #77ab13}
+
+    .w-uservoice-xxx-rag-cn .fl{width:160px;}
+    .w-uservoice-xxx-rag-cn .fl table{margin-left:10px;margin-top:60px;height:290px;}
+    .w-uservoice-xxx-rag-cn .fr{width:230px;}    
+
+/**
+* @section Custom Widgets
+* @subsection Frashbooks widget
+*/
+.w-unread-emails .freshbooks td.number, .w-zendesk .freshbooks td.number {width: 80%}
+
+/**
+* For small zendesk widget
+*/
+.w-unread-emails td.zendesk {width:75px;}
+
+/**
+* @section Custom Widgets
+* @subsection Friends Widget
+*/
+.w-friends {}
+	.w-friends-grid { padding:3px 0;}
+		.w-friends-grid ul {list-style:none;}
+		.w-friends-grid li {padding:5px 5px 5px;}
+		.w-friends-grid li.odd { background:#1f2021;}
+		.w-friends-grid li:first-child p:first-child {color:#fff;}
+			.w-friends-grid li p {margin-bottom:3px;}
+			.w-friends-grid li p:first-child {padding-left:2px;}
+
+/**
+* @section Custom Widgets
+* @subsection  Server status widget
+*/
+.w-server-status .b-widget-inner {padding-top:21px;}
+.b-server-time {margin-top:20px;}
+	.b-server-downtime {float:left; background:url(/images/widgets/dots_devider_v.gif) repeat-y 100% 0; max-width:103px; min-width:90px; padding:5px 10px 5px 0;}
+	.b-server-downtime span {white-space:nowrap}
+        .b-server-uptime {float:left; padding:5px 0 5px 10px;}
+		.b-server-downtime div:first-child, .b-server-uptime div:first-child {margin-bottom:3px;}
+.w-server-status.b-widget-xxx .b-widget-inner {padding-top:79px; padding-left:15px;}
+.w-server-status.b-widget-xxx .b-server-time {margin-top:50px;}
+.w-server-status.b-widget-xxx .b-server-downtime {max-width:none; min-width:inherit; padding:5px 25px 5px 0;} 	
+.w-server-status.b-widget-xxx .b-server-uptime {padding:5px 0 5px 25px;}			
+
+/**
+* @section Custom Widgets
+* @subsection  Widget with icon in top
+*/			
+.w-crnr-head .b-widget-wrap {padding-top:26px; overflow: hidden; position:relative;}
+
+.w-crnr-head.b-widget-x .b-widget-wrap, .w-crnr-head.b-widget-xx .b-widget-wrap {height:162px;}
+.w-crnr-head.b-widget-xxxxxx .b-widget-wrap, .w-crnr-head.b-widget-xxx .b-widget-wrap {height:403px;}
+
+.w-crnr-head.b-widget-x.w-header .b-widget-wrap, .w-crnr-head.b-widget-xx.w-header .b-widget-wrap {height:146px; padding-top: 10px}
+.w-crnr-head.b-widget-xxxxxx.w-header .b-widget-wrap, .w-crnr-head.b-widget-xxx.w-header .b-widget-wrap {height:373px;}
+
+.w-crnr-head.b-widget-x .b-widget-body, .w-crnr-head.b-widget-xx .b-widget-body {height:198px; position:relative;}
+.w-crnr-head.b-widget-xxxxxx .b-widget-body, .w-crnr-head.b-widget-xxx .b-widget-body {height:438px; position:relative;}
+
+/**
+ * With header
+ */
+.w-crnr-head.b-widget-x.w-header .b-widget-wrap, .w-crnr-head.b-widget-xx.w-header .b-widget-wrap {height:146px; padding-top: 10px}
+.w-crnr-head.b-widget-xxxxxx.w-header .b-widget-wrap, .w-crnr-head.b-widget-xxx.w-header .b-widget-wrap {height:386px; padding-top: 10px}
+
+.w-crnr-head.b-widget-x.w-header .b-widget-body, .w-crnr-head.b-widget-xx.w-header .b-widget-body {height:158px; position:relative;}
+.w-crnr-head.b-widget-xxxxxx.w-header .b-widget-body, .w-crnr-head.b-widget-xxx.w-header .b-widget-body {height:398px; position:relative;}
+/**
+ * With header + paring
+ */
+.w-crnr-head.b-widget-x.w-header.w-pager .b-widget-wrap, .w-crnr-head.b-widget-xx.w-header.w-pager .b-widget-wrap {height:120px; padding-top: 10px}
+.w-crnr-head.b-widget-xxxxxx.w-header.w-pager .b-widget-wrap, .w-crnr-head.b-widget-xxx.w-header.w-pager .b-widget-wrap {height:338px;}
+
+.w-crnr-head.b-widget-x.w-header.w-pager .b-widget-body, .w-crnr-head.b-widget-xx.w-header.w-pager .b-widget-body {height:158px; position:relative;}
+.w-crnr-head.b-widget-xxxxxx.w-header.w-pager .b-widget-body, .w-crnr-head.b-widget-xxx.w-header.w-pager .b-widget-body {height:398px; position:relative;}
+
+.b-wibget-crnr {position:absolute; top:0; right:0; z-index:102;}
+
+/**
+* @section Custom Widgets
+* @subsection Milestones widget
+*/
+.w-milestones {}
+    .w-milestones .b-widget-inner { padding-top:17px;}
+    .w-milestones .b-widget-inner .fl {width:60px;}
+    .w-milestones .b-widget-inner .fr {width:130px; padding-left:10px;}
+    .w-milestones .b-widget-inner td {padding-bottom:10px; vertical-align: top;}
+    .w-milestones .b-widget-inner td.number {padding-right: 10px; width: 50%; text-align: right}
+
+    .w-milestones .color-1 {background: #ae432e}
+    .w-milestones .color-2 {background: #b5712e}
+    .w-milestones .color-3 {background: #77ab13}
+
+/**
+* @section Custom Widgets
+* @subsection Pingdom widget
+*/
+.w-pingdom-xxx {}
+    .w-pingdom-xxx .b-widget-body {padding: 0 34px;}
+    .w-pingdom-xxx .b-widget-inner {padding-top: 65px}
+    .w-pingdom-xxx .b-server-time {margin-top: 23px}
+    .w-pingdom-xxx .b-server-downtime {max-width: 200px}
+
+/**
+* @section Custom Widgets
+* @subsection Chartbead widget
+*/
+.w-chartbeat-big {}
+    .w-chartbeat-big .b-widget-inner {padding-top:47px;}
+    .w-chartbeat-big .b-curr-visitors {margin-bottom: 2px}
+    .w-chartbeat-big .b-curr-values {padding-top: 13px}
+    .w-chartbeat-big .b-curr-min {padding-left: 15px}
+    .w-chartbeat-big .b-curr-max {padding-right: 19px}
+
+.chartbeat-scale {width: 143px; height: 70px; margin-left: 30px; background: url(/images/widgets/chartbeat-scale.png) repeat-x top; position: relative}
+.chartbeat-pointer {position: absolute; width: 48px; height: 48px; bottom: 0px; left: 46px}
+.chartbeat-scale-big {width: 284px; height: 140px; margin-left: 78px; background: url(/images/widgets/chartbeat-scale-big.png) repeat-x top; position: relative}
+.chartbeat-pointer-big {position: absolute; width: 103px; height: 103px; bottom: 0px; left: 91px}
+
+/**
+* @section Custom Widgets
+* @subsection Image widget
+*/
+.w-image-x .b-widget-body {background: #232526; padding: 0; height: 198px;}
+.w-image-xx .b-widget-body {background: #232526; padding: 0; height: 198px;}
+.w-image-xxx .b-widget-body {background: #232526; padding: 0; height: 438px;}
+.w-image-xxxxxx .b-widget-body {background: #232526; padding: 0; height: 438px;}
+
+.w-image-x .image-box {width: 220px; height: 188px; margin: 5px; overflow: hidden;}
+.w-image-xx .image-box {width: 460px; height: 188px; margin: 5px; overflow: hidden;}
+.w-image-xxx .image-box {width: 460px; height: 428px; margin: 5px; overflow: hidden;}
+.w-image-xxxxxx .image-box {width: 220px; height: 428px; margin: 5px; overflow: hidden;}
+
+.w-image-x .preloader, .w-image-xx .preloader, .w-image-xxx .preloader, .w-image-xxxxxx .preloader {padding: 23px 15px 15px 15px}
+.w-image-xxx .preloader {font-size: 24px; line-height: 1.2em;}
+
+/**
+* Widgets pager
+*
+* @section Pager
+*/
+.w-pager .b-widget-inner {min-height:100%; position:relative;}
+.w-pager.b-widget-x .b-widget-wrap, .w-pager.b-widget-xx .b-widget-wrap {height:139px; overflow:hidden;}
+.w-pager.b-widget-xxx .b-widget-wrap, .w-pager.b-widget-xxxxxx .b-widget-wrap {height:378px; overflow:hidden;}
+
+.b-widget-pager-l {background:url(/images/widgets/crnr_pager_l.gif) no-repeat 0 0; height:27px; position:relative; margin:-27px -5px 0;;}
+	.b-widget-pager-r {background:url(/images/widgets/crnr_pager_r.gif) no-repeat 100% 0; padding:0 4px;}
+		.b-widget-pager {background:url(/images/widgets/bg_pager.gif) repeat-x 0 0; font:normal 11px Arial, Tahoma, Geneva, sans-serif; padding:2px 0 4px;}
+			.b-widget-pager nav {float:right;}
+				.b-widget-pager nav a, .b-widget-pager nav a:visited {background:url(/images/widgets/bull_pager.png) no-repeat 0 0; display:inline-block; width:8px; height:8px; margin-right:2px;}
+				.b-widget-pager nav a:hover, .b-widget-pager nav a.active {background-position:0 -24px;}
+
+/**
+* Popups
+*
+* @section Popups
+*/
+.b-dash-popup {}
+	.b-dash-popup .b-widget {position:static;}
+		.b-dash-popup .b-widget > header {height:21px; padding:11px 10px 11px 18px;}
+			.b-dash-popup .b-widget > header > section {font:normal 18px Univers57Condensed, Arial, Helvetica, sans-serif; padding-top:0;}
+		.b-dash-popup .b-widget-body {padding:0 20px; overflow:inherit;}
+			.b-popup-note {background:#292b2c; margin:10px -10px; padding:11px 10px;}
+		.b-dash-popup .b-widget > footer {background:none; height:50px; padding:18px 15px 0;}
+	.b-dash-popup .textbox {background:#141617; border-style:solid; border-width:1px; border-color:#060707 #121415 #2f3031 #17191a; color:#707275; font-size:12px; font-family:Arial, Helvetica, sans-serif; padding:7px; width:254px; margin-right:10px;}
+
+/**
+* @section Popups
+* @subsection Popup Configure Emails
+*/
+.b-popup-emails {}	
+	.b-emails-radio {padding-top:12px;}
+		.b-emails-radio label {font-weight:bold; position: relative; width: 270px; color: #9E9FA0}
+	.b-emails-checklist {padding-left:20px; padding-bottom:12px;}
+		.b-emails-check {margin-bottom:8px; margin-left: 120px}
+                .b-emails-check.last {margin-bottom:17px;}
+		.b-emails-row {padding-left:20px; font-size:11px; font-family:Arial, Tahoma, Geneva, sans-serif; margin-bottom:11px;}
+		.b-emails-row + .b-emails-check {padding-top:11px;}
+		.b-emails-row input[type='text'] {background:#141617; border-style:solid; border-width:1px; border-color:#060707 #121415 #2f3031 #17191a; color:#444749; font-family:Arial, Tahoma, Geneva, sans-serif; font-size:11px; padding:2px 4px; width:20px;}
+
+/**
+* @section Popups
+* @subsection Popup Configure Analytics
+*/
+.b-popup-analytics {padding-top:13px;}
+	.b-analytics-row { margin-bottom:17px;}
+        .b-analytics-row.first {margin-bottom: 0px}
+		.b-analytics-row label {font-weight:bold; display:block; float:left; width: 105px; padding-right: 15px; line-height: 30px; text-align: right; color: #9E9FA0}
+                .b-analytics-row label.two-line {line-height: 15px}
+                .b-analytics-row label.wide {width: 140px}
+                .b-analytics-row label.inbox {width: 100px; text-align: left; padding-right: 10px}
+                .b-analytics-row label.inbox-all {width: 80px}
+		.b-analytics-note {font:normal 11px Arial, Tahoma, Geneva, sans-serif; color:#444749;}
+        .b-analytics-row.dashboard {margin-bottom: 0px; padding-left: 10px}
+            .b-analytics-row.dashboard > div {width: 100%; text-align: left; padding-bottom: 4px}
+/**
+* @section Popups
+* @subsection Connect Account
+*/
+.b-popup-connect {}
+	.b-connect-btns {padding:11px 20px 21px; margin:0 -20px;}
+		.b-connect-btns .btn-plain {margin-right:7px;}
+	.b-popup-warn p:before { content:url(/images/widgets/ico_warning.png); display:block; float:left; margin-right:10px;}
+        .b-popup-warn p { min-height: 35px}
+	
+        .b-connect-login {padding-bottom:20px; padding-top:16px;}
+	
+            /* .b-connect-login label {font-weight:bold; display:block; float:left; width: 125px; padding-right: 15px; line-height: 30px; text-align: right; color: #9E9FA0} */
+		.b-connect-login > div:first-child {margin-right:4%;}
+        .b-connect-login.top-x0 {padding-top: 0px}
+	.b-dash-popup.b-popup-connect-account .b-widget > footer {padding:18px 20px 0;}
+
+/**
+* @section Popups
+* @subsection Choose Widget
+*/
+.b-popup-choose-widget .b-widget-body {padding:0;}
+	.b-popup-tabs .b-project-tabs-head ul {min-height:418px;}
+	.b-popup-tabs .b-project-tabs-head ul li {width:161px; min-height:20px; padding-left:18px;}
+	.b-popup-tabs .b-project-tabs-head ul li a {padding:8px 0 1px; font-size:12px;}
+	.b-popup-tabs .b-project-tabs-head ul li:first-child a {padding:10px 0 2px;}
+	.b-popup-tabs .b-project-tabs-content {width:360px; padding-left:9px; min-height:290px; padding-right:10px;}
+	.b-popup-tabs .b-project-tabs-content .b-widget-inner {padding-top:4px;}
+	.b-popup-tabs .b-project-tabs-content .b-widget-inner {height:auto;}
+	
+	.b-choose-text {padding:14px 9px; font-size: 12px}
+            .b-choose-text p {padding-bottom: 10px}
+        .b-choose-item {background:url(/images/widgets/dots_devider.gif) repeat-x 0 0; padding:14px 9px;}
+	.b-widget-inner .b-choose-item:first-child {background-image:none;}
+		.b-choose-type {float:left; max-width:200px; overflow:hidden;}
+			.b-choose-name {font-size:14px; color:#9e9fa0;}
+			.b-choose-status {font-size:11px; color:#444749;}
+		.b-choose-size {float:right; max-width:180px; overflow:hidden;}
+	.b-choose-item:hover {background-color:#1e2021; cursor:pointer;}
+		.b-choose-item:hover .b-choose-name {color:#77ab13;}
+		.b-choose-item:hover .b-choose-status {color:#707275;}
+.b-popup-choose-widget .b-widget > footer {padding: 0px}
+
+/**
+* @section Popups
+* @subsection Remove Widget
+*/
+.b-popup-remove .b-popup-note {margin-bottom:22px;}	
+
+/**
+* @section Popups
+* @subsection Configure Tweeter
+*/
+.b-popup-conf-twitter {}
+	.b-twitt-row { padding-left:20px; margin-bottom:5px;}	
+		.b-twitt-row label {display:block; margin-bottom:2px;}
+
+/**
+* @section Popups
+* @subsection Configure Commission Junction
+*/
+.b-junction-box {margin-bottom:17px;}
+	.b-junction-box label {display:block; margin-bottom:6px; font-weight:bold;}
+	.b-junction-col-1 {float:left;}
+	.b-junction-col-2 {float:left; text-align:center; width:100px;}
+	.b-junction-col-3 {float:right;}
+	
+/**
+* @section Popups
+* @subsection Configure Text
+*/
+.b-popup-text {padding:13px 0;}
+	.b-conftext-row { margin-bottom:10px; background:url(/images/widgets/dots_devider.gif) repeat-x 0 100%; padding-bottom:10px;} 
+                .b-conftext-row label {font-weight:bold; display:block; float:left; width: 105px; padding-right: 15px; line-height: 30px; text-align: right; color: #9E9FA0}
+                .b-conftext-number {float:left; width:30px; font-size:20px;}
+		.b-conftext-fld {float:left; padding-top:7px; position: relative}
+			.b-dash-popup .b-conftext-fld textarea {height:40px; width:285px; margin-right:0;}
+			.b-conftext-fld p {text-align:right;}
+		.b-conftext-row .jquery-selectbox {float:left; }
+        .b-conftext-row-last {margin-bottom:0px; background:none; padding-bottom:0px;}
+
+/**
+* Misc Styles
+*
+* @section Misc
+*/
+.disabled {display:none;}
+.e-tweet-sep {color:#36393b; vertical-align:top; margin:0 10px;}
+.l-pad {padding-left:20px;}
+.delete-account {padding: 11px 0 0 0}
+    .delete-account a {color: #707275}
+    .delete-account a.active {color: #9e9fa0}
+.loading {background: url('/images/ajax-loader.gif') #232526 no-repeat 50% 50%}
+.ads, .limit-connection {box-shadow: 2px 0 3px #0d0d0d, -2px 0 3px #0d0d0d, 0 3px 3px #0d0d0d, 0 -2px 3px #0d0d0d;
+        -moz-box-shadow: 2px 0 3px #0d0d0d, -2px 0 3px #0d0d0d, 0 3px 3px #0d0d0d, 0 -2px 3px #0d0d0d;
+        -webkit-box-shadow: 2px 0 3px #0d0d0d, -2px 0 3px #0d0d0d, 0 3px 3px #0d0d0d, 0 -2px 3px #0d0d0d; 
+        height: 66px; background:#232526 url(/images/widgets/widget_grad.png) no-repeat 100% 0;
+        font: 18px Arial; color: #707275; padding: 20px; text-align: center;}
+    .ads img {display: block; margin: 0 auto; margin-bottom: 18px}
+    .ads a, .ads a:hover {color: #D3D4D4; text-decoration: none}
+.limit-connection {height: 100%px; padding: 20px;}
+
+
+/**
+ * Help button CSS
+ */
+a.btn-help {display: block; width: 24px; height: 24px; background:url(/images/help.png) no-repeat 0 0; background-position: 100% -24px}
+a.btn-help:hover {display: block; width: 24px; height: 24px; background:url(/images/help.png) no-repeat 0 0; background-position: 0 0}
+a.help {display: block; width: 24px; height: 24px; background:url(/images/help.png) no-repeat 0 0;}
+
+/**
+ * Tooltips css
+ */
+ins.b-tip {position:absolute; left:35px; top:0px; width:280px; font-size:11px; text-decoration:none; font-weight:normal; z-index:100; display:none;}
+ins.b-tip .b-tip-crnr { background:url(/images/crnr-tip.png) no-repeat 0 0; width:9px; height:19px; font-size:0; margin-right:-1px; position:relative; float:left; margin-top:7px;}
+        ins.b-tip .b-tip-i {background:#c6c6c6; border:1px solid #111212; color:#343738; padding:6px 10px; float:left; width:250px; -moz-box-shadow:0 1px 3px #000; -webkit-box-shadow:0 1px 3px #000; box-shadow:0 1px 3px #000;}
+        ins.b-tip .b-tip-i a, ins.b-tip .b-tip-i a:hover {color: #336699}
+/**
+ * Form boxes
+ */
+.b-element {float: left; width: 285px;}
+.b-element-wide {float: left; width: 330px}
+    .b-element-wide .b-emails-row {padding-left: 0px}
+.b-element-text {padding-top: 5px}
+.b-help {float: left;  position: relative; padding-top: 3px}
+
+.b-connect-login .literal, .b-analytics-row .literal {font-size:11px;}
+.b-connect-login .literal .b-choose-size, .b-analytics-row .literal .b-choose-size {float:none; padding-top:5px;}
+
+
+
+
+/** Leds **/
+.led {width: 10px; height:10px; display:inline-block; margin-right: 6px; background: url('/images/leds.png') no-repeat}
+    .red {background-position:0 0px;}
+    .amber {background-position:-10px 0px;}
+    .green {background-position:-20px 0px;}
+
+/**
+ * Custom css
+ */
+.w-my-basecamp {}
+        .w-my-basecamp.b-widget > header > section {}
+        .w-my-basecamp dl {padding-top:2px;}
+        .w-my-basecamp dt { padding-top:10px; padding-bottom:4px;}
+                .w-my-basecamp dt * {vertical-align:middle;}
+                .w-my-basecamp dt .w-label-wrap {vertical-align:top;width:18%;display:inline-block;overflow:hidden;}
+                .w-my-basecamp dt .w-label {}
+                .w-my-basecamp dt .w-title {display:inline-block;width:80%;white-space:nowrap;}
+        .w-my-basecamp dd {background:url(../images/widgets/dots_devider.gif) repeat-x 0 100%; padding: 2px 0px 15px 85px;}
+
+        span.w-label {display:inline-block; zoom:1; display:inline; color:#fff; text-transform:uppercase; font-size:10px; text-shadow:none; padding:1px 4px 0;}
+
+        .b-negative {background:#af442d;}
+        .b-positive {background:#76ab05;}
+        .b-extra {background:#b5712b;}
+
+/**
+ * Getsatisfaction status
+ */
+.b-s-problem, .b-s-question {background:#af442d;}
+.b-s-praise {background:#76ab05;}
+.b-s-idea, .b-s-update, .b-s-tip {background:#b5712b;}
+
+/**
+ * Salesforce status
+ */
+.b-s-open {background:#af442d;}
+.b-s-closed {background:#76ab05;}
+.b-s-working {background:#b5712b;}
+
+ /**
+  * Funnel small
+  */
+ .w-funnel {}
+        .w-funnel ul {list-style:none; padding-top:11px;}
+                .w-funnel ul li {margin-bottom:1px; background:#1e2021;}
+                .b-funnel-ind {width:215px; background:#232526; overflow:hidden;}
+                        .b-funnel-ind img { min-width:1px; border-top:1px solid; display:block;
+                            background-color: #77AB13;border-color: #77AB13;
+                                            }
+                .b-funnel-text {background:#1e2021; display:inline-block;width:215px; padding:5px 0 0 10px; font-size:11px; line-height:1.2; overflow:hidden;}
+                        .b-funnel-text span {display:block;}
+                        .b-funnel-text .t-main {font-size:18px;}
+        .b-funnel-l .b-funnel-ind {float:left; text-align:right;}
+                .b-funnel-l .b-funnel-ind img {float:right;}
+        .b-funnel-l .b-funnel-text {float:left;}
+        .b-funnel-r .b-funnel-ind {float:right;}
+        .b-funnel-r .b-funnel-text {float:left;}
+
+/**
+ * Funnel big
+ */
+.dashboard-large .b-widget-xxx .b-widget-body {height:419px;}
+		
+/**
+* @section Custom Widgets
+* @subsection Bullet Graph widget
+*/
+.w-graph {}
+	.w-graph-ver .b-widget-inner, .w-graph-hor .b-widget-inner {padding:20px 0;}
+	.w-graph-hor.b-widget-xx .b-widget-inner {padding-top:40px;}
+	.w-graph-ver.b-widget-xxx .b-widget-inner {padding-top:10px;}
+	.b-widget-xxx.w-graph-ver .b-graph {float:left; width:101px; margin-right:9px;}
+	.b-graph {margin-bottom:5px;}
+				.b-graph-name span {display:block;}
+			.b-graph-ind {position:relative;}
+				.ind-red {background:#ae432e;  border-top:1px solid #c5796a;}
+				.ind-amber {background:#b5712e; border-top:1px solid #c99766;}
+				.ind-green {background:#77ab13; border-top:1px solid #9bc152;}
+				.b-graph-bar {position:absolute; background: rgba(255, 255, 255, 0.25); z-index:1; overflow:hidden; }
+					.b-graph-measure {height:14px; background:#1a1c1d;display:block; float:right;}
+				.b-graph-line {position:absolute; background:#1a1c1d; z-index:2;}
+			.b-graph-scale ul {list-style:none;}
+				.b-graph-scale li {font-size:11px;}
+
+		/* Horisontal Graph */
+		.w-graph-hor .b-graph-body {padding-right:18px;}
+			.w-graph-hor .b-graph-name {background:#1a1c1d; float:left; height:30px; width:179px; text-align:right; padding:15px 10px; overflow:hidden;}
+			.w-graph-hor .b-graph-ind {float:right; width:223px;}
+				.w-graph-hor .b-ind {float:left; height:59px;}
+				.w-graph-hor .b-graph-bar {top:23px; height:14px;}
+				.w-graph-hor .b-graph-line {width:5px; height:34px; top:13px;}
+
+		.w-graph-hor .b-graph-scale {margin-right:-18px;}
+		.w-graph-hor .b-graph-scale ul {float:right;}
+		.w-graph-hor .b-graph-scale li {float:left; text-align:center; background:url(/images/widgets/graph-scale-hor.gif) no-repeat 50% 0; padding-top:10px;}
+                /* 2 points */
+                .w-graph-hor .b-graph-scale .p-2 {margin-right: -91px}
+                .w-graph-hor .b-graph-scale .p-2 li {width: 221px}
+                .w-graph-hor .b-graph-scale .p-2 li:first-child {width: 221px}                  
+                /* 3 points */
+                .w-graph-hor .b-graph-scale .p-3 {margin-right: -35px}
+                .w-graph-hor .b-graph-scale .p-3 li {width: 110px}
+                .w-graph-hor .b-graph-scale .p-3 li:first-child {width: 111px}                
+                /* 4 points */
+                .w-graph-hor .b-graph-scale .p-4 {margin-right: -17px}
+                .w-graph-hor .b-graph-scale .p-4 li {width:74px;}
+                .w-graph-hor .b-graph-scale .p-4 li:first-child {width: 71px}
+                /* 5 points */
+                .w-graph-hor .b-graph-scale .p-5 li {width:58px;}
+                .w-graph-hor .b-graph-scale .p-5 li:first-child {width:55px}
+                .w-graph-hor .b-graph-scale .p-5 li:last-child {width:39px;}                                
+                /* 6 points */
+                .w-graph-hor .b-graph-scale .p-6 li {width:45px;}
+                .w-graph-hor .b-graph-scale .p-6 li:last-child {width:38px;}
+                /* 7 points */
+                .w-graph-hor .b-graph-scale .p-7 li {width:37px;}
+                .w-graph-hor .b-graph-scale .p-7 li:last-child {width:37px;}
+                /* 8 points */
+                .w-graph-hor .b-graph-scale .p-8 li {width:32px;}
+                .w-graph-hor .b-graph-scale .p-8 li:first-child {width:21px}
+                .w-graph-hor .b-graph-scale .p-8 li:last-child {width:38px;}
+                
+		/* Vertical Graph */
+		.w-graph-ver .b-widget-inner {padding-top:10px;}
+			.w-graph-ver .b-graph-body  {width:101px; margin:0 auto;}
+			.w-graph-ver .b-graph-name { text-align:center; padding-bottom:20px; max-height:58px; overflow:hidden; min-height:58px;}
+				.w-graph-ver .b-graph-ind {width:60px; height:295px;float:right;}
+				.w-graph-ver .b-ind {border-top:0; }
+				.w-graph-ver .b-graph-bar {width:14px; left:23px;}
+                                .w-graph-ver .b-graph-bar .b-graph-measure {width:14px; display:block; position: absolute; bottom: 0}
+				.w-graph-ver .b-graph-line {width:34px; height:5px; left:13px;}
+		.w-graph-ver .b-graph-scale {float:left; width:41px; margin-top:-8px;}
+		.w-graph-ver .b-graph-scale li {background:url(/images/widgets/graph-scale-ver.gif) no-repeat 100% 8px; height:59px; padding-right:19px; text-align:right;}
+                .w-graph-ver .b-graph-scale li:first-child {height: 57px}
+                /* 2 points */
+                .w-graph-ver .b-graph-scale .p-2 {}
+                .w-graph-ver .b-graph-scale .p-2 li {height:20px}
+                .w-graph-ver .b-graph-scale .p-2 li:first-child {height:293px}                 
+                /* 3 points */
+                .w-graph-ver .b-graph-scale .p-3 {}
+                .w-graph-ver .b-graph-scale .p-3 li {height:147px}
+                .w-graph-ver .b-graph-scale .p-3 li:first-child {height:146px}                 
+                /* 4 points */
+                .w-graph-ver .b-graph-scale .p-4 {}
+                .w-graph-ver .b-graph-scale .p-4 li {height:98px}
+                .w-graph-ver .b-graph-scale .p-4 li:first-child {height:97px}                 
+                /* 5 points */
+                .w-graph-ver .b-graph-scale .p-5 {}
+                .w-graph-ver .b-graph-scale .p-5 li {height:74px}
+                .w-graph-ver .b-graph-scale .p-5 li:first-child {height: 72px}                 
+                /* 6 points */
+                .w-graph-ver .b-graph-scale .p-6 {}
+                .w-graph-ver .b-graph-scale .p-6 li {height:59px}
+                .w-graph-ver .b-graph-scale .p-6 li:first-child {height: 57px}                
+                /* 7 points */
+                .w-graph-ver .b-graph-scale .p-7 {}
+                .w-graph-ver .b-graph-scale .p-7 li {height:49px}
+                .w-graph-ver .b-graph-scale .p-7 li:first-child {height: 49px}  
+                /* 7 points */
+                .w-graph-ver .b-graph-scale .p-8 {}
+                .w-graph-ver .b-graph-scale .p-8 li {height:42px}
+                .w-graph-ver .b-graph-scale .p-8 li:first-child {height: 41px}                 
+                

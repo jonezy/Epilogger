@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
+using System.Net;
+using System.ServiceProcess;
 using AutoMapper;
 using Epilogger.Data;
 using Epilogger.Web.Areas.Api.Models.Classes;
+using Epilogger.Web.Areas.Api.Models.GeckoClasses;
 using Epilogger.Web.Core.Stats;
 using Epilogger.Web.Models;
 
@@ -78,6 +81,77 @@ namespace Epilogger.Web.Areas.Api.Models
         {
             return new ImageService().Count();
         }
+
+
+        public bool EpiloggerStatus()
+        {
+            //First test if SQL is responding
+            try
+            {
+                var ecount = new EventService().Count();
+                if (ecount == 0) return false;
+            }
+            catch
+            {
+                return false;
+            }
+
+            //Test we can pull up an EPL webpage.
+            try
+            {
+                using (var client = new WebClient())
+                {
+                    var result = client.DownloadString("http://epilogger.com/home/webstatus");
+                    if (result.IndexOf("Epilogger is Up", System.StringComparison.Ordinal) == 0) return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+
+            //All is good
+            return true;
+        }
+
+
+        public List<GeckoFunnelItem> EpiloggerServiceStatus()
+        {
+
+            try
+            {
+                var EPLservices = new EpiloggerServices().GetEpiloggerServiceStatus();
+                if (EPLservices == null) throw new ArgumentNullException("EPLservices");
+                var funnelItems = new List<GeckoFunnelItem>();
+
+                foreach (var service in EPLservices)
+                {
+                    funnelItems.Add(new GeckoFunnelItem { label = service.DisplayName, value = service.Status == ServiceControllerStatus.Running ? 100 : 0 });
+                }
+                return funnelItems;
+            }
+            catch
+            {
+                return null;
+            }
+            
+        }
+
+        public int NumberOfTweetsInDateRange(DateTime f, DateTime t)
+        {
+            return new TweetService().NumberOfTweetsInDateRange(f, t);
+        }
+
+        public List<TweetGrowthStats> GetTweetGrowth(DateTime f, DateTime t)
+        {
+            return new TweetGrowth().GetTweetGrowthStats(f, t);
+        }
+
+        public List<TopEventsByUserActivityStats> GetTopEventByUserActivity(DateTime f, DateTime t)
+        {
+            return _ss.FindTopEventsByUserActivityStats(f, t);
+        }
+
 
     }
  

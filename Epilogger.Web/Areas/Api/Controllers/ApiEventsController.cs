@@ -599,8 +599,71 @@ namespace Epilogger.Web.Areas.Api.Controllers
                                                }
                 }, JsonRequestBehavior.AllowGet);
             }
-        
-        
+
+            public virtual JsonResult GeckoEpiloggerWebsiteStatus()
+            {
+                return Json(new Geckometer() { item = _statManager.EpiloggerStatus() ? 1 : 0, max = new Ometeritem() { text = "Up", value = 1 }, min = new Ometeritem() { text = "Down", value = 0 } }, JsonRequestBehavior.AllowGet);
+            }
+
+            public virtual JsonResult GeckoEpiloggerServiceStatus()
+            {
+                return Json(new GeckoFunnel()
+                                {
+                                    type = "reverse",
+                                    percentage = "hide",
+                                    item = _statManager.EpiloggerServiceStatus()
+                                }, JsonRequestBehavior.AllowGet);
+            }
+
+
+            public virtual JsonResult GeckoNumberOfTweetsInTheLastHour()
+            {
+                return Json(new GeckoNumberAndSecondaryStat()
+                {
+                    item = new List<GeckoItem>()
+                                           {
+                                               new GeckoItem() { text = "", value = _statManager.NumberOfTweetsInDateRange(DateTime.UtcNow.AddHours(-1), DateTime.UtcNow) },
+                                               new GeckoItem() { text = "", value = _statManager.NumberOfTweetsInDateRange(DateTime.UtcNow.AddHours(-2), DateTime.UtcNow.AddHours(-1)) }
+                                           }
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+
+            public virtual JsonResult GeckoGetTweetGrowthLast24Hours()
+            {
+                var growth = _statManager.GetTweetGrowth(DateTime.UtcNow.AddDays(-1), DateTime.UtcNow);
+                var geckoGrowth = new GeckoLineChart();
+                var geckoSettings = new GeckoSettings { axisy = new List<string>(), axisx = new List<string>() };
+                geckoGrowth.item = new List<string>();
+
+                geckoSettings.colour = "ee4490";
+                geckoSettings.axisy.Add(growth.Min(t => t.NumberOfTweets).ToString(CultureInfo.InvariantCulture));
+                geckoSettings.axisy.Add(growth.Max(t => t.NumberOfTweets).ToString(CultureInfo.InvariantCulture));
+                geckoSettings.axisx.Add(DateTime.UtcNow.AddDays(-1).ToString("MMMM d"));
+                geckoSettings.axisx.Add(DateTime.UtcNow.ToString("MMMM d"));
+
+                foreach (var i in growth)
+                {
+                    geckoGrowth.item.Add(i.NumberOfTweets.ToString(CultureInfo.InvariantCulture));
+                }
+
+                geckoGrowth.settings = geckoSettings;
+
+                return Json(geckoGrowth, JsonRequestBehavior.AllowGet);
+            }
+
+
+            public virtual JsonResult GeckoTopEventByUserActivity()
+            {
+                var funnelItems = _statManager.GetTopEventByUserActivity(DateTime.UtcNow.AddDays(-1), DateTime.UtcNow).Select(item => new GeckoFunnelItem() {label = item.EventName, value = item.HitCount}).ToList();
+                return Json(new GeckoFunnel()
+                                        {
+                                            type = "reverse",
+                                            percentage = "show",
+                                            item = funnelItems
+                                        }, JsonRequestBehavior.AllowGet);
+            }
+
         #endregion
 
 
@@ -731,6 +794,7 @@ namespace Epilogger.Web.Areas.Api.Controllers
 
             return computedHashString;
         }
+        
     }
 
 

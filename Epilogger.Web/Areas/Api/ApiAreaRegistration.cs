@@ -318,10 +318,36 @@ namespace Epilogger.Web.Areas.Api
                 new { controller = "ApiEvents", action = "GeckoPhotoCount" }
             );
 
+            context.MapRoute(
+                "GeckoEpiloggerWebsiteStatus",
+                "Api/Stats/Gecko/EPLStatus",
+                new { controller = "ApiEvents", action = "GeckoEpiloggerWebsiteStatus" }
+            );
 
+            context.MapRoute(
+                "GeckoEpiloggerServiceStatus",
+                "Api/Stats/Gecko/EPLServiceStatus",
+                new { controller = "ApiEvents", action = "GeckoEpiloggerServiceStatus" }
+            );
 
+            context.MapRoute(
+                "GeckoNumberOfTweetsInTheLastHour",
+                "Api/Stats/Gecko/TweetsInTheLastHour",
+                new { controller = "ApiEvents", action = "GeckoNumberOfTweetsInTheLastHour" }
+            );
+            
+            context.MapRoute(
+                "GeckoGetTweetGrowthLast24Hours",
+                "Api/Stats/Gecko/TweetCountPerHourLast24Hours",
+                new { controller = "ApiEvents", action = "GeckoGetTweetGrowthLast24Hours" }
+            );
 
-
+            context.MapRoute(
+                "GeckoTopEventByUserActivity",
+                "Api/Stats/Gecko/TopEventByUserActivityLastDay",
+                new { controller = "ApiEvents", action = "GeckoTopEventByUserActivity" }
+            );
+            
 
 
             context.MapRoute(

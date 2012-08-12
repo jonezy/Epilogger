@@ -222,6 +222,12 @@ namespace Epilogger.Web
         }
 
 
+        public int NumberOfTweetsInDateRange(DateTime f, DateTime t)
+        {
+            return db.Tweets.Count(d => d.CreatedDate >= f & d.CreatedDate <= t);
+        }
+
+
         ////Reading on the performance diff of List vs iEnumerable.
         ////http://stackoverflow.com/questions/3628425/linq-ienumerable-vs-list-what-to-use-how-do-they-work
         //public List<Tweet> FindByEventIDList(int EventID)
