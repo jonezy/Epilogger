@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System;
+using System.Data;
 using System.Linq;
 using Epilogger.Data;
 using Epilogger.Web.Model;
+using Links;
 
 
 namespace Epilogger.Web
@@ -166,6 +168,92 @@ namespace Epilogger.Web
 
             return tweets;
         }
+
+
+        public IEnumerable<TweetsAndImage> GetTweetsAndImagesPaged(int eventID, int? page, int tweetsPerPage)
+        {
+
+            var skipAmount = page.HasValue ? page.Value - 1 : 0;
+
+            //Subsonic doesn't support this type fo Outer join
+            //return (from t in db.Tweets   
+            //        join imd in db.ImageMetaData on t.TwitterID equals imd.TwitterID into image
+            //        from timd in image.DefaultIfEmpty()
+            //        join i in db.Images on timd.ImageID equals i.ID into tweetAndImage
+            //        from ti in tweetAndImage.DefaultIfEmpty()
+            //        where t.EventID == eventID
+            //        select new TweetsAndImage()
+            //                   {
+            //                       Tweet = t,
+            //                       Image = ti
+            //                   }).Skip(skipAmount * tweetsPerPage).Take(tweetsPerPage).ToList();
+
+
+            //Subsonic chokes on this double outer join
+            //return (from t in db.Tweets
+            //        from imd in db.ImageMetaData.Where(x => x.TwitterID == t.ID).DefaultIfEmpty()
+            //        from img in db.Images.Where(f => f.ID==imd.ImageID).DefaultIfEmpty()
+            //        where t.EventID == eventID
+            //        select new TweetsAndImage() { Tweet = t, Image = img }
+            //        ).Skip(skipAmount * tweetsPerPage).Take(tweetsPerPage);
+            
+            //exec TweetsAndImageByEventIDPaged 133, 11, 10
+
+            //Do it with a stored procedure
+            var sproc = db.TweetsAndImageByEventIDPaged(eventID, skipAmount * tweetsPerPage, tweetsPerPage);
+            var searchResults = sproc.ExecuteDataSet();
+
+            var resultsList = new List<TweetsAndImage>();
+            foreach (DataRow row in searchResults.Tables[0].Rows)
+            {
+                var tAndA = new TweetsAndImage
+                {
+                    Tweet =
+                        new Tweet
+                        {
+                            CreatedDate = DateTime.Parse(row["CreatedDate"].ToString()),
+                            EventID = int.Parse(row["tEventID"].ToString()),
+                            FromUserScreenName = row["FromUserScreenName"].ToString(),
+                            ID = int.Parse(row["tID"].ToString()),
+                            IsoLanguageCode = row["IsoLanguageCode"].ToString(),
+                            Location = row["Location"].ToString(),
+                            ProfileImageURL = row["ProfileImageURL"].ToString(),
+                            RawSource = row["RawSource"].ToString(),
+                            SinceID = int.Parse(row["SinceID"].ToString()),
+                            Source = row["Source"].ToString(),
+                            Text = row["Text"].ToString(),
+                            TextAsHTML = row["TextAsHTML"].ToString(),
+                            ToUserScreenName = row["ToUserScreenName"].ToString(),
+                            TwitterID = long.Parse(row["TwitterID"].ToString())
+                        }
+                };
+
+
+                if (row["Fullsize"].ToString() != string.Empty)
+                {
+                    tAndA.Image = new Image
+                    {
+                        AzureContainerPrefix = row["AzureContainerPrefix"].ToString(),
+                        DateTime = DateTime.Parse(row["DateTime"].ToString()),
+                        EventID = int.Parse(row["iEventID"].ToString()),
+                        Fullsize = row["Fullsize"].ToString(),
+                        ID = int.Parse(row["iID"].ToString()),
+                        OriginalImageLink = row["OriginalImageLink"].ToString(),
+                        Thumb = row["Thumb"].ToString()
+                    };
+                }
+
+                resultsList.Add(tAndA);
+            }
+
+            return resultsList;
+
+        }
+
+
+        
+
+
 
         public Tweet FindByTwitterID(long? twitterID)
         {

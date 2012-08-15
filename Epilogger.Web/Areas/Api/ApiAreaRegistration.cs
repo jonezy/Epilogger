@@ -92,6 +92,7 @@ namespace Epilogger.Web.Areas.Api
                 new { controller = "ApiEvents", action = "TweetsByImageID", eventid = UrlParameter.Optional, imageid = UrlParameter.Optional, page = UrlParameter.Optional, count = UrlParameter.Optional }
             );
 
+
             context.MapRoute(
                "Top10Tweeters",
                "Api/Tweets/{eventid}/Top10Tweeters",
@@ -104,6 +105,17 @@ namespace Epilogger.Web.Areas.Api
                 "Api/Tweets/{eventid}/{page}/{count}",
                 new { controller = "ApiEvents", action = "Tweets", eventid = UrlParameter.Optional, page = UrlParameter.Optional, count = UrlParameter.Optional }
             );
+
+
+            context.MapRoute(
+                "AllFeedByEventId",
+                "Api/AllFeed/{eventid}/{page}/{count}",
+                new { controller = "ApiEvents", action = "AllFeed", eventid = UrlParameter.Optional, page = UrlParameter.Optional, count = UrlParameter.Optional }
+            );
+
+
+
+
 
 
             /* Images */

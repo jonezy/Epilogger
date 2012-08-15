@@ -12,11 +12,13 @@ namespace Epilogger.Web.Areas.Api.Models
 {
     public class TweetManager : ITweetManager
     {
-        TweetService _ts = new TweetService();
+        readonly TweetService _ts = new TweetService();
+        readonly ImageService _is = new ImageService();
 
         public TweetManager()
         {
-            if (_ts == null) _ts = new TweetService();    
+            if (_ts == null) _ts = new TweetService();
+            if (_is == null) _is = new ImageService();
         }
 
         //****************
@@ -24,6 +26,14 @@ namespace Epilogger.Web.Areas.Api.Models
         {
             return Mapper.Map<List<Tweet>, List<ApiTweet>>(_ts.GetPagedTweets(eventId, page, count, (DateTime)SqlDateTime.MinValue, (DateTime)SqlDateTime.MaxValue).ToList());
         }
+
+        public List<ApiTweetsAndImage> GetTweetsAndImagesByEventPaged(int eventId, int page, int count)
+        {
+            var test = _ts.GetTweetsAndImagesPaged(eventId, page, count);
+            
+            return Mapper.Map<List<TweetsAndImage>, List<ApiTweetsAndImage>>(_ts.GetTweetsAndImagesPaged(eventId, page, count).ToList());
+        }
+
 
         public List<ApiTweeter> GetTop10Tweeters(int eventId)
         {

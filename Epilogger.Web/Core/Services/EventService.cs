@@ -267,48 +267,55 @@ namespace Epilogger.Web {
             return base.GetRepository<Event>().Add(entity);
         }
 
-        public List<Epilogger.Web.Models.SearchInEventModel> SearchInEvent(int EventID, string SearchTerm, DateTime FromDateTime, DateTime ToDateTime)
+        public List<SearchInEventModel> SearchInEvent(int eventID, string searchTerm, DateTime fromDateTime, DateTime toDateTime)
         {
-            StoredProcedure sproc = db.SearchInEvent(EventID, SearchTerm, FromDateTime, ToDateTime);
-            DataSet SearchResults = sproc.ExecuteDataSet();
+            var sproc = db.SearchInEvent(eventID, searchTerm, fromDateTime, toDateTime);
+            var searchResults = sproc.ExecuteDataSet();
 
-            List <Epilogger.Web.Models.SearchInEventModel>  ResultsList = new List<Epilogger.Web.Models.SearchInEventModel>();
-            foreach (DataRow row in SearchResults.Tables[0].Rows)
+            var  resultsList = new List<SearchInEventModel>();
+            foreach (DataRow row in searchResults.Tables[0].Rows)
             {
-                Epilogger.Web.Models.SearchInEventModel SearchItem = new Epilogger.Web.Models.SearchInEventModel();
-                SearchItem.Tweet = new Epilogger.Data.Tweet();
+                var searchItem = new SearchInEventModel
+                                     {
+                                         Tweet =
+                                             new Tweet
+                                                 {
+                                                     CreatedDate = DateTime.Parse(row["CreatedDate"].ToString()),
+                                                     EventID = int.Parse(row["EventID"].ToString()),
+                                                     FromUserScreenName = row["FromUserScreenName"].ToString(),
+                                                     ID = int.Parse(row["ID"].ToString()),
+                                                     IsoLanguageCode = row["IsoLanguageCode"].ToString(),
+                                                     Location = row["Location"].ToString(),
+                                                     ProfileImageURL = row["ProfileImageURL"].ToString(),
+                                                     RawSource = row["RawSource"].ToString(),
+                                                     SinceID = int.Parse(row["SinceID"].ToString()),
+                                                     Source = row["Source"].ToString(),
+                                                     Text = row["Text"].ToString(),
+                                                     TextAsHTML = row["TextAsHTML"].ToString(),
+                                                     ToUserScreenName = row["ToUserScreenName"].ToString(),
+                                                     TwitterID = long.Parse(row["TwitterID"].ToString())
+                                                 }
+                                     };
 
-                SearchItem.Tweet.CreatedDate = DateTime.Parse(row["CreatedDate"].ToString());
-                SearchItem.Tweet.EventID = int.Parse(row["EventID"].ToString());
-                SearchItem.Tweet.FromUserScreenName = row["FromUserScreenName"].ToString();
-                SearchItem.Tweet.ID = int.Parse(row["ID"].ToString());
-                SearchItem.Tweet.IsoLanguageCode = row["IsoLanguageCode"].ToString();
-                SearchItem.Tweet.Location = row["Location"].ToString();
-                SearchItem.Tweet.ProfileImageURL = row["ProfileImageURL"].ToString();
-                SearchItem.Tweet.RawSource = row["RawSource"].ToString();
-                SearchItem.Tweet.SinceID = int.Parse(row["SinceID"].ToString());
-                SearchItem.Tweet.Source = row["Source"].ToString();
-                SearchItem.Tweet.Text = row["Text"].ToString();
-                SearchItem.Tweet.TextAsHTML = row["TextAsHTML"].ToString();
-                SearchItem.Tweet.ToUserScreenName = row["ToUserScreenName"].ToString();
-                SearchItem.Tweet.TwitterID = long.Parse(row["TwitterID"].ToString());
 
                 if (row["Fullsize"].ToString() != string.Empty)
                 {
-                    SearchItem.Image = new Epilogger.Data.Image();
-                    SearchItem.Image.AzureContainerPrefix = row["AzureContainerPrefix"].ToString();
-                    SearchItem.Image.DateTime = DateTime.Parse(row["DateTime1"].ToString());
-                    SearchItem.Image.EventID = int.Parse(row["EventID"].ToString());
-                    SearchItem.Image.Fullsize = row["Fullsize"].ToString();
-                    SearchItem.Image.ID = int.Parse(row["ID2"].ToString());
-                    SearchItem.Image.OriginalImageLink = row["OriginalImageLink"].ToString();
-                    SearchItem.Image.Thumb = row["Thumb"].ToString();
+                    searchItem.Image = new Image
+                                           {
+                                               AzureContainerPrefix = row["AzureContainerPrefix"].ToString(),
+                                               DateTime = DateTime.Parse(row["DateTime1"].ToString()),
+                                               EventID = int.Parse(row["EventID"].ToString()),
+                                               Fullsize = row["Fullsize"].ToString(),
+                                               ID = int.Parse(row["ID2"].ToString()),
+                                               OriginalImageLink = row["OriginalImageLink"].ToString(),
+                                               Thumb = row["Thumb"].ToString()
+                                           };
                 }
 
-                ResultsList.Add(SearchItem);
+                resultsList.Add(searchItem);
             }
 
-            return ResultsList;
+            return resultsList;
         }
 
 

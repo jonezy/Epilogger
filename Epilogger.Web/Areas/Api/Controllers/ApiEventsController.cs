@@ -127,6 +127,13 @@ namespace Epilogger.Web.Areas.Api.Controllers
         #endregion
 
         #region TheFeed
+
+            [HttpGet, HmacAuthorization]
+            public virtual JsonResult AllFeed(int eventId, int page, int count)
+            {
+                return Json(_tweetManager.GetTweetsAndImagesByEventPaged(eventId, page, count), JsonRequestBehavior.AllowGet);
+            }
+
         #endregion
 
         #region Tweets

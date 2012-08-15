@@ -243,6 +243,8 @@
     <Compile Include="Areas\Api\Models\Classes\ApiUser.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiUserFollowsEvent.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiVenue.cs" />
+    <Compile Include="Areas\Api\Models\Classes\ApiAllFeed.cs" />
+    <Compile Include="Areas\Api\Models\Classes\ApiTweetsAndImage.cs" />
     <Compile Include="Areas\Api\Models\GeckoClasses\GeckoFunnel.cs" />
     <Compile Include="Areas\Api\Models\GeckoClasses\Geckometer.cs" />
     <Compile Include="Areas\Api\Models\GeckoClasses\GeckoNumberAndSecondaryStat.cs" />
@@ -373,6 +375,7 @@
     <Compile Include="Models\AddLinkViewModel.cs" />
     <Compile Include="Models\AllContentViewModel.cs" />
     <Compile Include="Models\AllPhotosDisplayViewModel.cs" />
+    <Compile Include="Models\TweetsAndImage.cs" />
     <Compile Include="Models\AzureTweetModel.cs" />
     <Compile Include="Models\AllTweetsDisplayViewModel.cs" />
     <Compile Include="Models\BlogPostDisplayViewModel.cs" />

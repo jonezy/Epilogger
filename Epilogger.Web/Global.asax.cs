@@ -612,11 +612,17 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.WebsiteURL, opt => opt.MapFrom(f => f.WebsiteURL == "http://" ? null : f.WebsiteURL));
 
             Mapper.CreateMap<EventCategory, ApiCategory>();
+
+            Mapper.CreateMap<TweetsAndImage, ApiTweetsAndImage>();
             
             Mapper.CreateMap<Tweet, ApiTweet>()
                 .ForMember(dest => dest.Images, opt => opt.Ignore());
 
-            Mapper.CreateMap<Tweeter, ApiTweeter>();
+            Mapper.CreateMap<Tweeter, ApiTweeter>()
+                .ForMember(dest => dest.PhotoCount, opt => opt.Ignore());
+
+            //PhotoCount
+
             Mapper.CreateMap<Image, ApiImage>();
             Mapper.CreateMap<TopImageAndTweet, ApiTopImageAndTweet>();
             Mapper.CreateMap<CheckIn, ApiCheckIn>()

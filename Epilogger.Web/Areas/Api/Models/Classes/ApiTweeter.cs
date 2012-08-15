@@ -11,5 +11,6 @@ namespace Epilogger.Web.Areas.Api.Models.Classes
         public string Picture { get; set; }
         public int Total { get; set; }
         public int PercentOfTotal { get; set; }
+        public int PhotoCount { get; set; }
     }
 }

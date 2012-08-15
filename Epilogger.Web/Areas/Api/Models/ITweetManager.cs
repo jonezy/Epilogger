@@ -9,6 +9,7 @@ namespace Epilogger.Web.Areas.Api.Models
         List<ApiTweeter> GetTop10Tweeters(int eventId);
         List<ApiTweet> GetTweetsByImageID(int imageId, int eventId, int page, int count);
         int GetTweetCountByImageID(int imageId, int eventId);
+        List<ApiTweetsAndImage> GetTweetsAndImagesByEventPaged(int eventId, int page, int count);
     }
 }
 
