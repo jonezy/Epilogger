@@ -156,7 +156,7 @@ a.edit_icon {
 
 #homepage-container {
 	min-height:548px;
-	padding: 117px 0px 0px 0px;
+	padding: 90px 0px 0px 0px;
 	position:relative;}
 
 #homepage-intro {
@@ -257,10 +257,9 @@ a.edit_icon {
 #homepage-toolbar #refresh {}
     
 #header {
-   padding-top:12px;
-   padding-bottom: 10px;
    position:relative;    
-   background:#fff;}
+   background:#fff;
+   }
 	
 .homeBlurb { width: 425px; }
 .homePager { float: right; margin-top: -20px; }
@@ -268,11 +267,13 @@ a.edit_icon {
 
 /* ------------------------------ MENUS */
 
+/*Stop going back */
+
 /* --- main menu */
 #menu-bar 
 {
     float: right;
-    margin-top: 30px;
+    margin-top: 20px;
     z-index: 9000;
     line-height: 100%;
 }
@@ -286,16 +287,16 @@ a.edit_icon {
 }
 
 #menu-bar a {
-  font:bold 21px 'InterstatePlusRegular', impact, sans-serif;
-  color: #1E72C8;
-  text-decoration: none;
-  display: block;
-  padding: 8px 20px 8px 10px;
-  margin: 0;
+    color: #5a5a5a;
+    font: bold 16px Helvetica, Arial, Sans-Serif;
+    text-decoration: none;
+    display: block;
+    padding: 8px 12px 8px 10px;
+    margin: 0;
 }
 #menu-bar li.noPadding a
 {
-    padding: 8px 0px 8px 20px;  
+    padding: 8px 0px 8px 10px;  
 }
 
 /*Main menu hover*/
@@ -309,14 +310,17 @@ a.edit_icon {
 
 #menu-bar li:hover > a
 {
-  color: #82E4FE;
+  /*color: #ee4490;*/
+    background-color: #eee;
 }
 
 
 
 #menu-bar li.submenu:hover > a {
-  color: #82E4FE;
-  background: #757472 url(/Public/Images/menu/MenuArrow.png) no-repeat 96% 16px;
+  /*color: #ee4490;*/
+  background: #eee url(/Public/Images/menu/MenuArrow.png) no-repeat 96% 16px;
+  
+  
 }
 
 /*SubMenu Hover */
@@ -327,33 +331,57 @@ a.edit_icon {
 }
 
 #menu-bar ul a:hover {
-  background: #858482 !important;
-  color: #A5EBFD !important;
+  color: #ee4490 !important;
 }
 
 /*Sub Menu*/
 #menu-bar ul 
 {
-    background: #757472;
+    background: #fff;
     margin: 0;
+    border: 1px solid #ccc;
     padding: 5px 5px 16px 5px;
     position: absolute;
-    top: 30px;
-    left: 0;
+    top: 35px;
+    
     z-index: 9000;
+}
+#menu-bar ul.right
+{
+    right: 0 !important;
 }
 
 
 /*Browse Sub*/
 #menu-bar ul.browse {
     display: none;
-    width: 154px;
+    width: 145px;
 }
+#menu-bar li.browse 
+{
+    width: 143px;
+}
+
 
 /*Dashboard sub*/
 #menu-bar ul.dashboard {
     display: none;
-    width: 118px;    
+    width: 145px;    
+}
+
+#menu-bar li.dashboard 
+{
+    width: 111px;
+}
+
+/*User Sub*/
+#menu-bar ul.user {
+    display: none;
+    width: 145px;
+}
+#menu-bar li.user 
+{
+    width: 81px;
 }
 
 
@@ -374,7 +402,7 @@ a.edit_icon {
 
 #menu-bar ul a {
     padding: 5px 0px 5px 5px;
-    color:#eeeeee !important;
+    color:#5a5a5a !important;
     font-size:13px;
     font-style:normal;
     font-family:helvetica;
@@ -406,6 +434,23 @@ a.edit_icon {
   height: 1%;
 }
 
+
+#profileImage {
+    padding-right: 17px;
+    margin-top: -3px;
+    float: right;
+}
+#profileImage a 
+{
+    width: 34px;
+    height: 34px;
+    padding: 1px;
+    border: 1px solid #dedede;
+}
+#profileImage img {
+    width: 34px;
+    height: 34px;
+}
 	
 	
 /* ------------------------------ CONTENT */
@@ -1717,6 +1762,8 @@ span.tweet-date a:hover { text-decoration: underline; }
     background-color: #403e3a;
     color: #bababa;
     font-size: 12px;
+    position: absolute;
+    top: -19px;
 }
 
 #god-menu a {
@@ -1731,12 +1778,12 @@ span.tweet-date a:hover { text-decoration: underline; }
     /*border-top:solid 3px #5695d6;*/
     margin:0px -40px 0px -40px;
     color:#fff; 
-    padding-bottom:9px;
     /*background:#fff url(../images/bg/jaggies.gif) repeat-x bottom;*/
     background-color: #fff;
     z-index:2000;
     position: fixed;
     width: 100%;
+    height: 70px;
     }
     
    
@@ -1746,7 +1793,7 @@ span.tweet-date a:hover { text-decoration: underline; }
     height: 7px;
     background: url(../images/bg/jaggies-trans.gif) repeat-x bottom;
     position: absolute;
-    margin-top: 9px;
+    top: 70px;
 }
     
 
@@ -1754,16 +1801,22 @@ span.tweet-date a:hover { text-decoration: underline; }
 div#search-container {
     width: 150px;
     position: absolute;
-    top: 7px;
-    right: 10px;
-	}
+    top: 22px;
+}
+
+
+div#mainLogo {
+    position: absolute;
+    left: 358px;
+    top: 10px;
+}
 
 div#search-container input[type=text] {
     float:left;
-	color:#888;
+	color:#676767;
 	font:bold 14px Helvetica, Arial, Sans-Serif;
 	border: solid 1px #eee;
-	width:128px;
+	width:175px;
 	height:14px;
 	padding:5px 0 5px 26px;
     background: #eee url('/Public/images/homepage/SearchIcon.png') no-repeat 5px 5px;

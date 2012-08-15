@@ -1,57 +1,77 @@
-﻿@using RichmondDay.Helpers
+﻿@using System.Globalization
+@using Epilogger.Data
+@using Epilogger.Web
+@using RichmondDay.Helpers
 @{
     var controller = ViewContext.RouteData.Values["controller"] as string ?? "";
     var action = ViewContext.RouteData.Values["action"] as string ?? "";
     
-    //This is a hack, BuildTemplateMethod not sure what's ThemeProvider bnest way to accomplish this
+    //This is a hack, BuildTemplateMethod not sure what's ThemeProvider best way to accomplish this
     var userId = new Guid();
+    var theUser = new User();
     try
     {
         Guid.TryParse(CookieHelpers.GetCookieValue("lc", "uid").ToString(), out userId);
+        if (userId != Guid.Empty)
+        {
+            theUser = new UserService().GetUserByID(userId);
+        }
     }
     catch (Exception)
     {
     }
-    
 }
 
 <ul id="menu-bar">
-    <li class="@(controller.ToLower() == "browse" ? "current " : "")submenu">@Html.ActionLink("BROWSE EVENTS", "index", "browse", new { filter = "" }, new { })
+    
+    <li>@Html.ActionLink("Add Event", "create", "events", null, controller.ToLower() == "events" && action.ToLower() == "create" ? new { @class = "current" } : null)</li>
+    
+    <li class="@(controller.ToLower() == "browse" ? "current " : "")submenu browse">@Html.ActionLink("Browse Events", "index", "browse", new { filter = "" }, new { })
         <ul class="browse">
-            <li>@Html.ActionLink("today", "index", "browse", new { filter = "now" }, new { })</li>
-            <li>@Html.ActionLink("upcoming", "index", "browse", new { filter = "upcoming" }, new { })</li>
-            <li>@Html.ActionLink("past", "index", "browse", new { filter = "past" }, new { })</li>
+            <li>@Html.ActionLink("Today", "index", "browse", new { filter = "now" }, new { })</li>
+            <li>@Html.ActionLink("Upcoming", "index", "browse", new { filter = "upcoming" }, new { })</li>
+            <li>@Html.ActionLink("Past", "index", "browse", new { filter = "past" }, new { })</li>
             <li class="menuSpacer"></li>
-            <li>@Html.ActionLink("subscriptions", "subscriptions", "dashboard")</li>
-            <li>@Html.ActionLink("my created events", "events", "dashboard")</li>
-            <li>@Html.ActionLink("random event!", "index", "browse", new { filter = "random" }, new { })</li>
+            <li>@Html.ActionLink("My events", "events", "dashboard")</li>
+            <li>@Html.ActionLink("Subscriptions", "subscriptions", "dashboard")</li> 
+            <li>@Html.ActionLink("Random event", "index", "browse", new { filter = "random" }, new { })</li>
         </ul>
     </li>
     
-    <li>@Html.ActionLink("ADD EVENT", "create", "events", null, controller.ToLower() == "events" && action.ToLower() == "create" ? new { @class = "current" } : null)</li>
     
-    <li class="@(controller.ToLower() == "dashboard" ? "current " : "")submenu">@Html.ActionLink("DASHBOARD", "index", "dashboard", null, controller.ToLower() == "dashboard" ? new { @class = "current" } : null)
+    <li class="@(controller.ToLower() == "dashboard" ? "current " : "")submenu dashboard">@Html.ActionLink("Dashboard", "index", "dashboard", null, controller.ToLower() == "dashboard" ? new { @class = "current" } : null)
         <ul class="dashboard">
-            <li>@Html.ActionLink("my created events", "events", "dashboard")</li>
-            <li>@Html.ActionLink("subscriptions", "subscriptions", "dashboard")</li>
+            <li>@Html.ActionLink("Activity", "index", "dashboard")</li>
+            <li>@Html.ActionLink("My events", "events", "dashboard")</li>
+            <li>@Html.ActionLink("Subscriptions", "subscriptions", "dashboard")</li>
             @*<li><a href="#">inbox</a></li>*@
-            <li class="menuSpacer"></li>
-            <li>@Html.ActionLink("account activity", "index", "dashboard")</li>
-            <li>@Html.ActionLink("view / edit profile", "index", "account")</li>
+            @*<li class="menuSpacer"></li>
+            
+            <li>@Html.ActionLink("view / edit profile", "index", "account")</li>*@
             @*<li><a href="#">preferences</a></li>*@
         </ul>
     </li>
     
     
-
+    
 
     @if (userId != Guid.Empty)
     {
-        <li class="noPadding">@Html.ActionLink("LOGOUT", "logout", "account")</li>
+        //This is will be a user profile icon with a menu
+        <li class="submenu user">
+            <div id="profileImage">@Html.ActionImage("index", "account", null, theUser.ProfilePicture.ToString(CultureInfo.InvariantCulture), "")</div>
+            <ul class="user right">
+                @*<li>@Html.ActionLink("Invite friend", "index", "dashboard")</li>*@
+                <li>@Html.ActionLink("settings", "index", "account")</li>
+                <li>@Html.ActionLink("Logout", "logout", "account")</li>
+                @*<li class="menuSpacer"></li>
+                <li>@Html.ActionLink("Logout", "logout", "account")</li>*@
+            </ul>
+        </li>
     }
     else
     {
-        <li class="noPadding">@Html.ActionLink("LOGIN / REGISTER", "login", "account")</li>
+        <li class="">@Html.ActionLink("Login", "login", "account")</li>
     }
     @*<li class="noPadding">@Html.ActionLink("LOGIN / REGISTER", "login", "account")</li>*@
     

@@ -95,20 +95,20 @@
             @*@Html.Action("GlobalNavigation", "Navigation", new { Area = "" })*@
             @*<br style="clear:both;" />*@
             <div id="header">
-
-                <a href="/">@Html.Raw(Html.Image("logo.png", "id='logo'"))</a>
-            
-
                 <div id="search-container">
                     @using (Html.BeginForm("Search", "Home", FormMethod.Post, null))
                     {
                         @Html.TextBox("SearchTerm", null, new {@class = "remove-bottom", @title = "Find an event..."})
                     }
                 </div>
+                
+                <div id="mainLogo">
+                    <a href="/">@Html.Raw(Html.Image("logoSmall.png", "id='logo'"))</a>
+                </div>
 
-                @*@Html.Action("Navigation", "Navigation", new { Area = "" })*@
-                @Html.Partial("Navigation", new { Area = "" })
-            </div>
+                    @*@Html.Action("Navigation", "Navigation", new { Area = "" })*@
+                    @Html.Partial("Navigation", new { Area = "" })
+                </div>
         </div>
         <div id="jaggies"></div>
     </div>

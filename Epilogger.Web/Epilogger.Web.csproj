@@ -375,6 +375,7 @@
     <Compile Include="Models\AddLinkViewModel.cs" />
     <Compile Include="Models\AllContentViewModel.cs" />
     <Compile Include="Models\AllPhotosDisplayViewModel.cs" />
+    <Compile Include="Models\NavigationViewModel.cs" />
     <Compile Include="Models\TweetsAndImage.cs" />
     <Compile Include="Models\AzureTweetModel.cs" />
     <Compile Include="Models\AllTweetsDisplayViewModel.cs" />
@@ -473,6 +474,7 @@
     <Content Include="Public\css\geckoboard\lightBasic.css" />
     <Content Include="Public\images\livemode\client\bg.png" />
     <Content Include="Public\images\livemode\client\sponsor-osheaga.png" />
+    <Content Include="Public\images\logoSmall.png" />
     <Content Include="Public\images\widget\icon-arrow.png" />
     <Content Include="Public\images\widget\logo\chevywidget.png" />
     <Content Include="Public\images\widget\menu-active.png" />
@@ -3049,7 +3051,6 @@
     <Content Include="Public\js\TimePicker\timePicker.css" />
     <Content Include="Areas\Admin\Views\ManageApi\index.cshtml" />
     <Content Include="Areas\Admin\Views\ManageApi\edit.cshtml" />
-    <None Include="ClassDiagram1.cd" />
     <None Include="Public\js\bootstrap-Image-Gallery\Makefile" />
     <None Include="Public\js\bootstrap-Image-Gallery\package.json" />
     <None Include="Public\js\bootstrap-Image-Gallery\README.md" />
@@ -3077,7 +3078,6 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Public\js\tmpl.min.js" />
-    <Content Include="testWidget.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -8675,7 +8675,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>16007</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
