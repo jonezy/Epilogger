@@ -25,6 +25,14 @@ namespace Epilogger.Web.Controllers {
 
             return PartialView("GlobalNavigation", model);
         }
+
+        [ChildActionOnly]
+        public virtual ActionResult Nag()
+        {
+            return PartialView("Nag", new NagViewModel { IsUserLoggedIn = CurrentUserID != Guid.Empty ? true : false });
+        }
+
+
         //[ChildActionOnly]
         //public ActionResult Navigation()
         //{

@@ -19,7 +19,7 @@
                 <fieldset class="create">
                     <p>@Html.LabelFor(model => model.Username) @Html.TextBoxFor(model => model.Username)</p>
                     <p>@Html.LabelFor(model => model.Password) @Html.PasswordFor(model => model.Password)</p>
-                    <p id="confirmPW">@Html.LabelFor(model => model.ConfirmPassword) @Html.PasswordFor(model => model.ConfirmPassword)</p>
+                    @*<p id="confirmPW">@Html.LabelFor(model => model.ConfirmPassword) @Html.PasswordFor(model => model.ConfirmPassword)</p>*@
                     <p>@Html.LabelFor(model => model.EmailAddress) @Html.TextBoxFor(model => model.EmailAddress)</p>
                     <p>@Html.LabelFor(model => model.DateOfBirth) @Html.TextBoxFor(model => model.DateOfBirth, new { @class = "dob" })</p>
                     @*<p>@Html.LabelFor(model => model.TimeZoneOffset) @Html.DropDownListFor(model => model.TimeZoneOffset, Model.TimeZones, "Select your timezone")</p>*@

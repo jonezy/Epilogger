@@ -89,6 +89,7 @@
     <div id="global-bar" class="clearfix">
         
         @Html.Action("GlobalNavigation", "Navigation", new { Area = "" })
+        
             
         <div class="container_12 clearfix">
         
@@ -106,11 +107,14 @@
                     <a href="/">@Html.Raw(Html.Image("logoSmall.png", "id='logo'"))</a>
                 </div>
 
-                    @*@Html.Action("Navigation", "Navigation", new { Area = "" })*@
-                    @Html.Partial("Navigation", new { Area = "" })
-                </div>
+                @*@Html.Action("Navigation", "Navigation", new { Area = "" })*@
+                @Html.Partial("Navigation", new { Area = "" })
+                @Html.Action("Nag", "Navigation")
+            </div>
+            
         </div>
         <div id="jaggies"></div>
+        
     </div>
 
     <div class="container_12 clearfix" id="outer-container">

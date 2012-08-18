@@ -1,0 +1,31 @@
+﻿@model Epilogger.Web.Models.NagViewModel 
+
+@if (!Model.IsUserLoggedIn)
+{
+    var controller = ViewContext.ParentActionViewContext.RouteData.Values["controller"] as string ?? "";
+    var action = ViewContext.RouteData.Values["action"] as string ?? "";
+
+    if (controller != "account")
+    {
+        
+        <div id="signupNag">
+            <div class="nagText">
+                <strong>Epilogger is a living event archive.</strong><br />
+                Find, save, and share the moments!
+            </div>
+            <div class="nagButton">
+                @Html.ActionLink("Join Today", "login", "account", null, new {@class = "blue-action-button"})
+            </div>
+        </div>
+
+        <style>
+            #content-container {
+                padding: 150px 0px 0px 0px !important;
+            }
+            #homepage-container {
+                padding: 114px 0px 0px 0px !important;
+            }
+        </style>
+    }
+}
+}

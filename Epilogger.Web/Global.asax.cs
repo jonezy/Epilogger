@@ -81,6 +81,10 @@ namespace Epilogger.Web {
                 new { controller = "account", action = "validate" }
             );
 
+            /* AccountModel Stuff */
+            routes.MapRoute("Signup", "join/signup", new { controller = "account", action = "Signup" } );
+            routes.MapRoute("CreateAccount", "join/twitter", new { controller = "account", action = "Twitter" });
+
             routes.MapRoute(
                 "StarRatings",
                 "events/StarRatings",

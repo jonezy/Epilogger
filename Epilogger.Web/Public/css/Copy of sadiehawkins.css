@@ -42,9 +42,9 @@ a.edit_icon {
     background:-moz-linear-gradient(top, #d3d3d3, #d3d3d3); /* ff */
     box-shadow:0 0 1px #a1b9c8;
     color:#e6f5fa;
-    font:bold 18px 'InterstatePlusRegular';
+    font:bold 15px 'InterstatePlusRegular';
     padding:5px 10px;
-    /*text-transform:uppercase;*/
+    text-transform:uppercase;
     cursor: default;
     box-shadow:0 0 1px #777;}    
 
@@ -68,9 +68,9 @@ a.edit_icon {
     background:-moz-linear-gradient(top, #4aa0d7, #3486b7); /* ff */
     box-shadow:0 0 1px #a1b9c8;
     color:#e6f5fa;
-    font:bold 18px 'InterstatePlusRegular';
+    font:bold 15px 'InterstatePlusRegular';
     padding:5px 10px;
-    /*text-transform:uppercase;*/
+    text-transform:uppercase;
     cursor:pointer;
     box-shadow:0 0 1px #777;}
 
@@ -92,9 +92,9 @@ a.edit_icon {
     background:-moz-linear-gradient(top, #d84e69, #ce4a64); /* ff */
     box-shadow:0 0 1px #a1b9c8;
     color:#fefefe;
-    font:bold 18px 'InterstatePlusRegular';
+    font:bold 15px 'InterstatePlusRegular';
     padding:5px 10px;
-    /*text-transform:uppercase;*/
+    text-transform:uppercase;
     cursor:pointer;
     box-shadow:0 0 1px #777;}
 
@@ -152,11 +152,11 @@ a.edit_icon {
 	/*background: #efefef;*/
 	padding: 121px 0px 40px 0px;
 	position:relative;
-	min-height:550px;}
+	min-height:650px;}
 
 #homepage-container {
 	min-height:548px;
-	padding: 60px 0px 0px 0px;
+	padding: 94px 0px 0px 0px;
 	position:relative;}
 
 #homepage-intro {
@@ -283,15 +283,15 @@ a.edit_icon {
   list-style: none;
 }
 #menu-bar li.submenu {
-    background: url(/Public/Images/menu/MenuArrow.png) no-repeat 96% 15px;
+    background: url(/Public/Images/menu/MenuArrow.png) no-repeat 96% 16px;
 }
 
 #menu-bar a {
     color: #5a5a5a;
-    font: bold 14px Helvetica, Arial, Sans-Serif;
+    font: bold 16px Helvetica, Arial, Sans-Serif;
     text-decoration: none;
     display: block;
-    padding: 8px 8px 8px 6px;
+    padding: 8px 12px 8px 10px;
     margin: 0;
 }
 #menu-bar li.noPadding a
@@ -318,7 +318,7 @@ a.edit_icon {
 
 #menu-bar li.submenu:hover > a {
   /*color: #ee4490;*/
-  background: #eee url(/Public/Images/menu/MenuArrow.png) no-repeat 96% 15px;
+  background: #eee url(/Public/Images/menu/MenuArrow.png) no-repeat 96% 16px;
   
   
 }
@@ -342,7 +342,7 @@ a.edit_icon {
     border: 1px solid #ccc;
     padding: 5px 5px 16px 5px;
     position: absolute;
-    top: 32px;
+    top: 35px;
     
     z-index: 9000;
 }
@@ -359,7 +359,7 @@ a.edit_icon {
 }
 #menu-bar li.browse 
 {
-    width: 128px;
+    width: 143px;
 }
 
 
@@ -371,7 +371,7 @@ a.edit_icon {
 
 #menu-bar li.dashboard 
 {
-    width: 96px;
+    width: 111px;
 }
 
 /*User Sub*/
@@ -381,7 +381,7 @@ a.edit_icon {
 }
 #menu-bar li.user 
 {
-    width: 64px;
+    width: 81px;
 }
 
 
@@ -436,7 +436,7 @@ a.edit_icon {
 
 
 #profileImage {
-    padding-right: 15px;
+    padding-right: 17px;
     margin-top: -3px;
     float: right;
 }
@@ -1121,7 +1121,7 @@ fieldset.create label.left {width:auto !important;}
 fieldset.create p#confirmPW label {position:relative; top:-4px; line-height:13px}
 
 .createArrow { background: url('../images/icons/CreateAccountArrow.png') no-repeat; height: 350px; background-position: 0 65px; }
-/*.createAccountButton { position:relative; top: 155px; left: 80px; height: 40px; }*/
+.createAccountButton { position:relative; top: 155px; left: 80px; height: 40px; }
 .createAccountButton:hover { top: 156px;}
 
 
@@ -1831,7 +1831,7 @@ div#search-container {
 
 div#mainLogo {
     position: absolute;
-    left: 420px;
+    left: 358px;
     top: 10px;
 }
 
@@ -2651,75 +2651,7 @@ a.fdbk_tab_hidden {
 
 /* New Account Stuff */
 
-.signUpHeading h1 {
-    font-size: 22pt;
-    color: #2a2728;
-}
-.signUpHeading h2 {
-    font-size: 17pt;
-    color: #e43e71;
-}
-
-
-.authButtons {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-.authButtons li
-{
-    display: inline-block;
-}
-.orSepertor { padding: 15px;font-size: 14px; }
-
-
 #emailAccountLine {
     text-align: center;
     font-size: 14px;
 }
-.authButtons {
-    text-align: center;
-}
-.terms {
-    font-size: 10px;
-    text-align: center;
-}
-.terms a:first-child {
-    margin-right: 15px;
-}
-
-
-.createAccountPage {
-    width: 600px;
-    margin: auto;
-}
-
-.createProfilePicture {
-    float: left;
-    width: 250px;
-    padding: 1px;
-    border: 1px solid #d5d5d5;
-}
-.createFormFields {
-    margin-left: 270px;
-    width: 350px;
-}
-
-.createFormFields input[type="text"], .createFormFields input[type="password"], .createFormFields input[type="email"] 
-{
-    width: 340px;
-    font-size: 18px;
-    height: 30px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-}
-
-.createFormFields input[type="text"].blur, .createFormFields input[type="password"].blur, .createFormFields input[type="email"].blur
-{
-    color: #ccc;
-}
-
-.acceptText { font-size: 16px; }
-
-.createAccountButton {margin: auto; margin-top: 100px; }

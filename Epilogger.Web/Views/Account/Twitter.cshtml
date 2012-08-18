@@ -1,0 +1,100 @@
+﻿@model Epilogger.Web.Models.CreateAccountModel
+
+@{
+    Layout = "~/Views/Shared/_InteriorLayoutNoBC.cshtml";
+    ViewBag.Title = "Epilogger | Create Account";
+}
+
+
+<div class="createAccountPage">
+    <div class="signUpHeading center">
+        <h1>Almost there, <img src="/Public/images/signup/twitter-bird-light-bgs-sm.png" style="margin-top:-6px;" alt="Twitter" /> @Model.FirstName @Model.LastName!</h1>
+        <h2>We just need a little more information...</h2>
+    </div>
+    
+    <div class="spacer"></div>
+    
+    @Html.ValidationSummary("Please correct the following issues")
+    @using(Html.BeginForm("Twitter", "Account", FormMethod.Post)) {
+
+        <div class="createProfilePicture">
+            <img src="@Model.DisplayProfileImage" alt="@Model.ServiceUserName" width="250px" />
+        </div>
+        
+        <div class="createFormFields">
+            <fieldset class="">
+                <p>@Html.TextBoxFor(model => model.Username, new { @class = "blur", title = "Username" })</p>
+                <p>@Html.TextBoxFor(model => model.EmailAddress, new { @class = "blur", title = "Email Address" })</p>
+                
+                <p><input type="text" class="" id="txtPlainPassword" title="Password" value="Password" style="color: #ccc !important;"/></p>
+                <p>@Html.PasswordFor(model => model.Password, new { @class = "", title = "Password", id = "Password" })</p>
+                
+            </fieldset>
+            
+            <div class="acceptText">
+                By creating an account you agree to the Epilogger<br/> <a href="/home/Terms" target="_blank">Terms of Use</a> and <a href="/home/Privacy" target="_blank">Privacy Policy</a>
+                <div class="spacer"></div>
+                <input type="submit" class="blue-action-button" value="Create Account" /> 
+            </div>
+               
+            
+        </div>
+        
+        
+        @Html.HiddenFor(model => model.FirstName)
+        @Html.HiddenFor(model => model.LastName)
+        @Html.HiddenFor(model => model.ProfileImage)
+        @Html.HiddenFor(model => model.DisplayProfileImage)
+        @Html.HiddenFor(model => model.ServiceUserName)   
+        @Html.HiddenFor(model => model.DateOfBirth)  
+        
+        @Html.HiddenFor(model => model.TwitterClientToken)
+        @Html.HiddenFor(model => model.TwitterClientSecret)
+        @Html.HiddenFor(model => model.TwitterScreenname)
+    }
+
+</div>
+
+<script type="text/javascript">
+  
+      $("#txtPlainPassword").show();
+      $("#Password").hide();
+      
+      $("#txtPlainPassword").focus(function() {
+        $(this).hide();  
+        $("#Password").show();
+        $("#Password").focus();  
+      });
+     
+     $("#Password").blur(function() { 
+        if($(this).val().length == 0)
+        {
+          $(this).hide();  
+          $("#txtPlainPassword").show();
+        }      
+      });
+     
+  
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

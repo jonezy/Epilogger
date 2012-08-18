@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Collections.Generic;
+using System.Net;
 using System.Web.Mvc;
 
 using AutoMapper;
@@ -15,7 +17,7 @@ using Epilogger.Web.Core.Email;
 using Epilogger.Web.Epilogr;
 using Epilogger.Web.Models;
 using Epilogger.Web.Views.Emails;
-
+using Links;
 using RichmondDay.Helpers;
 using Twitterizer;
 
@@ -28,6 +30,261 @@ namespace Epilogger.Web.Controllers {
 
             base.Initialize(requestContext);
         }
+
+        /* New Account stuff section */
+        #region New Account Stuff
+
+        /* Sign up page Step 1 or 2 */
+        public virtual ActionResult Signup()
+        {
+            return View();
+        }
+
+
+        /* Create Account with Twitter Button */
+        [HttpGet]
+        public virtual ActionResult Twitter()
+        {
+            try
+            {
+                var twitterAuth = Request.QueryString["oauth_token"];
+                if (String.IsNullOrEmpty(twitterAuth))
+                {
+                    this.StoreError("There was a problem connecting to your twitter account");
+                    return RedirectToAction("Signup");
+                }
+
+                /****** FOR DEBUGGING *****/
+                //var accessTokenResponse = OAuthUtility.GetAccessTokenDuringCallback(TwitterHelper.TwitterConsumerKey, TwitterHelper.TwitterConsumerSecret);
+
+                //var twitterUser = TwitterHelper.GetUser(accessTokenResponse.Token,
+                //                                        accessTokenResponse.TokenSecret,
+                //                                        accessTokenResponse.ScreenName);
+
+
+                var accessTokenResponse = new OAuthTokenResponse();
+                var twitterUser = TwitterHelper.GetUser("8181322-SlGwMhPRfg1yhDxpnMSidFSG5yyhvvAX8wDra6linE",
+                                                        "NujAswPuqFYYTaKaqoxtAABiaaj1unkgfbhU2oleLyo",
+                                                        "Cbrooker");
+                
+                /**********************/
+
+                if (twitterUser == null)
+                {
+                    this.StoreError("There was a problem connecting to your twitter account");
+                    return RedirectToAction("Signup");
+                }
+
+                //Check if this user already exists.
+                //var userAuthService = new UserAuthenticationProfileService();
+                //var userAuth = userAuthService.UserAuthorizationByServiceScreenNameAndPlatform(accessTokenResponse.ScreenName, "Web", AuthenticationServices.TWITTER);
+                //if (userAuth != null) {
+                //    userAuth.Token = accessTokenResponse.Token;
+                //    userAuth.TokenSecret = accessTokenResponse.TokenSecret;
+                //    userAuthService.Save(userAuth);
+
+                //    var user = userAuth.Users.FirstOrDefault();
+                //    if (user != null)
+                //    {
+                //        CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString());
+                //        CookieHelpers.WriteCookie("lc", "tz", user.TimeZoneOffSet.ToString(CultureInfo.InvariantCulture));
+
+                //        //Record the Login
+                //        var ut = new UserLoginTracking()
+                //        {
+                //            UserId = user.ID,
+                //            LoginMethod = "Twitter",
+                //            DateTime = DateTime.UtcNow,
+                //            IPAddress = HttpContext.Request.UserHostAddress
+                //        };
+                //        new UserLoginTrackingService().Save(ut);
+                //        return RedirectToAction("Index", "Home");
+                //    }
+                //} 
+
+
+                //Get the larger profile pic from twitter
+                var req = (HttpWebRequest)WebRequest.Create(string.Format("https://api.twitter.com/1/users/profile_image?screen_name={0}&size=original", twitterUser.ResponseObject.ScreenName));
+                req.Method = "HEAD";
+                var myResp = (HttpWebResponse)req.GetResponse();
+                var profileImage = myResp.StatusCode == HttpStatusCode.OK ? myResp.ResponseUri.AbsoluteUri : twitterUser.ResponseObject.ProfileImageLocation;
+
+                var splitName = twitterUser.ResponseObject.Name.Split(new[] { " " }, StringSplitOptions.None);
+
+                var model = new CreateAccountModel()
+                {
+                    TwitterClientToken = accessTokenResponse.Token,
+                    TwitterClientSecret = accessTokenResponse.TokenSecret,
+                    TwitterScreenname = accessTokenResponse.ScreenName,
+                    FirstName = splitName[0],
+                    LastName = splitName[1],
+                    DisplayProfileImage = profileImage,
+                    ProfileImage = twitterUser.ResponseObject.ProfileImageLocation,
+                    ServiceUserName = twitterUser.ResponseObject.ScreenName
+                };
+
+                //Continue to Step 2
+                return View(model);
+            }
+            catch (Exception)
+            {
+                this.StoreError("There was a problem connecting to your twitter account");
+                return RedirectToAction("Signup", "join");
+            }
+        }
+
+        [HttpPost]
+        public virtual ActionResult Twitter(CreateAccountModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                //Check to see if this account already exists
+                var userTest = service.GetUserByUsername(model.Username);
+                if (userTest != null)
+                {
+                    ModelState.AddModelError(string.Empty, string.Format("The username {0} is already in use, please try another username", userTest.Username));
+                    model.Username = "";
+                    return View(model);
+                }
+
+                //Check to see if this email address already exists
+                var emailTest = service.GetUserByEmail(model.EmailAddress);
+                if (emailTest != null)
+                {
+                    ModelState.AddModelError(string.Empty, string.Format("The email address {0} is already in use, please a different email address", emailTest.EmailAddress));
+                    model.Username = "";
+                    return View(model);
+                }
+
+                //Ensure the User is over 13
+                if (model.DateOfBirth != null && (DateTime.Now - DateTime.Parse(model.DateOfBirth)).Days / 366 < 13)
+                {
+                    this.StoreError("You must be must be 13 years of age or older to use Epilogger.");
+                    ModelState.AddModelError(string.Empty, "You must be must be 13 years of age or older to use Epilogger.");
+                    return View(model);
+                }
+
+
+                var user = new User();
+                try
+                {
+                    //Save the User
+                    user = Mapper.Map<CreateAccountModel, User>(model);
+                    user.IsActive = false; // ensure this is set.
+                    service.Save(user);
+
+                    //Store the auth tokens for whatever service
+                    switch (model.AuthService)
+                    {
+                        case "twitter":
+                            {
+                                //Store the Twitter Auth Record
+
+                                break;
+                            }
+
+                            
+
+                        default:
+                            {
+
+                                break;
+                            }
+                            
+                    }
+                       
+
+
+
+
+
+
+
+
+
+                    // build a message to send to the user.
+                    //string validateUrl = string.Format("{0}account/validate/{1}", App.BaseUrl, Helpers.base64Encode(user.EmailAddress));
+
+                    //Changed to UserID GUID to prevent problems with duplicate email addresses.
+                    var validateUrl = string.Format("{0}account/validate/{1}", App.BaseUrl, Helpers.base64Encode(user.ID.ToString()));
+
+                    var parser = new TemplateParser();
+                    var replacements = new Dictionary<string, string>
+                                        {
+                                            {"[BASE_URL]", App.BaseUrl},
+                                            {"[FIRST_NAME]", user.EmailAddress},
+                                            {"[VALIDATE_ACCOUNT_URL]", validateUrl}
+                                        };
+
+                    var message = parser.Replace(AccountEmails.ValidateAccount, replacements);
+
+                    var sfEmail = new SpamSafeMail
+                    {
+                        EmailSubject = "Thank you for registering on epilogger.com",
+                        HtmlEmail = message,
+                        TextEmail = message
+                    };
+                    sfEmail.ToEmailAddresses.Add(model.EmailAddress);
+                    sfEmail.SendMail();
+
+
+                    this.StoreSuccess("Your account was created successfully<br /><br/>Please check your inbox for our validation message, your account will be inaccessable until you validate it.");
+
+                    CookieHelpers.WriteCookie("lc", "tempid", user.ID.ToString());
+
+                    return RedirectToAction("AccountActivationNeeded", "account");
+
+                }
+                catch (Exception ex)
+                {
+                    this.StoreError("There was a problem creating your account");
+                    if (user != null) service.DeleteUser(user.ID);
+                    return View(model);
+                }
+            }
+            return View(model);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #region Old Account Stuff
+
+        
+
+
 
         [RequiresAuthentication(ValidUserRole=UserRoleType.RegularUser, AccessDeniedMessage="You must be logged in to edit your account")]
         public virtual ActionResult Index () {
@@ -98,6 +355,11 @@ namespace Epilogger.Web.Controllers {
 
 
 
+        
+
+
+
+
 
 
 
@@ -109,6 +371,10 @@ namespace Epilogger.Web.Controllers {
         [HttpPost]
         public virtual ActionResult Create(CreateAccountModel model)
         {
+            //Twitter Auth Token is authed through twitter
+            //Request.QueryString["oauth_token"]
+
+
             if (ModelState.IsValid) {
                 // TEMP: check to make sure the email address provided is in the beta invite table.
                 //if(!service.IsBetaUser(model.EmailAddress)) {
@@ -134,12 +400,12 @@ namespace Epilogger.Web.Controllers {
                     return View(model);
                 }
                 //Ensure the passwords match
-                if (model.Password != model.ConfirmPassword)
-                {
-                    this.StoreError("The passwords you entered do not match.");
-                    ModelState.AddModelError(string.Empty, "The passwords you entered do not match.");
-                    return View(model);
-                }
+                //if (model.Password != model.ConfirmPassword)
+                //{
+                //    this.StoreError("The passwords you entered do not match.");
+                //    ModelState.AddModelError(string.Empty, "The passwords you entered do not match.");
+                //    return View(model);
+                //}
 
                 User user = null;
                 try {
@@ -479,9 +745,7 @@ namespace Epilogger.Web.Controllers {
         public virtual ActionResult Logout() {
             CookieHelpers.DestroyCookie("lc");
             
-            this.StoreInfo("You have been logged out of your epilogger account");
-
-            return RedirectToAction("Login");
+            return RedirectToAction("index", "Home");
         }
 
         [HttpGet]
@@ -492,8 +756,8 @@ namespace Epilogger.Web.Controllers {
         [HttpPost, ValidateInput(false)]
         public virtual ActionResult ForgotPassword(ForgotPasswordViewModel model) {
             try {
-                Guid passwordResetHash = Guid.NewGuid();
-                User user = service.GetUserByEmail(model.EmailAddress.Trim());
+                var passwordResetHash = Guid.NewGuid();
+                var user = service.GetUserByEmail(model.EmailAddress.Trim());
                 if (user == null) {
                     this.StoreWarning("There is no account on epilogger.com that uses that email address");
                     return View();
@@ -504,14 +768,14 @@ namespace Epilogger.Web.Controllers {
 
                 string resetPasswordUrl = string.Format("{0}account/resetpassword?hash={1}", App.BaseUrl, passwordResetHash);
 
-                TemplateParser parser = new TemplateParser();
-                Dictionary<string, string> replacements = new Dictionary<string, string>();
+                var parser = new TemplateParser();
+                var replacements = new Dictionary<string, string>();
                 replacements.Add("[BASE_URL]", App.BaseUrl);
                 replacements.Add("[USERNAME]", user.Username);
                 replacements.Add("[USER_EMAIL]", user.EmailAddress);
                 replacements.Add("[RESET_PASSWORD_URL]", resetPasswordUrl);
 
-                string message = parser.Replace(AccountEmails.ForgotPassword, replacements);
+                var message = parser.Replace(AccountEmails.ForgotPassword, replacements);
 
                 var sfEmail = new SpamSafeMail
                 {
@@ -679,6 +943,7 @@ namespace Epilogger.Web.Controllers {
             return View();
         }
 
+        #endregion
 
     }
 }

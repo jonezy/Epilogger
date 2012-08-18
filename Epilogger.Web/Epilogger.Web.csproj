@@ -375,6 +375,7 @@
     <Compile Include="Models\AddLinkViewModel.cs" />
     <Compile Include="Models\AllContentViewModel.cs" />
     <Compile Include="Models\AllPhotosDisplayViewModel.cs" />
+    <Compile Include="Models\NagViewModel.cs" />
     <Compile Include="Models\NavigationViewModel.cs" />
     <Compile Include="Models\TweetsAndImage.cs" />
     <Compile Include="Models\AzureTweetModel.cs" />
@@ -469,12 +470,17 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\combres_full_with_annotation.xml" />
+    <Content Include="Public\css\Copy of sadiehawkins.css" />
     <Content Include="Public\css\geckoboard\darkAdjusted.css" />
     <Content Include="Public\css\geckoboard\EPLCustom.css" />
     <Content Include="Public\css\geckoboard\lightBasic.css" />
+    <Content Include="Public\images\DefaultProfilePicture.png" />
     <Content Include="Public\images\livemode\client\bg.png" />
     <Content Include="Public\images\livemode\client\sponsor-osheaga.png" />
     <Content Include="Public\images\logoSmall.png" />
+    <Content Include="Public\images\signup\facebookButton.png" />
+    <Content Include="Public\images\signup\twitter-bird-light-bgs-sm.png" />
+    <Content Include="Public\images\signup\twitterButton.png" />
     <Content Include="Public\images\widget\icon-arrow.png" />
     <Content Include="Public\images\widget\logo\chevywidget.png" />
     <Content Include="Public\images\widget\menu-active.png" />
@@ -3136,6 +3142,9 @@
     <Content Include="Views\Widget\TwitterAuth.cshtml" />
     <Content Include="Views\Widget\TwitterRetweet.cshtml" />
     <Content Include="Views\Home\WebStatus.cshtml" />
+    <Content Include="Views\Shared\Nag.cshtml" />
+    <Content Include="Views\Account\Signup.cshtml" />
+    <Content Include="Views\Account\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />
@@ -5197,7 +5206,7 @@
     </None>
     <Content Include="Views\Browse\Index.cshtml" />
     <Content Include="Views\Events\Details.cshtml" />
-    <Content Include="Views\Account\Create.cshtml" />
+    <Content Include="Views\Account\Twitter.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\UpdatePassword.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />

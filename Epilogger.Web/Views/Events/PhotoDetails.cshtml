@@ -14,7 +14,7 @@
     <meta property="og:image" content="@Model.Image.Fullsize"></meta>
     <meta property="og:site_name" content="Epilogger"></meta>
     <meta property="fb:admins" content="1620315015"></meta>
-    <meta property="og:description" content="@{ Tweet first = null; foreach (Tweet tweet in Model.Tweets) { first = tweet; break; } }@first.Text"></meta>
+    <meta property="og:description" content="@{ var first = Model.Tweets.FirstOrDefault();} @{var theText = first != null ? first.Text : string.Empty;}@theText"></meta>
 }
 
 <script language="javascript" type="text/javascript">

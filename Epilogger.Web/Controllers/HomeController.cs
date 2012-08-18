@@ -243,7 +243,6 @@ namespace Epilogger.Web.Controllers {
         {
             return View();
         }
-
-
+        
     }
 }
