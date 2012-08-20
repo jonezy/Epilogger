@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Collections.Generic;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 
 using AutoMapper;
@@ -17,6 +18,7 @@ using Epilogger.Web.Core.Email;
 using Epilogger.Web.Epilogr;
 using Epilogger.Web.Models;
 using Epilogger.Web.Views.Emails;
+using Facebook;
 using Links;
 using RichmondDay.Helpers;
 using Twitterizer;
@@ -50,57 +52,31 @@ namespace Epilogger.Web.Controllers {
                 var twitterAuth = Request.QueryString["oauth_token"];
                 if (String.IsNullOrEmpty(twitterAuth))
                 {
-                    this.StoreError("There was a problem connecting to your twitter account");
+                    this.StoreError("There was a problem connecting to your Twitter account");
                     return RedirectToAction("Signup");
                 }
 
-                /****** FOR DEBUGGING *****/
-                //var accessTokenResponse = OAuthUtility.GetAccessTokenDuringCallback(TwitterHelper.TwitterConsumerKey, TwitterHelper.TwitterConsumerSecret);
+                var accessTokenResponse = OAuthUtility.GetAccessTokenDuringCallback(TwitterHelper.TwitterConsumerKey, TwitterHelper.TwitterConsumerSecret);
 
-                //var twitterUser = TwitterHelper.GetUser(accessTokenResponse.Token,
-                //                                        accessTokenResponse.TokenSecret,
-                //                                        accessTokenResponse.ScreenName);
-
-
-                var accessTokenResponse = new OAuthTokenResponse();
-                var twitterUser = TwitterHelper.GetUser("8181322-SlGwMhPRfg1yhDxpnMSidFSG5yyhvvAX8wDra6linE",
-                                                        "NujAswPuqFYYTaKaqoxtAABiaaj1unkgfbhU2oleLyo",
-                                                        "Cbrooker");
-                
-                /**********************/
+                var twitterUser = TwitterHelper.GetUser(accessTokenResponse.Token,
+                                                        accessTokenResponse.TokenSecret,
+                                                        accessTokenResponse.ScreenName);
 
                 if (twitterUser == null)
                 {
-                    this.StoreError("There was a problem connecting to your twitter account");
+                    this.StoreError("There was a problem connecting to your Twitter account");
                     return RedirectToAction("Signup");
                 }
 
-                //Check if this user already exists.
-                //var userAuthService = new UserAuthenticationProfileService();
-                //var userAuth = userAuthService.UserAuthorizationByServiceScreenNameAndPlatform(accessTokenResponse.ScreenName, "Web", AuthenticationServices.TWITTER);
-                //if (userAuth != null) {
-                //    userAuth.Token = accessTokenResponse.Token;
-                //    userAuth.TokenSecret = accessTokenResponse.TokenSecret;
-                //    userAuthService.Save(userAuth);
-
-                //    var user = userAuth.Users.FirstOrDefault();
-                //    if (user != null)
-                //    {
-                //        CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString());
-                //        CookieHelpers.WriteCookie("lc", "tz", user.TimeZoneOffSet.ToString(CultureInfo.InvariantCulture));
-
-                //        //Record the Login
-                //        var ut = new UserLoginTracking()
-                //        {
-                //            UserId = user.ID,
-                //            LoginMethod = "Twitter",
-                //            DateTime = DateTime.UtcNow,
-                //            IPAddress = HttpContext.Request.UserHostAddress
-                //        };
-                //        new UserLoginTrackingService().Save(ut);
-                //        return RedirectToAction("Index", "Home");
-                //    }
-                //} 
+                //Check if this user already exists. If so login and redirect to the homepage
+                var userId = CheckConnectedAccountUserExists(accessTokenResponse.ScreenName, AuthenticationServices.TWITTER, accessTokenResponse.Token, accessTokenResponse.TokenSecret);
+                if (userId != Guid.Empty)
+                {
+                    CookieHelpers.WriteCookie("lc", "uid", userId.ToString());
+                    this.StoreInfo("The Twitter account you used is already associated with an Epilogger account. We have logged you in.");
+                    return RedirectToAction("Index", "Home");
+                }
+                
 
 
                 //Get the larger profile pic from twitter
@@ -113,18 +89,19 @@ namespace Epilogger.Web.Controllers {
 
                 var model = new CreateAccountModel()
                 {
-                    TwitterClientToken = accessTokenResponse.Token,
-                    TwitterClientSecret = accessTokenResponse.TokenSecret,
-                    TwitterScreenname = accessTokenResponse.ScreenName,
+                    AuthToken = accessTokenResponse.Token,
+                    AuthTokenSecret = accessTokenResponse.TokenSecret,
+                    AuthScreenname = accessTokenResponse.ScreenName,
                     FirstName = splitName[0],
                     LastName = splitName[1],
                     DisplayProfileImage = profileImage,
                     ProfileImage = twitterUser.ResponseObject.ProfileImageLocation,
-                    ServiceUserName = twitterUser.ResponseObject.ScreenName
+                    ServiceUserName = twitterUser.ResponseObject.ScreenName,
+                    AuthService = "twitter"
                 };
 
                 //Continue to Step 2
-                return View(model);
+                return View("ShortCreateAccount", model);
             }
             catch (Exception)
             {
@@ -133,8 +110,130 @@ namespace Epilogger.Web.Controllers {
             }
         }
 
+        
+        [HttpGet]
+        public virtual ActionResult FacebookAuth()
+        {
+            try
+            {
+                //var accessToken = new Areas.Authentication.Controllers.FacebookController().ConnectAndGetAccount(Request, Url.Action("facebookauth", "join", null, "http"));
+
+                var code = Request.QueryString["code"] as string ?? "";
+                var state = Request.QueryString["state"] as string ?? "";
+
+                FacebookOAuthResult oauthResult;
+                FacebookOAuthResult.TryParse(Request.Url, out oauthResult);
+
+                string accessToken = null;
+                if (oauthResult.IsSuccess)
+                {
+                    var oAuthClient = new FacebookOAuthClient(FacebookApplication.Current) { RedirectUri = new Uri(Url.Action("facebookauth", "join", null, "http")) };
+
+
+                    dynamic tokenResult = oAuthClient.ExchangeCodeForAccessToken(code);
+                    accessToken = tokenResult.access_token;
+
+                    if (String.IsNullOrEmpty(accessToken))
+                    {
+                        this.StoreError("There was a problem connecting to your Facebook account");
+                        return RedirectToAction("Signup");
+                    }
+                }
+
+                return RedirectToAction("Facebook", "join", new { accessToken = accessToken });
+            }
+            catch (Exception)
+            {
+                this.StoreError("There was a problem connecting to your twitter account");
+                return RedirectToAction("Signup", "join");
+            }
+        }
+
+        /* Create Account with Facebook Button */
+        [HttpGet]
+        public virtual ActionResult Facebook()
+        {
+            try
+            {
+                //var accessToken = Request.QueryString["accessToken"];
+                var code = Request.QueryString["code"] as string ?? "";
+                var state = Request.QueryString["state"] as string ?? "";
+
+                FacebookOAuthResult oauthResult;
+                FacebookOAuthResult.TryParse(Request.Url, out oauthResult);
+
+                string accessToken = null;
+                if (oauthResult.IsSuccess)
+                {
+                    var oAuthClient = new FacebookOAuthClient(FacebookApplication.Current) { RedirectUri = new Uri(Url.Action("facebook", "join", null, "http")) };
+
+
+                    dynamic tokenResult = oAuthClient.ExchangeCodeForAccessToken(code);
+                    accessToken = tokenResult.access_token;
+
+                    if (String.IsNullOrEmpty(accessToken))
+                    {
+                        this.StoreError("There was a problem connecting to your Facebook account");
+                        return RedirectToAction("Signup");
+                    }
+                }
+
+
+
+
+                var fbClient = new FacebookClient(accessToken);
+
+                dynamic facebookUser = fbClient.Get("me");
+                
+                if (facebookUser == null)
+                {
+                    this.StoreError("There was a problem connecting to your Facebook account");
+                    return RedirectToAction("Signup");
+                }
+
+                //Check if this user already exists. If so login and redirect to the homepage
+                var userId = CheckConnectedAccountUserExists(facebookUser.username, AuthenticationServices.FACEBOOK, accessToken, null);
+                if (userId != Guid.Empty)
+                {
+                    CookieHelpers.WriteCookie("lc", "uid", userId.ToString());
+                    this.StoreInfo("The Facebook  account you used is already associated with an Epilogger account. We have logged you in.");
+                    return RedirectToAction("Index", "Home", new {area = ""});
+                }
+
+                
+                var model = new CreateAccountModel()
+                {
+                    AuthToken = accessToken,
+                    AuthScreenname = facebookUser.username,
+                    FirstName = facebookUser.first_name,
+                    LastName = facebookUser.last_name,
+                    DisplayProfileImage = FacebookHelper.GetProfilePictureWithSize(accessToken, "large"),
+                    ProfileImage = FacebookHelper.GetProfilePicture(accessToken),
+                    ServiceUserName = facebookUser.username,
+                    AuthService = "facebook"
+                };
+
+                //Continue to Step 2
+                //return RedirectToAction("Index", "Home");
+                return View("ShortCreateAccount", model);
+            }
+            catch (Exception)
+            {
+                this.StoreError("There was a problem connecting to your twitter account");
+                return RedirectToAction("Signup", "join");
+            }
+        }
+
+
+
+        //[HttpGet]
+        //public virtual ActionResult ShortCreateAccount()
+        //{
+        //    return View("ShortCreateAccount");
+        //}
+
         [HttpPost]
-        public virtual ActionResult Twitter(CreateAccountModel model)
+        public virtual ActionResult ShortCreateAccount(CreateAccountModel model)
         {
             if (ModelState.IsValid)
             {
@@ -157,12 +256,12 @@ namespace Epilogger.Web.Controllers {
                 }
 
                 //Ensure the User is over 13
-                if (model.DateOfBirth != null && (DateTime.Now - DateTime.Parse(model.DateOfBirth)).Days / 366 < 13)
-                {
-                    this.StoreError("You must be must be 13 years of age or older to use Epilogger.");
-                    ModelState.AddModelError(string.Empty, "You must be must be 13 years of age or older to use Epilogger.");
-                    return View(model);
-                }
+                //if (model.DateOfBirth != null && (DateTime.Now - DateTime.Parse(model.DateOfBirth)).Days / 366 < 13)
+                //{
+                //    this.StoreError("You must be must be 13 years of age or older to use Epilogger.");
+                //    ModelState.AddModelError(string.Empty, "You must be must be 13 years of age or older to use Epilogger.");
+                //    return View(model);
+                //}
 
 
                 var user = new User();
@@ -170,36 +269,34 @@ namespace Epilogger.Web.Controllers {
                 {
                     //Save the User
                     user = Mapper.Map<CreateAccountModel, User>(model);
-                    user.IsActive = false; // ensure this is set.
+                    user.IsActive = true;
                     service.Save(user);
 
                     //Store the auth tokens for whatever service
+                    var userAuth = new UserAuthenticationProfile
+                                   {
+                                       UserID = user.ID,
+                                       Platform = "Web",
+                                       ServiceUsername = model.AuthScreenname,
+                                       Token = model.AuthToken,
+                                       TokenSecret = model.AuthTokenSecret
+                                   };
+                
                     switch (model.AuthService)
                     {
                         case "twitter":
                             {
-                                //Store the Twitter Auth Record
-
+                                userAuth.Service = AuthenticationServices.TWITTER.ToString();
                                 break;
                             }
-
-                            
-
-                        default:
+                        case "facebook":
                             {
-
+                                userAuth.Service = AuthenticationServices.FACEBOOK.ToString();
                                 break;
-                            }
-                            
+                            }    
                     }
-                       
 
-
-
-
-
-
-
+                    new UserAuthenticationProfileService().Save(userAuth);
 
 
                     // build a message to send to the user.
@@ -250,7 +347,54 @@ namespace Epilogger.Web.Controllers {
 
 
 
+        private Guid CheckConnectedAccountUserExists(string userScreenName, AuthenticationServices authService, string token, string tokenSecret)
+        {
+            try
+            {
 
+                var userAuthService = new UserAuthenticationProfileService();
+                var userAuth = userAuthService.UserAuthorizationByServiceScreenNameAndPlatform(userScreenName, "Web", authService);
+                if (userAuth != null)
+                {
+                    string logInMethod = null;
+                    switch (authService)
+                    {
+                        case AuthenticationServices.TWITTER:
+                            userAuth.Token = token;
+                            userAuth.TokenSecret = tokenSecret;
+                            logInMethod = "Twitter";
+                            break;
+                        case AuthenticationServices.FACEBOOK:
+                            userAuth.Token = token;
+                            logInMethod = "Facebook";
+                            break;
+                    }
+                    userAuthService.Save(userAuth);
+
+                    var user = userAuth.Users.FirstOrDefault();
+                    if (user != null)
+                    {
+                        
+                        //Record the Login
+                        var ut = new UserLoginTracking()
+                        {
+                            UserId = user.ID,
+                            LoginMethod = logInMethod,
+                            DateTime = DateTime.UtcNow,
+                            IPAddress = HttpContext.Request.UserHostAddress
+                        };
+                        new UserLoginTrackingService().Save(ut);
+                        return user.ID;
+                    }
+                }
+
+                return Guid.Empty;
+            }
+            catch (Exception)
+            {
+                return Guid.Empty;
+            }
+        }
 
 
 

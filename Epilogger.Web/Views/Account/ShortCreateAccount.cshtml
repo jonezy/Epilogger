@@ -8,14 +8,15 @@
 
 <div class="createAccountPage">
     <div class="signUpHeading center">
-        <h1>Almost there, <img src="/Public/images/signup/twitter-bird-light-bgs-sm.png" style="margin-top:-6px;" alt="Twitter" /> @Model.FirstName @Model.LastName!</h1>
+        <h1>Almost there, <img src="@string.Format("/Public/images/signup/{0}", Model.AuthService == "twitter" ? "twitter-bird-light-bgs-sm.png" : "faceookLofo-sm.png")" style="margin-top:-6px;" alt="Twitter" /> @Model.FirstName @Model.LastName!</h1>
         <h2>We just need a little more information...</h2>
     </div>
     
     <div class="spacer"></div>
     
     @Html.ValidationSummary("Please correct the following issues")
-    @using(Html.BeginForm("Twitter", "Account", FormMethod.Post)) {
+    @using (Html.BeginForm("ShortCreateAccount", "Account", FormMethod.Post))
+    {
 
         <div class="createProfilePicture">
             <img src="@Model.DisplayProfileImage" alt="@Model.ServiceUserName" width="250px" />
@@ -24,7 +25,9 @@
         <div class="createFormFields">
             <fieldset class="">
                 <p>@Html.TextBoxFor(model => model.Username, new { @class = "blur", title = "Username" })</p>
+                <p>@Html.ValidationMessageFor(model => model.Username)</p>
                 <p>@Html.TextBoxFor(model => model.EmailAddress, new { @class = "blur", title = "Email Address" })</p>
+                <p>@Html.ValidationMessageFor(model => model.EmailAddress)</p>
                 
                 <p><input type="text" class="" id="txtPlainPassword" title="Password" value="Password" style="color: #ccc !important;"/></p>
                 <p>@Html.PasswordFor(model => model.Password, new { @class = "", title = "Password", id = "Password" })</p>
@@ -48,9 +51,11 @@
         @Html.HiddenFor(model => model.ServiceUserName)   
         @Html.HiddenFor(model => model.DateOfBirth)  
         
-        @Html.HiddenFor(model => model.TwitterClientToken)
-        @Html.HiddenFor(model => model.TwitterClientSecret)
-        @Html.HiddenFor(model => model.TwitterScreenname)
+        @Html.HiddenFor(model => model.AuthToken)
+        @Html.HiddenFor(model => model.AuthTokenSecret)
+        @Html.HiddenFor(model => model.AuthScreenname)
+        
+        @Html.HiddenFor(model => model.AuthService)
     }
 
 </div>
@@ -73,8 +78,6 @@
           $("#txtPlainPassword").show();
         }      
       });
-     
-  
 
 </script>
 

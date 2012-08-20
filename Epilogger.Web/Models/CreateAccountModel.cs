@@ -32,11 +32,9 @@ namespace Epilogger.Web.Models {
 
         public string AuthService { get; set; }
 
-        public string TwitterClientToken { get; set; }
-        public string TwitterClientSecret { get; set; }
-        public string TwitterScreenname { get; set; }
-
-        
+        public string AuthToken { get; set; }
+        public string AuthTokenSecret { get; set; }
+        public string AuthScreenname { get; set; }
 
     }
 }

@@ -479,6 +479,7 @@
     <Content Include="Public\images\livemode\client\sponsor-osheaga.png" />
     <Content Include="Public\images\logoSmall.png" />
     <Content Include="Public\images\signup\facebookButton.png" />
+    <Content Include="Public\images\signup\faceookLofo-sm.png" />
     <Content Include="Public\images\signup\twitter-bird-light-bgs-sm.png" />
     <Content Include="Public\images\signup\twitterButton.png" />
     <Content Include="Public\images\widget\icon-arrow.png" />
@@ -5206,7 +5207,7 @@
     </None>
     <Content Include="Views\Browse\Index.cshtml" />
     <Content Include="Views\Events\Details.cshtml" />
-    <Content Include="Views\Account\Twitter.cshtml" />
+    <Content Include="Views\Account\ShortCreateAccount.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\UpdatePassword.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />

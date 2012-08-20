@@ -83,7 +83,13 @@ namespace Epilogger.Web {
 
             /* AccountModel Stuff */
             routes.MapRoute("Signup", "join/signup", new { controller = "account", action = "Signup" } );
-            routes.MapRoute("CreateAccount", "join/twitter", new { controller = "account", action = "Twitter" });
+            routes.MapRoute("CreateAccountTwitter", "join/twitter", new { controller = "account", action = "Twitter" });
+            routes.MapRoute("CreateAccountFacebookAuth", "join/facebookauth", new { controller = "account", action = "Facebookauth" });
+            routes.MapRoute("CreateAccountFacebook", "join/facebook", new { controller = "account", action = "Facebook" });
+            
+
+
+
 
             routes.MapRoute(
                 "StarRatings",
@@ -503,16 +509,16 @@ namespace Epilogger.Web {
 
             Mapper.CreateMap<CreateAccountModel, User>()
                 .ForMember(dest => dest.RoleID, opt => opt.UseValue(2))
-                .ForMember(dest => dest.FirstName, opt => opt.Ignore())
-                .ForMember(dest => dest.LastName, opt => opt.Ignore())
                 .ForMember(dest => dest.ForgotPasswordHash, opt => opt.Ignore())
                 .ForMember(dest => dest.ID, opt => opt.Ignore())
                 .ForMember(dest => dest.Password, opt => opt.MapFrom(src => PasswordHelpers.EncryptPassword(src.Password)))
                 .ForMember(dest => dest.IsActive, opt => opt.UseValue(false))
                 .ForMember(dest => dest.CreatedDate, opt => opt.UseValue(DateTime.UtcNow))
-                .ForMember(dest => dest.ProfilePicture, opt => opt.Ignore())
+                //.ForMember(dest => dest.DateOfBirth, opt => opt.MapFrom(src => DateTime.Parse(src.DateOfBirth)))
+                .ForMember(dest => dest.DateOfBirth, opt => opt.Ignore())
+                .ForMember(dest => dest.ProfilePicture, opt => opt.MapFrom(src => src.ProfileImage))
                 .ForMember(dest => dest.TimeZoneOffSet, opt => opt.Ignore())
-                .ForMember(dest => dest.DateOfBirth, opt => opt.MapFrom(src => DateTime.Parse(src.DateOfBirth)));
+                .ForMember(dest => dest.EmailVerified, opt => opt.UseValue(false));
 
             Mapper.CreateMap<UserAuthenticationProfile, ConnectedNetworksViewModel>();
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Text;
+using System.Web;
 using System.Web.Mvc;
 
 using Epilogger.Data;
@@ -19,6 +20,16 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
         {
             return Redirect(BuildRequest(returnUrl));
         }
+
+        public virtual ActionResult ConnectRequestWithCallback(string callBackUrl)
+        {
+            return Redirect(BuildRequest(callBackUrl));
+        }
+
+
+
+
+
 
         public virtual ActionResult ConnectAccount()
         {
@@ -64,6 +75,33 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
 
             return RedirectToAction("Index", "Home");
         }
+
+
+        public dynamic ConnectAndGetAccount(HttpRequestBase theRequest, string theReturnUrl)
+        {
+
+            var code = theRequest.QueryString["code"] as string ?? "";
+            var state = theRequest.QueryString["state"] as string ?? "";
+
+            FacebookOAuthResult oauthResult;
+            FacebookOAuthResult.TryParse(theRequest.Url, out oauthResult);
+
+            if (oauthResult.IsSuccess)
+            {
+                var oAuthClient = new FacebookOAuthClient(FacebookApplication.Current) { RedirectUri = new Uri(theReturnUrl) };
+                
+
+                dynamic tokenResult = oAuthClient.ExchangeCodeForAccessToken(code);
+                var accessToken = tokenResult.access_token;
+
+                return accessToken;
+            }
+
+            return null;
+        }
+
+
+
 
         public virtual ActionResult Disconnect()
         {

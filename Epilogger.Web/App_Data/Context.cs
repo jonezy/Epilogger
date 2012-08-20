@@ -122,7 +122,6 @@ namespace Epilogger.Data
         }
 			
         public Query<EventCategory> EventCategories { get; set; }
-        public Query<User> Users { get; set; }
         public Query<APIApplication> APIApplications { get; set; }
         public Query<Tweet> Tweets { get; set; }
         public Query<ScraperURL> ScraperURLs { get; set; }
@@ -152,6 +151,7 @@ namespace Epilogger.Data
         public Query<CollectionQueueSetting> CollectionQueueSettings { get; set; }
         public Query<UserRatesEvent> UserRatesEvents { get; set; }
         public Query<MemoryBox> MemoryBoxes { get; set; }
+        public Query<User> Users { get; set; }
         public Query<UserRole> UserRoles { get; set; }
         public Query<UserFollowsUser> UserFollowsUsers { get; set; }
 
@@ -258,7 +258,6 @@ namespace Epilogger.Data
 
             #region ' Query Defs '
             EventCategories = new Query<EventCategory>(provider);
-            Users = new Query<User>(provider);
             APIApplications = new Query<APIApplication>(provider);
             Tweets = new Query<Tweet>(provider);
             ScraperURLs = new Query<ScraperURL>(provider);
@@ -288,6 +287,7 @@ namespace Epilogger.Data
             CollectionQueueSettings = new Query<CollectionQueueSetting>(provider);
             UserRatesEvents = new Query<UserRatesEvent>(provider);
             MemoryBoxes = new Query<MemoryBox>(provider);
+            Users = new Query<User>(provider);
             UserRoles = new Query<UserRole>(provider);
             UserFollowsUsers = new Query<UserFollowsUser>(provider);
             #endregion
@@ -297,7 +297,6 @@ namespace Epilogger.Data
         	if(DataProvider.Schema.Tables.Count == 0)
 			{
             	DataProvider.Schema.Tables.Add(new EventCategoriesTable(DataProvider));
-            	DataProvider.Schema.Tables.Add(new UserTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new APIApplicationTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new TweetsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ScraperURLsTable(DataProvider));
@@ -327,6 +326,7 @@ namespace Epilogger.Data
             	DataProvider.Schema.Tables.Add(new CollectionQueueSettingsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserRatesEventTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new MemoryBoxesTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new UserTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserRoleTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserFollowsUserTable(DataProvider));
             }

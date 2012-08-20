@@ -40,6 +40,22 @@ public static class FacebookHelper {
         return string.Format("https://graph.facebook.com/{0}/picture", me.id);
     }
 
+
+    public static string GetProfilePictureWithSize(string token, string size) {
+        if (!IsTokenValid(token)) {
+            // token is expired, get a new one and save it to the db.
+            token = UdpateAccessToken();
+            UpdateUsersAuthenticationToken(token);
+        }
+        
+        var fbClient = new FacebookClient(token);
+        dynamic me = fbClient.Get("me");
+
+        return string.Format("https://graph.facebook.com/{0}/picture?type={1}", me.id, size);
+    }
+
+    
+
     private static void UpdateUsersAuthenticationToken(string newToken) {
         UserService service= new UserService();
         UserAuthenticationProfileService authService = new UserAuthenticationProfileService();
