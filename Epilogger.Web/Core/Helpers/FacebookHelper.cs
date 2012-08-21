@@ -1,11 +1,10 @@
 ﻿using System;
+using System.Configuration;
 using System.Linq;
 
 using Epilogger.Data;
 using Epilogger.Web;
-
 using Facebook;
-
 using RichmondDay.Helpers;
 
 public static class FacebookHelper {
@@ -21,8 +20,18 @@ public static class FacebookHelper {
     }
 
     public static string UdpateAccessToken() {
-        var oAuthClient = new FacebookOAuthClient(FacebookApplication.Current);
-        dynamic tokenResult = oAuthClient.GetApplicationAccessToken();
+        
+        var fb = new FacebookClient();
+        dynamic tokenResult = fb.Get("oauth/access_token", new
+        { 
+            client_id     = ConfigurationManager.AppSettings["FacebookAppId"] as string ?? "",
+            client_secret = ConfigurationManager.AppSettings["FacebookAppSecret"] as string ?? "", 
+            grant_type    = "client_credentials" 
+        });
+
+
+        //var oAuthClient = new FacebookOAuthClient(FacebookApplication.Current);
+        //dynamic tokenResult = oAuthClient.GetApplicationAccessToken();
 
         return tokenResult.token;
     }
@@ -57,16 +66,16 @@ public static class FacebookHelper {
     
 
     private static void UpdateUsersAuthenticationToken(string newToken) {
-        UserService service= new UserService();
-        UserAuthenticationProfileService authService = new UserAuthenticationProfileService();
+        var service= new UserService();
+        var authService = new UserAuthenticationProfileService();
 
         // get the current userid
         Guid uid;
         Guid.TryParse(CookieHelpers.GetCookieValue("lc", "uid").ToString(), out uid);
          
         // get the users authentication record and update the token
-        User user = service.GetUserByID(uid);
-        UserAuthenticationProfile userAuth = user.UserAuthenticationProfiles.Where(ua => ua.Service == "FACEBOOK").FirstOrDefault();
+        var user = service.GetUserByID(uid);
+        var userAuth = user.UserAuthenticationProfiles.FirstOrDefault(ua => ua.Service == "FACEBOOK");
         userAuth.Token = newToken;
 
         authService.Save(userAuth);

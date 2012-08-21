@@ -110,75 +110,33 @@ namespace Epilogger.Web.Controllers {
             }
         }
 
-        
-        [HttpGet]
-        public virtual ActionResult FacebookAuth()
-        {
-            try
-            {
-                //var accessToken = new Areas.Authentication.Controllers.FacebookController().ConnectAndGetAccount(Request, Url.Action("facebookauth", "join", null, "http"));
-
-                var code = Request.QueryString["code"] as string ?? "";
-                var state = Request.QueryString["state"] as string ?? "";
-
-                FacebookOAuthResult oauthResult;
-                FacebookOAuthResult.TryParse(Request.Url, out oauthResult);
-
-                string accessToken = null;
-                if (oauthResult.IsSuccess)
-                {
-                    var oAuthClient = new FacebookOAuthClient(FacebookApplication.Current) { RedirectUri = new Uri(Url.Action("facebookauth", "join", null, "http")) };
-
-
-                    dynamic tokenResult = oAuthClient.ExchangeCodeForAccessToken(code);
-                    accessToken = tokenResult.access_token;
-
-                    if (String.IsNullOrEmpty(accessToken))
-                    {
-                        this.StoreError("There was a problem connecting to your Facebook account");
-                        return RedirectToAction("Signup");
-                    }
-                }
-
-                return RedirectToAction("Facebook", "join", new { accessToken = accessToken });
-            }
-            catch (Exception)
-            {
-                this.StoreError("There was a problem connecting to your twitter account");
-                return RedirectToAction("Signup", "join");
-            }
-        }
+  
 
         /* Create Account with Facebook Button */
         [HttpGet]
-        public virtual ActionResult Facebook()
+        public virtual ActionResult Facebook(string returnUrl)
         {
             try
             {
-                //var accessToken = Request.QueryString["accessToken"];
-                var code = Request.QueryString["code"] as string ?? "";
-                var state = Request.QueryString["state"] as string ?? "";
+                
+                var client = new FacebookClient();
+                var oauthResult = client.ParseOAuthCallbackUrl(Request.Url);
 
-                FacebookOAuthResult oauthResult;
-                FacebookOAuthResult.TryParse(Request.Url, out oauthResult);
+                // Build the Return URI form the Request Url
+                var redirectUri = new UriBuilder(Url.Action("facebook", "join", null, "http"));
 
-                string accessToken = null;
-                if (oauthResult.IsSuccess)
+                // Exchange the code for an access token
+                dynamic result = client.Get("/oauth/access_token", new
                 {
-                    var oAuthClient = new FacebookOAuthClient(FacebookApplication.Current) { RedirectUri = new Uri(Url.Action("facebook", "join", null, "http")) };
+                    client_id = ConfigurationManager.AppSettings["FacebookAppId"],
+                    redirect_uri = redirectUri.Uri.AbsoluteUri,
+                    client_secret = ConfigurationManager.AppSettings["FacebookAppSecret"],
+                    code = oauthResult.Code,
+                });
 
-
-                    dynamic tokenResult = oAuthClient.ExchangeCodeForAccessToken(code);
-                    accessToken = tokenResult.access_token;
-
-                    if (String.IsNullOrEmpty(accessToken))
-                    {
-                        this.StoreError("There was a problem connecting to your Facebook account");
-                        return RedirectToAction("Signup");
-                    }
-                }
-
-
+                // Read the auth values
+                string accessToken = result.access_token;
+                DateTime expires = DateTime.UtcNow.AddSeconds(Convert.ToDouble(result.expires));
 
 
                 var fbClient = new FacebookClient(accessToken);
@@ -214,23 +172,16 @@ namespace Epilogger.Web.Controllers {
                 };
 
                 //Continue to Step 2
-                //return RedirectToAction("Index", "Home");
                 return View("ShortCreateAccount", model);
             }
             catch (Exception)
             {
-                this.StoreError("There was a problem connecting to your twitter account");
+                this.StoreError("There was a problem connecting to your Facebook account");
                 return RedirectToAction("Signup", "join");
             }
         }
 
 
-
-        //[HttpGet]
-        //public virtual ActionResult ShortCreateAccount()
-        //{
-        //    return View("ShortCreateAccount");
-        //}
 
         [HttpPost]
         public virtual ActionResult ShortCreateAccount(CreateAccountModel model)

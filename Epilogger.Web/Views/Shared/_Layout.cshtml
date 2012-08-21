@@ -8,7 +8,23 @@
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"> <!--<![endif]-->
 
 <head>
-	<meta charset="utf-8" />
+    @*KissMetrics*@
+    <script type="text/javascript">
+        var _kmq = _kmq || [];
+        var _kmk = _kmk || '982ed5ae44d0650b3b3c723ff014e5c2186b5cbc';
+        function _kms(u) {
+            setTimeout(function () {
+                var d = document, f = d.getElementsByTagName('script')[0],
+                    s = d.createElement('script');
+                s.type = 'text/javascript'; s.async = true; s.src = u;
+                f.parentNode.insertBefore(s, f);
+            }, 1);
+        }
+        _kms('//i.kissmetrics.com/i.js');
+        _kms('//doug1izaerwt3.cloudfront.net/' + _kmk + '.1.js');
+    </script>
+
+    <meta charset="utf-8" />
     <meta name="google-site-verification" content="CuQwuSsvoWQapx1142El31mqbNSB6Dq0RBzTjzV0lXQ" />
     @RenderSection("head", false)
 
@@ -16,7 +32,7 @@
 
 
     <!--[if lt IE 9]>
-		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     
     

@@ -10,7 +10,7 @@
         <script type="text/javascript">
             var FlickrApiKey = '@ConfigurationManager.AppSettings["FlickrApiKey"]';
             var FlickrApiSecret = '@ConfigurationManager.AppSettings["FlickrApiSecret"]';
-            var FacebookAppId = '@(((FacebookConfigurationSection)ConfigurationManager.GetSection("facebookSettings")).AppId)';
+            var FacebookAppId = '@ConfigurationManager.AppSettings["FacebookAppId"]';
 
             $(function() {
                 jQuery.ajaxSettings.traditional = true; //set traditional parameters serialization which is used by ASP.NET

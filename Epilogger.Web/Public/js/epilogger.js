@@ -15,7 +15,9 @@ $(document).ready(function () {
 url = location.href;
 hashtag = (url.indexOf('#') != -1) ? decodeURI(url.substring(url.indexOf('#') + 1, url.length)) : false;
 if (hashtag != false) {
-    window.location = 'http://epilogger.com/' + hashtag;
+    if (hashtag != "_=_") {
+        window.location = 'http://epilogger.com/' + hashtag;    
+    }
 }
 
 
