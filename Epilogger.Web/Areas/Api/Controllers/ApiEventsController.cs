@@ -231,7 +231,7 @@ namespace Epilogger.Web.Areas.Api.Controllers
                 return Json(_userManager.GetUserByEmail(email), JsonRequestBehavior.AllowGet);
             }
 
-            [HttpPost]
+            [HttpPost, HmacAuthorization]
             public virtual JsonResult SaveUserFollowsEvent(ApiUserFollowsEvent ufe)
             {
                 return Json(_userManager.SaveUserFollowsEvent(ufe), JsonRequestBehavior.AllowGet);
@@ -242,6 +242,15 @@ namespace Epilogger.Web.Areas.Api.Controllers
             {
                 return Json(_userManager.DeleteEventSubscription(userId, eventId), JsonRequestBehavior.AllowGet);
             }
+
+            [HmacAuthorization]
+            public virtual JsonResult GetUserSubscribedAndCreatedEvents(Guid userId, int page, int count)
+            {
+                return Json(_eventManager.GetUserSubscribedAndCreatedEvents(userId, page,count), JsonRequestBehavior.AllowGet);
+            }
+
+        
+
 
 
         #endregion

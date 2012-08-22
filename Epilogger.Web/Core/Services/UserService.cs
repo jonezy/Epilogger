@@ -122,6 +122,16 @@ namespace Epilogger.Web {
             //return MyEvents.OrderByDescending(e => e.StartDateTime).ToList();
         }
 
+
+        public IEnumerable<Event> GetUserSubscribedAndCreatedEvents(Guid userID, int page, int count)
+        {
+            var usersSubscribedAndCreatedEvents = base.db.Events.Where(e => e.UserID == userID).OrderByDescending(d => d.CreatedDateTime).ToList();
+            usersSubscribedAndCreatedEvents.AddRange(base.db.UserFollowsEvents.Where(ufe => ufe.UserID == userID).OrderByDescending(d => d.Timestamp).Select(item => item.Events.FirstOrDefault()));
+
+            return usersSubscribedAndCreatedEvents.Skip(page * count).Take(count);
+        }
+
+
         public bool IsBetaUser(string emailAddress) {
             return base.db.BetaSignups.Where(b => b.EmailAddress == emailAddress).Count() > 0;
         }
