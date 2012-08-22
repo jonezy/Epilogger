@@ -12,10 +12,12 @@ namespace Epilogger.Web.Areas.Api.Models
     public class EventManager : IEventManager
     {
         EventService _es = new EventService();
+        UserService _us = new UserService();
 
         public EventManager()
         {
-            if (_es == null) _es = new EventService();    
+            if (_es == null) _es = new EventService();
+            if (_us == null) _us = new UserService();    
         }
 
         public Event Create(Event item)
@@ -83,6 +85,12 @@ namespace Epilogger.Web.Areas.Api.Models
             return Mapper.Map<List<SearchInEventModel>, List<ApiSearchInEvent>>(_es.SearchInEvent(eventId, searchTerm, (DateTime)SqlDateTime.MinValue, (DateTime)SqlDateTime.MaxValue));
         }
         //SearchInEvent(int EventID, string SearchTerm, DateTime FromDateTime, DateTime ToDateTime)
+
+
+        public List<ApiEvent> GetUserSubscribedAndCreatedEvents(Guid userID, int page, int count)
+        {
+            return Mapper.Map<List<Event>, List<ApiEvent>>(_us.GetUserSubscribedAndCreatedEvents(userID, page, count).ToList());
+        }
 
         
     }

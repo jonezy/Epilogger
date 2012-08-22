@@ -78,6 +78,14 @@ namespace Epilogger.Web.Areas.Api
                 new { controller = "ApiEvents", action = "EventsByCategoryID", categoryid = UrlParameter.Optional, page = UrlParameter.Optional, count = UrlParameter.Optional }
             );
 
+            context.MapRoute(
+                "MyEventsByUserId",
+                "Api/Events/Me/{userId}/{page}/{count}",
+                new { controller = "ApiEvents", action = "GetUserSubscribedAndCreatedEvents", userId = UrlParameter.Optional, page = UrlParameter.Optional, count = UrlParameter.Optional }
+            );
+
+
+
 
             context.MapRoute(
                 "TweetCountByImageID",

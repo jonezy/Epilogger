@@ -45,6 +45,10 @@ namespace Epilogger.Web.Areas.Api.Models
             return Mapper.Map<User, ApiUser>(_us.GetUserByEmail(email));
         }
 
+        
+
+        
+
 
         public ApiUserFollowsEvent SaveUserFollowsEvent(ApiUserFollowsEvent model)
         {
