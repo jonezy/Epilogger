@@ -145,5 +145,15 @@ namespace Epilogger.Web {
             return base.db.Users.Count(u => u.IsActive);
         }
 
+        public bool IsUsernameAvailable(string username)
+        {
+            return db.Users.Count(e => e.Username==username) == 0;
+        }
+
+        public bool IsEmailAddressAvailable(string emailaddress)
+        {
+            return db.Users.Count(e => e.EmailAddress == emailaddress && (bool)e.EmailVerified) == 0;
+        }
+
     }
 }

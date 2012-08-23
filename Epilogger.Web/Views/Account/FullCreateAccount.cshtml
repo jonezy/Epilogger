@@ -1,12 +1,10 @@
-﻿@using Combres.Mvc
-@model Epilogger.Web.Models.CreateAccountModel
+﻿@model Epilogger.Web.Models.CreateAccountModel
 
 @{
     Layout = "~/Views/Shared/_InteriorLayoutNoBC.cshtml";
     ViewBag.Title = "Epilogger | Create Account";
 }
 
-@Html.CombresLink("CreateAccountJs")
 
 <div class="createAccountPage">
     <div class="signUpHeading center">
@@ -16,7 +14,7 @@
     
     <div class="spacer"></div>
     
-    @*@Html.ValidationSummary("Please correct the following issues")*@
+    @Html.ValidationSummary("Please correct the following issues")
     @using (Html.BeginForm("ShortCreateAccount", "Account", FormMethod.Post))
     {
 
@@ -26,26 +24,20 @@
         
         <div class="createFormFields">
             <fieldset class="">
-                <div class="createFormField">
-                    @Html.TextBoxFor(model => model.Username, new { @class = "blur", title = "Username" }) 
-                    @Html.ValidationMessageFor(model => model.Username)
-                    <div id="usernameCheck" class="ajaxCheck"></div>
-                </div>
-                <div class="createFormField">
-                    @Html.TextBoxFor(model => model.EmailAddress, new { @class = "blur", title = "Email Address" }) 
-                    @Html.ValidationMessageFor(model => model.EmailAddress)
-                    <div id="emailCheck"></div>
-                </div>
-                <div class="createFormField">
-                    <input type="text" class="" id="txtPlainPassword" title="Password" value="Password" style="color: #ccc !important;"/>
-                    @Html.PasswordFor(model => model.Password, new { @class = "", title = "Password", id = "Password" })
-                </div>
+                <p>@Html.TextBoxFor(model => model.Username, new { @class = "blur", title = "Username" })</p>
+                <p>@Html.ValidationMessageFor(model => model.Username)</p>
+                <p>@Html.TextBoxFor(model => model.EmailAddress, new { @class = "blur", title = "Email Address" })</p>
+                <p>@Html.ValidationMessageFor(model => model.EmailAddress)</p>
+                
+                <p><input type="text" class="" id="txtPlainPassword" title="Password" value="Password" style="color: #ccc !important;"/></p>
+                <p>@Html.PasswordFor(model => model.Password, new { @class = "", title = "Password", id = "Password" })</p>
+                
             </fieldset>
             
             <div class="acceptText">
                 By creating an account you agree to the Epilogger<br/> <a href="/home/Terms" target="_blank">Terms of Use</a> and <a href="/home/Privacy" target="_blank">Privacy Policy</a>
                 <div class="spacer"></div>
-                <input type="submit" class="disabled blue-action-button submitForm" value="Create Account" /> 
+                <input type="submit" class="blue-action-button" value="Create Account" /> 
             </div>
                
             

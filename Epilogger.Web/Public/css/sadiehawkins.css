@@ -2704,6 +2704,10 @@ a.fdbk_tab_hidden {
     margin-left: 270px;
     width: 350px;
 }
+.createFormField {
+    margin-bottom: 20px;
+    font-weight: bold;
+}
 
 .createFormFields input[type="text"], .createFormFields input[type="password"], .createFormFields input[type="email"] 
 {
@@ -2713,12 +2717,21 @@ a.fdbk_tab_hidden {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
+    margin: 0;
 }
 
 .createFormFields input[type="text"].blur, .createFormFields input[type="password"].blur, .createFormFields input[type="email"].blur
 {
     color: #ccc;
 }
+
+.createFormFields input[type="text"].input-validation-error, .createFormFields input[type="password"].input-validation-error, .createFormFields input[type="email"].input-validation-error {
+    background-color: #ffafaf;
+    color: #878787;
+}
+
+.ajaxCheck { display: none; }
+
 
 .acceptText { font-size: 16px; }
 

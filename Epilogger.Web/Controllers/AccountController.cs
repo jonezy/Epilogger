@@ -290,6 +290,14 @@ namespace Epilogger.Web.Controllers {
                     return View(model);
                 }
             }
+            //switch (model.AuthService)
+            //{
+            //    case "facebook":
+            //        return RedirectToAction("Facebook", "join", model);
+            //    case "twitter":
+            //        return RedirectToAction("Twitter", "join", model);
+            //        break;
+            //}
             return View(model);
         }
 
@@ -348,6 +356,53 @@ namespace Epilogger.Web.Controllers {
         }
 
 
+        [HttpPost] //Called by Ajax
+        public bool CheckUsername(string username)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(username))
+                {
+                    return false;
+                }
+                if (username=="Username")
+                {
+                    return false;
+                }
+
+                //Check if username exists
+                return service.IsUsernameAvailable(username);    
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        [HttpPost] //Called by Ajax
+        public bool CheckEmailAddress(string emailaddress)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(emailaddress))
+                {
+                    return false;
+                }
+                if (emailaddress == "Email Address")
+                {
+                    return false;
+                }
+
+                //Check if username exists
+                return service.IsEmailAddressAvailable(emailaddress);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        //
 
 
 

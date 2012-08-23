@@ -93,5 +93,11 @@
       <resource path="~/Public/js/LiveMode.js" />
     </resourceSet>
 
+    <resourceSet name="CreateAccountJs" type="js">
+      <resource path="~/Public/js/jquery.blockUI.js" />
+      <resource path="~/Public/js/CreateAccount.js" />
+    </resourceSet>
+
+
   </resourceSets>
 </combres>

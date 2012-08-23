@@ -469,6 +469,8 @@
     <Content Include="Public\images\livemode\client\bg.png" />
     <Content Include="Public\images\livemode\client\sponsor-osheaga.png" />
     <Content Include="Public\images\logoSmall.png" />
+    <Content Include="Public\images\signup\checkmark.gif" />
+    <Content Include="Public\images\signup\createAccountLoader.gif" />
     <Content Include="Public\images\signup\facebookButton.png" />
     <Content Include="Public\images\signup\faceookLofo-sm.png" />
     <Content Include="Public\images\signup\twitter-bird-light-bgs-sm.png" />
@@ -476,6 +478,7 @@
     <Content Include="Public\images\widget\icon-arrow.png" />
     <Content Include="Public\images\widget\logo\chevywidget.png" />
     <Content Include="Public\images\widget\menu-active.png" />
+    <Content Include="Public\js\CreateAccount.js" />
     <Content Include="Public\js\widget.js" />
     <Content Include="WidgetSample.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -3093,7 +3096,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LayoutOldGood.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Account\TwitterAuthTest.cshtml" />
+    <Content Include="Views\Account\Old\TwitterAuthTest.cshtml" />
     <Content Include="Views\Widget\index.cshtml" />
     <Content Include="Views\Widget\_EmbedLayout.cshtml" />
     <Content Include="Views\Widget\_widgetMenu.cshtml" />
@@ -3136,7 +3139,8 @@
     <Content Include="Views\Home\WebStatus.cshtml" />
     <Content Include="Views\Shared\Nag.cshtml" />
     <Content Include="Views\Account\Signup.cshtml" />
-    <Content Include="Views\Account\Create.cshtml" />
+    <Content Include="Views\Account\Old\Create.cshtml" />
+    <Content Include="Views\Account\FullCreateAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />
