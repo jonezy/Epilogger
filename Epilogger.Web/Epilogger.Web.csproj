@@ -71,6 +71,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\elmah.corelibrary.1.2.1\lib\Elmah.dll</HintPath>
     </Reference>
+    <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
+      <HintPath>..\packages\Facebook.6.0.20\lib\net40-client\Facebook.dll</HintPath>
+    </Reference>
     <Reference Include="Fasterflect">
       <HintPath>..\packages\fasterflect.2.0.1\lib\net40\Fasterflect.dll</HintPath>
     </Reference>
@@ -8654,10 +8657,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\facebook-csharp-sdk\Source\Facebook\Facebook-Net40.csproj">
-      <Project>{857E540C-0092-4590-A279-F98A6B77AC0A}</Project>
-      <Name>Facebook-Net40</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Epilogger.Common\Epilogger.Common.csproj">
       <Project>{80AC28E2-F4B5-4D9C-8125-89238E665A02}</Project>
       <Name>Epilogger.Common</Name>

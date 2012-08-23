@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epilogger.Tests", "Epilogge
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epilogger.Common", "Epilogger.Common\Epilogger.Common.csproj", "{80AC28E2-F4B5-4D9C-8125-89238E665A02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facebook-Net40", "..\facebook-csharp-sdk\Source\Facebook\Facebook-Net40.csproj", "{857E540C-0092-4590-A279-F98A6B77AC0A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,10 +25,6 @@ Global
 		{80AC28E2-F4B5-4D9C-8125-89238E665A02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80AC28E2-F4B5-4D9C-8125-89238E665A02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80AC28E2-F4B5-4D9C-8125-89238E665A02}.Release|Any CPU.Build.0 = Release|Any CPU
-		{857E540C-0092-4590-A279-F98A6B77AC0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{857E540C-0092-4590-A279-F98A6B77AC0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{857E540C-0092-4590-A279-F98A6B77AC0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{857E540C-0092-4590-A279-F98A6B77AC0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
