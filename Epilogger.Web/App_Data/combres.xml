@@ -93,9 +93,18 @@
       <resource path="~/Public/js/LiveMode.js" />
     </resourceSet>
 
+
+    <resourceSet name="CreateAccountCss" type="css">
+      <resource path="~/Public/js/FileUploader/fileuploader.css" />
+    </resourceSet>
     <resourceSet name="CreateAccountJs" type="js">
       <resource path="~/Public/js/jquery.blockUI.js" />
       <resource path="~/Public/js/CreateAccount.js" />
+
+      <resource path="~/Public/js/FileUploader/fileuploader.js" />
+    
+
+
     </resourceSet>
 
 

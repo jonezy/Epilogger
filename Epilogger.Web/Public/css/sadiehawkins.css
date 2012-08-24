@@ -2694,12 +2694,21 @@ a.fdbk_tab_hidden {
     margin: auto;
 }
 
-.createProfilePicture {
+.profilePictureSection {
     float: left;
+    width: 250px;
+    font-size: 16px;
+}
+
+.createProfilePicture {
     width: 250px;
     padding: 1px;
     border: 1px solid #d5d5d5;
 }
+
+
+
+
 .createFormFields {
     margin-left: 270px;
     width: 350px;
@@ -2707,6 +2716,18 @@ a.fdbk_tab_hidden {
 .createFormField {
     margin-bottom: 20px;
     font-weight: bold;
+}
+
+.createFormLeft {
+    width: 160px;
+    float: left;
+    display: inline-block;
+    padding-right: 20px;
+}
+.createFormRight {
+    width: 160px;
+    display: inline-block;
+    
 }
 
 .createFormFields input[type="text"], .createFormFields input[type="password"], .createFormFields input[type="email"] 
@@ -2736,3 +2757,9 @@ a.fdbk_tab_hidden {
 .acceptText { font-size: 16px; }
 
 .createAccountButton {margin: auto; margin-top: 100px; }
+
+.birthdateinput {
+    background-image: url(/Public/Images/signup/DateIcon.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: 97% center !important;
+}

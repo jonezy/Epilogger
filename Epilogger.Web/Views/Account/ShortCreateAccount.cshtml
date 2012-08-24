@@ -7,6 +7,8 @@
 }
 
 @Html.CombresLink("CreateAccountJs")
+@Html.CombresLink("CreateAccountCss")
+
 
 <div class="createAccountPage">
     <div class="signUpHeading center">
@@ -19,9 +21,12 @@
     @*@Html.ValidationSummary("Please correct the following issues")*@
     @using (Html.BeginForm("ShortCreateAccount", "Account", FormMethod.Post))
     {
-
-        <div class="createProfilePicture">
-            <img src="@Model.DisplayProfileImage" alt="@Model.ServiceUserName" width="250px" />
+        <div class="profilePictureSection">
+            <div class="createProfilePicture">
+                <img id="theProfileImage" src="@Model.DisplayProfileImage" alt="@Model.ServiceUserName" width="250px" />
+            </div>
+            <div class="center" style="padding-top:5px;"><span id="uploadavator"></span></div>
+            @*<a href="" id="uploadavator">upload an avatar</a>*@
         </div>
         
         <div class="createFormFields">

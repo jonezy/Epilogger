@@ -2,7 +2,9 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Configuration;
+using System.Drawing.Imaging;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using System.Net;
@@ -15,6 +17,7 @@ using DevOne.Security.Cryptography.BCrypt;
 using Epilogger.Common;
 using Epilogger.Data;
 using Epilogger.Web.Core.Email;
+using Epilogger.Web.Core.Helpers;
 using Epilogger.Web.Epilogr;
 using Epilogger.Web.Models;
 using Epilogger.Web.Views.Emails;
@@ -41,7 +44,6 @@ namespace Epilogger.Web.Controllers {
         {
             return View();
         }
-
 
         /* Create Account with Twitter Button */
         [HttpGet]
@@ -109,8 +111,6 @@ namespace Epilogger.Web.Controllers {
                 return RedirectToAction("Signup", "join");
             }
         }
-
-  
 
         /* Create Account with Facebook Button */
         [HttpGet]
@@ -180,8 +180,6 @@ namespace Epilogger.Web.Controllers {
                 return RedirectToAction("Signup", "join");
             }
         }
-
-
 
         [HttpPost]
         public virtual ActionResult ShortCreateAccount(CreateAccountModel model)
@@ -268,7 +266,7 @@ namespace Epilogger.Web.Controllers {
 
                     var sfEmail = new SpamSafeMail
                     {
-                        EmailSubject = "Thank you for registering on epilogger.com",
+                        EmailSubject = "Welcome to epilogger.com!",
                         HtmlEmail = message,
                         TextEmail = message
                     };
@@ -276,11 +274,11 @@ namespace Epilogger.Web.Controllers {
                     sfEmail.SendMail();
 
 
-                    this.StoreSuccess("Your account was created successfully<br /><br/>Please check your inbox for our validation message, your account will be inaccessable until you validate it.");
+                    this.StoreSuccess("Your account was created successfully");
 
-                    CookieHelpers.WriteCookie("lc", "tempid", user.ID.ToString());
+                    CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString(), DateTime.Now.AddDays(30));
 
-                    return RedirectToAction("AccountActivationNeeded", "account");
+                    return RedirectToAction("Index", "Home");
 
                 }
                 catch (Exception ex)
@@ -290,18 +288,38 @@ namespace Epilogger.Web.Controllers {
                     return View(model);
                 }
             }
-            //switch (model.AuthService)
-            //{
-            //    case "facebook":
-            //        return RedirectToAction("Facebook", "join", model);
-            //    case "twitter":
-            //        return RedirectToAction("Twitter", "join", model);
-            //        break;
-            //}
+
             return View(model);
         }
 
+        /* Create Account - Full */
+        [HttpGet]
+        public virtual ActionResult FullCreateAccount()
+        {
+            try
+            {
+               
+                var model = new CreateAccountModel()
+                {
+                    AuthToken = string.Empty,
+                    AuthTokenSecret = string.Empty,
+                    AuthScreenname = string.Empty,
+                    FirstName = string.Empty,
+                    LastName = string.Empty,
+                    DisplayProfileImage = "/Public/images/signup/NoAvatar.png",
+                    ProfileImage = "/Public/images/signup/NoAvatar.png",
+                    ServiceUserName = String.Empty,
+                    AuthService = string.Empty
+                };
 
+                return View(model);
+            }
+            catch (Exception)
+            {
+                this.StoreError("There was a problem. Please try again later.");
+                return RedirectToAction("Signup", "join");
+            }
+        }
 
 
 
@@ -355,7 +373,6 @@ namespace Epilogger.Web.Controllers {
             }
         }
 
-
         [HttpPost] //Called by Ajax
         public bool CheckUsername(string username)
         {
@@ -402,9 +419,47 @@ namespace Epilogger.Web.Controllers {
             }
         }
 
-        //
+        [HttpPost]
+        public ActionResult UploadAvatar(string qqfile)
+        {
+            var path = @"C:\\";
+            var file = string.Empty;
 
+            Uri imageurl;
 
+            try
+            {
+                var stream = Request.InputStream;
+                if (String.IsNullOrEmpty(Request["qqfile"]))
+                {
+                    // IE
+                    var postedFile = Request.Files[0];
+                    if (postedFile != null) stream = postedFile.InputStream;
+                    file = Path.Combine(path, System.IO.Path.GetFileName(Request.Files[0].FileName));
+                }
+                else
+                {
+                    //Webkit, Mozilla
+                    file = Path.Combine(path, qqfile);
+                }
+
+                //Resize the image
+                Stream resizedImage = null;
+                Helpers.ResizeImage(stream, 250, 500, true, out resizedImage);
+
+                //Azure Storage Code - Full Profile pic
+                imageurl = AzureImageStorageHelper.StoreProfileImage("profileimage-" + Session.SessionID, "profilepicturesfull", resizedImage);
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, "application/json");
+            }
+
+            return Json(new { success = true, imageurl = imageurl.AbsoluteUri }, "text/html");
+        }
+
+        
 
 
         #endregion

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Web;
 using RichmondDay.Helpers;
@@ -116,8 +118,46 @@ namespace Epilogger.Web {
         }
 
 
-        
+        public static void ResizeImage(Stream imgStream, int newWidth, int maxHeight, bool onlyResizeIfWider, out Stream newImageStream)
+        {
+            var fullsizeImage = System.Drawing.Image.FromStream(imgStream);
 
+            // Prevent using images internal thumbnail
+            fullsizeImage.RotateFlip(System.Drawing.RotateFlipType.Rotate180FlipNone);
+            fullsizeImage.RotateFlip(System.Drawing.RotateFlipType.Rotate180FlipNone);
+
+            if (onlyResizeIfWider)
+            {
+                if (fullsizeImage.Width <= newWidth)
+                {
+                    newWidth = fullsizeImage.Width;
+                }
+            }
+
+            var newHeight = fullsizeImage.Height * newWidth / fullsizeImage.Width;
+            if (newHeight > maxHeight)
+            {
+                // Resize with height instead
+                newWidth = fullsizeImage.Width * maxHeight / fullsizeImage.Height;
+                newHeight = maxHeight;
+            }
+
+            var newImage = fullsizeImage.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero);
+
+            // Clear handle to original file so that we can overwrite it if necessary
+            fullsizeImage.Dispose();
+
+            // Save resized picture
+            newImageStream = newImage.ToStream(ImageFormat.Png);
+        }
+
+        public static Stream ToStream(this System.Drawing.Image image, ImageFormat formaw)
+        {
+            var stream = new System.IO.MemoryStream();
+            image.Save(stream, formaw);
+            stream.Position = 0;
+            return stream;
+        }
 
     }
 }

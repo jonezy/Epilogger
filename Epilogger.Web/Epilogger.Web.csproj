@@ -85,13 +85,12 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\Microsoft.WindowsAzure.ServiceRuntime.dll</HintPath>
+    <Reference Include="Microsoft.WindowsAzure.Configuration">
+      <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.1.7.0.3\lib\net35-full\Microsoft.WindowsAzure.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.WindowsAzure.StorageClient">
-      <HintPath>..\packages\WindowsAzure.StorageClient.Library.1.4\lib\Microsoft.WindowsAzure.StorageClient.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WindowsAzure.Storage.1.7.0.0\lib\net35-full\Microsoft.WindowsAzure.StorageClient.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -301,6 +300,7 @@
     <Compile Include="Core\Framework\DateTimeModelBinder.cs" />
     <Compile Include="Core\Framework\TimezoneManager.cs" />
     <Compile Include="Core\Handlers\ReverseProxyHttpHandler.cs" />
+    <Compile Include="Core\Helpers\AzureImageStorageHelper.cs" />
     <Compile Include="Core\Helpers\AzureTableHelper.cs" />
     <Compile Include="Core\Helpers\FacebookHelper.cs" />
     <Compile Include="Core\Helpers\FoursquareVenueClient.cs" />
@@ -476,12 +476,17 @@
     <Content Include="Public\images\signup\createAccountLoader.gif" />
     <Content Include="Public\images\signup\facebookButton.png" />
     <Content Include="Public\images\signup\faceookLofo-sm.png" />
+    <Content Include="Public\images\signup\NoAvatar.png" />
     <Content Include="Public\images\signup\twitter-bird-light-bgs-sm.png" />
     <Content Include="Public\images\signup\twitterButton.png" />
     <Content Include="Public\images\widget\icon-arrow.png" />
     <Content Include="Public\images\widget\logo\chevywidget.png" />
     <Content Include="Public\images\widget\menu-active.png" />
     <Content Include="Public\js\CreateAccount.js" />
+    <Content Include="Public\js\FileUploader\do-nothing.htm" />
+    <Content Include="Public\js\FileUploader\fileuploader.css" />
+    <Content Include="Public\js\FileUploader\fileuploader.js" />
+    <Content Include="Public\js\FileUploader\loading.gif" />
     <Content Include="Public\js\widget.js" />
     <Content Include="WidgetSample.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -8640,7 +8645,7 @@
     <None Include="Public\js\FacebookPhotoPicker\dojoroot\dojo\_firebug\.svn\text-base\tab_rgt_over.png.svn-base" />
     <None Include="Public\js\FacebookPhotoPicker\dojoroot\dojo\_firebug\.svn\text-base\warningIcon.png.svn-base" />
     <None Include="Public\js\FacebookPhotoPicker\dojoroot\dojo\_firebug\LICENSE" />
-    <Content Include="Views\Account\AccountActivationNeeded.cshtml" />
+    <Content Include="Views\Account\Old\AccountActivationNeeded.cshtml" />
     <Content Include="Views\Account\ActivationSent.cshtml" />
     <Content Include="Views\Shared\GlobalNavigation.cshtml" />
     <Content Include="Views\Shared\Navigation.cshtml" />
@@ -8654,6 +8659,7 @@
     <EmbeddedResource Include="Views\Emails\AccountEmails.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AccountEmails.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -1,43 +1,77 @@
-﻿@model Epilogger.Web.Models.CreateAccountModel
+﻿@using Combres.Mvc
+@model Epilogger.Web.Models.CreateAccountModel
 
 @{
     Layout = "~/Views/Shared/_InteriorLayoutNoBC.cshtml";
     ViewBag.Title = "Epilogger | Create Account";
 }
 
+@Html.CombresLink("CreateAccountJs")
+@Html.CombresLink("CreateAccountCss")
+
 
 <div class="createAccountPage">
     <div class="signUpHeading center">
-        <h1>Almost there, <img src="@string.Format("/Public/images/signup/{0}", Model.AuthService == "twitter" ? "twitter-bird-light-bgs-sm.png" : "faceookLofo-sm.png")" style="margin-top:-6px;" alt="Twitter" /> @Model.FirstName @Model.LastName!</h1>
+        <h1>Almost there!</h1>
         <h2>We just need a little more information...</h2>
     </div>
     
     <div class="spacer"></div>
     
-    @Html.ValidationSummary("Please correct the following issues")
+    @*@Html.ValidationSummary("Please correct the following issues")*@
     @using (Html.BeginForm("ShortCreateAccount", "Account", FormMethod.Post))
     {
-
-        <div class="createProfilePicture">
-            <img src="@Model.DisplayProfileImage" alt="@Model.ServiceUserName" width="250px" />
+        <div class="profilePictureSection">
+            <div class="createProfilePicture">
+                <img id="theProfileImage" src="@Model.DisplayProfileImage" alt="Avatar" width="250px" />
+            </div>
+            <div class="center" style="padding-top:5px;"><span id="uploadavator"></span></div>
+            @*<a href="" id="uploadavator">upload an avatar</a>*@
         </div>
         
         <div class="createFormFields">
             <fieldset class="">
-                <p>@Html.TextBoxFor(model => model.Username, new { @class = "blur", title = "Username" })</p>
-                <p>@Html.ValidationMessageFor(model => model.Username)</p>
-                <p>@Html.TextBoxFor(model => model.EmailAddress, new { @class = "blur", title = "Email Address" })</p>
-                <p>@Html.ValidationMessageFor(model => model.EmailAddress)</p>
+                <div class="createFormField">
+                    @Html.TextBoxFor(model => model.Username, new { @class = "blur", title = "Username" }) 
+                    @Html.ValidationMessageFor(model => model.Username)
+                    <div id="usernameCheck" class="ajaxCheck"></div>
+                </div>
+                <div class="createFormField">
+                    @Html.TextBoxFor(model => model.EmailAddress, new { @class = "blur", title = "Email Address" }) 
+                    @Html.ValidationMessageFor(model => model.EmailAddress)
+                    <div id="emailCheck"></div>
+                </div>
+                <div class="createFormField">
+                    <input type="text" class="" id="txtPlainPassword" title="Password" value="Password" style="color: #ccc !important;"/>
+                    @Html.PasswordFor(model => model.Password, new { @class = "", title = "Password", id = "Password" })
+                </div>
                 
-                <p><input type="text" class="" id="txtPlainPassword" title="Password" value="Password" style="color: #ccc !important;"/></p>
-                <p>@Html.PasswordFor(model => model.Password, new { @class = "", title = "Password", id = "Password" })</p>
                 
+                
+                <div class="createFormField">
+                    <div class="createFormLeft">
+                        @Html.TextBoxFor(model => model.FirstName, new { @class = "blur", title = "First Name" }) 
+                        @Html.ValidationMessageFor(model => model.FirstName)
+                    </div>    
+                    
+                    <div class="createFormRight">
+                        @Html.TextBoxFor(model => model.LastName, new { @class = "blur", title = "Last Name" }) 
+                        @Html.ValidationMessageFor(model => model.LastName)
+                    </div>
+
+                </div>
+
+                <div class="createFormField">
+                    @Html.TextBoxFor(model => model.DateOfBirth, new { @class = "blur birthdateinput", title = "When is your birthday?" }) 
+                    @Html.ValidationMessageFor(model => model.DateOfBirth)
+                </div>
+
             </fieldset>
             
             <div class="acceptText">
                 By creating an account you agree to the Epilogger<br/> <a href="/home/Terms" target="_blank">Terms of Use</a> and <a href="/home/Privacy" target="_blank">Privacy Policy</a>
                 <div class="spacer"></div>
-                <input type="submit" class="blue-action-button" value="Create Account" /> 
+                <input type="submit" class="disabled blue-action-button submitForm" value="Create Account" /> 
             </div>
                
             

@@ -2,12 +2,37 @@
 
 head.ready(function () {
 
+
+
+
+
+    var button = $('#uploadavator')[0];
+    var uploader = new qq.FileUploader({
+        element: button,
+        allowedExtensions: ['jpg', 'jpeg', 'png', 'gif'],
+        sizeLimit: 2147483647, // max size
+        action: '/Account/UploadAvatar',
+        multiple: false,
+        uploadButtonText: 'upload an avatar',
+        onComplete: function (id, fileName, responseJSON) {
+            $("#theProfileImage").attr("src", responseJSON.imageurl);
+            $("#ProfileImage").val(responseJSON.imageurl);
+            $("#DisplayProfileImage").val(responseJSON.imageurl);
+        }
+    });
+
+
+
     var usernameValid = false;
 
     checkIfCreateIsDisabled();
 
     $('#Username').live('keyup', function () {
+        $("#Username").val($("#Username").val().replace(/^\s+|\s+$/g, "")); // trim leading and trailing spaces
+        $("#Username").val($("#Username").val().replace( /[_|\s]+/g , "")); // no spaces
+        $("#Username").val($("#Username").val().replace(/[^a-zA-Z0-9-]+/g, "")); // remove all non-alphanumeric characters except the hyphen
 
+         
         var value = $("#Username").val();
         setTimeout(function () {
             if ($("#Username").val() == value) {
@@ -92,7 +117,7 @@ head.ready(function () {
         checkIfCreateIsDisabled();
     });
 
-    $('#Password').live('keyup', function() {
+    $('#Password').live('keyup', function () {
         checkIfCreateIsDisabled();
     });
 
