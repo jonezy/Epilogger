@@ -82,11 +82,11 @@ namespace Epilogger.Web {
             );
 
             /* AccountModel Stuff */
-            routes.MapRoute("Signup", "join/signup", new { controller = "account", action = "Signup" } );
-            routes.MapRoute("CreateAccountTwitter", "join/twitter", new { controller = "account", action = "Twitter" });
-            routes.MapRoute("CreateAccountFacebookAuth", "join/facebookauth", new { controller = "account", action = "Facebookauth" });
-            routes.MapRoute("DoFacebookLogin", "join/DoFacebookLogin", new { controller = "account", action = "DoFacebookLogin" });
-            routes.MapRoute("CreateAccountFacebook", "join/facebook", new { controller = "account", action = "Facebook" });
+            //routes.MapRoute("Signup", "join/signup", new { controller = "account", action = "Signup" } );
+            //routes.MapRoute("CreateAccountTwitter", "join/twitter", new { controller = "account", action = "Twitter" });
+            //routes.MapRoute("CreateAccountFacebookAuth", "join/facebookauth", new { controller = "account", action = "Facebookauth" });
+            //routes.MapRoute("DoFacebookLogin", "join/DoFacebookLogin", new { controller = "account", action = "DoFacebookLogin" });
+            //routes.MapRoute("CreateAccountFacebook", "join/facebook", new { controller = "account", action = "Facebook" });
 
 
             routes.MapRoute(

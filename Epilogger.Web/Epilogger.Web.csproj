@@ -285,6 +285,7 @@
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageUploadController.cs" />
+    <Compile Include="Controllers\JoinController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Controllers\WidgetController.cs" />
     <Compile Include="Core\AuthenticationServices.cs" />
@@ -474,6 +475,7 @@
     <Content Include="Public\images\logoSmall.png" />
     <Content Include="Public\images\signup\checkmark.gif" />
     <Content Include="Public\images\signup\createAccountLoader.gif" />
+    <Content Include="Public\images\signup\DateIcon.png" />
     <Content Include="Public\images\signup\facebookButton.png" />
     <Content Include="Public\images\signup\faceookLofo-sm.png" />
     <Content Include="Public\images\signup\NoAvatar.png" />
@@ -3146,9 +3148,14 @@
     <Content Include="Views\Widget\TwitterRetweet.cshtml" />
     <Content Include="Views\Home\WebStatus.cshtml" />
     <Content Include="Views\Shared\Nag.cshtml" />
-    <Content Include="Views\Account\Signup.cshtml" />
+    <Content Include="Views\Join\Signup.cshtml" />
     <Content Include="Views\Account\Old\Create.cshtml" />
     <Content Include="Views\Account\FullCreateAccount.cshtml" />
+    <Content Include="Views\Join\Twitter.cshtml" />
+    <Content Include="Views\Join\_ShortCreateForm.cshtml" />
+    <Content Include="Views\Join\Facebook.cshtml" />
+    <Content Include="Views\Join\Email.cshtml" />
+    <Content Include="Views\Join\_FullCreateForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />

@@ -2730,7 +2730,7 @@ a.fdbk_tab_hidden {
     
 }
 
-.createFormFields input[type="text"], .createFormFields input[type="password"], .createFormFields input[type="email"] 
+.createFormFields input[type="text"], .createFormFields input[type="password"], .createFormFields input[type="email"], .createFormFields select
 {
     width: 340px;
     font-size: 18px;
@@ -2751,6 +2751,25 @@ a.fdbk_tab_hidden {
     color: #878787;
 }
 
+#m_DOB {
+    width: 135px;
+    height: 35px;
+    margin-right: 10px;
+    float: left;
+}
+#d_DOB {
+    width: 95px;
+    height: 35px;
+    margin-right: 10px;
+    float: left;
+}
+#y_DOB {
+    width: 95px;
+    height: 35px;
+}
+.birthdayText { font-size: 10px; }
+.birthdayText strong { font-weight: bold; }
+
 .ajaxCheck { display: none; }
 
 
@@ -2763,3 +2782,6 @@ a.fdbk_tab_hidden {
     background-repeat: no-repeat !important;
     background-position: 97% center !important;
 }
+
+.createAccountSubmit { float: left;margin-right: 20px; }
+#createAccountWait { margin-top: 7px;display: none;}

@@ -431,3 +431,90 @@ head.ready(function () {
         }
     } (jQuery);
 });
+
+//Validate Birthdate - Used on Create Account Pages - Aug 25, 2012
+head.ready(function () {
+    $("#m_DOB").change(function () {
+        var month = $("#m_DOB").val();
+        var year = $("#y_DOB").val();
+        var totalDays;
+
+        if (month == 2) {
+            if (year % 4 == 0) {
+                totalDays = 29;
+            }
+            else {
+                totalDays = 28;
+            }
+        }
+        else if (month == 4 || month == 6 || month == 9 || month == 11) {
+            totalDays = 30;
+        }
+        else {
+            totalDays = 31;
+        }
+
+        //if ($("#d_DOB").val() > totalDays) {
+        var dropDown = $("#d_DOB");
+        dropDown.children().remove();
+
+        dropDown.append("<option value='Day'>Day</option>");
+        for (var key = 1; key <= totalDays; key++) {
+            dropDown.append("<option value='" + key + "'>" + key + "</option>");
+        }
+        //}
+
+        consolidateBirthday();
+    });
+
+    $("#y_DOB").change(function () {
+        var year = $("#y_DOB").val();
+        var month = $("#m_DOB").val();
+        var totalDays;
+        if (month == 2) {
+            if (year % 4 == 0) {
+                totalDays = 29;
+            }
+            else {
+                totalDays = 28;
+            }
+        }
+        else if (month == 4 || month == 6 || month == 9 || month == 11) {
+            totalDays = 30;
+        }
+        else {
+            totalDays = 31;
+        }
+
+        if ($("#d_DOB option:selected").text() > totalDays) {
+            var dropDown = $("#d_DOB");
+            dropDown.children().remove();
+            dropDown.append("<option value='Day'>Day</option>");
+            for (var key = 1; key <= totalDays; key++) {
+                dropDown.append("<option value='" + key + "'>" + key + "</option>");
+            }
+        }
+
+        consolidateBirthday();
+    });
+
+    $("#d_DOB").change(function () {
+        consolidateBirthday();
+    });
+
+
+    function consolidateBirthday() {
+
+        if ($("#d_DOB option:selected").text() != "Day" &&
+                    $("#m_DOB option:selected").text() != "Month" &&
+                    $("#y_DOB option:selected").text() != "Year") {
+
+            $("#DateOfBirth").val($("#m_DOB option:selected").val() + "/" + $("#d_DOB option:selected").val() + "/" + $("#y_DOB option:selected").val() + " 00:00:00");
+            //alert($("#DateOfBirth").val());
+            //08/25/2012 04:09:42
+        }
+    }
+
+
+
+});

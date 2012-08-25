@@ -158,6 +158,18 @@ namespace Epilogger.Web {
             stream.Position = 0;
             return stream;
         }
+        
+        public static string ResolveServerUrl(string serverUrl, bool forceHttps)
+        {
+            if (serverUrl.IndexOf("://", System.StringComparison.Ordinal) > -1)
+                return serverUrl;
+
+            var newUrl = serverUrl;
+            var originalUri = HttpContext.Current.Request.Url;
+            newUrl = (forceHttps ? "https" : originalUri.Scheme) +
+                "://" + originalUri.Authority + newUrl;
+            return newUrl;
+        } 
 
     }
 }

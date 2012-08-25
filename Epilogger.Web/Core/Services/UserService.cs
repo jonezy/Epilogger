@@ -152,7 +152,7 @@ namespace Epilogger.Web {
 
         public bool IsEmailAddressAvailable(string emailaddress)
         {
-            return db.Users.Count(e => e.EmailAddress == emailaddress && (bool)e.EmailVerified) == 0;
+            return db.Users.Count(e => e.EmailAddress == emailaddress) == 0;
         }
 
     }

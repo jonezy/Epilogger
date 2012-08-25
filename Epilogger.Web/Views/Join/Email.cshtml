@@ -1,0 +1,13 @@
+﻿@using Combres.Mvc
+@model Epilogger.Web.Models.CreateAccountModel
+
+@{
+    Layout = "~/Views/Shared/_InteriorLayoutNoBC.cshtml";
+    ViewBag.Title = "Epilogger | Create Account";
+}
+
+@Html.CombresLink("CreateAccountJs")
+@Html.CombresLink("CreateAccountCss")
+
+
+@Html.Partial("_FullCreateForm", Model)

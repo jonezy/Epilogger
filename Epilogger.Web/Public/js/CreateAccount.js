@@ -29,10 +29,10 @@ head.ready(function () {
 
     $('#Username').live('keyup', function () {
         $("#Username").val($("#Username").val().replace(/^\s+|\s+$/g, "")); // trim leading and trailing spaces
-        $("#Username").val($("#Username").val().replace( /[_|\s]+/g , "")); // no spaces
+        $("#Username").val($("#Username").val().replace(/[_|\s]+/g, "")); // no spaces
         $("#Username").val($("#Username").val().replace(/[^a-zA-Z0-9-]+/g, "")); // remove all non-alphanumeric characters except the hyphen
 
-         
+
         var value = $("#Username").val();
         setTimeout(function () {
             if ($("#Username").val() == value) {
@@ -95,7 +95,7 @@ head.ready(function () {
                                     $("#emailCheck").html("<img src='/Public/images/signup/checkmark.gif' alt='' />&nbsp;&nbsp; Email Address is available!");
                                     checkIfCreateIsDisabled();
                                 } else {
-                                    $("#emailCheck").html("This email address already exists in Epilogger, would you like to <a href=''>login</a> or <a href=''>recover your password</a>.");
+                                    $("#emailCheck").html("This email address already exists in Epilogger, would you like to <a href='/login'>login</a> or <a href='/account/forgotpassword'>recover your password</a>.");
                                     $(".submitForm").attr('disabled', 'disabled');
                                     checkIfCreateIsDisabled();
                                 }
@@ -121,6 +121,15 @@ head.ready(function () {
         checkIfCreateIsDisabled();
     });
 
+    $("#d_DOB").change(function () {
+        checkIfCreateIsDisabled();
+    });
+    $("#m_DOB").change(function () {
+        checkIfCreateIsDisabled();
+    });
+    $("#y_DOB").change(function () {
+        checkIfCreateIsDisabled();
+    });
 
 
     function isValidEmailAddress(emailAddress) {
@@ -135,7 +144,10 @@ head.ready(function () {
                     $("#EmailAddress").val() != "Email Address" &&
                     $("#Password").val() != "Password" &&
                     isValidEmailAddress($("#EmailAddress").val()) == true &&
-                    usernameValid == true) {
+                    usernameValid == true &&
+                    $("#d_DOB option:selected").text() != "Day" &&
+                    $("#m_DOB option:selected").text() != "Month" &&
+                    $("#y_DOB option:selected").text() != "Year") {
 
             $(".submitForm").removeClass("disabled");
             $(".submitForm").removeAttr("disabled");
@@ -146,5 +158,12 @@ head.ready(function () {
 
     }
 
+
+    if ($("#Username").val() != "Username") {
+        $('#Username').trigger('keyup');
+    }
+
+
+    checkIfCreateIsDisabled();
 
 });
