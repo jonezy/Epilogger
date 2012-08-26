@@ -147,16 +147,7 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Create() {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Create);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult Create(Epilogger.Web.Models.CreateAccountModel model) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Create);
-            callInfo.RouteValueDictionary.Add("model", model);
-            return callInfo;
-        }
+        
 
         public override System.Web.Mvc.ActionResult Validate(string validationCode) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Validate);

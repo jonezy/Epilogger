@@ -1,37 +1,90 @@
 ﻿@model Epilogger.Web.Models.LoginModel
-
 @{
-    Layout = "~/Views/Shared/_InteriorLayout.cshtml";
-    ViewBag.Title = "Login";
-}
-<div class="grid_5 alpha" style="width:440px;">
-<h1>Existing User Login:</h1>
-@Html.ValidationSummary("Please correct the following issues")
-
-@using (Html.BeginForm("Login", "Account", FormMethod.Post)) {
-    <fieldset class="login">
-        <p>@Html.LabelFor(model => model.Username) @Html.TextBoxFor(model => model.Username)</p>
-        <br style="clear:both;" />
-        <p>@Html.LabelFor(model => model.Password) @Html.PasswordFor(model => model.Password, new { @class = "remove-bottom" })</p>
-        <br style="clear:both;" />
-        <p class="clearfix rememberme"> @Html.CheckBoxFor(model => model.RememberMe, new { @class = "left" })<label class="left">Remember me?</label></p>
-
-        <p class="submit"><input type="submit" class="blue-action-button" value="login" /> - @Html.ActionLink("I forgot my password", "forgotpassword", "account")</p>
-    </fieldset>
-    @Html.ActionImage("ConnectRequest", "twitter", new { area = "Authentication" }, "/Public/images/icons/sign-in-with-twitter-d.png", "Sign in with twitter")
+    ViewBag.Title = "Epilogger | Login";
+    Layout = "~/Views/Shared/_InteriorLayoutNoBC.cshtml";
 }
 
-</div>
-
-<div class="grid_6 omega clearfix">
-    <h1>3 Reasons To Join</h1>
-    <p>We’re so excited you decided to join! Creating account won’t take you a minute and you can get started straight away! Create an event or subscribe to an existing one and leave your mark on history!</p>
-    <img src="@Url.Content("~/Public/images/reasons/1.png")" class="left" style="margin-right:5px;" />
-    <img src="@Url.Content("~/Public/images/reasons/2.png")" class="left" style="margin-right:5px;" />
-    <img src="@Url.Content("~/Public/images/reasons/3.png")" class="left" />
-    <br style="clear:both;" >
-
-    <div align="center" style="margin-top:20px;">
-        @Html.ActionLink("Create An Account", "create", "account", null, new { @class = "blue-action-button" })
+<div>
+    @* <div class="signUpHeading center">
+        <h1>Create an account to take full advantage of Epilogger.</h1>
+        <h2>You'll be creating events and dancing in just two steps!</h2>
     </div>
+    
+    <div class="spacer"></div>*@
+    
+    <ul class="authButtons">
+        <li>@Html.ActionImage("ConnectRequestWithCallback", "twitter", new { area = "Authentication", callBackUrl = Url.Action("twitter", "join", null, "http") }, "/Public/images/signup/twitterButton.png", "Sign in with twitter")</li>
+        <li class="orSepertor"><em>-- or --</em></li>
+        <li>@Html.ActionImage("ConnectRequestWithCallback", "facebook", new { area = "Authentication", callBackUrl = Url.Action("facebook", "join", null, "http") }, "/Public/images/signup/facebookButton.png", "Sign in with facebook")</li>
+    </ul>
+
+    
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+        
+    
+    
+    <div id="emailAccountLine">
+        
+        @using (Html.BeginForm())
+        {
+       
+            <div class="createFormFields loginFormFields">
+                <fieldset class="">
+                    <div class="createFormField loginFormField">
+                        @Html.TextBoxFor(model => model.Username, new { @class = "blur", title = "Username" }) 
+                        @*@Html.ValidationMessageFor(model => model.Username)*@
+                    </div>
+                    <div class="createFormField loginFormField">
+                        <input type="text" class="" id="txtPlainPassword" title="Password" value="Password" style="color: #ccc !important;"/>
+                        @Html.PasswordFor(model => model.Password, new { @class = "blur", title = "Password", id = "Password" })
+                        @*@Html.ValidationMessageFor(model => model.Password)*@
+                    </div>
+                </fieldset>
+                @*@Html.ValidationSummary()*@
+                @Html.Raw(Html.MyValidationSummary())
+
+                <div class="loginText">
+                    <input type="submit" class="blue-action-button createAccounstSubmit submitForm" value="Login" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Html.ActionLink("Forgot your password?", "ForgotPassword", "account")
+                </div>
+               
+            
+            </div>
+      
+        }
+        
+
+    </div>
+
 </div>
+
+
+
+<script type="text/javascript">
+
+    function submitForm() {
+        $(".submitForm").addClass("disabled");
+        $(".submitForm").attr('disabled', 'disabled');
+        $("#createAccountWait").show();
+        $("form").submit();
+    }
+
+    $("#txtPlainPassword").show();
+    $("#Password").hide();
+
+    $("#txtPlainPassword").focus(function () {
+        $(this).hide();
+        $("#Password").show();
+        $("#Password").focus();
+    });
+
+    $("#Password").blur(function () {
+        if ($(this).val().length == 0) {
+            $(this).hide();
+            $("#txtPlainPassword").show();
+        }
+    });
+
+
+</script>

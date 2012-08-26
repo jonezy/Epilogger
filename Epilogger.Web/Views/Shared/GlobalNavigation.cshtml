@@ -1,7 +1,7 @@
 ﻿@model Epilogger.Web.Models.GlobalNavigationModel
 
 
-@if (Model.UserLoggedIn && Model.CurrentUserRole == UserRoleType.Administrator)
+@if (Model.UserLoggedIn && Model.CurrentUserRole == UserRoleType.Unknown)
 {
     <div id="god-menu" class="clearfix">
         <div class="container_12 clearfix">
@@ -15,6 +15,25 @@
         #homepage-container { padding: 75px 0px 0px 0px !important; }
         #content-container {
             padding: 75px 0px 0px 0px !important;
+        }
+    </style>
+}
+
+
+@*This is the nag to verify your email*@
+@if (Model.UserLoggedIn && !Model.IsEmailVerified)
+{
+    <div id="verify-nag" class="clearfix">
+        <div class="container_12 clearfix">
+            Please verify your email address. If you did not receive the email you can change your email address or we can @Html.ActionLink("resend the email", "ResendVerificationEmail", "Join") (Check your spam folder.)
+        </div>
+    </div>
+    
+    <style>
+        #global-bar{ top: 25px !important; }
+        #homepage-container { padding: 86px 0px 0px 0px !important; }
+        #content-container {
+            padding: 124px 0px 0px 0px !important;
         }
     </style>
 }

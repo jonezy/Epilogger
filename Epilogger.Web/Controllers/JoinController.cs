@@ -63,7 +63,9 @@ namespace Epilogger.Web.Controllers {
                 if (userId != Guid.Empty)
                 {
                     CookieHelpers.WriteCookie("lc", "uid", userId.ToString());
-                    this.StoreInfo("The Twitter account you used is already associated with an Epilogger account. We have logged you in.");
+                    RecordTheLogin(userId);
+
+                    //this.StoreInfo("The Twitter account you used is already associated with an Epilogger account. We have logged you in.");
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -170,7 +172,9 @@ namespace Epilogger.Web.Controllers {
                 if (userId != Guid.Empty)
                 {
                     CookieHelpers.WriteCookie("lc", "uid", userId.ToString());
-                    this.StoreInfo("The Facebook  account you used is already associated with an Epilogger account. We have logged you in.");
+                    RecordTheLogin(userId);
+
+                    //this.StoreInfo("The Facebook  account you used is already associated with an Epilogger account. We have logged you in.");
                     return RedirectToAction("Index", "Home", new { area = "" });
                 }
 
@@ -285,9 +289,27 @@ namespace Epilogger.Web.Controllers {
 
 
 
+        /* Called from a link, there is no page.*/
+        [HttpGet]
+        public ActionResult ResendVerificationEmail()
+        {
+            try
+            {
+                SendVerificationEmail(CurrentUser);
+                this.StoreSuccess("Verification Email has been resent to " + CurrentUser.EmailAddress + ". Please check your email.");
+            }
+            catch (Exception ex)
+            {
+                this.StoreError("There was a problem resending your email verification, please try again.");
+            }
+
+            return Redirect(Request.UrlReferrer.AbsoluteUri);
+        }
 
 
-    #region Private Methods
+
+
+        #region Private Methods
 
 
         
@@ -409,7 +431,7 @@ namespace Epilogger.Web.Controllers {
             new UserAuthenticationProfileService().Save(userAuth);
         }
 
-        private static void SendWelcomeEmail(CreateAccountModel model, User user)
+        private static void SendWelcomeEmail(User user)
         {
             // build a message to send to the user.
 
@@ -432,8 +454,35 @@ namespace Epilogger.Web.Controllers {
                 HtmlEmail = message,
                 TextEmail = message
             };
-            sfEmail.ToEmailAddresses.Add(model.EmailAddress);
+            sfEmail.ToEmailAddresses.Add(user.EmailAddress);
             sfEmail.SendMail();
+        }
+
+        private static void SendVerificationEmail(User user)
+        {
+            // build a message to send to the user.
+
+            //Changed to UserID GUID to prevent problems with duplicate email addresses.
+            var validateUrl = string.Format("{0}account/validate/{1}", App.BaseUrl, Helpers.base64Encode(user.ID.ToString()));
+
+            var parser = new TemplateParser();
+            var replacements = new Dictionary<string, string>
+                                   {
+                                       {"[BASE_URL]", App.BaseUrl},
+                                       {"[FIRST_NAME]", user.EmailAddress},
+                                       {"[VALIDATE_ACCOUNT_URL]", validateUrl}
+                                   };
+
+            var message = parser.Replace(AccountEmails.ValidateAccount, replacements);
+
+            var sfEmail = new SpamSafeMail
+            {
+                EmailSubject = "Welcome to epilogger.com!",
+                HtmlEmail = message,
+                TextEmail = message
+            };
+            sfEmail.ToEmailAddresses.Add(user.EmailAddress);
+            //sfEmail.SendMail();
         }
 
         private void ShortCreateFormSaveUser(CreateAccountModel model)
@@ -441,7 +490,7 @@ namespace Epilogger.Web.Controllers {
             var user = SaveUser(model);
             ConnectAuthAccountToUser(model, user);
 
-            SendWelcomeEmail(model, user);
+            SendWelcomeEmail(user);
 
             this.StoreSuccess("Your account was created successfully");
             CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString(), DateTime.Now.AddDays(30));
@@ -451,12 +500,24 @@ namespace Epilogger.Web.Controllers {
         {
             var user = SaveUser(model);
 
-            SendWelcomeEmail(model, user);
+            SendWelcomeEmail(user);
 
             this.StoreSuccess("Your account was created successfully");
             CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString(), DateTime.Now.AddDays(30));
         }
 
+        private void RecordTheLogin(Guid userId)
+        {
+            //Record the Login
+            var ut = new UserLoginTracking()
+            {
+                UserId = userId,
+                LoginMethod = "Epilogger Account",
+                DateTime = DateTime.UtcNow,
+                IPAddress = HttpContext.Request.UserHostAddress
+            };
+            new UserLoginTrackingService().Save(ut);
+        }
 
 
     #endregion

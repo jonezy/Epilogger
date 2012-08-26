@@ -127,7 +127,50 @@ namespace Epilogger.Web.Controllers {
             return Json(new { success = true, imageurl = imageurl.AbsoluteUri }, "text/html");
         }
 
+
+
+        [HttpGet]
+        public virtual ActionResult Validate(string validationCode)
+        {
+            if (string.IsNullOrEmpty(validationCode))
+            {
+                this.StoreError("The verification code couldn't be determined, please try clicking the link in your email again.");
+                return View();
+            }
+            // decode the email address from base64
+            // look up the user account using the email address
+            // set EmailVerified = true and update, redirect to the home page.
+            var userid = Guid.Parse(Helpers.base64Decode(validationCode));
+            if (userid == Guid.Empty)
+            {
+                this.StoreError("The verificatoin code couldn't be determined, please try clicking the link in your email again.");
+                return View();
+            }
+
+            var user = service.GetUserByID(userid);
+            if (user == null)
+            {
+                this.StoreError("We couldn't find an account to activate with that verification code.");
+                return View();
+            }
+
+            user.EmailVerified = true;
+            service.Save(user);
+
+            this.StoreSuccess("Your email address has been verified. You can go ahead and unleash epicness!");
+            return RedirectToAction("Index", "Home");
+        }
+
+
+
+
         #endregion
+
+
+
+
+
+
 
 
 
@@ -216,128 +259,98 @@ namespace Epilogger.Web.Controllers {
 
 
 
-        [HttpGet]
-        public virtual ActionResult Create() {
-            return View(new CreateAccountModel());
-        }
+        //[HttpGet]
+        //public virtual ActionResult Create() {
+        //    return View(new CreateAccountModel());
+        //}
 
-        [HttpPost]
-        public virtual ActionResult Create(CreateAccountModel model)
-        {
-            //Twitter Auth Token is authed through twitter
-            //Request.QueryString["oauth_token"]
-
-
-            if (ModelState.IsValid) {
-                // TEMP: check to make sure the email address provided is in the beta invite table.
-                //if(!service.IsBetaUser(model.EmailAddress)) {
-                //    this.StoreError("You must be invited to use the epilogger alpha, please click the create account link in your invite email to create your account, if you would like to be invited email team@epilogger.com");
-                //    return View(model);
-                //}
-
-                //Check to see if this account already exists
-                var userTest = service.GetUserByUsername(model.Username);
-                if (userTest != null)
-                {
-                    ModelState.AddModelError(string.Empty, "The username " + userTest.Username + " is already in use, please try another username");
-                    model.Username = "";
-                    return View(model);
-                }
+        //[HttpPost]
+        //public virtual ActionResult Create(CreateAccountModel model)
+        //{
+        //    //Twitter Auth Token is authed through twitter
+        //    //Request.QueryString["oauth_token"]
 
 
-                //Ensure the User is over 13
-                if (model.DateOfBirth != null && (DateTime.Now - DateTime.Parse(model.DateOfBirth)).Days / 366 < 13)
-                {
-                    this.StoreError("You must be must be 13 years of age or older to use Epilogger.");
-                    ModelState.AddModelError(string.Empty, "You must be must be 13 years of age or older to use Epilogger.");
-                    return View(model);
-                }
-                //Ensure the passwords match
-                //if (model.Password != model.ConfirmPassword)
-                //{
-                //    this.StoreError("The passwords you entered do not match.");
-                //    ModelState.AddModelError(string.Empty, "The passwords you entered do not match.");
-                //    return View(model);
-                //}
+        //    if (ModelState.IsValid) {
+        //        // TEMP: check to make sure the email address provided is in the beta invite table.
+        //        //if(!service.IsBetaUser(model.EmailAddress)) {
+        //        //    this.StoreError("You must be invited to use the epilogger alpha, please click the create account link in your invite email to create your account, if you would like to be invited email team@epilogger.com");
+        //        //    return View(model);
+        //        //}
 
-                User user = null;
-                try {
-                    user = Mapper.Map<CreateAccountModel, User>(model);
-                    user.IsActive = false; // ensure this is set.
-                    service.Save(user);
+        //        //Check to see if this account already exists
+        //        var userTest = service.GetUserByUsername(model.Username);
+        //        if (userTest != null)
+        //        {
+        //            ModelState.AddModelError(string.Empty, "The username " + userTest.Username + " is already in use, please try another username");
+        //            model.Username = "";
+        //            return View(model);
+        //        }
 
-                    // build a message to send to the user.
-                    //string validateUrl = string.Format("{0}account/validate/{1}", App.BaseUrl, Helpers.base64Encode(user.EmailAddress));
+
+        //        //Ensure the User is over 13
+        //        if (model.DateOfBirth != null && (DateTime.Now - DateTime.Parse(model.DateOfBirth)).Days / 366 < 13)
+        //        {
+        //            this.StoreError("You must be must be 13 years of age or older to use Epilogger.");
+        //            ModelState.AddModelError(string.Empty, "You must be must be 13 years of age or older to use Epilogger.");
+        //            return View(model);
+        //        }
+        //        //Ensure the passwords match
+        //        //if (model.Password != model.ConfirmPassword)
+        //        //{
+        //        //    this.StoreError("The passwords you entered do not match.");
+        //        //    ModelState.AddModelError(string.Empty, "The passwords you entered do not match.");
+        //        //    return View(model);
+        //        //}
+
+        //        User user = null;
+        //        try {
+        //            user = Mapper.Map<CreateAccountModel, User>(model);
+        //            user.IsActive = false; // ensure this is set.
+        //            service.Save(user);
+
+        //            // build a message to send to the user.
+        //            //string validateUrl = string.Format("{0}account/validate/{1}", App.BaseUrl, Helpers.base64Encode(user.EmailAddress));
                     
-                    //Changed to UserID GUID to prevent problems with duplicate email addresses.
-                    string validateUrl = string.Format("{0}account/validate/{1}", App.BaseUrl, Helpers.base64Encode(user.ID.ToString()));
+        //            //Changed to UserID GUID to prevent problems with duplicate email addresses.
+        //            string validateUrl = string.Format("{0}account/validate/{1}", App.BaseUrl, Helpers.base64Encode(user.ID.ToString()));
 
-                    var parser = new TemplateParser();
-                    Dictionary<string, string> replacements = new Dictionary<string, string>
-                                                                  {
-                                                                      {"[BASE_URL]", App.BaseUrl},
-                                                                      {"[FIRST_NAME]", user.EmailAddress},
-                                                                      {"[VALIDATE_ACCOUNT_URL]", validateUrl}
-                                                                  };
+        //            var parser = new TemplateParser();
+        //            Dictionary<string, string> replacements = new Dictionary<string, string>
+        //                                                          {
+        //                                                              {"[BASE_URL]", App.BaseUrl},
+        //                                                              {"[FIRST_NAME]", user.EmailAddress},
+        //                                                              {"[VALIDATE_ACCOUNT_URL]", validateUrl}
+        //                                                          };
 
-                    string message = parser.Replace(AccountEmails.ValidateAccount, replacements);
+        //            string message = parser.Replace(AccountEmails.ValidateAccount, replacements);
 
-                    var sfEmail = new SpamSafeMail
-                    {
-                        EmailSubject = "Thank you for registering on epilogger.com",
-                        HtmlEmail = message,
-                        TextEmail = message
-                    };
-                    sfEmail.ToEmailAddresses.Add(model.EmailAddress);
+        //            var sfEmail = new SpamSafeMail
+        //            {
+        //                EmailSubject = "Thank you for registering on epilogger.com",
+        //                HtmlEmail = message,
+        //                TextEmail = message
+        //            };
+        //            sfEmail.ToEmailAddresses.Add(model.EmailAddress);
 
-                    sfEmail.SendMail();
+        //            sfEmail.SendMail();
                     
-                    this.StoreSuccess("Your account was created successfully<br /><br/>Please check your inbox for our validation message, your account will be inaccessable until you validate it.");
+        //            this.StoreSuccess("Your account was created successfully<br /><br/>Please check your inbox for our validation message, your account will be inaccessable until you validate it.");
 
-                    CookieHelpers.WriteCookie("lc", "tempid", user.ID.ToString());
+        //            CookieHelpers.WriteCookie("lc", "tempid", user.ID.ToString());
 
-                    return RedirectToAction("AccountActivationNeeded", "account");
+        //            return RedirectToAction("AccountActivationNeeded", "account");
 
-                } catch (Exception ex) {
-                    this.StoreError("There was a problem creating your account");
-                    if (user != null) service.DeleteUser(user.ID);
-                    return View(model);
-                }
-            }
-            return View(model);
-        }
+        //        } catch (Exception ex) {
+        //            this.StoreError("There was a problem creating your account");
+        //            if (user != null) service.DeleteUser(user.ID);
+        //            return View(model);
+        //        }
+        //    }
+        //    return View(model);
+        //}
 
-        [HttpGet]
-        public virtual ActionResult Validate(string validationCode) {
-            if (string.IsNullOrEmpty(validationCode)) {
-                this.StoreError("The verification code couldn't be determined, please try clicking the link in your email again.");
-                return View();
-            }
-            // decode the email address from base64
-            // look up the usre account using the email address
-            // set isactive = true and update, redirect to login with thank you message.
-            Guid userid = Guid.Parse(Helpers.base64Decode(validationCode));
-            if (userid== Guid.Empty)
-            {
-                this.StoreError("The verificatoin code couldn't be determined, please try clicking the link in your email again.");
-                return View();
-            }
-
-            User user = service.GetUserByID(userid);
-            if (user == null) {
-                this.StoreError("We couldn't find an account to activate with that verification code");
-                return View();
-            }
-
-            user.IsActive = true;
-            
-            service.Save(user);
-
-            CookieHelpers.DestroyCookie("lc");
-
-            this.StoreSuccess("Your account has been activated!  You can go ahead and login to unleash the epicness!");
-            return RedirectToAction("login", "account");
-        }
+        
 
         //[HttpPost]
         //public ActionResult Update(AccountModel model, FormCollection c) {
@@ -403,11 +416,11 @@ namespace Epilogger.Web.Controllers {
             // to a page to create a new password.
 
             if (ModelState.IsValid) {
-                User user = service.GetUserByUsername(model.Username);
+                var user = service.GetUserByUsername(model.Username);
 
                 if (user == null)
                 {
-                    ModelState.AddModelError(string.Empty, "There is a problem with your username or password. Please try again or create an account.");
+                    ModelState.AddModelError(string.Empty, "There is a problem with your username or password. Please try again or <a href='/join/signup'/>create an account</a>.");
                     return View(model);
                 }
 
@@ -419,14 +432,14 @@ namespace Epilogger.Web.Controllers {
                 
                 user = service.GetUserByUsername(model.Username);
                 if (!BCryptHelper.CheckPassword(model.Password, user.Password)) {
-                    ModelState.AddModelError(string.Empty, "There is a problem with your username or password. Please try again or create an account.");
+                    ModelState.AddModelError(string.Empty, "There is a problem with your username or password. Please try again or <a href='/join/signup'/>create an account</a>.");
                     return View(model);
                 }
 
-                if (user.IsActive == false) {
-                    ModelState.AddModelError(string.Empty, "Your account has not been activated yet, please click the link in the verification email that was sent to you.");
-                    return RedirectToAction("AccountActivationNeeded");
-                }
+                //if (user.IsActive == false) {
+                //    ModelState.AddModelError(string.Empty, "Your account has not been activated yet, please click the link in the verification email that was sent to you.");
+                //    return RedirectToAction("AccountActivationNeeded");
+                //}
 
                 
 

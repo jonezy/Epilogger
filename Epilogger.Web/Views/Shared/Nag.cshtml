@@ -5,7 +5,7 @@
     var controller = ViewContext.ParentActionViewContext.RouteData.Values["controller"] as string ?? "";
     var action = ViewContext.RouteData.Values["action"] as string ?? "";
 
-    if (controller.ToLower() != "join")
+    if (controller.ToLower() != "join" && controller.ToLower() != "account")
     {
         
         <div id="signupNag">

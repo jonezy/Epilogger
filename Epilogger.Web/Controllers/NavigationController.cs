@@ -22,6 +22,7 @@ namespace Epilogger.Web.Controllers {
                 model.Username = CurrentUser.Username;
             }
             model.CurrentUserRole = CurrentUserRole;
+            model.IsEmailVerified = IsEmailVerified;
 
             return PartialView("GlobalNavigation", model);
         }

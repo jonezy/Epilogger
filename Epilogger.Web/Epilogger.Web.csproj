@@ -3150,12 +3150,12 @@
     <Content Include="Views\Shared\Nag.cshtml" />
     <Content Include="Views\Join\Signup.cshtml" />
     <Content Include="Views\Account\Old\Create.cshtml" />
-    <Content Include="Views\Account\FullCreateAccount.cshtml" />
     <Content Include="Views\Join\Twitter.cshtml" />
     <Content Include="Views\Join\_ShortCreateForm.cshtml" />
     <Content Include="Views\Join\Facebook.cshtml" />
     <Content Include="Views\Join\Email.cshtml" />
     <Content Include="Views\Join\_FullCreateForm.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />
@@ -5217,8 +5217,7 @@
     </None>
     <Content Include="Views\Browse\Index.cshtml" />
     <Content Include="Views\Events\Details.cshtml" />
-    <Content Include="Views\Account\ShortCreateAccount.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Old\LoginOld.cshtml" />
     <Content Include="Views\Account\UpdatePassword.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Areas\Authentication\Views\Web.config" />

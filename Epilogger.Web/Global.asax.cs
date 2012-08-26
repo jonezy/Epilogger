@@ -88,6 +88,8 @@ namespace Epilogger.Web {
             //routes.MapRoute("DoFacebookLogin", "join/DoFacebookLogin", new { controller = "account", action = "DoFacebookLogin" });
             //routes.MapRoute("CreateAccountFacebook", "join/facebook", new { controller = "account", action = "Facebook" });
 
+            routes.MapRoute("Login", "login", new { controller = "account", action = "login" });
+
 
             routes.MapRoute(
                 "StarRatings",

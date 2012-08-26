@@ -1,0 +1,37 @@
+﻿@model Epilogger.Web.Models.LoginModel
+
+@{
+    Layout = "~/Views/Shared/_InteriorLayout.cshtml";
+    ViewBag.Title = "Login";
+}
+<div class="grid_5 alpha" style="width:440px;">
+<h1>Existing User Login:</h1>
+@Html.ValidationSummary("Please correct the following issues")
+
+@using (Html.BeginForm("Login", "Account", FormMethod.Post)) {
+    <fieldset class="login">
+        <p>@Html.LabelFor(model => model.Username) @Html.TextBoxFor(model => model.Username)</p>
+        <br style="clear:both;" />
+        <p>@Html.LabelFor(model => model.Password) @Html.PasswordFor(model => model.Password, new { @class = "remove-bottom" })</p>
+        <br style="clear:both;" />
+        <p class="clearfix rememberme"> @Html.CheckBoxFor(model => model.RememberMe, new { @class = "left" })<label class="left">Remember me?</label></p>
+
+        <p class="submit"><input type="submit" class="blue-action-button" value="login" /> - @Html.ActionLink("I forgot my password", "forgotpassword", "account")</p>
+    </fieldset>
+    @Html.ActionImage("ConnectRequest", "twitter", new { area = "Authentication" }, "/Public/images/icons/sign-in-with-twitter-d.png", "Sign in with twitter")
+}
+
+</div>
+
+<div class="grid_6 omega clearfix">
+    <h1>3 Reasons To Join</h1>
+    <p>We’re so excited you decided to join! Creating account won’t take you a minute and you can get started straight away! Create an event or subscribe to an existing one and leave your mark on history!</p>
+    <img src="@Url.Content("~/Public/images/reasons/1.png")" class="left" style="margin-right:5px;" />
+    <img src="@Url.Content("~/Public/images/reasons/2.png")" class="left" style="margin-right:5px;" />
+    <img src="@Url.Content("~/Public/images/reasons/3.png")" class="left" />
+    <br style="clear:both;" >
+
+    <div align="center" style="margin-top:20px;">
+        @Html.ActionLink("Create An Account", "create", "account", null, new { @class = "blue-action-button" })
+    </div>
+</div>

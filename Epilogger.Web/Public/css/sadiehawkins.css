@@ -150,7 +150,7 @@ a.edit_icon {
 
 #content-container {
 	/*background: #efefef;*/
-	padding: 121px 0px 40px 0px;
+	padding: 100px 0px 40px 0px;
 	position:relative;
 	min-height:550px;}
 
@@ -1769,6 +1769,20 @@ span.tweet-date a:hover { text-decoration: underline; }
 #god-menu a {
     color: #eeeeee;
 }
+
+/* Verify Email Nag - CB Aug 25, 2012 */    
+#verify-nag {
+    width: 100%;
+    height: 20px;
+    background-color: paleGoldenrod;
+    color: #555;
+    padding-top: 5px;
+    position: absolute;
+    top: -25px;
+}
+
+
+
 /********************/
 
 
@@ -2706,7 +2720,9 @@ a.fdbk_tab_hidden {
     border: 1px solid #d5d5d5;
 }
 
-
+.loginFormFields {
+    margin: auto !important;
+}
 
 
 .createFormFields {
@@ -2716,6 +2732,10 @@ a.fdbk_tab_hidden {
 .createFormField {
     margin-bottom: 20px;
     font-weight: bold;
+}
+
+.loginFormField {
+    text-align: left;
 }
 
 .createFormLeft {
@@ -2773,7 +2793,8 @@ a.fdbk_tab_hidden {
 .ajaxCheck { display: none; }
 
 
-.acceptText { font-size: 16px; }
+.acceptText { font-size: 16px; text-align: left; }
+.loginText { font-size: 14px; text-align: left; }
 
 .createAccountButton {margin: auto; margin-top: 100px; }
 
@@ -2785,3 +2806,12 @@ a.fdbk_tab_hidden {
 
 .createAccountSubmit { float: left;margin-right: 20px; }
 #createAccountWait { margin-top: 7px;display: none;}
+
+
+.notification-warnings {
+    text-align: left;
+     margin-bottom: 15px;
+}
+.notification-warnings p {
+    margin-bottom: 5px;
+}

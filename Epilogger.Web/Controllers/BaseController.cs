@@ -28,8 +28,20 @@ namespace Epilogger.Web.Controllers {
         
         public User CurrentUser {
             get {
-                UserService service = new UserService();
+                var service = new UserService();
                 return service.GetUserByID(CurrentUserID);
+            }
+        }
+
+        public bool IsEmailVerified
+        {
+            get
+            {
+                 if (CurrentUser != null)
+                 {
+                     return CurrentUser.EmailVerified != null && (bool) CurrentUser.EmailVerified;
+                 }
+                return false;
             }
         }
 

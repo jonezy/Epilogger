@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using Epilogger.Web.Models;
@@ -96,6 +97,33 @@ namespace System.Web.Mvc {
 
             return MvcHtmlString.Create(anchorHtml);
         }
+
+
+        public static string MyValidationSummary(this HtmlHelper helper, string validationMessage = "")
+        {
+            var retVal = "";
+            if (helper.ViewData.ModelState.IsValid)
+                return "";
+            
+            retVal += "<div class='notification-warnings'><span>";
+            
+            if (!String.IsNullOrEmpty(validationMessage))
+                retVal += validationMessage;
+            
+            retVal += "</span>";
+            
+            retVal += "<div class='text'>";
+            foreach (var key in helper.ViewData.ModelState.Keys)
+            {
+                foreach (var err in helper.ViewData.ModelState[key].Errors)
+                    retVal += "<p>" + err.ErrorMessage + "</p>";
+            }
+
+            retVal += "</div></div>";
+            return retVal.ToString(CultureInfo.InvariantCulture);
+        }
+      
+
 
     }
 }
