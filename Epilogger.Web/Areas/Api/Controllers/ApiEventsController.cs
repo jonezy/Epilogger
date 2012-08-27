@@ -398,8 +398,7 @@ namespace Epilogger.Web.Areas.Api.Controllers
 
         #endregion
 
-
-        #region Stats
+        #region Geckoboard Stats
 
             public virtual JsonResult GeckoGetUserGrowthDayOverDay()
             {
