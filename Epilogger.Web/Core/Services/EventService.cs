@@ -338,5 +338,12 @@ namespace Epilogger.Web {
         }
 
 
+
+        public List<Event> GetTrendingEvents()
+        {
+            return db.GetTrendingEventsByActivity().ExecuteTypedList<Event>();
+        }
+
+
     }
 }

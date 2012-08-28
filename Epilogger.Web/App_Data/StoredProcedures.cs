@@ -482,6 +482,11 @@ namespace Epilogger.Data{
             sp.Command.AddParameter("ID",ID,DbType.Int32);
             return sp;
         }
+        public StoredProcedure DeleteUser(string UserId){
+            StoredProcedure sp=new StoredProcedure("DeleteUser",this.Provider);
+            sp.Command.AddParameter("UserId",UserId,DbType.String);
+            return sp;
+        }
         public StoredProcedure GetCurrentActiveUsers(){
             StoredProcedure sp=new StoredProcedure("GetCurrentActiveUsers",this.Provider);
             return sp;
@@ -545,6 +550,10 @@ namespace Epilogger.Data{
             sp.Command.AddParameter("ItemToReturn",ItemToReturn,DbType.Int32);
             sp.Command.AddParameter("FromDate",FromDate,DbType.DateTime);
             sp.Command.AddParameter("ToDate",ToDate,DbType.DateTime);
+            return sp;
+        }
+        public StoredProcedure GetTrendingEventsByActivity(){
+            StoredProcedure sp=new StoredProcedure("GetTrendingEventsByActivity",this.Provider);
             return sp;
         }
         public StoredProcedure GetTweetsPerHourStats(DateTime FromDate,DateTime ToDate){

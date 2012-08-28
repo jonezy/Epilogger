@@ -48,19 +48,26 @@ namespace Epilogger.Web.Areas.Api.Models
 
         public List<ApiEvent> GetTrendingEvents()
         {
-            var eplRedis = new Common.Redis();
-            var trendingEventId = eplRedis.GetTrendingEvents();
-            var trendingEvents = new List<Event>();
-            foreach (var e in trendingEventId.Take(10).Select(eventId => _es.FindByID((int.Parse(eventId)))))
-            {
-                if (e != null)
-                {
-                    e.Name = e.Name;
-                    trendingEvents.Add(e);
-                }
-            }
 
-            return Mapper.Map<List<Event>, List<ApiEvent>>(trendingEvents);
+            return Mapper.Map<List<Event>, List<ApiEvent>>(_es.GetTrendingEvents());
+
+
+
+
+
+            //var eplRedis = new Common.Redis();
+            //var trendingEventId = eplRedis.GetTrendingEvents();
+            //var trendingEvents = new List<Event>();
+            //foreach (var e in trendingEventId.Take(10).Select(eventId => _es.FindByID((int.Parse(eventId)))))
+            //{
+            //    if (e != null)
+            //    {
+            //        e.Name = e.Name;
+            //        trendingEvents.Add(e);
+            //    }
+            //}
+
+            //return Mapper.Map<List<Event>, List<ApiEvent>>(trendingEvents);
         }
 
 
