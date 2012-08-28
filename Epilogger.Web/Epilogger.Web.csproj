@@ -470,6 +470,16 @@
     <Content Include="Public\css\geckoboard\EPLCustom.css" />
     <Content Include="Public\css\geckoboard\lightBasic.css" />
     <Content Include="Public\images\DefaultProfilePicture.png" />
+    <Content Include="Public\images\email\bg-tablebottom.png" />
+    <Content Include="Public\images\email\bg-tableleft.png" />
+    <Content Include="Public\images\email\bg-tableright.png" />
+    <Content Include="Public\images\email\bg-tabletop.png" />
+    <Content Include="Public\images\email\bg-teeth.png" />
+    <Content Include="Public\images\email\btn-validate.png" />
+    <Content Include="Public\images\email\icon-bird.png" />
+    <Content Include="Public\images\email\icon-email.png" />
+    <Content Include="Public\images\email\icon-facebook.png" />
+    <Content Include="Public\images\email\logo.png" />
     <Content Include="Public\images\livemode\client\bg.png" />
     <Content Include="Public\images\livemode\client\sponsor-osheaga.png" />
     <Content Include="Public\images\logoSmall.png" />
