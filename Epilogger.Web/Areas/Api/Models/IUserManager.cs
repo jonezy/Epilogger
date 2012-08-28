@@ -13,5 +13,7 @@ namespace Epilogger.Web.Areas.Api.Models
         ApiUserFollowsEvent SaveUserFollowsEvent(ApiUserFollowsEvent model);
         bool DeleteEventSubscription(Guid userId, int eventId);
         User LoginWithTwitter(string userName, string token, string tokenSecret);
+        User LoginWithFacebook(string userName, string token);
+        bool ConnectAuthAccountToUser(Guid userId, string authService, string authScreenName, string authToken, string authTokenSecret, string platform);
     }
 }

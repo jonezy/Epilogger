@@ -212,26 +212,26 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult AccountActivationNeeded() {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.AccountActivationNeeded);
-            return callInfo;
-        }
+        //public override System.Web.Mvc.ActionResult AccountActivationNeeded() {
+        //    var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.AccountActivationNeeded);
+        //    return callInfo;
+        //}
 
         public override System.Web.Mvc.ActionResult ActivationSent() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ActivationSent);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult TwitterAuthTest() {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.TwitterAuthTest);
-            return callInfo;
-        }
+        //public override System.Web.Mvc.ActionResult TwitterAuthTest() {
+        //    var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.TwitterAuthTest);
+        //    return callInfo;
+        //}
 
-        public override System.Web.Mvc.ActionResult TwitterAuthTest(Epilogger.Web.Models.TwitterAuthTestViewModel model) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.TwitterAuthTest);
-            callInfo.RouteValueDictionary.Add("model", model);
-            return callInfo;
-        }
+        //public override System.Web.Mvc.ActionResult TwitterAuthTest(Epilogger.Web.Models.TwitterAuthTestViewModel model) {
+        //    var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.TwitterAuthTest);
+        //    callInfo.RouteValueDictionary.Add("model", model);
+        //    return callInfo;
+        //}
 
     }
 }

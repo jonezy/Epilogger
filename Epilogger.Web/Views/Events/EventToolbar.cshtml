@@ -36,7 +36,7 @@
     
         @if (Model.EventSlug=="c2-mtl")
         {
-            @Html.ActionLink("NexaLive", "nexalive", "events", new { id = Model.EventID }, action.ToLower() == "nexalive" ? new { @class = "tooltip-trigger nexalive current", @title = "NexaLive" } : new { @class = "tooltip-trigger nexalive", @title = "NexaLive" })    
+            @Html.ActionLink("NexaLive", "ConceptMap", "events", new { id = Model.EventID }, action.ToLower() == "ConceptMap" ? new { @class = "tooltip-trigger nexalive current", @title = "NexaLive" } : new { @class = "tooltip-trigger nexalive", @title = "NexaLive" })    
         }
     </div>
 }
@@ -58,7 +58,7 @@ else
     
         @if (Model.EventSlug=="c2-mtl")
         {
-            @Html.ActionLink("NexaLive", "nexalive", "events", new { id = Model.EventID }, action.ToLower() == "nexalive" ? new { @class = "tooltip-trigger nexalive current", @title = "NexaLive" } : new { @class = "tooltip-trigger nexalive", @title = "NexaLive" })    
+            @Html.ActionLink("NexaLive", "ConceptMap", "events", new { id = Model.EventID }, action.ToLower() == "ConceptMap" ? new { @class = "tooltip-trigger nexalive current", @title = "NexaLive" } : new { @class = "tooltip-trigger nexalive", @title = "NexaLive" })    
         }
     </div>
 }

@@ -29,7 +29,7 @@ namespace Epilogger.Web.Areas.Api.Models
 
         public List<ApiTweetsAndImage> GetTweetsAndImagesByEventPaged(int eventId, int page, int count)
         {
-            var test = _ts.GetTweetsAndImagesPaged(eventId, page, count);
+            //var test = _ts.GetTweetsAndImagesPaged(eventId, page, count);
             
             return Mapper.Map<List<TweetsAndImage>, List<ApiTweetsAndImage>>(_ts.GetTweetsAndImagesPaged(eventId, page, count).ToList());
         }

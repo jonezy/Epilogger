@@ -1,4 +1,5 @@
 ﻿@using Epilogger.Web;
+@using Epilogger.Web.Models
 @model Epilogger.Web.Models.BrowseEventsDisplayViewModel
 <script type="text/javascript" language="javascript">
     head.js('@Url.Content("~/Public/js/BrowseEvents.js")');
@@ -25,7 +26,7 @@
         </div>
         
         <div class="BEventListContainer">
-            @Html.Partial("_BrowseEventTabContentTemplate", Model.Events)
+            @Html.Partial("_BrowseEventTabContentTemplate", (List<DashboardEventViewModel>) Model.Events)
         </div>   
     
         <span class="spacer"></span>        

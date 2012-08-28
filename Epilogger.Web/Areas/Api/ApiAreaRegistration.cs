@@ -26,6 +26,20 @@ namespace Epilogger.Web.Areas.Api
             );
 
             context.MapRoute(
+                "ConnectTwitterAccountToUser",
+                "Api/Users/Authenticate/ConnectTwitterAccountToUser",
+                new { controller = "ApiEvents", action = "ConnectTwitterAccountToUser" }
+            );
+
+            context.MapRoute(
+                "ConnectFacebookAccountToUser",
+                "Api/Users/Authenticate/ConnectFacebookAccountToUser",
+                new { controller = "ApiEvents", action = "ConnectFacebookAccountToUser" }
+            );
+
+
+
+            context.MapRoute(
                 "ListTrendingEvents",
                 "Api/Events/Trending",
                 new { controller = "ApiEvents", action = "TrendingEvents" }

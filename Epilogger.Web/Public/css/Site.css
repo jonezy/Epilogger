@@ -27,7 +27,7 @@ section { display: block; }
     font-weight: normal;
     font-style: normal;}
 
-
+/*
 @font-face {
     font-family: 'ChunkFiveRegular';
     src: url('fonts/Chunkfive-webfont.eot');
@@ -47,7 +47,7 @@ section { display: block; }
          url('fonts/Museo_Slab_500-webfont.svg#webfont8VbsAwew') format('svg');
     font-weight: normal;
     font-style: normal;}
-
+*/
 
 /* HEADINGS   
 ----------------------------------------------------------*/

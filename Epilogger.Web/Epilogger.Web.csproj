@@ -222,6 +222,7 @@
     <Compile Include="Areas\Admin\Models\InviteUsersViewModel.cs" />
     <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
     <Compile Include="Areas\Api\Controllers\ApiEventsController.cs" />
+    <Compile Include="Areas\Api\Models\ApiConnectAuthAccount.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiCategory.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiCheckIn.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiEvent.cs" />
@@ -465,7 +466,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\combres_full_with_annotation.xml" />
-    <Content Include="Public\css\Copy of sadiehawkins.css" />
     <Content Include="Public\css\geckoboard\darkAdjusted.css" />
     <Content Include="Public\css\geckoboard\EPLCustom.css" />
     <Content Include="Public\css\geckoboard\lightBasic.css" />
@@ -3114,7 +3114,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_LayoutOldGood.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Account\Old\TwitterAuthTest.cshtml" />
     <Content Include="Views\Widget\index.cshtml" />

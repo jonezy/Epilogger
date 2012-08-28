@@ -6,6 +6,7 @@ using System.Linq;
 using AutoMapper;
 using Epilogger.Data;
 using Epilogger.Web.Areas.Api.Models.Classes;
+using Epilogger.Web.Controllers;
 using Epilogger.Web.Core.Stats;
 using Epilogger.Web.Models;
 
@@ -149,7 +150,7 @@ namespace Epilogger.Web.Areas.Api.Models
         }
 
 
-        public User LoginWithFacebook(string userName, string token, string tokenSecret)
+        public User LoginWithFacebook(string userName, string token)
         {
 
             // check to see if we already have the screen name in the userauth table.
@@ -160,7 +161,7 @@ namespace Epilogger.Web.Areas.Api.Models
             if (userAuth != null)
             {
                 userAuth.Token = token;
-                userAuth.TokenSecret = tokenSecret;
+                userAuth.TokenSecret = null;
                 userAuthService.Save(userAuth);
 
                 var user = userAuth.Users.FirstOrDefault();
@@ -198,7 +199,7 @@ namespace Epilogger.Web.Areas.Api.Models
                         Service = AuthenticationServices.TWITTER.ToString(),
                         ServiceUsername = userName,
                         Token = token,
-                        TokenSecret = tokenSecret
+                        TokenSecret = null
                     };
                     userAuthService.Save(userAuth);
 
@@ -214,7 +215,7 @@ namespace Epilogger.Web.Areas.Api.Models
                     Service = AuthenticationServices.TWITTER.ToString(),
                     ServiceUsername = userName,
                     Token = token,
-                    TokenSecret = tokenSecret
+                    TokenSecret = null
                 };
                 userAuthService.Save(userAuth2);
 
@@ -224,6 +225,13 @@ namespace Epilogger.Web.Areas.Api.Models
             }
 
             return null;
+
+        }
+
+        public bool ConnectAuthAccountToUser(Guid userId, string authService, string authScreenName, string authToken, string authTokenSecret, string platform)
+        {
+            return AccountController.ConnectAuthAccountToUser(userId, authService, authScreenName, authToken, authTokenSecret,
+                                                       platform);
 
         }
 

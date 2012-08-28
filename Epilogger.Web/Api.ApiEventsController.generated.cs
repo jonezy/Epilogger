@@ -119,7 +119,7 @@ namespace Epilogger.Web.Areas.Api.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.JsonResult GetUserByID() {
+        public System.Web.Mvc.JsonResult GetUserById() {
             return new T4MVC_JsonResult(Area, Name, ActionNames.GetUserByID);
         }
         [NonAction]
@@ -651,7 +651,7 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.JsonResult GetUserByID(System.Guid userId) {
+        public override System.Web.Mvc.JsonResult GetUserById(System.Guid userId) {
             var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GetUserByID);
             callInfo.RouteValueDictionary.Add("userId", userId);
             return callInfo;

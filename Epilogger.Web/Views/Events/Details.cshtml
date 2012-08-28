@@ -156,7 +156,7 @@ else
                 }
             </ul>
             <a href="" class="smallRateLink">(Rate this event)</a>
-                using (Html.BeginForm("StarRatings", "events", FormMethod.Post, new { @id = "ratingForm" }))
+                using (Html.BeginForm("StarRatings", "events", FormMethod.Post, new { id = "ratingForm" }))
                 {
                 @Html.Partial("_StarRatingTemplate")
                 @Html.HiddenFor(model => model.EventSlug)

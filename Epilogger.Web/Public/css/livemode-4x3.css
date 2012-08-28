@@ -7,7 +7,7 @@ html, body, div#content {
 body {
 	margin:0;
 	padding:0;
-	background:#f3f3f3 url('img/bg-noise.png');
+	background:#f3f3f3 /*url('img/bg-noise.png')*/;
 	overflow:hidden;
 	font:1em helvetica, arial, sans-serif;
 	color:#666}	
@@ -33,12 +33,14 @@ div.single-tweet {
 	border-radius:2%;
 	padding:5%;
 	box-shadow:0 0 0.25em #ccc;
-	text-wrap:unrestricted;
+	/*text-wrap:unrestricted;*/
 	line-height:1.35em; }
 
+/*
 div.single-tweet.retweet {
-	background:#fff url('img/icon-retweet.png') top right no-repeat;}
-
+	background:#fff url('img/icon-retweet.png') top right no-repeat;
+}
+*/
 div.single-tweet-arrow {
 	margin:0 0 10% 0;
 	width: 0; 

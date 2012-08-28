@@ -127,8 +127,6 @@ namespace Epilogger.Web.Controllers {
             return Json(new { success = true, imageurl = imageurl.AbsoluteUri }, "text/html");
         }
 
-
-
         [HttpGet]
         public virtual ActionResult Validate(string validationCode)
         {
@@ -159,6 +157,123 @@ namespace Epilogger.Web.Controllers {
 
             this.StoreSuccess("Your email address has been verified. You can go ahead and unleash epicness!");
             return RedirectToAction("Index", "Home");
+        }
+
+
+        public static bool ConnectAuthAccountToUser(Guid userId, string authService, string authScreenName, string authToken, string authTokenSecret, string platform)
+        {
+            try
+            {
+                if (userId == Guid.Empty) return false;
+                if (string.IsNullOrEmpty(authService)) return false;
+                if (string.IsNullOrEmpty(authScreenName)) return false;
+                if (string.IsNullOrEmpty(authToken)) return false;
+                if (string.IsNullOrEmpty(platform)) return false;
+
+
+                var userAuthService = new UserAuthenticationProfileService();
+                UserAuthenticationProfile userAuth = null;
+            
+                switch (authService.ToLower())
+                {
+                    case "twitter":
+                        {
+                            userAuth = userAuthService.UserAuthorizationByServiceScreenNameAndPlatform(authScreenName, platform, AuthenticationServices.TWITTER);
+                            break;
+                        }
+                    case "facebook":
+                        {
+                            userAuth = userAuthService.UserAuthorizationByServiceScreenNameAndPlatform(authScreenName, platform, AuthenticationServices.FACEBOOK);
+                            break;
+                        }
+                }
+
+                if (userAuth == null)
+                {
+                    //Store the auth tokens for this user
+                    userAuth = new UserAuthenticationProfile
+                    {
+                        UserID = userId,
+                        Platform = platform,
+                        ServiceUsername = authScreenName,
+                        Token = authToken,
+                        TokenSecret = authTokenSecret
+                    };
+
+                    switch (authService.ToLower())
+                    {
+                        case "twitter":
+                            {
+                                userAuth.Service = AuthenticationServices.TWITTER.ToString();
+                                break;
+                            }
+                        case "facebook":
+                            {
+                                userAuth.Service = AuthenticationServices.FACEBOOK.ToString();
+                                break;
+                            }
+                    }
+
+                    new UserAuthenticationProfileService().Save(userAuth);
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            
+        }
+
+
+        public Guid CheckConnectedAccountUserExists(string userScreenName, AuthenticationServices authService, string token, string tokenSecret)
+        {
+            try
+            {
+
+                var userAuthService = new UserAuthenticationProfileService();
+                var userAuth = userAuthService.UserAuthorizationByServiceScreenNameAndPlatform(userScreenName, "Web", authService);
+                if (userAuth != null)
+                {
+                    string logInMethod = null;
+                    switch (authService)
+                    {
+                        case AuthenticationServices.TWITTER:
+                            userAuth.Token = token;
+                            userAuth.TokenSecret = tokenSecret;
+                            logInMethod = "Twitter";
+                            break;
+                        case AuthenticationServices.FACEBOOK:
+                            userAuth.Token = token;
+                            logInMethod = "Facebook";
+                            break;
+                    }
+                    userAuthService.Save(userAuth);
+
+                    var user = userAuth.Users.FirstOrDefault();
+                    if (user != null)
+                    {
+
+                        //Record the Login
+                        var ut = new UserLoginTracking()
+                        {
+                            UserId = user.ID,
+                            LoginMethod = logInMethod,
+                            DateTime = DateTime.UtcNow,
+                            IPAddress = HttpContext.Request.UserHostAddress
+                        };
+                        new UserLoginTrackingService().Save(ut);
+                        return user.ID;
+                    }
+                }
+
+                return Guid.Empty;
+            }
+            catch (Exception)
+            {
+                return Guid.Empty;
+            }
         }
 
 
@@ -724,10 +839,10 @@ namespace Epilogger.Web.Controllers {
         }
 
 
-        public virtual ActionResult AccountActivationNeeded()
-        {
-            return View();
-        }
+        //public virtual ActionResult AccountActivationNeeded()
+        //{
+        //    return View();
+        //}
 
 
 
@@ -772,42 +887,42 @@ namespace Epilogger.Web.Controllers {
             return View();
         }
 
-        public virtual ActionResult TwitterAuthTest()
-        {
+        //public virtual ActionResult TwitterAuthTest()
+        //{
 
-            var apiClient = new APISoapClient();
-            var container = apiClient.CreateUrl("http://www.google.com");
+        //    var apiClient = new APISoapClient();
+        //    var container = apiClient.CreateUrl("http://www.google.com");
 
 
             
 
-            //var urlRequestBody = new Epilogr.CreateUrlRequestBody("http://www.google.com");
-            //var urlRequest = new Epilogr.CreateUrlRequest(urlRequestBody);
+        //    //var urlRequestBody = new Epilogr.CreateUrlRequestBody("http://www.google.com");
+        //    //var urlRequest = new Epilogr.CreateUrlRequest(urlRequestBody);
 
-            //var test = new Epilogr.CreateUrlResponse(new CreateUrlResponseBody());
+        //    //var test = new Epilogr.CreateUrlResponse(new CreateUrlResponseBody());
            
-            //var containdter = new Epilogr.Container();
+        //    //var containdter = new Epilogr.Container();
             
-            //var urlResponseBody = new CreateUrlResponseBody();
-            //var mytest = new Epilogr.CreateUrlResponse(urlResponseBody);
+        //    //var urlResponseBody = new CreateUrlResponseBody();
+        //    //var mytest = new Epilogr.CreateUrlResponse(urlResponseBody);
             
 
-            //Epilogr.CreateUrlResponse =
+        //    //Epilogr.CreateUrlResponse =
 
-            var test = "test";
+        //    var test = "test";
 
-            return View();
-        }
+        //    return View();
+        //}
 
-        [HttpPost]
-        public virtual ActionResult TwitterAuthTest(TwitterAuthTestViewModel model)
-        {
+        //[HttpPost]
+        //public virtual ActionResult TwitterAuthTest(TwitterAuthTestViewModel model)
+        //{
 
-            var tokens = new OAuthTokens { ConsumerKey = "qV0GasfpuvDRmXhnaDA", ConsumerSecret = "q3ftmYti8d4ws2iNieidofWYLswdHT3BRwmu813EA", AccessToken = "280687481-XyZq3P6v7qivApsYjES8V3LjTRgcRZIx2XRO755V", AccessTokenSecret = "Z7MG32TDldpx5USDdOUXjzsop1ZtaEbLMm1bzTnuk" };
-            TwitterResponse<TwitterStatus> tweetResponse = TwitterStatus.Update(tokens, "Test");
+        //    var tokens = new OAuthTokens { ConsumerKey = "qV0GasfpuvDRmXhnaDA", ConsumerSecret = "q3ftmYti8d4ws2iNieidofWYLswdHT3BRwmu813EA", AccessToken = "280687481-XyZq3P6v7qivApsYjES8V3LjTRgcRZIx2XRO755V", AccessTokenSecret = "Z7MG32TDldpx5USDdOUXjzsop1ZtaEbLMm1bzTnuk" };
+        //    TwitterResponse<TwitterStatus> tweetResponse = TwitterStatus.Update(tokens, "Test");
 
-            return View();
-        }
+        //    return View();
+        //}
 
         #endregion
 

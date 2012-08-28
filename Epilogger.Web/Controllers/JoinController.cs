@@ -482,7 +482,7 @@ namespace Epilogger.Web.Controllers {
                 TextEmail = message
             };
             sfEmail.ToEmailAddresses.Add(user.EmailAddress);
-            //sfEmail.SendMail();
+            sfEmail.SendMail();
         }
 
         private void ShortCreateFormSaveUser(CreateAccountModel model)

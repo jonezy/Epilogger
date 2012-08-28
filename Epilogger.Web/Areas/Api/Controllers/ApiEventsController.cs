@@ -214,7 +214,7 @@ namespace Epilogger.Web.Areas.Api.Controllers
         #region User
         
             [HmacAuthorization]
-            public virtual JsonResult GetUserByID(Guid userId)
+            public virtual JsonResult GetUserById(Guid userId)
             {
                 return Json(_userManager.GetUserByID(userId), JsonRequestBehavior.AllowGet);
             }
@@ -282,7 +282,7 @@ namespace Epilogger.Web.Areas.Api.Controllers
                 else if (headerValue.Contains("Twitter"))
                 {
                     var userNamePass = Encoding.UTF8.GetString(Convert.FromBase64String(headers["Authorization"].Substring(8)));
-                    var splitUserPass = userNamePass.Split(new string[] { ":" }, StringSplitOptions.None);
+                    var splitUserPass = userNamePass.Split(new[] { ":" }, StringSplitOptions.None);
 
                     var twitterUserName = splitUserPass[0];
                     var twitterToken = splitUserPass[1];
@@ -301,13 +301,13 @@ namespace Epilogger.Web.Areas.Api.Controllers
                 else if (headerValue.Contains("Facebook"))
                 {
                     var userNamePass = Encoding.UTF8.GetString(Convert.FromBase64String(headers["Authorization"].Substring(9)));
-                    var splitUserPass = userNamePass.Split(new string[] { ":" }, StringSplitOptions.None);
+                    var splitUserPass = userNamePass.Split(new[] { ":" }, StringSplitOptions.None);
 
                     var fbUserName = splitUserPass[0];
                     var fbToken = splitUserPass[1];
-                    var fbTokenSecret = splitUserPass[2];
+                    //var fbTokenSecret = splitUserPass[2];
 
-                    //user = _userManager.LoginWithTwitter(twitterUserName, twitterToken, twitterTokenSecret);
+                    user = _userManager.LoginWithFacebook(fbUserName, fbToken);
 
                     if (user == null)
                     {
@@ -316,11 +316,20 @@ namespace Epilogger.Web.Areas.Api.Controllers
 
                 }
 
-
-
-                return Json(Mapper.Map<User, ApiUser>(user), JsonRequestBehavior.AllowGet);
-         
+                return Json(Mapper.Map<User, ApiUser>(user), JsonRequestBehavior.AllowGet);         
             }
+
+            [HttpPost, HmacAuthorization]
+            public virtual JsonResult ConnectTwitterAccountToUser(ApiConnectAuthAccount caa)
+            {
+                return Json(_userManager.ConnectAuthAccountToUser(caa.UserId, "Twitter", caa.AuthScreenName, caa.AuthToken, caa.AuthTokenSecret, "Mobile"));
+            }
+            [HttpPost, HmacAuthorization]
+            public virtual JsonResult ConnectFacebookAccountToUser(ApiConnectAuthAccount caa)
+            {
+                return Json(_userManager.ConnectAuthAccountToUser(caa.UserId, "Facebook", caa.AuthScreenName, caa.AuthToken, caa.AuthTokenSecret, "Mobile"));
+            }
+
 
         #endregion
 
