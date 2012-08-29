@@ -13,5 +13,7 @@ namespace Epilogger.Web.Areas.Api.Models
         List<ApiMemoryBoxItem> MemoryBoxItemsByMemBoxIdPaged(int memBoxId, int page, int count);
         List<ApiMemoryBox> MemoryBoxByUserId(Guid userId);
         List<ApiMemoryBox> MemoryBoxByUserIdandEventId(Guid userId, int eventId);
+        List<ApiTweet> TweetsByMemBoxIdPaged(int memBoxId, int page, int count);
+        List<ApiImage> PhotosByMemBoxIdPaged(int memBoxId, int page, int count);
     }
 }

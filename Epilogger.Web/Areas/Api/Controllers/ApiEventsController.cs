@@ -391,6 +391,20 @@ namespace Epilogger.Web.Areas.Api.Controllers
                 return Json(_memBoxManager.MemoryBoxItemsByMemBoxIdPaged(memBoxId, page, count), JsonRequestBehavior.AllowGet);
             }
 
+
+            [HmacAuthorization]
+            public virtual JsonResult GetAllTweetsInMemBoxPaged(int memBoxId, int page, int count)
+            {
+                return Json(_memBoxManager.TweetsByMemBoxIdPaged(memBoxId, page, count), JsonRequestBehavior.AllowGet);
+            }
+
+            [HmacAuthorization]
+            public virtual JsonResult GetAllImagesInMemBoxPaged(int memBoxId, int page, int count)
+            {
+                return Json(_memBoxManager.PhotosByMemBoxIdPaged(memBoxId, page, count), JsonRequestBehavior.AllowGet);
+            }
+
+
             [HmacAuthorization]
             public virtual JsonResult GetAllMemoryBoxesByUserId(Guid userId)
             {

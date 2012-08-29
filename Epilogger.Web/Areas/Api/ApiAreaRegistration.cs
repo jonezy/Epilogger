@@ -245,6 +245,19 @@ namespace Epilogger.Web.Areas.Api
                 new { controller = "ApiEvents", action = "GetAllItemsInMemBoxPaged", memBoxId = UrlParameter.Optional, page = UrlParameter.Optional, count = UrlParameter.Optional }
             );
 
+
+            context.MapRoute(
+                "GetAllTweetsInMemBoxPaged",
+                "Api/MemoryBoxes/MemoryBox/{memBoxId}/Tweets/{page}/{count}",
+                new { controller = "ApiEvents", action = "GetAllTweetsInMemBoxPaged", memBoxId = UrlParameter.Optional, page = UrlParameter.Optional, count = UrlParameter.Optional }
+            );
+
+            context.MapRoute(
+                "GetAllPhotosInMemBoxPaged",
+                "Api/MemoryBoxes/MemoryBox/{memBoxId}/Photos/{page}/{count}",
+                new { controller = "ApiEvents", action = "GetAllImagesInMemBoxPaged", memBoxId = UrlParameter.Optional, page = UrlParameter.Optional, count = UrlParameter.Optional }
+            );
+
             context.MapRoute(
                 "GetAllMemoryBoxesByUserId",
                 "Api/MemoryBoxes/{userid}",

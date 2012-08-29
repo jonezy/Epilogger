@@ -155,5 +155,11 @@ namespace Epilogger.Web
             //return db.Images.Where(t => t.EventID == eventId && t.DateTime > pageLoadTime).OrderByDescending(t => t.DateTime).Take(numberToReturn).ToList();
         }
 
+        public IEnumerable<Image> GetImagesInMemoryBoxPaged(int memBoxId, int page, int count)
+        {
+            return db.GetPhotosFromMemoryBox(memBoxId, page, count).ExecuteTypedList<Image>();
+        }
+
+
     }
 }

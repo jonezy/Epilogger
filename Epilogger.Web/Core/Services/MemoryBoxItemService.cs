@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using AutoMapper;
 using Epilogger.Data;
+using Epilogger.Web.Areas.Api.Models.Classes;
 
 namespace Epilogger.Web {
 
@@ -48,6 +50,29 @@ namespace Epilogger.Web {
             var mi = db.MemoryBoxItems.Where(e => e.MemboxId == memBoxId).OrderByDescending(e => e.ID);
             return mi.Skip(currentPage * recordsPerPage).Take(recordsPerPage).ToList();
         }
+
+        //public List<Tweet> MemoryBoxTweetsByMemBoxIdPaged(int memBoxId, int currentPage, int recordsPerPage)
+        //{
+        //    currentPage = currentPage - 1;
+
+        //    return Mapper.Map<List<Tweet>, List<ApiTweet>>(_ts.GetTweetsInMemoryBoxPaged(memBoxId, currentPage, recordsPerPage).ToList());
+
+
+        //    //var mi = from mbis in db.MemoryBoxItems
+        //    //         where mbis.MemboxId == memBoxId && mbis.ItemType == "Tweet"
+        //    //         orderby mbis.ID descending
+        //    //         select mbis;
+
+        //    //var tweets = from twts in db.Tweets
+        //    //             where twts.ID = mi;
+
+
+
+
+        //    //var mi = db.MemoryBoxItems.Where(e => e.MemboxId == memBoxId && e.ItemType=="Tweet").OrderByDescending(e => e.ID).Select();
+        //    //return mi.Skip(currentPage * recordsPerPage).Take(recordsPerPage).ToList();
+        //}
+
 
         public List<MemoryBox> MemoryBoxByUserId(Guid userId)
         {

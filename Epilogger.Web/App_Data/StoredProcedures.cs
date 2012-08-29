@@ -517,6 +517,13 @@ namespace Epilogger.Data{
             sp.Command.AddParameter("EventID",EventID,DbType.Int64);
             return sp;
         }
+        public StoredProcedure GetPhotosFromMemoryBox(int MemBoxId,int skip,int take){
+            StoredProcedure sp=new StoredProcedure("GetPhotosFromMemoryBox",this.Provider);
+            sp.Command.AddParameter("MemBoxId",MemBoxId,DbType.Int32);
+            sp.Command.AddParameter("skip",skip,DbType.Int32);
+            sp.Command.AddParameter("take",take,DbType.Int32);
+            return sp;
+        }
         public StoredProcedure GetRandomImagesByEventID(int EventID,int RecordsToReturn){
             StoredProcedure sp=new StoredProcedure("GetRandomImagesByEventID",this.Provider);
             sp.Command.AddParameter("EventID",EventID,DbType.Int32);
@@ -554,6 +561,13 @@ namespace Epilogger.Data{
         }
         public StoredProcedure GetTrendingEventsByActivity(){
             StoredProcedure sp=new StoredProcedure("GetTrendingEventsByActivity",this.Provider);
+            return sp;
+        }
+        public StoredProcedure GetTweetsFromMemoryBox(int MemBoxId,int skip,int take){
+            StoredProcedure sp=new StoredProcedure("GetTweetsFromMemoryBox",this.Provider);
+            sp.Command.AddParameter("MemBoxId",MemBoxId,DbType.Int32);
+            sp.Command.AddParameter("skip",skip,DbType.Int32);
+            sp.Command.AddParameter("take",take,DbType.Int32);
             return sp;
         }
         public StoredProcedure GetTweetsPerHourStats(DateTime FromDate,DateTime ToDate){

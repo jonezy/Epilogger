@@ -15,11 +15,15 @@ namespace Epilogger.Web.Areas.Api.Models
     {
         readonly MemoryBoxService _ms = new MemoryBoxService();
         readonly MemoryBoxItemService _msi = new MemoryBoxItemService();
+        readonly TweetService _ts = new TweetService();
+        readonly ImageService _is = new ImageService();
 
         public MemoryBoxManager()
         {
             if (_ms == null) _ms = new MemoryBoxService();
             if (_msi == null) _msi = new MemoryBoxItemService();
+            if (_ts == null) _ts = new TweetService();
+            if (_is == null) _is = new ImageService();
         }
 
         //****************
@@ -83,6 +87,23 @@ namespace Epilogger.Web.Areas.Api.Models
         {
             return Mapper.Map<List<MemoryBoxItem>, List<ApiMemoryBoxItem>>(_msi.MemoryBoxItemsByMemBoxIdPaged(memBoxId, page, count));
         }
+
+        public List<ApiTweet> TweetsByMemBoxIdPaged(int memBoxId, int page, int count)
+        {
+            return Mapper.Map<List<Tweet>, List<ApiTweet>>(_ts.GetTweetsInMemoryBoxPaged(memBoxId, page, count).ToList());
+        }
+
+        public List<ApiImage> PhotosByMemBoxIdPaged(int memBoxId, int page, int count)
+        {
+            return Mapper.Map<List<Image>, List<ApiImage>>(_is.GetImagesInMemoryBoxPaged(memBoxId, page, count).ToList());
+        }
+
+
+
+
+        
+
+
 
         public List<ApiMemoryBox> MemoryBoxByUserId(Guid userId)
         {

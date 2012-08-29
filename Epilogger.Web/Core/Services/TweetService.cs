@@ -250,8 +250,11 @@ namespace Epilogger.Web
 
         }
 
+        public IEnumerable<Tweet> GetTweetsInMemoryBoxPaged(int memBoxId, int page, int count)
+        {
+            return db.GetTweetsFromMemoryBox(memBoxId, page, count).ExecuteTypedList<Tweet>();
+        }
 
-        
 
 
 
