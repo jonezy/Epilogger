@@ -3080,6 +3080,7 @@
     <Content Include="Public\js\TimePicker\timePicker.css" />
     <Content Include="Areas\Admin\Views\ManageApi\index.cshtml" />
     <Content Include="Areas\Admin\Views\ManageApi\edit.cshtml" />
+    <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="Public\js\bootstrap-Image-Gallery\Makefile" />
     <None Include="Public\js\bootstrap-Image-Gallery\package.json" />
     <None Include="Public\js\bootstrap-Image-Gallery\README.md" />
