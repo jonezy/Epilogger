@@ -220,7 +220,100 @@ Epilogger – We’ll Remember&lt;/p&gt;
 &lt;/body&gt;
 &lt;/html&gt;</value>
   </data>
-  <data name="BetaInvite" xml:space="preserve">
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt; 
+    
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+    &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;
+    &lt;title&gt;Welcome to Epilogger.com&lt;/title&gt;
+    &lt;style type="text/css"&gt;
+    
+        /* Client-specific Styles */
+        #outlook a { padding: 0; } /* Force Outlook to provide a "view in browser" button. */
+        body { width: 100% !important; } .ReadMsgBody { width: 100%; } .ExternalClass { width: 100%; } /* Force Hotmail to display emails at full width */
+        body { -webkit-text-size-adjust: none; -ms-text-size-adjust: none; } /* Prevent Webkit and Windows Mobile platforms from changing default font sizes. */
+
+        /* Reset Styles */
+        body { margin: 0; padding: 0; background:#000;color:#5a5a5a;font: normal 14px Georgia;}
+        img { height: auto; line-height: 100%; outline: none; text-decoration: none; }
+		a img { border:none; }
+		a {color:#4b9ed8;}
+        #backgroundTable { margin: 0; padding: 0; width: 100% !important;background:#000; }
+        #mainTable { margin: 0; padding: 0; width: 555px !important;background:#fff; padding:30px !important;}
+        #footerTable { font-size:11px;color:#b7b8b8;}
+       p {
+           margin: 1em 0;
+       }
+       
+       h1, h2, h3, h4, h5, h6 {
+           color: black !important;
+           line-height: 100% !important;
+       }
+       
+       h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+           color: blue !important;
+       }
+       
+       h1 a:active, h2 a:active,  h3 a:active, h4 a:active, h5 a:active, h6 a:active {
+           color: red !important; /* Preferably not the same color as the normal header link color.  There is limited support for psuedo classes in email clients, this was added just for good measure. */
+       }
+       
+       h1 a:visited, h2 a:visited,  h3 a:visited, h4 a:visited, h5 a:visited, h6 a:visited {
+           color: purple !important; /* Preferably not the same color as the normal header link color. There is limited support for psuedo classes in email clients, this was added just for good measure. */
+       }
+       
+       table td {
+           border-collapse: collapse;
+       }
+
+       .yshortcuts, .yshortcuts a, .yshortcuts a:link,.yshortcuts a:visited, .yshortcuts a:hover, .yshortcuts a span { color: #4b9ed8; text-decoration: none !important; border-bottom: none !important; background: none !important; } /* Body text color for the New Yahoo.  This example sets the font of Yahoo's Shortcuts to black. */
+       
+       
+       &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;table width="100%" cellpadding="0" cellspacing="0" border="0" id="backgroundTable"&gt;
+        &lt;tr&gt;
+            &lt;td align="center" valign="top"&gt;
+                &lt;table width="555" id="mainTable" cellpadding="0" cellspacing="0" border="0"&gt;
+                    &lt;tr&gt;
+                        &lt;td&gt;&lt;img src="[BASE_URL]Public/emails/images/logo.png" alt="Epilogger" title="Epilogger" width="186" height="71" style="display: block;" /&gt;&lt;br /&gt;&lt;/td&gt;
+                    &lt;/tr&gt;
+                    &lt;tr&gt;
+                        &lt;td&gt;
+&lt;p&gt;Hi [USERNAME], &lt;/p&gt;
+
+&lt;p&gt;We have received a request to reset your password for your Epilogger account with the email address [USER_EMAIL]. &lt;/p&gt;
+
+&lt;p&gt;&lt;a style="color:#4b9ed8;" href="[RESET_PASSWORD_URL]"&gt;Click here&lt;/a&gt; to reset your password. &lt;/p&gt;
+&lt;br /&gt;
+
+&lt;p&gt;Unleash Epicness!&lt;br /&gt;
+Epilogger – We’ll Remember&lt;/p&gt;
+                        &lt;/td&gt;
+                    &lt;/tr&gt;
+                    &lt;tr&gt;
+                        &lt;td&gt;
+                            &lt;br /&gt;
+                            &lt;hr style="border:solid 1px #d4d4d4;" /&gt;
+                            &lt;table width="100%" cellpadding="0" cellspacing="0" border="0" id="footerTable"&gt;
+                                &lt;tr&gt;
+                                    &lt;td width="50%" align="left"&gt;&lt;i&gt;Follow &lt;a style="color:#4b9ed8;" href="http://twitter.com/Epilogger"&gt;@epilogger&lt;/a&gt; on twitter or &lt;a style="color:#4b9ed8;" href="http://www.facebook.com/Epilogger"&gt;facebook&lt;/a&gt;.&lt;br /&gt;&lt;a style="color:#4b9ed8;" href="http://epilogger.com"&gt;http://epilogger.com&lt;/a&gt;&lt;/i&gt;&lt;/td&gt;
+                                    &lt;td width="50%" align="right"&gt;&lt;i&gt;&lt;a style="color:#4b9ed8;" href="mailto:info@epilogger.com"&gt;info@epilogger.com&lt;/a&gt;&lt;br /&gt;We’ll Remember!&lt;/i&gt;&lt;/td&gt;
+                                &lt;/tr&gt;
+                            &lt;/table&gt;
+                        &lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;  
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;  
+&lt;/body&gt;
+&lt;/html&gt;</value>
+  </data>
+  <data name="OldBetaInvite" xml:space="preserve">
     <value>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt; 
     
@@ -335,100 +428,7 @@ Epilogger Inc.&lt;/p&gt;
 &lt;/body&gt;
 &lt;/html&gt;</value>
   </data>
-  <data name="ForgotPassword" xml:space="preserve">
-    <value>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt; 
-    
-&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
-&lt;head&gt;
-    &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;
-    &lt;title&gt;Welcome to Epilogger.com&lt;/title&gt;
-    &lt;style type="text/css"&gt;
-    
-        /* Client-specific Styles */
-        #outlook a { padding: 0; } /* Force Outlook to provide a "view in browser" button. */
-        body { width: 100% !important; } .ReadMsgBody { width: 100%; } .ExternalClass { width: 100%; } /* Force Hotmail to display emails at full width */
-        body { -webkit-text-size-adjust: none; -ms-text-size-adjust: none; } /* Prevent Webkit and Windows Mobile platforms from changing default font sizes. */
-
-        /* Reset Styles */
-        body { margin: 0; padding: 0; background:#000;color:#5a5a5a;font: normal 14px Georgia;}
-        img { height: auto; line-height: 100%; outline: none; text-decoration: none; }
-		a img { border:none; }
-		a {color:#4b9ed8;}
-        #backgroundTable { margin: 0; padding: 0; width: 100% !important;background:#000; }
-        #mainTable { margin: 0; padding: 0; width: 555px !important;background:#fff; padding:30px !important;}
-        #footerTable { font-size:11px;color:#b7b8b8;}
-       p {
-           margin: 1em 0;
-       }
-       
-       h1, h2, h3, h4, h5, h6 {
-           color: black !important;
-           line-height: 100% !important;
-       }
-       
-       h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
-           color: blue !important;
-       }
-       
-       h1 a:active, h2 a:active,  h3 a:active, h4 a:active, h5 a:active, h6 a:active {
-           color: red !important; /* Preferably not the same color as the normal header link color.  There is limited support for psuedo classes in email clients, this was added just for good measure. */
-       }
-       
-       h1 a:visited, h2 a:visited,  h3 a:visited, h4 a:visited, h5 a:visited, h6 a:visited {
-           color: purple !important; /* Preferably not the same color as the normal header link color. There is limited support for psuedo classes in email clients, this was added just for good measure. */
-       }
-       
-       table td {
-           border-collapse: collapse;
-       }
-
-       .yshortcuts, .yshortcuts a, .yshortcuts a:link,.yshortcuts a:visited, .yshortcuts a:hover, .yshortcuts a span { color: #4b9ed8; text-decoration: none !important; border-bottom: none !important; background: none !important; } /* Body text color for the New Yahoo.  This example sets the font of Yahoo's Shortcuts to black. */
-       
-       
-       &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;table width="100%" cellpadding="0" cellspacing="0" border="0" id="backgroundTable"&gt;
-        &lt;tr&gt;
-            &lt;td align="center" valign="top"&gt;
-                &lt;table width="555" id="mainTable" cellpadding="0" cellspacing="0" border="0"&gt;
-                    &lt;tr&gt;
-                        &lt;td&gt;&lt;img src="[BASE_URL]Public/emails/images/logo.png" alt="Epilogger" title="Epilogger" width="186" height="71" style="display: block;" /&gt;&lt;br /&gt;&lt;/td&gt;
-                    &lt;/tr&gt;
-                    &lt;tr&gt;
-                        &lt;td&gt;
-&lt;p&gt;Hi [USERNAME], &lt;/p&gt;
-
-&lt;p&gt;We have received a request to reset your password for your Epilogger account with the email address [USER_EMAIL]. &lt;/p&gt;
-
-&lt;p&gt;&lt;a style="color:#4b9ed8;" href="[RESET_PASSWORD_URL]"&gt;Click here&lt;/a&gt; to reset your password. &lt;/p&gt;
-&lt;br /&gt;
-
-&lt;p&gt;Unleash Epicness!&lt;br /&gt;
-Epilogger – We’ll Remember&lt;/p&gt;
-                        &lt;/td&gt;
-                    &lt;/tr&gt;
-                    &lt;tr&gt;
-                        &lt;td&gt;
-                            &lt;br /&gt;
-                            &lt;hr style="border:solid 1px #d4d4d4;" /&gt;
-                            &lt;table width="100%" cellpadding="0" cellspacing="0" border="0" id="footerTable"&gt;
-                                &lt;tr&gt;
-                                    &lt;td width="50%" align="left"&gt;&lt;i&gt;Follow &lt;a style="color:#4b9ed8;" href="http://twitter.com/Epilogger"&gt;@epilogger&lt;/a&gt; on twitter or &lt;a style="color:#4b9ed8;" href="http://www.facebook.com/Epilogger"&gt;facebook&lt;/a&gt;.&lt;br /&gt;&lt;a style="color:#4b9ed8;" href="http://epilogger.com"&gt;http://epilogger.com&lt;/a&gt;&lt;/i&gt;&lt;/td&gt;
-                                    &lt;td width="50%" align="right"&gt;&lt;i&gt;&lt;a style="color:#4b9ed8;" href="mailto:info@epilogger.com"&gt;info@epilogger.com&lt;/a&gt;&lt;br /&gt;We’ll Remember!&lt;/i&gt;&lt;/td&gt;
-                                &lt;/tr&gt;
-                            &lt;/table&gt;
-                        &lt;/td&gt;
-                    &lt;/tr&gt;
-                &lt;/table&gt;  
-            &lt;/td&gt;
-        &lt;/tr&gt;
-    &lt;/table&gt;  
-&lt;/body&gt;
-&lt;/html&gt;</value>
-  </data>
-  <data name="ValidateAccount" xml:space="preserve">
+  <data name="OldValidateAccount" xml:space="preserve">
     <value>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt; 
     
@@ -520,11 +520,308 @@ Epilogger – We’ll Remember&lt;/p&gt;
 &lt;/body&gt;
 &lt;/html&gt;</value>
   </data>
-  <data name="WelcomeMessage" xml:space="preserve">
+  <data name="OldWelcomeMessage" xml:space="preserve">
     <value>Hi [FULLNAME]&lt;br /&gt;&lt;br /&gt;
 
 Thank you for registering and taking part in epilogger.com, the new hot way to remember your life.
 
 &lt;a href="[LINKTOLOGIN]"&gt;Login and start epilogging!&lt;/a&gt;</value>
+  </data>
+  <data name="ValidateEmail" xml:space="preserve">
+    <value>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt; 
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+	&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;
+	&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"/&gt;
+	&lt;title&gt;Verification&lt;/title&gt;
+	&lt;style type="text/css"&gt;
+		/* Based on The MailChimp Reset INLINE: Yes. */  
+		/* Client-specific Styles */
+		#outlook a {padding:0;} /* Force Outlook to provide a "view in browser" menu link. */
+		/* Prevent Webkit and Windows Mobile platforms from changing default font sizes.*/ 
+		.ExternalClass {width:100%;} /* Force Hotmail to display emails at full width */  
+		.ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;}
+		/* Forces Hotmail to display normal line spacing.  More on that: http://www.emailonacid.com/forum/viewthread/43/ */ 
+		#backgroundTable {margin:0; padding:0; width:100% !important; line-height: 100% !important;}
+		/* End reset */
+
+		/* Some sensible defaults for images
+		Bring inline: Yes. */
+		img {outline:none; text-decoration:none; -ms-interpolation-mode: bicubic;} 
+		a img {border:none;} 
+		.image_fix {display:block;}
+
+		h1 a:active, h2 a:active,  h3 a:active, h4 a:active, h5 a:active, h6 a:active {	color: red !important;}
+		h1 a:visited, h2 a:visited,  h3 a:visited, h4 a:visited, h5 a:visited, h6 a:visited { color: purple !important;}
+
+
+		/***************************************************
+		****************************************************
+		MOBILE TARGETING
+		****************************************************
+		***************************************************/
+		@media only screen and (max-device-width: 480px) 
+		{
+			/* Part one of controlling phone number linking for mobile. */
+			a[href^="tel"], a[href^="sms"] {
+				text-decoration: none;
+				color: blue; /* or whatever your want */
+				pointer-events: none;
+				cursor: default;}
+
+			.mobile_link a[href^="tel"], .mobile_link a[href^="sms"] {
+				text-decoration: default;
+				color: orange !important;
+				pointer-events: auto;
+				cursor: default;}
+		}
+
+		/* More Specific Targeting */
+
+		@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+		/* You guessed it, ipad (tablets, smaller screens, etc) */
+			/* repeating for the ipad */
+			a[href^="tel"], a[href^="sms"] {
+						text-decoration: none;
+						color: blue; /* or whatever your want */
+						pointer-events: none;
+						cursor: default;
+					}
+
+			.mobile_link a[href^="tel"], .mobile_link a[href^="sms"] {
+						text-decoration: default;
+						color: orange !important;
+						pointer-events: auto;
+						cursor: default;
+					}
+		}
+	&lt;/style&gt;
+
+	&lt;!-- Targeting Windows Mobile --&gt;
+	&lt;!--[if IEMobile 7]&gt;
+	&lt;style type="text/css"&gt;
+	
+	&lt;/style&gt;
+	&lt;![endif]--&gt;   
+
+	&lt;!-- ***********************************************
+	****************************************************
+	END MOBILE TARGETING
+	****************************************************
+	************************************************ --&gt;
+
+	&lt;!--[if gte mso 9]&gt;
+		&lt;style&gt;
+		/* Target Outlook 2007 and 2010 */
+		&lt;/style&gt;
+	&lt;![endif]--&gt;
+&lt;/head&gt;
+&lt;body style="width:100% !important; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; margin:0; padding:0;"&gt;
+&lt;table bgcolor="#eeeeee" cellspacing="0" cellpadding="10" border="0" width="600" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; font-family:helvetica, arial, sans-serif; padding-left:15px; padding-right:15px"&gt;
+	&lt;tr&gt;&lt;td&gt;&amp;nbsp;&lt;a href="http://epilogger.com" style="position:relative; top:10px;"&gt;&lt;img src="http://epilogger.com/Public/images/email/logo.png" alt="Epilogger.com logo" border="0"/&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;
+			&lt;!-- START CONTENT --&gt;
+			&lt;table bgcolor="#ffffff" cellspacing="0" cellpadding="0" border="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; line-height:1.45em; font-size:10.5pt; color:#707070"&gt;
+				&lt;tr&gt;&lt;td colspan="2" style="border-collapse:collapse; background-image:url('http://epilogger.com/Public/images/email/bg-tabletop.jpg'); height:11px"/&gt;&lt;/td&gt;&lt;/tr&gt;
+				&lt;tr&gt;
+					&lt;td width="350" valign="top" style="border-collapse:collapse; padding:0 15px; background-image:url('http://epilogger.com/Public/images/email/bg-tableleft.png'); background-position:left; background-repeat:repeat-y"&gt;
+						&lt;!-- User: First name --&gt;
+						&lt;h1 style="color:#000; font-family:helvetica, arial, sans-serif; letter-spacing:-1px; margin-bottom:0"&gt;Hi [FIRST_NAME],&lt;/h1&gt;
+						
+						&lt;!-- Paragraph: mini-tour --&gt;
+						&lt;h2 style="color:#f838ba; margin:1em 0 5px 0;  font-family:helvetica, arial, sans-serif; font-size:13pt; letter-spacing:-1px"&gt;Validate your e-mail&lt;/h2&gt;
+						&lt;p style="margin:0;"&gt;Your email address isn’t verified in our system just yet. In order to be doubly sure that you’re not a robot we’ll need you to validate your email address. Don’t worry, it’s super easy. Just click here and you’ll be all set!&lt;/p&gt;
+						&lt;p style="margin:1em 0;"&gt;Thanks for using Epilogger, we hope you like it!&lt;/p&gt;
+						&lt;p style="margin:1em 0;"&gt;&lt;a href="[VALIDATE_ACCOUNT_URL]"&gt;&lt;img src="http://epilogger.com/Public/images/email/btn-validate.jpg"/&gt;&lt;/a&gt;&lt;/p&gt;
+					&lt;/td&gt;
+					
+					&lt;td width="*" valign="top" style="border-collapse:collapse; border-left:1px dotted #e0e0e0; padding:0 15px; background-image:url('http://epilogger.com/Public/images/email/bg-tableright.png'); background-position:right; background-repeat:repeat-y; font-size:10pt"&gt;
+						&lt;h2 style="color:#f838ba; margin-bottom:5px; font-family:helvetica, arial, sans-serif; font-size:13pt; letter-spacing:-1px"&gt;Get in Touch&lt;/h2&gt;
+						&lt;p style="margin:0; line-height:1.8em"&gt;
+							&lt;img src="http://epilogger.com/Public/images/email/icon-bird.png"/&gt; &amp;nbsp;&amp;nbsp;&lt;a href="http://twitter.com/twitter.com"&gt;@epilogger&lt;/a&gt;&lt;br/&gt;
+							&lt;img src="http://epilogger.com/Public/images/email/icon-facebook.png"/&gt; &amp;nbsp;&amp;nbsp;&lt;a href="http://facebook.com/epilogger"&gt;facebook/epilogger&lt;/a&gt;&lt;br/&gt;
+							&lt;img src="http://epilogger.com/Public/images/email/icon-email.png"/&gt; &amp;nbsp;&amp;nbsp;&lt;a href="mailto:info@epilogger.com"&gt;info@epilogger.com&lt;/a&gt;
+						&lt;/p&gt;
+						
+						&lt;h2 style="color:#f838ba; margin-top:25px; margin-bottom:5px; font-family:helvetica, arial, sans-serif; font-size:13pt; letter-spacing:-1px"&gt;Hungry for more? Read &lt;a href="http://epilogger.com/blog"&gt;our blog&lt;/a&gt;.&lt;/h2&gt;
+						&lt;p style="margin:0;"&gt;We publish event news and features every Tuesday &amp; Thursday!&lt;/p&gt;
+						&lt;p style="margin:1em 0;"&gt;&lt;a href="http://epilogger.com/blog"&gt;&lt;img src="http://epilogger.com/Public/images/email/btn-blog.jpg"/&gt;&lt;/a&gt;&lt;/p&gt;
+						
+						
+						&lt;!-- Paragraph: feedback --&gt;
+						&lt;h2 style="color:#f838ba; margin:1.5em 0 5px 0; font-family:helvetica, arial, sans-serif; font-size:13pt; letter-spacing:-1px"&gt;Problems?&lt;/h2&gt;
+						&lt;p style="margin:0;"&gt;If you run into any issues feel free to get in touch using the feedback tab on your right- we’ll be sure to get it.&lt;/p&gt;
+						&lt;p style="margin:1em 0;"&gt;&lt;a href="mailto:info@epilogger.com"&gt;&lt;img src="http://epilogger.com/Public/images/email/btn-trouble.jpg" alt="send feedback" border="0"/&gt;&lt;/a&gt;&lt;/p&gt;
+					&lt;/td&gt;
+				&lt;/tr&gt;
+				&lt;tr&gt;&lt;td colspan="2" style="border-collapse:collapse; background-image:url('http://epilogger.com/Public/images/email/bg-tablebottom.png'); height:4px" /&gt;&lt;/tr&gt;
+			&lt;/table&gt;
+			&lt;!-- END CONTENT --&gt;
+		&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;p align="center" style="margin:0; line-height:0.8em"&gt;&lt;font size="1" face="arial" color="#8b8b8b"&gt;Copyright © [year] Epilogger, All rights reserved.&lt;br/&gt;You are receiving this email because you are a valuable early adopter of Epilogger. We appreciate your sign up! &lt;br /&gt;&lt;br /&gt;Our mailing address is: 
+Epilogger&lt;br /&gt;
+221 Yonge St&lt;br /&gt;
+Toronto, On M5B 1M4&lt;br /&gt;
+Canada&lt;/font&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+
+&lt;/body&gt;
+&lt;/html&gt;</value>
+  </data>
+  <data name="WelcomeEmail" xml:space="preserve">
+    <value>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt; 
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+	&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;
+	&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"/&gt;
+	&lt;title&gt;Welcome to Epilogger!&lt;/title&gt;
+	&lt;style type="text/css"&gt;
+		/* Based on The MailChimp Reset INLINE: Yes. */  
+		/* Client-specific Styles */
+		#outlook a {padding:0;} /* Force Outlook to provide a "view in browser" menu link. */
+		/* Prevent Webkit and Windows Mobile platforms from changing default font sizes.*/ 
+		.ExternalClass {width:100%;} /* Force Hotmail to display emails at full width */  
+		.ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;}
+		/* Forces Hotmail to display normal line spacing.  More on that: http://www.emailonacid.com/forum/viewthread/43/ */ 
+		#backgroundTable {margin:0; padding:0; width:100% !important; line-height: 100% !important;}
+		/* End reset */
+
+		/* Some sensible defaults for images
+		Bring inline: Yes. */
+		img {outline:none; text-decoration:none; -ms-interpolation-mode: bicubic;} 
+		a img {border:none;} 
+		.image_fix {display:block;}
+
+		h1 a:active, h2 a:active,  h3 a:active, h4 a:active, h5 a:active, h6 a:active {	color: red !important;}
+		h1 a:visited, h2 a:visited,  h3 a:visited, h4 a:visited, h5 a:visited, h6 a:visited { color: purple !important;}
+
+
+		/***************************************************
+		****************************************************
+		MOBILE TARGETING
+		****************************************************
+		***************************************************/
+		@media only screen and (max-device-width: 480px) 
+		{
+			/* Part one of controlling phone number linking for mobile. */
+			a[href^="tel"], a[href^="sms"] {
+				text-decoration: none;
+				color: blue; /* or whatever your want */
+				pointer-events: none;
+				cursor: default;}
+
+			.mobile_link a[href^="tel"], .mobile_link a[href^="sms"] {
+				text-decoration: default;
+				color: orange !important;
+				pointer-events: auto;
+				cursor: default;}
+		}
+
+		/* More Specific Targeting */
+
+		@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+		/* You guessed it, ipad (tablets, smaller screens, etc) */
+			/* repeating for the ipad */
+			a[href^="tel"], a[href^="sms"] {
+						text-decoration: none;
+						color: blue; /* or whatever your want */
+						pointer-events: none;
+						cursor: default;
+					}
+
+			.mobile_link a[href^="tel"], .mobile_link a[href^="sms"] {
+						text-decoration: default;
+						color: orange !important;
+						pointer-events: auto;
+						cursor: default;
+					}
+		}
+	&lt;/style&gt;
+
+	&lt;!-- Targeting Windows Mobile --&gt;
+	&lt;!--[if IEMobile 7]&gt;
+	&lt;style type="text/css"&gt;
+	
+	&lt;/style&gt;
+	&lt;![endif]--&gt;   
+
+	&lt;!-- ***********************************************
+	****************************************************
+	END MOBILE TARGETING
+	****************************************************
+	************************************************ --&gt;
+
+	&lt;!--[if gte mso 9]&gt;
+		&lt;style&gt;
+		/* Target Outlook 2007 and 2010 */
+		&lt;/style&gt;
+	&lt;![endif]--&gt;
+&lt;/head&gt;
+&lt;body style="width:100% !important; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; margin:0; padding:0;"&gt;
+&lt;table bgcolor="#eeeeee" cellspacing="0" cellpadding="10" border="0" width="600" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; font-family:helvetica, arial, sans-serif; padding-left:15px; padding-right:15px"&gt;
+	&lt;tr&gt;&lt;td&gt;&amp;nbsp;&lt;a href="http://epilogger.com" style="position:relative; top:10px;"&gt;&lt;img src="http://epilogger.com/Public/images/email/logo.png" alt="Epilogger.com logo" border="0"/&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;
+			&lt;!-- START CONTENT --&gt;
+			&lt;table bgcolor="#ffffff" cellspacing="0" cellpadding="0" border="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; line-height:1.45em; font-size:10.5pt; color:#707070"&gt;
+				&lt;tr&gt;&lt;td colspan="2" style="border-collapse:collapse; background-image:url('http://epilogger.com/Public/images/email/bg-tabletop.jpg'); height:11px"/&gt;&lt;/td&gt;&lt;/tr&gt;
+				&lt;tr&gt;
+					&lt;td width="350" valign="top" style="border-collapse:collapse; padding:0 15px; background-image:url('http://epilogger.com/Public/images/email/bg-tableleft.png'); background-position:left; background-repeat:repeat-y"&gt;
+						&lt;!-- User: First name --&gt;
+						&lt;h1 style="color:#000; font-family:helvetica, arial, sans-serif; letter-spacing:-1px; margin-bottom:0"&gt;Hi [FIRST_NAME],&lt;/h1&gt;
+						
+						&lt;!-- Paragraph: welcome to Epilogger --&gt;
+						&lt;h2 style="color:#f838ba; margin:1em 0 5px 0; font-family:helvetica, arial, sans-serif; font-size:13pt; letter-spacing:-1px"&gt;Welcome to Epilogger!&lt;/h2&gt;
+						&lt;p style="margin:0;"&gt;We’re excited to have you join our community of awesome people and interesting events.&lt;/p&gt;
+						
+						&lt;!-- Paragraph: mini-tour --&gt;
+						&lt;h2 style="color:#f838ba; margin:1.5em 0 5px 0;  font-family:helvetica, arial, sans-serif; font-size:13pt; letter-spacing:-1px"&gt;New to Epilogger? Here’s a mini tour:&lt;/h2&gt;
+						&lt;p style="margin:0;"&gt;&lt;strong style="color:black;"&gt;Homepage:&lt;/strong&gt; This is where you’ll find trending events and a live stream of photos from around the world. Click on any of them to go straight to their event page.&lt;/p&gt;
+						&lt;p style="margin:1em 0;"&gt;&lt;strong style="color:black;"&gt;Event Pages:&lt;/strong&gt; These are pages dedicated to single events. Here you will see information about the event, social media content, and some interesting stats. From there you can subscribe to an event, comment on and share photos, and so much more!&lt;/p&gt;
+						&lt;p style="margin:1em 0;"&gt;&lt;strong style="color:black;"&gt;Browse Events:&lt;/strong&gt; Up in the toolbar you’ll notice this menu. Here you can find events sorted by date, category, or even just the ones you have subscribed to. &lt;/p&gt;
+						
+						&lt;!-- Paragraph: know what you're doing --&gt;
+						&lt;h2 style="color:#f838ba; margin:1.5em 0 5px 0; font-family:helvetica, arial, sans-serif; font-size:13pt; letter-spacing:-1px"&gt;Know what you're doing?&lt;/h2&gt;
+						&lt;p style="margin:0;"&gt;&lt;strong style="color:black;"&gt;Why not try adding an event?&lt;/strong&gt;  If you aren’t sure what keywords to use, just start with the event’s official hashtag. From there you can add any words or phrases that people talking about your event might say if they were unsure of the official hashtag. By the way, just be sure to double check that it’s not already in the system before you jump right in.&lt;/p&gt;
+						&lt;p style="margin:1em 0;"&gt;&amp;nbsp;&lt;/p&gt;
+					&lt;/td&gt;
+					
+					&lt;td width="*" valign="top" style="border-collapse:collapse; border-left:1px dotted #e0e0e0; padding:0 15px; background-image:url('http://epilogger.com/Public/images/email/bg-tableright.png'); background-position:right; background-repeat:repeat-y; font-size:10pt"&gt;
+						&lt;h2 style="color:#f838ba; margin-bottom:5px; font-family:helvetica, arial, sans-serif; font-size:13pt; letter-spacing:-1px"&gt;Get in Touch&lt;/h2&gt;
+						&lt;p style="margin:0; line-height:1.8em"&gt;
+							&lt;img src="http://epilogger.com/Public/images/email/icon-bird.png"/&gt; &amp;nbsp;&amp;nbsp;&lt;a href="http://twitter.com/twitter.com"&gt;@epilogger&lt;/a&gt;&lt;br/&gt;
+							&lt;img src="http://epilogger.com/Public/images/email/icon-facebook.png"/&gt; &amp;nbsp;&amp;nbsp;&lt;a href="http://facebook.com/epilogger"&gt;facebook/epilogger&lt;/a&gt;&lt;br/&gt;
+							&lt;img src="http://epilogger.com/Public/images/email/icon-email.png"/&gt; &amp;nbsp;&amp;nbsp;&lt;a href="mailto:info@epilogger.com"&gt;info@epilogger.com&lt;/a&gt;
+						&lt;/p&gt;
+						
+						&lt;h2 style="color:#f838ba; margin-top:25px; margin-bottom:5px; font-family:helvetica, arial, sans-serif; font-size:13pt; letter-spacing:-1px"&gt;Hungry for more? Read &lt;a href="http://epilogger.com/blog"&gt;our blog&lt;/a&gt;.&lt;/h2&gt;
+						&lt;p style="margin:0;"&gt;We publish event news and features every Tuesday &amp; Thursday!&lt;/p&gt;
+						&lt;p style="margin:1em 0;"&gt;&lt;a href="http://epilogger.com/blog"&gt;&lt;img src="http://epilogger.com/Public/images/email/btn-blog.jpg"/&gt;&lt;/a&gt;&lt;/p&gt;
+						
+						
+						&lt;!-- Paragraph: feedback --&gt;
+						&lt;h2 style="color:#f838ba; margin:1.5em 0 5px 0; font-family:helvetica, arial, sans-serif; font-size:13pt; letter-spacing:-1px"&gt;Problems?&lt;/h2&gt;
+						&lt;p style="margin:0;"&gt;If you run into any issues feel free to get in touch using the feedback tab on your right- we’ll be sure to get it.&lt;/p&gt;
+						&lt;p style="margin:1em 0;"&gt;&lt;a href="mailto:feedback@epilogger.com"&gt;&lt;img src="http://epilogger.com/Public/images/email/btn-trouble.jpg" alt="send feedback" border="0"/&gt;&lt;/a&gt;&lt;/p&gt;
+					&lt;/td&gt;
+				&lt;/tr&gt;
+				&lt;tr&gt;&lt;td colspan="2" style="border-collapse:collapse; background-image:url('http://epilogger.com/Public/images/email/bg-tablebottom.png'); height:4px"/&gt;&lt;/td&gt;&lt;/tr&gt;
+			&lt;/table&gt;
+			&lt;!-- END CONTENT --&gt;
+		&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;p align="center" style="margin:0; line-height:0.8em"&gt;&lt;font size="1" face="arial" color="#8b8b8b"&gt;Copyright © [year] Epilogger, All rights reserved.&lt;br/&gt;You are receiving this email because you are a valuable early adopter of Epilogger. We appreciate your sign up! &lt;br /&gt;&lt;br /&gt;Our mailing address is: 
+Epilogger&lt;br /&gt;
+221 Yonge St&lt;br /&gt;
+Toronto, On M5B 1M4&lt;br /&gt;
+Canada&lt;/font&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+
+&lt;/body&gt;
+&lt;/html&gt;</value>
   </data>
 </root>

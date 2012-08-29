@@ -51,10 +51,6 @@ namespace Epilogger.Web.Areas.Api.Models
 
             return Mapper.Map<List<Event>, List<ApiEvent>>(_es.GetTrendingEvents());
 
-
-
-
-
             //var eplRedis = new Common.Redis();
             //var trendingEventId = eplRedis.GetTrendingEvents();
             //var trendingEvents = new List<Event>();

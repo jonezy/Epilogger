@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -433,20 +434,16 @@ namespace Epilogger.Web.Controllers {
 
         private static void SendWelcomeEmail(User user)
         {
-            // build a message to send to the user.
-
-            //Changed to UserID GUID to prevent problems with duplicate email addresses.
-            var validateUrl = string.Format("{0}account/validate/{1}", App.BaseUrl, Helpers.base64Encode(user.ID.ToString()));
+            //Send the user the Welcome Email
 
             var parser = new TemplateParser();
             var replacements = new Dictionary<string, string>
                                    {
-                                       {"[BASE_URL]", App.BaseUrl},
-                                       {"[FIRST_NAME]", user.EmailAddress},
-                                       {"[VALIDATE_ACCOUNT_URL]", validateUrl}
+                                       {"[FIRST_NAME]", user.FirstName},
+                                       {"[year]", DateTime.Now.Year.ToString(CultureInfo.InvariantCulture) }
                                    };
 
-            var message = parser.Replace(AccountEmails.ValidateAccount, replacements);
+            var message = parser.Replace(AccountEmails.WelcomeEmail, replacements);
 
             var sfEmail = new SpamSafeMail
             {
@@ -460,7 +457,7 @@ namespace Epilogger.Web.Controllers {
 
         private static void SendVerificationEmail(User user)
         {
-            // build a message to send to the user.
+            //Send the Validate Email Address Email
 
             //Changed to UserID GUID to prevent problems with duplicate email addresses.
             var validateUrl = string.Format("{0}account/validate/{1}", App.BaseUrl, Helpers.base64Encode(user.ID.ToString()));
@@ -468,16 +465,16 @@ namespace Epilogger.Web.Controllers {
             var parser = new TemplateParser();
             var replacements = new Dictionary<string, string>
                                    {
-                                       {"[BASE_URL]", App.BaseUrl},
-                                       {"[FIRST_NAME]", user.EmailAddress},
-                                       {"[VALIDATE_ACCOUNT_URL]", validateUrl}
+                                       {"[FIRST_NAME]", user.FirstName},
+                                       {"[VALIDATE_ACCOUNT_URL]", validateUrl},
+                                       {"[year]", DateTime.Now.Year.ToString(CultureInfo.InvariantCulture) }
                                    };
 
-            var message = parser.Replace(AccountEmails.ValidateAccount, replacements);
+            var message = parser.Replace(AccountEmails.ValidateEmail, replacements);
 
             var sfEmail = new SpamSafeMail
             {
-                EmailSubject = "Welcome to epilogger.com!",
+                EmailSubject = "epilogger.com - Please validate your email address",
                 HtmlEmail = message,
                 TextEmail = message
             };
@@ -491,6 +488,7 @@ namespace Epilogger.Web.Controllers {
             ConnectAuthAccountToUser(model, user);
 
             SendWelcomeEmail(user);
+            SendVerificationEmail(user);
 
             this.StoreSuccess("Your account was created successfully");
             CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString(), DateTime.Now.AddDays(30));
@@ -501,6 +499,7 @@ namespace Epilogger.Web.Controllers {
             var user = SaveUser(model);
 
             SendWelcomeEmail(user);
+            SendVerificationEmail(user);
 
             this.StoreSuccess("Your account was created successfully");
             CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString(), DateTime.Now.AddDays(30));

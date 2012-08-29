@@ -872,7 +872,7 @@ namespace Epilogger.Web.Controllers {
                                                                       {"[VALIDATE_ACCOUNT_URL]", validateUrl}
                                                                   };
 
-            var message = parser.Replace(AccountEmails.ValidateAccount, replacements);
+            var message = parser.Replace(AccountEmails.OldValidateAccount, replacements);
 
             var sfEmail = new SpamSafeMail
                               {

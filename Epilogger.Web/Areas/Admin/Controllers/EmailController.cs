@@ -47,7 +47,7 @@ namespace Epilogger.Web.Areas.Admin.Controllers {
                     replacements.Add("[BASE_URL]", App.BaseUrl);
                     replacements.Add("[CREATE_ACCOUNT_URL]", string.Format("{0}account/create", App.BaseUrl));
 
-                    string message = parser.Replace(AccountEmails.BetaInvite, replacements);
+                    string message = parser.Replace(AccountEmails.OldBetaInvite, replacements);
 
                     EmailSender sender = new EmailSender();
                     sender.Send(App.MailConfiguration, email, "", "You're invited to try the Epilogger alpha!", message);
