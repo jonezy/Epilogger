@@ -177,6 +177,24 @@ namespace Epilogger.Web.Views.Emails {
         ///&lt;head&gt;
         ///	&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
         ///	&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;/&gt;
+        ///	&lt;title&gt;Verification&lt;/title&gt;
+        ///	&lt;style type=&quot;text/css&quot;&gt;
+        ///		/* Based on The MailChimp Reset INLINE: Yes. */  
+        ///		/* Client-specific Styles */
+        ///		#outlook a {padding:0;} /* Force Outlook to provide a &quot;view in brow [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string ValidateEmailThankYou {
+            get {
+                return ResourceManager.GetString("ValidateEmailThankYou", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt; 
+        ///&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+        ///&lt;head&gt;
+        ///	&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+        ///	&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;/&gt;
         ///	&lt;title&gt;Welcome to Epilogger!&lt;/title&gt;
         ///	&lt;style type=&quot;text/css&quot;&gt;
         ///		/* Based on The MailChimp Reset INLINE: Yes. */  

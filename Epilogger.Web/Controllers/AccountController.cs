@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -28,10 +29,10 @@ using Twitterizer;
 
 namespace Epilogger.Web.Controllers {
     public partial class AccountController : BaseController {
-        UserService service;
+        UserService _service;
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext) {
-            if (service == null) service = new UserService();
+            if (_service == null) _service = new UserService();
 
             base.Initialize(requestContext);
         }
@@ -56,7 +57,7 @@ namespace Epilogger.Web.Controllers {
                 }
 
                 //Check if username exists
-                return service.IsUsernameAvailable(username);    
+                return _service.IsUsernameAvailable(username);    
             }
             catch (Exception)
             {
@@ -79,7 +80,7 @@ namespace Epilogger.Web.Controllers {
                 }
 
                 //Check if username exists
-                return service.IsEmailAddressAvailable(emailaddress);
+                return _service.IsEmailAddressAvailable(emailaddress);
             }
             catch (Exception)
             {
@@ -145,7 +146,7 @@ namespace Epilogger.Web.Controllers {
                 return View();
             }
 
-            var user = service.GetUserByID(userid);
+            var user = _service.GetUserByID(userid);
             if (user == null)
             {
                 this.StoreError("We couldn't find an account to activate with that verification code.");
@@ -153,11 +154,83 @@ namespace Epilogger.Web.Controllers {
             }
 
             user.EmailVerified = true;
-            service.Save(user);
+            _service.Save(user);
+
+            SendVerificationThankYouEmail(user);
 
             this.StoreSuccess("Your email address has been verified. You can go ahead and unleash epicness!");
             return RedirectToAction("Index", "Home");
         }
+
+
+        private static void SendVerificationThankYouEmail(User user)
+        {
+            //Send the Validate Email Thank You
+
+            //Build the trending list
+            var es = new EventService();
+            var imgs = new ImageService();
+            
+            var trending = new StringBuilder();
+
+            //trending.Append("<ul style='margin:20px 0 0 0; padding: 0; list-style: none;'>");
+
+            //foreach (var item in es.GetHomepageActivity().Where(e=> e.ActivityType==ActivityType.PHOTOS_VIDEOS).Take(6))
+            //{
+            //    item.Image = imgs.FindByID(Convert.ToInt32(item.ActivityContent));
+                
+            //    trending.Append(
+            //        string.Format("<li style='display:inline-block;width:150px;overflow:hidden;margin-right: 20px;'><a href='{0}'>{1}<br /><img src='{2}' width='150px' alt='' /></a></li>", "http://epilogger.com/events/" + item.EventSlug, item.EventName, item.Image.Fullsize));
+                
+            //}
+
+            //trending.Append("</ul>");
+
+            trending.Append("<table style='margin:20px 0 0 0; padding: 0; list-style: none;'>");
+
+            int i = 1;
+            foreach (var item in es.GetHomepageActivity().Where(e => e.ActivityType == ActivityType.PHOTOS_VIDEOS).Take(6))
+            {
+                if (i == 1) { trending.Append("<tr valign='top'>"); }
+
+                item.Image = imgs.FindByID(Convert.ToInt32(item.ActivityContent));
+                
+                trending.Append(
+                    string.Format("<td style='width:150px;overflow:hidden;padding-right: 20px;' ><a href='{0}'>{1}<br /><img src='{2}' width='150px' alt='' /></a></td>", "http://epilogger.com/events/" + item.EventSlug, item.EventName, item.Image.Fullsize));
+
+                if (i == 2) { trending.Append("</tr>");
+                    i = 1;
+                } else
+                {
+                    i++;
+                }
+
+            }
+
+            trending.Append("</table>");
+
+
+
+            var parser = new TemplateParser();
+            var replacements = new Dictionary<string, string>
+                                   {
+                                       {"[FIRST_NAME]", user.FirstName},
+                                       {"[year]", DateTime.Now.Year.ToString(CultureInfo.InvariantCulture) },
+                                       {"[TRENDING_EVENTS]", trending.ToString()}
+                                   };
+
+            var message = parser.Replace(AccountEmails.ValidateEmailThankYou, replacements);
+
+            var sfEmail = new SpamSafeMail
+            {
+                EmailSubject = "Epilogger.com - Thank You for validating your email address",
+                HtmlEmail = message,
+                TextEmail = message
+            };
+            sfEmail.ToEmailAddresses.Add(user.EmailAddress);
+            sfEmail.SendMail();
+        }
+
 
 
         public static bool ConnectAuthAccountToUser(Guid userId, string authService, string authScreenName, string authToken, string authTokenSecret, string platform)
@@ -346,7 +419,7 @@ namespace Epilogger.Web.Controllers {
                     }
                     user.ProfilePicture = imagePath;
 
-                    service.Save(user);
+                    _service.Save(user);
 
                     //this.StoreSuccess("Your account was updated successfully");
                     this.Receive(MessageType.Success, "Your account was updated successfully");
@@ -531,7 +604,7 @@ namespace Epilogger.Web.Controllers {
             // to a page to create a new password.
 
             if (ModelState.IsValid) {
-                var user = service.GetUserByUsername(model.Username);
+                var user = _service.GetUserByUsername(model.Username);
 
                 if (user == null)
                 {
@@ -545,7 +618,7 @@ namespace Epilogger.Web.Controllers {
                     return RedirectToAction("UpdatePassword");
                 }
                 
-                user = service.GetUserByUsername(model.Username);
+                user = _service.GetUserByUsername(model.Username);
                 if (!BCryptHelper.CheckPassword(model.Password, user.Password)) {
                     ModelState.AddModelError(string.Empty, "There is a problem with your username or password. Please try again or <a href='/join/signup'/>create an account</a>.");
                     return View(model);
@@ -738,14 +811,14 @@ namespace Epilogger.Web.Controllers {
         public virtual ActionResult ForgotPassword(ForgotPasswordViewModel model) {
             try {
                 var passwordResetHash = Guid.NewGuid();
-                var user = service.GetUserByEmail(model.EmailAddress.Trim());
+                var user = _service.GetUserByEmail(model.EmailAddress.Trim());
                 if (user == null) {
                     this.StoreWarning("There is no account on epilogger.com that uses that email address");
                     return View();
                 }
 
                 user.ForgotPasswordHash = passwordResetHash;
-                service.Save(user);
+                _service.Save(user);
 
                 string resetPasswordUrl = string.Format("{0}account/resetpassword?hash={1}", App.BaseUrl, passwordResetHash);
 
@@ -782,7 +855,7 @@ namespace Epilogger.Web.Controllers {
         [HttpGet]
         public virtual ActionResult ResetPassword() {
             Guid passwordResetHash = Guid.Parse(Request.QueryString["hash"].ToString());
-            User user = service.GetUserByResetHash(passwordResetHash);
+            User user = _service.GetUserByResetHash(passwordResetHash);
             if (user == null) {
                 this.StoreWarning("Something isn't right, the user didn't request this action?");
                 return View();
@@ -797,11 +870,11 @@ namespace Epilogger.Web.Controllers {
         [HttpPost, ValidateInput(false)]
         public virtual ActionResult ResetPassword(ResetPasswordViewModel model) {
             try {
-                User user = service.GetUserByID(Guid.Parse(model.UserID));
+                User user = _service.GetUserByID(Guid.Parse(model.UserID));
                 user.Password = PasswordHelpers.EncryptPassword(model.NewPassword);
                 user.ForgotPasswordHash = null;
 
-                service.Save(user);
+                _service.Save(user);
                 
                 this.StoreSuccess("Your password has been updated, you can now login!");
 
@@ -824,10 +897,10 @@ namespace Epilogger.Web.Controllers {
                 // update password.
                 string salt = BCryptHelper.GenerateSalt();
                 string password = BCryptHelper.HashPassword(model.NewPassword, salt);
-                User user = service.GetUserByID(CurrentUserID);
+                User user = _service.GetUserByID(CurrentUserID);
                 user.Password = password;
 
-                service.Save(user);
+                _service.Save(user);
 
                 this.StoreSuccess("Your password has been updated, please login using the password you just created.");
 

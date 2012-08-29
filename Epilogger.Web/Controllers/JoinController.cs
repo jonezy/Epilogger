@@ -474,7 +474,7 @@ namespace Epilogger.Web.Controllers {
 
             var sfEmail = new SpamSafeMail
             {
-                EmailSubject = "epilogger.com - Please validate your email address",
+                EmailSubject = "Epilogger.com - Please validate your email address",
                 HtmlEmail = message,
                 TextEmail = message
             };
