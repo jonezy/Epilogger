@@ -230,6 +230,7 @@
     <Compile Include="Areas\Api\Models\Classes\ApiImage.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiMemoryBox.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiMemoryBoxItem.cs" />
+    <Compile Include="Areas\Api\Models\Classes\ApiMemoryBoxTweet.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiSearchInEvent.cs" />
     <Compile Include="Areas\Api\Models\CategoryManager.cs" />
     <Compile Include="Areas\Api\Models\Classes\ApiTweet.cs" />
@@ -372,6 +373,7 @@
     <Compile Include="Models\AddLinkViewModel.cs" />
     <Compile Include="Models\AllContentViewModel.cs" />
     <Compile Include="Models\AllPhotosDisplayViewModel.cs" />
+    <Compile Include="Models\MemoryBoxTweet.cs" />
     <Compile Include="Models\NagViewModel.cs" />
     <Compile Include="Models\NavigationViewModel.cs" />
     <Compile Include="Models\TweetsAndImage.cs" />

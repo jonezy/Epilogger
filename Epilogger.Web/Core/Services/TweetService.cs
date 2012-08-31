@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using Epilogger.Data;
 using Epilogger.Web.Model;
+using Epilogger.Web.Models;
 using Links;
 
 
@@ -170,10 +171,10 @@ namespace Epilogger.Web
         }
 
 
-        public IEnumerable<TweetsAndImage> GetTweetsAndImagesPaged(int eventID, int? page, int tweetsPerPage)
+        public IEnumerable<TweetsAndImage> GetTweetsAndImagesPaged(int eventId, int page, int tweetsPerPage)
         {
 
-            var skipAmount = page.HasValue ? page.Value - 1 : 0;
+            //var skipAmount = page.HasValue ? page.Value - 1 : 0;
 
             //Subsonic doesn't support this type fo Outer join
             //return (from t in db.Tweets   
@@ -200,7 +201,7 @@ namespace Epilogger.Web
             //exec TweetsAndImageByEventIDPaged 133, 11, 10
 
             //Do it with a stored procedure
-            var sproc = db.TweetsAndImageByEventIDPaged(eventID, skipAmount, tweetsPerPage);
+            var sproc = db.TweetsAndImageByEventIDPaged(eventId, (int) page, tweetsPerPage);
             var searchResults = sproc.ExecuteDataSet();
 
             var resultsList = new List<TweetsAndImage>();
@@ -250,9 +251,57 @@ namespace Epilogger.Web
 
         }
 
-        public IEnumerable<Tweet> GetTweetsInMemoryBoxPaged(int memBoxId, int page, int count)
+        public IEnumerable<MemoryBoxTweet> GetTweetsInMemoryBoxPaged(int memBoxId, int page, int count)
         {
-            return db.GetTweetsFromMemoryBox(memBoxId, page, count).ExecuteTypedList<Tweet>();
+
+            var sproc = db.GetTweetsFromMemoryBox(memBoxId, page, count);
+            var searchResults = sproc.ExecuteDataSet();
+
+            var resultsList = new List<MemoryBoxTweet>();
+            foreach (DataRow row in searchResults.Tables[0].Rows)
+            {
+                var tAndA = new MemoryBoxTweet
+                {
+                    Tweet =
+                        new Tweet
+                        {
+                            CreatedDate = DateTime.Parse(row["CreatedDate"].ToString()),
+                            EventID = int.Parse(row["tEventID"].ToString()),
+                            FromUserScreenName = row["FromUserScreenName"].ToString(),
+                            ID = int.Parse(row["tID"].ToString()),
+                            IsoLanguageCode = row["IsoLanguageCode"].ToString(),
+                            Location = row["Location"].ToString(),
+                            ProfileImageURL = row["ProfileImageURL"].ToString(),
+                            RawSource = row["RawSource"].ToString(),
+                            SinceID = int.Parse(row["SinceID"].ToString()),
+                            Source = row["Source"].ToString(),
+                            Text = row["Text"].ToString(),
+                            TextAsHTML = row["TextAsHTML"].ToString(),
+                            ToUserScreenName = row["ToUserScreenName"].ToString(),
+                            TwitterID = long.Parse(row["TwitterID"].ToString())
+                        }
+                };
+
+
+                if (row["mId"].ToString() != string.Empty)
+                {
+                    tAndA.MemoryBoxItem = new MemoryBoxItem()
+                    {
+                        ID = int.Parse(row["tId"].ToString()),
+                        EventId = int.Parse(row["mEventID"].ToString()),
+                        MemboxId = int.Parse(row["MemboxId"].ToString()),
+                        UserId = Guid.Parse(row["UserId"].ToString()),
+                        ItemType = row["ItemType"].ToString(),
+                        ItemId = row["ItemId"].ToString(),
+                        AddedDateTime = DateTime.Parse(row["AddedDateTime"].ToString())
+                    };
+                }
+
+                resultsList.Add(tAndA);
+            }
+
+            return resultsList;
+            
         }
 
 

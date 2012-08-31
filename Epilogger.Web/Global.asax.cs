@@ -652,8 +652,8 @@ namespace Epilogger.Web {
             Mapper.CreateMap<MemoryBoxItem, ApiMemoryBoxItem>();
             Mapper.CreateMap<ApiMemoryBoxItem, MemoryBoxItem>();
             Mapper.CreateMap<MemoryBox, ApiMemoryBox>();
-
-
+            Mapper.CreateMap<MemoryBoxTweet, ApiMemoryBoxTweet>();
+            
             Mapper.AssertConfigurationIsValid();
         }
 

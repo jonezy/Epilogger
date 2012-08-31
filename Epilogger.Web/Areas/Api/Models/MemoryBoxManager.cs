@@ -39,7 +39,6 @@ namespace Epilogger.Web.Areas.Api.Models
             return Mapper.Map<MemoryBox, ApiMemoryBox>(_ms.Save(Mapper.Map<ApiMemoryBox, MemoryBox>(box)));
         }
 
-
         public ApiMemoryBoxItem Save(ApiMemoryBoxItem box)
         {
             if (box.MemboxId == 0)
@@ -69,7 +68,6 @@ namespace Epilogger.Web.Areas.Api.Models
             return Mapper.Map<MemoryBoxItem, ApiMemoryBoxItem>(_msi.Save(Mapper.Map<ApiMemoryBoxItem, MemoryBoxItem>(box)));
         }
 
-
         public bool RemoveMemBoxItem(int id)
         {
             try
@@ -88,22 +86,15 @@ namespace Epilogger.Web.Areas.Api.Models
             return Mapper.Map<List<MemoryBoxItem>, List<ApiMemoryBoxItem>>(_msi.MemoryBoxItemsByMemBoxIdPaged(memBoxId, page, count));
         }
 
-        public List<ApiTweet> TweetsByMemBoxIdPaged(int memBoxId, int page, int count)
+        public List<ApiMemoryBoxTweet> TweetsByMemBoxIdPaged(int memBoxId, int page, int count)
         {
-            return Mapper.Map<List<Tweet>, List<ApiTweet>>(_ts.GetTweetsInMemoryBoxPaged(memBoxId, page, count).ToList());
+            return Mapper.Map<List<MemoryBoxTweet>, List<ApiMemoryBoxTweet>>(_ts.GetTweetsInMemoryBoxPaged(memBoxId, page, count).ToList());
         }
 
         public List<ApiImage> PhotosByMemBoxIdPaged(int memBoxId, int page, int count)
         {
             return Mapper.Map<List<Image>, List<ApiImage>>(_is.GetImagesInMemoryBoxPaged(memBoxId, page, count).ToList());
         }
-
-
-
-
-        
-
-
 
         public List<ApiMemoryBox> MemoryBoxByUserId(Guid userId)
         {
