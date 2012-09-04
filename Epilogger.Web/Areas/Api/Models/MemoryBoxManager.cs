@@ -41,7 +41,7 @@ namespace Epilogger.Web.Areas.Api.Models
 
         public ApiMemoryBoxItem Save(ApiMemoryBoxItem box)
         {
-            if (box.MemboxId == 0)
+            if (box.MemboxId == 0 || box.MemboxId == null)
             {
                 //Check to see if there is already a box for this User and this event.
                 var memBox = _ms.FindByUserIdandEventId(box.UserId, box.EventId);

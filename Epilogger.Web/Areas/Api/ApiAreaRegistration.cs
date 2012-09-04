@@ -240,11 +240,16 @@ namespace Epilogger.Web.Areas.Api
 
             /* Memory Boxes */
             context.MapRoute(
+                "AddItemToMemBox",
+                "Api/MemoryBoxes/MemoryBox/AddItem",
+                new { controller = "ApiEvents", action = "AddItemToMemBox" }
+            );
+            
+            context.MapRoute(
                 "GetAllItemsInMemBoxPaged",
                 "Api/MemoryBoxes/MemoryBox/{memBoxId}/{page}/{count}",
                 new { controller = "ApiEvents", action = "GetAllItemsInMemBoxPaged", memBoxId = UrlParameter.Optional, page = UrlParameter.Optional, count = UrlParameter.Optional }
             );
-
 
             context.MapRoute(
                 "GetAllTweetsInMemBoxPaged",
@@ -271,11 +276,7 @@ namespace Epilogger.Web.Areas.Api
             );
 
             
-            context.MapRoute(
-                "AddItemToMemBox",
-                "Api/MemoryBoxes/MemoryBox/AddItem",
-                new { controller = "ApiEvents", action = "AddItemToMemBox" }
-            );
+            
 
             context.MapRoute(
                 "RemoveItemFromMemBox",

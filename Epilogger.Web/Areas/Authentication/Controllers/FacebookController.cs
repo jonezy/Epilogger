@@ -18,7 +18,22 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
 
         public virtual ActionResult ConnectRequest()
         {
-            return Redirect(BuildRequest(returnUrl));
+            //return Redirect(BuildRequest(returnUrl));
+
+            // Build the Return URI form the Request Url
+            var redirectUri = new UriBuilder(returnUrl);
+
+            var client = new FacebookClient();
+
+            var uri = client.GetLoginUrl(new
+            {
+                client_id = ConfigurationManager.AppSettings["FacebookAppId"],
+                redirect_uri = redirectUri.Uri.AbsoluteUri,
+                scope = "email",
+            });
+
+            return Redirect(uri.ToString());
+
         }
 
         public virtual ActionResult ConnectRequestWithCallback(string callBackUrl)
@@ -46,6 +61,74 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
 
         public virtual ActionResult ConnectAccount()
         {
+            var state = Request.QueryString["state"] as string ?? "";
+
+            var client = new FacebookClient();
+            var oauthResult = client.ParseOAuthCallbackUrl(Request.Url);
+
+            // Build the Return URI form the Request Url
+            var redirectUri = new UriBuilder(returnUrl);
+
+            // Exchange the code for an access token
+            dynamic result = client.Get("/oauth/access_token", new
+            {
+                client_id = ConfigurationManager.AppSettings["FacebookAppId"],
+                redirect_uri = redirectUri.Uri.AbsoluteUri,
+                client_secret = ConfigurationManager.AppSettings["FacebookAppSecret"],
+                code = oauthResult.Code,
+            });
+
+            // Read the auth values
+            string accessToken = result.access_token;
+            DateTime expires = DateTime.UtcNow.AddSeconds(Convert.ToDouble(result.expires));
+
+
+            var fbClient = new FacebookClient(accessToken);
+
+            dynamic facebookUser = fbClient.Get("me");
+
+            if (facebookUser == null)
+            {
+                this.StoreError("There was a problem connecting to your Facebook account");
+                return RedirectToAction("index", "account");
+            }
+
+
+            var authorizationService = new UserAuthenticationProfileService();
+            var userAuth = authorizationService.UserAuthorizationByServiceScreenNameAndPlatform(facebookUser.username, "Web", AuthenticationServices.FACEBOOK);
+
+            if (userAuth != null)
+            {
+                userAuth.Service = AuthenticationServices.FACEBOOK.ToString();
+                userAuth.Token = accessToken;
+            }
+            else
+            {
+                userAuth = new UserAuthenticationProfile
+                    {
+                        UserID = CurrentUserID,
+                        Platform = "Web",
+                        Service = AuthenticationServices.FACEBOOK.ToString(),
+                        Token = accessToken,
+                        ServiceUsername = facebookUser.username
+                    };
+            }
+
+            authorizationService.Save(userAuth);
+
+            this.StoreSuccess("Your facebook account has been linked to your epilogger.com account");
+
+            // prevent open redirection attack by checking if the url is local.
+            if (Url.IsLocalUrl(state))
+            {
+                return RedirectToAction("Index", "Account", new { area = "" });
+            }
+            else
+            {
+                return RedirectToAction("Index", "Account", new { area = "" });
+            }
+
+            
             //string code = Request.QueryString["code"] as string ?? "";
             //string state = Request.QueryString["state"] as string ?? "";
 
@@ -118,12 +201,12 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
 
         public virtual ActionResult Disconnect()
         {
-            //UserAuthenticationProfileService service = new UserAuthenticationProfileService();
-            //service.DisconnectService(AuthenticationServices.FACEBOOK, CurrentUserID);
+            var service = new UserAuthenticationProfileService();
+            service.DisconnectService(AuthenticationServices.FACEBOOK, CurrentUserID);
 
-            //this.StoreInfo("Your facebook account has been disconnected from your epiloggerepilogger.com account");
+            this.StoreInfo("Your facebook account has been disconnected from your epiloggerepilogger.com account");
 
-            //return Redirect(Request.UrlReferrer.ToString());
+            return Redirect(Request.UrlReferrer.ToString());
             return null;
         }
 
