@@ -134,8 +134,8 @@ else
         <div class="subscribedIndicator">SUBSCRIBED</div>
     }
     
-    <div class="grid_12 alpha">
-        <h1>@Model.Name</h1>
+    <div class="grid_12 alpha" itemscope itemtype="http://data-vocabulary.org/Event">
+        <h1 itemprop="summary">@Model.Name</h1>
         <h2 style="margin:0; padding:0">@Model.SubTitle</h2>
 
         @*Event Rating Section*@
@@ -221,7 +221,7 @@ else
 
 
     <div class="grid_5 alpha omega eventDescriptionSection">
-        <div id="eventDescription">
+        <div id="eventDescription" itemprop="description">
             @Html.Raw(Model.Description.Replace("\r", "<br />"))
         </div>
         
@@ -234,8 +234,22 @@ else
             <td>
                 @if (Model.Venue != null)
                 {
-                    <span class="img"><img src="@Url.Content("~/Public/images/icons/details-checkin.png")" /></span>
-                    <span>@Model.Venue.Name,<br/> @Model.Venue.Address,<br /> @Model.Venue.City (<a href="http://maps.google.com/?q=@Model.Venue.Name @Model.Venue.Address @Model.Venue.City @Model.Venue.State @Model.Venue.Zip" target="_blank">map</a>)</span>
+                    
+                    
+                    <span class="img"><img src="@Url.Content("~/Public/images/icons/details-checkin.png")" alt="" /></span>
+                    <span itemprop="location" itemscope itemtype="http://data-vocabulary.org/organization">
+                        <span itemprop="name">@Model.Venue.Name</span>
+                        ​<span itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
+                            <span itemprop="street-address">@Model.Venue.Address </span>
+                            <span itemprop="locality">@Model.Venue.City (<a href="http://maps.google.com/?q=@Model.Venue.Name @Model.Venue.Address @Model.Venue.City @Model.Venue.State @Model.Venue.Zip" target="_blank">map</a>)</span>
+                        </span>
+                    </span>
+                    
+                    
+                    <span itemprop="geo" itemscope itemtype="http://data-vocabulary.org/geo">
+                        <meta itemprop="latitude" content="@Model.Venue.Geolat" />
+                        <meta itemprop="longitude" content="@Model.Venue.Geolong" />
+                    </span>
                 }
            </td>
            <td>
@@ -243,12 +257,26 @@ else
                 <span>
                 @if (Model.StartDateTime.Subtract(Model.EndDateTime).Days == 0)
                 {
-                    @Html.DisplayFor(e => e.StartDateTime, "FullDate") <br />
-                    @Html.DisplayFor(e => e.StartDateTime, "Time") @:to @Html.DisplayFor(e => e.EndDateTime, "Time")
+                    <div itemscope itemtype="http://data-vocabulary.org/Event">
+                        <time itemprop="startDate" datetime="@String.Format("{0:yyyy-MM-ddThh:mm-00:00}", Model.StartDateTime)">
+                            @Html.DisplayFor(e => e.StartDateTime, "FullDate") <br />
+                            @Html.DisplayFor(e => e.StartDateTime, "Time") to 
+                        </time>
+                        <time itemprop="endDate" datetime="@String.Format("{0:yyyy-MM-ddThh:mm-00:00}", Model.EndDateTime)">
+                            @Html.DisplayFor(e => e.EndDateTime, "Time")
+                        </time>
+                    </div>
                 }
                 else
                 {
-                    @Html.DisplayFor(e => e.StartDateTime) @:to @Html.DisplayFor(e => e.EndDateTime)
+                    <div itemscope itemtype="http://data-vocabulary.org/Event">
+                        <time itemprop="startDate" datetime="@String.Format("{0:yyyy-MM-ddThh:mm-00:00}", Model.StartDateTime)">
+                            @Html.DisplayFor(e => e.StartDateTime) to 
+                        </time>
+                        <time itemprop="endDate" datetime="@String.Format("{0:yyyy-MM-ddThh:mm-00:00}", Model.EndDateTime)">
+                            @Html.DisplayFor(e => e.EndDateTime)
+                        </time>
+                    </div>
                 }
                 </span>
            </td>
@@ -554,11 +582,13 @@ else
         <a href="#" id="imageupload-modal">Upload</a>
     </h2>
     <div class="image-grid" id="photosvideos">
-        @foreach (Epilogger.Data.Image EPLImage in Model.Images)
-        {
-            var itvm = new Epilogger.Web.Models.ImageTemplateViewModel { Image = EPLImage, CanDelete = Model.CanDelete};
-            @Html.Partial("_ImageTemplate", itvm)
-        }
+        <div itemscope itemtype="http://data-vocabulary.org/Event">
+            @foreach (Epilogger.Data.Image EPLImage in Model.Images)
+            {
+                var itvm = new Epilogger.Web.Models.ImageTemplateViewModel { Image = EPLImage, CanDelete = Model.CanDelete };
+                @Html.Partial("_ImageTemplate", itvm)
+            }
+        </div>
     </div>
 
     <span class="clear sm-spacer"></span>

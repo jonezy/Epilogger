@@ -7,11 +7,11 @@
     <a href="@Model.Image.Fullsize" rel="EPLPhoto[latestphotos]" photoid="@thePath" title="" id="">
         @if (Model.Image.AzureContainerPrefix == "twitterphotos")
         {
-            <img src="@Model.Image.Fullsize" width="250" border="0" alt="" />    
+            <img itemprop="photo" src="@Model.Image.Fullsize" width="250" border="0" alt="" />    
         }
         else
         {
-            <img src="@Url.Action("GetPhotoThumbnail", new { photoUrl = Model.Image.Fullsize, width = 800, height = 800 })" width="250" border="0" alt="" />
+            <img itemprop="photo" src="@Url.Action("GetPhotoThumbnail", new { photoUrl = Model.Image.Fullsize, width = 800, height = 800 })" width="250" border="0" alt="" />
         }
         
     </a>

@@ -40,7 +40,7 @@
     }
     
     <ul id="EventDetailsMenu" class="clearfix">
-        <li>@Html.ActionLink("Overview", "details", null, new { id = @id }, action.ToLower() == "details" ? new { @class = "current" } : null)</li>
+        <li itemprop="url">@Html.ActionLink("Overview", "details", null, new { id = @id }, action.ToLower() == "details" ? new { @class = "current" } : null)</li>
         <li>@Html.ActionLink("Photos", "allphotos", null, new { id = @id }, action.ToLower() == "allphotos" ? new { @class = "current" } : null)</li>
         <li>@Html.ActionLink("Tweets", "alltweets", null, new { id = @id }, action.ToLower() == "alltweets" ? new { @class = "current" } : null)</li>
         <li>@Html.ActionLink("Blog Posts", "allblogposts", null, new { id = @id }, action.ToLower() == "allblogposts" ? new { @class = "current" } : null)</li>
