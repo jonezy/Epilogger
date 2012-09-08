@@ -2531,6 +2531,7 @@ div#SearchTimeFilter input[type=text] {
 .photoTitle a {
     color: #000;
     font: bold 24px 'InterstatePlusRegular', arial, sans-serif;
+    text-decoration: underline;
 }
 .photoTitle img
 {
