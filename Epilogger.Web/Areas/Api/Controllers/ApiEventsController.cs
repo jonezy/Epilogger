@@ -793,7 +793,7 @@ namespace Epilogger.Web.Areas.Api.Controllers
                 }
 
                 //All parameters have are here, let's make sure they match.
-                var hmacValidationString = getHMACMD5Signature(filterContext.HttpContext.Request.Url.LocalPath, "", timeStampString, clientId, apiApplication.ClientSecret);
+                var hmacValidationString = getHMACMD5Signature(filterContext.HttpContext.Request.Url.AbsolutePath, "", timeStampString, clientId, apiApplication.ClientSecret);
                 
                 if (hmacValidationString != signature)
                 {
