@@ -1,7 +1,7 @@
 ﻿@model Epilogger.Web.Models.BrowseCategoriesDisplayViewModel
 @{
     Layout = "~/Views/Shared/_InteriorLayout.cshtml";
-    ViewBag.Title = "Epilogger - " + @Model.CategoryName;
+    ViewBag.Title = @Model.CategoryName + " | Epilogger";
 }
 <div id="events-nav">
     <h1>@Model.CategoryName.ToUpper()</h1>

@@ -2,7 +2,7 @@
 @model Epilogger.Web.Models.PhotoDetailsViewModel
 
 @{
-    ViewBag.Title = "Photo from " + Model.Event.Name + " via Epilogger";
+    ViewBag.Title = "Photo from " + Model.Event.Name + " | Epilogger";
     Layout = "~/Views/Shared/_InteriorLayoutNoBC.cshtml";
 }
 
@@ -66,7 +66,7 @@
 </script>
 
 
-<div>
+<div class="grid_12 alpha">
     
     <div id="photoleftColumn">
         @*Photo Icon*@
@@ -77,8 +77,9 @@
     </div>
     
     <div id="photorightColumn">
-        <img src="@Model.Image.Fullsize" alt="" />
-        
+        <a href="/events/@Model.EventSlug/allphotos"><img src="@Model.Image.Fullsize" alt="" border="0" /></a>
+        <div class="spacer"></div>
+        <h4 class="center"><a href="/events/@Model.EventSlug/allphotos">Why not take a look at the other @Model.Event.Images.Count(e => e.EventID == Model.Event.ID).ToString("#,###") photos from @Model.Event.Name?</a></h4>
         <div class="spacer"></div>
         
         <ul class="shareBar">

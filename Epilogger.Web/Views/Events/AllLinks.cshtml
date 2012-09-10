@@ -3,7 +3,7 @@
 @model Epilogger.Web.Models.AllLinksViewModel
 @{
     Layout = "~/Views/Shared/_InteriorLayout.cshtml";
-    ViewBag.Title = "Epilogger - " + Model.Name + "- Links";
+    ViewBag.Title = Model.Name + " - Links (Page " + (Model.CurrentPageIndex + 1) + ") | Epilogger";
 }
 
 @*New event menu*@
