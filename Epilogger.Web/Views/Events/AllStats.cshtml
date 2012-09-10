@@ -3,7 +3,7 @@
 @model Epilogger.Web.Models.AllStatsViewModel
 
 @{
-    ViewBag.Title = "Epilogger - All Stats";
+    ViewBag.Title = Model.Name + " - Stats (Page " + (Model.CurrentPageIndex + 1) + ") | Epilogger";
     Layout = "~/Views/Shared/_InteriorLayout.cshtml";
 }
 
