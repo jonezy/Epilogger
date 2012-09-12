@@ -46,11 +46,77 @@
             </div>
         </div>
         
-        
+        <div class="spacer"></div>
+        <div class="spacer"></div>
         
         <div class="profileSection">
             
+            <div class="profileFormFields">
+                <fieldset class="">
+                    <div class="profileTitle">Name:</div>
+                    <div class="createFormField">
+                        <div class="createFormLeft">
+                            @Html.TextBoxFor(model => model.FirstName, new { title = "First Name" }) 
+                            @Html.ValidationMessageFor(model => model.FirstName)
+                        </div>    
+                    
+                        <div class="createFormRight">
+                            @Html.TextBoxFor(model => model.LastName, new { title = "Last Name" }) 
+                            @Html.ValidationMessageFor(model => model.LastName)
+                        </div>
+
+                    </div>
+                    
+                    <div class="profileTitle">E-mail:</div>
+                    <div class="createFormField">
+                        @Html.TextBoxFor(model => model.EmailAddress, new { title = "Email Address" }) 
+                        @Html.ValidationMessageFor(model => model.EmailAddress)
+                        <div id="emailCheck"></div>
+                    </div>
+                    
+
+                    <div class="profileTitle">Birthday:</div>
+                    <div class="createFormField">
+                        @Html.DropDownList("m_DOB", Enumerable.Range(1, 12).Select(i => new SelectListItem { Value = i.ToString(), Text = System.Globalization.CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(i) }), "Month")
+                        @Html.DropDownList("d_DOB", Enumerable.Range(1, 31).Select(i => new SelectListItem { Value = i.ToString(), Text = i.ToString() }), "Day")
+                        @Html.DropDownList("y_DOB", Enumerable.Range(1920, (DateTime.UtcNow.Year - 1920)).Reverse().Select(i => new SelectListItem { Value = i.ToString(), Text = i.ToString() }), "Year")
+                        <div class="profileTitle">&nbsp;</div>(Don't worry. We won't show this.)
+                    </div>
+                    
+                    
+                    
+                    <div class="profileTitle">Password:</div>
+                    <div class="createFormField">
+                        <input type="text" class="" id="txtPlainPassword" title="Set a new password" value="Set a new password" style="color: #ccc !important;"/>
+                        @Html.PasswordFor(model => model.Password, new { @class = "", title = "", id = "Password" })
+                    </div>
+
+                </fieldset>
+                
+                @Html.ValidationSummary()
+                
+                <div class="seperator"></div>
+                <div class="spacer"></div>
+                
+                <div>
+                    Connect account stuff
+                </div>
+                
+                
+                <div class="seperator"></div>
+                <div class="spacer"></div>
+
+                <div class="acceptText">
+                    <input type="button" onclick="submitForm();" class="blue-action-button createAccountSubmit submitForm" value="Update Account" />
+                    <div id="createAccountWait">
+                        <img src="/Public/images/icons/ajaxWaiting.gif" alt="" />
+                    </div>
+                </div>
+               
             
+            </div>
+            
+
 
         </div>
         
@@ -71,7 +137,7 @@
             @*<a href="" id="uploadavator">upload an avatar</a>*@
         </div>
         
-        <div class="createFormFields">
+        @*<div class="createFormFields">
             <fieldset class="">
                 <div class="createFormField">
                     @Html.TextBoxFor(model => model.EmailAddress, new { @class = "blur", title = "Email Address" }) 
@@ -120,7 +186,7 @@
             </div>
                
             
-        </div>
+        </div>*@
         
         
         @Html.HiddenFor(model => model.FirstName)

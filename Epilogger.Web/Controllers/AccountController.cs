@@ -374,7 +374,7 @@ namespace Epilogger.Web.Controllers {
         public virtual ActionResult Index () {
             var model = Mapper.Map<User, AccountModel>(CurrentUser);
             model.ConnectedNetworks = Mapper.Map<List<UserAuthenticationProfile>, List<ConnectedNetworksViewModel>>(CurrentUser.UserAuthenticationProfiles.ToList());
-            
+            model.Password = string.Empty;
             return View(model);
         }
 

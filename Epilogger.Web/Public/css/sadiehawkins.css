@@ -2731,6 +2731,11 @@ a.fdbk_tab_hidden {
     margin-left: 270px;
     width: 350px;
 }
+.profileFormFields {
+    
+}
+
+
 .createFormField {
     margin-bottom: 20px;
     font-weight: bold;
@@ -2772,6 +2777,29 @@ a.fdbk_tab_hidden {
     background-color: #ffafaf;
     color: #878787;
 }
+
+
+.profileFormFields input[type="text"], .profileFormFields input[type="password"], .profileFormFields input[type="email"], .profileFormFields select
+{
+    width: 340px;
+    font-size: 18px;
+    height: 30px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    margin: 0;
+}
+
+.profileFormFields input[type="text"].blur, .profileFormFields input[type="password"].blur, .profileFormFields input[type="email"].blur
+{
+    color: #878787;
+}
+
+.profileFormFields input[type="text"].input-validation-error, .profileFormFields input[type="password"].input-validation-error, .profileFormFields input[type="email"].input-validation-error {
+    background-color: #ffafaf;
+    color: #878787;
+}
+
 
 #m_DOB {
     width: 135px;
@@ -2831,6 +2859,7 @@ a.fdbk_tab_hidden {
     color: #a6a5a5;
     font-size: 14px;
     float: left;
+    padding-top: 12px;
 }
 .avatarSelectSection {
     margin-left: 70px;
