@@ -372,7 +372,7 @@ namespace Epilogger.Web.Controllers {
 
         [RequiresAuthentication(ValidUserRole=UserRoleType.RegularUser, AccessDeniedMessage="You must be logged in to edit your account")]
         public virtual ActionResult Index () {
-            AccountModel model = Mapper.Map<User, AccountModel>(CurrentUser);
+            var model = Mapper.Map<User, AccountModel>(CurrentUser);
             model.ConnectedNetworks = Mapper.Map<List<UserAuthenticationProfile>, List<ConnectedNetworksViewModel>>(CurrentUser.UserAuthenticationProfiles.ToList());
             
             return View(model);

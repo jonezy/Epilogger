@@ -2719,6 +2719,7 @@ a.fdbk_tab_hidden {
     width: 250px;
     padding: 1px;
     border: 1px solid #d5d5d5;
+    display: inline-block;
 }
 
 .loginFormFields {
@@ -2815,4 +2816,44 @@ a.fdbk_tab_hidden {
 }
 .notification-warnings p {
     margin-bottom: 5px;
+}
+
+/* Account Page */
+.AccountPage {
+    width: 600px;
+    margin: auto;
+}
+
+.profileTitle {
+    width: 60px;
+    text-align: right;
+    padding-right: 10px;
+    color: #a6a5a5;
+    font-size: 14px;
+    float: left;
+}
+.avatarSelectSection {
+    margin-left: 70px;
+}
+.avatarSelect {
+    float: right;
+    width: 255px;
+    color: #666;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.avatarSelect li 
+{
+    margin-bottom: 15px;
+}
+
+.fromHD {
+    font-weight: bold;
+    font-size: 14px;
+    
+}
+.uploadFormatting {
+    padding-left: 25px;
+    font-size: 12px;
 }

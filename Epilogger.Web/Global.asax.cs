@@ -526,9 +526,11 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.ConnectedNetworks, opt => opt.Ignore())
                 //.ForMember(dest => dest.TimeZone, opt => opt.Ignore())
                 .ForMember(dest => dest.TwitterProfilePicture, opt => opt.ResolveUsing<TwitterProfilePictureResolver>())
-                .ForMember(dest => dest.FacebookProfilePicture, opt => opt.ResolveUsing<FacebookProfilePictureResolver>())
-                .ForMember(dest => dest.DateOfBirth, opt => opt.MapFrom(src => src.DateOfBirth.HasValue ? src.DateOfBirth.Value.ToShortDateString() : ""))
-                .ForMember(dest => dest.TimeZones, opt => opt.ResolveUsing<UserTimezonesResolver>());
+                .ForMember(dest => dest.FacebookProfilePicture,
+                           opt => opt.ResolveUsing<FacebookProfilePictureResolver>())
+                .ForMember(dest => dest.DateOfBirth,
+                           opt =>
+                           opt.MapFrom(src => src.DateOfBirth.HasValue ? src.DateOfBirth.Value.ToShortDateString() : ""));
 
             Mapper.CreateMap<CreateEventViewModel, Event>()
                 .ForMember(dest => dest.EventStatus, opt => opt.UseValue(1))

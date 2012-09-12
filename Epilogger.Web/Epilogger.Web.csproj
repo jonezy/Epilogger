@@ -3176,6 +3176,7 @@
     <Content Include="Views\Join\Email.cshtml" />
     <Content Include="Views\Join\_FullCreateForm.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />
@@ -5239,7 +5240,7 @@
     <Content Include="Views\Events\Details.cshtml" />
     <Content Include="Views\Account\Old\LoginOld.cshtml" />
     <Content Include="Views\Account\UpdatePassword.cshtml" />
-    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\IndexOld.cshtml" />
     <Content Include="Areas\Authentication\Views\Web.config" />
     <Content Include="Views\Shared\GlobalNavigationOldGood.cshtml" />
     <Content Include="Views\Events\Create.cshtml" />

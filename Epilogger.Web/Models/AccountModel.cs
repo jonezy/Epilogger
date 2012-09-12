@@ -25,11 +25,8 @@ namespace Epilogger.Web.Models {
         [DataType(DataType.EmailAddress)]
         public string EmailAddress { get; set; }
 
-        //[DisplayName("Your timezone")]
-        //public int TimeZone { get; set; }
+        public string Password { get; set; }
 
-        public IEnumerable<SelectListItem> TimeZones {get;set;}
-    
         [DisplayName("Date of birth")]
         public string DateOfBirth { get; set; }
 
