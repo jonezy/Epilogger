@@ -17,9 +17,10 @@ namespace Epilogger.Web {
             return GetRepository<UserAuthenticationProfile>().Add(entity);
         }
 
-        public void DisconnectService(AuthenticationServices serviceType, Guid userId) {
-            var profile = GetData().FirstOrDefault(p => p.UserID == userId && p.Service == serviceType.ToString());
+        public void DisconnectService(AuthenticationServices serviceType, Guid userId, string platform) {
+            var profile = GetData().FirstOrDefault(p => p.UserID == userId && p.Service == serviceType.ToString() && p.Platform==platform);
             GetRepository<UserAuthenticationProfile>().Delete(profile);
+
         }
 
         public UserAuthenticationProfile UserAuthorizationByService(AuthenticationServices serviceType, string platform) {

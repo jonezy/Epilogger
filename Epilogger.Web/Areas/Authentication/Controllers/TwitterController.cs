@@ -352,7 +352,7 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
         public virtual ActionResult Disconnect()
         {
             var service = new UserAuthenticationProfileService();
-            service.DisconnectService(AuthenticationServices.TWITTER, CurrentUserID);
+            service.DisconnectService(AuthenticationServices.TWITTER, CurrentUserID, "Web");
 
             this.StoreInfo("Your twitter account has been disconnected from your epilogger.com account");
 

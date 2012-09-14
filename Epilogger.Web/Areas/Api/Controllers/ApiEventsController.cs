@@ -51,8 +51,6 @@ namespace Epilogger.Web.Areas.Api.Controllers
         }
         #endregion
 
-
-
         #region Events
         
 
@@ -331,6 +329,20 @@ namespace Epilogger.Web.Areas.Api.Controllers
             }
 
 
+
+            [HttpPost, HmacAuthorization]
+            public virtual JsonResult DisconnectFacebookAccount(Guid userId)
+            {
+                return Json(_userManager.DisconnectAuthAccount(AuthenticationServices.FACEBOOK, userId));
+            }
+
+            [HttpPost, HmacAuthorization]
+            public virtual JsonResult DisconnectTwitterAccount(Guid userId)
+            {
+                return Json(_userManager.DisconnectAuthAccount(AuthenticationServices.TWITTER, userId));
+            }
+
+
         #endregion
 
         #region Categories
@@ -420,7 +432,6 @@ namespace Epilogger.Web.Areas.Api.Controllers
 
 
         #endregion
-
 
         #region Geckoboard Stats
 

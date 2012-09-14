@@ -38,6 +38,20 @@ namespace Epilogger.Web.Areas.Api
             );
 
 
+            context.MapRoute(
+                "DisconnectFacebookAccount",
+                "Api/Users/Authenticate/DisconnectFacebookAccount",
+                new { controller = "ApiEvents", action = "DisconnectFacebookAccount" }
+            );
+
+            context.MapRoute(
+                "DisconnectTwitterAccount",
+                "Api/Users/Authenticate/DisconnectTwitterAccount",
+                new { controller = "ApiEvents", action = "DisconnectTwitterAccount" }
+            );
+
+            
+
 
             context.MapRoute(
                 "ListTrendingEvents",
