@@ -2886,3 +2886,62 @@ a.fdbk_tab_hidden {
     padding-left: 25px;
     font-size: 12px;
 }
+
+.serviceThumb {
+    padding: 1px;
+    border: 1px solid #d5d5d5;
+    width: 77px;
+    display: inline-block;
+    float: left;
+    margin-right: 10px;
+}
+
+
+
+.connectAccountsSection {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.connectAccountsSection li {
+    display: inline-block;
+    width: 49%;
+    vertical-align: top;
+}
+
+.connectAccountsSection li:first 
+{
+    margin-right: 10px;
+}
+
+.connectDescription {
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.connectedDescription {
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+
+
+
+
+/*
+#connectFacebook {
+    width: 49%;
+    float: left;
+}
+#connectTwitter {
+    width: 49%;
+    margin-left: 51%;
+}
+
+.serviceThumb img 
+{
+    vertical-align: top;
+}
+*/

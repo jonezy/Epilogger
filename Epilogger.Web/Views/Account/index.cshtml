@@ -99,10 +99,81 @@
                 <div class="spacer"></div>
                 
                 <div>
-                    Connect account stuff
+                    <h2>Connect with Social Media</h2>
+                    <div class="spacer"></div>
+                    
+
+                    <ul class="connectAccountsSection">
+                        @if (Model.facebookUser == null)
+                        {
+                            <li>
+                                <div class="serviceThumb">
+                                    <img src="/Public/images/icons/facebookThumb.png" alt="Facebook" />
+                                </div>
+                                <input type="button" class="blue-action-button" value="Connect Facebook" />
+                                <div class="connectDescription">
+                                    Like items<br />
+                                    &nbsp;
+                                </div>
+                            </li>    
+                        }
+                        else
+                        {
+                            <li>
+                                <div class="serviceThumb">
+                                    <img src="/Public/images/icons/facebookThumb.png" alt="Facebook" />
+                                </div>
+                                
+                                <div class="connectedDescription">
+                                    Connected as:<br />
+                                    @Model.facebookUser.first_name @Model.facebookUser.last_name
+                                </div>
+                                <input type="button" class="blue-action-button" value="Disconnect" />
+                            </li>   
+                        }
+                        
+                        @if (Model.twitterUser == null)
+                        {
+                            <li>
+                                <div class="serviceThumb">
+                                    <img src="/Public/images/icons/twitterThumb.png" alt="Twitter" />
+                                </div>
+                            
+                                <input type="button" class="blue-action-button" value="Connect Twitter" />
+                                <div class="connectDescription">
+                                    Tweet and retweet<br />
+                                    Favorite items        
+                                </div>  
+
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                Connected
+                            </li>   
+                        }
+
+                    </ul>
+                    
+                    
+
+                    
+                    
+                    
+                    
+                    
+
+                    <div id="connectTwitter">
+                        
+                    </div>
                 </div>
                 
                 
+                
+                
+
+                <div class="spacer"></div>
                 <div class="seperator"></div>
                 <div class="spacer"></div>
 

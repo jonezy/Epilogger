@@ -528,9 +528,9 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.TwitterProfilePicture, opt => opt.ResolveUsing<TwitterProfilePictureResolver>())
                 .ForMember(dest => dest.FacebookProfilePicture,
                            opt => opt.ResolveUsing<FacebookProfilePictureResolver>())
-                .ForMember(dest => dest.DateOfBirth,
-                           opt =>
-                           opt.MapFrom(src => src.DateOfBirth.HasValue ? src.DateOfBirth.Value.ToShortDateString() : ""));
+                .ForMember(dest => dest.DateOfBirth, opt => opt.MapFrom(src => src.DateOfBirth.HasValue ? src.DateOfBirth.Value.ToShortDateString() : ""))
+                .ForMember(dest => dest.facebookUser, opt => opt.Ignore())
+                .ForMember(dest => dest.twitterUser, opt => opt.Ignore());
 
             Mapper.CreateMap<CreateEventViewModel, Event>()
                 .ForMember(dest => dest.EventStatus, opt => opt.UseValue(1))

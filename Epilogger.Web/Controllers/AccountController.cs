@@ -37,8 +37,8 @@ namespace Epilogger.Web.Controllers {
             base.Initialize(requestContext);
         }
 
-        /* New Account stuff section */
-        #region New Account Stuff
+    /* New Account stuff section */
+    #region New Account Stuff
 
         //These are used for Various account functions in a number of areas
 
@@ -128,6 +128,7 @@ namespace Epilogger.Web.Controllers {
             return Json(new { success = true, imageurl = imageurl.AbsoluteUri }, "text/html");
         }
 
+        //Processes the validation code when a user validates their email address.
         [HttpGet]
         public virtual ActionResult Validate(string validationCode)
         {
@@ -162,7 +163,7 @@ namespace Epilogger.Web.Controllers {
             return RedirectToAction("Index", "Home");
         }
 
-
+        //Sends the Thank you email after user validates their email address
         private static void SendVerificationThankYouEmail(User user)
         {
             //Send the Validate Email Thank You
@@ -231,8 +232,6 @@ namespace Epilogger.Web.Controllers {
             sfEmail.SendMail();
         }
 
-
-
         public static bool ConnectAuthAccountToUser(Guid userId, string authService, string authScreenName, string authToken, string authTokenSecret, string platform)
         {
             try
@@ -298,8 +297,7 @@ namespace Epilogger.Web.Controllers {
             }
             
         }
-
-
+        
         public Guid CheckConnectedAccountUserExists(string userScreenName, AuthenticationServices authService, string token, string tokenSecret)
         {
             try
@@ -349,31 +347,36 @@ namespace Epilogger.Web.Controllers {
             }
         }
 
-
-
-
-        #endregion
-
-
-
-
-
-
-
-
-
-
-
-        #region Old Account Stuff
-
-        
-
-
-
-        [RequiresAuthentication(ValidUserRole=UserRoleType.RegularUser, AccessDeniedMessage="You must be logged in to edit your account")]
-        public virtual ActionResult Index () {
+        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to edit your account")]
+        public virtual ActionResult Index()
+        {
             var model = Mapper.Map<User, AccountModel>(CurrentUser);
-            model.ConnectedNetworks = Mapper.Map<List<UserAuthenticationProfile>, List<ConnectedNetworksViewModel>>(CurrentUser.UserAuthenticationProfiles.ToList());
+            var connectedNetworks = CurrentUser.UserAuthenticationProfiles;
+
+            var facebookConn = connectedNetworks.FirstOrDefault(e => e.Service == "FACEBOOK");
+            var twitterConn = connectedNetworks.FirstOrDefault(e => e.Service == "TWITTER");
+
+            if (facebookConn != null)
+            {
+                var fbClient = new FacebookClient(facebookConn.Token);
+                dynamic facebookUser = fbClient.Get("me") ?? null;
+                model.facebookUser = facebookUser;
+            }
+            
+
+            if (twitterConn != null)
+            {
+                var twitterUser = TwitterHelper.GetUser(twitterConn.Token,
+                                                        twitterConn.TokenSecret,
+                                                        twitterConn.ServiceUsername);
+                model.twitterUser = twitterUser;
+            }
+            
+
+
+            
+            //model.ConnectedNetworks = Mapper.Map<List<UserAuthenticationProfile>, List<ConnectedNetworksViewModel>>(CurrentUser.UserAuthenticationProfiles.ToList());
+
             model.Password = string.Empty;
             return View(model);
         }
@@ -397,12 +400,11 @@ namespace Epilogger.Web.Controllers {
                     user.LastName = model.LastName;
                     user.EmailAddress = model.EmailAddress;
                     user.DateOfBirth = DateTime.Parse(model.DateOfBirth);
-                    //user.TimeZoneOffSet = model.TimeZone;
 
-                    string imagePath = string.Empty;
+                    var imagePath = string.Empty;
                     if (c["ProfilePictures"] != null)
                     {
-                        string pictureProvider = c["ProfilePictures"] as string ?? "";
+                        var pictureProvider = c["ProfilePictures"] as string ?? "";
 
                         if (pictureProvider.ToLower().Contains("twitter"))
                         {
@@ -433,6 +435,30 @@ namespace Epilogger.Web.Controllers {
             }
             return View(model);
         }
+
+
+
+
+
+    #endregion
+
+
+
+
+
+
+
+
+
+
+
+        #region Old Account Stuff
+
+        
+
+
+
+        
 
 
 

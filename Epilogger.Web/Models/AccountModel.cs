@@ -2,6 +2,8 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using Epilogger.Data;
+using Twitterizer;
 
 namespace Epilogger.Web.Models {
     public class AccountModel {
@@ -31,5 +33,9 @@ namespace Epilogger.Web.Models {
         public string DateOfBirth { get; set; }
 
         public List<ConnectedNetworksViewModel> ConnectedNetworks { get; set; }
+
+        public dynamic facebookUser  { get; set; }
+        public TwitterResponse<TwitterUser> twitterUser { get; set; }
+
     }
 }

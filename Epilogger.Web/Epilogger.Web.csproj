@@ -491,6 +491,8 @@
     <Content Include="Public\images\email\screenshot-browse.jpg" />
     <Content Include="Public\images\email\screenshot-events.jpg" />
     <Content Include="Public\images\email\screenshot-home.jpg" />
+    <Content Include="Public\images\icons\facebookThumb.png" />
+    <Content Include="Public\images\icons\twitterThumb.png" />
     <Content Include="Public\images\livemode\client\bg.png" />
     <Content Include="Public\images\livemode\client\sponsor-osheaga.png" />
     <Content Include="Public\images\logoSmall.png" />
