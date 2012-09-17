@@ -21,5 +21,6 @@ namespace Epilogger.Web.Areas.Api.Models
         List<GeckoFunnelItem> EpiloggerServiceStatus();
         int NumberOfTweetsInDateRange(DateTime f, DateTime t);
         List<TopEventsByUserActivityStats> GetTopEventByUserActivity(DateTime f, DateTime t);
+        List<UserGrowthStats> GetDailyUserGrowth(DateTime f, DateTime t);
     }
 }

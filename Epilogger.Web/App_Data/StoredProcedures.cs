@@ -511,6 +511,12 @@ namespace Epilogger.Data{
             sp.Command.AddParameter("TheURL",TheURL,DbType.AnsiString);
             return sp;
         }
+        public StoredProcedure GetNumberOfNewUsersPerDay(DateTime FromDate,DateTime ToDate){
+            StoredProcedure sp=new StoredProcedure("GetNumberOfNewUsersPerDay",this.Provider);
+            sp.Command.AddParameter("FromDate",FromDate,DbType.DateTime);
+            sp.Command.AddParameter("ToDate",ToDate,DbType.DateTime);
+            return sp;
+        }
         public StoredProcedure GetNumberOfRecordsByTwitterID(long TwitterID,long EventID){
             StoredProcedure sp=new StoredProcedure("GetNumberOfRecordsByTwitterID",this.Provider);
             sp.Command.AddParameter("TwitterID",TwitterID,DbType.Int64);

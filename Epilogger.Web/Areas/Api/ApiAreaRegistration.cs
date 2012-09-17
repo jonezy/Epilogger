@@ -315,6 +315,11 @@ namespace Epilogger.Web.Areas.Api
                 "Api/Stats/Gecko/UserGrowthLastMonth",
                 new { controller = "ApiEvents", action = "GeckoGetUserGrowthLastMonth" }
             );
+            context.MapRoute(
+                "GeckoGetDailyUserGrowthLastMonth",
+                "Api/Stats/Gecko/DailyUserGrowthLastMonth",
+                new { controller = "ApiEvents", action = "GeckoGetDailyUserGrowthLastMonth" }
+            );
 
 
             context.MapRoute(

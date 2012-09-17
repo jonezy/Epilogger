@@ -29,6 +29,14 @@ namespace Epilogger.Web {
 
         }
 
+        public List<UserGrowthStats> FindDailyUserGrowthStats(DateTime from, DateTime to)
+        {
+
+            var sp = db.GetNumberOfNewUsersPerDay(from, to);
+            return sp.ExecuteTypedList<UserGrowthStats>();
+
+        }
+
         public List<UserGrowthStats> FindUserGrowthStats()
         {
 

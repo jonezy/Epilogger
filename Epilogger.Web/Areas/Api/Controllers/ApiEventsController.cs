@@ -456,6 +456,7 @@ namespace Epilogger.Web.Areas.Api.Controllers
                 return Json(geckoGrowth, JsonRequestBehavior.AllowGet);
             }
 
+        
             public virtual JsonResult GeckoGetUserGrowthLastWeek()
             {
                 var growth = _statManager.GetUserGrowth(DateTime.UtcNow.AddDays(-7), DateTime.UtcNow);
@@ -502,6 +503,30 @@ namespace Epilogger.Web.Areas.Api.Controllers
 
                 return Json(geckoGrowth, JsonRequestBehavior.AllowGet);
             }
+
+            public virtual JsonResult GeckoGetDailyUserGrowthLastMonth()
+            {
+                var growth = _statManager.GetDailyUserGrowth(DateTime.UtcNow.AddMonths(-1), DateTime.UtcNow);
+                var geckoGrowth = new GeckoLineChart();
+                var geckoSettings = new GeckoSettings { axisy = new List<string>(), axisx = new List<string>() };
+                geckoGrowth.item = new List<string>();
+
+                geckoSettings.colour = "ee4490";
+                geckoSettings.axisy.Add(growth.Min(t => t.NumberOfUsers).ToString(CultureInfo.InvariantCulture));
+                geckoSettings.axisy.Add(growth.Max(t => t.NumberOfUsers).ToString(CultureInfo.InvariantCulture));
+                geckoSettings.axisx.Add(DateTime.UtcNow.AddMonths(-1).ToString("MMMM d"));
+                geckoSettings.axisx.Add(DateTime.UtcNow.ToString("MMMM d"));
+
+                foreach (var i in growth)
+                {
+                    geckoGrowth.item.Add(i.NumberOfUsers.ToString(CultureInfo.InvariantCulture));
+                }
+
+                geckoGrowth.settings = geckoSettings;
+
+                return Json(geckoGrowth, JsonRequestBehavior.AllowGet);
+            }
+
 
             public virtual JsonResult GeckoEventCount()
             {
