@@ -21,8 +21,8 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
 
         public virtual ActionResult ConnectRequestWithCallback(string callBackUrl)
         {
-            string requestToken = OAuthUtility.GetRequestToken(TwitterHelper.TwitterConsumerKey, TwitterHelper.TwitterConsumerSecret, callBackUrl).Token;
-            Uri authorizationUrl = OAuthUtility.BuildAuthorizationUri(requestToken, false);
+            var requestToken = OAuthUtility.GetRequestToken(TwitterHelper.TwitterConsumerKey, TwitterHelper.TwitterConsumerSecret, callBackUrl).Token;
+            var authorizationUrl = OAuthUtility.BuildAuthorizationUri(requestToken, false);
 
             return Redirect(authorizationUrl.ToString());
         }
@@ -358,5 +358,15 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
 
             return Redirect(Request.UrlReferrer.ToString());
         }
+
+
+        public ActionResult DisconnectClean()
+        {
+            var service = new UserAuthenticationProfileService();
+            service.DisconnectService(AuthenticationServices.TWITTER, CurrentUserID, "Web");
+            return null;
+        }
+
+       
     }
 }

@@ -30,10 +30,12 @@ using Twitterizer;
 namespace Epilogger.Web.Controllers {
     public partial class AccountController : BaseController {
         UserService _service;
+        private UserAuthenticationProfileService _ua;
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext) {
             if (_service == null) _service = new UserService();
-
+            if (_ua == null) _ua = new UserAuthenticationProfileService();
+            
             base.Initialize(requestContext);
         }
 
@@ -373,8 +375,6 @@ namespace Epilogger.Web.Controllers {
             }
             
 
-
-            
             //model.ConnectedNetworks = Mapper.Map<List<UserAuthenticationProfile>, List<ConnectedNetworksViewModel>>(CurrentUser.UserAuthenticationProfiles.ToList());
 
             model.Password = string.Empty;
@@ -437,10 +437,135 @@ namespace Epilogger.Web.Controllers {
         }
 
 
+        public ActionResult GetTwitterConnect()
+        {
+            try
+            {
+                var connectionProfile = _ua.UserAuthorizationByServicePlatformAndUserId(AuthenticationServices.TWITTER, "Web", CurrentUserID);
+                if (connectionProfile != null)
+                {
+                    var twitterUser = TwitterHelper.GetUser(connectionProfile.Token,
+                                                        connectionProfile.TokenSecret,
+                                                        connectionProfile.ServiceUsername);
+                    if (twitterUser != null)
+                    {
+                        var splitName = twitterUser.ResponseObject.Name.Split(new[] { " " }, StringSplitOptions.None);
+
+                        return PartialView("_DisconnectService", new DisconnectServiceViewModel() { ServiceName = "Twitter", ConnectedAs = string.Format("{0} {1}", splitName[0], splitName[1]) });
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+            
+            return PartialView("_ConnectService", new ConnectServiceViewModel() { ServiceName = "Twitter", ServiceUseDescription = "Tweet and retweet<br />Favorite items" });
+        }
+
+        public ActionResult GetFacebookConnect()
+        {
+            try
+            {
+                var connectionProfile = _ua.UserAuthorizationByServicePlatformAndUserId(AuthenticationServices.FACEBOOK, "Web", CurrentUserID);
+                if (connectionProfile != null)
+                {
+                    var fbClient = new FacebookClient(connectionProfile.Token);
+                    dynamic facebookUser = fbClient.Get("me");
+
+                    if (facebookUser != null)
+                    {
+                        return PartialView("_DisconnectService", new DisconnectServiceViewModel() { ServiceName = "Facebook", ConnectedAs = string.Format("{0} {1}", facebookUser.first_name, facebookUser.last_name) });    
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+            
+            return PartialView("_ConnectService", new ConnectServiceViewModel() { ServiceName = "Facebook", ServiceUseDescription = "Like items<br />&nbsp;" });
+        }
+
+
+        public ActionResult TwitterAuth()
+        {
+            if (Request.QueryString["oauth_token"] != null)
+            {
+                var accessTokenResponse = OAuthUtility.GetAccessTokenDuringCallback(TwitterHelper.TwitterConsumerKey,
+                                                                                    TwitterHelper.TwitterConsumerSecret);
+
+                // check to see if we already have the screen name in the userauth table.
+                var userAuthService = new UserAuthenticationProfileService();
+                var userAuth = userAuthService.UserAuthorizationByServiceScreenNameAndPlatform(accessTokenResponse.ScreenName,
+                                                                                    "Web",
+                                                                                    AuthenticationServices.TWITTER);
+
+                if (userAuth == null)
+                {
+                    //This is a connection to Twitter
+                    userAuth = new UserAuthenticationProfile
+                    {
+                        UserID = CurrentUserID,
+                        Platform = "Web",
+                        Service = AuthenticationServices.TWITTER.ToString(),
+                        ServiceUsername = accessTokenResponse.ScreenName,
+                        Token = accessTokenResponse.Token,
+                        TokenSecret = accessTokenResponse.TokenSecret
+                    };
+                    userAuthService.Save(userAuth);
+                }
+            }
+
+            return View();
+        }
+
+        public ActionResult FacebookAuth()
+        {
+            var client = new FacebookClient();
+            var oauthResult = client.ParseOAuthCallbackUrl(Request.Url);
+
+            // Build the Return URI form the Request Url
+            var redirectUri = new UriBuilder(Url.Action("FacebookAuth", "account", null, "http"));
+
+            // Exchange the code for an access token
+            dynamic result = client.Get("/oauth/access_token", new
+            {
+                client_id = ConfigurationManager.AppSettings["FacebookAppId"],
+                redirect_uri = redirectUri.Uri.AbsoluteUri,
+                client_secret = ConfigurationManager.AppSettings["FacebookAppSecret"],
+                code = oauthResult.Code,
+            });
+
+            // Read the auth values
+            string accessToken = result.access_token;
+            DateTime expires = DateTime.UtcNow.AddSeconds(Convert.ToDouble(result.expires));
+
+            var fbClient = new FacebookClient(accessToken);
+            dynamic facebookUser = fbClient.Get("me");
+
+            var authorizationService = new UserAuthenticationProfileService();
+            var userAuth = authorizationService.UserAuthorizationByServiceScreenNameAndPlatform(facebookUser.username, "Web", AuthenticationServices.FACEBOOK);
+
+            if (userAuth == null)
+            {
+                userAuth = new UserAuthenticationProfile
+                    {
+                        UserID = CurrentUserID,
+                        Platform = "Web",
+                        Service = AuthenticationServices.FACEBOOK.ToString(),
+                        Token = accessToken,
+                        ServiceUsername = facebookUser.username
+                    };
+            
+                authorizationService.Save(userAuth);
+
+            }
+            
+            return View();
+        }
 
 
 
-    #endregion
+        #endregion
 
 
 

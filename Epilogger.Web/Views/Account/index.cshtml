@@ -1,5 +1,6 @@
 ﻿@using Combres.Mvc
-@model Epilogger.Web.Models.AccountModel
+@using Epilogger.Web.Models
+@model AccountModel
 
 @{
     Layout = "~/Views/Shared/_InteriorLayoutNoBC.cshtml";
@@ -21,7 +22,7 @@
     @using (Html.BeginForm())
     {
        
-        <div class="avatarSection">
+        <div class="">
             <div class="profileTitle">Avatar:</div>    
             
             <div class="avatarSelectSection">
@@ -104,69 +105,13 @@
                     
 
                     <ul class="connectAccountsSection">
-                        @if (Model.facebookUser == null)
-                        {
-                            <li>
-                                <div class="serviceThumb">
-                                    <img src="/Public/images/icons/facebookThumb.png" alt="Facebook" />
-                                </div>
-                                <input type="button" class="blue-action-button" value="Connect Facebook" />
-                                <div class="connectDescription">
-                                    Like items<br />
-                                    &nbsp;
-                                </div>
-                            </li>    
-                        }
-                        else
-                        {
-                            <li>
-                                <div class="serviceThumb">
-                                    <img src="/Public/images/icons/facebookThumb.png" alt="Facebook" />
-                                </div>
-                                
-                                <div class="connectedDescription">
-                                    Connected as:<br />
-                                    @Model.facebookUser.first_name @Model.facebookUser.last_name
-                                </div>
-                                <input type="button" class="blue-action-button" value="Disconnect" />
-                            </li>   
-                        }
+                        @*Connect/Disconnect Facebook*@
+                        @Html.Action("GetFacebookConnect")
                         
-                        @if (Model.twitterUser == null)
-                        {
-                            <li>
-                                <div class="serviceThumb">
-                                    <img src="/Public/images/icons/twitterThumb.png" alt="Twitter" />
-                                </div>
-                            
-                                <input type="button" class="blue-action-button" value="Connect Twitter" />
-                                <div class="connectDescription">
-                                    Tweet and retweet<br />
-                                    Favorite items        
-                                </div>  
-
-                            </li>
-                        }
-                        else
-                        {
-                            <li>
-                                Connected
-                            </li>   
-                        }
-
+                        @*Connect/Disconnect Twitter*@
+                        @Html.Action("GetTwitterConnect")
                     </ul>
                     
-                    
-
-                    
-                    
-                    
-                    
-                    
-
-                    <div id="connectTwitter">
-                        
-                    </div>
                 </div>
                 
                 
@@ -179,99 +124,21 @@
 
                 <div class="acceptText">
                     <input type="button" onclick="submitForm();" class="blue-action-button createAccountSubmit submitForm" value="Update Account" />
+                    <a href="" onclick="refreshTwitterConnection();refreshFacebookConnection();return false;">Test</a>
                     <div id="createAccountWait">
                         <img src="/Public/images/icons/ajaxWaiting.gif" alt="" />
                     </div>
+
                 </div>
-               
             
             </div>
-            
-
 
         </div>
         
+       
+        @Html.HiddenFor(model => model.DateOfBirth)
+      
         
-        
-        <br /><br />
-<br /><br />        
-<br /><br />        
-<br />        
-        
-        
-        
-        
-        
-        <div class="profilePictureSection">
-            
-            <div class="center" style="padding-top:5px;"></div>
-            @*<a href="" id="uploadavator">upload an avatar</a>*@
-        </div>
-        
-        @*<div class="createFormFields">
-            <fieldset class="">
-                <div class="createFormField">
-                    @Html.TextBoxFor(model => model.EmailAddress, new { @class = "blur", title = "Email Address" }) 
-                    @Html.ValidationMessageFor(model => model.EmailAddress)
-                    <div id="emailCheck"></div>
-                </div>
-                <div class="createFormField">
-                    <input type="text" class="" id="txtPlainPassword" title="Password" value="Password" style="color: #ccc !important;"/>
-                    @Html.PasswordFor(model => model.Password, new { @class = "", title = "Password", id = "Password" })
-                </div>
-                
-                
-                
-                <div class="createFormField">
-                    <div class="createFormLeft">
-                        @Html.TextBoxFor(model => model.FirstName, new { @class = "blur", title = "First Name" }) 
-                        @Html.ValidationMessageFor(model => model.FirstName)
-                    </div>    
-                    
-                    <div class="createFormRight">
-                        @Html.TextBoxFor(model => model.LastName, new { @class = "blur", title = "Last Name" }) 
-                        @Html.ValidationMessageFor(model => model.LastName)
-                    </div>
-
-                </div>
-
-                <div class="createFormField">
-                    <h4>Birth Day</h4>
-                    @Html.DropDownList("m_DOB", Enumerable.Range(1, 12).Select(i => new SelectListItem { Value = i.ToString(), Text = System.Globalization.CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(i) }), "Month")
-                    @Html.DropDownList("d_DOB", Enumerable.Range(1, 31).Select(i => new SelectListItem { Value = i.ToString(), Text = i.ToString() }), "Day")
-                    @Html.DropDownList("y_DOB", Enumerable.Range(1920, (DateTime.UtcNow.Year - 1920)).Reverse().Select(i => new SelectListItem { Value = i.ToString(), Text = i.ToString() }), "Year")
-                    <span class="birthdayText">Epilogger uses your birthday to determine which type of events you are allowed to see. <strong>Your birth day will not be shared with anyone.</strong></span>
-                </div>
-
-            </fieldset>
-            
-            @Html.ValidationSummary()
-
-            <div class="acceptText">
-                By creating an account you agree to the Epilogger<br/> <a href="/home/Terms" target="_blank">Terms of Use</a> and <a href="/home/Privacy" target="_blank">Privacy Policy</a>
-                <div class="spacer"></div>
-                <input type="button" onclick="submitForm();" class="disabled blue-action-button createAccountSubmit submitForm" value="Create Account" />
-                <div id="createAccountWait">
-                    <img src="/Public/images/icons/ajaxWaiting.gif" alt="" />
-                </div>
-            </div>
-               
-            
-        </div>*@
-        
-        
-        @Html.HiddenFor(model => model.FirstName)
-        @Html.HiddenFor(model => model.LastName)
-        @*@Html.HiddenFor(model => model.ProfileImage)
-        @Html.HiddenFor(model => model.DisplayProfileImage)
-        @Html.HiddenFor(model => model.ServiceUserName)*@
-        @Html.HiddenFor(model => model.DateOfBirth)  
-        
-        @*@Html.HiddenFor(model => model.AuthToken)
-        @Html.HiddenFor(model => model.AuthTokenSecret)
-        @Html.HiddenFor(model => model.AuthScreenname)
-        
-        @Html.HiddenFor(model => model.AuthService)*@
     }
 
 </div>
@@ -317,4 +184,32 @@
 
     });
 
+
+    function refreshTwitterConnection() {
+        $.get( '@Url.Action("GetTwitterConnect")', function(data) {
+            $("#TwitterConnectSection").replaceWith(data);
+        });
+    }
+
+    function refreshFacebookConnection() {
+        $.get('@Url.Action("GetFacebookConnect")', function (data) {
+            $("#FacebookConnectSection").replaceWith(data);
+        });
+    }
+
+
+
+    function disconnectTwitterAccount() {
+        $.get('@Url.Action("DisconnectClean", "Twitter", new { area = "Authentication" })', function (data) {
+            refreshTwitterConnection();
+        });
+    }
+
+    function disconnectFacebookAccount() {
+        $.get('@Url.Action("DisconnectClean", "Facebook", new { area = "Authentication" })', function (data) {
+            refreshFacebookConnection();
+        });
+    }
+
+    
 </script>

@@ -373,6 +373,8 @@
     <Compile Include="Models\AddLinkViewModel.cs" />
     <Compile Include="Models\AllContentViewModel.cs" />
     <Compile Include="Models\AllPhotosDisplayViewModel.cs" />
+    <Compile Include="Models\ConnectServiceViewModel.cs" />
+    <Compile Include="Models\DisconnectServiceViewModel.cs" />
     <Compile Include="Models\MemoryBoxTweet.cs" />
     <Compile Include="Models\NagViewModel.cs" />
     <Compile Include="Models\NavigationViewModel.cs" />
@@ -3179,6 +3181,10 @@
     <Content Include="Views\Join\_FullCreateForm.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\index.cshtml" />
+    <Content Include="Views\Account\_ConnectService.cshtml" />
+    <Content Include="Views\Account\_DisconnectService.cshtml" />
+    <Content Include="Views\Account\TwitterAuth.cshtml" />
+    <Content Include="Views\Account\FacebookAuth.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />

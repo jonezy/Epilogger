@@ -2,10 +2,6 @@
 
 head.ready(function () {
 
-
-
-
-
     var button = $('#uploadavator')[0];
     var uploader = new qq.FileUploader({
         element: button,
@@ -167,3 +163,9 @@ head.ready(function () {
     checkIfCreateIsDisabled();
 
 });
+
+function popTheWindow(url) {
+    window.open(url, 'twitterAuth', "width=400,height=300,scrollbars=no");
+    return false;
+}
+

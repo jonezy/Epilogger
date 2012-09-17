@@ -6393,7 +6393,7 @@ namespace Epilogger.Data
             {
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.UserAuthenticationProfiles
-                       where items.UserID == _ID
+                       where items.UserID == _ID && items.Platform == "Web"
                        select items;
             }
         }

@@ -46,7 +46,9 @@ a.edit_icon {
     padding:5px 10px;
     /*text-transform:uppercase;*/
     cursor: default;
-    box-shadow:0 0 1px #777;}    
+    box-shadow:0 0 1px #777;
+    display: inline-block;
+}
 
 .blue-action-button.disabled:hover
 {
@@ -72,13 +74,41 @@ a.edit_icon {
     padding:5px 10px;
     /*text-transform:uppercase;*/
     cursor:pointer;
-    box-shadow:0 0 1px #777;}
+    box-shadow:0 0 1px #777;
+    display: inline-block;
+}
 
 .blue-action-button:hover {
     opacity:0.85;
     position:relative;
     top:1px;
     color:#fff}
+    
+    
+.lightblue-action-button {
+    border:1px solid #2ab4e4;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    background:#34afd9; /* no css3 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4aa0d7', endColorstr='#3486b7'); /*IE */
+    background:-webkit-gradient(linear, left top, left bottom, from (#38bbe7) to (#30a6ce)); /* webkit */
+    background:-moz-linear-gradient(top, #38bbe7 , #30a6ce); /* ff */
+    box-shadow:0 0 1px #a1b9c8;
+    color:#fff;
+    font:bold 18px 'InterstatePlusRegular';
+    padding:5px 10px;
+    /*text-transform:uppercase;*/
+    cursor: pointer;
+    box-shadow: 0 0 1px #777;
+    display: inline-block;
+ }
+
+.lightblue-action-button:hover {
+    opacity:0.85;
+    position:relative;
+    top:1px;
+    color:#fff }
     
     
 .red-action-button {
@@ -2924,7 +2954,6 @@ a.fdbk_tab_hidden {
     font-size: 14px;
     font-weight: bold;
 }
-
 
 
 

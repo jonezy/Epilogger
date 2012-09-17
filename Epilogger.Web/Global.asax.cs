@@ -90,6 +90,11 @@ namespace Epilogger.Web {
 
             routes.MapRoute("Login", "login", new { controller = "account", action = "login" });
 
+            routes.MapRoute(
+                "SettingTwitterAuth", 
+                "account/TwitterAuth", 
+                new { controller = "account", action = "TwitterAuth"
+            });
 
             routes.MapRoute(
                 "StarRatings",
@@ -526,8 +531,7 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.ConnectedNetworks, opt => opt.Ignore())
                 //.ForMember(dest => dest.TimeZone, opt => opt.Ignore())
                 .ForMember(dest => dest.TwitterProfilePicture, opt => opt.ResolveUsing<TwitterProfilePictureResolver>())
-                .ForMember(dest => dest.FacebookProfilePicture,
-                           opt => opt.ResolveUsing<FacebookProfilePictureResolver>())
+                .ForMember(dest => dest.FacebookProfilePicture, opt => opt.ResolveUsing<FacebookProfilePictureResolver>())
                 .ForMember(dest => dest.DateOfBirth, opt => opt.MapFrom(src => src.DateOfBirth.HasValue ? src.DateOfBirth.Value.ToShortDateString() : ""))
                 .ForMember(dest => dest.facebookUser, opt => opt.Ignore())
                 .ForMember(dest => dest.twitterUser, opt => opt.Ignore());
