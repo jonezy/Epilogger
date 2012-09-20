@@ -2,14 +2,31 @@
 
 head.ready(function () {
 
-    var button = $('#uploadavator')[0];
-    var uploader = new qq.FileUploader({
-        element: button,
+//    var button = $('#uploadavator')[0];
+//    var uploader = new qq.FileUploader({
+//        element: button,
+//        allowedExtensions: ['jpg', 'jpeg', 'png', 'gif'],
+//        sizeLimit: 2147483647, // max size
+//        action: '/Account/UploadAvatar',
+//        multiple: false,
+//        uploadButtonText: 'upload an avatar',
+//        onComplete: function (id, fileName, responseJSON) {
+//            $("#theProfileImage").attr("src", responseJSON.imageurl);
+//            $("#ProfileImage").val(responseJSON.imageurl);
+//            $("#DisplayProfileImage").val(responseJSON.imageurl);
+//        }
+//    });
+
+
+    var button2 = $('#profileuploadavator')[0];
+    var uploader2 = new qq.FileUploader({
+        element: button2,
         allowedExtensions: ['jpg', 'jpeg', 'png', 'gif'],
         sizeLimit: 2147483647, // max size
         action: '/Account/UploadAvatar',
         multiple: false,
-        uploadButtonText: 'upload an avatar',
+        uploadButtonClass: 'blue-action-button',
+        uploadButtonText: 'SELECT FILE',
         onComplete: function (id, fileName, responseJSON) {
             $("#theProfileImage").attr("src", responseJSON.imageurl);
             $("#ProfileImage").val(responseJSON.imageurl);

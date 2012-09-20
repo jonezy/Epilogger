@@ -30,18 +30,9 @@
                     <img id="theProfileImage" src="@Model.ProfilePicture" alt="Avatar" width="250px" />
                 </div>
                 
-                <ul class="avatarSelect">
-                    <li class="fromHD">
-                        @Html.RadioButton("profileImageSource", "HD") From my hard drive<br /><span class="uploadFormatting">(<span id="uploadavator"></span>)</span>
-                    </li>
-                    <li class="fromTwitter">
-                        @Html.RadioButton("profileImageSource", "TW")
-                    </li>
-                    <li class="fromFacebook">
-                        @Html.RadioButton("profileImageSource", "FB")
-                    </li>
-                </ul>
                 
+                @*GetProfileOptions*@
+                @Html.Action("GetProfileOptions")
                 
             
             </div>
@@ -145,6 +136,7 @@
 
 <script type="text/javascript">
 
+
     function submitForm() {
         $(".submitForm").addClass("disabled");
         $(".submitForm").attr('disabled', 'disabled');
@@ -184,6 +176,34 @@
 
     });
 
+    head.ready(function () {
+
+        $(".profileSelectThumb").bind("click", function (e) {
+            $(".profileSelectThumb").removeClass("selected");
+            $(this).addClass("selected");
+
+            if ($(this).parent().attr('id') == "fromHD") {
+                $("#profileuploadavator").show();
+                $("#switchPhotoButton").hide();
+            }
+            else {
+                $("#profileuploadavator").hide();
+                $("#switchPhotoButton").show();
+            }
+
+        });
+
+        $("#switchPhotoButton").bind("click", function (e) {
+            
+        });
+
+
+
+    });
+
+
+
+
 
     function refreshTwitterConnection() {
         $.get( '@Url.Action("GetTwitterConnect")', function(data) {
@@ -197,8 +217,6 @@
         });
     }
 
-
-
     function disconnectTwitterAccount() {
         $.get('@Url.Action("DisconnectClean", "Twitter", new { area = "Authentication" })', function (data) {
             refreshTwitterConnection();
@@ -210,6 +228,5 @@
             refreshFacebookConnection();
         });
     }
-
     
 </script>

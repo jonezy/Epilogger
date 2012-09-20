@@ -69,7 +69,7 @@ a.edit_icon {
     background:-webkit-gradient(linear, left top, left bottom, from (#4aa0d7) to (#3486b7)); /* webkit */
     background:-moz-linear-gradient(top, #4aa0d7, #3486b7); /* ff */
     box-shadow:0 0 1px #a1b9c8;
-    color:#e6f5fa;
+    color:#e6f5fa !important;
     font:bold 18px 'InterstatePlusRegular';
     padding:5px 10px;
     /*text-transform:uppercase;*/
@@ -2905,7 +2905,25 @@ a.fdbk_tab_hidden {
 .avatarSelect li 
 {
     margin-bottom: 15px;
+    display: inline-block;
 }
+
+
+.profileSelectThumb {
+    padding: 1px;
+    border: 1px solid #d5d5d5;
+    width: 69px;
+    display: inline-block;
+    float: left;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.profileSelectThumb.selected {
+    border: 2px solid #e54979;
+    padding: 0;
+}
+
 
 .fromHD {
     font-weight: bold;
@@ -2916,6 +2934,9 @@ a.fdbk_tab_hidden {
     padding-left: 25px;
     font-size: 12px;
 }
+
+
+
 
 .serviceThumb {
     padding: 1px;

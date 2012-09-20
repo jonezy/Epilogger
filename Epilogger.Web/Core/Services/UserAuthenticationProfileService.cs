@@ -32,6 +32,11 @@ namespace Epilogger.Web {
             return GetData().FirstOrDefault(ua => ua.Service == serviceType.ToString() && ua.Platform == platform && ua.UserID == userId);
         }
 
+        public IEnumerable<UserAuthenticationProfile> UserAuthorizationBPlatformAndUserId(string platform, Guid userId)
+        {
+            return GetData().Where(ua => ua.Platform == platform && ua.UserID == userId);
+        }
+
         public IEnumerable<UserAuthenticationProfile> UserAuthorizationByServiceScreenName(string screenName) {
             return GetData().Where(ua => ua.ServiceUsername == screenName);
         }

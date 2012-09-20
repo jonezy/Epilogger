@@ -378,6 +378,7 @@
     <Compile Include="Models\MemoryBoxTweet.cs" />
     <Compile Include="Models\NagViewModel.cs" />
     <Compile Include="Models\NavigationViewModel.cs" />
+    <Compile Include="Models\ProfileImageChoiceViewModel.cs" />
     <Compile Include="Models\TweetsAndImage.cs" />
     <Compile Include="Models\AzureTweetModel.cs" />
     <Compile Include="Models\AllTweetsDisplayViewModel.cs" />
@@ -495,6 +496,7 @@
     <Content Include="Public\images\email\screenshot-home.jpg" />
     <Content Include="Public\images\icons\facebookThumb.png" />
     <Content Include="Public\images\icons\twitterThumb.png" />
+    <Content Include="Public\images\icons\UploadProfilePic.png" />
     <Content Include="Public\images\livemode\client\bg.png" />
     <Content Include="Public\images\livemode\client\sponsor-osheaga.png" />
     <Content Include="Public\images\logoSmall.png" />
@@ -3185,6 +3187,7 @@
     <Content Include="Views\Account\_DisconnectService.cshtml" />
     <Content Include="Views\Account\TwitterAuth.cshtml" />
     <Content Include="Views\Account\FacebookAuth.cshtml" />
+    <Content Include="Views\Account\_profileImageChoice.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />

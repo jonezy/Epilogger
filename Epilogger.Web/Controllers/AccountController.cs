@@ -355,24 +355,24 @@ namespace Epilogger.Web.Controllers {
             var model = Mapper.Map<User, AccountModel>(CurrentUser);
             var connectedNetworks = CurrentUser.UserAuthenticationProfiles;
 
-            var facebookConn = connectedNetworks.FirstOrDefault(e => e.Service == "FACEBOOK");
-            var twitterConn = connectedNetworks.FirstOrDefault(e => e.Service == "TWITTER");
+            //var facebookConn = connectedNetworks.FirstOrDefault(e => e.Service == "FACEBOOK");
+            //var twitterConn = connectedNetworks.FirstOrDefault(e => e.Service == "TWITTER");
 
-            if (facebookConn != null)
-            {
-                var fbClient = new FacebookClient(facebookConn.Token);
-                dynamic facebookUser = fbClient.Get("me") ?? null;
-                model.facebookUser = facebookUser;
-            }
+            //if (facebookConn != null)
+            //{
+            //    var fbClient = new FacebookClient(facebookConn.Token);
+            //    dynamic facebookUser = fbClient.Get("me") ?? null;
+            //    model.facebookUser = facebookUser;
+            //}
             
 
-            if (twitterConn != null)
-            {
-                var twitterUser = TwitterHelper.GetUser(twitterConn.Token,
-                                                        twitterConn.TokenSecret,
-                                                        twitterConn.ServiceUsername);
-                model.twitterUser = twitterUser;
-            }
+            //if (twitterConn != null)
+            //{
+            //    var twitterUser = TwitterHelper.GetUser(twitterConn.Token,
+            //                                            twitterConn.TokenSecret,
+            //                                            twitterConn.ServiceUsername);
+            //    model.twitterUser = twitterUser;
+            //}
             
 
             //model.ConnectedNetworks = Mapper.Map<List<UserAuthenticationProfile>, List<ConnectedNetworksViewModel>>(CurrentUser.UserAuthenticationProfiles.ToList());
@@ -437,6 +437,52 @@ namespace Epilogger.Web.Controllers {
         }
 
 
+        
+
+        public ActionResult GetProfileOptions()
+        {
+            var model = new ProfileImageChoiceViewModel();
+
+            var connectedNetworks = _ua.UserAuthorizationBPlatformAndUserId("Web", CurrentUserID);
+            foreach (var cn in connectedNetworks)
+            {
+                if (cn.Service == AuthenticationServices.TWITTER.ToString())
+                {
+                    //Get the profile pic from Twitter
+                    try
+                    {
+                        var twitterUser = TwitterHelper.GetUser(cn.Token, cn.TokenSecret, cn.ServiceUsername);
+                        model.TwitterProfilePicture = twitterUser.ResponseObject.ProfileImageLocation;
+
+                        var req = (HttpWebRequest)WebRequest.Create(string.Format("https://api.twitter.com/1/users/profile_image?screen_name={0}&size=original", twitterUser.ResponseObject.ScreenName));
+                        req.Method = "HEAD";
+                        var myResp = (HttpWebResponse)req.GetResponse();
+                        model.TwitterProfilePictureLarge = myResp.StatusCode == HttpStatusCode.OK ? myResp.ResponseUri.AbsoluteUri : twitterUser.ResponseObject.ProfileImageLocation;
+                    }
+                    catch (Exception)
+                    {
+                        model.TwitterProfilePicture = string.Empty;
+                    }
+                }
+                if (cn.Service == AuthenticationServices.FACEBOOK.ToString())
+                {
+                    //Get the profile pic from Facebook
+                    try
+                    {
+                        model.FacebookProfilePicture = FacebookHelper.GetProfilePicture(cn.Token);
+                        model.FacebookProfilePictureLarge = FacebookHelper.GetProfilePictureWithSize(cn.Token, "large");
+                    }
+                    catch (Exception)
+                    {
+                        model.FacebookProfilePicture = string.Empty;
+                    }
+                }
+            }
+
+            return PartialView("_profileImageChoice", model);
+
+        }
+        
         public ActionResult GetTwitterConnect()
         {
             try
@@ -484,7 +530,6 @@ namespace Epilogger.Web.Controllers {
             
             return PartialView("_ConnectService", new ConnectServiceViewModel() { ServiceName = "Facebook", ServiceUseDescription = "Like items<br />&nbsp;" });
         }
-
 
         public ActionResult TwitterAuth()
         {
@@ -562,7 +607,6 @@ namespace Epilogger.Web.Controllers {
             
             return View();
         }
-
 
 
         #endregion
