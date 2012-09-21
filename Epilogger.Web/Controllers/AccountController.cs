@@ -353,7 +353,7 @@ namespace Epilogger.Web.Controllers {
         public virtual ActionResult Index()
         {
             var model = Mapper.Map<User, AccountModel>(CurrentUser);
-            var connectedNetworks = CurrentUser.UserAuthenticationProfiles;
+            //var connectedNetworks = CurrentUser.UserAuthenticationProfiles;
 
             //var facebookConn = connectedNetworks.FirstOrDefault(e => e.Service == "FACEBOOK");
             //var twitterConn = connectedNetworks.FirstOrDefault(e => e.Service == "TWITTER");
@@ -461,7 +461,7 @@ namespace Epilogger.Web.Controllers {
                     }
                     catch (Exception)
                     {
-                        model.TwitterProfilePicture = string.Empty;
+                        model.TwitterProfilePicture = null;
                     }
                 }
                 if (cn.Service == AuthenticationServices.FACEBOOK.ToString())
@@ -474,7 +474,7 @@ namespace Epilogger.Web.Controllers {
                     }
                     catch (Exception)
                     {
-                        model.FacebookProfilePicture = string.Empty;
+                        model.FacebookProfilePicture = null;
                     }
                 }
             }

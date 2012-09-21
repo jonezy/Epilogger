@@ -34,7 +34,7 @@ namespace Epilogger.Web {
 
         public IEnumerable<UserAuthenticationProfile> UserAuthorizationBPlatformAndUserId(string platform, Guid userId)
         {
-            return GetData().Where(ua => ua.Platform == platform && ua.UserID == userId);
+            return db.UserAuthenticationProfiles.Where(ua => ua.Platform == platform && ua.UserID == userId);
         }
 
         public IEnumerable<UserAuthenticationProfile> UserAuthorizationByServiceScreenName(string screenName) {

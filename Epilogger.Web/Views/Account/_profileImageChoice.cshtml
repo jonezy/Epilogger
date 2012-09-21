@@ -2,14 +2,14 @@
 
 <div class="avatarSelect">
     <ul class="">
-        @if (Model.TwitterProfilePicture != string.Empty)
+        @if (Model.TwitterProfilePicture != null)
         {
             <li class="profileSelector" id="fromTwitter">
                 <div class="profileSelectThumb"><img src="@Model.TwitterProfilePicture" alt="Twitter profile picture" width="69" /></div>
                 @Html.HiddenFor(e => e.TwitterProfilePictureLarge)
             </li>
         }
-        @if (Model.FacebookProfilePicture != string.Empty)
+        @if (Model.FacebookProfilePicture != null)
         {
             <li class="profileSelector" id="fromFacebook">
                 <div class="profileSelectThumb"><img src="@Model.FacebookProfilePicture" alt="Facebook profile picture" width="69" /></div>
@@ -18,10 +18,70 @@
         }
         <li class="profileSelector" id="fromHD">
             <div class="profileSelectThumb"><img src="/Public/images/icons/UploadProfilePic.png" alt="Upload photo" /></div>
-            
         </li>
     </ul>
     <a href="" id="switchPhotoButton" onclick="" class="blue-action-button">SWITCH PHOTOS</a>
     <span id="profileuploadavator" style="display:none;"></span>
+    <span id="uploadavator" style="display:none;"></span>
 </div>
 
+<script type="text/javascript">
+
+    head.ready(function () {
+
+        //Bind the Uploader
+        var button2 = $('#profileuploadavator')[0];
+        var uploader2 = new qq.FileUploader({
+            element: button2,
+            allowedExtensions: ['jpg', 'jpeg', 'png', 'gif'],
+            sizeLimit: 2147483647, // max size
+            action: '/Account/UploadAvatar',
+            multiple: false,
+            uploadButtonClass: 'blue-action-button',
+            uploadButtonText: 'SELECT FILE',
+            onComplete: function (id, fileName, responseJSON) {
+                $("#theProfileImage").attr("src", responseJSON.imageurl);
+                $("#ProfileImage").val(responseJSON.imageurl);
+                $("#DisplayProfileImage").val(responseJSON.imageurl);
+            }
+        });
+
+        //Handle the selecting of thumbs
+        $(".profileSelectThumb").bind("click", function (e) {
+            $(".profileSelectThumb").removeClass("selected");
+            $(this).addClass("selected");
+
+            if ($(this).parent().attr('id') == "fromHD") {
+                $("#profileuploadavator").show();
+                $("#switchPhotoButton").hide();
+            }
+            else {
+                $("#profileuploadavator").hide();
+                $("#switchPhotoButton").show();
+            }
+
+        });
+
+        //Handle the Switch Photos Button
+        $("#switchPhotoButton").bind("click", function (e) {
+            e.preventDefault();
+
+            var selObj = $(".selected img");
+
+            if (selObj.attr("alt").indexOf("Facebook") >= 0) {
+                $("#theProfileImage").attr("src", $("#FacebookProfilePictureLarge").val());
+                $("#ProfileImage").val(selObj.attr("src"));
+                $("#DisplayProfileImage").val($("#FacebookProfilePictureLarge").val());
+            }
+            if (selObj.attr("alt").indexOf("Twitter") >= 0) {
+                $("#theProfileImage").attr("src", $("#TwitterProfilePictureLarge").val());
+                $("#ProfileImage").val(selObj.attr("src"));
+                $("#DisplayProfileImage").val($("#TwitterProfilePictureLarge").val());
+            }
+
+        });
+
+    });
+
+
+</script>

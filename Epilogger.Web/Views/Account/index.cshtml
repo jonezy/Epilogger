@@ -32,9 +32,8 @@
                 
                 
                 @*GetProfileOptions*@
-                @Html.Action("GetProfileOptions")
+                @Html.Action("GetProfileOptions")    
                 
-            
             </div>
         </div>
         
@@ -176,44 +175,18 @@
 
     });
 
-    head.ready(function () {
-
-        $(".profileSelectThumb").bind("click", function (e) {
-            $(".profileSelectThumb").removeClass("selected");
-            $(this).addClass("selected");
-
-            if ($(this).parent().attr('id') == "fromHD") {
-                $("#profileuploadavator").show();
-                $("#switchPhotoButton").hide();
-            }
-            else {
-                $("#profileuploadavator").hide();
-                $("#switchPhotoButton").show();
-            }
-
-        });
-
-        $("#switchPhotoButton").bind("click", function (e) {
-            
-        });
-
-
-
-    });
-
-
-
-
-
+    
     function refreshTwitterConnection() {
-        $.get( '@Url.Action("GetTwitterConnect")', function(data) {
+        $.get('@Url.Action("GetTwitterConnect")', function (data) {
             $("#TwitterConnectSection").replaceWith(data);
+            refreshProfilePics();
         });
     }
 
     function refreshFacebookConnection() {
         $.get('@Url.Action("GetFacebookConnect")', function (data) {
             $("#FacebookConnectSection").replaceWith(data);
+            refreshProfilePics();
         });
     }
 
@@ -228,5 +201,12 @@
             refreshFacebookConnection();
         });
     }
-    
+
+    function refreshProfilePics() {
+        $.get('@Url.Action("GetProfileOptions")', function (data) {
+            $(".avatarSelect").replaceWith(data);
+        });
+    }
+
+
 </script>
