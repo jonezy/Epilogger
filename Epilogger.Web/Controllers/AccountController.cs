@@ -385,41 +385,55 @@ namespace Epilogger.Web.Controllers {
         [HttpPost]
         public virtual ActionResult Index(AccountModel model, FormCollection c)
         {
-            model.ConnectedNetworks = Mapper.Map<List<UserAuthenticationProfile>, List<ConnectedNetworksViewModel>>(CurrentUser.UserAuthenticationProfiles.ToList());
-            var theUser = Mapper.Map<User, AccountModel>(CurrentUser);
-            model.TwitterProfilePicture = theUser.TwitterProfilePicture;
-            model.FacebookProfilePicture = theUser.FacebookProfilePicture;
-            model.ProfilePicture = theUser.ProfilePicture;
+
+
+
+            //model.ConnectedNetworks = Mapper.Map<List<UserAuthenticationProfile>, List<ConnectedNetworksViewModel>>(CurrentUser.UserAuthenticationProfiles.ToList());
+            //var theUser = Mapper.Map<User, AccountModel>(CurrentUser);
+            //model.TwitterProfilePicture = theUser.TwitterProfilePicture;
+            //model.FacebookProfilePicture = theUser.FacebookProfilePicture;
+            //model.ProfilePicture = theUser.ProfilePicture;
 
             if (ModelState.IsValid)
             {
                 try
                 {
                     var user = CurrentUser;
+                    
                     user.FirstName = model.FirstName;
                     user.LastName = model.LastName;
                     user.EmailAddress = model.EmailAddress;
                     user.DateOfBirth = DateTime.Parse(model.DateOfBirth);
 
-                    var imagePath = string.Empty;
-                    if (c["ProfilePictures"] != null)
-                    {
-                        var pictureProvider = c["ProfilePictures"] as string ?? "";
+                    user.ProfilePicture = model.ProfilePicture;
+                    user.ProfilePictureLarge = model.ProfilePictureLarge;
 
-                        if (pictureProvider.ToLower().Contains("twitter"))
-                        {
-                            imagePath =
-                                TwitterHelper.GetUser(CurrentUserTwitterAuthorization.Token,
-                                                      CurrentUserTwitterAuthorization.TokenSecret,
-                                                      CurrentUserTwitterAuthorization.ServiceUsername).ResponseObject.
-                                    ProfileImageLocation;
-                        }
-                        else if (pictureProvider.ToLower().Contains("facebook"))
-                        {
-                            imagePath = FacebookHelper.GetProfilePicture(CurrentUserFacebookAuthorization.Token);
-                        }
+                    if (model.Password != null)
+                    {
+                        user.Password = PasswordHelpers.EncryptPassword(model.Password);
                     }
-                    user.ProfilePicture = imagePath;
+
+
+
+                    //var imagePath = string.Empty;
+                    //if (c["ProfilePictures"] != null)
+                    //{
+                    //    var pictureProvider = c["ProfilePictures"] as string ?? "";
+
+                    //    if (pictureProvider.ToLower().Contains("twitter"))
+                    //    {
+                    //        imagePath =
+                    //            TwitterHelper.GetUser(CurrentUserTwitterAuthorization.Token,
+                    //                                  CurrentUserTwitterAuthorization.TokenSecret,
+                    //                                  CurrentUserTwitterAuthorization.ServiceUsername).ResponseObject.
+                    //                ProfileImageLocation;
+                    //    }
+                    //    else if (pictureProvider.ToLower().Contains("facebook"))
+                    //    {
+                    //        imagePath = FacebookHelper.GetProfilePicture(CurrentUserFacebookAuthorization.Token);
+                    //    }
+                    //}
+                    //user.ProfilePicture = imagePath;
 
                     _service.Save(user);
 

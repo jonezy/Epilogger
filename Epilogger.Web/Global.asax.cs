@@ -523,7 +523,8 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.DateOfBirth, opt => opt.Ignore())
                 .ForMember(dest => dest.ProfilePicture, opt => opt.MapFrom(src => src.ProfileImage))
                 .ForMember(dest => dest.TimeZoneOffSet, opt => opt.Ignore())
-                .ForMember(dest => dest.EmailVerified, opt => opt.UseValue(false));
+                .ForMember(dest => dest.EmailVerified, opt => opt.UseValue(false))
+                .ForMember(dest => dest.ProfilePictureLarge, opt => opt.Ignore());
 
             Mapper.CreateMap<UserAuthenticationProfile, ConnectedNetworksViewModel>();
 

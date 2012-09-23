@@ -6339,6 +6339,23 @@ namespace Epilogger.Data
 		    }
 		}
 		
+        partial void OnProfilePictureLargeChanging(string value);
+        partial void OnProfilePictureLargeChanged();
+		
+		private string _ProfilePictureLarge;
+		public string ProfilePictureLarge { 
+		    get{
+		        return _ProfilePictureLarge;
+		    } 
+		    set{
+		        this.OnProfilePictureLargeChanging(value);
+                this.SendPropertyChanging();
+                this._ProfilePictureLarge = value;
+                this.SendPropertyChanged("ProfilePictureLarge");
+                this.OnProfilePictureLargeChanged();
+		    }
+		}
+		
 
         #endregion
 
@@ -6393,7 +6410,7 @@ namespace Epilogger.Data
             {
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.UserAuthenticationProfiles
-                       where items.UserID == _ID && items.Platform == "Web"
+                       where items.UserID == _ID
                        select items;
             }
         }

@@ -26,8 +26,17 @@
             <div class="profileTitle">Avatar:</div>    
             
             <div class="avatarSelectSection">
-                <div class="createProfilePicture    ">
-                    <img id="theProfileImage" src="@Model.ProfilePicture" alt="Avatar" width="250px" />
+                <div class="createProfilePicture">
+                    @if (Model.ProfilePictureLarge == null)
+                    {
+                        <img id="theProfileImage" src="@Model.ProfilePicture" alt="Avatar" width="250px" />    
+                    }
+                    else
+                    {
+                        <img id="theProfileImage" src="@Model.ProfilePictureLarge" alt="Avatar" width="250px" />    
+                    }
+                    @Html.HiddenFor(model => model.ProfilePicture)
+                    @Html.HiddenFor(model => model.ProfilePictureLarge)
                 </div>
                 
                 
@@ -113,8 +122,7 @@
                 <div class="spacer"></div>
 
                 <div class="acceptText">
-                    <input type="button" onclick="submitForm();" class="blue-action-button createAccountSubmit submitForm" value="Update Account" />
-                    <a href="" onclick="refreshTwitterConnection();refreshFacebookConnection();return false;">Test</a>
+                    <input type="button" onclick="submitForm();" class="blue-action-button" value="Update Account" />
                     <div id="createAccountWait">
                         <img src="/Public/images/icons/ajaxWaiting.gif" alt="" />
                     </div>

@@ -70,13 +70,15 @@
 
             if (selObj.attr("alt").indexOf("Facebook") >= 0) {
                 $("#theProfileImage").attr("src", $("#FacebookProfilePictureLarge").val());
-                $("#ProfileImage").val(selObj.attr("src"));
+                $("#ProfilePicture").val(selObj.attr("src"));
                 $("#DisplayProfileImage").val($("#FacebookProfilePictureLarge").val());
+                $("#ProfilePictureLarge").val($("#FacebookProfilePictureLarge").val());
             }
             if (selObj.attr("alt").indexOf("Twitter") >= 0) {
                 $("#theProfileImage").attr("src", $("#TwitterProfilePictureLarge").val());
-                $("#ProfileImage").val(selObj.attr("src"));
+                $("#ProfilePicture").val(selObj.attr("src"));
                 $("#DisplayProfileImage").val($("#TwitterProfilePictureLarge").val());
+                $("#ProfilePictureLarge").val($("#TwitterProfilePictureLarge").val());
             }
 
         });

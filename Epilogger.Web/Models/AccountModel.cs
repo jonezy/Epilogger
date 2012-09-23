@@ -11,6 +11,7 @@ namespace Epilogger.Web.Models {
 
         [DisplayName("Profile Picture")]
         public string ProfilePicture { get; set; }
+        public string ProfilePictureLarge { get; set; }
 
         public string TwitterProfilePicture { get; set; }
         public string FacebookProfilePicture { get; set; }
