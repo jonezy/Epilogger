@@ -512,6 +512,7 @@
     <Content Include="Public\images\widget\logo\chevywidget.png" />
     <Content Include="Public\images\widget\menu-active.png" />
     <Content Include="Public\js\CreateAccount.js" />
+    <Content Include="Public\js\EditAccount.js" />
     <Content Include="Public\js\FileUploader\do-nothing.htm" />
     <Content Include="Public\js\FileUploader\fileuploader.css" />
     <Content Include="Public\js\FileUploader\fileuploader.js" />

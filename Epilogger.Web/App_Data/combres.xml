@@ -100,13 +100,14 @@
     <resourceSet name="CreateAccountJs" type="js">
       <resource path="~/Public/js/jquery.blockUI.js" />
       <resource path="~/Public/js/CreateAccount.js" />
-
       <resource path="~/Public/js/FileUploader/fileuploader.js" />
-    
-
-
     </resourceSet>
 
+
+    <resourceSet name="EditAccountJs" type="js">
+      <resource path="~/Public/js/EditAccount.js" />
+      <resource path="~/Public/js/FileUploader/fileuploader.js" />
+    </resourceSet>
 
   </resourceSets>
 </combres>

@@ -7,7 +7,7 @@
     ViewBag.Title = "Epilogger | Create Account";
 }
 
-@Html.CombresLink("CreateAccountJs")
+@Html.CombresLink("EditAccountJs")
 @Html.CombresLink("CreateAccountCss")
 
 
@@ -143,6 +143,11 @@
 
 <script type="text/javascript">
 
+    function popTheWindow(url) {
+        window.open(url, 'twitterAuth', "width=400,height=300,scrollbars=no");
+        return false;
+    }
+
 
     function submitForm() {
         $(".submitForm").addClass("disabled");
@@ -183,7 +188,7 @@
 
     });
 
-    
+
     function refreshTwitterConnection() {
         $.get('@Url.Action("GetTwitterConnect")', function (data) {
             $("#TwitterConnectSection").replaceWith(data);
@@ -215,6 +220,7 @@
             $(".avatarSelect").replaceWith(data);
         });
     }
+    
 
 
 </script>

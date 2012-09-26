@@ -402,11 +402,17 @@ namespace Epilogger.Web.Controllers {
                     
                     user.FirstName = model.FirstName;
                     user.LastName = model.LastName;
-                    user.EmailAddress = model.EmailAddress;
                     user.DateOfBirth = DateTime.Parse(model.DateOfBirth);
 
                     user.ProfilePicture = model.ProfilePicture;
                     user.ProfilePictureLarge = model.ProfilePictureLarge;
+
+                    if (user.EmailAddress != model.EmailAddress)
+                    {
+                        user.EmailVerified = false;
+                    }
+                    user.EmailAddress = model.EmailAddress;
+                    
 
                     if (model.Password != null)
                     {
