@@ -27,6 +27,7 @@ namespace Epilogger.Web.Models {
 
         public string DisplayProfileImage { get; set; }
         public string ProfileImage { get; set; }
+        public string ProfileImageLarge { get; set; }
 
         public string ServiceUserName { get; set; }
 

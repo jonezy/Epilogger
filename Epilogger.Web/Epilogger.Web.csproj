@@ -373,9 +373,12 @@
     <Compile Include="Models\AddLinkViewModel.cs" />
     <Compile Include="Models\AllContentViewModel.cs" />
     <Compile Include="Models\AllPhotosDisplayViewModel.cs" />
+    <Compile Include="Models\ConnectServiceViewModel.cs" />
+    <Compile Include="Models\DisconnectServiceViewModel.cs" />
     <Compile Include="Models\MemoryBoxTweet.cs" />
     <Compile Include="Models\NagViewModel.cs" />
     <Compile Include="Models\NavigationViewModel.cs" />
+    <Compile Include="Models\ProfileImageChoiceViewModel.cs" />
     <Compile Include="Models\TweetsAndImage.cs" />
     <Compile Include="Models\AzureTweetModel.cs" />
     <Compile Include="Models\AllTweetsDisplayViewModel.cs" />
@@ -491,6 +494,9 @@
     <Content Include="Public\images\email\screenshot-browse.jpg" />
     <Content Include="Public\images\email\screenshot-events.jpg" />
     <Content Include="Public\images\email\screenshot-home.jpg" />
+    <Content Include="Public\images\icons\facebookThumb.png" />
+    <Content Include="Public\images\icons\twitterThumb.png" />
+    <Content Include="Public\images\icons\UploadProfilePic.png" />
     <Content Include="Public\images\livemode\client\bg.png" />
     <Content Include="Public\images\livemode\client\sponsor-osheaga.png" />
     <Content Include="Public\images\logoSmall.png" />
@@ -506,6 +512,7 @@
     <Content Include="Public\images\widget\logo\chevywidget.png" />
     <Content Include="Public\images\widget\menu-active.png" />
     <Content Include="Public\js\CreateAccount.js" />
+    <Content Include="Public\js\EditAccount.js" />
     <Content Include="Public\js\FileUploader\do-nothing.htm" />
     <Content Include="Public\js\FileUploader\fileuploader.css" />
     <Content Include="Public\js\FileUploader\fileuploader.js" />
@@ -3176,6 +3183,12 @@
     <Content Include="Views\Join\Email.cshtml" />
     <Content Include="Views\Join\_FullCreateForm.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\index.cshtml" />
+    <Content Include="Views\Account\_ConnectService.cshtml" />
+    <Content Include="Views\Account\_DisconnectService.cshtml" />
+    <Content Include="Views\Account\TwitterAuth.cshtml" />
+    <Content Include="Views\Account\FacebookAuth.cshtml" />
+    <Content Include="Views\Account\_profileImageChoice.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />
@@ -5239,7 +5252,7 @@
     <Content Include="Views\Events\Details.cshtml" />
     <Content Include="Views\Account\Old\LoginOld.cshtml" />
     <Content Include="Views\Account\UpdatePassword.cshtml" />
-    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\IndexOld.cshtml" />
     <Content Include="Areas\Authentication\Views\Web.config" />
     <Content Include="Views\Shared\GlobalNavigationOldGood.cshtml" />
     <Content Include="Views\Events\Create.cshtml" />

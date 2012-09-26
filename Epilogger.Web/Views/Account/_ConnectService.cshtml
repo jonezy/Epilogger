@@ -1,0 +1,14 @@
+﻿@model Epilogger.Web.Models.ConnectServiceViewModel
+
+
+<li id="@string.Format("{0}ConnectSection", Model.ServiceName)">
+    <div class="serviceThumb">
+        <img src="@string.Format("/Public/images/icons/{0}Thumb.png", Model.ServiceName)" alt="@Model.ServiceName" />
+    </div>
+
+    <a href="" class="lightblue-action-button" onclick="popTheWindow('@Url.Action("ConnectRequestWithCallback", Model.ServiceName, new { area = "Authentication", callBackUrl = @Url.Action(Model.ServiceName + "Auth", null, null, "http") })'); return false;">CONNECT @Model.ServiceName.ToUpper()</a>
+    <div class="connectDescription">
+        @Html.Raw(Model.ServiceUseDescription)
+    </div>  
+
+</li>

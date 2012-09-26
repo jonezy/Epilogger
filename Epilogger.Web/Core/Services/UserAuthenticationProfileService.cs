@@ -17,13 +17,24 @@ namespace Epilogger.Web {
             return GetRepository<UserAuthenticationProfile>().Add(entity);
         }
 
-        public void DisconnectService(AuthenticationServices serviceType, Guid userId) {
-            var profile = GetData().FirstOrDefault(p => p.UserID == userId && p.Service == serviceType.ToString());
+        public void DisconnectService(AuthenticationServices serviceType, Guid userId, string platform) {
+            var profile = GetData().FirstOrDefault(p => p.UserID == userId && p.Service == serviceType.ToString() && p.Platform==platform);
             GetRepository<UserAuthenticationProfile>().Delete(profile);
+
         }
 
         public UserAuthenticationProfile UserAuthorizationByService(AuthenticationServices serviceType, string platform) {
             return GetData().FirstOrDefault(ua => ua.Service == serviceType.ToString() && ua.Platform == platform);
+        }
+        
+        public UserAuthenticationProfile UserAuthorizationByServicePlatformAndUserId(AuthenticationServices serviceType, string platform, Guid userId)
+        {
+            return GetData().FirstOrDefault(ua => ua.Service == serviceType.ToString() && ua.Platform == platform && ua.UserID == userId);
+        }
+
+        public IEnumerable<UserAuthenticationProfile> UserAuthorizationBPlatformAndUserId(string platform, Guid userId)
+        {
+            return db.UserAuthenticationProfiles.Where(ua => ua.Platform == platform && ua.UserID == userId);
         }
 
         public IEnumerable<UserAuthenticationProfile> UserAuthorizationByServiceScreenName(string screenName) {

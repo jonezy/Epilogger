@@ -30,15 +30,17 @@ using Twitterizer;
 namespace Epilogger.Web.Controllers {
     public partial class AccountController : BaseController {
         UserService _service;
+        private UserAuthenticationProfileService _ua;
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext) {
             if (_service == null) _service = new UserService();
-
+            if (_ua == null) _ua = new UserAuthenticationProfileService();
+            
             base.Initialize(requestContext);
         }
 
-        /* New Account stuff section */
-        #region New Account Stuff
+    /* New Account stuff section */
+    #region New Account Stuff
 
         //These are used for Various account functions in a number of areas
 
@@ -128,6 +130,7 @@ namespace Epilogger.Web.Controllers {
             return Json(new { success = true, imageurl = imageurl.AbsoluteUri }, "text/html");
         }
 
+        //Processes the validation code when a user validates their email address.
         [HttpGet]
         public virtual ActionResult Validate(string validationCode)
         {
@@ -162,7 +165,7 @@ namespace Epilogger.Web.Controllers {
             return RedirectToAction("Index", "Home");
         }
 
-
+        //Sends the Thank you email after user validates their email address
         private static void SendVerificationThankYouEmail(User user)
         {
             //Send the Validate Email Thank You
@@ -231,8 +234,6 @@ namespace Epilogger.Web.Controllers {
             sfEmail.SendMail();
         }
 
-
-
         public static bool ConnectAuthAccountToUser(Guid userId, string authService, string authScreenName, string authToken, string authTokenSecret, string platform)
         {
             try
@@ -298,8 +299,7 @@ namespace Epilogger.Web.Controllers {
             }
             
         }
-
-
+        
         public Guid CheckConnectedAccountUserExists(string userScreenName, AuthenticationServices authService, string token, string tokenSecret)
         {
             try
@@ -349,7 +349,284 @@ namespace Epilogger.Web.Controllers {
             }
         }
 
+        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to edit your account")]
+        public virtual ActionResult Index()
+        {
+            var model = Mapper.Map<User, AccountModel>(CurrentUser);
+            //var connectedNetworks = CurrentUser.UserAuthenticationProfiles;
 
+            //var facebookConn = connectedNetworks.FirstOrDefault(e => e.Service == "FACEBOOK");
+            //var twitterConn = connectedNetworks.FirstOrDefault(e => e.Service == "TWITTER");
+
+            //if (facebookConn != null)
+            //{
+            //    var fbClient = new FacebookClient(facebookConn.Token);
+            //    dynamic facebookUser = fbClient.Get("me") ?? null;
+            //    model.facebookUser = facebookUser;
+            //}
+            
+
+            //if (twitterConn != null)
+            //{
+            //    var twitterUser = TwitterHelper.GetUser(twitterConn.Token,
+            //                                            twitterConn.TokenSecret,
+            //                                            twitterConn.ServiceUsername);
+            //    model.twitterUser = twitterUser;
+            //}
+            
+
+            //model.ConnectedNetworks = Mapper.Map<List<UserAuthenticationProfile>, List<ConnectedNetworksViewModel>>(CurrentUser.UserAuthenticationProfiles.ToList());
+
+            model.Password = string.Empty;
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public virtual ActionResult Index(AccountModel model, FormCollection c)
+        {
+
+
+
+            //model.ConnectedNetworks = Mapper.Map<List<UserAuthenticationProfile>, List<ConnectedNetworksViewModel>>(CurrentUser.UserAuthenticationProfiles.ToList());
+            //var theUser = Mapper.Map<User, AccountModel>(CurrentUser);
+            //model.TwitterProfilePicture = theUser.TwitterProfilePicture;
+            //model.FacebookProfilePicture = theUser.FacebookProfilePicture;
+            //model.ProfilePicture = theUser.ProfilePicture;
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var user = CurrentUser;
+                    
+                    user.FirstName = model.FirstName;
+                    user.LastName = model.LastName;
+                    user.DateOfBirth = DateTime.Parse(model.DateOfBirth);
+
+                    user.ProfilePicture = model.ProfilePicture;
+                    user.ProfilePictureLarge = model.ProfilePictureLarge;
+
+                    if (user.EmailAddress != model.EmailAddress)
+                    {
+                        user.EmailVerified = false;
+                    }
+                    user.EmailAddress = model.EmailAddress;
+                    
+
+                    if (model.Password != null)
+                    {
+                        user.Password = PasswordHelpers.EncryptPassword(model.Password);
+                    }
+
+
+
+                    //var imagePath = string.Empty;
+                    //if (c["ProfilePictures"] != null)
+                    //{
+                    //    var pictureProvider = c["ProfilePictures"] as string ?? "";
+
+                    //    if (pictureProvider.ToLower().Contains("twitter"))
+                    //    {
+                    //        imagePath =
+                    //            TwitterHelper.GetUser(CurrentUserTwitterAuthorization.Token,
+                    //                                  CurrentUserTwitterAuthorization.TokenSecret,
+                    //                                  CurrentUserTwitterAuthorization.ServiceUsername).ResponseObject.
+                    //                ProfileImageLocation;
+                    //    }
+                    //    else if (pictureProvider.ToLower().Contains("facebook"))
+                    //    {
+                    //        imagePath = FacebookHelper.GetProfilePicture(CurrentUserFacebookAuthorization.Token);
+                    //    }
+                    //}
+                    //user.ProfilePicture = imagePath;
+
+                    _service.Save(user);
+
+                    //this.StoreSuccess("Your account was updated successfully");
+                    this.Receive(MessageType.Success, "Your account was updated successfully");
+
+                }
+                catch (Exception ex)
+                {
+                    Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                    this.StoreError("There was a problem updating your account");
+                }
+            }
+            return View(model);
+        }
+
+
+        
+
+        public ActionResult GetProfileOptions()
+        {
+            var model = new ProfileImageChoiceViewModel();
+
+            var connectedNetworks = _ua.UserAuthorizationBPlatformAndUserId("Web", CurrentUserID);
+            foreach (var cn in connectedNetworks)
+            {
+                if (cn.Service == AuthenticationServices.TWITTER.ToString())
+                {
+                    //Get the profile pic from Twitter
+                    try
+                    {
+                        var twitterUser = TwitterHelper.GetUser(cn.Token, cn.TokenSecret, cn.ServiceUsername);
+                        model.TwitterProfilePicture = twitterUser.ResponseObject.ProfileImageLocation;
+
+                        var req = (HttpWebRequest)WebRequest.Create(string.Format("https://api.twitter.com/1/users/profile_image?screen_name={0}&size=original", twitterUser.ResponseObject.ScreenName));
+                        req.Method = "HEAD";
+                        var myResp = (HttpWebResponse)req.GetResponse();
+                        model.TwitterProfilePictureLarge = myResp.StatusCode == HttpStatusCode.OK ? myResp.ResponseUri.AbsoluteUri : twitterUser.ResponseObject.ProfileImageLocation;
+                    }
+                    catch (Exception)
+                    {
+                        model.TwitterProfilePicture = null;
+                    }
+                }
+                if (cn.Service == AuthenticationServices.FACEBOOK.ToString())
+                {
+                    //Get the profile pic from Facebook
+                    try
+                    {
+                        model.FacebookProfilePicture = FacebookHelper.GetProfilePicture(cn.Token);
+                        model.FacebookProfilePictureLarge = FacebookHelper.GetProfilePictureWithSize(cn.Token, "large");
+                    }
+                    catch (Exception)
+                    {
+                        model.FacebookProfilePicture = null;
+                    }
+                }
+            }
+
+            return PartialView("_profileImageChoice", model);
+
+        }
+        
+        public ActionResult GetTwitterConnect()
+        {
+            try
+            {
+                var connectionProfile = _ua.UserAuthorizationByServicePlatformAndUserId(AuthenticationServices.TWITTER, "Web", CurrentUserID);
+                if (connectionProfile != null)
+                {
+                    var twitterUser = TwitterHelper.GetUser(connectionProfile.Token,
+                                                        connectionProfile.TokenSecret,
+                                                        connectionProfile.ServiceUsername);
+                    if (twitterUser != null)
+                    {
+                        var splitName = twitterUser.ResponseObject.Name.Split(new[] { " " }, StringSplitOptions.None);
+
+                        return PartialView("_DisconnectService", new DisconnectServiceViewModel() { ServiceName = "Twitter", ConnectedAs = string.Format("{0} {1}", splitName[0], splitName[1]) });
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+            
+            return PartialView("_ConnectService", new ConnectServiceViewModel() { ServiceName = "Twitter", ServiceUseDescription = "Tweet and retweet<br />Favorite items" });
+        }
+
+        public ActionResult GetFacebookConnect()
+        {
+            try
+            {
+                var connectionProfile = _ua.UserAuthorizationByServicePlatformAndUserId(AuthenticationServices.FACEBOOK, "Web", CurrentUserID);
+                if (connectionProfile != null)
+                {
+                    var fbClient = new FacebookClient(connectionProfile.Token);
+                    dynamic facebookUser = fbClient.Get("me");
+
+                    if (facebookUser != null)
+                    {
+                        return PartialView("_DisconnectService", new DisconnectServiceViewModel() { ServiceName = "Facebook", ConnectedAs = string.Format("{0} {1}", facebookUser.first_name, facebookUser.last_name) });    
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+            
+            return PartialView("_ConnectService", new ConnectServiceViewModel() { ServiceName = "Facebook", ServiceUseDescription = "Like items<br />&nbsp;" });
+        }
+
+        public ActionResult TwitterAuth()
+        {
+            if (Request.QueryString["oauth_token"] != null)
+            {
+                var accessTokenResponse = OAuthUtility.GetAccessTokenDuringCallback(TwitterHelper.TwitterConsumerKey,
+                                                                                    TwitterHelper.TwitterConsumerSecret);
+
+                // check to see if we already have the screen name in the userauth table.
+                var userAuthService = new UserAuthenticationProfileService();
+                var userAuth = userAuthService.UserAuthorizationByServiceScreenNameAndPlatform(accessTokenResponse.ScreenName,
+                                                                                    "Web",
+                                                                                    AuthenticationServices.TWITTER);
+
+                if (userAuth == null)
+                {
+                    //This is a connection to Twitter
+                    userAuth = new UserAuthenticationProfile
+                    {
+                        UserID = CurrentUserID,
+                        Platform = "Web",
+                        Service = AuthenticationServices.TWITTER.ToString(),
+                        ServiceUsername = accessTokenResponse.ScreenName,
+                        Token = accessTokenResponse.Token,
+                        TokenSecret = accessTokenResponse.TokenSecret
+                    };
+                    userAuthService.Save(userAuth);
+                }
+            }
+
+            return View();
+        }
+
+        public ActionResult FacebookAuth()
+        {
+            var client = new FacebookClient();
+            var oauthResult = client.ParseOAuthCallbackUrl(Request.Url);
+
+            // Build the Return URI form the Request Url
+            var redirectUri = new UriBuilder(Url.Action("FacebookAuth", "account", null, "http"));
+
+            // Exchange the code for an access token
+            dynamic result = client.Get("/oauth/access_token", new
+            {
+                client_id = ConfigurationManager.AppSettings["FacebookAppId"],
+                redirect_uri = redirectUri.Uri.AbsoluteUri,
+                client_secret = ConfigurationManager.AppSettings["FacebookAppSecret"],
+                code = oauthResult.Code,
+            });
+
+            // Read the auth values
+            string accessToken = result.access_token;
+            DateTime expires = DateTime.UtcNow.AddSeconds(Convert.ToDouble(result.expires));
+
+            var fbClient = new FacebookClient(accessToken);
+            dynamic facebookUser = fbClient.Get("me");
+
+            var authorizationService = new UserAuthenticationProfileService();
+            var userAuth = authorizationService.UserAuthorizationByServiceScreenNameAndPlatform(facebookUser.username, "Web", AuthenticationServices.FACEBOOK);
+
+            if (userAuth == null)
+            {
+                userAuth = new UserAuthenticationProfile
+                    {
+                        UserID = CurrentUserID,
+                        Platform = "Web",
+                        Service = AuthenticationServices.FACEBOOK.ToString(),
+                        Token = accessToken,
+                        ServiceUsername = facebookUser.username
+                    };
+            
+                authorizationService.Save(userAuth);
+
+            }
+            
+            return View();
+        }
 
 
         #endregion
@@ -370,69 +647,7 @@ namespace Epilogger.Web.Controllers {
 
 
 
-        [RequiresAuthentication(ValidUserRole=UserRoleType.RegularUser, AccessDeniedMessage="You must be logged in to edit your account")]
-        public virtual ActionResult Index () {
-            AccountModel model = Mapper.Map<User, AccountModel>(CurrentUser);
-            model.ConnectedNetworks = Mapper.Map<List<UserAuthenticationProfile>, List<ConnectedNetworksViewModel>>(CurrentUser.UserAuthenticationProfiles.ToList());
-            
-            return View(model);
-        }
-
-
-        [HttpPost]
-        public virtual ActionResult Index(AccountModel model, FormCollection c)
-        {
-            model.ConnectedNetworks = Mapper.Map<List<UserAuthenticationProfile>, List<ConnectedNetworksViewModel>>(CurrentUser.UserAuthenticationProfiles.ToList());
-            var theUser = Mapper.Map<User, AccountModel>(CurrentUser);
-            model.TwitterProfilePicture = theUser.TwitterProfilePicture;
-            model.FacebookProfilePicture = theUser.FacebookProfilePicture;
-            model.ProfilePicture = theUser.ProfilePicture;
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    var user = CurrentUser;
-                    user.FirstName = model.FirstName;
-                    user.LastName = model.LastName;
-                    user.EmailAddress = model.EmailAddress;
-                    user.DateOfBirth = DateTime.Parse(model.DateOfBirth);
-                    //user.TimeZoneOffSet = model.TimeZone;
-
-                    string imagePath = string.Empty;
-                    if (c["ProfilePictures"] != null)
-                    {
-                        string pictureProvider = c["ProfilePictures"] as string ?? "";
-
-                        if (pictureProvider.ToLower().Contains("twitter"))
-                        {
-                            imagePath =
-                                TwitterHelper.GetUser(CurrentUserTwitterAuthorization.Token,
-                                                      CurrentUserTwitterAuthorization.TokenSecret,
-                                                      CurrentUserTwitterAuthorization.ServiceUsername).ResponseObject.
-                                    ProfileImageLocation;
-                        }
-                        else if (pictureProvider.ToLower().Contains("facebook"))
-                        {
-                            imagePath = FacebookHelper.GetProfilePicture(CurrentUserFacebookAuthorization.Token);
-                        }
-                    }
-                    user.ProfilePicture = imagePath;
-
-                    _service.Save(user);
-
-                    //this.StoreSuccess("Your account was updated successfully");
-                    this.Receive(MessageType.Success, "Your account was updated successfully");
-
-                }
-                catch (Exception ex)
-                {
-                    Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
-                    this.StoreError("There was a problem updating your account");
-                }
-            }
-            return View(model);
-        }
+        
 
 
 

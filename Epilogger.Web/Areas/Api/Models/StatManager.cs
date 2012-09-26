@@ -38,6 +38,13 @@ namespace Epilogger.Web.Areas.Api.Models
             return stats.GetUserGrowthStats(f, t);
         }
 
+        public List<UserGrowthStats> GetDailyUserGrowth(DateTime f, DateTime t)
+        {
+            var stats = new UserGrowth();
+            return stats.GetDailyUserGrowthStats(f, t);
+        }
+
+
         /* Events */
         public List<EventGrowthStats> GetEventGrowth()
         {

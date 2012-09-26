@@ -10,11 +10,13 @@ namespace Epilogger.Web {
             if (source.UserAuthenticationProfiles == null)
                 return string.Empty;
 
-            try {
-                UserAuthenticationProfile userAuth = source.UserAuthenticationProfiles.Where(ua => ua.Service == "FACEBOOK").FirstOrDefault();
-                return FacebookHelper.GetProfilePicture(userAuth.Token);
-                
-            } catch { return ""; }
+            try
+            {
+                var userAuth = source.UserAuthenticationProfiles.FirstOrDefault(ua => ua.Service == "FACEBOOK" && ua.Platform== "Web");
+                if (userAuth != null) return FacebookHelper.GetProfilePicture(userAuth.Token);
+            }
+            catch { return ""; }
+            return null;
         }
     }
 }

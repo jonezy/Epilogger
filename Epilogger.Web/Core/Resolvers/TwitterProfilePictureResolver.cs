@@ -10,25 +10,25 @@ namespace Epilogger.Web {
             if (source.UserAuthenticationProfiles == null)
                 return string.Empty;
 
-            if (source.UserAuthenticationProfiles.Where(ua => ua.Service == "TWITTER").FirstOrDefault() == null)
+            if (source.UserAuthenticationProfiles.FirstOrDefault(ua => ua.Service == "TWITTER" && ua.Platform=="Web") == null)
                 return string.Empty;
 
             try
             {
-                UserAuthenticationProfile userAuth = source.UserAuthenticationProfiles.Where(ua => ua.Service == "TWITTER").FirstOrDefault();
-                TwitterResponse<TwitterUser> twitterUser = TwitterHelper.GetUser(userAuth.Token, userAuth.TokenSecret, userAuth.ServiceUsername);
+                var userAuth = source.UserAuthenticationProfiles.FirstOrDefault(ua => ua.Service == "TWITTER" && ua.Platform == "Web");
+                if (userAuth != null)
+                {
+                    var twitterUser = TwitterHelper.GetUser(userAuth.Token, userAuth.TokenSecret, userAuth.ServiceUsername);
 
-                if (twitterUser == null)
-                    return string.Empty;
-
-                return twitterUser.ResponseObject.ProfileImageLocation;
+                    return twitterUser == null ? string.Empty : twitterUser.ResponseObject.ProfileImageLocation;
+                }
             }
             catch (Exception)
             {
                 return string.Empty;
             }
 
-            
+            return string.Empty;
         }
     }
 }

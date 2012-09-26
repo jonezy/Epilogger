@@ -1,0 +1,32 @@
+﻿@{
+    Layout = "";
+}
+
+<html>
+
+    <head>
+        <title>Redirecting</title>
+    
+        <script type="text/javascript">
+            function updateAndClose() {
+                if (window.opener && !window.opener.closed)
+                    window.opener.refreshTwitterConnection();
+                window.close();
+            }
+        </script>
+
+    </head>
+
+    <body onload="updateAndClose();">
+    
+        <h2>Redirecting you back to Epilogger...</h2>
+
+    </body>
+
+
+</html>
+
+
+
+
+

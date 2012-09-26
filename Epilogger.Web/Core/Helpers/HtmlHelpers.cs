@@ -7,6 +7,8 @@ using TagCloud;
 
 namespace System.Web.Mvc {
     public static class HtmlHelpers {
+
+        //I don't like this. We sh0ould try to avoid HTML in the server side code.
         public static MvcHtmlString RenderConnectSocialNetworkUI(this HtmlHelper helper, string network, IEnumerable<ConnectedNetworksViewModel> connectedNetworks) {
 
             var desiredNetwork = connectedNetworks.FirstOrDefault(cn => cn.Service.ToLower() == network.ToLower());

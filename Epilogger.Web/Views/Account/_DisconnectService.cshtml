@@ -1,0 +1,14 @@
+﻿@model Epilogger.Web.Models.DisconnectServiceViewModel
+
+<li id="@string.Format("{0}ConnectSection", Model.ServiceName)">
+    <div class="serviceThumb">
+        <img src="@string.Format("/Public/images/icons/{0}Thumb.png", Model.ServiceName)" alt="@Model.ServiceName" />
+    </div>
+                                
+    <div class="connectedDescription">
+        Connected as:<br />
+        @Model.ConnectedAs
+    </div>
+    @*@Url.Action("DisconnectClean", Model.ServiceName, new { area = "Authentication" })*@
+    <a href="" onclick="@string.Format("disconnect{0}Account()", Model.ServiceName);return false;" class="blue-action-button">DISCONNECT</a>
+</li>
