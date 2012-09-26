@@ -38,6 +38,20 @@ namespace Epilogger.Web.Areas.Api
             );
 
 
+            context.MapRoute(
+                "DisconnectFacebookAccount",
+                "Api/Users/Authenticate/DisconnectFacebookAccount",
+                new { controller = "ApiEvents", action = "DisconnectFacebookAccount" }
+            );
+
+            context.MapRoute(
+                "DisconnectTwitterAccount",
+                "Api/Users/Authenticate/DisconnectTwitterAccount",
+                new { controller = "ApiEvents", action = "DisconnectTwitterAccount" }
+            );
+
+            
+
 
             context.MapRoute(
                 "ListTrendingEvents",
@@ -300,6 +314,11 @@ namespace Epilogger.Web.Areas.Api
                 "GeckoGetUserGrowthLastMonth",
                 "Api/Stats/Gecko/UserGrowthLastMonth",
                 new { controller = "ApiEvents", action = "GeckoGetUserGrowthLastMonth" }
+            );
+            context.MapRoute(
+                "GeckoGetDailyUserGrowthLastMonth",
+                "Api/Stats/Gecko/DailyUserGrowthLastMonth",
+                new { controller = "ApiEvents", action = "GeckoGetDailyUserGrowthLastMonth" }
             );
 
 

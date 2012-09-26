@@ -1,0 +1,226 @@
+﻿@using Combres.Mvc
+@using Epilogger.Web.Models
+@model AccountModel
+
+@{
+    Layout = "~/Views/Shared/_InteriorLayoutNoBC.cshtml";
+    ViewBag.Title = "Epilogger | Create Account";
+}
+
+@Html.CombresLink("EditAccountJs")
+@Html.CombresLink("CreateAccountCss")
+
+
+<div class="AccountPage">
+    <div class="signUpHeading">
+        <h1>Profile & Settings</h1>
+    </div>
+    
+    <div class="spacer"></div>
+    
+    @*@Html.ValidationSummary("Please correct the following issues")*@
+    @using (Html.BeginForm())
+    {
+       
+        <div class="">
+            <div class="profileTitle">Avatar:</div>    
+            
+            <div class="avatarSelectSection">
+                <div class="createProfilePicture">
+                    @if (Model.ProfilePictureLarge == null)
+                    {
+                        <img id="theProfileImage" src="@Model.ProfilePicture" alt="Avatar" width="250px" />    
+                    }
+                    else
+                    {
+                        <img id="theProfileImage" src="@Model.ProfilePictureLarge" alt="Avatar" width="250px" />    
+                    }
+                    @Html.HiddenFor(model => model.ProfilePicture)
+                    @Html.HiddenFor(model => model.ProfilePictureLarge)
+                </div>
+                
+                
+                @*GetProfileOptions*@
+                @Html.Action("GetProfileOptions")    
+                
+            </div>
+        </div>
+        
+        <div class="spacer"></div>
+        <div class="spacer"></div>
+        
+        <div class="profileSection">
+            
+            <div class="profileFormFields">
+                <fieldset class="">
+                    <div class="profileTitle">Name:</div>
+                    <div class="createFormField">
+                        <div class="createFormLeft">
+                            @Html.TextBoxFor(model => model.FirstName, new { title = "First Name" }) 
+                            @Html.ValidationMessageFor(model => model.FirstName)
+                        </div>    
+                    
+                        <div class="createFormRight">
+                            @Html.TextBoxFor(model => model.LastName, new { title = "Last Name" }) 
+                            @Html.ValidationMessageFor(model => model.LastName)
+                        </div>
+
+                    </div>
+                    
+                    <div class="profileTitle">E-mail:</div>
+                    <div class="createFormField">
+                        @Html.TextBoxFor(model => model.EmailAddress, new { title = "Email Address" }) 
+                        @Html.ValidationMessageFor(model => model.EmailAddress)
+                        <div id="emailCheck"></div>
+                    </div>
+                    
+
+                    <div class="profileTitle">Birthday:</div>
+                    <div class="createFormField">
+                        @Html.DropDownList("m_DOB", Enumerable.Range(1, 12).Select(i => new SelectListItem { Value = i.ToString(), Text = System.Globalization.CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(i) }), "Month")
+                        @Html.DropDownList("d_DOB", Enumerable.Range(1, 31).Select(i => new SelectListItem { Value = i.ToString(), Text = i.ToString() }), "Day")
+                        @Html.DropDownList("y_DOB", Enumerable.Range(1920, (DateTime.UtcNow.Year - 1920)).Reverse().Select(i => new SelectListItem { Value = i.ToString(), Text = i.ToString() }), "Year")
+                        <div class="profileTitle">&nbsp;</div>(Don't worry. We won't show this.)
+                    </div>
+                    
+                    
+                    
+                    <div class="profileTitle">Password:</div>
+                    <div class="createFormField">
+                        <input type="text" class="" id="txtPlainPassword" title="Set a new password" value="Set a new password" style="color: #ccc !important;"/>
+                        @Html.PasswordFor(model => model.Password, new { @class = "", title = "", id = "Password" })
+                    </div>
+
+                </fieldset>
+                
+                @Html.ValidationSummary()
+                
+                <div class="seperator"></div>
+                <div class="spacer"></div>
+                
+                <div>
+                    <h2>Connect with Social Media</h2>
+                    <div class="spacer"></div>
+                    
+
+                    <ul class="connectAccountsSection">
+                        @*Connect/Disconnect Facebook*@
+                        @Html.Action("GetFacebookConnect")
+                        
+                        @*Connect/Disconnect Twitter*@
+                        @Html.Action("GetTwitterConnect")
+                    </ul>
+                    
+                </div>
+                
+                
+                
+                
+
+                <div class="spacer"></div>
+                <div class="seperator"></div>
+                <div class="spacer"></div>
+
+                <div class="acceptText">
+                    <input type="button" onclick="submitForm();" class="blue-action-button" value="Update Account" />
+                    <div id="createAccountWait">
+                        <img src="/Public/images/icons/ajaxWaiting.gif" alt="" />
+                    </div>
+
+                </div>
+            
+            </div>
+
+        </div>
+        
+       
+        @Html.HiddenFor(model => model.DateOfBirth)
+      
+        
+    }
+
+</div>
+
+<script type="text/javascript">
+
+    function popTheWindow(url) {
+        window.open(url, 'twitterAuth', "width=400,height=300,scrollbars=no");
+        return false;
+    }
+
+
+    function submitForm() {
+        $(".submitForm").addClass("disabled");
+        $(".submitForm").attr('disabled', 'disabled');
+        $("#createAccountWait").show();
+        $("form").submit();
+    }
+
+
+    $("#txtPlainPassword").show();
+    $("#Password").hide();
+
+    $("#txtPlainPassword").focus(function () {
+        $(this).hide();
+        $("#Password").show();
+        $("#Password").focus();
+    });
+
+    $("#Password").blur(function () {
+        if ($(this).val().length == 0) {
+            $(this).hide();
+            $("#txtPlainPassword").show();
+        }
+    });
+
+    head.ready(function () {
+
+        var dob = '@Model.DateOfBirth';
+        var substrings = dob.split('/');
+
+        var month = substrings[0];
+        var day = substrings[1];
+        var year = substrings[2].split(" ")[0];
+
+        $("#d_DOB").val(day);
+        $("#m_DOB").val(month);
+        $("#y_DOB").val(year);
+
+    });
+
+
+    function refreshTwitterConnection() {
+        $.get('@Url.Action("GetTwitterConnect")', function (data) {
+            $("#TwitterConnectSection").replaceWith(data);
+            refreshProfilePics();
+        });
+    }
+
+    function refreshFacebookConnection() {
+        $.get('@Url.Action("GetFacebookConnect")', function (data) {
+            $("#FacebookConnectSection").replaceWith(data);
+            refreshProfilePics();
+        });
+    }
+
+    function disconnectTwitterAccount() {
+        $.get('@Url.Action("DisconnectClean", "Twitter", new { area = "Authentication" })', function (data) {
+            refreshTwitterConnection();
+        });
+    }
+
+    function disconnectFacebookAccount() {
+        $.get('@Url.Action("DisconnectClean", "Facebook", new { area = "Authentication" })', function (data) {
+            refreshFacebookConnection();
+        });
+    }
+
+    function refreshProfilePics() {
+        $.get('@Url.Action("GetProfileOptions")', function (data) {
+            $(".avatarSelect").replaceWith(data);
+        });
+    }
+    
+
+
+</script>

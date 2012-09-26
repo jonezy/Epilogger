@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Globalization;
 using System.Linq;
+using System.Web.ApplicationServices;
 using AutoMapper;
 using Epilogger.Data;
 using Epilogger.Web.Areas.Api.Models.Classes;
@@ -234,6 +235,22 @@ namespace Epilogger.Web.Areas.Api.Models
                                                        platform);
 
         }
+
+
+        public bool DisconnectAuthAccount(AuthenticationServices authService, Guid userId)
+        {
+            try
+            {
+                new UserAuthenticationProfileService().DisconnectService(authService, userId, "Mobile");
+                return true;
+            }
+            catch(Exception)
+            {
+                return false;    
+            }
+
+        }
+
 
 
     }

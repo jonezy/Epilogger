@@ -573,7 +573,7 @@ qq.FileUploader = function(o){
 
 		template: '<div class="qq-uploader">' +
 				'<div class="qq-upload-drop-area"><span>{dragText}</span></div>' +
-				'<div class="qq-upload-button">{uploadButtonText}</div>' +
+				'<div class="qq-upload-button blue-action-button">{uploadButtonText}</div>' +
 				'<ul class="qq-upload-list"></ul>' +
 				'</div>',
 
@@ -937,6 +937,7 @@ qq.UploadButton = function(o){
 		acceptFiles: null,
 		// name attribute of file input
 		name: 'file',
+		id: 'profileUploadFile',
 		onChange: function(input){},
 		hoverClass: 'qq-upload-button-hover',
 		focusClass: 'qq-upload-button-focus'
@@ -984,6 +985,7 @@ qq.UploadButton.prototype = {
 
 		input.setAttribute("type", "file");
 		input.setAttribute("name", this._options.name);
+		input.setAttribute("id", this._options.id);
 
 		qq.css(input, {
 			position: 'absolute',

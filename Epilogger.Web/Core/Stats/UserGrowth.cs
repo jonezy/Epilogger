@@ -51,7 +51,14 @@ namespace Epilogger.Web.Core.Stats
             return data;
         }
 
+        public List<UserGrowthStats> GetDailyUserGrowthStats(DateTime f, DateTime t)
+        {
+           
+            var ss = new StatsService();
+            var data = ss.FindDailyUserGrowthStats(f, t);
 
+            return data;
+        }
 
     }
 

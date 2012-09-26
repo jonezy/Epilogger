@@ -11,7 +11,7 @@
   <resourceSets url="~/combres.axd"
                 defaultDuration="30"
                 defaultVersion="auto"
-                defaultDebugEnabled="false"
+                defaultDebugEnabled="true"
                 defaultIgnorePipelineWhenDebug="true"
                 localChangeMonitorInterval="30"
                 remoteChangeMonitorInterval="60"
@@ -100,13 +100,14 @@
     <resourceSet name="CreateAccountJs" type="js">
       <resource path="~/Public/js/jquery.blockUI.js" />
       <resource path="~/Public/js/CreateAccount.js" />
-
       <resource path="~/Public/js/FileUploader/fileuploader.js" />
-    
-
-
     </resourceSet>
 
+
+    <resourceSet name="EditAccountJs" type="js">
+      <resource path="~/Public/js/EditAccount.js" />
+      <resource path="~/Public/js/FileUploader/fileuploader.js" />
+    </resourceSet>
 
   </resourceSets>
 </combres>

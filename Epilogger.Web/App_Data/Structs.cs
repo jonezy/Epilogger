@@ -6076,6 +6076,16 @@ namespace Epilogger.Data {
 	                IsForeignKey = false,
 	                MaxLength = 0
                 });
+
+                Columns.Add(new DatabaseColumn("ProfilePictureLarge", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 250
+                });
                     
                 
                 
@@ -6246,6 +6256,18 @@ namespace Epilogger.Data {
    			public static string IsActiveColumn{
 			      get{
         			return "IsActive";
+      			}
+		    }
+           
+            public IColumn ProfilePictureLarge{
+                get{
+                    return this.GetColumn("ProfilePictureLarge");
+                }
+            }
+            				
+   			public static string ProfilePictureLargeColumn{
+			      get{
+        			return "ProfilePictureLarge";
       			}
 		    }
            

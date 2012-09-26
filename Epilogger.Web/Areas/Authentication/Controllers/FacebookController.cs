@@ -202,11 +202,19 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
         public virtual ActionResult Disconnect()
         {
             var service = new UserAuthenticationProfileService();
-            service.DisconnectService(AuthenticationServices.FACEBOOK, CurrentUserID);
+            service.DisconnectService(AuthenticationServices.FACEBOOK, CurrentUserID, "Web");
 
             this.StoreInfo("Your facebook account has been disconnected from your epiloggerepilogger.com account");
 
             return Redirect(Request.UrlReferrer.ToString());
+            return null;
+        }
+
+        public ActionResult DisconnectClean()
+        {
+            var service = new UserAuthenticationProfileService();
+            service.DisconnectService(AuthenticationServices.FACEBOOK, CurrentUserID, "Web");
+
             return null;
         }
 
