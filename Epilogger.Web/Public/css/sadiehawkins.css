@@ -1351,7 +1351,7 @@ ul#left-nav li ul li a.current {color:#a44b79;}
 
 #activityGallery li .galleryImage {
     position: relative;
-    left: -62px;
+    /*left: -62px;*/
 }
 
 #activityGallery li .galleryItem {

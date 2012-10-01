@@ -99,7 +99,7 @@
                         var thePath = theImg.EventID + "/" + theImg.ID;
                         <div class="featurePhotoBar" id="FeaturedPhoto@(theImg.ID)">
                             <a href="@theImg.Fullsize" rel="EPLPhoto[latestfeaturedphotos]" photoid="@thePath" title="" id="@theImg.ID">
-                                <img src="@theImg.Fullsize" alt="" />
+                                <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@theImg.Fullsize&width=435&height=335&preserveAspect=true" border="0" alt="" />
                             </a>
                         </div>
                     }
@@ -162,7 +162,7 @@
 
                 <div class="galleryImage"  id="photo-@item.Image.ID">
                     <a href="@item.Image.Fullsize" rel="EPLPhoto[latestphotos]" photoid="@thePath" title="" id="@item.Image.ID">
-                        <img src="@item.Image.Fullsize" width="350" border="0" alt="" />
+                        <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@item.Image.Fullsize&width=230&height=188&preserveAspect=true" border="0" alt="" />
                     </a>
                 </div>
             </li>   
