@@ -324,6 +324,7 @@
     <Compile Include="Core\Services\CategoryService.cs" />
     <Compile Include="Core\Services\BetaService.cs" />
     <Compile Include="Core\Services\APIApplicationService.cs" />
+    <Compile Include="Core\Services\LiveModeCustomSettingsService.cs" />
     <Compile Include="Core\Services\UserLoginTrackingService.cs" />
     <Compile Include="Core\Services\WidgetCustomSettingsService.cs" />
     <Compile Include="Core\Services\MemoryBoxItemService.cs" />

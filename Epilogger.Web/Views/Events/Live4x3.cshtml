@@ -32,31 +32,24 @@
 
             
             var updateTimeout = 10000;
-            
             var updateRate = 40000;
             var photoUpdateRate = 15000;
 
-
-
-            //var updateTimeout = 5000;
-            //var updateRate = 10000;
-            //var photoUpdateTimeout = 10000;
-            //var prologuePostsUpdates = 1;
-            //var isFirstFrontPage = 1;   
-            //var postsOnPage = new Array;
-            //var postsOnPageQS = '';
-            //var maxItemsOnPage = 6;
-            //Parameters to control the Image List
-            
-            //var photoProloguePostsUpdates = 1;
-            //var photoIsFirstFrontPage = 1;
-            //var photoPageLoadTime = pageLoadTime;
-    
-            //var photoPostsOnPage = new Array;
-            //var photoPostsOnPageQS = '';
-            //var photoMaxItemsOnPage = 9;
-
         </script>
+        
+        <style type="text/css">
+            
+            /* ------------------------------------- [ CUSTOM COLOURS ] --- */
+            .colour1 	{ color:@Model.CustomSettings.FooterTextColor !important} /* footer text */
+            .colour2, div.single-tweet p a { color:@Model.CustomSettings.LinkColour !important} /* links */
+            .colour3	{ color:@Model.CustomSettings.TwitterUserNameColour !important} /* twitter usernames */
+
+            /* background image test */
+            body { background:@Model.CustomSettings.Background; }
+            
+
+            @*#587b27 url('http://sparkentreenscene.com/s/spark/themes/bg-spark-reporter-jpg-mkyg.jpg')*@
+        </style>
 
     </head>
 
@@ -67,30 +60,7 @@
                 <div class="tweet-column" id="tweetColumn1"><div class="tweet"></div><div class="tweet"></div></div>
                 <div class="tweet-column" id="tweetColumn2"><div class="tweet"></div><div class="tweet"></div></div>
                 <div class="tweet-column" id="tweetColumn3"><div class="tweet"></div><div class="tweet"></div></div>
-    
-                
-                   @* @{
-                        var tCount = 1;
-                        var colCount = 1;
-                    }    
-                
-                    @foreach(var tweet in Model.Tweets)
-                    {
-                        if (tCount == 1 || tCount == 3 || tCount == 5)
-                        {
-                            @Html.Raw("<div class='tweet-column' id='tweetColumn" + colCount + "'>")
-                            colCount++;
-                        }
-
-                        @Html.Partial("_LiveTweetTemplate", new TweetTemplateViewModel() { CanDelete = false, Tweet = tweet, ShowControls = false, EventId = (int) tweet.EventID })
-
-                        if (tCount == 2 || tCount == 4 || tCount == 6)
-                        {
-                            @Html.Raw("</div>")
-                        }
-                        tCount++;
-                    }*@
-                </div>
+            </div>
 		
             <div id="photos">
                 @{
@@ -101,14 +71,14 @@
                     if (imgCount < 3)
                     {
                         <div class="imgLarge images">
-                            <img src="@img.Fullsize" width="300" alt="" />
+                            <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@img.Fullsize&width=284&height=222&preserveAspect=true" alt="" />
                         </div>
                     }
                     else
                     {
                         if (imgCount == 3) { <br style="clear:both"/> }
                         <div class="imgSmall images">
-                            <img src="@img.Fullsize" alt="" width="150" />
+                            <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@img.Fullsize&width=94&height=94&preserveAspect=true" alt="" />
                         </div>
                     }
                     imgCount++;
@@ -119,9 +89,12 @@
 	
 	
 	<div id="footer">
-		<div id="logo">
-			<img src="/Public/images/livemode/client/logo.png"/>
-		</div>
+        <div id="logo">
+            @if (Model.CustomSettings.Logo != null)
+            {
+                @Html.Raw(Html.Image(Model.CustomSettings.Logo))
+            }
+        </div>
 		
 		<div id="hashtag-sponsors">
 			<big class="colour1">
@@ -132,10 +105,13 @@
 			</big>
 			
             
-            <!--
-            <h1 class="colour1"	>@*Notre partenaire*@ Our partners</h1>
-			<img src="/Public/images/livemode/client/sponsor-osheaga.png"/> 
-            -->
+            @if (Model.CustomSettings.SponsorLogos != null)
+            {
+                <h1 class="colour1"	>@*Notre partenaire*@ Our partners</h1>
+                @Html.Raw(Model.CustomSettings.SponsorLogos)
+            }
+            
+            
 		</div>
 		
 		<div id="top-tweeters">
