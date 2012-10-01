@@ -4,7 +4,7 @@
 
 @{
     Layout = "~/Views/Shared/_InteriorLayout.cshtml";
-    ViewBag.Title = Model.Name + " - Photos (Page " + (Model.CurrentPageIndex + 1) + ") | Epilogger";
+    ViewBag.Title = "Epilogger - " + Model.Name + "- Photos";
 }
 
 <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
@@ -40,8 +40,9 @@
         var thePath = image.EventID + "/" + image.ID;
         <div id="TopPhoto@(image.ID)" class="topPhotosBar">
             <div class="topPhoto">
-                <a href="@image.Fullsize" rel="EPLPhoto[topphotos]" photoid="@thePath" title="" id="@image.ID">
-                    <img src="@image.Fullsize" width="415" border="0" alt="" />
+                <a href="@image.Fullsize" rel="EPLPhoto[topphotos]" photoid="@thePath" title="" id="@image.ID">                   
+                    <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@image.Fullsize&width=415&height=302&preserveAspect=true" width="415" width="302" border="0" alt="" />
+                    
                 </a>
             </div>
             <div class="topPhotoComments">
