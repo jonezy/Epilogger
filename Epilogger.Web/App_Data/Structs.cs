@@ -1825,6 +1825,201 @@ namespace Epilogger.Data {
         }
         
         /// <summary>
+        /// Table: LiveModeCustomSettings
+        /// Primary Key: 
+        /// </summary>
+
+        public class LiveModeCustomSettingsTable: DatabaseTable {
+            
+            public LiveModeCustomSettingsTable(IDataProvider provider):base("LiveModeCustomSettings",provider){
+                ClassName = "LiveModeCustomSetting";
+                SchemaName = "dbo";
+                
+
+                Columns.Add(new DatabaseColumn("Id", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = true,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("EventId", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = true,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("Background", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 500
+                });
+
+                Columns.Add(new DatabaseColumn("FooterTextColor", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 50
+                });
+
+                Columns.Add(new DatabaseColumn("LinkColour", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 50
+                });
+
+                Columns.Add(new DatabaseColumn("TwitterUserNameColour", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 50
+                });
+
+                Columns.Add(new DatabaseColumn("Logo", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 255
+                });
+
+                Columns.Add(new DatabaseColumn("SponsorLogos", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 500
+                });
+                    
+                
+                
+            }
+            
+            public IColumn Id{
+                get{
+                    return this.GetColumn("Id");
+                }
+            }
+            				
+   			public static string IdColumn{
+			      get{
+        			return "Id";
+      			}
+		    }
+           
+            public IColumn EventId{
+                get{
+                    return this.GetColumn("EventId");
+                }
+            }
+            				
+   			public static string EventIdColumn{
+			      get{
+        			return "EventId";
+      			}
+		    }
+           
+            public IColumn Background{
+                get{
+                    return this.GetColumn("Background");
+                }
+            }
+            				
+   			public static string BackgroundColumn{
+			      get{
+        			return "Background";
+      			}
+		    }
+           
+            public IColumn FooterTextColor{
+                get{
+                    return this.GetColumn("FooterTextColor");
+                }
+            }
+            				
+   			public static string FooterTextColorColumn{
+			      get{
+        			return "FooterTextColor";
+      			}
+		    }
+           
+            public IColumn LinkColour{
+                get{
+                    return this.GetColumn("LinkColour");
+                }
+            }
+            				
+   			public static string LinkColourColumn{
+			      get{
+        			return "LinkColour";
+      			}
+		    }
+           
+            public IColumn TwitterUserNameColour{
+                get{
+                    return this.GetColumn("TwitterUserNameColour");
+                }
+            }
+            				
+   			public static string TwitterUserNameColourColumn{
+			      get{
+        			return "TwitterUserNameColour";
+      			}
+		    }
+           
+            public IColumn Logo{
+                get{
+                    return this.GetColumn("Logo");
+                }
+            }
+            				
+   			public static string LogoColumn{
+			      get{
+        			return "Logo";
+      			}
+		    }
+           
+            public IColumn SponsorLogos{
+                get{
+                    return this.GetColumn("SponsorLogos");
+                }
+            }
+            				
+   			public static string SponsorLogosColumn{
+			      get{
+        			return "SponsorLogos";
+      			}
+		    }
+           
+                    
+        }
+        
+        /// <summary>
         /// Table: StatusMessages
         /// Primary Key: ID
         /// </summary>

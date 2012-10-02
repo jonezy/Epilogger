@@ -67,7 +67,7 @@
                         var thePath = image.EventID + "/" + image.ID;
                         <div class="hottestimage" id="photo-@image.ID">
                             <a href="@image.Fullsize" rel="EPLPhoto[@item.Event.ID]" photoid="@thePath" id="@image.ID">
-                                <img src="@image.Fullsize" width="200" border="0" alt="" /></a>
+                                <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@image.Fullsize&width=112&height=73&preserveAspect=true" border="0" alt="" /></a>
                         </div>
                     }
                 </div>
@@ -86,7 +86,7 @@
                         var thePath = image.EventID + "/" + image.ID;
                         <div class="hottestimage" id="photo-@image.ID">
                             <a href="@image.Fullsize" rel="EPLPhoto[@item.Event.ID]" photoid="@thePath" id="@image.ID">
-                                <img src="@image.Fullsize" width="200" border="0" alt="" />
+                                <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@image.Fullsize&width=112&height=73&preserveAspect=true" border="0" alt="" />
                             </a>
                         </div>
                     }

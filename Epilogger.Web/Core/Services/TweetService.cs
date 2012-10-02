@@ -54,10 +54,24 @@ namespace Epilogger.Web
 
         public IEnumerable<Epilogger.Web.Core.Stats.Tweeter> GetTop10TweetersByEventID(int eventID, DateTime F, DateTime T)
         {
-            return db.GetTop10TweetersByEventID(eventID, F, T).ExecuteTypedList<Epilogger.Web.Core.Stats.Tweeter>();
+            var topTweeters = db.GetTop10TweetersByEventID(eventID, F, T).ExecuteTypedList<Epilogger.Web.Core.Stats.Tweeter>();
+            foreach (var t in topTweeters)
+            {
+                t.Picture = GetTwitterProfileImageByScreenNameAndEventID(t.Name, eventID);
+            }
+            return topTweeters;
         }
 
 
+        public string GetTwitterProfileImageByScreenNameAndEventID(string screenName, int eventId)
+        {
+            var firstOrDefault = db.Tweets.Where(e => e.FromUserScreenName == screenName && e.EventID == eventId).OrderByDescending(e => e.ID).FirstOrDefault();
+            if (firstOrDefault != null)
+                return
+                    firstOrDefault.ProfileImageURL;
+
+            return "";
+        }
 
 
         //Slower funcitons
