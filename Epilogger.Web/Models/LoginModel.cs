@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
 namespace Epilogger.Web.Models {
@@ -11,5 +12,7 @@ namespace Epilogger.Web.Models {
 
         [DisplayName("Remember me?")]
         public bool RememberMe { get; set; }
+
+        public Uri ReturnUrl { get; set; }
     }
 }

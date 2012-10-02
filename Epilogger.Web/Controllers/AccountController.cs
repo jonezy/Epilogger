@@ -809,15 +809,13 @@ namespace Epilogger.Web.Controllers {
             // store this here so that we can redirect the user back later.
             if (Request.QueryString["returnUrl"] != null)
                 TempData["returnUrl"] = Request.QueryString["returnUrl"];
-
-            return View(new LoginModel());
+            
+            return View(new LoginModel() { ReturnUrl = Request.UrlReferrer });
         }
 
         [HttpPost]
         public virtual ActionResult Login(LoginModel model) {
-            // 1. First we need to check if the person logging in has a blank password, if they do then we need to redirect them 
-            // to a page to create a new password.
-
+            
             if (ModelState.IsValid) {
                 var user = _service.GetUserByUsername(model.Username);
 
@@ -871,6 +869,8 @@ namespace Epilogger.Web.Controllers {
                              };
                 new UserLoginTrackingService().Save(ut);
 
+                if (model.ReturnUrl != null)
+                    return Redirect(model.ReturnUrl.AbsoluteUri);
 
                 return RedirectToAction("index","home");
 
@@ -1014,6 +1014,9 @@ namespace Epilogger.Web.Controllers {
         public virtual ActionResult Logout() {
             CookieHelpers.DestroyCookie("lc");
             
+            if (Request.UrlReferrer != null)
+                return Redirect(Request.UrlReferrer.AbsoluteUri);
+
             return RedirectToAction("index", "Home");
         }
 
