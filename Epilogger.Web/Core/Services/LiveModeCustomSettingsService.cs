@@ -32,11 +32,11 @@ namespace Epilogger.Web {
 
             return new LiveModeCustomSetting()
                        {
-                           Logo = "/Public/images/livemode/client/logo.png",
+                           Logo = null,
                            Background = "",
                            FooterTextColor = "",
                            LinkColour = "",
-                           SponsorLogos = "",
+                           SponsorLogos = null,
                            TwitterUserNameColour = ""
                        };
         }

@@ -92,7 +92,10 @@
         <div id="logo">
             @if (Model.CustomSettings.Logo != null)
             {
-                @Html.Raw(Html.Image(Model.CustomSettings.Logo))
+                if (Model.CustomSettings.Logo.Length > 0)
+                {
+                    @Html.Raw(Html.Image(Model.CustomSettings.Logo))
+                }
             }
         </div>
 		
