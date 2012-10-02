@@ -168,10 +168,3 @@ h1 {
     display: none;}
 
 
-/* ------------------------------------- [ CUSTOM COLOURS ] --- */
-.colour1 	{ color:#000 !important} /* footer text */
-.colour2, div.single-tweet p a { color:#00573e !important} /* links */
-.colour3	{ color:#00573e !important} /* twitter usernames */
-
-/* background image test */
-/*body { background:#587b27 url('http://sparkentreenscene.com/s/spark/themes/bg-spark-reporter-jpg-mkyg.jpg'); } */

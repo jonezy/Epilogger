@@ -2021,6 +2021,198 @@ namespace Epilogger.Data
     
     
     /// <summary>
+    /// A class which represents the LiveModeCustomSettings table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.LiveModeCustomSetting 
+    /// </summary>
+
+	public partial class LiveModeCustomSetting: INotifyPropertyChanging, INotifyPropertyChanged
+	{
+        partial void OnLoaded();
+        partial void OnValidate(System.Data.Linq.ChangeAction action);
+        partial void OnCreated();
+	    
+	    public LiveModeCustomSetting(){
+	        OnCreated();
+	    }
+	    
+	    #region Properties
+	    
+        partial void OnIdChanging(int value);
+        partial void OnIdChanged();
+		
+		private int _Id;
+		public int Id { 
+		    get{
+		        return _Id;
+		    } 
+		    set{
+		        this.OnIdChanging(value);
+                this.SendPropertyChanging();
+                this._Id = value;
+                this.SendPropertyChanged("Id");
+                this.OnIdChanged();
+		    }
+		}
+		
+        partial void OnEventIdChanging(int value);
+        partial void OnEventIdChanged();
+		
+		private int _EventId;
+		public int EventId { 
+		    get{
+		        return _EventId;
+		    } 
+		    set{
+		        this.OnEventIdChanging(value);
+                this.SendPropertyChanging();
+                this._EventId = value;
+                this.SendPropertyChanged("EventId");
+                this.OnEventIdChanged();
+		    }
+		}
+		
+        partial void OnBackgroundChanging(string value);
+        partial void OnBackgroundChanged();
+		
+		private string _Background;
+		public string Background { 
+		    get{
+		        return _Background;
+		    } 
+		    set{
+		        this.OnBackgroundChanging(value);
+                this.SendPropertyChanging();
+                this._Background = value;
+                this.SendPropertyChanged("Background");
+                this.OnBackgroundChanged();
+		    }
+		}
+		
+        partial void OnFooterTextColorChanging(string value);
+        partial void OnFooterTextColorChanged();
+		
+		private string _FooterTextColor;
+		public string FooterTextColor { 
+		    get{
+		        return _FooterTextColor;
+		    } 
+		    set{
+		        this.OnFooterTextColorChanging(value);
+                this.SendPropertyChanging();
+                this._FooterTextColor = value;
+                this.SendPropertyChanged("FooterTextColor");
+                this.OnFooterTextColorChanged();
+		    }
+		}
+		
+        partial void OnLinkColourChanging(string value);
+        partial void OnLinkColourChanged();
+		
+		private string _LinkColour;
+		public string LinkColour { 
+		    get{
+		        return _LinkColour;
+		    } 
+		    set{
+		        this.OnLinkColourChanging(value);
+                this.SendPropertyChanging();
+                this._LinkColour = value;
+                this.SendPropertyChanged("LinkColour");
+                this.OnLinkColourChanged();
+		    }
+		}
+		
+        partial void OnTwitterUserNameColourChanging(string value);
+        partial void OnTwitterUserNameColourChanged();
+		
+		private string _TwitterUserNameColour;
+		public string TwitterUserNameColour { 
+		    get{
+		        return _TwitterUserNameColour;
+		    } 
+		    set{
+		        this.OnTwitterUserNameColourChanging(value);
+                this.SendPropertyChanging();
+                this._TwitterUserNameColour = value;
+                this.SendPropertyChanged("TwitterUserNameColour");
+                this.OnTwitterUserNameColourChanged();
+		    }
+		}
+		
+        partial void OnLogoChanging(string value);
+        partial void OnLogoChanged();
+		
+		private string _Logo;
+		public string Logo { 
+		    get{
+		        return _Logo;
+		    } 
+		    set{
+		        this.OnLogoChanging(value);
+                this.SendPropertyChanging();
+                this._Logo = value;
+                this.SendPropertyChanged("Logo");
+                this.OnLogoChanged();
+		    }
+		}
+		
+        partial void OnSponsorLogosChanging(string value);
+        partial void OnSponsorLogosChanged();
+		
+		private string _SponsorLogos;
+		public string SponsorLogos { 
+		    get{
+		        return _SponsorLogos;
+		    } 
+		    set{
+		        this.OnSponsorLogosChanging(value);
+                this.SendPropertyChanging();
+                this._SponsorLogos = value;
+                this.SendPropertyChanged("SponsorLogos");
+                this.OnSponsorLogosChanged();
+		    }
+		}
+		
+
+        #endregion
+
+        #region Foreign Keys
+        public IQueryable<Event> Events
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Events
+                       where items.ID == _EventId
+                       select items;
+            }
+        }
+
+        #endregion
+
+
+        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+        public event PropertyChangingEventHandler PropertyChanging;
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void SendPropertyChanging()
+        {
+            var handler = PropertyChanging;
+            if (handler != null)
+               handler(this, emptyChangingEventArgs);
+        }
+
+        protected virtual void SendPropertyChanged(String propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+	}
+	
+    
+    
+    /// <summary>
     /// A class which represents the StatusMessages table in the Epilogger Database.
     /// This class is queryable through EpiloggerDB.StatusMessage 
     /// </summary>
@@ -3640,6 +3832,17 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.Images
                        where items.EventID == _ID
+                       select items;
+            }
+        }
+
+        public IQueryable<LiveModeCustomSetting> LiveModeCustomSettings
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.LiveModeCustomSettings
+                       where items.EventId == _ID
                        select items;
             }
         }

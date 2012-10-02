@@ -5,14 +5,14 @@
 
 <div class="withcomment newPhotoupdates" id="photo-@Model.Image.ID">
     <a href="@Model.Image.Fullsize" rel="EPLPhoto[latestphotos]" photoid="@thePath" title="" id="">
-        @if (Model.Image.AzureContainerPrefix == "twitterphotos")
-        {
-            <img itemprop="photo" src="@Model.Image.Fullsize" width="250" border="0" alt="" />    
-        }
+        @*@if (Model.Image.AzureContainerPrefix == "twitterphotos")
+        {*@
+            <img itemprop="photo" src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@Model.Image.Fullsize&width=172&height=144&preserveAspect=true" border="0" alt="" />
+        @*}
         else
         {
             <img itemprop="photo" src="@Url.Action("GetPhotoThumbnail", new { photoUrl = Model.Image.Fullsize, width = 800, height = 800 })" width="250" border="0" alt="" />
-        }
+        }*@
         
     </a>
     <a href="#" class="commentbubble">
