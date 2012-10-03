@@ -14,5 +14,6 @@ namespace Epilogger.Web.Models {
         public bool RememberMe { get; set; }
 
         public Uri ReturnUrl { get; set; }
+        public bool InPopUp { get; set; }
     }
 }

@@ -1,17 +1,20 @@
 ﻿@model Epilogger.Web.Models.LoginModel
 @{
     ViewBag.Title = "Epilogger | Login";
-    Layout = "~/Views/Shared/_InteriorLayoutNoBC.cshtml";
+    Layout = Model.InPopUp ? "~/Views/Shared/_PopupLayout.cshtml" : "~/Views/Shared/_InteriorLayoutNoBC.cshtml";
 }
 
 <div>
-    @* <div class="signUpHeading center">
-        <h1>Create an account to take full advantage of Epilogger.</h1>
-        <h2>You'll be creating events and dancing in just two steps!</h2>
-    </div>
     
-    <div class="spacer"></div>*@
+    @if (Model.InPopUp)
+    {
+        <div class="spacer"></div>
+        <div class="signUpHeading center">
+            <h1>Login to take full advantage of Epilogger.</h1>
+        </div>
     
+        <div class="spacer"></div>
+    }
     <ul class="authButtons">
         <li>@Html.ActionImage("ConnectRequestWithCallback", "twitter", new { area = "Authentication", callBackUrl = Url.Action("twitter", "join", null, "http") }, "/Public/images/signup/twitterButton.png", "Sign in with twitter")</li>
         <li class="orSepertor"><em>-- or --</em></li>
@@ -48,10 +51,11 @@
                     <input type="submit" class="blue-action-button createAccounstSubmit submitForm" value="Login" />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Html.ActionLink("Forgot your password?", "ForgotPassword", "account")
                 </div>
-               
-            
+                <div class="orSepertor"><em>-- or --</em></div>
+                @Html.ActionLink("Create an account", "signup", "join")
             </div>
             @Html.HiddenFor(model => Model.ReturnUrl)
+            @Html.HiddenFor(model => Model.InPopUp)
         }
         
 

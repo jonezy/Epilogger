@@ -22,7 +22,6 @@ namespace Epilogger.Web.Controllers {
                 }
 
                 return userId;
-                
             }
         }
         

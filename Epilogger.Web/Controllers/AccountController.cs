@@ -353,47 +353,14 @@ namespace Epilogger.Web.Controllers {
         public virtual ActionResult Index()
         {
             var model = Mapper.Map<User, AccountModel>(CurrentUser);
-            //var connectedNetworks = CurrentUser.UserAuthenticationProfiles;
-
-            //var facebookConn = connectedNetworks.FirstOrDefault(e => e.Service == "FACEBOOK");
-            //var twitterConn = connectedNetworks.FirstOrDefault(e => e.Service == "TWITTER");
-
-            //if (facebookConn != null)
-            //{
-            //    var fbClient = new FacebookClient(facebookConn.Token);
-            //    dynamic facebookUser = fbClient.Get("me") ?? null;
-            //    model.facebookUser = facebookUser;
-            //}
             
-
-            //if (twitterConn != null)
-            //{
-            //    var twitterUser = TwitterHelper.GetUser(twitterConn.Token,
-            //                                            twitterConn.TokenSecret,
-            //                                            twitterConn.ServiceUsername);
-            //    model.twitterUser = twitterUser;
-            //}
-            
-
-            //model.ConnectedNetworks = Mapper.Map<List<UserAuthenticationProfile>, List<ConnectedNetworksViewModel>>(CurrentUser.UserAuthenticationProfiles.ToList());
-
             model.Password = string.Empty;
             return View(model);
         }
 
-
         [HttpPost]
         public virtual ActionResult Index(AccountModel model, FormCollection c)
         {
-
-
-
-            //model.ConnectedNetworks = Mapper.Map<List<UserAuthenticationProfile>, List<ConnectedNetworksViewModel>>(CurrentUser.UserAuthenticationProfiles.ToList());
-            //var theUser = Mapper.Map<User, AccountModel>(CurrentUser);
-            //model.TwitterProfilePicture = theUser.TwitterProfilePicture;
-            //model.FacebookProfilePicture = theUser.FacebookProfilePicture;
-            //model.ProfilePicture = theUser.ProfilePicture;
-
             if (ModelState.IsValid)
             {
                 try
@@ -418,32 +385,9 @@ namespace Epilogger.Web.Controllers {
                     {
                         user.Password = PasswordHelpers.EncryptPassword(model.Password);
                     }
-
-
-
-                    //var imagePath = string.Empty;
-                    //if (c["ProfilePictures"] != null)
-                    //{
-                    //    var pictureProvider = c["ProfilePictures"] as string ?? "";
-
-                    //    if (pictureProvider.ToLower().Contains("twitter"))
-                    //    {
-                    //        imagePath =
-                    //            TwitterHelper.GetUser(CurrentUserTwitterAuthorization.Token,
-                    //                                  CurrentUserTwitterAuthorization.TokenSecret,
-                    //                                  CurrentUserTwitterAuthorization.ServiceUsername).ResponseObject.
-                    //                ProfileImageLocation;
-                    //    }
-                    //    else if (pictureProvider.ToLower().Contains("facebook"))
-                    //    {
-                    //        imagePath = FacebookHelper.GetProfilePicture(CurrentUserFacebookAuthorization.Token);
-                    //    }
-                    //}
-                    //user.ProfilePicture = imagePath;
-
+                    
                     _service.Save(user);
 
-                    //this.StoreSuccess("Your account was updated successfully");
                     this.Receive(MessageType.Success, "Your account was updated successfully");
 
                 }
@@ -455,9 +399,6 @@ namespace Epilogger.Web.Controllers {
             }
             return View(model);
         }
-
-
-        
 
         public ActionResult GetProfileOptions()
         {
@@ -628,8 +569,103 @@ namespace Epilogger.Web.Controllers {
             return View();
         }
 
+        [HttpGet]
+        public virtual ActionResult Login()
+        {
+            CookieHelpers.DestroyCookie("lc");
 
-        #endregion
+            var model = new LoginModel() {ReturnUrl = Request.UrlReferrer};
+
+            // store this here so that we can redirect the user back later.
+            if (Request.QueryString["returnUrl"] != null)
+                TempData["returnUrl"] = Request.QueryString["returnUrl"];
+
+            //If this is open in a Window, this disables the Epilogger Header/Footer
+            if (Request.QueryString["NoFrame"] != null)
+            {
+                model.InPopUp = true;
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public virtual ActionResult Login(LoginModel model)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var user = _service.GetUserByUsername(model.Username);
+
+                if (user == null)
+                {
+                    ModelState.AddModelError(string.Empty, "There is a problem with your username or password. Please try again or <a href='/join/signup'/>create an account</a>.");
+                    return View(model);
+                }
+
+                // the user is a valid user but they need to update there password.
+                if (user.Password == string.Empty)
+                {
+                    CookieHelpers.WriteCookie("lc", "tempid", user.ID.ToString());
+                    return RedirectToAction("UpdatePassword");
+                }
+
+                user = _service.GetUserByUsername(model.Username);
+                if (!BCryptHelper.CheckPassword(model.Password, user.Password))
+                {
+                    ModelState.AddModelError(string.Empty, "There is a problem with your username or password. Please try again or <a href='/join/signup'/>create an account</a>.");
+                    return View(model);
+                }
+
+
+                // write the login cookie, redirect. 
+                if (model.RememberMe)
+                {
+                    CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString(), DateTime.Now.AddDays(30));
+                    CookieHelpers.WriteCookie("lc", "tz", user.TimeZoneOffSet.ToString(), DateTime.Now.AddDays(30));
+                }
+                else
+                {
+                    CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString());
+                    CookieHelpers.WriteCookie("lc", "tz", user.TimeZoneOffSet.ToString());
+                }
+
+                //if (TempData["returnUrl"] != null)
+                //    return Redirect(TempData["returnUrl"].ToString());
+
+                //Record the Login
+                var ut = new UserLoginTracking()
+                {
+                    UserId = user.ID,
+                    LoginMethod = "Epilogger Account",
+                    DateTime = DateTime.UtcNow,
+                    IPAddress = HttpContext.Request.UserHostAddress
+                };
+                new UserLoginTrackingService().Save(ut);
+
+                
+                if (model.InPopUp)
+                    return RedirectToAction("CloseAndRefresh");
+
+                if (model.ReturnUrl != null)
+                    return Redirect(model.ReturnUrl.AbsoluteUri);
+
+                return RedirectToAction("index", "home");
+
+            }
+
+            return View(model);
+        }
+
+
+        [HttpGet]
+        public virtual ActionResult CloseAndRefresh()
+        {
+            return View();
+        }
+
+
+    #endregion
 
 
 
@@ -802,82 +838,7 @@ namespace Epilogger.Web.Controllers {
         //    return RedirectToAction("Index");
         //}
 
-        [HttpGet]
-        public virtual ActionResult Login() {
-            CookieHelpers.DestroyCookie("lc");
-
-            // store this here so that we can redirect the user back later.
-            if (Request.QueryString["returnUrl"] != null)
-                TempData["returnUrl"] = Request.QueryString["returnUrl"];
-            
-            return View(new LoginModel() { ReturnUrl = Request.UrlReferrer });
-        }
-
-        [HttpPost]
-        public virtual ActionResult Login(LoginModel model) {
-            
-            if (ModelState.IsValid) {
-                var user = _service.GetUserByUsername(model.Username);
-
-                if (user == null)
-                {
-                    ModelState.AddModelError(string.Empty, "There is a problem with your username or password. Please try again or <a href='/join/signup'/>create an account</a>.");
-                    return View(model);
-                }
-
-                // the user is a valid user but they need to update there password.
-                if (user.Password == string.Empty) {
-                    CookieHelpers.WriteCookie("lc", "tempid", user.ID.ToString());
-                    return RedirectToAction("UpdatePassword");
-                }
-                
-                user = _service.GetUserByUsername(model.Username);
-                if (!BCryptHelper.CheckPassword(model.Password, user.Password)) {
-                    ModelState.AddModelError(string.Empty, "There is a problem with your username or password. Please try again or <a href='/join/signup'/>create an account</a>.");
-                    return View(model);
-                }
-
-                //if (user.IsActive == false) {
-                //    ModelState.AddModelError(string.Empty, "Your account has not been activated yet, please click the link in the verification email that was sent to you.");
-                //    return RedirectToAction("AccountActivationNeeded");
-                //}
-
-                
-
-                // write the login cookie, redirect. 
-                if (model.RememberMe) 
-                {
-                    CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString(), DateTime.Now.AddDays(30));
-                    CookieHelpers.WriteCookie("lc", "tz", user.TimeZoneOffSet.ToString(), DateTime.Now.AddDays(30));
-                }
-                else
-                {
-                    CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString());
-                    CookieHelpers.WriteCookie("lc", "tz", user.TimeZoneOffSet.ToString());
-                }
-
-                //if (TempData["returnUrl"] != null)
-                //    return Redirect(TempData["returnUrl"].ToString());
-
-                //Record the Login
-                var ut = new UserLoginTracking()
-                             {
-                                 UserId = user.ID,
-                                 LoginMethod = "Epilogger Account",
-                                 DateTime = DateTime.UtcNow,
-                                 IPAddress = HttpContext.Request.UserHostAddress
-                             };
-                new UserLoginTrackingService().Save(ut);
-
-                if (model.ReturnUrl != null)
-                    return Redirect(model.ReturnUrl.AbsoluteUri);
-
-                return RedirectToAction("index","home");
-
-            }
-
-            return View(model);
-        }
+        
 
         // GET: Account/TwitterLogon/
         public virtual ActionResult TwitterLogon(string oauth_token, string oauth_verifier, string ReturnUrl)

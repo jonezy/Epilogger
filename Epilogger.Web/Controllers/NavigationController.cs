@@ -14,9 +14,15 @@ namespace Epilogger.Web.Controllers {
             if (_eventService == null) _eventService = new EventService();
             base.Initialize(requestContext);
         }
-        [ChildActionOnly]
+        
         public virtual ActionResult GlobalNavigation()
         {
+
+            //if (Request.QueryString["userId"] != null)
+            //{
+            //    CurrentUserID = Guid.Parse(Request.QueryString["userId"]);
+            //}
+
             var model = new GlobalNavigationModel { UserLoggedIn = CurrentUserID != Guid.Empty ? true : false };
             if (CurrentUser != null) {
                 model.Username = CurrentUser.Username;

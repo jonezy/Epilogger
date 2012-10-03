@@ -271,7 +271,8 @@ function Tweetbox(url) {
 
     var twitterBox = {
         NewTweet: $("#tweetBoxPhoto").val(),
-        TwitterID: $("#TwitterID").val()
+        TwitterID: $("#TwitterID").val(),
+        VisibleConfirmation: $("#VisibleConfirmation").val()
     };
 
     $.post(url, twitterBox,
@@ -514,7 +515,5 @@ head.ready(function () {
             //08/25/2012 04:09:42
         }
     }
-
-
-
+    
 });

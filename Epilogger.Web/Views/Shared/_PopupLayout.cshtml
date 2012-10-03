@@ -1,0 +1,143 @@
+﻿@using Combres.Mvc
+@using Epilogger.Web.Models
+
+<!doctype html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"> <!--<![endif]-->
+
+<head>
+    @*KissMetrics*@
+    <script type="text/javascript">
+        var _kmq = _kmq || [];
+        var _kmk = _kmk || '982ed5ae44d0650b3b3c723ff014e5c2186b5cbc';
+        function _kms(u) {
+            setTimeout(function () {
+                var d = document, f = d.getElementsByTagName('script')[0],
+                    s = d.createElement('script');
+                s.type = 'text/javascript'; s.async = true; s.src = u;
+                f.parentNode.insertBefore(s, f);
+            }, 1);
+        }
+        _kms('//i.kissmetrics.com/i.js');
+        _kms('//doug1izaerwt3.cloudfront.net/' + _kmk + '.1.js');
+    </script>
+
+    <meta charset="utf-8" />
+    <meta name="google-site-verification" content="CuQwuSsvoWQapx1142El31mqbNSB6Dq0RBzTjzV0lXQ" />
+    @RenderSection("head", false)
+
+    <title>@ViewBag.Title</title>
+
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+    @Html.CombresLink("siteCss")
+    @Html.CombresLink("siteJs")
+   
+    <style type="text/css">
+        body { min-width: 0 !important; }
+    </style>
+</head>
+<body>
+    
+    @Html.Send(100)
+    <div id="flash"></div>
+    
+    
+
+    <div class="container_8 clearfix" id="outer-container">
+
+        @RenderBody()
+    
+    </div>
+
+    
+    <script language="javascript" type="text/javascript">
+    //Store all clicks, for interface tweaking.
+        head.ready(function () {
+            $(document).saveClicks(); 
+
+            $('.displayClicks').click(function() {
+                $.displayClicks();
+                $('#clickmap-overlay').click(function() {
+                    $.removeClicks();
+                    $(document).saveClicks();
+                });
+                $(document).stopSaveClicks();
+                return false;
+            });
+
+            $(".datepicker").datepicker({
+                showAnim: '',
+                dateFormat: 'm/d/yy',
+                showOn: 'button',
+                buttonImageOnly: true,
+                buttonImage: '@Url.Content("~/Public/js/datetime/txtdropdown/txtdropdown-btn.png")',
+                buttonText: 'Select a date'
+            });
+
+            $(".timedropdown").timedropdown();
+        });
+
+
+
+    //Saves all information when a user clicks on a link.
+        head.ready(function () {
+            $("a").bind('click', function (e) {
+                //console.log(e)
+
+                //For the images, we need to access the parent to get the image properties.
+                if (e.srcElement.host == null) {
+                    e.srcElement = e.srcElement.parentElement;
+                }
+                if (typeof EventID == "undefined") {
+                    EventID = 0;
+                }
+
+                //Post information back to EPL
+                $.ajax({
+                    url: '/Home/LogClick',
+                    type: 'POST',
+                    data: { href: e.srcElement.href, PathName: e.srcElement.pathname, UserAgent: navigator.userAgent, Host: e.srcElement.host, EventID: EventID },
+                    success: function (result) {
+                        // TODO: nothing
+                    }
+                });
+            });
+        });
+
+    </script>
+    
+    
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-23721181-2']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+    
+
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-177636-16']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+</body>
+</html>

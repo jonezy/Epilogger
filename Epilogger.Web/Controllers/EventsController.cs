@@ -1606,6 +1606,14 @@ namespace Epilogger.Web.Controllers {
                 };
                 _userTwitterActionService.Save(uta);
 
+                //if (c[2] != null)
+                //{
+                //    if (c[2] == "1")
+                //    {
+                //        this.Receive(MessageType.Success, "Your tweet has been sent");
+                //    }
+                //}
+
                 return ts.Result == RequestResult.Success;
             }
             catch (Exception)

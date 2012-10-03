@@ -1,6 +1,13 @@
 ﻿@{
     ViewBag.Title = "Epilogger | Welcome";
-    Layout = "~/Views/Shared/_InteriorLayoutNoBC.cshtml";
+    if (ViewBag.NoFrame != null && ViewBag.NoFrame)
+    {
+        Layout = "~/Views/Shared/_PopupLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_InteriorLayoutNoBC.cshtml";
+    }
 }
 
 <div>
