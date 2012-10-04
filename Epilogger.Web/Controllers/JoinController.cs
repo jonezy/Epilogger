@@ -149,7 +149,7 @@ namespace Epilogger.Web.Controllers {
                 var oauthResult = client.ParseOAuthCallbackUrl(Request.Url);
 
                 // Build the Return URI form the Request Url
-                var redirectUri = new UriBuilder(Url.Action("facebook", "join", null, "http"));
+                var redirectUri = new UriBuilder(Url.Action("facebook", "join", new { InPopUp }, "http"));
 
                 // Exchange the code for an access token
                 dynamic result = client.Get("/oauth/access_token", new

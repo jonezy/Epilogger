@@ -18,7 +18,7 @@
     <ul class="authButtons">
         <li>@Html.ActionImage("ConnectRequestWithCallback", "twitter", new { area = "Authentication", callBackUrl = Url.Action("twitter", "join", new { Model.InPopUp }, "http") }, "/Public/images/signup/twitterButton.png", "Sign in with twitter")</li>
         <li class="orSepertor"><em>-- or --</em></li>
-        <li>@Html.ActionImage("ConnectRequestWithCallback", "facebook", new { area = "Authentication", callBackUrl = Url.Action("facebook", "join", null, "http") }, "/Public/images/signup/facebookButton.png", "Sign in with facebook")</li>
+        <li>@Html.ActionImage("ConnectRequestWithCallback", "facebook", new { area = "Authentication", callBackUrl = Url.Action("facebook", "join", new { Model.InPopUp }, "http") }, "/Public/images/signup/facebookButton.png", "Sign in with facebook")</li>
     </ul>
 
     
