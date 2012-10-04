@@ -35,35 +35,44 @@
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     
+    
+
     @Html.CombresLink("siteCss")
     @Html.CombresLink("siteJs")
-   
+    
     <style type="text/css">
         body { min-width: 0 !important; }
     </style>
+
+    <script language="javascript" type="text/javascript">
+        
+        head.js('/Public/js/jquery.zrssfeed.min.js', function () {
+            $('#blog-posts').rssfeed('http://feeds.feedburner.com/epilogger?format=xml', {
+                limit: 1
+            });
+        });
+    </script>
+    
 </head>
 <body>
-    
+   
     @Html.Send(100)
     <div id="flash"></div>
     
-    
-
     <div class="container_8 clearfix" id="outer-container">
 
         @RenderBody()
     
     </div>
 
-    
     <script language="javascript" type="text/javascript">
-    //Store all clicks, for interface tweaking.
+        //Store all clicks, for interface tweaking.
         head.ready(function () {
-            $(document).saveClicks(); 
+            $(document).saveClicks();
 
-            $('.displayClicks').click(function() {
+            $('.displayClicks').click(function () {
                 $.displayClicks();
-                $('#clickmap-overlay').click(function() {
+                $('#clickmap-overlay').click(function () {
                     $.removeClicks();
                     $(document).saveClicks();
                 });
@@ -85,7 +94,7 @@
 
 
 
-    //Saves all information when a user clicks on a link.
+        //Saves all information when a user clicks on a link.
         head.ready(function () {
             $("a").bind('click', function (e) {
                 //console.log(e)

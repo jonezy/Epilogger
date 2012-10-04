@@ -44,6 +44,17 @@ namespace Epilogger.Web.Controllers {
             }
         }
 
+        public bool InPopUp
+        {
+            get
+            {
+                var inPopUp = Request.QueryString["InPopUp"] != null;
+                inPopUp = inPopUp && bool.Parse(Request.QueryString["InPopUp"]);
+                return inPopUp;
+            }
+        }
+
+
         protected UserAuthenticationProfile CurrentUserTwitterAuthorization {
             get
             {

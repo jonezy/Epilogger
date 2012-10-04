@@ -31,8 +31,8 @@ namespace Epilogger.Web.Controllers {
         /* Sign up page Step 1 or 2 */
         public ActionResult Signup()
         {
-            if (Request.QueryString["NoFrame"] != null)
-                ViewBag.NoFrame = true;
+            if (InPopUp)
+                ViewBag.InPopUp = true;
 
             return View();
         }
@@ -43,11 +43,12 @@ namespace Epilogger.Web.Controllers {
         {
             try
             {
+            
                 var twitterAuth = Request.QueryString["oauth_token"];
                 if (String.IsNullOrEmpty(twitterAuth))
                 {
                     this.StoreError("There was a problem connecting to your Twitter account");
-                    return RedirectToAction("Signup");
+                    return RedirectToAction("Signup", new { InPopUp });
                 }
 
                 var accessTokenResponse = OAuthUtility.GetAccessTokenDuringCallback(TwitterHelper.TwitterConsumerKey, TwitterHelper.TwitterConsumerSecret);
@@ -59,7 +60,7 @@ namespace Epilogger.Web.Controllers {
                 if (twitterUser == null)
                 {
                     this.StoreError("There was a problem connecting to your Twitter account");
-                    return RedirectToAction("Signup");
+                    return RedirectToAction("Signup", new { InPopUp });
                 }
 
                 //Check if this user already exists. If so login and redirect to the homepage
@@ -69,7 +70,9 @@ namespace Epilogger.Web.Controllers {
                     CookieHelpers.WriteCookie("lc", "uid", userId.ToString());
                     RecordTheLogin(userId);
 
-                    //this.StoreInfo("The Twitter account you used is already associated with an Epilogger account. We have logged you in.");
+                    if (InPopUp)
+                        return RedirectToAction("CloseAndRefresh", "Account");
+                    
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -93,7 +96,8 @@ namespace Epilogger.Web.Controllers {
                     DisplayProfileImage = profileImage,
                     ProfileImage = twitterUser.ResponseObject.ProfileImageLocation,
                     ServiceUserName = twitterUser.ResponseObject.ScreenName,
-                    AuthService = "twitter"
+                    AuthService = "twitter",
+                    InPopUp = InPopUp
                 };
 
                 //Continue to Step 2
@@ -102,7 +106,7 @@ namespace Epilogger.Web.Controllers {
             catch (Exception)
             {
                 this.StoreError("There was a problem connecting to your twitter account");
-                return RedirectToAction("Signup");
+                return RedirectToAction("Signup", new { InPopUp });
             }
         }
 
@@ -168,7 +172,7 @@ namespace Epilogger.Web.Controllers {
                 if (facebookUser == null)
                 {
                     this.StoreError("There was a problem connecting to your Facebook account");
-                    return RedirectToAction("Signup");
+                    return RedirectToAction("Signup", InPopUp);
                 }
 
                 //Check if this user already exists. If so login and redirect to the homepage
@@ -177,6 +181,9 @@ namespace Epilogger.Web.Controllers {
                 {
                     CookieHelpers.WriteCookie("lc", "uid", userId.ToString());
                     RecordTheLogin(userId);
+
+                    if (InPopUp)
+                        return RedirectToAction("CloseAndRefresh", "Account");
 
                     //this.StoreInfo("The Facebook  account you used is already associated with an Epilogger account. We have logged you in.");
                     return RedirectToAction("Index", "Home", new { area = "" });
@@ -192,7 +199,8 @@ namespace Epilogger.Web.Controllers {
                     DisplayProfileImage = FacebookHelper.GetProfilePictureWithSize(accessToken, "large"),
                     ProfileImage = FacebookHelper.GetProfilePicture(accessToken),
                     ServiceUserName = facebookUser.username,
-                    AuthService = "facebook"
+                    AuthService = "facebook",
+                    InPopUp = InPopUp
                 };
 
                 //Continue to Step 2
@@ -251,7 +259,8 @@ namespace Epilogger.Web.Controllers {
                     DisplayProfileImage = Helpers.ResolveServerUrl(VirtualPathUtility.ToAbsolute("~/Public/images/signup/NoAvatar.png"), false),
                     ProfileImage = Helpers.ResolveServerUrl(VirtualPathUtility.ToAbsolute("~/Public/images/signup/NoAvatar.png"), false),
                     ServiceUserName = String.Empty,
-                    AuthService = string.Empty
+                    AuthService = string.Empty,
+                    InPopUp = InPopUp
                 };
 
                 return View(model);

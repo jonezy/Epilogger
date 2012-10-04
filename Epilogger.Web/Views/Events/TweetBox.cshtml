@@ -75,7 +75,7 @@
 
 
     function popTheWindow(url) {
-        window.open(url, 'Login / Sign up | Epilogger', "width=692,height=575,scrollbars=no");
+        window.open(url, 'Login / Sign up | Epilogger', "width=692,height=675,scrollbars=no");
     }
     
     function loginReturn(userId) {
@@ -87,6 +87,7 @@
         //Refresh the header
         refreshGlobalBarHeader();
         refreshHeaderMenu();
+        refreshNag();
     }
 
     function refreshGlobalBarHeader() {
@@ -96,15 +97,16 @@
     }
 
     function refreshHeaderMenu() {
-        
-       
-
-
-//        $.get('@Url.Action("Navigation", "Navigation" new { Area = "" })', function (data) {
-//            $("#headerMenuAll").replaceWith(data);
-//        });
+        $.get('@Url.Action("GetNavMenu", "Navigation")', function (data) {
+            $("#headerMenuAll").replaceWith(data);
+        });
     }
     
+    function refreshNag() {
+        $.get('@Url.Action("Nag", "Navigation")', function (data) {
+            $("#nagContainer").replaceWith(data);
+        });
+    }
      
     
 </script>
@@ -142,7 +144,7 @@
     <div class="fright">
         <img src="/Public/images/icons/ajaxWaiting.gif" id="twitterLoading" style="display: none;" alt="loading" />
         <span id="statusMessage"></span>
-        <a href="#" onclick="refreshWebsiteHeader(); refreshHeaderMenu(); return false;">TEST</a>
+        
         @if (Model.IsTwitterAuthed)
         {
             <input type="submit" value="Tweet" id="submitTweet" class="blue-action-button" />
