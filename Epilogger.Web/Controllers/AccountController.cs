@@ -643,9 +643,18 @@ namespace Epilogger.Web.Controllers {
                 };
                 new UserLoginTrackingService().Save(ut);
 
-                
+
                 if (model.InPopUp)
+                {
+                    //Check if this user has twitter connected. If not, redirect to twitter connect.
+                    var connectionProfile = _ua.UserAuthorizationByServicePlatformAndUserId(AuthenticationServices.TWITTER, "Web", Guid.Parse(user.ID.ToString()));
+                    if (connectionProfile == null)
+                    {
+                        return RedirectToAction("ConnectTwitter");
+                    }
                     return RedirectToAction("CloseAndRefresh");
+                }
+                    
 
                 if (model.ReturnUrl != null)
                     return Redirect(model.ReturnUrl.AbsoluteUri);
@@ -663,7 +672,11 @@ namespace Epilogger.Web.Controllers {
         {
             return View();
         }
-
+        [HttpGet]
+        public virtual ActionResult ConnectTwitter()
+        {
+            return View();
+        }
 
     #endregion
 

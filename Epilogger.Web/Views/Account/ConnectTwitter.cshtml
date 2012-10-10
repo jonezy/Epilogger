@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Epilogger | Connect Twitter";
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+<div class="spacer"></div>
+<div class="signUpHeading center">
+    <h1>In order to send your tweet we need to connect your account to Twitter</h1>
+</div>
+    
+<div class="spacer"></div>
+
+<div>
+     @*Connect/Disconnect Twitter*@
+     @Html.Action("GetTwitterConnect")
+</div>
