@@ -144,14 +144,24 @@ namespace Epilogger.Common
 
             [Serializable]
             [JsonObject(MemberSerialization.OptOut)]
-            public class TwitterImageMSG
+            public class TwitterMediaMSG
             {
-                public int EventID { get; set; }
-                public long TweetID { get; set; }
+                public int EventId { get; set; }
+                public long TweetId { get; set; }
                 public string TwitterName { get; set; }
-                public string ImageSource { get; set; }
-                public Uri ImageURL { get; set; }
-                public string DisplayURL { get; set; }
+                public string Source { get; set; }
+                public Uri Url { get; set; }
+                public string DisplayUrl { get; set; }
+                public EventMediaType MediaType { get; set; }
+            }
+
+            public enum EventMediaType
+            {
+                None = 0,
+                Photo = 1,
+                YoutubeVideo = 2,
+                VimeoVideo = 3,
+                KeekVideo = 4
             }
 
             [Serializable]

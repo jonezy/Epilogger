@@ -1,4 +1,5 @@
 ﻿@using Epilogger
+@using Epilogger.Common
 @model Epilogger.Web.Models.HomepageViewModel
 
 
@@ -153,17 +154,36 @@
 
             if (item.ActivityType == Epilogger.Web.Models.ActivityType.PHOTOS_VIDEOS)
             {
-            <li>
-                @{ var thePath = item.Image.EventID + "/" + item.Image.ID; }
-                
-                <div class="title @item.ActivityType @rowClass">
-                    @Html.ActionLink(item.EventName.TruncateAtWord(30), "details", "events", new { @id = item.EventSlug }, null)    
-                </div>
+                var thePath = item.Image.EventID + "/" + item.Image.ID;
 
-                <div class="galleryImage"  id="photo-@item.Image.ID">
-                    <a href="@item.Image.Fullsize" rel="EPLPhoto[latestphotos]" photoid="@thePath" title="" id="@item.Image.ID">
-                        <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@item.Image.Fullsize&width=230&height=188&preserveAspect=true" border="0" alt="" />
-                    </a>
+                var fullSizeUrl = item.Image.Fullsize;
+                var isVideo = false;
+                if (item.Image.MediaType == (short)MQ.Messages.EventMediaType.YoutubeVideo)
+                {
+                    fullSizeUrl = string.Format("http://youtube.com/watch?v={0}", item.Image.Thumb);
+                    isVideo = true;
+                }
+                else if (item.Image.MediaType == (short)MQ.Messages.EventMediaType.VimeoVideo)
+                {
+                    fullSizeUrl = string.Format("http://vimeo.com/{0}", item.Image.Thumb);
+                    isVideo = true;
+                }
+                else if (item.Image.MediaType == (short)MQ.Messages.EventMediaType.KeekVideo)
+                {
+                    fullSizeUrl = string.Format("http://www.keek.com/embed/{0}?iframe=true", item.Image.Thumb);
+                    isVideo = true;
+                }
+                
+                <div class="withcomment newPhotoupdates" id="photo-@item.Image.ID">
+                    <div class="videothumbnailcontainer">
+                        <a href="@fullSizeUrl" rel="EPLPhoto[latestphotos]" photoid="@thePath" title="" id="@item.Image.ID">
+                            <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@item.Image.Fullsize&width=230&height=188&preserveAspect=true" border="0" alt="" />
+                            @if (isVideo)
+                            {
+                                <img src="@Links.Public.images.video_play_jpg" class="videothumbnail3"/>
+                            }
+                        </a>
+                    </div>
                 </div>
             </li>   
             }

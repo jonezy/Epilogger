@@ -1,20 +1,37 @@
-﻿
+﻿@using Epilogger.Common
 @model Epilogger.Web.Models.ImageTemplateViewModel
+@{ //ToDo: Move this logic out of view
 
-@{ var thePath = Model.Image.EventID + "/" + Model.Image.ID;}
+    var thePath = Model.Image.EventID + "/" + Model.Image.ID;
 
+    var fullSizeUrl = Model.Image.Fullsize;
+    var isVideo = false;
+    if (Model.Image.MediaType == (short)MQ.Messages.EventMediaType.YoutubeVideo)
+    {
+        fullSizeUrl = string.Format("http://youtube.com/watch?v={0}", Model.Image.Thumb);
+        isVideo = true;
+    }
+    else if (Model.Image.MediaType == (short)MQ.Messages.EventMediaType.VimeoVideo)
+    {
+        fullSizeUrl = string.Format("http://vimeo.com/{0}", Model.Image.Thumb);
+        isVideo = true;
+    }
+    else if (Model.Image.MediaType == (short)MQ.Messages.EventMediaType.KeekVideo)
+    {
+        fullSizeUrl = string.Format("http://www.keek.com/embed/{0}?iframe=true", Model.Image.Thumb);
+        isVideo = true;
+    }
+}
 <div class="withcomment newPhotoupdates" id="photo-@Model.Image.ID">
+<div class="videothumbnailcontainer">
     <a href="@Model.Image.Fullsize" rel="EPLPhoto[latestphotos]" photoid="@thePath" title="" id="">
-        @*@if (Model.Image.AzureContainerPrefix == "twitterphotos")
-        {*@
-            <img itemprop="photo" src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@Model.Image.Fullsize&width=172&height=144&preserveAspect=true" border="0" alt="" />
-        @*}
-        else
+        <img itemprop="photo" src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@Model.Image.Fullsize&width=172&height=144&preserveAspect=true" border="0" alt="" />
+        @if (isVideo)
         {
-            <img itemprop="photo" src="@Url.Action("GetPhotoThumbnail", new { photoUrl = Model.Image.Fullsize, width = 800, height = 800 })" width="250" border="0" alt="" />
-        }*@
-        
+            <img src="@Links.Public.images.video_play_jpg" class="videothumbnail1"/>
+        }
     </a>
+</div>
     <a href="#" class="commentbubble">
         @Model.Image.ImageMetaData.Count()
     </a>

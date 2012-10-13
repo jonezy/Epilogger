@@ -786,6 +786,7 @@ namespace Links {
                 public static readonly string _8_png = Url("8.png");
             }
         
+            public static readonly string video_play_jpg = Url("video-play.jpg");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class widget {
                 private const string URLPATH = "~/Public/images/widget";

@@ -1,4 +1,6 @@
-﻿@using Epilogger.Web;
+﻿
+@using Epilogger.Common
+@using Epilogger.Web;
 
 @model Epilogger.Web.Models.AllPhotosDisplayViewModel
 
@@ -23,7 +25,7 @@
 
 
 <div class="grid_11 alpha">
-	<h1>ALL PHOTOS</h1>
+	<h1>Media</h1>
 	<h2>FROM @Model.Name - @Model.PhotoCount.ToString("#,###")</h2>
 </div>
 
@@ -37,13 +39,39 @@
 {
     foreach (Epilogger.Data.Image image in Model.TopImages)
     {
+        //ToDo: Move this logic out of view
+        
         var thePath = image.EventID + "/" + image.ID;
+        
+        var fullSizeUrl = image.Fullsize;
+        var isVideo = false;
+        if (image.MediaType == (short)MQ.Messages.EventMediaType.YoutubeVideo)
+        {
+            fullSizeUrl = "http://youtube.com/watch?v=" + image.Thumb;
+            isVideo = true;
+        }
+        else if (image.MediaType == (short)MQ.Messages.EventMediaType.VimeoVideo)
+        {
+            fullSizeUrl = "http://vimeo.com/" + image.Thumb;
+            isVideo = true;
+        }
+        else if (image.MediaType == (short)MQ.Messages.EventMediaType.KeekVideo)
+        {
+            fullSizeUrl = string.Format("http://www.keek.com/embed/{0}?iframe=true", image.Thumb);
+            isVideo = true;
+        }
+        
         <div id="TopPhoto@(image.ID)" class="topPhotosBar">
             <div class="topPhoto">
-                <a href="@image.Fullsize" rel="EPLPhoto[topphotos]" photoid="@thePath" title="" id="@image.ID">                   
-                    <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@image.Fullsize&width=415&height=302&preserveAspect=true" width="415" width="302" border="0" alt="" />
-                    
-                </a>
+                <div class="videothumbnailcontainer">
+                    <a href="@fullSizeUrl" rel="EPLPhoto[topphotos]" photoid="@thePath" title="" id="@image.ID">
+                        <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@image.Fullsize&width=415&height=302&preserveAspect=true" width="415" width="302" border="0" alt="" />
+                        @if (isVideo)
+                        {
+                            <img src="@Links.Public.images.video_play_jpg" class="videothumbnail2"/>
+                        }
+                    </a>
+                </div>
             </div>
             <div class="topPhotoComments">
             </div>
