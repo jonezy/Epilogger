@@ -360,7 +360,7 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
         }
 
 
-        public ActionResult DisconnectClean()
+        public virtual ActionResult DisconnectClean()
         {
             var service = new UserAuthenticationProfileService();
             service.DisconnectService(AuthenticationServices.TWITTER, CurrentUserID, "Web");

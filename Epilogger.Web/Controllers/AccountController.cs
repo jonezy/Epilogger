@@ -91,7 +91,7 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpPost] //Called by Ajax
-        public ActionResult UploadAvatar(string qqfile)
+        public virtual ActionResult UploadAvatar(string qqfile)
         {
             var path = @"C:\\";
             var file = string.Empty;
@@ -457,9 +457,9 @@ namespace Epilogger.Web.Controllers {
         }
 
 
-        
 
-        public ActionResult GetProfileOptions()
+
+        public virtual ActionResult GetProfileOptions()
         {
             var model = new ProfileImageChoiceViewModel();
 
@@ -502,8 +502,8 @@ namespace Epilogger.Web.Controllers {
             return PartialView("_profileImageChoice", model);
 
         }
-        
-        public ActionResult GetTwitterConnect()
+
+        public virtual ActionResult GetTwitterConnect()
         {
             try
             {
@@ -528,7 +528,7 @@ namespace Epilogger.Web.Controllers {
             return PartialView("_ConnectService", new ConnectServiceViewModel() { ServiceName = "Twitter", ServiceUseDescription = "Tweet and retweet<br />Favorite items" });
         }
 
-        public ActionResult GetFacebookConnect()
+        public virtual ActionResult GetFacebookConnect()
         {
             try
             {
@@ -551,7 +551,7 @@ namespace Epilogger.Web.Controllers {
             return PartialView("_ConnectService", new ConnectServiceViewModel() { ServiceName = "Facebook", ServiceUseDescription = "Like items<br />&nbsp;" });
         }
 
-        public ActionResult TwitterAuth()
+        public virtual ActionResult TwitterAuth()
         {
             if (Request.QueryString["oauth_token"] != null)
             {
@@ -583,7 +583,7 @@ namespace Epilogger.Web.Controllers {
             return View();
         }
 
-        public ActionResult FacebookAuth()
+        public virtual ActionResult FacebookAuth()
         {
             var client = new FacebookClient();
             var oauthResult = client.ParseOAuthCallbackUrl(Request.Url);

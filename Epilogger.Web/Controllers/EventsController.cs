@@ -1780,7 +1780,7 @@ namespace Epilogger.Web.Controllers {
 
 
 
-        public ActionResult PullTweets(int eventId)
+        public virtual ActionResult PullTweets(int eventId)
         {
 
             var evt = _es.FindByID(eventId);

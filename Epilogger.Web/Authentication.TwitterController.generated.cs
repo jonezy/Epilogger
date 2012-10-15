@@ -64,6 +64,7 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
             public readonly string ConnectRequestWithCallback = "ConnectRequestWithCallback";
             public readonly string ConnectAccount = "ConnectAccount";
             public readonly string Disconnect = "Disconnect";
+            public readonly string DisconnectClean = "DisconnectClean";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -72,6 +73,7 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
             public const string ConnectRequestWithCallback = "ConnectRequestWithCallback";
             public const string ConnectAccount = "ConnectAccount";
             public const string Disconnect = "Disconnect";
+            public const string DisconnectClean = "DisconnectClean";
         }
 
 
@@ -112,6 +114,11 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
 
         public override System.Web.Mvc.ActionResult Disconnect() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Disconnect);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult DisconnectClean() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.DisconnectClean);
             return callInfo;
         }
 
