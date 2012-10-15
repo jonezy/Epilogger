@@ -6,7 +6,7 @@
 
 @{
     Layout = "~/Views/Shared/_InteriorLayout.cshtml";
-    ViewBag.Title = "Epilogger - " + Model.Name + "- Photos";
+    ViewBag.Title = Model.Name + " - Photos (Page " + (Model.CurrentPageIndex + 1) + ") | Epilogger";
 }
 
 <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
@@ -68,7 +68,7 @@
                         <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@image.Fullsize&width=415&height=302&preserveAspect=true" width="415" width="302" border="0" alt="" />
                         @if (isVideo)
                         {
-                            <img src="@Links.Public.images.video_play_jpg" class="videothumbnail2"/>
+                            <img src="@Links.Public.images.video_play_jpg" class="videothumbnail2" alt="1"/>
                         }
                     </a>
                 </div>

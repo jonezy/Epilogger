@@ -3323,6 +3323,16 @@ namespace Epilogger.Data {
 	                IsForeignKey = false,
 	                MaxLength = 0
                 });
+
+                Columns.Add(new DatabaseColumn("EventBrightUrl", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 500
+                });
                     
                 
                 
@@ -3661,6 +3671,18 @@ namespace Epilogger.Data {
    			public static string FeaturedEndDateTimeColumn{
 			      get{
         			return "FeaturedEndDateTime";
+      			}
+		    }
+           
+            public IColumn EventBrightUrl{
+                get{
+                    return this.GetColumn("EventBrightUrl");
+                }
+            }
+            				
+   			public static string EventBrightUrlColumn{
+			      get{
+        			return "EventBrightUrl";
       			}
 		    }
            

@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using RichmondDay.Helpers;
+using System.Drawing;
 
 namespace Epilogger.Web {
     public static class Helpers {
@@ -119,7 +122,7 @@ namespace Epilogger.Web {
         }
 
 
-        public static void ResizeImage(Stream imgStream, int newWidth, int maxHeight, bool onlyResizeIfWider, out Stream newImageStream)
+        public static void ResizeImageStream(Stream imgStream, int newWidth, int maxHeight, bool onlyResizeIfWider, out Stream newImageStream)
         {
             var fullsizeImage = System.Drawing.Image.FromStream(imgStream);
 
@@ -152,6 +155,8 @@ namespace Epilogger.Web {
             newImageStream = newImage.ToStream(ImageFormat.Png);
         }
 
+
+        
         public static Stream ToStream(this System.Drawing.Image image, ImageFormat formaw)
         {
             var stream = new System.IO.MemoryStream();

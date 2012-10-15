@@ -116,7 +116,7 @@ namespace Epilogger.Web.Controllers {
 
                 //Resize the image
                 Stream resizedImage = null;
-                Helpers.ResizeImage(stream, 250, 500, true, out resizedImage);
+                Helpers.ResizeImageStream(stream, 250, 500, true, out resizedImage);
 
                 //Azure Storage Code - Full Profile pic
                 imageurl = AzureImageStorageHelper.StoreProfileImage("profileimage-" + Session.SessionID, "profilepicturesfull", resizedImage);

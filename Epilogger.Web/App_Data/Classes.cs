@@ -3766,6 +3766,23 @@ namespace Epilogger.Data
 		    }
 		}
 		
+        partial void OnEventBrightUrlChanging(string value);
+        partial void OnEventBrightUrlChanged();
+		
+		private string _EventBrightUrl;
+		public string EventBrightUrl { 
+		    get{
+		        return _EventBrightUrl;
+		    } 
+		    set{
+		        this.OnEventBrightUrlChanging(value);
+                this.SendPropertyChanging();
+                this._EventBrightUrl = value;
+                this.SendPropertyChanged("EventBrightUrl");
+                this.OnEventBrightUrlChanged();
+		    }
+		}
+		
 
         #endregion
 
