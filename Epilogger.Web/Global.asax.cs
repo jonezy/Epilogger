@@ -383,7 +383,6 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.CurrentUserRole, opt => opt.Ignore())
                 .ForMember(dest => dest.CreatedEventUser, opt => opt.Ignore());
 
-
             Mapper.CreateMap<Event, WidgetViewModel>()
                 .ForMember(dest => dest.Images, opt => opt.Ignore())
                 .ForMember(dest => dest.CheckIns, opt => opt.Ignore())

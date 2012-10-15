@@ -3323,6 +3323,16 @@ namespace Epilogger.Data {
 	                IsForeignKey = false,
 	                MaxLength = 0
                 });
+
+                Columns.Add(new DatabaseColumn("EventBrightUrl", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 500
+                });
                     
                 
                 
@@ -3664,6 +3674,18 @@ namespace Epilogger.Data {
       			}
 		    }
            
+            public IColumn EventBrightUrl{
+                get{
+                    return this.GetColumn("EventBrightUrl");
+                }
+            }
+            				
+   			public static string EventBrightUrlColumn{
+			      get{
+        			return "EventBrightUrl";
+      			}
+		    }
+           
                     
         }
         
@@ -3973,6 +3995,16 @@ namespace Epilogger.Data {
 	                IsForeignKey = false,
 	                MaxLength = 100
                 });
+
+                Columns.Add(new DatabaseColumn("MediaType", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int16,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
                     
                 
                 
@@ -4095,6 +4127,18 @@ namespace Epilogger.Data {
    			public static string ImageFingerPrintColumn{
 			      get{
         			return "ImageFingerPrint";
+      			}
+		    }
+           
+            public IColumn MediaType{
+                get{
+                    return this.GetColumn("MediaType");
+                }
+            }
+            				
+   			public static string MediaTypeColumn{
+			      get{
+        			return "MediaType";
       			}
 		    }
            

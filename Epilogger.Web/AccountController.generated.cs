@@ -42,6 +42,11 @@ namespace Epilogger.Web.Controllers {
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult UploadAvatar() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.UploadAvatar);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult Validate() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Validate);
         }
@@ -65,37 +70,50 @@ namespace Epilogger.Web.Controllers {
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
-            public readonly string Index = "Index";
-            public readonly string Create = "Create";
+            public readonly string UploadAvatar = "UploadAvatar";
             public readonly string Validate = "Validate";
+            public readonly string Index = "Index";
+            public readonly string GetProfileOptions = "GetProfileOptions";
+            public readonly string GetTwitterConnect = "GetTwitterConnect";
+            public readonly string GetFacebookConnect = "GetFacebookConnect";
+            public readonly string TwitterAuth = "TwitterAuth";
+            public readonly string FacebookAuth = "FacebookAuth";
             public readonly string Login = "Login";
             public readonly string TwitterLogon = "TwitterLogon";
             public readonly string Logout = "Logout";
             public readonly string ForgotPassword = "ForgotPassword";
             public readonly string ResetPassword = "ResetPassword";
             public readonly string UpdatePassword = "UpdatePassword";
-            public readonly string AccountActivationNeeded = "AccountActivationNeeded";
             public readonly string ActivationSent = "ActivationSent";
-            public readonly string TwitterAuthTest = "TwitterAuthTest";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants {
-            public const string Index = "Index";
-            public const string Create = "Create";
+            public const string UploadAvatar = "UploadAvatar";
             public const string Validate = "Validate";
+            public const string Index = "Index";
+            public const string GetProfileOptions = "GetProfileOptions";
+            public const string GetTwitterConnect = "GetTwitterConnect";
+            public const string GetFacebookConnect = "GetFacebookConnect";
+            public const string TwitterAuth = "TwitterAuth";
+            public const string FacebookAuth = "FacebookAuth";
             public const string Login = "Login";
             public const string TwitterLogon = "TwitterLogon";
             public const string Logout = "Logout";
             public const string ForgotPassword = "ForgotPassword";
             public const string ResetPassword = "ResetPassword";
             public const string UpdatePassword = "UpdatePassword";
-            public const string AccountActivationNeeded = "AccountActivationNeeded";
             public const string ActivationSent = "ActivationSent";
-            public const string TwitterAuthTest = "TwitterAuthTest";
         }
 
 
+        static readonly ActionParamsClass_UploadAvatar s_params_UploadAvatar = new ActionParamsClass_UploadAvatar();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_UploadAvatar UploadAvatarParams { get { return s_params_UploadAvatar; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_UploadAvatar {
+            public readonly string qqfile = "qqfile";
+        }
         static readonly ActionParamsClass_Validate s_params_Validate = new ActionParamsClass_Validate();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_Validate ValidateParams { get { return s_params_Validate; } }
@@ -117,23 +135,46 @@ namespace Epilogger.Web.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string AccountActivationNeeded = "~/Views/Account/AccountActivationNeeded.cshtml";
+            public readonly string _ConnectService = "~/Views/Account/_ConnectService.cshtml";
+            public readonly string _DisconnectService = "~/Views/Account/_DisconnectService.cshtml";
+            public readonly string _profileImageChoice = "~/Views/Account/_profileImageChoice.cshtml";
             public readonly string ActivationSent = "~/Views/Account/ActivationSent.cshtml";
-            public readonly string Create = "~/Views/Account/Create.cshtml";
+            public readonly string FacebookAuth = "~/Views/Account/FacebookAuth.cshtml";
             public readonly string ForgotPassword = "~/Views/Account/ForgotPassword.cshtml";
-            public readonly string Index = "~/Views/Account/Index.cshtml";
+            public readonly string index = "~/Views/Account/index.cshtml";
+            public readonly string IndexOld = "~/Views/Account/IndexOld.cshtml";
             public readonly string Login = "~/Views/Account/Login.cshtml";
             public readonly string Menu = "~/Views/Account/Menu.cshtml";
             public readonly string ResetPassword = "~/Views/Account/ResetPassword.cshtml";
-            public readonly string TwitterAuthTest = "~/Views/Account/TwitterAuthTest.cshtml";
+            public readonly string TwitterAuth = "~/Views/Account/TwitterAuth.cshtml";
             public readonly string UpdatePassword = "~/Views/Account/UpdatePassword.cshtml";
             public readonly string Validate = "~/Views/Account/Validate.cshtml";
+            static readonly _Old s_Old = new _Old();
+            public _Old Old { get { return s_Old; } }
+            public partial class _Old{
+                public readonly string AccountActivationNeeded = "~/Views/Account/Old/AccountActivationNeeded.cshtml";
+                public readonly string Create = "~/Views/Account/Old/Create.cshtml";
+                public readonly string LoginOld = "~/Views/Account/Old/LoginOld.cshtml";
+                public readonly string TwitterAuthTest = "~/Views/Account/Old/TwitterAuthTest.cshtml";
+            }
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
     public class T4MVC_AccountController: Epilogger.Web.Controllers.AccountController {
         public T4MVC_AccountController() : base(Dummy.Instance) { }
+
+        public override System.Web.Mvc.ActionResult UploadAvatar(string qqfile) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.UploadAvatar);
+            callInfo.RouteValueDictionary.Add("qqfile", qqfile);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Validate(string validationCode) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Validate);
+            callInfo.RouteValueDictionary.Add("validationCode", validationCode);
+            return callInfo;
+        }
 
         public override System.Web.Mvc.ActionResult Index() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
@@ -147,11 +188,28 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
-        
+        public override System.Web.Mvc.ActionResult GetProfileOptions() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.GetProfileOptions);
+            return callInfo;
+        }
 
-        public override System.Web.Mvc.ActionResult Validate(string validationCode) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Validate);
-            callInfo.RouteValueDictionary.Add("validationCode", validationCode);
+        public override System.Web.Mvc.ActionResult GetTwitterConnect() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.GetTwitterConnect);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult GetFacebookConnect() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.GetFacebookConnect);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult TwitterAuth() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.TwitterAuth);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult FacebookAuth() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.FacebookAuth);
             return callInfo;
         }
 
@@ -212,26 +270,10 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
-        //public override System.Web.Mvc.ActionResult AccountActivationNeeded() {
-        //    var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.AccountActivationNeeded);
-        //    return callInfo;
-        //}
-
         public override System.Web.Mvc.ActionResult ActivationSent() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ActivationSent);
             return callInfo;
         }
-
-        //public override System.Web.Mvc.ActionResult TwitterAuthTest() {
-        //    var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.TwitterAuthTest);
-        //    return callInfo;
-        //}
-
-        //public override System.Web.Mvc.ActionResult TwitterAuthTest(Epilogger.Web.Models.TwitterAuthTestViewModel model) {
-        //    var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.TwitterAuthTest);
-        //    callInfo.RouteValueDictionary.Add("model", model);
-        //    return callInfo;
-        //}
 
     }
 }
