@@ -205,6 +205,11 @@ namespace Epilogger.Web.Controllers {
         public System.Web.Mvc.ActionResult LiveGetLastPhotosJson() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.LiveGetLastPhotosJson);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult PullTweets() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.PullTweets);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public EventsController Actions { get { return MVC.Events; } }
@@ -258,6 +263,7 @@ namespace Epilogger.Web.Controllers {
             public readonly string Live4X3 = "Live4X3";
             public readonly string LiveGetLastTweetsJson = "LiveGetLastTweetsJson";
             public readonly string LiveGetLastPhotosJson = "LiveGetLastPhotosJson";
+            public readonly string PullTweets = "PullTweets";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -300,6 +306,7 @@ namespace Epilogger.Web.Controllers {
             public const string Live4X3 = "Live4X3";
             public const string LiveGetLastTweetsJson = "LiveGetLastTweetsJson";
             public const string LiveGetLastPhotosJson = "LiveGetLastPhotosJson";
+            public const string PullTweets = "PullTweets";
         }
 
 
@@ -555,6 +562,13 @@ namespace Epilogger.Web.Controllers {
             public readonly string count = "count";
             public readonly string pageLoadTime = "pageLoadTime";
             public readonly string eventID = "eventID";
+        }
+        static readonly ActionParamsClass_PullTweets s_params_PullTweets = new ActionParamsClass_PullTweets();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_PullTweets PullTweetsParams { get { return s_params_PullTweets; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_PullTweets {
+            public readonly string eventId = "eventId";
         }
         static readonly ViewNames s_views = new ViewNames();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -875,6 +889,12 @@ namespace Epilogger.Web.Controllers {
             callInfo.RouteValueDictionary.Add("count", count);
             callInfo.RouteValueDictionary.Add("pageLoadTime", pageLoadTime);
             callInfo.RouteValueDictionary.Add("eventID", eventID);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult PullTweets(int eventId) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.PullTweets);
+            callInfo.RouteValueDictionary.Add("eventId", eventId);
             return callInfo;
         }
 

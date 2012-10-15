@@ -86,6 +86,7 @@ namespace Epilogger.Web.Controllers {
             public readonly string Terms = "Terms";
             public readonly string Privacy = "Privacy";
             public readonly string SocialBar = "SocialBar";
+            public readonly string WebStatus = "WebStatus";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -101,6 +102,7 @@ namespace Epilogger.Web.Controllers {
             public const string Terms = "Terms";
             public const string Privacy = "Privacy";
             public const string SocialBar = "SocialBar";
+            public const string WebStatus = "WebStatus";
         }
 
 
@@ -149,6 +151,7 @@ namespace Epilogger.Web.Controllers {
             public readonly string SocialBar = "~/Views/Home/SocialBar.cshtml";
             public readonly string StatusMessages = "~/Views/Home/StatusMessages.cshtml";
             public readonly string Terms = "~/Views/Home/Terms.cshtml";
+            public readonly string WebStatus = "~/Views/Home/WebStatus.cshtml";
         }
     }
 
@@ -225,6 +228,11 @@ namespace Epilogger.Web.Controllers {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.SocialBar);
             callInfo.RouteValueDictionary.Add("eventid", eventid);
             callInfo.RouteValueDictionary.Add("photoid", photoid);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult WebStatus() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.WebStatus);
             return callInfo;
         }
 

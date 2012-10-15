@@ -369,6 +369,9 @@
     <Compile Include="ImageUploadController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="JoinController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\AddBlogPostViewModel.cs" />
     <Compile Include="Models\AddLinkViewModel.cs" />
@@ -509,6 +512,7 @@
     <Content Include="Public\images\signup\NoAvatar.png" />
     <Content Include="Public\images\signup\twitter-bird-light-bgs-sm.png" />
     <Content Include="Public\images\signup\twitterButton.png" />
+    <Content Include="Public\images\video-play.jpg" />
     <Content Include="Public\images\widget\icon-arrow.png" />
     <Content Include="Public\images\widget\logo\chevywidget.png" />
     <Content Include="Public\images\widget\menu-active.png" />
@@ -8729,7 +8733,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>16007</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

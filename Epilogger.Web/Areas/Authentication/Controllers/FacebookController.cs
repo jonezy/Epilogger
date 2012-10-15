@@ -210,7 +210,7 @@ namespace Epilogger.Web.Areas.Authentication.Controllers {
             return null;
         }
 
-        public ActionResult DisconnectClean()
+        public virtual ActionResult DisconnectClean()
         {
             var service = new UserAuthenticationProfileService();
             service.DisconnectService(AuthenticationServices.FACEBOOK, CurrentUserID, "Web");

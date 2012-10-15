@@ -112,7 +112,8 @@ namespace Epilogger.Web.Controllers {
 
         //public ActionResult Details(int id) {
         [CompressFilter]
-        public virtual ActionResult Details(string id)
+        public virtual ActionResult 
+            Details(string id)
         {
 
             var requestedEvent = _es.FindBySlug(id);
@@ -1779,7 +1780,7 @@ namespace Epilogger.Web.Controllers {
 
 
 
-        public ActionResult PullTweets(int eventId)
+        public virtual ActionResult PullTweets(int eventId)
         {
 
             var evt = _es.FindByID(eventId);
@@ -1808,8 +1809,7 @@ namespace Epilogger.Web.Controllers {
 
         }
 
-
-
+        
     }
 
 }
