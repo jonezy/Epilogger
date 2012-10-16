@@ -95,6 +95,11 @@ namespace Epilogger.Web.Areas.Api.Models
             return Mapper.Map<List<Event>, List<ApiEvent>>(_us.GetUserSubscribedAndCreatedEvents(userID, page, count).ToList());
         }
 
+        public List<ApiEvent> GetUserSubscribedEvents(Guid userId, int page, int count)
+        {
+            return Mapper.Map<List<Event>, List<ApiEvent>>(_us.GetUserSubscribedEvents(userId, page, count).ToList());
+        }
+
         
     }
  

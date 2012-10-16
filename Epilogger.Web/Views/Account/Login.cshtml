@@ -49,7 +49,7 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Html.ActionLink("Forgot your password?", "ForgotPassword", "account")
                 </div>
                
-            
+                @Html.HiddenFor(model => Model.ReturnUrl)
             </div>
       
         }
