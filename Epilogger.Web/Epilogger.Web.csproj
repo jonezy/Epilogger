@@ -285,6 +285,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BrowseController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageUploadController.cs" />
@@ -479,6 +480,7 @@
     <Content Include="Public\css\geckoboard\darkAdjusted.css" />
     <Content Include="Public\css\geckoboard\EPLCustom.css" />
     <Content Include="Public\css\geckoboard\lightBasic.css" />
+    <Content Include="Public\css\video.css" />
     <Content Include="Public\images\DefaultProfilePicture.png" />
     <Content Include="Public\images\email\bg-tablebottom.png" />
     <Content Include="Public\images\email\bg-tableleft.png" />
@@ -498,6 +500,10 @@
     <Content Include="Public\images\email\screenshot-browse.jpg" />
     <Content Include="Public\images\email\screenshot-events.jpg" />
     <Content Include="Public\images\email\screenshot-home.jpg" />
+    <Content Include="Public\images\error\btn-search-home.png" />
+    <Content Include="Public\images\error\jaggies-trans.gif" />
+    <Content Include="Public\images\error\logoSmall.png" />
+    <Content Include="Public\images\error\scoobygang.png" />
     <Content Include="Public\images\icons\facebookThumb.png" />
     <Content Include="Public\images\icons\twitterThumb.png" />
     <Content Include="Public\images\icons\UploadProfilePic.png" />
@@ -3194,6 +3200,8 @@
     <Content Include="Views\Account\TwitterAuth.cshtml" />
     <Content Include="Views\Account\FacebookAuth.cshtml" />
     <Content Include="Views\Account\_profileImageChoice.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\ServerError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />
