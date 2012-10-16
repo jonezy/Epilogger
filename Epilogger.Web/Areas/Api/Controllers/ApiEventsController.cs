@@ -247,8 +247,12 @@ namespace Epilogger.Web.Areas.Api.Controllers
                 return Json(_eventManager.GetUserSubscribedAndCreatedEvents(userId, page,count), JsonRequestBehavior.AllowGet);
             }
 
-        
-
+            [HmacAuthorization]
+            public virtual JsonResult GetUserSubscribedEvents(Guid userId, int page, int count)
+            {
+                return Json(_eventManager.GetUserSubscribedEvents(userId, page, count), JsonRequestBehavior.AllowGet);
+            }
+    
 
 
         #endregion

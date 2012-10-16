@@ -19,6 +19,7 @@ namespace Epilogger.Web.Areas.Api.Models
         List<ApiSearchInEvent> SearchInEvent(int eventId, string searchTerm);
         bool Delete(int id);
         List<ApiEvent> GetUserSubscribedAndCreatedEvents(Guid userID, int page, int count);
+        List<ApiEvent> GetUserSubscribedEvents(Guid userId, int page, int count);
     }
 }
 
