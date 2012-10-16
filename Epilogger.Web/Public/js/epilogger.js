@@ -514,7 +514,22 @@ head.ready(function () {
             //08/25/2012 04:09:42
         }
     }
+});
 
-
-
+//Adds empty space to the flash div, so the flash_% message does not cover up the header
+head.ready(function () {
+    if ($('#flash').length != 0) {
+        var messageSize = 30;
+        //var heightAmount = messageSize + $('#flash').height();
+        if ($('#[id^=flash_]').length > 0) {
+            $('#flash').height($('#flash').height() + messageSize); ;
+        }
+        else {
+            $('#flash').height(0);
+        }
+        // remove messageSize amount per click
+        $('#[id^=flash_]').click(function () {
+            $('#flash').height($('#flash').height() - messageSize);
+        })
+    }
 });
