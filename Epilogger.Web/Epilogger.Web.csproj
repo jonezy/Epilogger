@@ -479,6 +479,7 @@
     <Content Include="Public\css\geckoboard\darkAdjusted.css" />
     <Content Include="Public\css\geckoboard\EPLCustom.css" />
     <Content Include="Public\css\geckoboard\lightBasic.css" />
+    <Content Include="Public\css\video.css" />
     <Content Include="Public\images\DefaultProfilePicture.png" />
     <Content Include="Public\images\email\bg-tablebottom.png" />
     <Content Include="Public\images\email\bg-tableleft.png" />
