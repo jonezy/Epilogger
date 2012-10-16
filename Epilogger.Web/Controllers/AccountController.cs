@@ -806,6 +806,8 @@ namespace Epilogger.Web.Controllers {
         public virtual ActionResult Login() {
             CookieHelpers.DestroyCookie("lc");
 
+            var model = new LoginModel() { ReturnUrl = Request.UrlReferrer };
+
             // store this here so that we can redirect the user back later.
             if (Request.QueryString["returnUrl"] != null)
                 TempData["returnUrl"] = Request.QueryString["returnUrl"];
@@ -871,6 +873,9 @@ namespace Epilogger.Web.Controllers {
                              };
                 new UserLoginTrackingService().Save(ut);
 
+
+                if (model.ReturnUrl != null)
+                    return Redirect(model.ReturnUrl.AbsoluteUri);
 
                 return RedirectToAction("index","home");
 
