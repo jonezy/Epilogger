@@ -60,6 +60,8 @@ namespace Epilogger.Web.Models {
         public int? VenueID { get; set; }
         public Epilogger.Data.Venue Venue { get; set; }
 
+        [DisplayName("EventBrite URL")]
+        public string EventBrightUrl { get; set; }
 
         [DisplayName("Time Zone")]
         public int TimeZoneOffset { get; set; }
