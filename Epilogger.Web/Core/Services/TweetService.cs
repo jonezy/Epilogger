@@ -301,7 +301,7 @@ namespace Epilogger.Web
                 {
                     tAndA.MemoryBoxItem = new MemoryBoxItem()
                     {
-                        ID = int.Parse(row["tId"].ToString()),
+                        ID = int.Parse(row["mId"].ToString()),
                         EventId = int.Parse(row["mEventID"].ToString()),
                         MemboxId = int.Parse(row["MemboxId"].ToString()),
                         UserId = Guid.Parse(row["UserId"].ToString()),
