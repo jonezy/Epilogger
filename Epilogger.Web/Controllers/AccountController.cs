@@ -812,7 +812,7 @@ namespace Epilogger.Web.Controllers {
             if (Request.QueryString["returnUrl"] != null)
                 TempData["returnUrl"] = Request.QueryString["returnUrl"];
 
-            return View(new LoginModel());
+            return View(model);
         }
 
         [HttpPost]
