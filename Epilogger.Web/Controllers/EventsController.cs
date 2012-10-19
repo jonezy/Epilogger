@@ -1561,7 +1561,8 @@ namespace Epilogger.Web.Controllers {
                 {
                     Tweet = _ts.FindByTwitterID(imageComment.TwitterID),
                     Event = _es.FindByID(eventid),
-                    IsTwitterAuthed = CurrentUserTwitterAuthorization != null
+                    IsTwitterAuthed = CurrentUserTwitterAuthorization != null,
+                    IsUserLoggedIn = CurrentUser != null
                 };    
             }
             else
@@ -1570,7 +1571,8 @@ namespace Epilogger.Web.Controllers {
                 {
                     Tweet = new Tweet(),
                     Event = _es.FindByID(eventid),
-                    IsTwitterAuthed = CurrentUserTwitterAuthorization != null
+                    IsTwitterAuthed = CurrentUserTwitterAuthorization != null,
+                    IsUserLoggedIn = CurrentUser != null
                 }; 
             }
             
@@ -1606,6 +1608,14 @@ namespace Epilogger.Web.Controllers {
                     DateTime = DateTime.UtcNow
                 };
                 _userTwitterActionService.Save(uta);
+
+                //if (c[2] != null)
+                //{
+                //    if (c[2] == "1")
+                //    {
+                //        this.Receive(MessageType.Success, "Your tweet has been sent");
+                //    }
+                //}
 
                 return ts.Result == RequestResult.Success;
             }

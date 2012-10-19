@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Epilogger | Connect Twitter";
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+<div class="spacer"></div>
+<div class="signUpHeading center">
+    <h1>In order to send your tweet we need to connect your account to Twitter</h1>
+</div>
+    
+<div class="spacer"></div>
+
+<div>
+    @*Connect/Disconnect Twitter*@
+    @Html.Action("GetTwitterConnect")
+</div>
+
+<script type="text/javascript">
+
+    function popTheWindow(url) {
+        window.open(url, 'twitterAuth2', "width=400,height=300,scrollbars=no");
+        return false;
+    }
+
+    function refreshTwitterConnection() {
+        $.get('@Url.Action("GetTwitterConnect")', function (data) {
+            $("#TwitterConnectSection").replaceWith(data);
+            window.location = '@Url.Action("CloseAndRefresh")';
+        });
+    }
+
+</script>

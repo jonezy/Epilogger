@@ -271,7 +271,8 @@ function Tweetbox(url) {
 
     var twitterBox = {
         NewTweet: $("#tweetBoxPhoto").val(),
-        TwitterID: $("#TwitterID").val()
+        TwitterID: $("#TwitterID").val(),
+        VisibleConfirmation: $("#VisibleConfirmation").val()
     };
 
     $.post(url, twitterBox,
