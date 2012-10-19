@@ -125,6 +125,9 @@ namespace Epilogger.Web.Controllers {
                 {
                     ShortCreateFormSaveUser(model);
 
+                    if (model.InPopUp)
+                        return RedirectToAction("Account", "CloseAndRefresh");
+
                     return RedirectToAction("Index", "Home");
                 }
                 catch (Exception ex)
@@ -228,6 +231,9 @@ namespace Epilogger.Web.Controllers {
                 {
                     ShortCreateFormSaveUser(model);
 
+                    if (model.InPopUp)
+                        return RedirectToAction("ConnectTwitter", "Account");
+
                     return RedirectToAction("Index", "Home");
                 }
                 catch (Exception ex)
@@ -287,6 +293,9 @@ namespace Epilogger.Web.Controllers {
                 {
                     FullCreateFormSaveUser(model);
 
+                    if (model.InPopUp)
+                        return RedirectToAction("ConnectTwitter", "Account");
+
                     return RedirectToAction("Index", "Home");
                 }
                 catch (Exception ex)
@@ -299,8 +308,6 @@ namespace Epilogger.Web.Controllers {
 
             return View(model);
         }
-
-
 
         /* Called from a link, there is no page.*/
         [HttpGet]

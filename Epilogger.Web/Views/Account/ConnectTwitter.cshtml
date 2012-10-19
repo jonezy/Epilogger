@@ -11,6 +11,22 @@
 <div class="spacer"></div>
 
 <div>
-     @*Connect/Disconnect Twitter*@
-     @Html.Action("GetTwitterConnect")
+    @*Connect/Disconnect Twitter*@
+    @Html.Action("GetTwitterConnect")
 </div>
+
+<script type="text/javascript">
+
+    function popTheWindow(url) {
+        window.open(url, 'twitterAuth2', "width=400,height=300,scrollbars=no");
+        return false;
+    }
+
+    function refreshTwitterConnection() {
+        $.get('@Url.Action("GetTwitterConnect")', function (data) {
+            $("#TwitterConnectSection").replaceWith(data);
+            window.location = '@Url.Action("CloseAndRefresh")';
+        });
+    }
+
+</script>
