@@ -2,6 +2,10 @@
 
 
 <div class="createAccountPage">
+    @if (Model.InPopUp)
+    {
+        <div class="spacer"></div>
+    }
     <div class="signUpHeading center">
         <h1>Almost there, <img src="@string.Format("/Public/images/signup/{0}", Model.AuthService == "twitter" ? "twitter-bird-light-bgs-sm.png" : "faceookLofo-sm.png")" style="margin-top:-6px;" alt="Twitter" /> @Model.FirstName @Model.LastName!</h1>
         <h2>We just need a little more information...</h2>
@@ -44,7 +48,7 @@
                     @Html.DropDownList("y_DOB", Enumerable.Range(1920, (DateTime.UtcNow.Year - 1920)).Reverse().Select(i => new SelectListItem { Value = i.ToString(), Text = i.ToString() }), "Year")
                     @Html.ValidationMessageFor(model => model.DateOfBirth)
                     <span class="birthdayText">Epilogger uses your birthday to determine which type of events you are allowed to see. <strong>Your birth day will not be shared with anyone.</strong></span>
-                 </div>
+                </div>
             </fieldset>
             
             @Html.ValidationSummary()

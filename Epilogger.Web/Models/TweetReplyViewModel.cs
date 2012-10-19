@@ -8,6 +8,7 @@ namespace Epilogger.Web.Models
         public Event Event { get; set; }
         public string ReplyNewTweet { get; set; }
         public bool IsTwitterAuthed { get; set; }
+        public bool IsUserLoggedIn { get; set; }
         public string ShortEventURL { get; set; }
     }
 }

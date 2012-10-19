@@ -285,7 +285,6 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BrowseController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
-    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageUploadController.cs" />
@@ -368,9 +367,6 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="ImageUploadController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="JoinController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModel.cs" />
@@ -480,7 +476,6 @@
     <Content Include="Public\css\geckoboard\darkAdjusted.css" />
     <Content Include="Public\css\geckoboard\EPLCustom.css" />
     <Content Include="Public\css\geckoboard\lightBasic.css" />
-    <Content Include="Public\css\video.css" />
     <Content Include="Public\images\DefaultProfilePicture.png" />
     <Content Include="Public\images\email\bg-tablebottom.png" />
     <Content Include="Public\images\email\bg-tableleft.png" />
@@ -500,10 +495,6 @@
     <Content Include="Public\images\email\screenshot-browse.jpg" />
     <Content Include="Public\images\email\screenshot-events.jpg" />
     <Content Include="Public\images\email\screenshot-home.jpg" />
-    <Content Include="Public\images\error\btn-search-home.png" />
-    <Content Include="Public\images\error\jaggies-trans.gif" />
-    <Content Include="Public\images\error\logoSmall.png" />
-    <Content Include="Public\images\error\scoobygang.png" />
     <Content Include="Public\images\icons\facebookThumb.png" />
     <Content Include="Public\images\icons\twitterThumb.png" />
     <Content Include="Public\images\icons\UploadProfilePic.png" />
@@ -518,7 +509,6 @@
     <Content Include="Public\images\signup\NoAvatar.png" />
     <Content Include="Public\images\signup\twitter-bird-light-bgs-sm.png" />
     <Content Include="Public\images\signup\twitterButton.png" />
-    <Content Include="Public\images\video-play.jpg" />
     <Content Include="Public\images\widget\icon-arrow.png" />
     <Content Include="Public\images\widget\logo\chevywidget.png" />
     <Content Include="Public\images\widget\menu-active.png" />
@@ -3200,8 +3190,9 @@
     <Content Include="Views\Account\TwitterAuth.cshtml" />
     <Content Include="Views\Account\FacebookAuth.cshtml" />
     <Content Include="Views\Account\_profileImageChoice.cshtml" />
-    <Content Include="Views\Error\NotFound.cshtml" />
-    <Content Include="Views\Error\ServerError.cshtml" />
+    <Content Include="Views\Shared\_PopupLayout.cshtml" />
+    <Content Include="Views\Account\CloseAndRefresh.cshtml" />
+    <Content Include="Views\Account\ConnectTwitter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />
@@ -5297,7 +5288,7 @@
     <Content Include="Views\Events\Edit.cshtml" />
     <Content Include="Views\Browse\_BrowseEventOverview.cshtml" />
     <Content Include="Views\Browse\_BrowseEventLists.cshtml" />
-    <Content Include="Views\Shared\_ModalLayout.cshtml" />
+    <Content Include="Views\Shared\_ModalLayoutOLD.cshtml" />
     <Content Include="Views\Events\VenueSearch.cshtml" />
     <Content Include="Views\Browse\_BrowseEventTabContentTemplate.cshtml" />
     <Content Include="Views\Events\_VenueSearchResults.cshtml" />
@@ -8741,7 +8732,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>16007</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
