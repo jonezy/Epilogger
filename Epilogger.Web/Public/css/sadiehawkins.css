@@ -871,7 +871,9 @@ div.profile img {
 .topPhoto { 
     float:left; 
     overflow:hidden; 
-    height:302px;}
+    height:302px;
+    width: 415px;
+    }
     
 .topPhotoComments { 
     overflow:auto; 

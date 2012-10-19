@@ -91,5 +91,4 @@ nav[role="global"] ul li a:hover { padding:8px 15px 5px 15px;}
 
 nav[role="main"] {background:#d1d1d1;}
 nav[role="main"] ul li a {color:#000;display:block;font-size:16px;padding:5px 10px; font-family: 'InterstatePlusBoldCond', 'MuseoSlab500', Chunk Five, Rockwell, serif; }
-nav[role="main"] ul li a:hover {background:#fc5daf;color:#fff;} 
-
+nav[role="main"] ul li a:hover {background:#fc5daf;color:#fff;}

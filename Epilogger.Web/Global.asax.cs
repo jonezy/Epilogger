@@ -383,7 +383,6 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.CurrentUserRole, opt => opt.Ignore())
                 .ForMember(dest => dest.CreatedEventUser, opt => opt.Ignore());
 
-
             Mapper.CreateMap<Event, WidgetViewModel>()
                 .ForMember(dest => dest.Images, opt => opt.Ignore())
                 .ForMember(dest => dest.CheckIns, opt => opt.Ignore())
@@ -546,7 +545,8 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.CollectionMode, opt => opt.UseValue(2))
                 .ForMember(dest => dest.IsFeatured, opt => opt.UseValue(false))
                 .ForMember(dest => dest.FeaturedStartDateTime, opt => opt.UseValue(DateTime.Parse("01/01/1800")))
-                .ForMember(dest => dest.FeaturedEndDateTime, opt => opt.UseValue(DateTime.Parse("01/01/1800")));
+                .ForMember(dest => dest.FeaturedEndDateTime, opt => opt.UseValue(DateTime.Parse("01/01/1800")))
+                .ForMember(dest => dest.EventBrightUrl, opt => opt.Ignore());
 
             Mapper.CreateMap<User, DashboardProfileViewModel>()
                 .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => string.Format("{0} {1}", src.FirstName, src.LastName)))

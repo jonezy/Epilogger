@@ -1,0 +1,22 @@
+.videothumbnailcontainer {
+    float: left;
+    position: relative
+}
+
+.videothumbnail1 {
+    position: absolute;
+    top: 50px;
+    left: 55px;
+}
+
+.videothumbnail2 {
+    position: absolute;
+    top: 130px;
+    left: 180px;
+}
+
+.videothumbnail3 {
+    position: absolute;
+    top: 70px;
+    left: 83px;
+}

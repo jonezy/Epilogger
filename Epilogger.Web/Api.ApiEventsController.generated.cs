@@ -59,6 +59,11 @@ namespace Epilogger.Web.Areas.Api.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult AllFeed() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.AllFeed);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.JsonResult Tweets() {
             return new T4MVC_JsonResult(Area, Name, ActionNames.Tweets);
         }
@@ -120,7 +125,7 @@ namespace Epilogger.Web.Areas.Api.Controllers {
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.JsonResult GetUserById() {
-            return new T4MVC_JsonResult(Area, Name, ActionNames.GetUserByID);
+            return new T4MVC_JsonResult(Area, Name, ActionNames.GetUserById);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -144,8 +149,33 @@ namespace Epilogger.Web.Areas.Api.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult GetUserSubscribedAndCreatedEvents() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.GetUserSubscribedAndCreatedEvents);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.JsonResult AuthEPLUser() {
             return new T4MVC_JsonResult(Area, Name, ActionNames.AuthEPLUser);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult ConnectTwitterAccountToUser() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.ConnectTwitterAccountToUser);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult ConnectFacebookAccountToUser() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.ConnectFacebookAccountToUser);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult DisconnectFacebookAccount() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.DisconnectFacebookAccount);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult DisconnectTwitterAccount() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.DisconnectTwitterAccount);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -179,6 +209,16 @@ namespace Epilogger.Web.Areas.Api.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult GetAllTweetsInMemBoxPaged() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.GetAllTweetsInMemBoxPaged);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult GetAllImagesInMemBoxPaged() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.GetAllImagesInMemBoxPaged);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.JsonResult GetAllMemoryBoxesByUserId() {
             return new T4MVC_JsonResult(Area, Name, ActionNames.GetAllMemoryBoxesByUserId);
         }
@@ -208,6 +248,7 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             public readonly string SearchEvents = "SearchEvents";
             public readonly string FeaturedEvents = "FeaturedEvents";
             public readonly string SearchInEvent = "SearchInEvent";
+            public readonly string AllFeed = "AllFeed";
             public readonly string Tweets = "Tweets";
             public readonly string Top10Tweeters = "Top10Tweeters";
             public readonly string TweetsByImageID = "TweetsByImageID";
@@ -220,12 +261,17 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             public readonly string ImagesByEventPaged = "ImagesByEventPaged";
             public readonly string FindCheckInCountByEventID = "FindCheckInCountByEventID";
             public readonly string FindByEventIDPaged = "FindByEventIDPaged";
-            public readonly string GetUserByID = "GetUserByID";
+            public readonly string GetUserById = "GetUserById";
             public readonly string GetUserByUsername = "GetUserByUsername";
             public readonly string GetUserByEmail = "GetUserByEmail";
             public readonly string SaveUserFollowsEvent = "SaveUserFollowsEvent";
             public readonly string DeleteUserEventSubscription = "DeleteUserEventSubscription";
+            public readonly string GetUserSubscribedAndCreatedEvents = "GetUserSubscribedAndCreatedEvents";
             public readonly string AuthEPLUser = "AuthEPLUser";
+            public readonly string ConnectTwitterAccountToUser = "ConnectTwitterAccountToUser";
+            public readonly string ConnectFacebookAccountToUser = "ConnectFacebookAccountToUser";
+            public readonly string DisconnectFacebookAccount = "DisconnectFacebookAccount";
+            public readonly string DisconnectTwitterAccount = "DisconnectTwitterAccount";
             public readonly string Categories = "Categories";
             public readonly string EventsByCategoryID = "EventsByCategoryID";
             public readonly string GetVenueByID = "GetVenueByID";
@@ -233,11 +279,30 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             public readonly string AddItemToMemBox = "AddItemToMemBox";
             public readonly string RemoveItemFromMemBox = "RemoveItemFromMemBox";
             public readonly string GetAllItemsInMemBoxPaged = "GetAllItemsInMemBoxPaged";
+            public readonly string GetAllTweetsInMemBoxPaged = "GetAllTweetsInMemBoxPaged";
+            public readonly string GetAllImagesInMemBoxPaged = "GetAllImagesInMemBoxPaged";
             public readonly string GetAllMemoryBoxesByUserId = "GetAllMemoryBoxesByUserId";
             public readonly string GetAllMemoryBoxesByUserIdandEventId = "GetAllMemoryBoxesByUserIdandEventId";
             public readonly string GeckoGetUserGrowthDayOverDay = "GeckoGetUserGrowthDayOverDay";
             public readonly string GeckoGetUserGrowthLastWeek = "GeckoGetUserGrowthLastWeek";
             public readonly string GeckoGetUserGrowthLastMonth = "GeckoGetUserGrowthLastMonth";
+            public readonly string GeckoGetDailyUserGrowthLastMonth = "GeckoGetDailyUserGrowthLastMonth";
+            public readonly string GeckoEventCount = "GeckoEventCount";
+            public readonly string GeckoActiveEventCount = "GeckoActiveEventCount";
+            public readonly string GeckoCollectingEventCount = "GeckoCollectingEventCount";
+            public readonly string GeckoEventCountRAG = "GeckoEventCountRAG";
+            public readonly string GeckoGetEventGrowthDayOverDay = "GeckoGetEventGrowthDayOverDay";
+            public readonly string GeckoGetEventGrowthLastWeek = "GeckoGetEventGrowthLastWeek";
+            public readonly string GeckoGetEventGrowthLastMonth = "GeckoGetEventGrowthLastMonth";
+            public readonly string GeckoDailyUniqueActiveUsers = "GeckoDailyUniqueActiveUsers";
+            public readonly string GeckoMonthlyActiveUsers = "GeckoMonthlyActiveUsers";
+            public readonly string GeckoTweetCount = "GeckoTweetCount";
+            public readonly string GeckoPhotoCount = "GeckoPhotoCount";
+            public readonly string GeckoEpiloggerWebsiteStatus = "GeckoEpiloggerWebsiteStatus";
+            public readonly string GeckoEpiloggerServiceStatus = "GeckoEpiloggerServiceStatus";
+            public readonly string GeckoNumberOfTweetsInTheLastHour = "GeckoNumberOfTweetsInTheLastHour";
+            public readonly string GeckoGetTweetGrowthLast24Hours = "GeckoGetTweetGrowthLast24Hours";
+            public readonly string GeckoTopEventByUserActivity = "GeckoTopEventByUserActivity";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -248,6 +313,7 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             public const string SearchEvents = "SearchEvents";
             public const string FeaturedEvents = "FeaturedEvents";
             public const string SearchInEvent = "SearchInEvent";
+            public const string AllFeed = "AllFeed";
             public const string Tweets = "Tweets";
             public const string Top10Tweeters = "Top10Tweeters";
             public const string TweetsByImageID = "TweetsByImageID";
@@ -260,12 +326,17 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             public const string ImagesByEventPaged = "ImagesByEventPaged";
             public const string FindCheckInCountByEventID = "FindCheckInCountByEventID";
             public const string FindByEventIDPaged = "FindByEventIDPaged";
-            public const string GetUserByID = "GetUserByID";
+            public const string GetUserById = "GetUserById";
             public const string GetUserByUsername = "GetUserByUsername";
             public const string GetUserByEmail = "GetUserByEmail";
             public const string SaveUserFollowsEvent = "SaveUserFollowsEvent";
             public const string DeleteUserEventSubscription = "DeleteUserEventSubscription";
+            public const string GetUserSubscribedAndCreatedEvents = "GetUserSubscribedAndCreatedEvents";
             public const string AuthEPLUser = "AuthEPLUser";
+            public const string ConnectTwitterAccountToUser = "ConnectTwitterAccountToUser";
+            public const string ConnectFacebookAccountToUser = "ConnectFacebookAccountToUser";
+            public const string DisconnectFacebookAccount = "DisconnectFacebookAccount";
+            public const string DisconnectTwitterAccount = "DisconnectTwitterAccount";
             public const string Categories = "Categories";
             public const string EventsByCategoryID = "EventsByCategoryID";
             public const string GetVenueByID = "GetVenueByID";
@@ -273,11 +344,30 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             public const string AddItemToMemBox = "AddItemToMemBox";
             public const string RemoveItemFromMemBox = "RemoveItemFromMemBox";
             public const string GetAllItemsInMemBoxPaged = "GetAllItemsInMemBoxPaged";
+            public const string GetAllTweetsInMemBoxPaged = "GetAllTweetsInMemBoxPaged";
+            public const string GetAllImagesInMemBoxPaged = "GetAllImagesInMemBoxPaged";
             public const string GetAllMemoryBoxesByUserId = "GetAllMemoryBoxesByUserId";
             public const string GetAllMemoryBoxesByUserIdandEventId = "GetAllMemoryBoxesByUserIdandEventId";
             public const string GeckoGetUserGrowthDayOverDay = "GeckoGetUserGrowthDayOverDay";
             public const string GeckoGetUserGrowthLastWeek = "GeckoGetUserGrowthLastWeek";
             public const string GeckoGetUserGrowthLastMonth = "GeckoGetUserGrowthLastMonth";
+            public const string GeckoGetDailyUserGrowthLastMonth = "GeckoGetDailyUserGrowthLastMonth";
+            public const string GeckoEventCount = "GeckoEventCount";
+            public const string GeckoActiveEventCount = "GeckoActiveEventCount";
+            public const string GeckoCollectingEventCount = "GeckoCollectingEventCount";
+            public const string GeckoEventCountRAG = "GeckoEventCountRAG";
+            public const string GeckoGetEventGrowthDayOverDay = "GeckoGetEventGrowthDayOverDay";
+            public const string GeckoGetEventGrowthLastWeek = "GeckoGetEventGrowthLastWeek";
+            public const string GeckoGetEventGrowthLastMonth = "GeckoGetEventGrowthLastMonth";
+            public const string GeckoDailyUniqueActiveUsers = "GeckoDailyUniqueActiveUsers";
+            public const string GeckoMonthlyActiveUsers = "GeckoMonthlyActiveUsers";
+            public const string GeckoTweetCount = "GeckoTweetCount";
+            public const string GeckoPhotoCount = "GeckoPhotoCount";
+            public const string GeckoEpiloggerWebsiteStatus = "GeckoEpiloggerWebsiteStatus";
+            public const string GeckoEpiloggerServiceStatus = "GeckoEpiloggerServiceStatus";
+            public const string GeckoNumberOfTweetsInTheLastHour = "GeckoNumberOfTweetsInTheLastHour";
+            public const string GeckoGetTweetGrowthLast24Hours = "GeckoGetTweetGrowthLast24Hours";
+            public const string GeckoTopEventByUserActivity = "GeckoTopEventByUserActivity";
         }
 
 
@@ -312,6 +402,15 @@ namespace Epilogger.Web.Areas.Api.Controllers {
         public class ActionParamsClass_SearchInEvent {
             public readonly string eventId = "eventId";
             public readonly string searchTerm = "searchTerm";
+        }
+        static readonly ActionParamsClass_AllFeed s_params_AllFeed = new ActionParamsClass_AllFeed();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_AllFeed AllFeedParams { get { return s_params_AllFeed; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_AllFeed {
+            public readonly string eventId = "eventId";
+            public readonly string page = "page";
+            public readonly string count = "count";
         }
         static readonly ActionParamsClass_Tweets s_params_Tweets = new ActionParamsClass_Tweets();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -411,11 +510,11 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             public readonly string page = "page";
             public readonly string count = "count";
         }
-        static readonly ActionParamsClass_GetUserByID s_params_GetUserByID = new ActionParamsClass_GetUserByID();
+        static readonly ActionParamsClass_GetUserById s_params_GetUserById = new ActionParamsClass_GetUserById();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_GetUserByID GetUserByIDParams { get { return s_params_GetUserByID; } }
+        public ActionParamsClass_GetUserById GetUserByIdParams { get { return s_params_GetUserById; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_GetUserByID {
+        public class ActionParamsClass_GetUserById {
             public readonly string userId = "userId";
         }
         static readonly ActionParamsClass_GetUserByUsername s_params_GetUserByUsername = new ActionParamsClass_GetUserByUsername();
@@ -447,12 +546,49 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             public readonly string userId = "userId";
             public readonly string eventId = "eventId";
         }
+        static readonly ActionParamsClass_GetUserSubscribedAndCreatedEvents s_params_GetUserSubscribedAndCreatedEvents = new ActionParamsClass_GetUserSubscribedAndCreatedEvents();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_GetUserSubscribedAndCreatedEvents GetUserSubscribedAndCreatedEventsParams { get { return s_params_GetUserSubscribedAndCreatedEvents; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_GetUserSubscribedAndCreatedEvents {
+            public readonly string userId = "userId";
+            public readonly string page = "page";
+            public readonly string count = "count";
+        }
         static readonly ActionParamsClass_AuthEPLUser s_params_AuthEPLUser = new ActionParamsClass_AuthEPLUser();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_AuthEPLUser AuthEPLUserParams { get { return s_params_AuthEPLUser; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_AuthEPLUser {
             public readonly string headers = "headers";
+        }
+        static readonly ActionParamsClass_ConnectTwitterAccountToUser s_params_ConnectTwitterAccountToUser = new ActionParamsClass_ConnectTwitterAccountToUser();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ConnectTwitterAccountToUser ConnectTwitterAccountToUserParams { get { return s_params_ConnectTwitterAccountToUser; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ConnectTwitterAccountToUser {
+            public readonly string caa = "caa";
+        }
+        static readonly ActionParamsClass_ConnectFacebookAccountToUser s_params_ConnectFacebookAccountToUser = new ActionParamsClass_ConnectFacebookAccountToUser();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ConnectFacebookAccountToUser ConnectFacebookAccountToUserParams { get { return s_params_ConnectFacebookAccountToUser; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ConnectFacebookAccountToUser {
+            public readonly string caa = "caa";
+        }
+        static readonly ActionParamsClass_DisconnectFacebookAccount s_params_DisconnectFacebookAccount = new ActionParamsClass_DisconnectFacebookAccount();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_DisconnectFacebookAccount DisconnectFacebookAccountParams { get { return s_params_DisconnectFacebookAccount; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_DisconnectFacebookAccount {
+            public readonly string userId = "userId";
+        }
+        static readonly ActionParamsClass_DisconnectTwitterAccount s_params_DisconnectTwitterAccount = new ActionParamsClass_DisconnectTwitterAccount();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_DisconnectTwitterAccount DisconnectTwitterAccountParams { get { return s_params_DisconnectTwitterAccount; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_DisconnectTwitterAccount {
+            public readonly string userId = "userId";
         }
         static readonly ActionParamsClass_EventsByCategoryID s_params_EventsByCategoryID = new ActionParamsClass_EventsByCategoryID();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -496,6 +632,24 @@ namespace Epilogger.Web.Areas.Api.Controllers {
         public ActionParamsClass_GetAllItemsInMemBoxPaged GetAllItemsInMemBoxPagedParams { get { return s_params_GetAllItemsInMemBoxPaged; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_GetAllItemsInMemBoxPaged {
+            public readonly string memBoxId = "memBoxId";
+            public readonly string page = "page";
+            public readonly string count = "count";
+        }
+        static readonly ActionParamsClass_GetAllTweetsInMemBoxPaged s_params_GetAllTweetsInMemBoxPaged = new ActionParamsClass_GetAllTweetsInMemBoxPaged();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_GetAllTweetsInMemBoxPaged GetAllTweetsInMemBoxPagedParams { get { return s_params_GetAllTweetsInMemBoxPaged; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_GetAllTweetsInMemBoxPaged {
+            public readonly string memBoxId = "memBoxId";
+            public readonly string page = "page";
+            public readonly string count = "count";
+        }
+        static readonly ActionParamsClass_GetAllImagesInMemBoxPaged s_params_GetAllImagesInMemBoxPaged = new ActionParamsClass_GetAllImagesInMemBoxPaged();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_GetAllImagesInMemBoxPaged GetAllImagesInMemBoxPagedParams { get { return s_params_GetAllImagesInMemBoxPaged; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_GetAllImagesInMemBoxPaged {
             public readonly string memBoxId = "memBoxId";
             public readonly string page = "page";
             public readonly string count = "count";
@@ -562,6 +716,14 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.SearchInEvent);
             callInfo.RouteValueDictionary.Add("eventId", eventId);
             callInfo.RouteValueDictionary.Add("searchTerm", searchTerm);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult AllFeed(int eventId, int page, int count) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.AllFeed);
+            callInfo.RouteValueDictionary.Add("eventId", eventId);
+            callInfo.RouteValueDictionary.Add("page", page);
+            callInfo.RouteValueDictionary.Add("count", count);
             return callInfo;
         }
 
@@ -652,7 +814,7 @@ namespace Epilogger.Web.Areas.Api.Controllers {
         }
 
         public override System.Web.Mvc.JsonResult GetUserById(System.Guid userId) {
-            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GetUserByID);
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GetUserById);
             callInfo.RouteValueDictionary.Add("userId", userId);
             return callInfo;
         }
@@ -682,9 +844,41 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             return callInfo;
         }
 
+        public override System.Web.Mvc.JsonResult GetUserSubscribedAndCreatedEvents(System.Guid userId, int page, int count) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GetUserSubscribedAndCreatedEvents);
+            callInfo.RouteValueDictionary.Add("userId", userId);
+            callInfo.RouteValueDictionary.Add("page", page);
+            callInfo.RouteValueDictionary.Add("count", count);
+            return callInfo;
+        }
+
         public override System.Web.Mvc.JsonResult AuthEPLUser(System.Collections.Specialized.NameValueCollection headers) {
             var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.AuthEPLUser);
             callInfo.RouteValueDictionary.Add("headers", headers);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult ConnectTwitterAccountToUser(Epilogger.Web.Areas.Api.Models.ApiConnectAuthAccount caa) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.ConnectTwitterAccountToUser);
+            callInfo.RouteValueDictionary.Add("caa", caa);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult ConnectFacebookAccountToUser(Epilogger.Web.Areas.Api.Models.ApiConnectAuthAccount caa) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.ConnectFacebookAccountToUser);
+            callInfo.RouteValueDictionary.Add("caa", caa);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult DisconnectFacebookAccount(System.Guid userId) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.DisconnectFacebookAccount);
+            callInfo.RouteValueDictionary.Add("userId", userId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult DisconnectTwitterAccount(System.Guid userId) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.DisconnectTwitterAccount);
+            callInfo.RouteValueDictionary.Add("userId", userId);
             return callInfo;
         }
 
@@ -733,6 +927,22 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             return callInfo;
         }
 
+        public override System.Web.Mvc.JsonResult GetAllTweetsInMemBoxPaged(int memBoxId, int page, int count) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GetAllTweetsInMemBoxPaged);
+            callInfo.RouteValueDictionary.Add("memBoxId", memBoxId);
+            callInfo.RouteValueDictionary.Add("page", page);
+            callInfo.RouteValueDictionary.Add("count", count);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GetAllImagesInMemBoxPaged(int memBoxId, int page, int count) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GetAllImagesInMemBoxPaged);
+            callInfo.RouteValueDictionary.Add("memBoxId", memBoxId);
+            callInfo.RouteValueDictionary.Add("page", page);
+            callInfo.RouteValueDictionary.Add("count", count);
+            return callInfo;
+        }
+
         public override System.Web.Mvc.JsonResult GetAllMemoryBoxesByUserId(System.Guid userId) {
             var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GetAllMemoryBoxesByUserId);
             callInfo.RouteValueDictionary.Add("userId", userId);
@@ -758,6 +968,91 @@ namespace Epilogger.Web.Areas.Api.Controllers {
 
         public override System.Web.Mvc.JsonResult GeckoGetUserGrowthLastMonth() {
             var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GeckoGetUserGrowthLastMonth);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GeckoGetDailyUserGrowthLastMonth() {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GeckoGetDailyUserGrowthLastMonth);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GeckoEventCount() {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GeckoEventCount);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GeckoActiveEventCount() {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GeckoActiveEventCount);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GeckoCollectingEventCount() {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GeckoCollectingEventCount);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GeckoEventCountRAG() {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GeckoEventCountRAG);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GeckoGetEventGrowthDayOverDay() {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GeckoGetEventGrowthDayOverDay);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GeckoGetEventGrowthLastWeek() {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GeckoGetEventGrowthLastWeek);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GeckoGetEventGrowthLastMonth() {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GeckoGetEventGrowthLastMonth);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GeckoDailyUniqueActiveUsers() {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GeckoDailyUniqueActiveUsers);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GeckoMonthlyActiveUsers() {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GeckoMonthlyActiveUsers);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GeckoTweetCount() {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GeckoTweetCount);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GeckoPhotoCount() {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GeckoPhotoCount);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GeckoEpiloggerWebsiteStatus() {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GeckoEpiloggerWebsiteStatus);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GeckoEpiloggerServiceStatus() {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GeckoEpiloggerServiceStatus);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GeckoNumberOfTweetsInTheLastHour() {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GeckoNumberOfTweetsInTheLastHour);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GeckoGetTweetGrowthLast24Hours() {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GeckoGetTweetGrowthLast24Hours);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GeckoTopEventByUserActivity() {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GeckoTopEventByUserActivity);
             return callInfo;
         }
 

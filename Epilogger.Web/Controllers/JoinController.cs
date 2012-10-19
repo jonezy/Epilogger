@@ -17,7 +17,7 @@ using RichmondDay.Helpers;
 using Twitterizer;
 
 namespace Epilogger.Web.Controllers {
-    public class JoinController : BaseController 
+    public partial class JoinController : BaseController 
     {
 
         UserService _us;
@@ -29,7 +29,7 @@ namespace Epilogger.Web.Controllers {
         }
 
         /* Sign up page Step 1 or 2 */
-        public ActionResult Signup()
+        public virtual ActionResult Signup()
         {
             if (InPopUp)
                 ViewBag.InPopUp = true;
@@ -39,7 +39,7 @@ namespace Epilogger.Web.Controllers {
 
         /* Create Account with Twitter Button */
         [HttpGet]
-        public ActionResult Twitter()
+        public virtual ActionResult Twitter()
         {
             try
             {
@@ -111,7 +111,7 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpPost]
-        public ActionResult Twitter(CreateAccountModel model)
+        public virtual ActionResult Twitter(CreateAccountModel model)
         {
             if (ModelState.IsValid)
             {
@@ -144,7 +144,7 @@ namespace Epilogger.Web.Controllers {
 
         /* Create Account with Facebook Button */
         [HttpGet]
-        public ActionResult Facebook(string returnUrl)
+        public virtual ActionResult Facebook(string returnUrl)
         {
             try
             {
@@ -217,7 +217,7 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpPost]
-        public ActionResult Facebook(CreateAccountModel model)
+        public virtual ActionResult Facebook(CreateAccountModel model)
         {
             if (ModelState.IsValid)
             {
@@ -250,7 +250,7 @@ namespace Epilogger.Web.Controllers {
 
         /* Create Account - Full */
         [HttpGet]
-        public ActionResult Email()
+        public virtual ActionResult Email()
         {
             try
             {
@@ -279,7 +279,7 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpPost]
-        public ActionResult Email(CreateAccountModel model)
+        public virtual ActionResult Email(CreateAccountModel model)
         {
             if (ModelState.IsValid)
             {
@@ -311,7 +311,7 @@ namespace Epilogger.Web.Controllers {
 
         /* Called from a link, there is no page.*/
         [HttpGet]
-        public ActionResult ResendVerificationEmail()
+        public virtual ActionResult ResendVerificationEmail()
         {
             try
             {

@@ -3766,6 +3766,23 @@ namespace Epilogger.Data
 		    }
 		}
 		
+        partial void OnEventBrightUrlChanging(string value);
+        partial void OnEventBrightUrlChanged();
+		
+		private string _EventBrightUrl;
+		public string EventBrightUrl { 
+		    get{
+		        return _EventBrightUrl;
+		    } 
+		    set{
+		        this.OnEventBrightUrlChanging(value);
+                this.SendPropertyChanging();
+                this._EventBrightUrl = value;
+                this.SendPropertyChanged("EventBrightUrl");
+                this.OnEventBrightUrlChanged();
+		    }
+		}
+		
 
         #endregion
 
@@ -4335,6 +4352,23 @@ namespace Epilogger.Data
                 this._ImageFingerPrint = value;
                 this.SendPropertyChanged("ImageFingerPrint");
                 this.OnImageFingerPrintChanged();
+		    }
+		}
+		
+        partial void OnMediaTypeChanging(short value);
+        partial void OnMediaTypeChanged();
+		
+		private short _MediaType;
+		public short MediaType { 
+		    get{
+		        return _MediaType;
+		    } 
+		    set{
+		        this.OnMediaTypeChanging(value);
+                this.SendPropertyChanging();
+                this._MediaType = value;
+                this.SendPropertyChanged("MediaType");
+                this.OnMediaTypeChanged();
 		    }
 		}
 		

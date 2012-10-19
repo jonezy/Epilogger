@@ -112,9 +112,12 @@ namespace Epilogger.Web.Areas.Api
                 new { controller = "ApiEvents", action = "GetUserSubscribedAndCreatedEvents", userId = UrlParameter.Optional, page = UrlParameter.Optional, count = UrlParameter.Optional }
             );
 
-
-
-
+            context.MapRoute(
+                "SubscribedEventsByUserId",
+                "Api/Events/Me/Subscribed/{userId}/{page}/{count}",
+                new { controller = "ApiEvents", action = "GetUserSubscribedEvents", userId = UrlParameter.Optional, page = UrlParameter.Optional, count = UrlParameter.Optional }
+            );
+            
             context.MapRoute(
                 "TweetCountByImageID",
                 "Api/Tweets/{eventid}/image/{imageid}/count",
@@ -258,6 +261,12 @@ namespace Epilogger.Web.Areas.Api
                 "Api/MemoryBoxes/MemoryBox/AddItem",
                 new { controller = "ApiEvents", action = "AddItemToMemBox" }
             );
+
+            context.MapRoute(
+                "RemoveItemFromMemBox",
+                "Api/MemoryBoxes/MemoryBox/RemoveItem/{memBoxItemId}",
+                new { controller = "ApiEvents", action = "RemoveItemFromMemBox", memBoxItemId = UrlParameter.Optional }
+            );
             
             context.MapRoute(
                 "GetAllItemsInMemBoxPaged",
@@ -290,13 +299,6 @@ namespace Epilogger.Web.Areas.Api
             );
 
             
-            
-
-            context.MapRoute(
-                "RemoveItemFromMemBox",
-                "Api/MemoryBoxes/MemoryBox/RemoveItem/{memBoxItemId}",
-                new { controller = "ApiEvents", action = "RemoveItemFromMemBox", memBoxItemId = UrlParameter.Optional }
-            );
 
             
             /* Stats */

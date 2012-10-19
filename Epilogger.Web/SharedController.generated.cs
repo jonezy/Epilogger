@@ -33,12 +33,12 @@ namespace T4MVC {
             public readonly string _InteriorLayout = "~/Views/Shared/_InteriorLayout.cshtml";
             public readonly string _InteriorLayoutNoBC = "~/Views/Shared/_InteriorLayoutNoBC.cshtml";
             public readonly string _Layout = "~/Views/Shared/_Layout.cshtml";
-            public readonly string _LayoutOldGood = "~/Views/Shared/_LayoutOldGood.cshtml";
             public readonly string _ModalLayout = "~/Views/Shared/_ModalLayout.cshtml";
             public readonly string Breadcrumb = "~/Views/Shared/Breadcrumb.cshtml";
             public readonly string Error = "~/Views/Shared/Error.cshtml";
             public readonly string GlobalNavigation = "~/Views/Shared/GlobalNavigation.cshtml";
             public readonly string GlobalNavigationOldGood = "~/Views/Shared/GlobalNavigationOldGood.cshtml";
+            public readonly string Nag = "~/Views/Shared/Nag.cshtml";
             public readonly string Navigation = "~/Views/Shared/Navigation.cshtml";
             public readonly string NavigationOldGood = "~/Views/Shared/NavigationOldGood.cshtml";
             static readonly _DisplayTemplates s_DisplayTemplates = new _DisplayTemplates();
