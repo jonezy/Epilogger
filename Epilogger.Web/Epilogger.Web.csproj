@@ -313,6 +313,7 @@
     <Compile Include="Core\Helpers\HtmlHelpers.cs" />
     <Compile Include="Core\Helpers\PasswordHelpers.cs" />
     <Compile Include="Core\Helpers\TwitterHelper.cs" />
+    <Compile Include="Core\Resolvers\ImageUrlResolver.cs" />
     <Compile Include="Core\Resolvers\UserProfilePictureResolver.cs" />
     <Compile Include="Core\Resolvers\UserTimezonesResolver.cs" />
     <Compile Include="Core\Resolvers\TimezonesResolver.cs" />
@@ -356,6 +357,9 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="EmailsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="EventsController.generated.cs">
@@ -3202,6 +3206,9 @@
     <Content Include="Views\Account\_profileImageChoice.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\ServerError.cshtml" />
+    <Content Include="Views\Shared\_PopupLayout.cshtml" />
+    <Content Include="Views\Account\CloseAndRefresh.cshtml" />
+    <Content Include="Views\Account\ConnectTwitter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />
@@ -5298,6 +5305,7 @@
     <Content Include="Views\Browse\_BrowseEventOverview.cshtml" />
     <Content Include="Views\Browse\_BrowseEventLists.cshtml" />
     <Content Include="Views\Shared\_ModalLayout.cshtml" />
+    <Content Include="Views\Shared\_ModalLayoutOLD.cshtml" />
     <Content Include="Views\Events\VenueSearch.cshtml" />
     <Content Include="Views\Browse\_BrowseEventTabContentTemplate.cshtml" />
     <Content Include="Views\Events\_VenueSearchResults.cshtml" />
@@ -8741,7 +8749,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>16007</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

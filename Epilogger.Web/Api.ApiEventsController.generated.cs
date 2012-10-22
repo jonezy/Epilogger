@@ -154,6 +154,11 @@ namespace Epilogger.Web.Areas.Api.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult GetUserSubscribedEvents() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.GetUserSubscribedEvents);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.JsonResult AuthEPLUser() {
             return new T4MVC_JsonResult(Area, Name, ActionNames.AuthEPLUser);
         }
@@ -227,6 +232,11 @@ namespace Epilogger.Web.Areas.Api.Controllers {
         public System.Web.Mvc.JsonResult GetAllMemoryBoxesByUserIdandEventId() {
             return new T4MVC_JsonResult(Area, Name, ActionNames.GetAllMemoryBoxesByUserIdandEventId);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult ShortenUrlEPL() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.ShortenUrlEPL);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ApiEventsController Actions { get { return MVC.Api.ApiEvents; } }
@@ -267,6 +277,7 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             public readonly string SaveUserFollowsEvent = "SaveUserFollowsEvent";
             public readonly string DeleteUserEventSubscription = "DeleteUserEventSubscription";
             public readonly string GetUserSubscribedAndCreatedEvents = "GetUserSubscribedAndCreatedEvents";
+            public readonly string GetUserSubscribedEvents = "GetUserSubscribedEvents";
             public readonly string AuthEPLUser = "AuthEPLUser";
             public readonly string ConnectTwitterAccountToUser = "ConnectTwitterAccountToUser";
             public readonly string ConnectFacebookAccountToUser = "ConnectFacebookAccountToUser";
@@ -303,6 +314,7 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             public readonly string GeckoNumberOfTweetsInTheLastHour = "GeckoNumberOfTweetsInTheLastHour";
             public readonly string GeckoGetTweetGrowthLast24Hours = "GeckoGetTweetGrowthLast24Hours";
             public readonly string GeckoTopEventByUserActivity = "GeckoTopEventByUserActivity";
+            public readonly string ShortenUrlEPL = "ShortenUrlEPL";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -332,6 +344,7 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             public const string SaveUserFollowsEvent = "SaveUserFollowsEvent";
             public const string DeleteUserEventSubscription = "DeleteUserEventSubscription";
             public const string GetUserSubscribedAndCreatedEvents = "GetUserSubscribedAndCreatedEvents";
+            public const string GetUserSubscribedEvents = "GetUserSubscribedEvents";
             public const string AuthEPLUser = "AuthEPLUser";
             public const string ConnectTwitterAccountToUser = "ConnectTwitterAccountToUser";
             public const string ConnectFacebookAccountToUser = "ConnectFacebookAccountToUser";
@@ -368,6 +381,7 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             public const string GeckoNumberOfTweetsInTheLastHour = "GeckoNumberOfTweetsInTheLastHour";
             public const string GeckoGetTweetGrowthLast24Hours = "GeckoGetTweetGrowthLast24Hours";
             public const string GeckoTopEventByUserActivity = "GeckoTopEventByUserActivity";
+            public const string ShortenUrlEPL = "ShortenUrlEPL";
         }
 
 
@@ -555,6 +569,15 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             public readonly string page = "page";
             public readonly string count = "count";
         }
+        static readonly ActionParamsClass_GetUserSubscribedEvents s_params_GetUserSubscribedEvents = new ActionParamsClass_GetUserSubscribedEvents();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_GetUserSubscribedEvents GetUserSubscribedEventsParams { get { return s_params_GetUserSubscribedEvents; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_GetUserSubscribedEvents {
+            public readonly string userId = "userId";
+            public readonly string page = "page";
+            public readonly string count = "count";
+        }
         static readonly ActionParamsClass_AuthEPLUser s_params_AuthEPLUser = new ActionParamsClass_AuthEPLUser();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_AuthEPLUser AuthEPLUserParams { get { return s_params_AuthEPLUser; } }
@@ -668,6 +691,13 @@ namespace Epilogger.Web.Areas.Api.Controllers {
         public class ActionParamsClass_GetAllMemoryBoxesByUserIdandEventId {
             public readonly string userId = "userId";
             public readonly string eventId = "eventId";
+        }
+        static readonly ActionParamsClass_ShortenUrlEPL s_params_ShortenUrlEPL = new ActionParamsClass_ShortenUrlEPL();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ShortenUrlEPL ShortenUrlEPLParams { get { return s_params_ShortenUrlEPL; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ShortenUrlEPL {
+            public readonly string url = "url";
         }
         static readonly ViewNames s_views = new ViewNames();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -846,6 +876,14 @@ namespace Epilogger.Web.Areas.Api.Controllers {
 
         public override System.Web.Mvc.JsonResult GetUserSubscribedAndCreatedEvents(System.Guid userId, int page, int count) {
             var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GetUserSubscribedAndCreatedEvents);
+            callInfo.RouteValueDictionary.Add("userId", userId);
+            callInfo.RouteValueDictionary.Add("page", page);
+            callInfo.RouteValueDictionary.Add("count", count);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GetUserSubscribedEvents(System.Guid userId, int page, int count) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GetUserSubscribedEvents);
             callInfo.RouteValueDictionary.Add("userId", userId);
             callInfo.RouteValueDictionary.Add("page", page);
             callInfo.RouteValueDictionary.Add("count", count);
@@ -1053,6 +1091,12 @@ namespace Epilogger.Web.Areas.Api.Controllers {
 
         public override System.Web.Mvc.JsonResult GeckoTopEventByUserActivity() {
             var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GeckoTopEventByUserActivity);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult ShortenUrlEPL(string url) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.ShortenUrlEPL);
+            callInfo.RouteValueDictionary.Add("url", url);
             return callInfo;
         }
 

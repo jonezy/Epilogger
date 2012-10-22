@@ -152,18 +152,18 @@ namespace Epilogger.Web.Controllers
             if (model.Width < model.Height)
             {
                 //Portrait
-                model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, model.Width <= 300 ? 3 : 6, FromDateTime(), ToDateTime());
+                model.Images = _is.FindByEventIdOrderDescTakeX(requestedEvent.ID, model.Width <= 300 ? 3 : 6, FromDateTime(), ToDateTime());
             }
             else
             {
                 //Landscape
                 if (model.Width >= 500 && model.Height >= 300)
                 {
-                    model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, (int)((model.Height - 125) / 85)*2, FromDateTime(), ToDateTime());
+                    model.Images = _is.FindByEventIdOrderDescTakeX(requestedEvent.ID, (int)((model.Height - 125) / 85)*2, FromDateTime(), ToDateTime());
 
                     if (model.Width >= 600)
                     {
-                        model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, (int)((model.Height-125) / 85)*3, FromDateTime(), ToDateTime());
+                        model.Images = _is.FindByEventIdOrderDescTakeX(requestedEvent.ID, (int)((model.Height-125) / 85)*3, FromDateTime(), ToDateTime());
                     }
                 }
             }
@@ -171,7 +171,7 @@ namespace Epilogger.Web.Controllers
             if ( model.Width==100 && model.Height==100)
             {
                 //Floating layout, load lots.
-                model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, 25, FromDateTime(), ToDateTime());
+                model.Images = _is.FindByEventIdOrderDescTakeX(requestedEvent.ID, 25, FromDateTime(), ToDateTime());
             }
 
             model.HeightOffset = GetHeightOffset(model.Height, model.Width, false);
@@ -231,18 +231,18 @@ namespace Epilogger.Web.Controllers
             if (model.Width < model.Height)
             {
                 //Portrait
-                model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, 24, FromDateTime(), ToDateTime());
+                model.Images = _is.FindByEventIdOrderDescTakeX(requestedEvent.ID, 24, FromDateTime(), ToDateTime());
             }
             else
             {
                 //Landscape
                 if (model.Width >= 500 && model.Height >= 300)
                 {
-                    model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, (int)((model.Height * 2 - 125) / 85) * 5, FromDateTime(), ToDateTime());
+                    model.Images = _is.FindByEventIdOrderDescTakeX(requestedEvent.ID, (int)((model.Height * 2 - 125) / 85) * 5, FromDateTime(), ToDateTime());
 
                     if (model.Width >= 600)
                     {
-                        model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, (int)((model.Height * 2 - 125) / 85) * 8, FromDateTime(), ToDateTime());
+                        model.Images = _is.FindByEventIdOrderDescTakeX(requestedEvent.ID, (int)((model.Height * 2 - 125) / 85) * 8, FromDateTime(), ToDateTime());
                     }
                 }
             }
@@ -250,7 +250,7 @@ namespace Epilogger.Web.Controllers
             if (model.Width == 100 && model.Height == 100)
             {
                 //Floating layout, load lots.
-                model.Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, 25, FromDateTime(), ToDateTime());
+                model.Images = _is.FindByEventIdOrderDescTakeX(requestedEvent.ID, 25, FromDateTime(), ToDateTime());
             }
 
 

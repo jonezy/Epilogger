@@ -549,12 +549,13 @@ namespace Epilogger.Data{
             sp.Command.AddParameter("ToDate",ToDate,DbType.DateTime);
             return sp;
         }
-        public StoredProcedure GetTopPhotosByEventID(int EventID,int ItemToReturn,DateTime FromDate,DateTime ToDate){
+        public StoredProcedure GetTopPhotosByEventID(int EventID,int ItemToReturn,DateTime FromDate,DateTime ToDate,bool IncludeVideos){
             StoredProcedure sp=new StoredProcedure("GetTopPhotosByEventID",this.Provider);
             sp.Command.AddParameter("EventID",EventID,DbType.Int32);
             sp.Command.AddParameter("ItemToReturn",ItemToReturn,DbType.Int32);
             sp.Command.AddParameter("FromDate",FromDate,DbType.DateTime);
             sp.Command.AddParameter("ToDate",ToDate,DbType.DateTime);
+            sp.Command.AddParameter("IncludeVideos",IncludeVideos,DbType.Boolean);
             return sp;
         }
         public StoredProcedure GetTopURLsByEventID(int EventID,int ItemToReturn,DateTime FromDate,DateTime ToDate){
@@ -622,11 +623,12 @@ namespace Epilogger.Data{
             sp.Command.AddParameter("ToDate",ToDate,DbType.DateTime);
             return sp;
         }
-        public StoredProcedure TweetsAndImageByEventIDPaged(int EventID,int skip,int take){
+        public StoredProcedure TweetsAndImageByEventIDPaged(int EventID,int skip,int take,bool IncludeVideos){
             StoredProcedure sp=new StoredProcedure("TweetsAndImageByEventIDPaged",this.Provider);
             sp.Command.AddParameter("EventID",EventID,DbType.Int32);
             sp.Command.AddParameter("skip",skip,DbType.Int32);
             sp.Command.AddParameter("take",take,DbType.Int32);
+            sp.Command.AddParameter("IncludeVideos",IncludeVideos,DbType.Boolean);
             return sp;
         }
 	

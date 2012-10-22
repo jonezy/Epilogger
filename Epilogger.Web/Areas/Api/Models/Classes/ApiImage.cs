@@ -17,5 +17,7 @@ namespace Epilogger.Web.Areas.Api.Models.Classes
         public int? DeleteVoteCount { get; set; }
         public bool Deleted { get; set; }
         public string ImageFingerPrint { get; set; }
+        public string EpiloggerImageLink { get; set; }
+        //public string EpiloggerImageLinkShort { get; set; }
     }
 }

@@ -7,16 +7,16 @@ using Epilogger.Web.Models;
 
 namespace Epilogger.Web.Controllers
 {
-    public class ErrorController : Controller
+    public partial class ErrorController : Controller
     {
         //
         // GET: /Error/
 
-        public ActionResult NotFound()
+        public virtual ActionResult NotFound()
         {
             return View();
         }
-        public ActionResult ServerError()
+        public virtual ActionResult ServerError()
         {
             // if (godMode)
             //{
@@ -25,7 +25,7 @@ namespace Epilogger.Web.Controllers
             //}
             return View();
         }
-        public ActionResult SearchRedirect(SearchEventViewModel model)
+        public virtual ActionResult SearchRedirect(SearchEventViewModel model)
         {
             return RedirectToAction("Home/Search", model);
         }

@@ -1,6 +1,6 @@
 ﻿@model Epilogger.Web.Models.GlobalNavigationModel
 
-
+<span id="globalBarAll">
 @if (Model.UserLoggedIn && Model.CurrentUserRole == UserRoleType.Administrator)
 {
     <div id="god-menu" class="clearfix">
@@ -37,3 +37,4 @@
         }
     </style>
 }
+</span>

@@ -143,8 +143,15 @@ namespace Epilogger.Web {
         {
             var skippage = page - 1;
 
-            var usersSubscribedAndCreatedEvents = base.db.Events.Where(e => e.UserID == userID).OrderByDescending(d => d.CreatedDateTime).ToList();
-            usersSubscribedAndCreatedEvents.AddRange(base.db.UserFollowsEvents.Where(ufe => ufe.UserID == userID).OrderByDescending(d => d.Timestamp).Select(item => item.Events.FirstOrDefault()));
+            var usersSubscribedAndCreatedEvents = db.Events.Where(e => e.UserID == userID).OrderByDescending(d => d.CreatedDateTime).ToList();
+            var theEvents = from u in db.UserFollowsEvents
+                            join e in db.Events on u.EventID equals e.ID
+                            where u.UserID == userID
+                            orderby u.Timestamp descending
+                            select e;
+            usersSubscribedAndCreatedEvents.AddRange(theEvents.Skip(skippage * count).Take(count).ToList());
+            
+            //usersSubscribedAndCreatedEvents.AddRange(base.db.UserFollowsEvents.Where(ufe => ufe.UserID == userID).OrderByDescending(d => d.Timestamp).Select(item => item.Events.FirstOrDefault()));
 
             return usersSubscribedAndCreatedEvents.Skip(skippage * count).Take(count);
 

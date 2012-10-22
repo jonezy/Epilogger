@@ -65,7 +65,7 @@ namespace Epilogger.Web.Controllers {
                 var fViewModel = new HomepageFeaturedEventsViewModel
                                      {
                                          Event = evt,
-                                         TopImages = IS.GetNewestPhotosByEventID(evt.ID, 5)
+                                         TopImages = IS.GetNewestPhotosByEventId(evt.ID, 5)
                                      };
                 featured.Add(fViewModel);
             }

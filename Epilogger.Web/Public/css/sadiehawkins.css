@@ -2980,6 +2980,10 @@ a.fdbk_tab_hidden {
 
 #profilePictureSection { display: inline; }
 
+#TwitterConnectSection {
+    list-style-type: none;
+}
+
 /*
 #connectFacebook {
     width: 49%;

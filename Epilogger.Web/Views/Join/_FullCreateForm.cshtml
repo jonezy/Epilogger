@@ -1,6 +1,10 @@
 ﻿@model Epilogger.Web.Models.CreateAccountModel
 
 <div class="createAccountPage">
+    @if (Model.InPopUp)
+    {
+        <div class="spacer"></div>
+    }
     <div class="signUpHeading center">
         <h1>Almost there!</h1>
         <h2>We just need a little more information...</h2>

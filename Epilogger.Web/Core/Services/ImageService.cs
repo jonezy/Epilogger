@@ -32,9 +32,12 @@ namespace Epilogger.Web
             return db.Images.Where(t => t.EventID == eventID && t.DateTime >= F && t.DateTime <= T && t.Deleted == false).OrderByDescending(t => t.DateTime).Take(9);
         }
 
-        public IEnumerable<Image> FindByEventIDOrderDescTakeX(int eventID, int numberToReturn, DateTime F, DateTime T)
+        public IEnumerable<Image> FindByEventIdOrderDescTakeX(int eventID, int numberToReturn, DateTime F, DateTime T, bool includeVideos = true)
         {
-            return db.Images.Where(t => t.EventID == eventID && t.DateTime >= F && t.DateTime <= T && t.Deleted == false).OrderByDescending(t => t.DateTime).Take(numberToReturn);
+            if (includeVideos)
+                return db.Images.Where(t => t.EventID == eventID && t.DateTime >= F && t.DateTime <= T && t.Deleted == false).OrderByDescending(t => t.DateTime).Take(numberToReturn);
+
+            return db.Images.Where(t => t.EventID == eventID && t.DateTime >= F && t.DateTime <= T && t.Deleted == false && t.MediaType==1).OrderByDescending(t => t.DateTime).Take(numberToReturn);
         }
 
         public List<Image> GetRandomImagesByEventID(int eventID, int numberToGet)
@@ -42,11 +45,11 @@ namespace Epilogger.Web
             return db.GetRandomImagesByEventID(eventID, numberToGet).ExecuteTypedList<Image>();
         }
 
-        public List<Image> GetTopPhotosByEventID(int eventID, int recordsToReturn, DateTime fromDateTime, DateTime toDateTime)
+        public List<Image> GetTopPhotosByEventId(int eventID, int recordsToReturn, DateTime fromDateTime, DateTime toDateTime, bool includeVideos = true)
         {
-            List<TopPhotos> ps = db.GetTopPhotosByEventID(eventID, recordsToReturn, fromDateTime, toDateTime).ExecuteTypedList<TopPhotos>();
+            var ps = db.GetTopPhotosByEventID(eventID, recordsToReturn, fromDateTime, toDateTime, includeVideos).ExecuteTypedList<TopPhotos>();
 
-            List<Image> theTopPhotos = new List<Image>();
+            var theTopPhotos = new List<Image>();
             foreach (TopPhotos TP in ps)
             {
                 Image TheImage = new Image();
@@ -57,16 +60,19 @@ namespace Epilogger.Web
             return theTopPhotos;
         }
 
-        public List<Image> GetNewestPhotosByEventID(int eventID, int numberToGet)
+        public IEnumerable<Image> GetNewestPhotosByEventId(int eventID, int numberToGet, bool includeVideos = true)
         {
-            return db.Images.Where(e => e.EventID == eventID).OrderByDescending(e => e.DateTime).Take(numberToGet).ToList();
+            if (includeVideos)
+                return db.Images.Where(e => e.EventID == eventID).OrderByDescending(e => e.DateTime).Take(numberToGet).ToList();
+
+            return db.Images.Where(e => e.EventID == eventID && e.MediaType==1).OrderByDescending(e => e.DateTime).Take(numberToGet).ToList();
         }
 
 
 
-        public List<TopImageAndTweet> GetTopPhotosAndTweetByEventID(int eventID, int recordsToReturn, DateTime fromDateTime, DateTime toDateTime)
+        public List<TopImageAndTweet> GetTopPhotosAndTweetByEventID(int eventID, int recordsToReturn, DateTime fromDateTime, DateTime toDateTime, bool includeVideos = true)
         {
-            List<TopPhotos> ps = db.GetTopPhotosByEventID(eventID, recordsToReturn, fromDateTime, toDateTime).ExecuteTypedList<TopPhotos>();
+            List<TopPhotos> ps = db.GetTopPhotosByEventID(eventID, recordsToReturn, fromDateTime, toDateTime, includeVideos).ExecuteTypedList<TopPhotos>();
 
             var ts = new TweetService();
             
@@ -105,15 +111,27 @@ namespace Epilogger.Web
         }
 
 
-        public IEnumerable<Image> GetPagedPhotos(int eventID, int? page, int photosPerPage, DateTime F, DateTime T)
+        public IEnumerable<Image> GetPagedPhotos(int eventID, int? page, int photosPerPage, DateTime F, DateTime T, bool includeVideos = true)
         {
 
-            int skipAmount = page.HasValue ? page.Value - 1 : 0;
+            var skipAmount = page.HasValue ? page.Value - 1 : 0;
 
-            var photos = (from t in db.Images
-                          where t.EventID == eventID && t.DateTime >= F && t.DateTime <= T && t.Deleted == false
-                          orderby t.DateTime descending
-                          select t).Skip(skipAmount * photosPerPage).Take(photosPerPage);
+            IEnumerable<Image> photos;
+            if (includeVideos)
+            {
+                photos = (from t in db.Images
+                              where t.EventID == eventID && t.DateTime >= F && t.DateTime <= T && t.Deleted == false
+                              orderby t.DateTime descending
+                              select t).Skip(skipAmount * photosPerPage).Take(photosPerPage);    
+            }
+            else
+            {
+                photos = (from t in db.Images
+                              where t.EventID == eventID && t.DateTime >= F && t.DateTime <= T && t.Deleted == false && t.MediaType==1
+                              orderby t.DateTime descending
+                              select t).Skip(skipAmount * photosPerPage).Take(photosPerPage);
+            }
+            
 
             return photos;
 

@@ -1,0 +1,48 @@
+﻿
+
+@*THIS CAUSES A LOT OF PROBLEMS FOR THE MODEL POPUPS. LOADS A LOT OF THE JS TWICE STOPPING THINGS FROM WORKING AND ADDS UNNECCESARY <HTML>AND<HEAD> TAGS IN THE MIDDLE OF THE PAGE*@
+@*Changed to use partialviews*@
+
+
+<!doctype html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	
+    <link href="@Url.Content("~/Public/css/reset.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Public/css/960_12_col.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Public/css/messages.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Public/css/sadiehawkins.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Public/css/modal.css")" rel="stylesheet" type="text/css" />
+
+    <script src="@Url.Content("~/Public/js/head.load.min.js")" type="text/javascript" language="javascript"></script>
+    <script type="text/javascript" language="javascript">
+        head.js('@Url.Content("~/Public/js/jquery-1.6.2.min.js")');
+        head.js('@Url.Content("~/Public/js/epilogger.js")');
+        head.js('@Url.Content("~/Public/js/jquery.colorbox-min.js")');
+    </script>
+
+	
+</head>
+<body>
+    @Html.Send(100)
+    @*@Html.Raw(Html.Notify())
+<div id="flash"></div>*@
+
+    @RenderBody()
+
+</body>
+</html>
+
