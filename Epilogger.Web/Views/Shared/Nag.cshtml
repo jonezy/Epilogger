@@ -1,10 +1,15 @@
 ﻿@model Epilogger.Web.Models.NagViewModel 
 
+<span id="nagContainer">
 @if (!Model.IsUserLoggedIn)
 {
-    var controller = ViewContext.ParentActionViewContext.RouteData.Values["controller"] as string ?? "";
-    var action = ViewContext.RouteData.Values["action"] as string ?? "";
-
+    var controller = "nothing";
+    if (ViewContext.ParentActionViewContext !=null)
+    {
+        controller = ViewContext.ParentActionViewContext.RouteData.Values["controller"] as string ?? "";
+        var action = ViewContext.RouteData.Values["action"] as string ?? "";
+    }
+    
     if (controller.ToLower() != "join" && controller.ToLower() != "account")
     {
         
@@ -29,3 +34,4 @@
     }
 }
 }
+</span>

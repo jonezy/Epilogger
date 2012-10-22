@@ -2,7 +2,7 @@
 @model Epilogger.Web.Models.CreateAccountModel
 
 @{
-    Layout = "~/Views/Shared/_InteriorLayoutNoBC.cshtml";
+    Layout = Model.InPopUp ? "~/Views/Shared/_PopupLayout.cshtml" : "~/Views/Shared/_InteriorLayoutNoBC.cshtml";
     ViewBag.Title = "Epilogger | Create Account";
 }
 

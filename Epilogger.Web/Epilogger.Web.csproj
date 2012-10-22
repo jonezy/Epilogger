@@ -3206,6 +3206,9 @@
     <Content Include="Views\Account\_profileImageChoice.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\ServerError.cshtml" />
+    <Content Include="Views\Shared\_PopupLayout.cshtml" />
+    <Content Include="Views\Account\CloseAndRefresh.cshtml" />
+    <Content Include="Views\Account\ConnectTwitter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />
@@ -5302,6 +5305,7 @@
     <Content Include="Views\Browse\_BrowseEventOverview.cshtml" />
     <Content Include="Views\Browse\_BrowseEventLists.cshtml" />
     <Content Include="Views\Shared\_ModalLayout.cshtml" />
+    <Content Include="Views\Shared\_ModalLayoutOLD.cshtml" />
     <Content Include="Views\Events\VenueSearch.cshtml" />
     <Content Include="Views\Browse\_BrowseEventTabContentTemplate.cshtml" />
     <Content Include="Views\Events\_VenueSearchResults.cshtml" />
