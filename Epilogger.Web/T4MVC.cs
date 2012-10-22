@@ -33,6 +33,7 @@ public static class MVC {
     public static Epilogger.Web.Controllers.BaseController Base = new Epilogger.Web.Controllers.T4MVC_BaseController();
     public static Epilogger.Web.Controllers.BrowseController Browse = new Epilogger.Web.Controllers.T4MVC_BrowseController();
     public static Epilogger.Web.Controllers.DashboardController Dashboard = new Epilogger.Web.Controllers.T4MVC_DashboardController();
+    public static Epilogger.Web.Controllers.ErrorController Error = new Epilogger.Web.Controllers.T4MVC_ErrorController();
     public static Epilogger.Web.Controllers.EventsController Events = new Epilogger.Web.Controllers.T4MVC_EventsController();
     public static Epilogger.Web.Controllers.HomeController Home = new Epilogger.Web.Controllers.T4MVC_HomeController();
     public static Epilogger.Web.Controllers.ImageUploadController ImageUpload = new Epilogger.Web.Controllers.T4MVC_ImageUploadController();
@@ -421,6 +422,7 @@ namespace Links {
             public static readonly string sadiehawkinsOldGood_css = Url("sadiehawkinsOldGood.css");
             public static readonly string Site_css = Url("Site.css");
             public static readonly string skeleton_css = Url("skeleton.css");
+            public static readonly string video_css = Url("video.css");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class widget {
                 private const string URLPATH = "~/Public/css/widget";
@@ -576,6 +578,17 @@ namespace Links {
                 public static readonly string screenshot_browse_jpg = Url("screenshot-browse.jpg");
                 public static readonly string screenshot_events_jpg = Url("screenshot-events.jpg");
                 public static readonly string screenshot_home_jpg = Url("screenshot-home.jpg");
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class error {
+                private const string URLPATH = "~/Public/images/error";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string btn_search_home_png = Url("btn-search-home.png");
+                public static readonly string jaggies_trans_gif = Url("jaggies-trans.gif");
+                public static readonly string logoSmall_png = Url("logoSmall.png");
+                public static readonly string scoobygang_png = Url("scoobygang.png");
             }
         
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

@@ -266,7 +266,7 @@ namespace Epilogger.Web.Controllers {
 
 				if (currentPage + 1 == 1) {
 					model.ShowTopPhotos = true;
-					model.TopImages = _is.GetTopPhotosByEventID(requestedEvent.ID, 10, this.FromDateTime(), this.ToDateTime());
+					model.TopImages = _is.GetTopPhotosByEventId(requestedEvent.ID, 10, this.FromDateTime(), this.ToDateTime());
 				}
 
 				return View(model);
@@ -1670,7 +1670,7 @@ namespace Epilogger.Web.Controllers {
 								{
 									EventId = requestedEvent.ID,
 									CustomSettings = new LiveModeCustomSettingsService().FindByEventID(requestedEvent.ID),
-									Images = _is.FindByEventIDOrderDescTakeX(requestedEvent.ID, 5, FromDateTime(), ToDateTime()).ToList(),
+									Images = _is.FindByEventIdOrderDescTakeX(requestedEvent.ID, 5, FromDateTime(), ToDateTime()).ToList(),
 									EpiloggerCounts = new Core.Stats.WidgetTotals().GetWidgetTotals(requestedEvent.ID, FromDateTime(), ToDateTime()),
 									TopTweeters = topTweetersStats.Calculate(_ts.GetTop10TweetersByEventID(requestedEvent.ID, FromDateTime(), ToDateTime())).ToList(),
 									Hashtag = requestedEvent.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0].Contains("#")

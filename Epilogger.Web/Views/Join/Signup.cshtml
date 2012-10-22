@@ -1,9 +1,20 @@
 ﻿@{
     ViewBag.Title = "Epilogger | Welcome";
-    Layout = "~/Views/Shared/_InteriorLayoutNoBC.cshtml";
+    if (ViewBag.InPopUp)
+    {
+        Layout = "~/Views/Shared/_PopupLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_InteriorLayoutNoBC.cshtml";
+    }
 }
 
 <div>
+    @if (ViewBag.InPopUp)
+    {
+        <div class="spacer"></div>
+    }
     <div class="signUpHeading center">
         <h1>Create an account to take full advantage of Epilogger.</h1>
         <h2>You'll be creating events and dancing in just two steps!</h2>
@@ -12,9 +23,9 @@
     <div class="spacer"></div>
     
     <ul class="authButtons">
-        <li>@Html.ActionImage("ConnectRequestWithCallback", "twitter", new { area = "Authentication", callBackUrl = Url.Action("twitter", "join", null, "http") }, "/Public/images/signup/twitterButton.png", "Sign in with twitter")</li>
+        <li>@Html.ActionImage("ConnectRequestWithCallback", "twitter", new { area = "Authentication", callBackUrl = Url.Action("twitter", "join", new { ViewBag.InPopUp }, "http") }, "/Public/images/signup/twitterButton.png", "Sign in with twitter")</li>
         <li class="orSepertor"><em>-- or --</em></li>
-        <li>@Html.ActionImage("ConnectRequestWithCallback", "facebook", new { area = "Authentication", callBackUrl = Url.Action("facebook", "join", null, "http") }, "/Public/images/signup/facebookButton.png", "Sign in with facebook")</li>
+        <li>@Html.ActionImage("ConnectRequestWithCallback", "facebook", new { area = "Authentication", callBackUrl = Url.Action("facebook", "join", new { ViewBag.InPopUp }, "http") }, "/Public/images/signup/facebookButton.png", "Sign in with facebook")</li>
     </ul>
 
     
@@ -24,7 +35,7 @@
     
     
     <div id="emailAccountLine">
-        I want to use my @Html.ActionLink("email address", "Email") to create an account.
+        I want to use my @Html.ActionLink("email address", "Email", new { ViewBag.InPopUp }, null) to create an account.
     </div>
 
 </div>

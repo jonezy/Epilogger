@@ -37,5 +37,7 @@ namespace Epilogger.Web.Models {
         public string AuthTokenSecret { get; set; }
         public string AuthScreenname { get; set; }
 
+        public bool InPopUp { get; set; }
+
     }
 }

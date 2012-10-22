@@ -22,7 +22,6 @@ namespace Epilogger.Web.Controllers {
                 }
 
                 return userId;
-                
             }
         }
         
@@ -44,6 +43,17 @@ namespace Epilogger.Web.Controllers {
                 return false;
             }
         }
+
+        public bool InPopUp
+        {
+            get
+            {
+                var inPopUp = Request.QueryString["InPopUp"] != null;
+                inPopUp = inPopUp && bool.Parse(Request.QueryString["InPopUp"]);
+                return inPopUp;
+            }
+        }
+
 
         protected UserAuthenticationProfile CurrentUserTwitterAuthorization {
             get

@@ -185,7 +185,7 @@ namespace Epilogger.Web
         }
 
 
-        public IEnumerable<TweetsAndImage> GetTweetsAndImagesPaged(int eventId, int page, int tweetsPerPage)
+        public IEnumerable<TweetsAndImage> GetTweetsAndImagesPaged(int eventId, int page, int tweetsPerPage, bool includeVideos = true)
         {
 
             //var skipAmount = page.HasValue ? page.Value - 1 : 0;
@@ -215,7 +215,7 @@ namespace Epilogger.Web
             //exec TweetsAndImageByEventIDPaged 133, 11, 10
 
             //Do it with a stored procedure
-            var sproc = db.TweetsAndImageByEventIDPaged(eventId, (int) page, tweetsPerPage);
+            var sproc = db.TweetsAndImageByEventIDPaged(eventId, (int)page, tweetsPerPage, includeVideos);
             var searchResults = sproc.ExecuteDataSet();
 
             var resultsList = new List<TweetsAndImage>();
