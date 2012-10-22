@@ -51,8 +51,9 @@ else
     var EventID = @Model.ID;
 
     var EventName = '@Model.Name';
-    var EventSlug = '@Model.EventSlug';
-    var EventURL = 'http://www.epilogger.com/Events/@Model.EventSlug/Details';
+    var EventSlug = '@Model.EventSlug'; //http://seven999.eventbrite.com/
+    //var EventURL = 'http://www.epilogger.com/Events/@Model.EventSlug/Details';
+   // var EventURL = 'http://seven999.eventbrite.com/';
     var HasSubscribed = @Model.HasSubscribed.ToString().ToLower();
     
     var disableAutoupdate = false;
@@ -327,7 +328,7 @@ else
 
 
     <div class="grid_7 alpha omega eventDescriptionSection">
-    @if (Model.EventBrightUrl != null)
+    @if (Model.EventBrightUrl != null || Model.EventBrightUrl=="")
     { 
         <div style="width:100%; text-align:left;" >
             <iframe src="@Model.EventBrightUrl" frameborder="0" height="256" width="100%" vspace="0" hspace="0" marginheight="5" marginwidth="5" scrolling="auto" allowtransparency="true"></iframe>
