@@ -126,7 +126,7 @@ namespace Epilogger.Web.Controllers {
                     ShortCreateFormSaveUser(model);
 
                     if (model.InPopUp)
-                        return RedirectToAction("Account", "CloseAndRefresh");
+                        return RedirectToAction("CloseAndRefresh", "Account");
 
                     return RedirectToAction("Index", "Home");
                 }
