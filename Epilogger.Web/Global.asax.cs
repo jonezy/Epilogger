@@ -88,6 +88,7 @@ namespace Epilogger.Web {
             //routes.MapRoute("DoFacebookLogin", "join/DoFacebookLogin", new { controller = "account", action = "DoFacebookLogin" });
             //routes.MapRoute("CreateAccountFacebook", "join/facebook", new { controller = "account", action = "Facebook" });
 
+            
             routes.MapRoute("Login", "login", new { controller = "account", action = "login" });
 
             routes.MapRoute(
@@ -638,9 +639,9 @@ namespace Epilogger.Web {
             Mapper.CreateMap<Tweeter, ApiTweeter>()
                 .ForMember(dest => dest.PhotoCount, opt => opt.Ignore());
 
-            //PhotoCount
+            Mapper.CreateMap<Image, ApiImage>()
+                .ForMember(dest => dest.EpiloggerImageLink, opt => opt.ResolveUsing<ImageUrlResolver>());
 
-            Mapper.CreateMap<Image, ApiImage>();
             Mapper.CreateMap<TopImageAndTweet, ApiTopImageAndTweet>();
             Mapper.CreateMap<CheckIn, ApiCheckIn>()
                 .ForMember(dest => dest.ProfilePicture, opt => opt.MapFrom(src => src.Tweets.FirstOrDefault().ProfileImageURL));

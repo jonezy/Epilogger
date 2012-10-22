@@ -745,9 +745,17 @@ namespace Epilogger.Web.Areas.Api.Controllers
 
         #endregion
 
+        #region Shortner
+            public virtual JsonResult ShortenUrlEPL(string url)
+            {
+                var apiClient = new Epilogr.APISoapClient();
+                return Json(apiClient.CreateUrl(url).ShortenedUrl, JsonRequestBehavior.AllowGet);
+            }
+        #endregion
 
 
-        //NOT IMPLIMENTED
+
+            //NOT IMPLIMENTED
         //Creates a bunch of events. (Not Implemented)
         [HttpPost]
         public virtual JsonResult EventList(List<Event> items)
