@@ -147,8 +147,15 @@ namespace Epilogger.Web.Controllers {
 					{
 						Regex regex = new Regex("eventbrite.com.+?([0-9]+)");
 						Match match = regex.Match(EventbriteURL);
-						string eventNumber = match.Groups[1].Value;
-						model.EventBrightUrl = String.Format("http://www.eventbrite.com/tickets-external?eid={0}&ref=etckt", eventNumber);
+                        if (match.Success)
+                       {
+                            string eventNumber = match.Groups[1].Value;
+                            model.EventBrightUrl  = String.Format("http://www.eventbrite.com/tickets-external?eid={0}&ref=etckt", eventNumber);
+                        }
+                        else
+                        {
+                            model.EventBrightUrl = null; 
+                        }
 					}
 				}
 				catch { model.EventBrightUrl = null; }
