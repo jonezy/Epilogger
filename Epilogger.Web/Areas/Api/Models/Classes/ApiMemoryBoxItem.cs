@@ -23,5 +23,7 @@ namespace Epilogger.Web.Areas.Api.Models.Classes
             }
             set { _includePhotos = value; }
         }
+
+        public int PhotoId { get; set; }
     }
 }

@@ -72,7 +72,7 @@ namespace Epilogger.Web.Areas.Api.Models
                 var theImage = _is.GetImageByTweetId(int.Parse(box.ItemId));
                 if (theImage != null)
                 {
-                    _msi.Save(new MemoryBoxItem()
+                    var photoMembox =_msi.Save(new MemoryBoxItem()
                                   {
                                       AddedDateTime = DateTime.UtcNow,
                                       EventId = box.EventId,
@@ -81,11 +81,15 @@ namespace Epilogger.Web.Areas.Api.Models
                                       MemboxId = (int)box.MemboxId,
                                       UserId = box.UserId
                                   });
+                    box.PhotoId = photoMembox.ID;
                 }
 
             }
 
-            return Mapper.Map<MemoryBoxItem, ApiMemoryBoxItem>(_msi.Save(Mapper.Map<ApiMemoryBoxItem, MemoryBoxItem>(box)));
+            var newbox = _msi.Save(Mapper.Map<ApiMemoryBoxItem, MemoryBoxItem>(box));
+            box.Id = newbox.ID;
+
+            return box;
         }
 
         public bool RemoveMemBoxItem(int id)
@@ -113,7 +117,7 @@ namespace Epilogger.Web.Areas.Api.Models
 
         public List<ApiImage> PhotosByMemBoxIdPaged(int memBoxId, int page, int count)
         {
-            return Mapper.Map<List<Image>, List<ApiImage>>(_is.GetImagesInMemoryBoxPaged(memBoxId, page, count).ToList());
+            return _is.Thedb().GetPhotosFromMemoryBox(memBoxId, page, count).ExecuteTypedList<ApiImage>();
         }
 
         public List<ApiMemoryBox> MemoryBoxByUserId(Guid userId)

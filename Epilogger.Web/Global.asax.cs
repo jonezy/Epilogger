@@ -641,7 +641,8 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.PhotoCount, opt => opt.Ignore());
 
             Mapper.CreateMap<Image, ApiImage>()
-                .ForMember(dest => dest.EpiloggerImageLink, opt => opt.ResolveUsing<ImageUrlResolver>());
+                .ForMember(dest => dest.EpiloggerImageLink, opt => opt.ResolveUsing<ImageUrlResolver>())
+                .ForMember(dest => dest.MemoryBoxItemId, opt => opt.Ignore());
 
             Mapper.CreateMap<TopImageAndTweet, ApiTopImageAndTweet>();
             Mapper.CreateMap<CheckIn, ApiCheckIn>()
@@ -659,7 +660,8 @@ namespace Epilogger.Web {
             Mapper.CreateMap<UserFollowsEvent, ApiUserFollowsEvent>();
 
             Mapper.CreateMap<MemoryBoxItem, ApiMemoryBoxItem>()
-                .ForMember(dest => dest.IncludePhotos, opt => opt.Ignore());
+                .ForMember(dest => dest.IncludePhotos, opt => opt.Ignore())
+                .ForMember(dest => dest.PhotoId, opt => opt.Ignore());
 
             Mapper.CreateMap<ApiMemoryBoxItem, MemoryBoxItem>();
             Mapper.CreateMap<MemoryBox, ApiMemoryBox>();

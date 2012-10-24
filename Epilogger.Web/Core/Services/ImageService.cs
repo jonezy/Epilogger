@@ -15,11 +15,18 @@ namespace Epilogger.Web
         public int countcol { get; set; }
     }
 
+
+
     public class ImageService : ServiceBase<Image>
     {
         protected override string CacheKey
         {
             get { return "Epilogger.Web.Images"; }
+        }
+
+        public EpiloggerDB Thedb()
+        {
+            return db;
         }
 
         public int FindImageCountByEventID(int EventID, DateTime F, DateTime T)
