@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
+using System.Globalization;
 using System.Linq;
 using AutoMapper;
 using Epilogger.Data;
@@ -56,14 +57,33 @@ namespace Epilogger.Web.Areas.Api.Models
                         EventId = box.EventId,
                         Type = "",
                         IsActive = true
-                    };    
+                    };
+                    memBox = _ms.Save(memBox);
                 }
                 
-                memBox = _ms.Save(memBox);
                 box.MemboxId = memBox.ID;
             }
 
             box.AddedDateTime = DateTime.UtcNow;
+
+            //If IncludePhoto is true and the tweet has a photo associated to it, also store the photo
+            if (box.IncludePhotos != null && (bool) box.IncludePhotos)
+            {
+                var theImage = _is.GetImageByTweetId(int.Parse(box.ItemId));
+                if (theImage != null)
+                {
+                    _msi.Save(new MemoryBoxItem()
+                                  {
+                                      AddedDateTime = DateTime.UtcNow,
+                                      EventId = box.EventId,
+                                      ItemType = "Photo",
+                                      ItemId = theImage.ID.ToString(CultureInfo.InvariantCulture),
+                                      MemboxId = (int)box.MemboxId,
+                                      UserId = box.UserId
+                                  });
+                }
+
+            }
 
             return Mapper.Map<MemoryBoxItem, ApiMemoryBoxItem>(_msi.Save(Mapper.Map<ApiMemoryBoxItem, MemoryBoxItem>(box)));
         }

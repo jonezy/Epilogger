@@ -178,6 +178,19 @@ namespace Epilogger.Web
             return db.GetPhotosFromMemoryBox(memBoxId, page, count).ExecuteTypedList<Image>();
         }
 
+        public Image GetImageByTweetId(int tweetId)
+        {
+            var tweet = db.Tweets.FirstOrDefault(e => e.ID == tweetId);
+            
+            //Need the TweetId, the long one from Twitter
+            var results = from m in db.ImageMetaData
+                          join i in db.Images on m.ImageID equals i.ID
+                          where m.TwitterID == tweet.TwitterID
+                          select i;
+
+            return results.FirstOrDefault();
+
+        }
 
     }
 }

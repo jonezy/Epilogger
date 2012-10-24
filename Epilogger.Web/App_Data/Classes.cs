@@ -3783,6 +3783,23 @@ namespace Epilogger.Data
 		    }
 		}
 		
+        partial void OnEventBriteEIDChanging(string value);
+        partial void OnEventBriteEIDChanged();
+		
+		private string _EventBriteEID;
+		public string EventBriteEID { 
+		    get{
+		        return _EventBriteEID;
+		    } 
+		    set{
+		        this.OnEventBriteEIDChanging(value);
+                this.SendPropertyChanging();
+                this._EventBriteEID = value;
+                this.SendPropertyChanged("EventBriteEID");
+                this.OnEventBriteEIDChanged();
+		    }
+		}
+		
 
         #endregion
 
