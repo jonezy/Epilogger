@@ -140,25 +140,12 @@ namespace Epilogger.Web.Controllers {
 
 				try
 				{
-					//http://www.eventbrite.com/tickets-external?eid=4612608436&ref=etckt  widget url
-					//http://www.eventbrite.com/event/4612608436/eorg   web url
-					string EventbriteURL = model.EventBrightUrl;
-					if (!EventbriteURL.Contains("tickets-external"))  // if the Eventbrite url is not in widget form...
+					if (string.IsNullOrEmpty(model.EventBriteEID) || !Helpers.IsDigitsOnly(model.EventBriteEID))
 					{
-						Regex regex = new Regex("eventbrite.com.+?([0-9]+)");
-						Match match = regex.Match(EventbriteURL);
-                        if (match.Success)
-                       {
-                            string eventNumber = match.Groups[1].Value;
-                            model.EventBrightUrl  = String.Format("http://www.eventbrite.com/tickets-external?eid={0}&ref=etckt", eventNumber);
-                        }
-                        else
-                        {
-                            model.EventBrightUrl = null; 
-                        }
+						model.EventBriteEID = null;
 					}
 				}
-				catch { model.EventBrightUrl = null; }
+				catch { model.EventBriteEID = null; }
 
 				model.CanDelete = false;
 				if ((requestedEvent.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator)
@@ -407,10 +394,14 @@ namespace Epilogger.Web.Controllers {
 				{
 					model.UserID = CurrentUserID;
 					model.CreatedDateTime = DateTime.UtcNow;
-										
+
 					var epLevent = Mapper.Map<CreateEventViewModel, Event>(model);
 					if (model.WebsiteURL == "http://") { model.WebsiteURL = string.Empty; }
 					if (model.EventBrightUrl == "http://") { model.EventBrightUrl = string.Empty; } else { epLevent.EventBrightUrl = model.EventBrightUrl; }
+					if (model.EventBrightUrl != string.Empty && model.EventBrightUrl.Contains("eventbrite.c"))
+					{
+						epLevent.EventBriteEID = getEventbriteEID(model.EventBrightUrl);
+					}
 					_es.Save(epLevent);
 
 					//Initiate a first collect on the event
@@ -545,6 +536,50 @@ namespace Epilogger.Web.Controllers {
 			return View(model);
 		}
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+		private string getEventbriteEID(string url)
+		{
+			HttpWebResponse response = null;
+			string site = "";
+			string eID = "";
+			try
+			{
+				HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+				response = (HttpWebResponse)request.GetResponse();
+				Stream responseStream = response.GetResponseStream();
+				StreamReader reader = new StreamReader(responseStream);
+				using (reader)
+				{
+					site = reader.ReadToEnd();
+				}
+				if (site != "")
+				{
+					eID = getEIDfromRegex(site);
+				}
+			}
+			catch { }
+			finally
+			{
+				if (response != null)
+				{
+					response.Close();
+				}
+			}
+
+
+			return eID;
+		}
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+		private string getEIDfromRegex(string site)
+		{
+			string pattern = @"name=.eid.\svalue=.([0-9]+)"; // matching <input type="hidden" name="eid" value="4668207735">
+			Regex regex = new Regex(pattern);
+			var match = regex.Match(site);
+			if (match.Success)
+				return match.Groups[1].ToString();
+			else
+				return "";
+		}
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 		public virtual ActionResult EventBySlug(string eventSlug)
@@ -1020,6 +1055,16 @@ namespace Epilogger.Web.Controllers {
 					currentEvent.EventBrightUrl = !string.IsNullOrEmpty(model.EventBrightUrl) && !model.EventBrightUrl.StartsWith("http://") ?
 						model.EventBrightUrl.Insert(0, "http://") :
 						model.EventBrightUrl;
+
+					if (!string.IsNullOrEmpty(currentEvent.EventBrightUrl) && currentEvent.EventBrightUrl.Contains(".eventbrite.c"))
+					{
+						currentEvent.EventBriteEID = getEventbriteEID(model.EventBrightUrl);
+					}
+					else
+					{
+						model.EventBriteEID = null;
+					}
+
 					currentEvent.Cost = model.Cost;
 					currentEvent.TimeZoneOffset = model.TimeZoneOffset;
 
