@@ -57,6 +57,7 @@ namespace Epilogger.Web.Controllers {
         public class ActionNamesClass {
             public readonly string GlobalNavigation = "GlobalNavigation";
             public readonly string Nag = "Nag";
+            public readonly string GetNavMenu = "GetNavMenu";
             public readonly string RenderBreadCrumb = "RenderBreadCrumb";
         }
 
@@ -64,6 +65,7 @@ namespace Epilogger.Web.Controllers {
         public class ActionNameConstants {
             public const string GlobalNavigation = "GlobalNavigation";
             public const string Nag = "Nag";
+            public const string GetNavMenu = "GetNavMenu";
             public const string RenderBreadCrumb = "RenderBreadCrumb";
         }
 
@@ -87,6 +89,11 @@ namespace Epilogger.Web.Controllers {
 
         public override System.Web.Mvc.ActionResult Nag() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Nag);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult GetNavMenu() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.GetNavMenu);
             return callInfo;
         }
 

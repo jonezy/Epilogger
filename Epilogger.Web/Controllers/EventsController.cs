@@ -400,7 +400,7 @@ namespace Epilogger.Web.Controllers {
 					if (model.EventBrightUrl == "http://") { model.EventBrightUrl = string.Empty; } else { epLevent.EventBrightUrl = model.EventBrightUrl; }
 					if (model.EventBrightUrl != string.Empty && model.EventBrightUrl.Contains("eventbrite.c"))
 					{
-						epLevent.EventBriteEID = getEventbriteEID(model.EventBrightUrl);
+						epLevent.EventBriteEID = GetEventbriteEID(model.EventBrightUrl);
 					}
 					_es.Save(epLevent);
 
@@ -417,107 +417,11 @@ namespace Epilogger.Web.Controllers {
 					tsmp.SendMessage(tsMSG);
 					tsmp.Dispose();
 
+                    //Tweet that the event has been created.
+                    SendEventCreatedTweet(epLevent);
 
-
-					//The event has been created and there is no error. 
-					//Let's tweet out that mother.
-					try
-					{
-						var apiClient = new Epilogr.APISoapClient();
-						var shortUrlContainer = apiClient.CreateUrl("http://epilogger.com/events/" + epLevent.EventSlug);
-
-						
-						var theTerm = string.Empty;
-						if (epLevent.SearchTerms.Contains("OR"))
-						{
-							var terms = Regex.Split(epLevent.SearchTerms, "OR");
-							if (!terms[0].Contains("#"))
-							{
-								theTerm = "#" + terms[0];
-							}
-							else
-							{
-								theTerm = terms[0];
-							}
-
-						}
-						else
-						{
-							if (!epLevent.SearchTerms.Contains("#"))
-							{
-								theTerm = "#" + epLevent.SearchTerms;
-							}
-						}
-
-
-						var beAPartString = string.Empty;
-						var compareToStart = DateTime.Compare(DateTime.UtcNow, epLevent.StartDateTime);
-						if (epLevent.EndDateTime == null)
-						{
-							beAPartString = "See what's going on";
-						}
-						else
-						{
-							var compareToEnd = DateTime.Compare(DateTime.UtcNow, epLevent.EndDateTime ?? DateTime.MinValue);
-
-							if (compareToStart < 0)
-							{
-								beAPartString = "Be a part of the lead up";
-							}
-							else if (compareToStart > 0 && compareToEnd < 0)
-							{
-								beAPartString = "See what's going on";
-							}
-							else if (compareToEnd > 0)
-							{
-								beAPartString = "See what happened";
-							}
-						}
-						
-						var eventCreatedTweet =
-							string.Format(
-								"{0} has been added to Epilogger! {1} at {2} {3}", epLevent.Name, beAPartString, shortUrlContainer.ShortenedUrl, theTerm);
-
-						var mp = new MQ.MSGProducer("Epilogger", "TweetSender");
-						var myMSG = new MQ.Messages.TweetSenderMsg { TweetText = eventCreatedTweet };
-						mp.SendMessage(myMSG);
-						mp.Dispose();
-					}
-					catch (Exception)
-					{
-					}
-
-					try
-					{
-						var theUser = _us.GetUserByID(model.UserID);
-
-						var parser = new TemplateParser();
-						var replacements = new Dictionary<string, string>
-											   {
-												   {"[BASE_URL]", App.BaseUrl},
-												   {"[EVENT_NAME]", model.Name},
-												   {"[EVENT_CREATOR]", string.Format("{0} {1} ({2})", theUser.FirstName, theUser.LastName, theUser.Username)},
-												   {"[SEARCH_TERMS]", model.SearchTerms},
-												   {"[EVENT_TIME]", model.StartDateTime.ToLocalTime() + " - " + (DateTime)model.EndDateTime.GetValueOrDefault().ToLocalTime() },
-												   {"[COLLECTION_TIME]", model.CollectionStartDateTime.ToLocalTime() + " - " + (DateTime)model.CollectionEndDateTime.GetValueOrDefault().ToLocalTime()},
-												   {"[EVENT_URL]", "http://epilogger.com/events/" + model.EventSlug }
-											   };
-
-						var message = parser.Replace(AccountEmails.AdminEventCreated, replacements);
-
-						var sfEmail = new SpamSafeMail
-						{
-							EmailSubject = model.Name + " has just been created.",
-							HtmlEmail = message,
-							TextEmail = message
-						};
-						sfEmail.ToEmailAddresses.Add("system@epilogger.com");
-
-						sfEmail.SendMail();
-					}
-					catch (Exception)
-					{
-					}
+                    //The the admins an email with the event details.
+				    SendEventCreatedEmailToSystem(model);
 
 					
 					this.StoreSuccess("Your Event was created successfully!  Dont forget to share it with your friends and attendees!");
@@ -536,28 +440,149 @@ namespace Epilogger.Web.Controllers {
 			return View(model);
 		}
 
+	    private void SendEventCreatedEmailToSystem(CreateEventViewModel model)
+	    {
+	        try
+	        {
+	            var theUser = _us.GetUserByID(model.UserID);
+
+	            var parser = new TemplateParser();
+	            var replacements = new Dictionary<string, string>
+	                                   {
+	                                       {"[BASE_URL]", App.BaseUrl},
+	                                       {"[EVENT_NAME]", model.Name},
+	                                       {
+	                                           "[EVENT_CREATOR]",
+	                                           string.Format("{0} {1} ({2}) {3}", theUser.FirstName, theUser.LastName, theUser.Username, theUser.EmailAddress)
+	                                       },
+	                                       {"[SEARCH_TERMS]", model.SearchTerms},
+	                                       {
+	                                           "[EVENT_TIME]",
+	                                           model.StartDateTime.ToLocalTime() + " - " +
+	                                           (DateTime) model.EndDateTime.GetValueOrDefault().ToLocalTime()
+	                                       },
+	                                       {
+	                                           "[COLLECTION_TIME]",
+	                                           model.CollectionStartDateTime.ToLocalTime() + " - " +
+	                                           (DateTime) model.CollectionEndDateTime.GetValueOrDefault().ToLocalTime()
+	                                       },
+	                                       {"[EVENT_URL]", "http://epilogger.com/events/" + model.EventSlug}
+	                                   };
+
+	            var message = parser.Replace(AccountEmails.AdminEventCreated, replacements);
+
+	            var sfEmail = new SpamSafeMail
+	                              {
+	                                  EmailSubject = model.Name + " has just been created.",
+	                                  HtmlEmail = message,
+	                                  TextEmail = message
+	                              };
+	            sfEmail.ToEmailAddresses.Add("system@epilogger.com");
+
+	            sfEmail.SendMail();
+	        }
+	        catch (Exception)
+	        {
+	        }
+	    }
+
+	    private static void SendEventCreatedTweet(Event epLevent)
+	    {
+            //The event has been created and there is no error. 
+	        //Let's tweet out that mother.
+	        try
+	        {
+	            var apiClient = new Epilogr.APISoapClient();
+	            var shortUrlContainer = apiClient.CreateUrl("http://epilogger.com/events/" + epLevent.EventSlug);
+
+
+	            var theTerm = string.Empty;
+	            if (epLevent.SearchTerms.Contains("OR"))
+	            {
+	                var terms = Regex.Split(epLevent.SearchTerms, "OR");
+	                if (!terms[0].Contains("#"))
+	                {
+	                    theTerm = "#" + terms[0];
+	                }
+	                else
+	                {
+	                    theTerm = terms[0];
+	                }
+	            }
+	            else
+	            {
+	                if (!epLevent.SearchTerms.Contains("#"))
+	                {
+	                    theTerm = "#" + epLevent.SearchTerms;
+	                }
+	            }
+
+
+	            var beAPartString = string.Empty;
+	            var compareToStart = DateTime.Compare(DateTime.UtcNow, epLevent.StartDateTime);
+	            if (epLevent.EndDateTime == null)
+	            {
+	                beAPartString = "See what's going on";
+	            }
+	            else
+	            {
+	                var compareToEnd = DateTime.Compare(DateTime.UtcNow, epLevent.EndDateTime ?? DateTime.MinValue);
+
+	                if (compareToStart < 0)
+	                {
+	                    beAPartString = "Be a part of the lead up";
+	                }
+	                else if (compareToStart > 0 && compareToEnd < 0)
+	                {
+	                    beAPartString = "See what's going on";
+	                }
+	                else if (compareToEnd > 0)
+	                {
+	                    beAPartString = "See what happened";
+	                }
+	            }
+
+	            var eventCreatedTweet =
+	                string.Format(
+	                    "{0} has been added to Epilogger! {1} at {2} {3}", epLevent.Name, beAPartString,
+	                    shortUrlContainer.ShortenedUrl, theTerm);
+
+	            var mp = new MQ.MSGProducer("Epilogger", "TweetSender");
+	            var myMSG = new MQ.Messages.TweetSenderMsg {TweetText = eventCreatedTweet};
+	            mp.SendMessage(myMSG);
+	            mp.Dispose();
+	        }
+	        catch (Exception)
+	        {
+	        }
+	    }
+
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-		private string getEventbriteEID(string url)
+		
+        private string GetEventbriteEID(string url)
 		{
 			HttpWebResponse response = null;
-			string site = "";
-			string eID = "";
+		    var eId = string.Empty;
 			try
 			{
-				HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+				var request = WebRequest.Create(url);
 				response = (HttpWebResponse)request.GetResponse();
-				Stream responseStream = response.GetResponseStream();
-				StreamReader reader = new StreamReader(responseStream);
-				using (reader)
-				{
-					site = reader.ReadToEnd();
-				}
-				if (site != "")
-				{
-					eID = getEIDfromRegex(site);
-				}
+				var responseStream = response.GetResponseStream();
+			    if (responseStream != null)
+			    {
+			        var reader = new StreamReader(responseStream);
+			        string site;
+			        using (reader)
+			        {
+			            site = reader.ReadToEnd();
+			        }
+			        if (site != "")
+			        {
+			            eId = GetEIDfromRegex(site);
+			        }
+			    }
 			}
-			catch { }
+            catch (Exception) { }
 			finally
 			{
 				if (response != null)
@@ -567,19 +592,19 @@ namespace Epilogger.Web.Controllers {
 			}
 
 
-			return eID;
+			return eId;
 		}
+
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-		private string getEIDfromRegex(string site)
+		
+        private static string GetEIDfromRegex(string site)
 		{
-			string pattern = @"name=.eid.\svalue=.([0-9]+)"; // matching <input type="hidden" name="eid" value="4668207735">
-			Regex regex = new Regex(pattern);
+			const string pattern = @"name=.eid.\svalue=.([0-9]+)"; // matching <input type="hidden" name="eid" value="4668207735">
+			var regex = new Regex(pattern);
 			var match = regex.Match(site);
-			if (match.Success)
-				return match.Groups[1].ToString();
-			else
-				return "";
+			return match.Success ? match.Groups[1].ToString() : string.Empty;
 		}
+
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 		public virtual ActionResult EventBySlug(string eventSlug)
@@ -1058,11 +1083,11 @@ namespace Epilogger.Web.Controllers {
 
 					if (!string.IsNullOrEmpty(currentEvent.EventBrightUrl) && currentEvent.EventBrightUrl.Contains(".eventbrite.c"))
 					{
-						currentEvent.EventBriteEID = getEventbriteEID(model.EventBrightUrl);
+						currentEvent.EventBriteEID = GetEventbriteEID(model.EventBrightUrl);
 					}
 					else
 					{
-						model.EventBriteEID = null;
+                        currentEvent.EventBriteEID = null;
 					}
 
 					currentEvent.Cost = model.Cost;
