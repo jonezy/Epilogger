@@ -61,7 +61,8 @@ namespace Epilogger.Web.Models {
         public int? VenueID { get; set; }
         public Epilogger.Data.Venue Venue { get; set; }
 
-       [RegularExpression(@".*eventbrite.c.*", ErrorMessage = "Invalid Eventbrite URL. example.eventbrite.com")]
+        //[RegularExpression(@".*eventbrite.c.*", ErrorMessage = "Invalid Eventbrite URL. example.eventbrite.com")]
+        //Had to remove for now.
         [DisplayName("EventBrite URL")]
         public string EventBrightUrl { get; set; }
 

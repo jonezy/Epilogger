@@ -396,8 +396,8 @@ namespace Epilogger.Web.Controllers {
 					model.CreatedDateTime = DateTime.UtcNow;
 
 					var epLevent = Mapper.Map<CreateEventViewModel, Event>(model);
-					if (model.WebsiteURL == "http://") { model.WebsiteURL = string.Empty; }
-					if (model.EventBrightUrl == "http://") { model.EventBrightUrl = string.Empty; } else { epLevent.EventBrightUrl = model.EventBrightUrl; }
+                    if (model.WebsiteURL == "http://") { epLevent.WebsiteURL = string.Empty; }
+                    if (model.EventBrightUrl == "http://") { epLevent.EventBrightUrl = null; } else { epLevent.EventBrightUrl = model.EventBrightUrl; }
 					if (model.EventBrightUrl != string.Empty && model.EventBrightUrl.Contains("eventbrite.c"))
 					{
 						epLevent.EventBriteEID = GetEventbriteEID(model.EventBrightUrl);
