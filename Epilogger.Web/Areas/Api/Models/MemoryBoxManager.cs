@@ -117,7 +117,7 @@ namespace Epilogger.Web.Areas.Api.Models
 
         public List<ApiImage> PhotosByMemBoxIdPaged(int memBoxId, int page, int count)
         {
-            return _is.Thedb().GetPhotosFromMemoryBox(memBoxId, page, count).ExecuteTypedList<ApiImage>();
+            return Mapper.Map<List<Image>, List<ApiImage>>(_is.Thedb().GetPhotosFromMemoryBox(memBoxId, page, count).ExecuteTypedList<Image>());
         }
 
         public List<ApiMemoryBox> MemoryBoxByUserId(Guid userId)
