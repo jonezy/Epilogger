@@ -313,6 +313,7 @@
     <Compile Include="Core\Helpers\HtmlHelpers.cs" />
     <Compile Include="Core\Helpers\PasswordHelpers.cs" />
     <Compile Include="Core\Helpers\TwitterHelper.cs" />
+    <Compile Include="Core\Resolvers\ApiImageUrlResolver.cs" />
     <Compile Include="Core\Resolvers\ImageUrlResolver.cs" />
     <Compile Include="Core\Resolvers\UserProfilePictureResolver.cs" />
     <Compile Include="Core\Resolvers\UserTimezonesResolver.cs" />

@@ -643,6 +643,9 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.EpiloggerImageLink, opt => opt.ResolveUsing<ImageUrlResolver>())
                 .ForMember(dest => dest.MemoryBoxItemId, opt => opt.Ignore());
 
+            Mapper.CreateMap<ApiImage, ApiImage>()
+                .ForMember(dest => dest.EpiloggerImageLink, opt => opt.ResolveUsing<ApiImageUrlResolver>());
+
             Mapper.CreateMap<TopImageAndTweet, ApiTopImageAndTweet>();
             Mapper.CreateMap<CheckIn, ApiCheckIn>()
                 .ForMember(dest => dest.ProfilePicture, opt => opt.MapFrom(src => src.Tweets.FirstOrDefault().ProfileImageURL));
