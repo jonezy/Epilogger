@@ -17,6 +17,7 @@ using Epilogger.Web.Core.Filters;
 using Epilogger.Web.Core.Stats;
 using Epilogger.Web.Models;
 using Epilogger.Common;
+using Epilogger.Web.Models.Timeline;
 using Epilogger.Web.Views.Emails;
 using RichmondDay.Helpers;
 using System.Net;
@@ -1902,6 +1903,86 @@ namespace Epilogger.Web.Controllers {
 			return RedirectToAction("details");
 
 		}
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        public virtual ActionResult Timeline(string id)
+        {
+
+            var requestedEvent = _es.FindBySlug(id);
+            if (requestedEvent != null)
+            {
+
+
+                return View(requestedEvent);
+            }
+            ModelState.AddModelError(string.Empty, "The event you're trying to visit doesn't exist.");
+            return RedirectToAction("index", "Browse");
+
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        public virtual ActionResult TimelineData(string id)
+        {
+            var requestedEvent = _es.FindBySlug(id);
+            var ro = new Models.Timeline.RootObject();
+
+            if (requestedEvent != null)
+            {
+                var theImages = _is.FindByEventID(requestedEvent.ID).OrderBy(e => e.DateTime);
+                
+                Models.Timeline.Timeline tl = new Models.Timeline.Timeline()
+                                                  {
+                                                      headline = requestedEvent.Name,
+                                                      type = "default",
+                                                      text = requestedEvent.Description,
+                                                      date = new List<Date>(),
+                                                      asset = new Asset(),
+                                                      era = new List<Era>()
+                                                  };
+
+
+                //Get all the photos for the event
+                Date nd = null;
+                
+                foreach (var img in theImages)
+                {
+                    var tw = _ts.FindByImageID(img.ID, requestedEvent.ID).FirstOrDefault();
+                    //object tw = null;
+                    nd = new Date()
+                    {
+                        startDate = String.Format("{0:yyyy,M,d,HH,mm,ss}", img.DateTime.ToLocalTime()),
+                        endDate = String.Format("{0:yyyy,M,d,HH,mm,ss}", img.DateTime.ToLocalTime()),
+                        headline = tw == null ? "" : tw.FromUserScreenName,
+                        text = tw == null ? "" : tw.Text,
+                        asset = new Asset2()
+                        {
+                            media = img.Fullsize,
+                            caption = "",
+                            credit = "",
+                            thumbnail = img.Fullsize
+                        }
+                    };
+
+                    tl.date.Add(nd);
+
+                }
+                tl.era.Add(new Era()
+                               {
+                                   startDate = String.Format("{0:yyyy,M,d,HH,mm,ss}", requestedEvent.StartDateTime.ToLocalTime()),
+                                   endDate = String.Format("{0:yyyy,M,d,HH,mm,ss}", ((DateTime)requestedEvent.EndDateTime).ToLocalTime()),
+                                   headline = "Official event times",
+                                   tag = "",
+                                   text = ""
+                               });
+                
+                ro.timeline = tl;
+            }
+
+            return Json(ro, JsonRequestBehavior.AllowGet);
+            
+        }
 
 		
 	}

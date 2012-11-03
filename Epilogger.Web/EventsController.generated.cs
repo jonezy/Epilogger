@@ -210,6 +210,16 @@ namespace Epilogger.Web.Controllers {
         public System.Web.Mvc.ActionResult PullTweets() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.PullTweets);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Timeline() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Timeline);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult TimelineData() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.TimelineData);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public EventsController Actions { get { return MVC.Events; } }
@@ -264,6 +274,8 @@ namespace Epilogger.Web.Controllers {
             public readonly string LiveGetLastTweetsJson = "LiveGetLastTweetsJson";
             public readonly string LiveGetLastPhotosJson = "LiveGetLastPhotosJson";
             public readonly string PullTweets = "PullTweets";
+            public readonly string Timeline = "Timeline";
+            public readonly string TimelineData = "TimelineData";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -307,6 +319,8 @@ namespace Epilogger.Web.Controllers {
             public const string LiveGetLastTweetsJson = "LiveGetLastTweetsJson";
             public const string LiveGetLastPhotosJson = "LiveGetLastPhotosJson";
             public const string PullTweets = "PullTweets";
+            public const string Timeline = "Timeline";
+            public const string TimelineData = "TimelineData";
         }
 
 
@@ -570,6 +584,20 @@ namespace Epilogger.Web.Controllers {
         public class ActionParamsClass_PullTweets {
             public readonly string eventId = "eventId";
         }
+        static readonly ActionParamsClass_Timeline s_params_Timeline = new ActionParamsClass_Timeline();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Timeline TimelineParams { get { return s_params_Timeline; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Timeline {
+            public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_TimelineData s_params_TimelineData = new ActionParamsClass_TimelineData();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_TimelineData TimelineDataParams { get { return s_params_TimelineData; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_TimelineData {
+            public readonly string id = "id";
+        }
         static readonly ViewNames s_views = new ViewNames();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewNames Views { get { return s_views; } }
@@ -602,6 +630,7 @@ namespace Epilogger.Web.Controllers {
             public readonly string NeedTwitterAuth = "~/Views/Events/NeedTwitterAuth.cshtml";
             public readonly string PhotoDetails = "~/Views/Events/PhotoDetails.cshtml";
             public readonly string Search = "~/Views/Events/Search.cshtml";
+            public readonly string Timeline = "~/Views/Events/Timeline.cshtml";
             public readonly string TweetBox = "~/Views/Events/TweetBox.cshtml";
             public readonly string TweetReply = "~/Views/Events/TweetReply.cshtml";
             public readonly string TweetRetweet = "~/Views/Events/TweetRetweet.cshtml";
@@ -895,6 +924,18 @@ namespace Epilogger.Web.Controllers {
         public override System.Web.Mvc.ActionResult PullTweets(int eventId) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.PullTweets);
             callInfo.RouteValueDictionary.Add("eventId", eventId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Timeline(string id) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Timeline);
+            callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult TimelineData(string id) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.TimelineData);
+            callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }
 
