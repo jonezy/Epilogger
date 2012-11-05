@@ -480,6 +480,76 @@ namespace Epilogger.Data {
 	                IsForeignKey = false,
 	                MaxLength = 0
                 });
+
+                Columns.Add(new DatabaseColumn("FromUserDisplayName", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 500
+                });
+
+                Columns.Add(new DatabaseColumn("Latitude", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.AnsiString,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = -1
+                });
+
+                Columns.Add(new DatabaseColumn("Longitude", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.AnsiString,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = -1
+                });
+
+                Columns.Add(new DatabaseColumn("InReplyToStatusId", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int64,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("ToUserDisplayName", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 500
+                });
+
+                Columns.Add(new DatabaseColumn("LatitudeStr", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 20
+                });
+
+                Columns.Add(new DatabaseColumn("LongitudeStr", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 20
+                });
                     
                 
                 
@@ -698,6 +768,90 @@ namespace Epilogger.Data {
    			public static string DeletedColumn{
 			      get{
         			return "Deleted";
+      			}
+		    }
+           
+            public IColumn FromUserDisplayName{
+                get{
+                    return this.GetColumn("FromUserDisplayName");
+                }
+            }
+            				
+   			public static string FromUserDisplayNameColumn{
+			      get{
+        			return "FromUserDisplayName";
+      			}
+		    }
+           
+            public IColumn Latitude{
+                get{
+                    return this.GetColumn("Latitude");
+                }
+            }
+            				
+   			public static string LatitudeColumn{
+			      get{
+        			return "Latitude";
+      			}
+		    }
+           
+            public IColumn Longitude{
+                get{
+                    return this.GetColumn("Longitude");
+                }
+            }
+            				
+   			public static string LongitudeColumn{
+			      get{
+        			return "Longitude";
+      			}
+		    }
+           
+            public IColumn InReplyToStatusId{
+                get{
+                    return this.GetColumn("InReplyToStatusId");
+                }
+            }
+            				
+   			public static string InReplyToStatusIdColumn{
+			      get{
+        			return "InReplyToStatusId";
+      			}
+		    }
+           
+            public IColumn ToUserDisplayName{
+                get{
+                    return this.GetColumn("ToUserDisplayName");
+                }
+            }
+            				
+   			public static string ToUserDisplayNameColumn{
+			      get{
+        			return "ToUserDisplayName";
+      			}
+		    }
+           
+            public IColumn LatitudeStr{
+                get{
+                    return this.GetColumn("LatitudeStr");
+                }
+            }
+            				
+   			public static string LatitudeStrColumn{
+			      get{
+        			return "LatitudeStr";
+      			}
+		    }
+           
+            public IColumn LongitudeStr{
+                get{
+                    return this.GetColumn("LongitudeStr");
+                }
+            }
+            				
+   			public static string LongitudeStrColumn{
+			      get{
+        			return "LongitudeStr";
       			}
 		    }
            

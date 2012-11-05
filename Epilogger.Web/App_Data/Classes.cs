@@ -752,6 +752,125 @@ namespace Epilogger.Data
 		    }
 		}
 		
+        partial void OnFromUserDisplayNameChanging(string value);
+        partial void OnFromUserDisplayNameChanged();
+		
+		private string _FromUserDisplayName;
+		public string FromUserDisplayName { 
+		    get{
+		        return _FromUserDisplayName;
+		    } 
+		    set{
+		        this.OnFromUserDisplayNameChanging(value);
+                this.SendPropertyChanging();
+                this._FromUserDisplayName = value;
+                this.SendPropertyChanged("FromUserDisplayName");
+                this.OnFromUserDisplayNameChanged();
+		    }
+		}
+		
+        partial void OnLatitudeChanging(string value);
+        partial void OnLatitudeChanged();
+		
+		private string _Latitude;
+		public string Latitude { 
+		    get{
+		        return _Latitude;
+		    } 
+		    set{
+		        this.OnLatitudeChanging(value);
+                this.SendPropertyChanging();
+                this._Latitude = value;
+                this.SendPropertyChanged("Latitude");
+                this.OnLatitudeChanged();
+		    }
+		}
+		
+        partial void OnLongitudeChanging(string value);
+        partial void OnLongitudeChanged();
+		
+		private string _Longitude;
+		public string Longitude { 
+		    get{
+		        return _Longitude;
+		    } 
+		    set{
+		        this.OnLongitudeChanging(value);
+                this.SendPropertyChanging();
+                this._Longitude = value;
+                this.SendPropertyChanged("Longitude");
+                this.OnLongitudeChanged();
+		    }
+		}
+		
+        partial void OnInReplyToStatusIdChanging(long? value);
+        partial void OnInReplyToStatusIdChanged();
+		
+		private long? _InReplyToStatusId;
+		public long? InReplyToStatusId { 
+		    get{
+		        return _InReplyToStatusId;
+		    } 
+		    set{
+		        this.OnInReplyToStatusIdChanging(value);
+                this.SendPropertyChanging();
+                this._InReplyToStatusId = value;
+                this.SendPropertyChanged("InReplyToStatusId");
+                this.OnInReplyToStatusIdChanged();
+		    }
+		}
+		
+        partial void OnToUserDisplayNameChanging(string value);
+        partial void OnToUserDisplayNameChanged();
+		
+		private string _ToUserDisplayName;
+		public string ToUserDisplayName { 
+		    get{
+		        return _ToUserDisplayName;
+		    } 
+		    set{
+		        this.OnToUserDisplayNameChanging(value);
+                this.SendPropertyChanging();
+                this._ToUserDisplayName = value;
+                this.SendPropertyChanged("ToUserDisplayName");
+                this.OnToUserDisplayNameChanged();
+		    }
+		}
+		
+        partial void OnLatitudeStrChanging(string value);
+        partial void OnLatitudeStrChanged();
+		
+		private string _LatitudeStr;
+		public string LatitudeStr { 
+		    get{
+		        return _LatitudeStr;
+		    } 
+		    set{
+		        this.OnLatitudeStrChanging(value);
+                this.SendPropertyChanging();
+                this._LatitudeStr = value;
+                this.SendPropertyChanged("LatitudeStr");
+                this.OnLatitudeStrChanged();
+		    }
+		}
+		
+        partial void OnLongitudeStrChanging(string value);
+        partial void OnLongitudeStrChanged();
+		
+		private string _LongitudeStr;
+		public string LongitudeStr { 
+		    get{
+		        return _LongitudeStr;
+		    } 
+		    set{
+		        this.OnLongitudeStrChanging(value);
+                this.SendPropertyChanging();
+                this._LongitudeStr = value;
+                this.SendPropertyChanged("LongitudeStr");
+                this.OnLongitudeStrChanged();
+		    }
+		}
+		
 
         #endregion
 
