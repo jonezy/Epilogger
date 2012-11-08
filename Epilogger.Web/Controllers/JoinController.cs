@@ -31,8 +31,7 @@ namespace Epilogger.Web.Controllers {
         /* Sign up page Step 1 or 2 */
         public virtual ActionResult Signup()
         {
-            if (InPopUp)
-                ViewBag.InPopUp = true;
+            ViewBag.InPopUp = InPopUp;
 
             return View();
         }
@@ -126,7 +125,7 @@ namespace Epilogger.Web.Controllers {
                     ShortCreateFormSaveUser(model);
 
                     if (model.InPopUp)
-                        return RedirectToAction("Account", "CloseAndRefresh");
+                        return RedirectToAction("CloseAndRefresh", "Account");
 
                     return RedirectToAction("Index", "Home");
                 }

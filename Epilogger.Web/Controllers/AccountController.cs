@@ -600,8 +600,12 @@ namespace Epilogger.Web.Controllers {
 
                 if (user == null)
                 {
-                    ModelState.AddModelError(string.Empty, "There is a problem with your username or password. Please try again or <a href='/join/signup'/>create an account</a>.");
-                    return View(model);
+                    user = _service.GetUserByEmail(model.Username);
+                    if (user==null)
+                    {
+                        ModelState.AddModelError(string.Empty, "There is a problem with your username or password. Please try again or <a href='/join/signup'/>create an account</a>.");
+                        return View(model);   
+                    }
                 }
 
                 // the user is a valid user but they need to update there password.
@@ -611,25 +615,16 @@ namespace Epilogger.Web.Controllers {
                     return RedirectToAction("UpdatePassword");
                 }
 
-                user = _service.GetUserByUsername(model.Username);
                 if (!BCryptHelper.CheckPassword(model.Password, user.Password))
                 {
                     ModelState.AddModelError(string.Empty, "There is a problem with your username or password. Please try again or <a href='/join/signup'/>create an account</a>.");
                     return View(model);
                 }
 
-
-                // write the login cookie, redirect. 
-                if (model.RememberMe)
-                {
-                    CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString(), DateTime.Now.AddDays(30));
-                    CookieHelpers.WriteCookie("lc", "tz", user.TimeZoneOffSet.ToString(), DateTime.Now.AddDays(30));
-                }
-                else
-                {
-                    CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString());
-                    CookieHelpers.WriteCookie("lc", "tz", user.TimeZoneOffSet.ToString());
-                }
+                //Always remember
+                CookieHelpers.WriteCookie("lc", "uid", user.ID.ToString(), DateTime.Now.AddDays(30));
+                CookieHelpers.WriteCookie("lc", "tz", user.TimeZoneOffSet.ToString(), DateTime.Now.AddDays(30));
+                
 
                 //if (TempData["returnUrl"] != null)
                 //    return Redirect(TempData["returnUrl"].ToString());

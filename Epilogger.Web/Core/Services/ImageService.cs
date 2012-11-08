@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using Epilogger.Data;
+using Epilogger.Web.Areas.Api.Models.Classes;
 using Epilogger.Web.Model;
 using SubSonic.Schema;
 using System.Data;
@@ -15,11 +16,18 @@ namespace Epilogger.Web
         public int countcol { get; set; }
     }
 
+
+
     public class ImageService : ServiceBase<Image>
     {
         protected override string CacheKey
         {
             get { return "Epilogger.Web.Images"; }
+        }
+
+        public EpiloggerDB Thedb()
+        {
+            return db;
         }
 
         public int FindImageCountByEventID(int EventID, DateTime F, DateTime T)
@@ -32,9 +40,12 @@ namespace Epilogger.Web
             return db.Images.Where(t => t.EventID == eventID && t.DateTime >= F && t.DateTime <= T && t.Deleted == false).OrderByDescending(t => t.DateTime).Take(9);
         }
 
-        public IEnumerable<Image> FindByEventIDOrderDescTakeX(int eventID, int numberToReturn, DateTime F, DateTime T)
+        public IEnumerable<Image> FindByEventIdOrderDescTakeX(int eventID, int numberToReturn, DateTime F, DateTime T, bool includeVideos = true)
         {
-            return db.Images.Where(t => t.EventID == eventID && t.DateTime >= F && t.DateTime <= T && t.Deleted == false).OrderByDescending(t => t.DateTime).Take(numberToReturn);
+            if (includeVideos)
+                return db.Images.Where(t => t.EventID == eventID && t.DateTime >= F && t.DateTime <= T && t.Deleted == false).OrderByDescending(t => t.DateTime).Take(numberToReturn);
+
+            return db.Images.Where(t => t.EventID == eventID && t.DateTime >= F && t.DateTime <= T && t.Deleted == false && t.MediaType==1).OrderByDescending(t => t.DateTime).Take(numberToReturn);
         }
 
         public List<Image> GetRandomImagesByEventID(int eventID, int numberToGet)
@@ -42,11 +53,11 @@ namespace Epilogger.Web
             return db.GetRandomImagesByEventID(eventID, numberToGet).ExecuteTypedList<Image>();
         }
 
-        public List<Image> GetTopPhotosByEventID(int eventID, int recordsToReturn, DateTime fromDateTime, DateTime toDateTime)
+        public List<Image> GetTopPhotosByEventId(int eventID, int recordsToReturn, DateTime fromDateTime, DateTime toDateTime, bool includeVideos = true)
         {
-            List<TopPhotos> ps = db.GetTopPhotosByEventID(eventID, recordsToReturn, fromDateTime, toDateTime).ExecuteTypedList<TopPhotos>();
+            var ps = db.GetTopPhotosByEventID(eventID, recordsToReturn, fromDateTime, toDateTime, includeVideos).ExecuteTypedList<TopPhotos>();
 
-            List<Image> theTopPhotos = new List<Image>();
+            var theTopPhotos = new List<Image>();
             foreach (TopPhotos TP in ps)
             {
                 Image TheImage = new Image();
@@ -57,16 +68,19 @@ namespace Epilogger.Web
             return theTopPhotos;
         }
 
-        public List<Image> GetNewestPhotosByEventID(int eventID, int numberToGet)
+        public IEnumerable<Image> GetNewestPhotosByEventId(int eventID, int numberToGet, bool includeVideos = true)
         {
-            return db.Images.Where(e => e.EventID == eventID).OrderByDescending(e => e.DateTime).Take(numberToGet).ToList();
+            if (includeVideos)
+                return db.Images.Where(e => e.EventID == eventID).OrderByDescending(e => e.DateTime).Take(numberToGet).ToList();
+
+            return db.Images.Where(e => e.EventID == eventID && e.MediaType==1).OrderByDescending(e => e.DateTime).Take(numberToGet).ToList();
         }
 
 
 
-        public List<TopImageAndTweet> GetTopPhotosAndTweetByEventID(int eventID, int recordsToReturn, DateTime fromDateTime, DateTime toDateTime)
+        public List<TopImageAndTweet> GetTopPhotosAndTweetByEventID(int eventID, int recordsToReturn, DateTime fromDateTime, DateTime toDateTime, bool includeVideos = true)
         {
-            List<TopPhotos> ps = db.GetTopPhotosByEventID(eventID, recordsToReturn, fromDateTime, toDateTime).ExecuteTypedList<TopPhotos>();
+            List<TopPhotos> ps = db.GetTopPhotosByEventID(eventID, recordsToReturn, fromDateTime, toDateTime, includeVideos).ExecuteTypedList<TopPhotos>();
 
             var ts = new TweetService();
             
@@ -105,19 +119,38 @@ namespace Epilogger.Web
         }
 
 
-        public IEnumerable<Image> GetPagedPhotos(int eventID, int? page, int photosPerPage, DateTime F, DateTime T)
+        public IEnumerable<Image> GetPagedPhotos(int eventID, int? page, int photosPerPage, DateTime F, DateTime T, bool includeVideos = true)
         {
 
-            int skipAmount = page.HasValue ? page.Value - 1 : 0;
+            var skipAmount = page.HasValue ? page.Value - 1 : 0;
 
-            var photos = (from t in db.Images
-                          where t.EventID == eventID && t.DateTime >= F && t.DateTime <= T && t.Deleted == false
-                          orderby t.DateTime descending
-                          select t).Skip(skipAmount * photosPerPage).Take(photosPerPage);
-
+            IEnumerable<Image> photos;
+            if (includeVideos)
+            {
+                photos = (from t in db.Images
+                              where t.EventID == eventID && t.DateTime >= F && t.DateTime <= T && t.Deleted == false
+                              orderby t.DateTime descending
+                              select t).Skip(skipAmount * photosPerPage).Take(photosPerPage);
+            }
+            else
+            {
+                photos = (from t in db.Images
+                              where t.EventID == eventID && t.DateTime >= F && t.DateTime <= T && t.Deleted == false && t.MediaType==1
+                              orderby t.DateTime descending
+                              select t).Skip(skipAmount * photosPerPage).Take(photosPerPage);
+            }
+            
             return photos;
 
         }
+
+
+        public IEnumerable<ApiImage> GetPagedApiImages(int eventID, int? page, int photosPerPage, bool includeVideos = true)
+        {
+            var skipAmount = page.HasValue ? page.Value : 1;
+            return db.GetImagesWithMemboxIDPaged(eventID, skipAmount, photosPerPage, includeVideos).ExecuteTypedList<ApiImage>();
+        }
+
 
         public int Count() {
             return base.db.Images.Count(t => t.Deleted == false);
@@ -160,6 +193,19 @@ namespace Epilogger.Web
             return db.GetPhotosFromMemoryBox(memBoxId, page, count).ExecuteTypedList<Image>();
         }
 
+        public Image GetImageByTweetId(int tweetId)
+        {
+            var tweet = db.Tweets.FirstOrDefault(e => e.ID == tweetId);
+            
+            //Need the TweetId, the long one from Twitter
+            var results = from m in db.ImageMetaData
+                          join i in db.Images on m.ImageID equals i.ID
+                          where m.TwitterID == tweet.TwitterID
+                          select i;
+
+            return results.FirstOrDefault();
+
+        }
 
     }
 }

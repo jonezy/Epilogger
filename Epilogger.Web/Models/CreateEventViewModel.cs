@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
 using Epilogger.Data;
+using Epilogger.Web.Core.Helpers;
 
 namespace Epilogger.Web.Models {
     public class CreateEventViewModel {
@@ -60,6 +61,12 @@ namespace Epilogger.Web.Models {
         public int? VenueID { get; set; }
         public Epilogger.Data.Venue Venue { get; set; }
 
+        //[RegularExpression(@".*eventbrite.c.*", ErrorMessage = "Invalid Eventbrite URL. example.eventbrite.com")]
+        //Had to remove for now.
+        [DisplayName("EventBrite URL")]
+        public string EventBrightUrl { get; set; }
+
+        public string EventBriteEID { get; set; }
 
         [DisplayName("Time Zone")]
         public int TimeZoneOffset { get; set; }

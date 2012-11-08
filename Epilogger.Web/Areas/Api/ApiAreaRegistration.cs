@@ -17,7 +17,11 @@ namespace Epilogger.Web.Areas.Api
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
-
+            context.MapRoute(
+                "ShortnedUrl",
+                "Api/ShortenUrl",
+                new { controller = "ApiEvents", action = "ShortenUrlEPL", url = UrlParameter.Optional }
+            );
             
             context.MapRoute(
                 "AuthEPLUser",

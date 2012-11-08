@@ -285,6 +285,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BrowseController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageUploadController.cs" />
@@ -312,6 +313,8 @@
     <Compile Include="Core\Helpers\HtmlHelpers.cs" />
     <Compile Include="Core\Helpers\PasswordHelpers.cs" />
     <Compile Include="Core\Helpers\TwitterHelper.cs" />
+    <Compile Include="Core\Resolvers\ApiImageUrlResolver.cs" />
+    <Compile Include="Core\Resolvers\ImageUrlResolver.cs" />
     <Compile Include="Core\Resolvers\UserProfilePictureResolver.cs" />
     <Compile Include="Core\Resolvers\UserTimezonesResolver.cs" />
     <Compile Include="Core\Resolvers\TimezonesResolver.cs" />
@@ -357,6 +360,9 @@
     <Compile Include="EmailsController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="ErrorController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="EventsController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -367,6 +373,9 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="ImageUploadController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JoinController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModel.cs" />
@@ -380,6 +389,7 @@
     <Compile Include="Models\NagViewModel.cs" />
     <Compile Include="Models\NavigationViewModel.cs" />
     <Compile Include="Models\ProfileImageChoiceViewModel.cs" />
+    <Compile Include="Models\Timeline\Timeline.cs" />
     <Compile Include="Models\TweetsAndImage.cs" />
     <Compile Include="Models\AzureTweetModel.cs" />
     <Compile Include="Models\AllTweetsDisplayViewModel.cs" />
@@ -476,6 +486,7 @@
     <Content Include="Public\css\geckoboard\darkAdjusted.css" />
     <Content Include="Public\css\geckoboard\EPLCustom.css" />
     <Content Include="Public\css\geckoboard\lightBasic.css" />
+    <Content Include="Public\css\video.css" />
     <Content Include="Public\images\DefaultProfilePicture.png" />
     <Content Include="Public\images\email\bg-tablebottom.png" />
     <Content Include="Public\images\email\bg-tableleft.png" />
@@ -495,6 +506,11 @@
     <Content Include="Public\images\email\screenshot-browse.jpg" />
     <Content Include="Public\images\email\screenshot-events.jpg" />
     <Content Include="Public\images\email\screenshot-home.jpg" />
+    <Content Include="Public\images\epilogger-movember.png" />
+    <Content Include="Public\images\error\btn-search-home.png" />
+    <Content Include="Public\images\error\jaggies-trans.gif" />
+    <Content Include="Public\images\error\logoSmall.png" />
+    <Content Include="Public\images\error\scoobygang.png" />
     <Content Include="Public\images\icons\facebookThumb.png" />
     <Content Include="Public\images\icons\twitterThumb.png" />
     <Content Include="Public\images\icons\UploadProfilePic.png" />
@@ -509,6 +525,7 @@
     <Content Include="Public\images\signup\NoAvatar.png" />
     <Content Include="Public\images\signup\twitter-bird-light-bgs-sm.png" />
     <Content Include="Public\images\signup\twitterButton.png" />
+    <Content Include="Public\images\video-play.jpg" />
     <Content Include="Public\images\widget\icon-arrow.png" />
     <Content Include="Public\images\widget\logo\chevywidget.png" />
     <Content Include="Public\images\widget\menu-active.png" />
@@ -518,6 +535,64 @@
     <Content Include="Public\js\FileUploader\fileuploader.css" />
     <Content Include="Public\js\FileUploader\fileuploader.js" />
     <Content Include="Public\js\FileUploader\loading.gif" />
+    <Content Include="Public\js\Timeline\css\loading.gif" />
+    <Content Include="Public\js\Timeline\css\themes\dark.css" />
+    <Content Include="Public\js\Timeline\css\themes\font\AbrilFatface-Average.css" />
+    <Content Include="Public\js\Timeline\css\themes\font\Arvo-PTSans.css" />
+    <Content Include="Public\js\Timeline\css\themes\font\Bevan-PotanoSans.css" />
+    <Content Include="Public\js\Timeline\css\themes\font\BreeSerif-OpenSans.css" />
+    <Content Include="Public\js\Timeline\css\themes\font\DroidSerif-DroidSans.css" />
+    <Content Include="Public\js\Timeline\css\themes\font\Georgia-Helvetica.css" />
+    <Content Include="Public\js\Timeline\css\themes\font\Lekton-Molengo.css" />
+    <Content Include="Public\js\Timeline\css\themes\font\Lora-Istok.css" />
+    <Content Include="Public\js\Timeline\css\themes\font\Merriweather-NewsCycle.css" />
+    <Content Include="Public\js\Timeline\css\themes\font\NewsCycle-Merriweather.css" />
+    <Content Include="Public\js\Timeline\css\themes\font\NixieOne-Ledger.css" />
+    <Content Include="Public\js\Timeline\css\themes\font\Pacifico-Arimo.css" />
+    <Content Include="Public\js\Timeline\css\themes\font\PlayfairDisplay-Muli.css" />
+    <Content Include="Public\js\Timeline\css\themes\font\PoiretOne-Molengo.css" />
+    <Content Include="Public\js\Timeline\css\themes\font\PT.css" />
+    <Content Include="Public\js\Timeline\css\themes\font\PTSerif-PTSans.css" />
+    <Content Include="Public\js\Timeline\css\themes\font\Rancho-Gudea.css" />
+    <Content Include="Public\js\Timeline\css\themes\font\SansitaOne-Kameron.css" />
+    <Content Include="Public\js\Timeline\css\themes\timeline-dark.png" />
+    <Content Include="Public\js\Timeline\css\themes\timeline-texture.png" />
+    <Content Include="Public\js\Timeline\css\timeline.css" />
+    <Content Include="Public\js\Timeline\css\timeline.png" />
+    <Content Include="Public\js\Timeline\js\locale\ar.js" />
+    <Content Include="Public\js\Timeline\js\locale\bg.js" />
+    <Content Include="Public\js\Timeline\js\locale\ca.js" />
+    <Content Include="Public\js\Timeline\js\locale\cz.js" />
+    <Content Include="Public\js\Timeline\js\locale\de.js" />
+    <Content Include="Public\js\Timeline\js\locale\dk.js" />
+    <Content Include="Public\js\Timeline\js\locale\el.js" />
+    <Content Include="Public\js\Timeline\js\locale\en.js" />
+    <Content Include="Public\js\Timeline\js\locale\es.js" />
+    <Content Include="Public\js\Timeline\js\locale\fo.js" />
+    <Content Include="Public\js\Timeline\js\locale\fr.js" />
+    <Content Include="Public\js\Timeline\js\locale\hu.js" />
+    <Content Include="Public\js\Timeline\js\locale\hy.js" />
+    <Content Include="Public\js\Timeline\js\locale\id.js" />
+    <Content Include="Public\js\Timeline\js\locale\is.js" />
+    <Content Include="Public\js\Timeline\js\locale\it.js" />
+    <Content Include="Public\js\Timeline\js\locale\ja.js" />
+    <Content Include="Public\js\Timeline\js\locale\kr.js" />
+    <Content Include="Public\js\Timeline\js\locale\nl.js" />
+    <Content Include="Public\js\Timeline\js\locale\no.js" />
+    <Content Include="Public\js\Timeline\js\locale\pl.js" />
+    <Content Include="Public\js\Timeline\js\locale\pt-br.js" />
+    <Content Include="Public\js\Timeline\js\locale\pt.js" />
+    <Content Include="Public\js\Timeline\js\locale\ru.js" />
+    <Content Include="Public\js\Timeline\js\locale\sk.js" />
+    <Content Include="Public\js\Timeline\js\locale\sl.js" />
+    <Content Include="Public\js\Timeline\js\locale\ta.js" />
+    <Content Include="Public\js\Timeline\js\locale\tl.js" />
+    <Content Include="Public\js\Timeline\js\locale\tr.js" />
+    <Content Include="Public\js\Timeline\js\locale\zh-ch.js" />
+    <Content Include="Public\js\Timeline\js\locale\zh-tw.js" />
+    <Content Include="Public\js\Timeline\js\storyjs-embed.js" />
+    <Content Include="Public\js\Timeline\js\timeline-min.js" />
+    <Content Include="Public\js\Timeline\js\timeline.js" />
     <Content Include="Public\js\widget.js" />
     <Content Include="WidgetSample.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -3190,9 +3265,12 @@
     <Content Include="Views\Account\TwitterAuth.cshtml" />
     <Content Include="Views\Account\FacebookAuth.cshtml" />
     <Content Include="Views\Account\_profileImageChoice.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\ServerError.cshtml" />
     <Content Include="Views\Shared\_PopupLayout.cshtml" />
     <Content Include="Views\Account\CloseAndRefresh.cshtml" />
     <Content Include="Views\Account\ConnectTwitter.cshtml" />
+    <Content Include="Views\Events\Timeline.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />
@@ -5288,6 +5366,7 @@
     <Content Include="Views\Events\Edit.cshtml" />
     <Content Include="Views\Browse\_BrowseEventOverview.cshtml" />
     <Content Include="Views\Browse\_BrowseEventLists.cshtml" />
+    <Content Include="Views\Shared\_ModalLayout.cshtml" />
     <Content Include="Views\Shared\_ModalLayoutOLD.cshtml" />
     <Content Include="Views\Events\VenueSearch.cshtml" />
     <Content Include="Views\Browse\_BrowseEventTabContentTemplate.cshtml" />
@@ -8733,8 +8812,8 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
-          <AutoAssignPort>False</AutoAssignPort>
-          <DevelopmentServerPort>16007</DevelopmentServerPort>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50873</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://local.epilogger.com</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
