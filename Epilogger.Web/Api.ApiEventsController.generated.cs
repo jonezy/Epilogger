@@ -154,6 +154,11 @@ namespace Epilogger.Web.Areas.Api.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult GetUserSubscribedEvents() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.GetUserSubscribedEvents);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.JsonResult AuthEPLUser() {
             return new T4MVC_JsonResult(Area, Name, ActionNames.AuthEPLUser);
         }
@@ -267,6 +272,7 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             public readonly string SaveUserFollowsEvent = "SaveUserFollowsEvent";
             public readonly string DeleteUserEventSubscription = "DeleteUserEventSubscription";
             public readonly string GetUserSubscribedAndCreatedEvents = "GetUserSubscribedAndCreatedEvents";
+            public readonly string GetUserSubscribedEvents = "GetUserSubscribedEvents";
             public readonly string AuthEPLUser = "AuthEPLUser";
             public readonly string ConnectTwitterAccountToUser = "ConnectTwitterAccountToUser";
             public readonly string ConnectFacebookAccountToUser = "ConnectFacebookAccountToUser";
@@ -332,6 +338,7 @@ namespace Epilogger.Web.Areas.Api.Controllers {
             public const string SaveUserFollowsEvent = "SaveUserFollowsEvent";
             public const string DeleteUserEventSubscription = "DeleteUserEventSubscription";
             public const string GetUserSubscribedAndCreatedEvents = "GetUserSubscribedAndCreatedEvents";
+            public const string GetUserSubscribedEvents = "GetUserSubscribedEvents";
             public const string AuthEPLUser = "AuthEPLUser";
             public const string ConnectTwitterAccountToUser = "ConnectTwitterAccountToUser";
             public const string ConnectFacebookAccountToUser = "ConnectFacebookAccountToUser";
@@ -551,6 +558,15 @@ namespace Epilogger.Web.Areas.Api.Controllers {
         public ActionParamsClass_GetUserSubscribedAndCreatedEvents GetUserSubscribedAndCreatedEventsParams { get { return s_params_GetUserSubscribedAndCreatedEvents; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_GetUserSubscribedAndCreatedEvents {
+            public readonly string userId = "userId";
+            public readonly string page = "page";
+            public readonly string count = "count";
+        }
+        static readonly ActionParamsClass_GetUserSubscribedEvents s_params_GetUserSubscribedEvents = new ActionParamsClass_GetUserSubscribedEvents();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_GetUserSubscribedEvents GetUserSubscribedEventsParams { get { return s_params_GetUserSubscribedEvents; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_GetUserSubscribedEvents {
             public readonly string userId = "userId";
             public readonly string page = "page";
             public readonly string count = "count";
@@ -846,6 +862,14 @@ namespace Epilogger.Web.Areas.Api.Controllers {
 
         public override System.Web.Mvc.JsonResult GetUserSubscribedAndCreatedEvents(System.Guid userId, int page, int count) {
             var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GetUserSubscribedAndCreatedEvents);
+            callInfo.RouteValueDictionary.Add("userId", userId);
+            callInfo.RouteValueDictionary.Add("page", page);
+            callInfo.RouteValueDictionary.Add("count", count);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GetUserSubscribedEvents(System.Guid userId, int page, int count) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GetUserSubscribedEvents);
             callInfo.RouteValueDictionary.Add("userId", userId);
             callInfo.RouteValueDictionary.Add("page", page);
             callInfo.RouteValueDictionary.Add("count", count);

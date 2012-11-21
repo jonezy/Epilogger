@@ -62,7 +62,7 @@ namespace Epilogger.Web.Controllers {
                 {
                     return null;
                 }
-                return CurrentUser != null && CurrentUser.UserAuthenticationProfiles.FirstOrDefault(ua => ua.Service == AuthenticationServices.TWITTER.ToString()) == null ? null : CurrentUser.UserAuthenticationProfiles.FirstOrDefault(ua => ua.Service == AuthenticationServices.TWITTER.ToString());
+                return CurrentUser != null && CurrentUser.UserAuthenticationProfiles.FirstOrDefault(ua => ua.Service == AuthenticationServices.TWITTER.ToString() && ua.Platform == "Web") == null ? null : CurrentUser.UserAuthenticationProfiles.FirstOrDefault(ua => ua.Service == AuthenticationServices.TWITTER.ToString() && ua.Platform == "Web");
             }
         }
 
