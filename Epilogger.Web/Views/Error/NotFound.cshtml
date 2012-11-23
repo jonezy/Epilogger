@@ -96,26 +96,27 @@ form input[type="text"] {
 	<div id="bg-teeth">
 	</div>
 	<div id="outer-container">
-		<div id="content">
-			<div style="width: 350px; float: left">
-				<h1>
-					4-OH-4 NOES!</h1>
-				<h2>
-					This page doesn’t exist.<br />
-					Here’s a cat video to make things better for you.</h2>
-				 @using (Html.BeginForm("Search", "Home", FormMethod.Post, null))
-					{
-						@Html.TextBox("SearchTerm", null, new {@class = "remove-bottom", @title = "Find an event..."})
-						<input type="image" src="../../Public/images/error/btn-search-home.png" />
-					}
-					<!--<input type="text" id="SearchTerm" value="Search for an event...	" />-->
+        <div id="content">
+            <div style="width: 350px; float: left">
+                <h1>
+                    4-OH-4 NOES!</h1>
+                <h2>
+                    This page doesn’t exist.<br />
+                    Here’s a cat video to make things better for you.</h2>
+                @using (Html.BeginForm("Search", "Home", FormMethod.Post, null))
+                {
+                    @Html.TextBox("SearchTerm", null, new {@class = "remove-bottom", @title = "Find an event..."})
+                    <input type="image" src="../../Public/images/error/btn-search-home.png" />
+                }
+                <!--<input type="text" id="SearchTerm" value="Search for an event...	" />-->
 					
 				
-				<p>
-					(or go back to the <a href="http://epilogger.com">homepage</a>)</p>
-			</div>
-			<iframe width="500" height="375" src="http://www.youtube.com/embed/Q34z5dCmC4M" frameborder="0"
-				allowfullscreen></iframe>
-		</div>
+                <p>
+                    (or go back to the <a href="http://epilogger.com">homepage</a>)</p>
+            </div>
+            <iframe width="500" height="375" src="http://www.youtube.com/embed/Q34z5dCmC4M" frameborder="0"
+                    allowfullscreen></iframe>
+        </div>
+    </div>
 </body>
 </html>
