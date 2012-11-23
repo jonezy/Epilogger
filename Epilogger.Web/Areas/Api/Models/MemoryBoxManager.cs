@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
+using System.Globalization;
 using System.Linq;
 using AutoMapper;
 using Epilogger.Data;
@@ -56,16 +57,39 @@ namespace Epilogger.Web.Areas.Api.Models
                         EventId = box.EventId,
                         Type = "",
                         IsActive = true
-                    };    
+                    };
+                    memBox = _ms.Save(memBox);
                 }
                 
-                memBox = _ms.Save(memBox);
                 box.MemboxId = memBox.ID;
             }
 
             box.AddedDateTime = DateTime.UtcNow;
 
-            return Mapper.Map<MemoryBoxItem, ApiMemoryBoxItem>(_msi.Save(Mapper.Map<ApiMemoryBoxItem, MemoryBoxItem>(box)));
+            //If IncludePhoto is true and the tweet has a photo associated to it, also store the photo
+            if (box.IncludePhotos != null && (bool) box.IncludePhotos)
+            {
+                var theImage = _is.GetImageByTweetId(int.Parse(box.ItemId));
+                if (theImage != null)
+                {
+                    var photoMembox =_msi.Save(new MemoryBoxItem()
+                                  {
+                                      AddedDateTime = DateTime.UtcNow,
+                                      EventId = box.EventId,
+                                      ItemType = "Photo",
+                                      ItemId = theImage.ID.ToString(CultureInfo.InvariantCulture),
+                                      MemboxId = (int)box.MemboxId,
+                                      UserId = box.UserId
+                                  });
+                    box.PhotoId = photoMembox.ID;
+                }
+
+            }
+
+            var newbox = _msi.Save(Mapper.Map<ApiMemoryBoxItem, MemoryBoxItem>(box));
+            box.Id = newbox.ID;
+
+            return box;
         }
 
         public bool RemoveMemBoxItem(int id)
@@ -93,7 +117,10 @@ namespace Epilogger.Web.Areas.Api.Models
 
         public List<ApiImage> PhotosByMemBoxIdPaged(int memBoxId, int page, int count)
         {
-            return Mapper.Map<List<Image>, List<ApiImage>>(_is.GetImagesInMemoryBoxPaged(memBoxId, page, count).ToList());
+            //return Mapper.Map<List<Image>, List<ApiImage>>(_is.Thedb().GetPhotosFromMemoryBox(memBoxId, page, count).ExecuteTypedList<Image>());
+            var theImages = _is.Thedb().GetPhotosFromMemoryBox(memBoxId, page, count).ExecuteTypedList<ApiImage>();
+            return Mapper.Map<List<ApiImage>, List<ApiImage>>(theImages);
+
         }
 
         public List<ApiMemoryBox> MemoryBoxByUserId(Guid userId)

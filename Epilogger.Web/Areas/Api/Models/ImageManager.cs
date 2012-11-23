@@ -55,13 +55,16 @@ namespace Epilogger.Web.Areas.Api.Models
             return Mapper.Map<List<TopImageAndTweet>, List<ApiTopImageAndTweet>>(_is.GetTopPhotosAndTweetByEventID(eventID, recordsToReturn, (DateTime)SqlDateTime.MinValue, (DateTime)SqlDateTime.MaxValue, false).ToList());
         }
 
-        public List<ApiImage> GetPagedPhotos(int eventID, int? page, int photosPerPage)
+        public List<ApiImage> GetPagedPhotos(int eventId, int? page, int photosPerPage)
         {
-            var model =
-                Mapper.Map<List<Image>, List<ApiImage>>(
-                    _is.GetPagedPhotos(eventID, page, photosPerPage, (DateTime) SqlDateTime.MinValue,
-                                       (DateTime) SqlDateTime.MaxValue, false).ToList());
-            return model;
+            //var model =
+            //    Mapper.Map<List<Image>, List<ApiImage>>(
+            //        _is.GetPagedPhotos(eventID, page, photosPerPage, (DateTime) SqlDateTime.MinValue,
+            //                           (DateTime) SqlDateTime.MaxValue, false).ToList());
+            //return model;
+
+            var theImages = _is.GetPagedApiImages(eventId, page, photosPerPage).ToList();
+            return Mapper.Map<List<ApiImage>, List<ApiImage>>(theImages);
         }
     }
  

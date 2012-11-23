@@ -58,6 +58,8 @@ namespace Epilogger.Web.Models {
         public Epilogger.Data.Venue Venue { get; set; }
         public string EventBrightUrl { get; set; }
 
+        public string EventBriteEID { get; set; }
+
         public EventToolbarViewModel ToolbarViewModel { get; set; }
         
     }

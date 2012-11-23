@@ -19,5 +19,6 @@ namespace Epilogger.Web.Areas.Api.Models.Classes
         public string ImageFingerPrint { get; set; }
         public string EpiloggerImageLink { get; set; }
         //public string EpiloggerImageLinkShort { get; set; }
+        public int? MemoryBoxItemId { get; set; }
     }
 }

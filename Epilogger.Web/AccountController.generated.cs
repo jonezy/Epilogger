@@ -79,6 +79,8 @@ namespace Epilogger.Web.Controllers {
             public readonly string TwitterAuth = "TwitterAuth";
             public readonly string FacebookAuth = "FacebookAuth";
             public readonly string Login = "Login";
+            public readonly string CloseAndRefresh = "CloseAndRefresh";
+            public readonly string ConnectTwitter = "ConnectTwitter";
             public readonly string TwitterLogon = "TwitterLogon";
             public readonly string Logout = "Logout";
             public readonly string ForgotPassword = "ForgotPassword";
@@ -98,6 +100,8 @@ namespace Epilogger.Web.Controllers {
             public const string TwitterAuth = "TwitterAuth";
             public const string FacebookAuth = "FacebookAuth";
             public const string Login = "Login";
+            public const string CloseAndRefresh = "CloseAndRefresh";
+            public const string ConnectTwitter = "ConnectTwitter";
             public const string TwitterLogon = "TwitterLogon";
             public const string Logout = "Logout";
             public const string ForgotPassword = "ForgotPassword";
@@ -139,6 +143,8 @@ namespace Epilogger.Web.Controllers {
             public readonly string _DisconnectService = "~/Views/Account/_DisconnectService.cshtml";
             public readonly string _profileImageChoice = "~/Views/Account/_profileImageChoice.cshtml";
             public readonly string ActivationSent = "~/Views/Account/ActivationSent.cshtml";
+            public readonly string CloseAndRefresh = "~/Views/Account/CloseAndRefresh.cshtml";
+            public readonly string ConnectTwitter = "~/Views/Account/ConnectTwitter.cshtml";
             public readonly string FacebookAuth = "~/Views/Account/FacebookAuth.cshtml";
             public readonly string ForgotPassword = "~/Views/Account/ForgotPassword.cshtml";
             public readonly string index = "~/Views/Account/index.cshtml";
@@ -221,6 +227,16 @@ namespace Epilogger.Web.Controllers {
         public override System.Web.Mvc.ActionResult Login(Epilogger.Web.Models.LoginModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Login);
             callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult CloseAndRefresh() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CloseAndRefresh);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ConnectTwitter() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ConnectTwitter);
             return callInfo;
         }
 

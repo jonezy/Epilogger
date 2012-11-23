@@ -547,7 +547,7 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.IsFeatured, opt => opt.UseValue(false))
                 .ForMember(dest => dest.FeaturedStartDateTime, opt => opt.UseValue(DateTime.Parse("01/01/1800")))
                 .ForMember(dest => dest.FeaturedEndDateTime, opt => opt.UseValue(DateTime.Parse("01/01/1800")))
-                .ForMember(dest => dest.EventBrightUrl, opt => opt.Ignore());
+                .ForMember(dest => dest.EventBriteEID, opt => opt.Ignore());
 
             Mapper.CreateMap<User, DashboardProfileViewModel>()
                 .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => string.Format("{0} {1}", src.FirstName, src.LastName)))
@@ -640,7 +640,11 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.PhotoCount, opt => opt.Ignore());
 
             Mapper.CreateMap<Image, ApiImage>()
-                .ForMember(dest => dest.EpiloggerImageLink, opt => opt.ResolveUsing<ImageUrlResolver>());
+                .ForMember(dest => dest.EpiloggerImageLink, opt => opt.ResolveUsing<ImageUrlResolver>())
+                .ForMember(dest => dest.MemoryBoxItemId, opt => opt.Ignore());
+
+            Mapper.CreateMap<ApiImage, ApiImage>()
+                .ForMember(dest => dest.EpiloggerImageLink, opt => opt.ResolveUsing<ApiImageUrlResolver>());
 
             Mapper.CreateMap<TopImageAndTweet, ApiTopImageAndTweet>();
             Mapper.CreateMap<CheckIn, ApiCheckIn>()
@@ -657,7 +661,10 @@ namespace Epilogger.Web {
             Mapper.CreateMap<ApiUserFollowsEvent, UserFollowsEvent>();
             Mapper.CreateMap<UserFollowsEvent, ApiUserFollowsEvent>();
 
-            Mapper.CreateMap<MemoryBoxItem, ApiMemoryBoxItem>();
+            Mapper.CreateMap<MemoryBoxItem, ApiMemoryBoxItem>()
+                .ForMember(dest => dest.IncludePhotos, opt => opt.Ignore())
+                .ForMember(dest => dest.PhotoId, opt => opt.Ignore());
+
             Mapper.CreateMap<ApiMemoryBoxItem, MemoryBoxItem>();
             Mapper.CreateMap<MemoryBox, ApiMemoryBox>();
             Mapper.CreateMap<MemoryBoxTweet, ApiMemoryBoxTweet>();

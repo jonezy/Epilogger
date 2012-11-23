@@ -7,6 +7,7 @@ namespace Epilogger.Web.Areas.Api.Models.Classes
 {
     public class ApiMemoryBoxItem
     {
+        private bool? _includePhotos;
         public int Id { get; set; }
         public int? MemboxId { get; set; }
         public Guid UserId { get; set; }
@@ -14,5 +15,15 @@ namespace Epilogger.Web.Areas.Api.Models.Classes
         public string ItemType { get; set; }
         public string ItemId { get; set; }
         public DateTime? AddedDateTime { get; set; }
+        public bool? IncludePhotos
+        {
+            get
+            {
+                return _includePhotos ?? false;
+            }
+            set { _includePhotos = value; }
+        }
+
+        public int PhotoId { get; set; }
     }
 }
