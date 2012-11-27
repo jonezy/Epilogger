@@ -2,7 +2,6 @@
 using System;
 using System.Linq;
 using Epilogger.Data;
-using Epilogger.Web.Areas.Api.Models.Classes;
 using Epilogger.Web.Model;
 using SubSonic.Schema;
 using System.Data;
@@ -130,7 +129,7 @@ namespace Epilogger.Web
                 photos = (from t in db.Images
                               where t.EventID == eventID && t.DateTime >= F && t.DateTime <= T && t.Deleted == false
                               orderby t.DateTime descending
-                              select t).Skip(skipAmount * photosPerPage).Take(photosPerPage);
+                              select t).Skip(skipAmount * photosPerPage).Take(photosPerPage);    
             }
             else
             {
@@ -140,17 +139,10 @@ namespace Epilogger.Web
                               select t).Skip(skipAmount * photosPerPage).Take(photosPerPage);
             }
             
+
             return photos;
 
         }
-
-
-        public IEnumerable<ApiImage> GetPagedApiImages(int eventID, int? page, int photosPerPage, bool includeVideos = true)
-        {
-            var skipAmount = page.HasValue ? page.Value : 1;
-            return db.GetImagesWithMemboxIDPaged(eventID, skipAmount, photosPerPage, includeVideos).ExecuteTypedList<ApiImage>();
-        }
-
 
         public int Count() {
             return base.db.Images.Count(t => t.Deleted == false);

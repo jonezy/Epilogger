@@ -67,6 +67,23 @@ head.ready(function () {
         });
     });
 
+    //Setup up the date boxes
+    $(function () {
+        var dates = $("#StartDateTime, #EndDateTime").datepicker({
+            changeMonth: true,
+            numberOfMonths: 3,
+            onSelect: function (selectedDate) {
+                var option = this.id == "StartDateTime" ? "minDate" : "maxDate",
+					instance = $(this).data("datepicker"),
+					date = $.datepicker.parseDate(
+						instance.settings.dateFormat ||
+						$.datepicker._defaults.dateFormat,
+						selectedDate, instance.settings);
+                dates.not(this).datepicker("option", option, date);
+            }
+        });
+    });
+
     $(function () {
         var dates = $("#collection_start_date, #collection_end_date").datepicker({
             changeMonth: true,

@@ -19,7 +19,18 @@
         IncludeDateRange = true;
     }
 }
+<script type="text/javascript" language="javascript">
+    head.js('@Url.Content("~/Public/js/EventDetails.js")');
 
+    $(function () {
+        $("#livemode-popup").colorbox({
+            iframe: true,
+            width: "560px", height: "460px",
+            href: '@Url.Action(MVC.Events.EditLiveMode())'
+        });
+
+    });
+</script>
 @if (!IncludeDateRange)
 {
     if (Model.HasSubscribed)
@@ -55,7 +66,10 @@
         <li>@Html.ActionLink("Stats", "allstats", null, new { id = @id }, action.ToLower() == "allstats" ? new { @class = "current" } : null)</li>
         
         @if ((Model.CreatedByID == Model.CurrentUserID) || Model.CurrentUserRole == UserRoleType.Administrator)
-        { <li>@Html.ActionLink("edit", "edit", "events", new { id = @id }, action.ToLower() == "edit" ? new { @class = "current" } : null)</li>}
+        { 
+            <li>@Html.ActionLink("edit", "edit", "events", new { id = @id }, action.ToLower() == "edit" ? new { @class = "current" } : null)</li>
+             <li><a href="#" id="livemode-popup">Edit Live Wall</a></li>
+        }
         @*<li>@Html.ActionLink("Search/Time Filter", "timefilters", null, new { id = @id }, action.ToLower() == "timefilters" ? new { @class = "current" } : null)</li>*@
     </ul>
     

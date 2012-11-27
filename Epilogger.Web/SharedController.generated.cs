@@ -59,6 +59,7 @@ namespace T4MVC {
             public _EditorTemplates EditorTemplates { get { return s_EditorTemplates; } }
             public partial class _EditorTemplates{
                 public readonly string DateTime = "DateTime";
+                public readonly string DateTimeOneLine = "DateTimeOneLine";
                 public readonly string TimeSpan = "TimeSpan";
             }
         }

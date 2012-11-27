@@ -1,0 +1,88 @@
+﻿@*@model Epilogger.Web.Models.CreateEventViewModel*@
+@{
+    Layout = "~/Views/Events/_CreateEventLayout.cshtml";
+    ViewBag.Title = "Create a new event | Epilogger";
+}
+<script>
+    $(document).ready(function () {
+        var x = $('#event-popup').height();
+        var y = $('#event-popup').width();
+
+        parent.$.colorbox.resize({ width: 560, height: 490 });
+
+    });
+</script>
+<body>
+    <div class="form_process2">
+        <img src="../../Public/images/CreateEvent/EventCreatedActive.png" alt="Basic Information" />
+    </div>
+    <div id="final_wrapper">
+        <div id="left_side">
+            <h2>
+                WOOT! YOUR EVENT HAS BEEN ADDED!</h2>
+                <h3>@* @Html.DisplayFor(m => m.Name)*@
+                        Your Event Name</h3>
+            <table>
+                <tr>
+                    <td>
+                        <img src="../../Public/images/CreateEvent/quotes.png" alt="quotes" />
+                    </td>
+                    <td>
+                   @* @Html.DisplayFor(m => m.Subtitle)*@
+                        subtitle of your event
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="../../Public/images/CreateEvent/clock.png" alt="clock" />
+                    </td>
+                    <td>
+                    @*@Html.DisplayFor(m => m.StartDateTime) to @Html.DisplayFor(m => m.EndDateTime) *@
+                    Sept 18th 2:00pm - Sept 19th 4:00pm
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="../../Public/images/CreateEvent/hash.png" alt="hashtags" />
+                    </td>
+                    <td>
+                    @*@Html.DisplayFor(m => m.SearchTerms)*@
+                    #Official <br />
+                    searchterms
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="../../Public/images/CreateEvent/info.png" alt="quotes" />
+                    </td>
+                    <td>
+                    @*@Html.DisplayFor(m => m.SearchTerms) *@
+                    The event will collect data a few days before and after the event
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="right_side">
+        <h3 class="grey_box">Improve your event page by adding:</h3>
+        <ul>
+        <li>Location</li>
+        <li>Description</li>
+        <li>Where to buy tickets</li>
+        <li>Official Website</li>
+        <li>Twitter & Facebook page</li>
+        <li>Sponsor logos</li>
+        <li>@*@Html.ActionImage("Edit","event","#","../images/CreateEvent/disabled_button_blue.png","add details")*@
+            <input type="button" value="add detail now" class="stn_button disabled_blue_button" id="addDetail" /></li>
+        </ul>
+        
+        </div>
+        <div id="tweet_footer">
+            <div id="left">
+                @Html.ActionImage("CreateEventTweets", "Events", "#", "../../Public/images/CreateEvent/EditHashtags.png", "Back")
+            </div>
+            <div id="right">
+                @Html.ActionImage("#", "Events", "#", "../../Public/images/CreateEvent/GotoEvent.png", "go view your event")
+            </div>
+        </div>
+    </div>
+</body>

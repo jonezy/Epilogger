@@ -22,7 +22,6 @@ namespace Epilogger.Web
             return base.GetData(t => t.Deleted==false);
         }
 
-
         public EpiloggerDB Thedb()
         {
             return db;

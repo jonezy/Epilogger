@@ -21,12 +21,25 @@
     {
     }
 }
+<script type="text/javascript" language="javascript">
+    head.js('@Url.Content("~/Public/js/EventDetails.js")');
+
+    $(function () {
+        $("#event-popup").colorbox({
+            iframe: true,
+            width: "560px", height: "460px",
+            href: '@Url.Action(MVC.Events.CreateEvent())'  
+        });
+        
+    });
+</script>
 
 <span id="headerMenuAll">
     <ul id="menu-bar">
          @if (userId != Guid.Empty)
          {
-             <li>@Html.ActionLink("Add Event", "create", "events", null, controller.ToLower() == "events" && action.ToLower() == "create" ? new {@class = "current"} : null)</li>
+             <!--<li>@Html.ActionLink("Add Event", "create", "events", null, controller.ToLower() == "events" && action.ToLower() == "create" ? new { @class = "current" } : null)</li>-->
+            <li><a href="#" id="event-popup">Add Event</a></li>
          }
         <li class="@(controller.ToLower() == "browse" ? "current " : "")submenu browse">@Html.ActionLink("Browse Events", "index", "browse", new { filter = "" }, new { })
             <ul class="browse">

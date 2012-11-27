@@ -1,0 +1,269 @@
+﻿body {margin:0; padding:0; overflow-x:hidden;}
+fieldset{ border:0;}
+fieldset.popForm .innerwrap 
+{
+    width:9999px;
+} 
+
+
+input[type=text]:focus, textarea:focus {border:2px solid #a1ceea;}
+.inner{width:400px; height:200px; border:2px solid salmon; float:left;}
+ input[type="text"], textarea{background:#eee; border:0;outline:0;
+                                              box-shadow: inset 0 0 10px #888; 
+                                              -moz-box-shadow: inset 0 0 10px #888;
+                                              -webkit-box-shadow: inset 0 0 10px#888; 
+                                              display:inline-block;
+                                              padding:3px 5px;
+                                              height:30px; width:60%; font-size:1.2em; font:14px Helvetica,Arial,Sans-Serif; color:#666;}
+fieldset.popForm label {display:inline-block;width:25%; text-align:right; padding-right:10px; font:14px Helvetica,Arial,Sans-Serif;color:#878787; }
+
+
+fieldset.popForm select  {background:#e3e3e3;border:none;height:26px; width:60%; font-size:1.2em; font:14px Helvetica,Arial,Sans-Serif; color:#666; border:1px solid #666;}
+fieldset.popForm .times {border:none;height:26px; width:13%; font-size:1.2em; font:14px Helvetica,Arial,Sans-Serif; color:#666; border:0; margin-right:4px;}
+
+fieldset.popForm .under_control_notice { margin-left:27%; margin-top:-27px; margin-bottom:20px; font:8pt Helvetica,Arial,Sans-Serif; color:#878787;}
+fieldset.popForm .hint { margin-left:27%; margin-top:-12px;margin-bottom:35px;  font:8pt Helvetica,Arial,Sans-Serif; color:#999;}
+
+.invisible{ display: none;}
+
+fieldset.popForm #startDate{
+float:left;
+}
+fieldset.popForm input[type="text"] .timepick{width:7em;}
+.form_process{margin-top:-40px; margin-bottom:25px;}
+.form_process2{margin-top:-40px; margin-bottom:25px;margin-left:-40px}
+.dashed{border-top:1px dotted #BBB; margin-top:3px; margin-bottom:15px;}
+
+.dropdown_div{
+    width:100%;
+    height:30px;
+    overflow:hidden;
+    background: no-repeat #fff;
+    background-image:url('../../Public/images/CreateEvent/calendarIcon.png');
+    background-position:top right;
+    border:0;
+}
+.dropdown_div select{
+    -webkit-appearance:none;
+    -webkit-border-radius:0;
+    background:transparent;
+    padding:3px;
+    font-size:1.2em;
+    height:30px;
+    width:120%;
+    overflow:hidden;
+    border:0;
+}
+
+.dropdown_image{
+    background: no-repeat #fff;
+}
+.dropdown_image select{
+    -webkit-appearance:none;
+    -webkit-border-radius:0;
+    background:transparent;
+    padding:5px;
+    font-size:1.2em;
+    height:30px;
+    width:100%;
+    overflow:hidden;
+}
+fieldset.popForm .AMPM  {background:#e3e3e3;border:none;height:26px; width:9%; font-size:1.2em; font:14px Helvetica,Arial,Sans-Serif; color:#666; border:0;}
+
+
+fieldset.popForm .blue_arrow{background-image:url('../../Public/images/CreateEvent/blueArrowDown.png'); background-repeat:no-repeat; 
+                         background-position-x:95%; background-position-y:50%; padding:0 2px; margin-right:4px; box-shadow: inset 0 0 5px #888; 
+                                              -moz-box-shadow: inset 0 0 5px #888;
+                                              -webkit-box-shadow: inset 0 0 5px#888; }
+fieldset.popForm input[type="text"].blue_calendar, textarea.blue_calendar {background-image:url('../../Public/images/CreateEvent/calendarIcon.png');background-repeat:no-repeat; 
+                         background-position-x:95%; background-position-y:50%; padding:0 5px; width:20%; margin-right:4px;}
+   
+input[type="text"] .bold{font-weight:bold}
+/*twitter*/
+#twitter_wrapper{
+    width:121%;
+    margin-left:-43px;
+    margin-top:-15px;
+    font-size:13px; 
+    font:Helvetica,Arial,Sans-Serif; 
+    color:#777
+} 
+#left_side{
+    width:50%;
+    height:75%;
+    float:left;
+}                        
+#right_side{
+    width:50%;
+    height:75%;
+    float:right;
+    
+} 
+.searchText{
+    color:#5498dd;
+    width:230px;
+}
+#tweet_footer
+{
+    height:9%;
+    float:none;
+    clear:both;
+}     
+
+
+.submitEvent{
+    color:#FFF;
+    background:url('../css/images/ui_create_event_btn.png') no-repeat;
+    font:bold 13px Arial,Sans-Serif;
+    text-align:left;
+    text-transform:uppercase;
+    height:32px;
+    width:212px;
+    border:0;
+    cursor:pointer;
+    float:right;
+    padding-left:12px;
+    padding-right:2px;
+    }
+     
+    .warning_small{
+    background-color:#fcfdd6;
+    padding:6px 6px 6px 6px;
+    width:250px;
+    border:1px solid #B9BD6B;
+    margin-bottom:10px;
+    }
+    .warning{
+    background-color:#fcfdd6;
+    padding:1px 6px 15px 6px;
+    float:none;
+    clear:both;
+    margin-right:15px;
+    width:240px;
+    border:1px solid #B9BD6B
+    }
+     .warning h3{
+    color:#b3a84a;
+    text-transform:none;
+    }
+     .warning span{
+    color:#777;
+    font:bold 13px Arial,Sans-Serif;
+    }
+.stn_button{
+    color:#FFF;
+    font:bold 13px Arial,Sans-Serif;
+    text-align:left;
+    text-transform:lowercase;
+    height:32px;
+    border:0;
+    cursor:pointer;
+    padding-left:12px;
+    padding-right:2%;
+   
+    }  
+    .blue_button{
+    background:url('../images/CreateEvent/button_blue.png') no-repeat;  
+    width:104px;   
+     margin-top:10px; 
+    }
+     .disabled_blue_button{
+    background:url('../images/CreateEvent/disabled_button_blue.png') no-repeat;     
+    width:130px; 
+    margin-top:10px; 
+    }
+    #preview_tweet_box
+    {
+        height:320px;
+        background-color:#EDEDED;
+        overflow:auto;
+    }
+#left{
+    float:left;
+}
+#right{
+    float:right;
+    text-align:right;
+}
+.validation-summary-errors
+{
+    margin-top:-20px;
+}
+.validation-summary-errors ul {
+    margin-top:-1px;
+}
+.add_another
+{
+    margin-top:15px;
+}
+.preview_stretch_btn
+{
+width:246px;
+padding-left:6px;
+margin-top:0;
+padding-left:40px;
+background-image:url('../../Public/images/CreateEvent/buttonPreview.png');
+background-repeat:no-repeat;
+}
+       /*Final Event Page*/  
+#final_wrapper
+{
+    font:13px Helvetica,Arial,Sans-Serif;color:#111;
+}  
+#event_created_wrapper #left_side
+{
+    width:70%;
+    height:75%;
+    float:left;
+}   
+#event_created_wrapper #left_side
+{
+    width:30%;
+    height:75%;
+    float:right;
+} 
+#left_side table
+{
+    font:13px Helvetica,Arial,Sans-Serif;color:#444;    
+    font-weight:bold;
+}
+#left_side td
+{
+    padding:5px 1px 5px 1px;
+} 
+.grey_box
+{
+    padding: 8px 12px 8px 12px;
+   background-color:#DEDEDE; 
+   color:#434343;  
+   font-size:1.2em;
+   margin-top:-11px;
+    width: 166px;
+    margin-left: 40px;
+}
+#final_wrapper ul
+{
+    list-style:none;
+    margin-top:-5px;
+}    
+#final_wrapper li
+{
+    padding: 8px 14px 8px 14px;
+    background-color:#DEDEDE;
+    margin-bottom:1px;
+}    
+/*live mode*/
+fieldset#livemode input[type="text"], textarea
+{
+    background:#eee; border:0;outline:0;
+                                              box-shadow: inset 0 0 10px #888; 
+                                              -moz-box-shadow: inset 0 0 10px #888;
+                                              -webkit-box-shadow: inset 0 0 10px#888; 
+                                              display:inline-block;
+                                              padding:3px 5px;
+                                              height:30px; width:25%; font-size:1.2em; font:14px Helvetica,Arial,Sans-Serif; color:#666;
+}
+fieldset#livemode label {display:inline-block;width:40%; text-align:right; padding-right:10px; font:14px Helvetica,Arial,Sans-Serif;color:#878787; }
+fieldset#livemode .upload_label{display:inline-block;width:40%; text-align:right; padding-right:10px; font:14px Helvetica,Arial,Sans-Serif;color:#878787; }
+fieldset#livemode h2 label{display:inline-block;width:40%; text-align:right; padding-right:10px; font:14px Helvetica,Arial,Sans-Serif;color:#878787; text-transform:none;}
+fieldset#livemode .submitEvent {padding-left:29px;}

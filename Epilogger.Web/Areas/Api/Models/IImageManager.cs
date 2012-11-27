@@ -10,7 +10,7 @@ namespace Epilogger.Web.Areas.Api.Models
         List<ApiImage> GetTopPhotosByEventID(int eventID, int recordsToReturn);
         List<ApiImage> GetNewestPhotosByEventID(int eventID, int numberToGet);
         List<ApiTopImageAndTweet> GetTopPhotosAndTweetByEventID(int eventID, int recordsToReturn);
-        List<ApiImage> GetPagedPhotos(int eventId, int? page, int photosPerPage);
+        List<ApiImage> GetPagedPhotos(int eventID, int? page, int photosPerPage);
     }
 }
 

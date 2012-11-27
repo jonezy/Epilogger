@@ -13,7 +13,6 @@ namespace Epilogger.Web.Models {
         public Guid UserID { get; set; }
         public DateTime CreatedDateTime { get; set; }
 
-
         [Required(ErrorMessage="Please enter your events name")]
         [DisplayName("Name")]
         public String Name { get; set; }
@@ -28,7 +27,7 @@ namespace Epilogger.Web.Models {
         [Required(ErrorMessage = "Please enter some search terms for your event (ex: epilogger OR EPL)")]
         [DisplayName("Search Terms")]
         public string SearchTerms { get; set; }
-        
+
         [DisplayName("Description")]
         public String Description { get; set; }
 
@@ -37,7 +36,7 @@ namespace Epilogger.Web.Models {
 
         [DisplayName("Twitter")]
         public string TwitterAccount { get; set; }
-        
+
         [DisplayName("Facebook")]
         public string FacebookPageURL { get; set; }
 
@@ -56,7 +55,7 @@ namespace Epilogger.Web.Models {
 
         [DisplayName("Data Collection End Time")]
         public DateTime? CollectionEndDateTime { get; set; }
-        
+
         public string FoursquareVenueID { get; set; }
         public int? VenueID { get; set; }
         public Epilogger.Data.Venue Venue { get; set; }
@@ -71,8 +70,9 @@ namespace Epilogger.Web.Models {
         [DisplayName("Time Zone")]
         public int TimeZoneOffset { get; set; }
 
-        public IEnumerable<SelectListItem> TimeZones { get; set; }
 
+        public IEnumerable<SelectListItem> TimeZones { get; set; }
+       
         [DisplayName("Category"), Required(ErrorMessage="Please select a category for your event")]
         public int CategoryID { get; set; }
         public IEnumerable<SelectListItem> Categories {
@@ -84,6 +84,7 @@ namespace Epilogger.Web.Models {
                 return categories.Select(c => new SelectListItem { Text = c.CategoryName, Value = c.ID.ToString()});
             }
         }
+
 
         public EventToolbarViewModel ToolbarViewModel { get; set; }
 
