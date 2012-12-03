@@ -404,31 +404,11 @@ namespace Epilogger.Web.Controllers {
                     model.CreatedDateTime = DateTime.UtcNow;
 
                     var epLevent = Mapper.Map<CreateBasicEventViewModel, Event>(model);
-                    ////   _es.Save(epLevent);
-
-                    ////Initiate a first collect on the event
-                    //var tsmp = new MQ.MSGProducer("Epilogger", "TwitterSearch");
-                    //var tsMSG = new MQ.Messages.TwitterSearchMSG
-                    //{
-                    //    EventID = model.ID,
-                    //    SearchTerms = model.SearchTerms,
-                    //    SearchFromLatestTweet = false,
-                    //    SearchSince = model.CollectionStartDateTime,
-                    //    SearchUntil = model.CollectionEndDateTime
-                    //};
-                    //tsmp.SendMessage(tsMSG);
-                    //tsmp.Dispose();
-
-                    ////Tweet that the event has been created.
-                    ////SendEventCreatedTweet(epLevdent);
-
-                    ////The the admins an email with the event details.
-                    //SendEventCreatedEmailToSystem(model);
-
+                   // _es.Save(epLevent);
 
                     //this.StoreSuccess("Your Event was created successfully!  Dont forget to share it with your friends and attendees!");
-                    //return View(model.ID)
-                    return RedirectToAction("CreateEventTweets");
+                    //return View("CreateEventTweets",model.ID);
+                    return RedirectToAction("CreateEventTweets", new { id = model.ID });  
                 }
                 catch (Exception ex)
                 {
@@ -478,10 +458,11 @@ namespace Epilogger.Web.Controllers {
         }
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-        public virtual ActionResult CreateEventTweets()
+        public virtual ActionResult CreateEventTweets(int id)
         {
-            // add in ID stuff after UI testing
-            return View();
+            CreateEventTwitterViewModel vm = new CreateEventTwitterViewModel();
+            vm.ID = id;
+            return View(vm);
         }
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -496,9 +477,33 @@ namespace Epilogger.Web.Controllers {
             {
                 try
                 {
-                    //var epLevent = Mapper.Map<CreateTwitterEventViewModel, Event>(model);
-                    //_es.Save(epLevent);
-                    return View("CreateEventFinal", model);
+                    var epLevent = Mapper.Map<CreateEventTwitterViewModel, Event>(model);
+                  //  _es.Save(epLevent);
+
+                    Event eventModel = _es.FindByID(model.ID);
+
+                    // get model
+
+                    
+                    ////Initiate a first collect on the event
+                    //var tsmp = new MQ.MSGProducer("Epilogger", "TwitterSearch");
+                    //var tsMSG = new MQ.Messages.TwitterSearchMSG
+                    //{
+                    //    EventID = eventModel.ID,
+                    //    SearchTerms = eventModel.SearchTerms,
+                    //    SearchFromLatestTweet = false,
+                    //    SearchSince = eventModel.CollectionStartDateTime,
+                    //    SearchUntil = eventModel.CollectionEndDateTime
+                    //};
+                    //tsmp.SendMessage(tsMSG);
+                    //tsmp.Dispose();
+
+
+
+                    ////The the admins an email with the event details.
+                   // SendEventCreatedEmailToSystem(eventModel);
+
+                    return View("CreateEventFinal", eventModel);
                 }
                 catch (Exception ex)
                 {
@@ -515,20 +520,11 @@ namespace Epilogger.Web.Controllers {
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         //[CompressFilter]
         //[RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to edit an event")]
-        public virtual ActionResult CreateEventFinal()
+        public virtual ActionResult CreateEventFinal(Event model)
         {
-            // Add in ID stuff after UI testing
-            //Event currentEvent = _es.FindBySlug(id);
-            //CreateEventViewModel model = Mapper.Map<Event, CreateEventViewModel>(currentEvent);
-            //model.ToolbarViewModel = BuildToolbarViewModel(currentEvent);
+            
 
-            //model.CurrentUserRole = CurrentUserRole;
-            //model.CurrentUserID = CurrentUser.ID;
-            //model.UserID = CurrentUser.ID;
-            //model.EventSlug = currentEvent.EventSlug;
-
-            //return View(model);
-            return View();
+            return View(model);
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -634,7 +630,7 @@ namespace Epilogger.Web.Controllers {
 	    private void SendEventCreatedEmailToSystem(CreateEventViewModel model)
 	    {
 	        try
-	        {
+	        {  
 	            var theUser = _us.GetUserByID(model.UserID);
 
 	            var parser = new TemplateParser();

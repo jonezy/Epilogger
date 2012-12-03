@@ -110,13 +110,9 @@
                 },
                 callbacks: {
                 onComplete: function(id, fileName, responseJSON) {
-                    if (responseJSON.success == false && responseJSON.limitReached) {
-                        $.confirm({
+  
                             $('#response-url').text(responseJSON.imageurl)
-                        });
-                    } else {
-                        addImage(responseJSON.idImage, responseJSON.imageType, responseJSON.showDescriptionOptions);
-                    }
+              
                 }
             },
             });

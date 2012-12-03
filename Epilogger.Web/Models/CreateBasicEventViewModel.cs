@@ -81,29 +81,24 @@ namespace Epilogger.Web.Models {
                 timeZones.Add(new TimeZone { TimeZoneName = "mst", TimeZoneOffset = -7 });
                 timeZones.Add(new TimeZone { TimeZoneName = "cst", TimeZoneOffset = -6 });
                 timeZones.Add(new TimeZone { TimeZoneName = "est", TimeZoneOffset = -5 });
-                //timeZones.Add("-4", "(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz");
-                //timeZones.Add("-3.5", "(GMT -3:30) Newfoundland");
-                //timeZones.Add("-3", "(GMT -3:00) Brazil, Buenos Aires, Georgetown");
-                //timeZones.Add("-2", "(GMT -2:00) Mid-Atlantic");
-                //timeZones.Add("-1", "(GMT -1:00 hour) Azores, Cape Verde Islands");
-                //timeZones.Add("0.0", "(GMT) Western Europe Time, London, Lisbon, Casablanca");
-                //timeZones.Add("1", "(GMT +1:00 hour) Brussels, Copenhagen, Madrid, Paris");
-                //timeZones.Add("2", "(GMT +2:00) Kaliningrad, South Africa");
-                //timeZones.Add("3", "(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg");
-                //timeZones.Add("3.5", "(GMT +3:30) Tehran");
-                //timeZones.Add("4", "(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi");
-                //timeZones.Add("4.5", "(GMT +4:30) Kabul");
-                //timeZones.Add("5", "(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent");
-                //timeZones.Add("5.5", "(GMT +5:30) Bombay, Calcutta, Madras, New Delhi");
-                //timeZones.Add("5.75", "(GMT +5:45) Kathmandu");
-                //timeZones.Add("6", "(GMT +6:00) Almaty, Dhaka, Colombo");
-                //timeZones.Add("7", "(GMT +7:00) Bangkok, Hanoi, Jakarta");
-                //timeZones.Add("8", "(GMT +8:00) Beijing, Perth, Singapore, Hong Kong");
-                //timeZones.Add("9", "(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk");
-                //timeZones.Add("9.5", "(GMT +9:30) Adelaide, Darwin");
-                //timeZones.Add("10", "(GMT +10:00) Eastern Australia, Guam, Vladivostok");
-                //timeZones.Add("11", "(GMT +11:00) Magadan, Solomon Islands, New Caledonia");
-                //timeZones.Add("12", "(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka");
+                timeZones.Add(new TimeZone { TimeZoneName = "ast", TimeZoneOffset = -4 });
+                timeZones.Add(new TimeZone { TimeZoneName = "brt", TimeZoneOffset = -3 });
+                timeZones.Add(new TimeZone { TimeZoneName = "brst", TimeZoneOffset = -2 });
+                timeZones.Add(new TimeZone { TimeZoneName = "azot", TimeZoneOffset = -1 });
+                timeZones.Add(new TimeZone { TimeZoneName = "wet", TimeZoneOffset = 0 });
+                timeZones.Add(new TimeZone { TimeZoneName = "cet", TimeZoneOffset = 1 });
+                timeZones.Add(new TimeZone { TimeZoneName = "cat", TimeZoneOffset = 2 });
+                timeZones.Add(new TimeZone { TimeZoneName = "eat", TimeZoneOffset = 3 });
+                timeZones.Add(new TimeZone { TimeZoneName = "msk", TimeZoneOffset = 4 });
+                timeZones.Add(new TimeZone { TimeZoneName = "pkt", TimeZoneOffset = 5 });
+                timeZones.Add(new TimeZone { TimeZoneName = "bst", TimeZoneOffset = 6 });
+                timeZones.Add(new TimeZone { TimeZoneName = "ict", TimeZoneOffset = 7 });
+                timeZones.Add(new TimeZone { TimeZoneName = "cst", TimeZoneOffset = 8 });
+                timeZones.Add(new TimeZone { TimeZoneName = "jst", TimeZoneOffset = 9 });
+                timeZones.Add(new TimeZone { TimeZoneName = "pgt", TimeZoneOffset = 10 });
+                timeZones.Add(new TimeZone { TimeZoneName = "nct", TimeZoneOffset = 11 });
+                timeZones.Add(new TimeZone { TimeZoneName = "fjt", TimeZoneOffset = 12 });
+
                 return timeZones;
             }
         }
@@ -174,6 +169,8 @@ namespace Epilogger.Web.Models {
 
         public UserRoleType CurrentUserRole { get; set; }
         public Guid CurrentUserID { get; set; }
+
+
 
     }
 }

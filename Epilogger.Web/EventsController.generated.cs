@@ -677,8 +677,9 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult CreateEventTweets() {
+        public override System.Web.Mvc.ActionResult CreateEventTweets(int id) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEventTweets);
+            callInfo.RouteValueDictionary.Add("id",id);
             return callInfo;
         }
 
@@ -688,7 +689,7 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult CreateEventFinal() {
+        public override System.Web.Mvc.ActionResult CreateEventFinal(Epilogger.Data.Event model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEventFinal);
             return callInfo;
         }

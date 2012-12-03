@@ -1,4 +1,4 @@
-﻿@model Epilogger.Web.Models.CreateEventViewModel
+﻿@model Epilogger.Web.Models.CreateEventTwitterViewModel
 @{
     Layout = "~/Views/Events/_CreateEventLayout.cshtml";
     ViewBag.Title = "Create a new event | Epilogger";
@@ -37,6 +37,7 @@
 @using (Html.BeginForm("CreateEventTweets", "Events"))
 {
     <fieldset>
+    @Html.HiddenFor(m => Model.ID)
         <div id="twitter_wrapper">   
             <div id="left_side">
                 <p>

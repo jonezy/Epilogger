@@ -11,6 +11,7 @@ namespace Epilogger.Web.Models
 {
     public class CreateEventTwitterViewModel
     {
+        public int ID { get; set; }
       [Required(ErrorMessage = "Please enter some search terms for your event (ex: epilogger OR EPL)")]
         [DisplayName("Search Terms")]
         public string SearchTerms { get; set; }

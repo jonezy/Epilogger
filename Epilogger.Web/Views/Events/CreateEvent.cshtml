@@ -29,7 +29,7 @@
             var x = $('#event-popup').height();
             var y = $('#event-popup').width();
 
-            parent.$.colorbox.resize({ width: 560, height: 460 });
+            parent.$.colorbox.resize({ width: 560, height: 510 });
 
         });
 
@@ -51,7 +51,7 @@
                 <div class="hint">
                     (ex: Presented by Aperture Laboratories)
                 </div>
-
+                 <p>@Html.LabelFor(model => model.CategoryID) @Html.DropDownListFor(model => model.CategoryID, Model.Categories, "Select your event category")</p>
                 <div class="dropdown_image">
                     <p>@Html.Label("Start date:") @Html.EditorFor(m => m.StartDateTime, "DateTimeOneline")
                         @*Html.DropDownList("startTimes", new SelectList(ViewBag.times, "Value", "Text"), new { @class = "blue_arrow times" })*@

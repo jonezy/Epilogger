@@ -1,4 +1,4 @@
-﻿@*@model Epilogger.Web.Models.CreateEventViewModel*@
+﻿@model Epilogger.Data.Event
 @{
     Layout = "~/Views/Events/_CreateEventLayout.cshtml";
     ViewBag.Title = "Create a new event | Epilogger";
@@ -28,7 +28,7 @@
                         <img src="../../Public/images/CreateEvent/quotes.png" alt="quotes" />
                     </td>
                     <td>
-                   @* @Html.DisplayFor(m => m.Subtitle)*@
+                   @Html.DisplayFor(m => m.SubTitle)
                         subtitle of your event
                     </td>
                 </tr>
@@ -71,8 +71,8 @@
         <li>Official Website</li>
         <li>Twitter & Facebook page</li>
         <li>Sponsor logos</li>
-        <li>@*@Html.ActionImage("Edit","event","#","../images/CreateEvent/disabled_button_blue.png","add details")*@
-            <input type="button" value="add detail now" class="stn_button disabled_blue_button" id="addDetail" /></li>
+        <li>@Html.ActionImage("Edit","event",'#',"../images/CreateEvent/disabled_button_blue.png","add details")</li>
+            @*<input type="button" value="add detail now" class="stn_button disabled_blue_button" id="addDetail" /></li>*@
         </ul>
         
         </div>
