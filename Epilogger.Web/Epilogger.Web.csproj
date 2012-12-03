@@ -384,7 +384,7 @@
     <Compile Include="Models\AllContentViewModel.cs" />
     <Compile Include="Models\AllPhotosDisplayViewModel.cs" />
     <Compile Include="Models\ConnectServiceViewModel.cs" />
-    <Compile Include="Models\LiveModeModel.cs" />
+    <Compile Include="Models\LiveModeCustomSettingViewModel.cs" />
     <Compile Include="Models\CreateBasicEventViewModel.cs" />
     <Compile Include="Models\CreateEventTwitterViewModel.cs" />
     <Compile Include="Models\DisconnectServiceViewModel.cs" />
@@ -487,6 +487,7 @@
     </Content>
     <Content Include="App_Data\combres_full_with_annotation.xml" />
     <Content Include="Public\css\event-popup.css" />
+    <Content Include="Public\css\fineuploader.css" />
     <Content Include="Public\css\geckoboard\darkAdjusted.css" />
     <Content Include="Public\css\geckoboard\EPLCustom.css" />
     <Content Include="Public\css\geckoboard\lightBasic.css" />
@@ -504,6 +505,11 @@
     <Content Include="Public\images\CreateEvent\info.png" />
     <Content Include="Public\images\CreateEvent\quotes.png" />
     <Content Include="Public\images\trigger.png" />
+    <Content Include="Public\js\FileUploader.js" />
+    <Content Include="Public\js\fineuploader.jquery-3.0\fineuploader.css" />
+    <Content Include="Public\js\fineuploader.jquery-3.0\jquery.fineuploader-3.0.js" />
+    <Content Include="Public\js\fineuploader.jquery-3.0\jquery.fineuploader-3.0.min.js" />
+    <Content Include="Public\js\fineuploader.jquery-3.0\loading.gif" />
     <Content Include="Public\js\jquery.miniColors.js" />
     <Content Include="Public\js\jquery.miniColors.min.js" />
     <Content Include="Public\js\jquery.js" />
@@ -2874,10 +2880,10 @@
     <Content Include="Public\js\head.load.min.js" />
     <Content Include="Public\js\HomePage.js" />
     <Content Include="Public\js\html5shiv.js" />
-    <Content Include="Public\js\jqueryCookie\jquery.cookie.js" />
-    <Content Include="Public\js\jqueryCookie\server.js" />
-    <Content Include="Public\js\jqueryCookie\test.html" />
-    <Content Include="Public\js\jqueryCookie\test.js" />
+    <Content Include="Public\js\msdropdown\jqueryCookie\jquery.cookie.js" />
+    <Content Include="Public\js\msdropdown\jqueryCookie\server.js" />
+    <Content Include="Public\js\msdropdown\jqueryCookie\test.html" />
+    <Content Include="Public\js\msdropdown\jqueryCookie\test.js" />
     <Content Include="Public\js\jqueryParseParams.js" />
     <Content Include="Public\js\jqueryQueryString.js" />
     <Content Include="Public\js\LiveMode.js" />
@@ -3142,7 +3148,7 @@
     <None Include="Public\js\bootstrap-Image-Gallery\Makefile" />
     <None Include="Public\js\bootstrap-Image-Gallery\package.json" />
     <None Include="Public\js\bootstrap-Image-Gallery\README.md" />
-    <None Include="Public\js\jqueryCookie\README.md" />
+    <None Include="Public\js\msdropdown\jqueryCookie\README.md" />
     <None Include="Public\js\jQueryFileUpload\package.json" />
     <None Include="Public\js\jQueryFileUpload\README.md" />
     <None Include="Public\js\jQueryFileUpload\server\gae-go\app.yaml" />
@@ -3249,6 +3255,7 @@
     <Content Include="Views\Events\CreateEventTweets.cshtml" />
     <Content Include="Views\Events\CreateEventFinal.cshtml" />
     <Content Include="Views\Events\EditLiveMode.cshtml" />
+    <Content Include="Views\Events\UploadFile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />

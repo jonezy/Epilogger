@@ -26,6 +26,8 @@ using System.Text.RegularExpressions;
 using Twitterizer;
 using System.Collections.ObjectModel;
 using System.Xml.Linq;
+using System.Web;
+using Epilogger.Web.Core.Helpers;
 
 namespace Epilogger.Web.Controllers {
 	public partial class EventsController : BaseController
@@ -37,6 +39,7 @@ namespace Epilogger.Web.Controllers {
 		EpiloggerDB _db;
         CreateEventViewModel eventModel = new CreateEventViewModel();
 		EventService _es = new EventService();
+        LiveModeCustomSettingsService _lm = new LiveModeCustomSettingsService();
 		TweetService _ts = new TweetService();
 		ImageService _is = new ImageService();
 		CheckInService _cs = new CheckInService();
@@ -1227,25 +1230,62 @@ namespace Epilogger.Web.Controllers {
 			return RedirectToAction("index", "Browse");
 
 		}
-        public virtual ActionResult EditLiveMode()
-        {
-            LiveModeModel Model = new LiveModeModel();
-            return View(Model);
 
+
+        public virtual ActionResult LiveMode(string eventID)
+        {
+            LiveModeCustomSettingViewModel Model = new LiveModeCustomSettingViewModel();
+            int id = 0;
+            try
+            {
+                id = Convert.ToInt16(eventID);
+            }
+            catch
+            { //todo
+            }
+            LiveModeCustomSetting currentLiveModel = _lm.FindByEventID(id);
+
+            if (currentLiveModel == null || currentLiveModel.Id==0)
+            {
+                Model.EventId = id;
+                return View("EditLiveMode", Model);
+            }
+            else
+            {
+                Mapper.CreateMap<Data.LiveModeCustomSetting, LiveModeCustomSettingViewModel>();
+                Model = Mapper.Map<Data.LiveModeCustomSetting, LiveModeCustomSettingViewModel>(currentLiveModel);
+                return View("EditLiveMode",Model);
+            }
         }
 
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         //[RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
         [HttpPost]
-        public virtual ActionResult EditLiveMode(LiveModeModel model)
+        public virtual ActionResult CreateLiveMode(LiveModeCustomSettingViewModel model, IEnumerable<HttpPostedFileBase> files)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                  
+                    //image stuff
+                    using (var messageProducer = new MQ.MSGProducer("Epilogger", "FileImage"))
+                    {
+                        foreach (var fileKey in Request.Files.AllKeys)
+                        {
+                            var file = Request.Files[fileKey];
 
+                            var fileMemoryStream = new MemoryStream();
+                            file.InputStream.CopyTo(fileMemoryStream);
+
+                            var imageMessage = new MQ.Messages.FileImageMSG(model.EventId, null, fileMemoryStream.ToArray(), file.FileName);
+                            messageProducer.SendMessage(imageMessage);
+                        }
+                    }
+                    Data.LiveModeCustomSetting liveSetting;
+                    Mapper.CreateMap<LiveModeCustomSettingViewModel, Data.LiveModeCustomSetting>();
+                    liveSetting = Mapper.Map<LiveModeCustomSettingViewModel, Data.LiveModeCustomSetting>(model);
+                    _lm.Save(liveSetting);
                     return RedirectToAction("CreateEventTweets");
                 }
                 catch (Exception ex)
@@ -1255,6 +1295,48 @@ namespace Epilogger.Web.Controllers {
             }
        
             return View(model);
+        }
+
+
+//-------- 
+        
+        public virtual ActionResult UploadFile(string qqfile)
+        {
+            var path = @"C:\\";
+            var file = string.Empty;
+
+            Uri imageurl;
+
+            try
+            {
+                var stream = Request.InputStream;
+                if (String.IsNullOrEmpty(Request["qqfile"]))
+                {
+                    // IE
+                    var postedFile = Request.Files[0];
+                    if (postedFile != null) stream = postedFile.InputStream;
+                    file = Path.Combine(path, System.IO.Path.GetFileName(Request.Files[0].FileName));
+                }
+                else
+                {
+                    //Webkit, Mozilla
+                    file = Path.Combine(path, qqfile);
+                }
+
+                //Resize the image
+                Stream resizedImage = null;
+               Helpers.ResizeImageStream(stream, 120, 120, true, out resizedImage);
+
+                //Azure Storage Code - Full Profile pic
+                imageurl = AzureImageStorageHelper.StoreProfileImage("Logo-" + Session.SessionID, "logosponsor", resizedImage);
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, "application/json");
+            }
+
+            return Json(new { success = true, imageurl = imageurl.AbsoluteUri }, "text/html");
         }
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 		[CompressFilter]

@@ -813,12 +813,15 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult EditLiveMode() {
+        public override System.Web.Mvc.ActionResult LiveMode(string id)
+        {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.EditLiveMode);
+            callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult EditLiveMode(Epilogger.Web.Models.LiveModeModel model) {
+        public override System.Web.Mvc.ActionResult CreateLiveMode(Epilogger.Web.Models.LiveModeCustomSettingViewModel model, IEnumerable<HttpPostedFileBase> files)
+        {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.EditLiveMode);
             callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;

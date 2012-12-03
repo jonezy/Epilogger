@@ -26,9 +26,9 @@
         $("#livemode-popup").colorbox({
             iframe: true,
             width: "560px", height: "460px",
-            href: '@Url.Action(MVC.Events.EditLiveMode())'
+            href:'@Url.Action("LiveMode", "Events", new {EventID=@Model.EventID})',
         });
-
+    
     });
 </script>
 @if (!IncludeDateRange)
@@ -68,7 +68,7 @@
         @if ((Model.CreatedByID == Model.CurrentUserID) || Model.CurrentUserRole == UserRoleType.Administrator)
         { 
             <li>@Html.ActionLink("edit", "edit", "events", new { id = @id }, action.ToLower() == "edit" ? new { @class = "current" } : null)</li>
-             <li><a href="#" id="livemode-popup">Edit Live Wall</a></li>
+             <li><a href="@Model.EventID" id="livemode-popup">Live Wall </a></li> 
         }
         @*<li>@Html.ActionLink("Search/Time Filter", "timefilters", null, new { id = @id }, action.ToLower() == "timefilters" ? new { @class = "current" } : null)</li>*@
     </ul>

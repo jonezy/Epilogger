@@ -167,6 +167,11 @@ namespace Epilogger.Web
                  "events/CreateEvent",
                 new { controller = "events", action = "CreateEvent" }
             );
+             routes.MapRoute(
+                "UploadFile",
+                "events/UploadFile",
+               new { controller = "events", action = "UploadFile" }
+           );
             routes.MapRoute(
                 "EditLiveMode",
                 "events/EditLiveMode",
