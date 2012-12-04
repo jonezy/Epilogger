@@ -384,6 +384,7 @@
     <Compile Include="Models\AllContentViewModel.cs" />
     <Compile Include="Models\AllPhotosDisplayViewModel.cs" />
     <Compile Include="Models\ConnectServiceViewModel.cs" />
+    <Compile Include="Models\CreateFinalEventViewModel.cs" />
     <Compile Include="Models\LiveModeCustomSettingViewModel.cs" />
     <Compile Include="Models\CreateBasicEventViewModel.cs" />
     <Compile Include="Models\CreateEventTwitterViewModel.cs" />

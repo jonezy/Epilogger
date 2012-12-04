@@ -1,4 +1,4 @@
-﻿@model Epilogger.Data.Event
+﻿@model Epilogger.Web.Models.CreateFinalEventViewModel
 @{
     Layout = "~/Views/Events/_CreateEventLayout.cshtml";
     ViewBag.Title = "Create a new event | Epilogger";
@@ -20,16 +20,16 @@
         <div id="left_side">
             <h2>
                 WOOT! YOUR EVENT HAS BEEN ADDED!</h2>
-                <h3>@* @Html.DisplayFor(m => m.Name)*@
-                        Your Event Name</h3>
+                <h3>@Html.DisplayFor(m => m.Name)
+                        @*Your Event Name*@</h3>
             <table>
                 <tr>
                     <td>
                         <img src="../../Public/images/CreateEvent/quotes.png" alt="quotes" />
                     </td>
                     <td>
-                   @Html.DisplayFor(m => m.SubTitle)
-                        subtitle of your event
+                   @Html.DisplayFor(m => m.Subtitle)
+                        @*subtitle of your event*@
                     </td>
                 </tr>
                 <tr>
@@ -37,8 +37,8 @@
                         <img src="../../Public/images/CreateEvent/clock.png" alt="clock" />
                     </td>
                     <td>
-                    @*@Html.DisplayFor(m => m.StartDateTime) to @Html.DisplayFor(m => m.EndDateTime) *@
-                    Sept 18th 2:00pm - Sept 19th 4:00pm
+                    @Html.DisplayFor(m => m.EventStartEndTime)
+                    @*Sept 18th 2:00pm - Sept 19th 4:00pm*@
                     </td>
                 </tr>
                 <tr>
@@ -46,9 +46,8 @@
                         <img src="../../Public/images/CreateEvent/hash.png" alt="hashtags" />
                     </td>
                     <td>
-                    @*@Html.DisplayFor(m => m.SearchTerms)*@
-                    #Official <br />
-                    searchterms
+                    Search Terms:
+                    @Html.DisplayFor(m => m.SearchTerms)
                     </td>
                 </tr>
                 <tr>
@@ -56,8 +55,7 @@
                         <img src="../../Public/images/CreateEvent/info.png" alt="quotes" />
                     </td>
                     <td>
-                    @*@Html.DisplayFor(m => m.SearchTerms) *@
-                    The event will collect data a few days before and after the event
+                    @Html.DisplayFor(m => m.CollectionTime)
                     </td>
                 </tr>
             </table>
@@ -71,7 +69,7 @@
         <li>Official Website</li>
         <li>Twitter & Facebook page</li>
         <li>Sponsor logos</li>
-        <li>@Html.ActionImage("Edit","event",'#',"../images/CreateEvent/disabled_button_blue.png","add details")</li>
+        <li>@Html.ActionImage("Edit", "event", new { id = Model.EventSlug}, "../images/CreateEvent/disabled_button_blue.png", "add details")</li>
             @*<input type="button" value="add detail now" class="stn_button disabled_blue_button" id="addDetail" /></li>*@
         </ul>
         

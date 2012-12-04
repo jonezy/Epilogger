@@ -100,7 +100,6 @@ head.ready(function () {
         });
     });
 
-
     //Setup the page
     //$("#createSteps li").addClass("stepDisable");
     $("#Name").focus();
