@@ -27,7 +27,11 @@ fieldset.popForm label {
     font-size: 14px;
     color:#868686;
 }
-
+.endDateCheckLabel {
+    font: 10pt Helvetica,Arial,Sans-Serif !important;
+    color: #999 !important;
+    display: inline !important;
+}
 
 fieldset.popForm select   
 {

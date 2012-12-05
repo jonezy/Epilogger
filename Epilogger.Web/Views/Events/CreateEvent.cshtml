@@ -86,13 +86,13 @@
                 </div>
 
                 <div class="under_control_notice">
-                    @Html.CheckBox("End_Date") Specify end time</div>
+                    @Html.CheckBox("End_Date") <label class="endDateCheckLabel" for="End_Date">Specify end time</label></div>
                 <div id="endDate" class="invisible dropdown_image">
                     @Html.Label("End date:") @Html.EditorFor(m => m.EndDateTime, "DateTimeOneline")
                     
+
                     @{
                         Debug.Assert(Model.EndDateTime != null, "Model.EndDateTime != null");
-
                     }
                     @Html.DropDownList("end_times", new SelectList(CreateBasicEventViewModel.Times, "Value", "Text", string.Format("{0:hh:mm}", ((DateTime) Model.EndDateTime).ToLocalTime())), new { @class = "times" })
                     
