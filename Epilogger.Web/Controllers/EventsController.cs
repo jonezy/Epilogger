@@ -371,13 +371,11 @@ namespace Epilogger.Web.Controllers {
             DateTime endDate;
             
 
-            string startTime = getTime(Request.Form["start_times"], Request.Form["AMPMstartTime"]);
-            string endTime = getTime(Request.Form["end_times"], Request.Form["AMPMstartTime"]);
+            var startTime = getTime(Request.Form["start_times"], Request.Form["AMPMstartTime"]);
+            var endTime = getTime(Request.Form["end_times"], Request.Form["AMPMstartTime"]);
             DateTime.TryParse(Request.Form["StartDateTime"] + " " + startTime, out startDate); // start date
             DateTime.TryParse(Request.Form["EndDateTime"] + " " + Request.Form["end_times"], out endDate); // end date (could be null)
            
-           
-
             #region Collection Start/End Date Times
             model.CollectionStartDateTime = getCollectionDateTime(Request.Form["collectDataTimes"], startDate, -1);
             if (EndDateValid(startDate,endDate))
@@ -405,6 +403,7 @@ namespace Epilogger.Web.Controllers {
                     model.EventSlug = NameIntoSlug(model.Name);
 
                     var epLevent = Mapper.Map<CreateBasicEventViewModel, Event>(model);
+                    
                     _es.Save(epLevent);
 
                     //this.StoreSuccess("Your Event was created successfully!  Dont forget to share it with your friends and attendees!");
