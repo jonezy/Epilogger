@@ -374,11 +374,20 @@ namespace Epilogger.Web.Controllers {
             var startTime = getTime(Request.Form["start_times"], Request.Form["AMPMstartTime"]);
             var endTime = getTime(Request.Form["end_times"], Request.Form["AMPMstartTime"]);
             DateTime.TryParse(Request.Form["StartDateTime"] + " " + startTime, out startDate); // start date
-            DateTime.TryParse(Request.Form["EndDateTime"] + " " + Request.Form["end_times"], out endDate); // end date (could be null)
+            DateTime.TryParse(Request.Form["EndDateTime"] + " " + endTime, out endDate); // end date (could be null)
            
+           
+            model.StartDateTime = ConvertToUniversalDateTime(startDate, Request.Form["timeZone"]);
+            if (EndDateValid(startDate, endDate))
+                model.EndDateTime = ConvertToUniversalDateTime(endDate, Request.Form["timeZone"]);
+            else
+                model.EndDateTime = null;
+
+
             #region Collection Start/End Date Times
+            //Moved as the timezone offset needs to be applied first
             model.CollectionStartDateTime = getCollectionDateTime(Request.Form["collectDataTimes"], startDate, -1);
-            if (EndDateValid(startDate,endDate))
+            if (EndDateValid(startDate, endDate))
             {
                 model.CollectionEndDateTime = getCollectionDateTime(Request.Form["collectDataTimes"], endDate, 1);
             }
@@ -388,11 +397,6 @@ namespace Epilogger.Web.Controllers {
             }
             #endregion
 
-            model.StartDateTime = ConvertToUniversalDateTime(startDate, Request.Form["timeZone"]);
-            if (EndDateValid(startDate, endDate))
-                model.EndDateTime = ConvertToUniversalDateTime(endDate, Request.Form["timeZone"]);
-            else
-                model.EndDateTime = null;
 
             if(ModelState.IsValid)
             {

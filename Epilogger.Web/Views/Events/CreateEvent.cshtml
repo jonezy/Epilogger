@@ -1,4 +1,6 @@
-﻿@using Epilogger.Web.Models
+﻿@using System.Diagnostics
+@using Epilogger.Web.Models
+@using FlickrNet
 @using Timezone.Framework
 @model CreateBasicEventViewModel
 @{
@@ -64,11 +66,21 @@
                 <div class="">
                     <p>@Html.Label("Start date:") @Html.EditorFor(m => m.StartDateTime, "DateTimeOneline")
 
-                        @Html.DropDownList("start_times", CreateBasicEventViewModel.Times, new { @class = "times" })
-                        <select name="AMPMstartTime" class="AMPM">
-                            <option>am</option>
-                            <option>pm</option>
-                        </select>
+                        @Html.DropDownList("start_times", new SelectList(CreateBasicEventViewModel.Times, "Value", "Text", string.Format("{0:hh:mm}", Model.StartDateTime.ToLocalTime())), new { @class = "times" })
+                        
+                        @Html.DropDownList("AMPMstartTime", new SelectList(new List<SelectListItem> {
+                                            new SelectListItem
+                                            {
+                                                Text = "am",
+                                                Value = "am"
+                                            },
+                                            new SelectListItem
+                                            {
+                                                Text = "pm",
+                                                Value = "pm"
+                                            }}, "Value", "Text", string.Format("{0:tt}", Model.StartDateTime.ToLocalTime()).ToLower()), 
+                                            new { @class = "AMPM" })
+                        
                         @Html.DropDownList("timeZone", new SelectList(CreateBasicEventViewModel.TimeZones, "TimeZoneOffset", "TimeZoneName", TimeZoneManager.UserTimeZone.BaseUtcOffset.Hours), new { @class = "timeZoneSelect" })
                     </p>
                 </div>
@@ -77,11 +89,25 @@
                     @Html.CheckBox("End_Date") Specify end time</div>
                 <div id="endDate" class="invisible dropdown_image">
                     @Html.Label("End date:") @Html.EditorFor(m => m.EndDateTime, "DateTimeOneline")
-                    @Html.DropDownList("end_times", CreateBasicEventViewModel.Times)
-                    <select name="AMPMendTime" class="AMPM">
-                        <option>am</option>
-                        <option>pm</option>
-                    </select>
+                    
+                    @{
+                        Debug.Assert(Model.EndDateTime != null, "Model.EndDateTime != null");
+
+                    }
+                    @Html.DropDownList("end_times", new SelectList(CreateBasicEventViewModel.Times, "Value", "Text", string.Format("{0:hh:mm}", ((DateTime) Model.EndDateTime).ToLocalTime())), new { @class = "times" })
+                    
+                    @Html.DropDownList("AMPMendTime", new SelectList(new List<SelectListItem> {
+                                            new SelectListItem
+                                            {
+                                                Text = "am",
+                                                Value = "am"
+                                            },
+                                            new SelectListItem
+                                            {
+                                                Text = "pm",
+                                                Value = "pm"
+                                            }}, "Value", "Text", string.Format("{0:tt}", ((DateTime) Model.EndDateTime).ToLocalTime()).ToLower()), 
+                                            new { @class = "AMPM" })
                 </div>
                 <p>
                     @Html.Label("Collect content:")
@@ -94,8 +120,18 @@
         </fieldset>
     }
 
-    <script type="text/javascript">
-        $('#End_Date').bind("change", function () {
-            $('#endDate').slideToggle(200);
-        });
-    </script>
+<script type="text/javascript">
+    var status = 0;
+    $('#End_Date').bind("change", function () {
+        $('#endDate').slideToggle(200);
+        if (status == 0) {
+            parent.$.colorbox.resize({ width: 560, height: 570 });
+            status = 1;
+        }
+        else {
+            parent.$.colorbox.resize({ width: 560, height: 510 });
+            status = 0;
+        }
+
+    });
+</script>
