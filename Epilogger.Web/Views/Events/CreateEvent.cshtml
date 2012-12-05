@@ -31,7 +31,7 @@
             var x = $('#event-popup').height();
             var y = $('#event-popup').width();
 
-            parent.$.colorbox.resize({ width: 560, height: 510 });
+            parent.$.colorbox.resize({ width: 560, height: 570 });
 
 
             $("#StartDateTime").change(function () {
@@ -66,49 +66,53 @@
                 <div class="">
                     <p>@Html.Label("Start date:") @Html.EditorFor(m => m.StartDateTime, "DateTimeOneline")
 
-                        @Html.DropDownList("start_times", new SelectList(CreateBasicEventViewModel.Times, "Value", "Text", string.Format("{0:hh:mm}", Model.StartDateTime.ToLocalTime())), new { @class = "times" })
+                        @Html.DropDownList("start_times", new SelectList(CreateBasicEventViewModel.Times, "Value", "Text", string.Format("{0:h:mm}", Model.StartDateTime.ToLocalTime())), new { @class = "times" })
                         
                         @Html.DropDownList("AMPMstartTime", new SelectList(new List<SelectListItem> {
-                                            new SelectListItem
-                                            {
-                                                Text = "am",
-                                                Value = "am"
-                                            },
-                                            new SelectListItem
-                                            {
-                                                Text = "pm",
-                                                Value = "pm"
-                                            }}, "Value", "Text", string.Format("{0:tt}", Model.StartDateTime.ToLocalTime()).ToLower()), 
-                                            new { @class = "AMPM" })
+                                                                                                        new SelectListItem
+                                                                                                            {
+                                                                                                                Text = "am",
+                                                                                                                Value = "am"
+                                                                                                            },
+                                                                                                        new SelectListItem
+                                                                                                            {
+                                                                                                                Text = "pm",
+                                                                                                                Value = "pm"
+                                                                                                            }}, "Value", "Text", string.Format("{0:tt}", Model.StartDateTime.ToLocalTime()).ToLower()), 
+                                           new { @class = "AMPM" })
                         
                         @Html.DropDownList("timeZone", new SelectList(CreateBasicEventViewModel.TimeZones, "TimeZoneOffset", "TimeZoneName", TimeZoneManager.UserTimeZone.BaseUtcOffset.Hours), new { @class = "timeZoneSelect" })
                     </p>
                 </div>
+                
 
                 <div class="under_control_notice">
-                    @Html.CheckBox("End_Date") <label class="endDateCheckLabel" for="End_Date">Specify end time</label></div>
-                <div id="endDate" class="invisible dropdown_image">
+                    @Html.CheckBox("End_Date") <label class="endDateCheckLabel" for="End_Date">All day</label>
+                </div>
+
+                <div id="endDate" class="dropdown_image">
                     @Html.Label("End date:") @Html.EditorFor(m => m.EndDateTime, "DateTimeOneline")
                     
 
                     @{
                         Debug.Assert(Model.EndDateTime != null, "Model.EndDateTime != null");
                     }
-                    @Html.DropDownList("end_times", new SelectList(CreateBasicEventViewModel.Times, "Value", "Text", string.Format("{0:hh:mm}", ((DateTime) Model.EndDateTime).ToLocalTime())), new { @class = "times" })
+                    @Html.DropDownList("end_times", new SelectList(CreateBasicEventViewModel.Times, "Value", "Text", string.Format("{0:h:mm}", ((DateTime) Model.EndDateTime).ToLocalTime())), new { @class = "times" })
                     
                     @Html.DropDownList("AMPMendTime", new SelectList(new List<SelectListItem> {
-                                            new SelectListItem
-                                            {
-                                                Text = "am",
-                                                Value = "am"
-                                            },
-                                            new SelectListItem
-                                            {
-                                                Text = "pm",
-                                                Value = "pm"
-                                            }}, "Value", "Text", string.Format("{0:tt}", ((DateTime) Model.EndDateTime).ToLocalTime()).ToLower()), 
-                                            new { @class = "AMPM" })
+                                                                                                  new SelectListItem
+                                                                                                      {
+                                                                                                          Text = "am",
+                                                                                                          Value = "am"
+                                                                                                      },
+                                                                                                  new SelectListItem
+                                                                                                      {
+                                                                                                          Text = "pm",
+                                                                                                          Value = "pm"
+                                                                                                      }}, "Value", "Text", string.Format("{0:tt}", ((DateTime) Model.EndDateTime).ToLocalTime()).ToLower()), 
+                                       new { @class = "AMPM" })
                 </div>
+                
                 <p>
                     @Html.Label("Collect content:")
                     @Html.DropDownList("collectDataTimes", new SelectList(CreateBasicEventViewModel.CollectDataList, "Value", "Text"))
@@ -121,7 +125,7 @@
     }
 
 <script type="text/javascript">
-    var status = 0;
+    var status = 1;
     $('#End_Date').bind("change", function () {
         $('#endDate').slideToggle(200);
         if (status == 0) {
@@ -132,6 +136,5 @@
             parent.$.colorbox.resize({ width: 560, height: 510 });
             status = 0;
         }
-
     });
 </script>

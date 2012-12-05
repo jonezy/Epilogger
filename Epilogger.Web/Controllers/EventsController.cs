@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Web.Helpers;
@@ -341,12 +342,12 @@ namespace Epilogger.Web.Controllers {
 
         //---Forms
        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
-        public virtual ActionResult CreateEvent()
+        public virtual ActionResult CreateEvent(string id)
         {
-
-            //var model = Mapper.Map<Event, CreateBasicEventViewModel>(new Event());
+            var requestedEvent = _es.FindBySlug(id);
+            var model = Mapper.Map<Event, CreateBasicEventViewModel>(requestedEvent);
             
-            var model = new CreateBasicEventViewModel();
+            //var model = new CreateBasicEventViewModel();
             var roundTime = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day, DateTime.UtcNow.Hour, 0, 0);
             if (DateTime.UtcNow.Minute > 30)
             {
@@ -370,9 +371,9 @@ namespace Epilogger.Web.Controllers {
             DateTime startDate;
             DateTime endDate;
             
-
             var startTime = getTime(Request.Form["start_times"], Request.Form["AMPMstartTime"]);
-            var endTime = getTime(Request.Form["end_times"], Request.Form["AMPMstartTime"]);
+            var endTime = getTime(Request.Form["end_times"], Request.Form["AMPMendTime"]);
+
             DateTime.TryParse(Request.Form["StartDateTime"] + " " + startTime, out startDate); // start date
             DateTime.TryParse(Request.Form["EndDateTime"] + " " + endTime, out endDate); // end date (could be null)
            
@@ -381,11 +382,12 @@ namespace Epilogger.Web.Controllers {
             if (EndDateValid(startDate, endDate))
                 model.EndDateTime = ConvertToUniversalDateTime(endDate, Request.Form["timeZone"]);
             else
-                model.EndDateTime = null;
+                //All day is checked, 
+                model.EndDateTime = ConvertToUniversalDateTime(endDate.AddDays(1), Request.Form["timeZone"]);
 
 
             #region Collection Start/End Date Times
-            //Moved as the timezone offset needs to be applied first
+            //Moved, as the timezone offset needs to be applied first
             model.CollectionStartDateTime = getCollectionDateTime(Request.Form["collectDataTimes"], startDate, -1);
             if (EndDateValid(startDate, endDate))
             {
@@ -429,7 +431,7 @@ namespace Epilogger.Web.Controllers {
         {
             bool hasEndDate;
             Boolean.TryParse(Request.Form["EndDateTime"],out hasEndDate);
-            if (endDate == null || endDate.ToString() == "1/1/0001 12:00:00 AM" || !hasEndDate || DateTime.Compare(startDate,endDate) >= 0)
+            if (endDate.ToString(CultureInfo.InvariantCulture) == "1/1/0001 12:00:00 AM" || hasEndDate || DateTime.Compare(startDate,endDate) >= 0)
                 return false;
            
             return true;
@@ -499,30 +501,33 @@ namespace Epilogger.Web.Controllers {
                 try
                 {
                     //var epLevent = Mapper.Map<CreateEventTwitterViewModel, Event>(model);
-                    Event eventModel = _es.FindBySlug(model.EventSlug);
-                    String[] searchTerms = frm["SearchTerms"].Split(',');
-                    string searchQuery = "";
-                    foreach (string s in searchTerms)
+                    var eventModel = _es.FindBySlug(model.EventSlug);
+                    var searchTerms = frm["SearchTerms"].Split(',');
+                    var searchQuery = "";
+                    foreach (var s in searchTerms)
                     {
                         if(s !="")
                         searchQuery += s + " OR ";
                     }
                     searchQuery = searchQuery.Remove(searchQuery.Length - 4, 4);
                     eventModel.SearchTerms = searchQuery;
-                    
+
+                    eventModel.IsActive = true;
+
                     _es.Save(eventModel);              
 
                     // get display model from event, route this eventually
-                    CreateFinalEventViewModel displayModel = new CreateFinalEventViewModel();
+                    var displayModel = new CreateFinalEventViewModel
+                                           {
+                                               Name = eventModel.Name,
+                                               Subtitle = eventModel.SubTitle,
+                                               SearchTerms = searchQuery,
+                                               EventSlug = eventModel.EventSlug,
+                                               CollectionTime = getCollectionWordFormat(eventModel.CollectionStartDateTime, eventModel.CollectionEndDateTime),
+                                               EventStartEndTime = getEventStartEndTime(eventModel.StartDateTime, eventModel.EndDateTime)
+                                           };
 
-                    displayModel.Name = eventModel.Name;
-                    displayModel.Subtitle = eventModel.SubTitle;
-                    displayModel.SearchTerms = searchQuery;
-                    displayModel.EventSlug = eventModel.EventSlug;
-                    displayModel.CollectionTime = getCollectionWordFormat(eventModel.CollectionStartDateTime, eventModel.CollectionEndDateTime);
-                    displayModel.EventStartEndTime = getEventStartEndTime(eventModel.StartDateTime, eventModel.EndDateTime);
 
-                    
                     ////Initiate a first collect on the event
                     //var tsmp = new MQ.MSGProducer("Epilogger", "TwitterSearch");
                     //var tsMSG = new MQ.Messages.TwitterSearchMSG
@@ -537,7 +542,7 @@ namespace Epilogger.Web.Controllers {
                     //tsmp.Dispose();
                     
                     ////The the admins an email with the event details.
-                   // SendEventCreatedEmailToSystem(eventModel);
+                    // SendEventCreatedEmailToSystem(eventModel);
 
                     return View("CreateEventFinal", displayModel);
                 }

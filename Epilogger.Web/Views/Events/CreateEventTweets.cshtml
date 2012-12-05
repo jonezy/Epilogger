@@ -3,7 +3,7 @@
     Layout = "~/Views/Events/_CreateEventLayout.cshtml";
     ViewBag.Title = "Create a new event | Epilogger";
 }
-<script>
+<script language="javascript">
     $(document).ready(function () {
         var x = $('#event-popup').height();
         var y = $('#event-popup').width();
@@ -28,11 +28,12 @@
         });
 
     });
-        
 </script>
+
 <div class="form_process2">
-    <img src="../../Public/images/CreateEvent/HashTagsActive.png" alt="Basic Information" />
+    <img src="/Public/images/CreateEvent/HashTagsActive.png" alt="Basic Information" />
 </div>
+
 @Html.ValidationSummary("Please correct the following issues")
 @using (Html.BeginForm("CreateEventTweets", "Events"))
 {
@@ -40,8 +41,7 @@
     @Html.HiddenFor(m => Model.EventSlug)
         <div id="twitter_wrapper">   
             <div id="left_side">
-                <p>
-                    Offical Hashtag </p>
+                <p>Official Hashtag(s) </p>
                 @Html.TextBoxFor(model => model.SearchTerms, new { @id = "searchText", @Value = "#", @class = "bolder searchText" })
               
                 <div id="addAnother1" class="invisible add_another">
@@ -61,7 +61,6 @@
                 </div>
                   <div id="button_input">
                     <input type="button" value="add another" class="stn_button blue_button" /> 
-                    
                 </div>
             </div>
 
@@ -89,11 +88,11 @@
              <div class="dashed">
                 </div>
                 <div id="left">
-                    @Html.ActionImage("CreateEvent", "Events", "#", "../../Public/images/CreateEvent/FixBasicInfo.png", "Back")
+                    @Html.ActionImage("CreateEvent", "Events", new { id = Model.EventSlug }, "/Public/images/CreateEvent/FixBasicInfo.png", "Back")
                 </div>
                 <div id="right">
                     @*  @Html.ActionImage("CreateEvent", "Events", "#", "../../Public/images/CreateEvent/CreateTweetEvent.png", "Save and Continue")*@
-                    <input type="image" src="../../Public/images/CreateEvent/CreateTweetEvent.png" alt="Save and Continue" />
+                    <input type="image" src="/Public/images/CreateEvent/CreateTweetEvent.png" alt="Save and Continue" />
                 </div>
             </div>
         </div>

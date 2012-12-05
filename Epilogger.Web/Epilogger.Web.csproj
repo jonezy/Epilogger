@@ -514,6 +514,8 @@
     <Content Include="Public\js\jquery.miniColors.js" />
     <Content Include="Public\js\jquery.miniColors.min.js" />
     <Content Include="Public\js\jquery.js" />
+    <Content Include="Public\js\jqueryCookie\jquery.cookie.js" />
+    <Content Include="Public\js\jqueryCookie\server.js" />
     <Content Include="Public\js\utils.js" />
     <Content Include="Public\templates\Twitter.htm" />
     <Content Include="Public\images\CreateEvent\BasicInfoActive.png" />
