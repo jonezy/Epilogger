@@ -175,7 +175,9 @@
                 }
                 <li>
                     
-
+                    <div class="title @item.ActivityType @rowClass">
+                        @Html.ActionLink(item.EventName.TruncateAtWord(30), "details", "events", new { @id = item.EventSlug }, null)    
+                    </div>
                     <div class="galleryImage"  id="photo-@item.Image.ID">
                         <a href="@fullSizeUrl" rel="EPLPhoto[latestphotos]" photoid="@thePath" title="" id="@item.Image.ID">
                             <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@item.Image.Fullsize&width=230&height=188&preserveAspect=true" border="0" alt="" />
@@ -185,18 +187,8 @@
                             }
                         </a>
                     </div>
-                    <div class="title @item.ActivityType @rowClass">
-                        @Html.ActionLink(item.EventName.TruncateAtWord(30), "details", "events", new { @id = item.EventSlug }, null)    
-                    </div>
-
                     
                     
-                    
-                    
-                    
-                    
-                    
-
 
 
 
@@ -216,11 +208,11 @@
             else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION)
             {
                 <li>
+                    <div class="title @item.ActivityType">
+                        @Html.ActionLink(item.EventName.TruncateAtWord(30), "details", "events", new { @id = item.EventSlug }, null)    
+                    </div>
                     <div class="galleryItem">
                         <h2><br /><br /><br /><br />New event added</h2>
-                    </div>
-                     <div class="title @item.ActivityType">
-                        @Html.ActionLink(item.EventName.TruncateAtWord(30), "details", "events", new { @id = item.EventSlug }, null)    
                     </div>
                 </li>
             }

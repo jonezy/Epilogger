@@ -72,32 +72,34 @@ namespace Epilogger.Web.Models {
             get
             {
                 //TimeZone timezone = new TimeZone();
-                List<TimeZone> timeZones = new List<TimeZone>();
-                timeZones.Add(new TimeZone { TimeZoneName = "idl", TimeZoneOffset = -12 });
-                timeZones.Add(new TimeZone { TimeZoneName = "sst", TimeZoneOffset = -11 });
-                timeZones.Add(new TimeZone { TimeZoneName = "hast", TimeZoneOffset = -10 });
-                timeZones.Add(new TimeZone { TimeZoneName = "akst", TimeZoneOffset = -9 });
-                timeZones.Add(new TimeZone { TimeZoneName = "pst", TimeZoneOffset = -8 });
-                timeZones.Add(new TimeZone { TimeZoneName = "mst", TimeZoneOffset = -7 });
-                timeZones.Add(new TimeZone { TimeZoneName = "cst", TimeZoneOffset = -6 });
-                timeZones.Add(new TimeZone { TimeZoneName = "est", TimeZoneOffset = -5 });
-                timeZones.Add(new TimeZone { TimeZoneName = "ast", TimeZoneOffset = -4 });
-                timeZones.Add(new TimeZone { TimeZoneName = "brt", TimeZoneOffset = -3 });
-                timeZones.Add(new TimeZone { TimeZoneName = "brst", TimeZoneOffset = -2 });
-                timeZones.Add(new TimeZone { TimeZoneName = "azot", TimeZoneOffset = -1 });
-                timeZones.Add(new TimeZone { TimeZoneName = "wet", TimeZoneOffset = 0 });
-                timeZones.Add(new TimeZone { TimeZoneName = "cet", TimeZoneOffset = 1 });
-                timeZones.Add(new TimeZone { TimeZoneName = "cat", TimeZoneOffset = 2 });
-                timeZones.Add(new TimeZone { TimeZoneName = "eat", TimeZoneOffset = 3 });
-                timeZones.Add(new TimeZone { TimeZoneName = "msk", TimeZoneOffset = 4 });
-                timeZones.Add(new TimeZone { TimeZoneName = "pkt", TimeZoneOffset = 5 });
-                timeZones.Add(new TimeZone { TimeZoneName = "bst", TimeZoneOffset = 6 });
-                timeZones.Add(new TimeZone { TimeZoneName = "ict", TimeZoneOffset = 7 });
-                timeZones.Add(new TimeZone { TimeZoneName = "cst", TimeZoneOffset = 8 });
-                timeZones.Add(new TimeZone { TimeZoneName = "jst", TimeZoneOffset = 9 });
-                timeZones.Add(new TimeZone { TimeZoneName = "pgt", TimeZoneOffset = 10 });
-                timeZones.Add(new TimeZone { TimeZoneName = "nct", TimeZoneOffset = 11 });
-                timeZones.Add(new TimeZone { TimeZoneName = "fjt", TimeZoneOffset = 12 });
+                var timeZones = new List<TimeZone>
+                                    {
+                                        new TimeZone {TimeZoneName = "idl", TimeZoneOffset = -12},
+                                        new TimeZone {TimeZoneName = "sst", TimeZoneOffset = -11},
+                                        new TimeZone {TimeZoneName = "hast", TimeZoneOffset = -10},
+                                        new TimeZone {TimeZoneName = "akst", TimeZoneOffset = -9},
+                                        new TimeZone {TimeZoneName = "pst", TimeZoneOffset = -8},
+                                        new TimeZone {TimeZoneName = "mst", TimeZoneOffset = -7},
+                                        new TimeZone {TimeZoneName = "cst", TimeZoneOffset = -6},
+                                        new TimeZone {TimeZoneName = "est", TimeZoneOffset = -5},
+                                        new TimeZone {TimeZoneName = "ast", TimeZoneOffset = -4},
+                                        new TimeZone {TimeZoneName = "brt", TimeZoneOffset = -3},
+                                        new TimeZone {TimeZoneName = "brst", TimeZoneOffset = -2},
+                                        new TimeZone {TimeZoneName = "azot", TimeZoneOffset = -1},
+                                        new TimeZone {TimeZoneName = "wet", TimeZoneOffset = 0},
+                                        new TimeZone {TimeZoneName = "cet", TimeZoneOffset = 1},
+                                        new TimeZone {TimeZoneName = "cat", TimeZoneOffset = 2},
+                                        new TimeZone {TimeZoneName = "eat", TimeZoneOffset = 3},
+                                        new TimeZone {TimeZoneName = "msk", TimeZoneOffset = 4},
+                                        new TimeZone {TimeZoneName = "pkt", TimeZoneOffset = 5},
+                                        new TimeZone {TimeZoneName = "bst", TimeZoneOffset = 6},
+                                        new TimeZone {TimeZoneName = "ict", TimeZoneOffset = 7},
+                                        new TimeZone {TimeZoneName = "cst", TimeZoneOffset = 8},
+                                        new TimeZone {TimeZoneName = "jst", TimeZoneOffset = 9},
+                                        new TimeZone {TimeZoneName = "pgt", TimeZoneOffset = 10},
+                                        new TimeZone {TimeZoneName = "nct", TimeZoneOffset = 11},
+                                        new TimeZone {TimeZoneName = "fjt", TimeZoneOffset = 12}
+                                    };
 
                 return timeZones;
             }

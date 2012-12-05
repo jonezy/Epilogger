@@ -327,42 +327,42 @@ namespace Epilogger.Web.Controllers {
 		[RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
 		public virtual ActionResult Create()
 		{
-			CreateEventViewModel Model = Mapper.Map<Event, CreateEventViewModel>(new Event());
+			var model = Mapper.Map<Event, CreateEventViewModel>(new Event());
 			//Model.TimeZoneOffset = Helpers.GetUserTimeZoneOffset();
 
-			DateTime roundTime = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day, DateTime.UtcNow.Hour, 0, 0);
+			var roundTime = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day, DateTime.UtcNow.Hour, 0, 0);
 			if (DateTime.UtcNow.Minute > 30)
 			{
 				roundTime = roundTime.AddHours(1);
 			}
 
-			Model.StartDateTime = roundTime;
-			Model.EndDateTime = roundTime.AddHours(3);
-			Model.CollectionStartDateTime = roundTime.AddDays(-2);
-			Model.CollectionEndDateTime = roundTime.AddDays(3);
-			Model.WebsiteURL = "http://";
-			Model.EventBrightUrl = "http://";
+			model.StartDateTime = roundTime;
+			model.EndDateTime = roundTime.AddHours(3);
+			model.CollectionStartDateTime = roundTime.AddDays(-2);
+			model.CollectionEndDateTime = roundTime.AddDays(3);
+			model.WebsiteURL = "http://";
+			model.EventBrightUrl = "http://";
 
-			return View(Model);
+			return View(model);
 		}
 
         //---Forms
-       // [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
+        // [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
         public virtual ActionResult CreateEvent()
         {
-            CreateBasicEventViewModel Model = Mapper.Map<Event, CreateBasicEventViewModel>(new Event());
-            DateTime roundTime = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day, DateTime.UtcNow.Hour, 0, 0);
+            var model = Mapper.Map<Event, CreateBasicEventViewModel>(new Event());
+            var roundTime = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day, DateTime.UtcNow.Hour, 0, 0);
             if (DateTime.UtcNow.Minute > 30)
             {
                 roundTime = roundTime.AddHours(1);
             }
             
-            Model.StartDateTime = roundTime;
-            Model.EndDateTime = roundTime.AddHours(3);
-            Model.CollectionStartDateTime = roundTime.AddDays(-2);
-            Model.CollectionEndDateTime = roundTime.AddDays(3);
+            model.StartDateTime = roundTime;
+            model.EndDateTime = roundTime.AddHours(3);
+            model.CollectionStartDateTime = roundTime.AddDays(-2);
+            model.CollectionEndDateTime = roundTime.AddDays(3);
 
-            return View(Model);
+            return View(model);
 
         }
 
@@ -379,9 +379,7 @@ namespace Epilogger.Web.Controllers {
             DateTime.TryParse(Request.Form["StartDateTime"] + " " + startTime, out startDate); // start date
             DateTime.TryParse(Request.Form["EndDateTime"] + " " + Request.Form["end_times"], out endDate); // end date (could be null)
 
-           
-
-            #region Collection Start/End Date Times
+           #region Collection Start/End Date Times
             model.CollectionStartDateTime = getCollectionDateTime(Request.Form["collectDataTimes"], startDate, -1);
             if (endDate != null && endDate.ToString() != "1/1/0001 12:00:00 AM")
             {

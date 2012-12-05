@@ -44,7 +44,7 @@
     {
         <fieldset class="popForm">
             <div class="notsureyetbro">
-                <p>@Html.Label("Event Title:") @Html.EditorFor(model => model.Name)
+                <p>@Html.Label("Event title:") @Html.EditorFor(model => model.Name)
 
                 <p>@Html.Label("Event subtitle:") @Html.EditorFor(model => model.Subtitle)
 
@@ -60,7 +60,8 @@
                             <option>am</option>
                             <option>pm</option>
                         </select>
-                        @Html.DropDownList("timeZone", new SelectList(Model.TimeZones, "TimeZoneOffset", "TimeZoneName"), new { @class = "AMPM blue_arrow" })
+                        @*@Html.DropDownList("timeZone", new SelectList(Model.TimeZones, "TimeZoneOffset", "TimeZoneName"), new { @class = "AMPM blue_arrow" })*@
+                        @Html.DropDownList("timeZone", new SelectList(Model.TimeZones, "TimeZoneOffset", "TimeZoneName", new { @class = "AMPM blue_arrow" }))
                     </p>
                 </div>
 
@@ -75,7 +76,7 @@
                     </select>
                 </div>
                 <p>
-                    @Html.Label("Collect Data For:")
+                    @Html.Label("Collect content:")
                     @Html.DropDownList("collectDataTimes", new SelectList(Model.collectDataList,"Value","Text"))
                 </p>
                 <div class="dashed">
