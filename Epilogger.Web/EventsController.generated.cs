@@ -677,19 +677,19 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult CreateEventTweets(int id) {
+        public override System.Web.Mvc.ActionResult CreateEventTweets(string id) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEventTweets);
             callInfo.RouteValueDictionary.Add("id",id);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult CreateEventTweets(Epilogger.Web.Models.CreateEventTwitterViewModel model) {
+        public override System.Web.Mvc.ActionResult CreateEventTweets(Epilogger.Web.Models.CreateEventTwitterViewModel model, FormCollection frm) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEventTweets);
             callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult CreateEventFinal(Epilogger.Data.Event model) {
+        public override System.Web.Mvc.ActionResult CreateEventFinal(Epilogger.Web.Models.CreateFinalEventViewModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEventFinal);
             return callInfo;
         }

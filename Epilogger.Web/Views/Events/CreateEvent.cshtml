@@ -14,13 +14,13 @@
     <link rel="stylesheet" href="/resources/demos/style.css" />
     <script>
         $(function () {
-            $("#StartDateTime").datepicker({ dateFormat: 'M dd, yy' }); ;
+            $("#StartDateTime").datepicker({ dateFormat: 'M dd, yy' }); 
             $("#anim").change(function () {
                 $("#StartDateTime").datepicker("option", "showAnim", $(this).val());
             });
         });
         $(function () {
-            $("#EndDateTime").datepicker({ dateFormat: 'M dd, yy' }); ;
+            $("#EndDateTime").datepicker({ dateFormat: 'M dd, yy' }); 
             $("#anim").change(function () {
                 $("#EndDateTime").datepicker("option", "showAnim", $(this).val());
             });
@@ -31,6 +31,15 @@
 
             parent.$.colorbox.resize({ width: 560, height: 510 });
 
+            
+              $("#StartDateTime").change(function () {
+                  test = $(this).datepicker('getDate');
+                  testm = new Date(test.getTime());
+                  testm.setDate(testm.getDate());
+
+                  $("#EndDateTime").datepicker("option", "minDate", testm);
+                });
+            
         });
 
     </script>
