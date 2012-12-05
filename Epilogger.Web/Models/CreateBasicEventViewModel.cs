@@ -78,6 +78,7 @@ namespace Epilogger.Web.Models {
             }
         }
 
+        public string CollectDataValue { get; set; }
         public static IEnumerable<SelectListItem> CollectDataList
         {
             get

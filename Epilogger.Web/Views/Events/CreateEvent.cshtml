@@ -81,7 +81,7 @@
                                                                                                             }}, "Value", "Text", string.Format("{0:tt}", Model.StartDateTime.ToLocalTime()).ToLower()), 
                                            new { @class = "AMPM" })
                         
-                        @Html.DropDownList("timeZone", new SelectList(CreateBasicEventViewModel.TimeZones, "TimeZoneOffset", "TimeZoneName", TimeZoneManager.UserTimeZone.BaseUtcOffset.Hours), new { @class = "timeZoneSelect" })
+                        @Html.DropDownList("timeZone", new SelectList(CreateBasicEventViewModel.TimeZones, "TimeZoneOffset", "TimeZoneName", Model.TimeZoneOffset), new { @class = "timeZoneSelect" })
                     </p>
                 </div>
                 
@@ -115,7 +115,7 @@
                 
                 <p>
                     @Html.Label("Collect content:")
-                    @Html.DropDownList("collectDataTimes", new SelectList(CreateBasicEventViewModel.CollectDataList, "Value", "Text"))
+                    @Html.DropDownList("collectDataTimes", new SelectList(CreateBasicEventViewModel.CollectDataList, "Value", "Text", Model.CollectDataValue))
                 </p>
                 <div class="dashed">
                 </div>

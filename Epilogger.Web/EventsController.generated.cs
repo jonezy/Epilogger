@@ -62,11 +62,6 @@ namespace Epilogger.Web.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult CreateEvent() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.CreateEvent);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult CreateEventTweets() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.CreateEventTweets);
         }
@@ -381,13 +376,6 @@ namespace Epilogger.Web.Controllers {
         public class ActionParamsClass_AllTweets {
             public readonly string id = "id";
             public readonly string page = "page";
-        }
-        static readonly ActionParamsClass_CreateEvent s_params_CreateEvent = new ActionParamsClass_CreateEvent();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_CreateEvent CreateEventParams { get { return s_params_CreateEvent; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_CreateEvent {
-            public readonly string id = "id";
         }
         static readonly ActionParamsClass_CreateEventTweets s_params_CreateEventTweets = new ActionParamsClass_CreateEventTweets();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -744,9 +732,8 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult CreateEvent(string id) {
+        public override System.Web.Mvc.ActionResult CreateEvent() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEvent);
-            callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }
 

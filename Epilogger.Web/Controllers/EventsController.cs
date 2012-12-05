@@ -19,6 +19,7 @@ using Epilogger.Web.Views.Emails;
 using System.Net;
 using System.IO;
 using System.Text.RegularExpressions;
+using Timezone.Framework;
 using Twitterizer;
 using System.Web;
 using Epilogger.Web.Core.Helpers;
@@ -321,45 +322,62 @@ namespace Epilogger.Web.Controllers {
 		[RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
 		public virtual ActionResult Create()
 		{
-			CreateEventViewModel Model = Mapper.Map<Event, CreateEventViewModel>(new Event());
+			var model = Mapper.Map<Event, CreateEventViewModel>(new Event());
 			//Model.TimeZoneOffset = Helpers.GetUserTimeZoneOffset();
 
-			DateTime roundTime = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day, DateTime.UtcNow.Hour, 0, 0);
+			var roundTime = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day, DateTime.UtcNow.Hour, 0, 0);
 			if (DateTime.UtcNow.Minute > 30)
 			{
 				roundTime = roundTime.AddHours(1);
 			}
 
-			Model.StartDateTime = roundTime;
-			Model.EndDateTime = roundTime.AddHours(3);
-			Model.CollectionStartDateTime = roundTime.AddDays(-2);
-			Model.CollectionEndDateTime = roundTime.AddDays(3);
-			Model.WebsiteURL = "http://";
-			Model.EventBrightUrl = "http://";
+			model.StartDateTime = roundTime;
+			model.EndDateTime = roundTime.AddHours(3);
+			model.CollectionStartDateTime = roundTime.AddDays(-2);
+			model.CollectionEndDateTime = roundTime.AddDays(3);
+			model.WebsiteURL = "http://";
+			model.EventBrightUrl = "http://";
 
-			return View(Model);
+			return View(model);
 		}
 
-        //---Forms
-       [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
-        public virtual ActionResult CreateEvent(string id)
+
+
+
+
+
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
+        public virtual ActionResult CreateEvent()
         {
-            var requestedEvent = _es.FindBySlug(id);
-            var model = Mapper.Map<Event, CreateBasicEventViewModel>(requestedEvent);
-            
-            //var model = new CreateBasicEventViewModel();
-            var roundTime = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day, DateTime.UtcNow.Hour, 0, 0);
-            if (DateTime.UtcNow.Minute > 30)
+
+            CreateBasicEventViewModel model;
+            if (TempData["CreateEvent"] == null)
             {
-                roundTime = roundTime.AddHours(1);
+                //Create a blank Temp Event Object to live with us through this process.
+                //TempData["CreateEvent"] = new Event();
+                model = new CreateBasicEventViewModel();
+
+                var roundTime = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day, DateTime.UtcNow.Hour, 0, 0);
+                if (DateTime.UtcNow.Minute > 30)
+                {
+                    roundTime = roundTime.AddHours(1);
+                }
+                model.StartDateTime = roundTime;
+                model.EndDateTime = roundTime.AddHours(3);
+                model.TimeZoneOffset = TimeZoneManager.UserTimeZone.BaseUtcOffset.Hours;
+
+                return View(model);
             }
-            
-            model.StartDateTime = roundTime;
-            model.EndDateTime = roundTime.AddHours(3);
-            model.CollectionStartDateTime = roundTime.AddDays(-2);
-            model.CollectionEndDateTime = roundTime.AddDays(3);
-           
-            return View(model); 
+
+            //Load from TempData as we've come back.
+            model = Mapper.Map<Event, CreateBasicEventViewModel>((Event) TempData["CreateEvent"]);
+            //Will have to adjust some of the times back for display
+
+            return View(model);
+
+
         }
 
         
@@ -367,16 +385,18 @@ namespace Epilogger.Web.Controllers {
 		[RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
         [HttpPost]
         public virtual ActionResult CreateEvent(CreateBasicEventViewModel model)
-        {
+		{
             DateTime startDate;
             DateTime endDate;
             
-            var startTime = getTime(Request.Form["start_times"], Request.Form["AMPMstartTime"]);
-            var endTime = getTime(Request.Form["end_times"], Request.Form["AMPMendTime"]);
+            var startTime = GetTime(Request.Form["start_times"], Request.Form["AMPMstartTime"]);
+            var endTime = GetTime(Request.Form["end_times"], Request.Form["AMPMendTime"]);
 
             DateTime.TryParse(Request.Form["StartDateTime"] + " " + startTime, out startDate); // start date
             DateTime.TryParse(Request.Form["EndDateTime"] + " " + endTime, out endDate); // end date (could be null)
-           
+
+		    var storeStartDateTime = startDate;
+            var storeEndDateTime = endDate;
            
             model.StartDateTime = ConvertToUniversalDateTime(startDate, Request.Form["timeZone"]);
             if (EndDateValid(startDate, endDate))
@@ -404,13 +424,26 @@ namespace Epilogger.Web.Controllers {
             {
                 try
                 {
+                    var epLevent = Mapper.Map<CreateBasicEventViewModel, Event>(model);
+                    
                     model.UserId = CurrentUserID;
                     model.CreatedDateTime = DateTime.UtcNow;
                     model.EventSlug = NameIntoSlug(model.Name);
+                    model.CollectDataValue = Request.Form["collectDataTimes"];
 
-                    var epLevent = Mapper.Map<CreateBasicEventViewModel, Event>(model);
+                    //Don't save, just put it in the TempData.
+                    TempData["CreateEvent"] = epLevent;
+                    //_es.Save(epLevent);
+
                     
-                    _es.Save(epLevent);
+
+                    //Save everything in TempData so we can read it back if a user presses Go Back from the Twitter Search page.
+                    //model.Id = epLevent.ID;
+                    //TempData["CreateEvent"] = model;
+                    //((CreateBasicEventViewModel)TempData["CreateEvent"]).StartDateTime = TimeZoneManager.ToUtcTime(storeStartDateTime);
+                    //((CreateBasicEventViewModel)TempData["CreateEvent"]).EndDateTime = TimeZoneManager.ToUtcTime(storeEndDateTime);
+                    //((CreateBasicEventViewModel)TempData["CreateEvent"]).TimeZoneOffset = int.Parse(Request.Form["timeZone"]);
+
 
                     //this.StoreSuccess("Your Event was created successfully!  Dont forget to share it with your friends and attendees!");
                     //return View("CreateEventTweets",model.ID);
@@ -437,27 +470,21 @@ namespace Epilogger.Web.Controllers {
             return true;
         }
 
-        private string NameIntoSlug(string p)
+        private static string NameIntoSlug(string p)
         {
             p = p.Replace(" ", "-");
             return p;
         }
 
-        private DateTime ConvertToUniversalDateTime(DateTime startDate, string timezone)
+        private static DateTime ConvertToUniversalDateTime(DateTime startDate, string timezone)
         {
             int timeZoneOffset = Convert.ToInt16(timezone);
             startDate = startDate.AddHours(-timeZoneOffset);
             return startDate;
         }
 
-        private string getTime(string time, string ampm)
+        private static string GetTime(string time, string ampm)
         {
-            //int xTime = 0;
-            //xTime = Convert.ToInt16(time);
-
-            //if (ampm == "pm")
-            //    xTime += 12;
-
             return time +":00" + ampm;
         }
 
@@ -482,10 +509,13 @@ namespace Epilogger.Web.Controllers {
         [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]        
         public virtual ActionResult CreateEventTweets(string id)
         {
-            var requestedEvent = _es.FindBySlug(id);
-            CreateEventTwitterViewModel vm = new CreateEventTwitterViewModel();
-            vm.EventSlug = requestedEvent.EventSlug;
-            return View(vm);
+            //var requestedEvent = _es.FindBySlug(id);
+            //CreateEventTwitterViewModel vm = new CreateEventTwitterViewModel();
+            //vm.EventSlug = requestedEvent.EventSlug;
+
+            var model = Mapper.Map<Event, CreateEventTwitterViewModel>((Event)TempData["CreateEvent"]);
+            TempData["CreateEvent"] = TempData["CreateEvent"];
+            return View(model);
         }
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
