@@ -110,5 +110,10 @@
       <resource path="~/Public/js/FileUploader/fileuploader.js" />
     </resourceSet>
 
+    <resourceSet name="CreateEventPopUp" type="css">
+      <resource path="~/Public/css/event-popup.css" />
+      <resource path="~/Public/js/jquery.UI.DatePicker/css/smoothness/jquery-ui-1.8.17.custom.css" />
+    </resourceSet>
+
   </resourceSets>
 </combres>

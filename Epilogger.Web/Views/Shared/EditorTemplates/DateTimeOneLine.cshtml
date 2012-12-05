@@ -2,6 +2,6 @@
 @model System.DateTime?
            
        
-        @Html.TextBox("", Model.HasValue ? Model.Value.ToString("MMM dd, yyyy") : "", new {@class = "date_picker, blue_calendar", @style = "margin-bottom:0px !important; width:9em;", @maxlength = "11" })
+        @Html.TextBox("", Model.HasValue ? Model.Value.ToString("MMM dd, yyyy") : "", new { @class = "date_picker, blue_calendar", @style = "margin-bottom:0px !important; width:128px;", @maxlength = "11" })
         @*Html.TextBox("", Model.HasValue ? new DateTime(Model.Value.Ticks).ToString("h:mm tt") : "", new { @class = "timepick", @style = "margin-bottom:0px !important;width:5em;", @maxlength = "8" })*@
         

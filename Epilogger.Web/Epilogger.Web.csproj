@@ -5352,7 +5352,6 @@
     <Content Include="Views\Events\Edit.cshtml" />
     <Content Include="Views\Browse\_BrowseEventOverview.cshtml" />
     <Content Include="Views\Browse\_BrowseEventLists.cshtml" />
-    <Content Include="Views\Shared\_ModalLayout.cshtml" />
     <Content Include="Views\Shared\_ModalLayoutOLD.cshtml" />
     <Content Include="Views\Events\VenueSearch.cshtml" />
     <Content Include="Views\Browse\_BrowseEventTabContentTemplate.cshtml" />

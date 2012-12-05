@@ -639,11 +639,11 @@ namespace Epilogger.Web
             //.ForMember(dest => dest.StartDateTime, opt => opt.MapFrom(src => src.StartDateTime.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5"))))
             //.ForMember(dest => dest.EndDateTime, opt => opt.MapFrom(src => src.EndDateTime.HasValue ? src.EndDateTime.Value.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5")) : src.EndDateTime));
 
-            Mapper.CreateMap<Event, CreateBasicEventViewModel>()
-                .ForMember(dest => dest.CurrentUserID, opt => opt.Ignore())
-                .ForMember(dest => dest.CurrentUserRole, opt => opt.Ignore())
-                .ForMember(dest => dest.TimeZones, opt => opt.Ignore())
-                .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore());
+            //Mapper.CreateMap<Event, CreateBasicEventViewModel>()
+            //    .ForMember(dest => dest.CurrentUserId, opt => opt.Ignore())
+            //    .ForMember(dest => dest.CurrentUserRole, opt => opt.Ignore())
+            //    .ForMember(dest => CreateBasicEventViewModel.TimeZones, opt => opt.Ignore())
+            //    .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore());
 
             Mapper.CreateMap<CreateBasicEventViewModel, Event>()
                 .ForMember(dest => dest.TimeZoneOffset, opt => opt.Ignore())

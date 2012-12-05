@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data.SqlTypes;
-using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Web.Helpers;
@@ -18,14 +15,10 @@ using Epilogger.Web.Core.Stats;
 using Epilogger.Web.Models;
 using Epilogger.Common;
 using Epilogger.Web.Views.Emails;
-using RichmondDay.Helpers;
 using System.Net;
 using System.IO;
-using System.Xml;
 using System.Text.RegularExpressions;
 using Twitterizer;
-using System.Collections.ObjectModel;
-using System.Xml.Linq;
 using System.Web;
 using Epilogger.Web.Core.Helpers;
 
@@ -350,20 +343,22 @@ namespace Epilogger.Web.Controllers {
        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
         public virtual ActionResult CreateEvent()
         {
-            CreateBasicEventViewModel Model = Mapper.Map<Event, CreateBasicEventViewModel>(new Event());
-            DateTime roundTime = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day, DateTime.UtcNow.Hour, 0, 0);
+
+            //var model = Mapper.Map<Event, CreateBasicEventViewModel>(new Event());
+            
+            var model = new CreateBasicEventViewModel();
+            var roundTime = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day, DateTime.UtcNow.Hour, 0, 0);
             if (DateTime.UtcNow.Minute > 30)
             {
                 roundTime = roundTime.AddHours(1);
             }
             
-            Model.StartDateTime = roundTime;
-            Model.EndDateTime = roundTime.AddHours(3);
-            Model.CollectionStartDateTime = roundTime.AddDays(-2);
-            Model.CollectionEndDateTime = roundTime.AddDays(3);
-
-            return View(Model);
-
+            model.StartDateTime = roundTime;
+            model.EndDateTime = roundTime.AddHours(3);
+            model.CollectionStartDateTime = roundTime.AddDays(-2);
+            model.CollectionEndDateTime = roundTime.AddDays(3);
+           
+            return View(model); 
         }
 
         
@@ -405,7 +400,7 @@ namespace Epilogger.Web.Controllers {
             {
                 try
                 {
-                    model.UserID = CurrentUserID;
+                    model.UserId = CurrentUserID;
                     model.CreatedDateTime = DateTime.UtcNow;
                     model.EventSlug = NameIntoSlug(model.Name);
 

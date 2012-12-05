@@ -1,26 +1,26 @@
-﻿@model Epilogger.Web.Models.CreateBasicEventViewModel
+﻿@using Epilogger.Web.Models
+@using Timezone.Framework
+@model CreateBasicEventViewModel
 @{
     Layout = "~/Views/Events/_CreateEventLayout.cshtml";
+    //Layout = "~/Views/Shared/_PopupLayout.cshtml";
     ViewBag.Title = "Create a new event | Epilogger";
 }
-<link href="@Url.Content("~/Public/css/event-popup.css")" rel="stylesheet" type="text/css" />
-<!DOCTYPE html>
-<html>
-<head>
-    <title>CreateEvent</title>
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
-    <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
-    <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="/resources/demos/style.css" />
-    <script>
+
+
+
+@section head {
+    <title>@ViewBag.Title</title>
+    
+    <script type="text/javascript">
         $(function () {
-            $("#StartDateTime").datepicker({ dateFormat: 'M dd, yy' }); 
+            $("#StartDateTime").datepicker({ dateFormat: 'M dd, yy' });
             $("#anim").change(function () {
                 $("#StartDateTime").datepicker("option", "showAnim", $(this).val());
             });
         });
         $(function () {
-            $("#EndDateTime").datepicker({ dateFormat: 'M dd, yy' }); 
+            $("#EndDateTime").datepicker({ dateFormat: 'M dd, yy' });
             $("#anim").change(function () {
                 $("#EndDateTime").datepicker("option", "showAnim", $(this).val());
             });
@@ -31,46 +31,45 @@
 
             parent.$.colorbox.resize({ width: 560, height: 510 });
 
-            
-              $("#StartDateTime").change(function () {
-                  test = $(this).datepicker('getDate');
-                  testm = new Date(test.getTime());
-                  testm.setDate(testm.getDate());
 
-                  $("#EndDateTime").datepicker("option", "minDate", testm);
-                });
-            
+            $("#StartDateTime").change(function () {
+                test = $(this).datepicker('getDate');
+                testm = new Date(test.getTime());
+                testm.setDate(testm.getDate());
+
+                $("#EndDateTime").datepicker("option", "minDate", testm);
+            });
+
         });
 
-    </script>
-</head>
-<body>
+    </script>   
+}
+
+
     <div class="form_process">
-        <img src="../../Public/images/CreateEvent/BasicInfoActive.png" alt="Basic Information" />
+        <img src="/Public/images/CreateEvent/BasicInfoActive.png" alt="Basic Information" />
     </div>
     @Html.ValidationSummary("Please correct the following issues")
     @using (Html.BeginForm("CreateEvent", "Events", FormMethod.Post, new { id = "CreateForm" }))
     {
         <fieldset class="popForm">
-            <div class="notsureyetbro">
-                <p>@Html.Label("Event title:") @Html.EditorFor(model => model.Name)
-
-                <p>@Html.Label("Event subtitle:") @Html.EditorFor(model => model.Subtitle)
-
+            <div class="">
+                <p>@Html.Label("Event title:") @Html.EditorFor(model => model.Name)</p>
+                <p>@Html.Label("Event subtitle:") @Html.EditorFor(model => model.Subtitle)</p>
                 <div class="hint">
                     (ex: Presented by Aperture Laboratories)
                 </div>
-                 <p>@Html.LabelFor(model => model.CategoryID) @Html.DropDownListFor(model => model.CategoryID, Model.Categories, "Select your event category")</p>
-                <div class="dropdown_image">
+                <p>@Html.LabelFor(model => model.CategoryId) @Html.DropDownListFor(model => model.CategoryId, Model.Categories, "Select your event category")</p>
+                
+                <div class="">
                     <p>@Html.Label("Start date:") @Html.EditorFor(m => m.StartDateTime, "DateTimeOneline")
-                        @*Html.DropDownList("startTimes", new SelectList(ViewBag.times, "Value", "Text"), new { @class = "blue_arrow times" })*@
-                    @Html.DropDownList("start_times", Model.Times, new { @class = "blue_arrow times" })
-                        <select name="AMPMstartTime" class="AMPM blue_arrow">
+
+                        @Html.DropDownList("start_times", CreateBasicEventViewModel.Times, new { @class = "times" })
+                        <select name="AMPMstartTime" class="AMPM">
                             <option>am</option>
                             <option>pm</option>
                         </select>
-                        @*@Html.DropDownList("timeZone", new SelectList(Model.TimeZones, "TimeZoneOffset", "TimeZoneName"), new { @class = "AMPM blue_arrow" })*@
-                        @Html.DropDownList("timeZone", new SelectList(Model.TimeZones, "TimeZoneOffset", "TimeZoneName", new { @class = "AMPM blue_arrow" }))
+                        @Html.DropDownList("timeZone", new SelectList(CreateBasicEventViewModel.TimeZones, "TimeZoneOffset", "TimeZoneName", TimeZoneManager.UserTimeZone.BaseUtcOffset.Hours), new { @class = "timeZoneSelect" })
                     </p>
                 </div>
 
@@ -78,15 +77,15 @@
                     @Html.CheckBox("End_Date") Specify end time</div>
                 <div id="endDate" class="invisible dropdown_image">
                     @Html.Label("End date:") @Html.EditorFor(m => m.EndDateTime, "DateTimeOneline")
-                    @Html.DropDownList("end_times", Model.Times, new { @class = "blue_arrow times" })
-                    <select name="AMPMendTime" class="AMPM blue_arrow">
+                    @Html.DropDownList("end_times", CreateBasicEventViewModel.Times)
+                    <select name="AMPMendTime" class="AMPM">
                         <option>am</option>
                         <option>pm</option>
                     </select>
                 </div>
                 <p>
                     @Html.Label("Collect content:")
-                    @Html.DropDownList("collectDataTimes", new SelectList(Model.collectDataList,"Value","Text"))
+                    @Html.DropDownList("collectDataTimes", new SelectList(CreateBasicEventViewModel.CollectDataList, "Value", "Text"))
                 </p>
                 <div class="dashed">
                 </div>
@@ -94,11 +93,9 @@
             </div>
         </fieldset>
     }
-    <script>
+
+    <script type="text/javascript">
         $('#End_Date').bind("change", function () {
-            // $("#endDate").toggleClass("invisible");
             $('#endDate').slideToggle(200);
         });
     </script>
-</body>
-</html>

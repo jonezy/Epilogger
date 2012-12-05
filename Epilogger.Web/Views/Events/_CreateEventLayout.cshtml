@@ -1,15 +1,21 @@
-﻿@using Epilogger.Web;
+﻿@using Combres.Mvc
+@using Epilogger.Web;
 @{
     Layout = "";
 }
 
 <html>
     <head>
-    <link href="@Url.Content("~/Public/css/event-popup.css")" rel="stylesheet" type="text/css" />
-    <script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.3.2.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="@Links.Public.js.jquery_1_6_2_min_js"></script>
-        <script src="../../Public/js/jTweet.js" type="text/javascript"></script>
-        <script src="../../Public/js/tweetTemplate.js" type="text/javascript"></script>
+        
+        @Html.CombresLink("siteJs")
+        @Html.CombresLink("CreateEventPopUp")
+
+        @*<link href="@Url.Content("~/Public/css/event-popup.css")" rel="stylesheet" type="text/css" />*@
+        @*<script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.3.2.min.js" type="text/javascript"></script>*@
+        @*<script type="text/C#"></script> type="text/javascript" src="@Links.Public.js.jquery_1_6_2_min_js"></script>*@
+        
+        <script src="/Public/js/jTweet.js" type="text/javascript"></script>
+        <script src="/Public/js/tweetTemplate.js" type="text/javascript"></script>
         
         <script type="text/javascript">
             $(function () {
@@ -19,8 +25,10 @@
         <script type="text/javascript">
             head.js('@Url.Content("~/Public/js/CreateEditEvent.js")');
             head.js('@Url.Content("~/Public/js/jquery.blockUI.js")');
-            </script>
-        @RenderSection("Head", false)
+        </script>
+
+        @RenderSection("head", false)
+
         <link rel="stylesheet" href="@Links.Public.css.sadiehawkins_css">
     </head>
     <body style="background-color: white;">

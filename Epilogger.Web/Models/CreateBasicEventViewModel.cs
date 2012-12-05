@@ -9,8 +9,8 @@ using Epilogger.Web.Core.Helpers;
 
 namespace Epilogger.Web.Models {
     public class CreateBasicEventViewModel {
-        public int ID { get; set; }
-        public Guid UserID { get; set; }
+        public int Id { get; set; }
+        public Guid UserId { get; set; }
         public DateTime CreatedDateTime { get; set; }
 
 
@@ -24,21 +24,6 @@ namespace Epilogger.Web.Models {
         
         [DisplayName("Subtitle")]
         public String Subtitle { get; set; }
-        
-        //[DisplayName("Description")]
-        //public String Description { get; set; }
-
-        //[DisplayName("Website")]
-        //public string WebsiteURL { get; set; }
-
-        //[DisplayName("Twitter")]
-        //public string TwitterAccount { get; set; }
-        
-        //[DisplayName("Facebook")]
-        //public string FacebookPageURL { get; set; }
-
-        //[DisplayName("Cost")]
-        //public String Cost { get; set; }
 
         [Required(ErrorMessage="Please enter your events start date and time")]
         [DisplayName("Event Start Date and Time")]
@@ -53,111 +38,101 @@ namespace Epilogger.Web.Models {
         [DisplayName("Data Collection End Time")]
         public DateTime? CollectionEndDateTime { get; set; }
         
-        //public string FoursquareVenueID { get; set; }
-        //public int? VenueID { get; set; }
-        //public Epilogger.Data.Venue Venue { get; set; }
-
-        ////[RegularExpression(@".*eventbrite.c.*", ErrorMessage = "Invalid Eventbrite URL. example.eventbrite.com")]
-        ////Had to remove for now.
-        //[DisplayName("EventBrite URL")]
-        //public string EventBrightUrl { get; set; }
-
-        //public string EventBriteEID { get; set; }
-
         [DisplayName("Time Zone")]
         public int TimeZoneOffset { get; set; }
 
-        public IEnumerable<TimeZone> TimeZones
+        public static IEnumerable<TimeZone> TimeZones
         {
             get
             {
-                //TimeZone timezone = new TimeZone();
-                var timeZones = new List<TimeZone>();
-                timeZones.Add(new TimeZone { TimeZoneName = "idl", TimeZoneOffset = -12 });
-                timeZones.Add(new TimeZone { TimeZoneName = "sst", TimeZoneOffset = -11 });
-                timeZones.Add(new TimeZone { TimeZoneName = "hast", TimeZoneOffset = -10 });
-                timeZones.Add(new TimeZone { TimeZoneName = "akst", TimeZoneOffset = -9 });
-                timeZones.Add(new TimeZone { TimeZoneName = "pst", TimeZoneOffset = -8 });
-                timeZones.Add(new TimeZone { TimeZoneName = "mst", TimeZoneOffset = -7 });
-                timeZones.Add(new TimeZone { TimeZoneName = "cst", TimeZoneOffset = -6 });
-                timeZones.Add(new TimeZone { TimeZoneName = "est", TimeZoneOffset = -5 });
-                timeZones.Add(new TimeZone { TimeZoneName = "ast", TimeZoneOffset = -4 });
-                timeZones.Add(new TimeZone { TimeZoneName = "brt", TimeZoneOffset = -3 });
-                timeZones.Add(new TimeZone { TimeZoneName = "brst", TimeZoneOffset = -2 });
-                timeZones.Add(new TimeZone { TimeZoneName = "azot", TimeZoneOffset = -1 });
-                timeZones.Add(new TimeZone { TimeZoneName = "wet", TimeZoneOffset = 0 });
-                timeZones.Add(new TimeZone { TimeZoneName = "cet", TimeZoneOffset = 1 });
-                timeZones.Add(new TimeZone { TimeZoneName = "cat", TimeZoneOffset = 2 });
-                timeZones.Add(new TimeZone { TimeZoneName = "eat", TimeZoneOffset = 3 });
-                timeZones.Add(new TimeZone { TimeZoneName = "msk", TimeZoneOffset = 4 });
-                timeZones.Add(new TimeZone { TimeZoneName = "pkt", TimeZoneOffset = 5 });
-                timeZones.Add(new TimeZone { TimeZoneName = "bst", TimeZoneOffset = 6 });
-                timeZones.Add(new TimeZone { TimeZoneName = "ict", TimeZoneOffset = 7 });
-                timeZones.Add(new TimeZone { TimeZoneName = "cst", TimeZoneOffset = 8 });
-                timeZones.Add(new TimeZone { TimeZoneName = "jst", TimeZoneOffset = 9 });
-                timeZones.Add(new TimeZone { TimeZoneName = "pgt", TimeZoneOffset = 10 });
-                timeZones.Add(new TimeZone { TimeZoneName = "nct", TimeZoneOffset = 11 });
-                timeZones.Add(new TimeZone { TimeZoneName = "fjt", TimeZoneOffset = 12 });
+                var timeZones = new List<TimeZone>
+                                    {
+                                        new TimeZone {TimeZoneName = "IDLW (-12)", TimeZoneOffset = -12},
+                                        new TimeZone {TimeZoneName = "NT   (-11)", TimeZoneOffset = -11},
+                                        new TimeZone {TimeZoneName = "AHST (-10)", TimeZoneOffset = -10},
+                                        new TimeZone {TimeZoneName = "YST  (-9)", TimeZoneOffset = -9},
+                                        new TimeZone {TimeZoneName = "PST  (-8)", TimeZoneOffset = -8},
+                                        new TimeZone {TimeZoneName = "MST  (-7)", TimeZoneOffset = -7},
+                                        new TimeZone {TimeZoneName = "CST  (-6)", TimeZoneOffset = -6},
+                                        new TimeZone {TimeZoneName = "EST  (-5)", TimeZoneOffset = -5},
+                                        new TimeZone {TimeZoneName = "AST  (-4)", TimeZoneOffset = -4},
+                                        new TimeZone {TimeZoneName = "EBT  (-3)", TimeZoneOffset = -3},
+                                        new TimeZone {TimeZoneName = "AT   (-2)", TimeZoneOffset = -2},
+                                        new TimeZone {TimeZoneName = "EGT  (-1)", TimeZoneOffset = -1},
+                                        new TimeZone {TimeZoneName = "UTC  (0)", TimeZoneOffset = 0},
+                                        new TimeZone {TimeZoneName = "CET  (+1)", TimeZoneOffset = 1},
+                                        new TimeZone {TimeZoneName = "EET  (+2)", TimeZoneOffset = 2},
+                                        new TimeZone {TimeZoneName = "MSK  (+3)", TimeZoneOffset = 3},
+                                        new TimeZone {TimeZoneName = "SAMT (+4)", TimeZoneOffset = 4},
+                                        new TimeZone {TimeZoneName = "PKT  (+5)", TimeZoneOffset = 5},
+                                        new TimeZone {TimeZoneName = "BST  (+6)", TimeZoneOffset = 6},
+                                        new TimeZone {TimeZoneName = "ICT  (+7)", TimeZoneOffset = 7},
+                                        new TimeZone {TimeZoneName = "IRKT (+8)", TimeZoneOffset = 8},
+                                        new TimeZone {TimeZoneName = "JST  (+9)", TimeZoneOffset = 9},
+                                        new TimeZone {TimeZoneName = "PGT  (+10)", TimeZoneOffset = 10},
+                                        new TimeZone {TimeZoneName = "NCT  (+11)", TimeZoneOffset = 11},
+                                        new TimeZone {TimeZoneName = "FJT  (+12)", TimeZoneOffset = 12}
+                                    };
 
                 return timeZones;
             }
         }
 
-        public IEnumerable<SelectListItem> collectDataList
+        public static IEnumerable<SelectListItem> CollectDataList
         {
             get
             {
-                List<SelectListItem> items = new List<SelectListItem>();
-                items.Add(new SelectListItem
-                {
-                    Text = "only during the event",
-                    Value = "1"
-                });
-                items.Add(new SelectListItem
-                {
-                    Text = "few hours before/after",
-                    Value = "2"
-                });
-                items.Add(new SelectListItem
-                {
-                    Text = "few days before/after",
-                    Value = "3",
-                    Selected = true
-                });
-                items.Add(new SelectListItem
-                {
-                    Text = "2 weeks before/after",
-                    Value = "4"
-                });
+                var items = new List<SelectListItem>
+                                {
+                                    new SelectListItem
+                                        {
+                                            Text = "only during the event",
+                                            Value = "1"
+                                        },
+                                    new SelectListItem
+                                        {
+                                            Text = "few hours before/after",
+                                            Value = "2"
+                                        },
+                                    new SelectListItem
+                                        {
+                                            Text = "few days before/after",
+                                            Value = "3",
+                                            Selected = true
+                                        },
+                                    new SelectListItem
+                                        {
+                                            Text = "2 weeks before/after",
+                                            Value = "4"
+                                        }
+                                };
 
                 return items;
             }
         }
 
-        [DisplayName("Category"), Required(ErrorMessage="Please select a category for your event")]
-        public int CategoryID { get; set; }
+        [DisplayName("Category:"), Required(ErrorMessage="Please select a category for your event")]
+        public int CategoryId { get; set; }
         public IEnumerable<SelectListItem> Categories {
             get {
                 // grab categories from the database!
-                CategoryService service = new CategoryService();
-                List<EventCategory> categories = service.AllCategories();
+                var service = new CategoryService();
+                var categories = service.AllCategories();
 
                 return categories.Select(c => new SelectListItem { Text = c.CategoryName, Value = c.ID.ToString()});
             }
         }
 
-        public IEnumerable<SelectListItem> Times
+        public static IEnumerable<SelectListItem> Times
         {
             get
             {
-                List<SelectListItem> times = new List<SelectListItem>();
-                for (int Minutes = 60; Minutes < 770; Minutes += 30)
+                var times = new List<SelectListItem>();
+                for (var minutes = 60; minutes < 770; minutes += 30)
                 {
-                    TimeSpan TS = TimeSpan.FromMinutes(Minutes);
-                    String TSString = String.Format("{0:00}:{1:00}", TS.Hours, TS.Minutes);
-                    SelectListItem item = new SelectListItem();
-                    item.Text = TSString;
-                    item.Value = TSString; //TS.Minutes.ToString();
+                    var ts = TimeSpan.FromMinutes(minutes);
+                    var tsString = String.Format("{0:00}:{1:00}", ts.Hours, ts.Minutes);
+                    var item = new SelectListItem {Text = tsString, Value = tsString};
                     times.Add(item);
                 }
 
@@ -168,7 +143,7 @@ namespace Epilogger.Web.Models {
         public EventToolbarViewModel ToolbarViewModel { get; set; }
 
         public UserRoleType CurrentUserRole { get; set; }
-        public Guid CurrentUserID { get; set; }
+        public Guid CurrentUserId { get; set; }
 
 
 
