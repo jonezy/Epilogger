@@ -552,6 +552,8 @@ namespace Epilogger.Web.Controllers {
                                 EventStartEndTime = getEventStartEndTime(eventModel.StartDateTime, eventModel.EndDateTime)
                             };
 
+                    TempData["Event"] = eventModel;
+
 
                     ////Initiate a first collect on the event
                     //var tsmp = new MQ.MSGProducer("Epilogger", "TwitterSearch");
@@ -565,9 +567,9 @@ namespace Epilogger.Web.Controllers {
                     //};
                     //tsmp.SendMessage(tsMSG);
                     //tsmp.Dispose();
-                    
+
                     ////The the admins an email with the event details.
-                    // SendEventCreatedEmailToSystem(eventModel);
+                    //SendEventCreatedEmailToSystem(eventModel);
 
                     return View("CreateEventFinal", displayModel);
                 }
