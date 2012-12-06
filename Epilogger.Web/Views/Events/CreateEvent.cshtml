@@ -61,12 +61,12 @@
                 <div class="hint">
                     (ex: Presented by Aperture Laboratories)
                 </div>
-                <p>@Html.LabelFor(model => model.CategoryId) @Html.DropDownListFor(model => model.CategoryId, Model.Categories, "Select your event category")</p>
+                <p>@Html.LabelFor(model => model.CategoryId) @Html.DropDownListFor(model => model.CategoryId, Model.Categories, "Select your event category", new { @class = "" })</p>
                 
                 <div class="">
                     <p>@Html.Label("Start date:") @Html.EditorFor(m => m.StartDateTime, "DateTimeOneline")
 
-                        @Html.DropDownList("start_times", new SelectList(CreateBasicEventViewModel.Times, "Value", "Text", string.Format("{0:hh:mm}", Model.StartDateTime.ToLocalTime())), new { @class = "times" })
+                        @Html.DropDownList("start_times", new SelectList(CreateBasicEventViewModel.Times, "Value", "Text", string.Format("{0:hh:mm}", Model.StartDateTime.ToLocalTime())), new { @class = " times" })
                         
                         @Html.DropDownList("AMPMstartTime", new SelectList(new List<SelectListItem> {
                                             new SelectListItem
@@ -78,8 +78,8 @@
                                             {
                                                 Text = "pm",
                                                 Value = "pm"
-                                            }}, "Value", "Text", string.Format("{0:tt}", Model.StartDateTime.ToLocalTime()).ToLower()), 
-                                            new { @class = "AMPM" })
+                                            }}, "Value", "Text", string.Format("{0:tt}", Model.StartDateTime.ToLocalTime()).ToLower()),
+                                 new { @class = "AMPM" })
                         
                         @Html.DropDownList("timeZone", new SelectList(CreateBasicEventViewModel.TimeZones, "TimeZoneOffset", "TimeZoneName", TimeZoneManager.UserTimeZone.BaseUtcOffset.Hours), new { @class = "timeZoneSelect" })
                     </p>
@@ -87,14 +87,12 @@
 
                 <div class="under_control_notice">
                     @Html.CheckBox("End_Date") <label class="endDateCheckLabel" for="End_Date">Specify end time</label></div>
-                <div id="endDate" class="invisible dropdown_image">
+                <div id="endDate" class="invisible">
                     @Html.Label("End date:") @Html.EditorFor(m => m.EndDateTime, "DateTimeOneline")
-                    
-
                     @{
                         Debug.Assert(Model.EndDateTime != null, "Model.EndDateTime != null");
                     }
-                    @Html.DropDownList("end_times", new SelectList(CreateBasicEventViewModel.Times, "Value", "Text", string.Format("{0:hh:mm}", ((DateTime) Model.EndDateTime).ToLocalTime())), new { @class = "times" })
+                    @Html.DropDownList("end_times", new SelectList(CreateBasicEventViewModel.Times, "Value", "Text", string.Format("{0:hh:mm}", ((DateTime)Model.EndDateTime).ToLocalTime())), new { @class = "times" })
                     
                     @Html.DropDownList("AMPMendTime", new SelectList(new List<SelectListItem> {
                                             new SelectListItem
@@ -109,10 +107,11 @@
                                             }}, "Value", "Text", string.Format("{0:tt}", ((DateTime) Model.EndDateTime).ToLocalTime()).ToLower()), 
                                             new { @class = "AMPM" })
                 </div>
+                <div class="">
                 <p>
                     @Html.Label("Collect content:")
-                    @Html.DropDownList("collectDataTimes", new SelectList(CreateBasicEventViewModel.CollectDataList, "Value", "Text"))
-                </p>
+                    @Html.DropDownList("collectDataTimes", new SelectList(CreateBasicEventViewModel.CollectDataList, "Value", "Text"), new { @class = "" })
+                </p></div>
                 <div class="dashed">
                 </div>
                 <input type="submit" class="submitEvent" value="ALL DONE WITH BASIC INFO" />

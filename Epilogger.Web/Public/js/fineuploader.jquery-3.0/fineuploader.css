@@ -11,17 +11,22 @@
 .qq-upload-button {
     display: block;
     /*or inline-block*/
-    width: 105px;
-    padding: 7px 0;
+    padding: 7px 10px;
+    height:16px;
     text-align: center;
-    background: #418FBF;
-    border:1px solid #3485B7;
+    border:1px solid #489ed3;
     color: #FFF;
-    font:bold 18px 'InterstatePlusRegular';
-    padding:5px 10px;
+    font:bold 14px 'Arial';
+
     box-shadow:0 0 1px #777;
-    background:-webkit-gradient(linear,left top,left bottom,from(#4AA0D7) to(#3486B7));
-    border-radius:3px;
+background: #499fd5; /* Old browsers */
+background: -moz-linear-gradient(top, #499fd5 0%, #408fbf 99%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#499fd5), color-stop(99%,#408fbf)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #499fd5 0%,#408fbf 99%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #499fd5 0%,#408fbf 99%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #499fd5 0%,#408fbf 99%); /* IE10+ */
+background: linear-gradient(to bottom, #499fd5 0%,#408fbf 99%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499fd5', endColorstr='#408fbf',GradientType=0 ); /* IE6-9 */
 }
 .qq-upload-button-hover {
     background: #31A5F8;

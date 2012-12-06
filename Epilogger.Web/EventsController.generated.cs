@@ -661,11 +661,6 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Create() {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Create);
-            return callInfo;
-        }
-
         public override System.Web.Mvc.ActionResult CreateEvent() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEvent);
             return callInfo;
@@ -691,12 +686,6 @@ namespace Epilogger.Web.Controllers {
 
         public override System.Web.Mvc.ActionResult CreateEventFinal(Epilogger.Web.Models.CreateFinalEventViewModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEventFinal);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult Create(Epilogger.Web.Models.CreateEventViewModel model) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Create);
-            callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }
 

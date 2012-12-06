@@ -86,10 +86,14 @@
     </resourceSet>
 
     <resourceSet name="LiveModeCss" type="css">
+      <resource path="~/Public/css/jquery.miniColors.css" />
+      <resource path="~/Public/js/fineuploader.jquery-3.0/fineuploader.css" />
       <resource path="~/Public/css/livemode-4x3.css" />
     </resourceSet>
     <resourceSet name="LiveModeJs" type="js">
-      <resource path="~/Public/js/jquery-1.6.2.min.js" />
+      <resource path="~/Public/js/jquery-1.8.2.min.js" />
+      <resource path="~/Public/js/jquery.miniColors.js" />
+      <resource path="~/Public/js/fineuploader.jquery-3.0/jquery.fineuploader-3.0.js"/>
       <resource path="~/Public/js/epiloggerInit.js" />
       <resource path="~/Public/js/LiveMode.js" />
     </resourceSet>

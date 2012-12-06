@@ -11,8 +11,13 @@ body {
 	overflow:hidden;
 	font:1em helvetica, arial, sans-serif;
 	color:#666}	
-
-
+	
+/* ------------------------------------- [ TOOLBAR ] --- */	
+div#toolbar{
+    width:100%;
+    height:90px;
+    background:white;
+}
 /* ------------------------------------- [ CONTENT: TWEETS & PHOTOS ] --- */	
 div#content {
 	height:73%;
@@ -168,3 +173,74 @@ h1 {
     display: none;}
 
 
+#toolbar
+{
+    font-family:Helvetica,Arial,Sans-Serif;
+    
+}
+
+
+#toolbar #live_mode_title
+{
+    float:left;
+    padding:0 30px 0 10px;
+}
+#toolbar h2
+{
+    color:#fc17b3;
+    
+}
+#toolbar select   
+{
+    border:none;
+    background: #ECECEC;
+    font-size:13px;
+    height: 20px; 
+    width: 105px; 
+    color: #666;    
+    padding-left: 2px;
+    display: inline-block;
+}
+#toolbar #customize_space
+{
+    padding-top:0px;
+}
+#toolbar .live_options{
+    float:left;
+    margin-left:30px;
+    width:175px;
+    padding-top:15px;
+}
+#toolbar .right_option{
+    padding-left:40px;
+    padding-top:5px;
+}
+#toolbar .step_image{
+    float:left;
+    padding-top:3px;
+    padding-right:10px;
+}
+#toolbar .submitEvent {
+    display: block;
+    /*or inline-block*/
+    padding: 7px 10px;
+    margin-top:0px;
+    text-align: center;
+    border:1px solid #489ed3;
+    color: #FFF;
+    font:bold 14px 'Arial';
+    box-shadow:0 0 1px #777;
+    background: #499fd5; /* Old browsers */
+    background: -moz-linear-gradient(top, #499fd5 0%, #408fbf 99%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#499fd5), color-stop(99%,#408fbf)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #499fd5 0%,#408fbf 99%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #499fd5 0%,#408fbf 99%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #499fd5 0%,#408fbf 99%); /* IE10+ */
+    background: linear-gradient(to bottom, #499fd5 0%,#408fbf 99%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499fd5', endColorstr='#408fbf',GradientType=0 ); /* IE6-9 */
+}
+#toolbar .submitEvent:hover {
+    background: #31A5F8;
+    margin-top:1px;
+    cursor:pointer;
+}

@@ -290,6 +290,102 @@ jQuery(function ($) {
 
     //    $(window).scroll(function () { removeYellow(); });
 
+    // live mode toolbar -----------------------------------------
+
+        function init() {
+
+            // Attach callbacks
+            $('.color-picker').miniColors({
+                change: function (hex, rgba) {
+                    $('#console').prepend('change: ' + hex + ', rgba(' + rgba.r + ', ' + rgba.g + ', ' + rgba.b + ', ' + rgba.a + ')<br>');
+                },
+                open: function (hex, rgba) {
+                    $('#console').prepend('open: ' + hex + ', rgba(' + rgba.r + ', ' + rgba.g + ', ' + rgba.b + ', ' + rgba.a + ')<br>');
+                },
+                close: function (hex, rgba) {
+                    $('#console').prepend('close: ' + hex + ', rgba(' + rgba.r + ', ' + rgba.g + ', ' + rgba.b + ', ' + rgba.a + ')<br>');
+                }
+            });
+
+        }
+        init();
+
+        $('.tweet-column').bind('DOMNodeInserted', function(event) {
+             if ($('#hideColor1').val() != "")
+            {
+            $('.colour1').css('color',$('#hideColor1').val());
+            }
+             if ($('#hideColor2').val() != "")
+            {
+            $('.colour2,a').css('color',$('#hideColor2').val());
+            }
+             if ($('#hidenColor3').val() != "")
+            {
+            $('.colour3').css('color',$('#hideColor3').val());
+            }
+       });
+
+       
+
+        function createUploader() {
+            var uploader = new qq.FineUploader({
+                element: $('#fine-uploader-logo')[0],
+                debug:true,
+                text: {
+                    uploadButton: 'Upload your logo'
+                },
+                request: {
+                    endpoint: '@Url.Action("UploadFile", "Events", new { qqfile = "Logo" })'
+                },
+                validation: {
+                    allowedExtensions: ['jpg', 'jpeg', 'png', 'gif'],
+                    sizeLimit: 20971520,
+                    stopOnFirstInvalidFile: true
+                },
+                messages: {
+                    typeError: "{file} has an invalid extension. Valid extension(s): {extensions}.",
+                    sizeError: "{file} is too large, maximum file size is {sizeLimit}.",
+                    minSizeError: "{file} is too small, minimum file size is {minSizeLimit}.",
+                    emptyError: "{file} is empty, please select files again without it.",
+                    noFilesError: "No files to uploaad.",
+                    onLeave: "The files are being uploaded, if you leave now the upload will be cancelled."
+                },
+                callbacks: {
+                onComplete: function(id, fileName, responseJSON) {
+  
+                            $('#response-url').text(responseJSON.imageurl)
+              
+                }
+            },
+            });
+
+                var uploader2 = new qq.FineUploader({
+                 multiple: true,
+                element: $('#fine-uploader-sponsors')[0],
+                text: {
+                    uploadButton: 'Add sponsor(s)'
+                },
+                request: {
+                    endpoint: '@Url.Action("UploadFile", "Events", new { qqfile = "Sponsors" })'
+                },
+                validation: {
+                    allowedExtensions: ['jpg', 'jpeg', 'png', 'gif'],
+                    sizeLimit: 20971520,
+                    stopOnFirstInvalidFile: true
+                },
+                messages: {
+                    typeError: "{file} has an invalid extension. Valid extension(s): {extensions}.",
+                    sizeError: "{file} is too large, maximum file size is {sizeLimit}.",
+                    minSizeError: "{file} is too small, minimum file size is {minSizeLimit}.",
+                    emptyError: "{file} is empty, please select files again without it.",
+                    noFilesError: "No files to uploaad.",
+                    onLeave: "The files are being uploaded, if you leave now the upload will be cancelled."
+                }
+            });
+        }
+
+        window.onload = createUploader;
+ 
 });
 
 
