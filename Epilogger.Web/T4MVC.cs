@@ -382,8 +382,8 @@ namespace Links {
             }
         
             public static readonly string colorbox_css = Url("colorbox.css");
-            public static readonly string colorpicker_css = Url("colorpicker.css");
             public static readonly string event_popup_css = Url("event-popup.css");
+            public static readonly string fineuploader_css = Url("fineuploader.css");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class geckoboard {
                 private const string URLPATH = "~/Public/css/geckoboard";
@@ -416,6 +416,7 @@ namespace Links {
             }
         
             public static readonly string jquery_ui_1_8_16_custom_css = Url("jquery-ui-1.8.16.custom.css");
+            public static readonly string jquery_miniColors_css = Url("jquery.miniColors.css");
             public static readonly string layout_css = Url("layout.css");
             public static readonly string livemode_4x3_css = Url("livemode-4x3.css");
             public static readonly string messages_css = Url("messages.css");
@@ -538,34 +539,11 @@ namespace Links {
                 private const string URLPATH = "~/Public/images/colorpicker";
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                public static readonly string blank_gif = Url("blank.gif");
-                public static readonly string colorpicker_background_png = Url("colorpicker_background.png");
-                public static readonly string colorpicker_hex_png = Url("colorpicker_hex.png");
-                public static readonly string colorpicker_hsb_b_png = Url("colorpicker_hsb_b.png");
-                public static readonly string colorpicker_hsb_h_png = Url("colorpicker_hsb_h.png");
-                public static readonly string colorpicker_hsb_s_png = Url("colorpicker_hsb_s.png");
-                public static readonly string colorpicker_indic_gif = Url("colorpicker_indic.gif");
-                public static readonly string colorpicker_overlay_png = Url("colorpicker_overlay.png");
-                public static readonly string colorpicker_rgb_b_png = Url("colorpicker_rgb_b.png");
-                public static readonly string colorpicker_rgb_g_png = Url("colorpicker_rgb_g.png");
-                public static readonly string colorpicker_rgb_r_png = Url("colorpicker_rgb_r.png");
-                public static readonly string colorpicker_select_gif = Url("colorpicker_select.gif");
-                public static readonly string colorpicker_submit_png = Url("colorpicker_submit.png");
-                public static readonly string custom_background_png = Url("custom_background.png");
-                public static readonly string custom_hex_png = Url("custom_hex.png");
-                public static readonly string custom_hsb_b_png = Url("custom_hsb_b.png");
-                public static readonly string custom_hsb_h_png = Url("custom_hsb_h.png");
-                public static readonly string custom_hsb_s_png = Url("custom_hsb_s.png");
-                public static readonly string custom_indic_gif = Url("custom_indic.gif");
-                public static readonly string custom_rgb_b_png = Url("custom_rgb_b.png");
-                public static readonly string custom_rgb_g_png = Url("custom_rgb_g.png");
-                public static readonly string custom_rgb_r_png = Url("custom_rgb_r.png");
-                public static readonly string custom_submit_png = Url("custom_submit.png");
-                public static readonly string select_png = Url("select.png");
-                public static readonly string select2_png = Url("select2.png");
-                public static readonly string slider_png = Url("slider.png");
+                public static readonly string colors_png = Url("colors.png");
+                public static readonly string trigger_png = Url("trigger.png");
             }
         
+            public static readonly string colors_png = Url("colors.png");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class CreateEvent {
                 private const string URLPATH = "~/Public/images/CreateEvent";
@@ -913,6 +891,7 @@ namespace Links {
                 public static readonly string _8_png = Url("8.png");
             }
         
+            public static readonly string trigger_png = Url("trigger.png");
             public static readonly string video_play_jpg = Url("video-play.jpg");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class widget {
@@ -1051,8 +1030,6 @@ namespace Links {
             public static readonly string canvas_to_blob_min_js = Url("canvas-to-blob.min.js");
             public static readonly string clickmap_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/clickmap.min.js") ? Url("clickmap.min.js") : Url("clickmap.js");
                           
-            public static readonly string colorpicker_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/colorpicker.min.js") ? Url("colorpicker.min.js") : Url("colorpicker.js");
-                          
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class confirm {
                 private const string URLPATH = "~/Public/js/confirm";
@@ -1149,8 +1126,6 @@ namespace Links {
             public static readonly string epiloggerInit_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/epiloggerInit.min.js") ? Url("epiloggerInit.min.js") : Url("epiloggerInit.js");
                           
             public static readonly string EventDetails_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/EventDetails.min.js") ? Url("EventDetails.min.js") : Url("EventDetails.js");
-                          
-            public static readonly string eye_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/eye.min.js") ? Url("eye.min.js") : Url("eye.js");
                           
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class FacebookPhotoPicker {
@@ -33812,6 +33787,20 @@ namespace Links {
                 public static readonly string loading_gif = Url("loading.gif");
             }
         
+            public static readonly string FileUploader_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/FileUploader.min.js") ? Url("FileUploader.min.js") : Url("FileUploader.js");
+                          
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class fineuploader_jquery_3_0 {
+                private const string URLPATH = "~/Public/js/fineuploader.jquery-3.0";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string fineuploader_css = Url("fineuploader.css");
+                public static readonly string jquery_fineuploader_3_0_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.fineuploader-3.0.min.js") ? Url("jquery.fineuploader-3.0.min.js") : Url("jquery.fineuploader-3.0.js");
+                              
+                public static readonly string jquery_fineuploader_3_0_min_js = Url("jquery.fineuploader-3.0.min.js");
+                public static readonly string loading_gif = Url("loading.gif");
+            }
+        
             public static readonly string head_load_min_js = Url("head.load.min.js");
             public static readonly string HomePage_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/HomePage.min.js") ? Url("HomePage.min.js") : Url("HomePage.js");
                           
@@ -33836,6 +33825,9 @@ namespace Links {
                           
             public static readonly string jquery_jtruncate_pack_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.jtruncate.pack.min.js") ? Url("jquery.jtruncate.pack.min.js") : Url("jquery.jtruncate.pack.js");
                           
+            public static readonly string jquery_miniColors_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.miniColors.min.js") ? Url("jquery.miniColors.min.js") : Url("jquery.miniColors.js");
+                          
+            public static readonly string jquery_miniColors_min_js = Url("jquery.miniColors.min.js");
             public static readonly string jquery_tweet_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.tweet.min.js") ? Url("jquery.tweet.min.js") : Url("jquery.tweet.js");
                           
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -34223,11 +34215,7 @@ namespace Links {
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                 public static readonly string jquery_cookie_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.cookie.min.js") ? Url("jquery.cookie.min.js") : Url("jquery.cookie.js");
                               
-                public static readonly string README_md = Url("README.md");
                 public static readonly string server_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/server.min.js") ? Url("server.min.js") : Url("server.js");
-                              
-                public static readonly string test_html = Url("test.html");
-                public static readonly string test_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/test.min.js") ? Url("test.min.js") : Url("test.js");
                               
             }
         
@@ -34472,8 +34460,6 @@ namespace Links {
                           
             public static readonly string jTweet_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jTweet.min.js") ? Url("jTweet.min.js") : Url("jTweet.js");
                           
-            public static readonly string layout_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/layout.min.js") ? Url("layout.min.js") : Url("layout.js");
-                          
             public static readonly string LiveMode_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/LiveMode.min.js") ? Url("LiveMode.min.js") : Url("LiveMode.js");
                           
             public static readonly string LiveModeBackUp_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/LiveModeBackUp.min.js") ? Url("LiveModeBackUp.min.js") : Url("LiveModeBackUp.js");
@@ -34486,6 +34472,21 @@ namespace Links {
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                 public static readonly string dd_css = Url("dd.css");
                 public static readonly string dd_arrow_gif = Url("dd_arrow.gif");
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class jqueryCookie {
+                    private const string URLPATH = "~/Public/js/msdropdown/jqueryCookie";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string jquery_cookie_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.cookie.min.js") ? Url("jquery.cookie.min.js") : Url("jquery.cookie.js");
+                                  
+                    public static readonly string README_md = Url("README.md");
+                    public static readonly string server_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/server.min.js") ? Url("server.min.js") : Url("server.js");
+                                  
+                    public static readonly string test_html = Url("test.html");
+                    public static readonly string test_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/test.min.js") ? Url("test.min.js") : Url("test.js");
+                                  
+                }
+            
                 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
                 public static class js {
                     private const string URLPATH = "~/Public/js/msdropdown/js";

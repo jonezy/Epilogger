@@ -98,8 +98,8 @@ fieldset.popForm #startDate{
 float:left;
 }
 fieldset.popForm input[type="text"] .timepick{width:7em;}
-.form_process{margin-top:-40px; margin-bottom:25px;}
-.form_process2{margin-top:-40px; margin-bottom:25px;margin-left:-40px}
+.form_process{ margin-bottom: 25px; }
+.form_process2{ margin-bottom: 25px; }
 .dashed{border-top:1px dotted #BBB; margin-top:3px; margin-bottom:15px;}
 
 .dropdown_div
@@ -358,3 +358,11 @@ fieldset#livemode .submitEvent {
     padding-left:10px;
     margin-bottom:15px;
 }
+
+#twitter_wrapper{
+    width:100%;
+    margin-left:-3px;
+    font-size:13px; 
+    font:Helvetica,Arial,Sans-Serif; 
+    color:#777
+} 

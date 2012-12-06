@@ -78,6 +78,7 @@ namespace Epilogger.Web.Models {
             }
         }
 
+        public string CollectDataValue { get; set; }
         public static IEnumerable<SelectListItem> CollectDataList
         {
             get
@@ -131,7 +132,7 @@ namespace Epilogger.Web.Models {
                 for (var minutes = 60; minutes < 770; minutes += 30)
                 {
                     var ts = TimeSpan.FromMinutes(minutes);
-                    var tsString = String.Format("{0:00}:{1:00}", ts.Hours, ts.Minutes);
+                    var tsString = String.Format("{0:0}:{1:00}", ts.Hours, ts.Minutes);
                     var item = new SelectListItem {Text = tsString, Value = tsString};
                     times.Add(item);
                 }
