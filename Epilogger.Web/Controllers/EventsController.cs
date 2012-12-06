@@ -319,7 +319,9 @@ namespace Epilogger.Web.Controllers {
 		}
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-		[RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
+
+        [Obsolete("Create is deprecated, please use CreateEvent instead.")]
+        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
 		public virtual ActionResult Create()
 		{
 			var model = Mapper.Map<Event, CreateEventViewModel>(new Event());
@@ -341,19 +343,14 @@ namespace Epilogger.Web.Controllers {
 			return View(model);
 		}
 
-
-
-
-
-
-
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
         [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
         public virtual ActionResult CreateEvent()
         {
 
             CreateBasicEventViewModel model;
-            if (TempData["CreateEvent"] == null)
+            if (TempData["CreateBasicEventViewModel"] == null)
             {
                 //Create a blank Temp Event Object to live with us through this process.
                 //TempData["CreateEvent"] = new Event();
@@ -372,9 +369,7 @@ namespace Epilogger.Web.Controllers {
             }
 
             //Load from TempData as we've come back.
-            model = Mapper.Map<Event, CreateBasicEventViewModel>((Event) TempData["CreateEvent"]);
-            //Will have to adjust some of the times back for display
-
+            model = (CreateBasicEventViewModel)TempData["CreateBasicEventViewModel"];
             return View(model);
 
 
@@ -424,25 +419,23 @@ namespace Epilogger.Web.Controllers {
             {
                 try
                 {
-                    var epLevent = Mapper.Map<CreateBasicEventViewModel, Event>(model);
                     
                     model.UserId = CurrentUserID;
                     model.CreatedDateTime = DateTime.UtcNow;
                     model.EventSlug = NameIntoSlug(model.Name);
                     model.CollectDataValue = Request.Form["collectDataTimes"];
 
+                    var epLevent = Mapper.Map<CreateBasicEventViewModel, Event>(model);
                     //Don't save, just put it in the TempData.
-                    TempData["CreateEvent"] = epLevent;
+                    TempData["Event"] = epLevent;
                     //_es.Save(epLevent);
 
-                    
 
                     //Save everything in TempData so we can read it back if a user presses Go Back from the Twitter Search page.
-                    //model.Id = epLevent.ID;
-                    //TempData["CreateEvent"] = model;
-                    //((CreateBasicEventViewModel)TempData["CreateEvent"]).StartDateTime = TimeZoneManager.ToUtcTime(storeStartDateTime);
-                    //((CreateBasicEventViewModel)TempData["CreateEvent"]).EndDateTime = TimeZoneManager.ToUtcTime(storeEndDateTime);
-                    //((CreateBasicEventViewModel)TempData["CreateEvent"]).TimeZoneOffset = int.Parse(Request.Form["timeZone"]);
+                    TempData["CreateBasicEventViewModel"] = model;
+                    ((CreateBasicEventViewModel)TempData["CreateBasicEventViewModel"]).StartDateTime = TimeZoneManager.ToUtcTime(storeStartDateTime);
+                    ((CreateBasicEventViewModel)TempData["CreateBasicEventViewModel"]).EndDateTime = TimeZoneManager.ToUtcTime(storeEndDateTime);
+                    ((CreateBasicEventViewModel)TempData["CreateBasicEventViewModel"]).TimeZoneOffset = int.Parse(Request.Form["timeZone"]);
 
 
                     //this.StoreSuccess("Your Event was created successfully!  Dont forget to share it with your friends and attendees!");
@@ -513,8 +506,8 @@ namespace Epilogger.Web.Controllers {
             //CreateEventTwitterViewModel vm = new CreateEventTwitterViewModel();
             //vm.EventSlug = requestedEvent.EventSlug;
 
-            var model = Mapper.Map<Event, CreateEventTwitterViewModel>((Event)TempData["CreateEvent"]);
-            TempData["CreateEvent"] = TempData["CreateEvent"];
+            var model = Mapper.Map<Event, CreateEventTwitterViewModel>((Event)TempData["Event"]);
+            TempData["Event"] = TempData["Event"];
             return View(model);
         }
 
@@ -531,7 +524,9 @@ namespace Epilogger.Web.Controllers {
                 try
                 {
                     //var epLevent = Mapper.Map<CreateEventTwitterViewModel, Event>(model);
-                    var eventModel = _es.FindBySlug(model.EventSlug);
+                    //var eventModel = _es.FindBySlug(model.EventSlug);
+                    var eventModel = Mapper.Map<Event, Event>((Event)TempData["Event"]);
+
                     var searchTerms = frm["SearchTerms"].Split(',');
                     var searchQuery = "";
                     foreach (var s in searchTerms)
@@ -548,14 +543,14 @@ namespace Epilogger.Web.Controllers {
 
                     // get display model from event, route this eventually
                     var displayModel = new CreateFinalEventViewModel
-                                           {
-                                               Name = eventModel.Name,
-                                               Subtitle = eventModel.SubTitle,
-                                               SearchTerms = searchQuery,
-                                               EventSlug = eventModel.EventSlug,
-                                               CollectionTime = getCollectionWordFormat(eventModel.CollectionStartDateTime, eventModel.CollectionEndDateTime),
-                                               EventStartEndTime = getEventStartEndTime(eventModel.StartDateTime, eventModel.EndDateTime)
-                                           };
+                            {
+                                Name = eventModel.Name,
+                                Subtitle = eventModel.SubTitle,
+                                SearchTerms = searchQuery,
+                                EventSlug = eventModel.EventSlug,
+                                CollectionTime = getCollectionWordFormat(eventModel.CollectionStartDateTime, eventModel.CollectionEndDateTime),
+                                EventStartEndTime = getEventStartEndTime(eventModel.StartDateTime, eventModel.EndDateTime)
+                            };
 
 
                     ////Initiate a first collect on the event

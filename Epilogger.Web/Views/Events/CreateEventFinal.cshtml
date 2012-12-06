@@ -14,7 +14,7 @@
 </script>
 <body>
     <div class="form_process2">
-        <img src="../../Public/images/CreateEvent/EventCreatedActive.png" alt="Basic Information" />
+        <img src="/Public/images/CreateEvent/EventCreatedActive.png" alt="Basic Information" />
     </div>
     <div id="final_wrapper">
         <div id="left_side">
@@ -25,7 +25,7 @@
             <table>
                 <tr>
                     <td>
-                        <img src="../../Public/images/CreateEvent/quotes.png" alt="quotes" />
+                        <img src="/Public/images/CreateEvent/quotes.png" alt="quotes" />
                     </td>
                     <td>
                    @Html.DisplayFor(m => m.Subtitle)
@@ -34,7 +34,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <img src="../../Public/images/CreateEvent/clock.png" alt="clock" />
+                        <img src="/Public/images/CreateEvent/clock.png" alt="clock" />
                     </td>
                     <td>
                     @Html.DisplayFor(m => m.EventStartEndTime)
@@ -43,7 +43,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <img src="../../Public/images/CreateEvent/hash.png" alt="hashtags" />
+                        <img src="/Public/images/CreateEvent/hash.png" alt="hashtags" />
                     </td>
                     <td>
                     Search Terms:
@@ -52,7 +52,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <img src="../../Public/images/CreateEvent/info.png" alt="quotes" />
+                        <img src="/Public/images/CreateEvent/info.png" alt="quotes" />
                     </td>
                     <td>
                     @Html.DisplayFor(m => m.CollectionTime)
@@ -69,17 +69,17 @@
         <li>Official Website</li>
         <li>Twitter & Facebook page</li>
         <li>Sponsor logos</li>
-        <li>@Html.ActionImage("Edit", "event", new { id = Model.EventSlug}, "../images/CreateEvent/disabled_button_blue.png", "add details")</li>
+        <li>@Html.ActionImage("Edit", "event", new { id = Model.EventSlug}, "/Public/images/CreateEvent/disabled_button_blue.png", "add details")</li>
             @*<input type="button" value="add detail now" class="stn_button disabled_blue_button" id="addDetail" /></li>*@
         </ul>
         
         </div>
         <div id="tweet_footer">
             <div id="left">
-                @Html.ActionImage("CreateEventTweets", "Events", "#", "../../Public/images/CreateEvent/EditHashtags.png", "Back")
+                @Html.ActionImage("CreateEventTweets", "Events", "#", "/Public/images/CreateEvent/EditHashtags.png", "Back")
             </div>
             <div id="right">
-                @Html.ActionImage("#", "Events", "#", "../../Public/images/CreateEvent/GotoEvent.png", "go view your event")
+                @Html.ActionImage("#", "Events", "#", "/Public/images/CreateEvent/GotoEvent.png", "go view your event")
             </div>
         </div>
     </div>
