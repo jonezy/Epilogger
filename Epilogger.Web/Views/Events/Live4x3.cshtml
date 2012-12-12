@@ -49,14 +49,15 @@
       <div id="live_mode_title">
                 <h2>
                     How your live mode will look: 
-                    </h2> (@Html.ActionLink("back to event page", "details", null, new { id = @Model.EventSlug }))
+                    </h2> <span id="backEvent">(@Html.ActionLink("back to event page", "details", null, new { id = @Model.EventSlug }))</span>
                     
             </div> 
             <div class="live_options">
-            <input type="button" class="submitEvent" value="Make Some Changes" id="edit_livemode" /></div> 
+            <input type="button" class="submitEvent-green" value="Launch Full Screen" id="launch"/></div>
             <div id="or">or</div>
             <div class="live_options">
-            <input type="button" class="submitEvent-green" value="Launch Full Screen" id="launch"/></div>
+            <input type="button" class="submitEvent" value="Make Some Changes" id="edit_livemode" /></div> 
+            
     </div>
     <div id="customize" class="invisible">
         @Html.HiddenFor(m => Model.CustomSettings.LightTheme, new { id = "theme" })

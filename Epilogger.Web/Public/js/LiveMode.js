@@ -315,7 +315,7 @@ jQuery(function ($) {
             $('.colour1').css('color', $('#hideColor1').val());
         }
         if ($('#hideColor2').val() != "") {
-            $('.colour2,a').css('color', $('#hideColor2').val());
+           $('.colour2, #content a').css('color', $('#hideColor2').val());
         }
         if ($('#hidenColor3').val() != "") {
             $('.colour3').css('color', $('#hideColor3').val());
