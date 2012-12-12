@@ -3,19 +3,25 @@
     Layout = "~/Views/Events/_CreateEventLayout.cshtml";
     ViewBag.Title = "Create a new event | Epilogger";
 }
-<script>
+<script language="javascript" type="text/javascript">
     $(document).ready(function () {
         var x = $('#event-popup').height();
         var y = $('#event-popup').width();
 
         parent.$.colorbox.resize({ width: 560, height: 490 });
-
     });
+    
+    function CloseAndRedirect(url) {
+        parent.$.colorbox.close();
+        parent.window.location = url;
+    }
+
 </script>
-<body>
+
     <div class="form_process2">
         <img src="/Public/images/CreateEvent/EventCreatedActive.png" alt="Basic Information" />
     </div>
+
     <div id="final_wrapper">
         <div id="left_side">
             <h2>
@@ -69,7 +75,11 @@
         <li>Official Website</li>
         <li>Twitter & Facebook page</li>
         <li>Sponsor logos</li>
-        <li>@Html.ActionImage("Edit", "event", new { id = Model.EventSlug}, "/Public/images/CreateEvent/disabled_button_blue.png", "add details")</li>
+            <li>
+                <input type="button" class="blue-action-button" onclick="CloseAndRedirect('@Url.Action("Edit", new { id = Model.EventSlug })');" value="add details" />
+
+                @*@Html.ActionImage("Edit", "event", new { id = Model.EventSlug }, "/Public/images/CreateEvent/disabled_button_blue.png", "add details")*@
+            </li>
             @*<input type="button" value="add detail now" class="stn_button disabled_blue_button" id="addDetail" /></li>*@
         </ul>
         
@@ -79,8 +89,9 @@
                 @Html.ActionImage("CreateEventTweets", "Events", "#", "/Public/images/CreateEvent/EditHashtags.png", "Back")
             </div>
             <div id="right">
-                @Html.ActionImage("#", "Events", "#", "/Public/images/CreateEvent/GotoEvent.png", "go view your event")
+                <input type="image" src="/Public/images/CreateEvent/GotoEvent.png" alt="" onclick="CloseAndRedirect('@Url.Action("Details", new { id = Model.EventSlug })');">
+                @*@Html.ActionImage("#", "Events", "#", "/Public/images/CreateEvent/GotoEvent.png", "go view your event")*@
             </div>
         </div>
     </div>
-</body>
+

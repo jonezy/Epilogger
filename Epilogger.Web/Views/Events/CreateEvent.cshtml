@@ -43,7 +43,6 @@
             });
 
         });
-
     </script>   
 }
 
@@ -53,7 +52,7 @@
     </div>
     @Html.ValidationSummary("Please correct the following issues")
     @using (Html.BeginForm("CreateEvent", "Events", FormMethod.Post, new { id = "CreateForm" }))
-    {
+    {   
         <fieldset class="popForm">
             <div class="">
                 <p>@Html.Label("Event title:") @Html.EditorFor(model => model.Name)</p>
