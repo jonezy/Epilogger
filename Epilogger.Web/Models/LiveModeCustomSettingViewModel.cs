@@ -7,6 +7,7 @@ using Twitterizer;
 
 namespace Epilogger.Web.Models {
     public class LiveModeCustomSettingViewModel {
+        public int Id { get; set; }
         public int EventId { get; set; }
 
         [StringLength(7, ErrorMessage = "must be 7 characters in length (#FFF000)")]
@@ -26,9 +27,11 @@ namespace Epilogger.Web.Models {
         public string LinkColour { get; set; }
 
         [DisplayName("Logo")]
-        public string CompanyLogo { get; set; }
+        public string Logo { get; set; }
 
         [DisplayName("Sponsor Logo")]
-        public string SponsorLogo{ get; set; }
+        public List<string> SponsorLogo{ get; set; }
+
+        public bool LightTheme { get; set; }
     }
 }

@@ -810,6 +810,19 @@ namespace Links {
                 public static readonly string icon_retweet_png = Url("icon-retweet.png");
                 public static readonly string logo_epl_png = Url("logo-epl.png");
                 public static readonly string noisebg_png = Url("noisebg.png");
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class toolbar {
+                    private const string URLPATH = "~/Public/images/livemode/toolbar";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string logo_dark_theme_png = Url("logo_dark_theme.png");
+                    public static readonly string number1_png = Url("number1.png");
+                    public static readonly string number2_png = Url("number2.png");
+                    public static readonly string number3_png = Url("number3.png");
+                    public static readonly string number4_png = Url("number4.png");
+                    public static readonly string number5_png = Url("number5.png");
+                }
+            
             }
         
             public static readonly string loading_gif = Url("loading.gif");
@@ -33807,6 +33820,7 @@ namespace Links {
             public static readonly string html5shiv_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/html5shiv.min.js") ? Url("html5shiv.min.js") : Url("html5shiv.js");
                           
             public static readonly string jquery_1_6_2_min_js = Url("jquery-1.6.2.min.js");
+            public static readonly string jquery_1_8_2_min_js = Url("jquery-1.8.2.min.js");
             public static readonly string jquery_ui_1_8_16_custom_min_js = Url("jquery-ui-1.8.16.custom.min.js");
             public static readonly string jquery_blockUI_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.blockUI.min.js") ? Url("jquery.blockUI.min.js") : Url("jquery.blockUI.js");
                           
@@ -34208,17 +34222,6 @@ namespace Links {
             public static readonly string jquery_validate_min_js = Url("jquery.validate.min.js");
             public static readonly string jquery_validate_unobtrusive_min_js = Url("jquery.validate.unobtrusive.min.js");
             public static readonly string jquery_zrssfeed_min_js = Url("jquery.zrssfeed.min.js");
-            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-            public static class jqueryCookie {
-                private const string URLPATH = "~/Public/js/jqueryCookie";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                public static readonly string jquery_cookie_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.cookie.min.js") ? Url("jquery.cookie.min.js") : Url("jquery.cookie.js");
-                              
-                public static readonly string server_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/server.min.js") ? Url("server.min.js") : Url("server.js");
-                              
-            }
-        
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class jQueryEpiloggerGallery {
                 private const string URLPATH = "~/Public/js/jQueryEpiloggerGallery";

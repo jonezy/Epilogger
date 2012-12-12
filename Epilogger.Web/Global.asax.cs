@@ -168,10 +168,15 @@ namespace Epilogger.Web
                 new { controller = "events", action = "CreateEvent" }
             );
              routes.MapRoute(
-                "UploadFile",
-                "events/UploadFile",
-               new { controller = "events", action = "UploadFile" }
+                "UploadLogo",
+                "events/UploadLogo",
+               new { controller = "events", action = "UploadLogo" }
            );
+             routes.MapRoute(
+              "UploadSponsors",
+              "events/UploadSponsors",
+             new { controller = "events", action = "UploadSponsors" }
+         );
             routes.MapRoute(
                 "EditLiveMode",
                 "events/EditLiveMode",

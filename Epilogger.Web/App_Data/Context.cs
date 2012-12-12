@@ -135,12 +135,14 @@ namespace Epilogger.Data
         public Query<LiveModeCustomSetting> LiveModeCustomSettings { get; set; }
         public Query<StatusMessage> StatusMessages { get; set; }
         public Query<UserClickAction> UserClickActions { get; set; }
+        public Query<CollectionQueueSetting> CollectionQueueSettings { get; set; }
         public Query<CheckIn> CheckIns { get; set; }
         public Query<Role> Roles { get; set; }
         public Query<userClickTracking> userClickTrackings { get; set; }
         public Query<Venue> Venues { get; set; }
         public Query<UserInRole> UserInRoles { get; set; }
         public Query<Event> Events { get; set; }
+        public Query<SponsorImage> SponsorImages { get; set; }
         public Query<ImageMetaDatum> ImageMetaData { get; set; }
         public Query<Image> Images { get; set; }
         public Query<UserTwitterAction> UserTwitterActions { get; set; }
@@ -149,7 +151,6 @@ namespace Epilogger.Data
         public Query<BlogPost> BlogPosts { get; set; }
         public Query<AggregateVisitHistoryOLD> AggregateVisitHistoryOLDs { get; set; }
         public Query<VisitHistoryOLD> VisitHistoryOLDs { get; set; }
-        public Query<CollectionQueueSetting> CollectionQueueSettings { get; set; }
         public Query<UserRatesEvent> UserRatesEvents { get; set; }
         public Query<MemoryBox> MemoryBoxes { get; set; }
         public Query<User> Users { get; set; }
@@ -272,12 +273,14 @@ namespace Epilogger.Data
             LiveModeCustomSettings = new Query<LiveModeCustomSetting>(provider);
             StatusMessages = new Query<StatusMessage>(provider);
             UserClickActions = new Query<UserClickAction>(provider);
+            CollectionQueueSettings = new Query<CollectionQueueSetting>(provider);
             CheckIns = new Query<CheckIn>(provider);
             Roles = new Query<Role>(provider);
             userClickTrackings = new Query<userClickTracking>(provider);
             Venues = new Query<Venue>(provider);
             UserInRoles = new Query<UserInRole>(provider);
             Events = new Query<Event>(provider);
+            SponsorImages = new Query<SponsorImage>(provider);
             ImageMetaData = new Query<ImageMetaDatum>(provider);
             Images = new Query<Image>(provider);
             UserTwitterActions = new Query<UserTwitterAction>(provider);
@@ -286,7 +289,6 @@ namespace Epilogger.Data
             BlogPosts = new Query<BlogPost>(provider);
             AggregateVisitHistoryOLDs = new Query<AggregateVisitHistoryOLD>(provider);
             VisitHistoryOLDs = new Query<VisitHistoryOLD>(provider);
-            CollectionQueueSettings = new Query<CollectionQueueSetting>(provider);
             UserRatesEvents = new Query<UserRatesEvent>(provider);
             MemoryBoxes = new Query<MemoryBox>(provider);
             Users = new Query<User>(provider);
@@ -312,12 +314,14 @@ namespace Epilogger.Data
             	DataProvider.Schema.Tables.Add(new LiveModeCustomSettingsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new StatusMessagesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserClickActionsTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new CollectionQueueSettingsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new CheckInsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new RolesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new userClickTrackingTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new VenuesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserInRolesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new EventsTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new SponsorImagesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ImageMetaDataTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ImagesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserTwitterActionsTable(DataProvider));
@@ -326,7 +330,6 @@ namespace Epilogger.Data
             	DataProvider.Schema.Tables.Add(new BlogPostsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new AggregateVisitHistoryOLDTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new VisitHistoryOLDTable(DataProvider));
-            	DataProvider.Schema.Tables.Add(new CollectionQueueSettingsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserRatesEventTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new MemoryBoxesTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserTable(DataProvider));

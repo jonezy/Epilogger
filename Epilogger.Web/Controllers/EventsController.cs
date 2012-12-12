@@ -23,6 +23,8 @@ using Timezone.Framework;
 using Twitterizer;
 using System.Web;
 using Epilogger.Web.Core.Helpers;
+using Microsoft.WindowsAzure;
+using Microsoft.WindowsAzure.StorageClient;
 
 namespace Epilogger.Web.Controllers {
 	public partial class EventsController : BaseController
@@ -320,28 +322,28 @@ namespace Epilogger.Web.Controllers {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        [Obsolete("Create is deprecated, please use CreateEvent instead.")]
-        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
-		public virtual ActionResult Create()
-		{
-			var model = Mapper.Map<Event, CreateEventViewModel>(new Event());
-			//Model.TimeZoneOffset = Helpers.GetUserTimeZoneOffset();
+        //[Obsolete("Create is deprecated, please use CreateEvent instead.")]
+        //[RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
+        //public virtual ActionResult Create()
+        //{
+        //    var model = Mapper.Map<Event, CreateEventViewModel>(new Event());
+        //    //Model.TimeZoneOffset = Helpers.GetUserTimeZoneOffset();
 
-			var roundTime = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day, DateTime.UtcNow.Hour, 0, 0);
-			if (DateTime.UtcNow.Minute > 30)
-			{
-				roundTime = roundTime.AddHours(1);
-			}
+        //    var roundTime = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day, DateTime.UtcNow.Hour, 0, 0);
+        //    if (DateTime.UtcNow.Minute > 30)
+        //    {
+        //        roundTime = roundTime.AddHours(1);
+        //    }
 
-			model.StartDateTime = roundTime;
-			model.EndDateTime = roundTime.AddHours(3);
-			model.CollectionStartDateTime = roundTime.AddDays(-2);
-			model.CollectionEndDateTime = roundTime.AddDays(3);
-			model.WebsiteURL = "http://";
-			model.EventBrightUrl = "http://";
+        //    model.StartDateTime = roundTime;
+        //    model.EndDateTime = roundTime.AddHours(3);
+        //    model.CollectionStartDateTime = roundTime.AddDays(-2);
+        //    model.CollectionEndDateTime = roundTime.AddDays(3);
+        //    model.WebsiteURL = "http://";
+        //    model.EventBrightUrl = "http://";
 
-			return View(model);
-		}
+        //    return View(model);
+        //}
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -1324,75 +1326,187 @@ namespace Epilogger.Web.Controllers {
 		}
 
 
-        public virtual ActionResult LiveMode(string eventID)
-        {
-            LiveModeCustomSettingViewModel Model = new LiveModeCustomSettingViewModel();
-            int id = 0;
-            try
-            {
-                id = Convert.ToInt16(eventID);
-            }
-            catch
-            { //todo
-            }
-            LiveModeCustomSetting currentLiveModel = _lm.FindByEventID(id);
+//public virtual ActionResult LiveMode(string eventID)
+//        {
+//            LiveModeCustomSettingViewModel Model = new LiveModeCustomSettingViewModel();
+//            int id = 0;
+//            try
+//            {
+//                id = Convert.ToInt16(eventID);
+//            }
+//            catch
+//            { //todo
+//            }
+//            LiveModeCustomSetting currentLiveModel = _lm.FindByEventID(id);
 
-            if (currentLiveModel == null || currentLiveModel.Id==0)
-            {
-                Model.EventId = id;
-                return View("EditLiveMode", Model);
-            }
-            else
-            {
-                Mapper.CreateMap<Data.LiveModeCustomSetting, LiveModeCustomSettingViewModel>();
-                Model = Mapper.Map<Data.LiveModeCustomSetting, LiveModeCustomSettingViewModel>(currentLiveModel);
-                return View("EditLiveMode",Model);
-            }
-        }
+//            if (currentLiveModel == null || currentLiveModel.Id==0)
+//            {
+//                Model.EventId = id;
+//                return View("EditLiveMode", Model);
+//            }
+//            else
+//            {
+//                Mapper.CreateMap<Data.LiveModeCustomSetting, LiveModeCustomSettingViewModel>();
+//                Model = Mapper.Map<Data.LiveModeCustomSetting, LiveModeCustomSettingViewModel>(currentLiveModel);
+//                return View("EditLiveMode",Model);
+//            }
+//        }
 
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         //[RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
+        //[HttpPost]
+        //public virtual ActionResult CreateLiveMode(LiveModeCustomSettingViewModel model, IEnumerable<HttpPostedFileBase> files)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            //image stuff
+        //            using (var messageProducer = new MQ.MSGProducer("Epilogger", "FileImage"))
+        //            {
+        //                foreach (var fileKey in Request.Files.AllKeys)
+        //                {
+        //                    var file = Request.Files[fileKey];
+
+        //                    var fileMemoryStream = new MemoryStream();
+        //                    file.InputStream.CopyTo(fileMemoryStream);
+
+        //                    var imageMessage = new MQ.Messages.FileImageMSG(model.EventId, null, fileMemoryStream.ToArray(), file.FileName);
+        //                    messageProducer.SendMessage(imageMessage);
+        //                }
+        //            }
+        //            Data.LiveModeCustomSetting liveSetting;
+        //            Mapper.CreateMap<LiveModeCustomSettingViewModel, Data.LiveModeCustomSetting>();
+        //            liveSetting = Mapper.Map<LiveModeCustomSettingViewModel, Data.LiveModeCustomSetting>(model);
+        //            _lm.Save(liveSetting);
+        //            return RedirectToAction("#");
+        //        }
+        //        catch (Exception ex)
+        //        {
+
+        //        }
+        //    }
+       
+        //    return View(model);
+        //}
+
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
+        //public virtual ActionResult LiveModeEdit(string eventID)
+        //{
+        //    LiveModeViewModel Model = new LiveModeViewModel();
+        //    int id = 0;
+        //    try
+        //    {
+        //        id = Convert.ToInt16(eventID);
+        //    }
+        //    catch
+        //    { //todo
+        //    }
+        //    LiveModeCustomSetting currentLiveModel = _lm.FindByEventID(id);
+
+        //    if (currentLiveModel == null || currentLiveModel.Id == 0)
+        //    {
+        //        Model.EventId = id;
+        //        return View("Live4x3", Model);
+        //    }
+        //    else
+        //    {
+        //        Mapper.CreateMap<Data.LiveModeCustomSetting, LiveModeViewModel>();
+        //        Model = Mapper.Map<Data.LiveModeCustomSetting, LiveModeViewModel>(currentLiveModel);
+        //        return View("Live4x3", Model);
+        //    }
+        //}
+        
+        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to edit live mode")]
         [HttpPost]
-        public virtual ActionResult CreateLiveMode(LiveModeCustomSettingViewModel model, IEnumerable<HttpPostedFileBase> files)
+        public virtual ActionResult CustomizeLiveMode(LiveModeViewModel model)
         {
+            // set all inputs to database
             if (ModelState.IsValid)
             {
                 try
                 {
-                    //image stuff
-                    using (var messageProducer = new MQ.MSGProducer("Epilogger", "FileImage"))
-                    {
-                        foreach (var fileKey in Request.Files.AllKeys)
-                        {
-                            var file = Request.Files[fileKey];
+                    LiveModeCustomSettingViewModel liveCustom = new LiveModeCustomSettingViewModel();
+                    
 
-                            var fileMemoryStream = new MemoryStream();
-                            file.InputStream.CopyTo(fileMemoryStream);
+                    liveCustom.EventId = model.EventId;
+                    liveCustom.LightTheme = Request.Form["light_dark_theme"] == "light";
+                    liveCustom.FooterTextColor = model.CustomSettings.FooterTextColor;
+                    liveCustom.LinkColour = model.CustomSettings.LinkColour;
+                    liveCustom.TwitterUserNameColour = model.CustomSettings.TwitterUserNameColour;
+                    liveCustom.Logo = model.CustomSettings.Logo;
 
-                            var imageMessage = new MQ.Messages.FileImageMSG(model.EventId, null, fileMemoryStream.ToArray(), file.FileName);
-                            messageProducer.SendMessage(imageMessage);
-                        }
-                    }
                     Data.LiveModeCustomSetting liveSetting;
                     Mapper.CreateMap<LiveModeCustomSettingViewModel, Data.LiveModeCustomSetting>();
-                    liveSetting = Mapper.Map<LiveModeCustomSettingViewModel, Data.LiveModeCustomSetting>(model);
+                    liveSetting = Mapper.Map<LiveModeCustomSettingViewModel, Data.LiveModeCustomSetting>(liveCustom);
                     _lm.Save(liveSetting);
-                    return RedirectToAction("CreateEventTweets");
+
+                    return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
                 }
                 catch (Exception ex)
                 {
-
+                    // to do
                 }
             }
-       
+
             return View(model);
         }
 
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
+        public virtual ActionResult UploadSponsors()
+        {
+            var path = @"C:\\";
+            var file = string.Empty;
 
-//-------- 
-        
-        public virtual ActionResult UploadFile(string qqfile)
+            Uri imageurl;
+            List<string> imageurls = new List<string>();
+            
+            try
+            {
+                foreach (HttpRequestBase rFile in Request.Files)
+                {
+
+                var stream = Request.InputStream;
+                if (String.IsNullOrEmpty(Request["qqfile"]))
+                {
+                    // IE
+                    var postedFile = rFile;
+                    if (postedFile != null) stream = postedFile.InputStream;
+                    file = Path.Combine(path, System.IO.Path.GetFileName(Request.Files[0].FileName));
+                }
+                else
+                {
+                    //Webkit, Mozilla
+                    file = Path.Combine(path, Request["qqfile"]);
+                }
+
+                System.Drawing.Image img = System.Drawing.Image.FromStream(stream);
+                bool correctSize = ((img.Width <= 250 && img.Width >= 220) && (img.Height <= 150 && img.Height >= 120));
+
+                if (!correctSize)
+                    throw new System.ArgumentException("Invalid Size");
+
+                Stream resizedImage = null;
+                Helpers.ResizeImageStream(stream, img.Width, img.Height, true, out resizedImage);
+
+                    //Azure Storage Code - Full Profile pic
+                    imageurl = AzureImageStorageHelper.StoreProfileImage("Sponsor-" + Session.SessionID, "logosponsor", resizedImage);
+                    imageurls.Add(imageurl.AbsoluteUri);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, "application/json");
+            }
+
+            
+            return Json(new { success = true, imageurls }, "text/html");
+        }
+           
+        public virtual ActionResult UploadLogo()
         {
             var path = @"C:\\";
             var file = string.Empty;
@@ -1412,12 +1526,21 @@ namespace Epilogger.Web.Controllers {
                 else
                 {
                     //Webkit, Mozilla
-                    file = Path.Combine(path, qqfile);
+                    file = Path.Combine(path, Request["qqfile"]);
                 }
 
                 //Resize the image
+                //Stream resizedImage = null;
+                //ResizeImageStream(stream, 120, 120, true, out resizedImage);
+
+                System.Drawing.Image img = System.Drawing.Image.FromStream(stream);
+                bool correctSize = ((img.Width <= 250 && img.Width >= 220) && (img.Height <= 150 && img.Height >= 120));
+
+                if (!correctSize)
+                    throw new System.ArgumentException("Invalid Size");
+
                 Stream resizedImage = null;
-               Helpers.ResizeImageStream(stream, 120, 120, true, out resizedImage);
+                Helpers.ResizeImageStream(stream, img.Width, img.Height, true, out resizedImage);
 
                 //Azure Storage Code - Full Profile pic
                 imageurl = AzureImageStorageHelper.StoreProfileImage("Logo-" + Session.SessionID, "logosponsor", resizedImage);
@@ -1429,6 +1552,41 @@ namespace Epilogger.Web.Controllers {
             }
 
             return Json(new { success = true, imageurl = imageurl.AbsoluteUri }, "text/html");
+        }
+
+        protected bool DeleteAzureImage(string Filename, string ContainerName)
+        {
+            try
+            {
+                // Variables for the cloud storage objects.
+                CloudStorageAccount cloudStorageAccount1 = default(CloudStorageAccount);
+                CloudBlobClient blobClient = default(CloudBlobClient);
+                CloudBlobContainer blobContainer = default(CloudBlobContainer);
+                CloudBlob blob = default(CloudBlob);
+
+                cloudStorageAccount1 = CloudStorageAccount.Parse("DefaultEndpointsProtocol=http;AccountName=epiloggerphotos;AccountKey=xbSt0uQAqExzWpc60pcmP6k49Uu7raxPG1BA5+aBhrAAdNxaoiFAZ67jQmG/iiJIeFeemnp74NRuuFAXaaxGJQ==");
+
+                // Create the blob client, which provides authenticated access to the Blob service.
+                blobClient = cloudStorageAccount1.CreateCloudBlobClient();
+
+                // Get the container reference.
+                blobContainer = blobClient.GetContainerReference(ContainerName);
+
+                // Get a reference to the blob.
+                blob = blobContainer.GetBlobReference(Filename);
+                blob.Properties.ContentType = "image/jpeg";
+
+                //
+                //Delete the file
+                blob.Delete();
+
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 		[CompressFilter]
@@ -2128,6 +2286,7 @@ namespace Epilogger.Web.Controllers {
 				var topTweetersStats = new TopTweetersStats();
 				var model = new LiveModeViewModel
 								{
+                                    EventSlug = requestedEvent.EventSlug,
 									EventId = requestedEvent.ID,
 									CustomSettings = new LiveModeCustomSettingsService().FindByEventID(requestedEvent.ID),
 									Images = _is.FindByEventIdOrderDescTakeX(requestedEvent.ID, 5, FromDateTime(), ToDateTime()).ToList(),
@@ -2135,9 +2294,9 @@ namespace Epilogger.Web.Controllers {
 									TopTweeters = topTweetersStats.Calculate(_ts.GetTop10TweetersByEventID(requestedEvent.ID, FromDateTime(), ToDateTime())).ToList(),
 									Hashtag = requestedEvent.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0].Contains("#")
 												? requestedEvent.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0]
-												: "#" + requestedEvent.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0]
+												: "#" + requestedEvent.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0],
 								};
-
+               
 				return View(model);
 			}
 			ModelState.AddModelError(string.Empty, "The event you're trying to visit doesn't exist.");

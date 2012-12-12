@@ -72,6 +72,11 @@ namespace Epilogger.Web.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Create() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Create);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult EventBySlug() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.EventBySlug);
         }
@@ -152,18 +157,8 @@ namespace Epilogger.Web.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult LiveMode() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.LiveMode);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult CreateLiveMode() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.CreateLiveMode);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult UploadFile() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.UploadFile);
+        public System.Web.Mvc.ActionResult CustomizeLiveMode() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.CustomizeLiveMode);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -254,10 +249,10 @@ namespace Epilogger.Web.Controllers {
             public readonly string Details = "Details";
             public readonly string AllPhotos = "AllPhotos";
             public readonly string AllTweets = "AllTweets";
-            public readonly string Create = "Create";
             public readonly string CreateEvent = "CreateEvent";
             public readonly string CreateEventTweets = "CreateEventTweets";
             public readonly string CreateEventFinal = "CreateEventFinal";
+            public readonly string Create = "Create";
             public readonly string EventBySlug = "EventBySlug";
             public readonly string GetImageComments = "GetImageComments";
             public readonly string GetImageCommentsPage1 = "GetImageCommentsPage1";
@@ -274,9 +269,9 @@ namespace Epilogger.Web.Controllers {
             public readonly string AllCheckins = "AllCheckins";
             public readonly string AllLinks = "AllLinks";
             public readonly string AllStats = "AllStats";
-            public readonly string LiveMode = "LiveMode";
-            public readonly string CreateLiveMode = "CreateLiveMode";
-            public readonly string UploadFile = "UploadFile";
+            public readonly string CustomizeLiveMode = "CustomizeLiveMode";
+            public readonly string UploadSponsors = "UploadSponsors";
+            public readonly string UploadLogo = "UploadLogo";
             public readonly string Edit = "Edit";
             public readonly string VenueSearch = "VenueSearch";
             public readonly string SearchVenues = "SearchVenues";
@@ -303,10 +298,10 @@ namespace Epilogger.Web.Controllers {
             public const string Details = "Details";
             public const string AllPhotos = "AllPhotos";
             public const string AllTweets = "AllTweets";
-            public const string Create = "Create";
             public const string CreateEvent = "CreateEvent";
             public const string CreateEventTweets = "CreateEventTweets";
             public const string CreateEventFinal = "CreateEventFinal";
+            public const string Create = "Create";
             public const string EventBySlug = "EventBySlug";
             public const string GetImageComments = "GetImageComments";
             public const string GetImageCommentsPage1 = "GetImageCommentsPage1";
@@ -323,9 +318,9 @@ namespace Epilogger.Web.Controllers {
             public const string AllCheckins = "AllCheckins";
             public const string AllLinks = "AllLinks";
             public const string AllStats = "AllStats";
-            public const string LiveMode = "LiveMode";
-            public const string CreateLiveMode = "CreateLiveMode";
-            public const string UploadFile = "UploadFile";
+            public const string CustomizeLiveMode = "CustomizeLiveMode";
+            public const string UploadSponsors = "UploadSponsors";
+            public const string UploadLogo = "UploadLogo";
             public const string Edit = "Edit";
             public const string VenueSearch = "VenueSearch";
             public const string SearchVenues = "SearchVenues";
@@ -390,6 +385,13 @@ namespace Epilogger.Web.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_CreateEventFinal {
             public readonly string displayModel = "displayModel";
+        }
+        static readonly ActionParamsClass_Create s_params_Create = new ActionParamsClass_Create();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Create CreateParams { get { return s_params_Create; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Create {
+            public readonly string model = "model";
         }
         static readonly ActionParamsClass_EventBySlug s_params_EventBySlug = new ActionParamsClass_EventBySlug();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -515,27 +517,13 @@ namespace Epilogger.Web.Controllers {
         public class ActionParamsClass_AllStats {
             public readonly string id = "id";
         }
-        static readonly ActionParamsClass_LiveMode s_params_LiveMode = new ActionParamsClass_LiveMode();
+        static readonly ActionParamsClass_CustomizeLiveMode s_params_CustomizeLiveMode = new ActionParamsClass_CustomizeLiveMode();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_LiveMode LiveModeParams { get { return s_params_LiveMode; } }
+        public ActionParamsClass_CustomizeLiveMode CustomizeLiveModeParams { get { return s_params_CustomizeLiveMode; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_LiveMode {
-            public readonly string eventID = "eventID";
-        }
-        static readonly ActionParamsClass_CreateLiveMode s_params_CreateLiveMode = new ActionParamsClass_CreateLiveMode();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_CreateLiveMode CreateLiveModeParams { get { return s_params_CreateLiveMode; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_CreateLiveMode {
+        public class ActionParamsClass_CustomizeLiveMode {
             public readonly string model = "model";
             public readonly string files = "files";
-        }
-        static readonly ActionParamsClass_UploadFile s_params_UploadFile = new ActionParamsClass_UploadFile();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_UploadFile UploadFileParams { get { return s_params_UploadFile; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_UploadFile {
-            public readonly string qqfile = "qqfile";
         }
         static readonly ActionParamsClass_Edit s_params_Edit = new ActionParamsClass_Edit();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -757,6 +745,12 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
+        public override System.Web.Mvc.ActionResult Create(Epilogger.Web.Models.CreateEventViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Create);
+            callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
         public override System.Web.Mvc.ActionResult EventBySlug(string eventSlug) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.EventBySlug);
             callInfo.RouteValueDictionary.Add("eventSlug", eventSlug);
@@ -871,22 +865,19 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult LiveMode(string eventID) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.LiveMode);
-            callInfo.RouteValueDictionary.Add("eventID", eventID);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult CreateLiveMode(Epilogger.Web.Models.LiveModeCustomSettingViewModel model, System.Collections.Generic.IEnumerable<System.Web.HttpPostedFileBase> files) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateLiveMode);
+        public override System.Web.Mvc.ActionResult CustomizeLiveMode(Epilogger.Web.Models.LiveModeViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CustomizeLiveMode);
             callInfo.RouteValueDictionary.Add("model", model);
-            callInfo.RouteValueDictionary.Add("files", files);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult UploadFile(string qqfile) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.UploadFile);
-            callInfo.RouteValueDictionary.Add("qqfile", qqfile);
+        public override System.Web.Mvc.ActionResult UploadSponsors() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.UploadSponsors);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult UploadLogo() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.UploadLogo);
             return callInfo;
         }
 

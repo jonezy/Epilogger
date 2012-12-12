@@ -96,6 +96,7 @@
       <resource path="~/Public/js/fineuploader.jquery-3.0/jquery.fineuploader-3.0.js"/>
       <resource path="~/Public/js/epiloggerInit.js" />
       <resource path="~/Public/js/LiveMode.js" />
+      <resource path="~/Public/js/Fullscreen.js" />
     </resourceSet>
 
 

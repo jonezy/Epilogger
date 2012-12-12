@@ -501,6 +501,14 @@ namespace Epilogger.Data{
             StoredProcedure sp=new StoredProcedure("GetHomePageActivity",this.Provider);
             return sp;
         }
+        public StoredProcedure GetImagesWithMemboxIDPaged(int EventID,int skip,int take,bool IncludeVideos){
+            StoredProcedure sp=new StoredProcedure("GetImagesWithMemboxIDPaged",this.Provider);
+            sp.Command.AddParameter("EventID",EventID,DbType.Int32);
+            sp.Command.AddParameter("skip",skip,DbType.Int32);
+            sp.Command.AddParameter("take",take,DbType.Int32);
+            sp.Command.AddParameter("IncludeVideos",IncludeVideos,DbType.Boolean);
+            return sp;
+        }
         public StoredProcedure GetLastTweetIDByEventID(int EventID){
             StoredProcedure sp=new StoredProcedure("GetLastTweetIDByEventID",this.Provider);
             sp.Command.AddParameter("EventID",EventID,DbType.Int32);
