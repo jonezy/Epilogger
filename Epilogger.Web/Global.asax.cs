@@ -547,7 +547,8 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.IsFeatured, opt => opt.UseValue(false))
                 .ForMember(dest => dest.FeaturedStartDateTime, opt => opt.UseValue(DateTime.Parse("01/01/1800")))
                 .ForMember(dest => dest.FeaturedEndDateTime, opt => opt.UseValue(DateTime.Parse("01/01/1800")))
-                .ForMember(dest => dest.EventBriteEID, opt => opt.Ignore());
+                .ForMember(dest => dest.EventBriteEID, opt => opt.Ignore())
+                .ForMember(dest => dest.LastCollectionDateTime, opt => opt.Ignore());
 
             Mapper.CreateMap<User, DashboardProfileViewModel>()
                 .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => string.Format("{0} {1}", src.FirstName, src.LastName)))

@@ -344,6 +344,10 @@ namespace Epilogger.Web {
             return db.GetTrendingEventsByActivity().ExecuteTypedList<Event>();
         }
 
+        public IEnumerable<Event> FindAllActiveEvents()
+        {
+            return db.Events.Where(e => e.IsActive);
+        }
 
     }
 }

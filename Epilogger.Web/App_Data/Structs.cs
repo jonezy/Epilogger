@@ -1980,7 +1980,7 @@ namespace Epilogger.Data {
         
         /// <summary>
         /// Table: LiveModeCustomSettings
-        /// Primary Key: 
+        /// Primary Key: Id
         /// </summary>
 
         public class LiveModeCustomSettingsTable: DatabaseTable {
@@ -1992,11 +1992,11 @@ namespace Epilogger.Data {
 
                 Columns.Add(new DatabaseColumn("Id", this)
                 {
-	                IsPrimaryKey = false,
+	                IsPrimaryKey = true,
 	                DataType = DbType.Int32,
 	                IsNullable = false,
 	                AutoIncrement = true,
-	                IsForeignKey = false,
+	                IsForeignKey = true,
 	                MaxLength = 0
                 });
 
@@ -2068,6 +2068,16 @@ namespace Epilogger.Data {
 	                AutoIncrement = false,
 	                IsForeignKey = false,
 	                MaxLength = 500
+                });
+
+                Columns.Add(new DatabaseColumn("LightTheme", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Boolean,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
                 });
                     
                 
@@ -2167,6 +2177,18 @@ namespace Epilogger.Data {
    			public static string SponsorLogosColumn{
 			      get{
         			return "SponsorLogos";
+      			}
+		    }
+           
+            public IColumn LightTheme{
+                get{
+                    return this.GetColumn("LightTheme");
+                }
+            }
+            				
+   			public static string LightThemeColumn{
+			      get{
+        			return "LightTheme";
       			}
 		    }
            
@@ -2469,6 +2491,333 @@ namespace Epilogger.Data {
    			public static string IPAddressColumn{
 			      get{
         			return "IPAddress";
+      			}
+		    }
+           
+                    
+        }
+        
+        /// <summary>
+        /// Table: CollectionQueueSettings
+        /// Primary Key: ID
+        /// </summary>
+
+        public class CollectionQueueSettingsTable: DatabaseTable {
+            
+            public CollectionQueueSettingsTable(IDataProvider provider):base("CollectionQueueSettings",provider){
+                ClassName = "CollectionQueueSetting";
+                SchemaName = "dbo";
+                
+
+                Columns.Add(new DatabaseColumn("ID", this)
+                {
+	                IsPrimaryKey = true,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = true,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("UpdateEventsModeTime", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("BeforeEventPollingTime", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("DuringEventPollingTime", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("AfterEventPollingTime", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("OnGoingEventsPollingTime", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("FullEventPollingTime", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("WorkerCollectionThreads", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("WorkerImageThreads", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("WorkerLinkThreads", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("WorkeSystemThreads", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("WorkerTweetsThreads", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("CalculateTrendingEventsUpdateInterval", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("MinCollectionRate", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+                    
+                
+                
+            }
+            
+            public IColumn ID{
+                get{
+                    return this.GetColumn("ID");
+                }
+            }
+            				
+   			public static string IDColumn{
+			      get{
+        			return "ID";
+      			}
+		    }
+           
+            public IColumn UpdateEventsModeTime{
+                get{
+                    return this.GetColumn("UpdateEventsModeTime");
+                }
+            }
+            				
+   			public static string UpdateEventsModeTimeColumn{
+			      get{
+        			return "UpdateEventsModeTime";
+      			}
+		    }
+           
+            public IColumn BeforeEventPollingTime{
+                get{
+                    return this.GetColumn("BeforeEventPollingTime");
+                }
+            }
+            				
+   			public static string BeforeEventPollingTimeColumn{
+			      get{
+        			return "BeforeEventPollingTime";
+      			}
+		    }
+           
+            public IColumn DuringEventPollingTime{
+                get{
+                    return this.GetColumn("DuringEventPollingTime");
+                }
+            }
+            				
+   			public static string DuringEventPollingTimeColumn{
+			      get{
+        			return "DuringEventPollingTime";
+      			}
+		    }
+           
+            public IColumn AfterEventPollingTime{
+                get{
+                    return this.GetColumn("AfterEventPollingTime");
+                }
+            }
+            				
+   			public static string AfterEventPollingTimeColumn{
+			      get{
+        			return "AfterEventPollingTime";
+      			}
+		    }
+           
+            public IColumn OnGoingEventsPollingTime{
+                get{
+                    return this.GetColumn("OnGoingEventsPollingTime");
+                }
+            }
+            				
+   			public static string OnGoingEventsPollingTimeColumn{
+			      get{
+        			return "OnGoingEventsPollingTime";
+      			}
+		    }
+           
+            public IColumn FullEventPollingTime{
+                get{
+                    return this.GetColumn("FullEventPollingTime");
+                }
+            }
+            				
+   			public static string FullEventPollingTimeColumn{
+			      get{
+        			return "FullEventPollingTime";
+      			}
+		    }
+           
+            public IColumn WorkerCollectionThreads{
+                get{
+                    return this.GetColumn("WorkerCollectionThreads");
+                }
+            }
+            				
+   			public static string WorkerCollectionThreadsColumn{
+			      get{
+        			return "WorkerCollectionThreads";
+      			}
+		    }
+           
+            public IColumn WorkerImageThreads{
+                get{
+                    return this.GetColumn("WorkerImageThreads");
+                }
+            }
+            				
+   			public static string WorkerImageThreadsColumn{
+			      get{
+        			return "WorkerImageThreads";
+      			}
+		    }
+           
+            public IColumn WorkerLinkThreads{
+                get{
+                    return this.GetColumn("WorkerLinkThreads");
+                }
+            }
+            				
+   			public static string WorkerLinkThreadsColumn{
+			      get{
+        			return "WorkerLinkThreads";
+      			}
+		    }
+           
+            public IColumn WorkeSystemThreads{
+                get{
+                    return this.GetColumn("WorkeSystemThreads");
+                }
+            }
+            				
+   			public static string WorkeSystemThreadsColumn{
+			      get{
+        			return "WorkeSystemThreads";
+      			}
+		    }
+           
+            public IColumn WorkerTweetsThreads{
+                get{
+                    return this.GetColumn("WorkerTweetsThreads");
+                }
+            }
+            				
+   			public static string WorkerTweetsThreadsColumn{
+			      get{
+        			return "WorkerTweetsThreads";
+      			}
+		    }
+           
+            public IColumn CalculateTrendingEventsUpdateInterval{
+                get{
+                    return this.GetColumn("CalculateTrendingEventsUpdateInterval");
+                }
+            }
+            				
+   			public static string CalculateTrendingEventsUpdateIntervalColumn{
+			      get{
+        			return "CalculateTrendingEventsUpdateInterval";
+      			}
+		    }
+           
+            public IColumn MinCollectionRate{
+                get{
+                    return this.GetColumn("MinCollectionRate");
+                }
+            }
+            				
+   			public static string MinCollectionRateColumn{
+			      get{
+        			return "MinCollectionRate";
       			}
 		    }
            
@@ -3497,6 +3846,16 @@ namespace Epilogger.Data {
 	                IsForeignKey = false,
 	                MaxLength = 20
                 });
+
+                Columns.Add(new DatabaseColumn("LastCollectionDateTime", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.DateTime,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
                     
                 
                 
@@ -3859,6 +4218,103 @@ namespace Epilogger.Data {
    			public static string EventBriteEIDColumn{
 			      get{
         			return "EventBriteEID";
+      			}
+		    }
+           
+            public IColumn LastCollectionDateTime{
+                get{
+                    return this.GetColumn("LastCollectionDateTime");
+                }
+            }
+            				
+   			public static string LastCollectionDateTimeColumn{
+			      get{
+        			return "LastCollectionDateTime";
+      			}
+		    }
+           
+                    
+        }
+        
+        /// <summary>
+        /// Table: SponsorImages
+        /// Primary Key: ID
+        /// </summary>
+
+        public class SponsorImagesTable: DatabaseTable {
+            
+            public SponsorImagesTable(IDataProvider provider):base("SponsorImages",provider){
+                ClassName = "SponsorImage";
+                SchemaName = "dbo";
+                
+
+                Columns.Add(new DatabaseColumn("ID", this)
+                {
+	                IsPrimaryKey = true,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = true,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("SponsorURL", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.AnsiString,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 250
+                });
+
+                Columns.Add(new DatabaseColumn("LiveModeID", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = true,
+	                MaxLength = 0
+                });
+                    
+                
+                
+            }
+            
+            public IColumn ID{
+                get{
+                    return this.GetColumn("ID");
+                }
+            }
+            				
+   			public static string IDColumn{
+			      get{
+        			return "ID";
+      			}
+		    }
+           
+            public IColumn SponsorURL{
+                get{
+                    return this.GetColumn("SponsorURL");
+                }
+            }
+            				
+   			public static string SponsorURLColumn{
+			      get{
+        			return "SponsorURL";
+      			}
+		    }
+           
+            public IColumn LiveModeID{
+                get{
+                    return this.GetColumn("LiveModeID");
+                }
+            }
+            				
+   			public static string LiveModeIDColumn{
+			      get{
+        			return "LiveModeID";
       			}
 		    }
            
@@ -5727,311 +6183,6 @@ namespace Epilogger.Data {
    			public static string UserIDColumn{
 			      get{
         			return "UserID";
-      			}
-		    }
-           
-                    
-        }
-        
-        /// <summary>
-        /// Table: CollectionQueueSettings
-        /// Primary Key: ID
-        /// </summary>
-
-        public class CollectionQueueSettingsTable: DatabaseTable {
-            
-            public CollectionQueueSettingsTable(IDataProvider provider):base("CollectionQueueSettings",provider){
-                ClassName = "CollectionQueueSetting";
-                SchemaName = "dbo";
-                
-
-                Columns.Add(new DatabaseColumn("ID", this)
-                {
-	                IsPrimaryKey = true,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = true,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("UpdateEventsModeTime", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("BeforeEventPollingTime", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("DuringEventPollingTime", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("AfterEventPollingTime", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("OnGoingEventsPollingTime", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("FullEventPollingTime", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("WorkerCollectionThreads", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("WorkerImageThreads", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("WorkerLinkThreads", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("WorkeSystemThreads", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("WorkerTweetsThreads", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("CalculateTrendingEventsUpdateInterval", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-                    
-                
-                
-            }
-            
-            public IColumn ID{
-                get{
-                    return this.GetColumn("ID");
-                }
-            }
-            				
-   			public static string IDColumn{
-			      get{
-        			return "ID";
-      			}
-		    }
-           
-            public IColumn UpdateEventsModeTime{
-                get{
-                    return this.GetColumn("UpdateEventsModeTime");
-                }
-            }
-            				
-   			public static string UpdateEventsModeTimeColumn{
-			      get{
-        			return "UpdateEventsModeTime";
-      			}
-		    }
-           
-            public IColumn BeforeEventPollingTime{
-                get{
-                    return this.GetColumn("BeforeEventPollingTime");
-                }
-            }
-            				
-   			public static string BeforeEventPollingTimeColumn{
-			      get{
-        			return "BeforeEventPollingTime";
-      			}
-		    }
-           
-            public IColumn DuringEventPollingTime{
-                get{
-                    return this.GetColumn("DuringEventPollingTime");
-                }
-            }
-            				
-   			public static string DuringEventPollingTimeColumn{
-			      get{
-        			return "DuringEventPollingTime";
-      			}
-		    }
-           
-            public IColumn AfterEventPollingTime{
-                get{
-                    return this.GetColumn("AfterEventPollingTime");
-                }
-            }
-            				
-   			public static string AfterEventPollingTimeColumn{
-			      get{
-        			return "AfterEventPollingTime";
-      			}
-		    }
-           
-            public IColumn OnGoingEventsPollingTime{
-                get{
-                    return this.GetColumn("OnGoingEventsPollingTime");
-                }
-            }
-            				
-   			public static string OnGoingEventsPollingTimeColumn{
-			      get{
-        			return "OnGoingEventsPollingTime";
-      			}
-		    }
-           
-            public IColumn FullEventPollingTime{
-                get{
-                    return this.GetColumn("FullEventPollingTime");
-                }
-            }
-            				
-   			public static string FullEventPollingTimeColumn{
-			      get{
-        			return "FullEventPollingTime";
-      			}
-		    }
-           
-            public IColumn WorkerCollectionThreads{
-                get{
-                    return this.GetColumn("WorkerCollectionThreads");
-                }
-            }
-            				
-   			public static string WorkerCollectionThreadsColumn{
-			      get{
-        			return "WorkerCollectionThreads";
-      			}
-		    }
-           
-            public IColumn WorkerImageThreads{
-                get{
-                    return this.GetColumn("WorkerImageThreads");
-                }
-            }
-            				
-   			public static string WorkerImageThreadsColumn{
-			      get{
-        			return "WorkerImageThreads";
-      			}
-		    }
-           
-            public IColumn WorkerLinkThreads{
-                get{
-                    return this.GetColumn("WorkerLinkThreads");
-                }
-            }
-            				
-   			public static string WorkerLinkThreadsColumn{
-			      get{
-        			return "WorkerLinkThreads";
-      			}
-		    }
-           
-            public IColumn WorkeSystemThreads{
-                get{
-                    return this.GetColumn("WorkeSystemThreads");
-                }
-            }
-            				
-   			public static string WorkeSystemThreadsColumn{
-			      get{
-        			return "WorkeSystemThreads";
-      			}
-		    }
-           
-            public IColumn WorkerTweetsThreads{
-                get{
-                    return this.GetColumn("WorkerTweetsThreads");
-                }
-            }
-            				
-   			public static string WorkerTweetsThreadsColumn{
-			      get{
-        			return "WorkerTweetsThreads";
-      			}
-		    }
-           
-            public IColumn CalculateTrendingEventsUpdateInterval{
-                get{
-                    return this.GetColumn("CalculateTrendingEventsUpdateInterval");
-                }
-            }
-            				
-   			public static string CalculateTrendingEventsUpdateIntervalColumn{
-			      get{
-        			return "CalculateTrendingEventsUpdateInterval";
       			}
 		    }
            

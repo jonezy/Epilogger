@@ -1253,7 +1253,7 @@ ul#left-nav li ul li a.current {color:#a44b79;}
 
 .homepage-trending     
 {
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 
@@ -2999,3 +2999,9 @@ a.fdbk_tab_hidden {
     vertical-align: top;
 }
 */
+
+
+.homeBlurb {
+    font-size: 17px;
+    line-height: 22px;
+}

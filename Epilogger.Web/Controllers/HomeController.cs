@@ -15,69 +15,129 @@ namespace Epilogger.Web.Controllers {
 
     public partial class HomeController : BaseController
     {
-        UserLogService LS = new UserLogService();
-        ClickLogService CS = new ClickLogService();
-        EventService ES = new EventService();
-        ImageService IS = new ImageService();
+        readonly UserLogService _ls = new UserLogService();
+        readonly ClickLogService _cs = new ClickLogService();
+        readonly EventService _es = new EventService();
+        readonly ImageService _is = new ImageService();
 
         [CacheFilter(Duration = 10)]
         [CompressFilter]
         public virtual ActionResult Index()
         {
-            ViewBag.Message = "Welcome to Epilogger!";
 
-            var activity = ES.GetHomepageActivity();
+            var activity = _es.GetHomepageActivity();
             var model = new HomepageViewModel(
                 activity.Take(8).ToList(),
                 0,
                 activity.Count()
                 ) {HomepageTotal = new HomepageTotal()};
 
-            model.HomepageTotal = new HomepageTotals().HomepageTotal;
-
-
-            //Do the redis stuff to get the Trending Events
-            var eplRedis = new Common.Redis();
-            var trendingEventId = eplRedis.GetTrendingEvents();
-            var trendingEvents = new List<Event>();
-            foreach (var e in trendingEventId.Take(10).Select(eventId => ES.FindByID((int.Parse(eventId)))))
-            {
-                if (e !=null)
-                {
-                    e.Name = e.Name.TruncateAtWord(30);
-                    trendingEvents.Add(e);
-                }
-            }
-            model.TrendingEvents = trendingEvents;
-
-            //Convert the Image ID in the ActivityContent to the Image HTML from the template. Facilite common HTML and single place for image HTML.
             foreach (var item in model.Activity.Where(item => item.ActivityType == ActivityType.PHOTOS_VIDEOS))
             {
-                item.Image = IS.FindByID(Convert.ToInt32(item.ActivityContent));
+                item.Image = _is.FindByID(Convert.ToInt32(item.ActivityContent));
             }
+
 
             //This is for the featured Events
-
             //Get all the Events that are currently features
-            var featured = new List<HomepageFeaturedEventsViewModel>();
-            foreach (var evt in ES.GetFeaturedEvents())
-            {
-                var fViewModel = new HomepageFeaturedEventsViewModel
-                                     {
-                                         Event = evt,
-                                         TopImages = IS.GetNewestPhotosByEventId(evt.ID, 5)
-                                     };
-                featured.Add(fViewModel);
-            }
-
+            var featured = _es.GetFeaturedEvents().Select(evt => new HomepageFeaturedEventsViewModel
+                                                                     {
+                                                                         Event = evt, TopImages = _is.GetNewestPhotosByEventId(evt.ID, 5)
+                                                                     }).ToList();
             model.FeaturedEvents = featured;
             
 
-            var sc = new StatusMessagesService();
-            model.StatusMessages = sc.GetLast10Messages();
+            //No featured events, choose a current short event or ...
+            if (featured.Count==0)
+            {
+                var activeEvents = _es.FindAllActiveEvents();
+
+                foreach (var evt in activeEvents)
+                {
+                    if (evt.EndDateTime == null) continue;
+                    
+                    if (((((DateTime)evt.EndDateTime) - evt.StartDateTime).TotalHours <= 8 && evt.StartDateTime < DateTime.UtcNow && evt.EndDateTime > DateTime.UtcNow))
+                    {
+                        featured.Add(new HomepageFeaturedEventsViewModel() { Event = evt, TopImages = _is.GetNewestPhotosByEventId(evt.ID, 5) });
+                    }
+                }
+
+                //Do we have any?
+                if (featured.Count == 0)
+                {
+                    foreach (var evt in activeEvents)
+                    {
+                        if (evt.EndDateTime == null) continue;
+
+                        if ((evt.StartDateTime - DateTime.UtcNow).TotalHours < 12 && (evt.StartDateTime - DateTime.UtcNow).TotalHours >= 0)
+                        {
+                            featured.Add(new HomepageFeaturedEventsViewModel() { Event = evt, TopImages = _is.GetNewestPhotosByEventId(evt.ID, 5) });
+                        }
+                    }
+                }
+
+                //Do we have any?
+                if (featured.Count == 0)
+                {
+                    foreach (var evt in activeEvents)
+                    {
+                        if (evt.EndDateTime == null) continue;
+
+                        if (((DateTime.UtcNow - ((DateTime)evt.EndDateTime)).TotalHours < 12 && (DateTime.UtcNow - ((DateTime)evt.EndDateTime)).TotalHours >= 0))
+                        {
+                            featured.Add(new HomepageFeaturedEventsViewModel() { Event = evt, TopImages = _is.GetNewestPhotosByEventId(evt.ID, 5) });
+                        }
+                    }
+
+                    if (featured.Count == 0)
+                    {
+                        foreach (var evt in activeEvents)
+                        {
+                            if (evt.EndDateTime == null) continue;
+
+                            if (((DateTime.UtcNow - ((DateTime)evt.EndDateTime)).TotalHours < 72 && (DateTime.UtcNow - ((DateTime)evt.EndDateTime)).TotalHours >= 0))
+                            {
+                                featured.Add(new HomepageFeaturedEventsViewModel() { Event = evt, TopImages = _is.GetNewestPhotosByEventId(evt.ID, 5) });
+                            }
+                        }
+                    }
+                }
+
+                
+                model.FeaturedEvents = featured;
+
+            }
 
             return View(model);
         }
+
+
+
+
+
+
+
+
+
+        //model.HomepageTotal = new HomepageTotals().HomepageTotal;
+        //Do the redis stuff to get the Trending Events
+        //var eplRedis = new Common.Redis();
+        //var trendingEventId = eplRedis.GetTrendingEvents();
+        //var trendingEvents = new List<Event>();
+        //foreach (var e in trendingEventId.Take(10).Select(eventId => ES.FindByID((int.Parse(eventId)))))
+        //{
+        //    if (e !=null)
+        //    {
+        //        e.Name = e.Name.TruncateAtWord(30);
+        //        trendingEvents.Add(e);
+        //    }
+        //}
+        //model.TrendingEvents = trendingEvents;
+
+        //Convert the Image ID in the ActivityContent to the Image HTML from the template. Facilite common HTML and single place for image HTML.
+
+        //var sc = new StatusMessagesService();
+        //model.StatusMessages = sc.GetLast10Messages();
 
         //public ActionResult BetaSignUp() {
         //    IEnumerable<HomepageActivityModel> activity = ES.GetHomepageActivity();
@@ -153,7 +213,7 @@ namespace Epilogger.Web.Controllers {
             clickactions.UserID = CurrentUserID;
             clickactions.IPAddress = HttpContext.Request.UserHostAddress;
 
-            LS.Save(clickactions);
+            _ls.Save(clickactions);
 
             return Json(new { success = true });
         }
@@ -165,14 +225,14 @@ namespace Epilogger.Web.Controllers {
             clickactions.UserID = CurrentUserID;
             clickactions.ClickDateTime = DateTime.UtcNow;
 
-            CS.Save(clickactions);
+            _cs.Save(clickactions);
 
             return Json(new { success = true });
         }
 
         public virtual ActionResult _GetClickMap(Epilogger.Data.userClickTracking clickactions)
         {
-            return PartialView(CS.GetLast200ClicksByLocation(clickactions.location));
+            return PartialView(_cs.GetLast200ClicksByLocation(clickactions.location));
         }
 
         public virtual ActionResult Search()
@@ -184,7 +244,7 @@ namespace Epilogger.Web.Controllers {
         public virtual ActionResult Search(SearchEventViewModel model)
         {
 
-            IEnumerable<Epilogger.Data.Event> evs = ES.GetEventsBySearchTerm(model.SearchTerm);
+            IEnumerable<Epilogger.Data.Event> evs = _es.GetEventsBySearchTerm(model.SearchTerm);
 
             model.Events = Mapper.Map<IEnumerable<Epilogger.Data.Event>, List<DashboardEventViewModel>>(evs);
 
@@ -243,6 +303,7 @@ namespace Epilogger.Web.Controllers {
         {
             return View();
         }
+
         
     }
 }
