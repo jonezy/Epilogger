@@ -49,13 +49,16 @@
             <p class="homeBlurb">
                 We bring the <b>entire experience</b> of an event into one interactive hub. Wondering where all the <b>photos</b> are from that party you went to? Looking for all the resources people were sharing during that conference the other week? We've got it all.
             </p>
-            
             @*<ul id="homepage-trendinglist">
                 @foreach (Epilogger.Data.Event ev in Model.TrendingEvents)
                 {
                     <li>@Html.ActionLink(ev.Name, "details", "events", new { @id = ev.EventSlug }, null)</li>
                 }
             </ul>*@
+        </div>
+        <div style="font-size: 20px; margin-top: 24px; line-height: 26px;">
+            <a href="http://ooomf.com/epilogger" target="_blank"><img src="/Public/images/rounded-57.png" border="0" alt="" style="float: left; margin-right: 15px;"/>
+            Sign up</a> to be the first to know when the Epilogger App hits the iOS App store
         </div>
     </div>
     

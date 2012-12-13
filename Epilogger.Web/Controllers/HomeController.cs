@@ -30,7 +30,7 @@ namespace Epilogger.Web.Controllers {
                 activity.Take(8).ToList(),
                 0,
                 activity.Count()
-                ) {HomepageTotal = new HomepageTotal()};
+                );
 
             foreach (var item in model.Activity.Where(item => item.ActivityType == ActivityType.PHOTOS_VIDEOS))
             {
