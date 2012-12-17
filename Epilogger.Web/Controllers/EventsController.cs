@@ -1505,7 +1505,6 @@ namespace Epilogger.Web.Controllers {
             {
                 
                 var stream = Request.InputStream;
-;
                 if (String.IsNullOrEmpty(Request["qqfile"]))
                 {
                     // IE
@@ -1521,7 +1520,7 @@ namespace Epilogger.Web.Controllers {
                 }
 
                 System.Drawing.Image img = System.Drawing.Image.FromStream(stream);
-                bool correctSize = ((img.Width <= 250 && img.Width >= 220) && (img.Height <= 100 && img.Height >= 30));
+                bool correctSize = ((img.Width <= 250 && img.Width >= 220) && (img.Height <= 125 && img.Height >= 30));
 
                 if (!correctSize)
                     throw new System.ArgumentException("Invalid Size");
