@@ -23,7 +23,8 @@ namespace Epilogger.Web.Models
         public List<Tweet> Tweets { get; set; }
         public List<Image> Images { get; set; }
 
-
+        public string Sponsors { get; set; }
+        public List<SponsorImage> SponsorImageList { get; set; }
 
     }
 }

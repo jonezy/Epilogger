@@ -328,6 +328,7 @@
     <Compile Include="Core\Services\BetaService.cs" />
     <Compile Include="Core\Services\APIApplicationService.cs" />
     <Compile Include="Core\Services\LiveModeCustomSettingsService.cs" />
+    <Compile Include="Core\Services\SponsorImageService.cs" />
     <Compile Include="Core\Services\UserLoginTrackingService.cs" />
     <Compile Include="Core\Services\WidgetCustomSettingsService.cs" />
     <Compile Include="Core\Services\MemoryBoxItemService.cs" />
@@ -505,6 +506,7 @@
     <Content Include="Public\images\CreateEvent\GotoEvent.png" />
     <Content Include="Public\images\CreateEvent\info.png" />
     <Content Include="Public\images\CreateEvent\quotes.png" />
+    <Content Include="Public\images\livemode\close-icon.png" />
     <Content Include="Public\images\livemode\icon-numpeople-dark.png" />
     <Content Include="Public\images\livemode\icon-numphotos-dark.png" />
     <Content Include="Public\images\livemode\icon-numtweets-dark.png" />
@@ -8809,11 +8811,12 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>52502</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://local.epilogger.com</IISUrl>
+          <IISUrl>
+          </IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

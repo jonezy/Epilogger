@@ -5,6 +5,7 @@
 }
 @using Combres.Mvc
 @using Epilogger.Web.Models
+
 <!doctype html>
 <html id="full">
 <head>
@@ -69,7 +70,8 @@
              @Html.HiddenFor(m => Model.CustomSettings.LinkColour, new { id = "hideColor2" });
              @Html.HiddenFor(m => Model.CustomSettings.TwitterUserNameColour, new { id = "hideColor3" });
              @Html.HiddenFor(m => Model.CustomSettings.Logo, new { id = "logo" });  
-               
+             @Html.HiddenFor(m => Model.Sponsors, new { id = "sponsors" });
+              @Html.HiddenFor(m => Model.SponsorImageList, new { id = "sponsor" });                                                             
                                                                                                                                                                                                                                    
             <div id="live_mode_title">
                 <h2>
@@ -111,16 +113,26 @@
                         <img src="../../Public/images/livemode/toolbar/number3.png" alt="step 3" /></div>
                     <div id="fine-uploader-logo">
                     </div>
-                    <div id="thumbnail-fine-uploader">
+                    <div id="thumbnail-fine-uploader" class="close_hover">
+                    @if (@Model.CustomSettings.Logo != null || @Model.CustomSettings.Logo != "")
+                    { 
+                    <img src=@Model.CustomSettings.Logo alt="logo" />
+                    }
                     </div>
-                    <span id="response-url"></span>
                 </div>
                 <div class="live_options">
                     <div class="step_image">
                         <img src="../../Public/images/livemode/toolbar/number4.png" alt="step 4" /></div>
-                    <div id="fine-uploader-sponsors">
+                    <div id="fine-uploader-sponsors">                 
+                      
                         
                     </div>
+                      @foreach (var image in Model.SponsorImageList)
+                        {
+                            <div class="sponsor-thumbs close_hover">
+                                <img src=@image.SponsorURL  />
+                             </div>
+                        }
                 </div>
                 <div class="live_options">
                     <div class="step_image">
@@ -159,8 +171,8 @@
             }
             @foreach (var img in Model.Images)
             {
-                
-                
+
+
                 if (imgCount < 3)
                 {
                 <div class="imgLarge images">
@@ -187,7 +199,7 @@
             {
                 if (Model.CustomSettings.Logo.Length > 0)
                 {
-              //  @Html.Raw(Html.Image(Model.CustomSettings.Logo))
+                    //  @Html.Raw(Html.Image(Model.CustomSettings.Logo))
                     <img src=@Model.CustomSettings.Logo alt="logo" />
                 }
             }
@@ -196,9 +208,17 @@
             <big class="colour1">Tweet! Take a photo! @*Tweetez ! Partagez vos photos!*@
                 <br />
                 Hashtag: <span class="colour2">@Model.Hashtag</span> </big>
-            @if (Model.CustomSettings.SponsorLogos != null)
+            @if (Model.SponsorImageList.Count>0)
             {
-                <h1 class="colour1">@*Notre partenaire*@ Our partners</h1>
+                <h1 id="partner" class="colour1">@*Notre partenaire*@ Our partners</h1>
+                <div id="sponsor_carousel">
+                    <ul id="gallery">
+                   @foreach (var image in Model.SponsorImageList)
+                    {
+                      <li><img src=@image.SponsorURL alt="sponsors" /></li>
+                    }
+                    </ul>
+                </div>
                 @Html.Raw(Model.CustomSettings.SponsorLogos)
             }
         </div>

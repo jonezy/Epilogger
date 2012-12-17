@@ -309,7 +309,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#52cc7f', end
 #toolbar #thumbnail-fine-uploader img {
     width:65px;}
 
-#toolbar .sponsor-thumbs {
+#toolbar .sponsor-thumbs img {
     width:65px;
     float:left;}
     
@@ -318,4 +318,22 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#52cc7f', end
 }
 #toolbar #backEvent{
     font-size:0.9em;
+}
+
+#sponsor_carousel{margin: -2.5em auto; overflow: hidden; position: relative;}
+#gallery{position: relative; left: 0; top: 0;}
+#gallery li { list-style-type:none;}
+
+.close_hover img:hover
+{
+    
+    background-image:url(../images/livemode/close-icon.png);
+    background-repeat:no-repeat;
+    background-position-x: 53px;
+    background-size: 9px;  
+    cursor:pointer; 
+}
+
+#toolbar #close{
+    z-index:20;
 }

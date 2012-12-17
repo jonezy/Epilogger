@@ -32,6 +32,8 @@ namespace Epilogger.Web.Models {
         [DisplayName("Sponsor Logo")]
         public List<string> SponsorLogo{ get; set; }
 
+        public string Sponsors { get; set; }
+
         public bool LightTheme { get; set; }
     }
 }

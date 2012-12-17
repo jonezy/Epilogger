@@ -25,6 +25,7 @@ using System.Web;
 using Epilogger.Web.Core.Helpers;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.StorageClient;
+using Epilogger.Web.Core.Services;
 
 namespace Epilogger.Web.Controllers {
 	public partial class EventsController : BaseController
@@ -46,6 +47,8 @@ namespace Epilogger.Web.Controllers {
 		UserService _us = new UserService();
 		VenueService _venueService = new VenueService();
 		UserTwitterActionService _userTwitterActionService = new UserTwitterActionService();
+        SponsorImageService _sis = new SponsorImageService();
+        
 
 		DateTime _fromDateTime = DateTime.Parse("2000-01-01 00:00:00");
 		private DateTime FromDateTime() {
@@ -554,8 +557,6 @@ namespace Epilogger.Web.Controllers {
                                 EventStartEndTime = getEventStartEndTime(eventModel.StartDateTime, eventModel.EndDateTime)
                             };
 
-                    TempData["Event"] = eventModel;
-
 
                     ////Initiate a first collect on the event
                     //var tsmp = new MQ.MSGProducer("Epilogger", "TwitterSearch");
@@ -569,9 +570,9 @@ namespace Epilogger.Web.Controllers {
                     //};
                     //tsmp.SendMessage(tsMSG);
                     //tsmp.Dispose();
-
+                    
                     ////The the admins an email with the event details.
-                    //SendEventCreatedEmailToSystem(eventModel);
+                    // SendEventCreatedEmailToSystem(eventModel);
 
                     return View("CreateEventFinal", displayModel);
                 }
@@ -1439,11 +1440,35 @@ namespace Epilogger.Web.Controllers {
                     liveCustom.LinkColour = model.CustomSettings.LinkColour;
                     liveCustom.TwitterUserNameColour = model.CustomSettings.TwitterUserNameColour;
                     liveCustom.Logo = model.CustomSettings.Logo;
-
+                    
+                  
+               
                     Data.LiveModeCustomSetting liveSetting;
                     Mapper.CreateMap<LiveModeCustomSettingViewModel, Data.LiveModeCustomSetting>();
                     liveSetting = Mapper.Map<LiveModeCustomSettingViewModel, Data.LiveModeCustomSetting>(liveCustom);
                     _lm.Save(liveSetting);
+
+                         // save sponsors
+                   // model.CustomSettings.SponsorImages
+                    if (!string.IsNullOrEmpty(model.Sponsors))
+                    {
+                        List<string> sponsors = getSponsorList(model.Sponsors);
+
+
+
+                        foreach (string url in sponsors)
+                        {
+                            var sponsor = new SponsorImage
+                            {
+                                LiveModeID = _lm.FindIDByEventID(model.EventId),
+                                SponsorURL = url
+                            };
+
+                            //sponsor.SponsorURL=
+                            // save the venue
+                            _sis.Save(sponsor);
+                        }
+                    }
 
                     return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
                 }
@@ -1456,25 +1481,35 @@ namespace Epilogger.Web.Controllers {
             return View(model);
         }
 
+        private List<string> getSponsorList(string p)
+        {
+
+            //;http://epiloggerprofileimages.blob.core.windows.net/logosponsor/Sponsor-rxv5ysbzub5oalb43ryjpfsi;http://epiloggerprofileimages.blob.core.windows.net/logosponsor/Sponsor-a1pa1fvjicnq1ek1lekjg21r
+            List<string> list = new List<string>();
+            p = p.Remove(0, 1);             // removes first ;
+            if (p.Contains(';'))
+                list = p.Split(';').ToList();
+            else
+                list.Add(p);
+            return list;
+        }
+
 //--------------------------------------------------------------------------------------------------------------------------------------------------------
         public virtual ActionResult UploadSponsors()
         {
             var path = @"C:\\";
             var file = string.Empty;
+                Uri imageurl;
 
-            Uri imageurl;
-            List<string> imageurls = new List<string>();
-            
             try
             {
-                foreach (HttpRequestBase rFile in Request.Files)
-                {
-
+                
                 var stream = Request.InputStream;
+;
                 if (String.IsNullOrEmpty(Request["qqfile"]))
                 {
                     // IE
-                    var postedFile = rFile;
+                    var postedFile = Request.Files[0];
                     if (postedFile != null) stream = postedFile.InputStream;
                     file = Path.Combine(path, System.IO.Path.GetFileName(Request.Files[0].FileName));
                 }
@@ -1482,10 +1517,11 @@ namespace Epilogger.Web.Controllers {
                 {
                     //Webkit, Mozilla
                     file = Path.Combine(path, Request["qqfile"]);
+
                 }
 
                 System.Drawing.Image img = System.Drawing.Image.FromStream(stream);
-                bool correctSize = ((img.Width <= 250 && img.Width >= 220) && (img.Height <= 150 && img.Height >= 120));
+                bool correctSize = ((img.Width <= 250 && img.Width >= 220) && (img.Height <= 100 && img.Height >= 30));
 
                 if (!correctSize)
                     throw new System.ArgumentException("Invalid Size");
@@ -1493,25 +1529,23 @@ namespace Epilogger.Web.Controllers {
                 Stream resizedImage = null;
                 Helpers.ResizeImageStream(stream, img.Width, img.Height, true, out resizedImage);
 
-                    //Azure Storage Code - Full Profile pic
-                    imageurl = AzureImageStorageHelper.StoreProfileImage("Sponsor-" + Session.SessionID, "logosponsor", resizedImage);
-                    imageurls.Add(imageurl.AbsoluteUri);
-                }
-
+                //Azure Storage Code - Full Profile pic
+                imageurl = AzureImageStorageHelper.StoreProfileImage("Sponsor-" + Session.SessionID, "logosponsor", resizedImage);
+                  //  imageurls.Add(imageurl.AbsoluteUri);
             }
             catch (Exception ex)
             {
                 return Json(new { success = false, message = ex.Message }, "application/json");
             }
 
-            
-            return Json(new { success = true, imageurls }, "text/html");
+
+            return Json(new { success = true, imageurl }, "text/html");
         }
-           
+ // -------------------------------------------------          
         public virtual ActionResult UploadLogo()
         {
             var path = @"C:\\";
-            var file = string.Empty;
+          var file = string.Empty;
 
             Uri imageurl;
 
@@ -1556,10 +1590,19 @@ namespace Epilogger.Web.Controllers {
             return Json(new { success = true, imageurl = imageurl.AbsoluteUri }, "text/html");
         }
 
-        protected bool DeleteAzureImage(string Filename, string ContainerName)
+        [HttpPost]
+        public bool DeleteAzureImage()
         {
+            //    Chris, when trying to call this method with a param, it didn't seem to work... doing this for now
+            // 		Request.Form.ToString()	"http%3a%2f%2fepiloggerprofileimages.blob.core.windows.net%2flogosponsor%2fSponsor-mypo54zwzr1rutc4zwjxoetf"	string
+            string formRequest = Request.Form.ToString();
+            string Filename = getFileName(formRequest);
+            string ContainerName = "logosponsor";
+
             try
             {
+                if (Filename == "")
+                    throw new FileNotFoundException();
                 // Variables for the cloud storage objects.
                 CloudStorageAccount cloudStorageAccount1 = default(CloudStorageAccount);
                 CloudBlobClient blobClient = default(CloudBlobClient);
@@ -1584,11 +1627,27 @@ namespace Epilogger.Web.Controllers {
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
 
+        }
+
+        private string getFileName(string formRequest)
+        {
+            // 		Request.Form.ToString()	"http%3a%2f%2fepiloggerprofileimages.blob.core.windows.net%2flogosponsor%2fSponsor-mypo54zwzr1rutc4zwjxoetf"
+            //(Sponsor-.+|Logo-.+)
+            string key = "";
+            Match match = Regex.Match(formRequest, @"(Sponsor-.+|Logo-.+)", RegexOptions.IgnoreCase);
+
+            // Here we check the Match instance.
+            if (match.Success)
+            {
+                // Finally, we get the Group value and display it.
+                key = match.Groups[1].Value;
+            }
+            return key;
         }
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 		[CompressFilter]
@@ -2283,6 +2342,7 @@ namespace Epilogger.Web.Controllers {
 		{
 
 			var requestedEvent = _es.FindBySlug(id);
+           
 			if (requestedEvent != null)
 			{
 				var topTweetersStats = new TopTweetersStats();
@@ -2297,8 +2357,10 @@ namespace Epilogger.Web.Controllers {
 									Hashtag = requestedEvent.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0].Contains("#")
 												? requestedEvent.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0]
 												: "#" + requestedEvent.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0],
+                                     
 								};
-               
+                var sponsors = _sis.FindByLiveID(model.CustomSettings.Id);
+                model.SponsorImageList = sponsors;
 				return View(model);
 			}
 			ModelState.AddModelError(string.Empty, "The event you're trying to visit doesn't exist.");

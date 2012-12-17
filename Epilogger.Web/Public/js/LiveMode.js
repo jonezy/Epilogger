@@ -315,7 +315,7 @@ jQuery(function ($) {
             $('.colour1').css('color', $('#hideColor1').val());
         }
         if ($('#hideColor2').val() != "") {
-           $('.colour2, #content a').css('color', $('#hideColor2').val());
+            $('.colour2, #content a').css('color', $('#hideColor2').val());
         }
         if ($('#hidenColor3').val() != "") {
             $('.colour3').css('color', $('#hideColor3').val());
@@ -324,15 +324,24 @@ jQuery(function ($) {
 
     //       
     //       '@Url.Action("UploadFile", "Events", new { qqfile = "Logo" })'
+
+    var fileCount = 0;
+    var addedFiles = 0;
+    var fileLimit = 5;
     function createUploader() {
         var uploader = new qq.FineUploader({
             element: $('#fine-uploader-logo')[0],
-            debug: true,
             text: {
                 uploadButton: 'Upload your logo'
             },
             request: {
                 endpoint: '/Events/UploadLogo'
+            },
+            failedUploadTextDisplay: {
+                mode: 'custom',
+                maxChars: 40,
+                responseProperty: 'error',
+                enableTooltip: true
             },
             validation: {
                 allowedExtensions: ['jpg', 'jpeg', 'png', 'gif'],
@@ -374,7 +383,7 @@ jQuery(function ($) {
                 uploadButton: 'Add sponsor(s)'
             },
             request: {
-                endpoint: '/Events/UploadSponsors'
+                endpoint: '/Events/UploadSponsors',
             },
             validation: {
                 allowedExtensions: ['jpg', 'jpeg', 'png', 'gif'],
@@ -391,21 +400,33 @@ jQuery(function ($) {
             },
             callbacks: {
                 onSubmit: function (id, fileName) {
+                    $('.qq-upload-list').hide();
                     fileCount++;
                     if (fileCount > fileLimit) {
-                        $('.qq-upload-list').hide();
+                        $('#fine-uploader-sponsors qq-upload-button').hide();
                         return false;
                     }
                 },
-
-                onComplete: function (id, fileName, responseJSON) {
-                    $('.qq-upload-list').remove()
+                onCancel: function (id, fileName) {
+                    fileCount--;
+                    if (fileCount <= fileLimit) {
+                        $('#fine-uploader-sponsors qq-upload-button').show();
+                    }
+                },
+                onComplete: function (id, fileName, responseJSON) {                 
                     if (responseJSON.success) {
-                        var result = response.imageurls;
-                        var i;
-                        for (i = 0; i < result.length; i++) {
-                            $('#fine-uploader-sponsors').append('<div class="sponsor-thumbs"><img src="' + result[i] + '" alt="sponsors"></div>');
+                    $('.qq-upload-list').remove()
+                        addedFiles++;
+                        if (addedFiles >= fileLimit) {
+                            $('#fine-uploader-sponsors qq-upload-button').hide();
                         }
+                        //var result = response.imageurls;
+                        $('#fine-uploader-sponsors').append('<div class="sponsor-thumbs"><img src="' + responseJSON.imageurl + '" alt="' + fileName + '">');
+                         $('#sponsors').val($('#sponsors').val() +  ';' + responseJSON.imageurl);
+                      // var i;
+                    //   for (i = 0; i < result.length; i++) {
+                   //       $('#fine-uploader-sponsors').append('<div class="sponsor-thumbs"><img src="' + result[i] + '" alt="sponsors"></div>');
+                        //}
                     }
                 }
             }
@@ -514,6 +535,41 @@ jQuery(function ($) {
         $('#preview_customize').toggleClass('invisible');
         $('#customize').toggleClass('invisible');
     });
+
+
+    // carousel
+
+    if($("#gallery").length){
+        $("#gallery li").hide().filter(':lt(1)').show();
+
+        
+                window.setInterval(function(){
+                  nextImage();
+                }, 5000);
+    }
+
+    function nextImage()
+    {
+           $("#gallery li:last").slideUp(function() {
+              $(this).insertBefore("#gallery li:first").slideDown(500);
+            })​;​
+
+    }
+
+        $('.close_hover').click(function() {
+    var path = $(this).children('img').attr('src');
+    $.ajax({
+                type: "POST",
+                url: "/Events/DeleteAzureImage/",
+                data: path,
+                 success: function () {
+                 alert("s");
+                 }
+            });
+             return false;
+      });
+     
+
 
 });
 
