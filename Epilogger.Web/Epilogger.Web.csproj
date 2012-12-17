@@ -517,6 +517,7 @@
     <Content Include="Public\images\livemode\client\bg.png" />
     <Content Include="Public\images\livemode\client\sponsor-osheaga.png" />
     <Content Include="Public\images\logoSmall.png" />
+    <Content Include="Public\images\rounded-57.png" />
     <Content Include="Public\images\signup\checkmark.gif" />
     <Content Include="Public\images\signup\createAccountLoader.gif" />
     <Content Include="Public\images\signup\DateIcon.png" />

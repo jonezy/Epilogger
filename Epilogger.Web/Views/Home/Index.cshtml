@@ -65,7 +65,7 @@
     <div id="homepage-video">
         @if (Model.FeaturedEvents.Count > 0)
         {
-            foreach (var theE in Model.FeaturedEvents)
+            foreach (var theE in Model.FeaturedEvents.Take(1))
             {
                 <div class="featuredEvent">
                     <div class="featuredEventName">@Html.ActionLink(theE.Event.Name, "details", "events", new { @id = theE.Event.EventSlug }, null)</div>
