@@ -368,8 +368,13 @@ jQuery(function ($) {
                 onComplete: function (id, fileName, responseJSON) {
                     $('.qq-upload-list').remove()
                     if (responseJSON.success) {
+                        $('#thumbnail-fine-uploader').empty();
                         $('#thumbnail-fine-uploader').append('<img src="' + responseJSON.imageurl + '" alt="' + fileName + '">');
                         $('#logo').val(responseJSON.imageurl);
+                    }
+                    else
+                    {
+                        jAlert("Make sure your logo is the correct size. Width: 220p-250px   Height: 100-180px");
                     }
 
                 }
@@ -420,13 +425,13 @@ jQuery(function ($) {
                         if (addedFiles >= fileLimit) {
                             $('#fine-uploader-sponsors qq-upload-button').hide();
                         }
-                        //var result = response.imageurls;
-                        $('#fine-uploader-sponsors').append('<div class="sponsor-thumbs"><img src="' + responseJSON.imageurl + '" alt="' + fileName + '">');
+                        $('.pad30').remove();
+                        $('#addition').append('<div class="sponsor-thumbs close_hover"><img src="' + responseJSON.imageurl + '" alt="' + fileName + '"/></div>');
                          $('#sponsors').val($('#sponsors').val() +  ';' + responseJSON.imageurl);
-                      // var i;
-                    //   for (i = 0; i < result.length; i++) {
-                   //       $('#fine-uploader-sponsors').append('<div class="sponsor-thumbs"><img src="' + result[i] + '" alt="sponsors"></div>');
-                        //}
+                    }
+                    else
+                    {
+                        jAlert("Make sure your image is the correct size. Width: 220p-250px   Height: 30-130px");
                     }
                 }
             }
@@ -541,10 +546,9 @@ jQuery(function ($) {
 
     if($("#gallery").length){
         $("#gallery li").hide().filter(':lt(1)').show();
-
-        
                 window.setInterval(function(){
-                  nextImage();
+                if($("#gallery li").length > 1)
+                    nextImage();
                 }, 5000);
     }
 
@@ -558,18 +562,18 @@ jQuery(function ($) {
 
         $('.close_hover').click(function() {
     var path = $(this).children('img').attr('src');
+    var eventid= $('#EventID').val();
     $.ajax({
                 type: "POST",
-                url: "/Events/DeleteAzureImage/",
-                data: path,
+                url: "/Events/DeleteLogoSponsors",
+                data: {'path':path, 'EventId':eventid},
                  success: function () {
-                 alert("s");
+                 
                  }
             });
+            $(this).hide();
              return false;
       });
-     
-
 
 });
 

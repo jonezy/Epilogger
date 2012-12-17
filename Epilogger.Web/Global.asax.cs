@@ -168,9 +168,9 @@ namespace Epilogger.Web
                 new { controller = "events", action = "CreateEvent" }
             );
             routes.MapRoute(
-                 "DeleteAzureImage",
-                 "events/DeleteAzureImage",
-                new { controller = "events", action = "DeleteAzureImage" }
+                 "DeleteLogoSponsors",
+                 "events/DeleteLogoSponsors",
+                new { controller = "events", action = "DeleteLogoSponsors" }
             );
              routes.MapRoute(
                 "UploadLogo",

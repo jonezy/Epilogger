@@ -865,7 +865,7 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult CustomizeLiveMode(Epilogger.Web.Models.LiveModeViewModel model) {
+        public override System.Web.Mvc.ActionResult Live4x3(Epilogger.Web.Models.LiveModeViewModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CustomizeLiveMode);
             callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;

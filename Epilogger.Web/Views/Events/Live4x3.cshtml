@@ -45,6 +45,8 @@
         </style>
 </head>
 <body>
+ @if (Model.CurrentUserID == Model.UserID || Model.CurrentUserRole == UserRoleType.Administrator)
+ {
     <div id="toolbar">
     <div id="preview_customize">
       <div id="live_mode_title">
@@ -63,9 +65,9 @@
     <div id="customize" class="invisible">
         @Html.HiddenFor(m => Model.CustomSettings.LightTheme, new { id = "theme" })
         @Html.ValidationSummary("Please correct the following issues")
-        @using (Html.BeginForm("CustomizeLiveMode", "Events"))
+        @using (Html.BeginForm("Live4x3", "Events"))
         {
-             @Html.HiddenFor(m => Model.EventId);  
+             @Html.HiddenFor(m => Model.EventId, new { id = "EventID" });  
              @Html.HiddenFor(m => Model.CustomSettings.FooterTextColor, new { id = "hideColor1" });
              @Html.HiddenFor(m => Model.CustomSettings.LinkColour, new { id = "hideColor2" });
              @Html.HiddenFor(m => Model.CustomSettings.TwitterUserNameColour, new { id = "hideColor3" });
@@ -114,25 +116,37 @@
                     <div id="fine-uploader-logo">
                     </div>
                     <div id="thumbnail-fine-uploader" class="close_hover">
-                    @if (@Model.CustomSettings.Logo != null || @Model.CustomSettings.Logo != "")
+                    @if (@Model.CustomSettings.Logo != null && @Model.CustomSettings.Logo != "")
                     { 
                     <img src=@Model.CustomSettings.Logo alt="logo" />
                     }
+                    else
+                    {
+                        <span class="image_requirements pad3">width: 220-250px height:100-180px </span>
+                    }
                     </div>
                 </div>
-                <div class="live_options">
+                <div id="addition" class="live_options">
                     <div class="step_image">
                         <img src="../../Public/images/livemode/toolbar/number4.png" alt="step 4" /></div>
                     <div id="fine-uploader-sponsors">                 
-                      
-                        
+       
                     </div>
-                      @foreach (var image in Model.SponsorImageList)
+                    @if (Model.SponsorImageList.Count > 0)
+                    {
+                        foreach (var image in Model.SponsorImageList)
                         {
                             <div class="sponsor-thumbs close_hover">
                                 <img src=@image.SponsorURL  />
                              </div>
                         }
+                    }
+                    else
+                    {
+                     <span class="image_requirements pad30">width: 220-250px height:30-130px </span>
+                    
+                    }
+                     
                 </div>
                 <div class="live_options">
                     <div class="step_image">
@@ -143,7 +157,7 @@
         }
         </div>
     </div>
-
+ }
     <div id="content">
         <div id="tweets">
             <div class="tweet-column" id="tweetColumn1">
@@ -208,15 +222,15 @@
             <big class="colour1">Tweet! Take a photo! @*Tweetez ! Partagez vos photos!*@
                 <br />
                 Hashtag: <span class="colour2">@Model.Hashtag</span> </big>
-            @if (Model.SponsorImageList.Count>0)
+            @if (Model.SponsorImageList.Count > 0)
             {
                 <h1 id="partner" class="colour1">@*Notre partenaire*@ Our partners</h1>
                 <div id="sponsor_carousel">
                     <ul id="gallery">
                    @foreach (var image in Model.SponsorImageList)
-                    {
+                   {
                       <li><img src=@image.SponsorURL alt="sponsors" /></li>
-                    }
+                   }
                     </ul>
                 </div>
                 @Html.Raw(Model.CustomSettings.SponsorLogos)

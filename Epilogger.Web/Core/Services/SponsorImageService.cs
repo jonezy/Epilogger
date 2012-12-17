@@ -47,5 +47,24 @@ namespace Epilogger.Web.Core.Services
 
             return 0;
         }
+
+        public bool DeleteSponsor(int liveModeID, string url)
+        {
+            try
+            {
+                var sponsor = db.SponsorImages.Where(d => d.LiveModeID == liveModeID && d.SponsorURL == url).FirstOrDefault();
+                if (sponsor != null)
+                {
+                    base.GetRepository<SponsorImage>().Delete(sponsor);
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+        }
     }
 }

@@ -319,7 +319,19 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#52cc7f', end
 #toolbar #backEvent{
     font-size:0.9em;
 }
-
+#toolbar #addition{
+    width:200px;
+}
+#toolbar .image_requirements
+{
+ font-size: 0.7em;  
+}
+.pad30{
+    padding-left:30px;
+}
+.pad3{
+ padding-left:3px;
+}
 #sponsor_carousel{margin: -2.5em auto; overflow: hidden; position: relative;}
 #gallery{position: relative; left: 0; top: 0;}
 #gallery li { list-style-type:none;}

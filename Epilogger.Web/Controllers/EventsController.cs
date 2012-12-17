@@ -1421,18 +1421,18 @@ namespace Epilogger.Web.Controllers {
         //        return View("Live4x3", Model);
         //    }
         //}
-        
+
         [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to edit live mode")]
         [HttpPost]
-        public virtual ActionResult CustomizeLiveMode(LiveModeViewModel model)
+        public virtual ActionResult Live4x3(LiveModeViewModel model)
         {
-            // set all inputs to database
+
             if (ModelState.IsValid)
             {
                 try
                 {
                     LiveModeCustomSettingViewModel liveCustom = new LiveModeCustomSettingViewModel();
-                    
+
 
                     liveCustom.EventId = model.EventId;
                     liveCustom.LightTheme = Request.Form["light_dark_theme"] == "light";
@@ -1440,16 +1440,16 @@ namespace Epilogger.Web.Controllers {
                     liveCustom.LinkColour = model.CustomSettings.LinkColour;
                     liveCustom.TwitterUserNameColour = model.CustomSettings.TwitterUserNameColour;
                     liveCustom.Logo = model.CustomSettings.Logo;
-                    
-                  
-               
+
+
+
                     Data.LiveModeCustomSetting liveSetting;
                     Mapper.CreateMap<LiveModeCustomSettingViewModel, Data.LiveModeCustomSetting>();
                     liveSetting = Mapper.Map<LiveModeCustomSettingViewModel, Data.LiveModeCustomSetting>(liveCustom);
                     _lm.Save(liveSetting);
 
-                         // save sponsors
-                   // model.CustomSettings.SponsorImages
+                    // save sponsors
+                    // model.CustomSettings.SponsorImages
                     if (!string.IsNullOrEmpty(model.Sponsors))
                     {
                         List<string> sponsors = getSponsorList(model.Sponsors);
@@ -1469,16 +1469,15 @@ namespace Epilogger.Web.Controllers {
                             _sis.Save(sponsor);
                         }
                     }
-
+                    //return View(model);
                     return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
                 }
                 catch (Exception ex)
                 {
-                    // to do
+                    return View();
                 }
             }
-
-            return View(model);
+            return View();
         }
 
         private List<string> getSponsorList(string p)
@@ -1520,7 +1519,7 @@ namespace Epilogger.Web.Controllers {
                 }
 
                 System.Drawing.Image img = System.Drawing.Image.FromStream(stream);
-                bool correctSize = ((img.Width <= 250 && img.Width >= 220) && (img.Height <= 125 && img.Height >= 30));
+                bool correctSize = ((img.Width <= 250 && img.Width >= 220) && (img.Height <= 130 && img.Height >= 30));
 
                 if (!correctSize)
                     throw new System.ArgumentException("Invalid Size");
@@ -1528,8 +1527,8 @@ namespace Epilogger.Web.Controllers {
                 Stream resizedImage = null;
                 Helpers.ResizeImageStream(stream, img.Width, img.Height, true, out resizedImage);
 
-                //Azure Storage Code - Full Profile pic
-                imageurl = AzureImageStorageHelper.StoreProfileImage("Sponsor-" + Session.SessionID, "logosponsor", resizedImage);
+                //Azure Storage Code
+                imageurl = AzureImageStorageHelper.StoreLogoSponsorImage("Sponsor-" + Session.SessionID, "logosponsor", resizedImage);
                   //  imageurls.Add(imageurl.AbsoluteUri);
             }
             catch (Exception ex)
@@ -1547,7 +1546,7 @@ namespace Epilogger.Web.Controllers {
           var file = string.Empty;
 
             Uri imageurl;
-
+            
             try
             {
                 var stream = Request.InputStream;
@@ -1569,7 +1568,7 @@ namespace Epilogger.Web.Controllers {
                 //ResizeImageStream(stream, 120, 120, true, out resizedImage);
 
                 System.Drawing.Image img = System.Drawing.Image.FromStream(stream);
-                bool correctSize = ((img.Width <= 250 && img.Width >= 220) && (img.Height <= 150 && img.Height >= 120));
+                bool correctSize = ((img.Width <= 250 && img.Width >= 220) && (img.Height <= 180 && img.Height >= 100));
 
                 if (!correctSize)
                     throw new System.ArgumentException("Invalid Size");
@@ -1577,8 +1576,8 @@ namespace Epilogger.Web.Controllers {
                 Stream resizedImage = null;
                 Helpers.ResizeImageStream(stream, img.Width, img.Height, true, out resizedImage);
 
-                //Azure Storage Code - Full Profile pic
-                imageurl = AzureImageStorageHelper.StoreProfileImage("Logo-" + Session.SessionID, "logosponsor", resizedImage);
+                //Azure Storage Code 
+                imageurl = AzureImageStorageHelper.StoreLogoSponsorImage("Logo-" + Session.SessionID, "logosponsor", resizedImage);
 
             }
             catch (Exception ex)
@@ -1590,14 +1589,37 @@ namespace Epilogger.Web.Controllers {
         }
 
         [HttpPost]
-        public bool DeleteAzureImage()
+        public bool DeleteLogoSponsors(string path, string eventid)
         {
-            //    Chris, when trying to call this method with a param, it didn't seem to work... doing this for now
-            // 		Request.Form.ToString()	"http%3a%2f%2fepiloggerprofileimages.blob.core.windows.net%2flogosponsor%2fSponsor-mypo54zwzr1rutc4zwjxoetf"	string
-            string formRequest = Request.Form.ToString();
-            string Filename = getFileName(formRequest);
-            string ContainerName = "logosponsor";
+            try
+            {
+                int id = Int16.Parse(eventid);
+                string Filename = getFileName(path);
+                string ContainerName = "logosponsor";
 
+                DeleteAzureImage(Filename, ContainerName);
+                
+                    int LiveModeID = _lm.FindIDByEventID(id);
+               if (DeleteDatabaseImage(LiveModeID,path))
+                        return true;
+                
+            }
+            catch { return false; }
+            return false;
+        }
+
+        private bool DeleteDatabaseImage(int id, string url)
+        {
+                 try
+                 {
+                     _sis.DeleteSponsor(id, url);
+                     return true;
+                 }
+                 catch { return false; }
+            
+        }
+        public bool DeleteAzureImage(string Filename, string ContainerName)
+        {
             try
             {
                 if (Filename == "")
@@ -1623,12 +1645,12 @@ namespace Epilogger.Web.Controllers {
                 //
                 //Delete the file
                 blob.Delete();
-
+                 // delete from database... create method for deleting both
                 return true;
             }
             catch (Exception ex)
             {
-                throw;
+                return false;
             }
 
         }
@@ -2336,10 +2358,9 @@ namespace Epilogger.Web.Controllers {
 		}
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-		
+[RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to edit an event")]
 		public virtual ActionResult Live4X3(string id)
 		{
-
 			var requestedEvent = _es.FindBySlug(id);
            
 			if (requestedEvent != null)
@@ -2358,6 +2379,11 @@ namespace Epilogger.Web.Controllers {
 												: "#" + requestedEvent.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0],
                                      
 								};
+
+                model.CurrentUserRole = CurrentUserRole;
+                model.CurrentUserID = CurrentUser.ID;
+                model.UserID = CurrentUser.ID;
+
                 var sponsors = _sis.FindByLiveID(model.CustomSettings.Id);
                 model.SponsorImageList = sponsors;
 				return View(model);

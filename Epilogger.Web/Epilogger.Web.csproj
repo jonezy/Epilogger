@@ -488,6 +488,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\combres_full_with_annotation.xml" />
+    <Content Include="Public\css\alert.css" />
     <Content Include="Public\css\event-popup.css" />
     <Content Include="Public\css\fineuploader.css" />
     <Content Include="Public\css\geckoboard\darkAdjusted.css" />
@@ -510,13 +511,16 @@
     <Content Include="Public\images\livemode\icon-numpeople-dark.png" />
     <Content Include="Public\images\livemode\icon-numphotos-dark.png" />
     <Content Include="Public\images\livemode\icon-numtweets-dark.png" />
+    <Content Include="Public\images\livemode\toolbar\info.gif" />
     <Content Include="Public\images\livemode\toolbar\logo_dark_theme.png" />
     <Content Include="Public\images\livemode\toolbar\number1.png" />
     <Content Include="Public\images\livemode\toolbar\number2.png" />
     <Content Include="Public\images\livemode\toolbar\number3.png" />
     <Content Include="Public\images\livemode\toolbar\number4.png" />
     <Content Include="Public\images\livemode\toolbar\number5.png" />
+    <Content Include="Public\images\livemode\toolbar\title.gif" />
     <Content Include="Public\images\trigger.png" />
+    <Content Include="Public\js\alerts.js" />
     <Content Include="Public\js\FileUploader.js" />
     <Content Include="Public\js\fineuploader.jquery-3.0\fineuploader.css" />
     <Content Include="Public\js\fineuploader.jquery-3.0\jquery.fineuploader-3.0.js" />
