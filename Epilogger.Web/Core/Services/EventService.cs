@@ -147,10 +147,25 @@ namespace Epilogger.Web {
             featuredEvents = f2Events as List<Event> ?? f2Events.ToList();
             if (featuredEvents.Any())
             {
+                //foreach (var e in featuredEvents)
+                //{
+                //    if (ContainsEnoughImages(e))
+                //        return e;
+                //}
+                
+                ////If nothing return a ramdom event
+                //var ev = GetRandomEvent(featuredEvents);
+                //return ev;
+
+
+
                 for (var i = 0; i < featuredEvents.Count(); i++)
                 {
                     var e = GetRandomEvent(featuredEvents);
                     if (ContainsEnoughImages(e))
+                        return e;
+
+                    if (i == featuredEvents.Count() - 1)
                         return e;
                 }
             }
