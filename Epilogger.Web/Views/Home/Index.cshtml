@@ -63,36 +63,34 @@
     </div>
     
     <div id="homepage-video">
-        @if (Model.FeaturedEvents.Count > 0)
+        @if (Model.FeaturedEvents != null)
         {
-            foreach (var theE in Model.FeaturedEvents.Take(1))
-            {
-                <div class="featuredEvent">
-                    <div class="featuredEventName">@Html.ActionLink(theE.Event.Name, "details", "events", new { @id = theE.Event.EventSlug }, null)</div>
-                    <div class="featuredBanner"></div>
-                    @foreach (var theImg in theE.TopImages)
+            
+            <div class="featuredEvent">
+                <div class="featuredEventName">@Html.ActionLink(Model.FeaturedEvents.Event.Name, "details", "events", new { @id = Model.FeaturedEvents.Event.EventSlug }, null)</div>
+                <div class="featuredBanner"></div>
+                @foreach (var theImg in Model.FeaturedEvents.TopImages)
+                {
+                    var thePath = theImg.EventID + "/" + theImg.ID;
+                    <div class="featurePhotoBar" id="FeaturedPhoto@(theImg.ID)">
+                        <a href="@theImg.Fullsize" rel="EPLPhoto[latestfeaturedphotos]" photoid="@thePath" title="" id="@theImg.ID">
+                            <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@theImg.Fullsize&width=435&height=335&preserveAspect=true" border="0" alt="" />
+                        </a>
+                    </div>
+                }
+            </div>
+            //Elipses go here
+            @*Links*@
+            <div id="">
+                <ul class="featuredPhotosList">
+                    @foreach (var image in Model.FeaturedEvents.TopImages)
                     {
-                        var thePath = theImg.EventID + "/" + theImg.ID;
-                        <div class="featurePhotoBar" id="FeaturedPhoto@(theImg.ID)">
-                            <a href="@theImg.Fullsize" rel="EPLPhoto[latestfeaturedphotos]" photoid="@thePath" title="" id="@theImg.ID">
-                                <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@theImg.Fullsize&width=435&height=335&preserveAspect=true" border="0" alt="" />
-                            </a>
-                        </div>
+                        <li><a href="" onclick="return false;" class="featuredPhotosListLink" id="@(image.ID)"></a></li>
                     }
-                </div>
-                //Elipses go here
-                @*Links*@
-                <div id="">
-                    <ul class="featuredPhotosList">
-                        @foreach (var image in theE.TopImages)
-                        {
-                            <li><a href="" onclick="return false;" class="featuredPhotosListLink" id="@(image.ID)"></a></li>
-                        }
-                    </ul>
-                </div>   
-                <br />
+                </ul>
+            </div>   
+            <br />
 
-            }
         }
         else
         {

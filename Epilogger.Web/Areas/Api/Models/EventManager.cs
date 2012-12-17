@@ -74,7 +74,7 @@ namespace Epilogger.Web.Areas.Api.Models
 
         public List<ApiEvent> GetFeaturedEvents()
         {
-            return Mapper.Map<List<Event>, List<ApiEvent>>(_es.GetFeaturedEvents().ToList());
+            return Mapper.Map<List<Event>, List<ApiEvent>>(new List<Event> {_es.GetFeaturedEvents()});
         }
 
         public List<ApiEvent> EventsByCategoyIdPaged(int categoryId, int page, int count)

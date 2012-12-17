@@ -38,75 +38,15 @@ namespace Epilogger.Web.Controllers {
             }
 
 
-            //This is for the featured Events
-            //Get all the Events that are currently features
-            var featured = _es.GetFeaturedEvents().Select(evt => new HomepageFeaturedEventsViewModel
-                                                                     {
-                                                                         Event = evt, TopImages = _is.GetNewestPhotosByEventId(evt.ID, 5)
-                                                                     }).ToList();
-            model.FeaturedEvents = featured;
+            //Featured Events
+            var featured = _es.GetFeaturedEvents();
+            if (featured != null)
+                model.FeaturedEvents = new HomepageFeaturedEventsViewModel()
+                                           {
+                                               Event = featured, 
+                                               TopImages = _is.GetNewestPhotosByEventId(featured.ID, 5)
+                                           };
             
-
-            //No featured events, choose a current short event or ...
-            if (featured.Count==0)
-            {
-                var activeEvents = _es.FindAllActiveEvents();
-
-                foreach (var evt in activeEvents)
-                {
-                    if (evt.EndDateTime == null) continue;
-                    
-                    if (((((DateTime)evt.EndDateTime) - evt.StartDateTime).TotalHours <= 8 && evt.StartDateTime < DateTime.UtcNow && evt.EndDateTime > DateTime.UtcNow))
-                    {
-                        featured.Add(new HomepageFeaturedEventsViewModel() { Event = evt, TopImages = _is.GetNewestPhotosByEventId(evt.ID, 5) });
-                    }
-                }
-
-                //Do we have any?
-                if (featured.Count == 0)
-                {
-                    foreach (var evt in activeEvents)
-                    {
-                        if (evt.EndDateTime == null) continue;
-
-                        if ((evt.StartDateTime - DateTime.UtcNow).TotalHours < 12 && (evt.StartDateTime - DateTime.UtcNow).TotalHours >= 0)
-                        {
-                            featured.Add(new HomepageFeaturedEventsViewModel() { Event = evt, TopImages = _is.GetNewestPhotosByEventId(evt.ID, 5) });
-                        }
-                    }
-                }
-
-                //Do we have any?
-                if (featured.Count == 0)
-                {
-                    foreach (var evt in activeEvents)
-                    {
-                        if (evt.EndDateTime == null) continue;
-
-                        if (((DateTime.UtcNow - ((DateTime)evt.EndDateTime)).TotalHours < 12 && (DateTime.UtcNow - ((DateTime)evt.EndDateTime)).TotalHours >= 0))
-                        {
-                            featured.Add(new HomepageFeaturedEventsViewModel() { Event = evt, TopImages = _is.GetNewestPhotosByEventId(evt.ID, 5) });
-                        }
-                    }
-
-                    if (featured.Count == 0)
-                    {
-                        foreach (var evt in activeEvents)
-                        {
-                            if (evt.EndDateTime == null) continue;
-
-                            if (((DateTime.UtcNow - ((DateTime)evt.EndDateTime)).TotalHours < 72 && (DateTime.UtcNow - ((DateTime)evt.EndDateTime)).TotalHours >= 0))
-                            {
-                                featured.Add(new HomepageFeaturedEventsViewModel() { Event = evt, TopImages = _is.GetNewestPhotosByEventId(evt.ID, 5) });
-                            }
-                        }
-                    }
-                }
-
-                
-                model.FeaturedEvents = featured;
-
-            }
 
             return View(model);
         }
