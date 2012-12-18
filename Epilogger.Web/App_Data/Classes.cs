@@ -875,17 +875,6 @@ namespace Epilogger.Data
         #endregion
 
         #region Foreign Keys
-        public IQueryable<CheckIn> CheckIns
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.CheckIns
-                       where items.TweetID == _ID
-                       select items;
-            }
-        }
-
         public IQueryable<Event> Events
         {
             get
@@ -893,6 +882,17 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.Events
                        where items.ID == _EventID
+                       select items;
+            }
+        }
+
+        public IQueryable<CheckIn> CheckIns
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.CheckIns
+                       where items.TweetID == _ID
                        select items;
             }
         }
@@ -2891,190 +2891,20 @@ namespace Epilogger.Data
 		    }
 		}
 		
-        partial void OnaChanging(int value);
-        partial void OnaChanged();
+        partial void OnMinCollectionRateChanging(int value);
+        partial void OnMinCollectionRateChanged();
 		
-		private int _a;
-		public int a { 
+		private int _MinCollectionRate;
+		public int MinCollectionRate { 
 		    get{
-		        return _a;
+		        return _MinCollectionRate;
 		    } 
 		    set{
-		        this.OnaChanging(value);
+		        this.OnMinCollectionRateChanging(value);
                 this.SendPropertyChanging();
-                this._a = value;
-                this.SendPropertyChanged("a");
-                this.OnaChanged();
-		    }
-		}
-		
-        partial void OnbChanging(int value);
-        partial void OnbChanged();
-		
-		private int _b;
-		public int b { 
-		    get{
-		        return _b;
-		    } 
-		    set{
-		        this.OnbChanging(value);
-                this.SendPropertyChanging();
-                this._b = value;
-                this.SendPropertyChanged("b");
-                this.OnbChanged();
-		    }
-		}
-		
-        partial void OncChanging(int value);
-        partial void OncChanged();
-		
-		private int _c;
-		public int c { 
-		    get{
-		        return _c;
-		    } 
-		    set{
-		        this.OncChanging(value);
-                this.SendPropertyChanging();
-                this._c = value;
-                this.SendPropertyChanged("c");
-                this.OncChanged();
-		    }
-		}
-		
-        partial void OndChanging(int value);
-        partial void OndChanged();
-		
-		private int _d;
-		public int d { 
-		    get{
-		        return _d;
-		    } 
-		    set{
-		        this.OndChanging(value);
-                this.SendPropertyChanging();
-                this._d = value;
-                this.SendPropertyChanged("d");
-                this.OndChanged();
-		    }
-		}
-		
-        partial void OneChanging(int value);
-        partial void OneChanged();
-		
-		private int _e;
-		public int e { 
-		    get{
-		        return _e;
-		    } 
-		    set{
-		        this.OneChanging(value);
-                this.SendPropertyChanging();
-                this._e = value;
-                this.SendPropertyChanged("e");
-                this.OneChanged();
-		    }
-		}
-		
-        partial void OnfChanging(int value);
-        partial void OnfChanged();
-		
-		private int _f;
-		public int f { 
-		    get{
-		        return _f;
-		    } 
-		    set{
-		        this.OnfChanging(value);
-                this.SendPropertyChanging();
-                this._f = value;
-                this.SendPropertyChanged("f");
-                this.OnfChanged();
-		    }
-		}
-		
-        partial void OngChanging(int value);
-        partial void OngChanged();
-		
-		private int _g;
-		public int g { 
-		    get{
-		        return _g;
-		    } 
-		    set{
-		        this.OngChanging(value);
-                this.SendPropertyChanging();
-                this._g = value;
-                this.SendPropertyChanged("g");
-                this.OngChanged();
-		    }
-		}
-		
-        partial void OnhChanging(int value);
-        partial void OnhChanged();
-		
-		private int _h;
-		public int h { 
-		    get{
-		        return _h;
-		    } 
-		    set{
-		        this.OnhChanging(value);
-                this.SendPropertyChanging();
-                this._h = value;
-                this.SendPropertyChanged("h");
-                this.OnhChanged();
-		    }
-		}
-		
-        partial void OniChanging(int value);
-        partial void OniChanged();
-		
-		private int _i;
-		public int i { 
-		    get{
-		        return _i;
-		    } 
-		    set{
-		        this.OniChanging(value);
-                this.SendPropertyChanging();
-                this._i = value;
-                this.SendPropertyChanged("i");
-                this.OniChanged();
-		    }
-		}
-		
-        partial void OnjChanging(int value);
-        partial void OnjChanged();
-		
-		private int _j;
-		public int j { 
-		    get{
-		        return _j;
-		    } 
-		    set{
-		        this.OnjChanging(value);
-                this.SendPropertyChanging();
-                this._j = value;
-                this.SendPropertyChanged("j");
-                this.OnjChanged();
-		    }
-		}
-		
-        partial void OnkChanging(int value);
-        partial void OnkChanged();
-		
-		private int _k;
-		public int k { 
-		    get{
-		        return _k;
-		    } 
-		    set{
-		        this.OnkChanging(value);
-                this.SendPropertyChanging();
-                this._k = value;
-                this.SendPropertyChanged("k");
-                this.OnkChanged();
+                this._MinCollectionRate = value;
+                this.SendPropertyChanged("MinCollectionRate");
+                this.OnMinCollectionRateChanged();
 		    }
 		}
 		
@@ -3827,17 +3657,6 @@ namespace Epilogger.Data
         #endregion
 
         #region Foreign Keys
-        public IQueryable<Role> Roles
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Roles
-                       where items.ID == _RoleID
-                       select items;
-            }
-        }
-
         public IQueryable<User> Users
         {
             get
@@ -3845,6 +3664,17 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.Users
                        where items.ID == _UserID
+                       select items;
+            }
+        }
+
+        public IQueryable<Role> Roles
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Roles
+                       where items.ID == _RoleID
                        select items;
             }
         }
@@ -4400,21 +4230,44 @@ namespace Epilogger.Data
 		    }
 		}
 		
+        partial void OnLastCollectionDateTimeChanging(DateTime? value);
+        partial void OnLastCollectionDateTimeChanged();
+		
+		private DateTime? _LastCollectionDateTime;
+		public DateTime? LastCollectionDateTime { 
+		    get{
+		        return _LastCollectionDateTime;
+		    } 
+		    set{
+		        this.OnLastCollectionDateTimeChanging(value);
+                this.SendPropertyChanging();
+                this._LastCollectionDateTime = value;
+                this.SendPropertyChanged("LastCollectionDateTime");
+                this.OnLastCollectionDateTimeChanged();
+		    }
+		}
+		
+        partial void OnNormalCollectionCountChanging(int? value);
+        partial void OnNormalCollectionCountChanged();
+		
+		private int? _NormalCollectionCount;
+		public int? NormalCollectionCount { 
+		    get{
+		        return _NormalCollectionCount;
+		    } 
+		    set{
+		        this.OnNormalCollectionCountChanging(value);
+                this.SendPropertyChanging();
+                this._NormalCollectionCount = value;
+                this.SendPropertyChanged("NormalCollectionCount");
+                this.OnNormalCollectionCountChanged();
+		    }
+		}
+		
 
         #endregion
 
         #region Foreign Keys
-        public IQueryable<CheckIn> CheckIns
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.CheckIns
-                       where items.EventID == _ID
-                       select items;
-            }
-        }
-
         public IQueryable<EventCategory> EventCategories
         {
             get
@@ -4426,24 +4279,13 @@ namespace Epilogger.Data
             }
         }
 
-        public IQueryable<User> Users
+        public IQueryable<CheckIn> CheckIns
         {
             get
             {
                   var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Users
-                       where items.ID == _UserID
-                       select items;
-            }
-        }
-
-        public IQueryable<Venue> Venues
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Venues
-                       where items.ID == _VenueID
+                  return from items in db.CheckIns
+                       where items.EventID == _ID
                        select items;
             }
         }
@@ -4554,6 +4396,28 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.WidgetCustomSettings
                        where items.EventId == _ID
+                       select items;
+            }
+        }
+
+        public IQueryable<User> Users
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Users
+                       where items.ID == _UserID
+                       select items;
+            }
+        }
+
+        public IQueryable<Venue> Venues
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Venues
+                       where items.ID == _VenueID
                        select items;
             }
         }
@@ -5100,17 +4964,6 @@ namespace Epilogger.Data
         #endregion
 
         #region Foreign Keys
-        public IQueryable<ImageMetaDatum> ImageMetaData
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.ImageMetaData
-                       where items.ImageID == _ID
-                       select items;
-            }
-        }
-
         public IQueryable<Event> Events
         {
             get
@@ -5118,6 +4971,17 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.Events
                        where items.ID == _EventID
+                       select items;
+            }
+        }
+
+        public IQueryable<ImageMetaDatum> ImageMetaData
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.ImageMetaData
+                       where items.ImageID == _ID
                        select items;
             }
         }
@@ -6733,17 +6597,6 @@ namespace Epilogger.Data
             }
         }
 
-        public IQueryable<User> Users
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.Users
-                       where items.ID == _UserId
-                       select items;
-            }
-        }
-
         public IQueryable<MemoryBoxItem> MemoryBoxItems
         {
             get
@@ -6751,6 +6604,17 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.MemoryBoxItems
                        where items.MemboxId == _ID
+                       select items;
+            }
+        }
+
+        public IQueryable<User> Users
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.Users
+                       where items.ID == _UserId
                        select items;
             }
         }
@@ -7088,17 +6952,6 @@ namespace Epilogger.Data
             }
         }
 
-        public IQueryable<UserRole> UserRoles
-        {
-            get
-            {
-                  var db=new Epilogger.Data.EpiloggerDB();
-                  return from items in db.UserRoles
-                       where items.ID == _RoleID
-                       select items;
-            }
-        }
-
         public IQueryable<UserAuthenticationProfile> UserAuthenticationProfiles
         {
             get
@@ -7132,7 +6985,7 @@ namespace Epilogger.Data
             }
         }
 
-        public IQueryable<UserFollowsUser> UserFollowsUsers7
+        public IQueryable<UserFollowsUser> UserFollowsUsers6
         {
             get
             {
@@ -7172,6 +7025,17 @@ namespace Epilogger.Data
                   var db=new Epilogger.Data.EpiloggerDB();
                   return from items in db.UserInRoles
                        where items.UserID == _ID
+                       select items;
+            }
+        }
+
+        public IQueryable<UserRole> UserRoles
+        {
+            get
+            {
+                  var db=new Epilogger.Data.EpiloggerDB();
+                  return from items in db.UserRoles
+                       where items.ID == _RoleID
                        select items;
             }
         }
