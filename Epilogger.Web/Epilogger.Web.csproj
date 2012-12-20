@@ -519,6 +519,7 @@
     <Content Include="Public\images\livemode\toolbar\number4.png" />
     <Content Include="Public\images\livemode\toolbar\number5.png" />
     <Content Include="Public\images\livemode\toolbar\title.gif" />
+    <Content Include="Public\images\rounded-57.png" />
     <Content Include="Public\images\trigger.png" />
     <Content Include="Public\js\alerts.js" />
     <Content Include="Public\js\FileUploader.js" />

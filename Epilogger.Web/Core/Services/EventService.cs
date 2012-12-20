@@ -59,11 +59,125 @@ namespace Epilogger.Web {
         }
 
         /*Featured Events*/
-        public IEnumerable<Event> GetFeaturedEvents()
+        public Event GetFeaturedEvents()
         {
-            return db.Events.Where(e => e.IsFeatured == true && DateTime.UtcNow >= e.FeaturedStartDateTime && DateTime.UtcNow <= e.FeaturedEndDateTime);
+            var doIt = true;
+            Event choseEvent = null;
+            
+            //If an event is explicitly defined
+            var fEvents = db.Events.Where(e => e.IsFeatured == true && DateTime.UtcNow >= e.FeaturedStartDateTime && DateTime.UtcNow <= e.FeaturedEndDateTime);
+            if (fEvents.Any())
+            {
+                for (var i = 0; i < fEvents.Count(); i++)
+                {
+                    var e = GetRandomEvent(fEvents);
+                    if (ContainsEnoughImages(e))
+                        return e;
+                }
+            }
+
+            //Find a short current event
+            var f2Events = FindAllActiveEvents().Where(e => e.EndDateTime != null && ((DateTime)e.EndDateTime - e.StartDateTime).TotalHours <= 8 && e.StartDateTime < DateTime.UtcNow && e.EndDateTime > DateTime.UtcNow);
+            var featuredEvents = f2Events as List<Event> ?? f2Events.ToList();
+            if (featuredEvents.Any())
+            {
+                for (var i = 0; i < featuredEvents.Count(); i++)
+                {
+                    var e = GetRandomEvent(featuredEvents);
+                    if (ContainsEnoughImages(e))
+                        return e;
+                }
+            }
+
+            //Ended in the last 12 hours
+            f2Events = FindAllActiveEvents().Where(e => e.EndDateTime != null && ((DateTime.UtcNow - ((DateTime)e.EndDateTime)).TotalHours < 12 && (DateTime.UtcNow - ((DateTime)e.EndDateTime)).TotalHours >= 0));
+            featuredEvents = f2Events as List<Event> ?? f2Events.ToList();
+            if (featuredEvents.Any())
+            {
+                for (var i = 0; i < featuredEvents.Count(); i++)
+                {
+                    var e = GetRandomEvent(featuredEvents);
+                    if (ContainsEnoughImages(e))
+                        return e;
+                }
+            }
+
+            //Check events starting soon
+            f2Events = FindAllActiveEvents().Where(e => (e.StartDateTime - DateTime.UtcNow).TotalHours < 12 && (e.StartDateTime - DateTime.UtcNow).TotalHours >= 0);
+            featuredEvents = f2Events as List<Event> ?? f2Events.ToList();
+            if (featuredEvents.Any())
+            {
+                for (var i = 0; i < featuredEvents.Count(); i++)
+                {
+                    var e = GetRandomEvent(featuredEvents);
+                    if (ContainsEnoughImages(e))
+                        return e;
+                }
+            }
+
+            //Started in the last 72 hours
+            f2Events = FindAllActiveEvents().Where(e => (e.StartDateTime - DateTime.UtcNow).TotalHours < 72 && (e.StartDateTime - DateTime.UtcNow).TotalHours >= 0);
+            featuredEvents = f2Events as List<Event> ?? f2Events.ToList();
+            if (featuredEvents.Any())
+            {
+                for (var i = 0; i < featuredEvents.Count(); i++)
+                {
+                    var e = GetRandomEvent(featuredEvents);
+                    if (ContainsEnoughImages(e))
+                        return e;
+                }
+            }
+
+            //Started in the week
+            f2Events = FindAllActiveEvents().Where(e => (e.StartDateTime - DateTime.UtcNow).TotalHours < 168 && (e.StartDateTime - DateTime.UtcNow).TotalHours >= 0);
+            featuredEvents = f2Events as List<Event> ?? f2Events.ToList();
+            if (featuredEvents.Any())
+                if (featuredEvents.Any())
+                {
+                    for (var i = 0; i < featuredEvents.Count(); i++)
+                    {
+                        var e = GetRandomEvent(featuredEvents);
+                        if (ContainsEnoughImages(e))
+                            return e;
+                    }
+                }
+
+            //Started in the month
+            f2Events = FindAllActiveEvents().Where(e => (e.StartDateTime - DateTime.UtcNow).TotalHours < 1080 && (e.StartDateTime - DateTime.UtcNow).TotalHours >= 0);
+            featuredEvents = f2Events as List<Event> ?? f2Events.ToList();
+            if (featuredEvents.Any())
+            {
+                //foreach (var e in featuredEvents)
+                //{
+                //    if (ContainsEnoughImages(e))
+                //        return e;
+                //}
+                
+                ////If nothing return a ramdom event
+                //var ev = GetRandomEvent(featuredEvents);
+                //return ev;
+
+
+
+                for (var i = 0; i < featuredEvents.Count(); i++)
+                {
+                    var e = GetRandomEvent(featuredEvents);
+                    if (ContainsEnoughImages(e))
+                        return e;
+
+                    if (i == featuredEvents.Count() - 1)
+                        return e;
+                }
+            }
+
+            
+            return null;
         }
 
+        private static bool ContainsEnoughImages(Event e)
+        {
+            return e.Images.Count() > 5;
+        }
 
         /* Upcoming events */
         public List<Event> UpcomingEvents()
@@ -183,8 +297,23 @@ namespace Epilogger.Web {
                     return EE;
                 }
             } while (true);
+        }
+
+
+        public Event GetRandomEvent(IEnumerable<Event> events)
+        {
+            const int lowerbound = 0;
+            var enumerable = events as List<Event> ?? events.ToList();
+            
+            var upperbound = enumerable.Count() - 1;
+
+            var r = new Random();
+            var randomNumber = r.Next(lowerbound, upperbound);
+
+            return enumerable.ToList()[randomNumber];
 
         }
+
 
         public int GetHighestEventID()
         {
@@ -344,6 +473,10 @@ namespace Epilogger.Web {
             return db.GetTrendingEventsByActivity().ExecuteTypedList<Event>();
         }
 
+        public IEnumerable<Event> FindAllActiveEvents()
+        {
+            return db.Events.Where(e => e.IsActive);
+        }
 
     }
 }

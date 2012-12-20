@@ -24,7 +24,7 @@ namespace Epilogger.Web.Models {
             Activity = activities;
         }
 
-        public List<HomepageFeaturedEventsViewModel> FeaturedEvents { get; set; }
+        public HomepageFeaturedEventsViewModel FeaturedEvents { get; set; }
 
     }
 }

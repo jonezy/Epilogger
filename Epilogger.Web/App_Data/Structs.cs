@@ -2639,107 +2639,7 @@ namespace Epilogger.Data {
 	                MaxLength = 0
                 });
 
-                Columns.Add(new DatabaseColumn("a", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("b", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("c", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("d", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("e", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("f", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("g", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("h", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("i", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("j", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("k", this)
+                Columns.Add(new DatabaseColumn("MinCollectionRate", this)
                 {
 	                IsPrimaryKey = false,
 	                DataType = DbType.Int32,
@@ -2909,135 +2809,15 @@ namespace Epilogger.Data {
       			}
 		    }
            
-            public IColumn a{
+            public IColumn MinCollectionRate{
                 get{
-                    return this.GetColumn("a");
+                    return this.GetColumn("MinCollectionRate");
                 }
             }
             				
-   			public static string aColumn{
+   			public static string MinCollectionRateColumn{
 			      get{
-        			return "a";
-      			}
-		    }
-           
-            public IColumn b{
-                get{
-                    return this.GetColumn("b");
-                }
-            }
-            				
-   			public static string bColumn{
-			      get{
-        			return "b";
-      			}
-		    }
-           
-            public IColumn c{
-                get{
-                    return this.GetColumn("c");
-                }
-            }
-            				
-   			public static string cColumn{
-			      get{
-        			return "c";
-      			}
-		    }
-           
-            public IColumn d{
-                get{
-                    return this.GetColumn("d");
-                }
-            }
-            				
-   			public static string dColumn{
-			      get{
-        			return "d";
-      			}
-		    }
-           
-            public IColumn e{
-                get{
-                    return this.GetColumn("e");
-                }
-            }
-            				
-   			public static string eColumn{
-			      get{
-        			return "e";
-      			}
-		    }
-           
-            public IColumn f{
-                get{
-                    return this.GetColumn("f");
-                }
-            }
-            				
-   			public static string fColumn{
-			      get{
-        			return "f";
-      			}
-		    }
-           
-            public IColumn g{
-                get{
-                    return this.GetColumn("g");
-                }
-            }
-            				
-   			public static string gColumn{
-			      get{
-        			return "g";
-      			}
-		    }
-           
-            public IColumn h{
-                get{
-                    return this.GetColumn("h");
-                }
-            }
-            				
-   			public static string hColumn{
-			      get{
-        			return "h";
-      			}
-		    }
-           
-            public IColumn i{
-                get{
-                    return this.GetColumn("i");
-                }
-            }
-            				
-   			public static string iColumn{
-			      get{
-        			return "i";
-      			}
-		    }
-           
-            public IColumn j{
-                get{
-                    return this.GetColumn("j");
-                }
-            }
-            				
-   			public static string jColumn{
-			      get{
-        			return "j";
-      			}
-		    }
-           
-            public IColumn k{
-                get{
-                    return this.GetColumn("k");
-                }
-            }
-            				
-   			public static string kColumn{
-			      get{
-        			return "k";
+        			return "MinCollectionRate";
       			}
 		    }
            
@@ -4066,6 +3846,26 @@ namespace Epilogger.Data {
 	                IsForeignKey = false,
 	                MaxLength = 20
                 });
+
+                Columns.Add(new DatabaseColumn("LastCollectionDateTime", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.DateTime,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("NormalCollectionCount", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
                     
                 
                 
@@ -4428,6 +4228,30 @@ namespace Epilogger.Data {
    			public static string EventBriteEIDColumn{
 			      get{
         			return "EventBriteEID";
+      			}
+		    }
+           
+            public IColumn LastCollectionDateTime{
+                get{
+                    return this.GetColumn("LastCollectionDateTime");
+                }
+            }
+            				
+   			public static string LastCollectionDateTimeColumn{
+			      get{
+        			return "LastCollectionDateTime";
+      			}
+		    }
+           
+            public IColumn NormalCollectionCount{
+                get{
+                    return this.GetColumn("NormalCollectionCount");
+                }
+            }
+            				
+   			public static string NormalCollectionCountColumn{
+			      get{
+        			return "NormalCollectionCount";
       			}
 		    }
            
