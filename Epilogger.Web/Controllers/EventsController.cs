@@ -397,14 +397,18 @@ namespace Epilogger.Web.Controllers {
 
 		    var storeStartDateTime = startDate;
             var storeEndDateTime = endDate;
-           
+
+            model.allDay = Request.Form["End_Date"].Contains("true");
+
             model.StartDateTime = ConvertToUniversalDateTime(startDate, Request.Form["timeZone"]);
             if (EndDateValid(startDate, endDate))
                 model.EndDateTime = ConvertToUniversalDateTime(endDate, Request.Form["timeZone"]);
             else
+            {
                 //All day is checked, 
                 model.EndDateTime = ConvertToUniversalDateTime(endDate.AddDays(1), Request.Form["timeZone"]);
-
+               
+            }
 
             #region Collection Start/End Date Times
             //Moved, as the timezone offset needs to be applied first

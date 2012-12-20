@@ -508,8 +508,6 @@ jQuery(function ($) {
         $("#icon_photo").attr("src", "/Public/images/livemode/icon-numphotos-dark.png");
     }
 
-
-
     $('.tweet-column').bind('DOMNodeInserted', function (event) {
 
         if ($('#light_dark_theme').val() == "dark") {
@@ -574,7 +572,15 @@ jQuery(function ($) {
             $(this).hide();
              return false;
       });
+      
+       $('#change_color').click(function () {
+        $('#color_holder').toggleClass('invisible');
+    });
 
+//    $('.right_option').mouseleave(function (){
+//         $('#color_holder').addClass('invisible');
+//    });
+     
 });
 
 

@@ -112,6 +112,7 @@ INPUT.miniColors {
 
 .miniColors-triggerWrap {
 	background: url(images/trigger.png) -22px 0 no-repeat;
+	
 }
 
 .miniColors-triggerWrap.disabled {
@@ -127,4 +128,10 @@ INPUT.miniColors {
 
 .miniColors-triggerWrap.disabled .miniColors-trigger {
 	cursor: default;
+}
+
+.miniColors-hextext{
+    position:relative;
+    top:155px;
+    background-color:#FFF;
 }

@@ -653,7 +653,8 @@ namespace Epilogger.Web
                 .ForMember(dest => dest.CurrentUserId, opt => opt.Ignore())
                 .ForMember(dest => dest.CurrentUserRole, opt => opt.Ignore())
                 .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore())
-                .ForMember(dest => dest.CollectDataValue, opt => opt.Ignore());
+                .ForMember(dest => dest.CollectDataValue, opt => opt.Ignore())
+                .ForMember(dest => dest.allDay, opt => opt.Ignore());
 
             Mapper.CreateMap<CreateBasicEventViewModel, Event>()
                 .ForMember(dest => dest.TimeZoneOffset, opt => opt.Ignore())

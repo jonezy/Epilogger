@@ -349,3 +349,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#52cc7f', end
 #toolbar #close{
     z-index:20;
 }
+#color_holder
+{
+    position:absolute;
+    background-color:#454545;
+    padding-right:4px;
+    margin-top: -11px;
+    padding-bottom: 1px;
+}

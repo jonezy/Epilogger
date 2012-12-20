@@ -86,7 +86,7 @@
         </div>
         <div id="tweet_footer">
             <div id="left">
-                @Html.ActionImage("CreateEventTweets", "Events", "#", "/Public/images/CreateEvent/EditHashtags.png", "Back")
+               @* @Html.ActionImage("CreateEventTweets", "Events", "#", "/Public/images/CreateEvent/EditHashtags.png", "Back")*@
             </div>
             <div id="right">
                 <input type="image" src="/Public/images/CreateEvent/GotoEvent.png" alt="" onclick="CloseAndRedirect('@Url.Action("Details", new { id = Model.EventSlug })');">

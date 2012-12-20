@@ -141,6 +141,8 @@ namespace Epilogger.Web.Models {
             }
         }
 
+        public bool allDay { get; set; }
+
         public EventToolbarViewModel ToolbarViewModel { get; set; }
 
         public UserRoleType CurrentUserRole { get; set; }
