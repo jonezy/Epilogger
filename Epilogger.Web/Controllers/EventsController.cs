@@ -1217,7 +1217,7 @@ namespace Epilogger.Web.Controllers {
 
 			if (requestedEvent != null)
 			{
-				var blogPosts = Mapper.Map<List<BlogPost>, List<BlogPostDisplayViewModel>>(_bs.FindByEventID(requestedEvent.ID).ToList());
+				var blogPosts = Mapper.Map<List<BlogPost>, List<BlogPostDisplayViewModel>>(_bs.FindByEventID(requestedEvent.ID).OrderByDescending(i => i.DateTime).ToList());
 
 				var model = Mapper.Map<Event, AllBlogPostsViewModel>(requestedEvent);
 				model.SetAllBlogPostsViewModel(blogPosts, currentPage, blogPosts.Count());
