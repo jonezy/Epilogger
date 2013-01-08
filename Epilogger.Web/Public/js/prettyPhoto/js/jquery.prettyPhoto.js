@@ -171,14 +171,15 @@
 
             if (settings.allow_resize) {
                 // For use within normal web clients 
-                var isiPad = navigator.userAgent.match(/iPad/i) != null;
+                //var isiPad = navigator.userAgent.match(/iPad/i) != null;
 
                 // For use within iPad developer UIWebView
                 // Thanks to Andrew Hedges!
                 var ua = navigator.userAgent;
                 var isiPad = /iPad/i.test(ua) || /iPhone OS 3_1_2/i.test(ua) || /iPhone OS 3_2_2/i.test(ua) || /iPhone OS/i.test(ua) || /iAndroid/i.test(ua);
 
-                if (!isiPad) $(window).bind('scroll.prettyphoto', function () { _center_overlay(); });
+                //CB - Jan 8, 2013. Disable scroll locking
+                //if (!isiPad) $(window).bind('scroll.prettyphoto', function () { _center_overlay(); });
             }
 
             $.prettyPhoto.open();
