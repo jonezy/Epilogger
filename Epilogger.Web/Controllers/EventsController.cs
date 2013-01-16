@@ -369,6 +369,7 @@ namespace Epilogger.Web.Controllers {
                 model.StartDateTime = roundTime;
                 model.EndDateTime = roundTime.AddHours(3);
                 model.TimeZoneOffset = TimeZoneManager.UserTimeZone.BaseUtcOffset.Hours;
+                model.allDay = false;
 
                 return View(model);
             }
@@ -399,16 +400,22 @@ namespace Epilogger.Web.Controllers {
             var storeEndDateTime = endDate;
 
             model.allDay = Request.Form["End_Date"].Contains("true");
+		    model.TimeZoneOffset = int.Parse(Request.Form["timeZone"]);
 
-            model.StartDateTime = ConvertToUniversalDateTime(startDate, Request.Form["timeZone"]);
-            if (EndDateValid(startDate, endDate))
-                model.EndDateTime = ConvertToUniversalDateTime(endDate, Request.Form["timeZone"]);
+            if (!model.allDay)
+		    {
+                model.StartDateTime = ConvertToUniversalDateTime(startDate, model.TimeZoneOffset.ToString(CultureInfo.InvariantCulture));
+                model.EndDateTime = ConvertToUniversalDateTime(EndDateValid(startDate, endDate) ? endDate : endDate.AddDays(1), model.TimeZoneOffset.ToString(CultureInfo.InvariantCulture));
+		    }
             else
             {
-                //All day is checked, 
-                model.EndDateTime = ConvertToUniversalDateTime(endDate.AddDays(1), Request.Form["timeZone"]);
-               
-            }
+                startDate = DateTime.Parse(startDate.ToShortDateString() + " 12:00am");
+                model.StartDateTime = ConvertToUniversalDateTime(startDate, model.TimeZoneOffset.ToString(CultureInfo.InvariantCulture));
+
+                endDate = DateTime.Parse(startDate.ToShortDateString() + " 11:59pm");
+                model.EndDateTime = ConvertToUniversalDateTime(endDate, model.TimeZoneOffset.ToString(CultureInfo.InvariantCulture));
+		    }
+            
 
             #region Collection Start/End Date Times
             //Moved, as the timezone offset needs to be applied first

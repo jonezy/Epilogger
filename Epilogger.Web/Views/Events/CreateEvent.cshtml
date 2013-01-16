@@ -111,21 +111,22 @@
 
     $('#End_Date').bind("change", function () {
         $('#endDate').slideToggle(200);
-        if (status == 0) {
+        $('#start_times').slideToggle(200);
+        $('#AMPMstartTime').slideToggle(200);
+
+        //if (status == 0) {
+        if ($('#End_Date').val()=="true") {
             parent.$.colorbox.resize({ width: 560, height: 570 });
-            status = 1;
+            //status = 1;
+            $('#End_Date').val("false");
         }
         else {
             parent.$.colorbox.resize({ width: 560, height: 510 });
-            status = 0;
+            //status = 0;
+            $('#End_Date').val("true");
         }
     });
 
-    if ($('#End_Date').attr('checked')) {
-        $('#endDate').slideToggle(200);
-        parent.$.colorbox.resize({ width: 560, height: 510 });
-        status = 0;
-    }
 
     $(document).ready(function () {
         $("#Name").autocomplete({
