@@ -291,6 +291,7 @@
     <Compile Include="Controllers\ImageUploadController.cs" />
     <Compile Include="Controllers\JoinController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
+    <Compile Include="Controllers\UtilitiesController.cs" />
     <Compile Include="Controllers\WidgetController.cs" />
     <Compile Include="Core\AuthenticationServices.cs" />
     <Compile Include="Core\Email\EmailSender.cs" />
@@ -500,6 +501,7 @@
     <Content Include="Public\images\colorpicker\colors.png" />
     <Content Include="Public\images\colorpicker\trigger.png" />
     <Content Include="Public\images\colors.png" />
+    <Content Include="Public\images\CreateEvent\gps.png" />
     <Content Include="Public\images\CreateEvent\hash.png" />
     <Content Include="Public\images\CreateEvent\clock.png" />
     <Content Include="Public\images\CreateEvent\EditHashtags.png" />
@@ -8818,7 +8820,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>52502</DevelopmentServerPort>
+          <DevelopmentServerPort>29351</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

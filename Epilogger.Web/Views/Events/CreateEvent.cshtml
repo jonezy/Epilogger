@@ -8,12 +8,8 @@
     //Layout = "~/Views/Shared/_PopupLayout.cshtml";
     ViewBag.Title = "Create a new event | Epilogger";
 }
-
-
-
 @section head {
     <title>@ViewBag.Title</title>
-    
     <script type="text/javascript">
         $(function () {
             $("#StartDateTime").datepicker({ dateFormat: 'M dd, yy' });
@@ -43,31 +39,26 @@
             });
 
         });
-    </script>   
+    </script>
 }
-
-
-    <div class="form_process">
-        <img src="/Public/images/CreateEvent/BasicInfoActive.png" alt="Basic Information" />
-    </div>
-    @Html.ValidationSummary("Please correct the following issues")
-    @using (Html.BeginForm("CreateEvent", "Events", FormMethod.Post, new { id = "CreateForm" }))
-    {   
-        <fieldset class="popForm">
+<div class="form_process">
+    <img src="/Public/images/CreateEvent/BasicInfoActive.png" alt="Basic Information" />
+</div>
+@Html.ValidationSummary("Please correct the following issues")
+@using (Html.BeginForm("CreateEvent", "Events", FormMethod.Post, new { id = "CreateForm" }))
+{   
+    <fieldset class="popForm">
+        <div class="">
+            <p>@Html.Label("Event title:") @Html.EditorFor(model => model.Name)</p>
+            <p>@Html.Label("Event subtitle:") @Html.EditorFor(model => model.Subtitle)</p>
+            <div class="hint">
+                (ex: Presented by Aperture Laboratories)
+            </div>
+            <p>@Html.LabelFor(model => model.CategoryId) @Html.DropDownListFor(model => model.CategoryId, Model.Categories, "Select your event category")</p>
             <div class="">
-                <p>@Html.Label("Event title:") @Html.EditorFor(model => model.Name)</p>
-                <p>@Html.Label("Event subtitle:") @Html.EditorFor(model => model.Subtitle)</p>
-                <div class="hint">
-                    (ex: Presented by Aperture Laboratories)
-                </div>
-                <p>@Html.LabelFor(model => model.CategoryId) @Html.DropDownListFor(model => model.CategoryId, Model.Categories, "Select your event category")</p>
-                
-                <div class="">
-                    <p>@Html.Label("Start date:") @Html.EditorFor(m => m.StartDateTime, "DateTimeOneline")
-
-                        @Html.DropDownList("start_times", new SelectList(CreateBasicEventViewModel.Times, "Value", "Text", string.Format("{0:h:mm}", Model.StartDateTime.ToLocalTime())), new { @class = "times" })
-                        
-                        @Html.DropDownList("AMPMstartTime", new SelectList(new List<SelectListItem> {
+                <p>@Html.Label("Start date:") @Html.EditorFor(m => m.StartDateTime, "DateTimeOneline")
+                    @Html.DropDownList("start_times", new SelectList(CreateBasicEventViewModel.Times, "Value", "Text", string.Format("{0:h:mm}", Model.StartDateTime.ToLocalTime())), new { @class = "times" })
+                    @Html.DropDownList("AMPMstartTime", new SelectList(new List<SelectListItem> {
                                                                                                         new SelectListItem
                                                                                                             {
                                                                                                                 Text = "am",
@@ -78,26 +69,21 @@
                                                                                                                 Text = "pm",
                                                                                                                 Value = "pm"
                                                                                                             }}, "Value", "Text", string.Format("{0:tt}", Model.StartDateTime.ToLocalTime()).ToLower()), new { @class = "AMPM" })
-                        
-                        @Html.DropDownList("timeZone", new SelectList(CreateBasicEventViewModel.TimeZones, "TimeZoneOffset", "TimeZoneName", Model.TimeZoneOffset), new { @class = "timeZoneSelect" })
-                    </p>
-                </div>
-                
-
-                <div class="under_control_notice">
-                    @Html.CheckBox("End_Date",@Model.allDay) <label class="endDateCheckLabel" for="End_Date">All day</label>
-                </div>
-
-                <div id="endDate" class="dropdown_image">
-                    @Html.Label("End date:") @Html.EditorFor(m => m.EndDateTime, "DateTimeOneline")
-                    
-
-                    @{
-                        Debug.Assert(Model.EndDateTime != null, "Model.EndDateTime != null");
-                    }
-                    @Html.DropDownList("end_times", new SelectList(CreateBasicEventViewModel.Times, "Value", "Text", string.Format("{0:h:mm}", ((DateTime) Model.EndDateTime).ToLocalTime())), new { @class = "times" })
-                    
-                    @Html.DropDownList("AMPMendTime", new SelectList(new List<SelectListItem> {
+                    @Html.DropDownList("timeZone", new SelectList(CreateBasicEventViewModel.TimeZones, "TimeZoneOffset", "TimeZoneName", Model.TimeZoneOffset), new { @class = "timeZoneSelect" })
+                </p>
+            </div>
+            <div class="under_control_notice">
+                @Html.CheckBox("End_Date", @Model.allDay)
+                <label class="endDateCheckLabel" for="End_Date">
+                    All day</label>
+            </div>
+            <div id="endDate" class="dropdown_image">
+                @Html.Label("End date:") @Html.EditorFor(m => m.EndDateTime, "DateTimeOneline")
+                @{
+    Debug.Assert(Model.EndDateTime != null, "Model.EndDateTime != null");
+                }
+                @Html.DropDownList("end_times", new SelectList(CreateBasicEventViewModel.Times, "Value", "Text", string.Format("{0:h:mm}", ((DateTime)Model.EndDateTime).ToLocalTime())), new { @class = "times" })
+                @Html.DropDownList("AMPMendTime", new SelectList(new List<SelectListItem> {
                                                                                                   new SelectListItem
                                                                                                       {
                                                                                                           Text = "am",
@@ -107,21 +93,19 @@
                                                                                                       {
                                                                                                           Text = "pm",
                                                                                                           Value = "pm"
-                                                                                                      }}, "Value", "Text", string.Format("{0:tt}", ((DateTime) Model.EndDateTime).ToLocalTime()).ToLower()), 
+                                                                                                      }}, "Value", "Text", string.Format("{0:tt}", ((DateTime)Model.EndDateTime).ToLocalTime()).ToLower()),
                                        new { @class = "AMPM" })
-                </div>
-                
-                <p>
-                    @Html.Label("Collect content:")
-                    @Html.DropDownList("collectDataTimes", new SelectList(CreateBasicEventViewModel.CollectDataList, "Value", "Text", Model.CollectDataValue))
-                </p>
-                <div class="dashed">
-                </div>
-                <input type="submit" class="submitEvent" value="ALL DONE WITH BASIC INFO" />
             </div>
-        </fieldset>
-    }
-
+            <p>
+                @Html.Label("Collect content:")
+                @Html.DropDownList("collectDataTimes", new SelectList(CreateBasicEventViewModel.CollectDataList, "Value", "Text", Model.CollectDataValue))
+            </p>
+            <div class="dashed">
+            </div>
+            <input type="submit" class="submitEvent" value="ALL DONE WITH BASIC INFO" />
+        </div>
+    </fieldset>
+}
 <script type="text/javascript">
     var status = 1;
 
@@ -142,4 +126,34 @@
         parent.$.colorbox.resize({ width: 560, height: 510 });
         status = 0;
     }
+
+    $(document).ready(function () {
+        $("#Name").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("Autocomplete", "Utilities")',
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: "<div class=\"auto_complete_detail\"><div class=\"auto_complete_name\">" + item.label + "</div><div class=\"auto_complete_date\"><img src=\"/Public/images/CreateEvent/clock.png\"  /><span>" + item.startDate + "</span></div><div class=\"auto_complete_venue\"><img src=\"/Public/images/CreateEvent/gps.png\"  /><span>" + item.venue + "</span></div></div>", value: item.url, id: item.id }; 
+                        }));
+                    }
+
+                });
+            },
+            select: function (event, ui) {
+            // alert(ui.item.value);
+             window.open(ui.item.value);
+                return false;
+            }
+        }).data("autocomplete")._renderItem = function (ul, item) {
+            return $("<li>")
+                .data("item.autocomplete", item)
+                .append("<a>" + item.label + "</a>")
+                .appendTo(ul);
+        }
+        
+    });
 </script>

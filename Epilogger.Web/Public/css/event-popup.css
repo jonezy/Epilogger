@@ -1,4 +1,4 @@
-﻿body { margin:0 !important; padding:0 !important; overflow-x: hidden; }
+﻿body { margin:0 !important; padding:0 !important; overflow: hidden; }
 fieldset { border:0; }
 fieldset.popForm .innerwrap 
 {
@@ -366,3 +366,32 @@ fieldset#livemode .submitEvent {
     font:Helvetica,Arial,Sans-Serif; 
     color:#777
 } 
+.auto_complete_detail {
+    padding: 3px 0 4px 0;
+}
+.auto_complete_detail:hover {
+    color: #3087b4;
+}
+.auto_complete_name 
+{
+   padding-bottom: 1px;
+} 
+
+.auto_complete_date {
+     font-weight: normal;
+    color: black;
+    float: left;
+    font-size: 0.9em;
+    padding: 0 20px 0 0;
+}
+.auto_complete_venue {
+     font-weight: normal;
+        color: black;
+        font-size: 0.9em;
+}
+.auto_complete_venue span{
+    padding-left: 6px;
+}
+.auto_complete_date span {
+     padding-left: 6px;
+}
