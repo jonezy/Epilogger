@@ -1,4 +1,5 @@
-﻿body { margin:0 !important; padding:0 !important; overflow: hidden; }
+﻿
+body { margin:0 !important; padding:0 !important; overflow: hidden; }
 fieldset { border:0; }
 fieldset.popForm .innerwrap 
 {
@@ -13,10 +14,16 @@ input[type="text"], textarea
     background: #eee; 
     display: inline-block;
     padding: 3px 5px;
-    height: 30px; 
+    height: 30px;
     width: 67%;
-    font: 14px Helvetica,Arial,Sans-Serif; 
+    font: 14px Helvetica,Arial,Sans-Serif;
     color: #666;
+ 
+    /*
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+*/
 }
                                               
 fieldset.popForm label {
@@ -40,13 +47,25 @@ fieldset.popForm select
     -webkit-border-radius:0;
     */
     
+    vertical-align: top;
     background: #eee;
-    
-    height: 30px; 
-    width: 67%; 
+    height: 30px !important;
+    width: 67%;
     font: 14px Helvetica,Arial,Sans-Serif; 
     color: #666;    
-    padding-left: 2px;
+    
+    line-height:normal;
+    padding:3px;
+    
+    
+    
+    
+    /*
+padding-left: 2px;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+*/
 }
 
 /*
@@ -95,7 +114,7 @@ fieldset.popForm .hint { margin-left: 25%; margin-top:-12px;margin-bottom:35px; 
 .invisible { display: none;}
 
 fieldset.popForm #startDate{
-float:left;
+    float:left;
 }
 fieldset.popForm input[type="text"] .timepick{width:7em;}
 .form_process{ margin-bottom: 25px; }
@@ -136,12 +155,16 @@ fieldset.popForm input[type="text"] .timepick{width:7em;}
 
 fieldset.popForm input[type="text"].blue_calendar, textarea.blue_calendar 
 {
-    background-image:url('../../Public/images/CreateEvent/calendarIcon.png');
-    background-repeat:no-repeat;
+    background: #eee url('../../Public/images/CreateEvent/calendarIcon.png') no-repeat 95% 50%; 
+    
+    
+    /*background-image: url('../../Public/images/CreateEvent/calendarIcon.png');
+    background-repeat: no-repeat;
     background-position-x: 95%;
-    background-position-y: 50%;
-    padding:0 5px;
-    width:20%;
+    background-position-y: 50%;*/
+    
+    padding: 0 5px;
+    width: 20%;
     margin-right:4px;
 }
    

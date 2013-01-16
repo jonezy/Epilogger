@@ -35,7 +35,7 @@ namespace Epilogger.Web.Controllers {
 		readonly string _version = DateTime.Today.ToString("yyyyMMdd");
 
 		EpiloggerDB _db;
-        CreateEventViewModel eventModel = new CreateEventViewModel();
+        //CreateEventViewModel eventModel = new CreateEventViewModel();
 		EventService _es = new EventService();
         LiveModeCustomSettingsService _lm = new LiveModeCustomSettingsService();
 		TweetService _ts = new TweetService();
@@ -534,7 +534,7 @@ namespace Epilogger.Web.Controllers {
                 {
                     //var epLevent = Mapper.Map<CreateEventTwitterViewModel, Event>(model);
                     //var eventModel = _es.FindBySlug(model.EventSlug);
-                    var eventModel = Mapper.Map<Event, Event>((Event)TempData["Event"]);
+                    var eventMod = Mapper.Map<Event, Event>((Event)TempData["Event"]);
 
                     var searchTerms = frm["SearchTerms"].Split(',');
                     var searchQuery = "";
@@ -544,39 +544,39 @@ namespace Epilogger.Web.Controllers {
                         searchQuery += s + " OR ";
                     }
                     searchQuery = searchQuery.Remove(searchQuery.Length - 4, 4);
-                    eventModel.SearchTerms = searchQuery;
+                    eventMod.SearchTerms = searchQuery;
 
-                    eventModel.IsActive = true;
+                    eventMod.IsActive = true;
 
-                    _es.Save(eventModel);              
+                    _es.Save(eventMod);              
 
                     // get display model from event, route this eventually
                     var displayModel = new CreateFinalEventViewModel
                             {
-                                Name = eventModel.Name,
-                                Subtitle = eventModel.SubTitle,
+                                Name = eventMod.Name,
+                                Subtitle = eventMod.SubTitle,
                                 SearchTerms = searchQuery,
-                                EventSlug = eventModel.EventSlug,
-                                CollectionTime = getCollectionWordFormat(eventModel.CollectionStartDateTime, eventModel.CollectionEndDateTime),
-                                EventStartEndTime = getEventStartEndTime(eventModel.StartDateTime, eventModel.EndDateTime)
+                                EventSlug = eventMod.EventSlug,
+                                CollectionTime = getCollectionWordFormat(eventMod.CollectionStartDateTime, eventMod.CollectionEndDateTime),
+                                EventStartEndTime = getEventStartEndTime(eventMod.StartDateTime, eventMod.EndDateTime)
                             };
 
 
-                    ////Initiate a first collect on the event
-                    //var tsmp = new MQ.MSGProducer("Epilogger", "TwitterSearch");
-                    //var tsMSG = new MQ.Messages.TwitterSearchMSG
-                    //{
-                    //    EventID = eventModel.ID,
-                    //    SearchTerms = eventModel.SearchTerms,
-                    //    SearchFromLatestTweet = false,
-                    //    SearchSince = eventModel.CollectionStartDateTime,
-                    //    SearchUntil = eventModel.CollectionEndDateTime
-                    //};
-                    //tsmp.SendMessage(tsMSG);
-                    //tsmp.Dispose();
-                    
-                    ////The the admins an email with the event details.
-                    // SendEventCreatedEmailToSystem(eventModel);
+                    //Initiate a first collect on the event
+                    var tsmp = new MQ.MSGProducer("Epilogger", "TwitterSearch");
+                    var tsMSG = new MQ.Messages.TwitterSearchMSG
+                    {
+                        EventID = eventMod.ID,
+                        SearchTerms = eventMod.SearchTerms,
+                        SearchFromLatestTweet = false,
+                        SearchSince = eventMod.CollectionStartDateTime,
+                        SearchUntil = eventMod.CollectionEndDateTime
+                    };
+                    tsmp.SendMessage(tsMSG);
+                    tsmp.Dispose();
+
+                    //The the admins an email with the event details.
+                    SendEventCreatedEmailToSystem(eventMod);
 
                     return View("CreateEventFinal", displayModel);
                 }
@@ -713,7 +713,7 @@ namespace Epilogger.Web.Controllers {
                     SendEventCreatedTweet(epLevent);
 
                     //The the admins an email with the event details.
-				    SendEventCreatedEmailToSystem(model);
+				    //SendEventCreatedEmailToSystem(model);
 
 					
 					this.StoreSuccess("Your Event was created successfully!  Dont forget to share it with your friends and attendees!");
@@ -732,46 +732,49 @@ namespace Epilogger.Web.Controllers {
 			return View(model);
 		}
 
-	    private void SendEventCreatedEmailToSystem(CreateEventViewModel model)
+	    private void SendEventCreatedEmailToSystem(Event model)
 	    {
 	        try
-	        {  
-	            var theUser = _us.GetUserByID(model.UserID);
+	        {
+	            if (model.UserID != null)
+	            {
+	                var theUser = _us.GetUserByID((Guid)model.UserID);
 
-	            var parser = new TemplateParser();
-	            var replacements = new Dictionary<string, string>
-	                                   {
-	                                       {"[BASE_URL]", App.BaseUrl},
-	                                       {"[EVENT_NAME]", model.Name},
+	                var parser = new TemplateParser();
+	                var replacements = new Dictionary<string, string>
 	                                       {
-	                                           "[EVENT_CREATOR]",
-	                                           string.Format("{0} {1} ({2}) {3}", theUser.FirstName, theUser.LastName, theUser.Username, theUser.EmailAddress)
-	                                       },
-	                                       {"[SEARCH_TERMS]", model.SearchTerms},
-	                                       {
-	                                           "[EVENT_TIME]",
-	                                           model.StartDateTime.ToLocalTime() + " - " +
-	                                           (DateTime) model.EndDateTime.GetValueOrDefault().ToLocalTime()
-	                                       },
-	                                       {
-	                                           "[COLLECTION_TIME]",
-	                                           model.CollectionStartDateTime.ToLocalTime() + " - " +
-	                                           (DateTime) model.CollectionEndDateTime.GetValueOrDefault().ToLocalTime()
-	                                       },
-	                                       {"[EVENT_URL]", "http://epilogger.com/events/" + model.EventSlug}
-	                                   };
+	                                           {"[BASE_URL]", App.BaseUrl},
+	                                           {"[EVENT_NAME]", model.Name},
+	                                           {
+	                                               "[EVENT_CREATOR]",
+	                                               string.Format("{0} {1} ({2}) {3}", theUser.FirstName, theUser.LastName, theUser.Username, theUser.EmailAddress)
+	                                           },
+	                                           {"[SEARCH_TERMS]", model.SearchTerms},
+	                                           {
+	                                               "[EVENT_TIME]",
+	                                               model.StartDateTime.ToLocalTime() + " - " +
+	                                               (DateTime) model.EndDateTime.GetValueOrDefault().ToLocalTime()
+	                                           },
+	                                           {
+	                                               "[COLLECTION_TIME]",
+	                                               model.CollectionStartDateTime.ToLocalTime() + " - " +
+	                                               (DateTime) model.CollectionEndDateTime.GetValueOrDefault().ToLocalTime()
+	                                           },
+	                                           {"[EVENT_URL]", "http://epilogger.com/events/" + model.EventSlug}
+	                                       };
 
-	            var message = parser.Replace(AccountEmails.AdminEventCreated, replacements);
+	                var message = parser.Replace(AccountEmails.AdminEventCreated, replacements);
 
-	            var sfEmail = new SpamSafeMail
-	                              {
-	                                  EmailSubject = model.Name + " has just been created.",
-	                                  HtmlEmail = message,
-	                                  TextEmail = message
-	                              };
-	            sfEmail.ToEmailAddresses.Add("system@epilogger.com");
+	                var sfEmail = new SpamSafeMail
+	                                  {
+	                                      EmailSubject = model.Name + " has just been created.",
+	                                      HtmlEmail = message,
+	                                      TextEmail = message
+	                                  };
+	                sfEmail.ToEmailAddresses.Add("system@epilogger.com");
 
-	            sfEmail.SendMail();
+	                sfEmail.SendMail();
+	            }
 	        }
 	        catch (Exception)
 	        {
