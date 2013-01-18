@@ -12,7 +12,7 @@
     });
     
     function CloseAndRedirect(url) {
-        parent.$.colorbox.close();
+        
         parent.window.location = url;
     }
 
@@ -29,22 +29,26 @@
                 <h3>@Html.DisplayFor(m => m.Name)
                         @*Your Event Name*@</h3>
             <table>
-                <tr>
-                    <td>
-                        <img src="/Public/images/CreateEvent/quotes.png" alt="quotes" />
-                    </td>
-                    <td>
-                   @Html.DisplayFor(m => m.Subtitle)
-                        @*subtitle of your event*@
-                    </td>
-                </tr>
-                <tr>
+                @{
+                    if (Model.Subtitle != null && Model.Subtitle != "")
+                    {
+                        @:<tr>
+                        @:<td>                      
+                        @: <img src="/Public/images/CreateEvent/quotes.png" alt="quotes" />        
+                        @:</td>
+                        @:<td>
+                            @Html.DisplayFor(m => m.Subtitle)
+                            @*subtitle of your event*@
+                        @:</td>
+                        @:</tr>
+                    }
+                    <tr>
                     <td>
                         <img src="/Public/images/CreateEvent/clock.png" alt="clock" />
                     </td>
                     <td>
-                    @Html.DisplayFor(m => m.EventStartEndTime)
-                    @*Sept 18th 2:00pm - Sept 19th 4:00pm*@
+                        @Html.DisplayFor(m => m.EventStartEndTime)
+                        @*Sept 18th 2:00pm - Sept 19th 4:00pm*@
                     </td>
                 </tr>
                 <tr>
@@ -52,8 +56,8 @@
                         <img src="/Public/images/CreateEvent/hash.png" alt="hashtags" />
                     </td>
                     <td>
-                    Search Terms:
-                    @Html.DisplayFor(m => m.SearchTerms)
+                        Search Terms:
+                        @Html.DisplayFor(m => m.SearchTerms)
                     </td>
                 </tr>
                 <tr>
@@ -61,7 +65,7 @@
                         <img src="/Public/images/CreateEvent/info.png" alt="quotes" />
                     </td>
                     <td>
-                    @Html.DisplayFor(m => m.CollectionTime)
+                        @Html.DisplayFor(m => m.CollectionTime)
                     </td>
                 </tr>
             </table>

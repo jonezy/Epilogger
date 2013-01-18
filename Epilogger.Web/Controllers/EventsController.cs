@@ -604,7 +604,7 @@ namespace Epilogger.Web.Controllers {
         [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to edit an event")]
         public virtual ActionResult CreateEventFinal(CreateFinalEventViewModel displayModel)
         {
-            
+           
 
             return View(displayModel);
         }

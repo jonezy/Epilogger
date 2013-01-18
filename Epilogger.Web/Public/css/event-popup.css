@@ -18,12 +18,10 @@ input[type="text"], textarea
     width: 67%;
     font: 14px Helvetica,Arial,Sans-Serif;
     color: #666;
- 
-    /*
-    -moz-box-sizing: content-box;
-    -webkit-box-sizing: content-box;
-    box-sizing: content-box;
-*/
+    border: 2px solid #BBB;
+    box-shadow: inset 0 0 3px #CCC;
+    -moz-box-shadow:inset 0 0 3px #CCC;
+    -webkit-box-shadow: inset 0 0 3px #CCC; 
 }
                                               
 fieldset.popForm label {
@@ -55,17 +53,12 @@ fieldset.popForm select
     color: #666;    
     
     line-height:normal;
-    padding:3px;
+    padding: 3px 0px;
     
-    
-    
-    
-    /*
-padding-left: 2px;
-    -moz-box-sizing: content-box;
-    -webkit-box-sizing: content-box;
-    box-sizing: content-box;
-*/
+       border: 2px solid #BBB;
+       box-shadow: inset 0 0 3px #CCC;
+    -moz-box-shadow:inset 0 0 3px #CCC;
+    -webkit-box-shadow: inset 0 0 3px #CCC; 
 }
 
 /*
@@ -92,7 +85,8 @@ fieldset.popForm .AMPM {
 }
 
 fieldset.popForm .timeZoneSelect {
-    width: 90px; 
+    width: 90px;
+    text-transform: lowercase;
 }
 
 /*
@@ -174,18 +168,20 @@ input[type="text"] .bold {
 
 /*twitter*/
 #twitter_wrapper{
-    width:121%;
-    margin-left:-43px;
     margin-top:-15px;
     font-size:13px; 
-    font:Helvetica,Arial,Sans-Serif; 
-    color:#777
+    font:Helvetica,Arial,Sans-Serif;
+    color: #777;
+    height:500px;
 } 
 #left_side{
     width:50%;
     height:75%;
     float:left;
-}                        
+}       
+#left_side p{
+    font-weight: bold; 
+}                    
 #right_side{
     width:50%;
     height:75%;
@@ -221,7 +217,7 @@ input[type="text"] .bold {
      
     .warning_small{
     background-color:#fcfdd6;
-    padding:6px 6px 6px 6px;
+   padding: 3px 0px 3px 3px;
     width:250px;
     border:1px solid #B9BD6B;
     margin-bottom:10px;
@@ -240,8 +236,8 @@ input[type="text"] .bold {
     text-transform:none;
     }
      .warning span{
-    color:#777;
-    font:bold 13px Arial,Sans-Serif;
+    color:#666;
+    font: 13px Arial,Sans-Serif;
     }
 .stn_button{
     color:#FFF;
@@ -347,7 +343,7 @@ input[type="text"] .bold {
 }
 
 /*live mode*/
-fieldset#livemode input[type="text"], textarea
+/*fieldset#livemode input[type="text"], textarea
 {
     background:#eee; border:0;outline:0;
     box-shadow: inset 0 0 10px #888; 
@@ -417,4 +413,4 @@ fieldset#livemode .submitEvent {
 }
 .auto_complete_date span {
      padding-left: 6px;
-}
+}*/
