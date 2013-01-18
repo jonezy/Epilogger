@@ -153,11 +153,7 @@ namespace Epilogger.Web.Controllers {
 				}
 				catch { model.EventBriteEID = null; }
 
-				model.CanDelete = false;
-				if ((requestedEvent.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator)
-				{
-					model.CanDelete = true;
-				}
+			    model.CanDelete = CanModerate(requestedEvent);
 
 				//@(((Model.EventRatings.Sum(i => i.UserRating) / Model.EventRatings.Count()) / 5) * 100)
 
@@ -251,11 +247,7 @@ namespace Epilogger.Web.Controllers {
 				model.Images = _is.GetPagedPhotos(requestedEvent.ID, currentPage + 1, 30, this.FromDateTime(), this.ToDateTime());
 				model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
 
-				model.CanDelete = false;
-				if ((requestedEvent.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator)
-				{
-					model.CanDelete = true;
-				}
+			    model.CanDelete = CanModerate(requestedEvent);
 
 				if (currentPage + 1 == 1) {
 					model.ShowTopPhotos = true;
@@ -298,14 +290,8 @@ namespace Epilogger.Web.Controllers {
 				model.Tweets = _ts.GetPagedTweets(requestedEvent.ID, currentPage + 1, 100, FromDateTime(), ToDateTime());
 				model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
 
-				model.CanDelete = false;
-				if ((requestedEvent.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator)
-				{
-					model.CanDelete = true;
-				}
-
-				//model.CanDelete = 
-
+			    model.CanDelete = CanModerate(requestedEvent);
+                
 				if (currentPage + 1 == 1)
 				{
 					model.ShowTopTweets = true;
@@ -997,9 +983,8 @@ namespace Epilogger.Web.Controllers {
 
 						//Instead of hard coding the HTML for the tweets, let's use the template.
 						var firstOrDefault = theT.Events.FirstOrDefault(t => t.ID == EventID);
-						var canDelete = firstOrDefault != null && ((firstOrDefault.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator);
-
-						htmlString.Append(RenderRazorViewToString("TweetTemplate", new TweetTemplateViewModel() { CanDelete = canDelete, Tweet = theT, ShowControls = true, EventId = EventID }));
+						
+						htmlString.Append(RenderRazorViewToString("TweetTemplate", new TweetTemplateViewModel() { CanDelete = CanModerate(firstOrDefault), Tweet = theT, ShowControls = true, EventId = EventID }));
 
 						RecordCount++;
 					}
@@ -1045,9 +1030,7 @@ namespace Epilogger.Web.Controllers {
 
 						//Instead of hard coding the HTML for the images, let's use the template.
 						var firstOrDefault = theI.Events.FirstOrDefault(t => t.ID == EventID);
-						var canDelete = firstOrDefault != null && ((firstOrDefault.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator);
-
-						html.Append(RenderRazorViewToString("_ImageTemplate", new ImageTemplateViewModel { CanDelete = canDelete, Image = theI }));
+                        html.Append(RenderRazorViewToString("_ImageTemplate", new ImageTemplateViewModel { CanDelete = CanModerate(firstOrDefault), Image = theI }));
 						
 						recordCount++;
 					}
@@ -2437,9 +2420,8 @@ namespace Epilogger.Web.Controllers {
 
 						//Instead of hard coding the HTML for the tweets, let's use the template.
 						var firstOrDefault = theT.Events.FirstOrDefault(t => t.ID == eventID);
-						var canDelete = firstOrDefault != null && ((firstOrDefault.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator);
 
-						tweets.Add(RenderRazorViewToString("_LiveTweetTemplate", new TweetTemplateViewModel() { ModifyDisplayClass = "newupdates", CanDelete = canDelete, Tweet = theT, ShowControls = true, EventId = eventID }));
+						tweets.Add(RenderRazorViewToString("_LiveTweetTemplate", new TweetTemplateViewModel() { ModifyDisplayClass = "newupdates", CanDelete = CanModerate(firstOrDefault), Tweet = theT, ShowControls = true, EventId = eventID }));
 					}
 
 					//Return the Dictionary as it's IEnumerable and it creates the correct JSON doc.
@@ -2554,6 +2536,20 @@ namespace Epilogger.Web.Controllers {
 			return RedirectToAction("details");
 
 		}
+
+
+        private bool CanModerate(Event e)
+        {
+            if (e == null) return false;
+            if (CurrentUserRole == UserRoleType.Administrator) return true;
+
+            if (e.IsPaid != null && (bool) e.IsPaid)
+            {
+                return ((e.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator);
+            }
+
+            return false;
+        }
 
 		
 	}

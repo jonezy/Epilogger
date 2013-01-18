@@ -600,7 +600,9 @@ namespace Epilogger.Web
                 .ForMember(dest => dest.FeaturedEndDateTime, opt => opt.UseValue(DateTime.Parse("01/01/1800")))
                 .ForMember(dest => dest.EventBriteEID, opt => opt.Ignore())
                 .ForMember(dest => dest.LastCollectionDateTime, opt => opt.Ignore())
-                .ForMember(dest => dest.NormalCollectionCount, opt => opt.Ignore());
+                .ForMember(dest => dest.NormalCollectionCount, opt => opt.Ignore())
+                .ForMember(dest => dest.IsPaid, opt => opt.Ignore())
+                .ForMember(dest => dest.DatePaid, opt => opt.Ignore());
 
             Mapper.CreateMap<User, DashboardProfileViewModel>()
                 .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => string.Format("{0} {1}", src.FirstName, src.LastName)))
@@ -676,7 +678,9 @@ namespace Epilogger.Web
                 .ForMember(dest => dest.TwitterAccount, opt => opt.Ignore())
                 .ForMember(dest => dest.FacebookPageURL, opt => opt.Ignore())
                 .ForMember(dest => dest.LastCollectionDateTime, opt => opt.Ignore())
-                .ForMember(dest => dest.NormalCollectionCount, opt => opt.Ignore());
+                .ForMember(dest => dest.NormalCollectionCount, opt => opt.Ignore())
+                .ForMember(dest => dest.IsPaid, opt => opt.Ignore())
+                .ForMember(dest => dest.DatePaid, opt => opt.Ignore());
 
             var mapTVM = Mapper.CreateMap<Event, CreateEventTwitterViewModel>();
             mapTVM.ForAllMembers(opt => opt.Ignore());

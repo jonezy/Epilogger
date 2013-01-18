@@ -4264,6 +4264,40 @@ namespace Epilogger.Data
 		    }
 		}
 		
+        partial void OnIsPaidChanging(bool? value);
+        partial void OnIsPaidChanged();
+		
+		private bool? _IsPaid;
+		public bool? IsPaid { 
+		    get{
+		        return _IsPaid;
+		    } 
+		    set{
+		        this.OnIsPaidChanging(value);
+                this.SendPropertyChanging();
+                this._IsPaid = value;
+                this.SendPropertyChanged("IsPaid");
+                this.OnIsPaidChanged();
+		    }
+		}
+		
+        partial void OnDatePaidChanging(DateTime? value);
+        partial void OnDatePaidChanged();
+		
+		private DateTime? _DatePaid;
+		public DateTime? DatePaid { 
+		    get{
+		        return _DatePaid;
+		    } 
+		    set{
+		        this.OnDatePaidChanging(value);
+                this.SendPropertyChanging();
+                this._DatePaid = value;
+                this.SendPropertyChanged("DatePaid");
+                this.OnDatePaidChanged();
+		    }
+		}
+		
 
         #endregion
 
