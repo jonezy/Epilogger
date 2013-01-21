@@ -2365,24 +2365,31 @@ namespace Epilogger.Web.Controllers {
 			{
 				var topTweetersStats = new TopTweetersStats();
 				var model = new LiveModeViewModel
-								{
-                                    EventSlug = requestedEvent.EventSlug,
-									EventId = requestedEvent.ID,
-									CustomSettings = new LiveModeCustomSettingsService().FindByEventID(requestedEvent.ID),
-									Images = _is.FindByEventIdOrderDescTakeX(requestedEvent.ID, 5, FromDateTime(), ToDateTime()).ToList(),
-									EpiloggerCounts = new Core.Stats.WidgetTotals().GetWidgetTotals(requestedEvent.ID, FromDateTime(), ToDateTime()),
-									TopTweeters = topTweetersStats.Calculate(_ts.GetTop10TweetersByEventID(requestedEvent.ID, FromDateTime(), ToDateTime())).ToList(),
-									Hashtag = requestedEvent.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0].Contains("#")
-												? requestedEvent.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0]
-												: "#" + requestedEvent.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0],
-                                     
-								};
+				                {
+				                    EventSlug = requestedEvent.EventSlug,
+				                    EventId = requestedEvent.ID,
+				                    CustomSettings = new LiveModeCustomSettingsService().FindByEventID(requestedEvent.ID),
+				                    Images =
+				                        _is.FindByEventIdOrderDescTakeX(requestedEvent.ID, 5, FromDateTime(), ToDateTime()).ToList(),
+				                    EpiloggerCounts =
+				                        new Core.Stats.WidgetTotals().GetWidgetTotals(requestedEvent.ID, FromDateTime(),
+				                                                                      ToDateTime()),
+				                    TopTweeters =
+				                        topTweetersStats.Calculate(_ts.GetTop10TweetersByEventID(requestedEvent.ID, FromDateTime(),
+				                                                                                 ToDateTime())).ToList(),
+				                    Hashtag =
+				                        requestedEvent.SearchTerms.Split(new string[] {" OR "}, StringSplitOptions.None)[0].Contains
+				                            ("#")
+				                            ? requestedEvent.SearchTerms.Split(new string[] {" OR "}, StringSplitOptions.None)[0]
+				                            : "#" +
+				                              requestedEvent.SearchTerms.Split(new string[] {" OR "}, StringSplitOptions.None)[0],
+				                    CurrentUserRole = CurrentUserRole,
+				                    CurrentUserID = CurrentUser.ID,
+				                    UserID = CurrentUser.ID,
 
-                model.CurrentUserRole = CurrentUserRole;
-                model.CurrentUserID = CurrentUser.ID;
-                model.UserID = CurrentUser.ID;
+				                };
 
-                var sponsors = _sis.FindByLiveID(model.CustomSettings.Id);
+			    var sponsors = _sis.FindByLiveID(model.CustomSettings.Id);
                 model.SponsorImageList = sponsors;
 				return View(model);
 			}
@@ -2404,7 +2411,7 @@ namespace Epilogger.Web.Controllers {
 
 					pageLoadTime = string.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.Parse(pageLoadTime));
 					
-					var theTweets = _ts.FindForLiveModeAjaxDesc(eventID, count);
+					var theTweets = _ts.FindForLiveModeAjaxDesc(eventID, count).ToList();
 					theTweets.Sort((x, y) => y.CreatedDate.Value.CompareTo(x.CreatedDate.Value));
 					
 
