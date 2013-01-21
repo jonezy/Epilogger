@@ -1516,7 +1516,8 @@ namespace Epilogger.Web.Controllers {
                 }
 
                 System.Drawing.Image img = System.Drawing.Image.FromStream(stream);
-                bool correctSize = ((img.Width <= 250 && img.Width >= 220) && (img.Height <= 130 && img.Height >= 30));
+                //var correctSize = ((img.Width <= 250 && img.Width >= 220) && (img.Height <= 130 && img.Height >= 30));
+                var correctSize = ((img.Width <= 250 && img.Width >= 80) && (img.Height <= 130 && img.Height >= 30));
 
                 if (!correctSize)
                     throw new System.ArgumentException("Invalid Size");

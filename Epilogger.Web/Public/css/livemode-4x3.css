@@ -332,7 +332,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#52cc7f', end
 .pad3{
  padding-left:3px;
 }
-#sponsor_carousel{margin: -2.5em auto; overflow: hidden; position: relative;}
+/*#sponsor_carousel{margin: -2.5em auto; overflow: hidden; position: relative;}*/
+#sponsor_carousel{ }
 #gallery{position: relative; left: 0; top: 0;}
 #gallery li { list-style-type:none;}
 

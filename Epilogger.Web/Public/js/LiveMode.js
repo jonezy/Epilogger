@@ -366,7 +366,7 @@ jQuery(function ($) {
                 },
 
                 onComplete: function (id, fileName, responseJSON) {
-                    $('.qq-upload-list').remove()
+                    $('.qq-upload-list').remove();
                     if (responseJSON.success) {
                         $('#thumbnail-fine-uploader').empty();
                         $('#thumbnail-fine-uploader').append('<img src="' + responseJSON.imageurl + '" alt="' + fileName + '">');
@@ -420,7 +420,7 @@ jQuery(function ($) {
                 },
                 onComplete: function (id, fileName, responseJSON) {                 
                     if (responseJSON.success) {
-                    $('.qq-upload-list').remove()
+                        $('.qq-upload-list').remove();
                         addedFiles++;
                         if (addedFiles >= fileLimit) {
                             $('#fine-uploader-sponsors qq-upload-button').hide();
