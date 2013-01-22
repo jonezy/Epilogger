@@ -141,6 +141,7 @@ namespace Epilogger.Web.Controllers {
 				model.CurrentUserRole = CurrentUserRole;
 				model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
 				model.TheUser = CurrentUser;
+
 				if (requestedEvent.UserID != null)
 					model.CreatedEventUser = _us.GetUserByID((Guid) requestedEvent.UserID);
 

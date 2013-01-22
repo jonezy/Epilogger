@@ -135,7 +135,11 @@ else
     }
     
     <div class="grid_12 alpha" itemscope itemtype="http://data-vocabulary.org/Event">
-        <h1 itemprop="summary">@Model.Name</h1>
+        <h1 itemprop="summary">
+            @if (Model.IsPaid)
+            { <img src="/Public/images/icons/icon-verified.png" alt="Super Event" /> }
+            @Model.Name
+        </h1>
         <h2 style="margin:0; padding:0">@Model.SubTitle</h2>
 
         @*Event Rating Section*@

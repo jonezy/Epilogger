@@ -64,6 +64,7 @@ namespace Epilogger.Web {
             var doIt = true;
             Event choseEvent = null;
             
+
             //If an event is explicitly defined
             var fEvents = db.Events.Where(e => e.IsFeatured == true && DateTime.UtcNow >= e.FeaturedStartDateTime && DateTime.UtcNow <= e.FeaturedEndDateTime);
             if (fEvents.Any())

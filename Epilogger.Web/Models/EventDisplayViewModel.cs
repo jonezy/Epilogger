@@ -49,6 +49,8 @@ namespace Epilogger.Web.Models {
         public DateTime ? FromDateTime { get; set; }
         public DateTime ? ToDateTime { get; set; }
 
+        public bool IsPaid { get; set; }
+
         public List<Epilogger.Data.UserRatesEvent> EventRatings { get; set; }
         public IEnumerable<Epilogger.Data.Tweet> Tweets { get; set; }
         public IEnumerable<Epilogger.Data.Image> Images { get; set;}
