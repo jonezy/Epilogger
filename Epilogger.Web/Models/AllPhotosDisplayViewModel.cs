@@ -13,6 +13,7 @@ namespace Epilogger.Web.Models {
         public IEnumerable<Epilogger.Data.Image> Images { get; set;}
         public List<Epilogger.Data.Image> TopImages { get; set; }
         public bool CanDelete { get; set; }
+        public bool IsExpired { get; set; }
 
         public EventToolbarViewModel ToolbarViewModel { get; set; }
     }

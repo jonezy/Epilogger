@@ -63,3 +63,5 @@
         });
     });
 </script>
+
+@Html.Partial("_ExpiredEventModalScript", new ExpiredEventModalScriptViewModel { EventId = Model.ID, IsExpired = Model.IsExpired })

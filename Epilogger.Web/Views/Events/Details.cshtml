@@ -1,4 +1,5 @@
-﻿@model Epilogger.Web.Models.EventDisplayViewModel
+﻿@using Epilogger.Web.Models
+@model Epilogger.Web.Models.EventDisplayViewModel
 @{
     Layout = "~/Views/Shared/_InteriorLayout.cshtml";
     ViewBag.Title = Model.Name + " | Epilogger";
@@ -54,7 +55,6 @@ else
     var EventName = '@Model.Name';
     var EventSlug = '@Model.EventSlug'; 
     var HasSubscribed = '@Model.HasSubscribed.ToString().ToLower()';
-    var isExpired = '@Model.IsExpired';
     
     var disableAutoupdate = false;
 
@@ -140,9 +140,13 @@ else
             @if (Model.IsPaid)
             { <img src="/Public/images/icons/icon-verified.png" alt="Super Event" /> }
             @Model.Name
-            <div style="display: inline-block; padding-left: 15px;">
-                @Html.ActionLink("Edit", "edit", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { @class = "blue-action-button" })
-            </div>
+            
+            @if ((Model.UserID == Model.CurrentUserID) || Model.CurrentUserRole == UserRoleType.Administrator)
+            {
+                <div style="display: inline-block; padding-left: 15px;">
+                    @Html.ActionLink("Edit", "edit", "events", new {id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"]}, new {@class = "blue-action-button"})
+                </div>
+            }
         </h1>
         <h2 style="margin:0; padding:0">@Model.SubTitle</h2>
 
@@ -731,15 +735,6 @@ else
             href: '@Url.Action("AddLink", "Events")'
         });
 
-        if (isExpired) {
-            $.colorbox({
-                width: '40%', initialWidth: '40%', height: '40%', initialHeight: '40%', open: true, overlayClose: false, escKey: false, loop: false,
-                opacity: 0.60, transition: 'none', speed: 0, close: '',
-                href: '@Url.Action("ExpiredUpgradeNotice", "Events", new { id = Model.ID })', onLoad: function () {
-                    $('#cboxClose').remove();
-                }
-            });
-        }
 
 
 
@@ -751,4 +746,4 @@ else
 
 </script>
 
-
+@Html.Partial("_ExpiredEventModalScript", new ExpiredEventModalScriptViewModel { EventId = Model.ID, IsExpired = Model.IsExpired })

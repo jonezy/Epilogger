@@ -4,7 +4,7 @@ using Epilogger.Web.Core.Stats;
 
 namespace Epilogger.Web.Models {
     public class AllStatsViewModel {
-        public string ID { get; set; }
+        public int ID { get; set; }
         public string EventSlug { get; set; }
         public string Name { get; set; }
         public string SearchTerms { get; set; }
@@ -29,6 +29,8 @@ namespace Epilogger.Web.Models {
         public int PageSize { get { return 12; } }
         public int CurrentPageIndex { get; set; }
         public int TotalRecords { get; set; }
+
+        public bool IsExpired { get; set; }
 
         public EventToolbarViewModel ToolbarViewModel { get; set; }
         //public IEnumerable<Epilogger.Data.URL> Links { get; set; }

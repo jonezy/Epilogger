@@ -1,6 +1,7 @@
 ﻿
 @using Epilogger.Common
 @using Epilogger.Web;
+@using Epilogger.Web.Models
 
 @model Epilogger.Web.Models.AllPhotosDisplayViewModel
 
@@ -122,3 +123,4 @@
     });
 </script>
 
+@Html.Partial("_ExpiredEventModalScript", new ExpiredEventModalScriptViewModel { EventId = Model.ID, IsExpired = Model.IsExpired })

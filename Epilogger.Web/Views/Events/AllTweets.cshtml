@@ -75,3 +75,5 @@
 
     @MvcHtmlString.Create(Html.Pager(100, Model.CurrentPageIndex, Model.TweetCount, new { controller = "Events", action = "AllTweets", id = Model.EventSlug, f = Request.QueryString["f"], t = Request.QueryString["t"] }))
 </div>
+
+@Html.Partial("_ExpiredEventModalScript", new ExpiredEventModalScriptViewModel { EventId = Model.ID, IsExpired = Model.IsExpired })

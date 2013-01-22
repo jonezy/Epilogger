@@ -15,6 +15,7 @@ namespace Epilogger.Web.Models {
         public IEnumerable<Data.Tweet> Tweets { get; set; }
         public List<Tweeter> TopTweeters { get; set; }
         public bool CanDelete { get; set; }
+        public bool IsExpired { get; set; }
 
         public EventToolbarViewModel ToolbarViewModel { get; set; }
     }

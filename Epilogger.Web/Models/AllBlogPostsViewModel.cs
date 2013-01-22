@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 namespace Epilogger.Web.Models {
     public class AllBlogPostsViewModel {
-        public string ID { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
+        public bool IsExpired { get; set; }
 
         public int PageSize { get { return 12; } }
         public int CurrentPageIndex { get; set; }
@@ -20,6 +21,7 @@ namespace Epilogger.Web.Models {
             TotalRecords = totalRecords;
 
             BlogPosts = activities;
+
         }
     }
 }

@@ -513,7 +513,8 @@ namespace Epilogger.Web
                 .ForMember(dest => dest.TopTweeters, opt => opt.Ignore())
                 .ForMember(dest => dest.AllCheckIns, opt => opt.Ignore())
                 .ForMember(dest => dest.TopLinks, opt => opt.Ignore())
-                .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore());
+                .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore())
+                .ForMember(dest => dest.IsExpired, opt => opt.Ignore());
 
             Mapper.CreateMap<BetaSignup, BetaSignUpViewModel>()
                 .ForMember(dest => dest.Activity, opt => opt.Ignore())
@@ -537,7 +538,8 @@ namespace Epilogger.Web
                 .ForMember(dest => dest.CurrentPageIndex, opt => opt.Ignore())
                 .ForMember(dest => dest.TotalRecords, opt => opt.Ignore())
                 .ForMember(dest => dest.Links, opt => opt.Ignore())
-                .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore());
+                .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore())
+                .ForMember(dest => dest.IsExpired, opt => opt.Ignore());
 
             Mapper.CreateMap<CheckIn, CheckinDisplayViewModel>()
                 .ForMember(dest => dest.Tweet, opt => opt.MapFrom(src => src.Tweets.FirstOrDefault()));
@@ -552,16 +554,15 @@ namespace Epilogger.Web
                 .ForMember(dest => dest.Thumbnail, opt => opt.Ignore())
                 .ForMember(dest => dest.DateTime, opt => opt.UseValue(DateTime.Now));
 
-
-
+            
             Mapper.CreateMap<Event, AllBlogPostsViewModel>()
                 .ForMember(dest => dest.BlogPosts, opt => opt.Ignore())
                 .ForMember(dest => dest.CurrentPageIndex, opt => opt.Ignore())
                 .ForMember(dest => dest.PageSize, opt => opt.Ignore())
                 .ForMember(dest => dest.TotalRecords, opt => opt.Ignore())
-                .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore());
-
-
+                .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore())
+                .ForMember(dest => dest.IsExpired, opt => opt.Ignore());
+            
 
             Mapper.CreateMap<CreateAccountModel, User>()
                 .ForMember(dest => dest.RoleID, opt => opt.UseValue(2))
@@ -622,7 +623,8 @@ namespace Epilogger.Web
                 .ForMember(dest => dest.Images, opt => opt.Ignore())
                 .ForMember(dest => dest.TopImages, opt => opt.Ignore())
                 .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore())
-                .ForMember(dest => dest.CanDelete, opt => opt.Ignore());
+                .ForMember(dest => dest.CanDelete, opt => opt.Ignore())
+                .ForMember(dest => dest.IsExpired, opt => opt.Ignore());
 
             Mapper.CreateMap<Event, AllTweetsDisplayViewModel>()
                 .ForMember(dest => dest.TweetCount, opt => opt.Ignore())
@@ -633,7 +635,8 @@ namespace Epilogger.Web
                 .ForMember(dest => dest.UniqueTweeterCount, opt => opt.Ignore())
                 .ForMember(dest => dest.TopTweeters, opt => opt.Ignore())
                 .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore())
-                .ForMember(dest => dest.CanDelete, opt => opt.Ignore());
+                .ForMember(dest => dest.CanDelete, opt => opt.Ignore())
+                .ForMember(dest => dest.IsExpired, opt => opt.Ignore());
 
 
 

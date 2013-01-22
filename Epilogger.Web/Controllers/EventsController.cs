@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -183,17 +184,8 @@ namespace Epilogger.Web.Controllers {
 					}
 				}
 
-
-                if ((bool)(!requestedEvent.IsPaid))
-                {
-                    //Not paid
-                    if ((DateTime.UtcNow - requestedEvent.StartDateTime).Days > 30)
-                    {
-                        //Event is older than 30 days, This thing is expired.
-                        model.IsExpired = true;
-                    }
-                }
-
+                Debug.Assert(requestedEvent.IsPaid != null, "requestedEvent.IsPaid != null");
+                model.IsExpired = HasEventExpired((bool)requestedEvent.IsPaid, requestedEvent.StartDateTime);
 
 				return View(model);
 			}
@@ -269,6 +261,9 @@ namespace Epilogger.Web.Controllers {
 					model.TopImages = _is.GetTopPhotosByEventId(requestedEvent.ID, 10, this.FromDateTime(), this.ToDateTime());
 				}
 
+			    Debug.Assert(requestedEvent.IsPaid != null, "requestedEvent.IsPaid != null");
+			    model.IsExpired = HasEventExpired((bool) requestedEvent.IsPaid, requestedEvent.StartDateTime);
+
 				return View(model);
 			}
 			ModelState.AddModelError(string.Empty, "The event you're trying to visit doesn't exist.");
@@ -316,6 +311,9 @@ namespace Epilogger.Web.Controllers {
 					//                           this.ToDateTime()));
 					model.Tweets = _ts.GetPagedTweets(requestedEvent.ID, currentPage + 1, 100, FromDateTime(), ToDateTime());
 				}
+
+                Debug.Assert(requestedEvent.IsPaid != null, "requestedEvent.IsPaid != null");
+                model.IsExpired = HasEventExpired((bool)requestedEvent.IsPaid, requestedEvent.StartDateTime);
 
 				return View(model);
 			}
@@ -1230,6 +1228,9 @@ namespace Epilogger.Web.Controllers {
 				var model = Mapper.Map<Event, AllBlogPostsViewModel>(requestedEvent);
 				model.SetAllBlogPostsViewModel(blogPosts, currentPage, blogPosts.Count());
 				model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
+                
+                Debug.Assert(requestedEvent.IsPaid != null, "requestedEvent.IsPaid != null");
+                model.IsExpired = HasEventExpired((bool)requestedEvent.IsPaid, requestedEvent.StartDateTime);
 
 				return View(model);
 			}
@@ -1248,12 +1249,18 @@ namespace Epilogger.Web.Controllers {
 			{
 				var checkins = Mapper.Map<List<CheckIn>, List<CheckinDisplayViewModel>>(_cs.FindByEventIDPaged(currentEvent.ID, currentPage, 10, this.FromDateTime(), this.ToDateTime()).ToList());
 
-				var model = new AllCheckinsViewModel(checkins, currentPage, 10);
-				model.ID = currentEvent.ID.ToString();
-				model.Name = currentEvent.Name;
-				model.EventSlug = currentEvent.EventSlug;
-				model.TotalRecords = _cs.FindCheckInCountByEventID(currentEvent.ID, this.FromDateTime(), this.ToDateTime());
-				model.ToolbarViewModel = BuildToolbarViewModel(currentEvent);
+				var model = new AllCheckinsViewModel(checkins, currentPage, 10)
+				                {
+				                    ID = currentEvent.ID,
+				                    Name = currentEvent.Name,
+				                    EventSlug = currentEvent.EventSlug,
+				                    TotalRecords =
+				                        _cs.FindCheckInCountByEventID(currentEvent.ID, this.FromDateTime(), this.ToDateTime()),
+				                    ToolbarViewModel = BuildToolbarViewModel(currentEvent)
+				                };
+
+                Debug.Assert(currentEvent.IsPaid != null, "requestedEvent.IsPaid != null");
+                model.IsExpired = HasEventExpired((bool)currentEvent.IsPaid, currentEvent.StartDateTime);
 
 				return View(model);
 
@@ -1277,6 +1284,9 @@ namespace Epilogger.Web.Controllers {
 				model.CurrentPageIndex = currentPage;
 				model.TotalRecords = _ls.FindCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
 				model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
+
+                Debug.Assert(requestedEvent.IsPaid != null, "requestedEvent.IsPaid != null");
+                model.IsExpired = HasEventExpired((bool)requestedEvent.IsPaid, requestedEvent.StartDateTime);
 
 				return View(model);
 			}
@@ -1314,17 +1324,48 @@ namespace Epilogger.Web.Controllers {
 				}
 				model.MyUTCNow = DateTime.UtcNow;
 
+                Debug.Assert(requestedEvent.IsPaid != null, "requestedEvent.IsPaid != null");
+                model.IsExpired = HasEventExpired((bool)requestedEvent.IsPaid, requestedEvent.StartDateTime);
+
 				model.TweetCount = _ts.FindTweetCountByEventID(requestedEvent.ID, FromDateTime(), ToDateTime());
 				model.ImageCount = _is.FindImageCountByEventID(requestedEvent.ID, FromDateTime(), ToDateTime());
 				model.ExternalLinkCount = _ls.FindCountByEventID(requestedEvent.ID, FromDateTime(), ToDateTime());
 				model.TopImages = model.TopImages = _is.GetTopPhotosAndTweetByEventID(requestedEvent.ID, 10, FromDateTime(), ToDateTime());
-				model.TopLinks = _ls.GetTopURLsByEventID(requestedEvent.ID, 5, FromDateTime(), ToDateTime());
+				
 
 				var checkins = Mapper.Map<List<CheckIn>, List<CheckinDisplayViewModel>>(_cs.FindByEventID(requestedEvent.ID, FromDateTime(), ToDateTime()).ToList());
 				model.AllCheckIns = checkins;
 
-				var topTweetersStats = new TopTweetersStats();
-				model.TopTweeters = model.TopTweeters = topTweetersStats.Calculate(_ts.GetTop10TweetersByEventID(requestedEvent.ID, FromDateTime(), ToDateTime())).ToList();
+                model.TopLinks = new List<TopURLs>()
+			                        {
+			                            new TopURLs() { FullURL = "Event Expired" },
+                                        new TopURLs() { FullURL = "Event Expired" },
+                                        new TopURLs() { FullURL = "Event Expired" },
+                                        new TopURLs() { FullURL = "Event Expired" },
+                                        new TopURLs() { FullURL = "Event Expired" }
+			                        };
+
+                model.TopTweeters = new List<Tweeter>
+                                        {
+                                            new Tweeter() { Name = "Event Expired" },
+                                            new Tweeter() { Name = "Event Expired" },
+                                            new Tweeter() { Name = "Event Expired" },
+                                            new Tweeter() { Name = "Event Expired" },
+                                            new Tweeter() { Name = "Event Expired" },
+                                            new Tweeter() { Name = "Event Expired" },
+                                            new Tweeter() { Name = "Event Expired" },
+                                            new Tweeter() { Name = "Event Expired" },
+                                            new Tweeter() { Name = "Event Expired" },
+                                            new Tweeter() { Name = "Event Expired" }
+                                        };
+			    if (!model.IsExpired)
+                {
+                    model.TopLinks = _ls.GetTopURLsByEventID(requestedEvent.ID, 5, FromDateTime(), ToDateTime());
+
+                    var topTweetersStats = new TopTweetersStats();
+                    model.TopTweeters = topTweetersStats.Calculate(_ts.GetTop10TweetersByEventID(requestedEvent.ID, FromDateTime(), ToDateTime())).ToList();
+                }
+				
 
 				model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
 
@@ -1332,6 +1373,7 @@ namespace Epilogger.Web.Controllers {
 				//model.CurrentPageIndex = currentPage;
 				//model.TotalRecords = LS.FindCountByEventID(id, this.FromDateTime(), this.ToDateTime());
 
+                
 
 				return View(model);
 			}
@@ -2589,6 +2631,20 @@ namespace Epilogger.Web.Controllers {
                 return ((e.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator);
             }
 
+            return false;
+        }
+
+        private bool HasEventExpired(bool isPaid, DateTime startDate)
+        {
+            if (!isPaid)
+            {
+                //Not paid
+                if ((DateTime.UtcNow - startDate).Days > 30)
+                {
+                    //Event is older than 30 days, This thing is expired.
+                    return true;
+                }
+            }
             return false;
         }
 

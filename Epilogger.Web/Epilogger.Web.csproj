@@ -387,6 +387,7 @@
     <Compile Include="Models\AllPhotosDisplayViewModel.cs" />
     <Compile Include="Models\ConnectServiceViewModel.cs" />
     <Compile Include="Models\CreateFinalEventViewModel.cs" />
+    <Compile Include="Models\ExpiredEventModalScriptViewModel.cs" />
     <Compile Include="Models\LiveModeCustomSettingViewModel.cs" />
     <Compile Include="Models\CreateBasicEventViewModel.cs" />
     <Compile Include="Models\CreateEventTwitterViewModel.cs" />
@@ -3281,6 +3282,7 @@
     <Content Include="Views\Events\EditLiveMode.cshtml" />
     <Content Include="Views\Events\UploadFile.cshtml" />
     <Content Include="Views\Events\ExpiredUpgradeNotice.cshtml" />
+    <Content Include="Views\Events\_ExpiredEventModalScript.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />
