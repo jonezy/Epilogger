@@ -283,14 +283,29 @@ namespace Epilogger.Web.Controllers {
 				var topTweetersStats = new TopTweetersStats();
 				var model = Mapper.Map<Event, AllTweetsDisplayViewModel>(requestedEvent);
 
+                Debug.Assert(requestedEvent.IsPaid != null, "requestedEvent.IsPaid != null");
+                model.IsExpired = HasEventExpired((bool)requestedEvent.IsPaid, requestedEvent.StartDateTime);
+
+
+
+                model.TopTweeters = new List<Tweeter>()
+                                        {
+                                            new Tweeter() { Name = "Event expired", PercentOfTotal = 100, Total = 1 }
+                                        };
+                if (!model.IsExpired)
+                {
+                    model.TopTweeters =
+                    topTweetersStats.Calculate(_ts.GetTop10TweetersByEventID(requestedEvent.ID, this.FromDateTime(),
+                                                                             this.ToDateTime())).ToList();    
+                }
+
+
 				model.TweetCount = _ts.FindTweetCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
 				model.UniqueTweeterCount = _ts.FindUniqueTweetCountByEventID(requestedEvent.ID, this.FromDateTime(),
 																			 this.ToDateTime());
 
 				model.CurrentPageIndex = currentPage;
-				model.TopTweeters =
-					topTweetersStats.Calculate(_ts.GetTop10TweetersByEventID(requestedEvent.ID, this.FromDateTime(),
-																			 this.ToDateTime())).ToList();
+				
 				model.ShowTopTweets = false;
 				//model.Tweets =
 				//    Mapper.Map<IEnumerable<Tweet>, IEnumerable<TweetDisplayViewModel>>(
@@ -312,8 +327,7 @@ namespace Epilogger.Web.Controllers {
 					model.Tweets = _ts.GetPagedTweets(requestedEvent.ID, currentPage + 1, 100, FromDateTime(), ToDateTime());
 				}
 
-                Debug.Assert(requestedEvent.IsPaid != null, "requestedEvent.IsPaid != null");
-                model.IsExpired = HasEventExpired((bool)requestedEvent.IsPaid, requestedEvent.StartDateTime);
+                
 
 				return View(model);
 			}
@@ -1338,25 +1352,25 @@ namespace Epilogger.Web.Controllers {
 
                 model.TopLinks = new List<TopURLs>()
 			                        {
-			                            new TopURLs() { FullURL = "Event Expired" },
-                                        new TopURLs() { FullURL = "Event Expired" },
-                                        new TopURLs() { FullURL = "Event Expired" },
-                                        new TopURLs() { FullURL = "Event Expired" },
-                                        new TopURLs() { FullURL = "Event Expired" }
+			                            new TopURLs() { FullURL = "Event expired" },
+                                        new TopURLs() { FullURL = "Event expired" },
+                                        new TopURLs() { FullURL = "Event expired" },
+                                        new TopURLs() { FullURL = "Event expired" },
+                                        new TopURLs() { FullURL = "Event expired" }
 			                        };
 
                 model.TopTweeters = new List<Tweeter>
                                         {
-                                            new Tweeter() { Name = "Event Expired" },
-                                            new Tweeter() { Name = "Event Expired" },
-                                            new Tweeter() { Name = "Event Expired" },
-                                            new Tweeter() { Name = "Event Expired" },
-                                            new Tweeter() { Name = "Event Expired" },
-                                            new Tweeter() { Name = "Event Expired" },
-                                            new Tweeter() { Name = "Event Expired" },
-                                            new Tweeter() { Name = "Event Expired" },
-                                            new Tweeter() { Name = "Event Expired" },
-                                            new Tweeter() { Name = "Event Expired" }
+                                            new Tweeter() { Name = "Event expired" },
+                                            new Tweeter() { Name = "Event expired" },
+                                            new Tweeter() { Name = "Event expired" },
+                                            new Tweeter() { Name = "Event expired" },
+                                            new Tweeter() { Name = "Event expired" },
+                                            new Tweeter() { Name = "Event expired" },
+                                            new Tweeter() { Name = "Event expired" },
+                                            new Tweeter() { Name = "Event expired" },
+                                            new Tweeter() { Name = "Event expired" },
+                                            new Tweeter() { Name = "Event expired" }
                                         };
 			    if (!model.IsExpired)
                 {
