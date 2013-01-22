@@ -126,6 +126,8 @@ namespace Epilogger.Web.Controllers {
 
 			if (requestedEvent != null)
 			{
+
+                //The standard display
 				var model = Mapper.Map<Event, EventDisplayViewModel>(requestedEvent);
 				model.TweetCount = _ts.FindTweetCountByEventID(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
 				model.Tweets = _ts.FindByEventIDOrderDescTake6(requestedEvent.ID, this.FromDateTime(), this.ToDateTime());
@@ -180,6 +182,18 @@ namespace Epilogger.Web.Controllers {
 						model.HasUserRated = false;
 					}
 				}
+
+
+                if ((bool)(!requestedEvent.IsPaid))
+                {
+                    //Not paid
+                    if ((DateTime.UtcNow - requestedEvent.StartDateTime).Days > 30)
+                    {
+                        //Event is older than 30 days, This thing is expired.
+                        model.IsExpired = true;
+                    }
+                }
+
 
 				return View(model);
 			}
@@ -2355,6 +2369,24 @@ namespace Epilogger.Web.Controllers {
 			return RedirectToAction("index", "Browse");
 			
 		}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        public virtual ActionResult ExpiredUpgradeNotice(string id)
+        {
+
+            var requestedEvent = _es.FindBySlug(id);
+            if (requestedEvent != null)
+            {
+                //var model = Mapper.Map<Event, AllLinksViewModel>(requestedEvent);
+                //model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
+
+                return PartialView();
+            }
+            ModelState.AddModelError(string.Empty, "The event you're trying to visit doesn't exist.");
+            return RedirectToAction("index", "Browse");
+
+        }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to edit an event")]

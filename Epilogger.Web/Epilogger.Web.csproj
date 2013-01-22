@@ -3280,6 +3280,7 @@
     <Content Include="Views\Events\CreateEventFinal.cshtml" />
     <Content Include="Views\Events\EditLiveMode.cshtml" />
     <Content Include="Views\Events\UploadFile.cshtml" />
+    <Content Include="Views\Events\ExpiredUpgradeNotice.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />

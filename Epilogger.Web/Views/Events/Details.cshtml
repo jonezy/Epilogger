@@ -5,20 +5,20 @@
 }
 
 @{
-    bool IncludeDateRange = false;
-    int YesCount = 0;
+    var includeDateRange = false;
+    var yesCount = 0;
 
     if (Request.QueryString["f"] != null)
     { 
-        YesCount++;
+        yesCount++;
     }
     if (Request.QueryString["t"] != null)
     {
-        YesCount++;
+        yesCount++;
     }
-    if (YesCount == 2)
+    if (yesCount == 2)
     {
-        IncludeDateRange = true;
+        includeDateRange = true;
     }
 }
 
@@ -53,7 +53,8 @@ else
 
     var EventName = '@Model.Name';
     var EventSlug = '@Model.EventSlug'; 
-    var HasSubscribed = @Model.HasSubscribed.ToString().ToLower();
+    var HasSubscribed = '@Model.HasSubscribed.ToString().ToLower()';
+    var isExpired = '@Model.IsExpired';
     
     var disableAutoupdate = false;
 
@@ -606,7 +607,7 @@ else
     
 
     <p>
-        @if (!IncludeDateRange)
+        @if (!includeDateRange)
         { 
             @: (@Html.ActionLink("See all media", "AllPhotos", "events", new { id = Model.ID }))
            }
@@ -663,7 +664,7 @@ else
         <div class="clear">
         </div>
         <p>
-            @if (!IncludeDateRange)
+            @if (!includeDateRange)
             { 
                 @: (@Html.ActionLink("See all links", "alllinks", "events", new { id = Model.ID }))
            }
@@ -688,7 +689,7 @@ else
                 <a href="@checkin.FourSquareCheckInURL" target="_blank">
                     <img src="@Url.Content(ThisTweet.ProfileImageURL)" class="fleft" height="48" width="48" alt="" /></a>
             }
-            @if (!IncludeDateRange)
+            @if (!includeDateRange)
             { 
                 @: (@Html.ActionLink("See all checkins", "allcheckins", "events", new { id = Model.ID }))
             }
@@ -729,6 +730,17 @@ else
             width: "60%", height: "60%",
             href: '@Url.Action("AddLink", "Events")'
         });
+
+        if (isExpired) {
+            $.colorbox({
+                width: '40%', initialWidth: '40%', height: '40%', initialHeight: '40%', open: true, overlayClose: false, escKey: false, loop: false,
+                opacity: 0.60, transition: 'none', speed: 0, close: '',
+                href: '@Url.Action("ExpiredUpgradeNotice", "Events", new { id = Model.ID })', onLoad: function () {
+                    $('#cboxClose').remove();
+                }
+            });
+        }
+
 
 
         //        $(".uploadPhotos").colorbox({

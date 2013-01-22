@@ -50,6 +50,7 @@ namespace Epilogger.Web.Models {
         public DateTime ? ToDateTime { get; set; }
 
         public bool IsPaid { get; set; }
+        public bool IsExpired { get; set; }
 
         public List<Epilogger.Data.UserRatesEvent> EventRatings { get; set; }
         public IEnumerable<Epilogger.Data.Tweet> Tweets { get; set; }

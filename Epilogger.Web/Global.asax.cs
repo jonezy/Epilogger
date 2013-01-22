@@ -702,6 +702,8 @@ namespace Epilogger.Web
                 .ForMember(dest => dest.ID, opt => opt.Ignore())
                 .ForMember(dest => dest.EventID, opt => opt.Ignore());
 
+            Mapper.CreateMap<Event, EventDisplayViewModel>()
+                .ForMember(dest => dest.IsExpired, opt => opt.Ignore());
 
             //Mapper.CreateMap<Tweet, TweetTemplateViewModel>()
             //    .ForMember(dest => dest.EventId, opt => opt.MapFrom(src => src.EventID))
