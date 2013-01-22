@@ -139,6 +139,9 @@ else
             @if (Model.IsPaid)
             { <img src="/Public/images/icons/icon-verified.png" alt="Super Event" /> }
             @Model.Name
+            <div style="display: inline-block; padding-left: 15px;">
+                @Html.ActionLink("Edit", "edit", "events", new { id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, new { @class = "blue-action-button" })
+            </div>
         </h1>
         <h2 style="margin:0; padding:0">@Model.SubTitle</h2>
 
@@ -180,8 +183,6 @@ else
             <div class="starSmall">You rated @Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID && i.EventID == Model.ID).FirstOrDefault().UserRating stars on <br /> @Html.DisplayFor(thing => Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime, "ShortDateTime")</div>
         }
         
-        
-
         <span class="spacer"></span> 
 
         @*New event menu*@
