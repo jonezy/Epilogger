@@ -17,6 +17,9 @@ namespace Epilogger.Web.Models {
         [DisplayName("Name")]
         public String Name { get; set; }
 
+        [DisplayName("Private Event (Only you have access to view this event)")]
+        public bool IsPrivate { get; set; }
+
         [Required(ErrorMessage = "Please enter your events name")]
         [DisplayName("Friendly URL")]
         public String EventSlug { get; set; }
@@ -90,6 +93,8 @@ namespace Epilogger.Web.Models {
 
         public UserRoleType CurrentUserRole { get; set; }
         public Guid CurrentUserID { get; set; }
+
+        public bool IsPaid { get; set; }
 
     }
 }
