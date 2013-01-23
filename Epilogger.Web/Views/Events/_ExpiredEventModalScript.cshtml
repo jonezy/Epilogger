@@ -10,6 +10,7 @@
             opacity: 0.60, transition: 'none', speed: 0, close: '',
             href: '@Url.Action("ExpiredUpgradeNotice", "Events", new { id = Model.EventId })', onLoad: function () {
                 $('#cboxClose').remove();
+                $('#cboxOverlay').attr('style', 'opacity: 0.6; cursor: auto; top: 70px; z-index: 0 !important;');
             }
         });
     }
