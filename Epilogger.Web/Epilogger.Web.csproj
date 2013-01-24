@@ -3283,6 +3283,7 @@
     <Content Include="Views\Events\UploadFile.cshtml" />
     <Content Include="Views\Events\ExpiredUpgradeNotice.cshtml" />
     <Content Include="Views\Events\_ExpiredEventModalScript.cshtml" />
+    <Content Include="Views\Home\UpgradeBenefits.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />

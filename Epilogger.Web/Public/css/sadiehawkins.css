@@ -3005,3 +3005,52 @@ a.fdbk_tab_hidden {
     font-size: 17px;
     line-height: 22px;
 }
+
+
+
+
+
+table.benefitsTable {
+    background-color: #fff;
+    margin: 20px auto;
+    color: #8f8f8f;
+    font-size: 16px;
+    width: 810px;
+}
+
+table.benefitsTable h2 {
+    text-transform: none !important;
+}
+
+table.benefitsTable .headerRow 
+{
+    background-color: #eee;
+}
+
+table.benefitsTable th {
+    font-size: 16px;
+    font-weight: bold !important;
+}
+
+table.benefitsTable .premiumHeading {
+    color: #f51282;
+}
+
+
+table.benefitsTable .column1 { width: 416px; }
+table.benefitsTable .column2 { width: 146px; text-align: center; }
+
+table.benefitsTable td {
+    border: 2px solid #eee;
+    padding: 15px;
+}
+.benefitImage {
+    float: left;
+    margin-right: 14px;
+    margin-bottom: 30px;
+}
+.benefitImageCheck {
+    margin-left: 46px;
+    margin-top: 30px;
+}
+
