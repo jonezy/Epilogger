@@ -2,7 +2,7 @@
 
 <script type="text/javascript" language="javascript">
 
-    var isExpired = '@Model.IsExpired.ToString().ToLower()';
+    var isExpired = @Model.IsExpired.ToString().ToLower();
 
     if (isExpired) {
         $.colorbox({
