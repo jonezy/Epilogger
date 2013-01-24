@@ -468,7 +468,7 @@ namespace Epilogger.Web.Controllers {
             }
             else
             {
-                string start = startDate.ToString("MMM d hh:mm tt");
+                string start = startDate.ToString("MMM d h:mm tt");
                 string end = endDate.ToString("MMM d h:mm tt");
                 end = end.Remove(end.Length - 3, 3) + (end.Substring(end.Length - 2, 2).ToLower());
                 start = start.Remove(start.Length - 3, 3) + (start.Substring(start.Length - 2, 2).ToLower());
