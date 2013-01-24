@@ -26,55 +26,72 @@
             if (i == 5)
                 $(this).remove();
         });
-
+        
     });
-</script>
+    function advanceMode() {
+        $('#normal_mode').toggle();
 
+        if ($('#IsAdvanceMode').val() == 'false')
+            $('#IsAdvanceMode').val('true');
+        else {
+            $('#IsAdvanceMode').val('false');
+        }
+
+        $('#advance_link').text($('#advance_link').text() == '(advance mode)' ? '(normal mode)' : '(advance mode)');
+     
+    }
+</script>
 <div class="form_process2">
     <img src="/Public/images/CreateEvent/HashTagsActive.png" alt="Basic Information" />
 </div>
-
 @Html.ValidationSummary("Please correct the following issues")
 @using (Html.BeginForm("CreateEventTweets", "Events"))
 {
     <fieldset>
-    @Html.HiddenFor(m => Model.EventSlug)
-        <div id="twitter_wrapper">   
+        @Html.HiddenFor(m => Model.EventSlug)
+        @Html.HiddenFor(m => Model.EventTime)
+        @Html.HiddenFor(x => x.IsAdvanceMode, new { id = "IsAdvanceMode" } )
+        <div id="twitter_wrapper">
             <div id="left_side">
-                <p>Official Hashtag(s) </p>
+                <p>
+                    Official Hashtag(s)
+                </p>
                 @Html.TextBoxFor(model => model.SearchTerms, new { @id = "searchText", @Value = "#", @class = "bolder searchText" })
-              
-                <div id="addAnother1" class="invisible add_another">
-                @Html.TextBoxFor(model => model.SearchTerms, new { @id = "searchText2", @Value = "", @class = "searchText" })
+                <div id="normal_mode">
+                    <div id="addAnother1" class="invisible add_another">
+                        @Html.TextBoxFor(model => model.SearchTerms, new { @id = "searchText2", @Value = "", @class = "searchText" })
+                    </div>
+                    <div id="addAnother2" class="invisible add_another">
+                        @Html.TextBoxFor(model => model.SearchTerms, new { @id = "searchText3", @Value = "", @class = "searchText" })
+                    </div>
+                    <div id="addAnother3" class="invisible add_another">
+                        @Html.TextBoxFor(model => model.SearchTerms, new { @id = "searchText4", @Value = "", @class = "searchText" })
+                    </div>
+                    <div id="addAnother4" class="invisible add_another">
+                        @Html.TextBoxFor(model => model.SearchTerms, new { @id = "searchText5", @Value = "", @class = "searchText" })
+                    </div>
+                    <div id="addAnother5" class="invisible add_another">
+                        @Html.TextBoxFor(model => model.SearchTerms, new { @id = "searchText6", @Value = "", @class = "searchText" })
+                    </div>
+                    <div id="button_input">
+                        <input type="button" value="add another" class="stn_button blue_button" />
+                    </div>
                 </div>
-                <div id="addAnother2" class="invisible add_another">
-                @Html.TextBoxFor(model => model.SearchTerms, new { @id = "searchText3", @Value = "", @class = "searchText" })
-                </div>
-                <div id="addAnother3" class="invisible add_another">
-                @Html.TextBoxFor(model => model.SearchTerms, new { @id = "searchText4", @Value = "", @class = "searchText" })
-                </div>
-                <div id="addAnother4" class="invisible add_another">
-                @Html.TextBoxFor(model => model.SearchTerms, new { @id = "searchText5", @Value = "", @class = "searchText" })
-                </div>
-                <div id="addAnother5" class="invisible add_another">
-                @Html.TextBoxFor(model => model.SearchTerms, new { @id = "searchText6", @Value = "", @class = "searchText" })
-                </div>
-                  <div id="button_input">
-                    <input type="button" value="add another" class="stn_button blue_button" /> 
+                <div>
+                    <a href="#" id="advance_link"onclick="advanceMode()">(advance mode)</a>
                 </div>
             </div>
-
             <div id="right_side">
                 <div id="warningBox" class="warning">
-                <div class="clear_away">
-                    <h3>
-                        Hit the preview button to see what your search term(s) collect!</h3>
-                    <span>If your terms are too broad, try narrowing it down with an official
-                          hashtag unique to your event</span><br /></div>
-                          <input type="button" value="preview results" class="stn_button disabled_blue_button"
+                    <div class="clear_away">
+                        <h3>
+                            Hit the preview button to see what your search term(s) collect!</h3>
+                        <span>If your terms are too broad, try narrowing it down with an official hashtag unique
+                            to your event</span><br />
+                    </div>
+                    <input type="button" value="preview results" class="stn_button disabled_blue_button"
                         id="searchButton" />
                 </div>
-
                 <div id="preview_tweet_box" class="invisible">
                     <div id="tweetSubContainer">
                     </div>
@@ -83,9 +100,8 @@
                     @*<input id="getMoreTweetsButton" type="button" value="Get More Tweets" />*@
                 </div>
             </div>
-           
             <div id="tweet_footer">
-             <div class="dashed">
+                <div class="dashed">
                 </div>
                 <div id="left">
                     @Html.ActionImage("CreateEvent", "Events", new { id = Model.EventSlug }, "/Public/images/CreateEvent/FixBasicInfo.png", "Back")

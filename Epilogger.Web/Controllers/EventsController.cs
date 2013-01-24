@@ -373,6 +373,7 @@ namespace Epilogger.Web.Controllers {
         [HttpPost]
         public virtual ActionResult CreateEvent(CreateBasicEventViewModel model)
 		{
+		   
             DateTime startDate;
             DateTime endDate;
             
@@ -385,7 +386,7 @@ namespace Epilogger.Web.Controllers {
 		    var storeStartDateTime = startDate;
             var storeEndDateTime = endDate;
 
-            model.allDay = Request.Form["End_Date"].Contains("true");
+            model.allDay = Request.Form["End_Date"].Contains("false,false");
 		    model.TimeZoneOffset = int.Parse(Request.Form["timeZone"]);
 
             if (!model.allDay)
@@ -405,14 +406,14 @@ namespace Epilogger.Web.Controllers {
 
             #region Collection Start/End Date Times
             //Moved, as the timezone offset needs to be applied first
-            model.CollectionStartDateTime = getCollectionDateTime(Request.Form["collectDataTimes"], startDate, -1);
+            model.CollectionStartDateTime = ConvertToUniversalDateTime(getCollectionDateTime(Request.Form["collectDataTimes"], startDate, -1), model.TimeZoneOffset.ToString(CultureInfo.InvariantCulture));
             if (EndDateValid(startDate, endDate))
             {
-                model.CollectionEndDateTime = getCollectionDateTime(Request.Form["collectDataTimes"], endDate, 1);
+                model.CollectionEndDateTime = ConvertToUniversalDateTime(getCollectionDateTime(Request.Form["collectDataTimes"], endDate, 1), model.TimeZoneOffset.ToString(CultureInfo.InvariantCulture));
             }
             else
             {
-                model.CollectionEndDateTime = getCollectionDateTime(Request.Form["collectDataTimes"], startDate, 1);
+                model.CollectionEndDateTime = ConvertToUniversalDateTime(getCollectionDateTime(Request.Form["collectDataTimes"], startDate, 1), model.TimeZoneOffset.ToString(CultureInfo.InvariantCulture));
             }
             #endregion
 
@@ -421,7 +422,7 @@ namespace Epilogger.Web.Controllers {
             {
                 try
                 {
-                    
+                    model.IsPaid = false;
                     model.UserId = CurrentUserID;
                     model.CreatedDateTime = DateTime.UtcNow;
                     model.EventSlug = NameIntoSlug(model.Name);
@@ -435,6 +436,7 @@ namespace Epilogger.Web.Controllers {
 
                     //Save everything in TempData so we can read it back if a user presses Go Back from the Twitter Search page.
                     TempData["CreateBasicEventViewModel"] = model;
+                    TempData["EventTime"] = getEventTime(startDate, endDate, model.allDay);
                     ((CreateBasicEventViewModel)TempData["CreateBasicEventViewModel"]).StartDateTime = TimeZoneManager.ToUtcTime(storeStartDateTime);
                     ((CreateBasicEventViewModel)TempData["CreateBasicEventViewModel"]).EndDateTime = TimeZoneManager.ToUtcTime(storeEndDateTime);
                     ((CreateBasicEventViewModel)TempData["CreateBasicEventViewModel"]).TimeZoneOffset = int.Parse(Request.Form["timeZone"]);
@@ -453,6 +455,26 @@ namespace Epilogger.Web.Controllers {
                 }
             }
            return View(model);
+        }
+
+        private string getEventTime(DateTime startDate, DateTime endDate, bool AllDay)
+        {
+            string fullDate = "";
+            //Jan 17 1:00pm - Jan 19 2:00pm
+
+            if (AllDay)
+            {
+                fullDate = startDate.ToString("MMMM d");
+            }
+            else
+            {
+                string start = startDate.ToString("MMM d hh:mm tt");
+                string end = endDate.ToString("MMM d h:mm tt");
+                end = end.Remove(end.Length - 3, 3) + (end.Substring(end.Length - 2, 2).ToLower());
+                start = start.Remove(start.Length - 3, 3) + (start.Substring(start.Length - 2, 2).ToLower());
+                fullDate = string.Format("{0} - {1}", start, end);
+            }
+            return fullDate;
         }
 
         private bool EndDateValid(DateTime startDate, DateTime endDate)
@@ -510,6 +532,8 @@ namespace Epilogger.Web.Controllers {
 
             var model = Mapper.Map<Event, CreateEventTwitterViewModel>((Event)TempData["Event"]);
             TempData["Event"] = TempData["Event"];
+            //TempData["CreateBasicEventViewModel"] = TempData["CreateBasicEventViewModel"];
+           model.EventTime =TempData["EventTime"].ToString();
             return View(model);
         }
 
@@ -528,17 +552,24 @@ namespace Epilogger.Web.Controllers {
                     //var epLevent = Mapper.Map<CreateEventTwitterViewModel, Event>(model);
                     //var eventModel = _es.FindBySlug(model.EventSlug);
                     var eventMod = Mapper.Map<Event, Event>((Event)TempData["Event"]);
-
-                    var searchTerms = frm["SearchTerms"].Split(',');
                     var searchQuery = "";
-                    foreach (var s in searchTerms)
+                    if (!model.IsAdvanceMode)
                     {
-                        if(s !="")
-                        searchQuery += s + " OR ";
+                        var searchTerms = frm["SearchTerms"].Split(',');
+                        
+                        foreach (var s in searchTerms)
+                        {
+                            if (s != "")
+                                searchQuery += s + " OR ";
+                        }
+                        searchQuery = searchQuery.Remove(searchQuery.Length - 4, 4);
+                        eventMod.SearchTerms = searchQuery;
                     }
-                    searchQuery = searchQuery.Remove(searchQuery.Length - 4, 4);
-                    eventMod.SearchTerms = searchQuery;
-
+                    else
+                    {
+                        searchQuery = frm["SearchTerms"];
+                        eventMod.SearchTerms = frm["SearchTerms"]; //check
+                    }
                     eventMod.IsActive = true;
 
                     _es.Save(eventMod);              
@@ -550,8 +581,8 @@ namespace Epilogger.Web.Controllers {
                                 Subtitle = eventMod.SubTitle,
                                 SearchTerms = searchQuery,
                                 EventSlug = eventMod.EventSlug,
-                                CollectionTime = getCollectionWordFormat(eventMod.CollectionStartDateTime, eventMod.CollectionEndDateTime),
-                                EventStartEndTime = getEventStartEndTime(eventMod.StartDateTime, eventMod.EndDateTime)
+                                CollectionTime = getCollectionWordFormat(eventMod.CollectionStartDateTime, eventMod.StartDateTime),
+                                EventStartEndTime = frm["EventTime"] 
                             };
 
 
@@ -609,16 +640,16 @@ namespace Epilogger.Web.Controllers {
             return totalDate;
         }
 
-        private string getCollectionWordFormat(DateTime dateTime, DateTime? endDate)
+        private string getCollectionWordFormat(DateTime colDateTime, DateTime startDateTime)
         {
             string collectionSentence = "";
-           double hours = (endDate.Value-dateTime).TotalHours;
+           double hours = (startDateTime-colDateTime).TotalHours;
            if (hours < 3)
                collectionSentence = "only during the event";
            else if (hours >=3 && hours <=6)
-               collectionSentence = "few hours before/after";
+               collectionSentence = "a few hours before/after";
            else if (hours > 6 && hours <= 144)
-               collectionSentence = "few days before/after";
+               collectionSentence = "a few days before/after";
            else
                collectionSentence = "2 weeks before/after";
 
@@ -630,7 +661,7 @@ namespace Epilogger.Web.Controllers {
 		[HttpPost]
 		public virtual ActionResult Create(CreateEventViewModel model)
 		{
-
+           
 			DateTime startDate;
 			DateTime endDate;
 			DateTime collectionStart;

@@ -41,6 +41,10 @@ namespace Epilogger.Web.Models {
         [DisplayName("Time Zone")]
         public int TimeZoneOffset { get; set; }
 
+        public string EventTime { get; set; }
+
+        public bool IsPaid { get; set; }
+
         public static IEnumerable<TimeZone> TimeZones
         {
             get
