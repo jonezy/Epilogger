@@ -42,11 +42,6 @@ namespace Epilogger.Web.Controllers {
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult Index() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.Index);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult Events() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Events);
         }
@@ -75,7 +70,6 @@ namespace Epilogger.Web.Controllers {
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
-            public readonly string Index = "Index";
             public readonly string Profile = "Profile";
             public readonly string Events = "Events";
             public readonly string AllEvents = "AllEvents";
@@ -85,7 +79,6 @@ namespace Epilogger.Web.Controllers {
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants {
-            public const string Index = "Index";
             public const string Profile = "Profile";
             public const string Events = "Events";
             public const string AllEvents = "AllEvents";
@@ -94,13 +87,6 @@ namespace Epilogger.Web.Controllers {
         }
 
 
-        static readonly ActionParamsClass_Index s_params_Index = new ActionParamsClass_Index();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Index IndexParams { get { return s_params_Index; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Index {
-            public readonly string page = "page";
-        }
         static readonly ActionParamsClass_Events s_params_Events = new ActionParamsClass_Events();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_Events EventsParams { get { return s_params_Events; } }
@@ -131,7 +117,7 @@ namespace Epilogger.Web.Controllers {
             public readonly string Account = "~/Views/Dashboard/Account.cshtml";
             public readonly string AllEvents = "~/Views/Dashboard/AllEvents.cshtml";
             public readonly string Events = "~/Views/Dashboard/Events.cshtml";
-            public readonly string Index = "~/Views/Dashboard/Index.cshtml";
+            public readonly string IndexOLD = "~/Views/Dashboard/IndexOLD.cshtml";
             public readonly string Menu = "~/Views/Dashboard/Menu.cshtml";
             public readonly string Profile = "~/Views/Dashboard/Profile.cshtml";
             public readonly string Subscriptions = "~/Views/Dashboard/Subscriptions.cshtml";
@@ -141,12 +127,6 @@ namespace Epilogger.Web.Controllers {
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
     public class T4MVC_DashboardController: Epilogger.Web.Controllers.DashboardController {
         public T4MVC_DashboardController() : base(Dummy.Instance) { }
-
-        public override System.Web.Mvc.ActionResult Index(int? page) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
-            callInfo.RouteValueDictionary.Add("page", page);
-            return callInfo;
-        }
 
         public override System.Web.Mvc.ActionResult Profile() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Profile);

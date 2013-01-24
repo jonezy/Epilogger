@@ -24,18 +24,18 @@ namespace Epilogger.Web.Controllers {
             base.Initialize(requestContext);
         }
 
-        public virtual ActionResult Index(int? page)
-        {
-            int currentPage = page.HasValue ? page.Value - 1 : 0;
-            IEnumerable<DashboardActivityModel> activity = userService.GetUserDashboardActivity(CurrentUser.ID);
-            DashboardIndexViewModel model = new DashboardIndexViewModel(
-                activity.OrderByDescending(a => a.Date).Skip(currentPage * 12).Take(12).ToList(),
-                currentPage,
-                activity.Count()
-            );
+        //public virtual ActionResult Index(int? page)
+        //{
+        //    int currentPage = page.HasValue ? page.Value - 1 : 0;
+        //    IEnumerable<DashboardActivityModel> activity = userService.GetUserDashboardActivity(CurrentUser.ID);
+        //    DashboardIndexViewModel model = new DashboardIndexViewModel(
+        //        activity.OrderByDescending(a => a.Date).Skip(currentPage * 12).Take(12).ToList(),
+        //        currentPage,
+        //        activity.Count()
+        //    );
             
-            return View(model);
-        }
+        //    return View(model);
+        //}
 
         public virtual ActionResult Profile()
         {
@@ -49,12 +49,22 @@ namespace Epilogger.Web.Controllers {
         public virtual ActionResult Events(int? page)
         {
             int currentPage = page.HasValue ? page.Value - 1 : 0;
-            IEnumerable<DashboardActivityModel> activity = userService.GetUsersEventActivity(CurrentUser.ID);
-            DashboardIndexViewModel model = new DashboardIndexViewModel(
-                activity.OrderByDescending(a => a.Date).Skip(currentPage * 12).Take(12).ToList(),
-                currentPage,
-                activity.Count()
-            );
+
+            var model = new MyEventsViewModel()
+                            {
+                                CurrentPageIndex = currentPage,
+                                Events =
+                                    Mapper.Map<IEnumerable<Event>, List<DashboardEventViewModel>>(
+                                        eventService.FindByUserIDPaged(CurrentUserID, currentPage, 50))
+                            };
+            
+            
+            //IEnumerable<DashboardActivityModel> activity = userService.GetUsersEventActivity(CurrentUser.ID);
+            //DashboardIndexViewModel model = new DashboardIndexViewModel(
+            //    activity.OrderByDescending(a => a.Date).Skip(currentPage * 12).Take(12).ToList(),
+            //    currentPage,
+            //    activity.Count()
+            //);
 
             return View(model);
         }

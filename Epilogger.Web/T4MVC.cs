@@ -721,6 +721,7 @@ namespace Links {
                 public static readonly string header_person_png = Url("header-person.png");
                 public static readonly string hovernub_png = Url("hovernub.png");
                 public static readonly string icon_trending_png = Url("icon-trending.png");
+                public static readonly string icon_verified_png = Url("icon-verified.png");
                 public static readonly string less_png = Url("less.png");
                 public static readonly string more_png = Url("more.png");
                 public static readonly string not_png = Url("not.png");
@@ -915,6 +916,27 @@ namespace Links {
             }
         
             public static readonly string trigger_png = Url("trigger.png");
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class Upgrade {
+                private const string URLPATH = "~/Public/images/Upgrade";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string icon_feature_commenting_png = Url("icon-feature-commenting.png");
+                public static readonly string icon_feature_eventbrite_png = Url("icon-feature-eventbrite.png");
+                public static readonly string icon_feature_feature_png = Url("icon-feature-feature.png");
+                public static readonly string icon_feature_lifespan_png = Url("icon-feature-lifespan.png");
+                public static readonly string icon_feature_livemode_png = Url("icon-feature-livemode.png");
+                public static readonly string icon_feature_moderation_png = Url("icon-feature-moderation.png");
+                public static readonly string icon_feature_private_png = Url("icon-feature-private.png");
+                public static readonly string icon_feature_searchterms_png = Url("icon-feature-searchterms.png");
+                public static readonly string icon_feature_toptweeters_png = Url("icon-feature-toptweeters.png");
+                public static readonly string icon_feature_verified_png = Url("icon-feature-verified.png");
+                public static readonly string icon_featurecheckmark_png = Url("icon-featurecheckmark.png");
+                public static readonly string icon_featureembed_png = Url("icon-featureembed.png");
+                public static readonly string icon_privateevent_png = Url("icon-privateevent.png");
+                public static readonly string icon_verifiedevents_png = Url("icon-verifiedevents.png");
+            }
+        
             public static readonly string video_play_jpg = Url("video-play.jpg");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class widget {

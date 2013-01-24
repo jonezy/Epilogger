@@ -87,6 +87,7 @@ namespace Epilogger.Web.Controllers {
             public readonly string Privacy = "Privacy";
             public readonly string SocialBar = "SocialBar";
             public readonly string WebStatus = "WebStatus";
+            public readonly string UpgradeBenefits = "UpgradeBenefits";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -103,6 +104,7 @@ namespace Epilogger.Web.Controllers {
             public const string Privacy = "Privacy";
             public const string SocialBar = "SocialBar";
             public const string WebStatus = "WebStatus";
+            public const string UpgradeBenefits = "UpgradeBenefits";
         }
 
 
@@ -151,6 +153,7 @@ namespace Epilogger.Web.Controllers {
             public readonly string SocialBar = "~/Views/Home/SocialBar.cshtml";
             public readonly string StatusMessages = "~/Views/Home/StatusMessages.cshtml";
             public readonly string Terms = "~/Views/Home/Terms.cshtml";
+            public readonly string UpgradeBenefits = "~/Views/Home/UpgradeBenefits.cshtml";
             public readonly string WebStatus = "~/Views/Home/WebStatus.cshtml";
         }
     }
@@ -233,6 +236,11 @@ namespace Epilogger.Web.Controllers {
 
         public override System.Web.Mvc.ActionResult WebStatus() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.WebStatus);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult UpgradeBenefits() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.UpgradeBenefits);
             return callInfo;
         }
 

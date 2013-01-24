@@ -393,6 +393,7 @@
     <Compile Include="Models\CreateEventTwitterViewModel.cs" />
     <Compile Include="Models\DisconnectServiceViewModel.cs" />
     <Compile Include="Models\MemoryBoxTweet.cs" />
+    <Compile Include="Models\MyEventsViewModel.cs" />
     <Compile Include="Models\NagViewModel.cs" />
     <Compile Include="Models\NavigationViewModel.cs" />
     <Compile Include="Models\ProfileImageChoiceViewModel.cs" />
@@ -5368,7 +5369,7 @@
     <Content Include="Areas\Authentication\Views\Web.config" />
     <Content Include="Views\Shared\GlobalNavigationOldGood.cshtml" />
     <Content Include="Views\Events\Create.cshtml" />
-    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Dashboard\IndexOLD.cshtml" />
     <Content Include="Views\Dashboard\Profile.cshtml" />
     <Content Include="Views\Dashboard\Menu.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />

@@ -58,9 +58,9 @@
     
          @if (userId != Guid.Empty)
          {
-             <li class="@(controller.ToLower() == "dashboard" ? "current " : "")submenu dashboard">@Html.ActionLink("Dashboard", "index", "dashboard", null, controller.ToLower() == "dashboard" ? new {@class = "current"} : null)
+             <li class="@(controller.ToLower() == "dashboard" ? "current " : "")submenu dashboard">@Html.ActionLink("Dashboard", "events", "dashboard", null, controller.ToLower() == "dashboard" ? new {@class = "current"} : null)
                  <ul class="dashboard">
-                     <li>@Html.ActionLink("Activity", "index", "dashboard")</li>
+                     @*<li>@Html.ActionLink("Activity", "index", "dashboard")</li>*@
                      <li>@Html.ActionLink("My events", "events", "dashboard")</li>
                      <li>@Html.ActionLink("Subscriptions", "subscriptions", "dashboard")</li>
                      @*<li><a href="#">inbox</a></li>*@
