@@ -382,3 +382,4 @@ function SetSelectedVenue(venueId, venueName, venueAddress, venueCity, venueStat
     $(".submitForm").removeAttr("disabled");
 
 }
+

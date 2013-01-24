@@ -26,7 +26,7 @@
         <div id="left_side">
             <h2>
                 WOOT! YOUR EVENT HAS BEEN ADDED!</h2>
-                <h3>@Html.DisplayFor(m => m.Name)
+                <h3 id="title">@Html.DisplayFor(m => m.Name)
                         @*Your Event Name*@</h3>
             <table>
                 @{
@@ -65,8 +65,7 @@
                     <td>
                         <img src="/Public/images/CreateEvent/info.png" alt="quotes" />
                     </td>
-                    <td>
-                        @Html.DisplayFor(m => m.CollectionTime)
+                    <td>The event page starts collecting data <b>@Html.DisplayFor(m => m.CollectionTime)</b>
                     </td>
                 </tr>
             </table>
@@ -94,7 +93,7 @@
                @* @Html.ActionImage("CreateEventTweets", "Events", "#", "/Public/images/CreateEvent/EditHashtags.png", "Back")*@
             </div>
             <div id="right">
-                <input type="image" src="/Public/images/CreateEvent/GotoEvent.png" alt="" onclick="CloseAndRedirect('@Url.Action("Details", new { id = Model.EventSlug })');">
+                <input type="submit" class="submitEvent" value="TAKE ME TO MY EVENT" onclick="CloseAndRedirect('@Url.Action("Details", new { id = Model.EventSlug })');">
                 @*@Html.ActionImage("#", "Events", "#", "/Public/images/CreateEvent/GotoEvent.png", "go view your event")*@
             </div>
         </div>

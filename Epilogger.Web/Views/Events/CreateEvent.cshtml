@@ -128,33 +128,46 @@
     });
 
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         $("#Name").autocomplete({
-            source: function (request, response) {
+            source: function(request, response) {
                 $.ajax({
                     url: '@Url.Action("Autocomplete", "Utilities")',
                     type: "POST",
                     dataType: "json",
                     data: { term: request.term },
-                    success: function (data) {
-                        response($.map(data, function (item) {
-                            return { label: "<div class=\"auto_complete_detail\"><div class=\"auto_complete_name\">" + item.label + "</div><div class=\"auto_complete_date\"><img src=\"/Public/images/CreateEvent/clock.png\"  /><span>" + item.startDate + "</span></div><div class=\"auto_complete_venue\"><img src=\"/Public/images/CreateEvent/gps.png\"  /><span>" + item.venue + "</span></div></div>", value: item.url, id: item.id }; 
+                    success: function(data) {
+                        response($.map(data, function(item) {
+                            return { label: "<div class=\"auto_complete_detail\"><div class=\"auto_complete_name\">" + item.label + "</div><div class=\"auto_complete_date\"><img src=\"/Public/images/CreateEvent/clock.png\"  /><span>" + item.startDate + "</span></div><div class=\"auto_complete_venue\"><img src=\"/Public/images/CreateEvent/gps.png\"  /><span>" + item.venue + "</span></div></div>", value: item.url, id: item.id };
                         }));
                     }
-
                 });
             },
-            select: function (event, ui) {
-            // alert(ui.item.value);
-             window.open(ui.item.value);
+            select: function(event, ui) {
+                // alert(ui.item.value);
+                window.open(ui.item.value);
                 return false;
             }
-        }).data("autocomplete")._renderItem = function (ul, item) {
-            return $("<li>")
-                .data("item.autocomplete", item)
-                .append("<a>" + item.label + "</a>")
-                .appendTo(ul);
-        }
-        
+        }).data("autocomplete")._renderMenu = function(ul, items) {
+            var self = this;
+
+            $.each(items, function(index, item) {
+                if (index == 0)
+                    ul.append('<li id="auto_complete_header"><b>Events already in Epilogger:</b></li>');
+                var renderItem = function (ul1, item1) {
+                    return $("<li></li>")
+                        .data("item.autocomplete", item1)
+                        .append("<a>" + item1.label + "</a>")
+                        .appendTo(ul1);
+                };
+                self._renderItem = renderItem(ul,item);
+            });
+        };
     });
+    
+
 </script>
+@* return $("<li>")
+                        .data("item.autocomplete", item)
+                        .append("<a>" + item.label + "</a>")
+                        .appendTo(ul);*@
