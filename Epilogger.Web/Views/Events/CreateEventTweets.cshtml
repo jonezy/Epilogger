@@ -26,18 +26,23 @@
             if (i == 5)
                 $(this).remove();
         });
-        
+
     });
-    function advanceMode() {
+    
+    function advancedMode() {
         $('#normal_mode').toggle();
 
         if ($('#IsAdvanceMode').val() == 'false')
+        {
             $('#IsAdvanceMode').val('true');
+            $('#modeTitle').text('Official Hashtag(s):');
+        }
         else {
             $('#IsAdvanceMode').val('false');
+            $('#modeTitle').text('Advanced Mode: Hashtags/Keywords');
         }
 
-        $('#advance_link').text($('#advance_link').text() == '(advance mode)' ? '(normal mode)' : '(advance mode)');
+        $('#advance_link').text($('#advance_link').text() == '(advanced mode)' ? '(normal mode)' : '(advanced mode)');
      
     }
 </script>
@@ -53,12 +58,13 @@
         @Html.HiddenFor(x => x.IsAdvanceMode, new { id = "IsAdvanceMode" } )
         <div id="twitter_wrapper">
             <div id="left_side">
-                <p>
+                <p id="modeTitle">
                     Official Hashtag(s):
                 </p>
                 @Html.TextBoxFor(model => model.SearchTerms, new { @id = "searchText", @Value = "#", @class = "bolder searchText" })
                 <div id="normal_mode">
                     <div id="addAnother1" class="invisible add_another">
+                        <p>Other hashtags/keywords:</p>
                         @Html.TextBoxFor(model => model.SearchTerms, new { @id = "searchText2", @Value = "", @class = "searchText" })
                     </div>
                     <div id="addAnother2" class="invisible add_another">
@@ -78,7 +84,7 @@
                     </div>
                 </div>
                 <div style="padding-top: 8px;">
-                    <a href="#" id="advance_link"onclick="advanceMode()">(advanced mode)</a>
+                    <a href="" id="advance_link" onclick="advancedMode(); return false;">(advanced mode)</a>
                 </div>
             </div>
             <div id="right_side">

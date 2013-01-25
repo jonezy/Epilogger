@@ -55,7 +55,7 @@
     </resourceSet>
     
     <resourceSet name="CreateEventJs" type="js">
-      <resource path="~/Public/js/jquery.blockUI.js" />
+      <!--<resource path="~/Public/js/jquery.blockUI.js" />-->
       <resource path="~/Public/js/CreateEditEvent.js" />
     </resourceSet>
     
