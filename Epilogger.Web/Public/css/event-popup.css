@@ -108,7 +108,7 @@ fieldset.popForm .blue_arrow
 .inner { width:400px; height:200px; border:2px solid salmon; float:left; }
 
 fieldset.popForm .under_control_notice { margin-left:25%; margin-top:-27px; margin-bottom:20px; font:8pt Helvetica,Arial,Sans-Serif; color:#878787;}
-fieldset.popForm .hint { margin-left: 25%; margin-top:-12px;margin-bottom:35px;  font:8pt Helvetica,Arial,Sans-Serif; color:#999;}
+fieldset.popForm .hint { margin-left: 25%; margin-top:-12px;margin-bottom:29px;  font:8pt Helvetica,Arial,Sans-Serif; color:#999;}
 
 .invisible { display: none;}
 
@@ -432,4 +432,16 @@ fieldset#livemode .submitEvent {
     font-family: helvetica, arial, sans-serif;
     font-size: 14px;
     color: #555;
+}
+
+.field-validation-error {
+    color: red;
+    padding-left: 23%;
+    margin-left: 13px;
+}
+#CategoryId {
+    margin-bottom: 0px !important;
+}
+.padTheTop {
+    padding-top: 2px;
 }

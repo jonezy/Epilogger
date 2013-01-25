@@ -44,18 +44,19 @@
 <div class="form_process">
     <img src="/Public/images/CreateEvent/BasicInfoActive.png" alt="Basic Information" />
 </div>
-@Html.ValidationSummary("Please correct the following issues")
+@*@Html.ValidationSummary("Please correct the following issues")*@
 @using (Html.BeginForm("CreateEvent", "Events", FormMethod.Post, new { id = "CreateForm" }))
 {   
     <fieldset class="popForm">
         <div class="">
-            <p>@Html.Label("Event title:") @Html.EditorFor(model => model.Name)</p>
+            <p>@Html.Label("Event title:") @Html.EditorFor(model => model.Name) @Html.ValidationMessageFor(model => model.Name)</p>
             <p>@Html.Label("Event subtitle:") @Html.EditorFor(model => model.Subtitle)</p>
             <div class="hint">
                 (ex: Presented by Aperture Laboratories)
             </div>
-            <p>@Html.LabelFor(model => model.CategoryId) @Html.DropDownListFor(model => model.CategoryId, Model.Categories, "Select your event category")</p>
-            <div class="">
+            <p>@Html.LabelFor(model => model.CategoryId) @Html.DropDownListFor(model => model.CategoryId, Model.Categories, "Select your event category")
+            @Html.ValidationMessageFor(model => model.CategoryId)</p>
+            <div class="padTheTop">
                 <p>@Html.Label("Start date:") @Html.EditorFor(m => m.StartDateTime, "DateTimeOneline")
                     @Html.DropDownList("start_times", new SelectList(CreateBasicEventViewModel.Times, "Value", "Text", string.Format("{0:h:mm}", Model.StartDateTime.ToLocalTime())), new { @class = "times" })
                     @Html.DropDownList("AMPMstartTime", new SelectList(new List<SelectListItem> {
@@ -127,6 +128,14 @@
         }
     });
 
+
+//    if ($(".field-validation-error").length > 0)
+//    {
+//        parent.$.colorbox.resize({ width: 560, height: 650 });
+//    }
+//    else {
+//        parent.$.colorbox.resize({ width: 560, height: 570 });
+//    }
 
     $(document).ready(function() {
         $("#Name").autocomplete({
