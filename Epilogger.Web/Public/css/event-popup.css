@@ -18,10 +18,13 @@ input[type="text"], textarea
     width: 67%;
     font: 14px Helvetica,Arial,Sans-Serif;
     color: #666;
-    border: 2px solid #BBB;
-    box-shadow: inset 0 0 3px #CCC;
-    -moz-box-shadow:inset 0 0 3px #CCC;
-    -webkit-box-shadow: inset 0 0 3px #CCC; 
+    /*border: 2px solid #BBB;*/
+    border: 0;
+    border-left: 1px solid #e3e3e3;
+    border-right: 1px solid #e3e3e3;
+    box-shadow: inset 0px 1px 1px #CCC;
+    -moz-box-shadow:inset  0px 1px 1px #CCC;
+    -webkit-box-shadow: inset 0px 1px 1px #CCC; 
 }
                                               
 fieldset.popForm label {
@@ -53,12 +56,14 @@ fieldset.popForm select
     color: #666;    
     
     line-height:normal;
-    padding: 3px 0px;
+    /*padding: 3px 0px;*/
+
+    border: 1px solid #ccc;
+    border-bottom: 1px solid #eee;
+    border-left: 1px solid #e3e3e3;
+    border-right: 1px solid #fff;
     
-       border: 2px solid #BBB;
-       box-shadow: inset 0 0 3px #CCC;
-    -moz-box-shadow:inset 0 0 3px #CCC;
-    -webkit-box-shadow: inset 0 0 3px #CCC; 
+   
 }
 
 /*
