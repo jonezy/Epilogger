@@ -73,7 +73,7 @@
                 </p>
             </div>
             <div class="under_control_notice">
-                @Html.CheckBox("End_Date", @Model.allDay)
+                @Html.CheckBox("End_Date", @Model.allDay, new { value=false })
                 <label class="endDateCheckLabel" for="End_Date">
                     All day</label>
             </div>
