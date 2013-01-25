@@ -526,14 +526,13 @@ namespace Epilogger.Web.Controllers {
         [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]        
         public virtual ActionResult CreateEventTweets(string id)
         {
-            //var requestedEvent = _es.FindBySlug(id);
-            //CreateEventTwitterViewModel vm = new CreateEventTwitterViewModel();
-            //vm.EventSlug = requestedEvent.EventSlug;
-
             var model = Mapper.Map<Event, CreateEventTwitterViewModel>((Event)TempData["Event"]);
+            model.EventTime = TempData["EventTime"].ToString();
+
+            //Need to resave this stuff. Or it's lost on page refresh
+            TempData["EventTime"] = TempData["EventTime"];
             TempData["Event"] = TempData["Event"];
-            //TempData["CreateBasicEventViewModel"] = TempData["CreateBasicEventViewModel"];
-           model.EventTime =TempData["EventTime"].ToString();
+
             return View(model);
         }
 

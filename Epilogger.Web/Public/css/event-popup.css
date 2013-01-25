@@ -180,27 +180,29 @@ input[type="text"] .bold {
     height:500px;
 } 
 #left_side{
-    width:50%;
-    height:75%;
+    width: 230px;
+    height: 394px;
     float:left;
 }       
-#left_side p{
-    font-weight: bold; 
+#left_side p {
+    font-weight: bold;
+    margin-bottom: 10px !important;
 }                    
 #right_side{
-    width:50%;
+    width:270px;
     height:75%;
     float:right;
     
 } 
 .searchText{
     color:#5498dd;
-    width:230px;
+    width: 100% !important;
+    font-weight: bold !important;
 }
 #tweet_footer
 {
-    height:9%;
-    float:none;
+    /*height:9%;
+    float:none;*/
     clear:both;
 }     
 
@@ -220,25 +222,29 @@ input[type="text"] .bold {
     padding-right:2px;
     }
      
-    .warning_small{
+.warning_small{
     background-color:#fcfdd6;
-   padding: 3px 0px 3px 3px;
-    width:250px;
+    padding: 10px 0;
+    width:268px;
     border:1px solid #B9BD6B;
     margin-bottom:10px;
-    }
+    text-align: center;
+}
     .warning{
-    background-color:#fcfdd6;
-    padding:1px 6px 15px 6px;
-    float:none;
-    clear:both;
-    margin-right:15px;
-    width:240px;
-    border:1px solid #B9BD6B
+        background-color:#fcfdd6;
+        padding: 10px;
+        /*padding:1px 6px 15px 6px;
+        float:none;
+        clear:both;
+        margin-right:15px;
+        width:240px;
+        */
+        border:1px solid #f3efc8
     }
      .warning h3{
-    color:#b3a84a;
-    text-transform:none;
+        color:#b3a84a;
+        text-transform:none;
+        margin: 0;
     }
      .warning span{
     color:#666;
@@ -268,7 +274,7 @@ input[type="text"] .bold {
     }
     #preview_tweet_box
     {
-        height:320px;
+        height: 330px;
         background-color:#EDEDED;
         overflow:auto;
     }
@@ -292,10 +298,13 @@ input[type="text"] .bold {
 }
 .preview_stretch_btn
 {
-    width:246px;
+    width:245px;
+    text-align: center;
+    /*
     padding-left:6px;
     margin-top:0;
     padding-left:40px;
+*/
     background-image:url('../../Public/images/CreateEvent/buttonPreview.png');
     background-repeat:no-repeat;
 }
@@ -444,4 +453,8 @@ fieldset#livemode .submitEvent {
 }
 .padTheTop {
     padding-top: 2px;
+}
+
+#twitter_table td {
+    padding-bottom: 5px;
 }

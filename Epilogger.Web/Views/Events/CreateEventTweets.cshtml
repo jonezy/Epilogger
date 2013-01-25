@@ -3,12 +3,12 @@
     Layout = "~/Views/Events/_CreateEventLayout.cshtml";
     ViewBag.Title = "Create a new event | Epilogger";
 }
-<script language="javascript">
+<script type="text/javascript">
     $(document).ready(function () {
         var x = $('#event-popup').height();
         var y = $('#event-popup').width();
 
-        parent.$.colorbox.resize({ width: 575, height: 570 });
+        parent.$.colorbox.resize({ width: 560, height: 550 });
 
         $('#searchButton').bind("click", function () {
             $("#preview_tweet_box").removeClass("invisible");
@@ -17,7 +17,7 @@
             $("#warningBox").attr('class', 'warning_small');
             $(this).removeClass("disabled_blue_button");
             $(this).addClass("preview_stretch_btn");
-            $(this).prop('value', 'refresh my preview results');
+            $(this).prop('value', 'refresh results in preview box');
         });
         var i = 0;
         $('#button_input').bind("click", function () {
@@ -54,7 +54,7 @@
         <div id="twitter_wrapper">
             <div id="left_side">
                 <p>
-                    Official Hashtag(s)
+                    Official Hashtag(s):
                 </p>
                 @Html.TextBoxFor(model => model.SearchTerms, new { @id = "searchText", @Value = "#", @class = "bolder searchText" })
                 <div id="normal_mode">
@@ -77,15 +77,14 @@
                         <input type="button" value="add another" class="stn_button blue_button" />
                     </div>
                 </div>
-                <div>
-                    <a href="#" id="advance_link"onclick="advanceMode()">(advance mode)</a>
+                <div style="padding-top: 8px;">
+                    <a href="#" id="advance_link"onclick="advanceMode()">(advanced mode)</a>
                 </div>
             </div>
             <div id="right_side">
                 <div id="warningBox" class="warning">
                     <div class="clear_away">
-                        <h3>
-                            Hit the preview button to see what your search term(s) collect!</h3>
+                        <h3>Hit the preview button to see what your search term(s) collect!</h3>
                         <span>If your terms are too broad, try narrowing it down with an official hashtag unique
                             to your event</span><br />
                     </div>
