@@ -552,24 +552,34 @@ namespace Epilogger.Web.Controllers {
                     //var eventModel = _es.FindBySlug(model.EventSlug);
                     var eventMod = Mapper.Map<Event, Event>((Event)TempData["Event"]);
                     var searchQuery = "";
-                    if (!model.IsAdvanceMode)
+                    if (model.IsAdvanceMode)
                     {
-                        var searchTerms = frm["SearchTerms"].Split(',');
-                        
-                        foreach (var s in searchTerms)
-                        {
-                            if (s != "")
-                                searchQuery += s + " OR ";
-                        }
-                        searchQuery = searchQuery.Remove(searchQuery.Length - 4, 4);
-                        eventMod.SearchTerms = searchQuery;
+                        searchQuery = frm["SearchTerms"];
+                        eventMod.SearchTerms = searchQuery.Replace(",", "").Trim();
                     }
                     else
                     {
-                        searchQuery = frm["SearchTerms"];
-                        eventMod.SearchTerms = frm["SearchTerms"]; //check
+                        var searchTerms = frm["SearchTerms"].Split(',');
+                        foreach (var s in searchTerms)
+                        {
+                            if (s != "")
+                            {
+                                if (s.Contains(" "))
+                                {
+                                    searchQuery += "\"" + s + "\" OR ";
+                                }
+                                else
+                                {
+                                    searchQuery += s + " OR ";
+                                }   
+                            }
+                        }
+                        searchQuery = searchQuery.Remove(searchQuery.Length - 4, 4);
+                        eventMod.SearchTerms = searchQuery.Trim();
                     }
                     eventMod.IsActive = true;
+                    eventMod.IsPaid = false;
+                    eventMod.IsPrivate = false;
 
                     _es.Save(eventMod);              
 

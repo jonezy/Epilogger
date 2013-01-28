@@ -28,23 +28,32 @@
         });
 
     });
-    
+
     function advancedMode() {
         $('#normal_mode').toggle();
 
-        if ($('#IsAdvanceMode').val() == 'false')
-        {
-            $('#IsAdvanceMode').val('true');
+        if ($('#IsAdvanceMode').val() == 'False') {
+            $('#IsAdvanceMode').val('True');
             $('#modeTitle').text('Official Hashtag(s):');
+
         }
         else {
-            $('#IsAdvanceMode').val('false');
+            $('#IsAdvanceMode').val('False');
             $('#modeTitle').text('Advanced Mode: Hashtags/Keywords');
         }
 
-        $('#advance_link').text($('#advance_link').text() == '(advanced mode)' ? '(normal mode)' : '(advanced mode)');
-     
+        $('#t_op_section').toggleClass('twitterOperatorSectionOn twitterOperatorSectionOff');
+        $('#advance_link').text($('#advance_link').text() == 'advanced mode' ? 'simple mode' : 'advanced mode');
+
+        $("#SearchHelpPopUpDiv").addClass("uiPopUpHidden");
     }
+
+    function showTOperators() {
+        $("#SearchHelpPopUpDiv").toggleClass("uiPopUpHidden");
+        $('#twitter_operators').text($('#twitter_operators').text() == 'view twitter operators' ? 'hide twitter operators' : 'view twitter operators');
+    }
+
+
 </script>
 <div class="form_process2">
     <img src="/Public/images/CreateEvent/HashTagsActive.png" alt="Basic Information" />
@@ -55,7 +64,7 @@
     <fieldset>
         @Html.HiddenFor(m => Model.EventSlug)
         @Html.HiddenFor(m => Model.EventTime)
-        @Html.HiddenFor(x => x.IsAdvanceMode, new { id = "IsAdvanceMode" } )
+        @Html.HiddenFor(x => x.IsAdvanceMode, new { id = "IsAdvanceMode", value = false } )
         <div id="twitter_wrapper">
             <div id="left_side">
                 <p id="modeTitle">
@@ -84,7 +93,10 @@
                     </div>
                 </div>
                 <div style="padding-top: 8px;">
-                    <a href="" id="advance_link" onclick="advancedMode(); return false;">(advanced mode)</a>
+                    <div id="t_op_section" class="twitterOperatorSectionOff">
+                        <a href="" id="twitter_operators" onclick="showTOperators(); return false;">view twitter operators</a>&nbsp; | &nbsp;
+                    </div>
+                    <a href="" id="advance_link" onclick="advancedMode(); return false;">advanced mode</a>
                 </div>
             </div>
             <div id="right_side">
@@ -117,6 +129,32 @@
                 </div>
             </div>
         </div>
-    </fieldset>
-            
+    </fieldset> 
 }
+
+
+<div id="SearchHelpPopUpDiv" class="uiPopUp uiPopUpHidden">
+    <div id="SearchHelpPopUpContentDiv" class="">
+        <table cellpadding="0" cellspacing="0">
+            <tbody><tr><th>Operator</th><th>Finds data...</th></tr>
+                <tr><td>epilogger search</td><td>containing both "epilogger" and "search". This is the default operator.</td></tr>
+                <tr><td><b>"</b>happy hour<b>"</b></td><td>containing the exact phrase "happy hour".</td></tr>
+                <tr><td>love <b>OR</b> hate</td><td>containing either "love" or "hate" (or both).</td></tr>
+                <tr><td>beer <b>-</b>root</td><td>containing "beer" but not "root".</td></tr>
+                <tr><td><b>#</b>haiku</td><td>containing the hashtag "haiku".</td></tr>
+                <tr><td><b>from:</b>alexiskold</td><td>sent from person "alexiskold".</td></tr>
+                <tr><td><b>to:</b>techcrunch</td><td>sent to person "techcrunch".</td></tr>
+                <tr><td><b>@@</b>mashable</td><td>referencing person "mashable".</td></tr>
+                <tr><td>"happy hour" <b>near:</b>"san francisco"</td><td>containing the exact phrase "happy hour" and sent near "san francisco".</td></tr>
+                <tr><td><b>near:</b>NYC <b>within:</b>15mi</td><td>sent within 15 miles of "NYC".</td></tr>
+                <tr><td>superhero <b>since:</b>2010-12-27</td><td>containing "superhero" and sent since date "2010-12-27" (year-month-day).</td></tr>
+                <tr><td>ftw <b>until:</b>2010-12-27</td><td>containing "ftw" and sent up to date "2010-12-27".</td></tr>
+                <tr><td>movie -scary <b>:)</b></td><td>containing "movie", but not "scary", and with a positive attitude.</td></tr>
+                <tr><td>flight <b>:(</b></td><td>containing "flight" and with a negative attitude.</td></tr>
+                <tr><td>traffic <b>?</b></td><td>containing "traffic" and asking a question.</td></tr>
+                <tr><td>hilarious <b>filter:links</b></td><td>containing "hilarious" and linking to URLs.</td></tr>
+                <tr><td>news <b>source:twitterfeed</b></td><td>containing "news" and entered via TwitterFeed</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -175,7 +175,7 @@ input[type="text"] .bold {
 #twitter_wrapper{
     margin-top:-15px;
     font-size:13px; 
-    font:Helvetica,Arial,Sans-Serif;
+    font-family: Helvetica,Arial,Sans-Serif;
     color: #777;
     height:500px;
 } 
@@ -457,4 +457,41 @@ fieldset#livemode .submitEvent {
 
 #twitter_table td {
     padding-bottom: 5px;
+}
+
+
+.twitterOperatorSectionOff {
+    display: none;
+}
+.twitterOperatorSectionOn {
+    display: inline-block;
+}
+
+.uiPopUp {
+    padding: 5px !important;  
+    width: 472px !important;
+    position: relative;
+    left: 0px !important;
+    top: -400px !important;
+    z-index: 1000;
+    height: 214px !important;
+    overflow: scroll !important;
+    box-shadow: 3px 3px 4px #ccc;
+    -moz-box-shadow: 3px 3px 4px #ccc;
+    -webkit-box-shadow: 3px 3px 4px #ccc;
+    border: 1px solid #ccc;
+}
+
+.uiPopUpHidden {
+    display: none;
+}
+.uiPopUp table {
+    border-spacing: 0px !important;
+}
+
+.uiPopUp table td 
+{
+    border: 1px solid #ccc;
+    border-collapse: collapse !important;
+    padding: 3px !important;
 }
