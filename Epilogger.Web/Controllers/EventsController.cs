@@ -581,35 +581,38 @@ namespace Epilogger.Web.Controllers {
                     eventMod.IsPaid = false;
                     eventMod.IsPrivate = false;
 
-                    _es.Save(eventMod);              
+                    _es.Save(eventMod);
+                    TempData["Event"] = eventMod;
 
                     // get display model from event, route this eventually
-                    var displayModel = new CreateFinalEventViewModel
-                            {
-                                Name = eventMod.Name,
-                                Subtitle = eventMod.SubTitle,
-                                SearchTerms = searchQuery,
-                                EventSlug = eventMod.EventSlug,
-                                CollectionTime = getCollectionWordFormat(eventMod.CollectionStartDateTime, eventMod.StartDateTime),
-                                EventStartEndTime = frm["EventTime"] 
-                            };
+                    var displayModel = new CreateFinalEventViewModel()
+                                            {
+                                                Name = eventMod.Name,
+                                                Subtitle = eventMod.SubTitle,
+                                                SearchTerms = searchQuery,
+                                                EventSlug = eventMod.EventSlug,
+                                                CollectionTime = getCollectionWordFormat(eventMod.CollectionStartDateTime, eventMod.StartDateTime),
+                                                EventStartEndTime = frm["EventTime"] 
+                                            };
 
 
                     //Initiate a first collect on the event
-                    var tsmp = new MQ.MSGProducer("Epilogger", "TwitterSearch");
-                    var tsMSG = new MQ.Messages.TwitterSearchMSG
-                    {
-                        EventID = eventMod.ID,
-                        SearchTerms = eventMod.SearchTerms,
-                        SearchFromLatestTweet = false,
-                        SearchSince = eventMod.CollectionStartDateTime,
-                        SearchUntil = eventMod.CollectionEndDateTime
-                    };
-                    tsmp.SendMessage(tsMSG);
-                    tsmp.Dispose();
+                    //TODO Remove after testing
+                    //var tsmp = new MQ.MSGProducer("Epilogger", "TwitterSearch");
+                    //var tsMSG = new MQ.Messages.TwitterSearchMSG
+                    //{
+                    //    EventID = eventMod.ID,
+                    //    SearchTerms = eventMod.SearchTerms,
+                    //    SearchFromLatestTweet = false,
+                    //    SearchSince = eventMod.CollectionStartDateTime,
+                    //    SearchUntil = eventMod.CollectionEndDateTime
+                    //};
+                    //tsmp.SendMessage(tsMSG);
+                    //tsmp.Dispose();
 
                     //The the admins an email with the event details.
-                    SendEventCreatedEmailToSystem(eventMod);
+                    //TODO Remove after testing
+                    //SendEventCreatedEmailToSystem(eventMod);
 
                     return View("CreateEventFinal", displayModel);
                 }
@@ -626,28 +629,49 @@ namespace Epilogger.Web.Controllers {
         }
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+        
+        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
+        
+        public virtual ActionResult CreateEventFinal()
+        {
+            //TODO Remove this, it's for debugging
+            var model = new CreateFinalEventViewModel()
+                            {
+                                Name = "Test Event",
+                                Subtitle = "This is a subtitle",
+                                SearchTerms = "#Rocksteady OR \"Jimmy hat\"",
+                                EventSlug = "test_event",
+                                CollectionTime = getCollectionWordFormat(DateTime.Parse("1/31/2013 10:00:00 PM"), DateTime.Parse("1/31/2013 10:00:00 PM")),
+                                EventStartEndTime = "Jan 31 5:00pm - Jan 31 8:00pm"
+                            };
+
+            return View(model);
+
+
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+        
         //[CompressFilter]
         [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to edit an event")]
         public virtual ActionResult CreateEventFinal(CreateFinalEventViewModel displayModel)
         {
-           
-
             return View(displayModel);
         }
 
-        private string getEventStartEndTime(DateTime startDateTime, DateTime? endDateTime)
-        {
-            //Sept 18th 2:00pm UTC - Sept 19th 4:00pm UTC
-            string totalDate = startDateTime.ToString("MMM dd hh:mm tt UTC");
-            string endDate = "";
-            if (endDateTime != null || DateTime.Compare(startDateTime,endDateTime.Value) <= 0)
-            {
-                endDate = endDateTime.Value.ToString("MMM dd hh:mm tt UTC");
-                totalDate += " - " + endDate;
-            }
+        //private string getEventStartEndTime(DateTime startDateTime, DateTime? endDateTime)
+        //{
+        //    //Sept 18th 2:00pm UTC - Sept 19th 4:00pm UTC
+        //    string totalDate = startDateTime.ToString("MMM dd hh:mm tt UTC");
+        //    string endDate = "";
+        //    if (endDateTime != null || DateTime.Compare(startDateTime,endDateTime.Value) <= 0)
+        //    {
+        //        endDate = endDateTime.Value.ToString("MMM dd hh:mm tt UTC");
+        //        totalDate += " - " + endDate;
+        //    }
             
-            return totalDate;
-        }
+        //    return totalDate;
+        //}
 
         private string getCollectionWordFormat(DateTime colDateTime, DateTime startDateTime)
         {

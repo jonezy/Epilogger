@@ -118,6 +118,7 @@ fieldset.popForm #startDate{
 fieldset.popForm input[type="text"] .timepick{width:7em;}
 .form_process{ margin-bottom: 25px; }
 .form_process2{ margin-bottom: 25px; }
+.form_process3{ margin-bottom: 10px; }
 .dashed{border-top:1px dotted #BBB; margin-top:3px; margin-bottom:15px;}
 
 .dropdown_div
@@ -334,30 +335,61 @@ input[type="text"] .bold {
 {
     padding:5px 1px 5px 1px;
 } 
-.grey_box
+/*.grey_box
 {
+    color:#434343;  
+    background-color:#f3f3f3; 
+    font-size:1.2em;
     padding: 8px 12px 8px 12px;
-   background-color:#f3f3f3; 
-   color:#434343;  
-   font-size:1.2em;
-   margin-top:-11px;
+    
+    
+    margin-top:-11px;
     width: 201px;
     margin-left: 40px;
+    
+}*/
+
+.improveEventPanel {
+    background-color:#f3f1f1;
+    width: 185px;
+    padding: 5px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    margin-left: 64px;
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+    padding-bottom: 15px;
 }
+
+
+
 #final_wrapper ul
 {
     list-style:none;
-    margin: -5px 5px 0px 40px;
-    border-left: 9px solid #f3f3f3;
-    border-right:9px solid #f3f3f3;
     padding-left: 0px;
+    color: #7f7f7f;
+    text-align: left;
+    
+    /*margin: -5px 5px 0px 40px;
+    border-left: 9px solid #f3f3f3;
+    border-right:9px solid #f3f3f3;*/
+    
 }    
 #final_wrapper li
 {
-    padding: 8px 14px 8px 14px;
-    background-color:#f3f3f3;
+    padding: 8px;
     margin-bottom:1px;
+    border-bottom: 1px solid #fff;
 }
+
+.rightSummaryTitle {
+    text-align: left;
+    color: #6a6969;
+    margin-left: 8px;
+}
+
+
 
 h3#title  {
     font-family: helvetica, arial;

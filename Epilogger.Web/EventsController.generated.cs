@@ -67,11 +67,6 @@ namespace Epilogger.Web.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult CreateEventFinal() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.CreateEventFinal);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult Create() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Create);
         }
@@ -378,13 +373,6 @@ namespace Epilogger.Web.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_CreateEventTweets {
             public readonly string id = "id";
-        }
-        static readonly ActionParamsClass_CreateEventFinal s_params_CreateEventFinal = new ActionParamsClass_CreateEventFinal();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_CreateEventFinal CreateEventFinalParams { get { return s_params_CreateEventFinal; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_CreateEventFinal {
-            public readonly string displayModel = "displayModel";
         }
         static readonly ActionParamsClass_Create s_params_Create = new ActionParamsClass_Create();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -735,6 +723,11 @@ namespace Epilogger.Web.Controllers {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEventTweets);
             callInfo.RouteValueDictionary.Add("model", model);
             callInfo.RouteValueDictionary.Add("frm", frm);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult CreateEventFinal() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEventFinal);
             return callInfo;
         }
 
