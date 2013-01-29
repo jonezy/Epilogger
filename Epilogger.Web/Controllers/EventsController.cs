@@ -425,15 +425,12 @@ namespace Epilogger.Web.Controllers {
                     model.IsPaid = false;
                     model.UserId = CurrentUserID;
                     model.CreatedDateTime = DateTime.UtcNow;
-                    model.EventSlug = NameIntoSlug(model.Name);
                     model.CollectDataValue = Request.Form["collectDataTimes"];
 
                     var epLevent = Mapper.Map<CreateBasicEventViewModel, Event>(model);
                     //Don't save, just put it in the TempData.
                     TempData["Event"] = epLevent;
-                    //_es.Save(epLevent);
-
-
+                    
                     //Save everything in TempData so we can read it back if a user presses Go Back from the Twitter Search page.
                     TempData["CreateBasicEventViewModel"] = model;
                     TempData["EventTime"] = getEventTime(startDate, endDate, model.allDay);
@@ -441,9 +438,6 @@ namespace Epilogger.Web.Controllers {
                     ((CreateBasicEventViewModel)TempData["CreateBasicEventViewModel"]).EndDateTime = TimeZoneManager.ToUtcTime(storeEndDateTime);
                     ((CreateBasicEventViewModel)TempData["CreateBasicEventViewModel"]).TimeZoneOffset = int.Parse(Request.Form["timeZone"]);
 
-
-                    //this.StoreSuccess("Your Event was created successfully!  Dont forget to share it with your friends and attendees!");
-                    //return View("CreateEventTweets",model.ID);
                     return RedirectToAction("CreateEventTweets", new { id = model.EventSlug});  
                 }
                 catch (Exception ex)
@@ -489,7 +483,16 @@ namespace Epilogger.Web.Controllers {
 
         private static string NameIntoSlug(string p)
         {
-            p = p.Replace(" ", "-");
+
+            //p = p.ToLower(); // change everything to lowercase
+            ////		.replace(/^\s+|\s+$/g, "") // trim leading and trailing spaces
+            ////		.replace(/[_|\s]+/g, "-") // change all spaces and underscores to a hyphen
+            ////		.replace(/[^a-zA-Z0-9-]+/g, "") // remove all non-alphanumeric characters except the hyphen
+            ////		.replace(/[-]+/g, "-") // replace multiple instances of the hyphen with a single instance
+            ////		.replace(/^-+|-+$/g, "") // trim leading and trailing hyphens				
+            ////		;
+
+            //p = p.Replace(" ", "-");
             return p;
         }
 
@@ -607,6 +610,8 @@ namespace Epilogger.Web.Controllers {
                     //TODO Remove after testing
                     SendEventCreatedEmailToSystem(eventMod);
 
+                    //Clear this for the next create event
+                    TempData["Event"] = null;
                     return View("CreateEventFinal", displayModel);
                 }
                 catch (Exception ex)

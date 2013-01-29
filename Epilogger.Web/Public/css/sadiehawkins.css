@@ -159,6 +159,34 @@ a.edit_icon {
     color:#333}
     
 
+.lighterblue-action-button {
+    border:1px solid #7da8c3;
+    border-radius:3px; 
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    background:#80a6bf; /* no css3 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4aa0d7', endColorstr='#3486b7'); /*IE */
+    background:-webkit-gradient(linear, left top, left bottom, from (#38bbe7) to (#30a6ce)); /* webkit */
+    background:-moz-linear-gradient(top, #7da8c3 , #7ca0b7); /* ff */
+    box-shadow:0 0 1px #a1b9c8;
+    color:#fff;
+    font:bold 18px 'InterstatePlusRegular';
+    padding:5px 10px;
+    /*text-transform:uppercase;*/
+    cursor: pointer;
+    box-shadow: 0 0 1px #777;
+    display: inline-block;
+ }
+
+.lighterblue-action-button:hover {
+    opacity:0.85;
+    position:relative;
+    top:1px;
+    color:#fff }
+
+
+
+
 .datepicker, .timedropdown, .picker-start-date, .picker-end-date, .picker-start-time, .picker-end-time {
     margin:0 !important;
     display:inline !important;

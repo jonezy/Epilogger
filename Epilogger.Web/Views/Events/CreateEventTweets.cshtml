@@ -34,7 +34,7 @@
             if ($('#IsAdvanceMode').val() == 'False') {
                 if ($(this).val().indexOf(" ") >= 0) {
                     if ($(this).val().substring(0, 1) != '"' && $(this).val().substring($(this).val().legnth - 1, 1) != '"') {
-                        $(this).val('"' + $(this).val() + '"');
+                        $(this).val('"' + $.trim($(this).val()) + '"');
                     }
                 }
             }
@@ -67,7 +67,7 @@
         }
         else {
             $('#IsAdvanceMode').val('False');
-            $('#modeTitle').text('Official Hashtag(s):');
+            $('#modeTitle').text('Official Hashtag:');
 
             //Populate the other boxes if they changed something in advanced mode
             var parts = $('#searchText').val().split(" OR "), i, l;
@@ -111,7 +111,7 @@
         <div id="twitter_wrapper">
             <div id="left_side">
                 <p id="modeTitle">
-                    Official Hashtag(s):
+                    Official Hashtag:
                 </p>
                 @Html.TextBoxFor(model => model.SearchTerms, new { @id = "searchText", @Value = "#", @class = "bolder searchText" })
                 <div id="normal_mode">

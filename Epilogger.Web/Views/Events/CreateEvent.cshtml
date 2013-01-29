@@ -39,6 +39,9 @@
             });
 
         });
+
+        
+
     </script>
 }
 <div class="form_process">
@@ -104,6 +107,7 @@
             <div class="dashed">
             </div>
             <input type="submit" class="submitEvent" value="ALL DONE WITH BASIC INFO" />
+            @Html.HiddenFor(model => model.EventSlug)
         </div>
     </fieldset>
 }
@@ -172,8 +176,36 @@
                 self._renderItem = renderItem(ul,item);
             });
         };
+
+
+
+
+        //Friendly URL creation
+        $("#Name").bind("keyup", function (e) {
+            buildFriendlyUrl($("#Name").val());
+        });
+        //    $("#EventSlug").bind("keyup", function (e) {
+        //        buildFriendlyUrl($("#EventSlug").val());
+        //    });
+
+
+        function buildFriendlyUrl(title) {
+            var url = title
+        .toLowerCase() // change everything to lowercase
+		.replace(/^\s+|\s+$/g, "") // trim leading and trailing spaces
+		.replace(/[_|\s]+/g, "-") // change all spaces and underscores to a hyphen
+		.replace(/[^a-zA-Z0-9-]+/g, "") // remove all non-alphanumeric characters except the hyphen
+		.replace(/[-]+/g, "-") // replace multiple instances of the hyphen with a single instance
+		.replace(/^-+|-+$/g, "") // trim leading and trailing hyphens
+		;
+
+            $("#EventSlug").val(url);
+        }
+
     });
     
+
+
 
 </script>
 @* return $("<li>")
