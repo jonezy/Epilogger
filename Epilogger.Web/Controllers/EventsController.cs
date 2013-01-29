@@ -562,16 +562,16 @@ namespace Epilogger.Web.Controllers {
                         var searchTerms = frm["SearchTerms"].Split(',');
                         foreach (var s in searchTerms)
                         {
-                            if (s != "")
+                            if (s.Trim() != "")
                             {
-                                if (s.Contains(" "))
-                                {
-                                    searchQuery += "\"" + s + "\" OR ";
-                                }
-                                else
-                                {
+                                //if (s.Contains(" "))
+                                //{
+                                //    searchQuery += "\"" + s + "\" OR ";
+                                //}
+                                //else
+                                //{
                                     searchQuery += s + " OR ";
-                                }   
+                                //}   
                             }
                         }
                         searchQuery = searchQuery.Remove(searchQuery.Length - 4, 4);

@@ -294,6 +294,11 @@ input[type="text"] .bold {
     text-align:right;
     margin-right: 14px;
 }
+
+.finalRight {
+    margin-right: 14px; 
+ }
+
 .validation-summary-errors
 {
     margin-top:-20px;

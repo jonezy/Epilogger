@@ -83,11 +83,11 @@
         <div id="left">
             @* @Html.ActionImage("CreateEventTweets", "Events", "#", "/Public/images/CreateEvent/EditHashtags.png", "Back")*@
             
-            @Html.ActionImage("CreateEventTweets", "Events",  null, "/Public/images/CreateEvent/EditHashtags.png", "Edit my hashtags")
+            @*@Html.ActionImage("CreateEventTweets", "Events",  null, "/Public/images/CreateEvent/EditHashtags.png", "Edit my hashtags")*@
             
         </div>
-        <div id="right">
-            <img src="/Public/images/CreateEvent/GotoEvent.png" alt="Take me to my event" onclick="CloseAndRedirect('@Url.Action("Details", new { id = Model.EventSlug })');" />
+        <div id="right" class="finalRight">
+            <img src="/Public/images/CreateEvent/GotoEvent.png" alt="Take me to my event" style="cursor: pointer;" onclick="CloseAndRedirect('@Url.Action("Details", new { id = Model.EventSlug })');" />
             
             @*@Html.ActionImage("CreateEvent", "Events", null, "/Public/images/CreateEvent/GotoEvent.png", "Take me to my event")*@
             @*<input type="submit" class="submitEvent" value="TAKE ME TO MY EVENT" onclick="CloseAndRedirect('@Url.Action("Details", new { id = Model.EventSlug })');">*@

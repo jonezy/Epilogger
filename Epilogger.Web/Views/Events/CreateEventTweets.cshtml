@@ -27,7 +27,23 @@
                 $(this).remove();
         });
 
+
+
+
+        $('.searchText').bind("blur", function () {
+            if ($('#IsAdvanceMode').val() == 'False') {
+                if ($(this).val().indexOf(" ") >= 0) {
+                    if ($(this).val().substring(0, 1) != '"' && $(this).val().substring($(this).val().legnth - 1, 1) != '"') {
+                        $(this).val('"' + $(this).val() + '"');
+                    }
+                }
+            }
+        });
+
     });
+    
+  
+
 
     //var searchBackUp = "";
     function advancedMode() {
@@ -42,13 +58,6 @@
             var query = "";
             $.each($('.searchText'), function () {
                 if ($(this).val() != "") {
-                    if ($(this).val().indexOf(" ") >= 0) 
-                    {
-                        if ($(this).val().substring(0, 1) != '"' && $(this).val().substring($(this).val().legnth-1, 1) != '"')
-                        {
-                            $(this).val('"' + $(this).val() + '"');        
-                        }
-                    }
                     query = query + $(this).val().replace('#', '') + ' OR ';
                 }
             });
@@ -68,10 +77,10 @@
                 $("#searchText" + (i + 2)).val(parts[i + 1]);
                 if ($("#searchText" + (i + 2)).val().length > 0)
                 {
-                    $("#addAnother" + (i + 2)).removeClass("invisible");
+                    $("#addAnother" + (i + 1)).removeClass("invisible");
                 }
                 else {
-                    $("#addAnother" + (i + 2)).addClass("invisible");
+                    $("#addAnother" + (i + 1)).addClass("invisible");
                 }
             }
    
@@ -87,7 +96,6 @@
         $("#SearchHelpPopUpDiv").toggleClass("uiPopUpHidden");
         $('#twitter_operators').text($('#twitter_operators').text() == 'view twitter operators' ? 'hide twitter operators' : 'view twitter operators');
     }
-
 
 </script>
 <div class="form_process2">

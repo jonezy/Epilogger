@@ -20,12 +20,12 @@ $(document).ready(function () {
         $("#getMoreTweetsButton").hide();
         $.each($('.searchText'), function () {
             if ($(this).val() != "") {
-                if ($(this).val().indexOf(" ") >= 0) {
-                    if ($(this).val().substring(0, 1) != '"' && $(this).val().substring($(this).val().legnth-1, 1) != '"')
-                    {
-                        $(this).val('"' + $(this).val() + '"');
-                    }
-                }
+//                if ($(this).val().indexOf(" ") >= 0) {
+//                    if ($(this).val().substring(0, 1) != '"' && $(this).val().substring($(this).val().legnth-1, 1) != '"')
+//                    {
+//                        $(this).val('"' + $(this).val() + '"');
+//                    }
+//                }
                 query = query + $(this).val().replace('#', '') + ' OR ';
             }
         });
