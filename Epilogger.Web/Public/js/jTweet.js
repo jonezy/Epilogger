@@ -20,8 +20,13 @@ $(document).ready(function () {
         $("#getMoreTweetsButton").hide();
         $.each($('.searchText'), function () {
             if ($(this).val() != "") {
-                
-                query = query + $(this).val().replace('#','') + ' OR ';
+                if ($(this).val().indexOf(" ") >= 0) {
+                    if ($(this).val().substring(0, 1) != '"' && $(this).val().substring($(this).val().legnth-1, 1) != '"')
+                    {
+                        $(this).val('"' + $(this).val() + '"');
+                    }
+                }
+                query = query + $(this).val().replace('#', '') + ' OR ';
             }
         });
         query = query.substring(0, query.length - 4);
@@ -32,7 +37,12 @@ $(document).ready(function () {
 function GetTweets(query, count) {
     var searchUrl = "http://search.twitter.com/search.json?q=" + query + "&rpp=" + count + "&lang=en&callback=?";
     $.getJSON(searchUrl, function (data) {
-        ApplyTwitterTemplate(data);
+        if (data.results.length == 0) {
+            NoResults();
+        }
+        else {
+            ApplyTwitterTemplate(data);
+        }
     });
 }
 
@@ -50,6 +60,18 @@ function ApplyTwitterTemplate(data) {
                                  null, { filter_data: false });
     $tweetSubContainer.processTemplate(data);
     $("#tweetMainContainer").append($tweetSubContainer);
+
+    //show get more button and set next page url
+    $("#getMoreTweetsButton").unbind('click', null);
+    $("#getMoreTweetsButton").click(function () {
+        GetMoreTweets(data.next_page);
+    }).show();
+
+    $tweetSubContainer.fadeIn("slow");
+}
+
+function NoResults() {
+    $("#tweetMainContainer").html('<div class="noResults">There are no results for those search terms.</div>');
 
     //show get more button and set next page url
     $("#getMoreTweetsButton").unbind('click', null);

@@ -571,3 +571,9 @@ fieldset#livemode .submitEvent {
     border-collapse: collapse !important;
     padding: 3px !important;
 }
+
+
+.noResults {
+    padding: 10px;
+    font-size: 16px;
+}

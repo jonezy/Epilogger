@@ -29,17 +29,52 @@
 
     });
 
+    //var searchBackUp = "";
     function advancedMode() {
         $('#normal_mode').toggle();
 
         if ($('#IsAdvanceMode').val() == 'False') {
             $('#IsAdvanceMode').val('True');
-            $('#modeTitle').text('Official Hashtag(s):');
+            $('#modeTitle').text('Advanced Mode: Hashtags/Keywords');
+            searchBackUp = "";
 
+            //searchBackUp = $('#searchText').val();
+            var query = "";
+            $.each($('.searchText'), function () {
+                if ($(this).val() != "") {
+                    if ($(this).val().indexOf(" ") >= 0) 
+                    {
+                        if ($(this).val().substring(0, 1) != '"' && $(this).val().substring($(this).val().legnth-1, 1) != '"')
+                        {
+                            $(this).val('"' + $(this).val() + '"');        
+                        }
+                    }
+                    query = query + $(this).val().replace('#', '') + ' OR ';
+                }
+            });
+            query = query.substring(0, query.length - 4);
+            
+            $('#searchText').val(query);
         }
         else {
             $('#IsAdvanceMode').val('False');
-            $('#modeTitle').text('Advanced Mode: Hashtags/Keywords');
+            $('#modeTitle').text('Official Hashtag(s):');
+
+            //Populate the other boxes if they changed something in advanced mode
+            var parts = $('#searchText').val().split(" OR "), i, l;
+
+            $("#searchText").val(parts[0]);
+            for (i = 0, l = parts.length; i < l; i += 1) {
+                $("#searchText" + (i + 2)).val(parts[i + 1]);
+                if ($("#searchText" + (i + 2)).val().length > 0)
+                {
+                    $("#addAnother" + (i + 2)).removeClass("invisible");
+                }
+                else {
+                    $("#addAnother" + (i + 2)).addClass("invisible");
+                }
+            }
+   
         }
 
         $('#t_op_section').toggleClass('twitterOperatorSectionOn twitterOperatorSectionOff');
@@ -106,8 +141,7 @@
                         <span>If your terms are too broad, try narrowing it down with an official hashtag unique
                             to your event</span><br />
                     </div>
-                    <input type="button" value="preview results" class="stn_button disabled_blue_button"
-                        id="searchButton" />
+                    <input type="button" value="preview results" class="stn_button disabled_blue_button" id="searchButton" />
                 </div>
                 <div id="preview_tweet_box" class="invisible">
                     <div id="tweetSubContainer">
