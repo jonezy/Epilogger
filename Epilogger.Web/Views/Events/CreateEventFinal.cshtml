@@ -8,7 +8,7 @@
 //        var x = $('#event-popup').height();
 //        var y = $('#event-popup').width();
 
-        parent.$.colorbox.resize({ width: 560, height: 485 });
+        parent.$.colorbox.resize({ width: 560, height: 520 });
     });
     
     function CloseAndRedirect(url) {
@@ -23,50 +23,45 @@
 
 
 <div id="final_wrapper">
-    <div id="left_side">
+    <div id="left_side" class="left_side_wider">
         
         <h2>WOOT! YOUR EVENT HAS BEEN ADDED!</h2>
         <h3 id="title">@Html.DisplayFor(m => m.Name)</h3>
         
-        <table>
+        <ul class="summaryTable">
             @if (!string.IsNullOrEmpty(Model.Subtitle))
             {
-                <tr>
-                    <td>
-                        <img src="/Public/images/CreateEvent/quotes.png" alt="quotes" />
-                    </td>
-                    <td>
+                <li>
+                    <img src="/Public/images/CreateEvent/quotes.png" alt="quotes" />
+                    <div class="tableText">
                         @Html.DisplayFor(m => m.Subtitle)
-                    </td>
-                </tr>
+                    </div>
+                </li>
             }
-            
-            <tr>
-                <td>
-                    <img src="/Public/images/CreateEvent/clock.png" alt="clock" />
-                </td>
-                <td>
+            <li>
+                <img src="/Public/images/CreateEvent/clock.png" alt="clock" />
+                <div class="tableText">
                     @Html.DisplayFor(m => m.EventStartEndTime)
                     @*Sept 18th 2:00pm - Sept 19th 4:00pm*@
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img src="/Public/images/CreateEvent/hash.png" alt="hashtags" />
-                </td>
-                <td>
-                    Search Terms:
+                </div>
+            </li>
+            <li>
+                <img src="/Public/images/CreateEvent/hash.png" alt="hashtags" />
+                <div class="tableText">
                     @Html.DisplayFor(m => m.SearchTerms)
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img src="/Public/images/CreateEvent/info.png" alt="quotes" />
-                </td>
-                <td>The event page starts collecting data <b>@Html.DisplayFor(m => m.CollectionTime)</b>
-                </td>
-            </tr>
-        </table>
+                </div>
+            </li>
+            <li>
+                <img src="/Public/images/CreateEvent/info.png" alt="quotes" />
+                <div class="tableText">
+                    The event page starts collecting data @Html.DisplayFor(m => m.CollectionTime)
+                </div>
+            </li>
+        </ul>
+        
+        
+   
+
     </div>
     <div id="right_side">
         <div class="improveEventPanel">
@@ -80,16 +75,22 @@
                 <li>Twitter & Facebook page</li>
                 <li>Sponsor logos</li>
             </ul>
-            <input type="button" class="blue-action-button" onclick="CloseAndRedirect('@Url.Action("Edit", new { id = Model.EventSlug })');" value="add details" />
+            <input type="button" class="blue-action-button" onclick="CloseAndRedirect('@Url.Action("Edit", new { id = Model.EventSlug })');" value="add details now" />
         </div>
     </div>
 
     <div id="tweet_footer">
         <div id="left">
             @* @Html.ActionImage("CreateEventTweets", "Events", "#", "/Public/images/CreateEvent/EditHashtags.png", "Back")*@
+            
+            @Html.ActionImage("CreateEventTweets", "Events",  null, "/Public/images/CreateEvent/EditHashtags.png", "Edit my hashtags")
+            
         </div>
         <div id="right">
-            <input type="submit" class="submitEvent" value="TAKE ME TO MY EVENT" onclick="CloseAndRedirect('@Url.Action("Details", new { id = Model.EventSlug })');">
+            <img src="/Public/images/CreateEvent/GotoEvent.png" alt="Take me to my event" onclick="CloseAndRedirect('@Url.Action("Details", new { id = Model.EventSlug })');" />
+            
+            @*@Html.ActionImage("CreateEvent", "Events", null, "/Public/images/CreateEvent/GotoEvent.png", "Take me to my event")*@
+            @*<input type="submit" class="submitEvent" value="TAKE ME TO MY EVENT" onclick="CloseAndRedirect('@Url.Action("Details", new { id = Model.EventSlug })');">*@
             @*@Html.ActionImage("#", "Events", "#", "/Public/images/CreateEvent/GotoEvent.png", "go view your event")*@
         </div>
     </div>
