@@ -564,14 +564,7 @@ namespace Epilogger.Web.Controllers {
                         {
                             if (s.Trim() != "")
                             {
-                                //if (s.Contains(" "))
-                                //{
-                                //    searchQuery += "\"" + s + "\" OR ";
-                                //}
-                                //else
-                                //{
-                                    searchQuery += s + " OR ";
-                                //}   
+                                searchQuery += s + " OR ";
                             }
                         }
                         searchQuery = searchQuery.Remove(searchQuery.Length - 4, 4);
@@ -598,21 +591,21 @@ namespace Epilogger.Web.Controllers {
 
                     //Initiate a first collect on the event
                     //TODO Remove after testing
-                    //var tsmp = new MQ.MSGProducer("Epilogger", "TwitterSearch");
-                    //var tsMSG = new MQ.Messages.TwitterSearchMSG
-                    //{
-                    //    EventID = eventMod.ID,
-                    //    SearchTerms = eventMod.SearchTerms,
-                    //    SearchFromLatestTweet = false,
-                    //    SearchSince = eventMod.CollectionStartDateTime,
-                    //    SearchUntil = eventMod.CollectionEndDateTime
-                    //};
-                    //tsmp.SendMessage(tsMSG);
-                    //tsmp.Dispose();
+                    var tsmp = new MQ.MSGProducer("Epilogger", "TwitterSearch");
+                    var tsMSG = new MQ.Messages.TwitterSearchMSG
+                    {
+                        EventID = eventMod.ID,
+                        SearchTerms = eventMod.SearchTerms,
+                        SearchFromLatestTweet = false,
+                        SearchSince = eventMod.CollectionStartDateTime,
+                        SearchUntil = eventMod.CollectionEndDateTime
+                    };
+                    tsmp.SendMessage(tsMSG);
+                    tsmp.Dispose();
 
                     //The the admins an email with the event details.
                     //TODO Remove after testing
-                    //SendEventCreatedEmailToSystem(eventMod);
+                    SendEventCreatedEmailToSystem(eventMod);
 
                     return View("CreateEventFinal", displayModel);
                 }
