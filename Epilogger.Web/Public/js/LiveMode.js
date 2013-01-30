@@ -78,13 +78,9 @@ jQuery(function ($) {
 
     function animateTweets(tweetList) {
 
-        //var d = 1;
-        //var tweetList = newTweets.tweetsInhtml;
-        //var tweetList = $("#divStaging .tweet");
         var i = -1;
         var animationCallback = null;
         animationCallback = function () {
-            //tweetList = $("#divStaging .tweet");
             if (tweetList == null) { return false; }
             if (++i < tweetList.length) {
                 if (stopAnimation) return false;
@@ -200,10 +196,6 @@ jQuery(function ($) {
     getPhotos();
 
 
-    //    function isElementVisible(elem) {
-    //        elem = $(elem); if (!elem.length) { return false; }
-    //        var docViewTop = $(window).scrollTop(); var docViewBottom = docViewTop + $(window).height(); var elemTop = elem.offset().top; var elemBottom = elemTop + elem.height(); var isVisible = ((elemBottom >= docViewTop) && (elemTop <= docViewBottom) && (elemBottom <= docViewBottom) && (elemTop >= docViewTop)); return isVisible;
-    //    }
     var getNewTweets = '0';
     var getPhotosUpdate = '0';
     function toggleUpdates(updater, newStatus) {
@@ -229,16 +221,6 @@ jQuery(function ($) {
 
 
 
-    //    function titleCount() {
-    //        if (isFirstFrontPage) { var n = $('li.newupdates').length; } else { var n = newUnseenUpdates; }
-    //        if (n <= 0) { if (document.title.match(/\([\d+]\)/)) { document.title = document.title.replace(/(.*)\([\d]+\)(.*)/, "$1$2"); } } else { if (document.title.match(/\((\d+)\)/)) { document.title = document.title.replace(/\((\d+)\)/, "(" + n + ")"); } else { document.title = '(1) ' + document.title; } }
-    //    }
-
-    //    function autgrow(textarea, min) {
-    //        var linebreaks = textarea.value.match(/\n/g); if (linebreaks != null && linebreaks.length + 1 >= min) { textarea.rows = (linebreaks.length + 1); }
-    //        else { textarea.rows = min; }
-    //    }
-
 
     $.ajaxSetup({
         timeout: updateTimeout,
@@ -247,48 +229,6 @@ jQuery(function ($) {
         { toggleUpdates('newtweets', 'on'); toggleUpdates('newphotos', 'on'); }
     });
 
-    //  getPhotos();
-
-    //    //Photos
-    //    $.ajaxSetup({
-    //        timeout: updateTimeout,
-    //        cache: false,
-    //        error: function ()
-    //        { toggleUpdates('newphotos', 'on'); }
-    //    });
-
-
-
-
-
-    //    if (prologuePostsUpdates) { toggleUpdates('newtweets', 'on'); }
-
-    //    if (disableAutoupdate) {
-    //        toggleUpdates('newtweets', 'off');
-    //    }
-    //    else {
-    //        toggleUpdates('newtweets', 'on');
-    //    }
-
-    //    $("#tweetlist li.tweet").each(function () {
-    //        var thisId = $(this).attr("id");
-    //        vpostId = thisId.substring(thisId.indexOf('-') + 1);
-    //        postsOnPage.push(thisId);
-    //        postsOnPageQS += "&vp[]=" + vpostId;
-    //    });
-
-    //    function removeYellow() {
-    //        if (isFirstFrontPage) {
-    //            $('#tweetlist li.newupdates').each(function () {
-    //                if (isElementVisible(this)) {
-    //                    $(this).animate({ backgroundColor: '#FFF' }, { duration: 2500 });
-    //                    $(this).removeClass('newupdates');
-    //                }
-    //            });
-    //        }
-    //    }
-
-    //    $(window).scroll(function () { removeYellow(); });
 
     // live mode toolbar -----------------------------------------
 
@@ -322,8 +262,7 @@ jQuery(function ($) {
         }
     });
 
-    //       
-    //       '@Url.Action("UploadFile", "Events", new { qqfile = "Logo" })'
+    
 
     var fileCount = 0;
     var addedFiles = 0;
@@ -552,35 +491,32 @@ jQuery(function ($) {
 
     function nextImage()
     {
-           $("#gallery li:last").slideUp(function() {
-              $(this).insertBefore("#gallery li:first").slideDown(500);
-            })​;​
-
+        $("#gallery li:last").slideUp(function() {
+            $(this).insertBefore("#gallery li:first").slideDown(500);
+        })​;​
     }
 
-        $('.close_hover').click(function() {
-    var path = $(this).children('img').attr('src');
-    var eventid= $('#EventID').val();
-    $.ajax({
+    $('.close_hover').click(function() {
+        var path = $(this).children('img').attr('src');
+        var eventid= $('#EventID').val();
+        $.ajax({
                 type: "POST",
                 url: "/Events/DeleteLogoSponsors",
                 data: {'path':path, 'EventId':eventid},
                  success: function () {
                  
                  }
-            });
-            $(this).hide();
-             return false;
-      });
+        });
+            
+        $(this).hide();
+        return false;
+    });
       
-       $('#change_color').click(function () {
+    $('#change_color').click(function () {
         $('#color_holder').toggleClass('invisible');
     });
 
-//    $('.right_option').mouseleave(function (){
-//         $('#color_holder').addClass('invisible');
-//    });
-     
+    
 });
 
 

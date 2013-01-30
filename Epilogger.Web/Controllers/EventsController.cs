@@ -612,6 +612,8 @@ namespace Epilogger.Web.Controllers {
 
                     //Clear this for the next create event
                     TempData["Event"] = null;
+                    TempData["CreateBasicEventViewModel"] = null;
+
                     return View("CreateEventFinal", displayModel);
                 }
                 catch (Exception ex)
