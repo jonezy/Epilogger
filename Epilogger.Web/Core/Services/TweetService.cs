@@ -22,7 +22,6 @@ namespace Epilogger.Web
             return base.GetData(t => t.Deleted==false);
         }
 
-
         public EpiloggerDB Thedb()
         {
             return db;
@@ -65,7 +64,7 @@ namespace Epilogger.Web
 
         public string GetTwitterProfileImageByScreenNameAndEventID(string screenName, int eventId)
         {
-            var firstOrDefault = db.Tweets.Where(e => e.FromUserScreenName == screenName && e.EventID == eventId).OrderByDescending(e => e.ID).FirstOrDefault();
+            var firstOrDefault = db.Tweets.Where(e => e.FromUserScreenName == screenName && e.EventID == eventId && (e.Deleted == null || e.Deleted == false)).OrderByDescending(e => e.ID).FirstOrDefault();
             if (firstOrDefault != null)
                 return
                     firstOrDefault.ProfileImageURL;
@@ -113,11 +112,11 @@ namespace Epilogger.Web
         public IEnumerable<Tweet> FindByImageID(int imageID, DateTime startDateTimeFilter, DateTime endDateTimeFilter, int eventId)
         {
             var imds = new ImageMetaDateService();
-            IEnumerable<ImageMetaDatum> im = imds.FindByImageID(imageID);
+            var im = imds.FindByImageID(imageID);
 
             return from tw in db.Tweets
                    join I in im on tw.TwitterID equals I.TwitterID
-                   where tw.EventID == eventId //&& tw.Deleted == null || tw.Deleted == false
+                   where tw.EventID == eventId  //&& tw.Deleted == null || tw.Deleted == false
                    orderby tw.CreatedDate
                    select tw;
         }
@@ -133,7 +132,7 @@ namespace Epilogger.Web
         public int FindCountByImageID(int imageID, DateTime startDateTimeFilter, DateTime endDateTimeFilter, int eventId)
         {
             var imds = new ImageMetaDateService();
-            IEnumerable<ImageMetaDatum> im = imds.FindByImageID(imageID);
+            var im = imds.FindByImageID(imageID);
 
             return (from tw in db.Tweets
                    join I in im on tw.TwitterID equals I.TwitterID
@@ -350,20 +349,20 @@ namespace Epilogger.Web
         }
 
 
-        public List<Tweet> FindForLiveModeAjax(int eventId, DateTime pageLoadTime, int numberToReturn)
+        public IQueryable<Tweet> FindForLiveModeAjax(int eventId, DateTime pageLoadTime, int numberToReturn)
         {
-            return db.Tweets.Where(t => t.EventID == eventId && t.CreatedDate > pageLoadTime).OrderBy(t => t.CreatedDate).Take(numberToReturn).ToList();
+            return db.Tweets.Where(t => t.EventID == eventId && t.CreatedDate > pageLoadTime && (t.Deleted == null || t.Deleted == false)).OrderBy(t => t.CreatedDate).Take(numberToReturn);
         }
 
-        public List<Tweet> FindForLiveModeAjaxDesc(int eventId, int numberToReturn)
+        public IQueryable<Tweet> FindForLiveModeAjaxDesc(int eventId, int numberToReturn)
         {
-            return db.Tweets.Where(t => t.EventID == eventId).OrderByDescending(t => t.CreatedDate).Take(numberToReturn).ToList();
+            return db.Tweets.Where(t => t.EventID == eventId && (t.Deleted == null || t.Deleted == false)).OrderByDescending(t => t.CreatedDate).Take(numberToReturn);
         }
 
 
-        public List<Tweet> FindForLiveModeFirstLoad(int eventId, int numberToReturn)
+        public IQueryable<Tweet> FindForLiveModeFirstLoad(int eventId, int numberToReturn)
         {
-            return db.Tweets.Where(t => t.EventID == eventId).OrderByDescending(t => t.CreatedDate).Take(numberToReturn).ToList();
+            return db.Tweets.Where(t => t.EventID == eventId && (t.Deleted == null || t.Deleted == false)).OrderByDescending(t => t.CreatedDate).Take(numberToReturn);
         }
 
 
@@ -378,7 +377,7 @@ namespace Epilogger.Web
 
         public int NumberOfTweetsInDateRange(DateTime f, DateTime t)
         {
-            return db.Tweets.Count(d => d.CreatedDate >= f & d.CreatedDate <= t);
+            return db.Tweets.Count(d => d.CreatedDate >= f & d.CreatedDate <= t && (d.Deleted == null || d.Deleted == false));
         }
 
 

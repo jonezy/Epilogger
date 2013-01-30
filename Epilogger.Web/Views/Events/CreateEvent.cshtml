@@ -1,0 +1,217 @@
+﻿@using System.Diagnostics
+@using Epilogger.Web.Models
+@using FlickrNet
+@using Timezone.Framework
+@model CreateBasicEventViewModel
+@{
+    Layout = "~/Views/Events/_CreateEventLayout.cshtml";
+    //Layout = "~/Views/Shared/_PopupLayout.cshtml";
+    ViewBag.Title = "Create a new event | Epilogger";
+}
+@section head {
+    <title>@ViewBag.Title</title>
+    <script type="text/javascript">
+        $(function () {
+            $("#StartDateTime").datepicker({ dateFormat: 'M dd, yy' });
+            $("#anim").change(function () {
+                $("#StartDateTime").datepicker("option", "showAnim", $(this).val());
+            });
+        });
+        $(function () {
+            $("#EndDateTime").datepicker({ dateFormat: 'M dd, yy' });
+            $("#anim").change(function () {
+                $("#EndDateTime").datepicker("option", "showAnim", $(this).val());
+            });
+        });
+        $(document).ready(function () {
+            var x = $('#event-popup').height();
+            var y = $('#event-popup').width();
+
+            parent.$.colorbox.resize({ width: 560, height: 570 });
+
+
+            $("#StartDateTime").change(function () {
+                test = $(this).datepicker('getDate');
+                testm = new Date(test.getTime());
+                testm.setDate(testm.getDate());
+
+                $("#EndDateTime").datepicker("option", "minDate", testm);
+            });
+
+        });
+
+        
+
+    </script>
+}
+<div class="form_process">
+    <img src="/Public/images/CreateEvent/BasicInfoActive.png" alt="Basic Information" />
+</div>
+@*@Html.ValidationSummary("Please correct the following issues")*@
+@using (Html.BeginForm("CreateEvent", "Events", FormMethod.Post, new { id = "CreateForm" }))
+{   
+    <fieldset class="popForm">
+        <div class="">
+            <p>@Html.Label("Event title:") @Html.EditorFor(model => model.Name) @Html.ValidationMessageFor(model => model.Name)</p>
+            <p>@Html.Label("Event subtitle:") @Html.EditorFor(model => model.Subtitle)</p>
+            <div class="hint">
+                (ex: Presented by Aperture Laboratories)
+            </div>
+            <p>@Html.LabelFor(model => model.CategoryId) @Html.DropDownListFor(model => model.CategoryId, Model.Categories, "Select your event category")
+            @Html.ValidationMessageFor(model => model.CategoryId)</p>
+            <div class="padTheTop">
+                <p>@Html.Label("Start date:") @Html.EditorFor(m => m.StartDateTime, "DateTimeOneline")
+                    @Html.DropDownList("start_times", new SelectList(CreateBasicEventViewModel.Times, "Value", "Text", string.Format("{0:h:mm}", Model.StartDateTime.ToLocalTime())), new { @class = "times" })
+                    @Html.DropDownList("AMPMstartTime", new SelectList(new List<SelectListItem> {
+                                                                                                        new SelectListItem
+                                                                                                            {
+                                                                                                                Text = "am",
+                                                                                                                Value = "am"
+                                                                                                            },
+                                                                                                        new SelectListItem
+                                                                                                            {
+                                                                                                                Text = "pm",
+                                                                                                                Value = "pm"
+                                                                                                            }}, "Value", "Text", string.Format("{0:tt}", Model.StartDateTime.ToLocalTime()).ToLower()), new { @class = "AMPM" })
+                    @Html.DropDownList("timeZone", new SelectList(CreateBasicEventViewModel.TimeZones, "TimeZoneOffset", "TimeZoneName", Model.TimeZoneOffset), new { @class = "timeZoneSelect" })
+                </p>
+            </div>
+            <div class="under_control_notice">
+                @Html.CheckBox("End_Date", @Model.allDay, new { value = false })
+                <label class="endDateCheckLabel" for="End_Date">
+                    All day</label>
+            </div>
+            <div id="endDate" class="dropdown_image">
+                @Html.Label("End date:") @Html.EditorFor(m => m.EndDateTime, "DateTimeOneline")
+                @{
+    Debug.Assert(Model.EndDateTime != null, "Model.EndDateTime != null");
+                }
+                @Html.DropDownList("end_times", new SelectList(CreateBasicEventViewModel.Times, "Value", "Text", string.Format("{0:h:mm}", ((DateTime)Model.EndDateTime).ToLocalTime())), new { @class = "times" })
+                @Html.DropDownList("AMPMendTime", new SelectList(new List<SelectListItem> {
+                                                                                                  new SelectListItem
+                                                                                                      {
+                                                                                                          Text = "am",
+                                                                                                          Value = "am"
+                                                                                                      },
+                                                                                                  new SelectListItem
+                                                                                                      {
+                                                                                                          Text = "pm",
+                                                                                                          Value = "pm"
+                                                                                                      }}, "Value", "Text", string.Format("{0:tt}", ((DateTime)Model.EndDateTime).ToLocalTime()).ToLower()),
+                                       new { @class = "AMPM" })
+            </div>
+            <p>
+                @Html.Label("Collect content:")
+                @Html.DropDownList("collectDataTimes", new SelectList(CreateBasicEventViewModel.CollectDataList, "Value", "Text", Model.CollectDataValue))
+            </p>
+            <div class="dashed">
+            </div>
+            <input type="submit" class="submitEvent" value="ALL DONE WITH BASIC INFO" />
+            @Html.HiddenFor(model => model.EventSlug)
+        </div>
+    </fieldset>
+}
+<script type="text/javascript">
+    var status = 1;
+
+    $('#End_Date').bind("change", function () {
+        $('#endDate').slideToggle(200);
+        $('#start_times').slideToggle(200);
+        $('#AMPMstartTime').slideToggle(200);
+
+        //if (status == 0) {
+        if ($('#End_Date').val()=="true") {
+            parent.$.colorbox.resize({ width: 560, height: 570 });
+            //status = 1;
+            $('#End_Date').val("false");
+        }
+        else {
+            parent.$.colorbox.resize({ width: 560, height: 510 });
+            //status = 0;
+            $('#End_Date').val("true");
+        }
+    });
+
+
+//    if ($(".field-validation-error").length > 0)
+//    {
+//        parent.$.colorbox.resize({ width: 560, height: 650 });
+//    }
+//    else {
+//        parent.$.colorbox.resize({ width: 560, height: 570 });
+//    }
+
+    $(document).ready(function () {
+        $("#Name").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("Autocomplete", "Utilities")',
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: "<div class=\"auto_complete_detail\"><div class=\"auto_complete_name\">" + item.label + "</div><div class=\"auto_complete_date\"><img src=\"/Public/images/CreateEvent/clock.png\"  /><span>" + item.startDate + "</span></div><div class=\"auto_complete_venue\"><img src=\"/Public/images/CreateEvent/gps.png\"  /><span>" + item.venue + "</span></div></div>", value: item.url, id: item.id };
+                        }));
+                    }
+                });
+            },
+            select: function (event, ui) {
+                // alert(ui.item.value);
+                window.open(ui.item.value);
+                return false;
+            }
+        }).data("autocomplete")._renderMenu = function (ul, items) {
+            var self = this;
+
+            $.each(items, function (index, item) {
+                if (index == 0)
+                    ul.append('<li id="auto_complete_header"><b>Events already in Epilogger:</b></li>');
+                var renderItem = function (ul1, item1) {
+                    return $("<li></li>")
+                        .data("item.autocomplete", item1)
+                        .append("<a>" + item1.label + "</a>")
+                        .appendTo(ul1);
+                };
+                self._renderItem = renderItem(ul, item);
+            });
+        };
+
+
+
+
+        //Friendly URL creation
+        $("#Name").bind("keyup", function (e) {
+            buildFriendlyUrl($("#Name").val());
+        });
+        //    $("#EventSlug").bind("keyup", function (e) {
+        //        buildFriendlyUrl($("#EventSlug").val());
+        //    });
+
+
+        function buildFriendlyUrl(title) {
+            var url = title
+        .toLowerCase() // change everything to lowercase
+		.replace(/^\s+|\s+$/g, "") // trim leading and trailing spaces
+		.replace(/[_|\s]+/g, "-") // change all spaces and underscores to a hyphen
+		.replace(/[^a-zA-Z0-9-]+/g, "") // remove all non-alphanumeric characters except the hyphen
+		.replace(/[-]+/g, "-") // replace multiple instances of the hyphen with a single instance
+		.replace(/^-+|-+$/g, "") // trim leading and trailing hyphens
+		;
+
+            $("#EventSlug").val(url);
+        }
+
+
+        $("#Name").focus();
+
+    });
+    
+
+
+
+</script>
+@* return $("<li>")
+                        .data("item.autocomplete", item)
+                        .append("<a>" + item.label + "</a>")
+                        .appendTo(ul);*@

@@ -17,25 +17,31 @@ using Timezone.Framework;
 
 using T4MVC;
 
-namespace Epilogger.Web {
+namespace Epilogger.Web
+{
 
-    public class App : System.Web.HttpApplication {
+    public class App : System.Web.HttpApplication
+    {
         /// <summary>
         /// The application's base url (eg: http://www.example.com, http://localhost:21215/)
         /// </summary>
-        public static string BaseUrl {
-            get {
+        public static string BaseUrl
+        {
+            get
+            {
                 string url = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + VirtualPathUtility.ToAbsolute("~/");
                 var httpContext = HttpContext.Current;
 
-                var uriBuilder = new UriBuilder {
+                var uriBuilder = new UriBuilder
+                {
                     Host = httpContext.Request.Url.Host,
                     Path = "/",
                     Port = 80,
                     Scheme = "http",
                 };
 
-                if (httpContext.Request.IsLocal) {
+                if (httpContext.Request.IsLocal)
+                {
                     uriBuilder.Port = httpContext.Request.Url.Port;
                 }
 
@@ -43,9 +49,12 @@ namespace Epilogger.Web {
             }
         }
 
-        public static SmtpConfiguration MailConfiguration {
-            get {
-                return new SmtpConfiguration() {       
+        public static SmtpConfiguration MailConfiguration
+        {
+            get
+            {
+                return new SmtpConfiguration()
+                {
                     Server = ConfigurationManager.AppSettings["SiteSettings.Mail.Server"] as string ?? "",
                     Port = int.Parse(ConfigurationManager.AppSettings["SiteSettings.Mail.ServerPort"] as string),
                     Username = ConfigurationManager.AppSettings["SiteSettings.Mail.Username"] as string ?? "",
@@ -56,10 +65,13 @@ namespace Epilogger.Web {
         }
         /// <summary>
         /// Boolean flag to indicate whether or not caching should be enabled.
-        /// </summary>
-        public static bool CachingEnabled {
-            get {
-                if (ConfigurationManager.AppSettings["CachingEnabled"] != null) {
+        /// </summary>b
+        public static bool CachingEnabled
+        {
+            get
+            {
+                if (ConfigurationManager.AppSettings["CachingEnabled"] != null)
+                {
                     bool enabled;
                     bool.TryParse(ConfigurationManager.AppSettings["CachingEnabled"].ToString(), out enabled);
 
@@ -69,12 +81,14 @@ namespace Epilogger.Web {
                 return false;
             }
         }
-        
-        public static void RegisterGlobalFilters(GlobalFilterCollection filters) {
+
+        public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+        {
             filters.Add(new ErrorLogging());
         }
 
-        public static void RegisterRoutes(RouteCollection routes) {
+        public static void RegisterRoutes(RouteCollection routes)
+        {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.MapRoute("ValidateAccount",
                 "account/validate/{validationCode}",
@@ -88,14 +102,17 @@ namespace Epilogger.Web {
             //routes.MapRoute("DoFacebookLogin", "join/DoFacebookLogin", new { controller = "account", action = "DoFacebookLogin" });
             //routes.MapRoute("CreateAccountFacebook", "join/facebook", new { controller = "account", action = "Facebook" });
 
-            
+
             routes.MapRoute("Login", "login", new { controller = "account", action = "login" });
 
             routes.MapRoute(
-                "SettingTwitterAuth", 
-                "account/TwitterAuth", 
-                new { controller = "account", action = "TwitterAuth"
-            });
+                "SettingTwitterAuth",
+                "account/TwitterAuth",
+                new
+                {
+                    controller = "account",
+                    action = "TwitterAuth"
+                });
 
             routes.MapRoute(
                 "StarRatings",
@@ -145,19 +162,52 @@ namespace Epilogger.Web {
                 new { controller = "events", action = "LiveGetLastPhotosJson" }
             );
 
-
+            routes.MapRoute(
+                 "CreateEvent",
+                 "events/CreateEvent",
+                new { controller = "events", action = "CreateEvent" }
+            );
+            routes.MapRoute(
+                 "DeleteLogoSponsors",
+                 "events/DeleteLogoSponsors",
+                new { controller = "events", action = "DeleteLogoSponsors" }
+            );
+             routes.MapRoute(
+                "UploadLogo",
+                "events/UploadLogo",
+               new { controller = "events", action = "UploadLogo" }
+           );
+             routes.MapRoute(
+              "UploadSponsors",
+              "events/UploadSponsors",
+             new { controller = "events", action = "UploadSponsors" }
+         );
+            routes.MapRoute(
+                "EditLiveMode",
+                "events/EditLiveMode",
+               new { controller = "events", action = "EditLiveMode" }
+           );
+            routes.MapRoute(
+                "CreateEventTweets",
+                "events/CreateEventTweets",
+               new { controller = "events", action = "CreateEventTweets" }
+           );
+            routes.MapRoute(
+             "CreateEventFinal",
+             "events/CreateEventFinal",
+            new { controller = "events", action = "CreateEventFinal" }
+        );
             routes.MapRoute(
                 "GetBrowseOverviewTabData",
                 "Events/GetBrowseOverviewTabData",
                 new { controller = "events", action = "GetBrowseOverviewTabData" }
             );
 
-            routes.MapRoute(
-                "CreateEvent",
-                "events/create",
-                new { controller = "events", action = "create"}
-            );
-
+            //routes.MapRoute(
+            //    "CreateEvent",
+            //    "events/create",
+            //    new { controller = "events", action = "create" }
+            //);
             routes.MapRoute(
                 "TweetTemplate",
                 "events/tweettemplate",
@@ -237,7 +287,7 @@ namespace Epilogger.Web {
             routes.MapRoute("UploadFlickrImages", "events/imageupload/flickr/upload/{id}", MVC.ImageUpload.UploadFlickrImages());
             routes.MapRoute("GetFacebookAlbums", "events/imageupload/facebook/albums/{id}", MVC.ImageUpload.GetFacebookAlbums());
             routes.MapRoute("UpoadFacebookAlbumPhotos", "events/imageupload/facebook/upload/{id}/{albumId}", MVC.ImageUpload.UploadFacebookAlbumPhotos());
-            routes.MapRoute("UploadImageFromComputer", "events/imageupload/computer/{id}", MVC.ImageUpload.UploadFromComputer());           
+            routes.MapRoute("UploadImageFromComputer", "events/imageupload/computer/{id}", MVC.ImageUpload.UploadFromComputer());
 
             routes.MapRoute(
                 "GetImageCommentsPaged",
@@ -250,7 +300,6 @@ namespace Epilogger.Web {
                 "events/imagecommentcontrol/{eventId}/{imageId}",
                 new { controller = "events", action = "imagecommentcontrol", eventId = UrlParameter.Optional, imageId = UrlParameter.Optional }
             );
-           
             routes.MapRoute(
                 "EventBrowseRoutes",
                 "browse/{filter}",
@@ -344,7 +393,8 @@ namespace Epilogger.Web {
             TimeZoneManager.UpdateTimeZone(this.Request);
         }
 
-        protected void Application_Start() {
+        protected void Application_Start()
+        {
             AreaRegistration.RegisterAllAreas();
 
             RegisterAutomapperMappings();
@@ -358,7 +408,8 @@ namespace Epilogger.Web {
             ModelMetadataProviders.Current = new DateTimeMetadataProvider();
         }
 
-        private void RegisterAutomapperMappings() {
+        private void RegisterAutomapperMappings()
+        {
             Mapper.CreateMap<Tweet, TweetDisplayViewModel>();
 
             Mapper.CreateMap<Event, EventDisplayViewModel>()
@@ -481,7 +532,7 @@ namespace Epilogger.Web {
 
 
             Mapper.CreateMap<Event, AllContentViewModel>();
-            
+
             Mapper.CreateMap<Event, AllLinksViewModel>()
                 .ForMember(dest => dest.CurrentPageIndex, opt => opt.Ignore())
                 .ForMember(dest => dest.TotalRecords, opt => opt.Ignore())
@@ -489,11 +540,11 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore());
 
             Mapper.CreateMap<CheckIn, CheckinDisplayViewModel>()
-                .ForMember(dest =>dest.Tweet, opt => opt.MapFrom(src => src.Tweets.FirstOrDefault()));
-            
+                .ForMember(dest => dest.Tweet, opt => opt.MapFrom(src => src.Tweets.FirstOrDefault()));
+
             Mapper.CreateMap<BlogPost, BlogPostDisplayViewModel>()
                 .ForMember(dest => dest.Url, opt => opt.MapFrom(src => src.BlogURL));
-            
+
             Mapper.CreateMap<AddBlogPostViewModel, BlogPost>()
                 .ForMember(dest => dest.ID, opt => opt.Ignore())
                 .ForMember(dest => dest.UserID, opt => opt.Ignore())
@@ -548,7 +599,10 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.FeaturedStartDateTime, opt => opt.UseValue(DateTime.Parse("01/01/1800")))
                 .ForMember(dest => dest.FeaturedEndDateTime, opt => opt.UseValue(DateTime.Parse("01/01/1800")))
                 .ForMember(dest => dest.EventBriteEID, opt => opt.Ignore())
-                .ForMember(dest => dest.LastCollectionDateTime, opt => opt.Ignore());
+                .ForMember(dest => dest.LastCollectionDateTime, opt => opt.Ignore())
+                .ForMember(dest => dest.NormalCollectionCount, opt => opt.Ignore())
+                .ForMember(dest => dest.IsPaid, opt => opt.Ignore())
+                .ForMember(dest => dest.DatePaid, opt => opt.Ignore());
 
             Mapper.CreateMap<User, DashboardProfileViewModel>()
                 .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => string.Format("{0} {1}", src.FirstName, src.LastName)))
@@ -559,7 +613,7 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.EventCategoryID, opt => opt.MapFrom(src => src.EventCategories.FirstOrDefault().ID))
                 .ForMember(dest => dest.TotalTweets, opt => opt.MapFrom(src => src.Tweets.Count()))
                 .ForMember(dest => dest.TotalMedia, opt => opt.MapFrom(src => src.Images.Count()));
-            
+
             Mapper.CreateMap<Event, AllPhotosDisplayViewModel>()
                 .ForMember(dest => dest.PhotoCount, opt => opt.Ignore())
                 .ForMember(dest => dest.Page, opt => opt.Ignore())
@@ -580,7 +634,7 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.TopTweeters, opt => opt.Ignore())
                 .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore())
                 .ForMember(dest => dest.CanDelete, opt => opt.Ignore());
-            
+
 
 
             Mapper.CreateMap<Event, CreateEventViewModel>()
@@ -589,11 +643,53 @@ namespace Epilogger.Web {
                 .ForMember(dest => dest.Venue, opt => opt.MapFrom(src => src.Venues.FirstOrDefault()))
                 .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore())
                 .ForMember(dest => dest.CurrentUserID, opt => opt.Ignore())
-                .ForMember(dest => dest.CurrentUserRole, opt => opt.Ignore());
-                //.ForMember(dest => dest.CollectionStartDateTime, opt => opt.MapFrom(src => src.CollectionStartDateTime.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5"))))
-                //.ForMember(dest => dest.CollectionEndDateTime, opt => opt.MapFrom(src => src.CollectionEndDateTime.HasValue ? src.CollectionEndDateTime.Value.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5")) : src.CollectionEndDateTime))
-                //.ForMember(dest => dest.StartDateTime, opt => opt.MapFrom(src => src.StartDateTime.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5"))))
-                //.ForMember(dest => dest.EndDateTime, opt => opt.MapFrom(src => src.EndDateTime.HasValue ? src.EndDateTime.Value.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5")) : src.EndDateTime));
+                .ForMember(dest => dest.CurrentUserRole, opt => opt.Ignore())
+                .ForMember(dest => dest.TimeZones, opt => opt.Ignore());
+            //.ForMember(dest => dest.CollectionStartDateTime, opt => opt.MapFrom(src => src.CollectionStartDateTime.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5"))))
+            //.ForMember(dest => dest.CollectionEndDateTime, opt => opt.MapFrom(src => src.CollectionEndDateTime.HasValue ? src.CollectionEndDateTime.Value.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5")) : src.CollectionEndDateTime))
+            //.ForMember(dest => dest.StartDateTime, opt => opt.MapFrom(src => src.StartDateTime.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5"))))
+            //.ForMember(dest => dest.EndDateTime, opt => opt.MapFrom(src => src.EndDateTime.HasValue ? src.EndDateTime.Value.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5")) : src.EndDateTime));
+
+            Mapper.CreateMap<Event, CreateBasicEventViewModel>()
+                .ForMember(dest => dest.CurrentUserId, opt => opt.Ignore())
+                .ForMember(dest => dest.CurrentUserRole, opt => opt.Ignore())
+                .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore())
+                .ForMember(dest => dest.CollectDataValue, opt => opt.Ignore())
+                .ForMember(dest => dest.allDay, opt => opt.Ignore())
+                .ForMember(dest => dest.EventTime, opt => opt.Ignore())
+                .ForMember(dest => dest.IsPaid, opt => opt.Ignore());
+
+            Mapper.CreateMap<CreateBasicEventViewModel, Event>()
+                .ForMember(dest => dest.TimeZoneOffset, opt => opt.Ignore())
+                .ForMember(dest => dest.Description, opt => opt.Ignore())
+                .ForMember(dest => dest.EventStatus, opt => opt.UseValue(1))
+                .ForMember(dest => dest.NumberOfTweets, opt => opt.UseValue(0))
+                .ForMember(dest => dest.IsPrivate, opt => opt.UseValue(false))
+                .ForMember(dest => dest.IsAdult, opt => opt.UseValue(false))
+                .ForMember(dest => dest.IsActive, opt => opt.UseValue(false))
+                .ForMember(dest => dest.CollectionMode, opt => opt.UseValue(1))
+                .ForMember(dest => dest.IsFeatured, opt => opt.UseValue(false))
+                .ForMember(dest => dest.FeaturedStartDateTime, opt => opt.UseValue(DateTime.Parse("01/01/1800")))
+                .ForMember(dest => dest.FeaturedEndDateTime, opt => opt.UseValue(DateTime.Parse("01/01/1800")))
+                .ForMember(dest => dest.EventBriteEID, opt => opt.Ignore())
+                .ForMember(dest => dest.EventBrightUrl, opt => opt.Ignore())
+                .ForMember(dest => dest.VenueID, opt => opt.Ignore())
+                .ForMember(dest => dest.Cost, opt => opt.Ignore())
+                .ForMember(dest => dest.WebsiteURL, opt => opt.Ignore())
+                .ForMember(dest => dest.SearchTerms, opt => opt.Ignore())
+                .ForMember(dest => dest.TwitterAccount, opt => opt.Ignore())
+                .ForMember(dest => dest.FacebookPageURL, opt => opt.Ignore())
+                .ForMember(dest => dest.LastCollectionDateTime, opt => opt.Ignore())
+                .ForMember(dest => dest.NormalCollectionCount, opt => opt.Ignore())
+                .ForMember(dest => dest.IsPaid, opt => opt.Ignore())
+                .ForMember(dest => dest.DatePaid, opt => opt.Ignore());
+
+            var mapTVM = Mapper.CreateMap<Event, CreateEventTwitterViewModel>();
+            mapTVM.ForAllMembers(opt => opt.Ignore());
+            mapTVM.ForMember(dest => dest.SearchTerms, o => o.Ignore());
+
+            var mapE = Mapper.CreateMap<CreateEventTwitterViewModel, Event>();
+            mapE.ForAllMembers(opt => opt.Ignore());
 
             Mapper.CreateMap<AddLinkViewModel, URL>()
                 .ForMember(dest => dest.DateTime, opt => opt.Ignore())
@@ -633,7 +729,7 @@ namespace Epilogger.Web {
             Mapper.CreateMap<EventCategory, ApiCategory>();
 
             Mapper.CreateMap<TweetsAndImage, ApiTweetsAndImage>();
-            
+
             Mapper.CreateMap<Tweet, ApiTweet>()
                 .ForMember(dest => dest.Images, opt => opt.Ignore());
 
@@ -643,9 +739,6 @@ namespace Epilogger.Web {
             Mapper.CreateMap<Image, ApiImage>()
                 .ForMember(dest => dest.EpiloggerImageLink, opt => opt.ResolveUsing<ImageUrlResolver>())
                 .ForMember(dest => dest.MemoryBoxItemId, opt => opt.Ignore());
-
-            Mapper.CreateMap<ApiImage, ApiImage>()
-                .ForMember(dest => dest.EpiloggerImageLink, opt => opt.ResolveUsing<ApiImageUrlResolver>());
 
             Mapper.CreateMap<TopImageAndTweet, ApiTopImageAndTweet>();
             Mapper.CreateMap<CheckIn, ApiCheckIn>()
@@ -669,21 +762,24 @@ namespace Epilogger.Web {
             Mapper.CreateMap<ApiMemoryBoxItem, MemoryBoxItem>();
             Mapper.CreateMap<MemoryBox, ApiMemoryBox>();
             Mapper.CreateMap<MemoryBoxTweet, ApiMemoryBoxTweet>();
-            
+
             Mapper.AssertConfigurationIsValid();
         }
 
-        public static string ToPublicUrl(Uri relativeUri) {
+        public static string ToPublicUrl(Uri relativeUri)
+        {
             var httpContext = HttpContext.Current;
 
-            var uriBuilder = new UriBuilder {
+            var uriBuilder = new UriBuilder
+            {
                 Host = httpContext.Request.Url.Host,
                 Path = "/",
                 Port = 80,
                 Scheme = "http",
             };
 
-            if (httpContext.Request.IsLocal) {
+            if (httpContext.Request.IsLocal)
+            {
                 uriBuilder.Port = httpContext.Request.Url.Port;
             }
 

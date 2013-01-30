@@ -33,7 +33,6 @@ namespace T4MVC {
             public readonly string _InteriorLayout = "~/Views/Shared/_InteriorLayout.cshtml";
             public readonly string _InteriorLayoutNoBC = "~/Views/Shared/_InteriorLayoutNoBC.cshtml";
             public readonly string _Layout = "~/Views/Shared/_Layout.cshtml";
-            public readonly string _ModalLayout = "~/Views/Shared/_ModalLayout.cshtml";
             public readonly string _ModalLayoutOLD = "~/Views/Shared/_ModalLayoutOLD.cshtml";
             public readonly string _PopupLayout = "~/Views/Shared/_PopupLayout.cshtml";
             public readonly string Breadcrumb = "~/Views/Shared/Breadcrumb.cshtml";
@@ -59,6 +58,7 @@ namespace T4MVC {
             public _EditorTemplates EditorTemplates { get { return s_EditorTemplates; } }
             public partial class _EditorTemplates{
                 public readonly string DateTime = "DateTime";
+                public readonly string DateTimeOneLine = "DateTimeOneLine";
                 public readonly string TimeSpan = "TimeSpan";
             }
         }

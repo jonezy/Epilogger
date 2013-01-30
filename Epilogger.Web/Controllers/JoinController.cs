@@ -31,7 +31,8 @@ namespace Epilogger.Web.Controllers {
         /* Sign up page Step 1 or 2 */
         public virtual ActionResult Signup()
         {
-            ViewBag.InPopUp = InPopUp;
+            if (InPopUp)
+                ViewBag.InPopUp = true;
 
             return View();
         }

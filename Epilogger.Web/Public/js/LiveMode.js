@@ -78,13 +78,9 @@ jQuery(function ($) {
 
     function animateTweets(tweetList) {
 
-        //var d = 1;
-        //var tweetList = newTweets.tweetsInhtml;
-        //var tweetList = $("#divStaging .tweet");
         var i = -1;
         var animationCallback = null;
         animationCallback = function () {
-            //tweetList = $("#divStaging .tweet");
             if (tweetList == null) { return false; }
             if (++i < tweetList.length) {
                 if (stopAnimation) return false;
@@ -200,10 +196,6 @@ jQuery(function ($) {
     getPhotos();
 
 
-    //    function isElementVisible(elem) {
-    //        elem = $(elem); if (!elem.length) { return false; }
-    //        var docViewTop = $(window).scrollTop(); var docViewBottom = docViewTop + $(window).height(); var elemTop = elem.offset().top; var elemBottom = elemTop + elem.height(); var isVisible = ((elemBottom >= docViewTop) && (elemTop <= docViewBottom) && (elemBottom <= docViewBottom) && (elemTop >= docViewTop)); return isVisible;
-    //    }
     var getNewTweets = '0';
     var getPhotosUpdate = '0';
     function toggleUpdates(updater, newStatus) {
@@ -229,16 +221,6 @@ jQuery(function ($) {
 
 
 
-    //    function titleCount() {
-    //        if (isFirstFrontPage) { var n = $('li.newupdates').length; } else { var n = newUnseenUpdates; }
-    //        if (n <= 0) { if (document.title.match(/\([\d+]\)/)) { document.title = document.title.replace(/(.*)\([\d]+\)(.*)/, "$1$2"); } } else { if (document.title.match(/\((\d+)\)/)) { document.title = document.title.replace(/\((\d+)\)/, "(" + n + ")"); } else { document.title = '(1) ' + document.title; } }
-    //    }
-
-    //    function autgrow(textarea, min) {
-    //        var linebreaks = textarea.value.match(/\n/g); if (linebreaks != null && linebreaks.length + 1 >= min) { textarea.rows = (linebreaks.length + 1); }
-    //        else { textarea.rows = min; }
-    //    }
-
 
     $.ajaxSetup({
         timeout: updateTimeout,
@@ -247,49 +229,294 @@ jQuery(function ($) {
         { toggleUpdates('newtweets', 'on'); toggleUpdates('newphotos', 'on'); }
     });
 
-    //  getPhotos();
 
-    //    //Photos
-    //    $.ajaxSetup({
-    //        timeout: updateTimeout,
-    //        cache: false,
-    //        error: function ()
-    //        { toggleUpdates('newphotos', 'on'); }
-    //    });
+    // live mode toolbar -----------------------------------------
+
+    function init() {
+
+        // Attach callbacks
+        $('.color-picker').miniColors({
+            change: function (hex, rgba) {
+                $('#console').prepend('change: ' + hex + ', rgba(' + rgba.r + ', ' + rgba.g + ', ' + rgba.b + ', ' + rgba.a + ')<br>');
+            },
+            open: function (hex, rgba) {
+                $('#console').prepend('open: ' + hex + ', rgba(' + rgba.r + ', ' + rgba.g + ', ' + rgba.b + ', ' + rgba.a + ')<br>');
+            },
+            close: function (hex, rgba) {
+                $('#console').prepend('close: ' + hex + ', rgba(' + rgba.r + ', ' + rgba.g + ', ' + rgba.b + ', ' + rgba.a + ')<br>');
+            }
+        });
+
+    }
+    init();
+
+    $('.tweet-column').bind('DOMNodeInserted', function (event) {
+        if ($('#hideColor1').val() != "") {
+            $('.colour1').css('color', $('#hideColor1').val());
+        }
+        if ($('#hideColor2').val() != "") {
+            $('.colour2, #content a').css('color', $('#hideColor2').val());
+        }
+        if ($('#hidenColor3').val() != "") {
+            $('.colour3').css('color', $('#hideColor3').val());
+        }
+    });
+
+    
+
+    var fileCount = 0;
+    var addedFiles = 0;
+    var fileLimit = 5;
+    function createUploader() {
+        var uploader = new qq.FineUploader({
+            element: $('#fine-uploader-logo')[0],
+            text: {
+                uploadButton: 'Upload your logo'
+            },
+            request: {
+                endpoint: '/Events/UploadLogo'
+            },
+            failedUploadTextDisplay: {
+                mode: 'custom',
+                maxChars: 40,
+                responseProperty: 'error',
+                enableTooltip: true
+            },
+            validation: {
+                allowedExtensions: ['jpg', 'jpeg', 'png', 'gif'],
+                sizeLimit: 112000,
+                stopOnFirstInvalidFile: true
+            },
+            messages: {
+                typeError: "{file} has an invalid extension. Valid extension(s): {extensions}.",
+                sizeError: "{file} is too large, maximum file size is {sizeLimit}.",
+                minSizeError: "{file} is too small, minimum file size is {minSizeLimit}.",
+                emptyError: "{file} is empty, please select files again without it.",
+                noFilesError: "No files to uploaad.",
+                onLeave: "The files are being uploaded, if you leave now the upload will be cancelled."
+            },
+            callbacks: {
+                onSubmit: function (id, fileName) {
+                    fileCount++;
+                    if (fileCount > fileLimit) {
+                        $('.qq-upload-list').hide();
+                        return false;
+                    }
+                },
+
+                onComplete: function (id, fileName, responseJSON) {
+                    $('.qq-upload-list').remove();
+                    if (responseJSON.success) {
+                        $('#thumbnail-fine-uploader').empty();
+                        $('#thumbnail-fine-uploader').append('<img src="' + responseJSON.imageurl + '" alt="' + fileName + '">');
+                        $('#logo').val(responseJSON.imageurl);
+                    }
+                    else
+                    {
+                        jAlert("Make sure your logo is the correct size. Width: 220p-250px   Height: 100-180px");
+                    }
+
+                }
+            }
+        });
+
+        var uploader2 = new qq.FineUploader({
+            multiple: true,
+            element: $('#fine-uploader-sponsors')[0],
+            text: {
+                uploadButton: 'Add sponsor(s)'
+            },
+            request: {
+                endpoint: '/Events/UploadSponsors',
+            },
+            validation: {
+                allowedExtensions: ['jpg', 'jpeg', 'png', 'gif'],
+                sizeLimit: 112000,
+                stopOnFirstInvalidFile: true
+            },
+            messages: {
+                typeError: "{file} has an invalid extension. Valid extension(s): {extensions}.",
+                sizeError: "{file} is too large, maximum file size is {sizeLimit}.",
+                minSizeError: "{file} is too small, minimum file size is {minSizeLimit}.",
+                emptyError: "{file} is empty, please select files again without it.",
+                noFilesError: "No files to uploaad.",
+                onLeave: "The files are being uploaded, if you leave now the upload will be cancelled."
+            },
+            callbacks: {
+                onSubmit: function (id, fileName) {
+                    $('.qq-upload-list').hide();
+                    fileCount++;
+                    if (fileCount > fileLimit) {
+                        $('#fine-uploader-sponsors qq-upload-button').hide();
+                        return false;
+                    }
+                },
+                onCancel: function (id, fileName) {
+                    fileCount--;
+                    if (fileCount <= fileLimit) {
+                        $('#fine-uploader-sponsors qq-upload-button').show();
+                    }
+                },
+                onComplete: function (id, fileName, responseJSON) {                 
+                    if (responseJSON.success) {
+                        $('.qq-upload-list').remove();
+                        addedFiles++;
+                        if (addedFiles >= fileLimit) {
+                            $('#fine-uploader-sponsors qq-upload-button').hide();
+                        }
+                        $('.pad30').remove();
+                        $('#addition').append('<div class="sponsor-thumbs close_hover"><img src="' + responseJSON.imageurl + '" alt="' + fileName + '"/></div>');
+                         $('#sponsors').val($('#sponsors').val() +  ';' + responseJSON.imageurl);
+                    }
+                    else
+                    {
+                        jAlert("Make sure your image is the correct size. Width: 220p-250px   Height: 30-130px");
+                    }
+                }
+            }
+        });
+    }
+
+    window.onload = createUploader;
+
+    // set up the jquery components with the database data
+    $(window).load(function () {
+        if ($('#theme').val() == "False") {
+            SetDarkTheme();
+            $('#light_dark_theme').val("dark");
+        }
+        else {
+            SetLightTheme();
+        }
+
+        if ($('#hideColor1').val() != "")
+            $('#color1js').css('background-color', $('#hideColor1').val());
+        if ($('#hideColor2').val() != "")
+            $('#color2js').css('background-color', $('#hideColor2').val());
+        if ($('#hideColor3').val() != "")
+            $('#color3js').css('background-color', $('#hideColor3').val());
+    });
 
 
 
+    $('#light_dark_theme').change(function () {
+        if ($('#light_dark_theme').val() == "light") {
+            SetLightTheme();
+        }
+        else {
+            SetDarkTheme();
+        }
+    });
+    function SetLightTheme() {
+        $('.single-tweet-dark').addClass("single-tweet");
+        $('.single-tweet-arrow-dark').addClass("single-tweet-arrow");
+        $('.footer-dark').addClass("footer");
+
+        $('.single-tweet').removeClass("single-tweet-dark");
+        $('.single-tweet-arrow').removeClass("single-tweet-arrow-dark");
+        $('.footer-dark').removeClass("footer-dark");
+
+        $('body').css("background-color", "#f3f3f3");
+        $('#tweets').css("background-color", "#F3F3F3");
+        $('#content').css("background-color", "#f3f3f3");
+        $('#full').css("background-color", "#f3f3f3");
+
+        $("#logo_footer").attr("src", "/Public/images/livemode/logo-epl.png");
+        $("#icon_tweet").attr("src", "/Public/images/livemode/icon-numtweets.png");
+        $("#icon_people").attr("src", "/Public/images/livemode/icon-numpeople.png");
+        $("#icon_photo").attr("src", "/Public/images/livemode/icon-numphotos.png");
+    }
+
+    function SetDarkTheme() {
+        $('.single-tweet').addClass("single-tweet-dark");
+        $('.single-tweet-arrow').addClass("single-tweet-arrow-dark");
+        $('.footer').addClass("footer-dark");
+
+        $('.single-tweet-dark').removeClass("single-tweet");
+        $('.single-tweet-arrow-dark').removeClass("single-tweet-arrow");
+        $('.footer').removeClass("footer");
+
+        $('body').css("background-color", "#3e3e3e");
+        $('#tweets').css("background-color", "#3e3e3e");
+        $('#content').css("background-color", "#3e3e3e");
+        $('#full').css("background-color", "#3e3e3e");
+
+        $("#logo_footer").attr("src", "/Public/images/livemode/toolbar/logo_dark_theme.png");
+        $("#icon_tweet").attr("src", "/Public/images/livemode/icon-numtweets-dark.png");
+        $("#icon_people").attr("src", "/Public/images/livemode/icon-numpeople-dark.png");
+        $("#icon_photo").attr("src", "/Public/images/livemode/icon-numphotos-dark.png");
+    }
+
+    $('.tweet-column').bind('DOMNodeInserted', function (event) {
+
+        if ($('#light_dark_theme').val() == "dark") {
+            $('.single-tweet').addClass("single-tweet-dark");
+            $('.single-tweet-dark').removeClass("single-tweet");
+
+            $('.single-tweet-arrow').addClass("single-tweet-arrow-dark");
+            $('.single-tweet-arrow-dark').removeClass("single-tweet-arrow");
+        }
+        else {
+            $('.single-tweet-dark').addClass("single-tweet");
+            $('.single-tweet').removeClass("single-tweet-dark");
 
 
-    //    if (prologuePostsUpdates) { toggleUpdates('newtweets', 'on'); }
+            $('.single-tweet-arrow-dark').addClass("single-tweet-arrow");
+            $('.single-tweet-arrow').removeClass("single-tweet-arrow-dark");
+        }
+    });
 
-    //    if (disableAutoupdate) {
-    //        toggleUpdates('newtweets', 'off');
-    //    }
-    //    else {
-    //        toggleUpdates('newtweets', 'on');
-    //    }
+    if (fullScreenApi.supportsFullScreen) {
+        launch.addEventListener('click', function () {
+            $('#toolbar').hide();
+            fullScreenApi.requestFullScreen(full);
+        }, true);
+    }
 
-    //    $("#tweetlist li.tweet").each(function () {
-    //        var thisId = $(this).attr("id");
-    //        vpostId = thisId.substring(thisId.indexOf('-') + 1);
-    //        postsOnPage.push(thisId);
-    //        postsOnPageQS += "&vp[]=" + vpostId;
-    //    });
+    $('#edit_livemode').click(function () {
+        $('#preview_customize').toggleClass('invisible');
+        $('#customize').toggleClass('invisible');
+    });
 
-    //    function removeYellow() {
-    //        if (isFirstFrontPage) {
-    //            $('#tweetlist li.newupdates').each(function () {
-    //                if (isElementVisible(this)) {
-    //                    $(this).animate({ backgroundColor: '#FFF' }, { duration: 2500 });
-    //                    $(this).removeClass('newupdates');
-    //                }
-    //            });
-    //        }
-    //    }
 
-    //    $(window).scroll(function () { removeYellow(); });
+    // carousel
 
+    if($("#gallery").length){
+        $("#gallery li").hide().filter(':lt(1)').show();
+                window.setInterval(function(){
+                if($("#gallery li").length > 1)
+                    nextImage();
+                }, 5000);
+    }
+
+    function nextImage()
+    {
+        $("#gallery li:last").slideUp(function() {
+            $(this).insertBefore("#gallery li:first").slideDown(500);
+        })​;​
+    }
+
+    $('.close_hover').click(function() {
+        var path = $(this).children('img').attr('src');
+        var eventid= $('#EventID').val();
+        $.ajax({
+                type: "POST",
+                url: "/Events/DeleteLogoSponsors",
+                data: {'path':path, 'EventId':eventid},
+                 success: function () {
+                 
+                 }
+        });
+            
+        $(this).hide();
+        return false;
+    });
+      
+    $('#change_color').click(function () {
+        $('#color_holder').toggleClass('invisible');
+    });
+
+    
 });
 
 

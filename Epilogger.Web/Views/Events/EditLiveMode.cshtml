@@ -1,0 +1,197 @@
+﻿@* ********THIS IS NOT USED*@
+
+@model Epilogger.Web.Models.LiveModeCustomSettingViewModel
+@using Epilogger.Web.Core.Helpers
+@using Combres.Mvc
+
+@{
+    //Layout = "~/Views/Events/_CreateEventLayout.cshtml";
+    Layout = "~/Views/Shared/_InteriorLayoutNoBC.cshtml";
+    ViewBag.Title = "EditLiveMode";
+}
+
+@section theHead
+{
+    @Html.CombresLink("LiveModeJs");
+    @Html.CombresLink("LiveModeCss");
+
+    @*<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="../../Public/js/jquery.miniColors.js"></script>
+    <script src="../../Public/js/jquery.colorbox-min.js"></script>
+    
+    <link type="text/css" rel="stylesheet" href="../../Public/css/jquery.miniColors.css" />
+    <link rel="stylesheet" href="../../Public/css/colorbox.css" />
+    <link rel="stylesheet" href="../../Public/css/event-popup.css" />
+    <link href="../../Public/js/fineuploader.jquery-3.0/fineuploader.css" rel="stylesheet">
+    *@
+ 
+    
+
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            function init() {
+
+                // Attach callbacks
+                $('.color-picker').miniColors({
+                    change: function (hex, rgba) {
+                        $('#console').prepend('change: ' + hex + ', rgba(' + rgba.r + ', ' + rgba.g + ', ' + rgba.b + ', ' + rgba.a + ')<br>');
+                    },
+                    open: function (hex, rgba) {
+                        $('#console').prepend('open: ' + hex + ', rgba(' + rgba.r + ', ' + rgba.g + ', ' + rgba.b + ', ' + rgba.a + ')<br>');
+                    },
+                    close: function (hex, rgba) {
+                        $('#console').prepend('close: ' + hex + ', rgba(' + rgba.r + ', ' + rgba.g + ', ' + rgba.b + ', ' + rgba.a + ')<br>');
+                    }
+                });
+
+            }
+            init();
+
+            $(function () {
+                var defaults = {
+                    opacity: 0.4,
+                    speed: 200,
+                    overlayClose: true,
+                    close:"test"
+                };
+                $("#imageupload-modal1").colorbox($.extend(defaults, {
+                    iframe: false,
+                    width: "540px", height: "620px",
+                    close:"My New Close Text",
+                    href: '@Url.Action(MVC.ImageUpload.ChooseUploadSource())',
+   
+                }));
+
+
+            });
+
+        });
+    </script>
+    <script type="text/javascript" language="javascript">
+        function createUploader() {
+            var uploader = new qq.FineUploader({
+                element: $('#fine-uploader-logo')[0],
+                debug:true,
+                text: {
+                    uploadButton: 'SELECT FILE'
+                },
+                request: {
+                    endpoint: '@Url.Action("UploadFile", "Events", new { qqfile = "Logo" })'
+                },
+                validation: {
+                    allowedExtensions: ['jpg', 'jpeg', 'png', 'gif'],
+                    sizeLimit: 20971520,
+                    stopOnFirstInvalidFile: true
+                },
+                messages: {
+                    typeError: "{file} has an invalid extension. Valid extension(s): {extensions}.",
+                    sizeError: "{file} is too large, maximum file size is {sizeLimit}.",
+                    minSizeError: "{file} is too small, minimum file size is {minSizeLimit}.",
+                    emptyError: "{file} is empty, please select files again without it.",
+                    noFilesError: "No files to uploaad.",
+                    onLeave: "The files are being uploaded, if you leave now the upload will be cancelled."
+                },
+                callbacks: {
+                onComplete: function(id, fileName, responseJSON) {
+                    $('#response-url').text(responseJSON.imageurl);
+                }
+            },
+            });
+
+                var uploader2 = new qq.FineUploader({
+                 multiple: true,
+                element: $('#fine-uploader-sponsors')[0],
+                text: {
+                    uploadButton: 'SELECT FILES'
+                },
+                request: {
+                    endpoint: '@Url.Action("UploadFile", "Events", new { qqfile = "Sponsors" })'
+                },
+                validation: {
+                    allowedExtensions: ['jpg', 'jpeg', 'png', 'gif'],
+                    sizeLimit: 20971520,
+                    stopOnFirstInvalidFile: true
+                },
+                messages: {
+                    typeError: "{file} has an invalid extension. Valid extension(s): {extensions}.",
+                    sizeError: "{file} is too large, maximum file size is {sizeLimit}.",
+                    minSizeError: "{file} is too small, minimum file size is {minSizeLimit}.",
+                    emptyError: "{file} is empty, please select files again without it.",
+                    noFilesError: "No files to uploaad.",
+                    onLeave: "The files are being uploaded, if you leave now the upload will be cancelled."
+                }
+            });
+        }
+
+        window.onload = createUploader;
+    </script>
+    <style>
+        /* Fine Uploader
+      -------------------------------------------------- */
+        .qq-upload-list {
+            text-align: left;
+        }
+ 
+      /* For the bootstrapped demos */
+        li.alert-success {
+            background-color: #DFF0D8;
+        }
+ 
+        li.alert-error {
+            background-color: #F2DEDE;
+        }
+ 
+        .alert-error .qq-upload-failed-text {
+            display: inline;
+        }
+    </style>
+}
+
+
+<h2 id="live_mode_h2">Live Mode Edit</h2>
+
+@using (Html.BeginForm("CreateLiveMode", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+ @*<script type="text/javascript" src="../../Public/js/fineuploader.jquery-3.0/jquery.fineuploader-3.0.js"></script>*@
+    
+    
+   @* @Html.ValidationSummary("Please correct the following issues")*@
+    <fieldset id="livemode">
+    <div>
+        The image url is <span id="response-url"></span>
+    </div>
+        
+    @Html.HiddenFor(model => model.EventId)
+    @Html.HiddenFor(model => model.SponsorLogo)
+
+        <div id="button-wrapper">
+            <span class="uploader-span">Upload Logo:</span> 
+            <div id="fine-uploader-logo"></div>
+        
+            <p></p>
+            <span class="uploader-span">Upload Sponsors:</span>
+            <div id="fine-uploader-sponsors"></div>
+        </div>
+
+        <p>
+            @Html.LabelFor(model => model.Background)
+            @Html.TextBoxFor(model => model.Background, new { @class = "color-picker black miniColors" })
+        </p>
+        <p>
+            @Html.LabelFor(model => model.FooterTextColor)
+            @Html.TextBoxFor(model => model.FooterTextColor, new { @class = "color-picker black miniColors" })
+        </p>
+        <p>
+            @Html.LabelFor(model => model.TwitterUserNameColour)
+            @Html.TextBoxFor(model => model.TwitterUserNameColour, new { @class = "color-picker black miniColors" })
+        </p>
+        <p>
+            @Html.LabelFor(model => model.LinkColour)
+            @Html.TextBoxFor(model => model.LinkColour, new { @class = "color-picker black miniColors" })
+        </p>
+        <br />
+        <p>
+            <input type="submit" class="submitEvent" value="save and preview" />
+        </p>
+    </fieldset>
+}

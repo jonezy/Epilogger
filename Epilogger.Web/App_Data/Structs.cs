@@ -3856,6 +3856,36 @@ namespace Epilogger.Data {
 	                IsForeignKey = false,
 	                MaxLength = 0
                 });
+
+                Columns.Add(new DatabaseColumn("NormalCollectionCount", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("IsPaid", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Boolean,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("DatePaid", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.DateTime,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
                     
                 
                 
@@ -4230,6 +4260,42 @@ namespace Epilogger.Data {
    			public static string LastCollectionDateTimeColumn{
 			      get{
         			return "LastCollectionDateTime";
+      			}
+		    }
+           
+            public IColumn NormalCollectionCount{
+                get{
+                    return this.GetColumn("NormalCollectionCount");
+                }
+            }
+            				
+   			public static string NormalCollectionCountColumn{
+			      get{
+        			return "NormalCollectionCount";
+      			}
+		    }
+           
+            public IColumn IsPaid{
+                get{
+                    return this.GetColumn("IsPaid");
+                }
+            }
+            				
+   			public static string IsPaidColumn{
+			      get{
+        			return "IsPaid";
+      			}
+		    }
+           
+            public IColumn DatePaid{
+                get{
+                    return this.GetColumn("DatePaid");
+                }
+            }
+            				
+   			public static string DatePaidColumn{
+			      get{
+        			return "DatePaid";
       			}
 		    }
            

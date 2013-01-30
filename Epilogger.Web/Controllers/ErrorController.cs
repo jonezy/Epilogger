@@ -27,7 +27,7 @@ namespace Epilogger.Web.Controllers
         }
         public virtual ActionResult SearchRedirect(SearchEventViewModel model)
         {
-            return RedirectToAction("Home/Search", model);
+            return RedirectToAction("Search", "Home", model);
         }
     }
 }

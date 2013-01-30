@@ -19,6 +19,7 @@
     }
 }
 
+
 @if (!IncludeDateRange)
 { 
     <div id="event-toolbar">
@@ -31,10 +32,11 @@
         @Html.ActionLink("search", "search", "events", new { id = Model.EventID }, action.ToLower() == "search" ? new { @class = "tooltip-trigger search current", @title = "Search" } : new { @class = "tooltip-trigger search", @title = "Search" })
         @if ((Model.CreatedByID == Model.CurrentUserID) || Model.CurrentUserRole == UserRoleType.Administrator) {
             @Html.ActionLink("edit", "edit", "events", new { id = Model.EventID }, action.ToLower() == "edit" ? new { @class = "tooltip-trigger edit current", @title = "Edit Event" } : new { @class = "tooltip-trigger edit", @title = "Edit Event" })
+            
         }
         @Html.ActionLink("allstats", "allstats", "events", new { id = Model.EventID }, action.ToLower() == "allstats" ? new { @class = "tooltip-trigger allstats current", @title = "Event Stats" } : new { @class = "tooltip-trigger allstats", @title = "Event Stats" })
     
-        @if (Model.EventSlug=="c2-mtl")
+        @if (Model.EventSlug == "c2-mtl")
         {
             @Html.ActionLink("NexaLive", "ConceptMap", "events", new { id = Model.EventID }, action.ToLower() == "ConceptMap" ? new { @class = "tooltip-trigger nexalive current", @title = "NexaLive" } : new { @class = "tooltip-trigger nexalive", @title = "NexaLive" })    
         }
@@ -56,7 +58,7 @@ else
         }
         @Html.ActionLink("allstats", "allstats", "events", new { id = Model.EventID, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "allstats" ? new { @class = "allstats current" } : new { @class = "allstats" })
     
-        @if (Model.EventSlug=="c2-mtl")
+        @if (Model.EventSlug == "c2-mtl")
         {
             @Html.ActionLink("NexaLive", "ConceptMap", "events", new { id = Model.EventID }, action.ToLower() == "ConceptMap" ? new { @class = "tooltip-trigger nexalive current", @title = "NexaLive" } : new { @class = "tooltip-trigger nexalive", @title = "NexaLive" })    
         }

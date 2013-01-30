@@ -55,7 +55,7 @@
     </resourceSet>
     
     <resourceSet name="CreateEventJs" type="js">
-      <resource path="~/Public/js/jquery.blockUI.js" />
+      <!--<resource path="~/Public/js/jquery.blockUI.js" />-->
       <resource path="~/Public/js/CreateEditEvent.js" />
     </resourceSet>
     
@@ -86,12 +86,19 @@
     </resourceSet>
 
     <resourceSet name="LiveModeCss" type="css">
+      <resource path="~/Public/css/jquery.miniColors.css" />
+      <resource path="~/Public/js/fineuploader.jquery-3.0/fineuploader.css" />
       <resource path="~/Public/css/livemode-4x3.css" />
+      <resource path="~/Public/css/alert.css" />
     </resourceSet>
     <resourceSet name="LiveModeJs" type="js">
-      <resource path="~/Public/js/jquery-1.6.2.min.js" />
+      <resource path="~/Public/js/jquery-1.8.2.min.js" />
+      <resource path="~/Public/js/jquery.miniColors.js" />
+      <resource path="~/Public/js/fineuploader.jquery-3.0/jquery.fineuploader-3.0.js"/>
       <resource path="~/Public/js/epiloggerInit.js" />
       <resource path="~/Public/js/LiveMode.js" />
+      <resource path="~/Public/js/Fullscreen.js" />
+      <resource path="~/Public/js/alerts.js" />
     </resourceSet>
 
 
@@ -108,6 +115,11 @@
     <resourceSet name="EditAccountJs" type="js">
       <resource path="~/Public/js/EditAccount.js" />
       <resource path="~/Public/js/FileUploader/fileuploader.js" />
+    </resourceSet>
+
+    <resourceSet name="CreateEventPopUp" type="css">
+      <resource path="~/Public/css/event-popup.css" />
+      <resource path="~/Public/js/jquery.UI.DatePicker/css/smoothness/jquery-ui-1.8.17.custom.css" />
     </resourceSet>
 
   </resourceSets>

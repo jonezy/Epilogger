@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data.SqlTypes;
-using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -17,14 +15,17 @@ using Epilogger.Web.Core.Filters;
 using Epilogger.Web.Core.Stats;
 using Epilogger.Web.Models;
 using Epilogger.Common;
-using Epilogger.Web.Models.Timeline;
 using Epilogger.Web.Views.Emails;
-using RichmondDay.Helpers;
 using System.Net;
 using System.IO;
-using System.Xml;
 using System.Text.RegularExpressions;
+using Timezone.Framework;
 using Twitterizer;
+using System.Web;
+using Epilogger.Web.Core.Helpers;
+using Microsoft.WindowsAzure;
+using Microsoft.WindowsAzure.StorageClient;
+using Epilogger.Web.Core.Services;
 
 namespace Epilogger.Web.Controllers {
 	public partial class EventsController : BaseController
@@ -34,7 +35,9 @@ namespace Epilogger.Web.Controllers {
 		readonly string _version = DateTime.Today.ToString("yyyyMMdd");
 
 		EpiloggerDB _db;
+        //CreateEventViewModel eventModel = new CreateEventViewModel();
 		EventService _es = new EventService();
+        LiveModeCustomSettingsService _lm = new LiveModeCustomSettingsService();
 		TweetService _ts = new TweetService();
 		ImageService _is = new ImageService();
 		CheckInService _cs = new CheckInService();
@@ -44,6 +47,8 @@ namespace Epilogger.Web.Controllers {
 		UserService _us = new UserService();
 		VenueService _venueService = new VenueService();
 		UserTwitterActionService _userTwitterActionService = new UserTwitterActionService();
+        SponsorImageService _sis = new SponsorImageService();
+        
 
 		DateTime _fromDateTime = DateTime.Parse("2000-01-01 00:00:00");
 		private DateTime FromDateTime() {
@@ -148,11 +153,7 @@ namespace Epilogger.Web.Controllers {
 				}
 				catch { model.EventBriteEID = null; }
 
-				model.CanDelete = false;
-				if ((requestedEvent.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator)
-				{
-					model.CanDelete = true;
-				}
+			    model.CanDelete = CanModerate(requestedEvent);
 
 				//@(((Model.EventRatings.Sum(i => i.UserRating) / Model.EventRatings.Count()) / 5) * 100)
 
@@ -246,11 +247,7 @@ namespace Epilogger.Web.Controllers {
 				model.Images = _is.GetPagedPhotos(requestedEvent.ID, currentPage + 1, 30, this.FromDateTime(), this.ToDateTime());
 				model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
 
-				model.CanDelete = false;
-				if ((requestedEvent.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator)
-				{
-					model.CanDelete = true;
-				}
+			    model.CanDelete = CanModerate(requestedEvent);
 
 				if (currentPage + 1 == 1) {
 					model.ShowTopPhotos = true;
@@ -293,14 +290,8 @@ namespace Epilogger.Web.Controllers {
 				model.Tweets = _ts.GetPagedTweets(requestedEvent.ID, currentPage + 1, 100, FromDateTime(), ToDateTime());
 				model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
 
-				model.CanDelete = false;
-				if ((requestedEvent.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator)
-				{
-					model.CanDelete = true;
-				}
-
-				//model.CanDelete = 
-
+			    model.CanDelete = CanModerate(requestedEvent);
+                
 				if (currentPage + 1 == 1)
 				{
 					model.ShowTopTweets = true;
@@ -319,34 +310,391 @@ namespace Epilogger.Web.Controllers {
 		}
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        //[Obsolete("Create is deprecated, please use CreateEvent instead.")]
+        //[RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
+        //public virtual ActionResult Create()
+        //{
+        //    var model = Mapper.Map<Event, CreateEventViewModel>(new Event());
+        //    //Model.TimeZoneOffset = Helpers.GetUserTimeZoneOffset();
+
+        //    var roundTime = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day, DateTime.UtcNow.Hour, 0, 0);
+        //    if (DateTime.UtcNow.Minute > 30)
+        //    {
+        //        roundTime = roundTime.AddHours(1);
+        //    }
+
+        //    model.StartDateTime = roundTime;
+        //    model.EndDateTime = roundTime.AddHours(3);
+        //    model.CollectionStartDateTime = roundTime.AddDays(-2);
+        //    model.CollectionEndDateTime = roundTime.AddDays(3);
+        //    model.WebsiteURL = "http://";
+        //    model.EventBrightUrl = "http://";
+
+        //    return View(model);
+        //}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
+        public virtual ActionResult CreateEvent()
+        {
+
+            CreateBasicEventViewModel model;
+            if (TempData["CreateBasicEventViewModel"] == null)
+            {
+                //Create a blank Temp Event Object to live with us through this process.
+                //TempData["CreateEvent"] = new Event();
+                model = new CreateBasicEventViewModel();
+
+                var roundTime = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day, DateTime.UtcNow.Hour, 0, 0);
+                if (DateTime.UtcNow.Minute > 30)
+                {
+                    roundTime = roundTime.AddHours(1);
+                }
+                model.StartDateTime = roundTime;
+                model.EndDateTime = roundTime.AddHours(3);
+                model.TimeZoneOffset = TimeZoneManager.UserTimeZone.BaseUtcOffset.Hours;
+                model.allDay = false;
+
+                return View(model);
+            }
+
+            //Load from TempData as we've come back.
+            model = (CreateBasicEventViewModel)TempData["CreateBasicEventViewModel"];
+            return View(model);
+
+
+        }
+
+        
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 		[RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
-		public virtual ActionResult Create()
+        [HttpPost]
+        public virtual ActionResult CreateEvent(CreateBasicEventViewModel model)
 		{
-			CreateEventViewModel Model = Mapper.Map<Event, CreateEventViewModel>(new Event());
-			//Model.TimeZoneOffset = Helpers.GetUserTimeZoneOffset();
+		   
+            DateTime startDate;
+            DateTime endDate;
+            
+            var startTime = GetTime(Request.Form["start_times"], Request.Form["AMPMstartTime"]);
+            var endTime = GetTime(Request.Form["end_times"], Request.Form["AMPMendTime"]);
 
-			DateTime roundTime = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day, DateTime.UtcNow.Hour, 0, 0);
-			if (DateTime.UtcNow.Minute > 30)
-			{
-				roundTime = roundTime.AddHours(1);
-			}
+            DateTime.TryParse(Request.Form["StartDateTime"] + " " + startTime, out startDate); // start date
+            DateTime.TryParse(Request.Form["EndDateTime"] + " " + endTime, out endDate); // end date (could be null)
 
-			Model.StartDateTime = roundTime;
-			Model.EndDateTime = roundTime.AddHours(3);
-			Model.CollectionStartDateTime = roundTime.AddDays(-2);
-			Model.CollectionEndDateTime = roundTime.AddDays(3);
-			Model.WebsiteURL = "http://";
-			Model.EventBrightUrl = "http://";
+		    var storeStartDateTime = startDate;
+            var storeEndDateTime = endDate;
 
-			return View(Model);
-		}
+            model.allDay = Request.Form["End_Date"].Contains("false,false");
+		    model.TimeZoneOffset = int.Parse(Request.Form["timeZone"]);
+
+            if (!model.allDay)
+		    {
+                model.StartDateTime = ConvertToUniversalDateTime(startDate, model.TimeZoneOffset.ToString(CultureInfo.InvariantCulture));
+                model.EndDateTime = ConvertToUniversalDateTime(EndDateValid(startDate, endDate) ? endDate : endDate.AddDays(1), model.TimeZoneOffset.ToString(CultureInfo.InvariantCulture));
+		    }
+            else
+            {
+                startDate = DateTime.Parse(startDate.ToShortDateString() + " 12:00am");
+                model.StartDateTime = ConvertToUniversalDateTime(startDate, model.TimeZoneOffset.ToString(CultureInfo.InvariantCulture));
+
+                endDate = DateTime.Parse(startDate.ToShortDateString() + " 11:59pm");
+                model.EndDateTime = ConvertToUniversalDateTime(endDate, model.TimeZoneOffset.ToString(CultureInfo.InvariantCulture));
+		    }
+            
+
+            #region Collection Start/End Date Times
+            //Moved, as the timezone offset needs to be applied first
+            model.CollectionStartDateTime = ConvertToUniversalDateTime(getCollectionDateTime(Request.Form["collectDataTimes"], startDate, -1), model.TimeZoneOffset.ToString(CultureInfo.InvariantCulture));
+            if (EndDateValid(startDate, endDate))
+            {
+                model.CollectionEndDateTime = ConvertToUniversalDateTime(getCollectionDateTime(Request.Form["collectDataTimes"], endDate, 1), model.TimeZoneOffset.ToString(CultureInfo.InvariantCulture));
+            }
+            else
+            {
+                model.CollectionEndDateTime = ConvertToUniversalDateTime(getCollectionDateTime(Request.Form["collectDataTimes"], startDate, 1), model.TimeZoneOffset.ToString(CultureInfo.InvariantCulture));
+            }
+            #endregion
+
+
+            if(ModelState.IsValid)
+            {
+                try
+                {
+                    model.IsPaid = false;
+                    model.UserId = CurrentUserID;
+                    model.CreatedDateTime = DateTime.UtcNow;
+                    model.CollectDataValue = Request.Form["collectDataTimes"];
+
+                    var epLevent = Mapper.Map<CreateBasicEventViewModel, Event>(model);
+                    //Don't save, just put it in the TempData.
+                    TempData["Event"] = epLevent;
+                    
+                    //Save everything in TempData so we can read it back if a user presses Go Back from the Twitter Search page.
+                    TempData["CreateBasicEventViewModel"] = model;
+                    TempData["EventTime"] = getEventTime(startDate, endDate, model.allDay);
+                    ((CreateBasicEventViewModel)TempData["CreateBasicEventViewModel"]).StartDateTime = TimeZoneManager.ToUtcTime(storeStartDateTime);
+                    ((CreateBasicEventViewModel)TempData["CreateBasicEventViewModel"]).EndDateTime = TimeZoneManager.ToUtcTime(storeEndDateTime);
+                    ((CreateBasicEventViewModel)TempData["CreateBasicEventViewModel"]).TimeZoneOffset = int.Parse(Request.Form["timeZone"]);
+
+                    return RedirectToAction("CreateEventTweets", new { id = model.EventSlug});  
+                }
+                catch (Exception ex)
+                {
+                    this.StoreError(string.Format("There was an error: {0}", ex.Message));
+                    var epLevent = Mapper.Map<CreateBasicEventViewModel, Event>(model);
+                    model = Mapper.Map<Event, CreateBasicEventViewModel>(epLevent);
+                    return View(model);
+                }
+            }
+           return View(model);
+        }
+
+        private string getEventTime(DateTime startDate, DateTime endDate, bool AllDay)
+        {
+            string fullDate = "";
+            //Jan 17 1:00pm - Jan 19 2:00pm
+
+            if (AllDay)
+            {
+                fullDate = startDate.ToString("MMMM d");
+            }
+            else
+            {
+                string start = startDate.ToString("MMM d h:mm tt");
+                string end = endDate.ToString("MMM d h:mm tt");
+                end = end.Remove(end.Length - 3, 3) + (end.Substring(end.Length - 2, 2).ToLower());
+                start = start.Remove(start.Length - 3, 3) + (start.Substring(start.Length - 2, 2).ToLower());
+                fullDate = string.Format("{0} - {1}", start, end);
+            }
+            return fullDate;
+        }
+
+        private bool EndDateValid(DateTime startDate, DateTime endDate)
+        {
+            bool hasEndDate;
+            Boolean.TryParse(Request.Form["EndDateTime"],out hasEndDate);
+            if (endDate.ToString(CultureInfo.InvariantCulture) == "1/1/0001 12:00:00 AM" || hasEndDate || DateTime.Compare(startDate,endDate) >= 0)
+                return false;
+           
+            return true;
+        }
+
+        private static string NameIntoSlug(string p)
+        {
+
+            //p = p.ToLower(); // change everything to lowercase
+            ////		.replace(/^\s+|\s+$/g, "") // trim leading and trailing spaces
+            ////		.replace(/[_|\s]+/g, "-") // change all spaces and underscores to a hyphen
+            ////		.replace(/[^a-zA-Z0-9-]+/g, "") // remove all non-alphanumeric characters except the hyphen
+            ////		.replace(/[-]+/g, "-") // replace multiple instances of the hyphen with a single instance
+            ////		.replace(/^-+|-+$/g, "") // trim leading and trailing hyphens				
+            ////		;
+
+            //p = p.Replace(" ", "-");
+            return p;
+        }
+
+        private static DateTime ConvertToUniversalDateTime(DateTime startDate, string timezone)
+        {
+            int timeZoneOffset = Convert.ToInt16(timezone);
+            startDate = startDate.AddHours(-timeZoneOffset);
+            return startDate;
+        }
+
+        private static string GetTime(string time, string ampm)
+        {
+            return time +":00" + ampm;
+        }
+
+        private DateTime getCollectionDateTime(string s, DateTime eventDate, int i ) // adds the a set number of days depending on collectDataTimes DDL
+        {
+            switch(s)
+            {
+                case "1":
+                    return eventDate;
+                case "2":
+                    return eventDate.AddHours(3 *i);
+                case "3":
+                    return eventDate.AddDays(3 * i);
+                case "4":
+                    return eventDate.AddDays(14 * i);
+                default:
+                    return eventDate.AddDays(3 * i);
+            }
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]        
+        public virtual ActionResult CreateEventTweets(string id)
+        {
+            var model = Mapper.Map<Event, CreateEventTwitterViewModel>((Event)TempData["Event"]);
+            model.EventTime = TempData["EventTime"].ToString();
+
+            //Need to resave this stuff. Or it's lost on page refresh
+            TempData["EventTime"] = TempData["EventTime"];
+            TempData["Event"] = TempData["Event"];
+
+            return View(model);
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
+        [HttpPost]
+        public virtual ActionResult CreateEventTweets(CreateEventTwitterViewModel model, FormCollection frm)
+        {
+            if (model.SearchTerms == "#")   // removes the default value from confusing the ModelState
+                ModelState.AddModelError("Search Terms", "Please enter some search terms for your event (ex: epilogger OR EPL)");
+           
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    //var epLevent = Mapper.Map<CreateEventTwitterViewModel, Event>(model);
+                    //var eventModel = _es.FindBySlug(model.EventSlug);
+                    var eventMod = Mapper.Map<Event, Event>((Event)TempData["Event"]);
+                    var searchQuery = "";
+                    if (model.IsAdvanceMode)
+                    {
+                        searchQuery = frm["SearchTerms"];
+                        eventMod.SearchTerms = searchQuery.Replace(",", "").Trim();
+                    }
+                    else
+                    {
+                        var searchTerms = frm["SearchTerms"].Split(',');
+                        foreach (var s in searchTerms)
+                        {
+                            if (s.Trim() != "")
+                            {
+                                searchQuery += s + " OR ";
+                            }
+                        }
+                        searchQuery = searchQuery.Remove(searchQuery.Length - 4, 4);
+                        eventMod.SearchTerms = searchQuery.Trim();
+                    }
+                    eventMod.IsActive = true;
+                    eventMod.IsPaid = false;
+                    eventMod.IsPrivate = false;
+
+                    _es.Save(eventMod);
+                    TempData["Event"] = eventMod;
+
+                    // get display model from event, route this eventually
+                    var displayModel = new CreateFinalEventViewModel()
+                                            {
+                                                Name = eventMod.Name,
+                                                Subtitle = eventMod.SubTitle,
+                                                SearchTerms = searchQuery,
+                                                EventSlug = eventMod.EventSlug,
+                                                CollectionTime = getCollectionWordFormat(eventMod.CollectionStartDateTime, eventMod.StartDateTime),
+                                                EventStartEndTime = frm["EventTime"] 
+                                            };
+
+
+                    //Initiate a first collect on the event
+                    //TODO Remove after testing
+                    var tsmp = new MQ.MSGProducer("Epilogger", "TwitterSearch");
+                    var tsMSG = new MQ.Messages.TwitterSearchMSG
+                    {
+                        EventID = eventMod.ID,
+                        SearchTerms = eventMod.SearchTerms,
+                        SearchFromLatestTweet = false,
+                        SearchSince = eventMod.CollectionStartDateTime,
+                        SearchUntil = eventMod.CollectionEndDateTime
+                    };
+                    tsmp.SendMessage(tsMSG);
+                    tsmp.Dispose();
+
+                    //The the admins an email with the event details.
+                    //TODO Remove after testing
+                    SendEventCreatedEmailToSystem(eventMod);
+
+                    //Clear this for the next create event
+                    TempData["Event"] = null;
+                    TempData["CreateBasicEventViewModel"] = null;
+
+                    return View("CreateEventFinal", displayModel);
+                }
+                catch (Exception ex)
+                {
+                    this.StoreError(string.Format("There was an error: {0}", ex.Message));
+                    var epLevent = Mapper.Map<CreateEventTwitterViewModel, Event>(model);
+                    model = Mapper.Map<Event, CreateEventTwitterViewModel>(epLevent);
+                    return View(model);
+                }
+            }
+            
+            return View();
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+        
+        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
+        
+        public virtual ActionResult CreateEventFinal()
+        {
+            //TODO Remove this, it's for debugging
+            var model = new CreateFinalEventViewModel()
+                            {
+                                Name = "Test Event",
+                                Subtitle = "This is a subtitle",
+                                SearchTerms = "#Rocksteady OR \"Jimmy hat\"",
+                                EventSlug = "test_event",
+                                CollectionTime = getCollectionWordFormat(DateTime.Parse("1/31/2013 10:00:00 PM"), DateTime.Parse("1/31/2013 10:00:00 PM")),
+                                EventStartEndTime = "Jan 31 5:00pm - Jan 31 8:00pm"
+                            };
+
+            return View(model);
+
+
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+        
+        //[CompressFilter]
+        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to edit an event")]
+        public virtual ActionResult CreateEventFinal(CreateFinalEventViewModel displayModel)
+        {
+            return View(displayModel);
+        }
+
+        //private string getEventStartEndTime(DateTime startDateTime, DateTime? endDateTime)
+        //{
+        //    //Sept 18th 2:00pm UTC - Sept 19th 4:00pm UTC
+        //    string totalDate = startDateTime.ToString("MMM dd hh:mm tt UTC");
+        //    string endDate = "";
+        //    if (endDateTime != null || DateTime.Compare(startDateTime,endDateTime.Value) <= 0)
+        //    {
+        //        endDate = endDateTime.Value.ToString("MMM dd hh:mm tt UTC");
+        //        totalDate += " - " + endDate;
+        //    }
+            
+        //    return totalDate;
+        //}
+
+        private string getCollectionWordFormat(DateTime colDateTime, DateTime startDateTime)
+        {
+            string collectionSentence = "";
+           double hours = (startDateTime-colDateTime).TotalHours;
+           if (hours < 3)
+               collectionSentence = "only during the event";
+           else if (hours >=3 && hours <=6)
+               collectionSentence = "a few hours before/after";
+           else if (hours > 6 && hours <= 144)
+               collectionSentence = "a few days before/after";
+           else
+               collectionSentence = "2 weeks before/after";
+
+           return collectionSentence;
+        }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 		[RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
 		[HttpPost]
 		public virtual ActionResult Create(CreateEventViewModel model)
 		{
-
+           
 			DateTime startDate;
 			DateTime endDate;
 			DateTime collectionStart;
@@ -422,7 +770,7 @@ namespace Epilogger.Web.Controllers {
                     SendEventCreatedTweet(epLevent);
 
                     //The the admins an email with the event details.
-				    SendEventCreatedEmailToSystem(model);
+				    //SendEventCreatedEmailToSystem(model);
 
 					
 					this.StoreSuccess("Your Event was created successfully!  Dont forget to share it with your friends and attendees!");
@@ -441,46 +789,49 @@ namespace Epilogger.Web.Controllers {
 			return View(model);
 		}
 
-	    private void SendEventCreatedEmailToSystem(CreateEventViewModel model)
+	    private void SendEventCreatedEmailToSystem(Event model)
 	    {
 	        try
 	        {
-	            var theUser = _us.GetUserByID(model.UserID);
+	            if (model.UserID != null)
+	            {
+	                var theUser = _us.GetUserByID((Guid)model.UserID);
 
-	            var parser = new TemplateParser();
-	            var replacements = new Dictionary<string, string>
-	                                   {
-	                                       {"[BASE_URL]", App.BaseUrl},
-	                                       {"[EVENT_NAME]", model.Name},
+	                var parser = new TemplateParser();
+	                var replacements = new Dictionary<string, string>
 	                                       {
-	                                           "[EVENT_CREATOR]",
-	                                           string.Format("{0} {1} ({2}) {3}", theUser.FirstName, theUser.LastName, theUser.Username, theUser.EmailAddress)
-	                                       },
-	                                       {"[SEARCH_TERMS]", model.SearchTerms},
-	                                       {
-	                                           "[EVENT_TIME]",
-	                                           model.StartDateTime.ToLocalTime() + " - " +
-	                                           (DateTime) model.EndDateTime.GetValueOrDefault().ToLocalTime()
-	                                       },
-	                                       {
-	                                           "[COLLECTION_TIME]",
-	                                           model.CollectionStartDateTime.ToLocalTime() + " - " +
-	                                           (DateTime) model.CollectionEndDateTime.GetValueOrDefault().ToLocalTime()
-	                                       },
-	                                       {"[EVENT_URL]", "http://epilogger.com/events/" + model.EventSlug}
-	                                   };
+	                                           {"[BASE_URL]", App.BaseUrl},
+	                                           {"[EVENT_NAME]", model.Name},
+	                                           {
+	                                               "[EVENT_CREATOR]",
+	                                               string.Format("{0} {1} ({2}) {3}", theUser.FirstName, theUser.LastName, theUser.Username, theUser.EmailAddress)
+	                                           },
+	                                           {"[SEARCH_TERMS]", model.SearchTerms},
+	                                           {
+	                                               "[EVENT_TIME]",
+	                                               model.StartDateTime.ToLocalTime() + " - " +
+	                                               (DateTime) model.EndDateTime.GetValueOrDefault().ToLocalTime()
+	                                           },
+	                                           {
+	                                               "[COLLECTION_TIME]",
+	                                               model.CollectionStartDateTime.ToLocalTime() + " - " +
+	                                               (DateTime) model.CollectionEndDateTime.GetValueOrDefault().ToLocalTime()
+	                                           },
+	                                           {"[EVENT_URL]", "http://epilogger.com/events/" + model.EventSlug}
+	                                       };
 
-	            var message = parser.Replace(AccountEmails.AdminEventCreated, replacements);
+	                var message = parser.Replace(AccountEmails.AdminEventCreated, replacements);
 
-	            var sfEmail = new SpamSafeMail
-	                              {
-	                                  EmailSubject = model.Name + " has just been created.",
-	                                  HtmlEmail = message,
-	                                  TextEmail = message
-	                              };
-	            sfEmail.ToEmailAddresses.Add("system@epilogger.com");
+	                var sfEmail = new SpamSafeMail
+	                                  {
+	                                      EmailSubject = model.Name + " has just been created.",
+	                                      HtmlEmail = message,
+	                                      TextEmail = message
+	                                  };
+	                sfEmail.ToEmailAddresses.Add("system@epilogger.com");
 
-	            sfEmail.SendMail();
+	                sfEmail.SendMail();
+	            }
 	        }
 	        catch (Exception)
 	        {
@@ -696,9 +1047,8 @@ namespace Epilogger.Web.Controllers {
 
 						//Instead of hard coding the HTML for the tweets, let's use the template.
 						var firstOrDefault = theT.Events.FirstOrDefault(t => t.ID == EventID);
-						var canDelete = firstOrDefault != null && ((firstOrDefault.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator);
-
-						htmlString.Append(RenderRazorViewToString("TweetTemplate", new TweetTemplateViewModel() { CanDelete = canDelete, Tweet = theT, ShowControls = true, EventId = EventID }));
+						
+						htmlString.Append(RenderRazorViewToString("TweetTemplate", new TweetTemplateViewModel() { CanDelete = CanModerate(firstOrDefault), Tweet = theT, ShowControls = true, EventId = EventID }));
 
 						RecordCount++;
 					}
@@ -744,9 +1094,7 @@ namespace Epilogger.Web.Controllers {
 
 						//Instead of hard coding the HTML for the images, let's use the template.
 						var firstOrDefault = theI.Events.FirstOrDefault(t => t.ID == EventID);
-						var canDelete = firstOrDefault != null && ((firstOrDefault.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator);
-
-						html.Append(RenderRazorViewToString("_ImageTemplate", new ImageTemplateViewModel { CanDelete = canDelete, Image = theI }));
+                        html.Append(RenderRazorViewToString("_ImageTemplate", new ImageTemplateViewModel { CanDelete = CanModerate(firstOrDefault), Image = theI }));
 						
 						recordCount++;
 					}
@@ -926,7 +1274,7 @@ namespace Epilogger.Web.Controllers {
 
 			if (requestedEvent != null)
 			{
-				var blogPosts = Mapper.Map<List<BlogPost>, List<BlogPostDisplayViewModel>>(_bs.FindByEventID(requestedEvent.ID).ToList());
+				var blogPosts = Mapper.Map<List<BlogPost>, List<BlogPostDisplayViewModel>>(_bs.FindByEventID(requestedEvent.ID).OrderByDescending(i => i.DateTime).ToList());
 
 				var model = Mapper.Map<Event, AllBlogPostsViewModel>(requestedEvent);
 				model.SetAllBlogPostsViewModel(blogPosts, currentPage, blogPosts.Count());
@@ -1041,6 +1389,349 @@ namespace Epilogger.Web.Controllers {
 
 		}
 
+
+//public virtual ActionResult LiveMode(string eventID)
+//        {
+//            LiveModeCustomSettingViewModel Model = new LiveModeCustomSettingViewModel();
+//            int id = 0;
+//            try
+//            {
+//                id = Convert.ToInt16(eventID);
+//            }
+//            catch
+//            { //todo
+//            }
+//            LiveModeCustomSetting currentLiveModel = _lm.FindByEventID(id);
+
+//            if (currentLiveModel == null || currentLiveModel.Id==0)
+//            {
+//                Model.EventId = id;
+//                return View("EditLiveMode", Model);
+//            }
+//            else
+//            {
+//                Mapper.CreateMap<Data.LiveModeCustomSetting, LiveModeCustomSettingViewModel>();
+//                Model = Mapper.Map<Data.LiveModeCustomSetting, LiveModeCustomSettingViewModel>(currentLiveModel);
+//                return View("EditLiveMode",Model);
+//            }
+//        }
+
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+        //[RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
+        //[HttpPost]
+        //public virtual ActionResult CreateLiveMode(LiveModeCustomSettingViewModel model, IEnumerable<HttpPostedFileBase> files)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            //image stuff
+        //            using (var messageProducer = new MQ.MSGProducer("Epilogger", "FileImage"))
+        //            {
+        //                foreach (var fileKey in Request.Files.AllKeys)
+        //                {
+        //                    var file = Request.Files[fileKey];
+
+        //                    var fileMemoryStream = new MemoryStream();
+        //                    file.InputStream.CopyTo(fileMemoryStream);
+
+        //                    var imageMessage = new MQ.Messages.FileImageMSG(model.EventId, null, fileMemoryStream.ToArray(), file.FileName);
+        //                    messageProducer.SendMessage(imageMessage);
+        //                }
+        //            }
+        //            Data.LiveModeCustomSetting liveSetting;
+        //            Mapper.CreateMap<LiveModeCustomSettingViewModel, Data.LiveModeCustomSetting>();
+        //            liveSetting = Mapper.Map<LiveModeCustomSettingViewModel, Data.LiveModeCustomSetting>(model);
+        //            _lm.Save(liveSetting);
+        //            return RedirectToAction("#");
+        //        }
+        //        catch (Exception ex)
+        //        {
+
+        //        }
+        //    }
+       
+        //    return View(model);
+        //}
+
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
+        //public virtual ActionResult LiveModeEdit(string eventID)
+        //{
+        //    LiveModeViewModel Model = new LiveModeViewModel();
+        //    int id = 0;
+        //    try
+        //    {
+        //        id = Convert.ToInt16(eventID);
+        //    }
+        //    catch
+        //    { //todo
+        //    }
+        //    LiveModeCustomSetting currentLiveModel = _lm.FindByEventID(id);
+
+        //    if (currentLiveModel == null || currentLiveModel.Id == 0)
+        //    {
+        //        Model.EventId = id;
+        //        return View("Live4x3", Model);
+        //    }
+        //    else
+        //    {
+        //        Mapper.CreateMap<Data.LiveModeCustomSetting, LiveModeViewModel>();
+        //        Model = Mapper.Map<Data.LiveModeCustomSetting, LiveModeViewModel>(currentLiveModel);
+        //        return View("Live4x3", Model);
+        //    }
+        //}
+
+        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to edit live mode")]
+        [HttpPost]
+        public virtual ActionResult Live4x3(LiveModeViewModel model)
+        {
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    LiveModeCustomSettingViewModel liveCustom = new LiveModeCustomSettingViewModel();
+
+
+                    liveCustom.EventId = model.EventId;
+                    liveCustom.LightTheme = Request.Form["light_dark_theme"] == "light";
+                    liveCustom.FooterTextColor = model.CustomSettings.FooterTextColor;
+                    liveCustom.LinkColour = model.CustomSettings.LinkColour;
+                    liveCustom.TwitterUserNameColour = model.CustomSettings.TwitterUserNameColour;
+                    liveCustom.Logo = model.CustomSettings.Logo;
+
+
+
+                    Data.LiveModeCustomSetting liveSetting;
+                    Mapper.CreateMap<LiveModeCustomSettingViewModel, Data.LiveModeCustomSetting>();
+                    liveSetting = Mapper.Map<LiveModeCustomSettingViewModel, Data.LiveModeCustomSetting>(liveCustom);
+                    _lm.Save(liveSetting);
+
+                    // save sponsors
+                    // model.CustomSettings.SponsorImages
+                    if (!string.IsNullOrEmpty(model.Sponsors))
+                    {
+                        List<string> sponsors = getSponsorList(model.Sponsors);
+
+
+
+                        foreach (string url in sponsors)
+                        {
+                            var sponsor = new SponsorImage
+                            {
+                                LiveModeID = _lm.FindIDByEventID(model.EventId),
+                                SponsorURL = url
+                            };
+
+                            //sponsor.SponsorURL=
+                            // save the venue
+                            _sis.Save(sponsor);
+                        }
+                    }
+                    //return View(model);
+                    return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+                }
+                catch (Exception ex)
+                {
+                    return View();
+                }
+            }
+            return View();
+        }
+
+        private List<string> getSponsorList(string p)
+        {
+
+            //;http://epiloggerprofileimages.blob.core.windows.net/logosponsor/Sponsor-rxv5ysbzub5oalb43ryjpfsi;http://epiloggerprofileimages.blob.core.windows.net/logosponsor/Sponsor-a1pa1fvjicnq1ek1lekjg21r
+            List<string> list = new List<string>();
+            p = p.Remove(0, 1);             // removes first ;
+            if (p.Contains(';'))
+                list = p.Split(';').ToList();
+            else
+                list.Add(p);
+            return list;
+        }
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
+        public virtual ActionResult UploadSponsors()
+        {
+            var path = @"C:\\";
+            var file = string.Empty;
+                Uri imageurl;
+
+            try
+            {
+                
+                var stream = Request.InputStream;
+                if (String.IsNullOrEmpty(Request["qqfile"]))
+                {
+                    // IE
+                    var postedFile = Request.Files[0];
+                    if (postedFile != null) stream = postedFile.InputStream;
+                    file = Path.Combine(path, System.IO.Path.GetFileName(Request.Files[0].FileName));
+                }
+                else
+                {
+                    //Webkit, Mozilla
+                    file = Path.Combine(path, Request["qqfile"]);
+
+                }
+
+                System.Drawing.Image img = System.Drawing.Image.FromStream(stream);
+                //var correctSize = ((img.Width <= 250 && img.Width >= 220) && (img.Height <= 130 && img.Height >= 30));
+                var correctSize = ((img.Width <= 250 && img.Width >= 80) && (img.Height <= 130 && img.Height >= 30));
+
+                if (!correctSize)
+                    throw new System.ArgumentException("Invalid Size");
+
+                Stream resizedImage = null;
+                Helpers.ResizeImageStream(stream, img.Width, img.Height, true, out resizedImage);
+
+                //Azure Storage Code
+                imageurl = AzureImageStorageHelper.StoreLogoSponsorImage("Sponsor-" + Session.SessionID, "logosponsor", resizedImage);
+                  //  imageurls.Add(imageurl.AbsoluteUri);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, "application/json");
+            }
+
+
+            return Json(new { success = true, imageurl }, "text/html");
+        }
+ // -------------------------------------------------          
+        public virtual ActionResult UploadLogo()
+        {
+            var path = @"C:\\";
+          var file = string.Empty;
+
+            Uri imageurl;
+            
+            try
+            {
+                var stream = Request.InputStream;
+                if (String.IsNullOrEmpty(Request["qqfile"]))
+                {
+                    // IE
+                    var postedFile = Request.Files[0];
+                    if (postedFile != null) stream = postedFile.InputStream;
+                    file = Path.Combine(path, System.IO.Path.GetFileName(Request.Files[0].FileName));
+                }
+                else
+                {
+                    //Webkit, Mozilla
+                    file = Path.Combine(path, Request["qqfile"]);
+                }
+
+                //Resize the image
+                //Stream resizedImage = null;
+                //ResizeImageStream(stream, 120, 120, true, out resizedImage);
+
+                System.Drawing.Image img = System.Drawing.Image.FromStream(stream);
+                bool correctSize = ((img.Width <= 250 && img.Width >= 220) && (img.Height <= 180 && img.Height >= 100));
+
+                if (!correctSize)
+                    throw new System.ArgumentException("Invalid Size");
+
+                Stream resizedImage = null;
+                Helpers.ResizeImageStream(stream, img.Width, img.Height, true, out resizedImage);
+
+                //Azure Storage Code 
+                imageurl = AzureImageStorageHelper.StoreLogoSponsorImage("Logo-" + Session.SessionID, "logosponsor", resizedImage);
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, "application/json");
+            }
+
+            return Json(new { success = true, imageurl = imageurl.AbsoluteUri }, "text/html");
+        }
+
+        [HttpPost]
+        public bool DeleteLogoSponsors(string path, string eventid)
+        {
+            try
+            {
+                int id = Int16.Parse(eventid);
+                string Filename = getFileName(path);
+                string ContainerName = "logosponsor";
+
+                DeleteAzureImage(Filename, ContainerName);
+                
+                    int LiveModeID = _lm.FindIDByEventID(id);
+               if (DeleteDatabaseImage(LiveModeID,path))
+                        return true;
+                
+            }
+            catch { return false; }
+            return false;
+        }
+
+        private bool DeleteDatabaseImage(int id, string url)
+        {
+                 try
+                 {
+                     _sis.DeleteSponsor(id, url);
+                     return true;
+                 }
+                 catch { return false; }
+            
+        }
+        public bool DeleteAzureImage(string Filename, string ContainerName)
+        {
+            try
+            {
+                if (Filename == "")
+                    throw new FileNotFoundException();
+                // Variables for the cloud storage objects.
+                CloudStorageAccount cloudStorageAccount1 = default(CloudStorageAccount);
+                CloudBlobClient blobClient = default(CloudBlobClient);
+                CloudBlobContainer blobContainer = default(CloudBlobContainer);
+                CloudBlob blob = default(CloudBlob);
+
+                cloudStorageAccount1 = CloudStorageAccount.Parse("DefaultEndpointsProtocol=http;AccountName=epiloggerphotos;AccountKey=xbSt0uQAqExzWpc60pcmP6k49Uu7raxPG1BA5+aBhrAAdNxaoiFAZ67jQmG/iiJIeFeemnp74NRuuFAXaaxGJQ==");
+
+                // Create the blob client, which provides authenticated access to the Blob service.
+                blobClient = cloudStorageAccount1.CreateCloudBlobClient();
+
+                // Get the container reference.
+                blobContainer = blobClient.GetContainerReference(ContainerName);
+
+                // Get a reference to the blob.
+                blob = blobContainer.GetBlobReference(Filename);
+                blob.Properties.ContentType = "image/jpeg";
+
+                //
+                //Delete the file
+                blob.Delete();
+                 // delete from database... create method for deleting both
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+        }
+
+        private string getFileName(string formRequest)
+        {
+            // 		Request.Form.ToString()	"http%3a%2f%2fepiloggerprofileimages.blob.core.windows.net%2flogosponsor%2fSponsor-mypo54zwzr1rutc4zwjxoetf"
+            //(Sponsor-.+|Logo-.+)
+            string key = "";
+            Match match = Regex.Match(formRequest, @"(Sponsor-.+|Logo-.+)", RegexOptions.IgnoreCase);
+
+            // Here we check the Match instance.
+            if (match.Success)
+            {
+                // Finally, we get the Group value and display it.
+                key = match.Groups[1].Value;
+            }
+            return key;
+        }
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 		[CompressFilter]
 		[RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to edit an event")]
@@ -1066,7 +1757,7 @@ namespace Epilogger.Web.Controllers {
 			Event currentEvent = _es.FindBySlug(model.EventSlug);
 			model.ID = currentEvent.ID;
 
-			//if (ModelState.IsValid) {
+			if (ModelState.IsValid) {
 				try {
 					currentEvent.CategoryID = model.CategoryID;
 					currentEvent.SubTitle = model.Subtitle;
@@ -1186,7 +1877,7 @@ namespace Epilogger.Web.Controllers {
 					model.EventSlug = currentEvent.EventSlug;
 					return View(model);
 				}
-			//}
+			}
 			
 			return RedirectToAction("edit", new { id = model.EventSlug});
 		}
@@ -1729,26 +2420,41 @@ namespace Epilogger.Web.Controllers {
 		}
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-		
+[RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to edit an event")]
 		public virtual ActionResult Live4X3(string id)
 		{
-
 			var requestedEvent = _es.FindBySlug(id);
+           
 			if (requestedEvent != null)
 			{
 				var topTweetersStats = new TopTweetersStats();
 				var model = new LiveModeViewModel
-								{
-									EventId = requestedEvent.ID,
-									CustomSettings = new LiveModeCustomSettingsService().FindByEventID(requestedEvent.ID),
-									Images = _is.FindByEventIdOrderDescTakeX(requestedEvent.ID, 5, FromDateTime(), ToDateTime()).ToList(),
-									EpiloggerCounts = new Core.Stats.WidgetTotals().GetWidgetTotals(requestedEvent.ID, FromDateTime(), ToDateTime()),
-									TopTweeters = topTweetersStats.Calculate(_ts.GetTop10TweetersByEventID(requestedEvent.ID, FromDateTime(), ToDateTime())).ToList(),
-									Hashtag = requestedEvent.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0].Contains("#")
-												? requestedEvent.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0]
-												: "#" + requestedEvent.SearchTerms.Split(new string[] { " OR " }, StringSplitOptions.None)[0]
-								};
+				                {
+				                    EventSlug = requestedEvent.EventSlug,
+				                    EventId = requestedEvent.ID,
+				                    CustomSettings = new LiveModeCustomSettingsService().FindByEventID(requestedEvent.ID),
+				                    Images =
+				                        _is.FindByEventIdOrderDescTakeX(requestedEvent.ID, 5, FromDateTime(), ToDateTime()).ToList(),
+				                    EpiloggerCounts =
+				                        new Core.Stats.WidgetTotals().GetWidgetTotals(requestedEvent.ID, FromDateTime(),
+				                                                                      ToDateTime()),
+				                    TopTweeters =
+				                        topTweetersStats.Calculate(_ts.GetTop10TweetersByEventID(requestedEvent.ID, FromDateTime(),
+				                                                                                 ToDateTime())).ToList(),
+				                    Hashtag =
+				                        requestedEvent.SearchTerms.Split(new string[] {" OR "}, StringSplitOptions.None)[0].Contains
+				                            ("#")
+				                            ? requestedEvent.SearchTerms.Split(new string[] {" OR "}, StringSplitOptions.None)[0]
+				                            : "#" +
+				                              requestedEvent.SearchTerms.Split(new string[] {" OR "}, StringSplitOptions.None)[0],
+				                    CurrentUserRole = CurrentUserRole,
+				                    CurrentUserID = CurrentUser.ID,
+				                    UserID = CurrentUser.ID,
 
+				                };
+
+			    var sponsors = _sis.FindByLiveID(model.CustomSettings.Id);
+                model.SponsorImageList = sponsors;
 				return View(model);
 			}
 			ModelState.AddModelError(string.Empty, "The event you're trying to visit doesn't exist.");
@@ -1769,7 +2475,7 @@ namespace Epilogger.Web.Controllers {
 
 					pageLoadTime = string.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.Parse(pageLoadTime));
 					
-					var theTweets = _ts.FindForLiveModeAjaxDesc(eventID, count);
+					var theTweets = _ts.FindForLiveModeAjaxDesc(eventID, count).ToList();
 					theTweets.Sort((x, y) => y.CreatedDate.Value.CompareTo(x.CreatedDate.Value));
 					
 
@@ -1786,9 +2492,8 @@ namespace Epilogger.Web.Controllers {
 
 						//Instead of hard coding the HTML for the tweets, let's use the template.
 						var firstOrDefault = theT.Events.FirstOrDefault(t => t.ID == eventID);
-						var canDelete = firstOrDefault != null && ((firstOrDefault.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator);
 
-						tweets.Add(RenderRazorViewToString("_LiveTweetTemplate", new TweetTemplateViewModel() { ModifyDisplayClass = "newupdates", CanDelete = canDelete, Tweet = theT, ShowControls = true, EventId = eventID }));
+						tweets.Add(RenderRazorViewToString("_LiveTweetTemplate", new TweetTemplateViewModel() { ModifyDisplayClass = "newupdates", CanDelete = CanModerate(firstOrDefault), Tweet = theT, ShowControls = true, EventId = eventID }));
 					}
 
 					//Return the Dictionary as it's IEnumerable and it creates the correct JSON doc.
@@ -1904,84 +2609,18 @@ namespace Epilogger.Web.Controllers {
 
 		}
 
-        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        public virtual ActionResult Timeline(string id)
+        private bool CanModerate(Event e)
         {
+            if (e == null) return false;
+            if (CurrentUserRole == UserRoleType.Administrator) return true;
 
-            var requestedEvent = _es.FindBySlug(id);
-            if (requestedEvent != null)
+            if (e.IsPaid != null && (bool) e.IsPaid)
             {
-
-
-                return View(requestedEvent);
-            }
-            ModelState.AddModelError(string.Empty, "The event you're trying to visit doesn't exist.");
-            return RedirectToAction("index", "Browse");
-
-        }
-
-        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
-        public virtual ActionResult TimelineData(string id)
-        {
-            var requestedEvent = _es.FindBySlug(id);
-            var ro = new Models.Timeline.RootObject();
-
-            if (requestedEvent != null)
-            {
-                var theImages = _is.FindByEventID(requestedEvent.ID).OrderBy(e => e.DateTime);
-                
-                Models.Timeline.Timeline tl = new Models.Timeline.Timeline()
-                                                  {
-                                                      headline = requestedEvent.Name,
-                                                      type = "default",
-                                                      text = requestedEvent.Description,
-                                                      date = new List<Date>(),
-                                                      asset = new Asset(),
-                                                      era = new List<Era>()
-                                                  };
-
-
-                //Get all the photos for the event
-                Date nd = null;
-                
-                foreach (var img in theImages)
-                {
-                    var tw = _ts.FindByImageID(img.ID, requestedEvent.ID).FirstOrDefault();
-                    //object tw = null;
-                    nd = new Date()
-                    {
-                        startDate = String.Format("{0:yyyy,M,d,HH,mm,ss}", img.DateTime.ToLocalTime()),
-                        endDate = String.Format("{0:yyyy,M,d,HH,mm,ss}", img.DateTime.ToLocalTime()),
-                        headline = tw == null ? "" : tw.FromUserScreenName,
-                        text = tw == null ? "" : tw.Text,
-                        asset = new Asset2()
-                        {
-                            media = img.Fullsize,
-                            caption = "",
-                            credit = "",
-                            thumbnail = img.Fullsize
-                        }
-                    };
-
-                    tl.date.Add(nd);
-
-                }
-                tl.era.Add(new Era()
-                               {
-                                   startDate = String.Format("{0:yyyy,M,d,HH,mm,ss}", requestedEvent.StartDateTime.ToLocalTime()),
-                                   endDate = String.Format("{0:yyyy,M,d,HH,mm,ss}", ((DateTime)requestedEvent.EndDateTime).ToLocalTime()),
-                                   headline = "Official event times",
-                                   tag = "",
-                                   text = ""
-                               });
-                
-                ro.timeline = tl;
+                return ((e.UserID == CurrentUserID) || CurrentUserRole == UserRoleType.Administrator);
             }
 
-            return Json(ro, JsonRequestBehavior.AllowGet);
-            
+            return false;
         }
 
 		

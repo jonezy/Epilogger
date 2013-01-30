@@ -62,6 +62,16 @@ namespace Epilogger.Web.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult CreateEventTweets() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.CreateEventTweets);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Create() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Create);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult EventBySlug() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.EventBySlug);
         }
@@ -142,6 +152,11 @@ namespace Epilogger.Web.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Live4x3() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Live4x3);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult Edit() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
         }
@@ -210,16 +225,6 @@ namespace Epilogger.Web.Controllers {
         public System.Web.Mvc.ActionResult PullTweets() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.PullTweets);
         }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult Timeline() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.Timeline);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult TimelineData() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.TimelineData);
-        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public EventsController Actions { get { return MVC.Events; } }
@@ -239,6 +244,9 @@ namespace Epilogger.Web.Controllers {
             public readonly string Details = "Details";
             public readonly string AllPhotos = "AllPhotos";
             public readonly string AllTweets = "AllTweets";
+            public readonly string CreateEvent = "CreateEvent";
+            public readonly string CreateEventTweets = "CreateEventTweets";
+            public readonly string CreateEventFinal = "CreateEventFinal";
             public readonly string Create = "Create";
             public readonly string EventBySlug = "EventBySlug";
             public readonly string GetImageComments = "GetImageComments";
@@ -256,6 +264,9 @@ namespace Epilogger.Web.Controllers {
             public readonly string AllCheckins = "AllCheckins";
             public readonly string AllLinks = "AllLinks";
             public readonly string AllStats = "AllStats";
+            public readonly string Live4x3 = "Live4x3";
+            public readonly string UploadSponsors = "UploadSponsors";
+            public readonly string UploadLogo = "UploadLogo";
             public readonly string Edit = "Edit";
             public readonly string VenueSearch = "VenueSearch";
             public readonly string SearchVenues = "SearchVenues";
@@ -274,8 +285,6 @@ namespace Epilogger.Web.Controllers {
             public readonly string LiveGetLastTweetsJson = "LiveGetLastTweetsJson";
             public readonly string LiveGetLastPhotosJson = "LiveGetLastPhotosJson";
             public readonly string PullTweets = "PullTweets";
-            public readonly string Timeline = "Timeline";
-            public readonly string TimelineData = "TimelineData";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -284,6 +293,9 @@ namespace Epilogger.Web.Controllers {
             public const string Details = "Details";
             public const string AllPhotos = "AllPhotos";
             public const string AllTweets = "AllTweets";
+            public const string CreateEvent = "CreateEvent";
+            public const string CreateEventTweets = "CreateEventTweets";
+            public const string CreateEventFinal = "CreateEventFinal";
             public const string Create = "Create";
             public const string EventBySlug = "EventBySlug";
             public const string GetImageComments = "GetImageComments";
@@ -301,6 +313,9 @@ namespace Epilogger.Web.Controllers {
             public const string AllCheckins = "AllCheckins";
             public const string AllLinks = "AllLinks";
             public const string AllStats = "AllStats";
+            public const string Live4x3 = "Live4x3";
+            public const string UploadSponsors = "UploadSponsors";
+            public const string UploadLogo = "UploadLogo";
             public const string Edit = "Edit";
             public const string VenueSearch = "VenueSearch";
             public const string SearchVenues = "SearchVenues";
@@ -319,8 +334,6 @@ namespace Epilogger.Web.Controllers {
             public const string LiveGetLastTweetsJson = "LiveGetLastTweetsJson";
             public const string LiveGetLastPhotosJson = "LiveGetLastPhotosJson";
             public const string PullTweets = "PullTweets";
-            public const string Timeline = "Timeline";
-            public const string TimelineData = "TimelineData";
         }
 
 
@@ -353,6 +366,20 @@ namespace Epilogger.Web.Controllers {
         public class ActionParamsClass_AllTweets {
             public readonly string id = "id";
             public readonly string page = "page";
+        }
+        static readonly ActionParamsClass_CreateEventTweets s_params_CreateEventTweets = new ActionParamsClass_CreateEventTweets();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_CreateEventTweets CreateEventTweetsParams { get { return s_params_CreateEventTweets; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_CreateEventTweets {
+            public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_Create s_params_Create = new ActionParamsClass_Create();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Create CreateParams { get { return s_params_Create; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Create {
+            public readonly string model = "model";
         }
         static readonly ActionParamsClass_EventBySlug s_params_EventBySlug = new ActionParamsClass_EventBySlug();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -478,6 +505,13 @@ namespace Epilogger.Web.Controllers {
         public class ActionParamsClass_AllStats {
             public readonly string id = "id";
         }
+        static readonly ActionParamsClass_Live4x3 s_params_Live4x3 = new ActionParamsClass_Live4x3();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Live4x3 Live4x3Params { get { return s_params_Live4x3; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Live4x3 {
+            public readonly string model = "model";
+        }
         static readonly ActionParamsClass_Edit s_params_Edit = new ActionParamsClass_Edit();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_Edit EditParams { get { return s_params_Edit; } }
@@ -584,25 +618,12 @@ namespace Epilogger.Web.Controllers {
         public class ActionParamsClass_PullTweets {
             public readonly string eventId = "eventId";
         }
-        static readonly ActionParamsClass_Timeline s_params_Timeline = new ActionParamsClass_Timeline();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Timeline TimelineParams { get { return s_params_Timeline; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Timeline {
-            public readonly string id = "id";
-        }
-        static readonly ActionParamsClass_TimelineData s_params_TimelineData = new ActionParamsClass_TimelineData();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_TimelineData TimelineDataParams { get { return s_params_TimelineData; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_TimelineData {
-            public readonly string id = "id";
-        }
         static readonly ViewNames s_views = new ViewNames();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly string _CreateEventLayout = "~/Views/Events/_CreateEventLayout.cshtml";
             public readonly string _EventMenu = "~/Views/Events/_EventMenu.cshtml";
             public readonly string _ImageTemplate = "~/Views/Events/_ImageTemplate.cshtml";
             public readonly string _LiveTweetTemplate = "~/Views/Events/_LiveTweetTemplate.cshtml";
@@ -620,8 +641,12 @@ namespace Epilogger.Web.Controllers {
             public readonly string Category = "~/Views/Events/Category.cshtml";
             public readonly string ConceptMap = "~/Views/Events/ConceptMap.cshtml";
             public readonly string Create = "~/Views/Events/Create.cshtml";
+            public readonly string CreateEvent = "~/Views/Events/CreateEvent.cshtml";
+            public readonly string CreateEventFinal = "~/Views/Events/CreateEventFinal.cshtml";
+            public readonly string CreateEventTweets = "~/Views/Events/CreateEventTweets.cshtml";
             public readonly string Details = "~/Views/Events/Details.cshtml";
             public readonly string Edit = "~/Views/Events/Edit.cshtml";
+            public readonly string EditLiveMode = "~/Views/Events/EditLiveMode.cshtml";
             public readonly string EventToolbar = "~/Views/Events/EventToolbar.cshtml";
             public readonly string ImageCommentControl = "~/Views/Events/ImageCommentControl.cshtml";
             public readonly string ImageCommentsPaged = "~/Views/Events/ImageCommentsPaged.cshtml";
@@ -630,11 +655,11 @@ namespace Epilogger.Web.Controllers {
             public readonly string NeedTwitterAuth = "~/Views/Events/NeedTwitterAuth.cshtml";
             public readonly string PhotoDetails = "~/Views/Events/PhotoDetails.cshtml";
             public readonly string Search = "~/Views/Events/Search.cshtml";
-            public readonly string Timeline = "~/Views/Events/Timeline.cshtml";
             public readonly string TweetBox = "~/Views/Events/TweetBox.cshtml";
             public readonly string TweetReply = "~/Views/Events/TweetReply.cshtml";
             public readonly string TweetRetweet = "~/Views/Events/TweetRetweet.cshtml";
             public readonly string TweetTemplate = "~/Views/Events/TweetTemplate.cshtml";
+            public readonly string UploadFile = "~/Views/Events/UploadFile.cshtml";
             public readonly string UploadPhotos = "~/Views/Events/UploadPhotos.cshtml";
             public readonly string VenueSearch = "~/Views/Events/VenueSearch.cshtml";
         }
@@ -677,8 +702,38 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Create() {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Create);
+        public override System.Web.Mvc.ActionResult CreateEvent() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEvent);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult CreateEvent(Epilogger.Web.Models.CreateBasicEventViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEvent);
+            callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult CreateEventTweets(string id) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEventTweets);
+            callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult CreateEventTweets(Epilogger.Web.Models.CreateEventTwitterViewModel model, System.Web.Mvc.FormCollection frm) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEventTweets);
+            callInfo.RouteValueDictionary.Add("model", model);
+            callInfo.RouteValueDictionary.Add("frm", frm);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult CreateEventFinal() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEventFinal);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult CreateEventFinal(Epilogger.Web.Models.CreateFinalEventViewModel displayModel) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEventFinal);
+            callInfo.RouteValueDictionary.Add("displayModel", displayModel);
             return callInfo;
         }
 
@@ -799,6 +854,22 @@ namespace Epilogger.Web.Controllers {
         public override System.Web.Mvc.ActionResult AllStats(string id) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.AllStats);
             callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Live4x3(Epilogger.Web.Models.LiveModeViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Live4x3);
+            callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult UploadSponsors() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.UploadSponsors);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult UploadLogo() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.UploadLogo);
             return callInfo;
         }
 
@@ -924,18 +995,6 @@ namespace Epilogger.Web.Controllers {
         public override System.Web.Mvc.ActionResult PullTweets(int eventId) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.PullTweets);
             callInfo.RouteValueDictionary.Add("eventId", eventId);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult Timeline(string id) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Timeline);
-            callInfo.RouteValueDictionary.Add("id", id);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult TimelineData(string id) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.TimelineData);
-            callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }
 

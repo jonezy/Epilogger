@@ -4,11 +4,14 @@ using System.Linq;
 using System.Web;
 using Epilogger.Data;
 using Epilogger.Web.Core.Stats;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Epilogger.Web.Models
 {
     public class LiveModeViewModel
     {
+        public string EventSlug { get; set; }
         public int EventId { get; set; }
         public LiveModeCustomSetting CustomSettings { get; set; }
         
@@ -19,5 +22,15 @@ namespace Epilogger.Web.Models
 
         public List<Tweet> Tweets { get; set; }
         public List<Image> Images { get; set; }
+
+        public string Sponsors { get; set; }
+
+
+        public List<SponsorImage> SponsorImageList;
+
+
+        public Guid UserID { get; set; }
+        public UserRoleType CurrentUserRole { get; set; }
+        public Guid CurrentUserID { get; set; }
     }
 }

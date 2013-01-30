@@ -16,6 +16,7 @@ namespace Epilogger.Web {
 
         public object Save(LiveModeCustomSetting entity)
         {
+            entity.Id = FindIDByEventID(entity.EventId);
             if (entity.Id > 0)
                 return base.GetRepository<LiveModeCustomSetting>().Update(entity);
 
@@ -38,7 +39,18 @@ namespace Epilogger.Web {
                            LinkColour = "",
                            SponsorLogos = null,
                            TwitterUserNameColour = ""
+
                        };
+        }
+        public int FindIDByEventID(int eventId)
+        {
+            var settings = GetData(v => v.EventId == eventId).FirstOrDefault();
+            if (settings != null)
+            {
+                return settings.Id;
+            }
+
+            return 0;
         }
 
 
