@@ -593,7 +593,6 @@ namespace Epilogger.Web.Controllers {
 
 
                     //Initiate a first collect on the event
-                    //TODO Remove after testing
                     var tsmp = new MQ.MSGProducer("Epilogger", "TwitterSearch");
                     var tsMSG = new MQ.Messages.TwitterSearchMSG
                     {
@@ -606,8 +605,10 @@ namespace Epilogger.Web.Controllers {
                     tsmp.SendMessage(tsMSG);
                     tsmp.Dispose();
 
+                    //Tweet that the event has been created.
+                    SendEventCreatedTweet(eventMod);
+
                     //The the admins an email with the event details.
-                    //TODO Remove after testing
                     SendEventCreatedEmailToSystem(eventMod);
 
                     //Clear this for the next create event
