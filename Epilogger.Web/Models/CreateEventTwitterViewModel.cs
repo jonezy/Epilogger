@@ -13,8 +13,11 @@ namespace Epilogger.Web.Models
     {
         public string EventSlug { get; set; }
 
-      [Required(ErrorMessage = "Please enter some search terms for your event (ex: epilogger OR EPL)")]
+        [Required(ErrorMessage = "Please enter some search terms for your event (ex: epilogger OR EPL)")]
         [DisplayName("Search Terms")]
         public string SearchTerms { get; set; }
+
+        public string EventTime { get; set; }
+        public bool IsAdvanceMode { get; set; }
     }
 }

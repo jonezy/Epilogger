@@ -319,21 +319,21 @@ function FlashMessage(message, cssClas) {
 
 
 //PopUp for Advanced Operators
-head.ready(function () {
+//head.ready(function () {
 
-    var myHelp = $("#SearchHelpPopUpDiv");
-    var myHelp_link = $("#AdvancedSearchHelp");
+//    var myHelp = $("#SearchHelpPopUpDiv");
+//    var myHelpLink = $("#AdvancedSearchHelp");
 
-    myHelp_link.toggle(
-        function () {
-            myHelp.show();
-            return false;
-        },
-        function () {
-            myHelp.hide();
-            return false;
-        });
-    });
+//    myHelpLink.toggle(
+//        function () {
+//            myHelp.show();
+//            return false;
+//        },
+//        function () {
+//            myHelp.hide();
+//            return false;
+//        });
+//    });
 
 jQuery.fn.hint = function (blurClass) {
     if (!blurClass) {

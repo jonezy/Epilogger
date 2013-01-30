@@ -10,12 +10,12 @@ using System.Collections;
 
 namespace Epilogger.Web.Controllers
 {
-    public class UtilitiesController : Controller
+    public partial class UtilitiesController : Controller
     {
         List<string> ets = new List<string>();
         EpiloggerDB db = new EpiloggerDB();
 
-        public ActionResult Autocomplete(string term)
+        public virtual ActionResult Autocomplete(string term)
         {
             var routeList = (from e in db.Events
                              where e.Name.Contains(term)
@@ -34,8 +34,8 @@ namespace Epilogger.Web.Controllers
             return Json(routeList, JsonRequestBehavior.AllowGet);
         }
 
-   
-        public ActionResult Autocomplete2(string term)
+
+        public virtual ActionResult Autocomplete2(string term)
         {
             string html = "";
             string ven = "";

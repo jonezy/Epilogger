@@ -70,6 +70,7 @@ namespace Epilogger.Web.Models {
         [DisplayName("Time Zone")]
         public int TimeZoneOffset { get; set; }
 
+        
 
         public IEnumerable<SelectListItem> TimeZones { get; set; }
        

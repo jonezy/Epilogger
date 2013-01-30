@@ -39,23 +39,27 @@
             });
 
         });
+
+        
+
     </script>
 }
 <div class="form_process">
     <img src="/Public/images/CreateEvent/BasicInfoActive.png" alt="Basic Information" />
 </div>
-@Html.ValidationSummary("Please correct the following issues")
+@*@Html.ValidationSummary("Please correct the following issues")*@
 @using (Html.BeginForm("CreateEvent", "Events", FormMethod.Post, new { id = "CreateForm" }))
 {   
     <fieldset class="popForm">
         <div class="">
-            <p>@Html.Label("Event title:") @Html.EditorFor(model => model.Name)</p>
+            <p>@Html.Label("Event title:") @Html.EditorFor(model => model.Name) @Html.ValidationMessageFor(model => model.Name)</p>
             <p>@Html.Label("Event subtitle:") @Html.EditorFor(model => model.Subtitle)</p>
             <div class="hint">
                 (ex: Presented by Aperture Laboratories)
             </div>
-            <p>@Html.LabelFor(model => model.CategoryId) @Html.DropDownListFor(model => model.CategoryId, Model.Categories, "Select your event category")</p>
-            <div class="">
+            <p>@Html.LabelFor(model => model.CategoryId) @Html.DropDownListFor(model => model.CategoryId, Model.Categories, "Select your event category")
+            @Html.ValidationMessageFor(model => model.CategoryId)</p>
+            <div class="padTheTop">
                 <p>@Html.Label("Start date:") @Html.EditorFor(m => m.StartDateTime, "DateTimeOneline")
                     @Html.DropDownList("start_times", new SelectList(CreateBasicEventViewModel.Times, "Value", "Text", string.Format("{0:h:mm}", Model.StartDateTime.ToLocalTime())), new { @class = "times" })
                     @Html.DropDownList("AMPMstartTime", new SelectList(new List<SelectListItem> {
@@ -73,7 +77,7 @@
                 </p>
             </div>
             <div class="under_control_notice">
-                @Html.CheckBox("End_Date", @Model.allDay)
+                @Html.CheckBox("End_Date", @Model.allDay, new { value = false })
                 <label class="endDateCheckLabel" for="End_Date">
                     All day</label>
             </div>
@@ -103,6 +107,7 @@
             <div class="dashed">
             </div>
             <input type="submit" class="submitEvent" value="ALL DONE WITH BASIC INFO" />
+            @Html.HiddenFor(model => model.EventSlug)
         </div>
     </fieldset>
 }
@@ -128,33 +133,82 @@
     });
 
 
-    $(document).ready(function () {
+//    if ($(".field-validation-error").length > 0)
+//    {
+//        parent.$.colorbox.resize({ width: 560, height: 650 });
+//    }
+//    else {
+//        parent.$.colorbox.resize({ width: 560, height: 570 });
+//    }
+
+    $(document).ready(function() {
         $("#Name").autocomplete({
-            source: function (request, response) {
+            source: function(request, response) {
                 $.ajax({
                     url: '@Url.Action("Autocomplete", "Utilities")',
                     type: "POST",
                     dataType: "json",
                     data: { term: request.term },
-                    success: function (data) {
-                        response($.map(data, function (item) {
-                            return { label: "<div class=\"auto_complete_detail\"><div class=\"auto_complete_name\">" + item.label + "</div><div class=\"auto_complete_date\"><img src=\"/Public/images/CreateEvent/clock.png\"  /><span>" + item.startDate + "</span></div><div class=\"auto_complete_venue\"><img src=\"/Public/images/CreateEvent/gps.png\"  /><span>" + item.venue + "</span></div></div>", value: item.url, id: item.id }; 
+                    success: function(data) {
+                        response($.map(data, function(item) {
+                            return { label: "<div class=\"auto_complete_detail\"><div class=\"auto_complete_name\">" + item.label + "</div><div class=\"auto_complete_date\"><img src=\"/Public/images/CreateEvent/clock.png\"  /><span>" + item.startDate + "</span></div><div class=\"auto_complete_venue\"><img src=\"/Public/images/CreateEvent/gps.png\"  /><span>" + item.venue + "</span></div></div>", value: item.url, id: item.id };
                         }));
                     }
-
                 });
             },
-            select: function (event, ui) {
-            // alert(ui.item.value);
-             window.open(ui.item.value);
+            select: function(event, ui) {
+                // alert(ui.item.value);
+                window.open(ui.item.value);
                 return false;
             }
-        }).data("autocomplete")._renderItem = function (ul, item) {
-            return $("<li>")
-                .data("item.autocomplete", item)
-                .append("<a>" + item.label + "</a>")
-                .appendTo(ul);
+        }).data("autocomplete")._renderMenu = function(ul, items) {
+            var self = this;
+
+            $.each(items, function(index, item) {
+                if (index == 0)
+                    ul.append('<li id="auto_complete_header"><b>Events already in Epilogger:</b></li>');
+                var renderItem = function (ul1, item1) {
+                    return $("<li></li>")
+                        .data("item.autocomplete", item1)
+                        .append("<a>" + item1.label + "</a>")
+                        .appendTo(ul1);
+                };
+                self._renderItem = renderItem(ul,item);
+            });
+        };
+
+
+
+
+        //Friendly URL creation
+        $("#Name").bind("keyup", function (e) {
+            buildFriendlyUrl($("#Name").val());
+        });
+        //    $("#EventSlug").bind("keyup", function (e) {
+        //        buildFriendlyUrl($("#EventSlug").val());
+        //    });
+
+
+        function buildFriendlyUrl(title) {
+            var url = title
+        .toLowerCase() // change everything to lowercase
+		.replace(/^\s+|\s+$/g, "") // trim leading and trailing spaces
+		.replace(/[_|\s]+/g, "-") // change all spaces and underscores to a hyphen
+		.replace(/[^a-zA-Z0-9-]+/g, "") // remove all non-alphanumeric characters except the hyphen
+		.replace(/[-]+/g, "-") // replace multiple instances of the hyphen with a single instance
+		.replace(/^-+|-+$/g, "") // trim leading and trailing hyphens
+		;
+
+            $("#EventSlug").val(url);
         }
-        
+
     });
+    
+
+
+
 </script>
+@* return $("<li>")
+                        .data("item.autocomplete", item)
+                        .append("<a>" + item.label + "</a>")
+                        .appendTo(ul);*@
