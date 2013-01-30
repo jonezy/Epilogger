@@ -609,7 +609,11 @@ namespace Epilogger.Web.Controllers {
                     SendEventCreatedTweet(eventMod);
 
                     //The the admins an email with the event details.
-                    SendEventCreatedEmailToSystem(eventMod);
+                    if ((bool) (!eventMod.IsPrivate))
+                    {
+                        SendEventCreatedEmailToSystem(eventMod);    
+                    }
+                    
 
                     //Clear this for the next create event
                     TempData["Event"] = null;
