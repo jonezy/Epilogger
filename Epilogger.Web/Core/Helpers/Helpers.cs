@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -24,6 +25,30 @@ namespace Epilogger.Web {
             // randomize indexes (several approaches are possible)
             return array;
         }
+
+
+        public static string ConvertNumberToKorM(int numberToConvert, bool showDecimal = false)
+        {
+            if (numberToConvert > 1000000)
+            {
+                if (showDecimal)
+                    return Math.Round(((double) numberToConvert / 1000000), 2).ToString(CultureInfo.InvariantCulture) + "M";
+
+                return Math.Floor(d: ((double)numberToConvert / 1000000)).ToString(CultureInfo.InvariantCulture) + "M";
+            }
+            if (numberToConvert > 1000)
+            {
+                if (showDecimal)
+                    return Math.Round((double)numberToConvert / 1000, 2).ToString(CultureInfo.InvariantCulture) + "K";
+
+                return Math.Floor(d: (double)numberToConvert / 1000).ToString(CultureInfo.InvariantCulture) + "K";
+            }
+            
+            return numberToConvert.ToString(CultureInfo.InvariantCulture);
+        }
+
+
+
 
         //DEPRECATED!
 

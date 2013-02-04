@@ -10,6 +10,9 @@ namespace Epilogger.Web.Models {
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
         public string SearchTerms { get; set; }
+        public bool IsPaid { get; set; }
+        public Guid UserID { get; set; }
+        public Guid CurrentUserId { get; set; }
         public int TotalTweets { get; set; }
         public int TotalMedia { get; set; }
     }

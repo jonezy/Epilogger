@@ -2703,6 +2703,12 @@ namespace Epilogger.Web.Controllers {
 
 		}
 
+        public virtual ActionResult UploadFile()
+        {
+            return View();
+        }
+
+	    
 
         private bool CanModerate(Event e)
         {
@@ -2730,6 +2736,8 @@ namespace Epilogger.Web.Controllers {
             }
             return false;
         }
+
+
 
 		
 	}

@@ -11,8 +11,13 @@
 </div>
 
 <div id="dashboard-content">
-    
-    @if (!Model.Events.Any()) {
+    <h1>MY EVENTS</h1>
+
+    @Html.Partial("_EventListItem", Model.Events)
+    <br class="clear" />
+    <div class="clear">
+
+    @*@if (!Model.Events.Any()) {
         <div class="dashboard-event-item clearfix">You haven't created any events. Why not add one?!</div>
         @Html.ActionLink("CREATE EVENT", "create", "events")
     }
@@ -36,41 +41,10 @@
                 <div class="total-media">@item.TotalMedia</div>
             </div>
         </div>
-    }
-    
-    
-    
-
-    @*
-    @foreach (var item in Model.Activity) {
-        <div class="dashboard-activity-entry">
-            <strong class="title @item.ActivityType">
-                @if(item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION) {
-                    @:NEW EVENT ADDED:
-                } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.FOLLOW_EVENT) {
-                    @:SUBSCRIBED TO EVENT
-                } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_RATING) {
-                    @:RATED AN EVENT
-                } else {
-                    @item.EventName
-                }</strong>
-        
-            @if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION || 
-                 item.ActivityType == Epilogger.Web.Models.ActivityType.FOLLOW_EVENT) {
-                     <h2>@MvcHtmlString.Create(item.EventName)</h2>
-                 } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_RATING) {
-                     <h2>you rated @item.EventName @MvcHtmlString.Create(item.ActivityContent) out of 5 stars</h2>
-                 } else if (item.ActivityType == Epilogger.Web.Models.ActivityType.PHOTOS_VIDEOS) {
-                     <img src="@item.ActivityContent" width="170" height="140" />
-                 } else {
-                     <p> @MvcHtmlString.Create(item.ActivityContent)</p>
-                 }
-        
-        
-        </div>
     }*@
-    <br class="clear" />
-    <div class="clear">
+    
+    
+    
     </div>
     @MvcHtmlString.Create(Html.Pager(Model.PageSize, Model.CurrentPageIndex, Model.TotalRecords, new { controller = "dashboard", action = "events" }))
 </div>

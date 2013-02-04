@@ -1,11 +1,13 @@
 ﻿@model Epilogger.Web.Models.BrowseEventsDisplayViewModel
+@{
+    var currentMonth = string.Empty;
+}
 <div id="events-nav">
-    <h1>BROWSE @Model.BrowsePageFilter.ToUpper() EVENTS</h1>
+    <h1>EVENTS HAPPENING @Model.BrowsePageFilter.ToUpper()</h1>
     <br style="clear: both;" />
 </div>
 <div id="events-content">
-    <h2>
-        EVENTS:</h2>
+    <h1>EVENTS</h1>
     @if (Model.Events.Count() == 0) {
         <div class="dashboard-event-item clearfix">
             There are currently no events going on. Why not add one?!</div>
@@ -13,6 +15,22 @@
         @Html.ActionLink("Add an Event", "create", "events", null, new { @class = "blue-action-button" })
     }
     @foreach (var item in Model.Events) {
+        if (string.Format("{0:MMMM yyyy}", item.StartDateTime) != currentMonth)
+        {
+            if (currentMonth != string.Empty)
+            {
+                @:<div class="spacer"></div>
+            }
+        
+            <div class="event-totals-icons">
+                <img src="/Public/images/icons/eventListTotalIcons.png" alt="" />
+            </div>
+        
+            currentMonth = string.Format("{0:MMMM yyyy}", item.StartDateTime);
+            @:<span></span><h2>@currentMonth</h2>
+        
+        }
+        
         <div class="dashboard-event-item clearfix">
             <div class="month-day">
                 <div class="month">@Html.DisplayFor(thing => item.StartDateTime, "Month")</div>
@@ -28,8 +46,8 @@
                 <div class="event-content-searchterms">@item.SearchTerms</div>
             </div>
             <div class="event-totals">
-                <div class="total-tweets">@string.Format("{0:#,###}", item.TotalTweets)</div>
-                <div class="total-media">@string.Format("{0:#,###}", item.TotalMedia)</div>
+                <div class="total-tweets">@Epilogger.Web.Helpers.ConvertNumberToKorM(item.TotalTweets)</div>
+                <div class="total-media">@Epilogger.Web.Helpers.ConvertNumberToKorM(item.TotalMedia)</div>
             </div>
         </div>
     }

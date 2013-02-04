@@ -4,7 +4,7 @@
 <ul id="left-nav">
     @*<li>@Html.ActionLink("Account Activity", "index", null,  action.ToLower() == "index" ? new { @class="current"} : null)</li>*@
     @*<li>@Html.ActionLink("Profile Information", "profile", null, action.ToLower() == "profile" ? new { @class = "current" } : null)</li>*@
-    <li>@Html.ActionLink("My Created Events", "events", null, action.ToLower() == "events" || action.ToLower() == "allevents" ? new { @class = "current no-border" } : null)
+    <li>@Html.ActionLink("My Events", "events", null, action.ToLower() == "events" || action.ToLower() == "allevents" ? new { @class = "current no-border" } : null)
        @* @if (action.ToLower() == "events" || action.ToLower() == "allevents") {
             <ul>
                 <li>@Html.ActionLink("- Recent Activity", "events", null, action.ToLower() == "events" ? new { @class = "current" } : null)</li>
@@ -12,7 +12,7 @@
             </ul>
         }*@
     </li>
-    <li>@Html.ActionLink("Event Subscriptions", "subscriptions", null, action.ToLower() == "subscriptions" ? new { @class = "current" } : null)</li>
+    <li>@Html.ActionLink("Subscriptions", "subscriptions", null, action.ToLower() == "subscriptions" ? new { @class = "current" } : null)</li>
     @*<li>@Html.ActionLink("Account & Preferences", "account", null, action.ToLower() == "account" ? new { @class = "current" } : null)</li>*@
 </ul>
 

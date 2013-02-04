@@ -122,8 +122,8 @@ div.footer {
 	bottom:0;
 	border-top:0.5em solid #fff;
 	box-shadow:0 0 0.25em #ccc;
-	opacity:0.9
-	color:#666;}
+    opacity: 0.9;
+	color: #666; }
 	
 div.footer-dark {
 	width:100%;
@@ -342,7 +342,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#52cc7f', end
     
     background-image:url(../images/livemode/close-icon.png);
     background-repeat:no-repeat;
-    background-position-x: 53px;
+    background-position: 53px 0;
     background-size: 9px;  
     cursor:pointer; 
 }

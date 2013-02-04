@@ -550,7 +550,7 @@ h4 {
 
 h6 {
     font-weight:normal;
-    font-size:11pt}    
+    font-size: 11pt;}
 
 .small-label, small {
 	text-transform:uppercase;
@@ -1522,11 +1522,12 @@ ul#left-nav li ul li a.current {color:#a44b79;}
 .event-content-searchterms2 {width:40px;float:left;background-position: 0px -22px;padding-left:14px;}
 
 .dashboard-event-item {
-    border-bottom:solid 1px #e1e1e1;
-    padding:8px 0px;}
+    /*border-bottom:solid 1px #e1e1e1;*/
+    padding: 9px 0px;}
    
 .dashboard-event-item .event-totals {
-    display:none}
+    /*display:none*/
+    }
 
 .month-day {
     font:bold 12px helvetica, arial, sans-serif;
@@ -1575,13 +1576,29 @@ ul#left-nav li ul li a.current {color:#a44b79;}
     color:#918e8e;}
 
 .dashboard-event-item .event-content {margin-left:15px;float:left;width:60%;}
-.dashboard-event-item .event-content h6 {margin-bottom:3px;}
+.dashboard-event-item .event-content h6 { margin-bottom:3px; font-weight: bold; }
 .dashboard-event-item .event-content-searchterms {width:70%;}
 
-.event-totals { float:right; } /*margin-top:15px; --took this out so the style could be reused better - Using on BrowseEvents.*/
+
+
+/*margin-top:15px; --took this out so the style could be reused better - Using on BrowseEvents.*/
+/*
+.event-totals { float:right; }
 .event-totals .total-tweets, .event-totals .total-media {background-image:url(../images/icons/dashboard-event-totals.png); background-repeat:no-repeat;height:25px;font-weight:bold;color:#2c70cc;font-size:11px;}
 .event-totals .total-tweets {float:left;padding:4px 40px 0px 0px;background-position:50px 0px;width:50px;}
 .event-totals .total-media {float:left;padding:4px 30px 0px 0px;background-position:34px -50px;width:40px;}
+*/
+
+.event-totals { float: right;width: 125px; font-weight:bold; color:#717171; font-size:14px; } /*margin-top:15px; --took this out so the style could be reused better - Using on BrowseEvents.*/
+.event-totals .total-tweets, .event-totals .total-media { }
+.event-totals .total-tweets { float: left;width: 68px;text-align: right; }
+.event-totals .total-media { float: right;width: 45px;text-align: right; }
+
+
+.event-totals-icons { float: right;width: 125px; font-weight:bold; color:#717171; font-size:14px;text-align: right; } /*margin-top:15px; --took this out so the style could be reused better - Using on BrowseEvents.*/
+.event-totals-icons .total-tweets { float: left;width: 65px;text-align: right; }
+.event-totals-icons .total-media { float: right;width: 45px;text-align: right; }
+
 
 .account-overview {
     border-top:dotted 1px #b5b5b5;
@@ -2243,8 +2260,9 @@ div#search-container input[type=image] {
     left:-83px;
     color:#c0c0c0; 
     padding-left:4px; 
-    font: italic 10px;
-    text-transform:lowercase}
+    text-transform: lowercase;
+    font-style: italic;
+    font-size: 10px; }
     
 a.smallRateLink:hover { text-decoration: underline; }
 .starSmall { font-size: 0.7em; line-height: 1em; }
@@ -2542,14 +2560,14 @@ body::-webkit-scrollbar-corner{background-clip:padding-box;background-color:#f5f
 .dropbutton { min-width: 10em; max-width: 9em; white-space: nowrap; background: #ff0084; -webkit-border-radius: 3px; -moz-border-radius: 3px; font-size: 10px; list-style: none outside; margin: 0px; padding:0px; position:absolute; }
 .dropbutton:hover { z-index: 1000; }
 .dropbutton * { cursor: pointer; }
-.dropbutton.alert { background: #FF4500; top: 30px important;}
+.dropbutton.alert { background: #FF4500; top: 30px !important;}
 .dropbutton li { padding: 0 5px; display: none;}
 .dropbutton li.first-child { display: block; }
 .dropbutton:hover li, .dropbutton.hovering li { display: block; }
 .dropbutton a, 
 .dropbutton button, 
 .dropbutton input { color: white; font-weight: normal; display: block; padding-right: 20px;line-height: 16px;text-overflow: ellipsis;overflow: hidden;font-size: 10px;font-family: Arial, Verdana, Sans-Serif;padding-left: 0px;outline: none;}
-.dropbutton button { border: none; xbackground: none; font-size: 10px; font-family: Arial, Verdana, Sans-Serif; padding: 0px; height: auto;}
+.dropbutton button { border: none; background: none; font-size: 10px; font-family: Arial, Verdana, Sans-Serif; padding: 0px; height: auto;}
 .dropbutton li.first-child, .dropbutton li.last-child { -webkit-border-top-right-radius: 3px; -webkit-border-top-left-radius: 3px; -moz-border-radius-topright: 3px; -moz-border-radius-topleft: 3px; }
 .dropbutton li:hover { background: #ff0084; }
 .dropbutton li.first-child a { background: url(../images/arrowdown.png) right 10px no-repeat; -webkit-border-top-right-radius: 3px; -webkit-border-top-left-radius: 3px; -moz-border-radius-topright: 3px; -moz-border-radius-topleft: 3px; }
@@ -3086,3 +3104,17 @@ table.benefitsTable td {
     margin-top: 30px;
 }
 
+.eventListMenu {
+    list-style: none;
+    margin: 0; 
+    padding: 0;
+}
+.eventListMenu li
+{
+    display: inline-block;
+    margin-right: 5px;
+}
+.eventListMenu a {
+    text-decoration: underline;
+
+}

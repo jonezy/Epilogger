@@ -26,9 +26,9 @@ namespace Epilogger.Web.Core.Stats {
                 var photoCount = imgs.FindImageCountByEventID(eventId, fromDateTime, toDateTime);
                 var uniqueTweeterCount = ts.FindUniqueTweetCountByEventID(eventId, fromDateTime, toDateTime);
 
-                data.TweetCount = ConvertNumberToKorM(tweetCount);
-                data.PhotoCount = ConvertNumberToKorM(photoCount);
-                data.UniqueTweeterCount = ConvertNumberToKorM(uniqueTweeterCount);
+                data.TweetCount = Web.Helpers.ConvertNumberToKorM(tweetCount);
+                data.PhotoCount = Web.Helpers.ConvertNumberToKorM(photoCount);
+                data.UniqueTweeterCount = Web.Helpers.ConvertNumberToKorM(uniqueTweeterCount);
 
                 cacheHelper.Add(CacheKey + eventId.ToString(CultureInfo.InvariantCulture), data, DateTime.Now.AddMinutes(CacheExpiry));
             }
@@ -37,23 +37,23 @@ namespace Epilogger.Web.Core.Stats {
         }
 
 
-        private string ConvertNumberToKorM(int numberToConvert)
-        {
-            string countString;
-            if (numberToConvert > 1000000)
-            {
-                countString = Math.Floor(d: (double)(numberToConvert / 1000000)).ToString(CultureInfo.InvariantCulture) + "M";
-            }
-            else if (numberToConvert > 1000)
-            {
-                countString = Math.Floor(d: (double)(numberToConvert / 1000)).ToString(CultureInfo.InvariantCulture) + "K";
-            }
-            else
-            {
-                countString = numberToConvert.ToString(CultureInfo.InvariantCulture);
-            }
-            return countString;
-        }
+        //public static string ConvertNumberToKorM(int numberToConvert)
+        //{
+        //    string countString;
+        //    if (numberToConvert > 1000000)
+        //    {
+        //        countString = Math.Floor(d: (double)(numberToConvert / 1000000)).ToString(CultureInfo.InvariantCulture) + "M";
+        //    }
+        //    else if (numberToConvert > 1000)
+        //    {
+        //        countString = Math.Floor(d: (double)(numberToConvert / 1000)).ToString(CultureInfo.InvariantCulture) + "K";
+        //    }
+        //    else
+        //    {
+        //        countString = numberToConvert.ToString(CultureInfo.InvariantCulture);
+        //    }
+        //    return countString;
+        //}
 
     }
 

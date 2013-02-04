@@ -85,14 +85,16 @@ namespace Epilogger.Web.Controllers {
 
         public virtual ActionResult Subscriptions(int? page)
         {
-            int currentPage = page.HasValue ? page.Value - 1 : 0;
-            List<Event> events = BuildEventSubscriptions();
+            var currentPage = page.HasValue ? page.Value - 1 : 0;
+            var events = BuildEventSubscriptions();
 
-            DashboardEventsViewModel model = new DashboardEventsViewModel() {
+            var model = new DashboardEventsViewModel() {
                 CurrentPageIndex = currentPage,
                 TotalRecords = events.Count(),
                 Events = Mapper.Map<List<Event>, List<DashboardEventViewModel>>(events.Skip(currentPage * 12).Take(12).ToList())
             };
+
+            model.Events.ForEach(e => e.CurrentUserId = CurrentUserID);
 
             return View(model);
         }
@@ -118,8 +120,9 @@ namespace Epilogger.Web.Controllers {
         }
 
         private List<Event> BuildEventSubscriptions() {
-            List<Event> events = new List<Event>();
-            List<UserFollowsEvent> subscribedEvents = CurrentUser.UserFollowsEvents.ToList();
+            
+            var subscribedEvents = CurrentUser.UserFollowsEvents;
+            var events = new List<Event>();
             foreach (var item in subscribedEvents) {
                 events.Add(item.Events.FirstOrDefault());
             }
