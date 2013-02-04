@@ -620,7 +620,6 @@ namespace Epilogger.Web.Controllers {
 
 
                     //Initiate a first collect on the event
-                    //TODO Remove after testing
                     var tsmp = new MQ.MSGProducer("Epilogger", "TwitterSearch");
                     var tsMSG = new MQ.Messages.TwitterSearchMSG
                     {
@@ -633,12 +632,20 @@ namespace Epilogger.Web.Controllers {
                     tsmp.SendMessage(tsMSG);
                     tsmp.Dispose();
 
+                    //Tweet that the event has been created.
+                    SendEventCreatedTweet(eventMod);
+
                     //The the admins an email with the event details.
-                    //TODO Remove after testing
+                    if ((bool) (!eventMod.IsPrivate))
+                    {
                     SendEventCreatedEmailToSystem(eventMod);
+                    }
+
 
                     //Clear this for the next create event
                     TempData["Event"] = null;
+                    TempData["CreateBasicEventViewModel"] = null;
+
                     return View("CreateEventFinal", displayModel);
                 }
                 catch (Exception ex)
@@ -1806,14 +1813,14 @@ namespace Epilogger.Web.Controllers {
 		[RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to edit an event")]
 		public virtual ActionResult Edit(string id)
 		{
-			Event currentEvent = _es.FindBySlug(id);
-			CreateEventViewModel model = Mapper.Map<Event, CreateEventViewModel>(currentEvent);
+			var currentEvent = _es.FindBySlug(id);
+			var model = Mapper.Map<Event, CreateEventViewModel>(currentEvent);
 			model.ToolbarViewModel = BuildToolbarViewModel(currentEvent);
 
 			model.CurrentUserRole = CurrentUserRole;
 			model.CurrentUserID = CurrentUser.ID;
-			model.UserID = CurrentUser.ID;
-			model.EventSlug = currentEvent.EventSlug;
+            //model.UserID = CurrentUser.ID;
+            //model.EventSlug = currentEvent.EventSlug;
 
 			return View(model);
 		}
@@ -1823,10 +1830,10 @@ namespace Epilogger.Web.Controllers {
 		[HttpPost]
 		public virtual ActionResult Edit(FormCollection fc, CreateEventViewModel model)
 		{
-			Event currentEvent = _es.FindBySlug(model.EventSlug);
-			model.ID = currentEvent.ID;
+			var currentEvent = _es.FindBySlug(model.EventSlug);
+            ////model.ID = currentEvent.ID;
 
-			if (ModelState.IsValid) {
+			//if (ModelState.IsValid) {
 				try {
 					currentEvent.CategoryID = model.CategoryID;
 					currentEvent.SubTitle = model.Subtitle;
@@ -1946,7 +1953,7 @@ namespace Epilogger.Web.Controllers {
 					model.EventSlug = currentEvent.EventSlug;
 					return View(model);
 				}
-			}
+			//}
 			
 			return RedirectToAction("edit", new { id = model.EventSlug});
 		}

@@ -4,11 +4,11 @@
 
     $.fn.saveClicks = function () {
         $(this).bind('mousedown.clickmap', function (evt) {
-            $.post('/Home/ClickMap', {
-                x: evt.pageX,
-                y: evt.pageY,
-                location: escape(document.location.pathname)
-            });
+//            $.post('/Home/ClickMap', {
+//                x: evt.pageX,
+//                y: evt.pageY,
+//                location: escape(document.location.pathname)
+//            });
         });
     };
 
