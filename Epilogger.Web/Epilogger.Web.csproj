@@ -393,6 +393,7 @@
     <Compile Include="Models\CreateEventTwitterViewModel.cs" />
     <Compile Include="Models\DisconnectServiceViewModel.cs" />
     <Compile Include="Models\MemoryBoxTweet.cs" />
+    <Compile Include="Models\MyEventsViewModel.cs" />
     <Compile Include="Models\NagViewModel.cs" />
     <Compile Include="Models\NavigationViewModel.cs" />
     <Compile Include="Models\ProfileImageChoiceViewModel.cs" />
@@ -528,6 +529,20 @@
     <Content Include="Public\images\livemode\toolbar\title.gif" />
     <Content Include="Public\images\rounded-57.png" />
     <Content Include="Public\images\trigger.png" />
+    <Content Include="Public\images\Upgrade\icon-feature-commenting.png" />
+    <Content Include="Public\images\Upgrade\icon-feature-eventbrite.png" />
+    <Content Include="Public\images\Upgrade\icon-feature-feature.png" />
+    <Content Include="Public\images\Upgrade\icon-feature-lifespan.png" />
+    <Content Include="Public\images\Upgrade\icon-feature-livemode.png" />
+    <Content Include="Public\images\Upgrade\icon-feature-moderation.png" />
+    <Content Include="Public\images\Upgrade\icon-feature-private.png" />
+    <Content Include="Public\images\Upgrade\icon-feature-searchterms.png" />
+    <Content Include="Public\images\Upgrade\icon-feature-toptweeters.png" />
+    <Content Include="Public\images\Upgrade\icon-feature-verified.png" />
+    <Content Include="Public\images\Upgrade\icon-featurecheckmark.png" />
+    <Content Include="Public\images\Upgrade\icon-featureembed.png" />
+    <Content Include="Public\images\Upgrade\icon-privateevent.png" />
+    <Content Include="Public\images\Upgrade\icon-verifiedevents.png" />
     <Content Include="Public\js\alerts.js" />
     <Content Include="Public\js\FileUploader.js" />
     <Content Include="Public\js\fineuploader.jquery-3.0\fineuploader.css" />
@@ -3286,6 +3301,7 @@
     <Content Include="Views\Events\UploadFile.cshtml" />
     <Content Include="Views\Events\ExpiredUpgradeNotice.cshtml" />
     <Content Include="Views\Events\_ExpiredEventModalScript.cshtml" />
+    <Content Include="Views\Home\UpgradeBenefits.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />
@@ -5353,7 +5369,7 @@
     <Content Include="Areas\Authentication\Views\Web.config" />
     <Content Include="Views\Shared\GlobalNavigationOldGood.cshtml" />
     <Content Include="Views\Events\Create.cshtml" />
-    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Dashboard\IndexOLD.cshtml" />
     <Content Include="Views\Dashboard\Profile.cshtml" />
     <Content Include="Views\Dashboard\Menu.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />

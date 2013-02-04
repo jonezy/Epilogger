@@ -2710,7 +2710,7 @@ namespace Epilogger.Web.Controllers {
             return false;
         }
 
-        private bool HasEventExpired(bool isPaid, DateTime startDate)
+        private static bool HasEventExpired(bool isPaid, DateTime startDate)
         {
             if (!isPaid)
             {

@@ -207,6 +207,11 @@ namespace Epilogger.Web.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult ExpiredUpgradeNotice() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.ExpiredUpgradeNotice);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult Live4X3() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Live4X3);
         }
@@ -281,6 +286,7 @@ namespace Epilogger.Web.Controllers {
             public readonly string PhotoDetails = "PhotoDetails";
             public readonly string TweetBox = "TweetBox";
             public readonly string ConceptMap = "ConceptMap";
+            public readonly string ExpiredUpgradeNotice = "ExpiredUpgradeNotice";
             public readonly string Live4X3 = "Live4X3";
             public readonly string LiveGetLastTweetsJson = "LiveGetLastTweetsJson";
             public readonly string LiveGetLastPhotosJson = "LiveGetLastPhotosJson";
@@ -330,6 +336,7 @@ namespace Epilogger.Web.Controllers {
             public const string PhotoDetails = "PhotoDetails";
             public const string TweetBox = "TweetBox";
             public const string ConceptMap = "ConceptMap";
+            public const string ExpiredUpgradeNotice = "ExpiredUpgradeNotice";
             public const string Live4X3 = "Live4X3";
             public const string LiveGetLastTweetsJson = "LiveGetLastTweetsJson";
             public const string LiveGetLastPhotosJson = "LiveGetLastPhotosJson";
@@ -586,6 +593,13 @@ namespace Epilogger.Web.Controllers {
         public class ActionParamsClass_ConceptMap {
             public readonly string id = "id";
         }
+        static readonly ActionParamsClass_ExpiredUpgradeNotice s_params_ExpiredUpgradeNotice = new ActionParamsClass_ExpiredUpgradeNotice();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ExpiredUpgradeNotice ExpiredUpgradeNoticeParams { get { return s_params_ExpiredUpgradeNotice; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ExpiredUpgradeNotice {
+            public readonly string id = "id";
+        }
         static readonly ActionParamsClass_Live4X3 s_params_Live4X3 = new ActionParamsClass_Live4X3();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_Live4X3 Live4X3Params { get { return s_params_Live4X3; } }
@@ -625,6 +639,7 @@ namespace Epilogger.Web.Controllers {
         public class ViewNames {
             public readonly string _CreateEventLayout = "~/Views/Events/_CreateEventLayout.cshtml";
             public readonly string _EventMenu = "~/Views/Events/_EventMenu.cshtml";
+            public readonly string _ExpiredEventModalScript = "~/Views/Events/_ExpiredEventModalScript.cshtml";
             public readonly string _ImageTemplate = "~/Views/Events/_ImageTemplate.cshtml";
             public readonly string _LiveTweetTemplate = "~/Views/Events/_LiveTweetTemplate.cshtml";
             public readonly string _StarRatingTemplate = "~/Views/Events/_StarRatingTemplate.cshtml";
@@ -648,6 +663,7 @@ namespace Epilogger.Web.Controllers {
             public readonly string Edit = "~/Views/Events/Edit.cshtml";
             public readonly string EditLiveMode = "~/Views/Events/EditLiveMode.cshtml";
             public readonly string EventToolbar = "~/Views/Events/EventToolbar.cshtml";
+            public readonly string ExpiredUpgradeNotice = "~/Views/Events/ExpiredUpgradeNotice.cshtml";
             public readonly string ImageCommentControl = "~/Views/Events/ImageCommentControl.cshtml";
             public readonly string ImageCommentsPaged = "~/Views/Events/ImageCommentsPaged.cshtml";
             public readonly string Live4x3 = "~/Views/Events/Live4x3.cshtml";
@@ -966,6 +982,12 @@ namespace Epilogger.Web.Controllers {
 
         public override System.Web.Mvc.ActionResult ConceptMap(string id) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ConceptMap);
+            callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ExpiredUpgradeNotice(string id) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ExpiredUpgradeNotice);
             callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }

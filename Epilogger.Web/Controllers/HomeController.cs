@@ -244,6 +244,10 @@ namespace Epilogger.Web.Controllers {
             return View();
         }
 
+        public virtual ActionResult UpgradeBenefits()
+        {
+            return View();
+        }
         
     }
 }

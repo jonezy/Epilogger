@@ -14,12 +14,12 @@ namespace Epilogger.Web {
         }
 
         public List<Event> AllEvents() {
-            return base.GetData();
+            return base.GetData().Where(e => e.IsPrivate == false) as List<Event>;
         }
 
         public List<Event> AllEventsDescPaged(int currentPage, int recordsPerPage)
         {
-            var es = db.Events.OrderByDescending(t => t.CreatedDateTime);
+            var es = db.Events.Where(e => e.IsPrivate==false).OrderByDescending(t => t.CreatedDateTime);
             var recordsToSkip = currentPage == 1 ? 1 : currentPage * recordsPerPage;
             return es.Skip(recordsToSkip).Take(recordsPerPage).ToList();
         } 
@@ -27,13 +27,13 @@ namespace Epilogger.Web {
 
         public List<Event> Get50Events()
         {
-            return db.Events.OrderByDescending(t => t.ID).Take(50).ToList();
+            return db.Events.Where(e => e.IsPrivate == false).OrderByDescending(t => t.ID).Take(50).ToList();
         }
 
         public Event RandomUpcomingEvent() {
-            List<Event> events = base.db.Events.Where(e => e.StartDateTime > DateTime.UtcNow).ToList();
-            Random rnd = new Random();
-            int i = rnd.Next(events.Count());
+            var events = base.db.Events.Where(e => e.StartDateTime > DateTime.UtcNow && e.IsPrivate==false).ToList();
+            var rnd = new Random();
+            var i = rnd.Next(events.Count());
 
             return events[i];
 
@@ -66,7 +66,7 @@ namespace Epilogger.Web {
             
 
             //If an event is explicitly defined
-            var fEvents = db.Events.Where(e => e.IsFeatured == true && DateTime.UtcNow >= e.FeaturedStartDateTime && DateTime.UtcNow <= e.FeaturedEndDateTime);
+            var fEvents = db.Events.Where(e => e.IsFeatured == true && DateTime.UtcNow >= e.FeaturedStartDateTime && DateTime.UtcNow <= e.FeaturedEndDateTime && e.IsPrivate==false);
             if (fEvents.Any())
             {
                 for (var i = 0; i < fEvents.Count(); i++)
@@ -183,15 +183,15 @@ namespace Epilogger.Web {
         /* Upcoming events */
         public List<Event> UpcomingEvents()
         {
-            return db.Events.Where(e => e.StartDateTime > DateTime.UtcNow).OrderByDescending(c => c.StartDateTime).ToList();
+            return db.Events.Where(e => e.StartDateTime > DateTime.UtcNow && e.IsPrivate==false).OrderByDescending(c => c.StartDateTime).ToList();
         }
         public int UpcomingEventCount()
         {
-            return db.Events.Where(e => e.StartDateTime > DateTime.UtcNow).Count();
+            return db.Events.Count(e => e.StartDateTime > DateTime.UtcNow && e.IsPrivate==false);
         }
         public List<Event> UpcomingEventsPaged(int currentPage, int recordsPerPage)
         {
-            var es = db.Events.Where(e => e.StartDateTime > DateTime.UtcNow);
+            var es = db.Events.Where(e => e.StartDateTime > DateTime.UtcNow && e.IsPrivate==false);
             return es.Skip(currentPage * recordsPerPage).Take(recordsPerPage).OrderBy(c => c.StartDateTime).ToList();
         }
 
@@ -199,39 +199,39 @@ namespace Epilogger.Web {
         /* Past events */
         public List<Event> PastEvents()
         {
-            return GetData(e => e.EndDateTime < DateTime.UtcNow).ToList();
+            return GetData(e => e.EndDateTime < DateTime.UtcNow && e.IsPrivate==false).ToList();
         }
         public int PastEventCount()
         {
-            return db.Events.Count(e => e.EndDateTime < DateTime.UtcNow);
+            return db.Events.Count(e => e.EndDateTime < DateTime.UtcNow && e.IsPrivate == false);
         }
         public List<Event> PastEventsPaged(int currentPage, int recordsPerPage)
         {
-            var es = db.Events.Where(e => e.EndDateTime < DateTime.UtcNow);
+            var es = db.Events.Where(e => e.EndDateTime < DateTime.UtcNow && e.IsPrivate == false);
             return es.Skip(currentPage * recordsPerPage).Take(recordsPerPage).OrderByDescending(c => c.StartDateTime).ToList();
         }
 
         /* Now events */
         public List<Event> GoingOnNowEvents()
         {
-            IEnumerable<Event> neverEndingEvents = from e in GetData()
-                                                   where e.EndDateTime == null
-                                                   select e;
+            var neverEndingEvents = from e in GetData()
+                                    where e.EndDateTime == null && e.IsPrivate == false
+                                    select e;
 
-            IEnumerable<Event> happeningNow = from e in GetData()
-                                              where (e.StartDateTime <= DateTime.UtcNow && (e.EndDateTime != null && e.EndDateTime >= DateTime.UtcNow))
-                                              select e;
+            var happeningNow = from e in GetData()
+                               where (e.StartDateTime <= DateTime.UtcNow && (e.EndDateTime != null && e.EndDateTime >= DateTime.UtcNow) && e.IsPrivate == false)
+                                select e;
 
             return neverEndingEvents.Concat(happeningNow).OrderBy(e => e.StartDateTime).ToList();
         }
         public int GoingOnNowEventsCount()
         {
             IEnumerable<Event> neverEndingEvents = from e in GetData()
-                                                   where e.EndDateTime == null
+                                                   where e.EndDateTime == null && e.IsPrivate == false
                                                    select e;
 
             IEnumerable<Event> happeningNow = from e in GetData()
-                                              where (e.StartDateTime <= DateTime.UtcNow && (e.EndDateTime != null && e.EndDateTime >= DateTime.UtcNow) && e.IsActive)
+                                              where (e.StartDateTime <= DateTime.UtcNow && (e.EndDateTime != null && e.EndDateTime >= DateTime.UtcNow) && e.IsActive && e.IsPrivate == false)
                                               select e;
 
             return neverEndingEvents.Concat(happeningNow).Count();
@@ -241,8 +241,8 @@ namespace Epilogger.Web {
         {
 
             IEnumerable<Event> collecting = from e in GetData()
-                                            where (e.CollectionStartDateTime <= DateTime.UtcNow && e.CollectionEndDateTime >= DateTime.UtcNow && e.IsActive)
-                                              select e;
+                                            where (e.CollectionStartDateTime <= DateTime.UtcNow && e.CollectionEndDateTime >= DateTime.UtcNow && e.IsActive && e.IsPrivate == false)
+                                            select e;
 
             return collecting.Count();
         }
@@ -250,11 +250,11 @@ namespace Epilogger.Web {
         public List<Event> GoingOnNowEventsPaged(int currentPage, int recordsPerPage)
         {
             IEnumerable<Event> neverEndingEvents = from e in GetData()
-                                                   where e.StartDateTime <= DateTime.UtcNow && e.EndDateTime == null
+                                                   where e.StartDateTime <= DateTime.UtcNow && e.EndDateTime == null && e.IsPrivate == false
                                                    select e;
 
             IEnumerable<Event> happeningNow = from e in GetData()
-                                              where (e.StartDateTime <= DateTime.UtcNow && (e.EndDateTime != null && e.EndDateTime >= DateTime.UtcNow))
+                                              where (e.StartDateTime <= DateTime.UtcNow && (e.EndDateTime != null && e.EndDateTime >= DateTime.UtcNow) && e.IsPrivate == false)
                                               select e;
 
             neverEndingEvents = neverEndingEvents.Concat(happeningNow).OrderByDescending(e => e.StartDateTime);
@@ -269,7 +269,8 @@ namespace Epilogger.Web {
 
         public List<Event> TodaysEvents()
         {
-            return GetData(IsSameDate<Event>(e => e.StartDateTime, DateTime.UtcNow)).ToList();
+            var d = GetData(IsSameDate<Event>(f => f.StartDateTime, DateTime.UtcNow));
+            return d.Where(e => e.IsPrivate == false).ToList();
         }
 
         public IEnumerable<HomepageActivityModel> GetHomepageActivity() {
@@ -280,8 +281,8 @@ namespace Epilogger.Web {
 
         public Event GetRandomEvent()
         {
-            int lowerbound = 1;
-            int upperbound = this.GetHighestEventID();
+            const int lowerbound = 1;
+            var upperbound = this.GetHighestEventId();
 
             System.Random r = new System.Random();
             int RandomNumber = r.Next(lowerbound, upperbound);
@@ -316,16 +317,16 @@ namespace Epilogger.Web {
         }
 
 
-        public int GetHighestEventID()
+        public int GetHighestEventId()
         {
-            return db.Events.OrderByDescending(e => e.ID).First().ID;
+            return db.Events.Where(e => e.IsPrivate==false).OrderByDescending(e => e.ID).First().ID;
         }
 
 
 
         public IEnumerable<Event> GetHottestEvents(int itemsToReturn)
         {
-            return db.Events.Where(e => e.StartDateTime > DateTime.UtcNow.AddDays(-14) && e.StartDateTime < DateTime.UtcNow).OrderByDescending(e => e.Tweets.Where(f => f.EventID == e.ID).Count() + (e.Images.Where(f => f.EventID == e.ID).Count() * 4)).Take(itemsToReturn);
+            return db.Events.Where(e => e.IsPrivate==false && e.StartDateTime > DateTime.UtcNow.AddDays(-14) && e.StartDateTime < DateTime.UtcNow).OrderByDescending(e => e.Tweets.Count(f => f.EventID == e.ID) + (e.Images.Where(f => f.EventID == e.ID).Count() * 4)).Take(itemsToReturn);
         }
 
 
@@ -349,13 +350,13 @@ namespace Epilogger.Web {
 
         public List<Event> GetEventsByCategoryID(int categoryID)
         {
-            return GetData(e => e.CategoryID == categoryID);
+            return GetData(e => e.CategoryID == categoryID && e.IsPrivate==false);
         }
 
 
         public List<Event> GetEventsByCategoryIDDescPaged(int categoryID, int currentPage, int recordsPerPage)
         {
-            var ec = db.Events.Where(e => e.CategoryID == categoryID).OrderByDescending(e => e.StartDateTime);
+            var ec = db.Events.Where(e => e.CategoryID == categoryID && e.IsPrivate==false).OrderByDescending(e => e.StartDateTime);
             return ec.Skip(currentPage * recordsPerPage).Take(recordsPerPage).ToList();
         }
 
@@ -364,21 +365,21 @@ namespace Epilogger.Web {
         {
             CategoryService CS = new CategoryService();
             Epilogger.Data.EventCategory TheCat = CS.GetCategoryBySlug(categorySlug);
-            return GetData(e => e.CategoryID == TheCat.ID);
+            return GetData(e => e.CategoryID == TheCat.ID && e.IsPrivate==false);
         }
 
         public List<Event> FindByUserID(Guid userID) {
-            return GetData().Where(e => e.UserID == userID).OrderByDescending(e=>e.StartDateTime).ToList();
+            return GetData().Where(e => e.UserID == userID && e.IsPrivate==false).OrderByDescending(e=>e.StartDateTime).ToList();
         }
 
         public List<Event> FindByUserIDPaged(Guid userID, int currentPage, int recordsPerPage)
         {
-            var es = db.Events.Where(e => e.UserID == userID);
+            var es = db.Events.Where(e => e.UserID == userID && e.IsPrivate==false);
             return es.Skip(currentPage * recordsPerPage).Take(recordsPerPage).OrderByDescending(c => c.StartDateTime).ToList();
         }
         public int FindCountByUserID(Guid userID)
         {
-            return db.Events.Where(e => e.UserID == userID).Count();
+            return db.Events.Count(e => e.UserID == userID && e.IsPrivate==false);
         }
         
 
@@ -453,8 +454,8 @@ namespace Epilogger.Web {
         {
 
             var EVs = from e in db.Events
-                      where e.Name.Contains(SearchTerm) ||
-                            e.SearchTerms.Contains(SearchTerm) || e.SubTitle.Contains(SearchTerm) || e.Description.Contains(SearchTerm)
+                      where (e.Name.Contains(SearchTerm) ||
+                            e.SearchTerms.Contains(SearchTerm) || e.SubTitle.Contains(SearchTerm) || e.Description.Contains(SearchTerm)) && e.IsPrivate==false
                       orderby e.CreatedDateTime
                       select e;
 
@@ -464,7 +465,7 @@ namespace Epilogger.Web {
 
 
         public int Count() {
-            return base.db.Events.Count();
+            return base.db.Events.Count(e => e.IsPrivate==false);
         }
 
 
@@ -476,7 +477,7 @@ namespace Epilogger.Web {
 
         public IEnumerable<Event> FindAllActiveEvents()
         {
-            return db.Events.Where(e => e.IsActive);
+            return db.Events.Where(e => e.IsActive && e.IsPrivate==false);
         }
 
     }
