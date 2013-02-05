@@ -549,8 +549,8 @@ namespace Epilogger.Web.Controllers {
            
             if (ModelState.IsValid)
             {
-                try
-                {
+                //try
+                //{
                     //var epLevent = Mapper.Map<CreateEventTwitterViewModel, Event>(model);
                     //var eventModel = _es.FindBySlug(model.EventSlug);
                     var eventMod = (Event)TempData["Event"];
@@ -620,14 +620,14 @@ namespace Epilogger.Web.Controllers {
                     TempData["CreateBasicEventViewModel"] = null;
 
                     return View("CreateEventFinal", displayModel);
-                }
-                catch (Exception ex)
-                {
-                    this.StoreError(string.Format("There was an error: {0}", ex.Message));
-                    //var epLevent = Mapper.Map<CreateEventTwitterViewModel, Event>(model);
-                    //model = Mapper.Map<Event, CreateEventTwitterViewModel>(epLevent);
-                    return View(model);
-                }
+                //}
+                //catch (Exception ex)
+                //{
+                //    this.StoreError(string.Format("There was an error: {0}", ex.Message));
+                //    //var epLevent = Mapper.Map<CreateEventTwitterViewModel, Event>(model);
+                //    //model = Mapper.Map<Event, CreateEventTwitterViewModel>(epLevent);
+                //    return View(model);
+                //}
             }
             
             return View();
