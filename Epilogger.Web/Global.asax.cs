@@ -684,9 +684,14 @@ namespace Epilogger.Web
                 .ForMember(dest => dest.IsPaid, opt => opt.Ignore())
                 .ForMember(dest => dest.DatePaid, opt => opt.Ignore());
 
-            var mapTVM = Mapper.CreateMap<Event, CreateEventTwitterViewModel>();
-            mapTVM.ForAllMembers(opt => opt.Ignore());
-            mapTVM.ForMember(dest => dest.SearchTerms, o => o.Ignore());
+            var mapTvm = Mapper.CreateMap<Event, CreateEventTwitterViewModel>()
+                        .ForMember(dest => dest.SearchTerms, o => o.Ignore())
+                        .ForMember(dest => dest.EventTime, o => o.Ignore())
+                        .ForMember(dest => dest.IsAdvanceMode, o => o.Ignore());
+
+            //mapTVM.ForAllMembers(opt => opt.Ignore());
+
+
 
             var mapE = Mapper.CreateMap<CreateEventTwitterViewModel, Event>();
             mapE.ForAllMembers(opt => opt.Ignore());

@@ -62,11 +62,6 @@ namespace Epilogger.Web.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult CreateEventTweets() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.CreateEventTweets);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult Create() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Create);
         }
@@ -285,6 +280,7 @@ namespace Epilogger.Web.Controllers {
             public readonly string LiveGetLastTweetsJson = "LiveGetLastTweetsJson";
             public readonly string LiveGetLastPhotosJson = "LiveGetLastPhotosJson";
             public readonly string PullTweets = "PullTweets";
+            public readonly string UploadFile = "UploadFile";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -334,6 +330,7 @@ namespace Epilogger.Web.Controllers {
             public const string LiveGetLastTweetsJson = "LiveGetLastTweetsJson";
             public const string LiveGetLastPhotosJson = "LiveGetLastPhotosJson";
             public const string PullTweets = "PullTweets";
+            public const string UploadFile = "UploadFile";
         }
 
 
@@ -366,13 +363,6 @@ namespace Epilogger.Web.Controllers {
         public class ActionParamsClass_AllTweets {
             public readonly string id = "id";
             public readonly string page = "page";
-        }
-        static readonly ActionParamsClass_CreateEventTweets s_params_CreateEventTweets = new ActionParamsClass_CreateEventTweets();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_CreateEventTweets CreateEventTweetsParams { get { return s_params_CreateEventTweets; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_CreateEventTweets {
-            public readonly string id = "id";
         }
         static readonly ActionParamsClass_Create s_params_Create = new ActionParamsClass_Create();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -713,9 +703,8 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult CreateEventTweets(string id) {
+        public override System.Web.Mvc.ActionResult CreateEventTweets() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEventTweets);
-            callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }
 
@@ -995,6 +984,11 @@ namespace Epilogger.Web.Controllers {
         public override System.Web.Mvc.ActionResult PullTweets(int eventId) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.PullTweets);
             callInfo.RouteValueDictionary.Add("eventId", eventId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult UploadFile() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.UploadFile);
             return callInfo;
         }
 

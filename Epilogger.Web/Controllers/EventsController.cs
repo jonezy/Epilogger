@@ -438,7 +438,7 @@ namespace Epilogger.Web.Controllers {
                     ((CreateBasicEventViewModel)TempData["CreateBasicEventViewModel"]).EndDateTime = TimeZoneManager.ToUtcTime(storeEndDateTime);
                     ((CreateBasicEventViewModel)TempData["CreateBasicEventViewModel"]).TimeZoneOffset = int.Parse(Request.Form["timeZone"]);
 
-                    return RedirectToAction("CreateEventTweets", new { id = model.EventSlug});  
+                    return RedirectToAction("CreateEventTweets");  
                 }
                 catch (Exception ex)
                 {
@@ -527,7 +527,7 @@ namespace Epilogger.Web.Controllers {
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]        
-        public virtual ActionResult CreateEventTweets(string id)
+        public virtual ActionResult CreateEventTweets()
         {
             var model = Mapper.Map<Event, CreateEventTwitterViewModel>((Event)TempData["Event"]);
             model.EventTime = TempData["EventTime"].ToString();
@@ -553,7 +553,7 @@ namespace Epilogger.Web.Controllers {
                 {
                     //var epLevent = Mapper.Map<CreateEventTwitterViewModel, Event>(model);
                     //var eventModel = _es.FindBySlug(model.EventSlug);
-                    var eventMod = Mapper.Map<Event, Event>((Event)TempData["Event"]);
+                    var eventMod = (Event)TempData["Event"];
                     var searchQuery = "";
                     if (model.IsAdvanceMode)
                     {
@@ -624,8 +624,8 @@ namespace Epilogger.Web.Controllers {
                 catch (Exception ex)
                 {
                     this.StoreError(string.Format("There was an error: {0}", ex.Message));
-                    var epLevent = Mapper.Map<CreateEventTwitterViewModel, Event>(model);
-                    model = Mapper.Map<Event, CreateEventTwitterViewModel>(epLevent);
+                    //var epLevent = Mapper.Map<CreateEventTwitterViewModel, Event>(model);
+                    //model = Mapper.Map<Event, CreateEventTwitterViewModel>(epLevent);
                     return View(model);
                 }
             }
