@@ -70,6 +70,7 @@ namespace Epilogger.Web.Controllers
             {
                 case "upcoming":
                     events = ES.UpcomingEventsPaged(currentPage, 10);
+                    model.TotalRecords = ES.UpcomingEventCount();
                     break;
                 case "past":
                     events = ES.PastEventsPaged(currentPage, 10);

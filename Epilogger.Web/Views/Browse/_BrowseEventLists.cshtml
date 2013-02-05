@@ -41,7 +41,12 @@
             </div>
             <div class="event-content">
                 @*<h6>@Html.ActionLink(item.Name, "details", "events", new { @id = item.ID }, null)</h6>*@
-                <h6>@Html.ActionLink(item.Name, "details", "events", new { @id = item.EventSlug }, null)</h6>
+                <h6>@Html.ActionLink(item.Name, "details", "events", new { @id = item.EventSlug }, null)
+                @if (item.IsPaid)
+                {
+                    @:&nbsp;&nbsp;<img src="/Public/images/icons/paidEventSmall.png" alt="Upgraded Event" />
+                }  
+                </h6>
                 <div class="event-content-time">@Html.DisplayFor(thing => item.StartDateTime, "Time")</div>
                 <div class="event-content-searchterms">@item.SearchTerms</div>
             </div>

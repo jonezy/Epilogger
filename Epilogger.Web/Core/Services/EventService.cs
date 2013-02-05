@@ -249,17 +249,35 @@ namespace Epilogger.Web {
 
         public List<Event> GoingOnNowEventsPaged(int currentPage, int recordsPerPage)
         {
-            IEnumerable<Event> neverEndingEvents = from e in GetData()
-                                                   where e.StartDateTime <= DateTime.UtcNow && e.EndDateTime == null && e.IsPrivate == false
-                                                   select e;
+            //IEnumerable<Event> neverEndingEvents = from e in GetData()
+            //                                       where e.StartDateTime <= DateTime.UtcNow && e.EndDateTime == null && e.IsPrivate == false
+            //                                       select e;
 
-            IEnumerable<Event> happeningNow = from e in GetData()
-                                              where (e.StartDateTime <= DateTime.UtcNow && (e.EndDateTime != null && e.EndDateTime >= DateTime.UtcNow) && e.IsPrivate == false)
-                                              select e;
+            //IEnumerable<Event> happeningNow = from e in GetData()
+            //                                  where (e.StartDateTime <= DateTime.UtcNow && (e.EndDateTime != null && e.EndDateTime >= DateTime.UtcNow) && e.IsPrivate == false)
+            //                                  select e;
 
-            neverEndingEvents = neverEndingEvents.Concat(happeningNow).OrderByDescending(e => e.StartDateTime);
+            //neverEndingEvents = neverEndingEvents.Concat(happeningNow).OrderByDescending(e => e.StartDateTime);
+            //var recordsToSkip = currentPage == 1 ? 1 : currentPage * recordsPerPage;
+            //return neverEndingEvents.Skip(recordsToSkip).Take(recordsPerPage).ToList();
+
+
+
+
+            //IEnumerable<Event> neverEndingEvents = from e in GetData()
+            //                                       where e.StartDateTime <= DateTime.UtcNow && e.EndDateTime == null && e.IsPrivate == false
+            //                                       select e;
+
+            var happeningNow = from e in GetData()
+                                    where (e.StartDateTime <= DateTime.UtcNow && (e.EndDateTime != null && e.EndDateTime >= DateTime.UtcNow) && e.IsPrivate == false)
+                                    select e;
+
+            //neverEndingEvents = neverEndingEvents.Concat(happeningNow).OrderByDescending(e => e.StartDateTime);
             var recordsToSkip = currentPage == 1 ? 1 : currentPage * recordsPerPage;
-            return neverEndingEvents.Skip(recordsToSkip).Take(recordsPerPage).ToList();
+            return happeningNow.Skip(recordsToSkip).Take(recordsPerPage).ToList();
+
+
+
         }
 
 

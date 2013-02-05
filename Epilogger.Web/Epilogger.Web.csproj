@@ -516,6 +516,10 @@
     <Content Include="Public\images\CreateEvent\quotes.png" />
     <Content Include="Public\images\icons\eventListTotalIcons.png" />
     <Content Include="Public\images\icons\icon-verified.png" />
+    <Content Include="Public\images\icons\icon-verified2.png" />
+    <Content Include="Public\images\icons\paidEventSmall.png" />
+    <Content Include="Public\images\icons\TakeMeToOtherEvents.png" />
+    <Content Include="Public\images\icons\UpgradeEventButton.png" />
     <Content Include="Public\images\livemode\close-icon.png" />
     <Content Include="Public\images\livemode\icon-numpeople-dark.png" />
     <Content Include="Public\images\livemode\icon-numphotos-dark.png" />
