@@ -9,3 +9,5 @@ fieldset.modal input[type="text"], textarea {width:100%;background:#e3e3e3;borde
 .three_col {float:left;}
 
 .venuesearchresult-item {padding:5px;border-bottom:1px dotted #dbdbdb;}
+
+.padTheExpiryNotice { padding: 18px; padding-bottom: 0;}

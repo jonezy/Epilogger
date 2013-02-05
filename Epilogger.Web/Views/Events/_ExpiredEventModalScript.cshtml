@@ -6,7 +6,7 @@
 
     if (isExpired) {
         $.colorbox({
-            width: '40%', initialWidth: '40%', height: '40%', initialHeight: '40%', open: true, overlayClose: false, escKey: false, loop: false,
+            width: '587px', initialWidth: '587px', height: '285px', initialHeight: '285px', open: true, overlayClose: false, escKey: false, loop: false,
             opacity: 0.60, transition: 'none', speed: 0, close: '',
             href: '@Url.Action("ExpiredUpgradeNotice", "Events", new { id = Model.EventId })', onLoad: function () {
                 $('#cboxClose').remove();

@@ -151,7 +151,7 @@ else
         <h2 style="margin:0; padding:0">@Model.SubTitle</h2>
 
         @*Event Rating Section*@
-        @if (!Model.HasUserRated)
+        @*@if (!Model.HasUserRated)
         {
             <ul class="star-rating">
                 @if (Model.EventRatings.Sum(i => i.UserRating) > 0)
@@ -188,7 +188,7 @@ else
             <div class="starSmall">You rated @Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID && i.EventID == Model.ID).FirstOrDefault().UserRating stars on <br /> @Html.DisplayFor(thing => Model.EventRatings.Where(i => i.UserID == Model.CurrentUserID).FirstOrDefault().RatingDateTime, "ShortDateTime")</div>
         }
         
-        <span class="spacer"></span> 
+        <span class="spacer"></span> *@
 
         @*New event menu*@
         @Html.Partial("Menu", Model.ToolbarViewModel)

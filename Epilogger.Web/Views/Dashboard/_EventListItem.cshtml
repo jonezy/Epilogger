@@ -28,7 +28,12 @@
             <div class="icon" style="background-image:url(@Url.Content("~/Public/images/date-icons/" + item.EventCategoryID + ".png"))"></div>
         </div>
         <div class="event-content">
-            <h6>@Html.ActionLink(item.Name, "details", "events", new { @id = item.EventSlug }, null)</h6>
+            <h6>@Html.ActionLink(item.Name, "details", "events", new { @id = item.EventSlug }, null)
+                @if (item.IsPaid)
+                {
+                    
+                }   
+            </h6>
                 
             <ul class="eventListMenu">
                 <li>@Html.ActionLink("Edit Event", "edit", "Events", new { id = item.EventSlug }, null)</li>

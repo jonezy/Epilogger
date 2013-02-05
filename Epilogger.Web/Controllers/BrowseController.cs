@@ -84,7 +84,7 @@ namespace Epilogger.Web.Controllers
                     model.TotalRecords = CurrentUser==null ? 0 : CurrentUser.UserFollowsEvents.Count();
                     break;
                 case "myevents":
-                    events = ES.FindByUserIDPaged(CurrentUserID, currentPage, 10);
+                    events = ES.FindByUserIdPaged(CurrentUserID, currentPage, 10);
                     model.TotalRecords = ES.FindCountByUserID(CurrentUserID);
                     break;
 

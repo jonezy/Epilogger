@@ -48,16 +48,14 @@ namespace Epilogger.Web.Controllers {
 
         public virtual ActionResult Events(int? page)
         {
-            int currentPage = page.HasValue ? page.Value - 1 : 0;
+            var currentPage = page.HasValue ? page.Value - 1 : 0;
 
             var model = new MyEventsViewModel()
                             {
                                 CurrentPageIndex = currentPage,
-                                Events =
-                                    Mapper.Map<IEnumerable<Event>, List<DashboardEventViewModel>>(
-                                        eventService.FindByUserIDPaged(CurrentUserID, currentPage, 50))
+                                Events = Mapper.Map<IEnumerable<Event>, List<DashboardEventViewModel>>(eventService.FindByUserIdPaged(CurrentUserID, currentPage, 50))
                             };
-            
+            model.Events.ForEach(m => m.CurrentUserId = CurrentUserID);
             
             //IEnumerable<DashboardActivityModel> activity = userService.GetUsersEventActivity(CurrentUser.ID);
             //DashboardIndexViewModel model = new DashboardIndexViewModel(

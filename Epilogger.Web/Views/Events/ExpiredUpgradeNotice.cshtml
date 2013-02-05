@@ -1,12 +1,16 @@
 ﻿   
 <link href="@Url.Content("~/Public/css/modal.css")" rel="stylesheet" type="text/css" />
 
-<div class="">
-    <h2>THIS EVENT HAS EXPIRED</h2>
-    <p>Upgrade you event to extend its life on Epilogger and gain access to out numerous premium features.</p>
-    <p>Are you the organizer, but don't recognize this page? You can claim this event page by dropping us an email at <a href="mailto:info@Epilogger.com">info@Epilogger.com</a>.</p>
+<div class="padTheExpiryNotice">
+    <h2>THIS EVENT HAS EXPIRED.</h2>
+    <p>Is this your event? Upgrade your event to extend its life on Epilogger and gain access to our numerous premium features.</p>
+    <p>Are you the event organiser but don't recognise this page? You can claim this event page by dropping us an email at <a href="mailto:info@Epilogger.com">info@Epilogger.com</a>.</p>
     <div class="spacer"></div>
-
+    <ul class="authButtons">
+        <li>@Html.ActionImage("", "", null, "/Public/images/icons/UpgradeEventButton.png", "Update event")</li>
+        <li class="orSepertor"><em>&mdash; or &mdash;</em></li>
+        <li>@Html.ActionImage("index", "browse", null, "/Public/images/icons/TakeMeToOtherEvents.png", "Take me to other events")</li>
+    </ul>
 </div>
 @*<div class="modal_right">
     <h2>Post information</h2>

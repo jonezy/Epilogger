@@ -372,11 +372,12 @@ namespace Epilogger.Web {
             return GetData().Where(e => e.UserID == userID && e.IsPrivate==false).OrderByDescending(e=>e.StartDateTime).ToList();
         }
 
-        public List<Event> FindByUserIDPaged(Guid userID, int currentPage, int recordsPerPage)
+        public List<Event> FindByUserIdPaged(Guid userId, int currentPage, int recordsPerPage)
         {
-            var es = db.Events.Where(e => e.UserID == userID && e.IsPrivate==false);
+            var es = db.Events.Where(e => e.UserID == userId);
             return es.Skip(currentPage * recordsPerPage).Take(recordsPerPage).OrderByDescending(c => c.StartDateTime).ToList();
         }
+
         public int FindCountByUserID(Guid userID)
         {
             return db.Events.Count(e => e.UserID == userID && e.IsPrivate==false);
