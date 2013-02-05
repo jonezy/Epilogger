@@ -701,6 +701,7 @@ namespace Links {
                 public static readonly string details_time_png = Url("details-time.png");
                 public static readonly string event_toolbar_ov_png = Url("event-toolbar-ov.png");
                 public static readonly string event_toolbar_png = Url("event-toolbar.png");
+                public static readonly string eventListTotalIcons_png = Url("eventListTotalIcons.png");
                 public static readonly string facebook_png = Url("facebook.png");
                 public static readonly string facebookThumb_png = Url("facebookThumb.png");
                 public static readonly string feature_bg_png = Url("feature-bg.png");
