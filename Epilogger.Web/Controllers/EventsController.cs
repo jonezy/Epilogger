@@ -203,11 +203,12 @@ namespace Epilogger.Web.Controllers {
 									   EventSlug = requestedEvent.EventSlug,
 									   CreatedByID = requestedEvent.UserID.Value,
 									   CurrentUserID = CurrentUserID,
-									   CurrentUserRole = CurrentUserRole
+									   CurrentUserRole = CurrentUserRole,
+                                       IsPaid = requestedEvent.IsPaid != null && (bool)requestedEvent.IsPaid
 								   };
 			if (CurrentUserID != Guid.Empty)
 			{
-				toolbarModel.HasSubscribed = CurrentUser.UserFollowsEvents.FirstOrDefault(ufe => ufe.EventID == requestedEvent.ID) != null ? true : false;
+				toolbarModel.HasSubscribed = CurrentUser.UserFollowsEvents.Any(ufe => ufe.EventID == requestedEvent.ID);
 			}
 
 			return toolbarModel;

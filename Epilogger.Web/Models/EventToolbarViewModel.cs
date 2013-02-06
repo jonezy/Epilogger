@@ -8,5 +8,6 @@ namespace Epilogger.Web.Models {
         public Guid CurrentUserID { get; set; }
         public UserRoleType CurrentUserRole { get; set; }
         public bool HasSubscribed { get; set;  }
+        public bool IsPaid { get; set; }
     }
 }
