@@ -1213,7 +1213,7 @@ fieldset.login label.left {width:auto !important;padding:2px 0;}
 .menuEdit a { background-image: url(/Public/Images/EventMenu/menu-edit.png);  width: 24px; }
 .menuLiveMode a { background-image: url(/Public/Images/EventMenu/menu-livemode.png);  width: 60px; }
 
-.subscribe { /*width: 79px;*/ height: 55px; position: fixed; }
+.subscribe { /*width: 79px;*/ height: 55px; position: absolute; }
 
 .menuLiveModeDisabled a { background-image: url(/Public/Images/EventMenu/menu-livemode-disabled.png);  width: 60px;cursor: default; }
 /*.noLink { height: 55px;margin: 0; }*/
