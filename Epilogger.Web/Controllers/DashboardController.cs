@@ -46,7 +46,7 @@ namespace Epilogger.Web.Controllers {
             return View(model);
         }
 
-        public virtual ActionResult Events(int? page)
+        public virtual ActionResult  Events(int? page)
         {
             var currentPage = page.HasValue ? page.Value - 1 : 0;
 

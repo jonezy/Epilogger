@@ -50,7 +50,6 @@ jQuery(function ($) {
 
                 if (newTweets.lasttweettime != '') {
                     pageLoadTime = newTweets.lasttweettime;
-
                     if (typeof newTweets.tweetsInhtml != "undefined") {
 
                         stopAnimation = false;
@@ -480,20 +479,19 @@ jQuery(function ($) {
 
 
     // carousel
-
-    if($("#gallery").length){
-        $("#gallery li").hide().filter(':lt(1)').show();
-                window.setInterval(function(){
-                if($("#gallery li").length > 1)
-                    nextImage();
-                }, 5000);
+    function nextImage() {
+        //$("#gallery li:last").slideUp(function() { $(this).insertBefore("#gallery li:first").slideDown(500); })​;
+        $("#gallery li:last-child").slideUp(function() { $(this).insertBefore("#gallery li:first").slideDown(500); });
     }
 
-    function nextImage()
+    if ($("#gallery").length)
     {
-        $("#gallery li:last").slideUp(function() {
-            $(this).insertBefore("#gallery li:first").slideDown(500);
-        })​;​
+        $("#gallery li").hide().filter(':lt(1)').show();
+        
+        window.setInterval(function(){
+                if($("#gallery li").length > 1) 
+                    nextImage();
+                }, 5000);
     }
 
     $('.close_hover').click(function() {
@@ -515,6 +513,9 @@ jQuery(function ($) {
     $('#change_color').click(function () {
         $('#color_holder').toggleClass('invisible');
     });
+
+
+    
 
     
 });
