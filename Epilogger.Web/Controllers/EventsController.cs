@@ -2528,16 +2528,10 @@ namespace Epilogger.Web.Controllers {
 				                    EventSlug = requestedEvent.EventSlug,
 				                    EventId = requestedEvent.ID,
 				                    CustomSettings = new LiveModeCustomSettingsService().FindByEventID(requestedEvent.ID),
-				                    Images =
-				                        _is.FindByEventIdOrderDescTakeX(requestedEvent.ID, 5, FromDateTime(), ToDateTime()).ToList(),
-				                    EpiloggerCounts =
-				                        new Core.Stats.WidgetTotals().GetWidgetTotals(requestedEvent.ID, FromDateTime(),
-				                                                                      ToDateTime()),
-				                    TopTweeters =
-				                        topTweetersStats.Calculate(_ts.GetTop10TweetersByEventID(requestedEvent.ID, FromDateTime(),
-				                                                                                 ToDateTime())).ToList(),
-				                    Hashtag =
-				                        requestedEvent.SearchTerms.Split(new string[] {" OR "}, StringSplitOptions.None)[0].Contains
+				                    Images = _is.FindByEventIdOrderDescTakeX(requestedEvent.ID, 5, FromDateTime(), ToDateTime()).ToList(),
+				                    EpiloggerCounts = new Core.Stats.WidgetTotals().GetWidgetTotals(requestedEvent.ID, FromDateTime(), ToDateTime()),
+				                    TopTweeters = topTweetersStats.Calculate(_ts.GetTop10TweetersByEventID(requestedEvent.ID, FromDateTime(), ToDateTime())).ToList(),
+				                    Hashtag = requestedEvent.SearchTerms.Split(new string[] {" OR "}, StringSplitOptions.None)[0].Contains
 				                            ("#")
 				                            ? requestedEvent.SearchTerms.Split(new string[] {" OR "}, StringSplitOptions.None)[0]
 				                            : "#" +
@@ -2545,7 +2539,7 @@ namespace Epilogger.Web.Controllers {
 				                    CurrentUserRole = CurrentUserRole,
 				                    CurrentUserID = CurrentUser.ID,
 				                    UserID = CurrentUser.ID,
-
+                                    IsPaid = requestedEvent.IsPaid != null && (bool)requestedEvent.IsPaid
 				                };
 
 			    var sponsors = _sis.FindByLiveID(model.CustomSettings.Id);

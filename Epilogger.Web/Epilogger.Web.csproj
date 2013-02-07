@@ -538,6 +538,7 @@
     <Content Include="Public\images\livemode\icon-numpeople-dark.png" />
     <Content Include="Public\images\livemode\icon-numphotos-dark.png" />
     <Content Include="Public\images\livemode\icon-numtweets-dark.png" />
+    <Content Include="Public\images\livemode\livemode-ad-light.png" />
     <Content Include="Public\images\livemode\toolbar\info.gif" />
     <Content Include="Public\images\livemode\toolbar\logo_dark_theme.png" />
     <Content Include="Public\images\livemode\toolbar\number1.png" />

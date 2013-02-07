@@ -149,7 +149,14 @@ div#logo {
 
 div#logo img {
 	position:relative;
-	top:-15%}
+    top: -35px;
+	}
+div#logo img.customLogo {
+	position:relative;
+    top: 0 !important;
+	/*top:-15%*/ 
+	}
+
 
 div#stats-credits img {
 	vertical-align:middle;

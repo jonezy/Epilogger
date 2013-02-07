@@ -32,5 +32,6 @@ namespace Epilogger.Web.Models
         public Guid UserID { get; set; }
         public UserRoleType CurrentUserRole { get; set; }
         public Guid CurrentUserID { get; set; }
+        public bool IsPaid { get; set; }
     }
 }

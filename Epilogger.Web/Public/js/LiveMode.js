@@ -479,9 +479,12 @@ jQuery(function ($) {
 
 
     // carousel
+    
+    //TODO: This needs to be fixed as it doesn't quite work properly
     function nextImage() {
         //$("#gallery li:last").slideUp(function() { $(this).insertBefore("#gallery li:first").slideDown(500); })​;
-        $("#gallery li:last-child").slideUp(function() { $(this).insertBefore("#gallery li:first").slideDown(500); });
+        $("#gallery li:last").slideUp(function() { $(this).insertBefore("#gallery li:first").slideDown(500); });
+        
     }
 
     if ($("#gallery").length)

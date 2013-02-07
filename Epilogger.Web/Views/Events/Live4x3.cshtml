@@ -39,230 +39,237 @@
             
         </style>
 </head>
-<body>
- @if (Model.CurrentUserID == Model.UserID || Model.CurrentUserRole == UserRoleType.Administrator)
- {
-    <div id="toolbar">
-        <div id="preview_customize">
-            <div id="live_mode_title">
-                <h2>
-                    How your live mode will look: 
-                </h2>   
-                <span id="backEvent">(@Html.ActionLink("back to event page", "details", null, new { id = @Model.EventSlug }))</span>            
-            </div> 
-        
-            <div class="live_options">
-                <input type="button" class="submitEvent-green" value="Launch Full Screen" id="launch"/>
-            </div>
-            <div id="or">or</div>
-            <div class="live_options">
-                <input type="button" class="submitEvent" value="Make Some Changes" id="edit_livemode" />
-            </div>     
-        </div>
-
-    <div id="customize" class="invisible">
-        @Html.HiddenFor(m => Model.CustomSettings.LightTheme, new { id = "theme" })
-        @Html.ValidationSummary("Please correct the following issues")
-        @using (Html.BeginForm("Live4x3", "Events"))
+    <body>
+        @if (Model.IsPaid)
         {
-             @Html.HiddenFor(m => Model.EventId, new { id = "EventID" });  
-             @Html.HiddenFor(m => Model.CustomSettings.FooterTextColor, new { id = "hideColor1" });
-             @Html.HiddenFor(m => Model.CustomSettings.LinkColour, new { id = "hideColor2" });
-             @Html.HiddenFor(m => Model.CustomSettings.TwitterUserNameColour, new { id = "hideColor3" });
-             @Html.HiddenFor(m => Model.CustomSettings.Logo, new { id = "logo" });  
-             @Html.HiddenFor(m => Model.Sponsors, new { id = "sponsors" });
-             @Html.HiddenFor(m => Model.SponsorImageList, new { id = "sponsor" });                                                             
-                                                                                                                                                                                                                                   
-            <div id="live_mode_title">
-                <h2>
-                    Edit Live Mode:</h2>
-            </div>
-            <div id="customize_space">
-                <div class="live_options">
-                    <img src="../../Public/images/livemode/toolbar/number1.png" alt="step 1" />
-                    Choose a theme
-                    <div class="right_option">
-                        @Html.DropDownList("light_dark_theme", new SelectList(new List<SelectListItem> {
-                                            new SelectListItem
-                                            {
-                                                Text = "light colors",
-                                                Value = "light"
-                                            },
-                                            new SelectListItem
-                                            {
-                                                Text = "dark colors",
-                                                Value = "dark"
-                                            }}, "Value", "Text"),
-                                 new { @class = "AMPM" })
-                    </div>
-                </div>
-                <div class="live_options">
-                 <div class="step_image">
-                    <img src="../../Public/images/livemode/toolbar/number2.png" alt="step 2" /></div>
-                   @* <input type="button" id="change_color" class="submitEvent" value="Edit text colors" />*@
-                    <div class="right_option">
-                       <div id="color_holder" >
-                        <input type="minicolors" id="color1" name="color1" class="color-picker" size="4" autocomplete="on"
-                            value="#005294" title="footer" /><br />
-                        <input type="minicolors" id="color2" name="color2" class="color-picker" size="4" autocomplete="on"
-                            value="#FF4294" title="links" /><br />
-                        <input type="minicolors" id="color3" name="color3" class="color-picker" size="4" autocomplete="on"
-                            value="#00FF94" title="hashtags" /></div></div>
-                </div>
-                <div class="live_options">
-                    <div class="step_image">
-                        <img src="../../Public/images/livemode/toolbar/number3.png" alt="step 3" /></div>
-                    <div id="fine-uploader-logo">
-                    </div>
-                    <div id="thumbnail-fine-uploader" class="close_hover">
-                    @if (@Model.CustomSettings.Logo != null && @Model.CustomSettings.Logo != "")
-                    { 
-                    <img src=@Model.CustomSettings.Logo alt="logo" />
-                    }
-                    else
-                    {
-                        <span class="image_requirements pad3">width: 220-250px height:100-180px </span>
-                    }
-                    </div>
-                </div>
-                <div id="addition" class="live_options">
-                    <div class="step_image">
-                        <img src="../../Public/images/livemode/toolbar/number4.png" alt="step 4" /></div>
-                    <div id="fine-uploader-sponsors">                 
-       
-                    </div>
-                    @if (Model.SponsorImageList.Count > 0)
-                    {
-                        foreach (var image in Model.SponsorImageList)
-                        {
-                            <div class="sponsor-thumbs close_hover">
-                                <img src=@image.SponsorURL  />
-                             </div>
-                        }
-                    }
-                    else
-                    {
-                     <span class="image_requirements pad30">width: 80-250px height:30-130px </span>
-                    
-                    }
-                     
-                </div>
-                <div class="live_options">
-                    <div class="step_image">
-                        <img src="../../Public/images/livemode/toolbar/number5.png" alt="step 5" /></div>
-                    <input type="submit" class="submitEvent" value="Save changes" />
-                </div>
-            </div>
-        }
-        </div>
-    </div>
- }
-    <div id="content">
-        <div id="tweets">
-            <div class="tweet-column" id="tweetColumn1">
-                <div class="tweet">
-                </div>
-                <div class="tweet">
-                </div>
-            </div>
-            <div class="tweet-column" id="tweetColumn2">
-                <div class="tweet">
-                </div>
-                <div class="tweet">
-                </div>
-            </div>
-            <div class="tweet-column" id="tweetColumn3">
-                <div class="tweet">
-                </div>
-                <div class="tweet">
-                </div>
-            </div>
-        </div>
-        <div id="photos">
-            @{
-                var imgCount = 1;
-            }
-            @foreach (var img in Model.Images)
+            if (Model.CurrentUserID == Model.UserID || Model.CurrentUserRole == UserRoleType.Administrator)
             {
+                <div id="toolbar">
+                    <div id="preview_customize">
+                        <div id="live_mode_title">
+                            <h2>
+                                How your live mode will look: 
+                            </h2>   
+                            <span id="backEvent">(@Html.ActionLink("back to event page", "details", null, new { id = @Model.EventSlug }))</span>            
+                        </div> 
+        
+                        <div class="live_options">
+                            <input type="button" class="submitEvent-green" value="Launch Full Screen" id="launch"/>
+                        </div>
+                        <div id="or">or</div>
+                        <div class="live_options">
+                            <input type="button" class="submitEvent" value="Make Some Changes" id="edit_livemode" />
+                        </div>     
+                    </div>
 
-
-                if (imgCount < 3)
-                {
-                <div class="imgLarge images">
-                    <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@img.Fullsize&width=284&height=222&preserveAspect=true"
-        alt="" />
+                    <div id="customize" class="invisible">
+                        @Html.HiddenFor(m => Model.CustomSettings.LightTheme, new { id = "theme" })
+                        @Html.ValidationSummary("Please correct the following issues")
+                        @using (Html.BeginForm("Live4x3", "Events"))
+                        {
+                            @Html.HiddenFor(m => Model.EventId, new { id = "EventID" });  
+                            @Html.HiddenFor(m => Model.CustomSettings.FooterTextColor, new { id = "hideColor1" });
+                            @Html.HiddenFor(m => Model.CustomSettings.LinkColour, new { id = "hideColor2" });
+                            @Html.HiddenFor(m => Model.CustomSettings.TwitterUserNameColour, new { id = "hideColor3" });
+                            @Html.HiddenFor(m => Model.CustomSettings.Logo, new { id = "logo" });  
+                            @Html.HiddenFor(m => Model.Sponsors, new { id = "sponsors" });
+                            @Html.HiddenFor(m => Model.SponsorImageList, new { id = "sponsor" });                                                             
+                                                                                                                                                                                                                                   
+                            <div id="live_mode_title">
+                                <h2>
+                                    Edit Live Mode:</h2>
+                            </div>
+                            <div id="customize_space">
+                                <div class="live_options">
+                                    <img src="../../Public/images/livemode/toolbar/number1.png" alt="step 1" />
+                                    Choose a theme
+                                    <div class="right_option">
+                                        @Html.DropDownList("light_dark_theme", new SelectList(new List<SelectListItem> {
+                                                                                                                           new SelectListItem
+                                                                                                                               {
+                                                                                                                                   Text = "light colors",
+                                                                                                                                   Value = "light"
+                                                                                                                               },
+                                                                                                                           new SelectListItem
+                                                                                                                               {
+                                                                                                                                   Text = "dark colors",
+                                                                                                                                   Value = "dark"
+                                                                                                                               }}, "Value", "Text"),
+                                                           new { @class = "AMPM" })
+                                    </div>
+                                </div>
+                                <div class="live_options">
+                                    <div class="step_image">
+                                        <img src="../../Public/images/livemode/toolbar/number2.png" alt="step 2" /></div>
+                                    @* <input type="button" id="change_color" class="submitEvent" value="Edit text colors" />*@
+                                    <div class="right_option">
+                                        <div id="color_holder" >
+                                            <input type="minicolors" id="color1" name="color1" class="color-picker" size="4" autocomplete="on"
+                                                   value="#005294" title="footer" /><br />
+                                            <input type="minicolors" id="color2" name="color2" class="color-picker" size="4" autocomplete="on"
+                                                   value="#FF4294" title="links" /><br />
+                                            <input type="minicolors" id="color3" name="color3" class="color-picker" size="4" autocomplete="on"
+                                                   value="#00FF94" title="hashtags" /></div></div>
+                                </div>
+                                <div class="live_options">
+                                    <div class="step_image">
+                                        <img src="../../Public/images/livemode/toolbar/number3.png" alt="step 3" /></div>
+                                    <div id="fine-uploader-logo">
+                                    </div>
+                                    <div id="thumbnail-fine-uploader" class="close_hover">
+                                        @if (!string.IsNullOrEmpty(Model.CustomSettings.Logo))
+                                        { 
+                                            <img src="@Model.CustomSettings.Logo" alt="logo" />
+                                        }
+                                        else
+                                        {
+                                            <span class="image_requirements pad3">width: 220-250px height:100-180px </span>
+                                        }
+                                    </div>
+                                </div>
+                                <div id="addition" class="live_options">
+                                    <div class="step_image">
+                                        <img src="../../Public/images/livemode/toolbar/number4.png" alt="step 4" /></div>
+                                    <div id="fine-uploader-sponsors">                 
+       
+                                    </div>
+                                    @if (Model.SponsorImageList.Count > 0)
+                                    {
+                                        foreach (var image in Model.SponsorImageList)
+                                        {
+                                            <div class="sponsor-thumbs close_hover">
+                                                <img src="@image.SponsorURL" alt=""  />
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span class="image_requirements pad30">width: 80-250px height:30-130px </span>
+                                    }
+                     
+                                </div>
+                                <div class="live_options">
+                                    <div class="step_image">
+                                        <img src="../../Public/images/livemode/toolbar/number5.png" alt="step 5" /></div>
+                                    <input type="submit" class="submitEvent" value="Save changes" />
+                                </div>
+                            </div>
+                        }
+                    </div>
                 </div>
+            }
+        }
+        <div id="content">
+            <div id="tweets">
+                <div class="tweet-column" id="tweetColumn1">
+                    <div class="tweet">
+                    </div>
+                    <div class="tweet">
+                    </div>
+                </div>
+                <div class="tweet-column" id="tweetColumn2">
+                    <div class="tweet">
+                    </div>
+                    <div class="tweet">
+                    </div>
+                </div>
+                <div class="tweet-column" id="tweetColumn3">
+                    <div class="tweet">
+                    </div>
+                    <div class="tweet">
+                    </div>
+                </div>
+            </div>
+            <div id="photos">
+                @{
+                    var imgCount = 1;
+                }
+                @foreach (var img in Model.Images)
+                {
+
+
+                    if (imgCount < 3)
+                    {
+                        <div class="imgLarge images">
+                            <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@img.Fullsize&width=284&height=222&preserveAspect=true" alt="" />
+                        </div>
+                    }
+                    else
+                    {
+                        if (imgCount == 3)
+                        { <br style="clear: both" /> }
+                        <div class="imgSmall images">
+                            <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@img.Fullsize&width=94&height=94&preserveAspect=true" 1alt="" />
+                        </div>
+                    }
+                    imgCount++;
+                }
+            </div>
+        </div>
+        <div id="footer" class="footer">
+            <div id="logo">
+                @if (!Model.IsPaid)
+                {
+                    <img src="/Public/images/livemode/livemode-ad-light.png" alt="logo" />
                 }
                 else
                 {
-                    if (imgCount == 3)
-                    { <br style="clear: both" /> }
-                <div class="imgSmall images">
-                    <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@img.Fullsize&width=94&height=94&preserveAspect=true"
-    alt="" />
-                </div>
+                    if (Model.CustomSettings.Logo != null)
+                    {
+                        if (!Model.CustomSettings.Logo.IsEmpty())
+                        {
+                            <img class="customLogo" src="@Model.CustomSettings.Logo" alt="logo" />
+                        }
+                        else
+                        {
+                            <img src="/Public/images/livemode/livemode-ad-light.png" alt="logo" />
+                        }
+                    }
                 }
-                imgCount++;
-            }
-        </div>
-    </div>
-    <div id="footer" class="footer">
-        <div id="logo">
-            @if (Model.CustomSettings.Logo != null)
-            {
-                if (Model.CustomSettings.Logo.Length > 0)
+            </div>
+            <div id="hashtag-sponsors">
+                <big class="colour1">Tweet! Take a photo! @*Tweetez ! Partagez vos photos!*@
+                    <br />
+                    Hashtag: <span class="colour2">@Model.Hashtag</span> </big>
+                @if (Model.SponsorImageList.Count > 0)
                 {
-                    //  @Html.Raw(Html.Image(Model.CustomSettings.Logo))
-                    <img src=@Model.CustomSettings.Logo alt="logo" />
+                    <h1 id="partner" class="colour1">@*Notre partenaire*@ Our partners</h1>
+                    <div id="sponsor_carousel">
+                        <ul id="gallery">
+                            @foreach (var image in Model.SponsorImageList)
+                            {
+                                <li><img src="@image.SponsorURL" alt="sponsors" /></li>
+                            }
+                        </ul>
+                    </div>
+                    @Html.Raw(Model.CustomSettings.SponsorLogos)
                 }
-            }
-        </div>
-        <div id="hashtag-sponsors">
-            <big class="colour1">Tweet! Take a photo! @*Tweetez ! Partagez vos photos!*@
+            </div>
+            <div id="top-tweeters">
+                <h1 class="colour1">@*Top utilisateurs*@ Top Tweeters</h1>
+                <ul id="topTweets">
+                    @foreach (var tt in Model.TopTweeters.Take(3))
+                    {
+                        <li>
+                            <img src="@tt.Picture" height="35" alt=""/>
+                            <strong class="colour3">@@@tt.Name</strong><br />
+                            @tt.Total tweets </li>
+                    }
+                </ul>
+            </div>
+            <div id="stats-credits">
+                <h1 class="colour1">@*Statistiques*@ Statistics</h1>
+                <img src="/Public/images/livemode/icon-numtweets.png" alt="" id="icon_tweet" /><span id="tweetCount">@Model.EpiloggerCounts.TweetCount</span> &nbsp;&nbsp;&nbsp;
+                <img src="/Public/images/livemode/icon-numphotos.png" alt="" id="icon_photo"/><span id="photoCount">@Model.EpiloggerCounts.PhotoCount</span> &nbsp;&nbsp;&nbsp;
+                <img src="/Public/images/livemode/icon-numpeople.png" alt="" id="icon_people"/><span id="uniqueCount">@Model.EpiloggerCounts.UniqueTweeterCount</span>
                 <br />
-                Hashtag: <span class="colour2">@Model.Hashtag</span> </big>
-            @if (Model.SponsorImageList.Count > 0)
-            {
-                <h1 id="partner" class="colour1">@*Notre partenaire*@ Our partners</h1>
-                <div id="sponsor_carousel">
-                    <ul id="gallery">
-                   @foreach (var image in Model.SponsorImageList)
-                   {
-                      <li><img src=@image.SponsorURL alt="sponsors" /></li>
-                   }
-                    </ul>
-                </div>
-                @Html.Raw(Model.CustomSettings.SponsorLogos)
-            }
+                <br />
+                <h1 class="colour1">@*Généré par*@ Powered by:
+                    <img id="logo_footer" src="/Public/images/livemode/logo-epl.png" alt="Epilogger" /></h1>
+                @*<a href="" id="updateLink">Update</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="" id="stopLink">Stop</a>*@
+                <div id="ajaxBusy">
+                    Loading...</div>
+            </div>
         </div>
-        <div id="top-tweeters">
-            <h1 class="colour1">@*Top utilisateurs*@ Top Tweeters</h1>
-            <ul id="topTweets">
-                @foreach (var tt in Model.TopTweeters.Take(3))
-                {
-                    <li>
-                        <img src="@tt.Picture" height="35" alt=""/>
-                        <strong class="colour3">@@@tt.Name</strong><br />
-                        @tt.Total tweets </li>
-                }
-            </ul>
-        </div>
-        <div id="stats-credits">
-            <h1 class="colour1">@*Statistiques*@ Statistics</h1>
-            <img src="/Public/images/livemode/icon-numtweets.png" alt="" id="icon_tweet" /><span id="tweetCount">
-                @Model.EpiloggerCounts.TweetCount</span> &nbsp;&nbsp;&nbsp;
-            <img src="/Public/images/livemode/icon-numphotos.png" alt="" id="icon_photo"/><span id="photoCount">
-                @Model.EpiloggerCounts.PhotoCount</span> &nbsp;&nbsp;&nbsp;
-            <img src="/Public/images/livemode/icon-numpeople.png" alt="" id="icon_people"/><span id="uniqueCount">
-                @Model.EpiloggerCounts.UniqueTweeterCount</span>
-            <br />
-            <br />
-            <h1 class="colour1">@*Généré par*@ Powered by:
-                <img id="logo_footer" src="/Public/images/livemode/logo-epl.png" alt="Epilogger" /></h1>
-            @*<a href="" id="updateLink">Update</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="" id="stopLink">Stop</a>*@
-            <div id="ajaxBusy">
-                Loading...</div>
-        </div>
-    </div>
-</body>
+    </body>
 </html>
