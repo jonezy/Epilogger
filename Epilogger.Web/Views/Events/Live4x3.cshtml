@@ -15,6 +15,7 @@
     @Html.CombresLink("LiveModeJs")
     <script language="javascript" type="text/javascript">
             var EventID = @Model.EventId;
+            var IsPaid = @Model.IsPaid.ToString().ToLower();
             
             var disableAutoupdate = false;
 
