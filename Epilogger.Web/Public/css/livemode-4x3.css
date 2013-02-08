@@ -214,7 +214,10 @@ h1 {
     height:90px;
     background:white;
     font-family:Helvetica,Arial,Sans-Serif;
-    margin-bottom: -20px;}
+    margin-bottom: -20px;
+    position: relative;
+    z-index: 99999;
+}
 
 #toolbar #live_mode_title {
     float:left;
@@ -242,13 +245,15 @@ h1 {
     float:left;
     margin-left:30px;
     width:175px;
-    padding-top:15px;}
+    padding-top: 10px;}
     
     #toolbar #or {
     float:left;
     margin-left:22px;
     width:15px;
-    padding-top:22px;}
+    padding-top:16px;
+        color: #808080;
+        }
 
 #toolbar .right_option {
     padding-left:40px;
@@ -300,7 +305,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#52cc7f', end
 
 #toolbar #preview_customize
 {
-    padding-top:5px;
+    /*padding-top:5px;*/
 }
 #toolbar .submitEvent:hover {
     background: #31A5F8;
@@ -364,4 +369,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#52cc7f', end
     padding-right:4px;
     margin-top: -11px;
     padding-bottom: 1px;
+}
+
+.chooseThemeTitle {
+    color: #808080;
+    margin-left: 39px;
+    margin-top: 4px;
 }
