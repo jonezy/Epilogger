@@ -577,111 +577,108 @@ namespace Epilogger.Web.Controllers {
            
             if (ModelState.IsValid)
             {
-                //try
-                //{
-                    //var epLevent = Mapper.Map<CreateEventTwitterViewModel, Event>(model);
-                    //var eventModel = _es.FindBySlug(model.EventSlug);
-                    var eventMod = (Event)TempData["Event"];
-                    var searchQuery = "";
-                    if (model.IsAdvanceMode)
+              
+                var eventMod = (Event)TempData["Event"];
+                var searchQuery = "";
+                if (model.IsAdvanceMode)
+                {
+                    searchQuery = frm["SearchTerms"];
+                    eventMod.SearchTerms = searchQuery.Replace(",", "").Trim();
+                }
+                else
+                {
+                    var searchTerms = frm["SearchTerms"].Split(',');
+                    foreach (var s in searchTerms)
                     {
-                        searchQuery = frm["SearchTerms"];
-                        eventMod.SearchTerms = searchQuery.Replace(",", "").Trim();
-                    }
-                    else
-                    {
-                        var searchTerms = frm["SearchTerms"].Split(',');
-                        foreach (var s in searchTerms)
+                        if (s.Trim() != "")
                         {
-                            if (s.Trim() != "")
-                            {
-                                searchQuery += s + " OR ";
-                            }
+                            searchQuery += s + " OR ";
                         }
-                        searchQuery = searchQuery.Remove(searchQuery.Length - 4, 4);
-                        eventMod.SearchTerms = searchQuery.Trim();
                     }
-                    eventMod.IsActive = true;
-                    eventMod.IsPaid = false;
-                    eventMod.IsPrivate = false;
+                    searchQuery = searchQuery.Remove(searchQuery.Length - 4, 4);
+                    eventMod.SearchTerms = searchQuery.Trim();
+                }
+                eventMod.IsActive = true;
+                eventMod.IsPaid = false;
+                eventMod.IsPrivate = false;
 
-                    _es.Save(eventMod);
-                    TempData["Event"] = eventMod;
+                _es.Save(eventMod);
+                TempData["Event"] = eventMod;
 
-                    // get display model from event, route this eventually
-                    var displayModel = new CreateFinalEventViewModel()
-                                            {
-                                                Name = eventMod.Name,
-                                                Subtitle = eventMod.SubTitle,
-                                                SearchTerms = searchQuery,
-                                                EventSlug = eventMod.EventSlug,
-                                                CollectionTime = getCollectionWordFormat(eventMod.CollectionStartDateTime, eventMod.StartDateTime),
-                                                EventStartEndTime = frm["EventTime"] 
-                                            };
-
-
-                    //Initiate a first collect on the event
-                    var tsmp = new MQ.MSGProducer("Epilogger", "TwitterSearch");
-                    var tsMSG = new MQ.Messages.TwitterSearchMSG
-                    {
-                        EventID = eventMod.ID,
-                        SearchTerms = eventMod.SearchTerms,
-                        SearchFromLatestTweet = false,
-                        SearchSince = eventMod.CollectionStartDateTime,
-                        SearchUntil = eventMod.CollectionEndDateTime
-                    };
-                    tsmp.SendMessage(tsMSG);
-                    tsmp.Dispose();
-
-                    //Tweet that the event has been created.
-                    SendEventCreatedTweet(eventMod);
-
-                    //The the admins an email with the event details.
-                    if ((bool) (!eventMod.IsPrivate))
-                    {
-                    SendEventCreatedEmailToSystem(eventMod);
-                    }
+                // get display model from event, route this eventually
+                var displayModel = new CreateFinalEventViewModel()
+                                        {
+                                            Name = eventMod.Name,
+                                            Subtitle = eventMod.SubTitle,
+                                            SearchTerms = searchQuery,
+                                            EventSlug = eventMod.EventSlug,
+                                            CollectionTime = getCollectionWordFormat(eventMod.CollectionStartDateTime, eventMod.StartDateTime),
+                                            EventStartEndTime = frm["EventTime"] 
+                                        };
 
 
-                    //Clear this for the next create event
-                    TempData["Event"] = null;
-                    TempData["CreateBasicEventViewModel"] = null;
+                //Initiate a first collect on the event
+                var tsmp = new MQ.MSGProducer("Epilogger", "TwitterSearch");
+                var tsMSG = new MQ.Messages.TwitterSearchMSG
+                {
+                    EventID = eventMod.ID,
+                    SearchTerms = eventMod.SearchTerms,
+                    SearchFromLatestTweet = false,
+                    SearchSince = eventMod.CollectionStartDateTime,
+                    SearchUntil = eventMod.CollectionEndDateTime
+                };
+                tsmp.SendMessage(tsMSG);
+                tsmp.Dispose();
 
-                    return View("CreateEventFinal", displayModel);
-                //}
-                //catch (Exception ex)
-                //{
-                //    this.StoreError(string.Format("There was an error: {0}", ex.Message));
-                //    //var epLevent = Mapper.Map<CreateEventTwitterViewModel, Event>(model);
-                //    //model = Mapper.Map<Event, CreateEventTwitterViewModel>(epLevent);
-                //    return View(model);
-                //}
+                //The the admins an email with the event details.
+                //SendEventCreatedEmailToSystem(eventMod);
+
+                //Clear this for the next create event
+                //TempData["Event"] = null;
+                //TempData["CreateBasicEventViewModel"] = null;
+
+                //return View("CreateEventFinal", displayModel);
+
+                return View("CreateEventUpgrade", eventMod);
+                
             }
             
             return View();
         }
 
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+        //[CompressFilter]
+        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to edit an event")]
+        public virtual ActionResult CreateEventUpgrade(Event model)
+        {
+
+            //Tweet that the event has been created.
+            //if ((bool) (!eventMod.IsPrivate))
+            //{        
+            //    SendEventCreatedTweet(eventMod);
+            //}
+            return View(model);
+        }
+
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         
-        [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
+        //[RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
         
-        public virtual ActionResult CreateEventFinal()
-        {
-            //TODO Remove this, it's for debugging
-            var model = new CreateFinalEventViewModel()
-                            {
-                                Name = "Test Event",
-                                Subtitle = "This is a subtitle",
-                                SearchTerms = "#Rocksteady OR \"Jimmy hat\"",
-                                EventSlug = "test_event",
-                                CollectionTime = getCollectionWordFormat(DateTime.Parse("1/31/2013 10:00:00 PM"), DateTime.Parse("1/31/2013 10:00:00 PM")),
-                                EventStartEndTime = "Jan 31 5:00pm - Jan 31 8:00pm"
-                            };
+        //public virtual ActionResult CreateEventFinal()
+        //{
+        //    //TODO Remove this, it's for debugging
+        //    var model = new CreateFinalEventViewModel()
+        //                    {
+        //                        Name = "Test Event",
+        //                        Subtitle = "This is a subtitle",
+        //                        SearchTerms = "#Rocksteady OR \"Jimmy hat\"",
+        //                        EventSlug = "test_event",
+        //                        CollectionTime = getCollectionWordFormat(DateTime.Parse("1/31/2013 10:00:00 PM"), DateTime.Parse("1/31/2013 10:00:00 PM")),
+        //                        EventStartEndTime = "Jan 31 5:00pm - Jan 31 8:00pm"
+        //                    };
 
-            return View(model);
-
-
-        }
+        //    return View(model);
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         
@@ -706,6 +703,13 @@ namespace Epilogger.Web.Controllers {
         //    return totalDate;
         //}
 
+
+
+        
+        
+
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         private string getCollectionWordFormat(DateTime colDateTime, DateTime startDateTime)
         {
             string collectionSentence = "";

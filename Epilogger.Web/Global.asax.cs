@@ -196,7 +196,12 @@ namespace Epilogger.Web
              "CreateEventFinal",
              "events/CreateEventFinal",
             new { controller = "events", action = "CreateEventFinal" }
-        );
+            );
+            routes.MapRoute(
+             "CreateEventUpgrade",
+             "events/CreateEventUpgrade",
+            new { controller = "events", action = "CreateEventUpgrade", id = UrlParameter.Optional }
+            );
             routes.MapRoute(
                 "GetBrowseOverviewTabData",
                 "Events/GetBrowseOverviewTabData",

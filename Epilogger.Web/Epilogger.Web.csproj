@@ -510,12 +510,20 @@
     <Content Include="Public\images\colorpicker\colors.png" />
     <Content Include="Public\images\colorpicker\trigger.png" />
     <Content Include="Public\images\colors.png" />
+    <Content Include="Public\images\CreateEvent\buttonPreview.png" />
     <Content Include="Public\images\CreateEvent\gps.png" />
     <Content Include="Public\images\CreateEvent\hash.png" />
     <Content Include="Public\images\CreateEvent\clock.png" />
     <Content Include="Public\images\CreateEvent\EditHashtags.png" />
     <Content Include="Public\images\CreateEvent\EventCreatedActive.png" />
     <Content Include="Public\images\CreateEvent\GotoEvent.png" />
+    <Content Include="Public\images\CreateEvent\icon-eventbrite-sm.png" />
+    <Content Include="Public\images\CreateEvent\icon-featured-sm.png" />
+    <Content Include="Public\images\CreateEvent\icon-lifespan-sm.png" />
+    <Content Include="Public\images\CreateEvent\icon-livemode-sm.png" />
+    <Content Include="Public\images\CreateEvent\icon-moderate-sm.png" />
+    <Content Include="Public\images\CreateEvent\icon-private-sm.png" />
+    <Content Include="Public\images\CreateEvent\icon-verified-sm.png" />
     <Content Include="Public\images\CreateEvent\info.png" />
     <Content Include="Public\images\CreateEvent\quotes.png" />
     <Content Include="Public\images\EventMenu\menu-blogs.png" />
@@ -3324,6 +3332,7 @@
     <Content Include="Views\Home\UpgradeBenefits.cshtml" />
     <Content Include="Views\Events\Menu.cshtml" />
     <Content Include="Views\Events\MenuOLD.cshtml" />
+    <Content Include="Views\Events\CreateEventUpgrade.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />

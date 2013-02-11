@@ -119,6 +119,7 @@ fieldset.popForm input[type="text"] .timepick{width:7em;}
 .form_process{ margin-bottom: 25px; }
 .form_process2{ margin-bottom: 25px; }
 .form_process3{ margin-bottom: 10px; }
+.form_process4{ margin-bottom: 10px; }
 .dashed{border-top:1px dotted #BBB; margin-top:3px; margin-bottom:15px;}
 
 .dropdown_div
@@ -568,7 +569,7 @@ fieldset#livemode .submitEvent {
 .uiPopUp table {
     border-spacing: 0px !important;
 }
-
+    
 .uiPopUp table td 
 {
     border: 1px solid #ccc;
@@ -581,3 +582,16 @@ fieldset#livemode .submitEvent {
     padding: 10px;
     font-size: 16px;
 }
+
+
+
+
+/* Event Upgrade */
+.greyBox { background-color: #f1f1f1;color: #858585;padding: 10px;font-size: 14px; }
+.greyBox h2 { margin-top: 1px;color: #6a6a6a;text-transform: none;font-family: Helvetica, Arial, sans-serif;font-size: 14px; }
+.checkMargin { margin-left: 26px;}
+
+.upgradeFeatures { margin-top: 14px !important; }
+.upgradeFeatures li { border-bottom: 1px solid #f1f1f1 !important; width: 242px;float: left; }
+#final_wrapper .upgradeFeatures li:first-child { padding-top: 7px !important; }
+.upgradeFeatures li img { float: left;margin-top: 3px; }

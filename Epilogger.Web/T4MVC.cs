@@ -554,6 +554,7 @@ namespace Links {
                 public static readonly string BasicInfoActive_png = Url("BasicInfoActive.png");
                 public static readonly string blueArrowDown_png = Url("blueArrowDown.png");
                 public static readonly string button_blue_png = Url("button_blue.png");
+                public static readonly string buttonPreview_png = Url("buttonPreview.png");
                 public static readonly string calendarIcon_png = Url("calendarIcon.png");
                 public static readonly string clock_png = Url("clock.png");
                 public static readonly string CreateTweetEvent_png = Url("CreateTweetEvent.png");
@@ -565,6 +566,13 @@ namespace Links {
                 public static readonly string gps_png = Url("gps.png");
                 public static readonly string hash_png = Url("hash.png");
                 public static readonly string HashTagsActive_png = Url("HashTagsActive.png");
+                public static readonly string icon_eventbrite_sm_png = Url("icon-eventbrite-sm.png");
+                public static readonly string icon_featured_sm_png = Url("icon-featured-sm.png");
+                public static readonly string icon_lifespan_sm_png = Url("icon-lifespan-sm.png");
+                public static readonly string icon_livemode_sm_png = Url("icon-livemode-sm.png");
+                public static readonly string icon_moderate_sm_png = Url("icon-moderate-sm.png");
+                public static readonly string icon_private_sm_png = Url("icon-private-sm.png");
+                public static readonly string icon_verified_sm_png = Url("icon-verified-sm.png");
                 public static readonly string info_png = Url("info.png");
                 public static readonly string quotes_png = Url("quotes.png");
             }
@@ -639,6 +647,23 @@ namespace Links {
             }
         
             public static readonly string event_activity_title_icons_png = Url("event_activity_title_icons.png");
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class EventMenu {
+                private const string URLPATH = "~/Public/images/EventMenu";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string menu_blogs_png = Url("menu-blogs.png");
+                public static readonly string menu_checkin_png = Url("menu-checkin.png");
+                public static readonly string menu_edit_png = Url("menu-edit.png");
+                public static readonly string menu_links_png = Url("menu-links.png");
+                public static readonly string menu_livemode_disabled_png = Url("menu-livemode-disabled.png");
+                public static readonly string menu_livemode_png = Url("menu-livemode.png");
+                public static readonly string menu_media_png = Url("menu-media.png");
+                public static readonly string menu_overview_png = Url("menu-overview.png");
+                public static readonly string menu_stats_png = Url("menu-stats.png");
+                public static readonly string menu_tweets_png = Url("menu-tweets.png");
+            }
+        
             public static readonly string fakevideo_jpg = Url("fakevideo.jpg");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class homepage {
@@ -723,10 +748,12 @@ namespace Links {
                 public static readonly string hovernub_png = Url("hovernub.png");
                 public static readonly string icon_trending_png = Url("icon-trending.png");
                 public static readonly string icon_verified_png = Url("icon-verified.png");
+                public static readonly string icon_verified2_png = Url("icon-verified2.png");
                 public static readonly string less_png = Url("less.png");
                 public static readonly string more_png = Url("more.png");
                 public static readonly string not_png = Url("not.png");
                 public static readonly string or_png = Url("or.png");
+                public static readonly string paidEventSmall_png = Url("paidEventSmall.png");
                 public static readonly string pencil_png = Url("pencil.png");
                 public static readonly string popUpNub_png = Url("popUpNub.png");
                 public static readonly string profile_eventlist_png = Url("profile-eventlist.png");
@@ -738,10 +765,12 @@ namespace Links {
                 public static readonly string star_png = Url("star.png");
                 public static readonly string SubscribedCheck_png = Url("SubscribedCheck.png");
                 public static readonly string Tab_EventInfo_png = Url("Tab-EventInfo.png");
+                public static readonly string TakeMeToOtherEvents_png = Url("TakeMeToOtherEvents.png");
                 public static readonly string tweet_black_png = Url("tweet-black.png");
                 public static readonly string twitter_everything_spritev2_png = Url("twitter-everything-spritev2.png");
                 public static readonly string twitter_png = Url("twitter.png");
                 public static readonly string twitterThumb_png = Url("twitterThumb.png");
+                public static readonly string UpgradeEventButton_png = Url("UpgradeEventButton.png");
                 public static readonly string UploadProfilePic_png = Url("UploadProfilePic.png");
                 public static readonly string WhenandWhere_png = Url("WhenandWhere.png");
             }
@@ -817,6 +846,7 @@ namespace Links {
                 public static readonly string icon_numtweets_dark_png = Url("icon-numtweets-dark.png");
                 public static readonly string icon_numtweets_png = Url("icon-numtweets.png");
                 public static readonly string icon_retweet_png = Url("icon-retweet.png");
+                public static readonly string livemode_ad_light_png = Url("livemode-ad-light.png");
                 public static readonly string logo_epl_png = Url("logo-epl.png");
                 public static readonly string noisebg_png = Url("noisebg.png");
                 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
