@@ -1,0 +1,202 @@
+﻿@model Epilogger.Web.Models.CreateEventTwitterViewModel
+@{
+    Layout = "~/Views/Events/_CreateEventLayout.cshtml";
+    ViewBag.Title = "Create a new event | Epilogger";
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        var x = $('#event-popup').height();
+        var y = $('#event-popup').width();
+
+        parent.$.colorbox.resize({ width: 560, height: 550 });
+
+        $('#searchButton').bind("click", function () {
+            $("#preview_tweet_box").removeClass("invisible");
+            $('#preview_tweet_box').slideDown(200);
+            $('.clear_away').remove();
+            $("#warningBox").attr('class', 'warning_small');
+            $(this).removeClass("disabled_blue_button");
+            $(this).addClass("preview_stretch_btn");
+            $(this).prop('value', 'refresh results in preview box');
+        });
+        var i = 0;
+        $('#button_input').bind("click", function () {
+            i++;
+            $("#addAnother" + i).removeClass("invisible");
+            if (i == 5)
+                $(this).remove();
+        });
+
+
+
+
+        $('.searchText').bind("blur", function () {
+            if ($('#IsAdvanceMode').val() == 'False') {
+                if ($(this).val().indexOf(" ") >= 0) {
+                    if ($(this).val().substring(0, 1) != '"' && $(this).val().substring($(this).val().legnth - 1, 1) != '"') {
+                        $(this).val('"' + $.trim($(this).val()) + '"');
+                    }
+                }
+            }
+        });
+
+    });
+    
+  
+
+
+    //var searchBackUp = "";
+    function advancedMode() {
+        $('#normal_mode').toggle();
+
+        if ($('#IsAdvanceMode').val() == 'False') {
+            $('#IsAdvanceMode').val('True');
+            $('#modeTitle').text('Advanced Mode: Hashtags/Keywords');
+            searchBackUp = "";
+
+            //searchBackUp = $('#searchText').val();
+            var query = "";
+            $.each($('.searchText'), function () {
+                if ($(this).val() != "") {
+                    query = query + $(this).val().replace('#', '') + ' OR ';
+                }
+            });
+            query = query.substring(0, query.length - 4);
+            
+            $('#searchText').val(query);
+        }
+        else {
+            $('#IsAdvanceMode').val('False');
+            $('#modeTitle').text('Official Hashtag:');
+
+            //Populate the other boxes if they changed something in advanced mode
+            var parts = $('#searchText').val().split(" OR "), i, l;
+
+            $("#searchText").val(parts[0]);
+            for (i = 0, l = parts.length; i < l; i += 1) {
+                $("#searchText" + (i + 2)).val(parts[i + 1]);
+                if ($("#searchText" + (i + 2)).val().length > 0)
+                {
+                    $("#addAnother" + (i + 1)).removeClass("invisible");
+                }
+                else {
+                    $("#addAnother" + (i + 1)).addClass("invisible");
+                }
+            }
+   
+        }
+
+        $('#t_op_section').toggleClass('twitterOperatorSectionOn twitterOperatorSectionOff');
+        $('#advance_link').text($('#advance_link').text() == 'advanced mode' ? 'simple mode' : 'advanced mode');
+
+        $("#SearchHelpPopUpDiv").addClass("uiPopUpHidden");
+    }
+
+    function showTOperators() {
+        $("#SearchHelpPopUpDiv").toggleClass("uiPopUpHidden");
+        $('#twitter_operators').text($('#twitter_operators').text() == 'view twitter operators' ? 'hide twitter operators' : 'view twitter operators');
+    }
+
+</script>
+<div class="form_process2">
+    <img src="/Public/images/CreateEvent/HashTagsActive.png" alt="Basic Information" />
+</div>
+@Html.ValidationSummary("Please correct the following issues")
+@using (Html.BeginForm("CreateEvent2", "Events"))
+{
+    <fieldset>
+        @Html.HiddenFor(m => Model.EventSlug)
+        @Html.HiddenFor(m => Model.EventTime)
+        @Html.HiddenFor(x => x.IsAdvanceMode, new { id = "IsAdvanceMode", value = false } )
+        <div id="twitter_wrapper">
+            <div id="left_side">
+                <p id="modeTitle">
+                    Official Hashtag:
+                </p>
+                @Html.TextBoxFor(model => model.SearchTerms, new { @id = "searchText", @Value = "#", @class = "bolder searchText" })
+                <div id="normal_mode">
+                    <div id="addAnother1" class="invisible add_another">
+                        <p>Other hashtags/keywords:</p>
+                        @Html.TextBoxFor(model => model.SearchTerms, new { @id = "searchText2", @Value = "", @class = "searchText" })
+                    </div>
+                    <div id="addAnother2" class="invisible add_another">
+                        @Html.TextBoxFor(model => model.SearchTerms, new { @id = "searchText3", @Value = "", @class = "searchText" })
+                    </div>
+                    <div id="addAnother3" class="invisible add_another">
+                        @Html.TextBoxFor(model => model.SearchTerms, new { @id = "searchText4", @Value = "", @class = "searchText" })
+                    </div>
+                    <div id="addAnother4" class="invisible add_another">
+                        @Html.TextBoxFor(model => model.SearchTerms, new { @id = "searchText5", @Value = "", @class = "searchText" })
+                    </div>
+                    <div id="addAnother5" class="invisible add_another">
+                        @Html.TextBoxFor(model => model.SearchTerms, new { @id = "searchText6", @Value = "", @class = "searchText" })
+                    </div>
+                    <div id="button_input">
+                        <input type="button" value="add another" class="stn_button blue_button" />
+                    </div>
+                </div>
+                <div style="padding-top: 8px;">
+                    <div id="t_op_section" class="twitterOperatorSectionOff">
+                        <a href="" id="twitter_operators" onclick="showTOperators(); return false;">view twitter operators</a>&nbsp; | &nbsp;
+                    </div>
+                    <a href="" id="advance_link" onclick="advancedMode(); return false;">advanced mode</a>
+                </div>
+            </div>
+            <div id="right_side">
+                <div id="warningBox" class="warning">
+                    <div class="clear_away">
+                        <h3>Hit the preview button to see what your search term(s) collect!</h3>
+                        <span>If your terms are too broad, try narrowing it down with an official hashtag unique
+                            to your event</span><br />
+                    </div>
+                    <input type="button" value="preview results" class="stn_button disabled_blue_button" id="searchButton" />
+                </div>
+                <div id="preview_tweet_box" class="invisible">
+                    <div id="tweetSubContainer">
+                    </div>
+                    <div id="tweetMainContainer">
+                    </div>
+                    @*<input id="getMoreTweetsButton" type="button" value="Get More Tweets" />*@
+                </div>
+            </div>
+            <div id="tweet_footer">
+                <div class="dashed">
+                </div>
+                <div id="left">
+                    @Html.ActionImage("CreateEvent", "Events", new { id = Model.EventSlug }, "/Public/images/CreateEvent/FixBasicInfo.png", "Back")
+                </div>
+                <div id="right">
+                    @*  @Html.ActionImage("CreateEvent", "Events", "#", "../../Public/images/CreateEvent/CreateTweetEvent.png", "Save and Continue")*@
+                    <input type="image" src="/Public/images/CreateEvent/CreateTweetEvent.png" alt="Save and Continue" />
+                </div>
+            </div>
+        </div>
+    </fieldset> 
+}
+
+
+<div id="SearchHelpPopUpDiv" class="uiPopUp uiPopUpHidden">
+    <div id="SearchHelpPopUpContentDiv" class="">
+        <table cellpadding="0" cellspacing="0">
+            <tbody><tr><th>Operator</th><th>Finds data...</th></tr>
+                <tr><td>epilogger search</td><td>containing both "epilogger" and "search". This is the default operator.</td></tr>
+                <tr><td><b>"</b>happy hour<b>"</b></td><td>containing the exact phrase "happy hour".</td></tr>
+                <tr><td>love <b>OR</b> hate</td><td>containing either "love" or "hate" (or both).</td></tr>
+                <tr><td>beer <b>-</b>root</td><td>containing "beer" but not "root".</td></tr>
+                <tr><td><b>#</b>haiku</td><td>containing the hashtag "haiku".</td></tr>
+                <tr><td><b>from:</b>alexiskold</td><td>sent from person "alexiskold".</td></tr>
+                <tr><td><b>to:</b>techcrunch</td><td>sent to person "techcrunch".</td></tr>
+                <tr><td><b>@@</b>mashable</td><td>referencing person "mashable".</td></tr>
+                <tr><td>"happy hour" <b>near:</b>"san francisco"</td><td>containing the exact phrase "happy hour" and sent near "san francisco".</td></tr>
+                <tr><td><b>near:</b>NYC <b>within:</b>15mi</td><td>sent within 15 miles of "NYC".</td></tr>
+                <tr><td>superhero <b>since:</b>2010-12-27</td><td>containing "superhero" and sent since date "2010-12-27" (year-month-day).</td></tr>
+                <tr><td>ftw <b>until:</b>2010-12-27</td><td>containing "ftw" and sent up to date "2010-12-27".</td></tr>
+                <tr><td>movie -scary <b>:)</b></td><td>containing "movie", but not "scary", and with a positive attitude.</td></tr>
+                <tr><td>flight <b>:(</b></td><td>containing "flight" and with a negative attitude.</td></tr>
+                <tr><td>traffic <b>?</b></td><td>containing "traffic" and asking a question.</td></tr>
+                <tr><td>hilarious <b>filter:links</b></td><td>containing "hilarious" and linking to URLs.</td></tr>
+                <tr><td>news <b>source:twitterfeed</b></td><td>containing "news" and entered via TwitterFeed</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
