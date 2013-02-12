@@ -62,13 +62,8 @@ namespace Epilogger.Web.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult CreateEventUpgrade() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.CreateEventUpgrade);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult CreateEventFinal() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.CreateEventFinal);
+        public System.Web.Mvc.ActionResult CreateEvent4() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.CreateEvent4);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -254,10 +249,10 @@ namespace Epilogger.Web.Controllers {
             public readonly string Details = "Details";
             public readonly string AllPhotos = "AllPhotos";
             public readonly string AllTweets = "AllTweets";
-            public readonly string CreateEvent = "CreateEvent";
-            public readonly string CreateEventTweets = "CreateEventTweets";
-            public readonly string CreateEventUpgrade = "CreateEventUpgrade";
-            public readonly string CreateEventFinal = "CreateEventFinal";
+            public readonly string CreateEvent1 = "CreateEvent1";
+            public readonly string CreateEvent2 = "CreateEvent2";
+            public readonly string CreateEvent3 = "CreateEvent3";
+            public readonly string CreateEvent4 = "CreateEvent4";
             public readonly string Create = "Create";
             public readonly string EventBySlug = "EventBySlug";
             public readonly string GetImageComments = "GetImageComments";
@@ -306,10 +301,10 @@ namespace Epilogger.Web.Controllers {
             public const string Details = "Details";
             public const string AllPhotos = "AllPhotos";
             public const string AllTweets = "AllTweets";
-            public const string CreateEvent = "CreateEvent";
-            public const string CreateEventTweets = "CreateEventTweets";
-            public const string CreateEventUpgrade = "CreateEventUpgrade";
-            public const string CreateEventFinal = "CreateEventFinal";
+            public const string CreateEvent1 = "CreateEvent1";
+            public const string CreateEvent2 = "CreateEvent2";
+            public const string CreateEvent3 = "CreateEvent3";
+            public const string CreateEvent4 = "CreateEvent4";
             public const string Create = "Create";
             public const string EventBySlug = "EventBySlug";
             public const string GetImageComments = "GetImageComments";
@@ -383,19 +378,12 @@ namespace Epilogger.Web.Controllers {
             public readonly string id = "id";
             public readonly string page = "page";
         }
-        static readonly ActionParamsClass_CreateEventUpgrade s_params_CreateEventUpgrade = new ActionParamsClass_CreateEventUpgrade();
+        static readonly ActionParamsClass_CreateEvent4 s_params_CreateEvent4 = new ActionParamsClass_CreateEvent4();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_CreateEventUpgrade CreateEventUpgradeParams { get { return s_params_CreateEventUpgrade; } }
+        public ActionParamsClass_CreateEvent4 CreateEvent4Params { get { return s_params_CreateEvent4; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_CreateEventUpgrade {
-            public readonly string model = "model";
-        }
-        static readonly ActionParamsClass_CreateEventFinal s_params_CreateEventFinal = new ActionParamsClass_CreateEventFinal();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_CreateEventFinal CreateEventFinalParams { get { return s_params_CreateEventFinal; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_CreateEventFinal {
-            public readonly string displayModel = "displayModel";
+        public class ActionParamsClass_CreateEvent4 {
+            public readonly string id = "id";
         }
         static readonly ActionParamsClass_Create s_params_Create = new ActionParamsClass_Create();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -672,10 +660,10 @@ namespace Epilogger.Web.Controllers {
             public readonly string Category = "~/Views/Events/Category.cshtml";
             public readonly string ConceptMap = "~/Views/Events/ConceptMap.cshtml";
             public readonly string Create = "~/Views/Events/Create.cshtml";
-            public readonly string CreateEvent = "~/Views/Events/CreateEvent.cshtml";
-            public readonly string CreateEventFinal = "~/Views/Events/CreateEventFinal.cshtml";
-            public readonly string CreateEventTweets = "~/Views/Events/CreateEventTweets.cshtml";
-            public readonly string CreateEventUpgrade = "~/Views/Events/CreateEventUpgrade.cshtml";
+            public readonly string CreateEvent1 = "~/Views/Events/CreateEvent1.cshtml";
+            public readonly string CreateEvent2 = "~/Views/Events/CreateEvent2.cshtml";
+            public readonly string CreateEvent3 = "~/Views/Events/CreateEvent3.cshtml";
+            public readonly string CreateEvent4 = "~/Views/Events/CreateEvent4.cshtml";
             public readonly string Details = "~/Views/Events/Details.cshtml";
             public readonly string Edit = "~/Views/Events/Edit.cshtml";
             public readonly string EditLiveMode = "~/Views/Events/EditLiveMode.cshtml";
@@ -736,38 +724,43 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult CreateEvent() {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEvent);
+        public override System.Web.Mvc.ActionResult CreateEvent1() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEvent1);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult CreateEvent(Epilogger.Web.Models.CreateBasicEventViewModel model) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEvent);
+        public override System.Web.Mvc.ActionResult CreateEvent1(Epilogger.Web.Models.CreateBasicEventViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEvent1);
             callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult CreateEventTweets() {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEventTweets);
+        public override System.Web.Mvc.ActionResult CreateEvent2() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEvent2);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult CreateEventTweets(Epilogger.Web.Models.CreateEventTwitterViewModel model, System.Web.Mvc.FormCollection frm) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEventTweets);
+        public override System.Web.Mvc.ActionResult CreateEvent2(Epilogger.Web.Models.CreateEventTwitterViewModel model, System.Web.Mvc.FormCollection frm) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEvent2);
             callInfo.RouteValueDictionary.Add("model", model);
             callInfo.RouteValueDictionary.Add("frm", frm);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult CreateEventUpgrade(Epilogger.Data.Event model) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEventUpgrade);
+        public override System.Web.Mvc.ActionResult CreateEvent3() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEvent3);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult CreateEvent3(Epilogger.Web.Models.CreateEvent3ViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEvent3);
             callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult CreateEventFinal(Epilogger.Web.Models.CreateFinalEventViewModel displayModel) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEventFinal);
-            callInfo.RouteValueDictionary.Add("displayModel", displayModel);
+        public override System.Web.Mvc.ActionResult CreateEvent4(int id) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEvent4);
+            callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }
 

@@ -13,7 +13,7 @@ namespace Epilogger.Web
         
         public object Save(UserClickAction entity)
         {
-            return base.GetRepository<UserClickAction>().Add(entity);
+            return GetRepository<UserClickAction>().Add(entity);
         }
 
 

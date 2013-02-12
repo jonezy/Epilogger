@@ -162,11 +162,7 @@ namespace Epilogger.Web
                 new { controller = "events", action = "LiveGetLastPhotosJson" }
             );
 
-            routes.MapRoute(
-                 "CreateEvent",
-                 "events/CreateEvent",
-                new { controller = "events", action = "CreateEvent" }
-            );
+            
             routes.MapRoute(
                  "DeleteLogoSponsors",
                  "events/DeleteLogoSponsors",
@@ -187,20 +183,26 @@ namespace Epilogger.Web
                 "events/EditLiveMode",
                new { controller = "events", action = "EditLiveMode" }
            );
+
             routes.MapRoute(
-                "CreateEventTweets",
-                "events/CreateEventTweets",
-               new { controller = "events", action = "CreateEventTweets" }
-           );
-            routes.MapRoute(
-             "CreateEventFinal",
-             "events/CreateEventFinal",
-            new { controller = "events", action = "CreateEventFinal" }
+                 "CreateEvent1",
+                 "events/CreateEvent1",
+                new { controller = "events", action = "CreateEvent1" }
             );
             routes.MapRoute(
-             "CreateEventUpgrade",
-             "events/CreateEventUpgrade",
-            new { controller = "events", action = "CreateEventUpgrade", id = UrlParameter.Optional }
+                "CreateEvent2",
+                "events/CreateEvent2",
+               new { controller = "events", action = "CreateEvent2" }
+           );
+            routes.MapRoute(
+             "CreateEvent3",
+             "events/CreateEvent3",
+            new { controller = "events", action = "CreateEvent3", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+             "CreateEvent4",
+             "events/CreateEvent4",
+            new { controller = "events", action = "CreateEvent4", id = UrlParameter.Optional }
             );
             routes.MapRoute(
                 "GetBrowseOverviewTabData",

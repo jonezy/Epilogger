@@ -102,7 +102,7 @@
     <img src="/Public/images/CreateEvent/HashTagsActive.png" alt="Basic Information" />
 </div>
 @Html.ValidationSummary("Please correct the following issues")
-@using (Html.BeginForm("CreateEventTweets", "Events"))
+@using (Html.BeginForm("CreateEvent2", "Events"))
 {
     <fieldset>
         @Html.HiddenFor(m => Model.EventSlug)
@@ -163,7 +163,7 @@
                 <div class="dashed">
                 </div>
                 <div id="left">
-                    @Html.ActionImage("CreateEvent", "Events", new { id = Model.EventSlug }, "/Public/images/CreateEvent/FixBasicInfo.png", "Back")
+                    @Html.ActionImage("CreateEvent1", "Events", null, "/Public/images/CreateEvent/FixBasicInfo.png", "Back")
                 </div>
                 <div id="right">
                     @*  @Html.ActionImage("CreateEvent", "Events", "#", "../../Public/images/CreateEvent/CreateTweetEvent.png", "Save and Continue")*@

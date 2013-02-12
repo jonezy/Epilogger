@@ -48,7 +48,7 @@
     <img src="/Public/images/CreateEvent/BasicInfoActive.png" alt="Basic Information" />
 </div>
 @*@Html.ValidationSummary("Please correct the following issues")*@
-@using (Html.BeginForm("CreateEvent", "Events", FormMethod.Post, new { id = "CreateForm" }))
+@using (Html.BeginForm("CreateEvent1", "Events", FormMethod.Post, new { id = "CreateForm" }))
 {   
     <fieldset class="popForm">
         <div class="">
@@ -77,8 +77,15 @@
                 </p>
             </div>
             <div class="under_control_notice">
-                @Html.CheckBox("End_Date", @Model.allDay, new { value = false })
-                <label class="endDateCheckLabel" for="End_Date">
+                
+                
+                @Html.CheckBoxFor(m => m.allDay, new { @checked = Model.allDay })
+                
+                @*@Html.CheckBox("End_Date", Model.allDay)*@
+                @*, new { value = false }*@
+                @*@Html.CheckBoxFor(m => m.allDay)*@
+                @*, new { value="false" }*@
+                <label class="endDateCheckLabel" id="End_DateLabel" for="allDay">
                     All day</label>
             </div>
             <div id="endDate" class="dropdown_image">
@@ -114,23 +121,28 @@
 <script type="text/javascript">
     var status = 1;
 
-    $('#End_Date').bind("change", function () {
+    $('#allDay').bind("change", function () {
         $('#endDate').slideToggle(200);
         $('#start_times').slideToggle(200);
         $('#AMPMstartTime').slideToggle(200);
 
-        //if (status == 0) {
-        if ($('#End_Date').val()=="true") {
-            parent.$.colorbox.resize({ width: 560, height: 570 });
-            //status = 1;
-            $('#End_Date').val("false");
+        if ($("#allDay").attr('checked') == "checked") {
+            parent.$.colorbox.resize({ width: 560, height: 510 });
         }
         else {
-            parent.$.colorbox.resize({ width: 560, height: 510 });
-            //status = 0;
-            $('#End_Date').val("true");
+            parent.$.colorbox.resize({ width: 560, height: 570 });
         }
     });
+    
+    
+    //This is for validation that fails
+    if ($("#allDay").attr('checked') == "checked") {
+        $('#endDate').hide();
+        $('#start_times').hide();
+        $('#AMPMstartTime').hide();
+        parent.$.colorbox.resize({ width: 560, height: 510 });
+    }
+    
 
 
 //    if ($(".field-validation-error").length > 0)
