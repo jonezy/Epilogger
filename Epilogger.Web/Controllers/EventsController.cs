@@ -692,7 +692,32 @@ namespace Epilogger.Web.Controllers {
         [HttpPost]
         public virtual ActionResult CreateEvent3(CreateEvent3ViewModel model)
         {
-            
+            //PayPal Processing time
+            var paypal = new Paypal
+                             {
+                                 cmd = "_xclick", business = ConfigurationManager.AppSettings["BusinessAccountKey"]
+                             };
+
+            var useSandbox = Convert.ToBoolean(ConfigurationManager.AppSettings["UseSandbox"]);
+            if (useSandbox)
+                ViewBag.actionURl = "https://www.sandbox.paypal.com/cgi-bin/webscr";
+            else
+                ViewBag.actionURl = "https://www.paypal.com/cgi-bin/webscr";
+
+            paypal.cancel_return = System.Configuration.ConfigurationManager.AppSettings["CancelURL"];
+            paypal.@return = ConfigurationManager.AppSettings["ReturnURL"]; //+"&PaymentId=1"; you can append your order Id here
+            paypal.notify_url = ConfigurationManager.AppSettings["NotifyURL"];// +"?PaymentId=1"; to maintain database logic 
+
+            paypal.currency_code = ConfigurationManager.AppSettings["CurrencyCode"];
+
+            //paypal.item_name = item;
+            //paypal.amount = amount;
+
+
+
+
+
+
             
             //var test = PayPal.Authentication.
             
