@@ -251,7 +251,7 @@ namespace Epilogger.Web.Controllers {
             public readonly string AllTweets = "AllTweets";
             public readonly string CreateEvent1 = "CreateEvent1";
             public readonly string CreateEvent2 = "CreateEvent2";
-            public readonly string CreateEvent3 = "CreateEvent3";
+            
             public readonly string CreateEvent4 = "CreateEvent4";
             public readonly string Create = "Create";
             public readonly string EventBySlug = "EventBySlug";
@@ -303,7 +303,7 @@ namespace Epilogger.Web.Controllers {
             public const string AllTweets = "AllTweets";
             public const string CreateEvent1 = "CreateEvent1";
             public const string CreateEvent2 = "CreateEvent2";
-            public const string CreateEvent3 = "CreateEvent3";
+            
             public const string CreateEvent4 = "CreateEvent4";
             public const string Create = "Create";
             public const string EventBySlug = "EventBySlug";
@@ -662,7 +662,7 @@ namespace Epilogger.Web.Controllers {
             public readonly string Create = "~/Views/Events/Create.cshtml";
             public readonly string CreateEvent1 = "~/Views/Events/CreateEvent1.cshtml";
             public readonly string CreateEvent2 = "~/Views/Events/CreateEvent2.cshtml";
-            public readonly string CreateEvent3 = "~/Views/Events/CreateEvent3.cshtml";
+            
             public readonly string CreateEvent4 = "~/Views/Events/CreateEvent4.cshtml";
             public readonly string Details = "~/Views/Events/Details.cshtml";
             public readonly string Edit = "~/Views/Events/Edit.cshtml";
@@ -747,16 +747,9 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult CreateEvent3() {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEvent3);
-            return callInfo;
-        }
+        
 
-        public override System.Web.Mvc.ActionResult CreateEvent3(Epilogger.Web.Models.CreateEvent3ViewModel model) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEvent3);
-            callInfo.RouteValueDictionary.Add("model", model);
-            return callInfo;
-        }
+        
 
         public override System.Web.Mvc.ActionResult CreateEvent4(int id) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEvent4);

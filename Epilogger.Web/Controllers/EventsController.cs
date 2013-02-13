@@ -658,7 +658,10 @@ namespace Epilogger.Web.Controllers {
 
                 //return View("CreateEvent4", displayModel);
 
-                return View("CreateEvent3");
+                return View("CreateEvent3", new CreateEvent3ViewModel()
+                                                {
+                                                    EventId = eventMod.ID
+                                                });
             }
             
             return View();
@@ -668,6 +671,7 @@ namespace Epilogger.Web.Controllers {
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         //[CompressFilter]
         [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to edit an event")]
+        [HttpGet]
         public virtual ActionResult CreateEvent3()
         {
             TempData["Event"] = TempData["Event"];
@@ -688,6 +692,11 @@ namespace Epilogger.Web.Controllers {
         [HttpPost]
         public virtual ActionResult CreateEvent3(CreateEvent3ViewModel model)
         {
+            
+            
+            //var test = PayPal.Authentication.
+            
+            
             //Not used yet. Not sure yet if I need it.
 
 

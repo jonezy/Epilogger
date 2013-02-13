@@ -101,6 +101,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.4.5.1\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PayPalCoreSDK">
+      <HintPath>..\packages\PayPalCoreSDK.1.0.1\lib\PayPalCoreSDK.dll</HintPath>
+    </Reference>
     <Reference Include="RichmondDay.Helpers, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\RichmondDay.Helpers.dll</HintPath>
