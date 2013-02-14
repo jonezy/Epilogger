@@ -11,6 +11,7 @@ namespace Epilogger.Web.Models
         {
         }
 
+        public string formUrl { get; set; }
         public string cmd { get; set; }
         public string business { get; set; }   
         public string no_shipping { get; set; }
@@ -20,5 +21,11 @@ namespace Epilogger.Web.Models
         public string currency_code { get; set; }
         public string item_name { get; set; }
         public string amount { get; set; }
+        public string item_number { get; set; }
+        public string quantity { get; set; }
+        public string tax { get; set; }
+        public string shipping { get; set; }
+        public string custom { get; set; }
+
     }
 }

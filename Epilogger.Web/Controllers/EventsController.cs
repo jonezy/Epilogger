@@ -49,6 +49,7 @@ namespace Epilogger.Web.Controllers {
 		VenueService _venueService = new VenueService();
 		UserTwitterActionService _userTwitterActionService = new UserTwitterActionService();
         SponsorImageService _sis = new SponsorImageService();
+	    private PaypalTransactionLogService _pp = new PaypalTransactionLogService();
         
 
 		DateTime _fromDateTime = DateTime.Parse("2000-01-01 00:00:00");
@@ -219,7 +220,6 @@ namespace Epilogger.Web.Controllers {
 		[HttpPost]
 		public virtual ActionResult Details(string id, FormCollection collection)
 		{
-
 
 			if (collection["ResetDates"] == "1")
 			{
@@ -692,6 +692,28 @@ namespace Epilogger.Web.Controllers {
         [HttpPost]
         public virtual ActionResult CreateEvent3(CreateEvent3ViewModel model)
         {
+            //Event theEvent;
+            //if (TempData["Event"] != null)
+            //{
+            //    theEvent = (Event)TempData["Event"];
+            //}
+            //else
+            //{
+            //    theEvent = _es.FindByID(model.EventId);
+            //}
+
+            //Save this upgrade request to match up with the transaction when the process is complete.
+            var pp = new PaypalTransactionLog()
+                         {
+                             Id = Guid.NewGuid(),
+                             EventId = model.EventId,
+                             UserId = CurrentUserID,
+                             PricePaidBeforeTax = 50,
+                             StartedDateTime = DateTime.UtcNow,
+                             IsPrivateEvent = model.IsPrivate,  
+                         };
+            _pp.Save(pp);
+
             //PayPal Processing time
             var paypal = new Paypal
                              {
@@ -700,26 +722,25 @@ namespace Epilogger.Web.Controllers {
 
             var useSandbox = Convert.ToBoolean(ConfigurationManager.AppSettings["UseSandbox"]);
             if (useSandbox)
-                ViewBag.actionURl = "https://www.sandbox.paypal.com/cgi-bin/webscr";
+                paypal.formUrl = "https://www.sandbox.paypal.com/cgi-bin/webscr";
             else
-                ViewBag.actionURl = "https://www.paypal.com/cgi-bin/webscr";
+                paypal.formUrl = "https://www.paypal.com/cgi-bin/webscr";
 
-            paypal.cancel_return = System.Configuration.ConfigurationManager.AppSettings["CancelURL"];
-            paypal.@return = ConfigurationManager.AppSettings["ReturnURL"]; //+"&PaymentId=1"; you can append your order Id here
+            paypal.cancel_return = ConfigurationManager.AppSettings["CancelURL"];
+            paypal.@return = ConfigurationManager.AppSettings["ReturnURL"]; //+ "&item_number=" + pp.Id; //+"&PaymentId=1"; you can append your order Id here
             paypal.notify_url = ConfigurationManager.AppSettings["NotifyURL"];// +"?PaymentId=1"; to maintain database logic 
 
             paypal.currency_code = ConfigurationManager.AppSettings["CurrencyCode"];
 
-            //paypal.item_name = item;
-            //paypal.amount = amount;
+            paypal.item_name = "Test1 - Epilogger premium event pack";
+            paypal.amount = "50";
+            paypal.item_number = pp.Id.ToString();
+            paypal.shipping = "0";
+            paypal.quantity = "1";
+            paypal.tax = ((float)(13 * 50) / 100).ToString(CultureInfo.InvariantCulture);
+            paypal.custom = pp.Id.ToString();
 
-
-
-
-
-
-            
-            //var test = PayPal.Authentication.
+            return RedirectToAction("PostToPayPal", paypal);
             
             
             //Not used yet. Not sure yet if I need it.
@@ -731,7 +752,7 @@ namespace Epilogger.Web.Controllers {
             //    SendEventCreatedTweet(eventMod);
             //}
 
-            return View();
+            //return View();
         }
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -775,8 +796,16 @@ namespace Epilogger.Web.Controllers {
             return View(displayModel);
         }
 
-	    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-        
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        public ActionResult PostToPayPal(Paypal paypal)
+        {
+            return View(paypal);
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
         //[CompressFilter]
         //[RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to edit an event")]
         //public virtual ActionResult CreateEvent4(CreateFinalEventViewModel displayModel)

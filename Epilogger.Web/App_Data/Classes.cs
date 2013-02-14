@@ -1232,6 +1232,187 @@ namespace Epilogger.Data
     
     
     /// <summary>
+    /// A class which represents the PaypalTransactionLog table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.PaypalTransactionLog 
+    /// </summary>
+
+	public partial class PaypalTransactionLog: INotifyPropertyChanging, INotifyPropertyChanged
+	{
+        partial void OnLoaded();
+        partial void OnValidate(System.Data.Linq.ChangeAction action);
+        partial void OnCreated();
+	    
+	    public PaypalTransactionLog(){
+	        OnCreated();
+	    }
+	    
+	    #region Properties
+	    
+        partial void OnIdChanging(Guid value);
+        partial void OnIdChanged();
+		
+		private Guid _Id;
+		public Guid Id { 
+		    get{
+		        return _Id;
+		    } 
+		    set{
+		        this.OnIdChanging(value);
+                this.SendPropertyChanging();
+                this._Id = value;
+                this.SendPropertyChanged("Id");
+                this.OnIdChanged();
+		    }
+		}
+		
+        partial void OnUserIdChanging(Guid value);
+        partial void OnUserIdChanged();
+		
+		private Guid _UserId;
+		public Guid UserId { 
+		    get{
+		        return _UserId;
+		    } 
+		    set{
+		        this.OnUserIdChanging(value);
+                this.SendPropertyChanging();
+                this._UserId = value;
+                this.SendPropertyChanged("UserId");
+                this.OnUserIdChanged();
+		    }
+		}
+		
+        partial void OnEventIdChanging(int value);
+        partial void OnEventIdChanged();
+		
+		private int _EventId;
+		public int EventId { 
+		    get{
+		        return _EventId;
+		    } 
+		    set{
+		        this.OnEventIdChanging(value);
+                this.SendPropertyChanging();
+                this._EventId = value;
+                this.SendPropertyChanged("EventId");
+                this.OnEventIdChanged();
+		    }
+		}
+		
+        partial void OnPaypalTransactionIdChanging(string value);
+        partial void OnPaypalTransactionIdChanged();
+		
+		private string _PaypalTransactionId;
+		public string PaypalTransactionId { 
+		    get{
+		        return _PaypalTransactionId;
+		    } 
+		    set{
+		        this.OnPaypalTransactionIdChanging(value);
+                this.SendPropertyChanging();
+                this._PaypalTransactionId = value;
+                this.SendPropertyChanged("PaypalTransactionId");
+                this.OnPaypalTransactionIdChanged();
+		    }
+		}
+		
+        partial void OnStartedDateTimeChanging(DateTime? value);
+        partial void OnStartedDateTimeChanged();
+		
+		private DateTime? _StartedDateTime;
+		public DateTime? StartedDateTime { 
+		    get{
+		        return _StartedDateTime;
+		    } 
+		    set{
+		        this.OnStartedDateTimeChanging(value);
+                this.SendPropertyChanging();
+                this._StartedDateTime = value;
+                this.SendPropertyChanged("StartedDateTime");
+                this.OnStartedDateTimeChanged();
+		    }
+		}
+		
+        partial void OnCompletedDateTimeChanging(DateTime? value);
+        partial void OnCompletedDateTimeChanged();
+		
+		private DateTime? _CompletedDateTime;
+		public DateTime? CompletedDateTime { 
+		    get{
+		        return _CompletedDateTime;
+		    } 
+		    set{
+		        this.OnCompletedDateTimeChanging(value);
+                this.SendPropertyChanging();
+                this._CompletedDateTime = value;
+                this.SendPropertyChanged("CompletedDateTime");
+                this.OnCompletedDateTimeChanged();
+		    }
+		}
+		
+        partial void OnPricePaidBeforeTaxChanging(int? value);
+        partial void OnPricePaidBeforeTaxChanged();
+		
+		private int? _PricePaidBeforeTax;
+		public int? PricePaidBeforeTax { 
+		    get{
+		        return _PricePaidBeforeTax;
+		    } 
+		    set{
+		        this.OnPricePaidBeforeTaxChanging(value);
+                this.SendPropertyChanging();
+                this._PricePaidBeforeTax = value;
+                this.SendPropertyChanged("PricePaidBeforeTax");
+                this.OnPricePaidBeforeTaxChanged();
+		    }
+		}
+		
+        partial void OnIsPrivateEventChanging(bool value);
+        partial void OnIsPrivateEventChanged();
+		
+		private bool _IsPrivateEvent;
+		public bool IsPrivateEvent { 
+		    get{
+		        return _IsPrivateEvent;
+		    } 
+		    set{
+		        this.OnIsPrivateEventChanging(value);
+                this.SendPropertyChanging();
+                this._IsPrivateEvent = value;
+                this.SendPropertyChanged("IsPrivateEvent");
+                this.OnIsPrivateEventChanged();
+		    }
+		}
+		
+
+        #endregion
+
+        #region Foreign Keys
+        #endregion
+
+
+        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+        public event PropertyChangingEventHandler PropertyChanging;
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void SendPropertyChanging()
+        {
+            var handler = PropertyChanging;
+            if (handler != null)
+               handler(this, emptyChangingEventArgs);
+        }
+
+        protected virtual void SendPropertyChanged(String propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+	}
+	
+    
+    
+    /// <summary>
     /// A class which represents the aspnet_Users table in the Epilogger Database.
     /// This class is queryable through EpiloggerDB.aspnet_User 
     /// </summary>

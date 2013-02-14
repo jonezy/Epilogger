@@ -347,6 +347,7 @@
     <Compile Include="Core\Services\CategoryService.cs" />
     <Compile Include="Core\Services\BetaService.cs" />
     <Compile Include="Core\Services\APIApplicationService.cs" />
+    <Compile Include="Core\Services\PaypalTransactionLogService.cs" />
     <Compile Include="Core\Services\LiveModeCustomSettingsService.cs" />
     <Compile Include="Core\Services\SponsorImageService.cs" />
     <Compile Include="Core\Services\UserLoginTrackingService.cs" />
@@ -423,6 +424,7 @@
     <Compile Include="Models\MyEventsViewModel.cs" />
     <Compile Include="Models\NagViewModel.cs" />
     <Compile Include="Models\NavigationViewModel.cs" />
+    <Compile Include="Models\Paypal.cs" />
     <Compile Include="Models\ProfileImageChoiceViewModel.cs" />
     <Compile Include="Models\TimeZone.cs" />
     <Compile Include="Models\TweetsAndImage.cs" />
@@ -3361,6 +3363,7 @@
     <Content Include="Views\Events\Menu.cshtml" />
     <Content Include="Views\Events\MenuOLD.cshtml" />
     <Content Include="Views\Events\CreateEvent3.cshtml" />
+    <Content Include="Views\Events\PostToPayPal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />

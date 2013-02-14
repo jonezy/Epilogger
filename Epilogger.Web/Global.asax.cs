@@ -204,6 +204,13 @@ namespace Epilogger.Web
              "events/CreateEvent4",
             new { controller = "events", action = "CreateEvent4", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                 "PostToPayPal",
+                 "events/PostToPayPal",
+                new { controller = "events", action = "PostToPayPal" }
+            );
+            
             routes.MapRoute(
                 "GetBrowseOverviewTabData",
                 "Events/GetBrowseOverviewTabData",

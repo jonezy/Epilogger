@@ -1139,6 +1139,201 @@ namespace Epilogger.Data {
         }
         
         /// <summary>
+        /// Table: PaypalTransactionLog
+        /// Primary Key: 
+        /// </summary>
+
+        public class PaypalTransactionLogTable: DatabaseTable {
+            
+            public PaypalTransactionLogTable(IDataProvider provider):base("PaypalTransactionLog",provider){
+                ClassName = "PaypalTransactionLog";
+                SchemaName = "dbo";
+                
+
+                Columns.Add(new DatabaseColumn("Id", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Guid,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("UserId", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Guid,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("EventId", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("PaypalTransactionId", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 50
+                });
+
+                Columns.Add(new DatabaseColumn("StartedDateTime", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.DateTime,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("CompletedDateTime", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.DateTime,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("PricePaidBeforeTax", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("IsPrivateEvent", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Boolean,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+                    
+                
+                
+            }
+            
+            public IColumn Id{
+                get{
+                    return this.GetColumn("Id");
+                }
+            }
+            				
+   			public static string IdColumn{
+			      get{
+        			return "Id";
+      			}
+		    }
+           
+            public IColumn UserId{
+                get{
+                    return this.GetColumn("UserId");
+                }
+            }
+            				
+   			public static string UserIdColumn{
+			      get{
+        			return "UserId";
+      			}
+		    }
+           
+            public IColumn EventId{
+                get{
+                    return this.GetColumn("EventId");
+                }
+            }
+            				
+   			public static string EventIdColumn{
+			      get{
+        			return "EventId";
+      			}
+		    }
+           
+            public IColumn PaypalTransactionId{
+                get{
+                    return this.GetColumn("PaypalTransactionId");
+                }
+            }
+            				
+   			public static string PaypalTransactionIdColumn{
+			      get{
+        			return "PaypalTransactionId";
+      			}
+		    }
+           
+            public IColumn StartedDateTime{
+                get{
+                    return this.GetColumn("StartedDateTime");
+                }
+            }
+            				
+   			public static string StartedDateTimeColumn{
+			      get{
+        			return "StartedDateTime";
+      			}
+		    }
+           
+            public IColumn CompletedDateTime{
+                get{
+                    return this.GetColumn("CompletedDateTime");
+                }
+            }
+            				
+   			public static string CompletedDateTimeColumn{
+			      get{
+        			return "CompletedDateTime";
+      			}
+		    }
+           
+            public IColumn PricePaidBeforeTax{
+                get{
+                    return this.GetColumn("PricePaidBeforeTax");
+                }
+            }
+            				
+   			public static string PricePaidBeforeTaxColumn{
+			      get{
+        			return "PricePaidBeforeTax";
+      			}
+		    }
+           
+            public IColumn IsPrivateEvent{
+                get{
+                    return this.GetColumn("IsPrivateEvent");
+                }
+            }
+            				
+   			public static string IsPrivateEventColumn{
+			      get{
+        			return "IsPrivateEvent";
+      			}
+		    }
+           
+                    
+        }
+        
+        /// <summary>
         /// Table: aspnet_Users
         /// Primary Key: UserId
         /// </summary>

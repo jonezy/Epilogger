@@ -1,0 +1,41 @@
+﻿@model Epilogger.Web.Models.Paypal
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index</title>
+    <script src="@Url.Content("/Public/js/jquery-1.8.2.min.js")" type="text/javascript"></script>
+</head>
+<body>
+    <form id="frm" action="@Model.formUrl">
+        @Html.HiddenFor(model => model.cmd)
+        @Html.HiddenFor(model => model.business)
+        @Html.HiddenFor(model => model.no_shipping)
+        @Html.HiddenFor(model => model.@return)
+        @Html.HiddenFor(model => model.cancel_return)
+        @Html.HiddenFor(model => model.notify_url)
+        @Html.HiddenFor(model => model.currency_code)
+        @Html.HiddenFor(model => model.item_name)
+        @Html.HiddenFor(model => model.amount)
+        @Html.HiddenFor(model => model.item_number)
+        
+        @Html.HiddenFor(model => model.shipping)
+        @Html.HiddenFor(model => model.quantity)
+        @Html.HiddenFor(model => model.tax)
+        @Html.HiddenFor(model => model.custom)
+        
+        @*<input type="image" src="http://www.paypal.com/en_US/i/btn/x-click-but01.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">*@
+    </form>
+    
+    <h4>Redirecting to Paypal...</h4>
+    
+</body>
+</html>
+<script type="text/javascript">
+    $(this.document).ready(function () {
+        var frm = $("form");
+        frm.submit();
+    });   
+</script>
