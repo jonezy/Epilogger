@@ -575,6 +575,12 @@ namespace Links {
                 public static readonly string icon_verified_sm_png = Url("icon-verified-sm.png");
                 public static readonly string info_png = Url("info.png");
                 public static readonly string quotes_png = Url("quotes.png");
+                public static readonly string StayWithBasicButton_png = Url("StayWithBasicButton.png");
+                public static readonly string step1_png = Url("step1.png");
+                public static readonly string step2_png = Url("step2.png");
+                public static readonly string step3_png = Url("step3.png");
+                public static readonly string step4_png = Url("step4.png");
+                public static readonly string UpgradeToPremium_png = Url("UpgradeToPremium.png");
             }
         
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -618,6 +624,7 @@ namespace Links {
                 public static readonly string btn_trouble_png = Url("btn-trouble.png");
                 public static readonly string btn_validate_jpg = Url("btn-validate.jpg");
                 public static readonly string btn_validate_png = Url("btn-validate.png");
+                public static readonly string EPLTeam_jpg = Url("EPLTeam.jpg");
                 public static readonly string icon_bird_png = Url("icon-bird.png");
                 public static readonly string icon_email_png = Url("icon-email.png");
                 public static readonly string icon_facebook_png = Url("icon-facebook.png");

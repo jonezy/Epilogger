@@ -67,6 +67,21 @@ namespace Epilogger.Web.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult PostToPayPal() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.PostToPayPal);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult PaypalSuccess() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.PaypalSuccess);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult PaypalNotify() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.PaypalNotify);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult Create() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Create);
         }
@@ -251,8 +266,11 @@ namespace Epilogger.Web.Controllers {
             public readonly string AllTweets = "AllTweets";
             public readonly string CreateEvent1 = "CreateEvent1";
             public readonly string CreateEvent2 = "CreateEvent2";
-            
+            public readonly string CreateEvent3 = "CreateEvent3";
             public readonly string CreateEvent4 = "CreateEvent4";
+            public readonly string PostToPayPal = "PostToPayPal";
+            public readonly string PaypalSuccess = "PaypalSuccess";
+            public readonly string PaypalNotify = "PaypalNotify";
             public readonly string Create = "Create";
             public readonly string EventBySlug = "EventBySlug";
             public readonly string GetImageComments = "GetImageComments";
@@ -303,8 +321,11 @@ namespace Epilogger.Web.Controllers {
             public const string AllTweets = "AllTweets";
             public const string CreateEvent1 = "CreateEvent1";
             public const string CreateEvent2 = "CreateEvent2";
-            
+            public const string CreateEvent3 = "CreateEvent3";
             public const string CreateEvent4 = "CreateEvent4";
+            public const string PostToPayPal = "PostToPayPal";
+            public const string PaypalSuccess = "PaypalSuccess";
+            public const string PaypalNotify = "PaypalNotify";
             public const string Create = "Create";
             public const string EventBySlug = "EventBySlug";
             public const string GetImageComments = "GetImageComments";
@@ -384,6 +405,27 @@ namespace Epilogger.Web.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_CreateEvent4 {
             public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_PostToPayPal s_params_PostToPayPal = new ActionParamsClass_PostToPayPal();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_PostToPayPal PostToPayPalParams { get { return s_params_PostToPayPal; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_PostToPayPal {
+            public readonly string paypal = "paypal";
+        }
+        static readonly ActionParamsClass_PaypalSuccess s_params_PaypalSuccess = new ActionParamsClass_PaypalSuccess();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_PaypalSuccess PaypalSuccessParams { get { return s_params_PaypalSuccess; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_PaypalSuccess {
+            public readonly string frm = "frm";
+        }
+        static readonly ActionParamsClass_PaypalNotify s_params_PaypalNotify = new ActionParamsClass_PaypalNotify();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_PaypalNotify PaypalNotifyParams { get { return s_params_PaypalNotify; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_PaypalNotify {
+            public readonly string frm = "frm";
         }
         static readonly ActionParamsClass_Create s_params_Create = new ActionParamsClass_Create();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -662,7 +704,7 @@ namespace Epilogger.Web.Controllers {
             public readonly string Create = "~/Views/Events/Create.cshtml";
             public readonly string CreateEvent1 = "~/Views/Events/CreateEvent1.cshtml";
             public readonly string CreateEvent2 = "~/Views/Events/CreateEvent2.cshtml";
-            
+            public readonly string CreateEvent3 = "~/Views/Events/CreateEvent3.cshtml";
             public readonly string CreateEvent4 = "~/Views/Events/CreateEvent4.cshtml";
             public readonly string Details = "~/Views/Events/Details.cshtml";
             public readonly string Edit = "~/Views/Events/Edit.cshtml";
@@ -676,6 +718,7 @@ namespace Epilogger.Web.Controllers {
             public readonly string MenuOLD = "~/Views/Events/MenuOLD.cshtml";
             public readonly string NeedTwitterAuth = "~/Views/Events/NeedTwitterAuth.cshtml";
             public readonly string PhotoDetails = "~/Views/Events/PhotoDetails.cshtml";
+            public readonly string PostToPayPal = "~/Views/Events/PostToPayPal.cshtml";
             public readonly string Search = "~/Views/Events/Search.cshtml";
             public readonly string TweetBox = "~/Views/Events/TweetBox.cshtml";
             public readonly string TweetReply = "~/Views/Events/TweetReply.cshtml";
@@ -747,13 +790,38 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
-        
+        public override System.Web.Mvc.ActionResult CreateEvent3() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEvent3);
+            return callInfo;
+        }
 
-        
+        public override System.Web.Mvc.ActionResult CreateEvent3(Epilogger.Web.Models.CreateEvent3ViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEvent3);
+            callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
 
         public override System.Web.Mvc.ActionResult CreateEvent4(int id) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEvent4);
             callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult PostToPayPal(Epilogger.Web.Models.Paypal paypal) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.PostToPayPal);
+            callInfo.RouteValueDictionary.Add("paypal", paypal);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult PaypalSuccess(System.Web.Mvc.FormCollection frm) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.PaypalSuccess);
+            callInfo.RouteValueDictionary.Add("frm", frm);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult PaypalNotify(System.Web.Mvc.FormCollection frm) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.PaypalNotify);
+            callInfo.RouteValueDictionary.Add("frm", frm);
             return callInfo;
         }
 

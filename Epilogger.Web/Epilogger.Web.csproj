@@ -518,6 +518,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AccountEmails.resx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Emails\UpgradeEmails.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UpgradeEmails.resx</DependentUpon>
+    </Compile>
     <Compile Include="WidgetController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
       <SubType>Code</SubType>
@@ -556,6 +561,13 @@
     <Content Include="Public\images\CreateEvent\icon-verified-sm.png" />
     <Content Include="Public\images\CreateEvent\info.png" />
     <Content Include="Public\images\CreateEvent\quotes.png" />
+    <Content Include="Public\images\CreateEvent\StayWithBasicButton.png" />
+    <Content Include="Public\images\CreateEvent\step1.png" />
+    <Content Include="Public\images\CreateEvent\step2.png" />
+    <Content Include="Public\images\CreateEvent\step3.png" />
+    <Content Include="Public\images\CreateEvent\step4.png" />
+    <Content Include="Public\images\CreateEvent\UpgradeToPremium.png" />
+    <Content Include="Public\images\email\EPLTeam.jpg" />
     <Content Include="Public\images\EventMenu\menu-blogs.png" />
     <Content Include="Public\images\EventMenu\menu-checkin.png" />
     <Content Include="Public\images\EventMenu\menu-edit.png" />
@@ -674,6 +686,7 @@
     <Content Include="Public\js\jTweet.js" />
     <Content Include="Public\js\tweetTemplate.js" />
     <Content Include="Public\js\widget.js" />
+    <Content Include="HTMLPage1.htm" />
     <Content Include="WidgetSample.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -8872,6 +8885,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AccountEmails.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Emails\UpgradeEmails.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>UpgradeEmails.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

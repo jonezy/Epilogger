@@ -29,6 +29,7 @@ namespace T4MVC {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
             public readonly string AccountEmails = "~/Views/Emails/AccountEmails.resx";
+            public readonly string UpgradeEmails = "~/Views/Emails/UpgradeEmails.resx";
         }
     }
 

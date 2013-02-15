@@ -798,7 +798,7 @@ namespace Epilogger.Web.Controllers {
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        public ActionResult PostToPayPal(Paypal paypal)
+        public virtual ActionResult PostToPayPal(Paypal paypal)
         {
             return View(paypal);
         }
@@ -806,7 +806,7 @@ namespace Epilogger.Web.Controllers {
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         [HttpPost]
-        public ActionResult PaypalSuccess(FormCollection frm)
+        public virtual ActionResult PaypalSuccess(FormCollection frm)
         {
             //Make sure this committed first.
             var uniqueid = Guid.Parse(frm["custom"]);
@@ -888,13 +888,16 @@ namespace Epilogger.Web.Controllers {
             } catch (Exception)
             { }
 
+            //Send the thank you email
+            SendUpgradeEventThankYou(evt);
+
             return evt == null ? RedirectToAction("index", "home") : RedirectToAction("details", new { id = evt.EventSlug });
         }
 
         
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-        public ActionResult PaypalNotify(FormCollection frm)
+        public virtual ActionResult PaypalNotify(FormCollection frm)
         {
 
             return RedirectToAction("details", new { id = "epilogger" });
@@ -1165,6 +1168,41 @@ namespace Epilogger.Web.Controllers {
 	        {
 	        }
 	    }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        private void SendUpgradeEventThankYou(Event model)
+        {
+            try
+            {
+                if (model.UserID != null)
+                {
+                    var theUser = _us.GetUserByID((Guid)model.UserID);
+
+                    var parser = new TemplateParser();
+                    var replacements = new Dictionary<string, string>
+	                                       {
+	                                           {"[EVENT_NAME]", model.Name},
+	                                           {"[FIRST_NAME]", theUser.FirstName}
+	                                       };
+
+                    var message = parser.Replace(UpgradeEmails.UpgradeThankYou, replacements);
+
+                    var sfEmail = new SpamSafeMail
+                    {
+                        EmailSubject = "Thank you for upgrading your Epilogger event!",
+                        HtmlEmail = message,
+                        TextEmail = message
+                    };
+                    sfEmail.ToEmailAddresses.Add(theUser.EmailAddress);
+
+                    sfEmail.SendMail();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 		
