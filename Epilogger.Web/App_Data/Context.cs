@@ -126,12 +126,12 @@ namespace Epilogger.Data
         public Query<Tweet> Tweets { get; set; }
         public Query<ScraperURL> ScraperURLs { get; set; }
         public Query<URL> URLS { get; set; }
-        public Query<PaypalTransactionLog> PaypalTransactionLogs { get; set; }
         public Query<aspnet_User> aspnet_Users { get; set; }
         public Query<UserLoginTracking> UserLoginTrackings { get; set; }
         public Query<UserAuthenticationProfile> UserAuthenticationProfiles { get; set; }
         public Query<BetaSignup> BetaSignups { get; set; }
         public Query<MemoryBoxItem> MemoryBoxItems { get; set; }
+        public Query<PaypalTransactionLog> PaypalTransactionLogs { get; set; }
         public Query<UserFollowsEvent> UserFollowsEvents { get; set; }
         public Query<LiveModeCustomSetting> LiveModeCustomSettings { get; set; }
         public Query<StatusMessage> StatusMessages { get; set; }
@@ -265,12 +265,12 @@ namespace Epilogger.Data
             Tweets = new Query<Tweet>(provider);
             ScraperURLs = new Query<ScraperURL>(provider);
             URLS = new Query<URL>(provider);
-            PaypalTransactionLogs = new Query<PaypalTransactionLog>(provider);
             aspnet_Users = new Query<aspnet_User>(provider);
             UserLoginTrackings = new Query<UserLoginTracking>(provider);
             UserAuthenticationProfiles = new Query<UserAuthenticationProfile>(provider);
             BetaSignups = new Query<BetaSignup>(provider);
             MemoryBoxItems = new Query<MemoryBoxItem>(provider);
+            PaypalTransactionLogs = new Query<PaypalTransactionLog>(provider);
             UserFollowsEvents = new Query<UserFollowsEvent>(provider);
             LiveModeCustomSettings = new Query<LiveModeCustomSetting>(provider);
             StatusMessages = new Query<StatusMessage>(provider);
@@ -307,12 +307,12 @@ namespace Epilogger.Data
             	DataProvider.Schema.Tables.Add(new TweetsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ScraperURLsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new URLsTable(DataProvider));
-            	DataProvider.Schema.Tables.Add(new PaypalTransactionLogTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new aspnet_UsersTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserLoginTrackingTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserAuthenticationProfileTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new BetaSignupsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new MemoryBoxItemsTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new PaypalTransactionLogTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new UserFollowsEventTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new LiveModeCustomSettingsTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new StatusMessagesTable(DataProvider));

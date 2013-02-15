@@ -15,10 +15,13 @@ namespace Epilogger.Web
 
         public object Save(PaypalTransactionLog entity)
         {
-            return base.GetRepository<PaypalTransactionLog>().Add(entity);
+            return entity.Id > 0 ? base.GetRepository<PaypalTransactionLog>().Update(entity) : base.GetRepository<PaypalTransactionLog>().Add(entity);
         }
 
-        
+        public PaypalTransactionLog FindById(Guid uniqueid)
+        {
+            return db.PaypalTransactionLogs.FirstOrDefault(r => r.UniqueId == uniqueid);
+        }
         
     }
 }

@@ -1232,187 +1232,6 @@ namespace Epilogger.Data
     
     
     /// <summary>
-    /// A class which represents the PaypalTransactionLog table in the Epilogger Database.
-    /// This class is queryable through EpiloggerDB.PaypalTransactionLog 
-    /// </summary>
-
-	public partial class PaypalTransactionLog: INotifyPropertyChanging, INotifyPropertyChanged
-	{
-        partial void OnLoaded();
-        partial void OnValidate(System.Data.Linq.ChangeAction action);
-        partial void OnCreated();
-	    
-	    public PaypalTransactionLog(){
-	        OnCreated();
-	    }
-	    
-	    #region Properties
-	    
-        partial void OnIdChanging(Guid value);
-        partial void OnIdChanged();
-		
-		private Guid _Id;
-		public Guid Id { 
-		    get{
-		        return _Id;
-		    } 
-		    set{
-		        this.OnIdChanging(value);
-                this.SendPropertyChanging();
-                this._Id = value;
-                this.SendPropertyChanged("Id");
-                this.OnIdChanged();
-		    }
-		}
-		
-        partial void OnUserIdChanging(Guid value);
-        partial void OnUserIdChanged();
-		
-		private Guid _UserId;
-		public Guid UserId { 
-		    get{
-		        return _UserId;
-		    } 
-		    set{
-		        this.OnUserIdChanging(value);
-                this.SendPropertyChanging();
-                this._UserId = value;
-                this.SendPropertyChanged("UserId");
-                this.OnUserIdChanged();
-		    }
-		}
-		
-        partial void OnEventIdChanging(int value);
-        partial void OnEventIdChanged();
-		
-		private int _EventId;
-		public int EventId { 
-		    get{
-		        return _EventId;
-		    } 
-		    set{
-		        this.OnEventIdChanging(value);
-                this.SendPropertyChanging();
-                this._EventId = value;
-                this.SendPropertyChanged("EventId");
-                this.OnEventIdChanged();
-		    }
-		}
-		
-        partial void OnPaypalTransactionIdChanging(string value);
-        partial void OnPaypalTransactionIdChanged();
-		
-		private string _PaypalTransactionId;
-		public string PaypalTransactionId { 
-		    get{
-		        return _PaypalTransactionId;
-		    } 
-		    set{
-		        this.OnPaypalTransactionIdChanging(value);
-                this.SendPropertyChanging();
-                this._PaypalTransactionId = value;
-                this.SendPropertyChanged("PaypalTransactionId");
-                this.OnPaypalTransactionIdChanged();
-		    }
-		}
-		
-        partial void OnStartedDateTimeChanging(DateTime? value);
-        partial void OnStartedDateTimeChanged();
-		
-		private DateTime? _StartedDateTime;
-		public DateTime? StartedDateTime { 
-		    get{
-		        return _StartedDateTime;
-		    } 
-		    set{
-		        this.OnStartedDateTimeChanging(value);
-                this.SendPropertyChanging();
-                this._StartedDateTime = value;
-                this.SendPropertyChanged("StartedDateTime");
-                this.OnStartedDateTimeChanged();
-		    }
-		}
-		
-        partial void OnCompletedDateTimeChanging(DateTime? value);
-        partial void OnCompletedDateTimeChanged();
-		
-		private DateTime? _CompletedDateTime;
-		public DateTime? CompletedDateTime { 
-		    get{
-		        return _CompletedDateTime;
-		    } 
-		    set{
-		        this.OnCompletedDateTimeChanging(value);
-                this.SendPropertyChanging();
-                this._CompletedDateTime = value;
-                this.SendPropertyChanged("CompletedDateTime");
-                this.OnCompletedDateTimeChanged();
-		    }
-		}
-		
-        partial void OnPricePaidBeforeTaxChanging(int? value);
-        partial void OnPricePaidBeforeTaxChanged();
-		
-		private int? _PricePaidBeforeTax;
-		public int? PricePaidBeforeTax { 
-		    get{
-		        return _PricePaidBeforeTax;
-		    } 
-		    set{
-		        this.OnPricePaidBeforeTaxChanging(value);
-                this.SendPropertyChanging();
-                this._PricePaidBeforeTax = value;
-                this.SendPropertyChanged("PricePaidBeforeTax");
-                this.OnPricePaidBeforeTaxChanged();
-		    }
-		}
-		
-        partial void OnIsPrivateEventChanging(bool value);
-        partial void OnIsPrivateEventChanged();
-		
-		private bool _IsPrivateEvent;
-		public bool IsPrivateEvent { 
-		    get{
-		        return _IsPrivateEvent;
-		    } 
-		    set{
-		        this.OnIsPrivateEventChanging(value);
-                this.SendPropertyChanging();
-                this._IsPrivateEvent = value;
-                this.SendPropertyChanged("IsPrivateEvent");
-                this.OnIsPrivateEventChanged();
-		    }
-		}
-		
-
-        #endregion
-
-        #region Foreign Keys
-        #endregion
-
-
-        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-        public event PropertyChangingEventHandler PropertyChanging;
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void SendPropertyChanging()
-        {
-            var handler = PropertyChanging;
-            if (handler != null)
-               handler(this, emptyChangingEventArgs);
-        }
-
-        protected virtual void SendPropertyChanged(String propertyName)
-        {
-            var handler = PropertyChanged;
-            if (handler != null)
-                handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-	}
-	
-    
-    
-    /// <summary>
     /// A class which represents the aspnet_Users table in the Epilogger Database.
     /// This class is queryable through EpiloggerDB.aspnet_User 
     /// </summary>
@@ -2161,6 +1980,901 @@ namespace Epilogger.Data
             }
         }
 
+        #endregion
+
+
+        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+        public event PropertyChangingEventHandler PropertyChanging;
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void SendPropertyChanging()
+        {
+            var handler = PropertyChanging;
+            if (handler != null)
+               handler(this, emptyChangingEventArgs);
+        }
+
+        protected virtual void SendPropertyChanged(String propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+	}
+	
+    
+    
+    /// <summary>
+    /// A class which represents the PaypalTransactionLog table in the Epilogger Database.
+    /// This class is queryable through EpiloggerDB.PaypalTransactionLog 
+    /// </summary>
+
+	public partial class PaypalTransactionLog: INotifyPropertyChanging, INotifyPropertyChanged
+	{
+        partial void OnLoaded();
+        partial void OnValidate(System.Data.Linq.ChangeAction action);
+        partial void OnCreated();
+	    
+	    public PaypalTransactionLog(){
+	        OnCreated();
+	    }
+	    
+	    #region Properties
+	    
+        partial void OnIdChanging(int value);
+        partial void OnIdChanged();
+		
+		private int _Id;
+		public int Id { 
+		    get{
+		        return _Id;
+		    } 
+		    set{
+		        this.OnIdChanging(value);
+                this.SendPropertyChanging();
+                this._Id = value;
+                this.SendPropertyChanged("Id");
+                this.OnIdChanged();
+		    }
+		}
+		
+        partial void OnUniqueIdChanging(Guid value);
+        partial void OnUniqueIdChanged();
+		
+		private Guid _UniqueId;
+		public Guid UniqueId { 
+		    get{
+		        return _UniqueId;
+		    } 
+		    set{
+		        this.OnUniqueIdChanging(value);
+                this.SendPropertyChanging();
+                this._UniqueId = value;
+                this.SendPropertyChanged("UniqueId");
+                this.OnUniqueIdChanged();
+		    }
+		}
+		
+        partial void OnUserIdChanging(Guid value);
+        partial void OnUserIdChanged();
+		
+		private Guid _UserId;
+		public Guid UserId { 
+		    get{
+		        return _UserId;
+		    } 
+		    set{
+		        this.OnUserIdChanging(value);
+                this.SendPropertyChanging();
+                this._UserId = value;
+                this.SendPropertyChanged("UserId");
+                this.OnUserIdChanged();
+		    }
+		}
+		
+        partial void OnEventIdChanging(int value);
+        partial void OnEventIdChanged();
+		
+		private int _EventId;
+		public int EventId { 
+		    get{
+		        return _EventId;
+		    } 
+		    set{
+		        this.OnEventIdChanging(value);
+                this.SendPropertyChanging();
+                this._EventId = value;
+                this.SendPropertyChanged("EventId");
+                this.OnEventIdChanged();
+		    }
+		}
+		
+        partial void OnPaypalTransactionIdChanging(string value);
+        partial void OnPaypalTransactionIdChanged();
+		
+		private string _PaypalTransactionId;
+		public string PaypalTransactionId { 
+		    get{
+		        return _PaypalTransactionId;
+		    } 
+		    set{
+		        this.OnPaypalTransactionIdChanging(value);
+                this.SendPropertyChanging();
+                this._PaypalTransactionId = value;
+                this.SendPropertyChanged("PaypalTransactionId");
+                this.OnPaypalTransactionIdChanged();
+		    }
+		}
+		
+        partial void OnStartedDateTimeChanging(DateTime? value);
+        partial void OnStartedDateTimeChanged();
+		
+		private DateTime? _StartedDateTime;
+		public DateTime? StartedDateTime { 
+		    get{
+		        return _StartedDateTime;
+		    } 
+		    set{
+		        this.OnStartedDateTimeChanging(value);
+                this.SendPropertyChanging();
+                this._StartedDateTime = value;
+                this.SendPropertyChanged("StartedDateTime");
+                this.OnStartedDateTimeChanged();
+		    }
+		}
+		
+        partial void OnCompletedDateTimeChanging(DateTime? value);
+        partial void OnCompletedDateTimeChanged();
+		
+		private DateTime? _CompletedDateTime;
+		public DateTime? CompletedDateTime { 
+		    get{
+		        return _CompletedDateTime;
+		    } 
+		    set{
+		        this.OnCompletedDateTimeChanging(value);
+                this.SendPropertyChanging();
+                this._CompletedDateTime = value;
+                this.SendPropertyChanged("CompletedDateTime");
+                this.OnCompletedDateTimeChanged();
+		    }
+		}
+		
+        partial void OnPricePaidBeforeTaxChanging(int? value);
+        partial void OnPricePaidBeforeTaxChanged();
+		
+		private int? _PricePaidBeforeTax;
+		public int? PricePaidBeforeTax { 
+		    get{
+		        return _PricePaidBeforeTax;
+		    } 
+		    set{
+		        this.OnPricePaidBeforeTaxChanging(value);
+                this.SendPropertyChanging();
+                this._PricePaidBeforeTax = value;
+                this.SendPropertyChanged("PricePaidBeforeTax");
+                this.OnPricePaidBeforeTaxChanged();
+		    }
+		}
+		
+        partial void OnIsPrivateEventChanging(bool value);
+        partial void OnIsPrivateEventChanged();
+		
+		private bool _IsPrivateEvent;
+		public bool IsPrivateEvent { 
+		    get{
+		        return _IsPrivateEvent;
+		    } 
+		    set{
+		        this.OnIsPrivateEventChanging(value);
+                this.SendPropertyChanging();
+                this._IsPrivateEvent = value;
+                this.SendPropertyChanged("IsPrivateEvent");
+                this.OnIsPrivateEventChanged();
+		    }
+		}
+		
+        partial void Onmc_grossChanging(string value);
+        partial void Onmc_grossChanged();
+		
+		private string _mc_gross;
+		public string mc_gross { 
+		    get{
+		        return _mc_gross;
+		    } 
+		    set{
+		        this.Onmc_grossChanging(value);
+                this.SendPropertyChanging();
+                this._mc_gross = value;
+                this.SendPropertyChanged("mc_gross");
+                this.Onmc_grossChanged();
+		    }
+		}
+		
+        partial void Onprotection_eligibilityChanging(string value);
+        partial void Onprotection_eligibilityChanged();
+		
+		private string _protection_eligibility;
+		public string protection_eligibility { 
+		    get{
+		        return _protection_eligibility;
+		    } 
+		    set{
+		        this.Onprotection_eligibilityChanging(value);
+                this.SendPropertyChanging();
+                this._protection_eligibility = value;
+                this.SendPropertyChanged("protection_eligibility");
+                this.Onprotection_eligibilityChanged();
+		    }
+		}
+		
+        partial void Onaddress_statusChanging(string value);
+        partial void Onaddress_statusChanged();
+		
+		private string _address_status;
+		public string address_status { 
+		    get{
+		        return _address_status;
+		    } 
+		    set{
+		        this.Onaddress_statusChanging(value);
+                this.SendPropertyChanging();
+                this._address_status = value;
+                this.SendPropertyChanged("address_status");
+                this.Onaddress_statusChanged();
+		    }
+		}
+		
+        partial void Onpayer_idChanging(string value);
+        partial void Onpayer_idChanged();
+		
+		private string _payer_id;
+		public string payer_id { 
+		    get{
+		        return _payer_id;
+		    } 
+		    set{
+		        this.Onpayer_idChanging(value);
+                this.SendPropertyChanging();
+                this._payer_id = value;
+                this.SendPropertyChanged("payer_id");
+                this.Onpayer_idChanged();
+		    }
+		}
+		
+        partial void OntaxChanging(string value);
+        partial void OntaxChanged();
+		
+		private string _tax;
+		public string tax { 
+		    get{
+		        return _tax;
+		    } 
+		    set{
+		        this.OntaxChanging(value);
+                this.SendPropertyChanging();
+                this._tax = value;
+                this.SendPropertyChanged("tax");
+                this.OntaxChanged();
+		    }
+		}
+		
+        partial void Onaddress_streetChanging(string value);
+        partial void Onaddress_streetChanged();
+		
+		private string _address_street;
+		public string address_street { 
+		    get{
+		        return _address_street;
+		    } 
+		    set{
+		        this.Onaddress_streetChanging(value);
+                this.SendPropertyChanging();
+                this._address_street = value;
+                this.SendPropertyChanged("address_street");
+                this.Onaddress_streetChanged();
+		    }
+		}
+		
+        partial void Onpayment_dateChanging(string value);
+        partial void Onpayment_dateChanged();
+		
+		private string _payment_date;
+		public string payment_date { 
+		    get{
+		        return _payment_date;
+		    } 
+		    set{
+		        this.Onpayment_dateChanging(value);
+                this.SendPropertyChanging();
+                this._payment_date = value;
+                this.SendPropertyChanged("payment_date");
+                this.Onpayment_dateChanged();
+		    }
+		}
+		
+        partial void Onpayment_statusChanging(string value);
+        partial void Onpayment_statusChanged();
+		
+		private string _payment_status;
+		public string payment_status { 
+		    get{
+		        return _payment_status;
+		    } 
+		    set{
+		        this.Onpayment_statusChanging(value);
+                this.SendPropertyChanging();
+                this._payment_status = value;
+                this.SendPropertyChanged("payment_status");
+                this.Onpayment_statusChanged();
+		    }
+		}
+		
+        partial void OncharsetChanging(string value);
+        partial void OncharsetChanged();
+		
+		private string _charset;
+		public string charset { 
+		    get{
+		        return _charset;
+		    } 
+		    set{
+		        this.OncharsetChanging(value);
+                this.SendPropertyChanging();
+                this._charset = value;
+                this.SendPropertyChanged("charset");
+                this.OncharsetChanged();
+		    }
+		}
+		
+        partial void Onaddress_zipChanging(string value);
+        partial void Onaddress_zipChanged();
+		
+		private string _address_zip;
+		public string address_zip { 
+		    get{
+		        return _address_zip;
+		    } 
+		    set{
+		        this.Onaddress_zipChanging(value);
+                this.SendPropertyChanging();
+                this._address_zip = value;
+                this.SendPropertyChanged("address_zip");
+                this.Onaddress_zipChanged();
+		    }
+		}
+		
+        partial void Onfirst_nameChanging(string value);
+        partial void Onfirst_nameChanged();
+		
+		private string _first_name;
+		public string first_name { 
+		    get{
+		        return _first_name;
+		    } 
+		    set{
+		        this.Onfirst_nameChanging(value);
+                this.SendPropertyChanging();
+                this._first_name = value;
+                this.SendPropertyChanged("first_name");
+                this.Onfirst_nameChanged();
+		    }
+		}
+		
+        partial void Onmc_feeChanging(string value);
+        partial void Onmc_feeChanged();
+		
+		private string _mc_fee;
+		public string mc_fee { 
+		    get{
+		        return _mc_fee;
+		    } 
+		    set{
+		        this.Onmc_feeChanging(value);
+                this.SendPropertyChanging();
+                this._mc_fee = value;
+                this.SendPropertyChanged("mc_fee");
+                this.Onmc_feeChanged();
+		    }
+		}
+		
+        partial void Onaddress_country_codeChanging(string value);
+        partial void Onaddress_country_codeChanged();
+		
+		private string _address_country_code;
+		public string address_country_code { 
+		    get{
+		        return _address_country_code;
+		    } 
+		    set{
+		        this.Onaddress_country_codeChanging(value);
+                this.SendPropertyChanging();
+                this._address_country_code = value;
+                this.SendPropertyChanged("address_country_code");
+                this.Onaddress_country_codeChanged();
+		    }
+		}
+		
+        partial void Onaddress_nameChanging(string value);
+        partial void Onaddress_nameChanged();
+		
+		private string _address_name;
+		public string address_name { 
+		    get{
+		        return _address_name;
+		    } 
+		    set{
+		        this.Onaddress_nameChanging(value);
+                this.SendPropertyChanging();
+                this._address_name = value;
+                this.SendPropertyChanged("address_name");
+                this.Onaddress_nameChanged();
+		    }
+		}
+		
+        partial void Onnotify_versionChanging(string value);
+        partial void Onnotify_versionChanged();
+		
+		private string _notify_version;
+		public string notify_version { 
+		    get{
+		        return _notify_version;
+		    } 
+		    set{
+		        this.Onnotify_versionChanging(value);
+                this.SendPropertyChanging();
+                this._notify_version = value;
+                this.SendPropertyChanged("notify_version");
+                this.Onnotify_versionChanged();
+		    }
+		}
+		
+        partial void OncustomChanging(string value);
+        partial void OncustomChanged();
+		
+		private string _custom;
+		public string custom { 
+		    get{
+		        return _custom;
+		    } 
+		    set{
+		        this.OncustomChanging(value);
+                this.SendPropertyChanging();
+                this._custom = value;
+                this.SendPropertyChanged("custom");
+                this.OncustomChanged();
+		    }
+		}
+		
+        partial void Onpayer_statusChanging(string value);
+        partial void Onpayer_statusChanged();
+		
+		private string _payer_status;
+		public string payer_status { 
+		    get{
+		        return _payer_status;
+		    } 
+		    set{
+		        this.Onpayer_statusChanging(value);
+                this.SendPropertyChanging();
+                this._payer_status = value;
+                this.SendPropertyChanged("payer_status");
+                this.Onpayer_statusChanged();
+		    }
+		}
+		
+        partial void OnbusinessChanging(string value);
+        partial void OnbusinessChanged();
+		
+		private string _business;
+		public string business { 
+		    get{
+		        return _business;
+		    } 
+		    set{
+		        this.OnbusinessChanging(value);
+                this.SendPropertyChanging();
+                this._business = value;
+                this.SendPropertyChanged("business");
+                this.OnbusinessChanged();
+		    }
+		}
+		
+        partial void Onaddress_countryChanging(string value);
+        partial void Onaddress_countryChanged();
+		
+		private string _address_country;
+		public string address_country { 
+		    get{
+		        return _address_country;
+		    } 
+		    set{
+		        this.Onaddress_countryChanging(value);
+                this.SendPropertyChanging();
+                this._address_country = value;
+                this.SendPropertyChanged("address_country");
+                this.Onaddress_countryChanged();
+		    }
+		}
+		
+        partial void Onaddress_cityChanging(string value);
+        partial void Onaddress_cityChanged();
+		
+		private string _address_city;
+		public string address_city { 
+		    get{
+		        return _address_city;
+		    } 
+		    set{
+		        this.Onaddress_cityChanging(value);
+                this.SendPropertyChanging();
+                this._address_city = value;
+                this.SendPropertyChanged("address_city");
+                this.Onaddress_cityChanged();
+		    }
+		}
+		
+        partial void OnquantityChanging(string value);
+        partial void OnquantityChanged();
+		
+		private string _quantity;
+		public string quantity { 
+		    get{
+		        return _quantity;
+		    } 
+		    set{
+		        this.OnquantityChanging(value);
+                this.SendPropertyChanging();
+                this._quantity = value;
+                this.SendPropertyChanged("quantity");
+                this.OnquantityChanged();
+		    }
+		}
+		
+        partial void Onpayer_emailChanging(string value);
+        partial void Onpayer_emailChanged();
+		
+		private string _payer_email;
+		public string payer_email { 
+		    get{
+		        return _payer_email;
+		    } 
+		    set{
+		        this.Onpayer_emailChanging(value);
+                this.SendPropertyChanging();
+                this._payer_email = value;
+                this.SendPropertyChanged("payer_email");
+                this.Onpayer_emailChanged();
+		    }
+		}
+		
+        partial void Onverify_signChanging(string value);
+        partial void Onverify_signChanged();
+		
+		private string _verify_sign;
+		public string verify_sign { 
+		    get{
+		        return _verify_sign;
+		    } 
+		    set{
+		        this.Onverify_signChanging(value);
+                this.SendPropertyChanging();
+                this._verify_sign = value;
+                this.SendPropertyChanged("verify_sign");
+                this.Onverify_signChanged();
+		    }
+		}
+		
+        partial void Ontxn_idChanging(string value);
+        partial void Ontxn_idChanged();
+		
+		private string _txn_id;
+		public string txn_id { 
+		    get{
+		        return _txn_id;
+		    } 
+		    set{
+		        this.Ontxn_idChanging(value);
+                this.SendPropertyChanging();
+                this._txn_id = value;
+                this.SendPropertyChanged("txn_id");
+                this.Ontxn_idChanged();
+		    }
+		}
+		
+        partial void Onpayment_typeChanging(string value);
+        partial void Onpayment_typeChanged();
+		
+		private string _payment_type;
+		public string payment_type { 
+		    get{
+		        return _payment_type;
+		    } 
+		    set{
+		        this.Onpayment_typeChanging(value);
+                this.SendPropertyChanging();
+                this._payment_type = value;
+                this.SendPropertyChanged("payment_type");
+                this.Onpayment_typeChanged();
+		    }
+		}
+		
+        partial void Onlast_nameChanging(string value);
+        partial void Onlast_nameChanged();
+		
+		private string _last_name;
+		public string last_name { 
+		    get{
+		        return _last_name;
+		    } 
+		    set{
+		        this.Onlast_nameChanging(value);
+                this.SendPropertyChanging();
+                this._last_name = value;
+                this.SendPropertyChanged("last_name");
+                this.Onlast_nameChanged();
+		    }
+		}
+		
+        partial void Onaddress_stateChanging(string value);
+        partial void Onaddress_stateChanged();
+		
+		private string _address_state;
+		public string address_state { 
+		    get{
+		        return _address_state;
+		    } 
+		    set{
+		        this.Onaddress_stateChanging(value);
+                this.SendPropertyChanging();
+                this._address_state = value;
+                this.SendPropertyChanged("address_state");
+                this.Onaddress_stateChanged();
+		    }
+		}
+		
+        partial void Onreceiver_emailChanging(string value);
+        partial void Onreceiver_emailChanged();
+		
+		private string _receiver_email;
+		public string receiver_email { 
+		    get{
+		        return _receiver_email;
+		    } 
+		    set{
+		        this.Onreceiver_emailChanging(value);
+                this.SendPropertyChanging();
+                this._receiver_email = value;
+                this.SendPropertyChanged("receiver_email");
+                this.Onreceiver_emailChanged();
+		    }
+		}
+		
+        partial void Onpayment_feeChanging(string value);
+        partial void Onpayment_feeChanged();
+		
+		private string _payment_fee;
+		public string payment_fee { 
+		    get{
+		        return _payment_fee;
+		    } 
+		    set{
+		        this.Onpayment_feeChanging(value);
+                this.SendPropertyChanging();
+                this._payment_fee = value;
+                this.SendPropertyChanged("payment_fee");
+                this.Onpayment_feeChanged();
+		    }
+		}
+		
+        partial void Onreceiver_idChanging(string value);
+        partial void Onreceiver_idChanged();
+		
+		private string _receiver_id;
+		public string receiver_id { 
+		    get{
+		        return _receiver_id;
+		    } 
+		    set{
+		        this.Onreceiver_idChanging(value);
+                this.SendPropertyChanging();
+                this._receiver_id = value;
+                this.SendPropertyChanged("receiver_id");
+                this.Onreceiver_idChanged();
+		    }
+		}
+		
+        partial void Ontxn_typeChanging(string value);
+        partial void Ontxn_typeChanged();
+		
+		private string _txn_type;
+		public string txn_type { 
+		    get{
+		        return _txn_type;
+		    } 
+		    set{
+		        this.Ontxn_typeChanging(value);
+                this.SendPropertyChanging();
+                this._txn_type = value;
+                this.SendPropertyChanged("txn_type");
+                this.Ontxn_typeChanged();
+		    }
+		}
+		
+        partial void Onitem_nameChanging(string value);
+        partial void Onitem_nameChanged();
+		
+		private string _item_name;
+		public string item_name { 
+		    get{
+		        return _item_name;
+		    } 
+		    set{
+		        this.Onitem_nameChanging(value);
+                this.SendPropertyChanging();
+                this._item_name = value;
+                this.SendPropertyChanged("item_name");
+                this.Onitem_nameChanged();
+		    }
+		}
+		
+        partial void Onmc_currencyChanging(string value);
+        partial void Onmc_currencyChanged();
+		
+		private string _mc_currency;
+		public string mc_currency { 
+		    get{
+		        return _mc_currency;
+		    } 
+		    set{
+		        this.Onmc_currencyChanging(value);
+                this.SendPropertyChanging();
+                this._mc_currency = value;
+                this.SendPropertyChanged("mc_currency");
+                this.Onmc_currencyChanged();
+		    }
+		}
+		
+        partial void Onitem_numberChanging(string value);
+        partial void Onitem_numberChanged();
+		
+		private string _item_number;
+		public string item_number { 
+		    get{
+		        return _item_number;
+		    } 
+		    set{
+		        this.Onitem_numberChanging(value);
+                this.SendPropertyChanging();
+                this._item_number = value;
+                this.SendPropertyChanged("item_number");
+                this.Onitem_numberChanged();
+		    }
+		}
+		
+        partial void Onresidence_countryChanging(string value);
+        partial void Onresidence_countryChanged();
+		
+		private string _residence_country;
+		public string residence_country { 
+		    get{
+		        return _residence_country;
+		    } 
+		    set{
+		        this.Onresidence_countryChanging(value);
+                this.SendPropertyChanging();
+                this._residence_country = value;
+                this.SendPropertyChanged("residence_country");
+                this.Onresidence_countryChanged();
+		    }
+		}
+		
+        partial void Ontest_ipnChanging(string value);
+        partial void Ontest_ipnChanged();
+		
+		private string _test_ipn;
+		public string test_ipn { 
+		    get{
+		        return _test_ipn;
+		    } 
+		    set{
+		        this.Ontest_ipnChanging(value);
+                this.SendPropertyChanging();
+                this._test_ipn = value;
+                this.SendPropertyChanged("test_ipn");
+                this.Ontest_ipnChanged();
+		    }
+		}
+		
+        partial void Onhandling_amountChanging(string value);
+        partial void Onhandling_amountChanged();
+		
+		private string _handling_amount;
+		public string handling_amount { 
+		    get{
+		        return _handling_amount;
+		    } 
+		    set{
+		        this.Onhandling_amountChanging(value);
+                this.SendPropertyChanging();
+                this._handling_amount = value;
+                this.SendPropertyChanged("handling_amount");
+                this.Onhandling_amountChanged();
+		    }
+		}
+		
+        partial void Ontransaction_subjectChanging(string value);
+        partial void Ontransaction_subjectChanged();
+		
+		private string _transaction_subject;
+		public string transaction_subject { 
+		    get{
+		        return _transaction_subject;
+		    } 
+		    set{
+		        this.Ontransaction_subjectChanging(value);
+                this.SendPropertyChanging();
+                this._transaction_subject = value;
+                this.SendPropertyChanged("transaction_subject");
+                this.Ontransaction_subjectChanged();
+		    }
+		}
+		
+        partial void Onpayment_grossChanging(string value);
+        partial void Onpayment_grossChanged();
+		
+		private string _payment_gross;
+		public string payment_gross { 
+		    get{
+		        return _payment_gross;
+		    } 
+		    set{
+		        this.Onpayment_grossChanging(value);
+                this.SendPropertyChanging();
+                this._payment_gross = value;
+                this.SendPropertyChanged("payment_gross");
+                this.Onpayment_grossChanged();
+		    }
+		}
+		
+        partial void OnshippingChanging(string value);
+        partial void OnshippingChanged();
+		
+		private string _shipping;
+		public string shipping { 
+		    get{
+		        return _shipping;
+		    } 
+		    set{
+		        this.OnshippingChanging(value);
+                this.SendPropertyChanging();
+                this._shipping = value;
+                this.SendPropertyChanged("shipping");
+                this.OnshippingChanged();
+		    }
+		}
+		
+        partial void OnauthChanging(string value);
+        partial void OnauthChanged();
+		
+		private string _auth;
+		public string auth { 
+		    get{
+		        return _auth;
+		    } 
+		    set{
+		        this.OnauthChanging(value);
+                this.SendPropertyChanging();
+                this._auth = value;
+                this.SendPropertyChanged("auth");
+                this.OnauthChanged();
+		    }
+		}
+		
+
+        #endregion
+
+        #region Foreign Keys
         #endregion
 
 

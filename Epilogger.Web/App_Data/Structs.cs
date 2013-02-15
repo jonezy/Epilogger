@@ -1139,201 +1139,6 @@ namespace Epilogger.Data {
         }
         
         /// <summary>
-        /// Table: PaypalTransactionLog
-        /// Primary Key: 
-        /// </summary>
-
-        public class PaypalTransactionLogTable: DatabaseTable {
-            
-            public PaypalTransactionLogTable(IDataProvider provider):base("PaypalTransactionLog",provider){
-                ClassName = "PaypalTransactionLog";
-                SchemaName = "dbo";
-                
-
-                Columns.Add(new DatabaseColumn("Id", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Guid,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("UserId", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Guid,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("EventId", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("PaypalTransactionId", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 50
-                });
-
-                Columns.Add(new DatabaseColumn("StartedDateTime", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.DateTime,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("CompletedDateTime", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.DateTime,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("PricePaidBeforeTax", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("IsPrivateEvent", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Boolean,
-	                IsNullable = false,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-                    
-                
-                
-            }
-            
-            public IColumn Id{
-                get{
-                    return this.GetColumn("Id");
-                }
-            }
-            				
-   			public static string IdColumn{
-			      get{
-        			return "Id";
-      			}
-		    }
-           
-            public IColumn UserId{
-                get{
-                    return this.GetColumn("UserId");
-                }
-            }
-            				
-   			public static string UserIdColumn{
-			      get{
-        			return "UserId";
-      			}
-		    }
-           
-            public IColumn EventId{
-                get{
-                    return this.GetColumn("EventId");
-                }
-            }
-            				
-   			public static string EventIdColumn{
-			      get{
-        			return "EventId";
-      			}
-		    }
-           
-            public IColumn PaypalTransactionId{
-                get{
-                    return this.GetColumn("PaypalTransactionId");
-                }
-            }
-            				
-   			public static string PaypalTransactionIdColumn{
-			      get{
-        			return "PaypalTransactionId";
-      			}
-		    }
-           
-            public IColumn StartedDateTime{
-                get{
-                    return this.GetColumn("StartedDateTime");
-                }
-            }
-            				
-   			public static string StartedDateTimeColumn{
-			      get{
-        			return "StartedDateTime";
-      			}
-		    }
-           
-            public IColumn CompletedDateTime{
-                get{
-                    return this.GetColumn("CompletedDateTime");
-                }
-            }
-            				
-   			public static string CompletedDateTimeColumn{
-			      get{
-        			return "CompletedDateTime";
-      			}
-		    }
-           
-            public IColumn PricePaidBeforeTax{
-                get{
-                    return this.GetColumn("PricePaidBeforeTax");
-                }
-            }
-            				
-   			public static string PricePaidBeforeTaxColumn{
-			      get{
-        			return "PricePaidBeforeTax";
-      			}
-		    }
-           
-            public IColumn IsPrivateEvent{
-                get{
-                    return this.GetColumn("IsPrivateEvent");
-                }
-            }
-            				
-   			public static string IsPrivateEventColumn{
-			      get{
-        			return "IsPrivateEvent";
-      			}
-		    }
-           
-                    
-        }
-        
-        /// <summary>
         /// Table: aspnet_Users
         /// Primary Key: UserId
         /// </summary>
@@ -2060,6 +1865,1125 @@ namespace Epilogger.Data {
    			public static string AddedDateTimeColumn{
 			      get{
         			return "AddedDateTime";
+      			}
+		    }
+           
+                    
+        }
+        
+        /// <summary>
+        /// Table: PaypalTransactionLog
+        /// Primary Key: Id
+        /// </summary>
+
+        public class PaypalTransactionLogTable: DatabaseTable {
+            
+            public PaypalTransactionLogTable(IDataProvider provider):base("PaypalTransactionLog",provider){
+                ClassName = "PaypalTransactionLog";
+                SchemaName = "dbo";
+                
+
+                Columns.Add(new DatabaseColumn("Id", this)
+                {
+	                IsPrimaryKey = true,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = true,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("UniqueId", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Guid,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("UserId", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Guid,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("EventId", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("PaypalTransactionId", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 50
+                });
+
+                Columns.Add(new DatabaseColumn("StartedDateTime", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.DateTime,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("CompletedDateTime", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.DateTime,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("PricePaidBeforeTax", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("IsPrivateEvent", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Boolean,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("mc_gross", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("protection_eligibility", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("address_status", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("payer_id", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("tax", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("address_street", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("payment_date", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("payment_status", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("charset", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("address_zip", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("first_name", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("mc_fee", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("address_country_code", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("address_name", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("notify_version", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("custom", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("payer_status", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("business", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("address_country", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("address_city", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("quantity", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("payer_email", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("verify_sign", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("txn_id", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("payment_type", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("last_name", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("address_state", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("receiver_email", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("payment_fee", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("receiver_id", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("txn_type", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("item_name", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("mc_currency", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("item_number", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("residence_country", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("test_ipn", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("handling_amount", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("transaction_subject", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("payment_gross", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("shipping", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+
+                Columns.Add(new DatabaseColumn("auth", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.String,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 100
+                });
+                    
+                
+                
+            }
+            
+            public IColumn Id{
+                get{
+                    return this.GetColumn("Id");
+                }
+            }
+            				
+   			public static string IdColumn{
+			      get{
+        			return "Id";
+      			}
+		    }
+           
+            public IColumn UniqueId{
+                get{
+                    return this.GetColumn("UniqueId");
+                }
+            }
+            				
+   			public static string UniqueIdColumn{
+			      get{
+        			return "UniqueId";
+      			}
+		    }
+           
+            public IColumn UserId{
+                get{
+                    return this.GetColumn("UserId");
+                }
+            }
+            				
+   			public static string UserIdColumn{
+			      get{
+        			return "UserId";
+      			}
+		    }
+           
+            public IColumn EventId{
+                get{
+                    return this.GetColumn("EventId");
+                }
+            }
+            				
+   			public static string EventIdColumn{
+			      get{
+        			return "EventId";
+      			}
+		    }
+           
+            public IColumn PaypalTransactionId{
+                get{
+                    return this.GetColumn("PaypalTransactionId");
+                }
+            }
+            				
+   			public static string PaypalTransactionIdColumn{
+			      get{
+        			return "PaypalTransactionId";
+      			}
+		    }
+           
+            public IColumn StartedDateTime{
+                get{
+                    return this.GetColumn("StartedDateTime");
+                }
+            }
+            				
+   			public static string StartedDateTimeColumn{
+			      get{
+        			return "StartedDateTime";
+      			}
+		    }
+           
+            public IColumn CompletedDateTime{
+                get{
+                    return this.GetColumn("CompletedDateTime");
+                }
+            }
+            				
+   			public static string CompletedDateTimeColumn{
+			      get{
+        			return "CompletedDateTime";
+      			}
+		    }
+           
+            public IColumn PricePaidBeforeTax{
+                get{
+                    return this.GetColumn("PricePaidBeforeTax");
+                }
+            }
+            				
+   			public static string PricePaidBeforeTaxColumn{
+			      get{
+        			return "PricePaidBeforeTax";
+      			}
+		    }
+           
+            public IColumn IsPrivateEvent{
+                get{
+                    return this.GetColumn("IsPrivateEvent");
+                }
+            }
+            				
+   			public static string IsPrivateEventColumn{
+			      get{
+        			return "IsPrivateEvent";
+      			}
+		    }
+           
+            public IColumn mc_gross{
+                get{
+                    return this.GetColumn("mc_gross");
+                }
+            }
+            				
+   			public static string mc_grossColumn{
+			      get{
+        			return "mc_gross";
+      			}
+		    }
+           
+            public IColumn protection_eligibility{
+                get{
+                    return this.GetColumn("protection_eligibility");
+                }
+            }
+            				
+   			public static string protection_eligibilityColumn{
+			      get{
+        			return "protection_eligibility";
+      			}
+		    }
+           
+            public IColumn address_status{
+                get{
+                    return this.GetColumn("address_status");
+                }
+            }
+            				
+   			public static string address_statusColumn{
+			      get{
+        			return "address_status";
+      			}
+		    }
+           
+            public IColumn payer_id{
+                get{
+                    return this.GetColumn("payer_id");
+                }
+            }
+            				
+   			public static string payer_idColumn{
+			      get{
+        			return "payer_id";
+      			}
+		    }
+           
+            public IColumn tax{
+                get{
+                    return this.GetColumn("tax");
+                }
+            }
+            				
+   			public static string taxColumn{
+			      get{
+        			return "tax";
+      			}
+		    }
+           
+            public IColumn address_street{
+                get{
+                    return this.GetColumn("address_street");
+                }
+            }
+            				
+   			public static string address_streetColumn{
+			      get{
+        			return "address_street";
+      			}
+		    }
+           
+            public IColumn payment_date{
+                get{
+                    return this.GetColumn("payment_date");
+                }
+            }
+            				
+   			public static string payment_dateColumn{
+			      get{
+        			return "payment_date";
+      			}
+		    }
+           
+            public IColumn payment_status{
+                get{
+                    return this.GetColumn("payment_status");
+                }
+            }
+            				
+   			public static string payment_statusColumn{
+			      get{
+        			return "payment_status";
+      			}
+		    }
+           
+            public IColumn charset{
+                get{
+                    return this.GetColumn("charset");
+                }
+            }
+            				
+   			public static string charsetColumn{
+			      get{
+        			return "charset";
+      			}
+		    }
+           
+            public IColumn address_zip{
+                get{
+                    return this.GetColumn("address_zip");
+                }
+            }
+            				
+   			public static string address_zipColumn{
+			      get{
+        			return "address_zip";
+      			}
+		    }
+           
+            public IColumn first_name{
+                get{
+                    return this.GetColumn("first_name");
+                }
+            }
+            				
+   			public static string first_nameColumn{
+			      get{
+        			return "first_name";
+      			}
+		    }
+           
+            public IColumn mc_fee{
+                get{
+                    return this.GetColumn("mc_fee");
+                }
+            }
+            				
+   			public static string mc_feeColumn{
+			      get{
+        			return "mc_fee";
+      			}
+		    }
+           
+            public IColumn address_country_code{
+                get{
+                    return this.GetColumn("address_country_code");
+                }
+            }
+            				
+   			public static string address_country_codeColumn{
+			      get{
+        			return "address_country_code";
+      			}
+		    }
+           
+            public IColumn address_name{
+                get{
+                    return this.GetColumn("address_name");
+                }
+            }
+            				
+   			public static string address_nameColumn{
+			      get{
+        			return "address_name";
+      			}
+		    }
+           
+            public IColumn notify_version{
+                get{
+                    return this.GetColumn("notify_version");
+                }
+            }
+            				
+   			public static string notify_versionColumn{
+			      get{
+        			return "notify_version";
+      			}
+		    }
+           
+            public IColumn custom{
+                get{
+                    return this.GetColumn("custom");
+                }
+            }
+            				
+   			public static string customColumn{
+			      get{
+        			return "custom";
+      			}
+		    }
+           
+            public IColumn payer_status{
+                get{
+                    return this.GetColumn("payer_status");
+                }
+            }
+            				
+   			public static string payer_statusColumn{
+			      get{
+        			return "payer_status";
+      			}
+		    }
+           
+            public IColumn business{
+                get{
+                    return this.GetColumn("business");
+                }
+            }
+            				
+   			public static string businessColumn{
+			      get{
+        			return "business";
+      			}
+		    }
+           
+            public IColumn address_country{
+                get{
+                    return this.GetColumn("address_country");
+                }
+            }
+            				
+   			public static string address_countryColumn{
+			      get{
+        			return "address_country";
+      			}
+		    }
+           
+            public IColumn address_city{
+                get{
+                    return this.GetColumn("address_city");
+                }
+            }
+            				
+   			public static string address_cityColumn{
+			      get{
+        			return "address_city";
+      			}
+		    }
+           
+            public IColumn quantity{
+                get{
+                    return this.GetColumn("quantity");
+                }
+            }
+            				
+   			public static string quantityColumn{
+			      get{
+        			return "quantity";
+      			}
+		    }
+           
+            public IColumn payer_email{
+                get{
+                    return this.GetColumn("payer_email");
+                }
+            }
+            				
+   			public static string payer_emailColumn{
+			      get{
+        			return "payer_email";
+      			}
+		    }
+           
+            public IColumn verify_sign{
+                get{
+                    return this.GetColumn("verify_sign");
+                }
+            }
+            				
+   			public static string verify_signColumn{
+			      get{
+        			return "verify_sign";
+      			}
+		    }
+           
+            public IColumn txn_id{
+                get{
+                    return this.GetColumn("txn_id");
+                }
+            }
+            				
+   			public static string txn_idColumn{
+			      get{
+        			return "txn_id";
+      			}
+		    }
+           
+            public IColumn payment_type{
+                get{
+                    return this.GetColumn("payment_type");
+                }
+            }
+            				
+   			public static string payment_typeColumn{
+			      get{
+        			return "payment_type";
+      			}
+		    }
+           
+            public IColumn last_name{
+                get{
+                    return this.GetColumn("last_name");
+                }
+            }
+            				
+   			public static string last_nameColumn{
+			      get{
+        			return "last_name";
+      			}
+		    }
+           
+            public IColumn address_state{
+                get{
+                    return this.GetColumn("address_state");
+                }
+            }
+            				
+   			public static string address_stateColumn{
+			      get{
+        			return "address_state";
+      			}
+		    }
+           
+            public IColumn receiver_email{
+                get{
+                    return this.GetColumn("receiver_email");
+                }
+            }
+            				
+   			public static string receiver_emailColumn{
+			      get{
+        			return "receiver_email";
+      			}
+		    }
+           
+            public IColumn payment_fee{
+                get{
+                    return this.GetColumn("payment_fee");
+                }
+            }
+            				
+   			public static string payment_feeColumn{
+			      get{
+        			return "payment_fee";
+      			}
+		    }
+           
+            public IColumn receiver_id{
+                get{
+                    return this.GetColumn("receiver_id");
+                }
+            }
+            				
+   			public static string receiver_idColumn{
+			      get{
+        			return "receiver_id";
+      			}
+		    }
+           
+            public IColumn txn_type{
+                get{
+                    return this.GetColumn("txn_type");
+                }
+            }
+            				
+   			public static string txn_typeColumn{
+			      get{
+        			return "txn_type";
+      			}
+		    }
+           
+            public IColumn item_name{
+                get{
+                    return this.GetColumn("item_name");
+                }
+            }
+            				
+   			public static string item_nameColumn{
+			      get{
+        			return "item_name";
+      			}
+		    }
+           
+            public IColumn mc_currency{
+                get{
+                    return this.GetColumn("mc_currency");
+                }
+            }
+            				
+   			public static string mc_currencyColumn{
+			      get{
+        			return "mc_currency";
+      			}
+		    }
+           
+            public IColumn item_number{
+                get{
+                    return this.GetColumn("item_number");
+                }
+            }
+            				
+   			public static string item_numberColumn{
+			      get{
+        			return "item_number";
+      			}
+		    }
+           
+            public IColumn residence_country{
+                get{
+                    return this.GetColumn("residence_country");
+                }
+            }
+            				
+   			public static string residence_countryColumn{
+			      get{
+        			return "residence_country";
+      			}
+		    }
+           
+            public IColumn test_ipn{
+                get{
+                    return this.GetColumn("test_ipn");
+                }
+            }
+            				
+   			public static string test_ipnColumn{
+			      get{
+        			return "test_ipn";
+      			}
+		    }
+           
+            public IColumn handling_amount{
+                get{
+                    return this.GetColumn("handling_amount");
+                }
+            }
+            				
+   			public static string handling_amountColumn{
+			      get{
+        			return "handling_amount";
+      			}
+		    }
+           
+            public IColumn transaction_subject{
+                get{
+                    return this.GetColumn("transaction_subject");
+                }
+            }
+            				
+   			public static string transaction_subjectColumn{
+			      get{
+        			return "transaction_subject";
+      			}
+		    }
+           
+            public IColumn payment_gross{
+                get{
+                    return this.GetColumn("payment_gross");
+                }
+            }
+            				
+   			public static string payment_grossColumn{
+			      get{
+        			return "payment_gross";
+      			}
+		    }
+           
+            public IColumn shipping{
+                get{
+                    return this.GetColumn("shipping");
+                }
+            }
+            				
+   			public static string shippingColumn{
+			      get{
+        			return "shipping";
+      			}
+		    }
+           
+            public IColumn auth{
+                get{
+                    return this.GetColumn("auth");
+                }
+            }
+            				
+   			public static string authColumn{
+			      get{
+        			return "auth";
       			}
 		    }
            

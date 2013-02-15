@@ -705,7 +705,7 @@ namespace Epilogger.Web.Controllers {
             //Save this upgrade request to match up with the transaction when the process is complete.
             var pp = new PaypalTransactionLog()
                          {
-                             Id = Guid.NewGuid(),
+                             UniqueId = Guid.NewGuid(),
                              EventId = model.EventId,
                              UserId = CurrentUserID,
                              PricePaidBeforeTax = 50,
@@ -734,11 +734,11 @@ namespace Epilogger.Web.Controllers {
 
             paypal.item_name = "Test1 - Epilogger premium event pack";
             paypal.amount = "50";
-            paypal.item_number = pp.Id.ToString();
+            paypal.item_number = pp.UniqueId.ToString();
             paypal.shipping = "0";
             paypal.quantity = "1";
             paypal.tax = ((float)(13 * 50) / 100).ToString(CultureInfo.InvariantCulture);
-            paypal.custom = pp.Id.ToString();
+            paypal.custom = pp.UniqueId.ToString();
 
             return RedirectToAction("PostToPayPal", paypal);
             
@@ -805,8 +805,104 @@ namespace Epilogger.Web.Controllers {
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
+        [HttpPost]
+        public ActionResult PaypalSuccess(FormCollection frm)
+        {
+            //Make sure this committed first.
+            var uniqueid = Guid.Parse(frm["custom"]);
+            var pp = _pp.FindById(uniqueid);
 
-        //[CompressFilter]
+            Event evt = null;
+            if (pp != null)
+            {
+                //Update PP
+                pp.PaypalTransactionId = frm["txn_id"];
+                pp.CompletedDateTime = DateTime.UtcNow;
+                _pp.Save(pp);
+
+                //Update the event
+                evt = _es.FindByID(pp.EventId);
+                evt.IsPrivate = pp.IsPrivateEvent;
+                evt.IsPaid = true;
+                evt.DatePaid = DateTime.UtcNow;
+
+                //A featured of paid is being Featured, Feature the event
+                if (!pp.IsPrivateEvent)
+                {
+                    evt.IsFeatured = true;
+                    evt.FeaturedStartDateTime = evt.CollectionStartDateTime;
+                    evt.FeaturedEndDateTime = evt.CollectionEndDateTime;    
+                }
+                _es.Save(evt);
+            }
+            
+            //Add the extended props
+            try
+            {
+                Debug.Assert(pp != null, "pp != null");
+
+                pp.mc_gross = frm["mc_gross"];
+                pp.protection_eligibility = frm["protection_eligibility"];
+                pp.address_status = frm["address_status"];
+                pp.payer_id = frm["payer_id"];
+                pp.tax = frm["tax"];
+                pp.address_street = frm["address_street"];
+                pp.payment_date = frm["payment_date"];
+                pp.payment_status = frm["payment_status"];
+                pp.charset = frm["charset"];
+                pp.address_zip = frm["address_zip"];
+                pp.first_name = frm["first_name"];
+                pp.mc_fee = frm["mc_fee"];
+                pp.address_country_code = frm["address_country_code"];
+                pp.address_name = frm["address_name"];
+                pp.notify_version = frm["notify_version"];
+                pp.custom = frm["custom"];
+                pp.payer_status = frm["payer_status"];
+                pp.business = frm["business"];
+                pp.address_country = frm["address_country"];
+                pp.address_city = frm["address_city"];
+                pp.quantity = frm["quantity"];
+                pp.payer_email = frm["payer_email"];
+                pp.verify_sign = frm["verify_sign"];
+                pp.txn_id = frm["txn_id"];
+                pp.payment_type = frm["payment_type"];
+                pp.last_name = frm["last_name"];
+                pp.address_state = frm["address_state"];
+                pp.receiver_email = frm["receiver_email"];
+                pp.payment_fee = frm["payment_fee"];
+                pp.receiver_id = frm["receiver_id"];
+                pp.txn_type = frm["txn_type"];
+                pp.item_name = frm["item_name"];
+                pp.mc_currency = frm["mc_currency"];
+                pp.item_number = frm["item_number"];
+                pp.residence_country = frm["residence_country"];
+                pp.test_ipn = frm["test_ipn"];
+                pp.handling_amount = frm["handling_amount"];
+                pp.transaction_subject = frm["transaction_subject"];
+                pp.payment_gross = frm["payment_gross"];
+                pp.shipping = frm["shipping"];
+                pp.auth = frm["auth"];
+
+                _pp.Save(pp);
+                
+            } catch (Exception)
+            { }
+
+            return evt == null ? RedirectToAction("index", "home") : RedirectToAction("details", new { id = evt.EventSlug });
+        }
+
+        
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+        public ActionResult PaypalNotify(FormCollection frm)
+        {
+
+            return RedirectToAction("details", new { id = "epilogger" });
+        }
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+	    //[CompressFilter]
         //[RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to edit an event")]
         //public virtual ActionResult CreateEvent4(CreateFinalEventViewModel displayModel)
         //{

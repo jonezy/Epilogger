@@ -210,7 +210,23 @@ namespace Epilogger.Web
                  "events/PostToPayPal",
                 new { controller = "events", action = "PostToPayPal" }
             );
-            
+            routes.MapRoute(
+                 "PaypalSuccess",
+                 "events/PaypalSuccess",
+                new { controller = "events", action = "PaypalSuccess" }
+            );
+            routes.MapRoute(
+                 "PaypalCancel",
+                 "events/PaypalCancel",
+                new { controller = "events", action = "PaypalCancel" }
+            );
+
+            routes.MapRoute(
+                 "PaypalNotify",
+                 "events/PaypalNotify",
+                new { controller = "events", action = "PaypalNotify" }
+            );
+
             routes.MapRoute(
                 "GetBrowseOverviewTabData",
                 "Events/GetBrowseOverviewTabData",
