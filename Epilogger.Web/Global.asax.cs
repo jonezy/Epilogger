@@ -619,7 +619,7 @@ namespace Epilogger.Web
                 .ForMember(dest => dest.facebookUser, opt => opt.Ignore())
                 .ForMember(dest => dest.twitterUser, opt => opt.Ignore());
 
-            Mapper.CreateMap<CreateEventViewModel, Event>()
+            Mapper.CreateMap<EditEventViewModel, Event>()
                 .ForMember(dest => dest.EventStatus, opt => opt.UseValue(1))
                 .ForMember(dest => dest.NumberOfTweets, opt => opt.UseValue(0))
                 .ForMember(dest => dest.IsPrivate, opt => opt.UseValue(false))
@@ -671,14 +671,16 @@ namespace Epilogger.Web
 
 
 
-            Mapper.CreateMap<Event, CreateEventViewModel>()
+            Mapper.CreateMap<Event, EditEventViewModel>()
                 .ForMember(dest => dest.FoursquareVenueID, opt => opt.MapFrom(src => src.VenueID.HasValue ? src.Venues.FirstOrDefault().FoursquareVenueID : string.Empty))
                 .ForMember(dest => dest.TimeZones, opt => opt.ResolveUsing<TimezonesResolver>())
                 .ForMember(dest => dest.Venue, opt => opt.MapFrom(src => src.Venues.FirstOrDefault()))
                 .ForMember(dest => dest.ToolbarViewModel, opt => opt.Ignore())
                 .ForMember(dest => dest.CurrentUserID, opt => opt.Ignore())
                 .ForMember(dest => dest.CurrentUserRole, opt => opt.Ignore())
-                .ForMember(dest => dest.TimeZones, opt => opt.Ignore());
+                .ForMember(dest => dest.TimeZones, opt => opt.Ignore())
+                .ForMember(dest => dest.Times, opt => opt.Ignore())
+                .ForMember(dest => dest.CollectDataValue, opt => opt.Ignore());
             //.ForMember(dest => dest.CollectionStartDateTime, opt => opt.MapFrom(src => src.CollectionStartDateTime.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5"))))
             //.ForMember(dest => dest.CollectionEndDateTime, opt => opt.MapFrom(src => src.CollectionEndDateTime.HasValue ? src.CollectionEndDateTime.Value.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5")) : src.CollectionEndDateTime))
             //.ForMember(dest => dest.StartDateTime, opt => opt.MapFrom(src => src.StartDateTime.ToUserTimeZone(src.TimeZoneOffset.HasValue ? src.TimeZoneOffset.Value : int.Parse("-5"))))

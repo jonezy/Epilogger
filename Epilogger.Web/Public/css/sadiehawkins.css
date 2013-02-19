@@ -996,36 +996,12 @@ ul#connected-networks, .topPhotosList, .topPhotosList li {
      background-position: 7px 9px;}
 
 
-.item-card {
-    margin-bottom:10px;}
-    
-.item-card h4 {
-    background:#fe60b1;
-    color:#fff;
-    float:left;
-    padding:7px 10px 5px 24px;
-    font-size: 14px !important;
-    -webkit-border-top-left-radius: 3px;
-    -webkit-border-top-right-radius: 3px;
-    -moz-border-radius-topleft: 3px;
-    -moz-border-radius-topright: 3px;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;}   
 
-    
-.item-data {
-    background:#dcdcdc;
-    padding:10px;
-    border-top:solid 5px #fe60b1;
-    margin:-5px 0px 10px 0px;}
-    
-.item-data .item-content {
-    width:400px; }
-    
-.item-data h1 {
-    border-bottom:2px solid #fff;
-    padding-bottom:10px;
-    margin-bottom:10px;}
+
+
+
+
+
 
 
 /* ------------------------------ CREATE EVENT */
@@ -1067,99 +1043,99 @@ ul#connected-networks, .topPhotosList, .topPhotosList li {
 
 #AdvancedContainer { font-size: 10px; padding-left: 5px; }
 #AdvancedSearchTerms { display: none; }
-
-.item-data input.searchBox1 { width:350px; }
-label span.small { font-size: 8px; }
 .blueBalls { color: #287cbe; text-transform: lowercase; font-weight: bold; }
-.item-data select.searchOperator { width: 149px !important;
-display: inline-block; }
 
-#rule-group input[type="text"] { display: inline-block; }
 
-.item-data label {
-    float:left;
-    font-size:10px;
-    width:90px;
-    text-align:right;
-    text-transform:uppercase;
-    color:#3e3e3e;
-    padding:6px 10px 0px 0px;}
-    
-.item-data input[type=text], .item-data textarea, select,
-fieldset.forgotpassword input[type="text"],  fieldset.forgotpassword input[type="password"], 
-fieldset.login input[type="text"],fieldset.login input[type="password"], fieldset.create input[type="password"],
-.inEventSearch input[type="text"], .filter-by-time form input[type="text"],
-.modal input[type="text"], .modal textarea {
-    border-radius:0;
-    border:0;
-    background:#fff;
-    box-shadow:inset 1px 1px 1px #888;
-    margin-bottom:15px !important; }
- 
- .modal textarea {
-     background:#e0e0e0}
-    
-.item-data input.wide, .item-data textarea.wide, .item-data select.wide {
-    float:left;
-    width:480px !important;
-    max-width:510px !important;}
-    
-.item-data input.inlineTextbox, .item-data textarea.inlineTextbox, .item-data select.inlineTextbox {
-    display: inline;
-    width:298px !important; }
-    
-.item-data input.padded, .item-data textarea.padded, .item-data select.padded 
-{
-    padding: 12px 5px;
-    
-    }    
-    
-/*Override this for dropdowns so they line up*/
-.item-data select.wide {
-    float:left;
-    width:487px !important;
-    max-width:540px !important; }
-    
-.item-data label.wide, .item-data label.wider, .item-data input.small {
-    width:100px;}
-    
-.item-data input.med {
-    width:200px;}
 
-.item-data p {
-    display:block;
-    clear:both;}
 
-.item-data select {
-    padding:6px 4px;}
+/* New Edit event - CB Feb 9, 2013 */
+
+    /* Global */
+    .item-data p { display:block; clear:both; }
+    .item-data label { float:left; font-size:16px; width: 118px; text-align:right; color:#868686; padding:6px 10px 0px 0px; }
     
-/*Override this for dropdowns so they line up*/    
-.item-data select.med { width:208px !important; display: inline-block; }      
-    
-   
-/* --- time select */
-.end-time {
-    margin-left:110px;
-    clear:both;}
-    
-.end-time input#end-time {
-    float:left;
-    margin-bottom:10px !important;}
-    
-.end-time label {
-    width:auto !important;
-    text-transform:none;
-    position:relative;
-    top:-6px;
-    font-size:8pt;
-    color:#858585}
-    
-    
-/* --- location select 
-#foursquare-search {
-    font-weight:normal;
-    padding:5px;
-    color:#888;}*/
+    .item-data input[type=text], .item-data textarea, select,
+    fieldset.forgotpassword input[type="text"],  fieldset.forgotpassword input[type="password"], 
+    fieldset.login input[type="text"],fieldset.login input[type="password"], fieldset.create input[type="password"],
+    .inEventSearch input[type="text"], .filter-by-time form input[type="text"],
+    .modal input[type="text"], .modal textarea {
+        display: inline-block;
+        padding: 3px 5px;                           /* overrides default */
+        height: 30px;
+        width: 350px;
+        font: 14px Helvetica,Arial,Sans-Serif;
+        color: #666;
+        border: 0;                                  /* overrides default */
+        border-left: 1px solid #e3e3e3;
+        border-right: 1px solid #e3e3e3;
+        box-shadow: inset 0px 1px 1px #CCC;
+        -moz-box-shadow: inset 0px 1px 1px #CCC;
+        -webkit-box-shadow: inset 0px 1px 1px #CCC;
+        margin-bottom: 0px !important; 
+    }
+
+    select {
+        /* This makes select boxes match textboxes */
+        height: 36px !important;
+        padding: 0;
+        border: 1px solid #ccc;
+        border-bottom: 1px solid #eee;
+        border-left: 1px solid #e3e3e3;
+        border-right: 1px solid #fff;
+        width: 361px;
+    }
+
+
+    /* Basic Info */
+    #StartDateTime{ display: inline-block !important; }
+    .timepick{ width:7em; }
+    .times { width: 13%; margin-right: 4px; }
+    .AMPM { width: 9%; }
+    input[type="text"].blue_calendar, textarea.blue_calendar { background: #fff url('/Public/images/CreateEvent/calendarIcon.png') no-repeat 95% 50%; /*padding: 0 5px;*/ width: 20%; margin-right:4px; }
+    .item-data input[type="checkbox"] { margin-top: 9px; }
+
+
+    /* Venue */
+    #selectedVenue { font-size: 14px; color: #868686; }
+
+
+    /* Descrition */
+    .item-data textarea { height: 130px;  } 
+
+/* ********************* */
+
+
+
+/*
+    .item-data select.wide { float:left; width:487px !important; max-width:540px !important;  }
+    .item-data label.wide, .item-data label.wider, .item-data input.small { width:100px; }
+    .item-data input.med { width:200px; }
+    .item-data select.med { width:208px !important; display: inline-block; }
+    .end-time { margin-left: 110px; clear:both; }
+    .end-time input#end-time { float:left; margin-bottom:10px !important; }
+    .end-time label { width:auto !important; text-transform:none; position:relative; top:-6px; font-size:8pt;color: #858585; }    
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* --- toolbar */
@@ -2954,16 +2930,25 @@ a.fdbk_tab_hidden {
     height: 35px;
     margin-right: 10px;
     float: left;
+    padding: 6px 4px;
+    display: block;
+    margin-bottom: 15px!important;
 }
 #d_DOB {
     width: 95px;
     height: 35px;
     margin-right: 10px;
     float: left;
+    padding: 6px 4px;
+    display: block;
+    margin-bottom: 15px!important;
 }
 #y_DOB {
     width: 95px;
     height: 35px;
+    padding: 6px 4px;
+    display: block;
+    margin-bottom: 15px!important;
 }
 .birthdayText { font-size: 10px; }
 .birthdayText strong { font-weight: bold; }

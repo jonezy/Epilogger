@@ -950,104 +950,104 @@ namespace Epilogger.Web.Controllers {
         }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-		[RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
-		[HttpPost]
-		public virtual ActionResult Create(CreateEventViewModel model)
-		{
+        //[RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
+        //[HttpPost]
+        //public virtual ActionResult Create(CreateEventViewModel model)
+        //{
            
-			DateTime startDate;
-			DateTime endDate;
-			DateTime collectionStart;
-			DateTime collectionEnd;
+        //    DateTime startDate;
+        //    DateTime endDate;
+        //    DateTime collectionStart;
+        //    DateTime collectionEnd;
 
-			DateTime.TryParse(Request.Form["start_date"] + " " + Request.Form["start_time"], out startDate); // start date
-			DateTime.TryParse(Request.Form["end_date"] + " " + Request.Form["end_time"], out endDate); // end date (could be null)
-			DateTime.TryParse(Request.Form["collection_start_date"] + " " + Request.Form["collection_start_time"], out collectionStart);
-			DateTime.TryParse(Request.Form["collection_end_date"] + " " + Request.Form["collection_end_time"], out collectionEnd);
+        //    DateTime.TryParse(Request.Form["start_date"] + " " + Request.Form["start_time"], out startDate); // start date
+        //    DateTime.TryParse(Request.Form["end_date"] + " " + Request.Form["end_time"], out endDate); // end date (could be null)
+        //    DateTime.TryParse(Request.Form["collection_start_date"] + " " + Request.Form["collection_start_time"], out collectionStart);
+        //    DateTime.TryParse(Request.Form["collection_end_date"] + " " + Request.Form["collection_end_time"], out collectionEnd);
 
-			//Adjust the timezone. this is becuase the EditTemplate is not returning the Time.
-			model.StartDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(startDate);
-			model.EndDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(endDate);
-			model.CollectionStartDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(collectionStart);
-			model.CollectionEndDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(collectionEnd);
+        //    //Adjust the timezone. this is becuase the EditTemplate is not returning the Time.
+        //    model.StartDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(startDate);
+        //    model.EndDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(endDate);
+        //    model.CollectionStartDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(collectionStart);
+        //    model.CollectionEndDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(collectionEnd);
 			
-			if (!string.IsNullOrEmpty(model.FoursquareVenueID))
-			{
-				// have to look up the foursquare venue and then create it and save it to the db.
-				dynamic foursquareVenue = LookupFoursquareVenue(model.FoursquareVenueID);
-				var locationNode = foursquareVenue.response.location;
+        //    if (!string.IsNullOrEmpty(model.FoursquareVenueID))
+        //    {
+        //        // have to look up the foursquare venue and then create it and save it to the db.
+        //        dynamic foursquareVenue = LookupFoursquareVenue(model.FoursquareVenueID);
+        //        var locationNode = foursquareVenue.response.location;
 
-				// convert it to a Venue
-				var venue = new Venue
-								{
-									FoursquareVenueID = foursquareVenue.response.id,
-									Address = locationNode.address,
-									Name = foursquareVenue.response.name,
-									City = locationNode.city,
-									State = locationNode.state,
-									Zip = locationNode.postalCode,
-									CrossStreet = locationNode.crossStreet,
-									Geolat = locationNode.lat,
-									Geolong = locationNode.lng
-								};
+        //        // convert it to a Venue
+        //        var venue = new Venue
+        //                        {
+        //                            FoursquareVenueID = foursquareVenue.response.id,
+        //                            Address = locationNode.address,
+        //                            Name = foursquareVenue.response.name,
+        //                            City = locationNode.city,
+        //                            State = locationNode.state,
+        //                            Zip = locationNode.postalCode,
+        //                            CrossStreet = locationNode.crossStreet,
+        //                            Geolat = locationNode.lat,
+        //                            Geolong = locationNode.lng
+        //                        };
 
-				// save the venue
-				_venueService.Save(venue);
-				model.VenueID = venue.ID;
-				model.Venue = venue;
-			}
+        //        // save the venue
+        //        _venueService.Save(venue);
+        //        model.VenueID = venue.ID;
+        //        model.Venue = venue;
+        //    }
 
-			if (ModelState.IsValid)
-			{
-				try
-				{
-					model.UserID = CurrentUserID;
-					model.CreatedDateTime = DateTime.UtcNow;
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            model.UserID = CurrentUserID;
+        //            model.CreatedDateTime = DateTime.UtcNow;
 
-					var epLevent = Mapper.Map<CreateEventViewModel, Event>(model);
-                    if (model.WebsiteURL == "http://") { epLevent.WebsiteURL = string.Empty; }
-                    if (model.EventBrightUrl == "http://") { epLevent.EventBrightUrl = null; } else { epLevent.EventBrightUrl = model.EventBrightUrl; }
-					if (model.EventBrightUrl != string.Empty && model.EventBrightUrl.Contains("eventbrite.c"))
-					{
-						epLevent.EventBriteEID = GetEventbriteEID(model.EventBrightUrl);
-					}
-					_es.Save(epLevent);
+        //            var epLevent = Mapper.Map<CreateEventViewModel, Event>(model);
+        //            if (model.WebsiteURL == "http://") { epLevent.WebsiteURL = string.Empty; }
+        //            if (model.EventBrightUrl == "http://") { epLevent.EventBrightUrl = null; } else { epLevent.EventBrightUrl = model.EventBrightUrl; }
+        //            if (model.EventBrightUrl != string.Empty && model.EventBrightUrl.Contains("eventbrite.c"))
+        //            {
+        //                epLevent.EventBriteEID = GetEventbriteEID(model.EventBrightUrl);
+        //            }
+        //            _es.Save(epLevent);
 
-					//Initiate a first collect on the event
-					var tsmp = new MQ.MSGProducer("Epilogger", "TwitterSearch");
-					var tsMSG = new MQ.Messages.TwitterSearchMSG
-					{
-						EventID = model.ID,
-						SearchTerms = model.SearchTerms,
-						SearchFromLatestTweet = false,
-						SearchSince = model.CollectionStartDateTime,
-						SearchUntil = model.CollectionEndDateTime
-					};
-					tsmp.SendMessage(tsMSG);
-					tsmp.Dispose();
+        //            //Initiate a first collect on the event
+        //            var tsmp = new MQ.MSGProducer("Epilogger", "TwitterSearch");
+        //            var tsMSG = new MQ.Messages.TwitterSearchMSG
+        //            {
+        //                EventID = model.ID,
+        //                SearchTerms = model.SearchTerms,
+        //                SearchFromLatestTweet = false,
+        //                SearchSince = model.CollectionStartDateTime,
+        //                SearchUntil = model.CollectionEndDateTime
+        //            };
+        //            tsmp.SendMessage(tsMSG);
+        //            tsmp.Dispose();
 
-                    //Tweet that the event has been created.
-                    SendEventCreatedTweet(epLevent);
+        //            //Tweet that the event has been created.
+        //            SendEventCreatedTweet(epLevent);
 
-                    //The the admins an email with the event details.
-				    //SendEventCreatedEmailToSystem(model);
+        //            //The the admins an email with the event details.
+        //            //SendEventCreatedEmailToSystem(model);
 
 					
-					this.StoreSuccess("Your Event was created successfully!  Dont forget to share it with your friends and attendees!");
+        //            this.StoreSuccess("Your Event was created successfully!  Dont forget to share it with your friends and attendees!");
 
-					return RedirectToAction("details", new { id = epLevent.EventSlug });
-				}
-				catch (Exception ex)
-				{
-					this.StoreError(string.Format("There was an error: {0}", ex.Message));
-					var epLevent = Mapper.Map<CreateEventViewModel, Event>(model);
-					model = Mapper.Map<Event, CreateEventViewModel>(epLevent);
-					return View(model);
-				}
-			}
+        //            return RedirectToAction("details", new { id = epLevent.EventSlug });
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            this.StoreError(string.Format("There was an error: {0}", ex.Message));
+        //            var epLevent = Mapper.Map<CreateEventViewModel, Event>(model);
+        //            model = Mapper.Map<Event, CreateEventViewModel>(epLevent);
+        //            return View(model);
+        //        }
+        //    }
 
-			return View(model);
-		}
+        //    return View(model);
+        //}
 
 	    private void SendEventCreatedEmailToSystem(Event model)
 	    {
@@ -2077,21 +2077,19 @@ namespace Epilogger.Web.Controllers {
 		public virtual ActionResult Edit(string id)
 		{
 			var currentEvent = _es.FindBySlug(id);
-			var model = Mapper.Map<Event, CreateEventViewModel>(currentEvent);
+			var model = Mapper.Map<Event, EditEventViewModel>(currentEvent);
 			model.ToolbarViewModel = BuildToolbarViewModel(currentEvent);
 
 			model.CurrentUserRole = CurrentUserRole;
 			model.CurrentUserID = CurrentUser.ID;
-            //model.UserID = CurrentUser.ID;
-            //model.EventSlug = currentEvent.EventSlug;
-
+            
 			return View(model);
 		}
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 		[RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to edit an event")]
 		[HttpPost]
-		public virtual ActionResult Edit(FormCollection fc, CreateEventViewModel model)
+        public virtual ActionResult Edit(FormCollection fc, EditEventViewModel model)
 		{
 			var currentEvent = _es.FindBySlug(model.EventSlug);
             ////model.ID = currentEvent.ID;
@@ -2208,11 +2206,11 @@ namespace Epilogger.Web.Controllers {
 					
 					_es.Save(currentEvent);
 					this.StoreSuccess("Your event was updated successfully!  Make sure you let all your friends know about the changes you just made!");
-					model = Mapper.Map<Event, CreateEventViewModel>(currentEvent);
+                    model = Mapper.Map<Event, EditEventViewModel>(currentEvent);
 					model.EventSlug = currentEvent.EventSlug;
 				} catch (Exception ex) {
 					this.StoreError(string.Format("There was an error: {0}", ex.Message));
-					model = Mapper.Map<Event, CreateEventViewModel>(currentEvent);
+                    model = Mapper.Map<Event, EditEventViewModel>(currentEvent);
 					model.EventSlug = currentEvent.EventSlug;
 					return View(model);
 				}

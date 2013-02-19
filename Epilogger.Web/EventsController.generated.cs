@@ -82,11 +82,6 @@ namespace Epilogger.Web.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult Create() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.Create);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult EventBySlug() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.EventBySlug);
         }
@@ -271,7 +266,6 @@ namespace Epilogger.Web.Controllers {
             public readonly string PostToPayPal = "PostToPayPal";
             public readonly string PaypalSuccess = "PaypalSuccess";
             public readonly string PaypalNotify = "PaypalNotify";
-            public readonly string Create = "Create";
             public readonly string EventBySlug = "EventBySlug";
             public readonly string GetImageComments = "GetImageComments";
             public readonly string GetImageCommentsPage1 = "GetImageCommentsPage1";
@@ -326,7 +320,6 @@ namespace Epilogger.Web.Controllers {
             public const string PostToPayPal = "PostToPayPal";
             public const string PaypalSuccess = "PaypalSuccess";
             public const string PaypalNotify = "PaypalNotify";
-            public const string Create = "Create";
             public const string EventBySlug = "EventBySlug";
             public const string GetImageComments = "GetImageComments";
             public const string GetImageCommentsPage1 = "GetImageCommentsPage1";
@@ -426,13 +419,6 @@ namespace Epilogger.Web.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_PaypalNotify {
             public readonly string frm = "frm";
-        }
-        static readonly ActionParamsClass_Create s_params_Create = new ActionParamsClass_Create();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Create CreateParams { get { return s_params_Create; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Create {
-            public readonly string model = "model";
         }
         static readonly ActionParamsClass_EventBySlug s_params_EventBySlug = new ActionParamsClass_EventBySlug();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -709,6 +695,7 @@ namespace Epilogger.Web.Controllers {
             public readonly string Details = "~/Views/Events/Details.cshtml";
             public readonly string Edit = "~/Views/Events/Edit.cshtml";
             public readonly string EditLiveMode = "~/Views/Events/EditLiveMode.cshtml";
+            public readonly string EditOLD = "~/Views/Events/EditOLD.cshtml";
             public readonly string EventToolbar = "~/Views/Events/EventToolbar.cshtml";
             public readonly string ExpiredUpgradeNotice = "~/Views/Events/ExpiredUpgradeNotice.cshtml";
             public readonly string ImageCommentControl = "~/Views/Events/ImageCommentControl.cshtml";
@@ -822,12 +809,6 @@ namespace Epilogger.Web.Controllers {
         public override System.Web.Mvc.ActionResult PaypalNotify(System.Web.Mvc.FormCollection frm) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.PaypalNotify);
             callInfo.RouteValueDictionary.Add("frm", frm);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult Create(Epilogger.Web.Models.CreateEventViewModel model) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Create);
-            callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }
 
@@ -967,7 +948,7 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Edit(System.Web.Mvc.FormCollection fc, Epilogger.Web.Models.CreateEventViewModel model) {
+        public override System.Web.Mvc.ActionResult Edit(System.Web.Mvc.FormCollection fc, Epilogger.Web.Models.EditEventViewModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
             callInfo.RouteValueDictionary.Add("fc", fc);
             callInfo.RouteValueDictionary.Add("model", model);

@@ -461,7 +461,7 @@
     <Compile Include="Models\TwitterAuthTestViewModel.cs" />
     <Compile Include="Models\UploadPhotosViewModel.cs" />
     <Compile Include="Models\CreateAccountModel.cs" />
-    <Compile Include="Models\CreateEventViewModel.cs" />
+    <Compile Include="Models\EditEventViewModel.cs" />
     <Compile Include="Models\DashboardAccountViewModel.cs" />
     <Compile Include="Models\DashboardActivityModel.cs" />
     <Compile Include="Models\DashboardEventsViewModel.cs" />
@@ -3377,6 +3377,7 @@
     <Content Include="Views\Events\MenuOLD.cshtml" />
     <Content Include="Views\Events\CreateEvent3.cshtml" />
     <Content Include="Views\Events\PostToPayPal.cshtml" />
+    <Content Include="Views\Events\EditOLD.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />
@@ -5443,7 +5444,7 @@
     <Content Include="Views\Account\IndexOld.cshtml" />
     <Content Include="Areas\Authentication\Views\Web.config" />
     <Content Include="Views\Shared\GlobalNavigationOldGood.cshtml" />
-    <Content Include="Views\Events\Create.cshtml" />
+    <Content Include="Views\Events\CreateOLD.cshtml" />
     <Content Include="Views\Dashboard\IndexOLD.cshtml" />
     <Content Include="Views\Dashboard\Profile.cshtml" />
     <Content Include="Views\Dashboard\Menu.cshtml" />
