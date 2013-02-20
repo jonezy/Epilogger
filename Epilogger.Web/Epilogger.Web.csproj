@@ -13,7 +13,7 @@
     <RootNamespace>Epilogger.Web</RootNamespace>
     <AssemblyName>Epilogger.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <MvcBuildViews>true</MvcBuildViews>
+    <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -578,6 +578,7 @@
     <Content Include="Public\images\EventMenu\menu-overview.png" />
     <Content Include="Public\images\EventMenu\menu-stats.png" />
     <Content Include="Public\images\EventMenu\menu-tweets.png" />
+    <Content Include="Public\images\icons\EditEventCheck.png" />
     <Content Include="Public\images\icons\eventListTotalIcons.png" />
     <Content Include="Public\images\icons\icon-verified.png" />
     <Content Include="Public\images\icons\icon-verified2.png" />
@@ -614,6 +615,7 @@
     <Content Include="Public\images\Upgrade\icon-privateevent.png" />
     <Content Include="Public\images\Upgrade\icon-verifiedevents.png" />
     <Content Include="Public\js\alerts.js" />
+    <Content Include="Public\js\EditEvent.js" />
     <Content Include="Public\js\FileUploader.js" />
     <Content Include="Public\js\fineuploader.jquery-3.0\fineuploader.css" />
     <Content Include="Public\js\fineuploader.jquery-3.0\jquery.fineuploader-3.0.js" />

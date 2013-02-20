@@ -15,7 +15,8 @@
 @*@Html.CombresLink("CreateEventJs")*@
 <script type="text/javascript">
     head.js('@Url.Content("~/Public/js/jquery.blockUI.js")');
-    head.js('@Url.Content("~/Public/js/CreateEditEvent.js")');
+    //head.js('@Url.Content("~/Public/js/CreateEditEvent.js")');
+    head.js('@Url.Content("~/Public/js/EditEvent.js")');
     var EventID = @Model.ID;
     var page = "Edit";
 </script>
@@ -28,8 +29,14 @@
 
 <div id="events-nav">
     <h1>EDIT EVENT INFO</h1>
-    <div class="spacer"></div>
     
+    <ul id="left-nav">
+        <li><a href="" id="menuBasic"><span class="editcheckOff"></span>BASIC INFORMATION</a></li>
+        <li><a href="" id="menuHashtag"><span class="editcheckOff"></span>HASHTAG & KEYWORDS</a></li>
+        <li><a href="" id="menuVenue"><span class="editcheckOff"></span>VENUE, LOCATION</a></li>
+        <li><a href="" id="menuDesc"><span class="editcheckOff"></span>DESCRIPTION & CONTACT INFO</a></li>
+        <li><a href="" id="menuTick"><span class="editcheckOff"></span>TICKETING</a></li>
+    </ul>
     
 
     @*<input type="button" onclick="$('#EditForm').submit();" class="blue-action-button submitForm" value="Save" />
@@ -54,11 +61,14 @@
     @using (Html.BeginForm("edit", "events", FormMethod.Post, new { id = "EditForm" }))
     {
 
-        <div id="editBasicInfoSection">
+        <div id="editBasicInfoSection" class="editSection">
             <h1>BASIC INFORMATION</h1>
             <div class="spacer"></div>
-            <div class="item-data clearfix">    
-                <p><label for="IsPrivate">Privacy:</label> @Html.CheckBoxFor(model => model.IsPrivate)<span class="icon-italic">(only you will be able to see this event)</span></p>
+            <div class="item-data clearfix">
+                @if (Model.IsPaid)
+                {
+                    <p><label for="IsPrivate">Privacy:</label> @Html.CheckBoxFor(model => model.IsPrivate)<span class="icon-italic">(only you will be able to see this event)</span></p>
+                }
                 <p>@Html.LabelFor(model => model.Name) @Html.TextBoxFor(model => model.Name, new { @class = "wide padded" })</p>
                 <p>@Html.LabelFor(model => model.Subtitle) @Html.TextBoxFor(model => model.Subtitle, new { @class = "wide padded" })</p>
                 <div class="spacer"></div>
@@ -67,19 +77,19 @@
                     <p>
                         @Html.Label("Start date:") @Html.EditorFor(m => m.StartDateTime, "DateTimeOneline")
                                 
-                            @Html.DropDownList("start_times", new SelectList(Model.Times, "Value", "Text", string.Format("{0:h:mm}", Model.StartDateTime.ToLocalTime())), new { @class = "times" })
-                            @Html.DropDownList("AMPMstartTime", new SelectList(new List<SelectListItem> {
-                                                                                                            new SelectListItem
-                                                                                                                {
-                                                                                                                    Text = "am",
-                                                                                                                    Value = "am"
-                                                                                                                },
-                                                                                                            new SelectListItem
-                                                                                                                {
-                                                                                                                    Text = "pm",
-                                                                                                                    Value = "pm"
-                                                                                                                }}, "Value", "Text", string.Format("{0:tt}", Model.StartDateTime.ToLocalTime()).ToLower()), new { @class = "AMPM" })
-                            @*@Html.DropDownList("timeZone", new SelectList(Model.TimeZones, "TimeZoneOffset", "TimeZoneName", Model.TimeZoneOffset), new { @class = "timeZoneSelect" })*@
+                        @Html.DropDownList("start_times", new SelectList(Model.Times, "Value", "Text", string.Format("{0:h:mm}", Model.StartDateTime)), new { @class = "times" })
+                        @Html.DropDownList("AMPMstartTime", new SelectList(new List<SelectListItem> {
+                                                                                                        new SelectListItem
+                                                                                                            {
+                                                                                                                Text = "am",
+                                                                                                                Value = "am"
+                                                                                                            },
+                                                                                                        new SelectListItem
+                                                                                                            {
+                                                                                                                Text = "pm",
+                                                                                                                Value = "pm"
+                                                                                                            }}, "Value", "Text", string.Format("{0:tt}", Model.StartDateTime).ToLower()), new { @class = "AMPM" })
+                        @*@Html.DropDownList("timeZone", new SelectList(Model.TimeZones, "TimeZoneOffset", "TimeZoneName", Model.TimeZoneOffset), new { @class = "timeZoneSelect" })*@
                         
                     </p>
                     
@@ -88,21 +98,21 @@
                         <p>
                             @Html.Label("End date:") @Html.EditorFor(m => m.EndDateTime, "DateTimeOneline")
                             @{
-        Debug.Assert(Model.EndDateTime != null, "Model.EndDateTime != null");
+                Debug.Assert(Model.EndDateTime != null, "Model.EndDateTime != null");
                             }
-                            @Html.DropDownList("end_times", new SelectList(Model.Times, "Value", "Text", string.Format("{0:h:mm}", ((DateTime)Model.EndDateTime).ToLocalTime())), new { @class = "times" })
+                            @Html.DropDownList("end_times", new SelectList(Model.Times, "Value", "Text", string.Format("{0:h:mm}", ((DateTime)Model.EndDateTime))), new { @class = "times" })
                             @Html.DropDownList("AMPMendTime", new SelectList(new List<SelectListItem> {
-                                                                                                            new SelectListItem
-                                                                                                                {
-                                                                                                                    Text = "am",
-                                                                                                                    Value = "am"
-                                                                                                                },
-                                                                                                            new SelectListItem
-                                                                                                                {
-                                                                                                                    Text = "pm",
-                                                                                                                    Value = "pm"
-                                                                                                                }}, "Value", "Text", string.Format("{0:tt}", ((DateTime)Model.EndDateTime).ToLocalTime()).ToLower()),
-                                                new { @class = "AMPM" })
+                                                                                                          new SelectListItem
+                                                                                                              {
+                                                                                                                  Text = "am",
+                                                                                                                  Value = "am"
+                                                                                                              },
+                                                                                                          new SelectListItem
+                                                                                                              {
+                                                                                                                  Text = "pm",
+                                                                                                                  Value = "pm"
+                                                                                                              }}, "Value", "Text", string.Format("{0:tt}", ((DateTime)Model.EndDateTime)).ToLower()),
+                                               new { @class = "AMPM" })
                         </p>
                     </div>
                     <div class="spacer"></div>
@@ -119,7 +129,7 @@
 
         </div>
             
-        <div id="hashTagsSection">
+        <div id="hashTagsSection" class="editSection">
             <h1>HASHTAG & KEYWORD</h1>
             <a href="" id="advance_link" onclick="advancedMode(); return false;">(Switch to advanced mode)</a>
             <div class="spacer"></div>
@@ -155,7 +165,7 @@
         </div>
         
         
-        <div id="venueSection">
+        <div id="venueSection" class="editSection">
             <h1>VENUE, LOCATION</h1>
 
             <div style="">
@@ -187,7 +197,7 @@
         </div>
         
         
-        <div id="descriptionSection">
+        <div id="descriptionSection" class="editSection">
             <h1>DESCRIPTION & CONTACT INFO</h1>
             <div class="item-data clearfix">
                 
@@ -209,7 +219,7 @@
         
         
         
-         <div id="ticketingSection">
+         <div id="ticketingSection" class="editSection">
             <h1>TICKETING</h1>
             <div class="item-data clearfix">
                 <p>@Html.LabelFor(model => model.EventBrightUrl)  @Html.TextBoxFor(model => model.EventBrightUrl, new { @class = "wide" })</p>            
@@ -283,11 +293,11 @@
               *@
     
         
-                <input type="submit" class="blue-action-button fright" value="Save Event" />
+               @* <input type="submit" class="blue-action-button fright" value="Save Event" />
                     if (Model.CurrentUserID == Model.UserID || Model.CurrentUserRole == UserRoleType.Administrator)
                     {
                 <input type="button" class="red-action-button confirm" value="Delete Event" name="confirm" />
-                    }
+                    }*@
     
                 <!-- modal content --> 
                 <div id='confirm'> 

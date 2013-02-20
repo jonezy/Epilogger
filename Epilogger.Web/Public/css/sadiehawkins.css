@@ -1084,6 +1084,16 @@ ul#connected-networks, .topPhotosList, .topPhotosList li {
         border-right: 1px solid #fff;
         width: 361px;
     }
+    
+    .editSection { display: none; }
+
+    /* Menu */
+    .editcheckOff {
+        display: inline-block;height: 13px;width: 16px;margin-right: 10px; background: #eee url(/Public/Images/icons/EditEventCheck.png) left -13px;
+    }
+    .editcheckOn {
+        display: inline-block;height: 13px;width: 16px;margin-right: 10px; background: #eee url(/Public/Images/icons/EditEventCheck.png) left top;
+    }
 
 
     /* Basic Info */
@@ -1240,7 +1250,7 @@ ul#left-nav li a {
     text-transform:uppercase;
     padding:10px;
     display:block;
-    border-bottom:1px solid #fff}
+    border-bottom: 1px dotted #d6d6d6; }
     
 ul#left-nav li a:hover, ul#left-nav li a.current {
     color:#fc5daf;

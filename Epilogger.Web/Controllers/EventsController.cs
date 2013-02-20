@@ -2092,13 +2092,64 @@ namespace Epilogger.Web.Controllers {
         public virtual ActionResult Edit(FormCollection fc, EditEventViewModel model)
 		{
 			var currentEvent = _es.FindBySlug(model.EventSlug);
-            ////model.ID = currentEvent.ID;
+		    model.ID = currentEvent.ID;
 
 			//if (ModelState.IsValid) {
-				try {
+				try
+				{
+                    //Basic section
+				    currentEvent.IsPrivate = model.IsPrivate;
+                    currentEvent.Name = model.Name;
+                    currentEvent.SubTitle = model.Subtitle;
+
+                    currentEvent.StartDateTime = model.StartDateTime;
+                    currentEvent.EndDateTime = model.EndDateTime;
+
+                    #region Collection Start/End Date Times
+
+                    Debug.Assert(model.EndDateTime != null, "model.EndDateTime != null");
+                    model.CollectionStartDateTime = ConvertToUniversalDateTime(getCollectionDateTime(Request.Form["collectDataTimes"], model.StartDateTime, -1), model.TimeZoneOffset.ToString(CultureInfo.InvariantCulture));
+				    model.CollectionEndDateTime = ConvertToUniversalDateTime(EndDateValid(model.StartDateTime, (DateTime)model.EndDateTime) ? getCollectionDateTime(Request.Form["collectDataTimes"], (DateTime)model.EndDateTime, 1) : getCollectionDateTime(Request.Form["collectDataTimes"], model.StartDateTime, 1), model.TimeZoneOffset.ToString(CultureInfo.InvariantCulture));
+
+				    #endregion
+
+
+
+
+                    //currentEvent.TimeZoneOffset = model.TimeZoneOffset;
+                    DateTime startDate;
+                    DateTime endDate;
+                    DateTime collectionStart;
+                    DateTime collectionEnd;
+
+                    DateTime.TryParse(Request.Form["start_date"] + " " + Request.Form["start_time"], out startDate); // start date
+                    DateTime.TryParse(Request.Form["end_date"] + " " + Request.Form["end_time"], out endDate); // end date (could be null)
+                    DateTime.TryParse(Request.Form["collection_start_date"] + " " + Request.Form["collection_start_time"], out collectionStart);
+                    DateTime.TryParse(Request.Form["collection_end_date"] + " " + Request.Form["collection_end_time"], out collectionEnd);
+
+                    //Adjust the timezone. this is because the EditTemplate is not returning the Time.
+                    model.StartDateTime = TimeZoneManager.ToUtcTime(startDate);
+                    model.EndDateTime = TimeZoneManager.ToUtcTime(endDate);
+                    model.CollectionStartDateTime = TimeZoneManager.ToUtcTime(collectionStart);
+                    model.CollectionEndDateTime = TimeZoneManager.ToUtcTime(collectionEnd);
+
+                    
+                    currentEvent.CollectionStartDateTime = model.CollectionStartDateTime;
+                    currentEvent.CollectionEndDateTime = model.CollectionEndDateTime;
+
+
+
+
+
+
+
+
+
+
+
+
+
 					currentEvent.CategoryID = model.CategoryID;
-					currentEvent.SubTitle = model.Subtitle;
-					currentEvent.Name = model.Name;
 					currentEvent.SearchTerms = model.SearchTerms;
 					currentEvent.Description = model.Description;
 					currentEvent.TwitterAccount = model.TwitterAccount;
@@ -2120,28 +2171,7 @@ namespace Epilogger.Web.Controllers {
 					}
 
 					currentEvent.Cost = model.Cost;
-					currentEvent.TimeZoneOffset = model.TimeZoneOffset;
-
-					DateTime startDate;
-					DateTime endDate;
-					DateTime collectionStart;
-					DateTime collectionEnd;
-
-					DateTime.TryParse(Request.Form["start_date"] + " " + Request.Form["start_time"], out startDate); // start date
-					DateTime.TryParse(Request.Form["end_date"] + " " + Request.Form["end_time"], out endDate); // end date (could be null)
-					DateTime.TryParse(Request.Form["collection_start_date"] + " " + Request.Form["collection_start_time"], out collectionStart);
-					DateTime.TryParse(Request.Form["collection_end_date"] + " " + Request.Form["collection_end_time"], out collectionEnd);
-
-					//Adjust the timezone. this is becuase the EditTemplate is not returning the Time.
-					model.StartDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(startDate);
-					model.EndDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(endDate);
-					model.CollectionStartDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(collectionStart);
-					model.CollectionEndDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(collectionEnd);
-
-					currentEvent.StartDateTime = model.StartDateTime;
-					currentEvent.EndDateTime = model.EndDateTime;
-					currentEvent.CollectionStartDateTime = model.CollectionStartDateTime;
-					currentEvent.CollectionEndDateTime = model.CollectionEndDateTime;
+					
 
 					////Adjust the timezone. this is becuase the EditTemplate is not returning the Time.
 					//currentEvent.StartDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(startDate);
@@ -2204,7 +2234,7 @@ namespace Epilogger.Web.Controllers {
 					}
 
 					
-					_es.Save(currentEvent);
+					//_es.Save(currentEvent);
 					this.StoreSuccess("Your event was updated successfully!  Make sure you let all your friends know about the changes you just made!");
                     model = Mapper.Map<Event, EditEventViewModel>(currentEvent);
 					model.EventSlug = currentEvent.EventSlug;
