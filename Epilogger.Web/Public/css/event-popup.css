@@ -536,6 +536,9 @@ fieldset#livemode .submitEvent {
     padding-top: 2px;
 }
 
+#twitter_table {
+    width: 240px;
+}
 #twitter_table td {
     padding-bottom: 5px;
 }

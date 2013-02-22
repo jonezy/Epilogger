@@ -2096,46 +2096,48 @@ namespace Epilogger.Web.Controllers {
 
 			//if (ModelState.IsValid) {
 				try
-				{
+                {
+                    #region Basic Section
                     //Basic section
 				    currentEvent.IsPrivate = model.IsPrivate;
                     currentEvent.Name = model.Name;
                     currentEvent.SubTitle = model.Subtitle;
 
-                    currentEvent.StartDateTime = model.StartDateTime;
-                    currentEvent.EndDateTime = model.EndDateTime;
-
-                    #region Collection Start/End Date Times
-
-                    Debug.Assert(model.EndDateTime != null, "model.EndDateTime != null");
-                    model.CollectionStartDateTime = ConvertToUniversalDateTime(getCollectionDateTime(Request.Form["collectDataTimes"], model.StartDateTime, -1), model.TimeZoneOffset.ToString(CultureInfo.InvariantCulture));
-				    model.CollectionEndDateTime = ConvertToUniversalDateTime(EndDateValid(model.StartDateTime, (DateTime)model.EndDateTime) ? getCollectionDateTime(Request.Form["collectDataTimes"], (DateTime)model.EndDateTime, 1) : getCollectionDateTime(Request.Form["collectDataTimes"], model.StartDateTime, 1), model.TimeZoneOffset.ToString(CultureInfo.InvariantCulture));
-
-				    #endregion
-
-
-
-
-                    //currentEvent.TimeZoneOffset = model.TimeZoneOffset;
+                    #region Time and Dates Section
                     DateTime startDate;
                     DateTime endDate;
-                    DateTime collectionStart;
-                    DateTime collectionEnd;
 
-                    DateTime.TryParse(Request.Form["start_date"] + " " + Request.Form["start_time"], out startDate); // start date
-                    DateTime.TryParse(Request.Form["end_date"] + " " + Request.Form["end_time"], out endDate); // end date (could be null)
-                    DateTime.TryParse(Request.Form["collection_start_date"] + " " + Request.Form["collection_start_time"], out collectionStart);
-                    DateTime.TryParse(Request.Form["collection_end_date"] + " " + Request.Form["collection_end_time"], out collectionEnd);
+                    var startTime = GetTime(Request.Form["start_times"], Request.Form["AMPMstartTime"]);
+                    var endTime = GetTime(Request.Form["end_times"], Request.Form["AMPMendTime"]);
 
-                    //Adjust the timezone. this is because the EditTemplate is not returning the Time.
-                    model.StartDateTime = TimeZoneManager.ToUtcTime(startDate);
-                    model.EndDateTime = TimeZoneManager.ToUtcTime(endDate);
-                    model.CollectionStartDateTime = TimeZoneManager.ToUtcTime(collectionStart);
-                    model.CollectionEndDateTime = TimeZoneManager.ToUtcTime(collectionEnd);
+                    DateTime.TryParse(Request.Form["StartDateTime"] + " " + startTime, out startDate); // start date
+                    DateTime.TryParse(Request.Form["EndDateTime"] + " " + endTime, out endDate); // end date (could be null)
+
+				    model.StartDateTime = startDate.ToUniversalTime();
+                    model.EndDateTime = endDate.ToUniversalTime();
 
                     
-                    currentEvent.CollectionStartDateTime = model.CollectionStartDateTime;
-                    currentEvent.CollectionEndDateTime = model.CollectionEndDateTime;
+                    //Moved, as the timezone offset needs to be applied first
+                    model.CollectionStartDateTime = getCollectionDateTime(Request.Form["collectDataTimes"], startDate, -1).ToUniversalTime();
+                    if (EndDateValid(startDate, endDate))
+                    {
+                        model.CollectionEndDateTime = getCollectionDateTime(Request.Form["collectDataTimes"], endDate, 1).ToUniversalTime();
+                    }
+                    else
+                    {
+                        model.CollectionEndDateTime = getCollectionDateTime(Request.Form["collectDataTimes"], startDate, 1).ToUniversalTime();
+                    }
+                    #endregion
+
+                    #endregion
+
+                    #region Hashtags & Keywords
+
+
+
+
+
+                    #endregion
 
 
 
@@ -2147,9 +2149,7 @@ namespace Epilogger.Web.Controllers {
 
 
 
-
-
-					currentEvent.CategoryID = model.CategoryID;
+                    currentEvent.CategoryID = model.CategoryID;
 					currentEvent.SearchTerms = model.SearchTerms;
 					currentEvent.Description = model.Description;
 					currentEvent.TwitterAccount = model.TwitterAccount;

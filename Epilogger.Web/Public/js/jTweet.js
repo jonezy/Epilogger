@@ -56,7 +56,7 @@ function GetMoreTweets(query) {
 function ApplyTwitterTemplate(data) {
     $tweetSubContainer = $("#tweetSubContainer").clone();
     $tweetSubContainer.hide();
-    $tweetSubContainer.setTemplateURL('../Public/templates/Twitter.htm',
+    $tweetSubContainer.setTemplateURL('/Public/templates/Twitter.htm',
                                  null, { filter_data: false });
     $tweetSubContainer.processTemplate(data);
     $("#tweetMainContainer").append($tweetSubContainer);

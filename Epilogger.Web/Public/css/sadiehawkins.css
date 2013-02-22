@@ -1086,6 +1086,7 @@ ul#connected-networks, .topPhotosList, .topPhotosList li {
     }
     
     .editSection { display: none; }
+    .invisible { display: none;}
 
     /* Menu */
     .editcheckOff {
@@ -1104,6 +1105,14 @@ ul#connected-networks, .topPhotosList, .topPhotosList li {
     input[type="text"].blue_calendar, textarea.blue_calendar { background: #fff url('/Public/images/CreateEvent/calendarIcon.png') no-repeat 95% 50%; /*padding: 0 5px;*/ width: 20%; margin-right:4px; }
     .item-data input[type="checkbox"] { margin-top: 9px; }
 
+    /* Hastags */
+    .warning{ background-color:#fcfdd6; padding: 10px;border: 1px solid #f3efc8;margin-bottom: 15px; }
+    .warning h3{ color:#b3a84a; text-transform:none; margin: 0; }
+    .warning span{ color:#666; font: 13px Arial,Sans-Serif; }
+    .stn_button{ color:#FFF; font:bold 13px Arial,Sans-Serif; text-align:left; text-transform:lowercase; height:32px; border:0; cursor:pointer; padding-left:12px; padding-right:2%; }
+    .twittersearch_blue_button { background:url('../images/CreateEvent/disabled_button_blue.png') no-repeat; width:130px; float: right; } 
+    .refreshBar {}
+    #preview_tweet_box { height: 330px; background-color:#EDEDED; overflow:auto; }
 
     /* Venue */
     #selectedVenue { font-size: 14px; color: #868686; }
