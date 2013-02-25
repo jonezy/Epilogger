@@ -12,13 +12,14 @@
 <link type='text/css' href="@Url.Content("/Public/js/confirm/css/confirm.css")" rel='stylesheet' media='screen' /> 
 
 
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyACSiRC-8eEdPrS6qs9LLRb8m-EZ-GNhEo&sensor=false"></script>
+
 @*@Html.CombresLink("CreateEventJs")*@
 <script type="text/javascript">
-    head.js('@Url.Content("~/Public/js/jquery.blockUI.js")');
+    //head.js('@Url.Content("~/Public/js/jquery.blockUI.js")');
     head.js('@Url.Content("~/Public/js/EditEvent.js")');
     head.js('/Public/js/jTweet.js');
     head.js('/Public/js/tweetTemplate.js');
-//    head.js('https://www.google.com/jsapi');
     
     
     var EventID = @Model.ID;
@@ -37,10 +38,7 @@
     } else {
         var venueAddress = '';
     }
-
-
-
-    
+   
 </script>
 
 
@@ -82,7 +80,7 @@
     @Html.ValidationSummary("Please correct the following issues")
     @using (Html.BeginForm("edit", "events", FormMethod.Post, new { id = "EditForm" }))
     {
-
+        @Html.HiddenFor(model => model.CurrentSection)
         <div id="editBasicInfoSection" class="editSection">
             <h1>BASIC INFORMATION</h1>
             <div class="spacer"></div>
@@ -257,7 +255,6 @@
             @Html.HiddenFor(model => model.UserID)
             @Html.HiddenFor(model => model.ID)
             
-            
 
         </div>
         
@@ -277,7 +274,7 @@
             
             
                 <div class="spacer"></div>
-                <p><label></label><input type="button" onclick="$('#EditForm').submit();" class="blue-action-button submitForm" value="UPDATE MY EVENT" /></p>
+                <p><label></label><input type="button" onclick="$('#EditForm').submit();" class="blue-action-button submitForm" value="UPDATE" /></p>
             </div>
         </div>
         
@@ -291,7 +288,7 @@
                 <p>@Html.LabelFor(model => model.Cost) @Html.TextBoxFor(model => model.Cost, new { @class = "small" })</p>
             
                 <div class="spacer"></div>
-                <p><label></label><input type="button" onclick="$('#EditForm').submit();" class="blue-action-button submitForm" value="UPDATE MY EVENT" /></p>
+                <p><label></label><input type="button" onclick="$('#EditForm').submit();" class="blue-action-button submitForm" value="UPDATE" /></p>
             </div>
         </div>
         

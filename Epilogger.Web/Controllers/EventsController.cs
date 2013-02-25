@@ -2082,6 +2082,7 @@ namespace Epilogger.Web.Controllers {
 
 			model.CurrentUserRole = CurrentUserRole;
 			model.CurrentUserID = CurrentUser.ID;
+		    model.CurrentSection = (string) TempData["currentSection"];
             
 			return View(model);
 		}
@@ -2198,78 +2199,57 @@ namespace Epilogger.Web.Controllers {
 
                     #endregion
 
+                    #region Description & Contact Info
 
-
-
-
-
-
-
-
+                    currentEvent.Description = model.Description;
                     currentEvent.CategoryID = model.CategoryID;
-					currentEvent.SearchTerms = model.SearchTerms;
-					currentEvent.Description = model.Description;
-					currentEvent.TwitterAccount = model.TwitterAccount;
-					currentEvent.FacebookPageURL = model.FacebookPageURL;
-					currentEvent.WebsiteURL = !string.IsNullOrEmpty(model.WebsiteURL) && !model.WebsiteURL.StartsWith("http://") ? 
-						model.WebsiteURL.Insert(0, "http://") : 
-						model.WebsiteURL;
-					currentEvent.EventBrightUrl = !string.IsNullOrEmpty(model.EventBrightUrl) && !model.EventBrightUrl.StartsWith("http://") ?
-						model.EventBrightUrl.Insert(0, "http://") :
-						model.EventBrightUrl;
+                    currentEvent.WebsiteURL = !string.IsNullOrEmpty(model.WebsiteURL) && !model.WebsiteURL.StartsWith("http://") ? model.WebsiteURL.Insert(0, "http://") : model.WebsiteURL;
+                    currentEvent.TwitterAccount = model.TwitterAccount;
+                    currentEvent.FacebookPageURL = model.FacebookPageURL;
 
-					if (!string.IsNullOrEmpty(currentEvent.EventBrightUrl) && currentEvent.EventBrightUrl.Contains(".eventbrite.c"))
-					{
-						currentEvent.EventBriteEID = GetEventbriteEID(model.EventBrightUrl);
-					}
-					else
-					{
+                    #endregion
+
+                    #region Ticketing
+
+                    currentEvent.EventBrightUrl = !string.IsNullOrEmpty(model.EventBrightUrl) && !model.EventBrightUrl.StartsWith("http://") ? model.EventBrightUrl.Insert(0, "http://") : model.EventBrightUrl;
+                    if (!string.IsNullOrEmpty(currentEvent.EventBrightUrl) && currentEvent.EventBrightUrl.Contains(".eventbrite.c"))
+                    {
+                        currentEvent.EventBriteEID = GetEventbriteEID(model.EventBrightUrl);
+                    }
+                    else
+                    {
                         currentEvent.EventBriteEID = null;
-					}
+                    }
 
-					currentEvent.Cost = model.Cost;
-					
+                    currentEvent.Cost = model.Cost;
 
-					////Adjust the timezone. this is becuase the EditTemplate is not returning the Time.
-					//currentEvent.StartDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(startDate);
-					//if (endDate != DateTime.MinValue)
-					//{
-					//    currentEvent.EndDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(endDate);
-					//}
+                    #endregion
 
-					//currentEvent.CollectionStartDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(collectionStart); 
-					//if (collectionEnd != DateTime.MinValue) {
-					//    currentEvent.CollectionEndDateTime = Timezone.Framework.TimeZoneManager.ToUtcTime(collectionEnd);
-					//}
+                    #region Save
 
-					//currentEvent.VenueID = model.VenueID;
+                    //TODO Remove when done testing
+                    _es.Save(currentEvent);
+                    this.StoreSuccess("Your event was updated successfully!  Make sure you let all your friends know about the changes you just made!");
 
-					
-
-					//Quick Hack
-					if (model.EndDateTime == DateTime.MinValue)
-					{
-						model.EndDateTime = null;
-					}
-					if (model.CollectionEndDateTime == DateTime.MinValue)
-					{
-						model.CollectionEndDateTime = null;
-					}
-
-					//TODO: Uncomment when done
-					//_es.Save(currentEvent);
-					this.StoreSuccess("Your event was updated successfully!  Make sure you let all your friends know about the changes you just made!");
+                    var currentSection = model.CurrentSection;
                     model = Mapper.Map<Event, EditEventViewModel>(currentEvent);
-					model.EventSlug = currentEvent.EventSlug;
-				} catch (Exception ex) {
+                    model.EventSlug = currentEvent.EventSlug;
+                    model.ToolbarViewModel = BuildToolbarViewModel(currentEvent);
+                    model.CurrentSection = currentSection;
+                    TempData["currentSection"] = currentSection;
+
+                    #endregion
+
+                } catch (Exception ex) {
 					this.StoreError(string.Format("There was an error: {0}", ex.Message));
                     model = Mapper.Map<Event, EditEventViewModel>(currentEvent);
 					model.EventSlug = currentEvent.EventSlug;
 					return View(model);
 				}
 			//}
-			
-			return RedirectToAction("edit", new { id = model.EventSlug});
+
+            //return View(model);
+            return RedirectToAction("edit", new { id = model.EventSlug});
 		}
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------

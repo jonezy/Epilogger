@@ -3,9 +3,11 @@
 head.ready(function () {
 
     //Show the first section
-    $("#left-nav li:first-child a").addClass("current");
-    //$("#editBasicInfoSection").show();
-    $("#venueSection").show();
+    if ($("#CurrentSection").val().length > 0) {
+        changeMenu($("#CurrentSection").val());
+    } else {
+        changeMenu("menuBasic");
+    }
 
     //Setup date time stuff
     $(function () {
@@ -35,11 +37,6 @@ head.ready(function () {
     $('#searchButton').bind("click", function () {
         $("#preview_tweet_box").removeClass("invisible");
         $('#preview_tweet_box').slideDown(200);
-        //$('.clear_away').remove();
-        //$("#warningBox").attr('class', 'warning_small');
-        //$(this).removeClass("disabled_blue_button");
-        //$(this).addClass("preview_stretch_btn");
-        //$(this).prop('value', 'refresh results in preview box');
     });
     var i = 0;
     $('#addAnotherTermBTN').bind("click", function () {
@@ -67,7 +64,7 @@ head.ready(function () {
 
 
     //Search Keyup
-    $('.searchText').bind("keyup", function(e) {
+    $('.searchText').bind("keyup", function (e) {
         //If the search terms are too complex, disable simple mode.
         if ($('#searchText').val().indexOf("AND") > 0 ||
         $('#searchText').val().indexOf("(") > 0 ||
@@ -85,7 +82,7 @@ head.ready(function () {
         }
     });
 
-    
+
 
     function showTOperators() {
         $("#SearchHelpPopUpDiv").toggleClass("uiPopUpHidden");
@@ -163,30 +160,45 @@ $("#left-nav li a").bind("click", function (e) {
     $(".editSection").hide();
     $("#left-nav li a").removeClass("current");
 
-    switch (this.id) {
+    changeMenu(this.id);
+
+});
+
+function changeMenu(menuItem) {
+    switch (menuItem) {
         case "menuBasic":
             $("#editBasicInfoSection").show();
-            $(this).addClass("current");
+            $("#CurrentSection").val("menuBasic");
+            $("#menuBasic").addClass("current");
             break;
         case "menuHashtag":
             $("#hashTagsSection").show();
-            $(this).addClass("current");    
+            $("#CurrentSection").val("menuHashtag");
+            $("#menuHashtag").addClass("current");
             break;
         case "menuVenue":
             $("#venueSection").show();
-            $(this).addClass("current");    
+            $("#CurrentSection").val("menuVenue");
+            $("#menuVenue").addClass("current");
+
+            //Fixed gMaps fucking up when the map is loaded in a hidden div
+            var center = map.getCenter();
+            google.maps.event.trigger(map, 'resize'); 
+            map.setCenter(center);
+
             break;
         case "menuDesc":
             $("#descriptionSection").show();
-            $(this).addClass("current");    
+            $("#CurrentSection").val("menuDesc");
+            $("#menuDesc").addClass("current");
             break;
         case "menuTick":
             $("#ticketingSection").show();
-            $(this).addClass("current");
+            $("#CurrentSection").val("menuTick");
+            $("#menuTick").addClass("current");
             break;
     }
-
-});
+}
 
 
 function SetSelectedVenue(venueId, venueName, venueAddress, venueCity, venueState, venueZip) {
@@ -196,6 +208,7 @@ function SetSelectedVenue(venueId, venueName, venueAddress, venueCity, venueStat
 
     //Move the map
     setLocation(venueName + ', ' + venueAddress + ', ' + venueCity + ', ' + venueState + ', ' + venueZip);
+    venueAddress = venueName + ', ' + venueAddress + ', ' + venueCity + ', ' + venueState + ', ' + venueZip;
 
     //Dismis the popup
     parent.$.fn.colorbox.close();
@@ -223,14 +236,14 @@ function initialize() {
 
 }
 
-function loadScript() {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src = "http://maps.googleapis.com/maps/api/js?key=AIzaSyACSiRC-8eEdPrS6qs9LLRb8m-EZ-GNhEo&sensor=false&callback=initialize";
-    document.body.appendChild(script);
-}
+//function loadScript() {
+//    var script = document.createElement("script");
+//    script.type = "text/javascript";
+//    script.src = "http://maps.googleapis.com/maps/api/js?key=AIzaSyACSiRC-8eEdPrS6qs9LLRb8m-EZ-GNhEo&sensor=false";
+//    document.body.appendChild(script);
+//}
 
-window.onload = loadScript;
+window.onload = initialize;
 
 
 var geocoder;
@@ -238,9 +251,9 @@ var marker;
 var infowindow;
 function setLocation(location) {
     
-    if(!geocoder) {
+    //if(!geocoder) {
         geocoder = new google.maps.Geocoder();	
-    }
+    //}
 
     var geocoderRequest = {
         address: location
