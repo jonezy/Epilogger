@@ -5,7 +5,7 @@ head.ready(function () {
     //Show the first section
     $("#left-nav li:first-child a").addClass("current");
     //$("#editBasicInfoSection").show();
-    $("#hashTagsSection").show();
+    $("#venueSection").show();
 
     //Setup date time stuff
     $(function () {
@@ -103,6 +103,8 @@ head.ready(function () {
         $('#advancedOnlyMsg').show();
     }
 
+
+
 });
 
 
@@ -192,15 +194,80 @@ function SetSelectedVenue(venueId, venueName, venueAddress, venueCity, venueStat
     $("#selectedVenue").html("<strong>" + venueName + "</strong><br />" + venueAddress + "<br />" + venueCity + ", " + venueState + "<br />" + venueZip + "<br />");
     $("#foursquare-search").val("Change venue");
 
+    //Move the map
+    setLocation(venueName + ', ' + venueAddress + ', ' + venueCity + ', ' + venueState + ', ' + venueZip);
+
     //Dismis the popup
     parent.$.fn.colorbox.close();
 
-    $("#moreinformation-info .blocking").unblock();
-    $("#moreinformation-info h4").unblock();
-    $("#step4").removeClass("stepDisable");
-    $("#step3 span").html("&nbsp;");
-    $("#step3").addClass("stepComplete");
-    $(".submitForm").removeClass("disabled");
-    $(".submitForm").removeAttr("disabled");
+}
 
+
+
+/* Google Maps */
+var map;
+function initialize() {
+
+    var mapOptions = {
+        zoom: 3,
+        center: new google.maps.LatLng(37.7750, -95.4183),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+    //If there is already a venue, go to it.
+    if (venueAddress.length > 0) {
+            setLocation(venueAddress);
+    }
+
+}
+
+function loadScript() {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "http://maps.googleapis.com/maps/api/js?key=AIzaSyACSiRC-8eEdPrS6qs9LLRb8m-EZ-GNhEo&sensor=false&callback=initialize";
+    document.body.appendChild(script);
+}
+
+window.onload = loadScript;
+
+
+var geocoder;
+var marker;
+var infowindow;
+function setLocation(location) {
+    
+    if(!geocoder) {
+        geocoder = new google.maps.Geocoder();	
+    }
+
+    var geocoderRequest = {
+        address: location
+    };
+
+    geocoder.geocode(geocoderRequest, function (results, status) {
+
+        if (status == google.maps.GeocoderStatus.OK) {
+            map.setCenter(results[0].geometry.location);
+            if (!marker) {
+                marker = new google.maps.Marker({
+                    map: map
+                });
+            }
+
+            marker.setPosition(results[0].geometry.location);
+
+            map.setZoom(16);
+
+
+            //            if (!infowindow) {
+            //                infowindow = new google.maps.InfoWindow();
+            //            }
+            //            var content = '<strong>' + results[0].formatted_address + '</strong>';
+            //            infowindow.setContent(content);
+            //            infowindow.open(map, marker);
+        }
+
+    });
 }

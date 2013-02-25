@@ -18,9 +18,29 @@
     head.js('@Url.Content("~/Public/js/EditEvent.js")');
     head.js('/Public/js/jTweet.js');
     head.js('/Public/js/tweetTemplate.js');
+//    head.js('https://www.google.com/jsapi');
+    
     
     var EventID = @Model.ID;
     var page = "Edit";
+
+    
+    if ('@Model.Venue'.length > 0) {
+        @{
+            var venueA = string.Empty;
+            if (Model.Venue != null)
+            {
+                venueA = string.Format("{0}, {1}, {2}, {3}", Model.Venue.Address, Model.Venue.City, Model.Venue.State, Model.Venue.Zip);
+            }
+        }
+        var venueAddress = '@venueA';
+    } else {
+        var venueAddress = '';
+    }
+
+
+
+    
 </script>
 
 
@@ -124,7 +144,7 @@
 
                 </div>
                 <div class="spacer"></div>
-                <p><label></label><input type="button" onclick="$('#EditForm').submit();" class="blue-action-button submitForm" value="SAVE BASIC INFO" /></p>
+                <p><label></label><input type="button" onclick="$('#EditForm').submit();" class="blue-action-button submitForm" value="UPDATE" /></p>
 
             </div>
             
@@ -132,7 +152,8 @@
         </div>
             
         <div id="hashTagsSection" class="editSection">
-            <input type="hidden" id = "IsAdvanceMode" value="False" />
+            @*<input type="hidden" id = "IsAdvanceMode" value="False" />*@
+            @Html.Hidden("IsAdvanceMode", "False")
             <h1>HASHTAG & KEYWORD</h1>
             <a href="" id="advance_link" onclick="advancedMode(); return false;">(Switch to advanced mode)</a>
             <span id="advancedOnlyMsg" style="display: none;">Do to the complexity of your search terms simple mode is no longer available.</span>
@@ -144,19 +165,19 @@
                 </p>
                 <div id="normal_mode">
                     <div id="addAnother1" class="invisible add_another">
-                        <p><label>Other terms:</label>@Html.TextBox("searchText2")</p>
+                        <p><label>Other terms:</label>@Html.TextBox("searchText2", "", new { @class = "searchText" })</p>
                     </div>
                     <div id="addAnother2" class="invisible add_another">
-                        <p><label></label>@Html.TextBox("searchText3")</p>
+                        <p><label></label>@Html.TextBox("searchText3", "", new { @class = "searchText" })</p>
                     </div>
                     <div id="addAnother3" class="invisible add_another">
-                        <p><label></label>@Html.TextBox("searchText4")</p>
+                        <p><label></label>@Html.TextBox("searchText4", "", new { @class = "searchText" })</p>
                     </div>
                     <div id="addAnother4" class="invisible add_another">
-                        <p><label></label>@Html.TextBox("searchText5")</p>
+                        <p><label></label>@Html.TextBox("searchText5", "", new { @class = "searchText" })</p>
                     </div>
                     <div id="addAnother5" class="invisible add_another">
-                        <p><label></label>@Html.TextBox("searchText6")</p>
+                        <p><label></label>@Html.TextBox("searchText6", "", new { @class = "searchText" })</p>
                     </div>
                     <div id="button_input">
                         <p><label></label><input id="addAnotherTermBTN" type="button" value="add another" class="blue-action-button" />
@@ -181,13 +202,18 @@
                 </div>
                 @*<input id="getMoreTweetsButton" type="button" value="Get More Tweets" />*@
             </div>
-
+            
+            <div class="item-data clearfix">
+                <div class="spacer"></div>
+                <p><label></label><input type="button" onclick="$('#EditForm').submit();" class="blue-action-button submitForm" value="UPDATE" /></p>
                 
+            </div>
         </div>
-        
         
         <div id="venueSection" class="editSection">
             <h1>VENUE, LOCATION</h1>
+            
+            <div id="map_canvas" style="height: 315px; width: 415px; float: right; border: 1px solid #cacaca;"></div>
 
             <div style="">
                 <div id="selectedVenue">
@@ -202,9 +228,27 @@
                     {
                         <p>No venue selected</p>
                     }
+                    
+                    
                 </div>
                 <input type="button" id="foursquare-search" class="blue-action-button" value="CHANGE VENUE" />
             </div>
+            
+            <div class="item-data clearfix">
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+                <p><label></label><input type="button" onclick="$('#EditForm').submit();" class="blue-action-button submitForm" value="UPDATE" /></p>
+            </div>
+
             @Html.HiddenFor(model => model.FoursquareVenueID)
             @Html.HiddenFor(model => model.VenueID)
             @Html.HiddenFor(model => model.EventSlug)

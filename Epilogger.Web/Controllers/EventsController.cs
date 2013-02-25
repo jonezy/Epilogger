@@ -2072,7 +2072,7 @@ namespace Epilogger.Web.Controllers {
             return key;
         }
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-		[CompressFilter]
+        //[CompressFilter]
 		[RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to edit an event")]
 		public virtual ActionResult Edit(string id)
 		{
@@ -2133,13 +2133,70 @@ namespace Epilogger.Web.Controllers {
 
                     #region Hashtags & Keywords
 
-
+                    var searchQuery = "";
+                    if (fc["IsAdvanceMode"] == "True")
+                    {
+                        searchQuery = fc["SearchTerms"];
+                        currentEvent.SearchTerms = searchQuery.Replace(",", "").Trim();
+                    }
+                    else
+                    {
+                        var searchTerms = fc["SearchTerms"].Split(',');
+                        foreach (var s in searchTerms)
+                        {
+                            if (s.Trim() != "")
+                            {
+                                searchQuery += s + " OR ";
+                            }
+                        }
+                        searchQuery = searchQuery.Remove(searchQuery.Length - 4, 4);
+                        currentEvent.SearchTerms = searchQuery.Trim();
+                    }
 
 
 
                     #endregion
 
+                    #region Venue
 
+                    if (!string.IsNullOrEmpty(model.FoursquareVenueID))
+                    {
+                        if (!_venueService.DoesVenueExist(model.FoursquareVenueID))
+                        {
+                            // have to look up the foursquare venue and then create it and save it to the db.
+                            dynamic foursquareVenue = LookupFoursquareVenue(model.FoursquareVenueID);
+                            var locationNode = foursquareVenue.response.location;
+
+                            // convert it to a Venue
+                            var venue = new Venue
+                            {
+                                FoursquareVenueID = foursquareVenue.response.id,
+                                Address = locationNode.address,
+                                Name = foursquareVenue.response.name,
+                                City = locationNode.city,
+                                State = locationNode.state,
+                                CrossStreet = locationNode.crossStreet,
+                                Geolat = locationNode.lat,
+                                Geolong = locationNode.lng
+                            };
+
+                            // save the venue
+                            _venueService.Save(venue);
+                            currentEvent.VenueID = venue.ID;
+                        }
+                        else
+                        {
+                            //Need to look up the VenueID of the new FourSquareID
+                            var lookupVenue = _venueService.FindByFourSquareVenueID(model.FoursquareVenueID);
+                            if (lookupVenue != null)
+                            {
+                                currentEvent.VenueID = lookupVenue.ID;
+                            }
+                        }
+                    }
+
+
+                    #endregion
 
 
 
@@ -2187,41 +2244,7 @@ namespace Epilogger.Web.Controllers {
 
 					//currentEvent.VenueID = model.VenueID;
 
-					if (!string.IsNullOrEmpty(model.FoursquareVenueID))
-					{
-						if (!_venueService.DoesVenueExist(model.FoursquareVenueID))
-						{
-							// have to look up the foursquare venue and then create it and save it to the db.
-							dynamic foursquareVenue = LookupFoursquareVenue(model.FoursquareVenueID);
-							var locationNode = foursquareVenue.response.location;
-
-							// convert it to a Venue
-							var venue = new Venue
-											{
-												FoursquareVenueID = foursquareVenue.response.id,
-												Address = locationNode.address,
-												Name = foursquareVenue.response.name,
-												City = locationNode.city,
-												State = locationNode.state,
-												CrossStreet = locationNode.crossStreet,
-												Geolat = locationNode.lat,
-												Geolong = locationNode.lng
-											};
-
-							// save the venue
-							_venueService.Save(venue);
-							currentEvent.VenueID = venue.ID;
-						}
-						else
-						{
-							//Need to look up the VenueID of the new FourSquareID
-							var lookupVenue = _venueService.FindByFourSquareVenueID(model.FoursquareVenueID);
-							if (lookupVenue != null)
-							{
-								currentEvent.VenueID = lookupVenue.ID;
-							}
-						}
-					}
+					
 
 					//Quick Hack
 					if (model.EndDateTime == DateTime.MinValue)
@@ -2233,7 +2256,7 @@ namespace Epilogger.Web.Controllers {
 						model.CollectionEndDateTime = null;
 					}
 
-					
+					//TODO: Uncomment when done
 					//_es.Save(currentEvent);
 					this.StoreSuccess("Your event was updated successfully!  Make sure you let all your friends know about the changes you just made!");
                     model = Mapper.Map<Event, EditEventViewModel>(currentEvent);

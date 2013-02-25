@@ -191,6 +191,7 @@ namespace Epilogger.Web.Models {
         public Guid CurrentUserID { get; set; }
 
         public bool IsPaid { get; set; }
+        
 
     }
 }
