@@ -441,6 +441,56 @@ namespace Epilogger.Web.Controllers {
 
 
 
+        private string setCollectionDateTime(DateTime startDateTime, DateTime endDateTime, DateTime cStartDateTime, DateTime cEndDateTime)
+        {
+
+            var sdiff = startDateTime - cStartDateTime;
+            var ediff = cEndDateTime - endDateTime;
+
+
+            if ((int)sdiff.TotalHours == 0 && (int)ediff.TotalHours == 0)
+            {
+                return "1";
+            }
+
+            if ((int)sdiff.TotalHours == 3 && (int)ediff.TotalHours == 3)
+            {
+                return "2";
+            }
+
+            if ((int)sdiff.TotalDays == 3 && (int)ediff.TotalDays == 3)
+            {
+                return "3";
+            }
+
+            if ((int)sdiff.TotalDays == 14 && (int)ediff.TotalDays == 14)
+            {
+                return "4";
+            }
+
+            return "2";
+
+
+
+            //var diff = endDateTime - startDateTime;
+            //var cdiff = cEndDateTime - cEndDateTime;
+
+            //switch (s)
+            //{
+            //    case "1":
+            //        return eventDate;
+            //    case "2":
+            //        return eventDate.AddHours(3 * i);
+            //    case "3":
+            //        return eventDate.AddDays(3 * i);
+            //    case "4":
+            //        return eventDate.AddDays(14 * i);
+            //    default:
+            //        return eventDate.AddDays(3 * i);
+            //}
+        }
+
+
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]
@@ -2083,7 +2133,12 @@ namespace Epilogger.Web.Controllers {
 			model.CurrentUserRole = CurrentUserRole;
 			model.CurrentUserID = CurrentUser.ID;
 		    model.CurrentSection = (string) TempData["currentSection"];
-            
+
+		    Debug.Assert(model.EndDateTime != null, "model.EndDateTime != null");
+		    Debug.Assert(model.CollectionEndDateTime != null, "model.CollectionEndDateTime != null");
+
+		    model.CollectDataValue = setCollectionDateTime(model.StartDateTime, (DateTime)model.EndDateTime, model.CollectionStartDateTime, (DateTime)model.CollectionEndDateTime);
+
 			return View(model);
 		}
 
@@ -2128,6 +2183,14 @@ namespace Epilogger.Web.Controllers {
                     {
                         model.CollectionEndDateTime = getCollectionDateTime(Request.Form["collectDataTimes"], startDate, 1).ToUniversalTime();
                     }
+
+                    currentEvent.StartDateTime = model.StartDateTime;
+                    currentEvent.EndDateTime = model.EndDateTime;
+                    currentEvent.CollectionStartDateTime = model.CollectionStartDateTime;
+                    currentEvent.CollectionEndDateTime = model.CollectionEndDateTime;
+
+                    model.CollectDataValue = Request.Form["collectDataTimes"];
+
                     #endregion
 
                     #endregion
@@ -2229,6 +2292,7 @@ namespace Epilogger.Web.Controllers {
 
                     //TODO Remove when done testing
                     _es.Save(currentEvent);
+
                     this.StoreSuccess("Your event was updated successfully!  Make sure you let all your friends know about the changes you just made!");
 
                     var currentSection = model.CurrentSection;

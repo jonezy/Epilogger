@@ -119,7 +119,8 @@ function advancedMode() {
         var query = "";
         $.each($('.searchText'), function () {
             if ($(this).val() != "") {
-                query = query + $(this).val().replace('#', '') + ' OR ';
+                query = query + $(this).val() + ' OR ';
+                //query = query + $(this).val().replace('#', '') + ' OR ';
             }
         });
         query = query.substring(0, query.length - 4);
