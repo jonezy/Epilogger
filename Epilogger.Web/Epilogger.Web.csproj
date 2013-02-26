@@ -38,6 +38,12 @@
     <Reference Include="AjaxMin">
       <HintPath>..\packages\AjaxMin.4.41.4378.21434\lib\net20\AjaxMin.dll</HintPath>
     </Reference>
+    <Reference Include="AppfailReporting">
+      <HintPath>..\packages\Appfail.WebForms.1.1.0\lib\35\AppfailReporting.dll</HintPath>
+    </Reference>
+    <Reference Include="AppfailReporting.Mvc">
+      <HintPath>..\packages\Appfail.Mvc.1.1.0\lib\35\AppfailReporting.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="AutoMapper, Version=2.1.265.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AutoMapper.2.1.265\lib\net40\AutoMapper.dll</HintPath>

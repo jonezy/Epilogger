@@ -84,6 +84,7 @@ namespace Epilogger.Web
 
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
+            //TODO: Put this back when going live
             //filters.Add(new ErrorLogging());
         }
 

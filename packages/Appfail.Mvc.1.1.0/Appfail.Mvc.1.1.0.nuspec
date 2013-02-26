@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Appfail.Mvc</id>
+    <version>1.1.0</version>
+    <authors>Appfail</authors>
+    <owners>Appfail</owners>
+    <projectUrl>http://appfail.net/</projectUrl>
+    <iconUrl>http://appfail.net/assets/img/logo32.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Appfail monitors your web application for exceptions and reports them to http://appfail.net for rich failure analytics and notifications.</description>
+    <dependencies>
+      <dependency id="Appfail.WebForms" version="1.1.0" />
+    </dependencies>
+    <references>
+      <reference file="AppfailReporting.Mvc.dll" />
+    </references>
+  </metadata>
+</package>
