@@ -124,10 +124,11 @@ else
         }
 
         <h1 itemprop="summary">
+            @Model.Name&nbsp;
             @if (Model.IsPaid)
-            { <img src="/Public/images/icons/icon-verified.png" alt="Super Event" /> }
-            @Model.Name
-            
+            {
+                <img src="/Public/images/icons/icon-verified.png" alt="Super Event" /> }
+
             @*@if ((Model.UserID == Model.CurrentUserID) || Model.CurrentUserRole == UserRoleType.Administrator)
             {
                 <div style="display: inline-block; padding-left: 15px;">

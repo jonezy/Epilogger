@@ -34,14 +34,20 @@
     <li class="menuCheckins">@Html.ActionLink("Checkins", "allcheckins", null, new { id = @id, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "allcheckins" ? new { @class = "menuOn" } : null)</li>
     
     @*Live Mode*@
-    @if (!Model.IsPaid)
+    @*@if (!Model.IsPaid)
     {
         <li class="menuLiveModeDisabled"><a href="" onclick="return false;">Live Mode Disabled</a></li>
     }
     else
+    {*@
+    
+    @if ((Model.CreatedByID == Model.CurrentUserID) || Model.CurrentUserRole == UserRoleType.Administrator)
     {
         <li class="menuLiveMode">@Html.ActionLink("Live Mode", "Live4x3", null, new { id = @id }, action.ToLower() == "live4x3" ? new { @class = "menuOn" } : null)</li>
     }
+    
+    
+    @*}*@
     
     
     <li class="menuStats">@Html.ActionLink("Stats", "allstats", null, new { id = @id, f = Request.QueryString["f"], t = Request.QueryString["t"] }, action.ToLower() == "allstats" ? new { @class = "menuOn" } : null)</li>
