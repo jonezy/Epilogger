@@ -84,7 +84,7 @@ namespace Epilogger.Web
 
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new ErrorLogging());
+            //filters.Add(new ErrorLogging());
         }
 
         public static void RegisterRoutes(RouteCollection routes)
