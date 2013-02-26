@@ -66,6 +66,14 @@
     }*@
     
     
+    @if (Model.CurrentUserID == Model.UserID || Model.CurrentUserRole == UserRoleType.Administrator)
+    {
+        <input type="button" class="red-action-button confirm" value="Delete Event" name="confirm" />
+        <div class="spacer"></div>
+    }
+    
+    
+
     <h1>UPGRADE YOUR EVENT</h1>
     <p>Upgrade for $50! Get premium features designed to foster community engagement before, during, and after your event.</p>
     
@@ -292,70 +300,7 @@
                 <p><label></label><input type="button" onclick="$('#EditForm').submit();" class="blue-action-button submitForm" value="UPDATE" /></p>
             </div>
         </div>
-        
-        @*
-        
-        <div class="spacer"></div><div class="spacer"></div>
-<div class="spacer"></div><div class="spacer"></div>        
-<div class="spacer"></div><div class="spacer"></div>        
-<div class="spacer"></div><div class="spacer"></div>        
-<div class="spacer"></div><div class="spacer"></div>        
-<div class="spacer"></div><div class="spacer"></div>        
-<div class="spacer"></div>        
-        
-        
-        
-            
-               
-       
-    
-    
-    
-                <div id="whattoinclude-info" class="item-card">
-                    <h4>SEARCH TERMS</h4>
-                    <br style="clear:both;" />
-                    <div class="blocking">
-                        <div class="item-data clearfix">
-                            <p><label>Search Terms</label> @Html.TextBoxFor(model => model.SearchTerms, new { @class = "wide padded" })</p>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="spacer"></div>
-                
-    
-    
-                <div id="whenandwhere-info" class="item-card">
-                    <h4>WHEN AND WHERE</h4>
-                    <br style="clear:both;" />
-                    <div id="createevent-time" class="item-data clearfix">
-                        <br />
-                        <label class="wide">Event Time</label>
-                        <div id="EventTimePicker">
-                            <input type="text" class="picker-start-date" name="start_date" id="start_date" value="@Html.DisplayFor(e => e.StartDateTime, "ShortDate")" />
-                            <input type="text" class="picker-start-time" name="start_time" id="start_time" value="@Html.DisplayFor(e => e.StartDateTime, "FullTime")" />
-                            &nbsp;to&nbsp;
-                            <input type="text" class="picker-end-time" name="end_time" id="end_time" value="@Html.DisplayFor(e => e.EndDateTime, "FullTime")" />
-                            <input type="text" class="picker-end-date" name="end_date" id="end_date" value="@Html.DisplayFor(e => e.EndDateTime, "ShortDate")" />
-                        </div>
-                
-                        <label class="wide">Collection Time</label>
-                        <div id="CollectionTimePicker">
-                            <input type="text" class="picker-start-date" name="collection_start_date" id="collection_start_date" value="@Html.DisplayFor(e => e.CollectionStartDateTime, "ShortDate")" />
-                            <input type="text" class="picker-start-time" name="collection_start_time" id="collection_start_time" value="@Html.DisplayFor(e => e.CollectionStartDateTime, "FullTime")" />
-                            &nbsp;to&nbsp;
-                            <input type="text" class="picker-end-time" name="collection_end_time" id="collection_end_time" value="@Html.DisplayFor(e => e.CollectionEndDateTime, "FullTime")" />
-                            <input type="text" class="picker-end-date" name="collection_end_date" id="collection_end_date"  value="@Html.DisplayFor(e => e.CollectionEndDateTime, "ShortDate")" />
-                        </div>
 
-
-                        
-                    </div>
-                </div>
-    
-              *@
-    
-        
                @* <input type="submit" class="blue-action-button fright" value="Save Event" />
                     if (Model.CurrentUserID == Model.UserID || Model.CurrentUserRole == UserRoleType.Administrator)
                     {
