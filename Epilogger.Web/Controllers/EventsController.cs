@@ -2147,6 +2147,10 @@ namespace Epilogger.Web.Controllers {
 		[HttpPost]
         public virtual ActionResult Edit(FormCollection fc, EditEventViewModel model)
 		{
+            if (model.SearchTerms == "#")   // removes the default value from confusing the ModelState
+                ModelState.AddModelError("Search Terms", "Please enter some search terms for your event (ex: epilogger OR EPL)");
+
+
 			var currentEvent = _es.FindBySlug(model.EventSlug);
 		    model.ID = currentEvent.ID;
 

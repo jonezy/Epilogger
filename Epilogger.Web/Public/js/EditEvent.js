@@ -98,21 +98,95 @@ head.ready(function () {
         $('#advance_link').hide();
         advancedMode();
         $('#advancedOnlyMsg').show();
+    } else {
+        //Fix boxes on reload
+        var parts = $('#searchText').val().split(" OR "), i, l;
+
+        $("#searchText").val(parts[0]);
+        for (i = 0, l = parts.length; i < l; i += 1) {
+            $("#searchText" + (i + 2)).val(parts[i + 1]);
+            if ($("#searchText" + (i + 2)).val().length > 0) {
+                $("#addAnother" + (i + 1)).removeClass("invisible");
+            }
+            else {
+                $("#addAnother" + (i + 1)).addClass("invisible");
+            }
+        }
     }
 
-
+    //Menu Check marks
+    adjustMenuCheckMarks();
 
 });
 
 
 
 
+function adjustMenuCheckMarks() {
+    $("#menuBasic span").removeClass("editcheckOn").addClass("editcheckOff");
+    $("#menuHashtag span").removeClass("editcheckOn").addClass("editcheckOff");
+    $("#menuVenue span").removeClass("editcheckOn").addClass("editcheckOff");
+    $("#menuDesc span").removeClass("editcheckOn").addClass("editcheckOff");
+    $("#menuTick span").removeClass("editcheckOn").addClass("editcheckOff");
+
+    //Basic Section
+    if ($("#Name").val().length > 0) {
+        $("#menuBasic span").removeClass("editcheckOff").addClass("editcheckOn");
+    }
+
+    //Hash Tag Section
+    if ($("#searchText").val().length > 1) {
+        $("#menuHashtag span").removeClass("editcheckOff").addClass("editcheckOn");
+    }
+
+    //Venue Section
+    if ($("#FoursquareVenueID").val().length > 0) {
+        $("#menuVenue span").removeClass("editcheckOff").addClass("editcheckOn");
+    }
+
+    //Description Section
+    var descGood = true;
+    if ($("#searchText").val().length == 0) {
+        descGood = false;
+    }
+    if ($("#WebsiteURL").val().length == 0) {
+        descGood = false;
+    }
+    if ($("#TwitterAccount").val().length == 0) {
+        descGood = false;
+    }
+    if ($("#FacebookPageURL").val().length == 0) {
+        descGood = false;
+    }
+
+    if (descGood) {
+        $("#menuDesc span").removeClass("editcheckOff").addClass("editcheckOn");
+    }
+
+    
+    //Ticketing Section
+    var tickGood = true;
+
+    if ($("#EventBrightUrl").val().length == 0) {
+        tickGood = false;
+    }
+    if ($("#Cost").val().length == 0) {
+        tickGood = false;
+    }
+    
+    if (tickGood) {
+        $("#menuTick span").removeClass("editcheckOff").addClass("editcheckOn");
+    }
+}
+
 
 
 function advancedMode() {
     $('#normal_mode').toggle();
 
+    
     if ($('#IsAdvanceMode').val() == 'False') {
+        //Goto Advanced Mode
         $('#IsAdvanceMode').val('True');
         $('#modeTitle').text('Advanced Mode: ');
         
@@ -128,6 +202,7 @@ function advancedMode() {
         $('#searchText').val(query);
     }
     else {
+        //Back to Simple Mode
         $('#IsAdvanceMode').val('False');
         $('#modeTitle').text('Official Hashtag:');
 
@@ -171,6 +246,7 @@ function changeMenu(menuItem) {
             $("#editBasicInfoSection").show();
             $("#CurrentSection").val("menuBasic");
             $("#menuBasic").addClass("current");
+            
             break;
         case "menuHashtag":
             $("#hashTagsSection").show();

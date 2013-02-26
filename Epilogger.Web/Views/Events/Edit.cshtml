@@ -163,19 +163,20 @@
                 </p>
                 <div id="normal_mode">
                     <div id="addAnother1" class="invisible add_another">
-                        <p><label>Other terms:</label>@Html.TextBox("searchText2", "", new { @class = "searchText" })</p>
+                        <p><label>Other terms:</label>@Html.TextBoxFor(model => model.SearchTerms, new { @id = "searchText2", @Value = "", @class = "searchText" })
+                        @*@Html.TextBox("searchText2", "", new { @class = "searchText" })*@</p>
                     </div>
                     <div id="addAnother2" class="invisible add_another">
-                        <p><label></label>@Html.TextBox("searchText3", "", new { @class = "searchText" })</p>
+                        <p><label></label>@Html.TextBoxFor(model => model.SearchTerms, new { @id = "searchText3", @Value = "", @class = "searchText" })</p>
                     </div>
                     <div id="addAnother3" class="invisible add_another">
-                        <p><label></label>@Html.TextBox("searchText4", "", new { @class = "searchText" })</p>
+                        <p><label></label>@Html.TextBoxFor(model => model.SearchTerms, new { @id = "searchText4", @Value = "", @class = "searchText" })</p>
                     </div>
                     <div id="addAnother4" class="invisible add_another">
-                        <p><label></label>@Html.TextBox("searchText5", "", new { @class = "searchText" })</p>
+                        <p><label></label>@Html.TextBoxFor(model => model.SearchTerms, new { @id = "searchText5", @Value = "", @class = "searchText" })</p>
                     </div>
                     <div id="addAnother5" class="invisible add_another">
-                        <p><label></label>@Html.TextBox("searchText6", "", new { @class = "searchText" })</p>
+                        <p><label></label>@Html.TextBoxFor(model => model.SearchTerms, new { @id = "searchText6", @Value = "", @class = "searchText" })</p>
                     </div>
                     <div id="button_input">
                         <p><label></label><input id="addAnotherTermBTN" type="button" value="add another" class="blue-action-button" />
