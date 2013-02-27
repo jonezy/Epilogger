@@ -21,7 +21,7 @@ namespace Epilogger.Web.Controllers {
         readonly ImageService _is = new ImageService();
 
         [CacheFilter(Duration = 10)]
-        [CompressFilter]
+        //[CompressFilter]
         public virtual ActionResult Index()
         {
 
@@ -43,10 +43,9 @@ namespace Epilogger.Web.Controllers {
             if (featured != null)
                 model.FeaturedEvents = new HomepageFeaturedEventsViewModel()
                                            {
-                                               Event = featured, 
-                                               TopImages = _is.GetNewestPhotosByEventId(featured.ID, 5)
+                                               Event = featured,
+                                               TopImages = _is.GetNewestPhotosByEventId(featured.ID, 40)
                                            };
-            
 
             return View(model);
         }

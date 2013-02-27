@@ -250,9 +250,10 @@ a.edit_icon {
 	min-height:550px;}
 
 #homepage-container {
-	min-height:548px;
+	/*min-height:548px;*/
 	padding: 60px 0px 0px 0px;
-	position:relative;}
+	/*position:relative;*/
+	}
 
 #homepage-intro {
     float:left;
@@ -1341,13 +1342,113 @@ ul#left-nav li ul li a.current {color:#a44b79;}
 
 
 
-/* Homepage Featured Event*/
+/*NEW Homepage featured Event - CB Feb 27, 2013 */
+
+#featuredEventContainer {
+    /*height: 375px;*/ 
+}
+
+
 .featuredEvent {
+}
+
+.featuredEvent a { float: left; }
+
+
+.featuredEventName {
+    display: block;
+    padding-top: 14px;
+    height: 94px;
+    width: 554px;
+    position: fixed;
+    margin-top:133px;
+    margin-left: 191px;
+    z-index: 1000;
+    text-align: center;
+    /* Fallback for web browsers that don't support RGBa */
+    background-color: rgb(0, 0, 0);
+    /* RGBa with 0.6 opacity */
+    background-color: rgba(0, 0, 0, 0.79);
+    /* For IE 5.5 - 7*/
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+    /* For IE 8*/
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+}
+.featuredText 
+{
+    color: #f811a4;
+    font: normal 12pt 'InterstatePlusRegular';
+    font-family: 'InterstatePlusRegular', helvetica, arial, sans-serif;
+    vertical-align: middle;
+}
+.featuredEventName a {
+    color: #fff;
+    font: normal 24pt 'InterstatePlusRegular';
+    font-family: 'InterstatePlusRegular', helvetica, arial, sans-serif;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 1px #000;
+}
+.featuredEventName a:hover 
+{
+    text-decoration: underline;
+}
+
+.featuredDetails {
+    font-size: 12pt;
+    font-weight: bold;
+    font-family: 'InterstatePlusRegular', helvetica, arial, sans-serif;
+    color: #d5d5d5;
+    text-shadow: 2px 2px 1px #000;
+    line-height: 1.5em;
+}
+
+
+
+
+.imgGrid1-1 {
+    width: 477px; height: 375px;
+}
+.imgGrid1-2 {
+    width: 209px;height: 200px;
+}
+.imgGrid1-3 {
+    width: 250px;height: 177px;
+}
+.imgGrid1-4 {
+    width: 104px;height: 88px;
+}
+.imgGrid1-5 {
+    width: 105px;height: 88px;
+}
+.imgGrid1-6 {
+    width: 104px;height: 87px;
+}
+.imgGrid1-7 {
+    width: 105px;height: 87px;
+}
+.imgGrid1-8 {
+    width: 250px;height: 198px; overflow: hidden;
+}
+
+.smallGroupImg {
+    margin: 0;padding: 0;
+    width: 210px;
+    float: left;
+}
+
+/* ***** NEW featured event end ****** */
+
+
+
+
+/* Homepage Featured Event*/
+/*.featuredEvent {
     height: 335px;
     width: 435px;
     overflow: hidden;
 }
 .featuredEventName {
+    
     background-image: url(/Public/images/icons/feature-bg.png);
     display: block;
     height: 31px;
@@ -1356,6 +1457,7 @@ ul#left-nav li ul li a.current {color:#a44b79;}
     padding-left: 80px;
     padding-top: 7px;
     z-index: 1000;
+
 }
 .featuredEventName a {
     color: #fff;
@@ -1365,14 +1467,16 @@ ul#left-nav li ul li a.current {color:#a44b79;}
 {
     text-decoration: underline;
 }
-
+*/
 .featuredBanner {
+   /*
     background-image: url(/Public/images/icons/ribbon-featured.png);
     display: block;
     height: 79px;
     width: 77px;
     position: absolute;
     z-index: 2000;
+*/
 }
 
 
@@ -1406,8 +1510,6 @@ ul#left-nav li ul li a.current {color:#a44b79;}
     background-position:0 0px;
     
 }
-
-
 /* END Featured Event */
 
 

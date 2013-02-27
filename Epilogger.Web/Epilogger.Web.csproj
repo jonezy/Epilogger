@@ -424,6 +424,7 @@
     <Compile Include="Models\CreateEvent3ViewModel.cs" />
     <Compile Include="Models\CreateFinalEventViewModel.cs" />
     <Compile Include="Models\ExpiredEventModalScriptViewModel.cs" />
+    <Compile Include="Models\HomePageGridImage.cs" />
     <Compile Include="Models\LiveModeCustomSettingViewModel.cs" />
     <Compile Include="Models\CreateBasicEventViewModel.cs" />
     <Compile Include="Models\CreateEventTwitterViewModel.cs" />
@@ -3388,6 +3389,7 @@
     <Content Include="Views\Events\CreateEvent3.cshtml" />
     <Content Include="Views\Events\PostToPayPal.cshtml" />
     <Content Include="Views\Events\EditOLD.cshtml" />
+    <Content Include="Views\Home\Copy %282%29 of Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />

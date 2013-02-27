@@ -1,5 +1,7 @@
 ﻿@using Epilogger
 @using Epilogger.Common
+@using Epilogger.Data
+@using Epilogger.Web.Models
 @model Epilogger.Web.Models.HomepageViewModel
 
 
@@ -27,15 +29,15 @@
 
 
 <div id="homepage-container">
+  
     <span class="spacer"></span>
 
+    @*
     <div id="homepage-intro">
         <span class="clear spacer"></span>
-        @*<h1>The entire event collected from everyone, in one place. @Html.ActionLink("Sign in", "login", "account") to make your mark.</h1>*@
+        
         @using (Html.BeginForm("Search", "Home", FormMethod.Post, null))
         {
-            @*<input type="submit" class="blue-action-button" id="homepageSearchOK" value="OK" />*@
-            //ToDo Replace with image button
             <img src="/Public/images/icons/btn-search-home.png" alt="search" id="homepageSearchOK" onclick="$('form').submit();" />
             @Html.TextBox("SearchTerm", null, new { @class = "remove-bottom", @title = "Find your event..." })
         }
@@ -49,20 +51,14 @@
             <p class="homeBlurb">
                 We bring the <b>entire experience</b> of an event into one interactive hub. Wondering where all the <b>photos</b> are from that party you went to? Looking for all the resources people were sharing during that conference the other week? We've got it all.
             </p>
-            @*<ul id="homepage-trendinglist">
-                @foreach (Epilogger.Data.Event ev in Model.TrendingEvents)
-                {
-                    <li>@Html.ActionLink(ev.Name, "details", "events", new { @id = ev.EventSlug }, null)</li>
-                }
-            </ul>*@
         </div>
         <div style="font-size: 20px; margin-top: 24px; line-height: 26px;">
             <a href="https://itunes.apple.com/ca/app/epilogger/id589827064" target="_blank"><img src="/Public/images/rounded-57.png" border="0" alt="" style="float: left; margin-right: 15px;"/>
             Download</a> the Epilogger App available in the iOS App store
         </div>
-    </div>
+    </div>*@
     
-    <div id="homepage-video">
+    @*<div id="homepage-video">
         @if (Model.FeaturedEvents != null)
         {
             
@@ -79,8 +75,7 @@
                     </div>
                 }
             </div>
-            //Elipses go here
-            @*Links*@
+            
             <div id="">
                 <ul class="featuredPhotosList">
                     @foreach (var image in Model.FeaturedEvents.TopImages)
@@ -107,15 +102,171 @@
             </div>    
         }
         
-    </div>
+    </div>*@
+    
+    
+    
+    <div id="featuredEventContainer">
+        
+        @if (Model.FeaturedEvents != null)
+        {
+            <div class="featuredEventName">
+                <img src="/Public/images/homepage/star.png" alt="star"/><span class="featuredText">&nbsp;FEATURED&nbsp;</span><img src="/Public/images/homepage/star.png" alt="star"/>
+                <br />
+                @Html.ActionLink(Model.FeaturedEvents.Event.Name, "details", "events", new {@id = Model.FeaturedEvents.Event.EventSlug}, null)
+                <br />
+                <span class="featuredDetails">@String.Format("{0:htt, MMM. d}", Model.FeaturedEvents.Event.StartDateTime.ToLocalTime())&nbsp;&nbsp;@Model.FeaturedEvents.Event.Venues.First().City, @Model.FeaturedEvents.Event.Venues.First().State</span>
+
+            </div>
+                @*<div class="featuredBanner"></div>*@
+
+            var imgSizeList = new List<HomePageGridImage>
+                                  {
+                                      new HomePageGridImage() {Width = 477, Height = 375}, 
+                                      new HomePageGridImage() {Width = 209, Height = 200}, 
+                                      new HomePageGridImage() {Width = 250, Height = 177},
+                                      new HomePageGridImage() {Width = 104, Height = 88}, 
+                                      new HomePageGridImage() {Width = 105, Height = 88},
+                                      new HomePageGridImage() {Width = 104, Height = 87}, 
+                                      new HomePageGridImage() {Width = 105, Height = 87}, 
+                                      new HomePageGridImage() {Width = 250, Height = 198}
+                                  };
+
+            for (var currentPage = 0; currentPage <= 0; currentPage++)
+            {
+                var theImgs = Model.FeaturedEvents.TopImages.Skip((currentPage * 8)).Take(8);
+                var enumerable = theImgs as List<Image> ?? theImgs.ToList();
+                var i = 1;
+
+                <div class="featuredEvent">
+                    
+                    <table cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td rowspan="3">
+                                @{ var thePath = "";
+                                   thePath = enumerable[0].EventID + "/" + enumerable[0].ID; }
+                                <a href="@enumerable[0].Fullsize" rel="EPLPhoto[latestfeaturedphotos]" photoid="@thePath" title="" id="@enumerable[0].ID" class="imgGrid1-1">
+                                    <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@enumerable[0].Fullsize&width=@imgSizeList[0].Width&height=@imgSizeList[0].Height&preserveAspect=true" border="0" alt="" />
+                                </a>
+                            </td>
+                            <td colspan="2">
+                                @{ thePath = enumerable[1].EventID + "/" + enumerable[1].ID; }
+                                <a href="@enumerable[1].Fullsize" rel="EPLPhoto[latestfeaturedphotos]" photoid="@thePath" title="" id="@enumerable[1].ID" class="imgGrid1-2">
+                                    <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@enumerable[1].Fullsize&width=@imgSizeList[1].Width&height=@imgSizeList[1].Height&preserveAspect=true" border="0" alt="" />
+                                </a>
+                            </td>
+                            <td rowspan="3">
+                                <table cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td>
+                                            @{ thePath = enumerable[2].EventID + "/" + enumerable[2].ID; }
+                                            <a href="@enumerable[2].Fullsize" rel="EPLPhoto[latestfeaturedphotos]" photoid="@thePath" title="" id="@enumerable[2].ID" class="imgGrid1-3">
+                                                <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@enumerable[2].Fullsize&width=@imgSizeList[2].Width&height=@imgSizeList[2].Height&preserveAspect=true" border="0" alt="" />
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @{ thePath = enumerable[7].EventID + "/" + enumerable[7].ID; }
+                                            <a href="@enumerable[7].Fullsize" rel="EPLPhoto[latestfeaturedphotos]" photoid="@thePath" title="" id="@enumerable[7].ID" class="imgGrid1-8">
+                                                <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@enumerable[7].Fullsize&width=@imgSizeList[7].Width&height=@imgSizeList[7].Height&preserveAspect=true" border="0" alt="" />
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @{ thePath = enumerable[3].EventID + "/" + enumerable[3].ID; }
+                                <a href="@enumerable[3].Fullsize" rel="EPLPhoto[latestfeaturedphotos]" photoid="@thePath" title="" id="@enumerable[3].ID" class="imgGrid1-4">
+                                    <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@enumerable[3].Fullsize&width=@imgSizeList[3].Width&height=@imgSizeList[3].Height&preserveAspect=true" border="0" alt="" />
+                                </a>
+                            </td>
+                            <td>
+                                @{ thePath = enumerable[4].EventID + "/" + enumerable[4].ID; }
+                                <a href="@enumerable[4].Fullsize" rel="EPLPhoto[latestfeaturedphotos]" photoid="@thePath" title="" id="@enumerable[4].ID" class="imgGrid1-5">
+                                    <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@enumerable[4].Fullsize&width=@imgSizeList[4].Width&height=@imgSizeList[4].Height&preserveAspect=true" border="0" alt="" />
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @{ thePath = enumerable[5].EventID + "/" + enumerable[5].ID; }
+                                <a href="@enumerable[5].Fullsize" rel="EPLPhoto[latestfeaturedphotos]" photoid="@thePath" title="" id="@enumerable[5].ID" class="imgGrid1-6">
+                                    <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@enumerable[5].Fullsize&width=@imgSizeList[5].Width&height=@imgSizeList[5].Height&preserveAspect=true" border="0" alt="" />
+                                </a>
+                            </td>
+                            <td>@{ thePath = enumerable[6].EventID + "/" + enumerable[6].ID; }
+                                <a href="@enumerable[6].Fullsize" rel="EPLPhoto[latestfeaturedphotos]" photoid="@thePath" title="" id="@enumerable[6].ID" class="imgGrid1-7">
+                                    <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@enumerable[6].Fullsize&width=@imgSizeList[6].Width&height=@imgSizeList[6].Height&preserveAspect=true" border="0" alt="" />
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+    
+                    
+                    @*<div class="smallGroupImg">*@
+                    @*</div>*@
+
+
+                @*    
+                    
+                    @foreach (var theImg in enumerable)
+                    {
+
+                       // var thePath = theImg.EventID + "/" + theImg.ID;
+                    <a href="@theImg.Fullsize" rel="EPLPhoto[latestfeaturedphotos]" photoid="@thePath" title="" id="@theImg.ID" class="imgGrid1-@i">
+                        <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@theImg.Fullsize&width=@imgSizeList[i - 1].Width&height=@imgSizeList[i - 1].Height&preserveAspect=true" border="0" alt="" />
+                    </a>
+                    
+                        i++;
+                    }*@
+                </div>
+                    
+                
+                
+            }
+         
+            
+            
+            @*
+                    <div class="featuredEvent">
+                       
+                        @foreach (var theImg in Model.FeaturedEvents.TopImages.Take(8))
+                        {
+                            var thePath = theImg.EventID + "/" + theImg.ID;
+                            <a href="@theImg.Fullsize" rel="EPLPhoto[latestfeaturedphotos]" photoid="@thePath" title="" id="@theImg.ID" class="imgGrid1-@i">
+                                <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@theImg.Fullsize&width=477&height=375&preserveAspect=true" border="0" alt="" />
+                            </a>
+                            @
+                            {
+                                i ++;
+                            }
+                        }
+                
+                    </div>*@
+
+                    <div id="">
+                        <ul class="featuredPhotosList">
+                            @foreach (var image in Model.FeaturedEvents.TopImages)
+                            {
+                                <li><a href="" onclick="return false;" class="featuredPhotosListLink" id="@(image.ID)"></a></li>
+                            }
+                        </ul>
+                    </div>
+                    <br />
+        }
+        
+                </div>
+    
     
     <div class="clear spacer"></div>
-    
     <div id="galleryContainer">
         <ul id="activityGallery">
         @foreach (var item in Model.Activity)
         {
-            string rowClass = string.Empty;
+            var rowClass = string.Empty;
             if (Model.Activity.IndexOf(item) >= 0 && Model.Activity.IndexOf(item) <= 3)
             {
                 rowClass = "top";
@@ -160,29 +311,6 @@
                             }
                         </a>
                     </div>
-
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-
-
-
-
-                    @*<div class="withcomment newPhotoupdates" id="photo-@item.Image.ID">
-                        <div class="videothumbnailcontainer">
-                            <a href="@fullSizeUrl" rel="EPLPhoto[latestphotos]" photoid="@thePath" title="" id="@item.Image.ID">
-                                <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@item.Image.Fullsize&width=230&height=188&preserveAspect=true" border="0" alt="" />
-                                @if (isVideo)
-                                {
-                                    <img src="@Links.Public.images.video_play_jpg" class="videothumbnail3"/>
-                                }
-                            </a>
-                        </div>
-                    </div>*@
                 </li>   
             }
             else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION)
@@ -212,20 +340,6 @@
     </div>
     
 
-        
-        
-        
-       
-        
-        
-        
-        @*if (Model.Activity.IndexOf(item) < 3 || Model.Activity.IndexOf(item) > 3 && Model.Activity.IndexOf(item) < 7 || Model.Activity.IndexOf(item) > 7 && Model.Activity.IndexOf(item) < 11)
-        { 
-            <div class="homepage-activity-entry-spacer">&nbsp;</div>
-        } *@
-       
-    
-
 
     <script type="text/javascript" charset="utf-8">
         head.ready(function () {
@@ -237,15 +351,26 @@
             });
         });
 
-        head.ready(function () {
-            $('#s3').cycle({
-                fx: 'scrollLeft',
-                speed: 300,
-                timeout: 3500,
-                next: '#s3',
-                pause: 1
-            });
-        });
+//        $('.featuredEvent').masonry({
+//            // options
+//            itemSelector: 'a'
+//        });
+
+
+
+
+
+
+        //Scroll for the slide show or featured
+//        head.ready(function () {
+//            $('#s3').cycle({
+//                fx: 'scrollLeft',
+//                speed: 300,
+//                timeout: 3500,
+//                next: '#s3',
+//                pause: 1
+//            });
+//        });
     </script>
 </div>
 

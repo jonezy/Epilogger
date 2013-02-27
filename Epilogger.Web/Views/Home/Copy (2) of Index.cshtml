@@ -1,0 +1,252 @@
+﻿@using Epilogger
+@using Epilogger.Common
+@model Epilogger.Web.Models.HomepageViewModel
+
+
+@{
+    Layout = "~/Views/Shared/_HomepageLayout.cshtml";
+    ViewBag.Title = "Epilogger | Home";
+
+}
+
+
+<script type="text/javascript" language="javascript">
+    head.js('@Url.Content("~/Public/js/HomePage.js")');
+</script>
+
+
+@*<div id="StatusMessages">
+    @foreach (Epilogger.Data.StatusMessage SM in Model.StatusMessages)
+    {
+        <span class="lightgray">@Html.DisplayFor(s => SM.MSGDateTime)</span> @: - @SM.MSG
+        <div class="seperator"></div>
+    }
+    
+</div>
+*@
+
+
+<div id="homepage-container">
+    <span class="spacer"></span>
+
+    <div id="homepage-intro">
+        <span class="clear spacer"></span>
+        @*<h1>The entire event collected from everyone, in one place. @Html.ActionLink("Sign in", "login", "account") to make your mark.</h1>*@
+        @using (Html.BeginForm("Search", "Home", FormMethod.Post, null))
+        {
+            @*<input type="submit" class="blue-action-button" id="homepageSearchOK" value="OK" />*@
+            //ToDo Replace with image button
+            <img src="/Public/images/icons/btn-search-home.png" alt="search" id="homepageSearchOK" onclick="$('form').submit();" />
+            @Html.TextBox("SearchTerm", null, new { @class = "remove-bottom", @title = "Find your event..." })
+        }
+        
+
+        <div class="homepage-trending">
+            <h2 style="font-size: 15pt; margin-bottom: 20px;"><img src="@Url.Content("~/Public/images/icons/icon-trending.png")" alt="" class="homepage-heart" />What is Epilogger (and why am I here)?</h2>
+            <p class="homeBlurb">
+                Epilogger is the <b>story of the event</b> from every point of view. It <b>connects people</b> through content at events, movements, and group experiences. 
+            </p>
+            <p class="homeBlurb">
+                We bring the <b>entire experience</b> of an event into one interactive hub. Wondering where all the <b>photos</b> are from that party you went to? Looking for all the resources people were sharing during that conference the other week? We've got it all.
+            </p>
+            @*<ul id="homepage-trendinglist">
+                @foreach (Epilogger.Data.Event ev in Model.TrendingEvents)
+                {
+                    <li>@Html.ActionLink(ev.Name, "details", "events", new { @id = ev.EventSlug }, null)</li>
+                }
+            </ul>*@
+        </div>
+        <div style="font-size: 20px; margin-top: 24px; line-height: 26px;">
+            <a href="https://itunes.apple.com/ca/app/epilogger/id589827064" target="_blank"><img src="/Public/images/rounded-57.png" border="0" alt="" style="float: left; margin-right: 15px;"/>
+            Download</a> the Epilogger App available in the iOS App store
+        </div>
+    </div>
+    
+    <div id="homepage-video">
+        @if (Model.FeaturedEvents != null)
+        {
+            
+            <div class="featuredEvent">
+                <div class="featuredEventName">@Html.ActionLink(Model.FeaturedEvents.Event.Name, "details", "events", new { @id = Model.FeaturedEvents.Event.EventSlug }, null)</div>
+                <div class="featuredBanner"></div>
+                @foreach (var theImg in Model.FeaturedEvents.TopImages)
+                {
+                    var thePath = theImg.EventID + "/" + theImg.ID;
+                    <div class="featurePhotoBar" id="FeaturedPhoto@(theImg.ID)">
+                        <a href="@theImg.Fullsize" rel="EPLPhoto[latestfeaturedphotos]" photoid="@thePath" title="" id="@theImg.ID">
+                            <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@theImg.Fullsize&width=435&height=335&preserveAspect=true" border="0" alt="" />
+                        </a>
+                    </div>
+                }
+            </div>
+            //Elipses go here
+            @*Links*@
+            <div id="">
+                <ul class="featuredPhotosList">
+                    @foreach (var image in Model.FeaturedEvents.TopImages)
+                    {
+                        <li><a href="" onclick="return false;" class="featuredPhotosListLink" id="@(image.ID)"></a></li>
+                    }
+                </ul>
+            </div>   
+            <br />
+
+        }
+        else
+        {
+            <div id="s3" class="pics" style="position: relative; ">
+                <img src="/Public/images/slideshow/1.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 462px; height: 310px; z-index: 3; opacity: 0; display: none; " />
+                <img src="/Public/images/slideshow/2.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 462px; height: 310px; z-index: 3; opacity: 0; display: none; " />
+                <img src="/Public/images/slideshow/3.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 462px; height: 310px; z-index: 3; opacity: 0; display: none; " />
+                <img src="/Public/images/slideshow/4.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 462px; height: 310px; z-index: 3; opacity: 0; display: none; " />
+                <img src="/Public/images/slideshow/6.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 462px; height: 310px; z-index: 3; opacity: 0; display: none; " />
+                <img src="/Public/images/slideshow/7a.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 462px; height: 310px; z-index: 3; opacity: 0; display: none; " />
+                <img src="/Public/images/slideshow/7b.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 462px; height: 310px; z-index: 3; opacity: 0; display: none; " />
+                <img src="/Public/images/slideshow/7c.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 462px; height: 310px; z-index: 3; opacity: 0; display: none; " />
+                <img src="/Public/images/slideshow/8.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 462px; height: 310px; z-index: 3; opacity: 0; display: none; " />
+            </div>    
+        }
+        
+    </div>
+    
+    <div class="clear spacer"></div>
+    
+    <div id="galleryContainer">
+        <ul id="activityGallery">
+        @foreach (var item in Model.Activity)
+        {
+            string rowClass = string.Empty;
+            if (Model.Activity.IndexOf(item) >= 0 && Model.Activity.IndexOf(item) <= 3)
+            {
+                rowClass = "top";
+            }
+            else if (Model.Activity.IndexOf(item) >= 4 && Model.Activity.IndexOf(item) <= 7)
+            {
+                rowClass = "bottom";
+            }
+
+            if (item.ActivityType == Epilogger.Web.Models.ActivityType.PHOTOS_VIDEOS)
+            {
+                var thePath = item.Image.EventID + "/" + item.Image.ID;
+
+                var fullSizeUrl = item.Image.Fullsize;
+                var isVideo = false;
+                if (item.Image.MediaType == (short)MQ.Messages.EventMediaType.YoutubeVideo)
+                {
+                    fullSizeUrl = string.Format("http://youtube.com/watch?v={0}", item.Image.Thumb);
+                    isVideo = true;
+                }
+                else if (item.Image.MediaType == (short)MQ.Messages.EventMediaType.VimeoVideo)
+                {
+                    fullSizeUrl = string.Format("http://vimeo.com/{0}", item.Image.Thumb);
+                    isVideo = true;
+                }
+                else if (item.Image.MediaType == (short)MQ.Messages.EventMediaType.KeekVideo)
+                {
+                    fullSizeUrl = string.Format("http://www.keek.com/embed/{0}?iframe=true", item.Image.Thumb);
+                    isVideo = true;
+                }
+                <li>
+                    <div class="title @item.ActivityType @rowClass">
+                        @Html.ActionLink(item.EventName.TruncateAtWord(30), "details", "events", new { @id = item.EventSlug }, null)    
+                    </div>
+
+                    <div class="galleryImage"  id="photo-@item.Image.ID">
+                        <a href="@fullSizeUrl" rel="EPLPhoto[latestphotos]" photoid="@thePath" title="" id="@item.Image.ID">
+                            <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@item.Image.Fullsize&width=230&height=188&preserveAspect=true" border="0" alt="" />
+                            @if (isVideo)
+                            {
+                                <img src="@Links.Public.images.video_play_jpg" class="videothumbnail3" alt="" />
+                            }
+                        </a>
+                    </div>
+
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+
+
+
+                    @*<div class="withcomment newPhotoupdates" id="photo-@item.Image.ID">
+                        <div class="videothumbnailcontainer">
+                            <a href="@fullSizeUrl" rel="EPLPhoto[latestphotos]" photoid="@thePath" title="" id="@item.Image.ID">
+                                <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@item.Image.Fullsize&width=230&height=188&preserveAspect=true" border="0" alt="" />
+                                @if (isVideo)
+                                {
+                                    <img src="@Links.Public.images.video_play_jpg" class="videothumbnail3"/>
+                                }
+                            </a>
+                        </div>
+                    </div>*@
+                </li>   
+            }
+            else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_CREATION)
+            {
+                <li>
+                    <div class="title @item.ActivityType">
+                        @Html.ActionLink(item.EventName.TruncateAtWord(30), "details", "events", new { @id = item.EventSlug }, null)    
+                    </div>
+                    <div class="galleryItem">
+                        <h2><br /><br /><br /><br />New event added</h2>
+                    </div>
+                </li>
+            }
+            else if (item.ActivityType == Epilogger.Web.Models.ActivityType.EVENT_RATING)
+            {
+                <li>
+                    <div class="title @item.ActivityType">
+                        @Html.ActionLink(item.EventName.TruncateAtWord(30), "details", "events", new { @id = item.EventSlug }, null)    
+                    </div>
+                    <div class="galleryItem">
+                        <h2><br /><br /><br /><br />Event rated</h2>
+                    </div>
+                </li>
+            }
+        }
+        </ul>
+    </div>
+    
+
+        
+        
+        
+       
+        
+        
+        
+        @*if (Model.Activity.IndexOf(item) < 3 || Model.Activity.IndexOf(item) > 3 && Model.Activity.IndexOf(item) < 7 || Model.Activity.IndexOf(item) > 7 && Model.Activity.IndexOf(item) < 11)
+        { 
+            <div class="homepage-activity-entry-spacer">&nbsp;</div>
+        } *@
+       
+    
+
+
+    <script type="text/javascript" charset="utf-8">
+        head.ready(function () {
+            $("a[rel^='EPLPhoto']").prettyPhoto({
+                theme: 'light_square',
+                animation_speed: 'fast',
+                overlay_gallery: false,
+                changepicturecallback: function () { changeDescription(); }
+            });
+        });
+
+        head.ready(function () {
+            $('#s3').cycle({
+                fx: 'scrollLeft',
+                speed: 300,
+                timeout: 3500,
+                next: '#s3',
+                pause: 1
+            });
+        });
+    </script>
+</div>
+
+<span class="big-spacer clear"></span>
