@@ -28,7 +28,6 @@ namespace Epilogger.Web.Models
 
         public List<SponsorImage> SponsorImageList;
 
-
         public Guid UserID { get; set; }
         public UserRoleType CurrentUserRole { get; set; }
         public Guid CurrentUserID { get; set; }

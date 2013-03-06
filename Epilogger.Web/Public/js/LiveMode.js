@@ -130,6 +130,7 @@ jQuery(function ($) {
         //Make the call get the JSON of new photos.
         $.ajax({
             type: "POST",
+            timeout: 100000,
             url: "/Events/LiveGetLastPhotosJson/",
             data: "{Count:5,pageLoadTime:'" + photoPageLoadTime + "',EventID:" + EventID + "}",
             contentType: "application/json; charset=utf-8",
@@ -407,6 +408,7 @@ jQuery(function ($) {
             SetDarkTheme();
         }
     });
+    
     function SetLightTheme() {
         $('.single-tweet-dark').addClass("single-tweet");
         $('.single-tweet-arrow-dark').addClass("single-tweet-arrow");
@@ -416,11 +418,13 @@ jQuery(function ($) {
         $('.single-tweet-arrow').removeClass("single-tweet-arrow-dark");
         $('.footer-dark').removeClass("footer-dark");
 
-        $('body').css("background-color", "#f3f3f3");
-        $('#tweets').css("background-color", "#F3F3F3");
-        $('#content').css("background-color", "#f3f3f3");
-        $('#full').css("background-color", "#f3f3f3");
-
+        if (customBackground=='false') {
+            $('body').css("background-color", "#f3f3f3");    
+            $('#content').css("background-color", "#f3f3f3");
+            $('#tweets').css("background-color", "#F3F3F3");
+            $('#full').css("background-color", "#f3f3f3");
+        }
+        
         $("#logo_footer").attr("src", "/Public/images/livemode/logo-epl.png");
         $("#icon_tweet").attr("src", "/Public/images/livemode/icon-numtweets.png");
         $("#icon_people").attr("src", "/Public/images/livemode/icon-numpeople.png");
@@ -436,11 +440,14 @@ jQuery(function ($) {
         $('.single-tweet-arrow-dark').removeClass("single-tweet-arrow");
         $('.footer').removeClass("footer");
 
-        $('body').css("background-color", "#3e3e3e");
-        $('#tweets').css("background-color", "#3e3e3e");
-        $('#content').css("background-color", "#3e3e3e");
-        $('#full').css("background-color", "#3e3e3e");
-
+        if (customBackground=='false') {
+            $('body').css("background-color", "#3e3e3e");
+            $('#content').css("background-color", "#3e3e3e");
+            $('#tweets').css("background-color", "#3e3e3e");
+            $('#full').css("background-color", "#3e3e3e");
+        }
+        
+        
         $("#logo_footer").attr("src", "/Public/images/livemode/toolbar/logo_dark_theme.png");
         $("#icon_tweet").attr("src", "/Public/images/livemode/icon-numtweets-dark.png");
         $("#icon_people").attr("src", "/Public/images/livemode/icon-numpeople-dark.png");
@@ -479,22 +486,18 @@ jQuery(function ($) {
     });
 
 
-    // carousel
+     // carousel
 
     if($("#gallery").length){
         $("#gallery li").hide().filter(':lt(1)').show();
-                window.setInterval(function(){
-                if($("#gallery li").length > 1)
-                    nextImage();
-                }, 5000);
+        window.setInterval(function() {
+            if ($("#gallery li").length > 1)
+                nextImage();
+        }, 5000);
+        
     }
 
-    function nextImage()
-    {
-        $("#gallery li:last").slideUp(function() {
-            $(this).insertBefore("#gallery li:first").slideDown(500);
-        })​;​
-    }
+    
 
     $('.close_hover').click(function() {
         var path = $(this).children('img').attr('src');
@@ -511,6 +514,13 @@ jQuery(function ($) {
         $(this).hide();
         return false;
     });
+    
+    function nextImage()
+    {
+        $("#gallery li:last").slideUp(function() {
+            $(this).insertBefore("#gallery li:first").slideDown(500);
+        });
+    }
       
     $('#change_color').click(function () {
         $('#color_holder').toggleClass('invisible');

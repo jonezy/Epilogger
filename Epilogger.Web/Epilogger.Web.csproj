@@ -500,6 +500,7 @@
     <Content Include="Public\css\geckoboard\lightBasic.css" />
     <Content Include="Public\css\images\ui_create_event_btn.png" />
     <Content Include="Public\css\jquery.miniColors.css" />
+    <Content Include="Public\css\LaunchFestLiveMode.css" />
     <Content Include="Public\css\video.css" />
     <Content Include="Public\images\colorpicker\colors.png" />
     <Content Include="Public\images\colorpicker\trigger.png" />
@@ -527,6 +528,7 @@
     <Content Include="Public\images\rounded-57.png" />
     <Content Include="Public\images\trigger.png" />
     <Content Include="Public\js\alerts.js" />
+    <Content Include="Public\js\LiveModeLaunchFest.js" />
     <Content Include="Public\js\FileUploader.js" />
     <Content Include="Public\js\fineuploader.jquery-3.0\fineuploader.css" />
     <Content Include="Public\js\fineuploader.jquery-3.0\jquery.fineuploader-3.0.js" />

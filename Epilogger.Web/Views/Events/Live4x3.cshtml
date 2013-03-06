@@ -11,16 +11,37 @@
     <meta charset="utf-8" />
     <meta name="google-site-verification" content="CuQwuSsvoWQapx1142El31mqbNSB6Dq0RBzTjzV0lXQ" />
     <title>@ViewBag.Title</title>
-    @Html.CombresLink("LiveModeCss")
-    @Html.CombresLink("LiveModeJs")
+    
+    @if (Model.EventId==2501)
+    {
+        @Html.CombresLink("LiveModeLaunchFestCss")
+        @Html.CombresLink("LiveModeLaunchFestJs")
+    }
+    else
+    {
+        @Html.CombresLink("LiveModeCss")
+        @Html.CombresLink("LiveModeJs")
+    }
+    
+    
+    
+
+    
     <script language="javascript" type="text/javascript">
             var EventID = @Model.EventId;
+
+            var background = '@Model.CustomSettings.Background';
+            if(background != null) {
+                var customBackground = 'true';
+            }else {
+                var customBackground = 'false';
+            }
             
             var disableAutoupdate = false;
 
             //Parameters to control the Tweet list
             var pageLoadTime = '@string.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.UtcNow)';
-            var photoPageLoadTime = '@string.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.UtcNow)';
+            var photoPageLoadTime = '@string.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.Now)';
 
             
             var updateTimeout = 10000;
@@ -32,13 +53,16 @@
     <style type="text/css">
             
             /* ------------------------------------- [ CUSTOM COLOURS ] --- */
-          .colour1 	{ color:@Model.CustomSettings.FooterTextColor } /* footer text */
+            .colour1 	{ color:@Model.CustomSettings.FooterTextColor } /* footer text */
             .colour2, div.single-tweet p a { color:@Model.CustomSettings.LinkColour } /* links */
             .colour3	{ color:@Model.CustomSettings.TwitterUserNameColour } /* twitter usernames */
 
             /* background image test */
-            body { background:@Model.CustomSettings.Background; }
+            body { background:@Html.Raw(Model.CustomSettings.Background); }
+            #full {background-color: #f2a241; }
             
+            #topTweets li { color: #f2a241 !important; }
+            #topTweets li strong { color: #fff !important; }
 
             @*#587b27 url('http://sparkentreenscene.com/s/spark/themes/bg-spark-reporter-jpg-mkyg.jpg')*@
         </style>
@@ -224,7 +248,18 @@
         <div id="hashtag-sponsors">
             <big class="colour1">Tweet! Take a photo! @*Tweetez ! Partagez vos photos!*@
                 <br />
-                Hashtag: <span class="colour2">@Model.Hashtag</span> </big>
+                Hashtag: 
+                @if (Model.EventId==2501)
+                {
+                    <span class="colour2">#launch2013</span>
+                }else
+                {
+                    <span class="colour2">@Model.Hashtag</span>
+                }
+            </big>
+            
+            
+            
             @if (Model.SponsorImageList.Count > 0)
             {
                 <h1 id="partner" class="colour1">@*Notre partenaire*@ Our partners</h1>
@@ -261,8 +296,18 @@
                 @Model.EpiloggerCounts.UniqueTweeterCount</span>
             <br />
             <br />
-            <h1 class="colour1">@*Généré par*@ Powered by:
-                <img id="logo_footer" src="/Public/images/livemode/logo-epl.png" alt="Epilogger" /></h1>
+            
+            @if (Model.EventId==2501)
+            {
+                <h1 class="colour1">Powered by:&nbsp;<img id="logo_footer" src="/Public/images/livemode/logo-epl-dark.png" alt="Epilogger" /></h1>
+            }
+            else
+            {
+                <h1 class="colour1">@*Généré par*@ Powered by:<img id="logo_footer" src="/Public/images/livemode/logo-epl.png" alt="Epilogger" /></h1>
+            }
+                
+                
+
             @*<a href="" id="updateLink">Update</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="" id="stopLink">Stop</a>*@
             <div id="ajaxBusy">
                 Loading...</div>
