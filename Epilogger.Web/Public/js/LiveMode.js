@@ -50,6 +50,7 @@ jQuery(function ($) {
 
                 if (newTweets.lasttweettime != '') {
                     pageLoadTime = newTweets.lasttweettime;
+
                     if (typeof newTweets.tweetsInhtml != "undefined") {
 
                         stopAnimation = false;
@@ -129,6 +130,7 @@ jQuery(function ($) {
         //Make the call get the JSON of new photos.
         $.ajax({
             type: "POST",
+            timeout: 100000,
             url: "/Events/LiveGetLastPhotosJson/",
             data: "{Count:5,pageLoadTime:'" + photoPageLoadTime + "',EventID:" + EventID + "}",
             contentType: "application/json; charset=utf-8",
@@ -262,124 +264,121 @@ jQuery(function ($) {
     });
 
     
-    if (IsPaid)
-        {
-            var fileCount = 0;
-            var addedFiles = 0;
-            var fileLimit = 5;
-            function createUploader() {
-                var uploader = new qq.FineUploader({
-                    element: $('#fine-uploader-logo')[0],
-                    text: {
-                        uploadButton: 'Upload your logo'
-                    },
-                    request: {
-                        endpoint: '/Events/UploadLogo'
-                    },
-                    failedUploadTextDisplay: {
-                        mode: 'custom',
-                        maxChars: 40,
-                        responseProperty: 'error',
-                        enableTooltip: true
-                    },
-                    validation: {
-                        allowedExtensions: ['jpg', 'jpeg', 'png', 'gif'],
-                        sizeLimit: 112000,
-                        stopOnFirstInvalidFile: true
-                    },
-                    messages: {
-                        typeError: "{file} has an invalid extension. Valid extension(s): {extensions}.",
-                        sizeError: "{file} is too large, maximum file size is {sizeLimit}.",
-                        minSizeError: "{file} is too small, minimum file size is {minSizeLimit}.",
-                        emptyError: "{file} is empty, please select files again without it.",
-                        noFilesError: "No files to uploaad.",
-                        onLeave: "The files are being uploaded, if you leave now the upload will be cancelled."
-                    },
-                    callbacks: {
-                        onSubmit: function (id, fileName) {
-                            fileCount++;
-                            if (fileCount > fileLimit) {
-                                $('.qq-upload-list').hide();
-                                return false;
-                            }
-                        },
 
-                        onComplete: function (id, fileName, responseJSON) {
-                            $('.qq-upload-list').remove();
-                            if (responseJSON.success) {
-                                $('#thumbnail-fine-uploader').empty();
-                                $('#thumbnail-fine-uploader').append('<img src="' + responseJSON.imageurl + '" alt="' + fileName + '">');
-                                $('#logo').val(responseJSON.imageurl);
-                            }
-                            else
-                            {
-                                jAlert("Make sure your logo is the correct size. Width: 220p-250px   Height: 100-180px");
-                            }
-
-                        }
+    var fileCount = 0;
+    var addedFiles = 0;
+    var fileLimit = 5;
+    function createUploader() {
+        var uploader = new qq.FineUploader({
+            element: $('#fine-uploader-logo')[0],
+            text: {
+                uploadButton: 'Upload your logo'
+            },
+            request: {
+                endpoint: '/Events/UploadLogo'
+            },
+            failedUploadTextDisplay: {
+                mode: 'custom',
+                maxChars: 40,
+                responseProperty: 'error',
+                enableTooltip: true
+            },
+            validation: {
+                allowedExtensions: ['jpg', 'jpeg', 'png', 'gif'],
+                sizeLimit: 112000,
+                stopOnFirstInvalidFile: true
+            },
+            messages: {
+                typeError: "{file} has an invalid extension. Valid extension(s): {extensions}.",
+                sizeError: "{file} is too large, maximum file size is {sizeLimit}.",
+                minSizeError: "{file} is too small, minimum file size is {minSizeLimit}.",
+                emptyError: "{file} is empty, please select files again without it.",
+                noFilesError: "No files to uploaad.",
+                onLeave: "The files are being uploaded, if you leave now the upload will be cancelled."
+            },
+            callbacks: {
+                onSubmit: function (id, fileName) {
+                    fileCount++;
+                    if (fileCount > fileLimit) {
+                        $('.qq-upload-list').hide();
+                        return false;
                     }
-                });
+                },
 
-                var uploader2 = new qq.FineUploader({
-                    multiple: true,
-                    element: $('#fine-uploader-sponsors')[0],
-                    text: {
-                        uploadButton: 'Add sponsor(s)'
-                    },
-                    request: {
-                        endpoint: '/Events/UploadSponsors',
-                    },
-                    validation: {
-                        allowedExtensions: ['jpg', 'jpeg', 'png', 'gif'],
-                        sizeLimit: 112000,
-                        stopOnFirstInvalidFile: true
-                    },
-                    messages: {
-                        typeError: "{file} has an invalid extension. Valid extension(s): {extensions}.",
-                        sizeError: "{file} is too large, maximum file size is {sizeLimit}.",
-                        minSizeError: "{file} is too small, minimum file size is {minSizeLimit}.",
-                        emptyError: "{file} is empty, please select files again without it.",
-                        noFilesError: "No files to uploaad.",
-                        onLeave: "The files are being uploaded, if you leave now the upload will be cancelled."
-                    },
-                    callbacks: {
-                        onSubmit: function (id, fileName) {
-                            $('.qq-upload-list').hide();
-                            fileCount++;
-                            if (fileCount > fileLimit) {
-                                $('#fine-uploader-sponsors qq-upload-button').hide();
-                                return false;
-                            }
-                        },
-                        onCancel: function (id, fileName) {
-                            fileCount--;
-                            if (fileCount <= fileLimit) {
-                                $('#fine-uploader-sponsors qq-upload-button').show();
-                            }
-                        },
-                        onComplete: function (id, fileName, responseJSON) {                 
-                            if (responseJSON.success) {
-                                $('.qq-upload-list').remove();
-                                addedFiles++;
-                                if (addedFiles >= fileLimit) {
-                                    $('#fine-uploader-sponsors qq-upload-button').hide();
-                                }
-                                $('.pad30').remove();
-                                $('#addition').append('<div class="sponsor-thumbs close_hover"><img src="' + responseJSON.imageurl + '" alt="' + fileName + '"/></div>');
-                                 $('#sponsors').val($('#sponsors').val() +  ';' + responseJSON.imageurl);
-                            }
-                            else
-                            {
-                                jAlert("Make sure your image is the correct size. Width: 220p-250px   Height: 30-130px");
-                            }
-                        }
+                onComplete: function (id, fileName, responseJSON) {
+                    $('.qq-upload-list').remove();
+                    if (responseJSON.success) {
+                        $('#thumbnail-fine-uploader').empty();
+                        $('#thumbnail-fine-uploader').append('<img src="' + responseJSON.imageurl + '" alt="' + fileName + '">');
+                        $('#logo').val(responseJSON.imageurl);
                     }
-                });
+                    else
+                    {
+                        jAlert("Make sure your logo is the correct size. Width: 220p-250px   Height: 100-180px");
+                    }
+
+                }
             }
+        });
 
-            window.onload = createUploader;
-        
+        var uploader2 = new qq.FineUploader({
+            multiple: true,
+            element: $('#fine-uploader-sponsors')[0],
+            text: {
+                uploadButton: 'Add sponsor(s)'
+            },
+            request: {
+                endpoint: '/Events/UploadSponsors',
+            },
+            validation: {
+                allowedExtensions: ['jpg', 'jpeg', 'png', 'gif'],
+                sizeLimit: 112000,
+                stopOnFirstInvalidFile: true
+            },
+            messages: {
+                typeError: "{file} has an invalid extension. Valid extension(s): {extensions}.",
+                sizeError: "{file} is too large, maximum file size is {sizeLimit}.",
+                minSizeError: "{file} is too small, minimum file size is {minSizeLimit}.",
+                emptyError: "{file} is empty, please select files again without it.",
+                noFilesError: "No files to uploaad.",
+                onLeave: "The files are being uploaded, if you leave now the upload will be cancelled."
+            },
+            callbacks: {
+                onSubmit: function (id, fileName) {
+                    $('.qq-upload-list').hide();
+                    fileCount++;
+                    if (fileCount > fileLimit) {
+                        $('#fine-uploader-sponsors qq-upload-button').hide();
+                        return false;
+                    }
+                },
+                onCancel: function (id, fileName) {
+                    fileCount--;
+                    if (fileCount <= fileLimit) {
+                        $('#fine-uploader-sponsors qq-upload-button').show();
+                    }
+                },
+                onComplete: function (id, fileName, responseJSON) {                 
+                    if (responseJSON.success) {
+                        $('.qq-upload-list').remove();
+                        addedFiles++;
+                        if (addedFiles >= fileLimit) {
+                            $('#fine-uploader-sponsors qq-upload-button').hide();
+                        }
+                        $('.pad30').remove();
+                        $('#addition').append('<div class="sponsor-thumbs close_hover"><img src="' + responseJSON.imageurl + '" alt="' + fileName + '"/></div>');
+                         $('#sponsors').val($('#sponsors').val() +  ';' + responseJSON.imageurl);
+                    }
+                    else
+                    {
+                        jAlert("Make sure your image is the correct size. Width: 220p-250px   Height: 30-130px");
+                    }
+                }
+            }
+        });
     }
+
+    window.onload = createUploader;
 
     // set up the jquery components with the database data
     $(window).load(function () {
@@ -409,6 +408,7 @@ jQuery(function ($) {
             SetDarkTheme();
         }
     });
+    
     function SetLightTheme() {
         $('.single-tweet-dark').addClass("single-tweet");
         $('.single-tweet-arrow-dark').addClass("single-tweet-arrow");
@@ -418,11 +418,13 @@ jQuery(function ($) {
         $('.single-tweet-arrow').removeClass("single-tweet-arrow-dark");
         $('.footer-dark').removeClass("footer-dark");
 
-        $('body').css("background-color", "#f3f3f3");
-        $('#tweets').css("background-color", "#F3F3F3");
-        $('#content').css("background-color", "#f3f3f3");
-        $('#full').css("background-color", "#f3f3f3");
-
+        if (customBackground=='false') {
+            $('body').css("background-color", "#f3f3f3");    
+            $('#content').css("background-color", "#f3f3f3");
+            $('#tweets').css("background-color", "#F3F3F3");
+            $('#full').css("background-color", "#f3f3f3");
+        }
+        
         $("#logo_footer").attr("src", "/Public/images/livemode/logo-epl.png");
         $("#icon_tweet").attr("src", "/Public/images/livemode/icon-numtweets.png");
         $("#icon_people").attr("src", "/Public/images/livemode/icon-numpeople.png");
@@ -438,11 +440,14 @@ jQuery(function ($) {
         $('.single-tweet-arrow-dark').removeClass("single-tweet-arrow");
         $('.footer').removeClass("footer");
 
-        $('body').css("background-color", "#3e3e3e");
-        $('#tweets').css("background-color", "#3e3e3e");
-        $('#content').css("background-color", "#3e3e3e");
-        $('#full').css("background-color", "#3e3e3e");
-
+        if (customBackground=='false') {
+            $('body').css("background-color", "#3e3e3e");
+            $('#content').css("background-color", "#3e3e3e");
+            $('#tweets').css("background-color", "#3e3e3e");
+            $('#full').css("background-color", "#3e3e3e");
+        }
+        
+        
         $("#logo_footer").attr("src", "/Public/images/livemode/toolbar/logo_dark_theme.png");
         $("#icon_tweet").attr("src", "/Public/images/livemode/icon-numtweets-dark.png");
         $("#icon_people").attr("src", "/Public/images/livemode/icon-numpeople-dark.png");
@@ -468,39 +473,31 @@ jQuery(function ($) {
         }
     });
 
-    if (IsPaid)
-        {
-            if (fullScreenApi.supportsFullScreen) {
-                launch.addEventListener('click', function () {
-                    $('#toolbar').hide();
-                    fullScreenApi.requestFullScreen(full);
-                }, true);
-            }
+    if (fullScreenApi.supportsFullScreen) {
+        launch.addEventListener('click', function () {
+            $('#toolbar').hide();
+            fullScreenApi.requestFullScreen(full);
+        }, true);
     }
+
     $('#edit_livemode').click(function () {
         $('#preview_customize').toggleClass('invisible');
         $('#customize').toggleClass('invisible');
     });
 
 
-    // carousel
-    
-    //TODO: This needs to be fixed as it doesn't quite work properly
-    function nextImage() {
-        //$("#gallery li:last").slideUp(function() { $(this).insertBefore("#gallery li:first").slideDown(500); })​;
-        $("#gallery li:last").slideUp(function() { $(this).insertBefore("#gallery li:first").slideDown(500); });
+     // carousel
+
+    if($("#gallery").length){
+        $("#gallery li").hide().filter(':lt(1)').show();
+        window.setInterval(function() {
+            if ($("#gallery li").length > 1)
+                nextImage();
+        }, 5000);
         
     }
 
-    if ($("#gallery").length)
-    {
-        $("#gallery li").hide().filter(':lt(1)').show();
-        
-        window.setInterval(function(){
-                if($("#gallery li").length > 1) 
-                    nextImage();
-                }, 5000);
-    }
+    
 
     $('.close_hover').click(function() {
         var path = $(this).children('img').attr('src');
@@ -517,13 +514,17 @@ jQuery(function ($) {
         $(this).hide();
         return false;
     });
+    
+    function nextImage()
+    {
+        $("#gallery li:last").slideUp(function() {
+            $(this).insertBefore("#gallery li:first").slideDown(500);
+        });
+    }
       
     $('#change_color').click(function () {
         $('#color_holder').toggleClass('invisible');
     });
-
-
-    
 
     
 });
