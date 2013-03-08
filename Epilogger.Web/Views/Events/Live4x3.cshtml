@@ -58,11 +58,13 @@
 
             @*/* background image test */*@
             body { background:@Html.Raw(Model.CustomSettings.Background); }
-            #full {background-color: #f2a241; }
             
-            #topTweets li { color: #f2a241 !important; }
-            #topTweets li strong { color: #fff !important; }
-
+            @if (Model.EventId==2501)
+            {
+                @: #full {background-color: #f2a241; }
+                @: #topTweets li { color: #f2a241 !important; }
+                @: #topTweets li strong { color: #fff !important; }
+            }
             @*#587b27 url('http://sparkentreenscene.com/s/spark/themes/bg-spark-reporter-jpg-mkyg.jpg')*@
         </style>
 </head>
@@ -258,10 +260,11 @@
                 <big class="colour1">Tweet! Take a photo! @*Tweetez ! Partagez vos photos!*@
                     <br />
                 Hashtag: 
-                @if (Model.EventId==2501)
+                @if (Model.EventId == 2501)
                 {
                     <span class="colour2">#launch2013</span>
-                }else
+                }
+                else
                 {
                     <span class="colour2">@Model.Hashtag</span>
                 }
@@ -303,7 +306,7 @@
                 <br />
                 <br />
             
-            @if (Model.EventId==2501)
+            @if (Model.EventId == 2501)
             {
                 <h1 class="colour1">Powered by:&nbsp;<img id="logo_footer" src="/Public/images/livemode/logo-epl-dark.png" alt="Epilogger" /></h1>
             }

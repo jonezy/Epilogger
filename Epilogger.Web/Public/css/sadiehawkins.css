@@ -1360,7 +1360,7 @@ ul#left-nav li ul li a.current {color:#a44b79;}
     padding-top: 14px;
     height: 94px;
     width: 554px;
-    position: fixed;
+    position: absolute;
     margin-top:133px;
     margin-left: 191px;
     z-index: 1000;
