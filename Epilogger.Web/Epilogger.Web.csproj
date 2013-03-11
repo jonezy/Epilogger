@@ -588,6 +588,14 @@
     <Content Include="Public\images\EventMenu\menu-overview.png" />
     <Content Include="Public\images\EventMenu\menu-stats.png" />
     <Content Include="Public\images\EventMenu\menu-tweets.png" />
+    <Content Include="Public\images\homepage\fHolder1.png" />
+    <Content Include="Public\images\homepage\fHolder2.png" />
+    <Content Include="Public\images\homepage\fHolder3.png" />
+    <Content Include="Public\images\homepage\fHolder4.png" />
+    <Content Include="Public\images\homepage\fHolder5.png" />
+    <Content Include="Public\images\homepage\fHolder6.png" />
+    <Content Include="Public\images\homepage\fHolder7.png" />
+    <Content Include="Public\images\homepage\fHolder8.png" />
     <Content Include="Public\images\icons\EditEventCheck.png" />
     <Content Include="Public\images\icons\eventListTotalIcons.png" />
     <Content Include="Public\images\icons\icon-verified.png" />

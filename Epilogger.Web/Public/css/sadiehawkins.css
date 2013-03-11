@@ -1,5 +1,5 @@
 body {
-    padding:0px 40px;
+    /*padding:0px 40px;*/
 	color:#606060;	
 	/*background:#efefef url('../images/bg/top.png') repeat-x;*/
 	background-color: #efefef;
@@ -251,7 +251,7 @@ a.edit_icon {
 
 #homepage-container {
 	/*min-height:548px;*/
-	padding: 60px 0px 0px 0px;
+	padding: 28px 0px 0px 0px;
 	/*position:relative;*/
 	}
 
@@ -351,7 +351,7 @@ a.edit_icon {
     
     
 #homepage-toolbar #refresh {}
-    
+    6
 #header {
    position:relative;    
    background:#fff;
@@ -1341,6 +1341,58 @@ ul#left-nav li ul li a.current {color:#a44b79;}
 }
 
 
+#homepageMainSpread {
+    background: #000 url(/Public/Images/homepage/fullGBImage1.png) center center;
+    height: 377px;
+    margin-top: 90px;
+}
+
+#hp-Tagline {
+    font-size: 49px;
+    color: #fff;
+    text-shadow: 0px 2px 8px #000;
+    font-family: 'InterstatePlusRegular', helvetica, arial, sans-serif;
+    margin-top: 53px;
+}
+
+#hp-Blurb {
+    color: #fff;
+    text-shadow: 0px 2px 8px #000;
+    font-family: 'InterstatePlusRegular', helvetica, arial, sans-serif;
+    font-size: 33px;
+    margin-top: 26px;
+    line-height: 1.2em;
+}
+
+#hp-eventSearch {
+    color: #fff;
+    text-shadow: 0px 2px 8px #000;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 51px;
+}
+
+input#SearchTerm[type="text"] {
+	color:#fff;
+    font-size: 18px;
+    font-weight: bold;
+	/*text-transform:uppercase;*/
+	width: 475px;
+	border: 1px solid #2d2d2d;
+	height: 33px;
+	padding:5px 0 5px 5px;
+    background-color: #0b0906;
+    margin-top: 8px;
+}
+
+#hp-appSection {
+    height: 361px;
+    width: 353px;
+    background-image: url(/Public/images/homepage/iPhoneShell.png);
+    margin-left: 539px;
+    margin-top: -301px;
+}
+
 
 /*NEW Homepage featured Event - CB Feb 27, 2013 */
 
@@ -1406,28 +1458,28 @@ ul#left-nav li ul li a.current {color:#a44b79;}
 
 
 .imgGrid1-1 {
-    width: 477px; height: 375px;
+    width: 477px; height: 375px; overflow: hidden;
 }
 .imgGrid1-2 {
-    width: 209px;height: 200px;
+    width: 209px;height: 200px; overflow: hidden;
 }
 .imgGrid1-3 {
-    width: 250px;height: 177px;
+    width: 250px;height: 177px; overflow: hidden;
 }
 .imgGrid1-4 {
-    width: 104px;height: 88px;
+    width: 104px;height: 88px; overflow: hidden;
 }
 .imgGrid1-5 {
-    width: 105px;height: 88px;
+    width: 105px;height: 88px; overflow: hidden;
 }
 .imgGrid1-6 {
-    width: 104px;height: 87px;
+    width: 104px;height: 87px; overflow: hidden;
 }
 .imgGrid1-7 {
-    width: 105px;height: 87px;
+    width: 105px;height: 87px; overflow: hidden;
 }
 .imgGrid1-8 {
-    width: 250px;height: 198px; overflow: hidden;
+    width: 250px;height: 198px; overflow: hidden; overflow: hidden;
 }
 
 .smallGroupImg {
@@ -2024,7 +2076,7 @@ span.tweet-date a:hover { text-decoration: underline; }
 #global-bar {
     display:block;
     /*border-top:solid 3px #5695d6;*/
-    margin:0px -40px 0px -40px;
+    /*margin:0px -40px 0px -40px;*/
     color:#fff; 
     /*background:#fff url(../images/bg/jaggies.gif) repeat-x bottom;*/
     background-color: #fff;
@@ -2078,9 +2130,10 @@ div#search-container {
 
 
 div#mainLogo {
-    position: absolute;
+    position: relative;
     left: 420px;
     top: 10px;
+    float: left;
 }
 
 div#search-container input[type=text] {
@@ -2110,10 +2163,11 @@ div#search-container input[type=image] {
     
 }
 #homepageSearchOK {
-    position: absolute;
-    left: 442px;
-    margin-top: 2px;
+    position: relative;
+    left: 448px;
+    margin-top: -34px;
     cursor: pointer;
+    float: left;
 }
 
 #eventSearchOK {
@@ -2676,7 +2730,7 @@ body::-webkit-scrollbar-corner{background-clip:padding-box;background-color:#f5f
 
 */
 
-#event-search-container input[type="text"], input#SearchTerm[type="text"] {
+#event-search-container input[type="text"] {
 	color:#1e72c8;
 	font:bold 20px InterstatePlusRegular;
 	/*text-transform:uppercase;*/
