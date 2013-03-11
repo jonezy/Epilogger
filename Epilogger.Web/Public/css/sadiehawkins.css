@@ -1394,6 +1394,31 @@ input#SearchTerm[type="text"] {
 }
 
 
+#hp-whoBlurbs h2 {
+    font-family: 'InterstatePlusRegular', helvetica, arial, sans-serif;
+    color: #000;
+    font-size: 30px;
+    text-transform: none;
+    text-align: center;
+}
+#hp-whoBlurbs p {
+    margin-bottom: 22px; 
+    font-size: 14px;
+    line-height: 1.45em;
+    color: #666;
+}
+
+
+#eventOrganizers {
+    float: left;
+    width: 455px;
+}
+
+#eventAttendees {
+    margin-left: 489px;
+    width: 455px;
+}
+
 /*NEW Homepage featured Event - CB Feb 27, 2013 */
 
 #featuredEventContainer {

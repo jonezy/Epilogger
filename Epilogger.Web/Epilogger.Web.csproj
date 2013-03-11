@@ -596,6 +596,11 @@
     <Content Include="Public\images\homepage\fHolder6.png" />
     <Content Include="Public\images\homepage\fHolder7.png" />
     <Content Include="Public\images\homepage\fHolder8.png" />
+    <Content Include="Public\images\homepage\fullGBImage1.png" />
+    <Content Include="Public\images\homepage\fullGBImage2.png" />
+    <Content Include="Public\images\homepage\iPhoneShell.png" />
+    <Content Include="Public\images\homepage\searchIconDark.png" />
+    <Content Include="Public\images\homepage\star.png" />
     <Content Include="Public\images\icons\EditEventCheck.png" />
     <Content Include="Public\images\icons\eventListTotalIcons.png" />
     <Content Include="Public\images\icons\icon-verified.png" />
