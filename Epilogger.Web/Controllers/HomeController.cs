@@ -42,10 +42,10 @@ namespace Epilogger.Web.Controllers {
             var featured = _es.GetFeaturedEvents();
             if (featured != null)
                 model.FeaturedEvents = new HomepageFeaturedEventsViewModel()
-                                           {
-                                               Event = featured,
-                                               TopImages = _is.GetNewestPhotosByEventId(featured.ID, 40)
-                                           };
+                        {
+                            Event = featured,
+                            TopImages = _is.GetNewestPhotosByEventId(featured.ID, 40)
+                        };
 
             return View(model);
         }

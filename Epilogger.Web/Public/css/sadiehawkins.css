@@ -1558,6 +1558,9 @@ input#SearchTerm[type="text"] {
 */
 }
 
+.featuredEvent {
+    display: none;
+}
 
 #featuresLinksDiv  
 {
@@ -1567,7 +1570,7 @@ input#SearchTerm[type="text"] {
 .featuredPhotosList {
     margin-top: 10px;
     list-style: none;
-    margin-left: 156px;
+    margin-left: 409px;
 }
     
 .featuredPhotosList li { 

@@ -145,27 +145,27 @@
                     <span class="featuredDetails">@String.Format("{0:htt, MMM. d}", Model.FeaturedEvents.Event.StartDateTime.ToLocalTime())&nbsp;&nbsp;@Model.FeaturedEvents.Event.Venues.First().City, @Model.FeaturedEvents.Event.Venues.First().State</span>
                 }
             </div>
-                @*<div class="featuredBanner"></div>*@
+                
+            
+            var imgSizeList = new List<HomePageGridImage>
+                                {
+                                    new HomePageGridImage() {Width = 477, Height = 375}, 
+                                    new HomePageGridImage() {Width = 209, Height = 200}, 
+                                    new HomePageGridImage() {Width = 250, Height = 177},
+                                    new HomePageGridImage() {Width = 104, Height = 88}, 
+                                    new HomePageGridImage() {Width = 105, Height = 88},
+                                    new HomePageGridImage() {Width = 104, Height = 87}, 
+                                    new HomePageGridImage() {Width = 105, Height = 87}, 
+                                    new HomePageGridImage() {Width = 250, Height = 198}
+                                };
 
-                var imgSizeList = new List<HomePageGridImage>
-                                  {
-                                      new HomePageGridImage() {Width = 477, Height = 375}, 
-                                      new HomePageGridImage() {Width = 209, Height = 200}, 
-                                      new HomePageGridImage() {Width = 250, Height = 177},
-                                      new HomePageGridImage() {Width = 104, Height = 88}, 
-                                      new HomePageGridImage() {Width = 105, Height = 88},
-                                      new HomePageGridImage() {Width = 104, Height = 87}, 
-                                      new HomePageGridImage() {Width = 105, Height = 87}, 
-                                      new HomePageGridImage() {Width = 250, Height = 198}
-                                  };
+            for (var currentPage = 0; currentPage <= ((int)Model.FeaturedEvents.TopImages.Count() / 8)-1; currentPage++)
+            {
+                var theImgs = Model.FeaturedEvents.TopImages.Skip((currentPage * 8)).Take(8);
+                var enumerable = theImgs as List<Image> ?? theImgs.ToList();
+                var i = 1;
 
-                for (var currentPage = 0; currentPage <= 0; currentPage++)
-                {
-                    var theImgs = Model.FeaturedEvents.TopImages.Skip((currentPage * 8)).Take(8);
-                    var enumerable = theImgs as List<Image> ?? theImgs.ToList();
-                    var i = 1;
-
-                <div class="featuredEvent">
+                <div class="featuredEvent" id="@string.Format("featuredPage{0}", currentPage+1)">
                     
                     <table cellpadding="0" cellspacing="0">
                         <tr>
@@ -298,7 +298,7 @@
                         <ul class="featuredPhotosList">
                             @for (var y = 1; y <= ((int)Model.FeaturedEvents.TopImages.Count() / 8); y++)
                             {
-                                <li><a href="" onclick="return false;" class="featuredPhotosListLink" id="somethingfun + @(y)"></a></li>
+                                <li><a href="" onclick="return false;" class="featuredPhotosListLink" id="@y"></a></li>
                             }
                         </ul>
                     </div>
