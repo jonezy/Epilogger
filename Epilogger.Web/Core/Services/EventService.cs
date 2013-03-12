@@ -292,7 +292,7 @@ namespace Epilogger.Web {
         }
 
         public IEnumerable<HomepageActivityModel> GetHomepageActivity() {
-            StoredProcedure sp = db.GetHomePageActivity();
+            var sp = db.GetHomePageActivity();
             return sp.ExecuteTypedList<HomepageActivityModel>();
         }
       

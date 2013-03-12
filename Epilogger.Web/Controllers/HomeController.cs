@@ -27,7 +27,7 @@ namespace Epilogger.Web.Controllers {
 
             var activity = _es.GetHomepageActivity();
             var model = new HomepageViewModel(
-                activity.Take(8).ToList(),
+                activity.Take(10).ToList(),
                 0,
                 activity.Count()
                 );

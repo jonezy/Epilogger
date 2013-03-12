@@ -1386,11 +1386,13 @@ input#SearchTerm[type="text"] {
 }
 
 #hp-appSection {
-    height: 361px;
-    width: 353px;
+    height: 252px;
+    width: 320px;
     background-image: url(/Public/images/homepage/iPhoneShell.png);
     margin-left: 539px;
-    margin-top: -301px;
+    margin-top: -302px;
+    padding-top: 109px;
+    padding-left: 32px;
 }
 
 
@@ -1607,8 +1609,8 @@ input#SearchTerm[type="text"] {
     margin: 4px;
     padding: 0px;
     float: left;
-    height: 188px;
-    width: 230px;
+    height: 153px;
+    width: 182px;
     overflow:hidden;
     background-color: #fff;
 }
@@ -1628,11 +1630,11 @@ input#SearchTerm[type="text"] {
     position: absolute;
     padding-top: 3px;
     height: 22px;
-    width: 200px;
+    width: 158px;
     background-color: #fff;
     overflow: hidden;
     font-weight: bold;
-    font-size: 10pt;
+    font-size: 9pt;
 }
 
 #activityGallery li .top {

@@ -30,9 +30,8 @@
 @section fullWidth {
     <div id="homepageMainSpread">
         <div class="container_12">
-            <div id="hp-Tagline">Epilogger is events.</div>
-            <div id="hp-Blurb">Follow, interact, share, and re-live<br />
-            them on your own terms.</div>
+            <div id="hp-Tagline">It's all in Epilogger.</div>
+            <div id="hp-Blurb">Find photos, videos, blogs, <br />& conversations from any event.</div>
             <div id="hp-eventSearch">
                 Start by finding your event:
                 @using (Html.BeginForm("Search", "Home", FormMethod.Post, null))
@@ -42,8 +41,16 @@
                 }
             </div>
         
-            <div id="hp-appSection"></div>
+            <div id="hp-appSection">
+                <div id="s3" class="pics" style="position: relative; ">
+                    <img src="/Public/images/homepage/app-home.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 293px; height: 252px; z-index: 3; opacity: 0; display: none; " />
+                    <img src="/Public/images/homepage/app-info.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 293px; height: 252px; z-index: 3; opacity: 0; display: none; " />
+                    <img src="/Public/images/homepage/app-popular.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 293px; height: 252px; z-index: 3; opacity: 0; display: none; " />
+                    <img src="/Public/images/homepage/app-photos.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 293px; height: 252px; z-index: 3; opacity: 0; display: none; " />
+                    <img src="/Public/images/homepage/app-info.png" alt="" style="position: absolute; top: 0px; left: 0px; width: 293px; height: 252px; z-index: 3; opacity: 0; display: none; " />
+                </div>  
             </div>
+        </div>
     </div>
 }
 
@@ -361,7 +368,7 @@
 
                     <div class="galleryImage"  id="photo-@item.Image.ID">
                         <a href="@fullSizeUrl" rel="EPLPhoto[latestphotos]" photoid="@thePath" title="" id="@item.Image.ID">
-                            <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@item.Image.Fullsize&width=230&height=188&preserveAspect=true" border="0" alt="" />
+                            <img src="http://epiloggerimageresizer.cloudapp.net/?photoUrl=@item.Image.Fullsize&width=182&height=153&preserveAspect=true" border="0" alt="" />
                             @if (isVideo)
                             {
                                 <img src="@Links.Public.images.video_play_jpg" class="videothumbnail3" alt="" />
@@ -419,15 +426,15 @@
 
 
         //Scroll for the slide show or featured
-//        head.ready(function () {
-//            $('#s3').cycle({
-//                fx: 'scrollLeft',
-//                speed: 300,
-//                timeout: 3500,
-//                next: '#s3',
-//                pause: 1
-//            });
-//        });
+        head.ready(function () {
+            $('#s3').cycle({
+                fx: 'fade',
+                speed: 800,
+                timeout: 3500,
+                next: '#s3',
+                pause: 1
+            });
+        });
     </script>
 </div>
 
