@@ -588,6 +588,11 @@
     <Content Include="Public\images\EventMenu\menu-overview.png" />
     <Content Include="Public\images\EventMenu\menu-stats.png" />
     <Content Include="Public\images\EventMenu\menu-tweets.png" />
+    <Content Include="Public\images\homepage\app-addtweet.png" />
+    <Content Include="Public\images\homepage\app-home.png" />
+    <Content Include="Public\images\homepage\app-info.png" />
+    <Content Include="Public\images\homepage\app-photos.png" />
+    <Content Include="Public\images\homepage\app-popular.png" />
     <Content Include="Public\images\homepage\fHolder1.png" />
     <Content Include="Public\images\homepage\fHolder2.png" />
     <Content Include="Public\images\homepage\fHolder3.png" />

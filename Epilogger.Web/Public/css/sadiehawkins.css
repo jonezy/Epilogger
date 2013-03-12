@@ -1344,7 +1344,7 @@ ul#left-nav li ul li a.current {color:#a44b79;}
 #homepageMainSpread {
     background: #000 url(/Public/Images/homepage/fullGBImage1.png) center center;
     height: 377px;
-    margin-top: 90px;
+    margin-top: 71px;
 }
 
 #hp-Tagline {
@@ -2114,7 +2114,8 @@ span.tweet-date a:hover { text-decoration: underline; }
     position: fixed;
     width: 100%;
     height: 70px;
-    }
+    top: 0;
+}
     
    
 #jaggies  

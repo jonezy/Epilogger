@@ -4,13 +4,14 @@
 @if (!Model.IsUserLoggedIn)
 {
     var controller = "nothing";
+    var action = "nothing";
     if (ViewContext.ParentActionViewContext !=null)
     {
         controller = ViewContext.ParentActionViewContext.RouteData.Values["controller"] as string ?? "";
-        var action = ViewContext.RouteData.Values["action"] as string ?? "";
+        action = ViewContext.ParentActionViewContext.RouteData.Values["action"] as string ?? "";
     }
-    
-    if (controller.ToLower() != "join" && controller.ToLower() != "account")
+
+    if (controller.ToLower() != "join" && controller.ToLower() != "account" && !(controller.ToLower() == "home" && action.ToLower() == "index"))
     {
         
         <div id="signupNag">
@@ -27,9 +28,9 @@
             #content-container {
                 padding: 150px 0px 0px 0px !important;
             }
-            #homepage-container {
+            /*#homepage-container {
                 padding: 114px 0px 0px 0px !important;
-            }
+            }*/
         </style>
     }
 }
