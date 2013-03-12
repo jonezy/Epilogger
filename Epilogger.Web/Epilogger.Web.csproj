@@ -591,6 +591,7 @@
     <Content Include="Public\images\homepage\app-addtweet.png" />
     <Content Include="Public\images\homepage\app-home.png" />
     <Content Include="Public\images\homepage\app-info.png" />
+    <Content Include="Public\images\homepage\app-label.png" />
     <Content Include="Public\images\homepage\app-photos.png" />
     <Content Include="Public\images\homepage\app-popular.png" />
     <Content Include="Public\images\homepage\fHolder1.png" />

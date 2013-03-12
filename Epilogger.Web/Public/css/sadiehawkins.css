@@ -1395,6 +1395,12 @@ input#SearchTerm[type="text"] {
     padding-left: 32px;
 }
 
+#appstoreIcon {
+    position: relative;
+    float: right;
+    margin-top: -52px;
+    margin-right: -61px;
+}
 
 #hp-whoBlurbs h2 {
     font-family: 'InterstatePlusRegular', helvetica, arial, sans-serif;
