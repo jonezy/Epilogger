@@ -107,7 +107,7 @@ fieldset.popForm .blue_arrow
 
 .inner { width:400px; height:200px; border:2px solid salmon; float:left; }
 
-fieldset.popForm .under_control_notice { margin-left:25%; margin-top:-27px; margin-bottom:20px; font:8pt Helvetica,Arial,Sans-Serif; color:#878787;}
+fieldset.popForm .under_control_notice { margin-left:25%; margin-top:-12px; margin-bottom:20px; font:8pt Helvetica,Arial,Sans-Serif; color:#878787;}
 fieldset.popForm .hint { margin-left: 25%; margin-top:-12px;margin-bottom:29px;  font:8pt Helvetica,Arial,Sans-Serif; color:#999;}
 
 .invisible { display: none;}

@@ -535,3 +535,23 @@ head.ready(function () {
     }
 });
 
+head.ready(function () {
+
+    head.js('@Url.Content("~/Public/js/EventDetails.js")');
+
+    $(function () {
+        $(".addEventTrigger").colorbox({
+            iframe: true,
+            width: "560px", height: "570px",
+            overlayClose: false, 
+            escKey: false,
+            href: '/Events/CreateEvent1'
+        });
+
+    });
+    
+});
+
+
+
+
