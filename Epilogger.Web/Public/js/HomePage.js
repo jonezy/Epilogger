@@ -1,5 +1,11 @@
 ﻿//featuredEvent
 
+$(document).ready(function() {
+    var randomNum = Math.ceil(Math.random() * 2);
+    $("#homepageMainSpread").attr({ 'style': 'background: #000 url(/Public/Images/homepage/fullGBImage' + randomNum + '.png) center center;' });
+});
+
+
 head.ready(function () {
     if ($(".featuredEvent").length > 0) {
         $('.featuredEvent:first').show();

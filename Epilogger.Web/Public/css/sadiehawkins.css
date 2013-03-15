@@ -1342,7 +1342,7 @@ ul#left-nav li ul li a.current {color:#a44b79;}
 
 
 #homepageMainSpread {
-    background: #000 url(/Public/Images/homepage/fullGBImage1.png) center center;
+    /*background: #000 url(/Public/Images/homepage/fullGBImage1.png) center center;*/
     height: 377px;
     margin-top: 71px;
 }
