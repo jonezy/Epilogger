@@ -312,6 +312,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BrowseController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\ElmahController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
