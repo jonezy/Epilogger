@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Helpers;
 using System.Web.Mvc;
-
+using System.Xml.XPath;
 using AutoMapper;
 
 using Epilogger.Data;
@@ -2178,14 +2178,15 @@ namespace Epilogger.Web.Controllers {
 
                     
                     //Moved, as the timezone offset needs to be applied first
-                    model.CollectionStartDateTime = getCollectionDateTime(Request.Form["collectDataTimes"], startDate, -1).ToUniversalTime();
+                    model.CollectionStartDateTime = getCollectionDateTime(Request.Form["collectDataTimes"], model.StartDateTime, -1);
+                    
                     if (EndDateValid(startDate, endDate))
                     {
-                        model.CollectionEndDateTime = getCollectionDateTime(Request.Form["collectDataTimes"], endDate, 1).ToUniversalTime();
+                        model.CollectionEndDateTime = getCollectionDateTime(Request.Form["collectDataTimes"], (DateTime)model.EndDateTime, 1);
                     }
                     else
                     {
-                        model.CollectionEndDateTime = getCollectionDateTime(Request.Form["collectDataTimes"], startDate, 1).ToUniversalTime();
+                        model.CollectionEndDateTime = getCollectionDateTime(Request.Form["collectDataTimes"], model.StartDateTime, 1);
                     }
 
                     currentEvent.StartDateTime = model.StartDateTime;
@@ -2335,6 +2336,7 @@ namespace Epilogger.Web.Controllers {
 		[HttpPost]
 		public virtual PartialViewResult SearchVenues(FormCollection fc)
 		{
+
 			var location = new StringBuilder();
 			if (fc["address"] != null) {
 				location.AppendFormat("{0},",fc["address"]);
@@ -2348,15 +2350,73 @@ namespace Epilogger.Web.Controllers {
 			if (fc["zip"] != null) {
 				location.AppendFormat("{0},", fc["zip"]);
 			}
-			
-			string url = string.Format("http://maps.google.com/maps/geo?output=csv&q={0}", Url.Encode(location.ToString().TrimEnd(',')));
-			string results = GetResults(url, null, "Get");
-			var parts = results.Split(',');
 
-			var longitude = Convert.ToDouble(parts[2]);
-			var latitude = Convert.ToDouble(parts[3]);
+		    var longitude = string.Empty;
+		    var latitude = string.Empty;
 
-			var venues = FoursquareVenueSearch(fc["name"] ?? "", longitude, latitude);
+            var url = string.Format("http://maps.googleapis.com/maps/api/geocode/xml?address={0}&sensor=false", Url.Encode(location.ToString().TrimEnd(',').TrimStart(',')));
+		    try
+            {
+                var request = (HttpWebRequest) WebRequest.Create(url);
+                request.Method = "GET";
+                var response = request.GetResponse();
+                {
+                    var document = new XPathDocument(response.GetResponseStream());
+                    var navigator = document.CreateNavigator();
+
+                    // get response status
+                    var statusIterator = navigator.Select("/GeocodeResponse/status");
+                    while (statusIterator.MoveNext())
+                    {
+                        if (statusIterator.Current.Value != "OK")
+                        {
+                            //TODO: Add error
+                        }
+                    }
+
+                    // get results
+                    var resultIterator = navigator.Select("/GeocodeResponse/result");
+                    while (resultIterator.MoveNext())
+                    {
+                        var geometryIterator = resultIterator.Current.Select("geometry");
+                        while (geometryIterator.MoveNext())
+                        {
+                            var locationIterator = geometryIterator.Current.Select("location");
+                            while (locationIterator.MoveNext())
+                            {
+                                var latIterator = locationIterator.Current.Select("lat");
+                                while (latIterator.MoveNext())
+                                {
+                                    latitude = latIterator.Current.Value;
+                                }
+
+                                var lngIterator = locationIterator.Current.Select("lng");
+                                while (lngIterator.MoveNext())
+                                {
+                                    longitude = lngIterator.Current.Value;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+
+
+		    //var url = string.Format("http://maps.google.com/maps/geo?output=csv&q={0}", Url.Encode(location.ToString().TrimEnd(',')));
+            //var results = GetResults(url, null, "Get");
+            //var parts = results.Split(',');
+
+            //var longitude = Convert.ToDouble(parts[2]);
+            //var latitude = Convert.ToDouble(parts[3]);
+
+		    var longitudedbl = Convert.ToDouble(longitude);
+            var latitudedbl = Convert.ToDouble(latitude);
+
+            var venues = FoursquareVenueSearch(fc["name"] ?? "", latitudedbl, longitudedbl);
 
 			var foundVenues = new List<FoursquareVenue>();
 			foreach (var item in venues.response) {
