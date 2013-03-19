@@ -33,6 +33,7 @@ public static class MVC {
     public static Epilogger.Web.Controllers.BaseController Base = new Epilogger.Web.Controllers.T4MVC_BaseController();
     public static Epilogger.Web.Controllers.BrowseController Browse = new Epilogger.Web.Controllers.T4MVC_BrowseController();
     public static Epilogger.Web.Controllers.DashboardController Dashboard = new Epilogger.Web.Controllers.T4MVC_DashboardController();
+    public static Epilogger.Web.Controllers.ElmahController Elmah = new Epilogger.Web.Controllers.T4MVC_ElmahController();
     public static Epilogger.Web.Controllers.ErrorController Error = new Epilogger.Web.Controllers.T4MVC_ErrorController();
     public static Epilogger.Web.Controllers.EventsController Events = new Epilogger.Web.Controllers.T4MVC_EventsController();
     public static Epilogger.Web.Controllers.HomeController Home = new Epilogger.Web.Controllers.T4MVC_HomeController();
@@ -419,6 +420,7 @@ namespace Links {
         
             public static readonly string jquery_ui_1_8_16_custom_css = Url("jquery-ui-1.8.16.custom.css");
             public static readonly string jquery_miniColors_css = Url("jquery.miniColors.css");
+            public static readonly string LaunchFestLiveMode_css = Url("LaunchFestLiveMode.css");
             public static readonly string layout_css = Url("layout.css");
             public static readonly string livemode_4x3_css = Url("livemode-4x3.css");
             public static readonly string messages_css = Url("messages.css");
@@ -689,12 +691,29 @@ namespace Links {
                 public static readonly string about_share_png = Url("about-share.png");
                 public static readonly string about_tw_png = Url("about-tw.png");
                 public static readonly string about_unite_png = Url("about-unite.png");
+                public static readonly string app_addtweet_png = Url("app-addtweet.png");
+                public static readonly string app_home_png = Url("app-home.png");
+                public static readonly string app_info_png = Url("app-info.png");
+                public static readonly string app_label_png = Url("app-label.png");
+                public static readonly string app_photos_png = Url("app-photos.png");
+                public static readonly string app_popular_png = Url("app-popular.png");
                 public static readonly string bg_about_png = Url("bg-about.png");
                 public static readonly string book_png = Url("book.png");
                 public static readonly string ChatWithUs_png = Url("ChatWithUs.png");
                 public static readonly string coke_png = Url("coke.png");
                 public static readonly string feed_bg_png = Url("feed.bg.png");
+                public static readonly string fHolder1_png = Url("fHolder1.png");
+                public static readonly string fHolder2_png = Url("fHolder2.png");
+                public static readonly string fHolder3_png = Url("fHolder3.png");
+                public static readonly string fHolder4_png = Url("fHolder4.png");
+                public static readonly string fHolder5_png = Url("fHolder5.png");
+                public static readonly string fHolder6_png = Url("fHolder6.png");
+                public static readonly string fHolder7_png = Url("fHolder7.png");
+                public static readonly string fHolder8_png = Url("fHolder8.png");
+                public static readonly string fullGBImage1_png = Url("fullGBImage1.png");
+                public static readonly string fullGBImage2_png = Url("fullGBImage2.png");
                 public static readonly string icon_logout_png = Url("icon-logout.png");
+                public static readonly string iPhoneShell_png = Url("iPhoneShell.png");
                 public static readonly string marketing_png = Url("marketing.png");
                 public static readonly string movember_png = Url("movember.png");
                 public static readonly string PinkHeart_png = Url("PinkHeart.png");
@@ -703,9 +722,11 @@ namespace Links {
                 public static readonly string RightArrow_png = Url("RightArrow.png");
                 public static readonly string rockout_png = Url("rockout.png");
                 public static readonly string SearchIcon_png = Url("SearchIcon.png");
+                public static readonly string searchIconDark_png = Url("searchIconDark.png");
                 public static readonly string socialday_png = Url("socialday.png");
                 public static readonly string socialweek_png = Url("socialweek.png");
                 public static readonly string sprouter_png = Url("sprouter.png");
+                public static readonly string star_png = Url("star.png");
                 public static readonly string tldr_png = Url("tldr.png");
             }
         
@@ -731,6 +752,7 @@ namespace Links {
                 public static readonly string details_cost_png = Url("details-cost.png");
                 public static readonly string details_hashtag_png = Url("details-hashtag.png");
                 public static readonly string details_time_png = Url("details-time.png");
+                public static readonly string EditEventCheck_png = Url("EditEventCheck.png");
                 public static readonly string event_toolbar_ov_png = Url("event-toolbar-ov.png");
                 public static readonly string event_toolbar_png = Url("event-toolbar.png");
                 public static readonly string eventListTotalIcons_png = Url("eventListTotalIcons.png");
@@ -1205,6 +1227,8 @@ namespace Links {
             }
         
             public static readonly string EditAccount_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/EditAccount.min.js") ? Url("EditAccount.min.js") : Url("EditAccount.js");
+                          
+            public static readonly string EditEvent_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/EditEvent.min.js") ? Url("EditEvent.min.js") : Url("EditEvent.js");
                           
             public static readonly string epilogger_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/epilogger.min.js") ? Url("epilogger.min.js") : Url("epilogger.js");
                           
@@ -34551,6 +34575,8 @@ namespace Links {
             public static readonly string LiveMode_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/LiveMode.min.js") ? Url("LiveMode.min.js") : Url("LiveMode.js");
                           
             public static readonly string LiveModeBackUp_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/LiveModeBackUp.min.js") ? Url("LiveModeBackUp.min.js") : Url("LiveModeBackUp.js");
+                          
+            public static readonly string LiveModeLaunchFest_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/LiveModeLaunchFest.min.js") ? Url("LiveModeLaunchFest.min.js") : Url("LiveModeLaunchFest.js");
                           
             public static readonly string load_image_min_js = Url("load-image.min.js");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

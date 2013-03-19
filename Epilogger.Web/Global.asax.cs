@@ -203,7 +203,7 @@ namespace Epilogger.Web
             routes.MapRoute(
              "CreateEvent3",
              "events/CreateEvent3",
-            new { controller = "events", action = "CreateEvent3", id = UrlParameter.Optional }
+            new { controller = "events", action = "CreateEvent3", id = UrlParameter.Optional, isupgrade = UrlParameter.Optional }
             );
             routes.MapRoute(
              "CreateEvent4",

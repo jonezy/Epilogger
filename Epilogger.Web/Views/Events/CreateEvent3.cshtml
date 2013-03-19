@@ -5,7 +5,14 @@
 }
 <script type="text/javascript">
     $(document).ready(function () {
-        parent.$.colorbox.resize({ width: 560, height: 520 });
+        var IsUpgrade = @Model.IsUpgrade.ToString().ToLower();
+        if (IsUpgrade) {
+            parent.$.colorbox.resize({ width: 560, height: 370 });
+            $("#benefitsBox").attr('style', 'height: 240px;');
+        }else {
+            parent.$.colorbox.resize({ width: 560, height: 520 });    
+            $("#benefitsBox").attr('style', 'height: 368px;');
+        }
     });
     
     function CloseAndRedirect(url) {
@@ -13,24 +20,28 @@
     }
 
 </script>
-
 <div class="form_process4">
-    <img src="/Public/images/CreateEvent/step3.png" alt="Private?" />
+    @if (!Model.IsUpgrade)
+    {
+        <img src="/Public/images/CreateEvent/step3.png" alt="Private?" />    
+    }
 </div>
 
 @using (Html.BeginForm("CreateEvent3", "Events", FormMethod.Post, new { id = "UpgradeToPremium" }))
 {
     <div id="final_wrapper">
-        <div style="height: 368px;">
-            <div class="greyBox">
-                @Html.CheckBoxFor(model => model.IsPrivate, new { @class = "fleft" })
-                <div class="checkMargin">
-                    <label for="IsPrivate"><h2><img src="/Public/images/CreateEvent/icon-private-sm.png" alt="" /> Make my event private</h2></label>
-                    <em>This is a premium feature. If you select this you’ll be taken to a payment screen to complete the upgrade process. Don't worry, your event info is already saved!</em>
-                </div>
+        <div id="benefitsBox">
+            @if (!Model.IsUpgrade)
+            {
+                <div class="greyBox">
+                    @Html.CheckBoxFor(model => model.IsPrivate, new {@class = "fleft"})
+                    <div class="checkMargin">
+                        <label for="IsPrivate"><h2><img src="/Public/images/CreateEvent/icon-private-sm.png" alt="" /> Make my event private</h2></label>
+                        <em>This is a premium feature. If you select this you’ll be taken to a payment screen to complete the upgrade process. Don't worry, your event info is already saved!</em>
+                    </div>
         
-            </div>
-    
+                </div>
+            }
             <h2>HERE'S WHAT ELSE YOU GET WHEN YOU UPGRADE YOUR EVENT:</h2>
             <ul class="upgradeFeatures">
                 <li>
@@ -82,15 +93,17 @@
             <div id="left">
             </div>
             <div id="right" class="finalRight">
-                @Html.ActionImage("CreateEvent4", "Events", new { id = Model.EventId }, "/Public/images/CreateEvent/StayWithBasicButton.png", "Stay with Basic")
+                @if (!Model.IsUpgrade)
+                {
+                    @Html.ActionImage("CreateEvent4", "Events", new {id = Model.EventId}, "/Public/images/CreateEvent/StayWithBasicButton.png", "Stay with Basic")
+                }
+                
+                
                 @*@using (Html.BeginForm("CreateEvent3", "Events", FormMethod.Post, new { id = "StayBasic", style = "display: inline;" }))
                 {
                     <a href="" onclick="$('#StayBasic').submit();return false;"><img src="/Public/images/CreateEvent/StayWithBasicButton.png" alt="" border="0"/></a>
                     
                 }*@
-                
-                
-
                 
                 @*API CALL - Submits form defined above*@
                 

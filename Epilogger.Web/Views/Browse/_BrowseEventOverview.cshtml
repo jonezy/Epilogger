@@ -30,7 +30,7 @@
         </div>   
     
         <span class="spacer"></span>        
-        @Html.ActionLink("Add an Event", "create", "events", null, new { @class = "blue-action-button" })
+        <a href="#" class="addEventTrigger blue-action-button" onclick="return false;">Add an Event</a>
 
         <span class="clear big-spacer"></span>  
     }
@@ -48,10 +48,14 @@
     </div>
     <br style="clear: both;" />
     <br />
-    @if (!string.IsNullOrEmpty(Model.RandomEvent.Description)) {
-        <p>@if (Model.RandomEvent.Description.Length > 150) {
+    @if (!string.IsNullOrEmpty(Model.RandomEvent.Description))
+    {
+        <p>@if (Model.RandomEvent.Description.Length > 150)
+           {
                @string.Format("{0}...", Model.RandomEvent.Description.Substring(0, 150))
-           } else {
+           }
+           else
+           {
             @Model.RandomEvent.Description
            }
            @Html.ActionLink("read more", "details", "events", new { id = Model.RandomEvent.EventSlug }, null)
@@ -60,10 +64,12 @@
 </div>
 <div id="events-content">
     <div id="HottestSlides">
-        @foreach (Epilogger.Web.Models.HotestEventsModel item in Model.HottestEvents) {
+        @foreach (Epilogger.Web.Models.HotestEventsModel item in Model.HottestEvents)
+        {
             <div class="HottestEventBig" id="HotestEventDetails@(item.Event.ID)">
                 <div class="hottest-photogridTop">
-                    @foreach (Epilogger.Data.Image image in item.RandomHottestImages.Take(5)) {
+                    @foreach (Epilogger.Data.Image image in item.RandomHottestImages.Take(5))
+                    {
                         var thePath = image.EventID + "/" + image.ID;
                         <div class="hottestimage" id="photo-@image.ID">
                             <a href="@image.Fullsize" rel="EPLPhoto[@item.Event.ID]" photoid="@thePath" id="@image.ID">
@@ -82,7 +88,8 @@
                     <br style="clear: both;" />
                 </div>
                 <div class="hottest-photogridBottom">
-                    @foreach (Epilogger.Data.Image image in item.RandomHottestImages.Skip(5).Take(5)) {
+                    @foreach (Epilogger.Data.Image image in item.RandomHottestImages.Skip(5).Take(5))
+                    {
                         var thePath = image.EventID + "/" + image.ID;
                         <div class="hottestimage" id="photo-@image.ID">
                             <a href="@image.Fullsize" rel="EPLPhoto[@item.Event.ID]" photoid="@thePath" id="@image.ID">
@@ -95,12 +102,16 @@
         }
     </div>
     <ul class="HottestList">
-        @foreach (Epilogger.Web.Models.HotestEventsModel item in Model.HottestEvents) {
+        @foreach (Epilogger.Web.Models.HotestEventsModel item in Model.HottestEvents)
+        {
             <li><a href="" onclick="return false;" class="HottestListLink" id="@(item.Event.ID)">
-                @if (item.Event.Name.Length > 18) {
+                @if (item.Event.Name.Length > 18)
+                {
                     @string.Format("{0}...", item.Event.Name.Substring(0, 18));
 
-                } else {            
+                }
+                else
+                {            
                     @item.Event.Name
                 }
             </a></li>
@@ -110,9 +121,11 @@
     <h2>
         FIND AN EVENT BY CATEGORY:</h2>
     @{int count = 0;}
-    @foreach (Epilogger.Data.EventCategory c in Model.EventCategories) {
+    @foreach (Epilogger.Data.EventCategory c in Model.EventCategories)
+    {
         <div class="browse-category-list-item" style="background-image:url(@Url.Content("~/Public/images/category-icons/" + c.ID + ".png"))">@Html.RouteLink(c.CategoryName, "BrowseCategtoryRoutes", new { CategoryName = c.URLStub.ToLower() })</div>
-        if (count == 2) {
+        if (count == 2)
+        {
         @:<br style="clear:both;" />
                     count = 0;
         } else {

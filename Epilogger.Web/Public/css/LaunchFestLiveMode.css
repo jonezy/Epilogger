@@ -120,8 +120,8 @@ div.footer {
 	font-weight:bold;
 	position:absolute;
 	bottom:0;
-	opacity:0.9
-	color:#666;}
+    opacity: 0.9;
+	color: #666;}
 	
 div.footer-dark {
 	width:100%;

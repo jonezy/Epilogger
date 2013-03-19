@@ -22,10 +22,10 @@
     <h2>EVENTS:</h2>
     @if (Model.Events.Count() == 0) {
         <div class="dashboard-event-item clearfix">There are currently no events going on. Why not add one?!</div>
-        @Html.ActionLink("CREATE EVENT", "create", "events")
+        <a href="#" class="addEventTrigger blue-action-button" onclick="return false;">CREATE EVENT</a>
     }
 
-    @foreach (var item in Model.Events) 
+    @foreach (var item in Model.Events)
     {
         <div class="dashboard-event-item clearfix"> 
             <div class="month-day">

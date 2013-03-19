@@ -383,6 +383,9 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ElmahController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="EmailsController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
       <SubType>Code</SubType>
@@ -3363,7 +3366,6 @@
     <Content Include="Views\Events\ImageCommentControl.cshtml" />
     <Content Include="Views\Home\SocialBar.cshtml" />
     <Content Include="Views\Events\ConceptMap.cshtml" />
-    <Content Include="Views\Home\Copy of Index.cshtml" />
     <Content Include="Views\Events\Live4x3.cshtml" />
     <Content Include="Views\Events\_LiveTweetTemplate.cshtml" />
     <Content Include="Views\Widget\_header.cshtml" />
@@ -3402,11 +3404,8 @@
     <Content Include="Views\Events\_ExpiredEventModalScript.cshtml" />
     <Content Include="Views\Home\UpgradeBenefits.cshtml" />
     <Content Include="Views\Events\Menu.cshtml" />
-    <Content Include="Views\Events\MenuOLD.cshtml" />
     <Content Include="Views\Events\CreateEvent3.cshtml" />
     <Content Include="Views\Events\PostToPayPal.cshtml" />
-    <Content Include="Views\Events\EditOLD.cshtml" />
-    <Content Include="Views\Home\Copy %282%29 of Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />
@@ -5473,7 +5472,6 @@
     <Content Include="Views\Account\IndexOld.cshtml" />
     <Content Include="Areas\Authentication\Views\Web.config" />
     <Content Include="Views\Shared\GlobalNavigationOldGood.cshtml" />
-    <Content Include="Views\Events\CreateOLD.cshtml" />
     <Content Include="Views\Dashboard\IndexOLD.cshtml" />
     <Content Include="Views\Dashboard\Profile.cshtml" />
     <Content Include="Views\Dashboard\Menu.cshtml" />

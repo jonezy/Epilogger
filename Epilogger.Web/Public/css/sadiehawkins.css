@@ -351,7 +351,7 @@ a.edit_icon {
     
     
 #homepage-toolbar #refresh {}
-    6
+    
 #header {
    position:relative;    
    background:#fff;
@@ -819,7 +819,7 @@ div.profile img {
     color: #636363; 
     font:bold 14px 'InterstatePlusRegular';
     background:#ddd;    
-    -moz-border-radius-topleft: 0 0 5px 5px;
+    -moz-border-radius: 0 0 5px 5px;
     -webkit-border-radius: 0 0 5px 5px;
     border-radius: 0 0 5px 5px;}
 

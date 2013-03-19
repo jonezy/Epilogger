@@ -9,6 +9,6 @@ namespace Epilogger.Web.Models
     {
         public bool IsPrivate { get; set; }
         public int EventId { get; set; }
-
+        public bool IsUpgrade { get; set; }
     }
 }

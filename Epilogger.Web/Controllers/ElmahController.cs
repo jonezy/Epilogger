@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace Epilogger.Web.Controllers
 {
-    public class ElmahController : Controller
+    public partial class ElmahController : Controller
     {
-        public ActionResult Index(string type)
+        public virtual ActionResult Index(string type)
         {
             return new ElmahResult(type);
         }

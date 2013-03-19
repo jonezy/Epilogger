@@ -62,6 +62,11 @@ namespace Epilogger.Web.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult CreateEvent3() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.CreateEvent3);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult CreateEvent4() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.CreateEvent4);
         }
@@ -392,6 +397,14 @@ namespace Epilogger.Web.Controllers {
             public readonly string id = "id";
             public readonly string page = "page";
         }
+        static readonly ActionParamsClass_CreateEvent3 s_params_CreateEvent3 = new ActionParamsClass_CreateEvent3();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_CreateEvent3 CreateEvent3Params { get { return s_params_CreateEvent3; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_CreateEvent3 {
+            public readonly string id = "id";
+            public readonly string isupgrade = "isupgrade";
+        }
         static readonly ActionParamsClass_CreateEvent4 s_params_CreateEvent4 = new ActionParamsClass_CreateEvent4();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_CreateEvent4 CreateEvent4Params { get { return s_params_CreateEvent4; } }
@@ -687,7 +700,6 @@ namespace Epilogger.Web.Controllers {
             public readonly string AllTweets = "~/Views/Events/AllTweets.cshtml";
             public readonly string Category = "~/Views/Events/Category.cshtml";
             public readonly string ConceptMap = "~/Views/Events/ConceptMap.cshtml";
-            public readonly string Create = "~/Views/Events/Create.cshtml";
             public readonly string CreateEvent1 = "~/Views/Events/CreateEvent1.cshtml";
             public readonly string CreateEvent2 = "~/Views/Events/CreateEvent2.cshtml";
             public readonly string CreateEvent3 = "~/Views/Events/CreateEvent3.cshtml";
@@ -695,14 +707,12 @@ namespace Epilogger.Web.Controllers {
             public readonly string Details = "~/Views/Events/Details.cshtml";
             public readonly string Edit = "~/Views/Events/Edit.cshtml";
             public readonly string EditLiveMode = "~/Views/Events/EditLiveMode.cshtml";
-            public readonly string EditOLD = "~/Views/Events/EditOLD.cshtml";
             public readonly string EventToolbar = "~/Views/Events/EventToolbar.cshtml";
             public readonly string ExpiredUpgradeNotice = "~/Views/Events/ExpiredUpgradeNotice.cshtml";
             public readonly string ImageCommentControl = "~/Views/Events/ImageCommentControl.cshtml";
             public readonly string ImageCommentsPaged = "~/Views/Events/ImageCommentsPaged.cshtml";
             public readonly string Live4x3 = "~/Views/Events/Live4x3.cshtml";
             public readonly string Menu = "~/Views/Events/Menu.cshtml";
-            public readonly string MenuOLD = "~/Views/Events/MenuOLD.cshtml";
             public readonly string NeedTwitterAuth = "~/Views/Events/NeedTwitterAuth.cshtml";
             public readonly string PhotoDetails = "~/Views/Events/PhotoDetails.cshtml";
             public readonly string PostToPayPal = "~/Views/Events/PostToPayPal.cshtml";
@@ -777,8 +787,10 @@ namespace Epilogger.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult CreateEvent3() {
+        public override System.Web.Mvc.ActionResult CreateEvent3(int id, bool isupgrade) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateEvent3);
+            callInfo.RouteValueDictionary.Add("id", id);
+            callInfo.RouteValueDictionary.Add("isupgrade", isupgrade);
             return callInfo;
         }
 

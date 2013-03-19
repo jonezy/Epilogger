@@ -529,9 +529,9 @@ head.ready(function () {
             $('#flash').height(0);
         }
         // remove messageSize amount per click
-        $('#[id^=flash_]').click(function () {
+        $('#[id^=flash_]').click(function() {
             $('#flash').height($('#flash').height() - messageSize);
-        })
+        });
     }
 });
 
@@ -543,13 +543,29 @@ head.ready(function () {
         $(".addEventTrigger").colorbox({
             iframe: true,
             width: "560px", height: "570px",
-            overlayClose: false, 
+            overlayClose: false,
             escKey: false,
             href: '/Events/CreateEvent1'
         });
-
     });
-    
+
+
+    $(".upgradeEventTrigger").bind("click", function (e) {
+        e.preventDefault();
+
+        var eventId = $(this).attr('value');
+
+        $.colorbox({
+            iframe: true,
+            width: "560px", height: "370px",
+            overlayClose: false,
+            escKey: false,
+            href: '/Events/CreateEvent3?isupgrade=true&id=' + eventId
+        });
+    });
+
+
+
 });
 
 

@@ -40,7 +40,6 @@
     <ul id="menu-bar">
          @if (userId != Guid.Empty)
          {
-             <!--<li>@Html.ActionLink("Add Event", "create", "events", null, controller.ToLower() == "events" && action.ToLower() == "create" ? new { @class = "current" } : null)</li>-->
             <li><a href="#" id="event-popup">Add Event</a></li>
          }
         <li class="@(controller.ToLower() == "browse" ? "current " : "")submenu browse">@Html.ActionLink("Browse Events", "index", "browse", new { filter = "" }, new { })

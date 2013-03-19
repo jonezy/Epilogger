@@ -186,7 +186,7 @@ namespace Epilogger.Web.Controllers {
 				}
 
                 Debug.Assert(requestedEvent.IsPaid != null, "requestedEvent.IsPaid != null");
-                model.IsExpired = HasEventExpired((bool)requestedEvent.IsPaid, requestedEvent.StartDateTime);
+			    model.IsExpired = false;
 
 				return View(model);
 			}
@@ -722,11 +722,12 @@ namespace Epilogger.Web.Controllers {
         //[CompressFilter]
         [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to edit an event")]
         [HttpGet]
-        public virtual ActionResult CreateEvent3()
+        public virtual ActionResult CreateEvent3(int id, bool isupgrade = false)
         {
             TempData["Event"] = TempData["Event"];
             
-            var model = new CreateEvent3ViewModel();
+            var model = new CreateEvent3ViewModel {EventId = id, IsUpgrade = isupgrade};
+
             if (TempData["Event"] != null)
             {
                 var eventModel = (Event)TempData["Event"];

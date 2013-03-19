@@ -17,9 +17,10 @@
         <div class="dashboard-event-item clearfix">
             There are currently no events going on. Why not add one?!</div>
         <span class="spacer"></span>        
-        @Html.ActionLink("Add an Event", "create", "events", null, new { @class = "blue-action-button" })
+        <a href="#" class="addEventTrigger blue-action-button" onclick="return false;">Add an Event</a>
     }
-    @foreach (var item in Model.Events) {
+    @foreach (var item in Model.Events)
+    {
         <div class="dashboard-event-item clearfix">
             <div class="month-day">
                 <div class="month">@Html.DisplayFor(thing => item.StartDateTime, "Month")</div>
