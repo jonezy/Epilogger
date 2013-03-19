@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Helpers;
 using System.Web.Mvc;
-
+using System.Xml.XPath;
 using AutoMapper;
 
 using Epilogger.Data;
@@ -1902,35 +1902,91 @@ namespace Epilogger.Web.Controllers {
 		[HttpPost]
 		public virtual PartialViewResult SearchVenues(FormCollection fc)
 		{
-			var location = new StringBuilder();
-			if (fc["address"] != null) {
-				location.AppendFormat("{0},",fc["address"]);
-			}
-			if (fc["state"] != null) {
-				location.AppendFormat("{0},",fc["state"]);
-			}
-			if (fc["city"] != null) {
-				location.AppendFormat("{0},",fc["city"]);
-			}
-			if (fc["zip"] != null) {
-				location.AppendFormat("{0},", fc["zip"]);
-			}
-			
-			string url = string.Format("http://maps.google.com/maps/geo?output=csv&q={0}", Url.Encode(location.ToString().TrimEnd(',')));
-			string results = GetResults(url, null, "Get");
-			var parts = results.Split(',');
+            var location = new StringBuilder();
+            if (fc["address"] != null)
+            {
+                location.AppendFormat("{0},", fc["address"]);
+            }
+            if (fc["state"] != null)
+            {
+                location.AppendFormat("{0},", fc["state"]);
+            }
+            if (fc["city"] != null)
+            {
+                location.AppendFormat("{0},", fc["city"]);
+            }
+            if (fc["zip"] != null)
+            {
+                location.AppendFormat("{0},", fc["zip"]);
+            }
 
-			var longitude = Convert.ToDouble(parts[2]);
-			var latitude = Convert.ToDouble(parts[3]);
+            var longitude = string.Empty;
+            var latitude = string.Empty;
 
-			var venues = FoursquareVenueSearch(fc["name"] ?? "", longitude, latitude);
+            var url = string.Format("http://maps.googleapis.com/maps/api/geocode/xml?address={0}&sensor=false", Url.Encode(location.ToString().TrimEnd(',').TrimStart(',')));
+            try
+            {
+                var request = (HttpWebRequest)WebRequest.Create(url);
+                request.Method = "GET";
+                var response = request.GetResponse();
+                {
+                    var document = new XPathDocument(response.GetResponseStream());
+                    var navigator = document.CreateNavigator();
 
-			var foundVenues = new List<FoursquareVenue>();
-			foreach (var item in venues.response) {
-				foundVenues.Add(new FoursquareVenue { id = item.id, Name = item.name, Address = item.location.address, City = item.location.city, State = item.location.state, Zip = item.location.postalCode });
-			}
+                    // get response status
+                    var statusIterator = navigator.Select("/GeocodeResponse/status");
+                    while (statusIterator.MoveNext())
+                    {
+                        if (statusIterator.Current.Value != "OK")
+                        {
+                            //TODO: Add error
+                        }
+                    }
 
-			return PartialView("_VenueSearchResults", foundVenues);
+                    // get results
+                    var resultIterator = navigator.Select("/GeocodeResponse/result");
+                    while (resultIterator.MoveNext())
+                    {
+                        var geometryIterator = resultIterator.Current.Select("geometry");
+                        while (geometryIterator.MoveNext())
+                        {
+                            var locationIterator = geometryIterator.Current.Select("location");
+                            while (locationIterator.MoveNext())
+                            {
+                                var latIterator = locationIterator.Current.Select("lat");
+                                while (latIterator.MoveNext())
+                                {
+                                    latitude = latIterator.Current.Value;
+                                }
+
+                                var lngIterator = locationIterator.Current.Select("lng");
+                                while (lngIterator.MoveNext())
+                                {
+                                    longitude = lngIterator.Current.Value;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+
+
+            var longitudedbl = Convert.ToDouble(longitude);
+            var latitudedbl = Convert.ToDouble(latitude);
+
+            var venues = FoursquareVenueSearch(fc["name"] ?? "", latitudedbl, longitudedbl);
+
+            var foundVenues = new List<FoursquareVenue>();
+            foreach (var item in venues.response)
+            {
+                foundVenues.Add(new FoursquareVenue { id = item.id, Name = item.name, Address = item.location.address, City = item.location.city, State = item.location.state, Zip = item.location.postalCode });
+            }
+
+            return PartialView("_VenueSearchResults", foundVenues);
 		}
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
