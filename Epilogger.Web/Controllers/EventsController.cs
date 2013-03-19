@@ -2406,13 +2406,6 @@ namespace Epilogger.Web.Controllers {
             }
 
 
-		    //var url = string.Format("http://maps.google.com/maps/geo?output=csv&q={0}", Url.Encode(location.ToString().TrimEnd(',')));
-            //var results = GetResults(url, null, "Get");
-            //var parts = results.Split(',');
-
-            //var longitude = Convert.ToDouble(parts[2]);
-            //var latitude = Convert.ToDouble(parts[3]);
-
 		    var longitudedbl = Convert.ToDouble(longitude);
             var latitudedbl = Convert.ToDouble(latitude);
 
