@@ -3138,6 +3138,54 @@ namespace Epilogger.Web.Controllers {
 
 		}
 
+
+        [RequiresAuthentication(ValidUserRole = UserRoleType.Administrator, AccessDeniedMessage = "You must be an epilogger administrator to access this feature.")]
+        public virtual ActionResult AdminUpgradeEvent(int eventId)
+        {
+
+            //Update the event
+            var evt = _es.FindByID(eventId);
+            evt.IsPaid = true;
+            evt.DatePaid = DateTime.UtcNow;
+
+            //A featured of paid is being Featured, Feature the event
+            if ((bool) (!evt.IsPrivate))
+            {
+                evt.IsFeatured = true;
+                evt.FeaturedStartDateTime = evt.CollectionStartDateTime;
+                evt.FeaturedEndDateTime = evt.CollectionEndDateTime;
+            }
+            _es.Save(evt);
+
+            this.StoreSuccess("This event has now been upgraded to Paid");
+
+            return RedirectToAction("details");
+        }
+
+        [RequiresAuthentication(ValidUserRole = UserRoleType.Administrator, AccessDeniedMessage = "You must be an epilogger administrator to access this feature.")]
+        public virtual ActionResult AdminDowngradeEvent(int eventId)
+        {
+
+            //Update the event
+            var evt = _es.FindByID(eventId);
+            evt.IsPaid = false;
+            evt.DatePaid = null;
+
+            //A featured of paid is being Featured, Feature the event
+            if ((bool)(!evt.IsPrivate))
+            {
+                evt.IsFeatured = false;
+                evt.FeaturedStartDateTime = null;
+                evt.FeaturedEndDateTime = null;
+            }
+            _es.Save(evt);
+
+            this.StoreSuccess("This event has now been downgraded to regular");
+
+            return RedirectToAction("details");
+        }
+
+
         public virtual ActionResult UploadFile()
         {
             return View();

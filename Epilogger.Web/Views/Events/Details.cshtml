@@ -106,7 +106,15 @@ else
             }
             
             <div class="fright">
-                @Html.ActionLink("Pull tweets (fill/back fill)", "PullTweets", new { eventId = Model.ID })
+                @Html.ActionLink("Pull tweets (fill/back fill)", "PullTweets", new { eventId = Model.ID }) | 
+                @if (!Model.IsPaid)
+                {
+                    @Html.ActionLink("Upgrade to Paid event (Also makes the event featured if it's not private)", "AdminUpgradeEvent", new { eventId = Model.ID })    
+                }
+                else
+                {
+                    @Html.ActionLink("Downgrade to regular event", "AdminDowngradeEvent", new { eventId = Model.ID })    
+                }
             </div>
         </div>
         <span class="spacer"></span>
