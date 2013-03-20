@@ -215,68 +215,92 @@
 		&lt;td&gt;
 			&lt;!-- START CONTENT --&gt;
 			&lt;table bgcolor="#ffffff" cellspacing="0" cellpadding="0" border="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; line-height:1.45em; font-size:10.5pt; color:#707070"&gt;
-				&lt;tr&gt;&lt;td colspan="2" style="border-collapse:collapse; background-image:url('http://epilogger.com/Public/images/email/bg-tabletop.jpg'); height:11px"/&gt;&lt;/td&gt;&lt;/tr&gt;
+				&lt;tr&gt;&lt;td height="11" colspan="2" style="border-collapse:collapse; background-image:url('http://epilogger.com/Public/images/email/bg-tabletop.png'); background-repeat:no-repeat; height:11px"&gt;&lt;/td&gt;&lt;/tr&gt;
+				
 				&lt;tr&gt;
-					&lt;td width="350" valign="top" style="border-collapse:collapse; padding:0 15px; background-image:url('http://epilogger.com/Public/images/email/bg-tableleft.png'); background-position:left; background-repeat:repeat-y"&gt;
+					&lt;td width="350" valign="top" style="border-collapse:collapse; padding:0 15px;"&gt;
 						&lt;!-- User: First name --&gt;
 						&lt;h1 style="color:#000; font-family:helvetica, arial, sans-serif; letter-spacing:-1px; margin-bottom:0"&gt;Hi [FIRST_NAME],&lt;/h1&gt;
 						
 						&lt;!-- Paragraph: mini-tour --&gt;
 					    &lt;h2 style="color:#f838ba; margin:1em 0 5px 0;  font-family:helvetica, arial, sans-serif; font-size:13pt; letter-spacing:-1px"&gt;
+
 					        Thank you for upgrading &lt;span style="color: #ad167d;"&gt;[EVENT_NAME]&lt;/span&gt;! It’s definitely much spiffier now
+
 					    &lt;/h2&gt;
 						&lt;p style="margin:0;"&gt;Here are some tips to help you get aquainted with your new premium features:&lt;/p&gt;
 					    
+
 					    &lt;ul style="list-style: square;"&gt;
+
 					        &lt;li style="margin-bottom: 20px;"&gt;
+
 					            &lt;span style="font-weight: bold; color: #626060;"&gt;Verification:&lt;/span&gt; look for the badge &amp;nbsp;&lt;img src="http://epilogger.com/Public/images/icons/paidEventSmall.png" alt="badge" /&gt; &amp;nbsp;beside your event's title. Your event is now part of an exclusive club of verified events.
+
 					        &lt;/li&gt;
+
 					        &lt;li style="margin-bottom: 20px;"&gt;
+
 					            &lt;span style="font-weight: bold; color: #626060;"&gt;Featured Status:&lt;/span&gt; unless your event is marked as private we will feature it on our website homepage, as well as, the cover of the Epilogger iPhone app.
+
 					        &lt;/li&gt;
+
 					        &lt;li style="margin-bottom: 20px;"&gt;
+
 					            &lt;span style="font-weight: bold; color: #626060;"&gt;Increased Life Span:&lt;/span&gt; basic events in Epilogger expire 30 days after the event ends, but not yours! Your event will be online for a full year and it's only $10 for each additional year.
+
 					        &lt;/li&gt;
+
 					        &lt;li style="margin-bottom: 20px;"&gt;
+
 					            &lt;span style="font-weight: bold; color: #626060;"&gt;Moderation:&lt;/span&gt; as an administrator you are now able to remove irrelevant or bad content. Just hit the 'delete' button under any tweet, photo, or video and presto it's gone.
+
 					        &lt;/li&gt;
+
 					        &lt;li style="margin-bottom: 20px;"&gt;
+
 					            &lt;span style="font-weight: bold; color: #626060;"&gt;Privacy:&lt;/span&gt; keep your event private from curious onlookers. Only you will have access to your event.
+
 					        &lt;/li&gt;
+
                             &lt;li style="margin-bottom: 20px;"&gt;
+
 					            &lt;span style="font-weight: bold; color: #626060;"&gt;Live Mode:&lt;/span&gt; a constant animated feed of all your event's content up on the big screen. Set up and customize your Epilogger Live Mode with your colours, logo, and even sponsor logos.
+
 					        &lt;/li&gt;
+
 					    &lt;/ul&gt;
+
 					
 					    &lt;p style="margin:1em 0;"&gt;
 					        See you out there,&lt;br /&gt;&lt;br /&gt;
 					        &lt;img src="http://epilogger.com/Public/images/email/EPLTeam.jpg" alt="Epilogger.com logo" border="0"/&gt;&lt;br /&gt;
 					        &lt;a href="mailto:support@epilogger.com"&gt;support@epilogger.com&lt;/a&gt;
-                            
-					    &lt;/p&gt;
-					    
+					    &lt;/p&gt;					    
 					&lt;/td&gt;
 					
-					&lt;td width="*" valign="top" style="border-collapse:collapse; border-left:1px dotted #e0e0e0; padding:0 15px; background-image:url('http://epilogger.com/Public/images/email/bg-tableright.png'); background-position:right; background-repeat:repeat-y; font-size:10pt"&gt;
+					&lt;td width="*" valign="top" style="border-collapse:collapse; border-left:1px dotted #e0e0e0; padding:0 15px; font-size:10pt"&gt;
 						&lt;h2 style="color:#f838ba; margin-bottom:5px; font-family:helvetica, arial, sans-serif; font-size:13pt; letter-spacing:-1px"&gt;Get in Touch&lt;/h2&gt;
 						&lt;p style="margin:0; line-height:1.8em"&gt;
 							&lt;img src="http://epilogger.com/Public/images/email/icon-bird.png"/&gt; &amp;nbsp;&amp;nbsp;&lt;a href="http://twitter.com/twitter.com"&gt;@epilogger&lt;/a&gt;&lt;br/&gt;
 							&lt;img src="http://epilogger.com/Public/images/email/icon-facebook.png"/&gt; &amp;nbsp;&amp;nbsp;&lt;a href="http://facebook.com/epilogger"&gt;facebook/epilogger&lt;/a&gt;&lt;br/&gt;
 							&lt;img src="http://epilogger.com/Public/images/email/icon-email.png"/&gt; &amp;nbsp;&amp;nbsp;&lt;a href="mailto:info@epilogger.com"&gt;info@epilogger.com&lt;/a&gt;
 						&lt;/p&gt;
-						
-						
 					&lt;/td&gt;
 				&lt;/tr&gt;
-				&lt;tr&gt;&lt;td colspan="2" style="border-collapse:collapse; background-image:url('http://epilogger.com/Public/images/email/bg-tablebottom.png'); height:4px" /&gt;&lt;/tr&gt;
+				&lt;tr&gt;&lt;td height="4" colspan="2" style="border-collapse:collapse; background-image:url('http://epilogger.com/Public/images/email/bg-tablebottom.png'); background-repeat:no-repeat; height:4px"&gt;&lt;/td&gt;&lt;/tr&gt;
 			&lt;/table&gt;
 			&lt;!-- END CONTENT --&gt;
 		&lt;/td&gt;
 	&lt;/tr&gt;
 	&lt;tr&gt;&lt;td&gt;&lt;p align="center" style="margin:0; line-height:0.8em"&gt;&lt;font size="1" face="arial" color="#8b8b8b"&gt;Copyright © [year] Epilogger, All rights reserved.&lt;br/&gt;You are receiving this email because you are a valuable early adopter of Epilogger. We appreciate your sign up! &lt;br /&gt;&lt;br /&gt;Our mailing address is: 
+
 Epilogger&lt;br /&gt;
+
 221 Yonge St&lt;br /&gt;
+
 Toronto, On M5B 1M4&lt;br /&gt;
+
 Canada&lt;/font&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;
 

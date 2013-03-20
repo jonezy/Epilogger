@@ -954,6 +954,31 @@ namespace Epilogger.Web.Controllers {
             return RedirectToAction("details", new { id = "epilogger" });
         }
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+        
+        [HttpPost]
+        public virtual ActionResult PaypalCancel(FormCollection frm)
+        {
+            var uniqueid = Guid.Parse(frm["custom"]);
+            var pp = _pp.FindById(uniqueid);
+
+            var eventslug = string.Empty;
+            if (pp != null)
+            {
+                var evt = _es.FindByID(pp.EventId);
+                eventslug = evt.EventSlug;
+            }
+            return eventslug == string.Empty ? RedirectToAction("index", "home") : RedirectToAction("Details", new { id = eventslug});
+            
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        public virtual ActionResult PaypalCancel()
+        {
+            return RedirectToAction("index", "home");
+
+        }
+
 
 
 	    //[CompressFilter]
@@ -2922,7 +2947,7 @@ namespace Epilogger.Web.Controllers {
                 //var model = Mapper.Map<Event, AllLinksViewModel>(requestedEvent);
                 //model.ToolbarViewModel = BuildToolbarViewModel(requestedEvent);
 
-                return PartialView();
+                return PartialView(requestedEvent);
             }
             ModelState.AddModelError(string.Empty, "The event you're trying to visit doesn't exist.");
             return RedirectToAction("index", "Browse");

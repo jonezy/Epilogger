@@ -1,4 +1,5 @@
-﻿   
+﻿@model Epilogger.Data.Event
+           
 <link href="@Url.Content("~/Public/css/modal.css")" rel="stylesheet" type="text/css" />
 
 <div class="padTheExpiryNotice">
@@ -7,11 +8,32 @@
     <p>Are you the event organiser but don't recognise this page? You can claim this event page by dropping us an email at <a href="mailto:info@Epilogger.com">info@Epilogger.com</a>.</p>
     <div class="spacer"></div>
     <ul class="authButtons">
-        <li>@Html.ActionImage("", "", null, "/Public/images/icons/UpgradeEventButton.png", "Update event")</li>
+        <li><a href="#" class="upgradeEventTriggerPop" onclick="return false;" value="@Model.ID"><img src="/Public/images/icons/UpgradeEventButton.png" alt="" /></a></li>
         <li class="orSepertor"><em>&mdash; or &mdash;</em></li>
         <li>@Html.ActionImage("index", "browse", null, "/Public/images/icons/TakeMeToOtherEvents.png", "Take me to other events")</li>
     </ul>
 </div>
+
+<script language="javascript">
+    $(".upgradeEventTriggerPop").bind("click", function(e) {
+        e.preventDefault();
+
+        var eventId = $(this).attr('value');
+        
+        $.colorbox({
+            iframe: true,
+            width: "560px",
+            height: "370px",
+            overlayClose: false,
+            escKey: false,
+            href: '/Events/CreateEvent3?isupgrade=true&id=' + eventId
+        });
+    });
+</script>
+
+
+@*@Html.ActionImage("", "", null, "/Public/images/icons/UpgradeEventButton.png", "Update event")*@
+
 @*<div class="modal_right">
     <h2>Post information</h2>
 

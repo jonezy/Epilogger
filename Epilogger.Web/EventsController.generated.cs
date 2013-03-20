@@ -271,6 +271,7 @@ namespace Epilogger.Web.Controllers {
             public readonly string PostToPayPal = "PostToPayPal";
             public readonly string PaypalSuccess = "PaypalSuccess";
             public readonly string PaypalNotify = "PaypalNotify";
+            public readonly string PaypalCancel = "PaypalCancel";
             public readonly string EventBySlug = "EventBySlug";
             public readonly string GetImageComments = "GetImageComments";
             public readonly string GetImageCommentsPage1 = "GetImageCommentsPage1";
@@ -325,6 +326,7 @@ namespace Epilogger.Web.Controllers {
             public const string PostToPayPal = "PostToPayPal";
             public const string PaypalSuccess = "PaypalSuccess";
             public const string PaypalNotify = "PaypalNotify";
+            public const string PaypalCancel = "PaypalCancel";
             public const string EventBySlug = "EventBySlug";
             public const string GetImageComments = "GetImageComments";
             public const string GetImageCommentsPage1 = "GetImageCommentsPage1";
@@ -431,6 +433,13 @@ namespace Epilogger.Web.Controllers {
         public ActionParamsClass_PaypalNotify PaypalNotifyParams { get { return s_params_PaypalNotify; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_PaypalNotify {
+            public readonly string frm = "frm";
+        }
+        static readonly ActionParamsClass_PaypalCancel s_params_PaypalCancel = new ActionParamsClass_PaypalCancel();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_PaypalCancel PaypalCancelParams { get { return s_params_PaypalCancel; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_PaypalCancel {
             public readonly string frm = "frm";
         }
         static readonly ActionParamsClass_EventBySlug s_params_EventBySlug = new ActionParamsClass_EventBySlug();
@@ -821,6 +830,17 @@ namespace Epilogger.Web.Controllers {
         public override System.Web.Mvc.ActionResult PaypalNotify(System.Web.Mvc.FormCollection frm) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.PaypalNotify);
             callInfo.RouteValueDictionary.Add("frm", frm);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult PaypalCancel(System.Web.Mvc.FormCollection frm) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.PaypalCancel);
+            callInfo.RouteValueDictionary.Add("frm", frm);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult PaypalCancel() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.PaypalCancel);
             return callInfo;
         }
 
