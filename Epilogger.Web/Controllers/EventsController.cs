@@ -187,6 +187,8 @@ namespace Epilogger.Web.Controllers {
 
                 Debug.Assert(requestedEvent.IsPaid != null, "requestedEvent.IsPaid != null");
 			    model.IsExpired = false;
+                //model.IsExpired = HasEventExpired((bool)requestedEvent.IsPaid, requestedEvent.StartDateTime);
+			    model.IsExpired = false; //Not going to show the expiry on the overview page.
 
 				return View(model);
 			}

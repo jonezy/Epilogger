@@ -2211,7 +2211,7 @@ div#search-container input[type=image] {
 #eventSearchOK {
     position: absolute;
     right: 24px;
-    margin-top: 4px;
+    margin-top: 12px;
     cursor: pointer;
 }
 

@@ -58,13 +58,6 @@ namespace Epilogger.Web.Controllers {
                             };
             model.Events.ForEach(m => m.CurrentUserId = CurrentUserID);
             
-            //IEnumerable<DashboardActivityModel> activity = userService.GetUsersEventActivity(CurrentUser.ID);
-            //DashboardIndexViewModel model = new DashboardIndexViewModel(
-            //    activity.OrderByDescending(a => a.Date).Skip(currentPage * 12).Take(12).ToList(),
-            //    currentPage,
-            //    activity.Count()
-            //);
-
             return View(model);
         }
 
