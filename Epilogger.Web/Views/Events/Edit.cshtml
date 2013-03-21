@@ -68,7 +68,7 @@
     
     @if (Model.CurrentUserID == Model.UserID || Model.CurrentUserRole == UserRoleType.Administrator)
     {
-        <input type="button" class="red-action-button confirm" value="Delete Event" name="confirm" />
+    <input type="button" class="red-action-button confirm" value="Delete Event" name="confirm" />
         <div class="spacer"></div>
     }
     
@@ -76,7 +76,10 @@
 
     <h1>UPGRADE YOUR EVENT</h1>
     <p>Upgrade for $50! Get premium features designed to foster community engagement before, during, and after your event.</p>
-    
+    @if (Model.CurrentUserID == Model.UserID || Model.CurrentUserRole == UserRoleType.Administrator)
+    {
+        <a href="#" class="upgradeEventTrigger blue-action-button" onclick="return false;" value="@Model.ID">Upgrade Event</a>
+    }
 </div>
 
 

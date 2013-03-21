@@ -129,8 +129,10 @@ else
         @if (!Model.IsPaid)
         {
             <div style="display: inline-block; float: right">
-                @*@Html.ActionLink("UPGRADE TO PREMIUM", "", "", null, new { @class = "blue-action-button" })*@
-                <a href="#" class="upgradeEventTrigger blue-action-button" onclick="return false;" value="@Model.ID">UPGRADE TO PREMIUM</a>
+                @if ((Model.UserID == Model.CurrentUserID) || Model.CurrentUserRole == UserRoleType.Administrator)
+                {
+                    <a href="#" class="upgradeEventTrigger blue-action-button" onclick="return false;" value="@Model.ID">UPGRADE TO PREMIUM</a>
+                }
             </div>
         }
 

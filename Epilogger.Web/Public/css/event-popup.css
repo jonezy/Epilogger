@@ -15,7 +15,7 @@ input[type="text"], textarea
     display: inline-block;
     padding: 3px 5px;
     height: 30px;
-    width: 67%;
+    width: 347px;
     font: 14px Helvetica,Arial,Sans-Serif;
     color: #666;
     /*border: 2px solid #BBB;*/
@@ -51,7 +51,7 @@ fieldset.popForm select
     vertical-align: top;
     background: #eee;
     height: 30px !important;
-    width: 67%;
+    width: 347px;
     font: 14px Helvetica,Arial,Sans-Serif; 
     color: #666;    
     
@@ -81,12 +81,12 @@ fieldset.popForm select
 
 fieldset.popForm .times 
 {
-    width: 13%;
+    width: 65px;
     margin-right: 4px;
 }
 
 fieldset.popForm .AMPM {
-    width: 9%; 
+    width: 46px;
 }
 
 fieldset.popForm .timeZoneSelect {

@@ -40,13 +40,21 @@
 
                 @if (item.IsPaid && item.UserID == item.CurrentUserId)
                 {
-                    <li>-</li>
-                    <li>Renew (Something)</li>
+                    <li></li>
+                    <li></li>
                 }
                 else
                 {
-                    <li>-</li>
-                    <li>Upgrade Event</li>
+                    if (item.UserID == item.CurrentUserId)
+                    {
+                        <li>-</li>
+                        <li>
+                            @if (!item.IsPaid)
+                            {
+                                <a href="#" class="upgradeEventTrigger" onclick="return false;" value="@item.ID">Upgrade Event</a>    
+                            }
+                        </li>
+                    }   
                 }
             </ul>
 

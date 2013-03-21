@@ -1101,8 +1101,8 @@ ul#connected-networks, .topPhotosList, .topPhotosList li {
     /* Basic Info */
     #StartDateTime{ display: inline-block !important; }
     .timepick{ width:7em; }
-    .times { width: 13%; margin-right: 4px; }
-    .AMPM { width: 9%; }
+    .times { width: 85px; margin-right: 4px; }
+    .AMPM { width: 60px; }
     input[type="text"].blue_calendar, textarea.blue_calendar { background: #fff url('/Public/images/CreateEvent/calendarIcon.png') no-repeat 95% 50%; /*padding: 0 5px;*/ width: 20%; margin-right:4px; }
     .item-data input[type="checkbox"] { margin-top: 9px; }
 
@@ -2220,7 +2220,7 @@ div#search-container input[type=image] {
 #breadcrumb { color:#999}
 
 
-/* --- pager */
+/* --- pager --- */
 .Pager {
     border-top:1px dotted #c0c0c0;
     min-width:250px;
