@@ -140,5 +140,9 @@
       <resource path="~/Public/js/jquery.UI.DatePicker/css/smoothness/jquery-ui-1.8.17.custom.css" />
     </resourceSet>
 
+    <resourceSet name="HomepageJs" type="js">
+      <resource path="~/Public/js/HomePage.js" />
+    </resourceSet>
+
   </resourceSets>
 </combres>

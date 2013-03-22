@@ -17,16 +17,18 @@ head.ready(function () {
 var intval = "";
 function start_Int() {
     if (intval == "") {
-        intval = window.setInterval(ChangeToNextPhoto, 5000);
+        intval = window.setInterval(ChangeToNextPhoto, 2000);
     } else {
         stop_Int();
     }
+    return false;
 }
 function stop_Int() {
     if (intval != "") {
         window.clearInterval(intval);
         intval = "";
     }
+    return false;
 }
 
 
@@ -34,6 +36,7 @@ $('.featuredPhotosListLink').click(function (e) {
     e.preventDefault();
     stop_Int();
     changePhoto(this, this.id, 100);
+    return false;
 });
 
 function changePhoto(item, theID, speed) {
@@ -42,8 +45,8 @@ function changePhoto(item, theID, speed) {
         $('.featuredPhotosListLink').removeClass('active');
         $(item).addClass('active');
         $('#featuredPage' + theID).fadeIn(speed);
+        return false;
     });
-
 }
 
 
@@ -55,7 +58,6 @@ function ChangeToNextPhoto() {
     else {
         changePhoto($('.featuredPhotosListLink:first'), $('.featuredPhotosListLink:first').attr("id"), 500);
     }
-
 }
 
 

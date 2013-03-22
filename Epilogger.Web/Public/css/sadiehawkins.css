@@ -80,7 +80,7 @@ a.edit_icon {
     background:-moz-linear-gradient(top, #d3d3d3, #d3d3d3); /* ff */
     box-shadow:0 0 1px #a1b9c8;
     color:#e6f5fa;
-    font: bold 16px Helvetica, Arial Narrow, Arial, sans-serif;
+    font: bold 15px Helvetica, Arial Narrow, Arial, sans-serif;
     padding:5px 10px;
     /*text-transform:uppercase;*/
     cursor: default;
@@ -107,7 +107,7 @@ a.edit_icon {
     background:-moz-linear-gradient(top, #4aa0d7, #3486b7); /* ff */
     box-shadow:0 0 1px #a1b9c8;
     color:#e6f5fa !important;
-    font: bold 16px Helvetica narrow, Arial Narrow, Arial, sans-serif;
+    font: bold 15px Helvetica narrow, Arial Narrow, Arial, sans-serif;
     padding:5px 10px;
     /*text-transform:uppercase;*/
     cursor:pointer;
@@ -1078,6 +1078,7 @@ ul#connected-networks, .topPhotosList, .topPhotosList li {
     select {
         /* This makes select boxes match textboxes */
         height: 36px !important;
+        vertical-align: top;
         padding: 0;
         border: 1px solid #ccc;
         border-bottom: 1px solid #eee;
@@ -1430,7 +1431,8 @@ input#SearchTerm[type="text"] {
 /*NEW Homepage featured Event - CB Feb 27, 2013 */
 
 #featuredEventContainer {
-    /*height: 375px;*/ 
+    /*height: 375px;*/
+    height: 413px;
 }
 
 
@@ -2302,7 +2304,7 @@ div#search-container input[type=image] {
     position:relative;
     left:-20px}
 
-#footer-container { background:#27252a url('../images/bg/bg-footer.png') repeat-x; padding:10px 0 40px 0; margin:0px -40px 0px -40px;}
+#footer-container { background:#27252a url('../images/bg/bg-footer.png') repeat-x; padding:10px 0 40px 0; }
 #footer { margin-top:20px; font-size:13px; color:#666; }
 #footer h4 {color:#fc75af; font:normal 13px 'InterstatePlusRegular',sans-serif;text-transform:uppercase;}
 #footer a, #footer h4 a {color:#70b1e3;}

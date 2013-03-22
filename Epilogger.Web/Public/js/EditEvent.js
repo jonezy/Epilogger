@@ -145,18 +145,18 @@ function adjustMenuCheckMarks() {
     }
 
     //Description Section
-    var descGood = true;
+    var descGood = false;
     if ($("#searchText").val().length == 0) {
-        descGood = false;
+        descGood = true;
     }
     if ($("#WebsiteURL").val().length == 0) {
-        descGood = false;
+        descGood = true;
     }
     if ($("#TwitterAccount").val().length == 0) {
-        descGood = false;
+        descGood = true;
     }
     if ($("#FacebookPageURL").val().length == 0) {
-        descGood = false;
+        descGood = true;
     }
 
     if (descGood) {

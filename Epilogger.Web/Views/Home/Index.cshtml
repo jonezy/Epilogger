@@ -1,4 +1,5 @@
-﻿@using Epilogger
+﻿@using Combres.Mvc
+@using Epilogger
 @using Epilogger.Common
 @using Epilogger.Data
 @using Epilogger.Web.Models
@@ -12,9 +13,11 @@
 }
 
 
-<script type="text/javascript" language="javascript">
+@*<script type="text/javascript" language="javascript">
     head.js('@Url.Content("~/Public/js/HomePage.js")');
 </script>
+*@
+@Html.CombresLink("HomepageJs")
 
 
 @*<div id="StatusMessages">
