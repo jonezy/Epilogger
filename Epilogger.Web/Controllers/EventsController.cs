@@ -438,7 +438,7 @@ namespace Epilogger.Web.Controllers {
                     ((CreateBasicEventViewModel)TempData["CreateBasicEventViewModel"]).EndDateTime = TimeZoneManager.ToUtcTime(storeEndDateTime);
                     ((CreateBasicEventViewModel)TempData["CreateBasicEventViewModel"]).TimeZoneOffset = int.Parse(Request.Form["timeZone"]);
 
-                    return RedirectToAction("CreateEventTweets");  
+                    return RedirectToAction("CreateEventTweets");
                 }
                 catch (Exception ex)
                 {
