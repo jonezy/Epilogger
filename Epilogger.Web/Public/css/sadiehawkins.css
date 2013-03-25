@@ -353,7 +353,8 @@ a.edit_icon {
 #homepage-toolbar #refresh {}
     
 #header {
-   position:relative;    
+   /*position:relative;*/
+   height: 70px;
    background:#fff;
    }
 	
