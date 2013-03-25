@@ -157,14 +157,14 @@ else
         @*New event menu*@
         @Html.Partial("Menu", Model.ToolbarViewModel)
 
-        <div id="SearchTimeFilter">
+        @*<div id="SearchTimeFilter">
             @using (Html.BeginForm("Search", "events", FormMethod.Post, null))
             {
                 <img src="/Public/images/icons/btn-search-home.png" alt="search" id="eventSearchOK" onclick="$('form').submit();" />
-                @Html.TextBox("SearchTerm", null, new { @class = "remove-bottom blur", title = "Search in this event..." }) @*<input type="submit" class="blue-action-button remove-bottom fleft" value="Search" />*@
+                @Html.TextBox("SearchTerm", null, new { @class = "remove-bottom blur", title = "Search in this event..." }) 
                 @Html.HiddenFor(model => model.EventSlug)
             }
-        </div>
+        </div>*@
 
         
 
@@ -562,11 +562,11 @@ else
 <!-- Media -->
 
 <div class="grid_7 omega">
+    <div id="theUploadButton"><a href="#" id="imageupload-modal" class="blue-action-button">upload photos</a></div>
     <h2>
         <span class="number" id="photoCount">@string.Format("{0:#,###}", Model.ImageCount)</span>
-        Media
-        <a href="#" id="imageupload-modal">Upload</a>
-    </h2>
+        Media</h2>
+    
     <div class="image-grid" id="photosvideos">
         <div itemscope itemtype="http://data-vocabulary.org/Event">
             @foreach (Epilogger.Data.Image EPLImage in Model.Images)

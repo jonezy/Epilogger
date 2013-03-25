@@ -1196,6 +1196,7 @@ fieldset.login label.left {width:auto !important;padding:2px 0;}
 
 #EventDetailsMenu { display:block; list-style-type:none;border-bottom: 1px solid #d0d0d0; margin-top: 10px; }
 #EventDetailsMenu li { padding:0; background-repeat: no-repeat;display: inline-block;padding: 0 12px;border-right: 1px dotted #d3d6c5; }
+#EventDetailsMenu li:last-child { border-right: 0; }
 #EventDetailsMenu a, #EventDetailsMenu a:visited { display: block;height: 55px;text-decoration: none; text-indent: -9999px; }
 #EventDetailsMenu li a:hover { background-position: left bottom; }
 .menuOn { background-position: left bottom; }
@@ -1210,7 +1211,30 @@ fieldset.login label.left {width:auto !important;padding:2px 0;}
 .menuEdit a { background-image: url(/Public/Images/EventMenu/menu-edit.png);  width: 24px; }
 .menuLiveMode a { background-image: url(/Public/Images/EventMenu/menu-livemode.png);  width: 60px; }
 
-.subscribe { /*width: 79px;*/ height: 55px; position: absolute; }
+.subscribe { height: 55px; position: absolute; width: 78px; }
+
+.searchInEvent { height: 55px; position: absolute; right: -12px; }
+#SearchTimeFilter { margin-top: -2px;  }
+div#SearchTimeFilter input[type=text] {
+	color:#767273;
+    font-size: 14px;
+    font-family: Helvetica, Arial, Sans-Serif;
+	border:solid 1px #e3e3e3;
+	width:193px;
+	height:28px;
+	padding:5px 0 5px 5px;
+    background-color: #fff;
+    z-index: 5000; 
+}
+
+#eventSearchOK {
+    position: absolute;
+    right: 15px;
+    margin-top: 4px;
+    cursor: pointer;
+}
+
+
 
 .menuLiveModeDisabled a { background-image: url(/Public/Images/EventMenu/menu-livemode-disabled.png);  width: 60px;cursor: default; }
 /*.noLink { height: 55px;margin: 0; }*/
@@ -2210,12 +2234,7 @@ div#search-container input[type=image] {
     float: left;
 }
 
-#eventSearchOK {
-    position: absolute;
-    right: 24px;
-    margin-top: 12px;
-    cursor: pointer;
-}
+
 
 
 #breadcrumb a {text-transform: lowercase; font-size:10px; color: #5e5e5e; }
@@ -2836,22 +2855,6 @@ body::-webkit-scrollbar-corner{background-clip:padding-box;background-color:#f5f
 .dropbutton.big {min-width: 12em !important; max-width: 12em !important;}
 .dropbutton.big * {	font-size: 14px !important;}
 .dropbutton.big li * {	padding:4px 0px 4px 0px !important;}
-
-
-
-#SearchTimeFilter { float: right; margin-top: -53px; /*margin-right: 110px;*/ }
-div#SearchTimeFilter input[type=text] {
-    float:left;
-	color:#767273;
-    font-size: 14px;
-    font-family: Helvetica, Arial, Sans-Serif;
-	border:solid 1px #e3e3e3;
-	width:193px;
-	height:28px;
-	padding:5px 0 5px 5px;
-    background-color: #fff;
-    z-index: 5000; }
-    
     
     
 /* PHOTO DETAILS PAGE */
@@ -3387,4 +3390,8 @@ table.benefitsTable td {
 .eventListMenu a {
     text-decoration: underline;
 
+}
+
+#theUploadButton {
+    float: right;
 }

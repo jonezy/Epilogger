@@ -76,6 +76,17 @@
             }
         }
     </li>
+    
+    <li class="searchInEvent">
+        <div id="SearchTimeFilter">
+            @using (Html.BeginForm("Search", "events", FormMethod.Post, null))
+            {
+                <img src="/Public/images/icons/btn-search-home.png" alt="search" id="eventSearchOK" onclick="$('form').submit();" />
+                @Html.TextBox("SearchTerm", null, new { @class = "remove-bottom blur", title = "Search in this event..." })
+                @Html.HiddenFor(model => model.EventSlug)
+            }
+        </div>
+    </li>
 
 </ul>
 

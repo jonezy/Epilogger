@@ -637,6 +637,7 @@
     <Content Include="Public\images\Upgrade\icon-feature-private.png" />
     <Content Include="Public\images\Upgrade\icon-feature-searchterms.png" />
     <Content Include="Public\images\Upgrade\icon-feature-toptweeters.png" />
+    <Content Include="Public\images\Upgrade\icon-feature-uploadphoto.png" />
     <Content Include="Public\images\Upgrade\icon-feature-verified.png" />
     <Content Include="Public\images\Upgrade\icon-featurecheckmark.png" />
     <Content Include="Public\images\Upgrade\icon-featureembed.png" />

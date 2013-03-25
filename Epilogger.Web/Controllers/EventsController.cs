@@ -119,7 +119,7 @@ namespace Epilogger.Web.Controllers {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 		//public ActionResult Details(int id) {
-		[CompressFilter]
+        //[CompressFilter]
 		public virtual ActionResult 
 			Details(string id)
 		{
