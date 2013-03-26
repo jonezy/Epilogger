@@ -1604,7 +1604,7 @@ namespace Epilogger.Web.Controllers {
 
 			if (requestedEvent != null)
 			{
-				var s = new SearchInEventViewModel {ID = requestedEvent.ID, SearchTerm = IEsearchterm};
+				var s = new SearchInEventViewModel { Id = requestedEvent.ID, SearchTerm = IEsearchterm };
 				var thisEvent = _es.FindByID(requestedEvent.ID);
 				s.Name = thisEvent.Name;
 				s.Eventslug = thisEvent.EventSlug;
@@ -1613,6 +1613,8 @@ namespace Epilogger.Web.Controllers {
 					s.SearchResults = _es.SearchInEvent(requestedEvent.ID, IEsearchterm, FromDateTime(), ToDateTime());
 				}
 				s.ToolbarViewModel = BuildToolbarViewModel(thisEvent);
+
+                s.CanDelete = CanModerate(requestedEvent);
 
 				return View(s);
 			}

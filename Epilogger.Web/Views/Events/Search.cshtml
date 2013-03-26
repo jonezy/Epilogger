@@ -1,7 +1,6 @@
-﻿@using Epilogger.Web;
-@using Epilogger.Web.Models;
+﻿@using Epilogger.Web.Models;
 
-@model Epilogger.Web.Models.SearchInEventViewModel
+@model SearchInEventViewModel
 @{
     Layout = "~/Views/Shared/_InteriorLayout.cshtml";
     ViewBag.Title = Model.Name + " - Search | Epilogger";
@@ -13,7 +12,7 @@
 
 <div id="events-nav">
     <h1>SEARCH EVENT</h1>
-    @if (@Model.SearchResults != null && @Model.SearchResults.Count() > 0)
+    @if (@Model.SearchResults != null && @Model.SearchResults.Any())
     {<h2>@Model.SearchTerm - @Model.SearchResults.Count() results</h2>}
     <br style="clear:both;" />
     @using (Html.BeginForm("Search", "events", FormMethod.Post, null))
@@ -24,24 +23,23 @@
     }
 </div>
 <div id="events-content">
-
-@if (Model.SearchResults != null) {
-    foreach (SearchInEventModel item in Model.SearchResults) {
-        <div class="alltweets-entry clearfix">
-            <img src="@item.Tweet.ProfileImageURL" class="fleft" height="48" width="48" alt="" />
-            <div class="tweet-content">
-                <strong><a href="http://www.twitter.com/@item.Tweet.FromUserScreenName" class="tweet-content-username" target="_blank">@item.Tweet.FromUserScreenName</a></strong>
-                <p>@Html.Raw(item.Tweet.TextAsHTML)</p>
-                @if (@item.Image != null) {
-                    var itvm = new Epilogger.Web.Models.ImageTemplateViewModel { Image = item.Image, CanDelete = false };
-                    @Html.Partial("_ImageTemplate", itvm)
-                }
-                <span class="tweet-date">(@Html.DisplayFor(thing => item.Tweet.CreatedDate))</span>
-            </div>
-        </div>
-    }
-}
-
+    <ul>
+        @if (Model.SearchResults != null) {
+            foreach (var item in Model.SearchResults) {
+        
+                var ttvm = new TweetTemplateViewModel { Tweet = item.Tweet, CanDelete = Model.CanDelete, ShowControls = true };
+                @Html.Action("TweetTemplate", ttvm)  
+        
+                <li class="image-grid clearfix" style="padding-bottom:30px;">
+                    @if (@item.Image != null)
+                    {
+                        var itvm = new ImageTemplateViewModel { Image = item.Image, CanDelete = Model.CanDelete };
+                                    @Html.Partial("_ImageTemplate", itvm)
+                    }
+                </li>
+            }
+        }
+    </ul>
     @*@MvcHtmlString.Create(Html.Pager(100, Model.CurrentPageIndex, Model.SearchResults.Count(), new { controller = "Events", action = "Search", id = Model.ID, f = Request.QueryString["f"], t = Request.QueryString["t"] }))*@
 </div>
 
