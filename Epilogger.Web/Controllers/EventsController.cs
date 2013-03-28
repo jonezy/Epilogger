@@ -785,7 +785,7 @@ namespace Epilogger.Web.Controllers {
 
             paypal.currency_code = ConfigurationManager.AppSettings["CurrencyCode"];
 
-            paypal.item_name = "Test1 - Epilogger premium event pack";
+            paypal.item_name = "Epilogger premium event upgrade";
             paypal.amount = "50";
             paypal.item_number = pp.UniqueId.ToString();
             paypal.shipping = "0";

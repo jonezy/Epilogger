@@ -170,7 +170,7 @@ function setupTwitterAction() {
         $.colorbox({
             width: 550,
             height: 320,
-            href: "TweetReply?eventId=" + EventID + "&tweetId=" + this.id
+            href: "/events/TweetReply?eventId=" + EventID + "&tweetId=" + this.id
         });
 
     });
@@ -181,7 +181,7 @@ function setupTwitterAction() {
         $.colorbox({
             width: 550,
             height: 230,
-            href: "TweetRetweet?eventId=" + EventID + "&tweetId=" + this.id
+            href: "/events/TweetRetweet?eventId=" + EventID + "&tweetId=" + this.id
         });
 
     });

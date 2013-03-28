@@ -6,6 +6,11 @@
     ViewBag.Title = Model.Name + " - Search | Epilogger";
 }
 
+<script language="javascript" type="text/javascript">
+    var EventSlug = '@Model.Eventslug';
+    var EventID = @Model.Id;
+</Script>
+
 @*New event menu*@
 @Html.Partial("Menu", Model.ToolbarViewModel)
 <div class="spacer"></div>
@@ -28,8 +33,8 @@
             foreach (var item in Model.SearchResults) {
         
                 var ttvm = new TweetTemplateViewModel { Tweet = item.Tweet, CanDelete = Model.CanDelete, ShowControls = true };
-                @Html.Action("TweetTemplate", ttvm)  
-        
+                @Html.Action("TweetTemplate", ttvm)
+
                 <li class="image-grid clearfix" style="padding-bottom:30px;">
                     @if (@item.Image != null)
                     {
