@@ -619,19 +619,17 @@ namespace Epilogger.Web.Controllers {
         [RequiresAuthentication(ValidUserRole = UserRoleType.RegularUser, AccessDeniedMessage = "You must be logged in to your epilogger account to create an event")]        
         public virtual ActionResult CreateEvent2()
         {
-
-            var createBasicEventViewModel = (CreateBasicEventViewModel)TempData["CreateBasicEventViewModel"];
-            TempData["CreateBasicEventViewModel"] = createBasicEventViewModel;
-
-            var model = new CreateEventTwitterViewModel();
-                            
+            try
+            {
+                var createBasicEventViewModel = (CreateBasicEventViewModel)TempData["CreateBasicEventViewModel"];
+                TempData["CreateBasicEventViewModel"] = createBasicEventViewModel;
+            }
+            catch (Exception)
+            {
+                this.StoreError("An error occured while creating your event, please try again.");
+            }
             
-            //var model = Mapper.Map<Event, CreateEventTwitterViewModel>((Event)TempData["Event"]);
-            //model.EventTime = CreateBasicEventViewModel.EventTime;
-            //Need to resave this stuff. Or it's lost on page refresh
-            //TempData["EventTime"] = TempData["EventTime"];
-            //TempData["Event"] = TempData["Event"];
-
+            var model = new CreateEventTwitterViewModel();
             return View(model);
         }
 
@@ -645,11 +643,19 @@ namespace Epilogger.Web.Controllers {
            
             if (ModelState.IsValid)
             {
-              
-                //var eventMod = (Event)TempData["Event"];
-                var createBasicEventViewModel = (CreateBasicEventViewModel)TempData["CreateBasicEventViewModel"];
-                var eventMod = Mapper.Map<CreateBasicEventViewModel, Event>(createBasicEventViewModel);
-
+                Event eventMod;
+                try
+                {
+                    var createBasicEventViewModel = (CreateBasicEventViewModel)TempData["CreateBasicEventViewModel"];
+                    eventMod = Mapper.Map<CreateBasicEventViewModel, Event>(createBasicEventViewModel);
+                }
+                catch (Exception)
+                {
+                    this.StoreError("An error occured while creating your event, please try again.");
+                    return RedirectToAction("CreateEvent1");
+                }
+                
+                //Search Term parsing.
                 var searchQuery = "";
                 if (model.IsAdvanceMode)
                 {
@@ -676,21 +682,10 @@ namespace Epilogger.Web.Controllers {
                 _es.Save(eventMod);
                 TempData["Event"] = eventMod;
 
-                // get display model from event, route this eventually
-                //var displayModel = new CreateFinalEventViewModel()
-                //                        {
-                //                            Name = eventMod.Name,
-                //                            Subtitle = eventMod.SubTitle,
-                //                            SearchTerms = searchQuery,
-                //                            EventSlug = eventMod.EventSlug,
-                //                            CollectionTime = getCollectionWordFormat(eventMod.CollectionStartDateTime, eventMod.StartDateTime),
-                //                            EventStartEndTime = frm["EventTime"] 
-                //                        };
-
 
                 //Initiate a first collect on the event
                 var tsmp = new MQ.MSGProducer("Epilogger", "TwitterSearch");
-                var tsMSG = new MQ.Messages.TwitterSearchMSG
+                var tsMsg = new MQ.Messages.TwitterSearchMSG
                 {
                     EventID = eventMod.ID,
                     SearchTerms = eventMod.SearchTerms,
@@ -698,11 +693,11 @@ namespace Epilogger.Web.Controllers {
                     SearchSince = eventMod.CollectionStartDateTime,
                     SearchUntil = eventMod.CollectionEndDateTime
                 };
-                tsmp.SendMessage(tsMSG);
+                tsmp.SendMessage(tsMsg);
                 tsmp.Dispose();
 
                 //The the admins an email with the event details.
-                //SendEventCreatedEmailToSystem(eventMod);
+                SendEventCreatedEmailToSystem(eventMod);
 
                 //Clear this for the next create event
                 //TempData["Event"] = null;
@@ -711,9 +706,9 @@ namespace Epilogger.Web.Controllers {
                 //return View("CreateEvent4", displayModel);
 
                 return View("CreateEvent3", new CreateEvent3ViewModel()
-                                                {
-                                                    EventId = eventMod.ID
-                                                });
+                            {
+                                EventId = eventMod.ID
+                            });
             }
             
             return View();

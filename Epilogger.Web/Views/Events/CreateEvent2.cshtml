@@ -18,16 +18,17 @@
             $(this).removeClass("disabled_blue_button");
             $(this).addClass("preview_stretch_btn");
             $(this).prop('value', 'refresh results in preview box');
+            e.preventDefault();
         });
         var i = 0;
+        
         $('#button_input').bind("click", function () {
             i++;
             $("#addAnother" + i).removeClass("invisible");
             if (i == 5)
                 $(this).remove();
+            e.preventDefault();
         });
-
-
 
 
         $('.searchText').bind("blur", function () {
@@ -132,7 +133,7 @@
                         @Html.TextBoxFor(model => model.SearchTerms, new { @id = "searchText6", @Value = "", @class = "searchText" })
                     </div>
                     <div id="button_input">
-                        <input type="button" value="add another" class="stn_button blue_button" />
+                        <input type="button" value="add another" onclick="return false;" class="stn_button blue_button" />
                     </div>
                 </div>
                 <div style="padding-top: 8px;">
@@ -149,7 +150,7 @@
                         <span>If your terms are too broad, try narrowing it down with an official hashtag unique
                             to your event</span><br />
                     </div>
-                    <input type="button" value="preview results" class="stn_button disabled_blue_button" id="searchButton" />
+                    <input type="button" value="preview results" class="stn_button disabled_blue_button" id="searchButton" onclick="return false;" />
                 </div>
                 <div id="preview_tweet_box" class="invisible">
                     <div id="tweetSubContainer">
